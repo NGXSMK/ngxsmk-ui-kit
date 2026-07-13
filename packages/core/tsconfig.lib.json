@@ -1,0 +1,19 @@
+/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
+/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../out-tsc/lib",
+    "declaration": true,
+    "declarationMap": true,
+    "types": [],
+    // ng-packagr must resolve sibling packages to their built output, not
+    // sources (the root tsconfig maps them to sources for app dev/tests).
+    "paths": {
+      "@ngxsmk/cdk": ["../../dist/ngxsmk/cdk"],
+      "@ngxsmk/theme": ["../../dist/ngxsmk/theme"]
+    }
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["**/*.spec.ts"]
+}

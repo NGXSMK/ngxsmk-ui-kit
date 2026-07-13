@@ -1,0 +1,53 @@
+/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
+/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "paths": {
+      "@ngxsmk/cdk": ["./packages/cdk/public-api.ts"],
+      "@ngxsmk/cdk/*": ["./packages/cdk/*"],
+      "@ngxsmk/core": ["./packages/core/public-api.ts"],
+      "@ngxsmk/core/*": ["./packages/core/*"],
+      "@ngxsmk/theme": ["./packages/theme/src/public-api.ts"]
+    },
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "preserve"
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true
+  },
+  "files": [],
+  "references": [
+    {
+      "path": "./packages/theme/tsconfig.lib.json"
+    },
+    {
+      "path": "./packages/theme/tsconfig.spec.json"
+    },
+    {
+      "path": "./packages/cdk/tsconfig.lib.json"
+    },
+    {
+      "path": "./packages/cdk/tsconfig.spec.json"
+    },
+    {
+      "path": "./packages/core/tsconfig.lib.json"
+    },
+    {
+      "path": "./packages/core/tsconfig.spec.json"
+    },
+    {
+      "path": "./apps/demo/tsconfig.app.json"
+    }
+  ]
+}

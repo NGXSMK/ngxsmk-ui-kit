@@ -1,0 +1,184 @@
+﻿{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "cli": {
+    "packageManager": "npm",
+    "analytics": "28d4a5eb-3e9f-42fb-8bc7-7bb38af7f2fc"
+  },
+  "newProjectRoot": "projects",
+  "projects": {
+    "@ngxsmk/theme": {
+      "projectType": "library",
+      "root": "packages/theme",
+      "sourceRoot": "packages/theme/src",
+      "prefix": "ngxsmk",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "packages/theme/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "packages/theme/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "tsConfig": "packages/theme/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "@ngxsmk/cdk": {
+      "projectType": "library",
+      "root": "packages/cdk",
+      "sourceRoot": "packages/cdk/src",
+      "prefix": "ngxsmk",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "packages/cdk/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "packages/cdk/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "tsConfig": "packages/cdk/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "@ngxsmk/core": {
+      "projectType": "library",
+      "root": "packages/core",
+      "sourceRoot": "packages/core/src",
+      "prefix": "ngxsmk",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "packages/core/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "packages/core/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "tsConfig": "packages/core/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "demo": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss",
+          "skipTests": true
+        },
+        "@schematics/angular:class": {
+          "skipTests": true
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true
+        },
+        "@schematics/angular:interceptor": {
+          "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "skipTests": true
+        },
+        "@schematics/angular:resolver": {
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
+        }
+      },
+      "root": "apps/demo",
+      "sourceRoot": "apps/demo/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "apps/demo/src/main.ts",
+            "tsConfig": "apps/demo/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "apps/demo/public"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/intl-tel-input/build/img",
+                "output": "assets/intl-tel-input/img"
+              }
+            ],
+            "styles": [
+              "packages/theme/styles/ngxsmk.css",
+              "packages/core/styles/button.css",
+              "node_modules/intl-tel-input/build/css/intlTelInput.css",
+              "apps/demo/src/styles.scss"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "24kB",
+                  "maximumError": "50kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "demo:build:production"
+            },
+            "development": {
+              "buildTarget": "demo:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        }
+      }
+    }
+  }
+}

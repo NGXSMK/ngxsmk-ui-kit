@@ -1,0 +1,314 @@
+/* Demo app base styles — token stylesheet is loaded before this file. */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Outfit:wght@100..900&display=swap');
+
+:root {
+  --ngxsmk-font-sans: 'DM Sans', system-ui, -apple-system, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--ngxsmk-color-background, #fafafa);
+  color: var(--ngxsmk-color-on-background, #09090b);
+  font-family: 'DM Sans', var(--ngxsmk-font-sans, system-ui), -apple-system, sans-serif;
+  font-size: var(--ngxsmk-text-body-md-size, 0.875rem);
+  line-height: var(--ngxsmk-text-body-md-line, 1.5);
+  transition: background-color 0.2s ease;
+}
+
+/* Smooth scrolling for the whole page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Remove default search input styling */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  appearance: none;
+}
+
+/* Focus visible ring */
+:focus-visible:not(input):not(textarea):not(select) {
+  outline: 2px solid var(--ngxsmk-color-ring, #7c3aed);
+  outline-offset: 2px;
+}
+
+button:focus {
+  outline: none;
+}
+
+/* Selection style */
+::selection {
+  background: var(--ngxsmk-color-primary-container, #ede9fe);
+  color: var(--ngxsmk-color-on-primary-container, #4c1d95);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 9999px;
+  background: var(--ngxsmk-color-outline, #e4e4e7);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ngxsmk-color-outline-strong, #a1a1aa);
+}
+
+/* Premium Layout and Component Showcase Styles */
+.ngxsmk-page-title {
+  font-family: 'Outfit', var(--ngxsmk-font-sans, system-ui), sans-serif;
+  font-size: 1.875rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.375rem;
+  color: var(--ngxsmk-color-on-background, #09090b);
+}
+
+.ngxsmk-page-desc {
+  font-family: 'DM Sans', var(--ngxsmk-font-sans, system-ui), sans-serif;
+  font-size: 0.875rem;
+  color: var(--ngxsmk-color-on-surface-variant, #71717a);
+  margin: 0 0 2.5rem;
+  line-height: 1.6;
+}
+
+section {
+  background: var(--ngxsmk-color-surface, #ffffff);
+  border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+  border-radius: var(--ngxsmk-radius-lg, 0.5rem);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+section:hover {
+  border-color: var(--ngxsmk-color-outline-strong, #d4d4d8);
+}
+
+section h3 {
+  font-family: 'DM Sans', var(--ngxsmk-font-sans, system-ui), sans-serif;
+  font-size: 0.625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ngxsmk-color-on-surface-variant, #71717a);
+  margin: 0 0 1rem;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+/* Form element base spacing and sizing */
+input, textarea, select {
+  font-family: inherit;
+  font-size: 0.875rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+  border-radius: var(--ngxsmk-radius-md, 0.375rem);
+  background: var(--ngxsmk-color-surface, #ffffff);
+  color: var(--ngxsmk-color-on-surface, #09090b);
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--ngxsmk-color-primary, #7c3aed);
+  box-shadow: 0 0 0 2px var(--ngxsmk-color-primary-container, #ede9fe);
+}
+
+.ngxsmk-demo-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+
+.ngxsmk-demo-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Showcase layout helpers (used inside <showcase-example> previews) */
+.ngxsmk-sc-grid {
+  display: grid;
+  gap: 1rem;
+  width: 100%;
+}
+
+.ngxsmk-sc-grid--2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.ngxsmk-sc-grid--3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 640px) {
+  .ngxsmk-sc-grid--2,
+  .ngxsmk-sc-grid--3 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.ngxsmk-sc-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.ngxsmk-sc-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  width: 100%;
+}
+
+/* Generic full-width demo surface */
+.ngxsmk-sc-surface {
+  width: 100%;
+  min-height: 2.5rem;
+}
+
+/* ==========================================================================
+   Responsive foundation
+   --------------------------------------------------------------------------
+   Breakpoint scale (mobile-first). CSS @media cannot read custom properties,
+   so the same pixel values are repeated in the queries below — keep them in
+   sync with these tokens.
+     --ngxsmk-bp-sm : 640px   (phones)
+     --ngxsmk-bp-md : 768px   (tablets / folded)
+     --ngxsmk-bp-lg : 1024px  (small laptops)
+     --ngxsmk-bp-xl : 1280px  (desktops)
+   ========================================================================== */
+:root {
+  --ngxsmk-bp-sm: 640px;
+  --ngxsmk-bp-md: 768px;
+  --ngxsmk-bp-lg: 1024px;
+  --ngxsmk-bp-xl: 1280px;
+}
+
+/* Layout utilities (mobile-first, fluid by default) */
+.ngxsmk-container {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: var(--ngxsmk-space-6, 1.5rem);
+}
+
+.ngxsmk-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ngxsmk-space-4, 1rem);
+}
+
+.ngxsmk-cluster {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ngxsmk-space-3, 0.75rem);
+}
+
+/* Auto-fitting grid: never overflows, reflows as space allows. */
+.ngxsmk-grid {
+  display: grid;
+  gap: var(--ngxsmk-space-4, 1rem);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+}
+
+/* Prevent horizontal overflow from media, code, and form controls. */
+img,
+svg,
+video,
+canvas,
+table,
+pre,
+code,
+input,
+textarea,
+select {
+  max-width: 100%;
+}
+
+/* Flex/grid children must be allowed to shrink below content size. */
+.ngxsmk-stack > *,
+.ngxsmk-cluster > *,
+.ngxsmk-grid > *,
+.ngxsmk-sc-wrap > *,
+.ngxsmk-sc-col > *,
+.ngxsmk-sc-grid > * {
+  min-width: 0;
+}
+
+/* Demo page padding tightens on small screens. */
+@media (max-width: 640px) {
+  .ngxsmk-page {
+    padding: var(--ngxsmk-space-8, 2rem) var(--ngxsmk-space-4, 1rem);
+  }
+  .ngxsmk-page__header h1 {
+    font-size: 1.5rem;
+  }
+  .ngxsmk-page__header {
+    margin-bottom: var(--ngxsmk-space-8, 2rem);
+  }
+  section {
+    padding: 1rem;
+  }
+  .ngxsmk-page-title {
+    font-size: 1.5rem;
+  }
+}
+
+/* Universal responsive safety net: no overlay panel may exceed the viewport
+   on small screens (prevents horizontal scroll from dialogs/menus/popovers). */
+@media (max-width: 640px) {
+  .cdk-overlay-pane {
+    max-width: calc(100vw - 1rem) !important;
+  }
+  .cdk-global-overlay-wrapper {
+    padding: var(--ngxsmk-space-2, 0.5rem);
+  }
+}
+
+/* Helper: wrap wide data components in a horizontal scroll region on mobile. */
+.ngxsmk-scroll-x {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+}
+
+/* intl-tel-input flag sprites are copied to /assets/intl-tel-input/img. */
+.iti__flag {
+  background-image: url('/assets/intl-tel-input/img/flags.png');
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .iti__flag {
+    background-image: url('/assets/intl-tel-input/img/flags@2x.png');
+  }
+}
+
+

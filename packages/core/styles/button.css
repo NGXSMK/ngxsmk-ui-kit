@@ -1,0 +1,106 @@
+.ngxsmk-button {
+  --_bg: var(--ngxsmk-button-bg, var(--ngxsmk-color-primary));
+  --_fg: var(--ngxsmk-button-color, var(--ngxsmk-color-on-primary));
+  --_radius: var(--ngxsmk-button-radius, var(--ngxsmk-radius-base));
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ngxsmk-space-2);
+  border: 1px solid transparent;
+  border-radius: var(--_radius);
+  background: var(--_bg);
+  color: var(--_fg);
+  font-family: var(--ngxsmk-font-sans);
+  font-size: var(--ngxsmk-text-label-lg-size);
+  font-weight: var(--ngxsmk-button-font-weight, 500);
+  line-height: var(--ngxsmk-text-label-lg-line);
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
+    border-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
+    color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
+}
+
+.ngxsmk-button:focus-visible {
+  outline: 2px solid var(--ngxsmk-color-ring);
+  outline-offset: 2px;
+}
+
+.ngxsmk-button:focus {
+  outline: none;
+}
+
+.ngxsmk-button[disabled] {
+  opacity: var(--ngxsmk-button-disabled-opacity, 0.5);
+  pointer-events: none;
+}
+
+.ngxsmk-button[data-size='sm'] {
+  padding: var(--ngxsmk-space-1) var(--ngxsmk-space-3);
+  font-size: var(--ngxsmk-text-label-md-size);
+}
+
+.ngxsmk-button[data-size='md'] {
+  padding: var(--ngxsmk-space-2) var(--ngxsmk-space-4);
+}
+
+.ngxsmk-button[data-size='lg'] {
+  padding: var(--ngxsmk-space-3) var(--ngxsmk-space-6);
+  font-size: var(--ngxsmk-text-body-lg-size);
+}
+
+.ngxsmk-button[data-icon-only][data-size='sm'] { padding: var(--ngxsmk-space-1); }
+.ngxsmk-button[data-icon-only][data-size='md'] { padding: var(--ngxsmk-space-2); }
+.ngxsmk-button[data-icon-only][data-size='lg'] { padding: var(--ngxsmk-space-3); }
+
+.ngxsmk-button[data-variant='primary']:hover { background: var(--ngxsmk-color-primary-hover); }
+.ngxsmk-button[data-variant='primary']:active { background: var(--ngxsmk-color-primary-active); }
+
+.ngxsmk-button[data-variant='secondary'] {
+  background: var(--ngxsmk-color-surface-variant);
+  color: var(--ngxsmk-color-on-surface);
+}
+.ngxsmk-button[data-variant='secondary']:hover { background: var(--ngxsmk-color-outline); }
+
+.ngxsmk-button[data-variant='outline'] {
+  background: transparent;
+  border-color: var(--ngxsmk-color-outline-strong);
+  color: var(--ngxsmk-color-on-surface);
+}
+.ngxsmk-button[data-variant='outline']:hover { background: var(--ngxsmk-color-surface-hover); }
+
+.ngxsmk-button[data-variant='ghost'] {
+  background: transparent;
+  color: var(--ngxsmk-color-on-surface);
+}
+.ngxsmk-button[data-variant='ghost']:hover { background: var(--ngxsmk-color-surface-hover); }
+
+.ngxsmk-button[data-variant='destructive'] {
+  background: var(--ngxsmk-color-error);
+  color: var(--ngxsmk-color-on-error);
+}
+.ngxsmk-button[data-variant='destructive']:hover { filter: brightness(0.92); }
+
+.ngxsmk-button[data-variant='link'] {
+  background: transparent;
+  color: var(--ngxsmk-color-primary);
+  padding-inline: 0;
+}
+.ngxsmk-button[data-variant='link']:hover { text-decoration: underline; }
+
+.ngxsmk-button__spinner {
+  width: 1em;
+  height: 1em;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: var(--ngxsmk-radius-full);
+  animation: ngxsmk-button-spin 0.6s linear infinite;
+}
+
+@keyframes ngxsmk-button-spin {
+  to { transform: rotate(360deg); }
+}
