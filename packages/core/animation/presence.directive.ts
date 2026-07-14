@@ -1,6 +1,7 @@
 import {
   Directive,
   ElementRef,
+  EmbeddedViewRef,
   TemplateRef,
   ViewContainerRef,
   effect,
@@ -46,7 +47,10 @@ export class NgxsmkPresence {
             }
           }
         } else if (this.viewContainer.length > 0) {
-          const el = this.host.nativeElement.querySelector('*') as HTMLElement | null;
+          const view = this.viewContainer.get(0) as EmbeddedViewRef<unknown> | null;
+          const el = view?.rootNodes.find(
+            (n): n is HTMLElement => n instanceof HTMLElement,
+          ) ?? null;
           const target = el ?? this.host.nativeElement;
           void playExit(target, this.motion()).then(() => {
             this.viewContainer.clear();

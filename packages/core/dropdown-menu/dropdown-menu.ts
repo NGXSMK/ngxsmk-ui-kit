@@ -8,7 +8,7 @@ import {
   model,
   signal,
 } from '@angular/core';
-import { NgxsmkAnimate, NgxsmkMotionState } from '@ngxsmk/core/animation';
+import { NgxsmkAnimate, NgxsmkMotionState, playExit } from '@ngxsmk/core/animation';
 
 export interface NgxsmkDropdownMenuItem {
   label: string;
@@ -114,9 +114,23 @@ export class NgxsmkDropdownMenu {
   readonly items = input.required<NgxsmkDropdownMenuItem[]>();
   readonly open = model(false);
 
+  protected readonly closing = signal(false);
+
+  /** Plays the exit animation, then flips `open` to false (reduced-motion safe). */
+  protected close(): void {
+    if (this.closing()) return;
+    this.closing.set(true);
+    const el = this.host.nativeElement.querySelector('.ngxsmk-dropdown-menu__list') as HTMLElement | null;
+    void playExit(el ?? this.host.nativeElement, this.DROPDOWN_MENU_MOTION).then(() => {
+      this.closing.set(false);
+      this.open.set(false);
+    });
+  }
+
   protected readonly DROPDOWN_MENU_MOTION: NgxsmkMotionState = {
     initial: { opacity: 0, y: -6 },
     animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: -6 },
     transition: { duration: 0.14, easing: 'ease-out' },
   };
 
@@ -136,18 +150,18 @@ export class NgxsmkDropdownMenu {
         item.action();
       }
     }
-    this.open.set(false);
+    this.close();
   }
 
   @HostListener('document:click', ['$event'])
   protected onDocumentClick(event: MouseEvent): void {
     if (this.open() && !this.host.nativeElement.contains(event.target as Node)) {
-      this.open.set(false);
+      this.close();
     }
   }
 
   @HostListener('document:keydown.escape')
   protected onEscape(): void {
-    this.open.set(false);
+    this.close();
   }
 }

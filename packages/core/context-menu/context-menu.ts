@@ -8,7 +8,7 @@ import {
   input,
   signal,
 } from '@angular/core';
-import { NgxsmkAnimate, NgxsmkMotionState } from '@ngxsmk/core/animation';
+import { NgxsmkAnimate, NgxsmkMotionState, playExit } from '@ngxsmk/core/animation';
 
 export interface NgxsmkContextMenuItem {
   label: string;
@@ -117,6 +117,7 @@ export class NgxsmkContextMenu {
   protected readonly CONTEXT_MENU_MOTION: NgxsmkMotionState = {
     initial: { opacity: 0, y: -6 },
     animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: -6 },
     transition: { duration: 0.14, easing: 'ease-out' },
   };
 
@@ -136,8 +137,16 @@ export class NgxsmkContextMenu {
     this.visible.set(true);
   }
 
+  protected readonly closing = signal(false);
+
   hide(): void {
-    this.visible.set(false);
+    if (this.closing()) return;
+    this.closing.set(true);
+    const el = this.host.nativeElement.querySelector('.ngxsmk-context-menu__list') as HTMLElement | null;
+    void playExit(el ?? this.host.nativeElement, this.CONTEXT_MENU_MOTION).then(() => {
+      this.closing.set(false);
+      this.visible.set(false);
+    });
   }
 
   protected onClick(event: Event): void {

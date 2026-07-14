@@ -2,11 +2,12 @@ import {
   ChangeDetectionStrategy,
   Component,
   DestroyRef,
+  ElementRef,
   inject,
   input,
   signal,
 } from '@angular/core';
-import { NgxsmkAnimate, NgxsmkMotionState } from '@ngxsmk/core/animation';
+import { NgxsmkAnimate, NgxsmkMotionState, playExit } from '@ngxsmk/core/animation';
 
 @Component({
   selector: 'ngxsmk-hover-card',
@@ -70,10 +71,25 @@ export class NgxsmkHoverCard {
 
   protected readonly visible = signal(false);
 
+  private readonly host = inject(ElementRef<HTMLElement>);
+  protected readonly closing = signal(false);
+
+  /** Plays the exit animation, then flips `visible` to false (reduced-motion safe). */
+  hide(): void {
+    if (this.closing()) return;
+    this.closing.set(true);
+    const el = this.host.nativeElement.querySelector('.ngxsmk-hover-card__popover') as HTMLElement | null;
+    void playExit(el ?? this.host.nativeElement, this.HOVER_CARD_MOTION).then(() => {
+      this.closing.set(false);
+      this.visible.set(false);
+    });
+  }
+
   /** Opacity-only so the popover's `translateX(-50%)` centering is preserved. */
   protected readonly HOVER_CARD_MOTION: NgxsmkMotionState = {
     initial: { opacity: 0 },
     animate: { opacity: 1 },
+    exit: { opacity: 0 },
     transition: { duration: 0.15, easing: 'ease-out' },
   };
 
@@ -122,7 +138,7 @@ export class NgxsmkHoverCard {
     if (this.closeTimer) return;
     this.closeTimer = setTimeout(() => {
       this.closeTimer = null;
-      this.visible.set(false);
+      this.hide();
     }, this.closeDelay());
   }
 

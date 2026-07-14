@@ -2,14 +2,16 @@ import {
   ChangeDetectionStrategy,
   Component,
   DestroyRef,
+  ElementRef,
   effect,
   inject,
   input,
   model,
+  signal,
   viewChild,
 } from '@angular/core';
 import { NgxsmkScrollLock } from '@ngxsmk/cdk';
-import { NgxsmkAnimate, NgxsmkMotionState } from '@ngxsmk/core/animation';
+import { NgxsmkAnimate, NgxsmkMotionState, playExit } from '@ngxsmk/core/animation';
 
 export type NgxsmkSheetSide = 'left' | 'right' | 'bottom';
 
@@ -17,8 +19,8 @@ export type NgxsmkSheetSide = 'left' | 'right' | 'bottom';
   selector: 'ngxsmk-sheet',
   template: `
     @if (open()) {
-      <div class="ngxsmk-sheet__root" [attr.data-side]="side()">
-      <div class="ngxsmk-sheet__backdrop" (click)="open.set(false)"></div>
+        <div class="ngxsmk-sheet__root" [attr.data-side]="side()">
+        <div class="ngxsmk-sheet__backdrop" (click)="requestClose()"></div>
         <div
           class="ngxsmk-sheet__panel"
           [ngxsmkAnimate]="SHEET_MOTION"
@@ -31,10 +33,10 @@ export type NgxsmkSheetSide = 'left' | 'right' | 'bottom';
           <h2 class="ngxsmk-sheet__title">{{ title() }}</h2>
           <button
             type="button"
-            class="ngxsmk-sheet__close"
-            aria-label="Close"
-            (click)="open.set(false)"
-          >
+              class="ngxsmk-sheet__close"
+              aria-label="Close"
+              (click)="requestClose()"
+            >
             <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
               <path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
             </svg>
@@ -145,16 +147,31 @@ export type NgxsmkSheetSide = 'left' | 'right' | 'bottom';
 })
 export class NgxsmkSheet {
   private readonly scrollLock = inject(NgxsmkScrollLock);
+  private readonly hostEl = inject(ElementRef<HTMLElement>);
 
   readonly open = model(false);
   readonly side = input<NgxsmkSheetSide>('right');
   readonly title = input('');
 
+  protected readonly closing = signal(false);
+
   protected readonly SHEET_MOTION: NgxsmkMotionState = {
     initial: { opacity: 0, y: 12 },
     animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: 12 },
     transition: { duration: 0.22, easing: 'ease-out' },
   };
+
+  /** Plays the exit animation, then flips `open` to false (reduced-motion safe). */
+  protected requestClose(): void {
+    if (this.closing()) return;
+    this.closing.set(true);
+    const el = this.hostEl.nativeElement.querySelector('.ngxsmk-sheet__panel') as HTMLElement | null;
+    void playExit(el ?? this.hostEl.nativeElement, this.SHEET_MOTION).then(() => {
+      this.closing.set(false);
+      this.open.set(false);
+    });
+  }
 
   private locked = false;
 
