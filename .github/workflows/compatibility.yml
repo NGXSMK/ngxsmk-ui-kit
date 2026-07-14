@@ -31,14 +31,18 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.ng == '22' && '22' || '20' }}
+          node-version: '22'
 
       - name: Install baseline dependencies
         run: npm ci
 
       - name: Pin Angular ${{ matrix.ng }} toolchain
         run: |
-          BUILDER="@angular-devkit/build-angular"
+          if [ "${{ matrix.ng }}" = "17" ] || [ "${{ matrix.ng }}" = "18" ]; then
+            BUILDER="@angular-devkit/build-angular"
+          else
+            BUILDER="@angular/build"
+          fi
           # Supported floor is 17.3 (signal output()), so install the 17.3 line.
           FLOOR=$([ "${{ matrix.ng }}" = "17" ] && echo "17.3" || echo "${{ matrix.ng }}")
           npm install --no-save --legacy-peer-deps \
