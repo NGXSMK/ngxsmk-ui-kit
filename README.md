@@ -63,6 +63,23 @@ These peer packages are declared on `@ngxsmk/core` and installed in the workspac
 - **Zoneless-ready.** Signal-based state throughout; no `zone.js`.
 - **Packaging.** Angular Package Format via `ng-packagr`. The root `tsconfig.json` maps `@ngxsmk/*` to sources for app dev/tests; each `tsconfig.lib.json` overrides to `dist/` for `ng-packagr` builds (build `theme`/`cdk` before `core`).
 
+## Performance & tree-shaking
+
+The library is built to stay out of your critical path:
+
+- **Per-component secondary entry points.** Every component ships as its own `@ngxsmk/core/<name>` entry point, so import only what you use. Prefer deep imports over the barrel:
+
+  ```ts
+  import { NgxsmkButton } from '@ngxsmk/core/button';      // ✅ tree-shaken to one component
+  import { NgxsmkButton } from '@ngxsmk/core';             // ⚠ pulls the whole catalog
+  ```
+
+  `package.json` sets `"sideEffects": false`, so unused re-exports are eliminated by the bundler.
+- **Signal-native + `OnPush` + zoneless.** All 150+ components use signal `input()`/`output()`/`model()`, `ChangeDetectionStrategy.OnPush`, and the demo runs without `zone.js` (`provideZonelessChangeDetection`).
+- **Partial compilation.** `ng-packagr` v22 emits partially-compiled output by default; your app's Angular compiler finishes it, shrinking published bundles.
+- **Lazy heavy peers.** `tel-input` (`@angular/material` + `intl-tel-input` + `libphonenumber-js`) and `datepicker` (`ngxsmk-datepicker` + `luxon`) are isolated entry points — they are only pulled in when you import those specific components.
+- **Runtime themes.** Themes are generated on demand via `NgxsmkThemeService.applyTheme()`; the app ships a single base stylesheet, not every preset.
+
 ## License
 
 MIT

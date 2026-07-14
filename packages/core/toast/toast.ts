@@ -26,6 +26,10 @@ export interface NgxsmkActiveToast extends Required<Omit<NgxsmkToastOptions, 'de
 
 const DEFAULT_DURATION_MS = 5000;
 
+const prefersReducedMotion = (): boolean =>
+  typeof window !== 'undefined' &&
+  window.matchMedia?.('(prefers-reduced-motion: reduce)').matches === true;
+
 /**
  * Toast state and API. Render `<ngxsmk-toaster />` once near the app root,
  * then call `show`/`success`/`error` from anywhere.
@@ -34,8 +38,13 @@ const DEFAULT_DURATION_MS = 5000;
 export class NgxsmkToast {
   private readonly announcer = inject(NgxsmkLiveAnnouncer);
   private readonly items = signal<NgxsmkActiveToast[]>([]);
+  private readonly leaving = signal<ReadonlySet<number>>(new Set());
   private readonly timers = new Map<number, ReturnType<typeof setTimeout>>();
   private nextId = 0;
+
+  isLeaving(id: number): boolean {
+    return this.leaving().has(id);
+  }
 
   readonly toasts = this.items.asReadonly();
 
@@ -83,13 +92,44 @@ export class NgxsmkToast {
       clearTimeout(timer);
       this.timers.delete(id);
     }
-    this.items.update((list) => list.filter((t) => t.id !== id));
+    if (this.isLeaving(id)) {
+      return;
+    }
+    if (prefersReducedMotion()) {
+      this.remove(id);
+      return;
+    }
+    this.leaving.update((set) => {
+      const next = new Set(set);
+      next.add(id);
+      return next;
+    });
+  }
+
+  /** Called once a toast's leave animation ends. */
+  commitDismiss(id: number): void {
+    this.leaving.update((set) => {
+      if (!set.has(id)) {
+        return set;
+      }
+      const next = new Set(set);
+      next.delete(id);
+      return next;
+    });
+    this.remove(id);
   }
 
   clear(): void {
-    for (const toast of this.items()) {
-      this.dismiss(toast.id);
+    for (const timer of this.timers.values()) {
+      clearTimeout(timer);
     }
+    this.timers.clear();
+    this.leaving.set(new Set());
+    this.items.set([]);
+  }
+
+  private remove(id: number): void {
+    this.items.update((list) => list.filter((t) => t.id !== id));
   }
 }
 
@@ -100,7 +140,12 @@ export class NgxsmkToast {
   selector: 'ngxsmk-toaster',
   template: `
     @for (toast of toasts(); track toast.id) {
-      <div class="ngxsmk-toaster__toast" [attr.data-variant]="toast.variant">
+      <div
+        class="ngxsmk-toaster__toast"
+        [attr.data-variant]="toast.variant"
+        [class.leaving]="service.isLeaving(toast.id)"
+        (animationend)="onAnimEnd($event, toast.id)"
+      >
         <div class="ngxsmk-toaster__accent" aria-hidden="true"></div>
         <div class="ngxsmk-toaster__body">
           <p class="ngxsmk-toaster__title">{{ toast.title }}</p>
@@ -215,6 +260,16 @@ export class NgxsmkToast {
       to { opacity: 1; transform: translateY(0); }
     }
 
+    .ngxsmk-toaster__toast.leaving {
+      animation: ngxsmk-toast-out var(--ngxsmk-duration-fast, 150ms) var(--ngxsmk-ease-in, ease-in) forwards;
+      pointer-events: none;
+    }
+
+    @keyframes ngxsmk-toast-out {
+      from { opacity: 1; transform: translateY(0); }
+      to { opacity: 0; transform: translateY(0.5rem); }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .ngxsmk-toaster__toast { animation: none; }
     }
@@ -229,4 +284,10 @@ export class NgxsmkToaster {
   );
 
   protected readonly toasts = computed(() => this.service.toasts());
+
+  protected onAnimEnd(event: AnimationEvent, id: number): void {
+    if (event.animationName === 'ngxsmk-toast-out') {
+      this.service.commitDismiss(id);
+    }
+  }
 }

@@ -15,13 +15,10 @@ import { NgxsmkCombobox } from '@ngxsmk/core/combobox';
 import { NgxsmkTypeahead } from '@ngxsmk/core/typeahead';
 import { NgxsmkPowerSearch } from '@ngxsmk/core/power-search';
 import { NgxsmkSlider } from '@ngxsmk/core/slider';
-import { NgxsmkDatePicker } from '@ngxsmk/core/date-picker';
-import { NgxsmkTelInput } from '@ngxsmk/core/tel-input';
 import { NgxsmkSegmentedControl } from '@ngxsmk/core/segmented-control';
 import { NgxsmkSelector } from '@ngxsmk/core/selector';
 import { NgxsmkMultiSelector } from '@ngxsmk/core/multi-selector';
 import { NgxsmkTokenizer } from '@ngxsmk/core/tokenizer';
-import { NgxsmkDatepicker, type DatepickerValue } from '@ngxsmk/core/datepicker';
 import { NgxsmkInputGroup } from '@ngxsmk/core/input-group';
 import { NgxsmkInputGroupText } from '@ngxsmk/core/input-group-text';
 import { NgxsmkField } from '@ngxsmk/core/field';
@@ -34,6 +31,7 @@ import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ShowcaseExample } from '../../showcase/showcase-example';
 import { TelInputShowcase } from './tel-input-showcase';
+import { DatepickerShowcase } from './datepicker-showcase';
 
 interface Option {
   value: string;
@@ -65,12 +63,10 @@ interface Option {
     NgxsmkTypeahead,
     NgxsmkPowerSearch,
     NgxsmkSlider,
-    NgxsmkDatePicker,
     NgxsmkSegmentedControl,
     NgxsmkSelector,
     NgxsmkMultiSelector,
     NgxsmkTokenizer,
-    NgxsmkDatepicker,
     NgxsmkInputGroup,
     NgxsmkInputGroupText,
     NgxsmkField,
@@ -79,6 +75,7 @@ interface Option {
     NgxsmkFormField,
     NgxsmkCheckboxListItemComponent,
     TelInputShowcase,
+    DatepickerShowcase,
   ],
   template: `
     <h2 class="ngxsmk-page-title">Forms</h2>
@@ -292,31 +289,7 @@ interface Option {
         </div>
       </showcase-example>
 
-      <showcase-example
-        title="Date Picker"
-        description="Native date field styled with theme tokens."
-        [code]="codeDatePicker"
-      >
-        <div class="ngxsmk-sc-col" style="width: 100%; max-width: 220px">
-          <ngxsmk-date-picker [(value)]="date" />
-          <small>Date: {{ date() || '—' }}</small>
-        </div>
-      </showcase-example>
-
-      <showcase-example
-        title="Datepicker (calendar)"
-        description="A feature-rich popover calendar powered by ngxsmk-datepicker — month navigation, ranges, time, i18n, and more."
-        [code]="codeDatepicker"
-      >
-        <div class="ngxsmk-sc-col" style="width: 100%; max-width: 300px">
-          <ngxsmk-datepicker
-            [value]="calendarDate()"
-            (valueChange)="onCalendarChange($event)"
-            placeholder="Pick a date"
-          />
-          <small>Selected: {{ calendarDate() ? calendarDate()!.toLocaleDateString() : '—' }}</small>
-        </div>
-      </showcase-example>
+      <datepicker-showcase />
 
       <showcase-example
         title="Telephone input"
@@ -503,8 +476,6 @@ export class FormsPage {
   protected readonly plan = signal<unknown>('pro');
   protected readonly notifications = signal(true);
   protected readonly volume = signal(40);
-  protected readonly date = signal('');
-  protected readonly calendarDate = signal<Date | null>(null);
   protected readonly view = signal('list');
   protected readonly selectedInterests = signal<string[]>(['design', 'ai']);
   protected readonly selectorColors = signal<string[]>([]);
@@ -515,10 +486,6 @@ export class FormsPage {
     this.langs.update((curr) =>
       checked ? [...new Set([...curr, value])] : curr.filter((v) => v !== value),
     );
-  }
-
-  protected onCalendarChange(value: DatepickerValue): void {
-    this.calendarDate.set(value instanceof Date ? value : null);
   }
 
   protected readonly codeButton = `<button ngxsmk-button variant="primary">Primary</button>\n<button ngxsmk-button loading>Saving</button>\n<button ngxsmk-button [disabled]="true">Disabled</button>`;
@@ -539,8 +506,6 @@ export class FormsPage {
   protected readonly codeRadio = `<ngxsmk-radio-group [(value)]="plan">\n  <ngxsmk-radio value="free">Free</ngxsmk-radio>\n  <ngxsmk-radio value="pro">Pro</ngxsmk-radio>\n</ngxsmk-radio-group>`;
   protected readonly codeSwitch = `<ngxsmk-switch [(checked)]="notifications">Email notifications</ngxsmk-switch>`;
   protected readonly codeSlider = `<ngxsmk-slider [min]="0" [max]="100" [step]="5" [(value)]="volume" />`;
-  protected readonly codeDatePicker = `<ngxsmk-date-picker [(value)]="date" />`;
-  protected readonly codeDatepicker = `<ngxsmk-datepicker [value]="calendarDate()" (valueChange)="onCalendarChange($event)" placeholder="Pick a date" />`;
   protected readonly codeTelInput = `<ngxsmk-tel-input [ngModel]="phone()" (ngModelChange)="phone.set($event)" label="Phone" hint="Include area code" [initialCountry]="'US'" [separateDialCode]="true" />`; // requires NO_ERRORS_SCHEMA (see TelInputShowcase)
   protected readonly codeSegmented = `<ngxsmk-segmented-control [options]="viewOptions" [(value)]="view" />`;
   protected readonly codeSelector = `<ngxsmk-selector [options]="interests" [(selected)]="selectedInterests" />`;

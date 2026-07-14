@@ -10,7 +10,13 @@
     "luxon": "^3.0.0",
     "ngxsmk-tel-input": "^1.8.4",
     "intl-tel-input": "^25.3.2",
-    "libphonenumber-js": "^1.12.10"
+    "libphonenumber-js": "^1.12.10",
+    "motion": "^12.0.0"
+  },
+  "peerDependenciesMeta": {
+    "motion": {
+      "optional": true
+    }
   },
   "dependencies": {
     "tslib": "^2.3.0"

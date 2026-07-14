@@ -1,8 +1,9 @@
-/* Demo app base styles — token stylesheet is loaded before this file. */
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Outfit:wght@100..900&display=swap');
+/* Demo app base styles — token stylesheet is loaded before this file.
+   Fonts (Inter / Plus Jakarta Sans / JetBrains Mono) are loaded via <link>
+   with preconnect in index.html, so no render-blocking @import here. */
 
 :root {
-  --ngxsmk-font-sans: 'DM Sans', system-ui, -apple-system, sans-serif;
+  --ngxsmk-font-sans: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 *,

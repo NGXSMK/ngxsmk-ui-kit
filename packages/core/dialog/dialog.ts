@@ -9,10 +9,12 @@ import {
   inject,
   input,
   model,
+  signal,
   viewChild,
 } from '@angular/core';
 import { NgxsmkScrollLock } from '@ngxsmk/cdk';
 import { ngxsmkUniqueId } from '@ngxsmk/core/util';
+import { NgxsmkAnimate, NgxsmkMotionState, playExit } from '@ngxsmk/core/animation';
 
 /** Marks content projected into the dialog's footer action row. */
 @Directive({
@@ -44,8 +46,16 @@ export class NgxsmkDialogFooter {}
  * </ngxsmk-dialog>
  * ```
  */
+const DIALOG_MOTION: NgxsmkMotionState = {
+  initial: { opacity: 0, y: 12 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: 8 },
+  transition: { duration: 0.18, easing: 'ease-out' },
+};
+
 @Component({
   selector: 'ngxsmk-dialog',
+  imports: [NgxsmkAnimate],
   template: `
     <dialog
       #dialog
@@ -55,8 +65,8 @@ export class NgxsmkDialogFooter {}
       (close)="onNativeClose()"
       (click)="onBackdropClick($event)"
     >
-      @if (open()) {
-        <div class="ngxsmk-dialog__container">
+      @if (visible()) {
+        <div class="ngxsmk-dialog__container" [ngxsmkAnimate]="enterMotion">
           @if (title() || dismissible()) {
             <div class="ngxsmk-dialog__header">
               @if (title()) {
@@ -177,6 +187,10 @@ export class NgxsmkDialog {
 
   protected readonly titleId = ngxsmkUniqueId('ngxsmk-dialog-title');
 
+  /** Mirrors `open` and stays true through the leave animation. */
+  protected readonly visible = signal(false);
+  protected readonly enterMotion = DIALOG_MOTION;
+
   private readonly dialogRef =
     viewChild.required<ElementRef<HTMLDialogElement>>('dialog');
   private locked = false;
@@ -185,10 +199,14 @@ export class NgxsmkDialog {
     effect(() => {
       const dialog = this.dialogRef().nativeElement;
       if (this.open() && !dialog.open) {
+        this.visible.set(true);
         dialog.showModal();
         this.setLocked(true);
       } else if (!this.open() && dialog.open) {
-        dialog.close();
+        void playExit(dialog, DIALOG_MOTION).then(() => {
+          dialog.close();
+          this.visible.set(false);
+        });
       }
     });
 

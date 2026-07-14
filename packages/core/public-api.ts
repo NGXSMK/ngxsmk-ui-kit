@@ -4,6 +4,7 @@
 
 export * from './accordion';
 export * from './alert-dialog';
+export * from './animation';
 export * from './agent-card';
 export * from './alert';
 export * from './app-shell';

@@ -8,11 +8,19 @@ import {
   signal,
 } from '@angular/core';
 import { ngxsmkUniqueId } from '@ngxsmk/core/util';
+import { NgxsmkMotionState, playEnter, playExit } from '@ngxsmk/core/animation';
 
 export type NgxsmkTooltipPosition = 'top' | 'bottom' | 'left' | 'right';
 
 const SHOW_DELAY_MS = 150;
 const GAP_PX = 8;
+
+const TOOLTIP_MOTION: NgxsmkMotionState = {
+  initial: { opacity: 0, scale: 0.96 },
+  animate: { opacity: 1, scale: 1 },
+  exit: { opacity: 0, scale: 0.96 },
+  transition: { duration: 0.14, easing: 'ease-out' },
+};
 
 /**
  * Text tooltip on hover/focus.
@@ -64,9 +72,12 @@ export class NgxsmkTooltip {
       clearTimeout(this.showTimer);
       this.showTimer = null;
     }
-    this.element?.remove();
+    const element = this.element;
     this.element = null;
     this.visible.set(false);
+    if (element) {
+      void playExit(element, TOOLTIP_MOTION).then(() => element.remove());
+    }
   }
 
   private show(): void {
@@ -96,6 +107,7 @@ export class NgxsmkTooltip {
     this.position(tooltip);
     this.element = tooltip;
     this.visible.set(true);
+    void playEnter(tooltip, TOOLTIP_MOTION);
   }
 
   private position(tooltip: HTMLElement): void {

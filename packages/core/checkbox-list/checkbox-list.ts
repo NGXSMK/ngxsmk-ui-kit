@@ -1,4 +1,4 @@
-import { Component, input, model, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, model, output } from '@angular/core';
 
 export interface CheckboxListItem {
   value: string;
@@ -28,6 +28,7 @@ export interface CheckboxListItem {
     .ngxsmk-checkbox-list__item--disabled { opacity: 0.5; cursor: not-allowed; }
   `,
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgxsmkCheckboxList {
   readonly items = input.required<CheckboxListItem[]>();
