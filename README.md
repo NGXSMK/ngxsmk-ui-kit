@@ -1,11 +1,11 @@
 # NGXSMK UI Kit
 
-[![Angular](https://img.shields.io/badge/Angular-22.x-dd0031?logo=angular&logoColor=white)](https://angular.dev)
+[![Angular](https://img.shields.io/badge/Angular-17.3%2B-dd0031?logo=angular&logoColor=white)](https://angular.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178c6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 [![npm @ngxsmk/core](https://img.shields.io/badge/npm-%40ngxsmk%2Fcore-blue)](https://www.npmjs.com/package/@ngxsmk/core)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 
-> An Angular-first, open-source UI ecosystem — **signals-native, zoneless, and token-themed**.
+> **v1.0.0 · Signals-native · Zoneless** — an Angular-first, open-source UI ecosystem, signals-native, zoneless, and token-themed.
 
 NGXSMK is a component library for modern Angular (**v17.3+**). Every component is a
 standalone, `OnPush`, signal-based component that reads design tokens from CSS
@@ -31,9 +31,10 @@ custom properties, so theming is instant and bundle size stays minimal. No
 
 ## Status
 
-Actively developed and usable. The workspace, theme engine, CDK behaviors, and
-the full component catalog are implemented. APIs may still change before a `1.0`
-stable release — see the [Roadmap](#roadmap).
+Stable. The `1.0.0` release ships the full component catalog, the token theme
+engine, CDK behaviors, and the animation helpers. The workspace, theme engine,
+and CDK are implemented and supported on Angular **17.3+** (see the
+[version note](#) above).
 
 ## Features
 

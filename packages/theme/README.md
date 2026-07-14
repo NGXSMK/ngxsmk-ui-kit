@@ -1,64 +1,41 @@
-# Theme
+# @ngxsmk/theme
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.0.0.
+The design-token engine of the [NGXSMK UI kit](https://github.com/NGXSMK/ngxsmk-ui-kit).
+`ThemeConfig` maps to `--ngxsmk-*` CSS custom properties, ships 4 presets with
+light/dark strategies, and supports runtime theme switching via
+`NgxsmkThemeService`.
 
-## Code scaffolding
+## Compatibility
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- Angular **17.3+**
+- `zone.js` optional (zoneless-friendly)
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the library, run:
+## Install
 
 ```bash
-ng build theme
+npm install @ngxsmk/theme
 ```
 
-This command will compile your project, and the build artifacts will be placed in the `dist/` directory.
+`@ngxsmk/theme` depends only on `@angular/core` and `@angular/common`.
 
-### Publishing the Library
+## Usage
 
-Once the project is built, you can publish your library by following these steps:
+```scss
+@import '@ngxsmk/theme/styles/ngxsmk.css';
+```
 
-1. Navigate to the `dist` directory:
+```ts
+import { NgxsmkThemeService } from '@ngxsmk/theme';
+```
 
-   ```bash
-   cd dist/theme
-   ```
+`@ngxsmk/theme` emits a flat set of CSS custom properties that every NGXSMK
+component reads — no per-component theming required.
 
-2. Run the `npm publish` command to publish your library to the npm registry:
-   ```bash
-   npm publish
-   ```
+## Building & publishing
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Built with the rest of the workspace via `npm run build:libs`. The published
+artifact lives in `dist/ngxsmk/theme`. To publish all packages:
 
 ```bash
-ng test
+npm run publish
 ```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.

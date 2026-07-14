@@ -1,6 +1,6 @@
 {
   "name": "ngxsmk-ui-kit",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve demo",
@@ -9,7 +9,8 @@
     "test": "ng test @ngxsmk/theme --watch=false && ng test @ngxsmk/cdk --watch=false && ng test @ngxsmk/core --watch=false",
     "theme:css": "tsx tools/scripts/generate-theme-css.ts",
     "build:libs": "ng build @ngxsmk/theme && ng build @ngxsmk/cdk && ng build @ngxsmk/core",
-    "build:demo": "ng build demo"
+    "build:demo": "ng build demo",
+    "publish": "npm run build:libs && npm publish ./dist/ngxsmk/cdk && npm publish ./dist/ngxsmk/theme && npm publish ./dist/ngxsmk/core"
   },
   "private": true,
   "packageManager": "npm@11.16.0",

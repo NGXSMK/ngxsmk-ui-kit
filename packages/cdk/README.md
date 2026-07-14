@@ -1,64 +1,43 @@
-# Cdk
+# @ngxsmk/cdk
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.0.0.
+Low-level, framework-agnostic Angular behaviors used by NGXSMK components:
 
-## Code scaffolding
+- `ClickOutside` — detect clicks outside an element
+- `FocusTrap` — trap focus within a container
+- `ScrollLock` — lock/unlock page scroll
+- `LiveAnnouncer` — announce messages to assistive tech
+- `MediaQuery` — reactive media-query signals
+- `VisuallyHidden` — visually hide content while keeping it accessible
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Part of the [NGXSMK UI kit](https://github.com/NGXSMK/ngxsmk-ui-kit).
 
-```bash
-ng generate component component-name
-```
+## Compatibility
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+- Angular **17.3+**
+- `zone.js` optional (zoneless-friendly)
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the library, run:
+## Install
 
 ```bash
-ng build cdk
+npm install @ngxsmk/cdk
 ```
 
-This command will compile your project, and the build artifacts will be placed in the `dist/` directory.
+`@ngxsmk/cdk` depends only on `@angular/core` and `@angular/common`.
 
-### Publishing the Library
+## Usage
 
-Once the project is built, you can publish your library by following these steps:
+```ts
+import { ClickOutside } from '@ngxsmk/cdk/click-outside';
+```
 
-1. Navigate to the `dist` directory:
+Prefer deep entry-point imports (e.g. `@ngxsmk/cdk/click-outside`) so the
+bundler tree-shakes unused behaviors.
 
-   ```bash
-   cd dist/cdk
-   ```
+## Building & publishing
 
-2. Run the `npm publish` command to publish your library to the npm registry:
-   ```bash
-   npm publish
-   ```
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Built with the rest of the workspace via `npm run build:libs`. The published
+artifact lives in `dist/ngxsmk/cdk`. To publish all packages:
 
 ```bash
-ng test
+npm run publish
 ```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.

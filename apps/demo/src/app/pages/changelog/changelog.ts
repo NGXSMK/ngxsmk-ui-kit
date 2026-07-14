@@ -71,6 +71,18 @@ interface Release {
 export class ChangelogPage {
   protected readonly releases: Release[] = [
     {
+      version: 'v1.0.0',
+      date: '2026-07-15',
+      summary: 'First stable release of the NGXSMK ecosystem.',
+      changes: [
+        { type: 'added', text: '@ngxsmk/core, @ngxsmk/cdk, and @ngxsmk/theme published at 1.0.0.' },
+        { type: 'added', text: 'Angular 17.3+ support verified across 17, 18, 19, 20, 21, and 22.' },
+        { type: 'added', text: '200+ components across forms, AI, enterprise, charts, and more.' },
+        { type: 'added', text: 'Universal token engine with runtime theme switching.' },
+        { type: 'changed', text: 'Peer dependencies widened to >=17.3.0 (was pinned to Angular 22).' },
+      ],
+    },
+    {
       version: 'v0.0.0-beta.1',
       date: '2026-07-13',
       summary: 'Initial beta release of the NGXSMK ecosystem.',
