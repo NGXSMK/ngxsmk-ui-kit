@@ -673,7 +673,7 @@ type RadiusKey = keyof typeof RADII;
   template: `
     <app-nav />
     
-    <div class="pg-container">
+    <div class="pg-container" [class.dark]="mode() === 'dark'">
       <!-- LEFT SIDENAV (Astryx views selectors) -->
       <aside class="pg-sidenav">
         <button type="button" aria-label="Code Editor" class="sidenav-btn" [class.active]="tab() === 'code'" (click)="tab.set('code')">
@@ -920,7 +920,6 @@ type RadiusKey = keyof typeof RADII;
         <!-- CANVAS AREA -->
         <div 
           class="canvas-scroll-area" 
-          [class.dark]="mode() === 'dark'" 
           [class.show-grid]="showGrid()"
           [style.background]="mode() === 'dark' ? '#09090b' : '#fafafa'"
         >
@@ -1051,7 +1050,6 @@ type RadiusKey = keyof typeof RADII;
       display: flex;
       flex-direction: column;
       width: 440px;
-      background: rgba(255, 255, 255, 0.85);
       backdrop-filter: blur(12px);
       border-right: 1px solid var(--ngxsmk-color-outline);
     }
@@ -1448,7 +1446,7 @@ type RadiusKey = keyof typeof RADII;
       background-size: 20px 20px;
     }
 
-    .canvas-scroll-area.dark.show-grid {
+    .dark .canvas-scroll-area.show-grid {
       background-image: radial-gradient(#27272a 1px, transparent 1px);
       background-size: 20px 20px;
     }
