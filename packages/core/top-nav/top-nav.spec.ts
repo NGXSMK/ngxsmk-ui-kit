@@ -11,6 +11,7 @@ import {
 } from './top-nav';
 
 @Component({
+  standalone: true,
   imports: [
     NgxsmkTopNav,
     NgxsmkTopNavMegaMenu,

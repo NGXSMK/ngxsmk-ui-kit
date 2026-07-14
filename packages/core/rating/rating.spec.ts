@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest';
 import { NgxsmkRating } from './rating';
 
 @Component({
+  standalone: true,
   imports: [NgxsmkRating],
   template: `<ngxsmk-rating [(value)]="value" [max]="max" [allowHalf]="half" />`,
 })

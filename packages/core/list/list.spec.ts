@@ -5,6 +5,7 @@ import { NgxsmkList } from './list';
 import { NgxsmkListItem } from '@ngxsmk/core/list-item';
 
 @Component({
+  standalone: true,
   imports: [NgxsmkList, NgxsmkListItem],
   template: `
     <ngxsmk-list [divided]="true">

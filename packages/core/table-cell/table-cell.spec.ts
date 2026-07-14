@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest';
 import { NgxsmkTableCell, NgxsmkTableHeaderCell, NgxsmkTableRow } from './table-cell';
 
 @Component({
+  standalone: true,
   imports: [NgxsmkTableCell, NgxsmkTableHeaderCell, NgxsmkTableRow],
   template: `
     <table class="ngxsmk-table">

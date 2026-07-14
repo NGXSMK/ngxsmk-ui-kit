@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest';
 import { NgxsmkPinInput } from './pin-input';
 
 @Component({
+  standalone: true,
   imports: [NgxsmkPinInput],
   template: `
     <ngxsmk-pin-input

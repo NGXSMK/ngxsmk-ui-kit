@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest';
 import { NgxsmkMeter } from './meter';
 
 @Component({
+  standalone: true,
   imports: [NgxsmkMeter],
   template: `
     <ngxsmk-meter

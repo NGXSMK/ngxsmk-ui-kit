@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest';
 import { NgxsmkTab, NgxsmkTabs } from './tabs';
 
 @Component({
+  standalone: true,
   imports: [NgxsmkTabs, NgxsmkTab],
   template: `
     <ngxsmk-tabs [(value)]="active">

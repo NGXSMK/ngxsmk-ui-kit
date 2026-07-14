@@ -2,10 +2,12 @@ name: Compatibility
 
 # Proves the publishable libraries (@ngxsmk/theme, @ngxsmk/cdk, @ngxsmk/core)
 # compile against every supported Angular major (17.3+). Each job installs the
-# target Angular toolchain, generates a libs-only angular.json, and builds the
-# three packages with that major's Angular CLI. Partial-Ivy output built with
-# an older major is forward-compatible, so building with the lowest supported
-# major (17) is sufficient to guarantee runtime compatibility across 17 → 22.
+# target Angular toolchain, derives the matching TypeScript version from
+# @angular/compiler-cli's peer range, generates a libs-only angular.json, and
+# builds the three packages with that major's Angular CLI. Partial-Ivy output
+# built with an older major is forward-compatible, so building with the lowest
+# supported major (17) already guarantees runtime compatibility across 17 -> 22;
+# the full matrix is run for extra confidence.
 
 on:
   push:
@@ -29,24 +31,35 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: ${{ matrix.ng == '22' && '22' || '20' }}
 
       - name: Install baseline dependencies
         run: npm ci
 
       - name: Pin Angular ${{ matrix.ng }} toolchain
         run: |
-          TS=$(node -e "const m={17:'~5.4.0',18:'~5.5.0',19:'~5.6.0',20:'~5.7.0',21:'~5.8.0',22:'~6.0.2'};console.log(m['${{ matrix.ng }}'])")
-          BUILDER=$([ "${{ matrix.ng }}" = "17" ] && echo "@angular-devkit/build-angular" || echo "@angular/build")
+          BUILDER="@angular-devkit/build-angular"
+          # Supported floor is 17.3 (signal output()), so install the 17.3 line.
+          FLOOR=$([ "${{ matrix.ng }}" = "17" ] && echo "17.3" || echo "${{ matrix.ng }}")
           npm install --no-save --legacy-peer-deps \
-            "@angular/core@^${{ matrix.ng }}.0" \
-            "@angular/common@^${{ matrix.ng }}.0" \
-            "@angular/compiler@^${{ matrix.ng }}.0" \
-            "@angular/compiler-cli@^${{ matrix.ng }}.0" \
-            "@angular/platform-browser@^${{ matrix.ng }}.0" \
-            "@angular/forms@^${{ matrix.ng }}.0" \
-            "$BUILDER@^${{ matrix.ng }}.0" \
-            "typescript@$TS"
+            "@angular/core@^${FLOOR}.0" \
+            "@angular/common@^${FLOOR}.0" \
+            "@angular/compiler@^${FLOOR}.0" \
+            "@angular/compiler-cli@^${FLOOR}.0" \
+            "@angular/platform-browser@^${FLOOR}.0" \
+            "@angular/forms@^${FLOOR}.0" \
+            "@angular/animations@^${FLOOR}.0" \
+            "@angular/cdk@^${FLOOR}.0" \
+            "ng-packagr@^${FLOOR}.0" \
+            "@angular/cli@^${FLOOR}.0" \
+            "$BUILDER@^${FLOOR}.0" \
+            "tslib"
+
+      - name: Install matching TypeScript
+        run: |
+          TS=$(node -e "console.log(require('@angular/compiler-cli/package.json').peerDependencies.typescript)")
+          echo "TypeScript peer for Angular ${{ matrix.ng }}: $TS"
+          npm install --no-save --legacy-peer-deps "typescript@$TS"
 
       - name: Generate libs-only angular.json
         run: node tools/scripts/gen-ci-angularjson.mjs ${{ matrix.ng }}

@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest';
 import { NgxsmkPagination } from './pagination';
 
 @Component({
+  standalone: true,
   imports: [NgxsmkPagination],
   template: `
     <ngxsmk-pagination

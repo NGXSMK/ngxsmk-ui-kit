@@ -4,6 +4,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { NgxsmkPopover } from './popover';
 
 @Component({
+  standalone: true,
   imports: [NgxsmkPopover],
   template: `
     <ngxsmk-popover placement="bottom" align="start" [disabled]="disabled">

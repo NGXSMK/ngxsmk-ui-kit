@@ -6,6 +6,10 @@
 /out-tsc
 /bazel-out
 
+# Generated compatibility-build artifacts (tools/scripts/gen-ci-angularjson.mjs)
+/angular.json.bak
+packages/*/tsconfig.lib.compat.json
+
 # Node
 /node_modules
 npm-debug.log

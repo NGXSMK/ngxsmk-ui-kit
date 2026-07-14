@@ -35,6 +35,7 @@ export type NgxsmkPopoverAlign = 'start' | 'center' | 'end';
  * ```
  */
 @Component({
+  standalone: true,
   selector: 'ngxsmk-popover',
   imports: [NgxsmkClickOutside, NgxsmkFocusTrap, NgxsmkAnimate],
   template: `

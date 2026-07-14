@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest';
 import { NgxsmkButton, NgxsmkButtonVariant } from './button';
 
 @Component({
+  standalone: true,
   imports: [NgxsmkButton],
   template: `
     <button ngxsmk-button [variant]="variant" size="sm" [loading]="loading()">

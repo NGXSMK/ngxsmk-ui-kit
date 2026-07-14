@@ -8,7 +8,7 @@ import { ChangeDetectionStrategy, Component, input, model, output } from '@angul
       @for (t of tokens(); track t) {
         <span class="ngxsmk-tokenizer__token">
           {{ t }}
-          <button type="button" class="ngxsmk-tokenizer__remove" (click)="remove(t)" aria-label="Remove {{ t }}">&times;</button>
+          <button type="button" class="ngxsmk-tokenizer__remove" (click)="remove(t)" [attr.aria-label]="'Remove ' + t">&times;</button>
         </span>
       }
       <input

@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest';
 import { NgxsmkStep, NgxsmkStepper } from './stepper';
 
 @Component({
+  standalone: true,
   imports: [NgxsmkStepper],
   template: `
     <ngxsmk-stepper [steps]="steps" [(activeIndex)]="index" [linear]="linear" />

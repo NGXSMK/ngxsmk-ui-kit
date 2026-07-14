@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest';
 import { NgxsmkOverflowList } from './overflow-list';
 
 @Component({
+  standalone: true,
   imports: [NgxsmkOverflowList],
   template: `
     <ngxsmk-overflow-list [max]="2" [total]="4">

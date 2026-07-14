@@ -5,6 +5,7 @@ import { describe, expect, it } from 'vitest';
 import { NgxsmkCheckbox } from './checkbox';
 
 @Component({
+  standalone: true,
   imports: [NgxsmkCheckbox, ReactiveFormsModule],
   template: `<ngxsmk-checkbox [formControl]="control">Accept</ngxsmk-checkbox>`,
 })

@@ -2,10 +2,10 @@
  * Public API Surface of @ngxsmk/cdk
  */
 
-export * from './click-outside';
-export * from './focusable';
-export * from './focus-trap';
-export * from './live-announcer';
-export * from './media-query';
-export * from './scroll-lock';
-export * from './visually-hidden';
+export * from '@ngxsmk/cdk/click-outside';
+export * from '@ngxsmk/cdk/focusable';
+export * from '@ngxsmk/cdk/focus-trap';
+export * from '@ngxsmk/cdk/live-announcer';
+export * from '@ngxsmk/cdk/media-query';
+export * from '@ngxsmk/cdk/scroll-lock';
+export * from '@ngxsmk/cdk/visually-hidden';

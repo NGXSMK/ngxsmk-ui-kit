@@ -21,6 +21,7 @@ export type NgxsmkMeterLevel = 'optimal' | 'suboptimal' | 'poor';
  * ```
  */
 @Component({
+  standalone: true,
   selector: 'ngxsmk-meter',
   template: `
     @if (label()) {

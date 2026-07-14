@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest';
 import { NgxsmkOutline, OutlineItem } from './outline';
 
 @Component({
+  standalone: true,
   imports: [NgxsmkOutline],
   template: `
     <ngxsmk-outline [items]="items" [(activeId)]="activeId" />
