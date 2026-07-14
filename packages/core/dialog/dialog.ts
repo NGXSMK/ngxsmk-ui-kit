@@ -10,6 +10,7 @@ import {
   input,
   model,
   signal,
+  untracked,
   viewChild,
 } from '@angular/core';
 import { NgxsmkScrollLock } from '@ngxsmk/cdk';
@@ -196,18 +197,24 @@ export class NgxsmkDialog {
   private locked = false;
 
   constructor() {
+    // Only `open()` and `dialogRef()` drive reactivity; the show/leave work
+    // (which may perform async motion loading) runs untracked, so it can't
+    // leak into the host's reactive context.
     effect(() => {
       const dialog = this.dialogRef().nativeElement;
-      if (this.open() && !dialog.open) {
-        this.visible.set(true);
-        dialog.showModal();
-        this.setLocked(true);
-      } else if (!this.open() && dialog.open) {
-        void playExit(dialog, DIALOG_MOTION).then(() => {
-          dialog.close();
-          this.visible.set(false);
-        });
-      }
+      const open = this.open();
+      untracked(() => {
+        if (open && !dialog.open) {
+          this.visible.set(true);
+          dialog.showModal();
+          this.setLocked(true);
+        } else if (!open && dialog.open) {
+          void playExit(dialog, DIALOG_MOTION).then(() => {
+            dialog.close();
+            this.visible.set(false);
+          });
+        }
+      });
     });
 
     inject(DestroyRef).onDestroy(() => this.setLocked(false));

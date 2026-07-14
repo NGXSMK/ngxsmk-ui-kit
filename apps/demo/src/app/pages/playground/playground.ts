@@ -18,7 +18,7 @@ import { NgxsmkAlert } from '@ngxsmk/core/alert';
 
 import { Component, computed, signal, input, forwardRef, effect, ChangeDetectionStrategy, ViewChild, ElementRef, inject
 } from '@angular/core';
-import { NgStyle, NgClass, CommonModule } from '@angular/common';
+import { NgStyle } from '@angular/common';
 import { AppNav } from '../../nav/nav';
 import { NgxsmkThemeService } from '@ngxsmk/theme';
 
@@ -164,7 +164,6 @@ function parseJSX(code: string): ASTNode[] {
   selector: 'ast-renderer',
   standalone: true,
   imports: [
-    CommonModule,
     NgStyle,
     NgxsmkButton,
     NgxsmkBadge,
@@ -660,7 +659,6 @@ type RadiusKey = keyof typeof RADII;
   selector: 'playground-page',
   standalone: true,
   imports: [
-    CommonModule,
     NgStyle,
     AppNav,
     NgxsmkButton,

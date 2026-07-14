@@ -7,6 +7,7 @@ import {
   inject,
   input,
   output,
+  untracked,
 } from '@angular/core';
 import { NgxsmkMotionState, playEnter, playExit } from './animate';
 
@@ -28,26 +29,31 @@ export class NgxsmkPresence {
   readonly afterLeave = output<void>();
 
   constructor() {
+    // Only `show()` drives reactivity; the enter/leave animation work (which
+    // may read signals or perform async motion loading) runs untracked, so it
+    // can't leak into the host's reactive context.
     effect(() => {
       const show = this.show();
-      if (show) {
-        if (this.viewContainer.length === 0) {
-          const view = this.viewContainer.createEmbeddedView(this.template);
-          const el = view.rootNodes.find(
-            (n): n is HTMLElement => n instanceof HTMLElement,
-          );
-          if (el) {
-            void playEnter(el, this.motion());
+      untracked(() => {
+        if (show) {
+          if (this.viewContainer.length === 0) {
+            const view = this.viewContainer.createEmbeddedView(this.template);
+            const el = view.rootNodes.find(
+              (n): n is HTMLElement => n instanceof HTMLElement,
+            );
+            if (el) {
+              void playEnter(el, this.motion());
+            }
           }
+        } else if (this.viewContainer.length > 0) {
+          const el = this.host.nativeElement.querySelector('*') as HTMLElement | null;
+          const target = el ?? this.host.nativeElement;
+          void playExit(target, this.motion()).then(() => {
+            this.viewContainer.clear();
+            this.afterLeave.emit();
+          });
         }
-      } else if (this.viewContainer.length > 0) {
-        const el = this.host.nativeElement.querySelector('*') as HTMLElement | null;
-        const target = el ?? this.host.nativeElement;
-        void playExit(target, this.motion()).then(() => {
-          this.viewContainer.clear();
-          this.afterLeave.emit();
-        });
-      }
+      });
     });
   }
 }

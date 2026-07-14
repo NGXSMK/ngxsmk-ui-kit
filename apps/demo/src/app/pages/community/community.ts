@@ -27,7 +27,7 @@ import { AppNav } from '../../nav/nav';
             <a ngxsmk-button size="sm" href="https://github.com" target="_blank">Join Discussion</a>
           </div>
         </ngxsmk-card>
-    </div>
+      </div>
     </div>
   `,
   styles: `
