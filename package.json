@@ -10,7 +10,7 @@
     "theme:css": "tsx tools/scripts/generate-theme-css.ts",
     "build:libs": "ng build @ngxsmk/theme && ng build @ngxsmk/cdk && ng build @ngxsmk/core",
     "build:demo": "ng build demo",
-    "publish": "npm run build:libs && npm publish ./dist/ngxsmk/cdk && npm publish ./dist/ngxsmk/theme && npm publish ./dist/ngxsmk/core"
+    "publish": "node tools/scripts/publish.mjs"
   },
   "private": true,
   "packageManager": "npm@11.16.0",
