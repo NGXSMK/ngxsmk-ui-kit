@@ -71,6 +71,17 @@ interface Release {
 export class ChangelogPage {
   protected readonly releases: Release[] = [
     {
+      version: 'v1.1.0',
+      date: '2026-07-15',
+      summary: 'Stable release with updated toolchain, command palette, and prompt carousel.',
+      changes: [
+        { type: 'added', text: 'Command palette component (@ngxsmk/core/command-palette) for quick search and actions.' },
+        { type: 'added', text: 'Prompt carousel component (@ngxsmk/core/prompt-carousel) for AI-focused templates.' },
+        { type: 'changed', text: 'Standardized workspace configuration and builder options.' },
+        { type: 'changed', text: 'Verified Angular compatibility across versions 17 through 22.' },
+      ],
+    },
+    {
       version: 'v1.0.0',
       date: '2026-07-15',
       summary: 'First stable release of the NGXSMK ecosystem.',

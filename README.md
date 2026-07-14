@@ -5,7 +5,7 @@
 [![npm @ngxsmk/core](https://img.shields.io/badge/npm-%40ngxsmk%2Fcore-blue)](https://www.npmjs.com/package/@ngxsmk/core)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 
-> **v1.0.0 · Signals-native · Zoneless** — an Angular-first, open-source UI ecosystem, signals-native, zoneless, and token-themed.
+> **v1.1.0 · Signals-native · Zoneless** — an Angular-first, open-source UI ecosystem, signals-native, zoneless, and token-themed.
 
 NGXSMK is a component library for modern Angular (**v17.3+**). Every component is a
 standalone, `OnPush`, signal-based component that reads design tokens from CSS
@@ -31,7 +31,7 @@ custom properties, so theming is instant and bundle size stays minimal. No
 
 ## Status
 
-Stable. The `1.0.0` release ships the full component catalog, the token theme
+Stable. The `1.1.0` release ships the full component catalog, the token theme
 engine, CDK behaviors, and the animation helpers. The workspace, theme engine,
 and CDK are implemented and supported on Angular **17.3+** (see the
 [version note](#) above).
