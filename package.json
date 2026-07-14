@@ -10,7 +10,9 @@
     "theme:css": "tsx tools/scripts/generate-theme-css.ts",
     "build:libs": "ng build @ngxsmk/theme && ng build @ngxsmk/cdk && ng build @ngxsmk/core",
     "build:demo": "ng build demo",
-    "publish": "node tools/scripts/publish.mjs"
+    "publish": "node tools/scripts/publish.mjs",
+    "restore:toolchain": "node tools/scripts/gen-ci-angularjson.mjs --restore && npm install",
+    "compat:test": "node tools/scripts/gen-ci-angularjson.mjs"
   },
   "private": true,
   "packageManager": "npm@11.16.0",
