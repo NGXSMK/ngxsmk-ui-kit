@@ -10,6 +10,7 @@ import {
 import { NgxsmkAnimate, NgxsmkMotionState, playExit } from '@ngxsmk/core/animation';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-hover-card',
   template: `
     <div

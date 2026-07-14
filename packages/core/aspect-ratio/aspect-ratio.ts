@@ -6,6 +6,7 @@ import {
 } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-aspect-ratio',
   template: `<ng-content />`,
   host: {

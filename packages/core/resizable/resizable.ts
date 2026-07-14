@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, ElementRef, afterNextRender, input,
 import { NgxsmkResizeHandle } from '@ngxsmk/core/resize-handle';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-resizable',
   template: `
     <div

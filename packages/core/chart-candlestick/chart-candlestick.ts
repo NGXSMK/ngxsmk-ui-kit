@@ -14,6 +14,7 @@ export interface NgxsmkCandlestickDataPoint {
 }
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-chart-candlestick',
   template: `
     <svg

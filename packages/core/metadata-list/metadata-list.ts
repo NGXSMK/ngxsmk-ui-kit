@@ -1,12 +1,14 @@
 import { ChangeDetectionStrategy, Component, Directive, input } from '@angular/core';
 
 @Directive({
+  standalone: true,
   selector: 'ngxsmk-metadata-list-item, [ngxsmkMetadataListItem]',
   host: { class: 'ngxsmk-metadata-list-item' },
 })
 export class NgxsmkMetadataListItem {}
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-metadata-list',
   template: `<dl class="ngxsmk-metadata-list__dl"><ng-content /></dl>`,
   host: { class: 'ngxsmk-metadata-list' },

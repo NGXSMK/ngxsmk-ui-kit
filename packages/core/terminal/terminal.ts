@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-terminal',
   template: `
     <div class="ngxsmk-terminal__header">{{ title() }}</div>

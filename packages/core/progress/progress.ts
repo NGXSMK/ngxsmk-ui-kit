@@ -14,6 +14,7 @@ import {
  * ```
  */
 @Component({
+  standalone: true,
   selector: 'ngxsmk-progress',
   template: `<div class="ngxsmk-progress__bar" [style.width]="barWidth()"></div>`,
   host: {

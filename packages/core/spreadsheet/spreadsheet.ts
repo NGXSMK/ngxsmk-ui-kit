@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-spreadsheet',
   template: `
     <div class="ngxsmk-spreadsheet__table" role="grid">

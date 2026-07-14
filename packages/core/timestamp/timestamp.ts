@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, input, computed } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-timestamp',
   template: `<time [attr.datetime]="datetime()">{{ display() }}</time>`,
   host: { class: 'ngxsmk-timestamp' },

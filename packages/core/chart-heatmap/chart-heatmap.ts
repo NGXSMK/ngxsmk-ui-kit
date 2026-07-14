@@ -11,6 +11,7 @@ export interface NgxsmkHeatmapLabels {
 }
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-chart-heatmap',
   template: `
     <svg

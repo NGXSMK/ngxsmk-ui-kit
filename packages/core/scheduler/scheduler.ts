@@ -9,6 +9,7 @@ export interface SchedulerEvent {
 }
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-scheduler',
   template: `
     <div class="ngxsmk-scheduler__header">

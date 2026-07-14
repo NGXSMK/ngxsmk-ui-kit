@@ -9,6 +9,7 @@ export interface ToolCall {
 }
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-tool-call-viewer',
   template: `
     @for (call of calls(); track call.id) {

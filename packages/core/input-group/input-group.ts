@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, DOCUMENT, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 
 const STYLE_ID = 'ngxsmk-input-group-styles';
 
@@ -74,6 +75,7 @@ const INPUT_GROUP_CSS = `
  * ```
  */
 @Component({
+  standalone: true,
   selector: 'ngxsmk-input-group',
   template: `<ng-content />`,
   host: { class: 'ngxsmk-input-group ngxsmk-input-group--core' },

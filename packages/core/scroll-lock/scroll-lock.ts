@@ -2,6 +2,7 @@ import { Directive, inject, input, effect, DestroyRef } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
 @Directive({
+  standalone: true,
   selector: '[ngxsmkScrollLock]',
 })
 export class NgxsmkScrollLock {

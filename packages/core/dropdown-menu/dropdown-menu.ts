@@ -18,6 +18,7 @@ export interface NgxsmkDropdownMenuItem {
 }
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-dropdown-menu',
   template: `
     <div class="ngxsmk-dropdown-menu__trigger" (click)="toggle()">

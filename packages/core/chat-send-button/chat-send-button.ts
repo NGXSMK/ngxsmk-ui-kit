@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-chat-send-button',
   template: `{{ label() }}`,
   host: {

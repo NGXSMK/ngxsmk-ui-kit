@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, input, model, output } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'button[ngxsmkToggleButton]',
   template: `<ng-content />`,
   host: {

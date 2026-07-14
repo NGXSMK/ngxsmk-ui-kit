@@ -9,6 +9,7 @@ export interface ChatMessageData {
 }
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-chat-message',
   template: `<ng-content />`,
   host: {

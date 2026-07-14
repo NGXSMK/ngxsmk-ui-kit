@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 export type NgxsmkFormLayoutColumns = 1 | 2 | 3 | 4;
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-form-layout',
   template: `<ng-content />`,
   host: {

@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'kbd[ngxsmk-kbd], ngxsmk-kbd',
   template: `<ng-content />`,
   host: {

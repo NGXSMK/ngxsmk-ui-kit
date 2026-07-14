@@ -137,6 +137,7 @@ export class NgxsmkToast {
  * Toast outlet. Place once in the root template: `<ngxsmk-toaster />`.
  */
 @Component({
+  standalone: true,
   selector: 'ngxsmk-toaster',
   template: `
     @for (toast of toasts(); track toast.id) {

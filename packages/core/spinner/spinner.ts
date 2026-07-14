@@ -15,6 +15,7 @@ export type NgxsmkSpinnerSize = 'sm' | 'md' | 'lg';
  * ```
  */
 @Component({
+  standalone: true,
   selector: 'ngxsmk-spinner',
   template: '',
   host: {

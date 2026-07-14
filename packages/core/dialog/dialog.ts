@@ -19,6 +19,7 @@ import { NgxsmkAnimate, NgxsmkMotionState, playExit } from '@ngxsmk/core/animati
 
 /** Marks content projected into the dialog's footer action row. */
 @Directive({
+  standalone: true,
   selector: '[ngxsmkDialogFooter]',
   host: {
     style: `
@@ -55,6 +56,7 @@ const DIALOG_MOTION: NgxsmkMotionState = {
 };
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-dialog',
   imports: [NgxsmkAnimate],
   template: `

@@ -1,6 +1,7 @@
 import { Directive } from '@angular/core';
 
 @Directive({
+  standalone: true,
   selector: '[ngxsmkVisuallyHidden]',
   host: {
     '[style.position]': '"absolute"',

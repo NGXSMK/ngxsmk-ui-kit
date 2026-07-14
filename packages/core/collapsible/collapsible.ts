@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, input, model } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-collapsible',
   template: `
     <button

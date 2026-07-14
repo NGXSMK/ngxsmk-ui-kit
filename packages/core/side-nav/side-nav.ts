@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, input, output, signal, inject } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-side-nav',
   template: `<div class="ngxsmk-side-nav__inner"><ng-content /></div>`,
   host: { class: 'ngxsmk-side-nav', '[attr.data-collapsed]': 'collapsed() ? "" : null' },
@@ -26,6 +27,7 @@ export class NgxsmkSideNav {
 }
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-side-nav-heading',
   template: `<span class="ngxsmk-side-nav-heading__text"><ng-content /></span>`,
   host: { class: 'ngxsmk-side-nav-heading' },
@@ -35,6 +37,7 @@ export class NgxsmkSideNav {
 export class NgxsmkSideNavHeading {}
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-side-nav-item',
   template: `
     @if (href()) {
@@ -69,6 +72,7 @@ export class NgxsmkSideNavItem {
 }
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-side-nav-section',
   template: `<ng-content />`,
   host: { class: 'ngxsmk-side-nav-section' },
@@ -78,6 +82,7 @@ export class NgxsmkSideNavItem {
 export class NgxsmkSideNavSection {}
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-side-nav-collapse-button',
   template: `
     <button type="button" class="ngxsmk-side-nav-collapse-btn" (click)="sideNav.toggle()" [attr.aria-label]="sideNav.collapsed() ? 'Expand sidebar' : 'Collapse sidebar'">

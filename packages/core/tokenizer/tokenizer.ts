@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, input, model, output } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-tokenizer',
   template: `
     <div class="ngxsmk-tokenizer__wrap" (click)="input.focus()">

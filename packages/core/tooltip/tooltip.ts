@@ -1,5 +1,5 @@
+import { DOCUMENT } from '@angular/common';
 import {
-  DOCUMENT,
   DestroyRef,
   Directive,
   ElementRef,
@@ -30,6 +30,7 @@ const TOOLTIP_MOTION: NgxsmkMotionState = {
  * ```
  */
 @Directive({
+  standalone: true,
   selector: '[ngxsmkTooltip]',
   host: {
     '(mouseenter)': 'scheduleShow()',

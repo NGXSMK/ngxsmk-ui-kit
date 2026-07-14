@@ -8,6 +8,7 @@ export interface AgentInfo {
 }
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-agent-card',
   template: `
     <div class="ngxsmk-agent-card__header">

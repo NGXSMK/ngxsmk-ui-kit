@@ -11,6 +11,7 @@ export interface NgxsmkChartConfig {
 }
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-chart-dashboard',
   template: `
     <div

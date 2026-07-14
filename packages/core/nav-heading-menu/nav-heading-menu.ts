@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, input, signal } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-nav-heading-menu',
   template: `
     <button type="button" class="ngxsmk-nav-heading-menu__trigger" (click)="open.set(!open())" [attr.aria-expanded]="open()">

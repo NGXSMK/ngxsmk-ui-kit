@@ -9,12 +9,14 @@ import {
 } from '@angular/core';
 
 @Directive({
+  standalone: true,
   selector: '[ngxsmkCheckboxListItem]',
   host: { class: 'ngxsmk-checkbox-list-item' },
 })
 export class NgxsmkCheckboxListItem {}
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-checkbox-list-item, [ngxsmkCheckboxListItem]',
   template: `
     <label class="ngxsmk-checkbox-list-item__wrapper">

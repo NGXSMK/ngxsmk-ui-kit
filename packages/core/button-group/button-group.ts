@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-button-group, [ngxsmkButtonGroup]',
   template: `<ng-content />`,
   host: {

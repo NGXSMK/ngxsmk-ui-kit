@@ -19,6 +19,7 @@ export type NgxsmkAlertVariant = 'info' | 'success' | 'warning' | 'error';
  * ```
  */
 @Component({
+  standalone: true,
   selector: 'ngxsmk-alert',
   template: `
     @if (!hidden()) {

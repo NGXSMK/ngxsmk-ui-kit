@@ -18,6 +18,7 @@ import {
 } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-multi-selector',
   template: `
     <div

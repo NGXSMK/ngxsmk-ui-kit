@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-chat-message-metadata',
   template: `{{ formattedTime() }}`,
   host: { class: 'ngxsmk-chat-message-metadata' },

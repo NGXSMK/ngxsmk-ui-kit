@@ -7,10 +7,25 @@
 
 > An Angular-first, open-source UI ecosystem — **signals-native, zoneless, and token-themed**.
 
-NGXSMK is a component library for modern Angular (v20+). Every component is a
+NGXSMK is a component library for modern Angular (**v17.3+**). Every component is a
 standalone, `OnPush`, signal-based component that reads design tokens from CSS
 custom properties, so theming is instant and bundle size stays minimal. No
-`zone.js` required.
+`zone.js` required — it works with both zone-based and zoneless apps.
+
+> **Angular version note:** the source targets Angular **17.3** as the minimum
+> (signal `input`/`model` and signal `viewChild`/`contentChild` queries). It uses
+> no Angular 18+/19+/20+‑only runtime APIs, so the same components run on 17.3,
+> 18, 19, 20, 21, and 22. The demo app in this repo additionally uses
+> zoneless change detection (`provideZonelessChangeDetection`), which needs
+> Angular 18+ (stable in 19), so the demo itself targets 18+.
+>
+> **Verified:** all three publishable packages (`@ngxsmk/theme`, `@ngxsmk/cdk`,
+> `@ngxsmk/core`) are compiled against every supported major in CI
+> (`.github/workflows/compatibility.yml`) — the libraries build cleanly on
+> Angular 17.3. Peer dependencies are declared as `>=17.3.0`. For publishing,
+> build with the lowest supported Angular so the partial‑Ivy output is
+> forward‑compatible (a package built with an older ng-packagr loads on newer
+> Angular, not the reverse).
 
 ---
 
@@ -223,7 +238,9 @@ The library is built to stay out of your critical path:
 
 ## Development
 
-This is an Nx-free Angular monorepo. Requirements: Node 20+, Angular CLI 22.
+This is an Nx-free Angular monorepo. To **develop/build this repo** you need
+Node 20+ and Angular CLI 22. The published libraries themselves support
+Angular **17.3+** (see version note above).
 
 ```bash
 npm install

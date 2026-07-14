@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-code-block',
   template: `<pre class="ngxsmk-code-block__pre"><code class="ngxsmk-code-block__code"><ng-content /></code></pre>`,
   host: { class: 'ngxsmk-code-block' },

@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-top-nav',
   template: `<div class="ngxsmk-top-nav__inner"><ng-content /></div>`,
   host: { class: 'ngxsmk-top-nav' },
@@ -16,6 +17,7 @@ import { ChangeDetectionStrategy, Component, input, output } from '@angular/core
 export class NgxsmkTopNav {}
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-top-nav-heading',
   template: `<a class="ngxsmk-top-nav-heading__link" [href]="href()"><ng-content /></a>`,
   host: { class: 'ngxsmk-top-nav-heading' },
@@ -31,6 +33,7 @@ export class NgxsmkTopNavHeading {
 }
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-top-nav-item',
   template: `
     @if (href()) {
@@ -53,6 +56,7 @@ export class NgxsmkTopNavItem {
 }
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-top-nav-menu',
   template: `<ng-content />`,
   host: { class: 'ngxsmk-top-nav-menu' },
@@ -64,6 +68,7 @@ export class NgxsmkTopNavItem {
 export class NgxsmkTopNavMenu {}
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-top-nav-mega-menu',
   template: `
     <div class="ngxsmk-top-nav-mega-menu__dropdown">
@@ -129,6 +134,7 @@ export class NgxsmkTopNavMegaMenu {
 }
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-top-nav-mega-menu-item',
   template: `
     <a class="ngxsmk-top-nav-mega-menu-item__link" [href]="href()">
@@ -159,6 +165,7 @@ export class NgxsmkTopNavMegaMenuItem {
 }
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-top-nav-mega-menu-featured-card',
   template: `<a class="ngxsmk-top-nav-mega-menu-featured" [href]="href()"><ng-content /></a>`,
   host: { class: 'ngxsmk-top-nav-mega-menu-featured-card' },

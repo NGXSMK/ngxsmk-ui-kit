@@ -31,6 +31,7 @@ export type NgxsmkButtonSize = 'sm' | 'md' | 'lg';
  * ```
  */
 @Directive({
+  standalone: true,
   selector: 'button[ngxsmk-button], a[ngxsmk-button]',
   host: {
     class: 'ngxsmk-button',

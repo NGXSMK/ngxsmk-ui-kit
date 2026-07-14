@@ -11,6 +11,7 @@ export interface NgxsmkChartDataPoint {
 }
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-chart-line',
   template: `
     <svg

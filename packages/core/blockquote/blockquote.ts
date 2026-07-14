@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-blockquote',
   template: `
     <div class="ngxsmk-blockquote__content"><ng-content /></div>

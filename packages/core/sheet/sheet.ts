@@ -16,6 +16,7 @@ import { NgxsmkAnimate, NgxsmkMotionState, playExit } from '@ngxsmk/core/animati
 export type NgxsmkSheetSide = 'left' | 'right' | 'bottom';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-sheet',
   template: `
     @if (open()) {

@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 
 @Directive({
+  standalone: true,
   selector: '[ngxsmkMediaTheme]',
   host: {
     '[attr.data-theme-mode]': 'matched() ? theme() : null',

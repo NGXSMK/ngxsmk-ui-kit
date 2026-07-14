@@ -17,6 +17,7 @@ export type NgxsmkTagVariant = 'neutral' | 'primary' | 'success' | 'warning' | '
  * ```
  */
 @Component({
+  standalone: true,
   selector: 'ngxsmk-tag',
   template: `<ng-content />`,
   host: {
@@ -76,6 +77,7 @@ export class NgxsmkTag {
  * ```
  */
 @Component({
+  standalone: true,
   selector: 'ngxsmk-chip',
   template: `
     <span class="ngxsmk-chip__label"><ng-content /></span>

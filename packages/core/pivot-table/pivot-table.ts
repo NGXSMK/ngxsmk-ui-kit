@@ -6,6 +6,7 @@ export interface PivotRow {
 }
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-pivot-table',
   template: `
     <div class="ngxsmk-pivot-table__grid">

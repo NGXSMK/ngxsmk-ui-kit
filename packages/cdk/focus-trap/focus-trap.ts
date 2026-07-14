@@ -1,5 +1,5 @@
+import { DOCUMENT } from '@angular/common';
 import {
-  DOCUMENT,
   DestroyRef,
   Directive,
   ElementRef,
@@ -16,6 +16,7 @@ import { getFocusable } from '@ngxsmk/cdk/focusable';
  * restores the previously focused element on destroy.
  */
 @Directive({
+  standalone: true,
   selector: '[ngxsmkFocusTrap]',
   host: {
     '(keydown)': 'onKeydown($event)',

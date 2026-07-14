@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, input, signal, effect } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-streaming-text',
   template: `{{ displayText() }}<span class="ngxsmk-streaming-text__cursor">&ZeroWidthSpace;</span>`,
   host: { class: 'ngxsmk-streaming-text', 'aria-live': 'polite' },

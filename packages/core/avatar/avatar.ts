@@ -18,6 +18,7 @@ export type NgxsmkAvatarSize = 'sm' | 'md' | 'lg' | 'xl';
  * ```
  */
 @Component({
+  standalone: true,
   selector: 'ngxsmk-avatar',
   template: `
     @if (showImage()) {

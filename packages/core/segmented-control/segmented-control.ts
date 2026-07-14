@@ -7,6 +7,7 @@ export interface SegmentedOption {
 }
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-segmented-control',
   template: `
     <div class="ngxsmk-segmented-control__group" role="radiogroup">

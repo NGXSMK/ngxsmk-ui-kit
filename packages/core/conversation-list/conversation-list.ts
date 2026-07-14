@@ -8,6 +8,7 @@ export interface Conversation {
 }
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-conversation-list',
   template: `
     <div class="ngxsmk-conversation-list__items">

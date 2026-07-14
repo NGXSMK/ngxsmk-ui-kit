@@ -15,6 +15,7 @@ import { DOCUMENT } from '@angular/common';
 export type NgxsmkAlertDialogVariant = 'info' | 'destructive';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-alert-dialog',
   template: `
     <dialog #dialog class="ngxsmk-alert-dialog__native" (cancel)="onCancel($event)" (close)="open.set(false)" (click)="onBackdropClick($event)">

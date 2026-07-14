@@ -48,6 +48,7 @@ function renderMarkdown(md: string): string {
 }
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-markdown',
   template: `<div class="ngxsmk-markdown" [innerHTML]="html()"></div>`,
   host: { class: 'ngxsmk-markdown-host' },

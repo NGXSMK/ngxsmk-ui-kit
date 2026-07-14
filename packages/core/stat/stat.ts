@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 export type NgxsmkStatTrend = 'up' | 'down' | 'flat';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-stat',
   template: `
     @if (icon()) {

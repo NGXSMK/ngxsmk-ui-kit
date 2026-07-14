@@ -21,6 +21,7 @@ const ALIGN_MAP: Record<string, string> = {
 };
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-stack',
   template: `<ng-content />`,
   host: {

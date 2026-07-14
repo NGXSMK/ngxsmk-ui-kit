@@ -9,6 +9,7 @@ export class NgxsmkBaseTypeaheadItem {
 }
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-base-typeahead',
   template: `
     <div class="ngxsmk-base-typeahead__wrap">

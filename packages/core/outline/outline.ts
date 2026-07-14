@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-outline',
   template: `
     <nav class="ngxsmk-outline__nav" aria-label="Page outline">

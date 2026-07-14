@@ -11,6 +11,7 @@ export interface NgxsmkBarChartDataPoint {
 }
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-chart-bar',
   template: `
     <svg

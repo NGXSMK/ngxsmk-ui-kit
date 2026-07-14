@@ -13,6 +13,7 @@ export interface DiagramEdge {
 }
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-diagram-builder',
   template: `
     <svg class="ngxsmk-diagram-builder__svg">

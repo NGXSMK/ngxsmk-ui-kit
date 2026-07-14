@@ -1,4 +1,5 @@
-import { DOCUMENT, Injectable, inject } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 
 /**
  * Locks body scrolling (for dialogs, drawers, sheets). Reference-counted so

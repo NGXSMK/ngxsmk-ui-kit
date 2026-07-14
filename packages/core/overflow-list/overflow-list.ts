@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, input, signal, ViewEncapsulation } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-overflow-list',
   template: `
     <div class="ngxsmk-overflow-list__items" [class.expanded]="expanded()">

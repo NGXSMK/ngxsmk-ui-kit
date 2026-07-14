@@ -20,6 +20,7 @@ import { ngxsmkUniqueId } from '@ngxsmk/core/util';
  * ```
  */
 @Component({
+  standalone: true,
   selector: 'ngxsmk-accordion',
   template: `<ng-content />`,
   host: { class: 'ngxsmk-accordion' },
@@ -61,6 +62,7 @@ export class NgxsmkAccordion {
 }
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-accordion-item',
   template: `
     <h3 class="ngxsmk-accordion-item__heading">

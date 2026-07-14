@@ -23,6 +23,7 @@ import { ngxsmkUniqueId } from '@ngxsmk/core/util';
  * ```
  */
 @Component({
+  standalone: true,
   selector: 'ngxsmk-radio-group',
   template: `<ng-content />`,
   host: {
@@ -81,6 +82,7 @@ export class NgxsmkRadioGroup implements ControlValueAccessor {
 
 /** Single option inside an `ngxsmk-radio-group`. */
 @Component({
+  standalone: true,
   selector: 'ngxsmk-radio',
   template: `
     <label class="ngxsmk-radio__wrapper">

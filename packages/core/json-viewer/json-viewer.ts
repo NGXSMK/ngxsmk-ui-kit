@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-json-viewer',
   template: `<div class="ngxsmk-json-viewer__tree" [innerHTML]="formatted()"></div>`,
   host: { class: 'ngxsmk-json-viewer' },

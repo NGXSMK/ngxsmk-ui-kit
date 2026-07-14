@@ -12,6 +12,7 @@ export interface NgxsmkScatterDataPoint {
 }
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-chart-scatter',
   template: `
     <svg

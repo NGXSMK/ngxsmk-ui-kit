@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, input, model, signal } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-combobox',
   template: `
     <div class="ngxsmk-combobox__wrap">

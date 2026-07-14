@@ -22,6 +22,7 @@ export type NgxsmkBadgeVariant =
  * ```
  */
 @Component({
+  standalone: true,
   selector: 'ngxsmk-badge',
   template: `<ng-content />`,
   host: {

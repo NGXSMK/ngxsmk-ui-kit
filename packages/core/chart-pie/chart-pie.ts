@@ -11,6 +11,7 @@ export interface NgxsmkPieChartDataPoint {
 }
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-chart-pie',
   template: `
     <svg

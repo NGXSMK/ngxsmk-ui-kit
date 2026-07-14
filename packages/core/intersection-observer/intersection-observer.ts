@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 
 @Directive({
+  standalone: true,
   selector: '[ngxsmkIntersectionObserver]',
 })
 export class NgxsmkIntersectionObserver {

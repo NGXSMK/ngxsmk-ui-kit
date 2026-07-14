@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-date-picker',
   template: `
     <input

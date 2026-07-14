@@ -8,6 +8,7 @@ export interface OrgNode {
 }
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-org-chart',
   template: `
     <div class="ngxsmk-org-chart__tree">

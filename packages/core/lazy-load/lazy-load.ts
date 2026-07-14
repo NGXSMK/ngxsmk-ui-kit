@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-lazy-load',
   template: `
     @if (visible()) {

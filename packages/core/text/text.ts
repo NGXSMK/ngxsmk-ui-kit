@@ -4,6 +4,7 @@ export type NgxsmkTextVariant = 'body' | 'caption' | 'overline' | 'inherit';
 export type NgxsmkTextColor = 'default' | 'secondary' | 'disabled' | 'brand' | 'inherit';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-text',
   template: `<ng-content />`,
   host: {

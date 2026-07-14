@@ -7,6 +7,7 @@ export interface ReasoningStep {
 }
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-reasoning-timeline',
   template: `
     <div class="ngxsmk-reasoning-timeline__steps">

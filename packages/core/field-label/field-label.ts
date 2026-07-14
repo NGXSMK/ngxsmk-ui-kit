@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-field-label, [ngxsmkFieldLabel], label[ngxsmkFieldLabel]',
   template: `<ng-content />@if (required()) { <span class="ngxsmk-field-label__req" aria-hidden="true">*</span> }`,
   host: { class: 'ngxsmk-field-label' },

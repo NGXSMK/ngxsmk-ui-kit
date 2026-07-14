@@ -11,6 +11,7 @@ import {
 export type NgxsmkBannerVariant = 'info' | 'success' | 'warning' | 'error';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-banner',
   template: `
     @if (!hidden()) {

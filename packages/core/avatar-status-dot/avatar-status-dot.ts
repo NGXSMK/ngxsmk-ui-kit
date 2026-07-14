@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 export type NgxsmkAvatarStatusDotVariant = 'online' | 'away' | 'busy' | 'offline';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-avatar-status-dot',
   template: '',
   host: {

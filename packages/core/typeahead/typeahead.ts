@@ -10,6 +10,7 @@ export class NgxsmkTypeaheadItem {
 }
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-typeahead',
   template: `
     <div class="ngxsmk-typeahead__wrap">

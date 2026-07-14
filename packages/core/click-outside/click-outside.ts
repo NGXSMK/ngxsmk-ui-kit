@@ -1,6 +1,7 @@
 import { Directive, inject, ElementRef, output, HostListener } from '@angular/core';
 
 @Directive({
+  standalone: true,
   selector: '[ngxsmkClickOutside]',
 })
 export class NgxsmkClickOutside {

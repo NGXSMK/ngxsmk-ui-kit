@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-chat-composer-token-element',
   template: `{{ label() }}`,
   host: { class: 'ngxsmk-chat-composer-token-element', '[attr.data-variant]': 'variant()' },

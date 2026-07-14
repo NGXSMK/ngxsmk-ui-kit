@@ -1,6 +1,7 @@
 import { Directive } from '@angular/core';
 
 @Directive({
+  standalone: true,
   selector: '[ngxsmkLayerProvider], ngxsmk-layer-provider',
 })
 export class NgxsmkLayerProvider {

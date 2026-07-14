@@ -10,6 +10,7 @@ import {
 import { NgxsmkTable, NgxsmkTableColumn } from '@ngxsmk/core/table';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-data-table',
   template: `
     <ngxsmk-table

@@ -6,6 +6,7 @@ export interface NgxsmkTableColumn {
 }
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-table',
   template: `
     <table class="ngxsmk-table__element">

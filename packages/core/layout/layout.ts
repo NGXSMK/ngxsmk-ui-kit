@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Directive } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-layout',
   template: `<ng-content />`,
   host: { class: 'ngxsmk-layout' },
@@ -9,14 +10,18 @@ import { ChangeDetectionStrategy, Component, Directive } from '@angular/core';
 })
 export class NgxsmkLayout {}
 
-@Directive({ selector: 'ngxsmk-layout-header, [ngxsmkLayoutHeader]', host: { class: 'ngxsmk-layout-header' } })
+@Directive({
+  standalone: true, selector: 'ngxsmk-layout-header, [ngxsmkLayoutHeader]', host: { class: 'ngxsmk-layout-header' } })
 export class NgxsmkLayoutHeader {}
 
-@Directive({ selector: 'ngxsmk-layout-content, [ngxsmkLayoutContent]', host: { class: 'ngxsmk-layout-content' } })
+@Directive({
+  standalone: true, selector: 'ngxsmk-layout-content, [ngxsmkLayoutContent]', host: { class: 'ngxsmk-layout-content' } })
 export class NgxsmkLayoutContent {}
 
-@Directive({ selector: 'ngxsmk-layout-footer, [ngxsmkLayoutFooter]', host: { class: 'ngxsmk-layout-footer' } })
+@Directive({
+  standalone: true, selector: 'ngxsmk-layout-footer, [ngxsmkLayoutFooter]', host: { class: 'ngxsmk-layout-footer' } })
 export class NgxsmkLayoutFooter {}
 
-@Directive({ selector: 'ngxsmk-layout-panel, [ngxsmkLayoutPanel]', host: { class: 'ngxsmk-layout-panel' } })
+@Directive({
+  standalone: true, selector: 'ngxsmk-layout-panel, [ngxsmkLayoutPanel]', host: { class: 'ngxsmk-layout-panel' } })
 export class NgxsmkLayoutPanel {}

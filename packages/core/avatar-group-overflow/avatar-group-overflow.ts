@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-avatar-group-overflow',
   template: `+{{ count() }}`,
   host: { class: 'ngxsmk-avatar-group-overflow', '[attr.aria-label]': 'ariaLabel()' },

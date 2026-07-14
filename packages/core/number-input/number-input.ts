@@ -8,6 +8,7 @@ import { ChangeDetectionStrategy, Component, booleanAttribute, computed, input, 
  * ```
  */
 @Component({
+  standalone: true,
   selector: 'ngxsmk-number-input',
   template: `
     <button

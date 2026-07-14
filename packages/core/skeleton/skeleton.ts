@@ -13,6 +13,7 @@ import {
  * ```
  */
 @Component({
+  standalone: true,
   selector: 'ngxsmk-skeleton',
   template: '',
   host: {

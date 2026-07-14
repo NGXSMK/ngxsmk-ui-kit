@@ -1,6 +1,7 @@
 import { Directive, input, signal } from '@angular/core';
 
 @Directive({
+  standalone: true,
   selector: '[ngxsmkMediaQuery]',
 })
 export class NgxsmkMediaQuery {

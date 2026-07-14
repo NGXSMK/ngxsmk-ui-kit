@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, input, model, signal } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-autocomplete',
   template: `
     <div class="ngxsmk-autocomplete__wrap">

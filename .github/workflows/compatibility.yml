@@ -1,0 +1,58 @@
+name: Compatibility
+
+# Proves the publishable libraries (@ngxsmk/theme, @ngxsmk/cdk, @ngxsmk/core)
+# compile against every supported Angular major (17.3+). Each job installs the
+# target Angular toolchain, generates a libs-only angular.json, and builds the
+# three packages with that major's Angular CLI. Partial-Ivy output built with
+# an older major is forward-compatible, so building with the lowest supported
+# major (17) is sufficient to guarantee runtime compatibility across 17 → 22.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  libs:
+    name: Build libs on Angular ${{ matrix.ng }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ng: ['17', '18', '19', '20', '21', '22']
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install baseline dependencies
+        run: npm ci
+
+      - name: Pin Angular ${{ matrix.ng }} toolchain
+        run: |
+          TS=$(node -e "const m={17:'~5.4.0',18:'~5.5.0',19:'~5.6.0',20:'~5.7.0',21:'~5.8.0',22:'~6.0.2'};console.log(m['${{ matrix.ng }}'])")
+          BUILDER=$([ "${{ matrix.ng }}" = "17" ] && echo "@angular-devkit/build-angular" || echo "@angular/build")
+          npm install --no-save --legacy-peer-deps \
+            "@angular/core@^${{ matrix.ng }}.0" \
+            "@angular/common@^${{ matrix.ng }}.0" \
+            "@angular/compiler@^${{ matrix.ng }}.0" \
+            "@angular/compiler-cli@^${{ matrix.ng }}.0" \
+            "@angular/platform-browser@^${{ matrix.ng }}.0" \
+            "@angular/forms@^${{ matrix.ng }}.0" \
+            "$BUILDER@^${{ matrix.ng }}.0" \
+            "typescript@$TS"
+
+      - name: Generate libs-only angular.json
+        run: node tools/scripts/gen-ci-angularjson.mjs ${{ matrix.ng }}
+
+      - name: Build libraries
+        run: |
+          npx -p @angular/cli@${{ matrix.ng }} ng build --project @ngxsmk/theme --configuration development
+          npx -p @angular/cli@${{ matrix.ng }} ng build --project @ngxsmk/cdk --configuration development
+          npx -p @angular/cli@${{ matrix.ng }} ng build --project @ngxsmk/core --configuration development

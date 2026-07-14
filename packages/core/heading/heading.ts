@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 export type NgxsmkHeadingLevel = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-heading',
   template: `<ng-content />`,
   host: {

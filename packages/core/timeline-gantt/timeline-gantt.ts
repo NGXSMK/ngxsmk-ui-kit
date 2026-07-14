@@ -9,6 +9,7 @@ export interface GanttItem {
 }
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-timeline-gantt',
   template: `
     <div class="ngxsmk-timeline-gantt__rows">

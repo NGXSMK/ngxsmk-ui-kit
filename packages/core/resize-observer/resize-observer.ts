@@ -12,6 +12,7 @@ export interface NgxsmkResizeObserverSize {
 }
 
 @Directive({
+  standalone: true,
   selector: '[ngxsmkResizeObserver]',
 })
 export class NgxsmkResizeObserver {

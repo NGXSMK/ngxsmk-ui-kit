@@ -10,6 +10,7 @@ import {
 import { NgxsmkScrollLock } from '@ngxsmk/cdk';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-chat-composer-drawer',
   template: `
     @if (open()) {

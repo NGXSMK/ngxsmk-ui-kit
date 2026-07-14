@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, input, signal, computed } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-thumbnail',
   template: `
     @if (showImage()) {

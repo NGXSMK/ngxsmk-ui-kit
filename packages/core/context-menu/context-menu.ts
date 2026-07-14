@@ -18,6 +18,7 @@ export interface NgxsmkContextMenuItem {
 }
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-context-menu',
   template: `
     @if (visible()) {

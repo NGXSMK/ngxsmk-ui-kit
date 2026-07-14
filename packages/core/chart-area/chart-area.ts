@@ -11,6 +11,7 @@ export interface NgxsmkAreaChartDataPoint {
 }
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-chart-area',
   template: `
     <svg

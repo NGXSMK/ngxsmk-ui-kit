@@ -13,6 +13,7 @@ export interface QueryCondition {
 }
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-query-builder',
   template: `
     <div class="ngxsmk-query-builder__conditions">

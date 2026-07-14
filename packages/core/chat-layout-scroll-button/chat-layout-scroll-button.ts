@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, output } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-chat-layout-scroll-button',
   template: `↓`,
   host: {

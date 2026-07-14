@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-chat-tokenized-text',
   template: `{{ text() }}`,
   host: { class: 'ngxsmk-chat-tokenized-text' },

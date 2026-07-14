@@ -6,6 +6,7 @@ export interface SelectorOption {
 }
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-selector',
   template: `
     <div class="ngxsmk-selector__chips">

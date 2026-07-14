@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-empty-state',
   template: `
     <div class="ngxsmk-empty-state__wrapper">

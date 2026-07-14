@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-chat-system-message',
   template: `{{ message() }}`,
   host: { class: 'ngxsmk-chat-system-message' },

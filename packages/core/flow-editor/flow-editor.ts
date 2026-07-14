@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-flow-editor',
   template: `
     <div class="ngxsmk-flow-editor__toolbar">

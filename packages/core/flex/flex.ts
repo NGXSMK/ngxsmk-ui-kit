@@ -27,6 +27,7 @@ const JUSTIFY_MAP: Record<string, string> = {
 };
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-flex',
   template: `<ng-content />`,
   host: {

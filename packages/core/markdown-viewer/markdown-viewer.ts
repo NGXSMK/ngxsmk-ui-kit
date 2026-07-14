@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-markdown-viewer',
   template: `<div class="ngxsmk-markdown-viewer__body"><ng-content /></div>`,
   host: { class: 'ngxsmk-markdown-viewer' },

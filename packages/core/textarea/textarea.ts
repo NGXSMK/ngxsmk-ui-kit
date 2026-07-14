@@ -8,6 +8,7 @@ import { ChangeDetectionStrategy, Component, booleanAttribute, input, model, out
  * ```
  */
 @Component({
+  standalone: true,
   selector: 'ngxsmk-textarea',
   template: `
     <textarea

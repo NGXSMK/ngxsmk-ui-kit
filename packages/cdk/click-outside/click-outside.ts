@@ -1,5 +1,5 @@
+import { DOCUMENT } from '@angular/common';
 import {
-  DOCUMENT,
   DestroyRef,
   Directive,
   ElementRef,
@@ -15,6 +15,7 @@ import {
  * ```
  */
 @Directive({
+  standalone: true,
   selector: '[ngxsmkClickOutside]',
 })
 export class NgxsmkClickOutside {

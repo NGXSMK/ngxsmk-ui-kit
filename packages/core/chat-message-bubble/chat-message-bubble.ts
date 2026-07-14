@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-chat-message-bubble',
   template: `<div class="ngxsmk-chat-message-bubble__bubble"><ng-content /></div>`,
   host: { class: 'ngxsmk-chat-message-bubble' },

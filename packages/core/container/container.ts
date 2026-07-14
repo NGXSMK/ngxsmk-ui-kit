@@ -7,6 +7,7 @@ import {
 export type NgxsmkContainerSize = 'sm' | 'md' | 'lg' | 'xl' | 'full';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-container',
   template: `<ng-content />`,
   host: {

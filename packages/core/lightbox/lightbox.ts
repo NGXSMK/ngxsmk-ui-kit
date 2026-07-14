@@ -14,6 +14,7 @@ export interface NgxsmkLightboxImage {
 }
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-lightbox',
   template: `
     <div class="ngxsmk-lightbox__trigger" (click)="show(0)">

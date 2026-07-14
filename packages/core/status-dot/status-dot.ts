@@ -10,6 +10,7 @@ const VARIANT_COLORS: Record<NgxsmkStatusDotVariant, string> = {
 };
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-status-dot',
   template: '',
   host: {

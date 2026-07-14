@@ -1,6 +1,7 @@
 import { Directive, input, output, HostListener } from '@angular/core';
 
 @Directive({
+  standalone: true,
   selector: '[ngxsmkCopyToClipboard]',
 })
 export class NgxsmkCopyToClipboard {

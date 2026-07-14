@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 export type NgxsmkFieldStatusVariant = 'error' | 'warning' | 'success' | 'info';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-field-status, [ngxsmkFieldStatus]',
   template: `{{ message() }}`,
   host: {

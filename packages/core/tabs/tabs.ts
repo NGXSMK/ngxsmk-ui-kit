@@ -19,6 +19,7 @@ import { ngxsmkUniqueId } from '@ngxsmk/core/util';
  * content; `ngxsmk-tabs` renders the active panel.
  */
 @Component({
+  standalone: true,
   selector: 'ngxsmk-tab',
   template: `
     <ng-template #content><ng-content /></ng-template>
@@ -44,6 +45,7 @@ export class NgxsmkTab {
  * ```
  */
 @Component({
+  standalone: true,
   selector: 'ngxsmk-tabs',
   imports: [NgTemplateOutlet],
   template: `

@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, input, output, signal } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-mobile-nav',
   template: `
     @if (open()) {
@@ -41,6 +42,7 @@ export class NgxsmkMobileNav {
 }
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-mobile-nav-toggle',
   template: `
     <button type="button" class="ngxsmk-mobile-nav-toggle__btn" (click)="toggled.emit()" [attr.aria-label]="'Toggle navigation'">

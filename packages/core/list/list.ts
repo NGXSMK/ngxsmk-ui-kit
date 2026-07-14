@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, booleanAttribute, input, ViewEncapsulation } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-list',
   template: `<ng-content />`,
   host: {

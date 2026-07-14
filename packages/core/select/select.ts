@@ -39,6 +39,7 @@ export interface NgxsmkSelectOption {
  * ```
  */
 @Component({
+  standalone: true,
   selector: 'ngxsmk-select',
   template: `
     <button

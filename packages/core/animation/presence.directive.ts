@@ -18,6 +18,7 @@ import { NgxsmkMotionState, playEnter, playExit } from './animate';
  * `false`. Mirrors the host's presence so leave animations can complete.
  */
 @Directive({
+  standalone: true,
   selector: '[ngxsmkPresence]',
 })
 export class NgxsmkPresence {

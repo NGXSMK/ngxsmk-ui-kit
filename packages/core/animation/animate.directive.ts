@@ -6,6 +6,7 @@ import { NgxsmkMotionState, playEnter } from './animate';
  * The motion state is supplied via the `ngxsmkAnimate` input.
  */
 @Directive({
+  standalone: true,
   selector: '[ngxsmkAnimate]',
 })
 export class NgxsmkAnimate {

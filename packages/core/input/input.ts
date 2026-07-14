@@ -21,6 +21,7 @@ import { ngxsmkUniqueId } from '@ngxsmk/core/util';
  * ```
  */
 @Component({
+  standalone: true,
   selector: 'ngxsmk-input',
   template: `
     <input

@@ -59,6 +59,7 @@ function ensureTableStyles(document: Document): void {
 }
 
 @Directive({
+  standalone: true,
   selector: 'td[ngxsmkTableCell], ngxsmk-table-cell',
   host: { class: 'ngxsmk-table-cell' },
 })
@@ -69,6 +70,7 @@ export class NgxsmkTableCell {
 }
 
 @Directive({
+  standalone: true,
   selector: 'th[ngxsmkTableHeaderCell], ngxsmk-table-header-cell',
   host: {
     class: 'ngxsmk-table-header-cell',
@@ -87,6 +89,7 @@ export class NgxsmkTableHeaderCell {
 }
 
 @Directive({
+  standalone: true,
   selector: 'tr[ngxsmkTableRow], ngxsmk-table-row',
   host: {
     class: 'ngxsmk-table-row',

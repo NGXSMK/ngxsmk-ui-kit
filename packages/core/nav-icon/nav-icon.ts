@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 export type NgxsmkNavIconSize = 'sm' | 'md' | 'lg';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-nav-icon',
   template: `
     <span class="ngxsmk-nav-icon__container">

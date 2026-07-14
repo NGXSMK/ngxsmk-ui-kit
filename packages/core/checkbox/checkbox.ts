@@ -21,6 +21,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
  * ```
  */
 @Component({
+  standalone: true,
   selector: 'ngxsmk-checkbox',
   template: `
     <label class="ngxsmk-checkbox__wrapper">

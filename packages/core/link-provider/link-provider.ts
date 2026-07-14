@@ -16,6 +16,7 @@ export const NGXSMK_LINK_PROVIDER = new InjectionToken<TemplateRef<NgxsmkLinkCon
 );
 
 @Directive({
+  standalone: true,
   selector: '[ngxsmkLinkProvider]',
 })
 export class NgxsmkLinkProvider {

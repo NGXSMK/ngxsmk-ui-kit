@@ -1,9 +1,11 @@
 import { ChangeDetectionStrategy, Component, Directive, input } from '@angular/core';
 
-@Directive({ selector: '[ngxsmkStackItem]', host: { class: 'ngxsmk-stack-item' } })
+@Directive({
+  standalone: true, selector: '[ngxsmkStackItem]', host: { class: 'ngxsmk-stack-item' } })
 export class NgxsmkStackItem {}
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-h-stack',
   template: `<ng-content />`,
   host: {
@@ -24,6 +26,7 @@ export class NgxsmkHStack {
 }
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-v-stack',
   template: `<ng-content />`,
   host: {

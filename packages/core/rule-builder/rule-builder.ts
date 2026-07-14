@@ -12,6 +12,7 @@ export interface Rule {
 }
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-rule-builder',
   template: `
     <div class="ngxsmk-rule-builder__group">

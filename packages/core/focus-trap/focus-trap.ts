@@ -1,6 +1,7 @@
 import { Directive, input } from '@angular/core';
 
 @Directive({
+  standalone: true,
   selector: '[ngxsmkFocusTrap]',
   host: {
     tabindex: '0',

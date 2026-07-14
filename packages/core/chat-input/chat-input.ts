@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, input, model, output } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-chat-input',
   template: `
     <div class="ngxsmk-chat-input__bar">

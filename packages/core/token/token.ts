@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 export type NgxsmkTokenVariant = 'default' | 'primary' | 'success' | 'warning' | 'error';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-token',
   template: `
     <span class="ngxsmk-token__label"><ng-content /></span>

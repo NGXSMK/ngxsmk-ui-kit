@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, input, output, signal } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-voice-input',
   template: `
     <button

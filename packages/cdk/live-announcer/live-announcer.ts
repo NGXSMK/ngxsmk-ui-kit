@@ -1,4 +1,5 @@
-import { DOCUMENT, Injectable, OnDestroy, inject } from '@angular/core';
+import { Injectable, OnDestroy, inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 
 export type AnnouncerPoliteness = 'polite' | 'assertive';
 

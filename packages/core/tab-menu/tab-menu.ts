@@ -7,6 +7,7 @@ import {
 import { NgxsmkTabs } from '@ngxsmk/core/tabs';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-tab-menu',
   template: `
     <div class="ngxsmk-tab-menu__wrapper" role="tablist" [attr.aria-label]="'Navigation menu'">

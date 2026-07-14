@@ -21,6 +21,7 @@ import { NgxsmkInput } from '@ngxsmk/core/input';
  * ```
  */
 @Component({
+  standalone: true,
   selector: 'ngxsmk-form-field',
   template: `
     @if (label()) {

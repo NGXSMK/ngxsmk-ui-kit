@@ -12,6 +12,7 @@ export interface WorkflowEdge {
 }
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-workflow-builder',
   template: `
     <div class="ngxsmk-workflow-builder__canvas">

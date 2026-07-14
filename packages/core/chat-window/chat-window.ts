@@ -3,6 +3,7 @@ import { NgxsmkChatMessage } from '@ngxsmk/core/chat-message';
 import { NgxsmkChatMessageBubble } from '@ngxsmk/core/chat-message-bubble';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-chat-window',
   template: `
     <div class="ngxsmk-chat-window__messages">

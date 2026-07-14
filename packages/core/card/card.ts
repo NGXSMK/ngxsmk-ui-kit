@@ -21,6 +21,7 @@ import {
  * ```
  */
 @Component({
+  standalone: true,
   selector: 'ngxsmk-card',
   template: `<ng-content />`,
   host: {
@@ -56,6 +57,7 @@ export class NgxsmkCard {
 }
 
 @Directive({
+  standalone: true,
   selector: '[ngxsmkCardHeader]',
   host: {
     class: 'ngxsmk-card__header',
@@ -70,6 +72,7 @@ export class NgxsmkCard {
 export class NgxsmkCardHeader {}
 
 @Directive({
+  standalone: true,
   selector: '[ngxsmkCardTitle]',
   host: {
     class: 'ngxsmk-card__title',
@@ -85,6 +88,7 @@ export class NgxsmkCardHeader {}
 export class NgxsmkCardTitle {}
 
 @Directive({
+  standalone: true,
   selector: '[ngxsmkCardDescription]',
   host: {
     class: 'ngxsmk-card__description',
@@ -100,6 +104,7 @@ export class NgxsmkCardTitle {}
 export class NgxsmkCardDescription {}
 
 @Directive({
+  standalone: true,
   selector: '[ngxsmkCardContent]',
   host: {
     class: 'ngxsmk-card__content',
@@ -109,6 +114,7 @@ export class NgxsmkCardDescription {}
 export class NgxsmkCardContent {}
 
 @Directive({
+  standalone: true,
   selector: '[ngxsmkCardFooter]',
   host: {
     class: 'ngxsmk-card__footer',

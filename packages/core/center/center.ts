@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-center',
   template: `<ng-content />`,
   host: { class: 'ngxsmk-center' },

@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-diff-viewer',
   template: `
     <div class="ngxsmk-diff-viewer__lines">

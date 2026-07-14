@@ -20,6 +20,7 @@ export interface KanbanMove {
 }
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-kanban-board',
   template: `
     <div class="ngxsmk-kanban-board__columns">

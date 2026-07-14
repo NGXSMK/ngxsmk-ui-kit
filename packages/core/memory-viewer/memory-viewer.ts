@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-memory-viewer',
   template: `
     <div class="ngxsmk-memory-viewer__items">

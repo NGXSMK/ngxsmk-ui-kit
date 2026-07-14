@@ -7,6 +7,7 @@ export interface PowerSearchFilter {
 }
 
 @Component({
+  standalone: true,
   selector: 'ngxsmk-power-search',
   template: `
     <div class="ngxsmk-power-search__bar">

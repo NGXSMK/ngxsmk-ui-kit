@@ -19,6 +19,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
  * ```
  */
 @Component({
+  standalone: true,
   selector: 'ngxsmk-switch',
   template: `
     <label class="ngxsmk-switch__wrapper">
