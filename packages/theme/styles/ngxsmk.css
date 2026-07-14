@@ -233,13 +233,3 @@
   --ngxsmk-color-info-container: #002452;
   --ngxsmk-color-on-info-container: #8FC1FF;
 }
-
-/* Reduced motion: honor user preference globally */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
-  }
-}
