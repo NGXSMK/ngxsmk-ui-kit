@@ -36,7 +36,7 @@ jobs:
       - name: Install baseline dependencies
         run: npm ci
 
-      - name: Pin Angular ${{ matrix.ng }} toolchain
+      - name: Pin Angular ${{ matrix.ng }} toolchain & TypeScript
         run: |
           if [ "${{ matrix.ng }}" = "17" ] || [ "${{ matrix.ng }}" = "18" ]; then
             BUILDER="@angular-devkit/build-angular"
@@ -45,25 +45,28 @@ jobs:
           fi
           # Supported floor is 17.3 (signal output()), so install the 17.3 line.
           FLOOR=$([ "${{ matrix.ng }}" = "17" ] && echo "17.3" || echo "${{ matrix.ng }}")
-          npm install --no-save --legacy-peer-deps \
-            "@angular/core@^${FLOOR}.0" \
-            "@angular/common@^${FLOOR}.0" \
-            "@angular/compiler@^${FLOOR}.0" \
-            "@angular/compiler-cli@^${FLOOR}.0" \
-            "@angular/platform-browser@^${FLOOR}.0" \
-            "@angular/forms@^${FLOOR}.0" \
-            "@angular/animations@^${FLOOR}.0" \
-            "@angular/cdk@^${FLOOR}.0" \
-            "ng-packagr@^${FLOOR}.0" \
-            "@angular/cli@^${FLOOR}.0" \
-            "$BUILDER@^${FLOOR}.0" \
+          
+          PKGS=(
+            "@angular/core@^${FLOOR}.0"
+            "@angular/common@^${FLOOR}.0"
+            "@angular/compiler@^${FLOOR}.0"
+            "@angular/compiler-cli@^${FLOOR}.0"
+            "@angular/platform-browser@^${FLOOR}.0"
+            "@angular/forms@^${FLOOR}.0"
+            "@angular/animations@^${FLOOR}.0"
+            "@angular/cdk@^${FLOOR}.0"
+            "ng-packagr@^${FLOOR}.0"
+            "@angular/cli@^${FLOOR}.0"
+            "$BUILDER@^${FLOOR}.0"
             "tslib"
-
-      - name: Install matching TypeScript
-        run: |
+          )
+          
+          npm install --no-save --legacy-peer-deps "${PKGS[@]}"
+          
           TS=$(node -e "console.log(require('@angular/compiler-cli/package.json').peerDependencies.typescript)")
           echo "TypeScript peer for Angular ${{ matrix.ng }}: $TS"
-          npm install --no-save --legacy-peer-deps "typescript@$TS"
+          
+          npm install --no-save --legacy-peer-deps "typescript@$TS" "${PKGS[@]}"
 
       - name: Generate libs-only angular.json
         run: node tools/scripts/gen-ci-angularjson.mjs ${{ matrix.ng }}
