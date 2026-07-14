@@ -24,6 +24,7 @@ import { NgxsmkVoiceInput } from '@ngxsmk/core/voice-input';
 import { NgxsmkAudioPlayer } from '@ngxsmk/core/audio-player';
 import { NgxsmkImageViewer } from '@ngxsmk/core/image-viewer';
 import { NgxsmkAgentCard } from '@ngxsmk/core/agent-card';
+import { NgxsmkPromptCarousel, PromptItem } from '@ngxsmk/core/prompt-carousel';
 import { Component, signal } from '@angular/core';
 import { ShowcaseExample } from '../../showcase/showcase-example';
 
@@ -58,6 +59,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     NgxsmkVoiceInput,
     NgxsmkAudioPlayer,
     NgxsmkImageViewer,
+    NgxsmkPromptCarousel,
   ],
   template: `
     <h2 class="ngxsmk-page-title">AI</h2>
@@ -374,6 +376,23 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     >
       <ngxsmk-chat-system-message [message]="systemNotice" />
     </showcase-example>
+
+    <showcase-example
+      title="Prompt Carousel (New)"
+      description="A scrollable horizontal list of pre-configured prompt suggestion cards with customizable color themes."
+      [code]="codePromptCarousel"
+    >
+      <ngxsmk-prompt-carousel
+        [prompts]="promptItemsList"
+        (selected)="onPromptSelected($event)"
+      />
+
+      @if (selectedPromptText()) {
+        <p class="ngxsmk-demo-hint" style="margin-top: 1rem;">
+          Active selection: <strong>"{{ selectedPromptText() }}"</strong>
+        </p>
+      }
+    </showcase-example>
   `,
   styles: `
     :host { display: block; }
@@ -412,6 +431,19 @@ export class AiPage {
   protected readonly dictating = signal(false);
   protected readonly drawerOpen = signal(false);
   protected readonly activeConversation = signal('1');
+  protected readonly selectedPromptText = signal('');
+
+  protected readonly promptItemsList: PromptItem[] = [
+    { id: '1', category: 'Coding', title: 'Refactor Code', prompt: 'Refactor this Angular component to use Signals and remove Zone.js.', icon: '⚡', colorPreset: 'violet' },
+    { id: '2', category: 'Writing', title: 'Email Drafter', prompt: 'Write a polite follow-up email about the project status.', icon: '✉️', colorPreset: 'blue' },
+    { id: '3', category: 'Productivity', title: 'Summarize Meeting', prompt: 'Summarize these transcripts into 5 key action points.', icon: '📋', colorPreset: 'emerald' },
+    { id: '4', category: 'Creativity', title: 'Brainstorm Ideas', prompt: 'Brainstorm 5 naming ideas for a signal-native UI toolkit.', icon: '💡', colorPreset: 'amber' },
+    { id: '5', category: 'Reviewing', title: 'Find Bugs', prompt: 'Perform a security audit and find edge cases in this code.', icon: '🔍', colorPreset: 'rose' }
+  ];
+
+  protected onPromptSelected(item: PromptItem): void {
+    this.selectedPromptText.set(item.prompt);
+  }
 
   protected onSend(text: string): void {
     this.sentLog.set(text);
@@ -554,4 +586,5 @@ export class AiPage {
   protected readonly codeChatMessageBubble = `<ngxsmk-chat-message [message]="userMsg">\n  <ngxsmk-chat-message-bubble>{{ userMsg.content }}</ngxsmk-chat-message-bubble>\n</ngxsmk-chat-message>\n<ngxsmk-chat-message [message]="assistantMsg">\n  <ngxsmk-chat-message-bubble>{{ assistantMsg.content }}</ngxsmk-chat-message-bubble>\n</ngxsmk-chat-message>`;
   protected readonly codeChatMessageMetadata = `<ngxsmk-chat-message-metadata [timestamp]="message.timestamp" />`;
   protected readonly codeChatSystemMessage = `<ngxsmk-chat-system-message [message]="'Assistant is typing…'" />`;
+  protected readonly codePromptCarousel = `<ngxsmk-prompt-carousel\n  [prompts]="promptsList"\n  (selected)="onPromptSelected($event)"\n/>`;
 }

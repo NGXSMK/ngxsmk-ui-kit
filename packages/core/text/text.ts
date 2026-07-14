@@ -18,7 +18,7 @@ export type NgxsmkTextColor = 'default' | 'secondary' | 'disabled' | 'brand' | '
       font-family: var(--ngxsmk-font-sans);
     }
 
-    :host([data-variant='body']) { font-size: var(--ngxsmk-text-body-md-size); line-height: var(--ngxsmk-text-body-md-line); color: var(--ngxsmk-color-on-surface); }
+    :host([data-variant='body']) { font-size: var(--ngxsmk-text-body-md-size); line-height: var(--ngxsmk-text-body-md-line); }
     :host([data-variant='caption']) { font-size: var(--ngxsmk-text-body-sm-size); line-height: var(--ngxsmk-text-body-sm-line); }
     :host([data-variant='overline']) { font-size: var(--ngxsmk-text-label-sm-size); line-height: var(--ngxsmk-text-label-sm-line); text-transform: uppercase; letter-spacing: 0.05em; }
 

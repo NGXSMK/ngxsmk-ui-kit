@@ -20,6 +20,7 @@ import { Component, computed, signal, input, forwardRef, effect, ChangeDetection
 } from '@angular/core';
 import { NgStyle, NgClass, CommonModule } from '@angular/common';
 import { AppNav } from '../../nav/nav';
+import { NgxsmkThemeService } from '@ngxsmk/theme';
 
 interface ASTNode {
   type: string;
@@ -199,7 +200,11 @@ function parseJSX(code: string): ASTNode[] {
 
         @switch (node().type) {
           @case ('Card') {
-            <ngxsmk-card [style.width.px]="node().attributes['width']" style="display:block; margin: 0 auto;">
+            <ngxsmk-card 
+              [style.width.px]="node().attributes['width']" 
+              [style.padding]="node().attributes['padding'] ? 'var(--ngxsmk-space-' + node().attributes['padding'] + ')' : null"
+              style="display:block; margin: 0 auto; max-width: 100%; box-sizing: border-box;"
+            >
               @for (c of node().children; track $index) {
                 <ast-renderer [node]="c" />
               }
@@ -1604,6 +1609,8 @@ export class PlaygroundPage {
   protected readonly tab = signal<'code' | 'theme'>('code');
   protected readonly themeTab = signal<'base' | 'components' | 'advanced'>('base');
   
+  private readonly themeService = inject(NgxsmkThemeService);
+
   // Code Editor state
   protected readonly editorCode = signal<string>(TEMPLATES['showcase']);
   protected readonly lines = computed(() => {
@@ -1696,6 +1703,25 @@ export class PlaygroundPage {
   constructor() {
     this.restoreFromHash();
     
+    // Sync playground dark mode with global theme dark mode
+    effect(() => {
+      const isDark = this.themeService.isDark();
+      const currentMode = this.mode();
+      if (isDark && currentMode === 'light') {
+        this.mode.set('dark');
+        this.cardBg.set('#18181b');
+        this.appBg.set('#09090b');
+        this.text.set('#fafafa');
+        this.neutral.set('#3f3f46');
+      } else if (!isDark && currentMode === 'dark') {
+        this.mode.set('light');
+        this.cardBg.set('#ffffff');
+        this.appBg.set('#fafafa');
+        this.text.set('#09090b');
+        this.neutral.set('#e4e4e7');
+      }
+    }, { allowSignalWrites: true });
+
     // Set up effects to update parameters based on Accent toggle if enabled
     effect(() => {
       if (this.createFromAccent()) {
@@ -1743,20 +1769,7 @@ export class PlaygroundPage {
   }
 
   protected toggleDarkMode() {
-    const current = this.mode();
-    if (current === 'light') {
-      this.mode.set('dark');
-      this.cardBg.set('#18181b');
-      this.appBg.set('#09090b');
-      this.text.set('#fafafa');
-      this.neutral.set('#3f3f46');
-    } else {
-      this.mode.set('light');
-      this.cardBg.set('#ffffff');
-      this.appBg.set('#fafafa');
-      this.text.set('#09090b');
-      this.neutral.set('#e4e4e7');
-    }
+    this.themeService.toggle();
   }
 
   protected applyThemePreset(preset: string) {

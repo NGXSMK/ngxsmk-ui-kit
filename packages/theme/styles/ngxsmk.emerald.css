@@ -25,6 +25,31 @@
   --ngxsmk-font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --ngxsmk-font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
   --ngxsmk-radius-base: 0.5rem;
+  --ngxsmk-control-height: 2.5rem;
+  --ngxsmk-button-bg: var(--ngxsmk-color-primary);
+  --ngxsmk-button-color: var(--ngxsmk-color-on-primary);
+  --ngxsmk-button-font-family: var(--ngxsmk-font-sans);
+  --ngxsmk-button-font-weight: 500;
+  --ngxsmk-button-radius: var(--ngxsmk-radius-base);
+  --ngxsmk-button-disabled-opacity: 0.5;
+  --ngxsmk-card-bg: var(--ngxsmk-color-surface);
+  --ngxsmk-card-radius: var(--ngxsmk-radius-xl);
+  --ngxsmk-card-shadow: var(--ngxsmk-shadow-sm);
+  --ngxsmk-card-border-color: var(--ngxsmk-color-outline);
+  --ngxsmk-accordion-bg: var(--ngxsmk-color-surface);
+  --ngxsmk-accordion-radius: var(--ngxsmk-radius-lg);
+  --ngxsmk-accordion-border-color: var(--ngxsmk-color-outline);
+  --ngxsmk-progress-height: 0.5rem;
+  --ngxsmk-progress-bg: var(--ngxsmk-color-surface-variant);
+  --ngxsmk-progress-color: var(--ngxsmk-color-primary);
+  --ngxsmk-progress-radius: var(--ngxsmk-radius-full);
+  --ngxsmk-switch-width: 2.25rem;
+  --ngxsmk-switch-height: 1.25rem;
+  --ngxsmk-switch-radius: var(--ngxsmk-radius-full);
+  --ngxsmk-switch-bg: var(--ngxsmk-color-outline-strong);
+  --ngxsmk-switch-thumb-size: 0.875rem;
+  --ngxsmk-switch-thumb-bg: var(--ngxsmk-color-surface);
+  --ngxsmk-switch-checked-bg: var(--ngxsmk-color-primary);
   --ngxsmk-space-0: 0px;
   --ngxsmk-space-1: 0.25rem;
   --ngxsmk-space-2: 0.5rem;
@@ -164,7 +189,7 @@
   --ngxsmk-color-on-info-container: #0049A3;
 }
 
-.dark {
+:root.dark, :root.dark body, .dark {
   color-scheme: dark;
   --ngxsmk-color-primary: #57F9C7;
   --ngxsmk-color-on-primary: #FFFFFF;

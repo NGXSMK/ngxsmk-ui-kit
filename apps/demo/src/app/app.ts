@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NgxsmkToaster } from '@ngxsmk/core/toast';
 import { NgxsmkThemeService } from '@ngxsmk/theme';
+import { SeoService } from './seo.service';
 
 @Component({
   selector: 'app-root',
@@ -16,8 +17,10 @@ import { NgxsmkThemeService } from '@ngxsmk/theme';
 })
 export class App {
   protected readonly theme = inject(NgxsmkThemeService);
+  private readonly seo = inject(SeoService);
 
   constructor() {
+    this.seo.init();
     let stored: string | null = null;
     try {
       stored = document.defaultView?.localStorage?.getItem('ngxsmk-theme-mode') ?? null;

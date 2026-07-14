@@ -83,8 +83,8 @@ interface Option {
   template: `
     <h2 class="ngxsmk-page-title">Forms</h2>
     <p class="ngxsmk-page-desc">
-      Buttons, inputs, selects, and rich form controls. Every component below is
-      live and interactive — try them out, then reveal the code to copy it.
+      Buttons, inputs, selects, and rich form controls. Every component below is live and
+      interactive — try them out, then reveal the code to copy it.
     </p>
 
     <div class="ngxsmk-sc-col">
@@ -145,11 +145,7 @@ interface Option {
         [code]="codeInput"
       >
         <div class="ngxsmk-sc-col" style="width: 100%; max-width: 320px">
-          <ngxsmk-input
-            type="email"
-            placeholder="you@example.com"
-            [(value)]="email"
-          />
+          <ngxsmk-input type="email" placeholder="you@example.com" [(value)]="email" />
           <small>Value: {{ email() || '—' }}</small>
         </div>
       </showcase-example>
@@ -159,11 +155,7 @@ interface Option {
         description="Multi-line input with a configurable row count."
         [code]="codeTextarea"
       >
-        <ngxsmk-textarea
-          placeholder="Share your feedback…"
-          [rows]="4"
-          [(value)]="feedback"
-        />
+        <ngxsmk-textarea placeholder="Share your feedback…" [rows]="4" [(value)]="feedback" />
       </showcase-example>
 
       <showcase-example
@@ -317,7 +309,11 @@ interface Option {
         [code]="codeDatepicker"
       >
         <div class="ngxsmk-sc-col" style="width: 100%; max-width: 300px">
-          <ngxsmk-datepicker [value]="calendarDate()" (valueChange)="onCalendarChange($event)" placeholder="Pick a date" />
+          <ngxsmk-datepicker
+            [value]="calendarDate()"
+            (valueChange)="onCalendarChange($event)"
+            placeholder="Pick a date"
+          />
           <small>Selected: {{ calendarDate() ? calendarDate()!.toLocaleDateString() : '—' }}</small>
         </div>
       </showcase-example>
@@ -386,10 +382,7 @@ interface Option {
         <ngxsmk-field hint="Choose a unique handle.">
           <ngxsmk-field-label [required]="true">Username</ngxsmk-field-label>
           <ngxsmk-input type="text" placeholder="e.g. ada_lovelace" />
-          <ngxsmk-field-status
-            variant="error"
-            message="This username is already taken."
-          />
+          <ngxsmk-field-status variant="error" message="This username is already taken." />
         </ngxsmk-field>
       </showcase-example>
 
@@ -398,11 +391,7 @@ interface Option {
         description="Batteries-included wrapper wiring label, hint, and error to the control."
         [code]="codeFormField"
       >
-        <ngxsmk-form-field
-          label="Email"
-          required
-          error="Please enter a valid email address."
-        >
+        <ngxsmk-form-field label="Email" required error="Please enter a valid email address.">
           <ngxsmk-input type="email" placeholder="you@example.com" />
         </ngxsmk-form-field>
       </showcase-example>
@@ -417,18 +406,21 @@ interface Option {
             description="Statically typed, great tooling."
             [checked]="langs().includes('ts')"
             (changed)="toggleLang('ts', $event)"
-          >TypeScript</ngxsmk-checkbox-list-item>
+            >TypeScript</ngxsmk-checkbox-list-item
+          >
           <ngxsmk-checkbox-list-item
             description="The full-stack framework."
             [checked]="langs().includes('ng')"
             (changed)="toggleLang('ng', $event)"
-          >Angular</ngxsmk-checkbox-list-item>
+            >Angular</ngxsmk-checkbox-list-item
+          >
           <ngxsmk-checkbox-list-item
             description="No framework required."
             disabled
             [checked]="langs().includes('js')"
             (changed)="toggleLang('js', $event)"
-          >JavaScript</ngxsmk-checkbox-list-item>
+            >JavaScript</ngxsmk-checkbox-list-item
+          >
           <small>{{ langs().length }} language(s) chosen</small>
         </div>
       </showcase-example>
@@ -520,8 +512,8 @@ export class FormsPage {
   protected readonly langs = signal<string[]>(['ts', 'ng']);
 
   protected toggleLang(value: string, checked: boolean): void {
-    this.langs.update(curr =>
-      checked ? [...new Set([...curr, value])] : curr.filter(v => v !== value),
+    this.langs.update((curr) =>
+      checked ? [...new Set([...curr, value])] : curr.filter((v) => v !== value),
     );
   }
 
@@ -549,7 +541,7 @@ export class FormsPage {
   protected readonly codeSlider = `<ngxsmk-slider [min]="0" [max]="100" [step]="5" [(value)]="volume" />`;
   protected readonly codeDatePicker = `<ngxsmk-date-picker [(value)]="date" />`;
   protected readonly codeDatepicker = `<ngxsmk-datepicker [value]="calendarDate()" (valueChange)="onCalendarChange($event)" placeholder="Pick a date" />`;
-  protected readonly codeTelInput = `<ngxsmk-tel-input [(ngModel)]="phone" label="Phone" hint="Include area code" [initialCountry]="'US'" [separateDialCode]="true" />`; // requires NO_ERRORS_SCHEMA (see TelInputShowcase)
+  protected readonly codeTelInput = `<ngxsmk-tel-input [ngModel]="phone()" (ngModelChange)="phone.set($event)" label="Phone" hint="Include area code" [initialCountry]="'US'" [separateDialCode]="true" />`; // requires NO_ERRORS_SCHEMA (see TelInputShowcase)
   protected readonly codeSegmented = `<ngxsmk-segmented-control [options]="viewOptions" [(value)]="view" />`;
   protected readonly codeSelector = `<ngxsmk-selector [options]="interests" [(selected)]="selectedInterests" />`;
   protected readonly codeMultiSelector = `<ngxsmk-multi-selector [options]="colors" [(value)]="selectorColors" placeholder="Select colors" />`;

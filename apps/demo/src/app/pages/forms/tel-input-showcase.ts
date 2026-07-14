@@ -2,6 +2,7 @@ import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { NgxsmkTelInput } from '@ngxsmk/core/tel-input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 /**
  * Isolated showcase for `ngxsmk-tel-input`.

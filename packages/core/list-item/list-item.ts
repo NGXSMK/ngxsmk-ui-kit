@@ -1,14 +1,23 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 
 export type NgxsmkListItemVariant = 'default' | 'active' | 'disabled';
 
 @Component({
   selector: 'ngxsmk-list-item, [ngxsmkListItem]',
+  standalone: true,
+  imports: [NgTemplateOutlet],
   template: `
-    @if (href()) {
-      <a class="ngxsmk-list-item__link" [href]="href()"><ng-content /></a>
-    } @else {
+    <ng-template #contentTpl>
       <ng-content />
+    </ng-template>
+
+    @if (href()) {
+      <a class="ngxsmk-list-item__link" [href]="href()">
+        <ng-container *ngTemplateOutlet="contentTpl" />
+      </a>
+    } @else {
+      <ng-container *ngTemplateOutlet="contentTpl" />
     }
   `,
   host: {

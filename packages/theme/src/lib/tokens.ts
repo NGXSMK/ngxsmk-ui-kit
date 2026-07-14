@@ -65,6 +65,13 @@ export const DEFAULT_TYPOGRAPHY: TypographyScale = {
   },
 };
 
+/**
+ * Standard height for single-line text controls (input, select, number-input,
+ * combobox, input-group, power-search, multi-select). All controls in the
+ * family use this so they read as one consistent size.
+ */
+export const CONTROL_HEIGHT = '2.5rem';
+
 export const SPACING: Record<string, string> = {
   '0': '0px',
   '0-5': '0.125rem',

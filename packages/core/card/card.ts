@@ -32,7 +32,7 @@ import {
       display: block;
       background: var(--ngxsmk-card-bg, var(--ngxsmk-color-surface));
       color: var(--ngxsmk-color-on-surface);
-      border: 1px solid var(--ngxsmk-color-outline);
+      border: 1px solid var(--ngxsmk-card-border-color, var(--ngxsmk-color-outline));
       border-radius: var(--ngxsmk-card-radius, var(--ngxsmk-radius-xl));
       box-shadow: var(--ngxsmk-card-shadow, var(--ngxsmk-shadow-sm));
       overflow: hidden;

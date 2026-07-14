@@ -26,9 +26,9 @@ import { ngxsmkUniqueId } from '@ngxsmk/core/util';
   styles: `
     :host {
       display: block;
-      border: 1px solid var(--ngxsmk-color-outline);
-      border-radius: var(--ngxsmk-radius-lg);
-      background: var(--ngxsmk-color-surface);
+      border: 1px solid var(--ngxsmk-accordion-border-color, var(--ngxsmk-color-outline));
+      border-radius: var(--ngxsmk-accordion-radius, var(--ngxsmk-radius-lg));
+      background: var(--ngxsmk-accordion-bg, var(--ngxsmk-color-surface));
       overflow: hidden;
     }
   `,
@@ -113,7 +113,7 @@ export class NgxsmkAccordion {
     }
 
     :host(:not(:last-child)) {
-      border-bottom: 1px solid var(--ngxsmk-color-outline);
+      border-bottom: 1px solid var(--ngxsmk-accordion-border-color, var(--ngxsmk-color-outline));
     }
 
     .ngxsmk-accordion-item__heading { margin: 0; }

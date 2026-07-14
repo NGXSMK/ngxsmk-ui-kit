@@ -30,8 +30,8 @@ import {
       display: block;
       width: 100%;
       height: var(--ngxsmk-progress-height, 0.5rem);
-      background: var(--ngxsmk-color-surface-variant);
-      border-radius: var(--ngxsmk-radius-full);
+      background: var(--ngxsmk-progress-bg, var(--ngxsmk-color-surface-variant));
+      border-radius: var(--ngxsmk-progress-radius, var(--ngxsmk-radius-full));
       overflow: hidden;
     }
 

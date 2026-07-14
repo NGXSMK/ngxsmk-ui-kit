@@ -140,7 +140,8 @@ export interface NgxsmkSelectOption {
       gap: var(--ngxsmk-space-2);
       width: 100%;
       box-sizing: border-box;
-      padding: var(--ngxsmk-space-2) var(--ngxsmk-space-3);
+      height: var(--ngxsmk-control-height);
+      padding: 0 var(--ngxsmk-space-3);
       border: 1px solid var(--ngxsmk-color-outline-strong);
       border-radius: var(--ngxsmk-radius-base);
       background: var(--ngxsmk-color-surface);

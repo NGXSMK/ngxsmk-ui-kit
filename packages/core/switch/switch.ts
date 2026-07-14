@@ -76,27 +76,27 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     .ngxsmk-switch__track {
       display: inline-flex;
       align-items: center;
-      width: 2.25rem;
-      height: 1.25rem;
+      width: var(--ngxsmk-switch-width, 2.25rem);
+      height: var(--ngxsmk-switch-height, 1.25rem);
       flex-shrink: 0;
       padding: 2px;
       box-sizing: border-box;
-      border-radius: var(--ngxsmk-radius-full);
-      background: var(--ngxsmk-color-outline-strong);
+      border-radius: var(--ngxsmk-switch-radius, var(--ngxsmk-radius-full));
+      background: var(--ngxsmk-switch-bg, var(--ngxsmk-color-outline-strong));
       transition: background-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
 
     .ngxsmk-switch__thumb {
-      width: 0.875rem;
-      height: 0.875rem;
+      width: var(--ngxsmk-switch-thumb-size, 0.875rem);
+      height: var(--ngxsmk-switch-thumb-size, 0.875rem);
       border-radius: var(--ngxsmk-radius-full);
-      background: var(--ngxsmk-color-surface);
+      background: var(--ngxsmk-switch-thumb-bg, var(--ngxsmk-color-surface));
       box-shadow: var(--ngxsmk-shadow-sm);
       transition: transform var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
 
-    :host([data-checked]) .ngxsmk-switch__track { background: var(--ngxsmk-color-primary); }
-    :host([data-checked]) .ngxsmk-switch__thumb { transform: translateX(1rem); }
+    :host([data-checked]) .ngxsmk-switch__track { background: var(--ngxsmk-switch-checked-bg, var(--ngxsmk-color-primary)); }
+    :host([data-checked]) .ngxsmk-switch__thumb { transform: translateX(calc(var(--ngxsmk-switch-width, 2.25rem) - var(--ngxsmk-switch-thumb-size, 0.875rem) - 4px)); }
 
     .ngxsmk-switch__native:focus-visible ~ .ngxsmk-switch__track {
       outline: 2px solid var(--ngxsmk-color-ring);

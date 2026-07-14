@@ -46,6 +46,7 @@ import { ChangeDetectionStrategy, Component, booleanAttribute, computed, input, 
       align-items: stretch;
       width: 100%;
       max-width: 10rem;
+      height: var(--ngxsmk-control-height);
       border: 1px solid var(--ngxsmk-color-outline-strong);
       border-radius: var(--ngxsmk-radius-base);
       background: var(--ngxsmk-color-surface);
@@ -69,7 +70,7 @@ import { ChangeDetectionStrategy, Component, booleanAttribute, computed, input, 
       font: inherit;
       font-size: var(--ngxsmk-text-body-md-size);
       text-align: center;
-      padding: var(--ngxsmk-space-2);
+      padding: 0 var(--ngxsmk-space-2);
       outline: none;
       -moz-appearance: textfield;
       appearance: textfield;

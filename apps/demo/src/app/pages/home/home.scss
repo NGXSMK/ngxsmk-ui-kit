@@ -200,7 +200,7 @@
 .bento__tile--buttons { grid-area: buttons; }
 .bento__tile--tags { grid-area: tags; }
 .bento__tile--progress { grid-area: progress; }
-.bento__tile--code { grid-area: code; background: var(--ngxsmk-color-on-surface); border-color: transparent; }
+.bento__tile--code { grid-area: code; background: #09090b; border-color: transparent; }
 
 .bento__profile {
   display: flex;
@@ -239,7 +239,7 @@
   font-family: var(--ngxsmk-font-mono);
   font-size: 0.82rem;
   line-height: 1.5;
-  color: color-mix(in srgb, var(--ngxsmk-color-surface) 88%, #9ca3af);
+  color: rgba(255, 255, 255, 0.85);
   white-space: pre;
 }
 .bento__tile--code code b { color: #7dd3fc; font-weight: 600; }

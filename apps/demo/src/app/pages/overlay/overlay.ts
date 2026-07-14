@@ -9,6 +9,8 @@ import { NgxsmkLightbox, NgxsmkLightboxImage } from '@ngxsmk/core/lightbox';
 import { NgxsmkThumbnail } from '@ngxsmk/core/thumbnail';
 import { NgxsmkImperativeDialog, NgxsmkImperativeAlertDialog } from '@ngxsmk/core/imperative-dialog';
 import { NgxsmkButton } from '@ngxsmk/core/button';
+import { NgxsmkCommandPalette, CommandItem } from '@ngxsmk/core/command-palette';
+import { NgxsmkThemeService } from '@ngxsmk/theme';
 import { Component, signal, inject } from '@angular/core';
 import { ShowcaseExample } from '../../showcase/showcase-example';
 
@@ -28,6 +30,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     NgxsmkContextMenu,
     NgxsmkLightbox,
     NgxsmkThumbnail,
+    NgxsmkCommandPalette,
   ],
   template: `
     <h2 class="ngxsmk-page-title">Overlay</h2>
@@ -212,6 +215,26 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
         <p class="ngxsmk-demo-hint">{{ alertStatus() }}</p>
       }
     </showcase-example>
+
+    <showcase-example
+      title="Spotlight Command Palette (New)"
+      description="A premium, keyboard-accessible command menu. Open it by clicking the button below or pressing Ctrl + K (or Cmd + K)."
+      [code]="codeCommandPalette"
+    >
+      <div class="ngxsmk-demo-row">
+        <button ngxsmk-button (click)="palette.open()">Open Palette (Ctrl + K)</button>
+      </div>
+
+      <ngxsmk-command-palette
+        #palette
+        [commands]="commandsList"
+        (selected)="onCommandSelected($event)"
+      />
+
+      @if (lastCommand()) {
+        <p class="ngxsmk-demo-hint">Executed: <strong>{{ lastCommand() }}</strong></p>
+      }
+    </showcase-example>
   `,
   styles: `
     .ngxsmk-demo-hint {
@@ -224,6 +247,28 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 export class OverlayPage {
   private readonly imperativeDialog = inject(NgxsmkImperativeDialog);
   private readonly imperativeAlert = inject(NgxsmkImperativeAlertDialog);
+  private readonly themeService = inject(NgxsmkThemeService);
+
+  protected readonly lastCommand = signal('');
+  protected readonly commandsList: CommandItem[] = [
+    { id: 'home', label: 'Go to Home Page', category: 'Navigation', shortcut: 'G H', icon: '🏠' },
+    { id: 'docs', label: 'Go to Documentation', category: 'Navigation', shortcut: 'G D', icon: '📖' },
+    { id: 'theme-light', label: 'Set Theme: Light Mode', category: 'Appearance', icon: '☀️' },
+    { id: 'theme-dark', label: 'Set Theme: Dark Mode', category: 'Appearance', icon: '🌙' },
+    { id: 'copy-npm', label: 'Copy npm Install Command', category: 'Actions', shortcut: '⌥ C', icon: '📋' },
+    { id: 'reset', label: 'Reset Demo Settings', category: 'Actions', icon: '🔄' },
+  ];
+
+  protected onCommandSelected(cmd: CommandItem): void {
+    this.lastCommand.set(cmd.label);
+    if (cmd.id === 'theme-light') {
+      this.themeService.setMode('light');
+    } else if (cmd.id === 'theme-dark') {
+      this.themeService.setMode('dark');
+    } else if (cmd.id === 'copy-npm') {
+      navigator.clipboard.writeText('npm install @ngxsmk/core @ngxsmk/theme');
+    }
+  }
 
   protected readonly dialogOpen = signal(false);
   protected readonly infoAlertOpen = signal(false);
@@ -361,4 +406,12 @@ async confirm() {
   const ok = await this.alert.confirm('Discard changes?');
   // ok is a boolean
 }`;
+
+  protected readonly codeCommandPalette = `<button ngxsmk-button (click)="palette.open()">Open Palette</button>
+
+<ngxsmk-command-palette
+  #palette
+  [commands]="commandsList"
+  (selected)="onCommandSelected($event)"
+/>`;
 }

@@ -165,3 +165,5 @@ export * from './util';
 export * from './visually-hidden';
 export * from './voice-input';
 export * from './workflow-builder';
+export * from './command-palette';
+export * from './prompt-carousel';

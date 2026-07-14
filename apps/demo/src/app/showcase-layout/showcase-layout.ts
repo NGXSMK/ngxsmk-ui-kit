@@ -1,11 +1,12 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, computed, ElementRef, ViewChild, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterOutlet, RouterLink, RouterLinkActive, Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 import { AppNav } from '../nav/nav';
 
 interface CategoryGroup {
   label: string;
-  categories: { path: string; label: string }[];
+  categories: { path: string; label: string; items: string[] }[];
 }
 
 @Component({
@@ -50,7 +51,7 @@ interface CategoryGroup {
       @if (mobileOpen()) {
         <div class="ngxsmk-sc-backdrop" (click)="mobileOpen.set(false)"></div>
       }
-      <main class="ngxsmk-sc-content">
+      <main #contentEl class="ngxsmk-sc-content">
         <button class="ngxsmk-sc-menu-btn" type="button" (click)="mobileOpen.set(true)" aria-label="Open component categories">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
             <path d="M3 6h18M3 12h18M3 18h18" />
@@ -245,85 +246,144 @@ export class ShowcaseLayout {
   protected readonly searchQuery = signal('');
   protected readonly mobileOpen = signal(false);
 
+  @ViewChild('contentEl') contentEl?: ElementRef<HTMLElement>;
+  private readonly router = inject(Router);
+
+  constructor() {
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      if (this.contentEl) {
+        this.contentEl.nativeElement.scrollTop = 0;
+      }
+    });
+  }
+
   private readonly allGroups: CategoryGroup[] = [
     {
       label: 'Content',
       categories: [
-        { path: 'content-typography', label: 'Content & Typography' },
+        { 
+          path: 'content-typography', 
+          label: 'Content & Typography',
+          items: ['Heading', 'Text', 'Blockquote', 'Code', 'Kbd', 'Link', 'Thumbnail', 'Timestamp', 'Token', 'Citation', 'Markdown']
+        },
       ],
     },
     {
       label: 'Navigation',
       categories: [
-        { path: 'navigation', label: 'Navigation' },
+        { 
+          path: 'navigation', 
+          label: 'Navigation',
+          items: ['Breadcrumb Item', 'Outline', 'Tab Menu', 'Nav Icon', 'Nav Heading Menu', 'Side Nav', 'Top Nav', 'Mega Menu', 'Mobile Nav']
+        },
       ],
     },
     {
       label: 'Layout',
       categories: [
-        { path: 'layout', label: 'Layout' },
+        { 
+          path: 'layout', 
+          label: 'Layout',
+          items: ['Center', 'Section', 'Container', 'Grid', 'Flex', 'HStack', 'VStack', 'Stack', 'Divider', 'Aspect Ratio', 'Spacer', 'Collapsible', 'Resizable', 'App Shell', 'Form Layout']
+        },
       ],
     },
     {
       label: 'Forms',
       categories: [
-        { path: 'forms', label: 'Forms' },
+        { 
+          path: 'forms', 
+          label: 'Forms',
+          items: ['Button', 'Button Group', 'Toggle Button', 'Toggle Button Group', 'Input', 'Checkbox', 'Checkbox List', 'Radio', 'Switch', 'Textarea', 'Number Input', 'Select', 'Multi Select', 'Autocomplete', 'Combobox', 'Typeahead', 'Power Search', 'Slider', 'Date Picker', 'Segmented Control', 'Selector', 'Multi Selector', 'Tokenizer', 'Input Group', 'Field', 'Form Field']
+        },
       ],
     },
     {
       label: 'Feedback',
       categories: [
-        { path: 'feedback', label: 'Feedback' },
+        { 
+          path: 'feedback', 
+          label: 'Feedback',
+          items: ['Alert', 'Banner', 'Badge', 'Progress', 'Skeleton', 'Spinner', 'Empty State', 'Status Dot']
+        },
       ],
     },
     {
       label: 'Data Display',
       categories: [
-        { path: 'data-display', label: 'Data Display' },
+        { 
+          path: 'data-display', 
+          label: 'Data Display',
+          items: ['Tabs', 'Accordion', 'Avatar', 'Tag & Chip', 'Table', 'Data Table', 'List', 'Metadata List', 'Overflow List', 'Stat', 'Status Dot']
+        },
       ],
     },
     {
       label: 'Overlay',
       categories: [
-        { path: 'overlay', label: 'Overlay' },
+        { 
+          path: 'overlay', 
+          label: 'Overlay',
+          items: ['Dialog', 'Alert Dialog', 'Tooltip', 'Hover Card', 'Sheet', 'Dropdown Menu', 'Context Menu', 'Lightbox']
+        },
       ],
     },
     {
       label: 'Charts',
       categories: [
-        { path: 'charts', label: 'Charts' },
+        { 
+          path: 'charts', 
+          label: 'Charts',
+          items: ['Line Chart', 'Bar Chart', 'Pie Chart', 'Area Chart', 'Scatter Chart', 'Candlestick Chart', 'Heatmap', 'Dashboard']
+        },
       ],
     },
     {
       label: 'AI',
       categories: [
-        { path: 'ai', label: 'AI' },
+        { 
+          path: 'ai', 
+          label: 'AI',
+          items: ['Agent Card', 'Chat Window', 'Chat Input', 'Chat Layout', 'Chat Send Button', 'Chat Dictation Button', 'Chat Tokens', 'Conversation List', 'Composer Drawer', 'Streaming Text', 'Markdown Viewer', 'Code Block', 'Diff Viewer', 'Citation Viewer', 'Tool Call Viewer', 'Reasoning Timeline', 'Memory Viewer', 'Voice Input', 'Audio Player', 'Image Viewer']
+        },
       ],
     },
     {
       label: 'Enterprise',
       categories: [
-        { path: 'enterprise', label: 'Enterprise' },
+        { 
+          path: 'enterprise', 
+          label: 'Enterprise',
+          items: ['Kanban Board', 'Scheduler', 'Timeline Gantt', 'Workflow Builder', 'Rule Builder', 'Spreadsheet', 'Pivot Table', 'Diagram Builder', 'Flow Editor', 'JSON Viewer', 'Terminal', 'Org Chart', 'Query Builder']
+        },
       ],
     },
     {
       label: 'Utilities',
       categories: [
-        { path: 'utilities', label: 'Utilities & Hooks' },
+        { 
+          path: 'utilities', 
+          label: 'Utilities & Hooks',
+          items: ['Visually Hidden', 'Focus Trap', 'Click Outside', 'Keyboard Shortcut', 'Scroll Lock', 'Resize Observer', 'Intersection Observer', 'Lazy Load', 'Layer Provider', 'Media Query', 'Media Theme']
+        },
       ],
     },
   ];
 
-  protected readonly filteredGroups = () => {
-    const q = this.searchQuery().toLowerCase();
+  protected readonly filteredGroups = computed(() => {
+    const q = this.searchQuery().toLowerCase().trim();
     if (!q) return this.allGroups;
     return this.allGroups
       .map(g => ({
         ...g,
         categories: g.categories.filter(c =>
-          c.label.toLowerCase().includes(q) || g.label.toLowerCase().includes(q)
+          c.label.toLowerCase().includes(q) || 
+          g.label.toLowerCase().includes(q) ||
+          c.items.some(item => item.toLowerCase().includes(q))
         ),
       }))
       .filter(g => g.categories.length > 0);
-  };
+  });
 }

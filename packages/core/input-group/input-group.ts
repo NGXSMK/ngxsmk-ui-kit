@@ -9,10 +9,13 @@ const STYLE_ID = 'ngxsmk-input-group-styles';
  * cannot reach them.
  */
 const INPUT_GROUP_CSS = `
-.ngxsmk-input-group {
+.ngxsmk-input-group.ngxsmk-input-group--core {
   display: inline-flex;
   align-items: stretch;
   width: 100%;
+  box-sizing: border-box;
+  height: var(--ngxsmk-control-height);
+  min-height: var(--ngxsmk-control-height);
   border: 1px solid var(--ngxsmk-color-outline-strong);
   border-radius: var(--ngxsmk-radius-base);
   background: var(--ngxsmk-color-surface);
@@ -22,7 +25,7 @@ const INPUT_GROUP_CSS = `
     border-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
     box-shadow var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
 }
-.ngxsmk-input-group:focus-within {
+.ngxsmk-input-group.ngxsmk-input-group--core:focus-within {
   border-color: var(--ngxsmk-color-ring);
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--ngxsmk-color-ring) 25%, transparent);
 }
@@ -31,7 +34,9 @@ const INPUT_GROUP_CSS = `
 .ngxsmk-input-group-text {
   display: inline-flex;
   align-items: center;
-  padding: var(--ngxsmk-space-2) var(--ngxsmk-space-3);
+  box-sizing: border-box;
+  height: var(--ngxsmk-control-height);
+  padding: 0 var(--ngxsmk-space-3);
   background: var(--ngxsmk-color-surface-variant);
   color: var(--ngxsmk-color-on-surface-variant);
   font-size: var(--ngxsmk-text-body-md-size);
@@ -43,14 +48,14 @@ const INPUT_GROUP_CSS = `
 .ngxsmk-input-group-text:not(:first-child) { border-left: 1px solid var(--ngxsmk-color-outline); }
 
 /* Nested controls shed their own chrome so the group reads as one field. */
-.ngxsmk-input-group .ngxsmk-input {
+.ngxsmk-input-group.ngxsmk-input-group--core .ngxsmk-input {
   flex: 1 1 auto;
   min-width: 0;
   border: none;
   border-radius: 0;
   background: transparent;
 }
-.ngxsmk-input-group .ngxsmk-input:focus-visible {
+.ngxsmk-input-group.ngxsmk-input-group--core .ngxsmk-input:focus-visible {
   outline: none;
   box-shadow: none;
 }
@@ -71,7 +76,7 @@ const INPUT_GROUP_CSS = `
 @Component({
   selector: 'ngxsmk-input-group',
   template: `<ng-content />`,
-  host: { class: 'ngxsmk-input-group' },
+  host: { class: 'ngxsmk-input-group ngxsmk-input-group--core' },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgxsmkInputGroup {

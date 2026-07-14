@@ -43,10 +43,12 @@ import { ngxsmkUniqueId } from '@ngxsmk/core/util';
   },
   styles: `
     :host {
-      display: block;
+      display: flex;
+      align-items: center;
       width: 100%;
       box-sizing: border-box;
-      padding: var(--ngxsmk-space-2) var(--ngxsmk-space-3);
+      height: var(--ngxsmk-control-height);
+      padding: 0 var(--ngxsmk-space-3);
       border: 1px solid var(--ngxsmk-color-outline-strong);
       border-radius: var(--ngxsmk-radius-base);
       background: var(--ngxsmk-color-surface);
@@ -69,7 +71,10 @@ import { ngxsmkUniqueId } from '@ngxsmk/core/util';
     :host([data-disabled]) { opacity: 0.5; }
 
     .ngxsmk-input__control {
+      flex: 1;
+      min-width: 0;
       width: 100%;
+      height: 100%;
       margin: 0;
       border: 0;
       background: transparent;
