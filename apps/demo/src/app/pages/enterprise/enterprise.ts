@@ -44,8 +44,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Kanban Board"
       description="Column-based task board grouped by status, with card titles and descriptions."
-      [code]="codeKanban"
-    >
+      [code]="codeKanban" [component]="NgxsmkKanbanBoard" [customize]="customizeNgxsmkKanbanBoard">
       <div class="ngxsmk-sc-surface" style="height:340px;overflow:auto;">
         <ngxsmk-kanban-board [columns]="kanbanColumns" />
       </div>
@@ -54,8 +53,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Scheduler"
       description="Weekly calendar grid that lays events out across the seven days of the week."
-      [code]="codeScheduler"
-    >
+      [code]="codeScheduler" [component]="NgxsmkScheduler" [customize]="customizeNgxsmkScheduler">
       <div class="ngxsmk-sc-surface" style="height:260px;overflow:auto;">
         <ngxsmk-scheduler [events]="schedulerEvents" [weekStart]="weekStart" />
       </div>
@@ -64,8 +62,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Timeline Gantt"
       description="Horizontal timeline of tasks with start offsets, durations, and progress fill."
-      [code]="codeGantt"
-    >
+      [code]="codeGantt" [component]="NgxsmkTimelineGantt" [customize]="customizeNgxsmkTimelineGantt">
       <div class="ngxsmk-sc-surface">
         <ngxsmk-timeline-gantt [items]="ganttItems" />
       </div>
@@ -74,8 +71,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Workflow Builder"
       description="Canvas of workflow nodes typed by their role in the process."
-      [code]="codeWorkflow"
-    >
+      [code]="codeWorkflow" [component]="NgxsmkWorkflowBuilder" [customize]="customizeNgxsmkWorkflowBuilder">
       <div style="height:420px;overflow:auto;">
         <ngxsmk-workflow-builder [nodes]="workflowNodes" [edges]="workflowEdges" />
       </div>
@@ -84,8 +80,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Rule Builder"
       description="Groups conditions under a logical operator for filtering and automation."
-      [code]="codeRule"
-    >
+      [code]="codeRule" [component]="NgxsmkRuleBuilder" [customize]="customizeNgxsmkRuleBuilder">
       <div class="ngxsmk-sc-col" style="max-width:520px;">
         <ngxsmk-rule-builder [group]="ruleGroup" />
       </div>
@@ -94,8 +89,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Spreadsheet"
       description="Lightweight grid renderer for tabular string data with scrollable cells."
-      [code]="codeSpreadsheet"
-    >
+      [code]="codeSpreadsheet" [component]="NgxsmkSpreadsheet" [customize]="customizeNgxsmkSpreadsheet">
       <div style="height:260px;overflow:auto;width:100%;">
         <ngxsmk-spreadsheet [data]="spreadsheetData" />
       </div>
@@ -104,8 +98,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Pivot Table"
       description="Cross-tabulated summary with a labelled row axis and measured value columns."
-      [code]="codePivot"
-    >
+      [code]="codePivot" [component]="NgxsmkPivotTable" [customize]="customizeNgxsmkPivotTable">
       <div style="height:280px;overflow:auto;width:100%;">
         <ngxsmk-pivot-table
           [rows]="pivotRows"
@@ -118,8 +111,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Diagram Builder"
       description="SVG diagram of positioned nodes connected by edges. Click a node to select it."
-      [code]="codeDiagram"
-    >
+      [code]="codeDiagram" [component]="NgxsmkDiagramBuilder" [customize]="customizeNgxsmkDiagramBuilder">
       <div class="ngxsmk-sc-surface" style="height:280px;overflow:hidden;">
         <ngxsmk-diagram-builder
           [nodes]="diagramNodes"
@@ -135,8 +127,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Flow Editor"
       description="Titled canvas listing flow steps as draggable-looking node chips."
-      [code]="codeFlow"
-    >
+      [code]="codeFlow" [component]="NgxsmkFlowEditor" [customize]="customizeNgxsmkFlowEditor">
       <div style="height:420px;">
         <ngxsmk-flow-editor title="Onboarding Flow" [nodes]="flowNodes" style="height:100%;" />
       </div>
@@ -145,8 +136,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="JSON Viewer"
       description="Pretty-printed, syntax-highlighted view of any JSON-serialisable value."
-      [code]="codeJson"
-    >
+      [code]="codeJson" [component]="NgxsmkJsonViewer" [customize]="customizeNgxsmkJsonViewer">
       <div style="width:100%;max-width:520px;">
         <ngxsmk-json-viewer [data]="jsonData" />
       </div>
@@ -155,8 +145,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Terminal"
       description="Console emulator that distinguishes input lines and shows a blinking cursor."
-      [code]="codeTerminal"
-    >
+      [code]="codeTerminal" [component]="NgxsmkTerminal" [customize]="customizeNgxsmkTerminal">
       <div style="width:100%;max-width:600px;">
         <ngxsmk-terminal title="build.log" prompt="$" [lines]="terminalLines" />
       </div>
@@ -165,8 +154,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Org Chart"
       description="Hierarchical tree of people cards showing name and role by reporting line."
-      [code]="codeOrg"
-    >
+      [code]="codeOrg" [component]="NgxsmkOrgChart" [customize]="customizeNgxsmkOrgChart">
       <div style="height:320px;overflow:auto;width:100%;">
         <ngxsmk-org-chart [nodes]="orgNodes" />
       </div>
@@ -175,8 +163,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Query Builder"
       description="Compose filter conditions across typed fields with operators and values."
-      [code]="codeQuery"
-    >
+      [code]="codeQuery" [component]="NgxsmkQueryBuilder" [customize]="customizeNgxsmkQueryBuilder">
       <div class="ngxsmk-sc-col" style="max-width:560px;">
         <ngxsmk-query-builder [fields]="queryFields" [(conditions)]="queryConditions" />
       </div>
@@ -184,6 +171,187 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
   `,
 })
 export class EnterprisePage {
+  protected readonly NgxsmkKanbanBoard = NgxsmkKanbanBoard;
+  protected readonly customizeNgxsmkKanbanBoard = `/* Theme <ngxsmk-kanban-board> via design tokens */
+ngxsmk-kanban-board {
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-on-surface-variant: ;
+  --ngxsmk-color-primary: ;
+  --ngxsmk-color-surface: ;
+  --ngxsmk-color-surface-variant: ;
+  --ngxsmk-duration-fast: ;
+  --ngxsmk-ease-out: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-lg: ;
+  --ngxsmk-radius-md: ;
+  --ngxsmk-shadow-sm: ;
+  --ngxsmk-space-1: ;
+  --ngxsmk-space-2: ;
+  --ngxsmk-space-3: ;
+  --ngxsmk-space-4: ;
+}`;
+  protected readonly NgxsmkScheduler = NgxsmkScheduler;
+  protected readonly customizeNgxsmkScheduler = `/* Theme <ngxsmk-scheduler> via design tokens */
+ngxsmk-scheduler {
+  --ngxsmk-color-on-primary-container: ;
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-outline-variant: ;
+  --ngxsmk-color-primary-container: ;
+  --ngxsmk-color-surface-variant: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-lg: ;
+  --ngxsmk-radius-sm: ;
+  --ngxsmk-space-1: ;
+  --ngxsmk-space-2: ;
+}`;
+  protected readonly NgxsmkTimelineGantt = NgxsmkTimelineGantt;
+  protected readonly customizeNgxsmkTimelineGantt = `/* Theme <ngxsmk-timeline-gantt> via design tokens */
+ngxsmk-timeline-gantt {
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-outline-variant: ;
+  --ngxsmk-color-primary: ;
+  --ngxsmk-color-surface-variant: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-sm: ;
+  --ngxsmk-space-2: ;
+  --ngxsmk-space-3: ;
+}`;
+  protected readonly NgxsmkWorkflowBuilder = NgxsmkWorkflowBuilder;
+  protected readonly customizeNgxsmkWorkflowBuilder = `/* Theme <ngxsmk-workflow-builder> via design tokens */
+ngxsmk-workflow-builder {
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-on-surface-variant: ;
+  --ngxsmk-color-outline: ;
+  --ngxsmk-color-outline-variant: ;
+  --ngxsmk-color-primary: ;
+  --ngxsmk-color-surface: ;
+  --ngxsmk-color-surface-container: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-lg: ;
+  --ngxsmk-radius-md: ;
+  --ngxsmk-shadow-sm: ;
+  --ngxsmk-space-3: ;
+  --ngxsmk-space-4: ;
+}`;
+  protected readonly NgxsmkRuleBuilder = NgxsmkRuleBuilder;
+  protected readonly customizeNgxsmkRuleBuilder = `/* Theme <ngxsmk-rule-builder> via design tokens */
+ngxsmk-rule-builder {
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-on-surface-variant: ;
+  --ngxsmk-color-outline-variant: ;
+  --ngxsmk-color-primary: ;
+  --ngxsmk-color-surface-variant: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-md: ;
+  --ngxsmk-radius-sm: ;
+  --ngxsmk-space-2: ;
+  --ngxsmk-space-3: ;
+}`;
+  protected readonly NgxsmkSpreadsheet = NgxsmkSpreadsheet;
+  protected readonly customizeNgxsmkSpreadsheet = `/* Theme <ngxsmk-spreadsheet> via design tokens */
+ngxsmk-spreadsheet {
+  --ngxsmk-color-outline-variant: ;
+  --ngxsmk-font-mono: ;
+  --ngxsmk-radius-md: ;
+  --ngxsmk-space-2: ;
+  --ngxsmk-space-3: ;
+}`;
+  protected readonly NgxsmkPivotTable = NgxsmkPivotTable;
+  protected readonly customizeNgxsmkPivotTable = `/* Theme <ngxsmk-pivot-table> via design tokens */
+ngxsmk-pivot-table {
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-outline-variant: ;
+  --ngxsmk-color-surface-variant: ;
+  --ngxsmk-font-mono: ;
+  --ngxsmk-radius-md: ;
+  --ngxsmk-space-2: ;
+  --ngxsmk-space-3: ;
+}`;
+  protected readonly NgxsmkDiagramBuilder = NgxsmkDiagramBuilder;
+  protected readonly customizeNgxsmkDiagramBuilder = `/* Theme <ngxsmk-diagram-builder> via design tokens */
+ngxsmk-diagram-builder {
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-outline: ;
+  --ngxsmk-color-primary: ;
+  --ngxsmk-color-surface: ;
+  --ngxsmk-font-sans: ;
+}`;
+  protected readonly NgxsmkFlowEditor = NgxsmkFlowEditor;
+  protected readonly customizeNgxsmkFlowEditor = `/* Theme <ngxsmk-flow-editor> via design tokens */
+ngxsmk-flow-editor {
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-outline-variant: ;
+  --ngxsmk-color-primary: ;
+  --ngxsmk-color-surface: ;
+  --ngxsmk-color-surface-container: ;
+  --ngxsmk-color-surface-variant: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-lg: ;
+  --ngxsmk-radius-md: ;
+  --ngxsmk-shadow-md: ;
+  --ngxsmk-space-2: ;
+  --ngxsmk-space-3: ;
+  --ngxsmk-space-4: ;
+}`;
+  protected readonly NgxsmkJsonViewer = NgxsmkJsonViewer;
+  protected readonly customizeNgxsmkJsonViewer = `/* Theme <ngxsmk-json-viewer> via design tokens */
+ngxsmk-json-viewer {
+  --ngxsmk-color-error: ;
+  --ngxsmk-color-outline: ;
+  --ngxsmk-color-primary: ;
+  --ngxsmk-color-success: ;
+  --ngxsmk-color-surface-variant: ;
+  --ngxsmk-color-warning: ;
+  --ngxsmk-font-mono: ;
+  --ngxsmk-radius-md: ;
+  --ngxsmk-space-4: ;
+}`;
+  protected readonly NgxsmkTerminal = NgxsmkTerminal;
+  protected readonly customizeNgxsmkTerminal = `/* Theme <ngxsmk-terminal> via design tokens */
+ngxsmk-terminal {
+  --ngxsmk-color-neutral-100: ;
+  --ngxsmk-color-neutral-300: ;
+  --ngxsmk-color-neutral-400: ;
+  --ngxsmk-color-neutral-800: ;
+  --ngxsmk-color-neutral-900: ;
+  --ngxsmk-color-neutral-950: ;
+  --ngxsmk-color-success: ;
+  --ngxsmk-font-mono: ;
+  --ngxsmk-radius-lg: ;
+  --ngxsmk-space-2: ;
+  --ngxsmk-space-3: ;
+  --ngxsmk-space-4: ;
+  --ngxsmk-terminal-bg: ;
+  --ngxsmk-terminal-fg: ;
+  --ngxsmk-terminal-prompt: ;
+}`;
+  protected readonly NgxsmkOrgChart = NgxsmkOrgChart;
+  protected readonly customizeNgxsmkOrgChart = `/* Theme <ngxsmk-org-chart> via design tokens */
+ngxsmk-org-chart {
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-on-surface-variant: ;
+  --ngxsmk-color-outline-variant: ;
+  --ngxsmk-color-surface: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-md: ;
+  --ngxsmk-space-1: ;
+  --ngxsmk-space-2: ;
+  --ngxsmk-space-3: ;
+  --ngxsmk-space-4: ;
+}`;
+  protected readonly NgxsmkQueryBuilder = NgxsmkQueryBuilder;
+  protected readonly customizeNgxsmkQueryBuilder = `/* Theme <ngxsmk-query-builder> via design tokens */
+ngxsmk-query-builder {
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-outline: ;
+  --ngxsmk-color-primary: ;
+  --ngxsmk-color-surface: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-md: ;
+  --ngxsmk-space-1-5: ;
+  --ngxsmk-space-2: ;
+}`;
+
   protected readonly selectedNode = signal<string | null>(null);
 
   protected readonly kanbanColumns: KanbanColumn[] = [

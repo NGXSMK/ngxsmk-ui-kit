@@ -34,8 +34,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Line Chart"
       description="A continuous series rendered as a polyline. Great for trends over time."
-      [code]="codeLine"
-    >
+      [code]="codeLine" [component]="NgxsmkLineChart" [customize]="customizeNgxsmkLineChart">
       <div class="ngxsmk-sc-surface" style="width:100%;max-width:520px;height:260px;">
         <ngxsmk-chart-line [data]="revenue" [width]="480" [height]="240" color="var(--ngxsmk-color-primary)" />
       </div>
@@ -44,8 +43,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Bar Chart"
       description="Discrete values as columns. Useful for comparing categories at a glance."
-      [code]="codeBar"
-    >
+      [code]="codeBar" [component]="NgxsmkBarChart" [customize]="customizeNgxsmkBarChart">
       <div class="ngxsmk-sc-surface" style="width:100%;max-width:520px;height:260px;">
         <ngxsmk-chart-bar [data]="quarters" [width]="480" [height]="240" color="var(--ngxsmk-color-secondary)" />
       </div>
@@ -54,8 +52,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Pie Chart"
       description="Proportional slices of a single total, with an optional donut mode."
-      [code]="codePie"
-    >
+      [code]="codePie" [component]="NgxsmkPieChart" [customize]="customizeNgxsmkPieChart">
       <div class="ngxsmk-sc-col ngxsmk-sc-wrap">
         <div class="ngxsmk-sc-surface" style="height:240px;">
           <ngxsmk-chart-pie [data]="traffic" [size]="200" />
@@ -69,8 +66,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Area Chart"
       description="A line chart with a gradient fill under the curve to emphasize volume."
-      [code]="codeArea"
-    >
+      [code]="codeArea" [component]="NgxsmkAreaChart">
       <div class="ngxsmk-sc-surface" style="width:100%;max-width:520px;height:260px;">
         <ngxsmk-chart-area [data]="activeUsers" [width]="480" [height]="240" color="var(--ngxsmk-color-tertiary)" />
       </div>
@@ -79,8 +75,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Scatter Chart"
       description="Plot pairs of values to reveal correlation across two axes."
-      [code]="codeScatter"
-    >
+      [code]="codeScatter" [component]="NgxsmkScatterChart" [customize]="customizeNgxsmkScatterChart">
       <div class="ngxsmk-sc-surface" style="width:100%;max-width:520px;height:260px;">
         <ngxsmk-chart-scatter [data]="correlation" [width]="480" [height]="240" />
       </div>
@@ -89,8 +84,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Candlestick Chart"
       description="Open/high/low/close candles for financial time series. Bullish candles are green, bearish red."
-      [code]="codeCandle"
-    >
+      [code]="codeCandle" [component]="NgxsmkCandlestickChart" [customize]="customizeNgxsmkCandlestickChart">
       <div class="ngxsmk-sc-surface" style="width:100%;max-width:520px;height:260px;">
         <ngxsmk-chart-candlestick [data]="ohlc" [width]="480" [height]="240" />
       </div>
@@ -99,8 +93,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Heatmap"
       description="A matrix of cells colored by magnitude, with optional axis labels."
-      [code]="codeHeat"
-    >
+      [code]="codeHeat" [component]="NgxsmkHeatmapChart" [customize]="customizeNgxsmkHeatmapChart">
       <div class="ngxsmk-sc-surface" style="width:100%;max-width:520px;height:300px;">
         <ngxsmk-chart-heatmap
           [data]="matrix"
@@ -114,8 +107,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Dashboard"
       description="A responsive grid wrapper that arranges multiple charts into a panel."
-      [code]="codeDashboard"
-    >
+      [code]="codeDashboard" [component]="NgxsmkChartDashboard" [customize]="customizeNgxsmkChartDashboard">
       <ngxsmk-chart-dashboard [columns]="3" style="width:100%;">
         <div class="ngxsmk-sc-surface" style="height:200px;">
           <ngxsmk-chart-line [data]="revenue" [width]="300" [height]="180" />
@@ -143,6 +135,53 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
   `,
 })
 export class ChartsPage {
+  protected readonly NgxsmkLineChart = NgxsmkLineChart;
+  protected readonly customizeNgxsmkLineChart = `/* Theme <ngxsmk-chart-line> via design tokens */
+ngxsmk-chart-line {
+  --ngxsmk-color-on-surface-variant: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-text-label-sm-size: ;
+}`;
+  protected readonly NgxsmkBarChart = NgxsmkBarChart;
+  protected readonly customizeNgxsmkBarChart = `/* Theme <ngxsmk-chart-bar> via design tokens */
+ngxsmk-chart-bar {
+  --ngxsmk-duration-fast: ;
+  --ngxsmk-ease-out: ;
+}`;
+  protected readonly NgxsmkPieChart = NgxsmkPieChart;
+  protected readonly customizeNgxsmkPieChart = `/* Theme <ngxsmk-chart-pie> via design tokens */
+ngxsmk-chart-pie {
+  --ngxsmk-color-surface: ;
+}`;
+  protected readonly NgxsmkAreaChart = NgxsmkAreaChart;
+  protected readonly NgxsmkScatterChart = NgxsmkScatterChart;
+  protected readonly customizeNgxsmkScatterChart = `/* Theme <ngxsmk-chart-scatter> via design tokens */
+ngxsmk-chart-scatter {
+  --ngxsmk-color-on-surface-variant: ;
+  --ngxsmk-duration-fast: ;
+  --ngxsmk-ease-out: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-text-label-sm-size: ;
+}`;
+  protected readonly NgxsmkCandlestickChart = NgxsmkCandlestickChart;
+  protected readonly customizeNgxsmkCandlestickChart = `/* Theme <ngxsmk-chart-candlestick> via design tokens */
+ngxsmk-chart-candlestick {
+  --ngxsmk-color-on-surface: ;
+}`;
+  protected readonly NgxsmkHeatmapChart = NgxsmkHeatmapChart;
+  protected readonly customizeNgxsmkHeatmapChart = `/* Theme <ngxsmk-chart-heatmap> via design tokens */
+ngxsmk-chart-heatmap {
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-surface: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-text-label-sm-size: ;
+}`;
+  protected readonly NgxsmkChartDashboard = NgxsmkChartDashboard;
+  protected readonly customizeNgxsmkChartDashboard = `/* Theme <ngxsmk-chart-dashboard> via design tokens */
+ngxsmk-chart-dashboard {
+  --ngxsmk-space-4: ;
+}`;
+
   protected readonly revenue = [
     { label: 'Jan', value: 42 },
     { label: 'Feb', value: 55 },

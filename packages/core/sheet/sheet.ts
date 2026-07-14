@@ -9,6 +9,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { NgxsmkScrollLock } from '@ngxsmk/cdk';
+import { NgxsmkAnimate, NgxsmkMotionState } from '@ngxsmk/core/animation';
 
 export type NgxsmkSheetSide = 'left' | 'right' | 'bottom';
 
@@ -18,13 +19,14 @@ export type NgxsmkSheetSide = 'left' | 'right' | 'bottom';
     @if (open()) {
       <div class="ngxsmk-sheet__root" [attr.data-side]="side()">
       <div class="ngxsmk-sheet__backdrop" (click)="open.set(false)"></div>
-      <div
-        class="ngxsmk-sheet__panel"
-        [attr.data-side]="side()"
-        role="dialog"
-        aria-modal="true"
-        [attr.aria-label]="title()"
-      >
+        <div
+          class="ngxsmk-sheet__panel"
+          [ngxsmkAnimate]="SHEET_MOTION"
+          [attr.data-side]="side()"
+          role="dialog"
+          aria-modal="true"
+          [attr.aria-label]="title()"
+        >
         <div class="ngxsmk-sheet__header">
           <h2 class="ngxsmk-sheet__title">{{ title() }}</h2>
           <button
@@ -45,7 +47,8 @@ export type NgxsmkSheetSide = 'left' | 'right' | 'bottom';
       </div>
     }
   `,
-  host: { class: 'ngxsmk-sheet' },
+    host: { class: 'ngxsmk-sheet' },
+    imports: [NgxsmkAnimate],
   styles: `
     :host { display: contents; }
 
@@ -146,6 +149,12 @@ export class NgxsmkSheet {
   readonly open = model(false);
   readonly side = input<NgxsmkSheetSide>('right');
   readonly title = input('');
+
+  protected readonly SHEET_MOTION: NgxsmkMotionState = {
+    initial: { opacity: 0, y: 12 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.22, easing: 'ease-out' },
+  };
 
   private locked = false;
 

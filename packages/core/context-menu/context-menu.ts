@@ -8,6 +8,7 @@ import {
   input,
   signal,
 } from '@angular/core';
+import { NgxsmkAnimate, NgxsmkMotionState } from '@ngxsmk/core/animation';
 
 export interface NgxsmkContextMenuItem {
   label: string;
@@ -22,6 +23,7 @@ export interface NgxsmkContextMenuItem {
     @if (visible()) {
       <div
         class="ngxsmk-context-menu__list"
+        [ngxsmkAnimate]="CONTEXT_MENU_MOTION"
         [style.left.px]="x()"
         [style.top.px]="y()"
         (click)="onClick($event)"
@@ -46,6 +48,7 @@ export interface NgxsmkContextMenuItem {
     class: 'ngxsmk-context-menu',
     '[style.display]': '"contents"',
   },
+  imports: [NgxsmkAnimate],
   styles: [
     `
     .ngxsmk-context-menu__list {
@@ -110,6 +113,12 @@ export class NgxsmkContextMenu {
   protected readonly visible = signal(false);
   protected readonly x = signal(0);
   protected readonly y = signal(0);
+
+  protected readonly CONTEXT_MENU_MOTION: NgxsmkMotionState = {
+    initial: { opacity: 0, y: -6 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.14, easing: 'ease-out' },
+  };
 
   constructor() {
     this.destroyRef.onDestroy(() => this.hide());

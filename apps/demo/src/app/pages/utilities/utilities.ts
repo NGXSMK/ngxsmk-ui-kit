@@ -33,8 +33,7 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
     <showcase-example
       title="Visually Hidden"
       description="Hides content visually while keeping it available to screen readers."
-      [code]="codeVisuallyHidden"
-    >
+      [code]="codeVisuallyHidden" [component]="NgxsmkButton">
       <div class="ngxsmk-sc-surface" style="flex: 1 1 100%">
         <p style="margin:0 0 .5rem">
           <button ngxsmk-button size="sm" (click)="showHidden.update(v => !v)">
@@ -56,8 +55,7 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
     <showcase-example
       title="Focus Trap"
       description="Cycles Tab focus within the element so keyboard users stay contained."
-      [code]="codeFocusTrap"
-    >
+      [code]="codeFocusTrap" [component]="NgxsmkButton">
       <div class="ngxsmk-sc-surface" style="flex: 1 1 100%">
         <p style="margin:0 0 .5rem">
           <button ngxsmk-button size="sm" (click)="focusTrapped.update(v => !v)">
@@ -77,8 +75,7 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
     <showcase-example
       title="Click Outside"
       description="Emits when a click lands outside the host element — perfect for popovers."
-      [code]="codeClickOutside"
-    >
+      [code]="codeClickOutside" [component]="NgxsmkButton">
       <div class="ngxsmk-sc-surface" style="flex: 1 1 100%; position: relative">
         <button ngxsmk-button size="sm" (click)="outsideOpen.set(true)">
           {{ outsideOpen() ? 'Popover open' : 'Open popover' }}
@@ -95,8 +92,7 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
     <showcase-example
       title="Keyboard Shortcut"
       description="Binds a global key combo and fires when it matches."
-      [code]="codeShortcut"
-    >
+      [code]="codeShortcut" [component]="NgxsmkKeyboardShortcut">
       <div class="ngxsmk-sc-surface" style="flex: 1 1 100%">
         <p style="margin:0">
           Press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>L</kbd>
@@ -112,8 +108,7 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
     <showcase-example
       title="Copy to Clipboard"
       description="Copies a bound string to the clipboard on click."
-      [code]="codeCopy"
-    >
+      [code]="codeCopy" [component]="NgxsmkButton">
       <div class="ngxsmk-sc-surface" style="flex: 1 1 100%">
         <code class="ngxsmk-demo-code">npm install @ngxsmk/core</code>
         <button
@@ -130,8 +125,7 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
     <showcase-example
       title="Scroll Lock"
       description="Locks the document scroll while active — e.g. behind a modal."
-      [code]="codeScrollLock"
-    >
+      [code]="codeScrollLock" [component]="NgxsmkButton">
       <div class="ngxsmk-sc-surface" style="flex: 1 1 100%">
         <button
           ngxsmk-button size="sm"
@@ -146,8 +140,7 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
     <showcase-example
       title="Resize Observer"
       description="Streams the element's size whenever it changes."
-      [code]="codeResize"
-    >
+      [code]="codeResize" [component]="NgxsmkResizeObserver">
       <div class="ngxsmk-sc-surface" style="flex: 1 1 100%">
         <div class="ngxsmk-resize-box" ngxsmkResizeObserver (sizeChanged)="onResize($event)">
           Drag the corner to resize me
@@ -161,8 +154,7 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
     <showcase-example
       title="Intersection Observer"
       description="Reports whether the element is visible within a scroll container."
-      [code]="codeIntersection"
-    >
+      [code]="codeIntersection" [component]="NgxsmkIntersectionObserver">
       <div class="ngxsmk-sc-surface" style="flex: 1 1 100%">
         <div class="ngxsmk-scroll-window">
           <div class="ngxsmk-scroll-spacer">Scroll down…</div>
@@ -182,8 +174,7 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
     <showcase-example
       title="Layer Provider"
       description="Establishes a positioned layer context for overlays and portals."
-      [code]="codeLayer"
-    >
+      [code]="codeLayer" [component]="NgxsmkLayerProvider">
       <div class="ngxsmk-sc-surface" style="flex: 1 1 100%">
         <div ngxsmkLayerProvider class="ngxsmk-layer-stage">
           <div class="ngxsmk-layer-card ngxsmk-layer-card--back">Base layer</div>
@@ -196,8 +187,7 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
     <showcase-example
       title="Media Query"
       description="Reflects a CSS media query match as a live signal."
-      [code]="codeMediaQuery"
-    >
+      [code]="codeMediaQuery" [component]="NgxsmkMediaQuery">
       <div class="ngxsmk-sc-surface" style="flex: 1 1 100%">
         <div ngxsmkMediaQuery="(min-width: 768px)"></div>
         <p style="margin:0">
@@ -211,8 +201,7 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
     <showcase-example
       title="Media Theme"
       description="Applies a theme mode attribute from a prefers-* media query."
-      [code]="codeMediaTheme"
-    >
+      [code]="codeMediaTheme" [component]="NgxsmkMediaTheme">
       <div class="ngxsmk-sc-surface" style="flex: 1 1 100%">
         <div
           class="ngxsmk-theme-box"
@@ -229,8 +218,7 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
     <showcase-example
       title="Lazy Load"
       description="Defers rendering children until they scroll into view."
-      [code]="codeLazy"
-    >
+      [code]="codeLazy" [component]="NgxsmkLazyLoad">
       <div class="ngxsmk-sc-surface" style="flex: 1 1 100%">
         <div class="ngxsmk-scroll-window">
           <div class="ngxsmk-scroll-spacer">Scroll down to load the content…</div>
@@ -247,8 +235,7 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
     <showcase-example
       title="Lazy Load (cards)"
       description="Each card below is wrapped in ngxsmk-lazy-load, so its markup is only created once it scrolls into the viewport — scroll the feed to watch them appear."
-      [code]="codeLazyCards"
-    >
+      [code]="codeLazyCards" [component]="NgxsmkLazyLoad">
       <div class="ngxsmk-sc-surface" style="flex: 1 1 100%">
         <div class="ngxsmk-scroll-window">
           <div class="ngxsmk-scroll-spacer">Scroll down — cards load as they enter view…</div>
@@ -447,6 +434,15 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
   `,
 })
 export class UtilitiesPage {
+  protected readonly NgxsmkButton = NgxsmkButton;
+  protected readonly NgxsmkKeyboardShortcut = NgxsmkKeyboardShortcut;
+  protected readonly NgxsmkResizeObserver = NgxsmkResizeObserver;
+  protected readonly NgxsmkIntersectionObserver = NgxsmkIntersectionObserver;
+  protected readonly NgxsmkLayerProvider = NgxsmkLayerProvider;
+  protected readonly NgxsmkMediaQuery = NgxsmkMediaQuery;
+  protected readonly NgxsmkMediaTheme = NgxsmkMediaTheme;
+  protected readonly NgxsmkLazyLoad = NgxsmkLazyLoad;
+
   protected readonly showHidden = signal(true);
   protected readonly focusTrapped = signal(true);
   protected readonly outsideOpen = signal(false);

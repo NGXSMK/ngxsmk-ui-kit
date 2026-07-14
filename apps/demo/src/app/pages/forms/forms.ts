@@ -88,8 +88,7 @@ interface Option {
       <showcase-example
         title="Button"
         description="Native button/anchor directive with variants, sizes, and a loading state."
-        [code]="codeButton"
-      >
+        [code]="codeButton" [component]="NgxsmkButton">
         <span class="ngxsmk-sc-wrap">
           <button ngxsmk-button>Primary</button>
           <button ngxsmk-button variant="secondary">Secondary</button>
@@ -105,8 +104,7 @@ interface Option {
       <showcase-example
         title="Button Group"
         description="Segments a set of related actions into a single connected control."
-        [code]="codeButtonGroup"
-      >
+        [code]="codeButtonGroup" [component]="NgxsmkButtonGroup" [customize]="customizeNgxsmkButtonGroup">
         <ngxsmk-button-group>
           <button ngxsmk-button variant="outline">Left</button>
           <button ngxsmk-button variant="outline">Center</button>
@@ -117,8 +115,7 @@ interface Option {
       <showcase-example
         title="Toggle Button"
         description="A pressable button that keeps an on/off pressed state."
-        [code]="codeToggleButton"
-      >
+        [code]="codeToggleButton" [component]="NgxsmkToggleButton" [customize]="customizeNgxsmkToggleButton">
         <button ngxsmkToggleButton [(pressed)]="starred">
           {{ starred() ? '★ Starred' : '☆ Star' }}
         </button>
@@ -127,8 +124,7 @@ interface Option {
       <showcase-example
         title="Toggle Button Group"
         description="Groups toggle buttons for formatting-style controls."
-        [code]="codeToggleButtonGroup"
-      >
+        [code]="codeToggleButtonGroup" [component]="NgxsmkToggleButtonGroup" [customize]="customizeNgxsmkToggleButtonGroup">
         <ngxsmk-toggle-button-group>
           <button ngxsmkToggleButton [(pressed)]="bold">Bold</button>
           <button ngxsmkToggleButton [(pressed)]="italic">Italic</button>
@@ -139,8 +135,7 @@ interface Option {
       <showcase-example
         title="Input"
         description="Themes native text inputs — pair it with a Form Field for labels."
-        [code]="codeInput"
-      >
+        [code]="codeInput" [component]="NgxsmkInput" [customize]="customizeNgxsmkInput">
         <div class="ngxsmk-sc-col" style="width: 100%; max-width: 320px">
           <ngxsmk-input type="email" placeholder="you@example.com" [(value)]="email" />
           <small>Value: {{ email() || '—' }}</small>
@@ -150,16 +145,14 @@ interface Option {
       <showcase-example
         title="Textarea"
         description="Multi-line input with a configurable row count."
-        [code]="codeTextarea"
-      >
+        [code]="codeTextarea" [component]="NgxsmkTextarea" [customize]="customizeNgxsmkTextarea">
         <ngxsmk-textarea placeholder="Share your feedback…" [rows]="4" [(value)]="feedback" />
       </showcase-example>
 
       <showcase-example
         title="Number Input"
         description="Numeric field with min, max, and step constraints."
-        [code]="codeNumber"
-      >
+        [code]="codeNumber" [component]="NgxsmkNumberInput" [customize]="customizeNgxsmkNumberInput">
         <div class="ngxsmk-sc-col">
           <ngxsmk-number-input [min]="0" [max]="10" [step]="1" [(value)]="quantity" />
           <small>Quantity: {{ quantity() }}</small>
@@ -169,8 +162,7 @@ interface Option {
       <showcase-example
         title="Select"
         description="Single-choice dropdown with full keyboard nav and typeahead, themed like the input family."
-        [code]="codeSelect"
-      >
+        [code]="codeSelect" [component]="NgxsmkSelect" [customize]="customizeNgxsmkSelect">
         <div class="ngxsmk-sc-col" style="width: 100%; max-width: 260px">
           <ngxsmk-select [options]="colors" placeholder="Pick a color" [(value)]="color" />
           <small>Selected: {{ color() || '—' }}</small>
@@ -180,8 +172,7 @@ interface Option {
       <showcase-example
         title="Multi Select"
         description="Choose several values, shown as removable tags."
-        [code]="codeMultiSelect"
-      >
+        [code]="codeMultiSelect" [component]="NgxsmkMultiSelect" [customize]="customizeNgxsmkMultiSelect">
         <div class="ngxsmk-sc-col" style="width: 100%; max-width: 320px">
           <ngxsmk-multi-select [options]="colors" placeholder="Add colors" [(value)]="colorList" />
           <small>{{ colorList().length }} selected</small>
@@ -191,8 +182,7 @@ interface Option {
       <showcase-example
         title="Autocomplete"
         description="Free-text input that suggests matching options as you type."
-        [code]="codeAutocomplete"
-      >
+        [code]="codeAutocomplete" [component]="NgxsmkAutocomplete" [customize]="customizeNgxsmkAutocomplete">
         <ngxsmk-autocomplete
           [options]="fruitOptions"
           placeholder="Search a fruit…"
@@ -203,8 +193,7 @@ interface Option {
       <showcase-example
         title="Combobox"
         description="Filterable dropdown that resolves to a single selected option."
-        [code]="codeCombobox"
-      >
+        [code]="codeCombobox" [component]="NgxsmkCombobox" [customize]="customizeNgxsmkCombobox">
         <ngxsmk-combobox
           [options]="countries"
           placeholder="Choose a country…"
@@ -215,8 +204,7 @@ interface Option {
       <showcase-example
         title="Typeahead"
         description="String-list search with keyboard-friendly suggestions."
-        [code]="codeTypeahead"
-      >
+        [code]="codeTypeahead" [component]="NgxsmkTypeahead" [customize]="customizeNgxsmkTypeahead">
         <ngxsmk-typeahead
           [options]="frameworks"
           placeholder="Search a framework…"
@@ -227,8 +215,7 @@ interface Option {
       <showcase-example
         title="Power Search"
         description="A search bar combined with faceted filter dropdowns."
-        [code]="codePowerSearch"
-      >
+        [code]="codePowerSearch" [component]="NgxsmkPowerSearch" [customize]="customizeNgxsmkPowerSearch">
         <div class="ngxsmk-sc-col" style="width: 100%; max-width: 480px">
           <ngxsmk-power-search
             placeholder="Search issues…"
@@ -242,16 +229,14 @@ interface Option {
       <showcase-example
         title="Checkbox"
         description="Single boolean control built on a native checkbox."
-        [code]="codeCheckbox"
-      >
+        [code]="codeCheckbox" [component]="NgxsmkCheckbox" [customize]="customizeNgxsmkCheckbox">
         <ngxsmk-checkbox [(checked)]="agreed">I accept the terms</ngxsmk-checkbox>
       </showcase-example>
 
       <showcase-example
         title="Checkbox List"
         description="Multiple checkboxes bound to an array of selected values."
-        [code]="codeCheckboxList"
-      >
+        [code]="codeCheckboxList" [component]="NgxsmkCheckboxList" [customize]="customizeNgxsmkCheckboxList">
         <div class="ngxsmk-sc-col">
           <ngxsmk-checkbox-list [items]="topics" [(selected)]="selectedTopics" />
           <small>{{ selectedTopics().length }} topic(s) chosen</small>
@@ -261,8 +246,7 @@ interface Option {
       <showcase-example
         title="Radio"
         description="Mutually exclusive options within a radio group."
-        [code]="codeRadio"
-      >
+        [code]="codeRadio" [component]="NgxsmkRadioGroup" [customize]="customizeNgxsmkRadioGroup">
         <ngxsmk-radio-group [(value)]="plan">
           <ngxsmk-radio value="free">Free</ngxsmk-radio>
           <ngxsmk-radio value="pro">Pro</ngxsmk-radio>
@@ -273,16 +257,14 @@ interface Option {
       <showcase-example
         title="Switch"
         description="Instant on/off toggle for settings."
-        [code]="codeSwitch"
-      >
+        [code]="codeSwitch" [component]="NgxsmkSwitch" [customize]="customizeNgxsmkSwitch">
         <ngxsmk-switch [(checked)]="notifications">Email notifications</ngxsmk-switch>
       </showcase-example>
 
       <showcase-example
         title="Slider"
         description="Range control for selecting a numeric value."
-        [code]="codeSlider"
-      >
+        [code]="codeSlider" [component]="NgxsmkSlider" [customize]="customizeNgxsmkSlider">
         <div class="ngxsmk-sc-col" style="width: 100%; max-width: 320px">
           <ngxsmk-slider [min]="0" [max]="100" [step]="5" [(value)]="volume" />
           <small>Volume: {{ volume() }}</small>
@@ -302,24 +284,21 @@ interface Option {
       <showcase-example
         title="Segmented Control"
         description="Compact single-choice switcher for views or modes."
-        [code]="codeSegmented"
-      >
+        [code]="codeSegmented" [component]="NgxsmkSegmentedControl" [customize]="customizeNgxsmkSegmentedControl">
         <ngxsmk-segmented-control [options]="viewOptions" [(value)]="view" />
       </showcase-example>
 
       <showcase-example
         title="Selector"
         description="Chip-style multi-select for tags and quick filters."
-        [code]="codeSelector"
-      >
+        [code]="codeSelector" [component]="NgxsmkSelector" [customize]="customizeNgxsmkSelector">
         <ngxsmk-selector [options]="interests" [(selected)]="selectedInterests" />
       </showcase-example>
 
       <showcase-example
         title="Multi Selector"
         description="Dropdown of checkboxes with a compact summary trigger."
-        [code]="codeMultiSelector"
-      >
+        [code]="codeMultiSelector" [component]="NgxsmkMultiSelector" [customize]="customizeNgxsmkMultiSelector">
         <ngxsmk-multi-selector
           [options]="colors"
           placeholder="Select colors"
@@ -330,16 +309,14 @@ interface Option {
       <showcase-example
         title="Tokenizer"
         description="Enter free-form tags; press Enter to add, Backspace to remove."
-        [code]="codeTokenizer"
-      >
+        [code]="codeTokenizer" [component]="NgxsmkTokenizer" [customize]="customizeNgxsmkTokenizer">
         <ngxsmk-tokenizer placeholder="Add a tag…" [(tokens)]="tags" />
       </showcase-example>
 
       <showcase-example
         title="Input Group"
         description="Attach text add-ons before and after an input."
-        [code]="codeInputGroup"
-      >
+        [code]="codeInputGroup" [component]="NgxsmkInputGroup">
         <ngxsmk-input-group>
           <ngxsmk-input-group-text>$</ngxsmk-input-group-text>
           <ngxsmk-input type="text" placeholder="0.00" />
@@ -350,8 +327,7 @@ interface Option {
       <showcase-example
         title="Field"
         description="Composable layout for a label, control, and status message."
-        [code]="codeField"
-      >
+        [code]="codeField" [component]="NgxsmkField" [customize]="customizeNgxsmkField">
         <ngxsmk-field hint="Choose a unique handle.">
           <ngxsmk-field-label [required]="true">Username</ngxsmk-field-label>
           <ngxsmk-input type="text" placeholder="e.g. ada_lovelace" />
@@ -362,8 +338,7 @@ interface Option {
       <showcase-example
         title="Form Field"
         description="Batteries-included wrapper wiring label, hint, and error to the control."
-        [code]="codeFormField"
-      >
+        [code]="codeFormField" [component]="NgxsmkFormField" [customize]="customizeNgxsmkFormField">
         <ngxsmk-form-field label="Email" required error="Please enter a valid email address.">
           <ngxsmk-input type="email" placeholder="you@example.com" />
         </ngxsmk-form-field>
@@ -372,8 +347,7 @@ interface Option {
       <showcase-example
         title="Checkbox List Item"
         description="Compose a multi-select list from individual NgxsmkCheckboxListItem children with their own checked state and optional descriptions."
-        [code]="codeCheckboxListItem"
-      >
+        [code]="codeCheckboxListItem" [component]="NgxsmkCheckboxListItemComponent" [customize]="customizeNgxsmkCheckboxListItemComponent">
         <div class="ngxsmk-sc-col ngxsmk-sc-surface">
           <ngxsmk-checkbox-list-item
             description="Statically typed, great tooling."
@@ -401,6 +375,400 @@ interface Option {
   `,
 })
 export class FormsPage {
+  protected readonly NgxsmkButton = NgxsmkButton;
+  protected readonly NgxsmkButtonGroup = NgxsmkButtonGroup;
+  protected readonly customizeNgxsmkButtonGroup = `/* Theme <ngxsmk-button-group> via design tokens */
+ngxsmk-button-group {
+  --ngxsmk-radius-md: ;
+  --ngxsmk-space-1: ;
+}`;
+  protected readonly NgxsmkToggleButton = NgxsmkToggleButton;
+  protected readonly customizeNgxsmkToggleButton = `/* Theme [ngxsmkToggleButton] via design tokens */
+[ngxsmkToggleButton] {
+  --ngxsmk-color-on-primary-container: ;
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-outline: ;
+  --ngxsmk-color-primary: ;
+  --ngxsmk-color-primary-container: ;
+  --ngxsmk-color-surface: ;
+  --ngxsmk-color-surface-hover: ;
+  --ngxsmk-duration-fast: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-md: ;
+  --ngxsmk-space-2: ;
+  --ngxsmk-space-4: ;
+}`;
+  protected readonly NgxsmkToggleButtonGroup = NgxsmkToggleButtonGroup;
+  protected readonly customizeNgxsmkToggleButtonGroup = `/* Theme <ngxsmk-toggle-button-group> via design tokens */
+ngxsmk-toggle-button-group {
+  --ngxsmk-radius-md: ;
+  --ngxsmk-space-1: ;
+}`;
+  protected readonly NgxsmkInput = NgxsmkInput;
+  protected readonly customizeNgxsmkInput = `/* Theme <ngxsmk-input> via design tokens */
+ngxsmk-input {
+  --ngxsmk-color-error: ;
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-on-surface-variant: ;
+  --ngxsmk-color-outline-strong: ;
+  --ngxsmk-color-ring: ;
+  --ngxsmk-color-surface: ;
+  --ngxsmk-control-height: ;
+  --ngxsmk-duration-fast: ;
+  --ngxsmk-ease-out: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-base: ;
+  --ngxsmk-space-3: ;
+  --ngxsmk-text-body-md-line: ;
+  --ngxsmk-text-body-md-size: ;
+}`;
+  protected readonly NgxsmkTextarea = NgxsmkTextarea;
+  protected readonly customizeNgxsmkTextarea = `/* Theme <ngxsmk-textarea> via design tokens */
+ngxsmk-textarea {
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-on-surface-variant: ;
+  --ngxsmk-color-outline-strong: ;
+  --ngxsmk-color-ring: ;
+  --ngxsmk-color-surface: ;
+  --ngxsmk-color-surface-variant: ;
+  --ngxsmk-duration-fast: ;
+  --ngxsmk-ease-out: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-base: ;
+  --ngxsmk-radius-md: ;
+  --ngxsmk-space-2: ;
+  --ngxsmk-space-3: ;
+  --ngxsmk-text-body-md-line: ;
+  --ngxsmk-text-body-md-size: ;
+}`;
+  protected readonly NgxsmkNumberInput = NgxsmkNumberInput;
+  protected readonly customizeNgxsmkNumberInput = `/* Theme <ngxsmk-number-input> via design tokens */
+ngxsmk-number-input {
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-outline-strong: ;
+  --ngxsmk-color-ring: ;
+  --ngxsmk-color-surface: ;
+  --ngxsmk-color-surface-hover: ;
+  --ngxsmk-color-surface-variant: ;
+  --ngxsmk-control-height: ;
+  --ngxsmk-duration-fast: ;
+  --ngxsmk-ease-out: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-base: ;
+  --ngxsmk-space-2: ;
+  --ngxsmk-text-body-md-size: ;
+}`;
+  protected readonly NgxsmkSelect = NgxsmkSelect;
+  protected readonly customizeNgxsmkSelect = `/* Theme <ngxsmk-select> via design tokens */
+ngxsmk-select {
+  --ngxsmk-color-error: ;
+  --ngxsmk-color-on-primary-container: ;
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-on-surface-variant: ;
+  --ngxsmk-color-outline: ;
+  --ngxsmk-color-outline-strong: ;
+  --ngxsmk-color-primary: ;
+  --ngxsmk-color-primary-container: ;
+  --ngxsmk-color-ring: ;
+  --ngxsmk-color-surface: ;
+  --ngxsmk-color-surface-hover: ;
+  --ngxsmk-control-height: ;
+  --ngxsmk-duration-fast: ;
+  --ngxsmk-ease-out: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-base: ;
+  --ngxsmk-radius-sm: ;
+  --ngxsmk-shadow-lg: ;
+  --ngxsmk-space-1: ;
+  --ngxsmk-space-1-5: ;
+  --ngxsmk-space-2: ;
+  --ngxsmk-space-3: ;
+  --ngxsmk-text-body-md-line: ;
+  --ngxsmk-text-body-md-size: ;
+  --ngxsmk-text-body-sm-size: ;
+  --ngxsmk-z-dropdown: ;
+}`;
+  protected readonly NgxsmkMultiSelect = NgxsmkMultiSelect;
+  protected readonly customizeNgxsmkMultiSelect = `/* Theme <ngxsmk-multi-select> via design tokens */
+ngxsmk-multi-select {
+  --ngxsmk-button-disabled-opacity: ;
+  --ngxsmk-color-on-primary-container: ;
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-on-surface-variant: ;
+  --ngxsmk-color-outline: ;
+  --ngxsmk-color-outline-strong: ;
+  --ngxsmk-color-primary: ;
+  --ngxsmk-color-primary-container: ;
+  --ngxsmk-color-surface: ;
+  --ngxsmk-color-surface-hover: ;
+  --ngxsmk-control-height: ;
+  --ngxsmk-duration-fast: ;
+  --ngxsmk-ease-out: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-base: ;
+  --ngxsmk-radius-md: ;
+  --ngxsmk-radius-sm: ;
+  --ngxsmk-shadow-md: ;
+  --ngxsmk-space-0-5: ;
+  --ngxsmk-space-1: ;
+  --ngxsmk-space-1-5: ;
+  --ngxsmk-space-2: ;
+  --ngxsmk-space-3: ;
+  --ngxsmk-text-body-md-size: ;
+  --ngxsmk-z-dropdown: ;
+}`;
+  protected readonly NgxsmkAutocomplete = NgxsmkAutocomplete;
+  protected readonly customizeNgxsmkAutocomplete = `/* Theme <ngxsmk-autocomplete> via design tokens */
+ngxsmk-autocomplete {
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-outline: ;
+  --ngxsmk-color-primary: ;
+  --ngxsmk-color-surface: ;
+  --ngxsmk-color-surface-hover: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-md: ;
+  --ngxsmk-shadow-lg: ;
+  --ngxsmk-space-1: ;
+  --ngxsmk-space-2: ;
+  --ngxsmk-space-3: ;
+  --ngxsmk-z-dropdown: ;
+}`;
+  protected readonly NgxsmkCombobox = NgxsmkCombobox;
+  protected readonly customizeNgxsmkCombobox = `/* Theme <ngxsmk-combobox> via design tokens */
+ngxsmk-combobox {
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-outline: ;
+  --ngxsmk-color-primary: ;
+  --ngxsmk-color-surface: ;
+  --ngxsmk-color-surface-hover: ;
+  --ngxsmk-control-height: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-md: ;
+  --ngxsmk-shadow-lg: ;
+  --ngxsmk-space-1: ;
+  --ngxsmk-space-2: ;
+  --ngxsmk-space-3: ;
+  --ngxsmk-text-body-md-line: ;
+  --ngxsmk-text-body-md-size: ;
+  --ngxsmk-z-dropdown: ;
+}`;
+  protected readonly NgxsmkTypeahead = NgxsmkTypeahead;
+  protected readonly customizeNgxsmkTypeahead = `/* Theme <ngxsmk-typeahead> via design tokens */
+ngxsmk-typeahead {
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-outline: ;
+  --ngxsmk-color-primary: ;
+  --ngxsmk-color-primary-container: ;
+  --ngxsmk-color-surface: ;
+  --ngxsmk-color-surface-hover: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-md: ;
+  --ngxsmk-shadow-lg: ;
+  --ngxsmk-space-1: ;
+  --ngxsmk-space-2: ;
+  --ngxsmk-space-3: ;
+  --ngxsmk-z-dropdown: ;
+}`;
+  protected readonly NgxsmkPowerSearch = NgxsmkPowerSearch;
+  protected readonly customizeNgxsmkPowerSearch = `/* Theme <ngxsmk-power-search> via design tokens */
+ngxsmk-power-search {
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-outline: ;
+  --ngxsmk-color-primary: ;
+  --ngxsmk-color-primary-container: ;
+  --ngxsmk-color-surface: ;
+  --ngxsmk-control-height: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-md: ;
+  --ngxsmk-space-2: ;
+  --ngxsmk-space-3: ;
+  --ngxsmk-text-body-md-line: ;
+  --ngxsmk-text-body-md-size: ;
+}`;
+  protected readonly NgxsmkCheckbox = NgxsmkCheckbox;
+  protected readonly customizeNgxsmkCheckbox = `/* Theme <ngxsmk-checkbox> via design tokens */
+ngxsmk-checkbox {
+  --ngxsmk-color-on-primary: ;
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-outline-strong: ;
+  --ngxsmk-color-primary: ;
+  --ngxsmk-color-ring: ;
+  --ngxsmk-color-surface: ;
+  --ngxsmk-duration-fast: ;
+  --ngxsmk-ease-out: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-sm: ;
+  --ngxsmk-space-2: ;
+  --ngxsmk-text-body-md-line: ;
+  --ngxsmk-text-body-md-size: ;
+}`;
+  protected readonly NgxsmkCheckboxList = NgxsmkCheckboxList;
+  protected readonly customizeNgxsmkCheckboxList = `/* Theme <ngxsmk-checkbox-list> via design tokens */
+ngxsmk-checkbox-list {
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-space-2: ;
+}`;
+  protected readonly NgxsmkRadioGroup = NgxsmkRadioGroup;
+  protected readonly customizeNgxsmkRadioGroup = `/* Theme <ngxsmk-radio-group> via design tokens */
+ngxsmk-radio-group {
+  --ngxsmk-space-2: ;
+  --ngxsmk-space-3: ;
+}`;
+  protected readonly NgxsmkSwitch = NgxsmkSwitch;
+  protected readonly customizeNgxsmkSwitch = `/* Theme <ngxsmk-switch> via design tokens */
+ngxsmk-switch {
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-outline-strong: ;
+  --ngxsmk-color-primary: ;
+  --ngxsmk-color-ring: ;
+  --ngxsmk-color-surface: ;
+  --ngxsmk-duration-fast: ;
+  --ngxsmk-ease-out: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-full: ;
+  --ngxsmk-shadow-sm: ;
+  --ngxsmk-space-2: ;
+  --ngxsmk-switch-bg: ;
+  --ngxsmk-switch-checked-bg: ;
+  --ngxsmk-switch-height: ;
+  --ngxsmk-switch-radius: ;
+  --ngxsmk-switch-thumb-bg: ;
+  --ngxsmk-switch-thumb-size: ;
+  --ngxsmk-switch-width: ;
+  --ngxsmk-text-body-md-line: ;
+  --ngxsmk-text-body-md-size: ;
+}`;
+  protected readonly NgxsmkSlider = NgxsmkSlider;
+  protected readonly customizeNgxsmkSlider = `/* Theme <ngxsmk-slider> via design tokens */
+ngxsmk-slider {
+  --ngxsmk-color-primary: ;
+  --ngxsmk-color-ring: ;
+  --ngxsmk-color-surface: ;
+  --ngxsmk-color-surface-variant: ;
+  --ngxsmk-duration-fast: ;
+  --ngxsmk-ease-out: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-full: ;
+  --ngxsmk-space-2: ;
+}`;
+  protected readonly NgxsmkSegmentedControl = NgxsmkSegmentedControl;
+  protected readonly customizeNgxsmkSegmentedControl = `/* Theme <ngxsmk-segmented-control> via design tokens */
+ngxsmk-segmented-control {
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-on-surface-variant: ;
+  --ngxsmk-color-surface: ;
+  --ngxsmk-color-surface-variant: ;
+  --ngxsmk-duration-fast: ;
+  --ngxsmk-ease-out: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-lg: ;
+  --ngxsmk-radius-md: ;
+  --ngxsmk-shadow-sm: ;
+  --ngxsmk-space-1: ;
+  --ngxsmk-space-1-5: ;
+  --ngxsmk-space-3: ;
+  --ngxsmk-text-body-sm-size: ;
+}`;
+  protected readonly NgxsmkSelector = NgxsmkSelector;
+  protected readonly customizeNgxsmkSelector = `/* Theme <ngxsmk-selector> via design tokens */
+ngxsmk-selector {
+  --ngxsmk-color-on-primary-container: ;
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-outline: ;
+  --ngxsmk-color-primary: ;
+  --ngxsmk-color-primary-container: ;
+  --ngxsmk-duration-fast: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-full: ;
+  --ngxsmk-space-1: ;
+  --ngxsmk-space-2: ;
+  --ngxsmk-space-3: ;
+  --ngxsmk-text-body-sm-size: ;
+}`;
+  protected readonly NgxsmkMultiSelector = NgxsmkMultiSelector;
+  protected readonly customizeNgxsmkMultiSelector = `/* Theme <ngxsmk-multi-selector> via design tokens */
+ngxsmk-multi-selector {
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-on-surface-variant: ;
+  --ngxsmk-color-outline: ;
+  --ngxsmk-color-outline-strong: ;
+  --ngxsmk-color-surface: ;
+  --ngxsmk-color-surface-variant: ;
+  --ngxsmk-duration-fast: ;
+  --ngxsmk-ease-out: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-base: ;
+  --ngxsmk-radius-md: ;
+  --ngxsmk-shadow-md: ;
+  --ngxsmk-space-2: ;
+  --ngxsmk-space-3: ;
+  --ngxsmk-text-body-md-line: ;
+  --ngxsmk-text-body-md-size: ;
+  --ngxsmk-z-popover: ;
+}`;
+  protected readonly NgxsmkTokenizer = NgxsmkTokenizer;
+  protected readonly customizeNgxsmkTokenizer = `/* Theme <ngxsmk-tokenizer> via design tokens */
+ngxsmk-tokenizer {
+  --ngxsmk-color-on-primary-container: ;
+  --ngxsmk-color-outline: ;
+  --ngxsmk-color-primary-container: ;
+  --ngxsmk-color-surface: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-full: ;
+  --ngxsmk-radius-md: ;
+  --ngxsmk-space-0-5: ;
+  --ngxsmk-space-1: ;
+  --ngxsmk-space-2: ;
+}`;
+  protected readonly NgxsmkInputGroup = NgxsmkInputGroup;
+  protected readonly NgxsmkField = NgxsmkField;
+  protected readonly customizeNgxsmkField = `/* Theme <ngxsmk-field> via design tokens */
+ngxsmk-field {
+  --ngxsmk-color-on-surface-variant: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-space-1: ;
+  --ngxsmk-space-3: ;
+  --ngxsmk-text-body-sm-size: ;
+}`;
+  protected readonly NgxsmkFormField = NgxsmkFormField;
+  protected readonly customizeNgxsmkFormField = `/* Theme <ngxsmk-form-field> via design tokens */
+ngxsmk-form-field {
+  --ngxsmk-color-error: ;
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-on-surface-variant: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-space-1-5: ;
+  --ngxsmk-text-body-sm-line: ;
+  --ngxsmk-text-body-sm-size: ;
+  --ngxsmk-text-label-lg-line: ;
+  --ngxsmk-text-label-lg-size: ;
+  --ngxsmk-text-label-lg-weight: ;
+}`;
+  protected readonly NgxsmkCheckboxListItemComponent = NgxsmkCheckboxListItemComponent;
+  protected readonly customizeNgxsmkCheckboxListItemComponent = `/* Theme <ngxsmk-checkbox-list-item> via design tokens */
+ngxsmk-checkbox-list-item {
+  --ngxsmk-color-on-primary: ;
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-on-surface-variant: ;
+  --ngxsmk-color-outline-strong: ;
+  --ngxsmk-color-primary: ;
+  --ngxsmk-color-surface: ;
+  --ngxsmk-color-surface-variant: ;
+  --ngxsmk-duration-fast: ;
+  --ngxsmk-ease-out: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-base: ;
+  --ngxsmk-radius-sm: ;
+  --ngxsmk-space-0-5: ;
+  --ngxsmk-space-2: ;
+  --ngxsmk-space-3: ;
+  --ngxsmk-text-body-md-line: ;
+  --ngxsmk-text-body-md-size: ;
+  --ngxsmk-text-body-sm-line: ;
+  --ngxsmk-text-body-sm-size: ;
+}`;
+
   protected readonly colors: Option[] = [
     { value: 'red', label: 'Red' },
     { value: 'green', label: 'Green' },

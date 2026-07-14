@@ -8,6 +8,7 @@ import {
   model,
   signal,
 } from '@angular/core';
+import { NgxsmkAnimate, NgxsmkMotionState } from '@ngxsmk/core/animation';
 
 export interface NgxsmkDropdownMenuItem {
   label: string;
@@ -23,7 +24,7 @@ export interface NgxsmkDropdownMenuItem {
       <ng-content select="[ngxsmkDropdownTrigger]" />
     </div>
     @if (open()) {
-      <div class="ngxsmk-dropdown-menu__list" (click)="onClick($event)">
+      <div class="ngxsmk-dropdown-menu__list" [ngxsmkAnimate]="DROPDOWN_MENU_MOTION" (click)="onClick($event)">
         @for (item of items(); track item.label) {
           @if (item.divider) {
             <div class="ngxsmk-dropdown-menu__divider"></div>
@@ -43,6 +44,7 @@ export interface NgxsmkDropdownMenuItem {
   host: {
     class: 'ngxsmk-dropdown-menu',
   },
+  imports: [NgxsmkAnimate],
   styles: `
     :host {
       display: inline-block;
@@ -111,6 +113,12 @@ export class NgxsmkDropdownMenu {
 
   readonly items = input.required<NgxsmkDropdownMenuItem[]>();
   readonly open = model(false);
+
+  protected readonly DROPDOWN_MENU_MOTION: NgxsmkMotionState = {
+    initial: { opacity: 0, y: -6 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.14, easing: 'ease-out' },
+  };
 
   toggle(): void {
     this.open.update((v) => !v);

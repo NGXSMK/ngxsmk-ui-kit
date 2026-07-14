@@ -20,7 +20,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 /**
  * Layout category showcase.
  *
- * Every component (or related group) is wrapped in a <showcase-example> so the
+ * Every component (or related group) is wrapped in a <showcase-example [component]="NgxsmkCenter"> so the
  * demo stays consistent with the rest of the category pages. Layout primitives
  * get visible placeholder children so their effect is obvious at a glance.
  */
@@ -77,8 +77,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Section"
       description="A titled block that groups related content with a semantic heading."
-      [code]="codeSection"
-    >
+      [code]="codeSection" [component]="NgxsmkSection" [customize]="customizeNgxsmkSection">
       <ngxsmk-section
         title="Project overview"
         style="width:100%;background:var(--ngxsmk-color-surface-variant);border-radius:8px;padding:1rem;"
@@ -93,8 +92,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Container"
       description="Caps content width and centers it on the page. Pick a size token to match your grid."
-      [code]="codeContainer"
-    >
+      [code]="codeContainer" [component]="NgxsmkContainer" [customize]="customizeNgxsmkContainer">
       <ngxsmk-container
         size="md"
         style="background:var(--ngxsmk-color-surface-variant);border-radius:8px;padding:1rem;"
@@ -109,8 +107,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Grid"
       description="A CSS grid with a configurable column count and gap. Items flow automatically."
-      [code]="codeGrid"
-    >
+      [code]="codeGrid" [component]="NgxsmkGrid">
       <ngxsmk-grid
         [cols]="3"
         gap="0.75rem"
@@ -128,8 +125,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Flex"
       description="A flexible flexbox row/column with alignment, justification, gap, and wrapping."
-      [code]="codeFlex"
-    >
+      [code]="codeFlex" [component]="NgxsmkFlex">
       <ngxsmk-flex
         [wrap]="true"
         justify="between"
@@ -147,8 +143,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="HStack / VStack / Stack"
       description="Directional stack helpers. HStack and VStack fix the axis; Stack lets you switch at runtime via [direction]. Mark children with ngxsmkStackItem."
-      [code]="codeStacks"
-    >
+      [code]="codeStacks" [component]="NgxsmkHStack">
       <div style="width:100%;">
         <ngxsmk-h-stack gap="0.5rem">
           <span ngxsmkStackItem style="padding:0.75rem 1rem;background:var(--ngxsmk-color-surface-variant);border-radius:8px;">A</span>
@@ -176,8 +171,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Divider"
       description="A semantic separator for horizontal rules or inline vertical dividers."
-      [code]="codeDivider"
-    >
+      [code]="codeDivider" [component]="NgxsmkDivider" [customize]="customizeNgxsmkDivider">
       <div style="width:100%;">
         <p style="margin:0;">Content above the divider.</p>
         <ngxsmk-divider />
@@ -197,8 +191,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Aspect Ratio"
       description="Locks a box to a fixed width/height ratio so media never jumps while loading."
-      [code]="codeAspect"
-    >
+      [code]="codeAspect" [component]="NgxsmkAspectRatio">
       <ngxsmk-aspect-ratio
         ratio="16/9"
         style="max-width:320px;background:var(--ngxsmk-color-surface-variant);border-radius:8px;"
@@ -212,8 +205,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Spacer"
       description="An empty, flexible filler that pushes siblings apart in a stack or flex row."
-      [code]="codeSpacer"
-    >
+      [code]="codeSpacer" [component]="NgxsmkHStack">
       <ngxsmk-h-stack style="width:100%;">
         <span style="padding:0.5rem 1rem;background:var(--ngxsmk-color-surface-variant);border-radius:8px;">Left</span>
         <ngxsmk-spacer />
@@ -224,8 +216,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Collapsible"
       description="A disclosure widget that expands to reveal hidden content. Open state can be controlled via [open]."
-      [code]="codeCollapsible"
-    >
+      [code]="codeCollapsible" [component]="NgxsmkCollapsible" [customize]="customizeNgxsmkCollapsible">
       <ngxsmk-collapsible title="Advanced settings" [open]="true" style="width:100%;">
         <p style="margin:0;">
           Hidden details appear here. The open state is a two-way model, so you
@@ -237,8 +228,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Resizable"
       description="A panel with a drag handle on its edge to resize interactively."
-      [code]="codeResizable"
-    >
+      [code]="codeResizable" [component]="NgxsmkResizable">
       <div style="width:100%;max-width:420px;">
         <ngxsmk-resizable
           initialWidth="260px"
@@ -254,8 +244,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="App Shell"
       description="A full app frame with optional top bar, sidebar, and footer. Project content via [topbar], [sidebar], and [footer]."
-      [code]="codeAppShell"
-    >
+      [code]="codeAppShell" [component]="NgxsmkAppShell" [customize]="customizeNgxsmkAppShell">
       <div style="width:100%;height:360px;position:relative;overflow:hidden;border:1px solid var(--ngxsmk-color-outline);border-radius:8px;">
         <ngxsmk-app-shell
           [sidebar]="true"
@@ -275,8 +264,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Form Layout"
       description="Arranges form fields into a responsive grid. Set [columns] to lay fields out side by side."
-      [code]="codeFormLayout"
-    >
+      [code]="codeFormLayout" [component]="NgxsmkFormLayout" [customize]="customizeNgxsmkFormLayout">
       <div style="width:100%;height:360px;position:relative;overflow:auto;background:var(--ngxsmk-color-surface-variant);border-radius:8px;padding:1rem;">
         <ngxsmk-form-layout [columns]="2">
           <label class="ngxsmk-demo-field">Name<input class="ngxsmk-demo-input" /></label>
@@ -291,8 +279,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Resize Handle"
       description="The drag handle used to resize a panel. Compose it with any element and wire the (resizing) output to update a size signal on drag."
-      [code]="codeResizeHandle"
-    >
+      [code]="codeResizeHandle" [component]="NgxsmkResizeHandle" [customize]="customizeNgxsmkResizeHandle">
       <div
         style="display:flex;width:100%;max-width:420px;border:1px solid var(--ngxsmk-color-outline);border-radius:8px;background:var(--ngxsmk-color-surface-variant);overflow:hidden;"
       >
@@ -309,8 +296,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Layout regions"
       description="App-region layout primitives: NgxsmkLayout frames a header, content, footer and optional side panel. The grid rows keep the header/footer fixed while content fills the rest."
-      [code]="codeLayoutRegions"
-    >
+      [code]="codeLayoutRegions" [component]="NgxsmkLayout">
       <div style="width:100%;height:320px;position:relative;overflow:hidden;border:1px solid var(--ngxsmk-color-outline);border-radius:8px;">
         <ngxsmk-layout style="min-height:0;height:100%;">
           <ngxsmk-layout-header class="ngxsmk-demo-bar">Header</ngxsmk-layout-header>
@@ -367,6 +353,69 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
   `,
 })
 export class LayoutPage {
+  protected readonly NgxsmkCenter = NgxsmkCenter;
+  protected readonly NgxsmkSection = NgxsmkSection;
+  protected readonly customizeNgxsmkSection = `/* Theme <ngxsmk-section> via design tokens */
+ngxsmk-section {
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-space-4: ;
+  --ngxsmk-text-headline-sm-line: ;
+  --ngxsmk-text-headline-sm-size: ;
+}`;
+  protected readonly NgxsmkContainer = NgxsmkContainer;
+  protected readonly customizeNgxsmkContainer = `/* Theme <ngxsmk-container> via design tokens */
+ngxsmk-container {
+  --ngxsmk-space-4: ;
+}`;
+  protected readonly NgxsmkGrid = NgxsmkGrid;
+  protected readonly NgxsmkFlex = NgxsmkFlex;
+  protected readonly NgxsmkHStack = NgxsmkHStack;
+  protected readonly NgxsmkDivider = NgxsmkDivider;
+  protected readonly customizeNgxsmkDivider = `/* Theme <ngxsmk-divider> via design tokens */
+ngxsmk-divider {
+  --ngxsmk-color-outline: ;
+}`;
+  protected readonly NgxsmkAspectRatio = NgxsmkAspectRatio;
+  protected readonly NgxsmkCollapsible = NgxsmkCollapsible;
+  protected readonly customizeNgxsmkCollapsible = `/* Theme <ngxsmk-collapsible> via design tokens */
+ngxsmk-collapsible {
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-on-surface-variant: ;
+  --ngxsmk-color-outline: ;
+  --ngxsmk-color-ring: ;
+  --ngxsmk-color-surface: ;
+  --ngxsmk-color-surface-hover: ;
+  --ngxsmk-duration-normal: ;
+  --ngxsmk-ease-out: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-lg: ;
+  --ngxsmk-space-3: ;
+  --ngxsmk-space-4: ;
+  --ngxsmk-text-body-md-line: ;
+  --ngxsmk-text-body-md-size: ;
+}`;
+  protected readonly NgxsmkResizable = NgxsmkResizable;
+  protected readonly NgxsmkAppShell = NgxsmkAppShell;
+  protected readonly customizeNgxsmkAppShell = `/* Theme <ngxsmk-app-shell> via design tokens */
+ngxsmk-app-shell {
+  --ngxsmk-font-sans: ;
+}`;
+  protected readonly NgxsmkFormLayout = NgxsmkFormLayout;
+  protected readonly customizeNgxsmkFormLayout = `/* Theme <ngxsmk-form-layout> via design tokens */
+ngxsmk-form-layout {
+  --ngxsmk-space-4: ;
+  --ngxsmk-space-6: ;
+}`;
+  protected readonly NgxsmkResizeHandle = NgxsmkResizeHandle;
+  protected readonly customizeNgxsmkResizeHandle = `/* Theme <ngxsmk-resize-handle> via design tokens */
+ngxsmk-resize-handle {
+  --ngxsmk-color-outline: ;
+  --ngxsmk-color-primary: ;
+  --ngxsmk-radius-full: ;
+}`;
+  protected readonly NgxsmkLayout = NgxsmkLayout;
+
   protected readonly codeCenter = `<ngxsmk-center>\n  <div>Perfectly centered</div>\n</ngxsmk-center>`;
 
   protected readonly codeSection = `<ngxsmk-section title="Project overview">\n  <p>Section body content.</p>\n</ngxsmk-section>`;

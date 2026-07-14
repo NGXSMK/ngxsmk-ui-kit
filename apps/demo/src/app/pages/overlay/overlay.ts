@@ -43,8 +43,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Dialog"
       description="Modal dialog on the native <dialog> element with a title, body, and footer actions. Two-way bound open state."
-      [code]="codeDialog"
-    >
+      [code]="codeDialog" [component]="NgxsmkButton">
       <div class="ngxsmk-demo-row">
         <button ngxsmk-button (click)="dialogOpen.set(true)">Open dialog</button>
       </div>
@@ -62,8 +61,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Alert Dialog"
       description="A focused confirmation prompt with confirm/cancel actions and info or destructive variants."
-      [code]="codeAlertDialog"
-    >
+      [code]="codeAlertDialog" [component]="NgxsmkButton">
       <div class="ngxsmk-demo-row">
         <button ngxsmk-button variant="outline" (click)="infoAlertOpen.set(true)">Info alert</button>
         <button ngxsmk-button variant="destructive" (click)="destructiveAlertOpen.set(true)">Destructive alert</button>
@@ -97,8 +95,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Tooltip"
       description="A directive that shows a short hint on hover or focus. Position it on any side of the trigger."
-      [code]="codeTooltip"
-    >
+      [code]="codeTooltip" [component]="NgxsmkButton">
       <div class="ngxsmk-demo-row">
         <button ngxsmk-button variant="outline" [ngxsmkTooltip]="'Appears above'" tooltipPosition="top">Top</button>
         <button ngxsmk-button variant="outline" [ngxsmkTooltip]="'Appears below'" tooltipPosition="bottom">Bottom</button>
@@ -110,8 +107,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Hover Card"
       description="A rich popover that opens on hover or focus of its trigger — ideal for profile and link previews."
-      [code]="codeHoverCard"
-    >
+      [code]="codeHoverCard" [component]="NgxsmkHoverCard" [customize]="customizeNgxsmkHoverCard">
       <ngxsmk-hover-card>
         <button ngxsmkHoverCardTrigger ngxsmk-button variant="ghost">&#64;ada_lovelace</button>
         <div class="ngxsmk-demo-stack">
@@ -124,8 +120,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Sheet"
       description="A panel that slides in from the left, right, or bottom edge. Great for filters, details, and navigation."
-      [code]="codeSheet"
-    >
+      [code]="codeSheet" [component]="NgxsmkButton">
       <div class="ngxsmk-demo-row">
         <button ngxsmk-button variant="outline" (click)="openSheet('left')">Open left</button>
         <button ngxsmk-button variant="outline" (click)="openSheet('right')">Open right</button>
@@ -144,8 +139,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Dropdown Menu"
       description="An actions menu anchored to a trigger button. Closes on selection, outside click, or Escape."
-      [code]="codeDropdown"
-    >
+      [code]="codeDropdown" [component]="NgxsmkDropdownMenu" [customize]="customizeNgxsmkDropdownMenu">
       <ngxsmk-dropdown-menu [items]="menuItems">
         <button ngxsmkDropdownTrigger ngxsmk-button variant="outline">Actions &#9662;</button>
       </ngxsmk-dropdown-menu>
@@ -158,8 +152,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Context Menu"
       description="A menu that opens at the pointer on right-click. Wire it to any surface via its show() method."
-      [code]="codeContextMenu"
-    >
+      [code]="codeContextMenu" [component]="NgxsmkContextMenu" [customize]="customizeNgxsmkContextMenu">
       <div
         class="ngxsmk-sc-surface"
         style="width:100%;padding:2rem;text-align:center;cursor:context-menu"
@@ -173,8 +166,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Lightbox"
       description="A full-screen image viewer with keyboard navigation. Click a thumbnail to open, or drive it via open state."
-      [code]="codeLightbox"
-    >
+      [code]="codeLightbox" [component]="NgxsmkLightbox" [customize]="customizeNgxsmkLightbox">
       <ngxsmk-lightbox [images]="galleryImages" [(open)]="lightboxOpen">
         <div class="ngxsmk-demo-row">
           @for (image of galleryImages; track image.src) {
@@ -191,8 +183,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Imperative Dialog"
       description="An injectable service that opens a native <dialog> programmatically — no template binding required."
-      [code]="codeImperativeDialog"
-    >
+      [code]="codeImperativeDialog" [component]="NgxsmkButton">
       <div class="ngxsmk-demo-row">
         <button ngxsmk-button (click)="openImperative()">Open imperatively</button>
       </div>
@@ -205,8 +196,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Imperative Alert Dialog"
       description="An injectable service that resolves a Promise<boolean> from a confirm prompt — great for quick inline confirmations."
-      [code]="codeImperativeAlertDialog"
-    >
+      [code]="codeImperativeAlertDialog" [component]="NgxsmkButton">
       <div class="ngxsmk-demo-row">
         <button ngxsmk-button variant="destructive" (click)="openImperativeAlert()">Confirm imperatively</button>
       </div>
@@ -219,8 +209,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Spotlight Command Palette (New)"
       description="A premium, keyboard-accessible command menu. Open it by clicking the button below or pressing Ctrl + K (or Cmd + K)."
-      [code]="codeCommandPalette"
-    >
+      [code]="codeCommandPalette" [component]="NgxsmkButton">
       <div class="ngxsmk-demo-row">
         <button ngxsmk-button (click)="palette.open()">Open Palette (Ctrl + K)</button>
       </div>
@@ -245,6 +234,72 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
   `,
 })
 export class OverlayPage {
+  protected readonly NgxsmkButton = NgxsmkButton;
+  protected readonly NgxsmkHoverCard = NgxsmkHoverCard;
+  protected readonly customizeNgxsmkHoverCard = `/* Theme <ngxsmk-hover-card> via design tokens */
+ngxsmk-hover-card {
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-outline: ;
+  --ngxsmk-color-surface: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-lg: ;
+  --ngxsmk-shadow-lg: ;
+  --ngxsmk-space-1: ;
+  --ngxsmk-space-4: ;
+  --ngxsmk-text-body-sm-line: ;
+  --ngxsmk-text-body-sm-size: ;
+  --ngxsmk-z-popover: ;
+}`;
+  protected readonly NgxsmkDropdownMenu = NgxsmkDropdownMenu;
+  protected readonly customizeNgxsmkDropdownMenu = `/* Theme <ngxsmk-dropdown-menu> via design tokens */
+ngxsmk-dropdown-menu {
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-outline: ;
+  --ngxsmk-color-ring: ;
+  --ngxsmk-color-surface: ;
+  --ngxsmk-color-surface-hover: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-md: ;
+  --ngxsmk-radius-sm: ;
+  --ngxsmk-shadow-lg: ;
+  --ngxsmk-space-1: ;
+  --ngxsmk-space-1-5: ;
+  --ngxsmk-space-3: ;
+  --ngxsmk-text-body-sm-line: ;
+  --ngxsmk-text-body-sm-size: ;
+  --ngxsmk-z-dropdown: ;
+}`;
+  protected readonly NgxsmkContextMenu = NgxsmkContextMenu;
+  protected readonly customizeNgxsmkContextMenu = `/* Theme <ngxsmk-context-menu> via design tokens */
+ngxsmk-context-menu {
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-outline: ;
+  --ngxsmk-color-ring: ;
+  --ngxsmk-color-surface: ;
+  --ngxsmk-color-surface-hover: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-md: ;
+  --ngxsmk-radius-sm: ;
+  --ngxsmk-shadow-lg: ;
+  --ngxsmk-space-1: ;
+  --ngxsmk-space-1-5: ;
+  --ngxsmk-space-3: ;
+  --ngxsmk-text-body-sm-line: ;
+  --ngxsmk-text-body-sm-size: ;
+  --ngxsmk-z-popover: ;
+}`;
+  protected readonly NgxsmkLightbox = NgxsmkLightbox;
+  protected readonly customizeNgxsmkLightbox = `/* Theme <ngxsmk-lightbox> via design tokens */
+ngxsmk-lightbox {
+  --ngxsmk-color-lightbox-backdrop: ;
+  --ngxsmk-color-ring: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-md: ;
+  --ngxsmk-space-2: ;
+  --ngxsmk-text-body-sm-size: ;
+  --ngxsmk-z-modal: ;
+}`;
+
   private readonly imperativeDialog = inject(NgxsmkImperativeDialog);
   private readonly imperativeAlert = inject(NgxsmkImperativeAlertDialog);
   private readonly themeService = inject(NgxsmkThemeService);

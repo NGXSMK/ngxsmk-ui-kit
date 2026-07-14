@@ -6,6 +6,7 @@ import {
   input,
   signal,
 } from '@angular/core';
+import { NgxsmkAnimate, NgxsmkMotionState } from '@ngxsmk/core/animation';
 
 @Component({
   selector: 'ngxsmk-hover-card',
@@ -22,6 +23,7 @@ import {
     @if (visible()) {
       <div
         class="ngxsmk-hover-card__popover"
+        [ngxsmkAnimate]="HOVER_CARD_MOTION"
         (mouseenter)="onPopoverEnter()"
         (mouseleave)="onPopoverLeave()"
       >
@@ -30,6 +32,7 @@ import {
     }
   `,
   host: { class: 'ngxsmk-hover-card' },
+  imports: [NgxsmkAnimate],
   styles: `
     :host {
       display: inline-block;
@@ -66,6 +69,13 @@ export class NgxsmkHoverCard {
   readonly closeDelay = input(150);
 
   protected readonly visible = signal(false);
+
+  /** Opacity-only so the popover's `translateX(-50%)` centering is preserved. */
+  protected readonly HOVER_CARD_MOTION: NgxsmkMotionState = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    transition: { duration: 0.15, easing: 'ease-out' },
+  };
 
   private openTimer: ReturnType<typeof setTimeout> | null = null;
   private closeTimer: ReturnType<typeof setTimeout> | null = null;

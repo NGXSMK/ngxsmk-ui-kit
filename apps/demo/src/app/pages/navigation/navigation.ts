@@ -38,8 +38,7 @@ interface AppOutlineItem {
     <showcase-example
       title="Breadcrumb Item"
       description="Trail of links that shows the current location. Wrap items in a nav with an aria-label; the last item renders as the active page."
-      [code]="codeBreadcrumb"
-    >
+      [code]="codeBreadcrumb" [component]="NgxsmkBreadcrumbItem" [customize]="customizeNgxsmkBreadcrumbItem">
       <nav aria-label="Breadcrumb" class="ngxsmk-sc-wrap">
         <ngxsmk-breadcrumb-item href="/">Home</ngxsmk-breadcrumb-item>
         <ngxsmk-breadcrumb-item href="/docs">Docs</ngxsmk-breadcrumb-item>
@@ -50,16 +49,14 @@ interface AppOutlineItem {
     <showcase-example
       title="Outline"
       description="A page outline / table-of-contents with depth-based indentation and an active entry. Pass the items array and the active id."
-      [code]="codeOutline"
-    >
+      [code]="codeOutline" [component]="NgxsmkOutline" [customize]="customizeNgxsmkOutline">
       <ngxsmk-outline [items]="outlineItems" [(activeId)]="outlineActive" />
     </showcase-example>
 
     <showcase-example
       title="Tab Menu"
       description="A segmented tab strip. Drop any clickable elements inside — here a set of role=&quot;tab&quot; buttons."
-      [code]="codeTabMenu"
-    >
+      [code]="codeTabMenu" [component]="NgxsmkTabMenu" [customize]="customizeNgxsmkTabMenu">
       <ngxsmk-tab-menu>
         <button class="ngxsmk-tab-menu__tab" role="tab" [class.ngxsmk-tab-menu__tab--active]="tabActive() === 'overview'" (click)="tabActive.set('overview')">Overview</button>
         <button class="ngxsmk-tab-menu__tab" role="tab" [class.ngxsmk-tab-menu__tab--active]="tabActive() === 'activity'" (click)="tabActive.set('activity')">Activity</button>
@@ -70,8 +67,7 @@ interface AppOutlineItem {
     <showcase-example
       title="Nav Icon"
       description="Compact icon-plus-label entry for vertical toolbars and rail menus. Set active and size as needed."
-      [code]="codeNavIcon"
-    >
+      [code]="codeNavIcon" [component]="NgxsmkNavIcon" [customize]="customizeNgxsmkNavIcon">
       <span class="ngxsmk-sc-wrap">
         <ngxsmk-nav-icon label="Home" [active]="navIconActive() === 'home'" (click)="navIconActive.set('home')">
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg>
@@ -88,8 +84,7 @@ interface AppOutlineItem {
     <showcase-example
       title="Nav Heading Menu"
       description="A label that expands into a stacked list of sub-links. Mark each entry with the nav-item attribute."
-      [code]="codeNavHeadingMenu"
-    >
+      [code]="codeNavHeadingMenu" [component]="NgxsmkNavHeadingMenu" [customize]="customizeNgxsmkNavHeadingMenu">
       <div class="ngxsmk-sc-surface" style="width: 16rem;">
         <ngxsmk-nav-heading-menu>
           Products
@@ -103,8 +98,7 @@ interface AppOutlineItem {
     <showcase-example
       title="Side Nav"
       description="A collapsible vertical navigation shell. Group items under headings and sections; the collapse button is wired to the shell."
-      [code]="codeSideNav"
-    >
+      [code]="codeSideNav" [component]="NgxsmkSideNav" [customize]="customizeNgxsmkSideNav">
       <div style="height: 320px; position: relative; border: 1px solid var(--ngxsmk-color-outline); border-radius: var(--ngxsmk-radius-lg); overflow: hidden;">
         <ngxsmk-side-nav>
           <ngxsmk-side-nav-section>
@@ -126,8 +120,7 @@ interface AppOutlineItem {
     <showcase-example
       title="Top Nav"
       description="A horizontal application bar. Combine a brand heading, active items, and a dropdown menu."
-      [code]="codeTopNav"
-    >
+      [code]="codeTopNav" [component]="NgxsmkTopNav" [customize]="customizeNgxsmkTopNav">
       <div style="height: 200px; position: relative; width: 100%; overflow: hidden; border: 1px solid var(--ngxsmk-color-outline); border-radius: var(--ngxsmk-radius-lg);">
         <ngxsmk-top-nav>
           <ngxsmk-top-nav-heading>Acme</ngxsmk-top-nav-heading>
@@ -143,8 +136,7 @@ interface AppOutlineItem {
     <showcase-example
       title="Mega Menu"
       description="A rich hover-revealed dropdown for the top nav: grouped columns of items plus a featured card. Hover “Products” to reveal it."
-      [code]="codeMegaMenu"
-    >
+      [code]="codeMegaMenu" [component]="NgxsmkTopNav" [customize]="customizeNgxsmkTopNav">
       <div style="height: 280px; position: relative; width: 100%; overflow: hidden; border: 1px solid var(--ngxsmk-color-outline); border-radius: var(--ngxsmk-radius-lg);">
         <ngxsmk-top-nav>
           <ngxsmk-top-nav-heading>Acme</ngxsmk-top-nav-heading>
@@ -172,8 +164,7 @@ interface AppOutlineItem {
     <showcase-example
       title="Mobile Nav"
       description="A slide-in drawer for small screens, opened by a hamburger toggle. The toggle emits an event to flip the open signal."
-      [code]="codeMobileNav"
-    >
+      [code]="codeMobileNav" [component]="NgxsmkMobileNavToggle" [customize]="customizeNgxsmkMobileNavToggle">
       <div class="ngxsmk-sc-surface" style="position: relative; overflow: hidden;">
         <ngxsmk-mobile-nav-toggle (toggled)="mobileNavOpen.set(!mobileNavOpen())" />
         <p class="ngxsmk-demo-hint">Tap the toggle to open the drawer. (Renders as an overlay in a real app.)</p>
@@ -189,8 +180,7 @@ interface AppOutlineItem {
     <showcase-example
       title="Link Provider"
       description="A directive that supplies a shared link template (via the NGXSMK_LINK_PROVIDER token). Drop nav links in and the active entry is highlighted."
-      [code]="codeLinkProvider"
-    >
+      [code]="codeLinkProvider" [component]="NgxsmkLinkProvider">
       <nav class="ngxsmk-sc-wrap" [ngxsmkLinkProvider]="linkTpl" aria-label="Primary">
         @for (item of linkItems; track item.href) {
           <a
@@ -209,8 +199,7 @@ interface AppOutlineItem {
     <showcase-example
       title="Side Nav (composed)"
       description="Build a vertical nav from the side-nav primitives — sections, headings, items, and a collapse button — inside a constrained container."
-      [code]="codeSideNavComposed"
-    >
+      [code]="codeSideNavComposed" [component]="NgxsmkSideNav" [customize]="customizeNgxsmkSideNav">
       <div style="height: 280px; position: relative; overflow: hidden; border: 1px solid var(--ngxsmk-color-outline); border-radius: var(--ngxsmk-radius-lg);">
         <ngxsmk-side-nav>
           <ngxsmk-side-nav-section>
@@ -233,8 +222,7 @@ interface AppOutlineItem {
     <showcase-example
       title="Top Nav (composed)"
       description="Assemble a horizontal bar from top-nav primitives — heading, items, a menu, and mega-menu cards — inside a constrained container."
-      [code]="codeTopNavComposed"
-    >
+      [code]="codeTopNavComposed" [component]="NgxsmkTopNavHeading" [customize]="customizeNgxsmkTopNavHeading">
       <div style="height: 220px; position: relative; width: 100%; overflow: hidden; border: 1px solid var(--ngxsmk-color-outline); border-radius: var(--ngxsmk-radius-lg);">
         <div class="ngxsmk-top-nav">
           <ngxsmk-top-nav-heading>Acme</ngxsmk-top-nav-heading>
@@ -306,6 +294,123 @@ interface AppOutlineItem {
   `,
 })
 export class NavigationPage {
+  protected readonly NgxsmkBreadcrumbItem = NgxsmkBreadcrumbItem;
+  protected readonly customizeNgxsmkBreadcrumbItem = `/* Theme <ngxsmk-breadcrumb-item> via design tokens */
+ngxsmk-breadcrumb-item {
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-on-surface-variant: ;
+  --ngxsmk-color-primary: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-space-2: ;
+  --ngxsmk-text-body-sm-size: ;
+}`;
+  protected readonly NgxsmkOutline = NgxsmkOutline;
+  protected readonly customizeNgxsmkOutline = `/* Theme <ngxsmk-outline> via design tokens */
+ngxsmk-outline {
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-on-surface-variant: ;
+  --ngxsmk-color-primary: ;
+  --ngxsmk-color-surface-hover: ;
+  --ngxsmk-duration-fast: ;
+  --ngxsmk-ease-out: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-sm: ;
+  --ngxsmk-space-1: ;
+  --ngxsmk-space-1-5: ;
+  --ngxsmk-space-3: ;
+  --ngxsmk-text-body-sm-line: ;
+  --ngxsmk-text-body-sm-size: ;
+}`;
+  protected readonly NgxsmkTabMenu = NgxsmkTabMenu;
+  protected readonly customizeNgxsmkTabMenu = `/* Theme <ngxsmk-tab-menu> via design tokens */
+ngxsmk-tab-menu {
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-on-surface-variant: ;
+  --ngxsmk-color-ring: ;
+  --ngxsmk-color-surface: ;
+  --ngxsmk-color-surface-hover: ;
+  --ngxsmk-color-surface-variant: ;
+  --ngxsmk-duration-fast: ;
+  --ngxsmk-ease-out: ;
+  --ngxsmk-radius-lg: ;
+  --ngxsmk-radius-md: ;
+  --ngxsmk-shadow-sm: ;
+  --ngxsmk-space-1: ;
+  --ngxsmk-space-3: ;
+  --ngxsmk-text-label-md-size: ;
+}`;
+  protected readonly NgxsmkNavIcon = NgxsmkNavIcon;
+  protected readonly customizeNgxsmkNavIcon = `/* Theme <ngxsmk-nav-icon> via design tokens */
+ngxsmk-nav-icon {
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-on-surface-variant: ;
+  --ngxsmk-color-primary: ;
+  --ngxsmk-color-surface-hover: ;
+  --ngxsmk-duration-fast: ;
+  --ngxsmk-ease-out: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-md: ;
+  --ngxsmk-space-2: ;
+  --ngxsmk-space-3: ;
+  --ngxsmk-space-4: ;
+  --ngxsmk-text-body-md-size: ;
+  --ngxsmk-text-body-sm-size: ;
+}`;
+  protected readonly NgxsmkNavHeadingMenu = NgxsmkNavHeadingMenu;
+  protected readonly customizeNgxsmkNavHeadingMenu = `/* Theme <ngxsmk-nav-heading-menu> via design tokens */
+ngxsmk-nav-heading-menu {
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-surface-hover: ;
+  --ngxsmk-duration-fast: ;
+  --ngxsmk-ease-out: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-md: ;
+  --ngxsmk-space-1: ;
+  --ngxsmk-space-2: ;
+  --ngxsmk-space-3: ;
+  --ngxsmk-space-4: ;
+  --ngxsmk-text-body-sm-size: ;
+}`;
+  protected readonly NgxsmkSideNav = NgxsmkSideNav;
+  protected readonly customizeNgxsmkSideNav = `/* Theme <ngxsmk-side-nav> via design tokens */
+ngxsmk-side-nav {
+  --ngxsmk-color-outline: ;
+  --ngxsmk-color-surface: ;
+  --ngxsmk-duration-normal: ;
+  --ngxsmk-ease-out: ;
+  --ngxsmk-sidenav-collapsed-width: ;
+  --ngxsmk-sidenav-width: ;
+  --ngxsmk-space-1: ;
+  --ngxsmk-space-4: ;
+}`;
+  protected readonly NgxsmkTopNav = NgxsmkTopNav;
+  protected readonly customizeNgxsmkTopNav = `/* Theme <ngxsmk-top-nav> via design tokens */
+ngxsmk-top-nav {
+  --ngxsmk-color-outline: ;
+  --ngxsmk-color-surface: ;
+  --ngxsmk-container-max-width: ;
+  --ngxsmk-space-2: ;
+  --ngxsmk-space-4: ;
+  --ngxsmk-topnav-height: ;
+}`;
+  protected readonly NgxsmkMobileNavToggle = NgxsmkMobileNavToggle;
+  protected readonly customizeNgxsmkMobileNavToggle = `/* Theme <ngxsmk-mobile-nav-toggle> via design tokens */
+ngxsmk-mobile-nav-toggle {
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-surface-hover: ;
+  --ngxsmk-radius-md: ;
+}`;
+  protected readonly NgxsmkLinkProvider = NgxsmkLinkProvider;
+  protected readonly NgxsmkTopNavHeading = NgxsmkTopNavHeading;
+  protected readonly customizeNgxsmkTopNavHeading = `/* Theme <ngxsmk-top-nav-heading> via design tokens */
+ngxsmk-top-nav-heading {
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-primary: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-space-4: ;
+  --ngxsmk-text-title-md-size: ;
+}`;
+
   protected readonly outlineItems: AppOutlineItem[] = [
     { id: 'intro', label: 'Introduction', depth: 0 },
     { id: 'install', label: 'Installation', depth: 0 },

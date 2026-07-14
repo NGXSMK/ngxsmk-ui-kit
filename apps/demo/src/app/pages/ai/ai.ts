@@ -71,8 +71,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Agent Card"
       description="Compact identity card for an AI agent: name, model, status, and description."
-      [code]="codeAgentCard"
-    >
+      [code]="codeAgentCard" [component]="NgxsmkAgentCard" [customize]="customizeNgxsmkAgentCard">
       <ngxsmk-agent-card [agent]="agent" />
       <ngxsmk-agent-card [agent]="agentIdle" />
     </showcase-example>
@@ -80,8 +79,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Chat Window"
       description="Scrollable message list that renders user, assistant, and system turns."
-      [code]="codeChatWindow"
-    >
+      [code]="codeChatWindow" [component]="NgxsmkChatWindow" [customize]="customizeNgxsmkChatWindow">
       <div class="ngxsmk-sc-surface" style="height:360px;width:100%;max-width:440px">
         <ngxsmk-chat-window [messages]="chatMessages" />
       </div>
@@ -90,8 +88,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Chat Input"
       description="Auto-growing composer with a submit output. Project action buttons via the [actions] slot."
-      [code]="codeChatInput"
-    >
+      [code]="codeChatInput" [component]="NgxsmkChatInput" [customize]="customizeNgxsmkChatInput">
       <div class="ngxsmk-demo-stack" style="width:100%;max-width:440px">
         @if (sentLog().length) {
           <div class="ngxsmk-sc-surface" style="padding:0.5rem 0.75rem;font-size:0.8125rem">
@@ -111,8 +108,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Chat Layout"
       description="Full chat shell with sidebar, header, scrolling body, and a pinned input region."
-      [code]="codeChatLayout"
-    >
+      [code]="codeChatLayout" [component]="NgxsmkChatLayout" [customize]="customizeNgxsmkChatLayout">
       <div class="ngxsmk-sc-surface" style="height:360px;width:100%;max-width:560px">
         <ngxsmk-chat-layout style="height:100%">
           <div sidebar class="ngxsmk-sc-surface" style="padding:0.75rem;width:140px">
@@ -138,8 +134,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Chat Send Button &amp; Dictation Button"
       description="Composer controls: a disabled-aware send button and a dictation toggle."
-      [code]="codeComposerButtons"
-    >
+      [code]="codeComposerButtons" [component]="NgxsmkChatSendButton" [customize]="customizeNgxsmkChatSendButton">
       <div class="ngxsmk-demo-row">
         <ngxsmk-chat-send-button (clicked)="onSendClick()" />
         <ngxsmk-chat-send-button [disabled]="true" />
@@ -150,8 +145,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Chat Tokenized Text"
       description="Renders text with highlighted mentions, tools, and file tokens."
-      [code]="codeTokens"
-    >
+      [code]="codeTokens" [component]="NgxsmkChatComposerTokenElement" [customize]="customizeNgxsmkChatComposerTokenElement">
       <div class="ngxsmk-demo-stack" style="width:100%;max-width:520px">
         <div class="ngxsmk-demo-row">
           <ngxsmk-chat-composer-token-element label="@alice" variant="entity" />
@@ -169,8 +163,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Conversation List"
       description="Selectable list of past conversations with title and last-message preview."
-      [code]="codeConversations"
-    >
+      [code]="codeConversations" [component]="NgxsmkConversationList" [customize]="customizeNgxsmkConversationList">
       <div class="ngxsmk-sc-surface" style="width:100%;max-width:320px">
         <ngxsmk-conversation-list [conversations]="conversations" [(activeId)]="activeConversation" />
       </div>
@@ -179,8 +172,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Composer Drawer"
       description="Slide-up panel for attachments, prompts, and tools. Toggle it open below."
-      [code]="codeDrawer"
-    >
+      [code]="codeDrawer" [component]="NgxsmkChatComposerDrawer" [customize]="customizeNgxsmkChatComposerDrawer">
       <div style="position:relative;padding-top:2.5rem;width:100%;max-width:520px">
         <button type="button" class="ngxsmk-demo-toggle" (click)="drawerOpen.set(!drawerOpen())">
           {{ drawerOpen() ? 'Close composer' : 'Open composer' }}
@@ -204,8 +196,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Streaming Text"
       description="Types out a string character-by-character with a blinking cursor."
-      [code]="codeStreaming"
-    >
+      [code]="codeStreaming" [component]="NgxsmkStreamingText" [customize]="customizeNgxsmkStreamingText">
       <div class="ngxsmk-sc-surface" style="padding:0.75rem;width:100%;max-width:520px;font-size:0.875rem">
         <ngxsmk-streaming-text [text]="streamingText" [speed]="18" />
       </div>
@@ -214,8 +205,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Markdown Viewer"
       description="Renders Markdown content into theme-aware styled HTML."
-      [code]="codeMarkdown"
-    >
+      [code]="codeMarkdown" [component]="NgxsmkMarkdownViewer" [customize]="customizeNgxsmkMarkdownViewer">
       <div class="ngxsmk-sc-surface" style="padding:0.75rem;width:100%;max-width:520px">
         <ngxsmk-markdown-viewer>{{ markdownSample }}</ngxsmk-markdown-viewer>
       </div>
@@ -224,8 +214,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Code Block"
       description="Monospaced, scrollable code surface with a language hint."
-      [code]="codeCodeBlock"
-    >
+      [code]="codeCodeBlock" [component]="NgxsmkCodeBlock" [customize]="customizeNgxsmkCodeBlock">
       <div style="width:100%;max-width:520px">
         <ngxsmk-code-block language="typescript">{{ codeBlockSample }}</ngxsmk-code-block>
       </div>
@@ -234,8 +223,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Diff Viewer"
       description="Line-by-line diff with add/remove highlighting parsed from a unified source."
-      [code]="codeDiff"
-    >
+      [code]="codeDiff" [component]="NgxsmkDiffViewer" [customize]="customizeNgxsmkDiffViewer">
       <div style="width:100%;max-width:520px">
         <ngxsmk-diff-viewer [source]="diffSource" />
       </div>
@@ -244,8 +232,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Citation Viewer"
       description="Source card showing the title, author, and a quoted snippet."
-      [code]="codeCitation"
-    >
+      [code]="codeCitation" [component]="NgxsmkCitationViewer" [customize]="customizeNgxsmkCitationViewer">
       <div style="width:100%;max-width:420px">
         <ngxsmk-citation-viewer
           title="Attention Is All You Need"
@@ -258,8 +245,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Tool Call Viewer"
       description="Shows agent tool invocations, arguments, status, and results."
-      [code]="codeToolCall"
-    >
+      [code]="codeToolCall" [component]="NgxsmkToolCallViewer" [customize]="customizeNgxsmkToolCallViewer">
       <div style="width:100%;max-width:480px">
         <ngxsmk-tool-call-viewer [calls]="toolCalls" />
       </div>
@@ -268,8 +254,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Reasoning Timeline"
       description="Step-by-step trace of the agent's reasoning with optional durations."
-      [code]="codeReasoning"
-    >
+      [code]="codeReasoning" [component]="NgxsmkReasoningTimeline" [customize]="customizeNgxsmkReasoningTimeline">
       <div class="ngxsmk-sc-surface" style="padding:0.75rem;width:100%;max-width:480px">
         <ngxsmk-reasoning-timeline [steps]="reasoningSteps" />
       </div>
@@ -278,8 +263,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Memory Viewer"
       description="Key/value store of what the agent remembers across the session."
-      [code]="codeMemory"
-    >
+      [code]="codeMemory" [component]="NgxsmkMemoryViewer" [customize]="customizeNgxsmkMemoryViewer">
       <div style="width:100%;max-width:420px">
         <ngxsmk-memory-viewer [entries]="memoryEntries" />
       </div>
@@ -288,8 +272,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Voice Input"
       description="Microphone control that toggles recording and surfaces a transcript."
-      [code]="codeVoice"
-    >
+      [code]="codeVoice" [component]="NgxsmkVoiceInput" [customize]="customizeNgxsmkVoiceInput">
       <div class="ngxsmk-demo-row">
         <ngxsmk-voice-input />
       </div>
@@ -298,8 +281,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Audio Player"
       description="Compact progress bar for voice replies and podcast-style playback."
-      [code]="codeAudio"
-    >
+      [code]="codeAudio" [component]="NgxsmkAudioPlayer" [customize]="customizeNgxsmkAudioPlayer">
       <div style="width:100%;max-width:420px">
         <ngxsmk-audio-player
           label="Voice reply"
@@ -313,8 +295,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Image Viewer"
       description="Image preview that expands to a fullscreen lightbox on click."
-      [code]="codeImage"
-    >
+      [code]="codeImage" [component]="NgxsmkImageViewer" [customize]="customizeNgxsmkImageViewer">
       <div style="width:100%;max-width:360px">
         <ngxsmk-image-viewer src="https://picsum.photos/seed/ngxsmk/600/400" alt="Sample generated image" />
       </div>
@@ -323,8 +304,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Chat Message"
       description="Container that lays out a single turn by role (user / assistant / system), aligning the avatar and body accordingly."
-      [code]="codeChatMessage"
-    >
+      [code]="codeChatMessage" [component]="NgxsmkChatMessage" [customize]="customizeNgxsmkChatMessage">
       <div style="width:100%;max-width:480px" class="ngxsmk-sc-surface">
         <ngxsmk-chat-message [message]="msgUser">
           <div class="ngxsmk-msg-avatar" aria-hidden="true">JS</div>
@@ -346,8 +326,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Chat Message Bubble"
       description="The speech bubble that wraps message content. User bubbles are emphasized via the ancestor role."
-      [code]="codeChatMessageBubble"
-    >
+      [code]="codeChatMessageBubble" [component]="NgxsmkChatMessage" [customize]="customizeNgxsmkChatMessage">
       <div style="width:100%;max-width:480px" class="ngxsmk-sc-col">
         <ngxsmk-chat-message [message]="msgUser">
           <ngxsmk-chat-message-bubble>{{ msgUser.content }}</ngxsmk-chat-message-bubble>
@@ -361,8 +340,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Chat Message Metadata"
       description="Renders a compact timestamp (and any status) beneath a message bubble."
-      [code]="codeChatMessageMetadata"
-    >
+      [code]="codeChatMessageMetadata" [component]="NgxsmkChatMessageMetadata" [customize]="customizeNgxsmkChatMessageMetadata">
       <div class="ngxsmk-demo-stack" style="width:100%;max-width:360px">
         <ngxsmk-chat-message-metadata [timestamp]="msgUser.timestamp" />
         <ngxsmk-chat-message-metadata [timestamp]="msgAssistant.timestamp" />
@@ -372,16 +350,14 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Chat System Message"
       description="Centered, low-emphasis pill for system notices like connection state or mode changes."
-      [code]="codeChatSystemMessage"
-    >
+      [code]="codeChatSystemMessage" [component]="NgxsmkChatSystemMessage" [customize]="customizeNgxsmkChatSystemMessage">
       <ngxsmk-chat-system-message [message]="systemNotice" />
     </showcase-example>
 
     <showcase-example
       title="Prompt Carousel (New)"
       description="A scrollable horizontal list of pre-configured prompt suggestion cards with customizable color themes."
-      [code]="codePromptCarousel"
-    >
+      [code]="codePromptCarousel" [component]="NgxsmkPromptCarousel" [customize]="customizeNgxsmkPromptCarousel">
       <ngxsmk-prompt-carousel
         [prompts]="promptItemsList"
         (selected)="onPromptSelected($event)"
@@ -426,6 +402,289 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
   `,
 })
 export class AiPage {
+  protected readonly NgxsmkAgentCard = NgxsmkAgentCard;
+  protected readonly customizeNgxsmkAgentCard = `/* Theme <ngxsmk-agent-card> via design tokens */
+ngxsmk-agent-card {
+  --ngxsmk-color-error: ;
+  --ngxsmk-color-on-primary-container: ;
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-on-surface-variant: ;
+  --ngxsmk-color-outline-variant: ;
+  --ngxsmk-color-primary-container: ;
+  --ngxsmk-color-success: ;
+  --ngxsmk-color-surface: ;
+  --ngxsmk-color-warning: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-full: ;
+  --ngxsmk-radius-lg: ;
+  --ngxsmk-space-2: ;
+  --ngxsmk-space-3: ;
+  --ngxsmk-space-4: ;
+}`;
+  protected readonly NgxsmkChatWindow = NgxsmkChatWindow;
+  protected readonly customizeNgxsmkChatWindow = `/* Theme <ngxsmk-chat-window> via design tokens */
+ngxsmk-chat-window {
+  --ngxsmk-font-sans: ;
+  --ngxsmk-space-3: ;
+  --ngxsmk-space-4: ;
+}`;
+  protected readonly NgxsmkChatInput = NgxsmkChatInput;
+  protected readonly customizeNgxsmkChatInput = `/* Theme <ngxsmk-chat-input> via design tokens */
+ngxsmk-chat-input {
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-outline: ;
+  --ngxsmk-color-outline-variant: ;
+  --ngxsmk-color-primary: ;
+  --ngxsmk-color-surface: ;
+  --ngxsmk-color-surface-container: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-lg: ;
+  --ngxsmk-space-2: ;
+  --ngxsmk-space-3: ;
+}`;
+  protected readonly NgxsmkChatLayout = NgxsmkChatLayout;
+  protected readonly customizeNgxsmkChatLayout = `/* Theme <ngxsmk-chat-layout> via design tokens */
+ngxsmk-chat-layout {
+  --ngxsmk-color-surface: ;
+  --ngxsmk-font-sans: ;
+}`;
+  protected readonly NgxsmkChatSendButton = NgxsmkChatSendButton;
+  protected readonly customizeNgxsmkChatSendButton = `/* Theme <ngxsmk-chat-send-button> via design tokens */
+ngxsmk-chat-send-button {
+  --ngxsmk-color-on-primary: ;
+  --ngxsmk-color-primary: ;
+  --ngxsmk-duration-fast: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-full: ;
+  --ngxsmk-space-2: ;
+  --ngxsmk-space-4: ;
+}`;
+  protected readonly NgxsmkChatComposerTokenElement = NgxsmkChatComposerTokenElement;
+  protected readonly customizeNgxsmkChatComposerTokenElement = `/* Theme <ngxsmk-chat-composer-token-element> via design tokens */
+ngxsmk-chat-composer-token-element {
+  --ngxsmk-color-on-primary-container: ;
+  --ngxsmk-color-on-surface-variant: ;
+  --ngxsmk-color-on-tertiary-container: ;
+  --ngxsmk-color-primary-container: ;
+  --ngxsmk-color-surface-variant: ;
+  --ngxsmk-color-tertiary-container: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-sm: ;
+  --ngxsmk-space-0-5: ;
+  --ngxsmk-space-2: ;
+}`;
+  protected readonly NgxsmkConversationList = NgxsmkConversationList;
+  protected readonly customizeNgxsmkConversationList = `/* Theme <ngxsmk-conversation-list> via design tokens */
+ngxsmk-conversation-list {
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-on-surface-variant: ;
+  --ngxsmk-color-primary-container: ;
+  --ngxsmk-color-surface-hover: ;
+  --ngxsmk-duration-fast: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-md: ;
+  --ngxsmk-space-1: ;
+  --ngxsmk-space-3: ;
+  --ngxsmk-space-4: ;
+}`;
+  protected readonly NgxsmkChatComposerDrawer = NgxsmkChatComposerDrawer;
+  protected readonly customizeNgxsmkChatComposerDrawer = `/* Theme <ngxsmk-chat-composer-drawer> via design tokens */
+ngxsmk-chat-composer-drawer {
+  --ngxsmk-color-backdrop: ;
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-on-surface-variant: ;
+  --ngxsmk-color-outline-variant: ;
+  --ngxsmk-color-ring: ;
+  --ngxsmk-color-surface: ;
+  --ngxsmk-color-surface-hover: ;
+  --ngxsmk-composer-drawer-height: ;
+  --ngxsmk-ease-out: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-lg: ;
+  --ngxsmk-radius-md: ;
+  --ngxsmk-shadow-xl: ;
+  --ngxsmk-space-3: ;
+  --ngxsmk-space-6: ;
+  --ngxsmk-text-body-md-line: ;
+  --ngxsmk-text-body-md-size: ;
+  --ngxsmk-z-modal: ;
+}`;
+  protected readonly NgxsmkStreamingText = NgxsmkStreamingText;
+  protected readonly customizeNgxsmkStreamingText = `/* Theme <ngxsmk-streaming-text> via design tokens */
+ngxsmk-streaming-text {
+  --ngxsmk-color-primary: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-space-1: ;
+}`;
+  protected readonly NgxsmkMarkdownViewer = NgxsmkMarkdownViewer;
+  protected readonly customizeNgxsmkMarkdownViewer = `/* Theme <ngxsmk-markdown-viewer> via design tokens */
+ngxsmk-markdown-viewer {
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-on-surface-variant: ;
+  --ngxsmk-color-outline-variant: ;
+  --ngxsmk-color-primary: ;
+  --ngxsmk-color-surface-container: ;
+  --ngxsmk-color-surface-variant: ;
+  --ngxsmk-font-mono: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-md: ;
+  --ngxsmk-radius-sm: ;
+  --ngxsmk-space-2: ;
+  --ngxsmk-space-3: ;
+}`;
+  protected readonly NgxsmkCodeBlock = NgxsmkCodeBlock;
+  protected readonly customizeNgxsmkCodeBlock = `/* Theme <ngxsmk-code-block> via design tokens */
+ngxsmk-code-block {
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-surface-variant: ;
+  --ngxsmk-font-mono: ;
+  --ngxsmk-radius-md: ;
+  --ngxsmk-space-4: ;
+}`;
+  protected readonly NgxsmkDiffViewer = NgxsmkDiffViewer;
+  protected readonly customizeNgxsmkDiffViewer = `/* Theme <ngxsmk-diff-viewer> via design tokens */
+ngxsmk-diff-viewer {
+  --ngxsmk-color-error: ;
+  --ngxsmk-color-outline: ;
+  --ngxsmk-color-outline-variant: ;
+  --ngxsmk-color-success: ;
+  --ngxsmk-font-mono: ;
+  --ngxsmk-radius-md: ;
+  --ngxsmk-space-0-5: ;
+  --ngxsmk-space-3: ;
+}`;
+  protected readonly NgxsmkCitationViewer = NgxsmkCitationViewer;
+  protected readonly customizeNgxsmkCitationViewer = `/* Theme <ngxsmk-citation-viewer> via design tokens */
+ngxsmk-citation-viewer {
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-on-surface-variant: ;
+  --ngxsmk-color-primary: ;
+  --ngxsmk-color-surface-container: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-md: ;
+  --ngxsmk-space-1: ;
+  --ngxsmk-space-3: ;
+}`;
+  protected readonly NgxsmkToolCallViewer = NgxsmkToolCallViewer;
+  protected readonly customizeNgxsmkToolCallViewer = `/* Theme <ngxsmk-tool-call-viewer> via design tokens */
+ngxsmk-tool-call-viewer {
+  --ngxsmk-color-error: ;
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-on-surface-variant: ;
+  --ngxsmk-color-primary: ;
+  --ngxsmk-color-success: ;
+  --ngxsmk-color-surface-variant: ;
+  --ngxsmk-font-mono: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-md: ;
+  --ngxsmk-space-1: ;
+  --ngxsmk-space-2: ;
+  --ngxsmk-space-3: ;
+}`;
+  protected readonly NgxsmkReasoningTimeline = NgxsmkReasoningTimeline;
+  protected readonly customizeNgxsmkReasoningTimeline = `/* Theme <ngxsmk-reasoning-timeline> via design tokens */
+ngxsmk-reasoning-timeline {
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-on-surface-variant: ;
+  --ngxsmk-color-outline: ;
+  --ngxsmk-color-primary: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-full: ;
+  --ngxsmk-space-1: ;
+  --ngxsmk-space-1-5: ;
+  --ngxsmk-space-2: ;
+  --ngxsmk-space-3: ;
+}`;
+  protected readonly NgxsmkMemoryViewer = NgxsmkMemoryViewer;
+  protected readonly customizeNgxsmkMemoryViewer = `/* Theme <ngxsmk-memory-viewer> via design tokens */
+ngxsmk-memory-viewer {
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-primary: ;
+  --ngxsmk-color-surface-variant: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-md: ;
+  --ngxsmk-space-2: ;
+  --ngxsmk-space-3: ;
+}`;
+  protected readonly NgxsmkVoiceInput = NgxsmkVoiceInput;
+  protected readonly customizeNgxsmkVoiceInput = `/* Theme <ngxsmk-voice-input> via design tokens */
+ngxsmk-voice-input {
+  --ngxsmk-color-error-container: ;
+  --ngxsmk-color-on-error-container: ;
+  --ngxsmk-color-on-surface-variant: ;
+  --ngxsmk-color-surface-hover: ;
+  --ngxsmk-color-surface-variant: ;
+  --ngxsmk-duration-fast: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-full: ;
+  --ngxsmk-space-2: ;
+}`;
+  protected readonly NgxsmkAudioPlayer = NgxsmkAudioPlayer;
+  protected readonly customizeNgxsmkAudioPlayer = `/* Theme <ngxsmk-audio-player> via design tokens */
+ngxsmk-audio-player {
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-on-surface-variant: ;
+  --ngxsmk-color-primary: ;
+  --ngxsmk-color-surface-variant: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-md: ;
+  --ngxsmk-space-2: ;
+  --ngxsmk-space-3: ;
+}`;
+  protected readonly NgxsmkImageViewer = NgxsmkImageViewer;
+  protected readonly customizeNgxsmkImageViewer = `/* Theme <ngxsmk-image-viewer> via design tokens */
+ngxsmk-image-viewer {
+  --ngxsmk-duration-fast: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-md: ;
+  --ngxsmk-z-modal: ;
+}`;
+  protected readonly NgxsmkChatMessage = NgxsmkChatMessage;
+  protected readonly customizeNgxsmkChatMessage = `/* Theme <ngxsmk-chat-message> via design tokens */
+ngxsmk-chat-message {
+  --ngxsmk-font-sans: ;
+  --ngxsmk-space-3: ;
+  --ngxsmk-space-4: ;
+}`;
+  protected readonly NgxsmkChatMessageMetadata = NgxsmkChatMessageMetadata;
+  protected readonly customizeNgxsmkChatMessageMetadata = `/* Theme <ngxsmk-chat-message-metadata> via design tokens */
+ngxsmk-chat-message-metadata {
+  --ngxsmk-color-on-surface-variant: ;
+  --ngxsmk-space-1: ;
+  --ngxsmk-text-body-xs-size: ;
+}`;
+  protected readonly NgxsmkChatSystemMessage = NgxsmkChatSystemMessage;
+  protected readonly customizeNgxsmkChatSystemMessage = `/* Theme <ngxsmk-chat-system-message> via design tokens */
+ngxsmk-chat-system-message {
+  --ngxsmk-color-on-surface-variant: ;
+  --ngxsmk-color-surface-variant: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-full: ;
+  --ngxsmk-space-1: ;
+  --ngxsmk-space-3: ;
+}`;
+  protected readonly NgxsmkPromptCarousel = NgxsmkPromptCarousel;
+  protected readonly customizeNgxsmkPromptCarousel = `/* Theme <ngxsmk-prompt-carousel> via design tokens */
+ngxsmk-prompt-carousel {
+  --ngxsmk-color-background: ;
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-on-surface-variant: ;
+  --ngxsmk-color-outline: ;
+  --ngxsmk-color-outline-strong: ;
+  --ngxsmk-color-primary: ;
+  --ngxsmk-color-primary-hover: ;
+  --ngxsmk-color-surface: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-lg: ;
+  --ngxsmk-shadow-md: ;
+  --ngxsmk-shadow-sm: ;
+  --ngxsmk-space-1: ;
+  --ngxsmk-space-12: ;
+  --ngxsmk-space-2: ;
+  --ngxsmk-space-4: ;
+  --ngxsmk-space-6: ;
+}`;
+
   protected readonly draft = signal('');
   protected readonly sentLog = signal('');
   protected readonly dictating = signal(false);

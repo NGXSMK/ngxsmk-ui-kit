@@ -63,8 +63,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Tabs"
       description="A labeled, keyboard-navigable tab interface. The active panel is wired to a signal via two-way binding."
-      [code]="codeTabs"
-    >
+      [code]="codeTabs" [component]="NgxsmkTabs" [customize]="customizeNgxsmkTabs">
       <div class="ngxsmk-sc-wrap">
         <ngxsmk-tabs [(value)]="activeTab">
           <ngxsmk-tab value="overview" label="Overview">The overview panel summarizes account health and recent activity.</ngxsmk-tab>
@@ -77,8 +76,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Accordion"
       description="A vertically stacked disclosure widget. Items expand independently to reveal supporting detail."
-      [code]="codeAccordion"
-    >
+      [code]="codeAccordion" [component]="NgxsmkAccordion" [customize]="customizeNgxsmkAccordion">
       <div class="ngxsmk-sc-wrap">
         <ngxsmk-accordion>
           <ngxsmk-accordion-item label="What is NGXSMK?" value="q1">
@@ -97,8 +95,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Avatar"
       description="User imagery with an automatic initials fallback. Combine with a status dot to convey presence."
-      [code]="codeAvatar"
-    >
+      [code]="codeAvatar" [component]="NgxsmkAvatar" [customize]="customizeNgxsmkAvatar">
       <div class="ngxsmk-sc-col">
         <div class="ngxsmk-sc-wrap">
           <ngxsmk-avatar src="https://i.pravatar.cc/120?img=12" alt="Ava Chen" size="lg" />
@@ -136,8 +133,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Tag"
       description="Compact, non-interactive labels for categorizing and filtering content."
-      [code]="codeTag"
-    >
+      [code]="codeTag" [component]="NgxsmkTag" [customize]="customizeNgxsmkTag">
       <div class="ngxsmk-sc-wrap">
         <ngxsmk-tag>angular</ngxsmk-tag>
         <ngxsmk-tag variant="primary">signals</ngxsmk-tag>
@@ -151,8 +147,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Chip"
       description="A removable token, ideal for applied filters and selected values."
-      [code]="codeChip"
-    >
+      [code]="codeChip" [component]="NgxsmkChip" [customize]="customizeNgxsmkChip">
       <div class="ngxsmk-sc-wrap">
         <ngxsmk-chip>TypeScript</ngxsmk-chip>
         <ngxsmk-chip>Angular</ngxsmk-chip>
@@ -164,16 +159,14 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Table"
       description="A simple, lightweight table driven by column and row definitions."
-      [code]="codeTable"
-    >
+      [code]="codeTable" [component]="NgxsmkTable" [customize]="customizeNgxsmkTable">
       <ngxsmk-table [columns]="memberColumns" [rows]="memberRows" [striped]="true" />
     </showcase-example>
 
     <showcase-example
       title="Data Table"
       description="A paginated, sortable data table for larger datasets."
-      [code]="codeDataTable"
-    >
+      [code]="codeDataTable" [component]="NgxsmkDataTable" [customize]="customizeNgxsmkDataTable">
       <ngxsmk-data-table
         [columns]="orderColumns"
         [rows]="orderRows"
@@ -186,8 +179,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="List"
       description="A vertical list of items, optionally divided or linkable."
-      [code]="codeList"
-    >
+      [code]="codeList" [component]="NgxsmkList" [customize]="customizeNgxsmkList">
       <div class="ngxsmk-sc-col" style="width:100%;max-width:28rem">
         <ngxsmk-list [divided]="true">
           <ngxsmk-list-item variant="active">Inbox</ngxsmk-list-item>
@@ -201,8 +193,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Metadata List"
       description="A definition-style list pairing labels with their values."
-      [code]="codeMetadata"
-    >
+      [code]="codeMetadata" [component]="NgxsmkMetadataList" [customize]="customizeNgxsmkMetadataList">
       <div class="ngxsmk-sc-wrap">
         <ngxsmk-metadata-list>
           <ngxsmk-metadata-list-item><dt>Created</dt><dd>Jul 13, 2026</dd></ngxsmk-metadata-list-item>
@@ -216,8 +207,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Overflow List"
       description="Collapses surplus items behind a single 'more' affordance that expands on demand."
-      [code]="codeOverflow"
-    >
+      [code]="codeOverflow" [component]="NgxsmkOverflowList" [customize]="customizeNgxsmkOverflowList">
       <div class="ngxsmk-sc-wrap">
         <ngxsmk-overflow-list [max]="3" [total]="6">
           <span item>Design</span>
@@ -233,8 +223,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Stat"
       description="A compact metric with optional trend indicator and icon."
-      [code]="codeStat"
-    >
+      [code]="codeStat" [component]="NgxsmkStat" [customize]="customizeNgxsmkStat">
       <div class="ngxsmk-sc-grid ngxsmk-sc-grid--3">
         <ngxsmk-stat label="Active users" value="1,284" trend="up" />
         <ngxsmk-stat label="Churn" value="2.3%" trend="down" />
@@ -245,8 +234,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Status Dot"
       description="A color-coded presence indicator for online, away, busy, and offline states."
-      [code]="codeStatusDot"
-    >
+      [code]="codeStatusDot" [component]="NgxsmkStatusDot" [customize]="customizeNgxsmkStatusDot">
       <div class="ngxsmk-sc-wrap">
         <span class="ngxsmk-demo-row"><ngxsmk-status-dot variant="online" /> Online</span>
         <span class="ngxsmk-demo-row"><ngxsmk-status-dot variant="away" /> Away</span>
@@ -258,8 +246,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Card"
       description="A content container composed from header, title, description, content, and footer sub-directives."
-      [code]="codeCard"
-    >
+      [code]="codeCard" [component]="NgxsmkCard" [customize]="customizeNgxsmkCard">
       <div class="ngxsmk-sc-wrap">
         <ngxsmk-card style="max-width:24rem">
           <div ngxsmkCardHeader>
@@ -282,8 +269,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Table (composed)"
       description="Build a table from the cell primitives â€” header cells, rows, and cells â€” for full layout control."
-      [code]="codeTableComposed"
-    >
+      [code]="codeTableComposed" [component]="NgxsmkTableRow">
       <div class="ngxsmk-sc-wrap">
         <table class="ngxsmk-table" style="width:100%;max-width:32rem">
           <thead>
@@ -316,6 +302,205 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
   `,
 })
 export class DataDisplayPage {
+  protected readonly NgxsmkTabs = NgxsmkTabs;
+  protected readonly customizeNgxsmkTabs = `/* Theme <ngxsmk-tabs> via design tokens */
+ngxsmk-tabs {
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-on-surface-variant: ;
+  --ngxsmk-color-outline: ;
+  --ngxsmk-color-primary: ;
+  --ngxsmk-color-ring: ;
+  --ngxsmk-duration-fast: ;
+  --ngxsmk-ease-out: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-sm: ;
+  --ngxsmk-space-1: ;
+  --ngxsmk-space-2: ;
+  --ngxsmk-space-4: ;
+  --ngxsmk-text-body-md-line: ;
+  --ngxsmk-text-body-md-size: ;
+  --ngxsmk-text-label-lg-line: ;
+  --ngxsmk-text-label-lg-size: ;
+  --ngxsmk-text-label-lg-weight: ;
+}`;
+  protected readonly NgxsmkAccordion = NgxsmkAccordion;
+  protected readonly customizeNgxsmkAccordion = `/* Theme <ngxsmk-accordion> via design tokens */
+ngxsmk-accordion {
+  --ngxsmk-accordion-bg: ;
+  --ngxsmk-accordion-border-color: ;
+  --ngxsmk-accordion-radius: ;
+  --ngxsmk-color-outline: ;
+  --ngxsmk-color-surface: ;
+  --ngxsmk-radius-lg: ;
+}`;
+  protected readonly NgxsmkAvatar = NgxsmkAvatar;
+  protected readonly customizeNgxsmkAvatar = `/* Theme <ngxsmk-avatar> via design tokens */
+ngxsmk-avatar {
+  --ngxsmk-color-on-primary-container: ;
+  --ngxsmk-color-primary-container: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-full: ;
+  --ngxsmk-radius-lg: ;
+}`;
+  protected readonly NgxsmkTag = NgxsmkTag;
+  protected readonly customizeNgxsmkTag = `/* Theme <ngxsmk-tag> via design tokens */
+ngxsmk-tag {
+  --ngxsmk-color-error-container: ;
+  --ngxsmk-color-info-container: ;
+  --ngxsmk-color-on-error-container: ;
+  --ngxsmk-color-on-info-container: ;
+  --ngxsmk-color-on-primary-container: ;
+  --ngxsmk-color-on-success-container: ;
+  --ngxsmk-color-on-surface-variant: ;
+  --ngxsmk-color-on-warning-container: ;
+  --ngxsmk-color-primary-container: ;
+  --ngxsmk-color-success-container: ;
+  --ngxsmk-color-surface-variant: ;
+  --ngxsmk-color-warning-container: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-sm: ;
+  --ngxsmk-space-0-5: ;
+  --ngxsmk-space-1: ;
+  --ngxsmk-space-2: ;
+  --ngxsmk-text-label-md-line: ;
+  --ngxsmk-text-label-md-size: ;
+  --ngxsmk-text-label-md-weight: ;
+}`;
+  protected readonly NgxsmkChip = NgxsmkChip;
+  protected readonly customizeNgxsmkChip = `/* Theme <ngxsmk-chip> via design tokens */
+ngxsmk-chip {
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-on-surface-variant: ;
+  --ngxsmk-color-outline: ;
+  --ngxsmk-color-ring: ;
+  --ngxsmk-color-surface-variant: ;
+  --ngxsmk-duration-fast: ;
+  --ngxsmk-ease-out: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-full: ;
+  --ngxsmk-space-0-5: ;
+  --ngxsmk-space-1: ;
+  --ngxsmk-space-2: ;
+  --ngxsmk-text-label-md-line: ;
+  --ngxsmk-text-label-md-size: ;
+  --ngxsmk-text-label-md-weight: ;
+}`;
+  protected readonly NgxsmkTable = NgxsmkTable;
+  protected readonly customizeNgxsmkTable = `/* Theme <ngxsmk-table> via design tokens */
+ngxsmk-table {
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-on-surface-variant: ;
+  --ngxsmk-color-outline: ;
+  --ngxsmk-color-outline-strong: ;
+  --ngxsmk-color-primary: ;
+  --ngxsmk-color-ring: ;
+  --ngxsmk-color-surface-variant: ;
+  --ngxsmk-duration-fast: ;
+  --ngxsmk-ease-out: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-sm: ;
+  --ngxsmk-space-2: ;
+  --ngxsmk-space-3: ;
+  --ngxsmk-space-4: ;
+  --ngxsmk-text-body-sm-line: ;
+  --ngxsmk-text-body-sm-size: ;
+}`;
+  protected readonly NgxsmkDataTable = NgxsmkDataTable;
+  protected readonly customizeNgxsmkDataTable = `/* Theme <ngxsmk-data-table> via design tokens */
+ngxsmk-data-table {
+  --ngxsmk-color-on-primary: ;
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-on-surface-variant: ;
+  --ngxsmk-color-outline: ;
+  --ngxsmk-color-primary: ;
+  --ngxsmk-color-ring: ;
+  --ngxsmk-color-surface-hover: ;
+  --ngxsmk-duration-fast: ;
+  --ngxsmk-ease-out: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-sm: ;
+  --ngxsmk-space-1: ;
+  --ngxsmk-space-3: ;
+  --ngxsmk-space-4: ;
+  --ngxsmk-text-body-sm-line: ;
+  --ngxsmk-text-body-sm-size: ;
+}`;
+  protected readonly NgxsmkList = NgxsmkList;
+  protected readonly customizeNgxsmkList = `/* Theme <ngxsmk-list> via design tokens */
+ngxsmk-list {
+  --ngxsmk-color-outline: ;
+  --ngxsmk-color-surface: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-lg: ;
+}`;
+  protected readonly NgxsmkMetadataList = NgxsmkMetadataList;
+  protected readonly customizeNgxsmkMetadataList = `/* Theme <ngxsmk-metadata-list> via design tokens */
+ngxsmk-metadata-list {
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-on-surface-variant: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-space-2: ;
+  --ngxsmk-space-4: ;
+  --ngxsmk-text-body-md-size: ;
+  --ngxsmk-text-body-sm-size: ;
+}`;
+  protected readonly NgxsmkOverflowList = NgxsmkOverflowList;
+  protected readonly customizeNgxsmkOverflowList = `/* Theme <ngxsmk-overflow-list> via design tokens */
+ngxsmk-overflow-list {
+  --ngxsmk-color-on-surface-variant: ;
+  --ngxsmk-color-outline: ;
+  --ngxsmk-color-surface-variant: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-full: ;
+  --ngxsmk-space-0-5: ;
+  --ngxsmk-space-2: ;
+  --ngxsmk-text-body-sm-size: ;
+}`;
+  protected readonly NgxsmkStat = NgxsmkStat;
+  protected readonly customizeNgxsmkStat = `/* Theme <ngxsmk-stat> via design tokens */
+ngxsmk-stat {
+  --ngxsmk-color-error: ;
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-on-surface-variant: ;
+  --ngxsmk-color-outline: ;
+  --ngxsmk-color-success: ;
+  --ngxsmk-color-surface: ;
+  --ngxsmk-color-surface-variant: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-lg: ;
+  --ngxsmk-radius-md: ;
+  --ngxsmk-space-3: ;
+  --ngxsmk-space-4: ;
+  --ngxsmk-text-body-sm-line: ;
+  --ngxsmk-text-body-sm-size: ;
+  --ngxsmk-text-headline-lg-line: ;
+  --ngxsmk-text-headline-lg-size: ;
+  --ngxsmk-text-headline-lg-weight: ;
+}`;
+  protected readonly NgxsmkStatusDot = NgxsmkStatusDot;
+  protected readonly customizeNgxsmkStatusDot = `/* Theme <ngxsmk-status-dot> via design tokens */
+ngxsmk-status-dot {
+  --ngxsmk-radius-full: ;
+}`;
+  protected readonly NgxsmkCard = NgxsmkCard;
+  protected readonly customizeNgxsmkCard = `/* Theme <ngxsmk-card> via design tokens */
+ngxsmk-card {
+  --ngxsmk-card-bg: ;
+  --ngxsmk-card-border-color: ;
+  --ngxsmk-card-radius: ;
+  --ngxsmk-card-shadow: ;
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-outline: ;
+  --ngxsmk-color-outline-strong: ;
+  --ngxsmk-color-surface: ;
+  --ngxsmk-duration-normal: ;
+  --ngxsmk-ease-out: ;
+  --ngxsmk-radius-xl: ;
+  --ngxsmk-shadow-md: ;
+  --ngxsmk-shadow-sm: ;
+}`;
+  protected readonly NgxsmkTableRow = NgxsmkTableRow;
+
   protected readonly activeTab = signal('overview');
 
   protected readonly memberColumns = [
