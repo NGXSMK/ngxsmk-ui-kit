@@ -34,7 +34,7 @@ jobs:
         run: npm run build:demo -- --base-href /ngxsmk-ui-kit/
 
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: dist/demo/browser
 
