@@ -12,7 +12,8 @@
     "paths": {
       "@ngxsmk/cdk": ["../../dist/ngxsmk/cdk"],
       "@ngxsmk/theme": ["../../dist/ngxsmk/theme"]
-    }
+    },
+    "stripInternal": true
   },
   "include": ["**/*.ts"],
   "exclude": ["**/*.spec.ts"]

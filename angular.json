@@ -161,7 +161,9 @@
               "packages/core/styles/button.css",
               "node_modules/intl-tel-input/build/css/intlTelInput.css",
               "apps/demo/src/styles.scss"
-            ]
+            ],
+            "optimization": true,
+            "sourceMap": false
           },
           "configurations": {
             "production": {
@@ -177,7 +179,18 @@
                   "maximumError": "50kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "optimization": {
+                "scripts": true,
+                "styles": {
+                  "minify": true,
+                  "inlineCritical": true
+                },
+                "fonts": true
+              },
+              "namedChunks": false,
+              "extractLicenses": true,
+              "serviceWorker": true
             },
             "development": {
               "optimization": false,

@@ -21,12 +21,19 @@
     "target": "ES2022",
     "module": "esnext",
     "moduleResolution": "bundler",
-    "useDefineForClassFields": false
+    "useDefineForClassFields": false,
+    "noEmitOnError": false,
+    "stripInternal": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
-    "strictInputAccessModifiers": true
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true,
+    "fullTemplateTypeCheck": true,
+    "extendedDiagnostics": {
+      "defaultCategory": "error"
+    }
   },
   "files": [],
   "references": [
