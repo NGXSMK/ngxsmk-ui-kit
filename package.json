@@ -1,6 +1,18 @@
 {
   "name": "ngxsmk-ui-kit",
-  "version": "1.2.0",
+  "version": "1.3.0",
+  "description": "NGXSMK — an Angular-first, open-source UI ecosystem: signals-native, zoneless components and a universal token engine.",
+  "keywords": [
+    "angular",
+    "ui-kit",
+    "design-system",
+    "components",
+    "signals",
+    "zoneless",
+    "theming",
+    "dark-mode",
+    "typescript"
+  ],
   "scripts": {
     "ng": "ng",
     "start": "ng serve demo",

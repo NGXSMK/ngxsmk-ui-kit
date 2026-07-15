@@ -146,7 +146,7 @@ function handleRequest(message: any): any {
         },
         serverInfo: {
           name: 'ngxsmk-mcp-server',
-          version: '1.2.0',
+          version: '1.3.0',
         },
       },
     };

@@ -2,7 +2,7 @@ import { Rule, Tree, SchematicContext } from '@angular-devkit/schematics';
 
 export interface NgAddSchema {
   project?: string;
-  theme?: 'astryx' | 'violet' | 'neutral' | 'emerald' | 'rose';
+  theme?: 'violet' | 'neutral' | 'emerald' | 'rose';
 }
 
 export function ngAdd(_options: NgAddSchema): Rule {

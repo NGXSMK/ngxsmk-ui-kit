@@ -1,30 +1,5 @@
 import { ThemeConfig } from './types';
 
-/**
- * Default preset: Astryx (Meta) blue. Light-mode primary is the exact
- * Astryx accent (#0064E0); dark mode brightens it to #2694FE via the
- * scale, matching astryx.atmeta.com.
- */
-export const astryxPreset: ThemeConfig = {
-  name: 'astryx',
-  brand: {
-    primary: '#0064E0',
-    primaryScale: {
-      50: '#E7F1FE',
-      100: '#CFE3FD',
-      200: '#9AC6FC',
-      300: '#5CA5FB',
-      400: '#2694FE',
-      500: '#0064E0',
-      600: '#0057C2',
-      700: '#0046A0',
-      800: '#00397F',
-      900: '#002C63',
-      950: '#001A3D',
-    },
-  },
-};
-
 /** Retained alias so existing violet-themed demos keep working. */
 export const violetPreset: ThemeConfig = {
   name: 'violet',
@@ -63,6 +38,10 @@ export const neutralPreset: ThemeConfig = {
   },
 };
 
+/**
+ * Default preset: Emerald green. This preset generates the prebuilt
+ * `ngxsmk.css` stylesheet shipped with @ngxsmk/theme.
+ */
 export const emeraldPreset: ThemeConfig = {
   name: 'emerald',
   brand: { primary: '#059669' },
@@ -74,7 +53,6 @@ export const rosePreset: ThemeConfig = {
 };
 
 export const presets: Record<string, ThemeConfig> = {
-  astryx: astryxPreset,
   violet: violetPreset,
   neutral: neutralPreset,
   emerald: emeraldPreset,

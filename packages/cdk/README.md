@@ -1,13 +1,6 @@
 # @ngxsmk/cdk
 
-Low-level, framework-agnostic Angular behaviors used by NGXSMK components:
-
-- `ClickOutside` — detect clicks outside an element
-- `FocusTrap` — trap focus within a container
-- `ScrollLock` — lock/unlock page scroll
-- `LiveAnnouncer` — announce messages to assistive tech
-- `MediaQuery` — reactive media-query signals
-- `VisuallyHidden` — visually hide content while keeping it accessible
+Low-level, zoneless-friendly Angular behaviors that power NGXSMK components. Each behavior is its own secondary entry point, so you only bundle what you import.
 
 Part of the [NGXSMK UI kit](https://github.com/NGXSMK/ngxsmk-ui-kit).
 
@@ -26,18 +19,68 @@ npm install @ngxsmk/cdk
 
 ## Usage
 
+### Click outside
+
+Emits when a pointer press lands outside the host element.
+
+```html
+<div class="menu" (ngxsmkClickOutside)="close()">…</div>
+```
+
 ```ts
-import { ClickOutside } from '@ngxsmk/cdk/click-outside';
+import { NgxsmkClickOutside } from '@ngxsmk/cdk/click-outside';
 ```
 
-Prefer deep entry-point imports (e.g. `@ngxsmk/cdk/click-outside`) so the
-bundler tree-shakes unused behaviors.
+### Focus trap
 
-## Building & publishing
+Traps Tab focus inside a container. `ngxsmkFocusTrapAutoCapture` moves focus in on init and restores the previously focused element on destroy.
 
-Built with the rest of the workspace via `npm run build:libs`. The published
-artifact lives in `dist/ngxsmk/cdk`. To publish all packages:
-
-```bash
-npm run publish
+```html
+<div ngxsmkFocusTrap ngxsmkFocusTrapAutoCapture>…</div>
 ```
+
+### Scroll lock
+
+Reference-counted body scroll lock for dialogs, drawers, and sheets. Compensates for scrollbar width to avoid layout shift.
+
+```ts
+import { NgxsmkScrollLock } from '@ngxsmk/cdk/scroll-lock';
+
+constructor(private lock: NgxsmkScrollLock) {}
+open() { this.lock.lock(); }
+close() { this.lock.unlock(); }
+```
+
+### Live announcer
+
+Announces messages to assistive technology via a visually hidden `aria-live` region.
+
+```ts
+import { NgxsmkLiveAnnouncer } from '@ngxsmk/cdk/live-announcer';
+
+this.announcer.announce('Item deleted', 'polite');
+```
+
+### Media query
+
+Reactive, signal-based media-query helper (call in an injection context).
+
+```ts
+import { injectMediaQuery } from '@ngxsmk/cdk/media-query';
+
+private readonly isMobile = injectMediaQuery('(max-width: 767px)');
+```
+
+### Visually hidden
+
+Hides content visually while keeping it available to screen readers.
+
+```html
+<span ngxsmkVisuallyHidden>Opens in a new window</span>
+```
+
+## Entry points
+
+`click-outside`, `focusable`, `focus-trap`, `live-announcer`, `media-query`, `scroll-lock`, `visually-hidden`, `intersection-observer`, `resize-observer`, `autofocus`, `testing`.
+
+Prefer deep imports (e.g. `@ngxsmk/cdk/click-outside`) so the bundler tree-shakes unused behaviors.

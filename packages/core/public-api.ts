@@ -139,6 +139,7 @@ export * from '@ngxsmk/core/resize-handle';
 export * from '@ngxsmk/core/rule-builder';
 export * from '@ngxsmk/core/scheduler';
 export * from '@ngxsmk/core/scroll-lock';
+export * from '@ngxsmk/core/seo';
 export * from '@ngxsmk/core/select';
 export * from '@ngxsmk/core/slider';
 export * from '@ngxsmk/core/spacer';

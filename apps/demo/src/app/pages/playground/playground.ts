@@ -222,17 +222,17 @@ function parseJSX(code: string): ASTNode[] {
             </ngxsmk-card>
           }
           @case ('Layout') {
-            <div class="astryx-layout" style="display: flex; flex-direction: column; width: 100%;">
+            <div class="demo-layout" style="display: flex; flex-direction: column; width: 100%;">
               @if (node().attributes['header']) {
                 <div
-                  class="astryx-layout-header"
+                  class="demo-layout-header"
                   style="border-bottom: 1px solid var(--ngxsmk-color-outline); padding-bottom: var(--ngxsmk-space-3); margin-bottom: var(--ngxsmk-space-3);"
                 >
                   <ast-renderer [node]="node().attributes['header']" />
                 </div>
               }
               <div
-                class="astryx-layout-content"
+                class="demo-layout-content"
                 style="flex: 1; display: flex; flex-direction: column; gap: var(--ngxsmk-space-3);"
               >
                 @for (c of node().children; track $index) {
@@ -244,7 +244,7 @@ function parseJSX(code: string): ASTNode[] {
               </div>
               @if (node().attributes['footer']) {
                 <div
-                  class="astryx-layout-footer"
+                  class="demo-layout-footer"
                   style="border-top: 1px solid var(--ngxsmk-color-outline); padding-top: var(--ngxsmk-space-3); margin-top: var(--ngxsmk-space-3);"
                 >
                   <ast-renderer [node]="node().attributes['footer']" />
@@ -253,7 +253,7 @@ function parseJSX(code: string): ASTNode[] {
             </div>
           }
           @case ('LayoutHeader') {
-            <div class="astryx-layout-header-content">
+            <div class="demo-layout-header-content">
               @for (c of node().children; track $index) {
                 <ast-renderer [node]="c" />
               }
@@ -261,7 +261,7 @@ function parseJSX(code: string): ASTNode[] {
           }
           @case ('LayoutContent') {
             <div
-              class="astryx-layout-content-content"
+              class="demo-layout-content-content"
               style="display: flex; flex-direction: column; gap: var(--ngxsmk-space-3);"
             >
               @for (c of node().children; track $index) {
@@ -270,7 +270,7 @@ function parseJSX(code: string): ASTNode[] {
             </div>
           }
           @case ('LayoutFooter') {
-            <div class="astryx-layout-footer-content">
+            <div class="demo-layout-footer-content">
               @for (c of node().children; track $index) {
                 <ast-renderer [node]="c" />
               }
@@ -417,21 +417,21 @@ function parseJSX(code: string): ASTNode[] {
       line-height: 1;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
-    .astryx-layout {
+    .demo-layout {
       display: flex;
       flex-direction: column;
       width: 100%;
       height: 100%;
     }
-    .astryx-layout-header {
+    .demo-layout-header {
       padding-bottom: var(--ngxsmk-space-3);
       margin-bottom: var(--ngxsmk-space-3);
     }
-    .astryx-layout-footer {
+    .demo-layout-footer {
       padding-top: var(--ngxsmk-space-3);
       margin-top: var(--ngxsmk-space-3);
     }
-    .astryx-layout-content {
+    .demo-layout-content {
       flex: 1;
       display: flex;
       flex-direction: column;
@@ -485,16 +485,16 @@ export class AstRenderer {
 }
 
 const TEMPLATES: Record<string, string> = {
-  showcase: `import {Card} from '@astryxdesign/core/Card';
+  showcase: `import {Card} from '@ngxsmk/core/Card';
 import {
   Layout,
   LayoutHeader,
   LayoutContent,
   LayoutFooter,
   HStack,
-} from '@astryxdesign/core/Layout';
-import {Text, Heading} from '@astryxdesign/core/Text';
-import {Button} from '@astryxdesign/core/Button';
+} from '@ngxsmk/core/Layout';
+import {Text, Heading} from '@ngxsmk/core/Text';
+import {Button} from '@ngxsmk/core/Button';
 
 export default function Example() {
   return (
@@ -524,7 +524,7 @@ export default function Example() {
     </Card>
   );
 }`,
-  'ai-chat': `import {Card} from '@astryxdesign/core/Card';
+  'ai-chat': `import {Card} from '@ngxsmk/core/Card';
 import {
   Layout,
   LayoutHeader,
@@ -532,11 +532,11 @@ import {
   LayoutFooter,
   HStack,
   VStack,
-} from '@astryxdesign/core/Layout';
-import {Text, Heading} from '@astryxdesign/core/Text';
-import {Button} from '@astryxdesign/core/Button';
-import {Avatar} from '@astryxdesign/core/Avatar';
-import {Alert} from '@astryxdesign/core/Alert';
+} from '@ngxsmk/core/Layout';
+import {Text, Heading} from '@ngxsmk/core/Text';
+import {Button} from '@ngxsmk/core/Button';
+import {Avatar} from '@ngxsmk/core/Avatar';
+import {Alert} from '@ngxsmk/core/Alert';
 
 export default function ChatExample() {
   return (
@@ -545,9 +545,9 @@ export default function ChatExample() {
         header={
           <LayoutHeader hasDivider>
             <HStack>
-              <Avatar name="Astryx AI" size="sm" />
+              <Avatar name="ngxsmk AI" size="sm" />
               <VStack>
-                <Heading level={3}>Astryx Assistant</Heading>
+                <Heading level={3}>ngxsmk Assistant</Heading>
                 <Text type="caption" color="muted">Online</Text>
               </VStack>
             </HStack>
@@ -562,11 +562,11 @@ export default function ChatExample() {
               <HStack>
                 <Avatar name="User" size="sm" />
                 <Card padding={3}>
-                  <Text type="body">How do I customize the brand colors in Astryx?</Text>
+                  <Text type="body">How do I customize the brand colors in ngxsmk?</Text>
                 </Card>
               </HStack>
               <HStack>
-                <Avatar name="Astryx AI" size="sm" />
+                <Avatar name="ngxsmk AI" size="sm" />
                 <Card padding={3} style="background-color: var(--ngxsmk-color-primary-container);">
                   <Text type="body">You can customize brand colors in the Theme Editor under Base Styles, or define a custom primaryScale.</Text>
                 </Card>
@@ -591,7 +591,7 @@ export default function ChatExample() {
     header={
       <LayoutHeader>
         <VStack>
-          <Heading level={2}>Astryx Core Agent</Heading>
+          <Heading level={2}>ngxsmk Core Agent</Heading>
           <Text type="body" color="secondary">The most advanced pair programmer for Next.js and StyleX.</Text>
         </VStack>
       </LayoutHeader>
@@ -722,7 +722,7 @@ type RadiusKey = keyof typeof RADII;
     <app-nav />
 
     <div class="pg-container">
-      <!-- LEFT SIDENAV (Astryx views selectors) -->
+      <!-- LEFT SIDENAV (ngxsmk views selectors) -->
       <aside class="pg-sidenav">
         <button
           type="button"
