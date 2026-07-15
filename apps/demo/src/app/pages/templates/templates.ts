@@ -21,6 +21,7 @@ import { Component, signal, computed } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AppNav } from '../../nav/nav';
+import { APP_VERSION } from '../../core/version';
 
 type TemplateCategory =
   'All' | 'Application' | 'Marketing' | 'E-Commerce' | 'Authentication' | 'DevOps';
@@ -279,7 +280,7 @@ interface TemplateItem {
               <div class="ngxsmk-mock-header">
                 <ngxsmk-heading level="h4" class="mock-panel-title">Admin Console</ngxsmk-heading>
                 <div style="flex-grow:1"></div>
-                <ngxsmk-badge variant="info">v1.2.0</ngxsmk-badge>
+                <ngxsmk-badge variant="info">{{ appVersion }}</ngxsmk-badge>
                 <ngxsmk-text
                   variant="body"
                   style="margin-left: 1rem; font-weight: 500; font-size: 0.8125rem; color: var(--ngxsmk-color-on-surface);"
@@ -466,7 +467,7 @@ interface TemplateItem {
                 <div
                   style="font-weight: 700; font-family: 'Outfit'; font-size: 1rem; color: var(--ngxsmk-color-primary);"
                 >
-                  Astryx SaaS
+                  ngxsmk SaaS
                 </div>
                 <div
                   style="display: flex; gap: 1.5rem; font-size: 0.8125rem; font-weight: 500; color: var(--ngxsmk-color-on-surface-variant);"
@@ -798,7 +799,7 @@ interface TemplateItem {
       padding: var(--ngxsmk-space-12, 3rem) var(--ngxsmk-space-6, 1.5rem);
     }
 
-    /* === Astryx-style header === */
+    /* === ngxsmk-style header === */
     .tpl-header {
       display: flex;
       flex-direction: column;
@@ -818,7 +819,7 @@ interface TemplateItem {
       font-size: 1.0625rem;
     }
 
-    /* === Astryx-style card grid === */
+    /* === ngxsmk-style card grid === */
     .tpl-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -1916,6 +1917,7 @@ interface TemplateItem {
   `,
 })
 export class TemplatesPage {
+  protected readonly appVersion = APP_VERSION;
   protected readonly categories: TemplateCategory[] = [
     'All',
     'Application',
@@ -2154,7 +2156,7 @@ export class TemplatesPage {
       gradient: 'linear-gradient(135deg, #701a75, #86198f, #a21caf)',
       code: `<!-- landing-page.html -->
 <div class="landing-nav">
-  <div style="font-weight: 700; font-family: 'Outfit';">Astryx SaaS</div>
+  <div style="font-weight: 700; font-family: 'Outfit';">ngxsmk SaaS</div>
   <div style="display: flex; gap: 1rem;">
     <span>Features</span>
     <span>Pricing</span>

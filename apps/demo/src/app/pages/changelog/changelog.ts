@@ -138,6 +138,25 @@ interface Release {
 export class ChangelogPage {
   protected readonly releases: Release[] = [
     {
+      version: 'v1.3.0',
+      date: '2026-07-16',
+      summary: 'SEO utilities, emerald default preset, and documentation improvements.',
+      changes: [
+        {
+          type: 'added',
+          text: 'SEO service: @ngxsmk/core/seo with NgxsmkSeoService and provideSeo() for title, description, canonical, Open Graph, Twitter Card, robots, and JSON-LD.',
+        },
+        {
+          type: 'changed',
+          text: 'emerald is now the default preset; the astryx preset was removed.',
+        },
+        {
+          type: 'changed',
+          text: 'Richer package READMEs and top-level docs with a component catalog, CLI & schematics, and accessibility guidance.',
+        },
+      ],
+    },
+    {
       version: 'v1.2.0',
       date: '2026-07-15',
       summary: 'Partial-Ivy build fix (resolves NG0203) and expanded component surface.',

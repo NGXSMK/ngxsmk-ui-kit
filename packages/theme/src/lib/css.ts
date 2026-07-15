@@ -120,7 +120,7 @@ function lightVars(theme: ResolvedTheme): Vars {
     '--ngxsmk-color-secondary-container': theme.secondary[100],
     '--ngxsmk-color-on-secondary-container': theme.secondary[900],
 
-    // Astryx: cool-grey body, white cards floating on top, hairline borders.
+    // Default light theme: cool-grey body, white cards floating on top, hairline borders.
     '--ngxsmk-color-background': theme.neutral[50],
     '--ngxsmk-color-on-background': '#0A1317',
     '--ngxsmk-color-surface': '#FFFFFF',
@@ -182,7 +182,7 @@ function darkVars(theme: ResolvedTheme): Vars {
     '--ngxsmk-color-secondary-container': theme.secondary[900],
     '--ngxsmk-color-on-secondary-container': theme.secondary[100],
 
-    // Astryx dark: near-neutral charcoal body, slightly lighter card,
+    // Default dark theme: near-neutral charcoal body, slightly lighter card,
     // lighter still for popovers; hairline light-on-dark borders.
     '--ngxsmk-color-background': '#111112',
     '--ngxsmk-color-on-background': '#DFE2E5',

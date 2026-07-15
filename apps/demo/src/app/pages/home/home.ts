@@ -9,6 +9,7 @@ import { Router, RouterLink } from '@angular/router';
 import { AppNav } from '../../nav/nav';
 import { NgxsmkAnimate } from '@ngxsmk/core/animation';
 import { NgxsmkThemeService } from '@ngxsmk/theme';
+import { APP_VERSION } from '../../core/version';
 
 interface Feature {
   icon: string;
@@ -53,6 +54,7 @@ interface ComponentCategory {
   styleUrl: './home.scss',
 })
 export class HomePage {
+  protected readonly appVersion = APP_VERSION;
   protected readonly theme = inject(NgxsmkThemeService);
   private readonly toast = inject(NgxsmkToast);
   private readonly router = inject(Router);

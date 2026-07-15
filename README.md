@@ -6,7 +6,26 @@
 [![npm @ngxsmk/core](https://img.shields.io/badge/npm-%40ngxsmk%2Fcore-blue)](https://www.npmjs.com/package/@ngxsmk/core)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 
-> **v1.2.0 · Signals-native · Zoneless** — an Angular-first, open-source UI ecosystem, signals-native, zoneless, and token-themed.
+> **v1.3.0 · Signals-native · Zoneless** — an Angular-first, open-source UI ecosystem, signals-native, zoneless, and token-themed.
+
+## Table of contents
+
+- [Features](#features)
+- [Packages](#packages)
+- [Components](#components)
+- [SEO utilities](#seo-utilities)
+- [Installation](#installation)
+- [Quick start](#quick-start)
+- [Theming & design tokens](#theming--design-tokens)
+- [Animations](#animations)
+- [CLI & schematics](#cli--schematics)
+- [Accessibility](#accessibility)
+- [Performance & tree-shaking](#performance--tree-shaking)
+- [Integrated third-party components](#integrated-third-party-components)
+- [Development](#development)
+- [Roadmap](#roadmap)
+- [Contributing](#contributing)
+- [License](#license)
 
 NGXSMK is a component library for modern Angular (**v17.3+**). Every component is a
 standalone, `OnPush`, signal-based component that reads design tokens from CSS
@@ -23,19 +42,16 @@ custom properties, so theming is instant and bundle size stays minimal. No
 > **Verified:** all three publishable packages (`@ngxsmk/theme`, `@ngxsmk/cdk`,
 > `@ngxsmk/core`) are compiled against every supported major in CI
 > (`.github/workflows/compatibility.yml`) — the libraries build cleanly on
-> Angular 17.3. Peer dependencies are declared as `>=17.3.0`. For publishing,
-> build with the lowest supported Angular so the partial‑Ivy output is
-> forward‑compatible (a package built with an older ng-packagr loads on newer
-> Angular, not the reverse).
+> Angular 17.3. Peer dependencies are declared as `>=17.3.0`.
 
 ---
 
 ## Status
 
-Stable. The `1.2.0` release ships the full component catalog, the token theme
+Stable. The `1.3.0` release ships the full component catalog, the token theme
 engine, CDK behaviors, and the animation helpers. The workspace, theme engine,
 and CDK are implemented and supported on Angular **17.3+** (see the
-[version note](#) above).
+version note above).
 
 ## Features
 
@@ -46,6 +62,7 @@ and CDK are implemented and supported on Angular **17.3+** (see the
 - **Accessible by default** — native elements wrapped with visually-hidden inputs so `ngModel` / reactive forms just work, plus focus management, live announcer, and ARIA wiring.
 - **Motion-ready** — optional first-class animations via [Motion](https://motion.dev) (`motion` is an optional peer dependency), with `prefers-reduced-motion` honored automatically.
 - **Tree-shakable** — per-component secondary entry points; import only what you use.
+- **SEO-ready** — `NgxsmkSeoService` / `provideSeo()` manage the document title, meta description, canonical link, Open Graph & Twitter Card tags, robots directive, and JSON-LD from a single API.
 
 ## Packages
 
@@ -55,6 +72,64 @@ and CDK are implemented and supported on Angular **17.3+** (see the
 | [`@ngxsmk/cdk`](packages/cdk)     | Low-level behaviors: click-outside, focus trap, scroll lock, live announcer, reactive media queries, visually-hidden.                                                                                                                                                                                                                                      |
 | [`@ngxsmk/core`](packages/core)   | 170+ standalone, `OnPush`, signals-based components — buttons, badges, tags, chips, cards, dividers, spinners, skeletons, alerts, progress, avatars, form-field, inputs, checks/radios/switches, tabs, accordions, tooltips, dialogs, toasts, and re-exported `ngxsmk-datepicker` / `ngxsmk-tel-input`. Also exposes the `@ngxsmk/core/animation` helpers. |
 
+## Components
+
+A curated slice of the catalog — every name below is a deep entry point
+(`@ngxsmk/core/<name>`). Import only what you use.
+
+- **Forms & inputs** — `input`, `textarea`, `select`, `multi-select`, `combobox`, `autocomplete`, `typeahead`, `number-input`, `pin-input`, `slider`, `checkbox`, `radio`, `switch`, `form-field`, `datepicker`, `tel-input`, `tag`, `segmented-control`, `rating`, `toggle-button`
+- **Buttons & actions** — `button`, `button-group`, `fab`, `split-button`, `link`
+- **Layout & structure** — `card`, `stack`, `h-stack`, `v-stack`, `grid`, `flex`, `center`, `spacer`, `divider`, `aspect-ratio`, `container`, `section`, `app-shell`, `side-nav`, `sheet`, `resizable`, `layout`
+- **Navigation** — `tabs`, `tab-menu`, `breadcrumb-item`, `pagination`, `top-nav`, `nav-icon`, `nav-heading-menu`, `dropdown-menu`, `context-menu`, `command-palette`, `mobile-nav`
+- **Feedback & status** — `alert`, `banner`, `toast`, `skeleton`, `spinner`, `progress`, `progress-circle`, `empty-state`, `status-dot`, `badge`
+- **Data display** — `avatar`, `avatar-group-overflow`, `avatar-status-dot`, `table`, `data-table`, `list`, `list-item`, `tree-view`, `accordion`, `stat`, `metadata-list`, `markdown`, `markdown-viewer`, `code`, `code-block`, `citation`, `citation-viewer`, `blockquote`, `thumbnail`, `timestamp`, `meter`
+- **Overlay & popups** — `dialog`, `alert-dialog`, `tooltip`, `popover`, `hover-card`, `lightbox`
+- **AI & chat** — `chat-window`, `chat-message`, `chat-message-bubble`, `chat-input`, `chat-layout`, `chat-system-message`, `chat-tokenized-text`, `chat-send-button`, `chat-composer-drawer`, `ai-chat`, `agent-card`, `reasoning-timeline`, `streaming-text`, `voice-input`
+- **Charts** — `chart-bar`, `chart-line`, `chart-pie`, `chart-area`, `chart-scatter`, `chart-heatmap`, `chart-candlestick`, `chart-dashboard`
+- **Enterprise & data** — `kanban-board`, `scheduler`, `workflow-builder`, `flow-editor`, `spreadsheet`, `pivot-table`, `org-chart`, `diagram-builder`, `query-builder`, `rule-builder`, `timeline-gantt`, `memory-viewer`
+- **Media** — `audio-player`, `image-viewer`, `carousel`, `prompt-carousel`, `lightbox`, `qr-code`
+- **Utilities & helpers** — `copy-to-clipboard`, `keyboard-shortcut`, `click-outside`, `scroll-lock`, `media-query`, `lazy-load`, `visually-hidden`, `focus-trap`, `intersection-observer`, `resize-observer`, `i18n`, `seo`, `animation` (`NgxsmkAnimate` / `NgxsmkPresence`), `let`, `hooks`, `diff-viewer`, `json-viewer`
+
+See the live [demo app](apps/demo) for interactive examples of every component.
+
+## SEO utilities
+
+`NgxsmkSeoService` (from `@ngxsmk/core/seo`) keeps your app crawlable and
+social-share friendly from one place. Set app-wide defaults at bootstrap with
+`provideSeo()`, then update per route from a router subscription:
+
+```ts
+import { provideSeo } from '@ngxsmk/core/seo';
+
+bootstrapApplication(App, {
+  providers: [
+    provideSeo({
+      siteName: 'NGXSMK',
+      image: 'https://example.com/og.png',
+      twitterCard: 'summary_large_image',
+    }),
+  ],
+});
+```
+
+```ts
+import { NgxsmkSeoService } from '@ngxsmk/core/seo';
+
+// inside a NavigationEnd subscription
+seo.update({
+  title: routeTitle,
+  description: routeDescription,
+  canonical: fullUrl,
+  type: 'website',
+  jsonLd: { '@type': 'WebSite', name: 'NGXSMK' },
+});
+```
+
+> **Repo discoverability:** add GitHub **topics** (`angular`, `ui-kit`,
+> `design-system`, `components`, `signals`, `zoneless`, `theming`) and set a
+> social-preview image in the repository Settings — these can't be configured
+> from files, so do them once in the GitHub UI.
+
 ## Installation
 
 Install the packages you need. `@ngxsmk/core` re-exports the CDK and theme
@@ -63,6 +138,9 @@ internals, so most apps only need:
 ```bash
 npm install @ngxsmk/core @ngxsmk/theme
 ```
+
+**Requirements:** Angular **17.3+**, Node **20+**, TypeScript **5.x+** (peer
+Angular packages `@angular/core`, `@angular/common`, `@angular/forms`).
 
 `@ngxsmk/core` declares these **peer dependencies** (you already have the
 `@angular/*` ones in any Angular app):
@@ -135,16 +213,24 @@ consume these directly and expose per-component override hooks (e.g.
 `--ngxsmk-button-bg`) on top.
 
 ```ts
-import { NgxsmkThemeService } from '@ngxsmk/theme';
+import { NgxsmkThemeService, emeraldPreset } from '@ngxsmk/theme';
 
 constructor(private theme: NgxsmkThemeService) {}
 
 ngOnInit() {
-  this.theme.applyTheme({ preset: 'midnight', mode: 'dark' });
+  // Apply a preset (emerald is the default theme shipped in ngxsmk.css)
+  this.theme.applyTheme(emeraldPreset);
+
+  // Dark mode is independent of the preset — toggle it any time
+  this.theme.setMode('dark'); // 'light' | 'dark' | 'system'
 }
 ```
 
-- **Presets:** 4 built-in presets; switch at runtime with no flash.
+You can also pass a fully custom `ThemeConfig` (any brand color, radius,
+typography, or token overrides) — see the [`@ngxsmk/theme`](packages/theme)
+docs for the full model.
+
+- **Presets:** 4 built-in presets — `emerald` (default), `violet`, `neutral`, `rose`. Apply any at runtime with no flash.
 - **Modes:** `light`, `dark`, or `system` (follows `prefers-color-scheme`).
 - **Control height** is centralized in `--ngxsmk-control-height` (default
   `2.5rem` / 40px). Changing it resizes every single-line text control at once.
@@ -212,6 +298,30 @@ on enter and the `exit` state on leave before detaching. The built-in `dialog`,
 pulled in when an animation actually runs, so the library type-checks and
 bundles cleanly whether or not `motion` is installed.
 
+## CLI & schematics
+
+[`@ngxsmk/cli`](packages/cli) provides an `ng add` schematic that wires the
+packages and the base theme stylesheet into a new or existing Angular workspace:
+
+```bash
+ng add @ngxsmk/core
+```
+
+It installs `@ngxsmk/core` + `@ngxsmk/theme`, registers `ngxsmk.css` in your
+`angular.json` styles, and sets a default preset — no manual CSS wiring
+required. A standalone `ngxsmk` binary is also available for theme CSS
+generation in CI.
+
+## Accessibility
+
+NGXSMK targets WCAG 2.1 AA:
+
+- **Native primitives** — form controls wrap native `<input>`/`<select>` elements with visually-hidden labels, so `ngModel` / reactive forms and screen readers work without extra markup.
+- **Keyboard & focus** — dialogs, sheets, and popovers trap and restore focus; menus, tabs, and comboboxes follow WAI-ARIA keyboard patterns.
+- **Live regions** — the CDK `LiveAnnouncer` announces dynamic changes to assistive technology.
+- **Reduced motion** — animations honor `prefers-reduced-motion` automatically (Motion jumps to the final state).
+- **Semantic tokens** — status colors ship with paired foreground tokens for AA contrast in both light and dark modes.
+
 ## Integrated third-party components
 
 `@ngxsmk/core` re-exports two external libraries so consumers get them from one
@@ -268,22 +378,6 @@ apps/
 tools/
   scripts/    # theme CSS generator, etc.
 ```
-
-## Publishing
-
-The root `package.json` is `private: true` (it is the workspace, not a
-publishable package). To publish to npm, build and publish each package
-individually:
-
-```bash
-npm run build:libs
-cd dist/ngxsmk/core && npm publish --access public
-cd dist/ngxsmk/theme && npm publish --access public
-cd dist/ngxsmk/cdk  && npm publish --access public
-```
-
-Each package carries its own `package.json` with correctly scoped `sideEffects`
-and peer dependencies.
 
 ## Roadmap
 

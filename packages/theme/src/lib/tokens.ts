@@ -1,10 +1,9 @@
 import { ColorScale, FontFamilies, SemanticColors, TypographyScale } from './types';
 
 /**
- * Cool blue-grey neutral scale matching the Astryx (Meta) design language.
- * Light steps carry a subtle blue tint; the darkest steps flatten toward
- * a near-neutral charcoal so dark-mode surfaces read like Astryx's
- * (#111112 body / #1F1F22 card) rather than a saturated navy.
+ * Cool blue-grey neutral scale. Light steps carry a subtle blue tint; the
+ * darkest steps flatten toward a near-neutral charcoal so dark-mode
+ * surfaces read like a soft, desaturated navy rather than a saturated one.
  */
 export const DEFAULT_NEUTRAL: ColorScale = {
   50: '#F1F4F7',
@@ -24,7 +23,7 @@ export const DEFAULT_SEMANTIC: SemanticColors = {
   success: '#0D8626',
   warning: '#E9AF08',
   error: '#E3193B',
-  info: '#0064E0',
+  info: '#2563EB',
 };
 
 export const DEFAULT_FONT_FAMILY: FontFamilies = {
@@ -87,9 +86,9 @@ export const SPACING: Record<string, string> = {
 };
 
 /**
- * Astryx radius scale: inner 4px, element 8px (buttons/inputs, the base),
+ * Radius scale: inner 4px, element 8px (buttons/inputs, the base),
  * container 12px (cards), then progressively larger through 28px "page"
- * rounding. Deliberately generous — Astryx reads soft and rounded.
+ * rounding. Deliberately generous so surfaces read soft and rounded.
  */
 export const RADIUS: Record<string, string> = {
   none: '0px',
@@ -103,9 +102,9 @@ export const RADIUS: Record<string, string> = {
 };
 
 /**
- * Soft, diffuse, layered shadows in the Astryx style (two stacked blurs,
- * low alpha). Overlay CSS resolves these to slightly stronger values in
- * dark mode via the elevation tokens on each surface.
+ * Soft, diffuse, layered shadows (two stacked blurs, low alpha). Overlay
+ * CSS resolves these to slightly stronger values in dark mode via the
+ * elevation tokens on each surface.
  */
 export const SHADOW: Record<string, string> = {
   sm: '0 1px 1px rgb(0 0 0 / 0.08), 0 2px 8px rgb(0 0 0 / 0.08)',

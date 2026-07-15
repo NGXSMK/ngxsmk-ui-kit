@@ -1,13 +1,18 @@
 import { Injectable, inject } from '@angular/core';
-import { Meta } from '@angular/platform-browser';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { filter, map } from 'rxjs/operators';
+import { NgxsmkSeoService } from '@ngxsmk/core/seo';
+
+const SITE_NAME = 'NGXSMK';
+const DEFAULT_DESCRIPTION =
+  'NGXSMK - Premium Zoneless and Signal-first Angular Design System featuring AI-ready controls and custom tokens.';
+const SOCIAL_IMAGE = 'https://ngxsmk.dev/assets/og-image.png';
 
 @Injectable({ providedIn: 'root' })
 export class SeoService {
   private readonly router = inject(Router);
   private readonly activatedRoute = inject(ActivatedRoute);
-  private readonly meta = inject(Meta);
+  private readonly seo = inject(NgxsmkSeoService);
 
   init(): void {
     this.router.events
@@ -18,25 +23,30 @@ export class SeoService {
           while (route.firstChild) {
             route = route.firstChild;
           }
-          return route.snapshot.data;
+          return route.snapshot;
         }),
       )
-      .subscribe((data) => {
-        const desc =
-          data['description'] ||
-          'NGXSMK - Premium Zoneless and Signal-first Angular Design System featuring AI-ready controls and custom tokens.';
-        this.meta.updateTag({ name: 'description', content: desc });
-        this.meta.updateTag({ name: 'og:description', content: desc });
-        this.meta.updateTag({ name: 'twitter:description', content: desc });
+      .subscribe((snapshot) => {
+        const title = (snapshot.data['title'] as string) ?? SITE_NAME;
+        const description = (snapshot.data['description'] as string) ?? DEFAULT_DESCRIPTION;
+        const url = this.canonicalUrl();
 
-        // Standard SEO and Social Graph Tags
-        this.meta.updateTag({ name: 'robots', content: 'index, follow' });
-        this.meta.updateTag({
-          name: 'viewport',
-          content: 'width=device-width, initial-scale=1, shrink-to-fit=no',
+        this.seo.update({
+          title,
+          description,
+          canonical: url,
+          url,
+          siteName: SITE_NAME,
+          type: 'website',
+          image: SOCIAL_IMAGE,
+          twitterCard: 'summary_large_image',
         });
-        this.meta.updateTag({ property: 'og:type', content: 'website' });
-        this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
       });
+  }
+
+  private canonicalUrl(): string {
+    const origin =
+      typeof window !== 'undefined' ? window.location.origin : 'https://ngxsmk.dev';
+    return `${origin}${this.router.url || '/'}`;
   }
 }

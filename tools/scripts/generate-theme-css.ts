@@ -18,7 +18,7 @@ for (const [name, config] of Object.entries(presets)) {
   console.log(`wrote ${file}`);
 }
 
-// The default stylesheet is the Astryx (Meta blue) preset.
+// The default stylesheet is the emerald preset.
 const defaultFile = join(outDir, 'ngxsmk.css');
-writeFileSync(defaultFile, buildThemeCss(presets['astryx']), 'utf8');
+writeFileSync(defaultFile, buildThemeCss(presets['emerald']), 'utf8');
 console.log(`wrote ${defaultFile}`);
