@@ -1,7 +1,11 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
-import { NgxsmkThemeService } from '@ngxsmk/theme';
-import { ThemeConfig, RadiusPreset, DarkModeStrategy } from '@ngxsmk/theme';
-import { buildThemeCss } from '@ngxsmk/theme';
+import {
+  NgxsmkThemeService,
+  ThemeConfig,
+  RadiusPreset,
+  DarkModeStrategy,
+  buildThemeCss,
+} from '@ngxsmk/theme';
 import { NgxsmkSelect, NgxsmkSelectOption } from '@ngxsmk/core/select';
 
 @Component({

@@ -74,4 +74,15 @@ module.exports = tseslint.config(
       '@angular-eslint/component-selector': 'off',
     },
   },
+  {
+    // Dynamic AST/preview renderers bind arbitrary component props, so loose typing is required
+    files: [
+      'apps/demo/src/app/pages/playground/**/*.ts',
+      'apps/demo/src/app/playground/**/*.ts',
+      'apps/demo/src/app/pages/interactive-playground/playground-demo-host.ts',
+    ],
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+    },
+  },
 );

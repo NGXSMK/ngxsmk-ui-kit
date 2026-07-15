@@ -1,4 +1,4 @@
-import { Injectable, signal, computed, inject } from '@angular/core';
+import { Injectable, signal, computed, Type } from '@angular/core';
 import MiniSearch from 'minisearch';
 
 export interface ComponentInput {
@@ -34,7 +34,7 @@ export interface ComponentExample {
   title: string;
   description: string;
   code: string;
-  componentType: any;
+  componentType?: Type<unknown>;
   customizeCode?: string;
 }
 
@@ -104,18 +104,7 @@ export const CATEGORY_ICONS: Record<ComponentCategory, string> = {
   other: '📦',
 };
 
-const CATEGORY_KEYWORDS: Record<ComponentCategory, string[]> = {
-  form: ['input', 'select', 'checkbox', 'radio', 'switch', 'form', 'field', 'textarea', 'number', 'date', 'slider', 'switch', 'toggle', 'tokenizer', 'autocomplete', 'combobox', 'typeahead', 'power-search', 'segmented', 'selector', 'multi-select', 'checkbox-list', 'checkbox-list-item', 'input-group', 'form-field', 'field'],
-  layout: ['layout', 'grid', 'flex', 'stack', 'container', 'divider', 'spacer', 'center', 'resizable', 'h-stack', 'v-stack', 'grid', 'split'],
-  navigation: ['nav', 'tabs', 'breadcrumb', 'side-nav', 'mobile-nav', 'top-nav', 'pagination', 'stepper', 'tab-menu', 'nav-heading-menu'],
-  'data-display': ['table', 'list', 'card', 'avatar', 'chip', 'tag', 'stat', 'progress', 'progress-circle', 'metadata', 'tree-view', 'org-chart', 'pivot-table', 'diff-viewer', 'qr-code', 'thumbnail'],
-  feedback: ['toast', 'alert', 'skeleton', 'spinner', 'empty-state', 'skeleton', 'progress', 'status-dot', 'rating'],
-  overlay: ['dialog', 'dialog', 'drawer', 'sheet', 'popover', 'tooltip', 'hover-card', 'lightbox', 'context-menu', 'dropdown-menu', 'imperative-dialog', 'chat-composer-drawer'],
-  chart: ['chart', 'chart-line', 'chart-bar', 'chart-pie', 'chart-area', 'chart-scatter', 'chart-heatmap', 'chart-candlestick', 'chart-dashboard'],
-  ai: ['chat', 'ai', 'prompt', 'streaming', 'reasoning', 'citation', 'tokenized', 'voice-input', 'dictation', 'chat-layout', 'chat-window', 'chat-message', 'chat-composer'],
-  utility: ['hooks', 'copy-to-clipboard', 'keyboard-shortcut', 'focus-trap', 'lazy-load', 'intersection-observer', 'resize-observer', 'media-query', 'media-theme', 'click-outside', 'scroll-lock', 'token', 'terminal', 'json-viewer', 'markdown', 'markdown-viewer', 'diff-viewer', 'memory-viewer', 'code-block', 'kbd', 'visually-hidden', 'imperative-dialog', 'layer-provider', 'link-provider', 'command-palette', 'prompt-carousel'],
-  other: [],
-};
+
 
 const PACKAGE_EXPORTS: Record<string, { name: string; category: ComponentCategory; description: string }[]> = {
   '@ngxsmk/core': [
@@ -378,7 +367,7 @@ export class ComponentRegistry {
   ): ComponentMetadata {
     const selector = this.nameToSelector(name);
     const tags = this.generateTags(name, category);
-    const { inputs, outputs, signals } = this.inferApi(name);
+    const { inputs, signals } = this.inferApi(name);
 
     return {
       name,
@@ -520,7 +509,6 @@ export class ComponentRegistry {
         title: 'Basic Usage',
         description: `Basic ${name} example`,
         code: `<${selector}>Basic ${name}</${selector}>`,
-        componentType: null,
       },
     ];
   }
@@ -552,7 +540,7 @@ export class ComponentRegistry {
     });
 
     let filtered = results
-      .map((r: any) => this.getComponent(r.id as string))
+      .map((r) => this.getComponent(r.id as string))
       .filter((c): c is ComponentMetadata => !!c);
 
     if (options?.category) {

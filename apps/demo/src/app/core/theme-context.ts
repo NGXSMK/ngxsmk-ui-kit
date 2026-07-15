@@ -1,6 +1,6 @@
 import { Injectable, signal, computed, inject, effect } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { NgxsmkThemeService, ThemeConfig, ThemeMode, DarkModeStrategy, ResolvedTheme } from '@ngxsmk/theme';
+import { NgxsmkThemeService, ThemeConfig, ThemeMode, ResolvedTheme } from '@ngxsmk/theme';
 
 export interface ThemeContext {
   theme: ResolvedTheme | null;
@@ -77,7 +77,9 @@ export class ThemeContextService {
     this.themeService.setMode(mode);
     try {
       this.document.defaultView?.localStorage?.setItem('ngxsmk-theme-mode', mode);
-    } catch {}
+    } catch {
+      // Ignore storage errors
+    }
   }
 
   toggleMode(): void {
@@ -91,7 +93,9 @@ export class ThemeContextService {
     this._direction.set(dir);
     try {
       this.document.defaultView?.localStorage?.setItem('ngxsmk-direction', dir);
-    } catch {}
+    } catch {
+      // Ignore storage errors
+    }
   }
 
   toggleDirection(): void {
@@ -167,7 +171,9 @@ export class ThemeDirectionService {
     this.direction.set(dir);
     try {
       this.document.defaultView?.localStorage?.setItem('ngxsmk-direction', dir);
-    } catch {}
+    } catch {
+      // Ignore storage errors
+    }
   }
 
   toggle(): void {
