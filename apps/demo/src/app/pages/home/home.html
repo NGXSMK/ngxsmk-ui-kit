@@ -8,20 +8,20 @@
 
     <div class="hero__inner">
       <div class="hero__copy">
-        <span class="hero__badge">
+        <span class="hero__badge" [ngxsmkAnimate]="motionHero">
           <span class="hero__badge-dot" aria-hidden="true"></span>
-          v1.1.0 · Signals-native · Zoneless
+          v1.2.0 · Signals-native · Zoneless
         </span>
-        <h1 class="hero__title">
+        <h1 class="hero__title" [ngxsmkAnimate]="motionTitle">
           The UI kit<br />
           Angular <span class="hero__grad">deserves.</span>
         </h1>
         <p class="hero__lede">
           217 components. Zero runtime dependencies. One universal token engine. Forms, AI,
-          enterprise widgets, and charts — copy-paste the source and own every line.
+          enterprise widgets, and charts - copy-paste the source and own every line.
         </p>
 
-        <div class="hero__cta">
+        <div class="hero__cta" [ngxsmkAnimate]="motionCta">
           <a ngxsmk-button size="lg" routerLink="/showcase">Get started →</a>
           <a ngxsmk-button size="lg" variant="outline" routerLink="/templates">Browse templates</a>
         </div>
@@ -39,7 +39,7 @@
       </div>
 
       <!-- Self-referential bento: the kit showing off the kit -->
-      <div class="bento">
+      <div class="bento" [ngxsmkAnimate]="motionBento">
         <div class="bento__tile bento__tile--brand">
           <span class="bento__logo" aria-hidden="true">◈</span>
           <span class="bento__wordmark">NGXSMK</span>
@@ -203,7 +203,7 @@
     <header class="section__head">
       <p class="section__eyebrow">Templates</p>
       <h2 class="section__title">Production-ready starting points</h2>
-      <p class="section__sub">Full pages assembled from NGXSMK components — clone one and ship.</p>
+      <p class="section__sub">Full pages assembled from NGXSMK components - clone one and ship.</p>
     </header>
 
     <div class="templates">

@@ -139,7 +139,7 @@ interface ApiOutput {
             </div>
           }
           <p class="ngxsmk-sc-ex__api-note">
-            Customize through design tokens — override the component's <code>--ngxsmk-*</code>
+            Customize through design tokens - override the component's <code>--ngxsmk-*</code>
             variables on the host element or at the theme level. Switch to the
             <strong>Customize</strong> tab for a concrete snippet.
           </p>
@@ -313,7 +313,7 @@ export class ShowcaseExample {
   /** Names of the component's outputs, used to detect two-way (`model`) inputs. */
   protected readonly outputNames = computed(() => new Set(this.outputs().map((o) => o.propName)));
 
-  /** A `model()` input exposes a `propNameChange` output — mark it as two-way. */
+  /** A `model()` input exposes a `propNameChange` output - mark it as two-way. */
   protected isModel(propName: string): boolean {
     return this.outputNames().has(`${propName}Change`);
   }

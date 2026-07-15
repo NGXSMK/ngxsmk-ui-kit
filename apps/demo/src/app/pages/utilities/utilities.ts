@@ -37,7 +37,7 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
     <h2 class="ngxsmk-page-title">Utilities &amp; Hooks</h2>
     <p class="ngxsmk-page-desc">
       Invisible-but-powerful directives and hooks for accessibility, layout, and interaction
-      behavior — each demo below makes the effect visible and interactive.
+      behavior - each demo below makes the effect visible and interactive.
     </p>
 
     <showcase-example
@@ -55,10 +55,10 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
         @if (showHidden()) {
           <p style="margin:0">
             Visible label
-            <span ngxsmkVisuallyHidden> — extra description only announced to screen readers</span>
+            <span ngxsmkVisuallyHidden> - extra description only announced to screen readers</span>
           </p>
         } @else {
-          <p style="margin:0">Visible label — extra description only announced to screen readers</p>
+          <p style="margin:0">Visible label - extra description only announced to screen readers</p>
         }
         <p class="ngxsmk-demo-hint">
           Toggle to compare: the directive removes it from view, not the DOM.
@@ -85,14 +85,14 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
           <a ngxsmk-link href="#">A focusable link</a>
         </div>
         <p class="ngxsmk-demo-hint">
-          Turn the trap on, then press Tab — focus loops inside the box.
+          Turn the trap on, then press Tab - focus loops inside the box.
         </p>
       </div>
     </showcase-example>
 
     <showcase-example
       title="Click Outside"
-      description="Emits when a click lands outside the host element — perfect for popovers."
+      description="Emits when a click lands outside the host element - perfect for popovers."
       [code]="codeClickOutside"
       [component]="NgxsmkButton"
     >
@@ -158,7 +158,7 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
 
     <showcase-example
       title="Scroll Lock"
-      description="Locks the document scroll while active — e.g. behind a modal."
+      description="Locks the document scroll while active - e.g. behind a modal."
       [code]="codeScrollLock"
       [component]="NgxsmkButton"
     >
@@ -173,7 +173,7 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
           Scroll is {{ scrollLocked() ? 'LOCKED' : 'free' }}
         </button>
         <p class="ngxsmk-demo-hint">
-          Toggle on, then try scrolling the page — it is frozen until you turn it off.
+          Toggle on, then try scrolling the page - it is frozen until you turn it off.
         </p>
       </div>
     </showcase-example>
@@ -288,13 +288,13 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
 
     <showcase-example
       title="Lazy Load (cards)"
-      description="Each card below is wrapped in ngxsmk-lazy-load, so its markup is only created once it scrolls into the viewport — scroll the feed to watch them appear."
+      description="Each card below is wrapped in ngxsmk-lazy-load, so its markup is only created once it scrolls into the viewport - scroll the feed to watch them appear."
       [code]="codeLazyCards"
       [component]="NgxsmkLazyLoad"
     >
       <div class="ngxsmk-sc-surface" style="flex: 1 1 100%">
         <div class="ngxsmk-scroll-window">
-          <div class="ngxsmk-scroll-spacer">Scroll down — cards load as they enter view…</div>
+          <div class="ngxsmk-scroll-spacer">Scroll down - cards load as they enter view…</div>
           @for (item of lazyCards; track item.id) {
             <ngxsmk-lazy-load class="ngxsmk-lazy-slot">
               <div class="ngxsmk-lazy-card">

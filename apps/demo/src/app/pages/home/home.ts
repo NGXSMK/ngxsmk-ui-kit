@@ -7,6 +7,7 @@ import { Component, inject, signal, computed } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AppNav } from '../../nav/nav';
+import { NgxsmkAnimate } from '@ngxsmk/core/animation';
 import { NgxsmkThemeService } from '@ngxsmk/theme';
 
 interface Feature {
@@ -46,6 +47,7 @@ interface ComponentCategory {
     NgxsmkDialogFooter,
     NgxsmkTag,
     NgxsmkToaster,
+    NgxsmkAnimate,
   ],
   templateUrl: './home.html',
   styleUrl: './home.scss',
@@ -57,6 +59,30 @@ export class HomePage {
 
   protected readonly installCommand = 'npm install @ngxsmk/core @ngxsmk/theme';
   protected readonly searchQuery = signal('');
+
+  protected readonly motionHero = {
+    initial: { opacity: 0, scale: 0.97 },
+    animate: { opacity: 1, scale: 1 },
+    transition: { duration: 0.4, easing: 'ease-out' }
+  };
+
+  protected readonly motionTitle = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    transition: { duration: 0.6, delay: 0.1, easing: 'ease-out' }
+  };
+
+  protected readonly motionCta = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    transition: { duration: 0.4, delay: 0.25, easing: 'ease-out' }
+  };
+
+  protected readonly motionBento = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    transition: { duration: 0.6, delay: 0.35, easing: 'ease-out' }
+  };
 
   protected getItemFragment(item: string): string {
     return item
@@ -76,6 +102,8 @@ export class HomePage {
       items: [
         'Button',
         'Button Group',
+        'FAB (Floating Action)',
+        'Split Button',
         'Toggle Button',
         'Toggle Button Group',
         'Input',
@@ -106,6 +134,7 @@ export class HomePage {
       title: 'AI',
       path: 'ai',
       items: [
+        'Interactive AI Chat',
         'Agent Card',
         'Chat Window',
         'Chat Input',
@@ -208,6 +237,7 @@ export class HomePage {
         'Banner',
         'Badge',
         'Progress',
+        'Progress Circle',
         'Skeleton',
         'Spinner',
         'Empty State',
@@ -229,6 +259,9 @@ export class HomePage {
         'Overflow List',
         'Stat',
         'Status Dot',
+        'Carousel',
+        'Tree View',
+        'QR Code',
       ],
     },
     {
@@ -263,6 +296,8 @@ export class HomePage {
       title: 'Utilities & Hooks',
       path: 'utilities',
       items: [
+        'Theme Builder',
+        'Component Playground',
         'Visually Hidden',
         'Focus Trap',
         'Click Outside',
@@ -297,25 +332,25 @@ export class HomePage {
       icon: '⚡',
       title: 'Angular-native',
       description:
-        'Built with signals, standalone components, and zoneless change detection. Never a port — designed for modern Angular.',
+        'Built with signals, standalone components, and zoneless change detection. Never a port - designed for modern Angular.',
     },
     {
       icon: '◇',
       title: 'Copy-paste DX',
       description:
-        'Own your components. npx ngxsmk add drops the source into your project — no black-box dependencies.',
+        'Own your components. npx ngxsmk add drops the source into your project - no black-box dependencies.',
     },
     {
       icon: '✦',
       title: 'AI components',
       description:
-        'Chat windows, streaming text, agent tool calls, and reasoning timelines — a design system built for the AI era.',
+        'Chat windows, streaming text, agent tool calls, and reasoning timelines - a design system built for the AI era.',
     },
     {
       icon: '▤',
       title: 'Enterprise suite',
       description:
-        'Kanban, workflow, spreadsheet, pivot table, and diagram editors — all free under an MIT license.',
+        'Kanban, workflow, spreadsheet, pivot table, and diagram editors - all free under an MIT license.',
     },
     {
       icon: '❖',

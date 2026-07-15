@@ -28,7 +28,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
   template: `
     <h2 class="ngxsmk-page-title">Feedback</h2>
     <p class="ngxsmk-page-desc">
-      Components that communicate status, progress, and system responses — from inline alerts and
+      Components that communicate status, progress, and system responses - from inline alerts and
       banners to loaders, skeletons, and presence dots.
     </p>
 

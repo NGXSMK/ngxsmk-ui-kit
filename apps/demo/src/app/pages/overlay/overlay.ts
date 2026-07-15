@@ -39,7 +39,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <h2 class="ngxsmk-page-title">Overlay</h2>
     <p class="ngxsmk-page-desc">
       Dialogs, tooltips, menus, and floating panels. Overlays render above the page, trap focus
-      where appropriate, and respect Escape and backdrop dismissal — all wired through signals for
+      where appropriate, and respect Escape and backdrop dismissal - all wired through signals for
       predictable open state.
     </p>
 
@@ -146,7 +146,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Hover Card"
-      description="A rich popover that opens on hover or focus of its trigger — ideal for profile and link previews."
+      description="A rich popover that opens on hover or focus of its trigger - ideal for profile and link previews."
       [code]="codeHoverCard"
       [component]="NgxsmkHoverCard"
       [customize]="customizeNgxsmkHoverCard"
@@ -242,7 +242,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Imperative Dialog"
-      description="An injectable service that opens a native <dialog> programmatically — no template binding required."
+      description="An injectable service that opens a native <dialog> programmatically - no template binding required."
       [code]="codeImperativeDialog"
       [component]="NgxsmkButton"
     >
@@ -257,7 +257,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Imperative Alert Dialog"
-      description="An injectable service that resolves a Promise<boolean> from a confirm prompt — great for quick inline confirmations."
+      description="An injectable service that resolves a Promise<boolean> from a confirm prompt - great for quick inline confirmations."
       [code]="codeImperativeAlertDialog"
       [component]="NgxsmkButton"
     >

@@ -1,4 +1,4 @@
-import { deriveScale } from './color';
+import { deriveScale, rotateHue } from './color';
 import {
   DEFAULT_FONT_FAMILY,
   DEFAULT_NEUTRAL,
@@ -27,10 +27,13 @@ export function defineConfig(config: ThemeConfig): ThemeConfig {
 
 /** Merge a user config with defaults and derive all color scales. */
 export function resolveTheme(config: ThemeConfig): ResolvedTheme {
+  const secondaryBase = config.brand.secondary ?? rotateHue(config.brand.primary, 60);
   return {
     name: config.name ?? 'custom',
     brandBase: config.brand.primary,
     brand: config.brand.primaryScale ?? deriveScale(config.brand.primary),
+    secondaryBase,
+    secondary: config.brand.secondaryScale ?? deriveScale(secondaryBase),
     neutral: config.neutral ?? DEFAULT_NEUTRAL,
     semantic: { ...DEFAULT_SEMANTIC, ...config.semantic },
     fontFamily: { ...DEFAULT_FONT_FAMILY, ...config.typography?.fontFamily },

@@ -81,7 +81,7 @@ interface Option {
     <h2 class="ngxsmk-page-title">Forms</h2>
     <p class="ngxsmk-page-desc">
       Buttons, inputs, selects, and rich form controls. Every component below is live and
-      interactive — try them out, then reveal the code to copy it.
+      interactive - try them out, then reveal the code to copy it.
     </p>
 
     <div class="ngxsmk-sc-col">
@@ -145,14 +145,14 @@ interface Option {
 
       <showcase-example
         title="Input"
-        description="Themes native text inputs — pair it with a Form Field for labels."
+        description="Themes native text inputs - pair it with a Form Field for labels."
         [code]="codeInput"
         [component]="NgxsmkInput"
         [customize]="customizeNgxsmkInput"
       >
         <div class="ngxsmk-sc-col" style="width: 100%; max-width: 320px">
           <ngxsmk-input type="email" placeholder="you@example.com" [(value)]="email" />
-          <small>Value: {{ email() || '—' }}</small>
+          <small>Value: {{ email() || '-' }}</small>
         </div>
       </showcase-example>
 
@@ -188,7 +188,7 @@ interface Option {
       >
         <div class="ngxsmk-sc-col" style="width: 100%; max-width: 260px">
           <ngxsmk-select [options]="colors" placeholder="Pick a color" [(value)]="color" />
-          <small>Selected: {{ color() || '—' }}</small>
+          <small>Selected: {{ color() || '-' }}</small>
         </div>
       </showcase-example>
 
@@ -260,7 +260,7 @@ interface Option {
             [filters]="searchFilters"
             [(query)]="searchQuery"
           />
-          <small>Query: {{ searchQuery() || '—' }}</small>
+          <small>Query: {{ searchQuery() || '-' }}</small>
         </div>
       </showcase-example>
 

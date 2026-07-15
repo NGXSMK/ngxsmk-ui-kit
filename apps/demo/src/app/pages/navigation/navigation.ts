@@ -59,7 +59,7 @@ interface AppOutlineItem {
   template: `
     <h2 class="ngxsmk-page-title">Navigation</h2>
     <p class="ngxsmk-page-desc">
-      Navigation primitives — from tiny breadcrumbs to full app shells — that share the theme token
+      Navigation primitives - from tiny breadcrumbs to full app shells - that share the theme token
       engine, so every link, tab, and menu recolors with your brand.
     </p>
 
@@ -89,7 +89,7 @@ interface AppOutlineItem {
 
     <showcase-example
       title="Tab Menu"
-      description='A segmented tab strip. Drop any clickable elements inside — here a set of role="tab" buttons.'
+      description='A segmented tab strip. Drop any clickable elements inside - here a set of role="tab" buttons.'
       [code]="codeTabMenu"
       [component]="NgxsmkTabMenu"
       [customize]="customizeNgxsmkTabMenu"
@@ -294,7 +294,7 @@ interface AppOutlineItem {
       [customize]="customizeNgxsmkTopNav"
     >
       <div
-        style="height: 280px; position: relative; width: 100%; overflow: hidden; border: 1px solid var(--ngxsmk-color-outline); border-radius: var(--ngxsmk-radius-lg);"
+        style="height: 380px; position: relative; width: 100%; overflow: hidden; border: 1px solid var(--ngxsmk-color-outline); border-radius: var(--ngxsmk-radius-lg);"
       >
         <ngxsmk-top-nav>
           <ngxsmk-top-nav-heading>Acme</ngxsmk-top-nav-heading>
@@ -388,7 +388,7 @@ interface AppOutlineItem {
 
     <showcase-example
       title="Side Nav (composed)"
-      description="Build a vertical nav from the side-nav primitives — sections, headings, items, and a collapse button — inside a constrained container."
+      description="Build a vertical nav from the side-nav primitives - sections, headings, items, and a collapse button - inside a constrained container."
       [code]="codeSideNavComposed"
       [component]="NgxsmkSideNav"
       [customize]="customizeNgxsmkSideNav"
@@ -424,7 +424,7 @@ interface AppOutlineItem {
 
     <showcase-example
       title="Top Nav (composed)"
-      description="Assemble a horizontal bar from top-nav primitives — heading, items, a menu, and mega-menu cards — inside a constrained container."
+      description="Assemble a horizontal bar from top-nav primitives - heading, items, a menu, and mega-menu cards - inside a constrained container."
       [code]="codeTopNavComposed"
       [component]="NgxsmkTopNavHeading"
       [customize]="customizeNgxsmkTopNavHeading"

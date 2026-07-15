@@ -67,6 +67,10 @@ export interface ThemeConfig {
     primary: string;
     /** Optional pre-built scale; overrides derivation from `primary`. */
     primaryScale?: ColorScale;
+    /** Secondary brand color as hex. A full 50–950 scale is derived. */
+    secondary?: string;
+    /** Optional pre-built secondary scale. */
+    secondaryScale?: ColorScale;
   };
   /** Neutral (gray) scale. Defaults to a balanced zinc-like scale. */
   neutral?: ColorScale;
@@ -98,6 +102,8 @@ export interface ResolvedTheme {
   /** The exact brand color from the config — light-mode primary. */
   brandBase: string;
   brand: ColorScale;
+  secondaryBase: string;
+  secondary: ColorScale;
   neutral: ColorScale;
   semantic: SemanticColors;
   fontFamily: FontFamilies;

@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, input, model, output } from '@angular/core';
+import { NgxsmkCheckbox } from '@ngxsmk/core/checkbox';
 
 export interface CheckboxListItem {
   value: string;
@@ -10,18 +11,13 @@ export interface CheckboxListItem {
   selector: 'ngxsmk-checkbox-list',
   template: `
     @for (item of items(); track item.value) {
-      <label
-        class="ngxsmk-checkbox-list__item"
-        [class.ngxsmk-checkbox-list__item--disabled]="item.disabled"
+      <ngxsmk-checkbox
+        [checked]="isChecked(item.value)"
+        [disabled]="item.disabled || false"
+        (checkedChange)="toggle(item.value)"
       >
-        <input
-          type="checkbox"
-          [checked]="isChecked(item.value)"
-          [disabled]="item.disabled"
-          (change)="toggle(item.value)"
-        />
-        <span>{{ item.label }}</span>
-      </label>
+        {{ item.label }}
+      </ngxsmk-checkbox>
     }
   `,
   host: { class: 'ngxsmk-checkbox-list' },
@@ -32,20 +28,9 @@ export interface CheckboxListItem {
       gap: var(--ngxsmk-space-2);
       font-family: var(--ngxsmk-font-sans);
     }
-    .ngxsmk-checkbox-list__item {
-      display: flex;
-      align-items: center;
-      gap: var(--ngxsmk-space-2);
-      cursor: pointer;
-      font-size: 0.875rem;
-      color: var(--ngxsmk-color-on-surface);
-    }
-    .ngxsmk-checkbox-list__item--disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
   `,
   standalone: true,
+  imports: [NgxsmkCheckbox],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgxsmkCheckboxList {

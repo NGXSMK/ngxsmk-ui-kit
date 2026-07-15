@@ -5,9 +5,12 @@ import { violetPreset } from './presets';
 describe('buildThemeCss', () => {
   const css = buildThemeCss(violetPreset);
 
-  it('emits brand scale, semantic roles, and static tokens on :root', () => {
+  it('emits brand scale, secondary scale, surface elevation, and static tokens on :root', () => {
     expect(css).toContain(':root {');
     expect(css).toContain('--ngxsmk-color-brand-500:');
+    expect(css).toContain('--ngxsmk-color-secondary-500:');
+    expect(css).toContain('--ngxsmk-color-surface-1:');
+    expect(css).toContain('--ngxsmk-color-surface-5:');
     expect(css).toContain('--ngxsmk-color-primary:');
     expect(css).toContain('--ngxsmk-color-surface:');
     expect(css).toContain('--ngxsmk-space-4: 1rem;');
@@ -16,6 +19,8 @@ describe('buildThemeCss', () => {
     expect(css).toContain('--ngxsmk-duration-normal: 200ms;');
     expect(css).toContain('--ngxsmk-font-sans:');
     expect(css).toContain('--ngxsmk-text-body-md-size: 0.875rem;');
+    expect(css).toContain('--ngxsmk-motion-duration:');
+    expect(css).toContain('@media (prefers-reduced-motion: reduce) {');
   });
 
   it('defaults to the class dark-mode strategy', () => {

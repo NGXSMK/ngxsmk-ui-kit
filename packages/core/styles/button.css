@@ -126,3 +126,101 @@
     transform: rotate(360deg);
   }
 }
+
+/* FAB Styles */
+.ngxsmk-fab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--ngxsmk-radius-full);
+  border: none;
+  cursor: pointer;
+  font-family: var(--ngxsmk-font-sans);
+  font-weight: 500;
+  box-shadow: var(--ngxsmk-shadow-lg);
+  transition: all var(--ngxsmk-motion-duration) var(--ngxsmk-motion-ease);
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+.ngxsmk-fab[data-size='sm'] {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+.ngxsmk-fab[data-size='md'] {
+  width: 3.5rem;
+  height: 3.5rem;
+}
+.ngxsmk-fab[data-size='lg'] {
+  width: 4.5rem;
+  height: 4.5rem;
+}
+
+.ngxsmk-fab[data-extended] {
+  width: auto;
+  padding: 0 var(--ngxsmk-space-4);
+  gap: var(--ngxsmk-space-2);
+}
+.ngxsmk-fab[data-extended][data-size='sm'] {
+  height: 2.5rem;
+}
+.ngxsmk-fab[data-extended][data-size='md'] {
+  height: 3.5rem;
+}
+.ngxsmk-fab[data-extended][data-size='lg'] {
+  height: 4.5rem;
+}
+
+.ngxsmk-fab[data-variant='primary'] {
+  background: var(--ngxsmk-color-primary);
+  color: var(--ngxsmk-color-on-primary);
+}
+.ngxsmk-fab[data-variant='primary']:hover {
+  background: var(--ngxsmk-color-primary-hover);
+  transform: translateY(-2px);
+}
+.ngxsmk-fab[data-variant='primary']:active {
+  background: var(--ngxsmk-color-primary-active);
+  transform: translateY(0);
+}
+
+.ngxsmk-fab[data-variant='secondary'] {
+  background: var(--ngxsmk-color-secondary);
+  color: var(--ngxsmk-color-on-secondary);
+}
+.ngxsmk-fab[data-variant='secondary']:hover {
+  background: var(--ngxsmk-color-secondary-hover);
+  transform: translateY(-2px);
+}
+.ngxsmk-fab[data-variant='secondary']:active {
+  background: var(--ngxsmk-color-secondary-active);
+  transform: translateY(0);
+}
+
+.ngxsmk-fab[data-position] {
+  position: fixed;
+  z-index: var(--ngxsmk-z-popover, 1500);
+}
+.ngxsmk-fab[data-position='bottom-right'] {
+  bottom: 1.5rem;
+  right: 1.5rem;
+}
+.ngxsmk-fab[data-position='bottom-left'] {
+  bottom: 1.5rem;
+  left: 1.5rem;
+}
+.ngxsmk-fab[data-position='top-right'] {
+  top: 1.5rem;
+  right: 1.5rem;
+}
+.ngxsmk-fab[data-position='top-left'] {
+  top: 1.5rem;
+  left: 1.5rem;
+}
+
+.ngxsmk-fab[disabled] {
+  opacity: 0.6;
+  pointer-events: none;
+  box-shadow: none;
+}
+

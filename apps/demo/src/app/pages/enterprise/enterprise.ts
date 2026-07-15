@@ -44,7 +44,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
   template: `
     <h2 class="ngxsmk-page-title">Enterprise</h2>
     <p class="ngxsmk-page-desc">
-      Heavy-duty building blocks for business applications — boards, schedulers, editors, and data
+      Heavy-duty building blocks for business applications - boards, schedulers, editors, and data
       tools. Each one is theme-aware and ready to wire up to your own data sources.
     </p>
 

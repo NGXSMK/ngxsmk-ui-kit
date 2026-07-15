@@ -30,7 +30,7 @@ import { FormsModule } from '@angular/forms';
           [initialCountry]="'US'"
           [separateDialCode]="true"
         />
-        <small>Value (E.164): {{ phone() || '—' }}</small>
+        <small>Value (E.164): {{ phone() || '-' }}</small>
       </div>
     } @placeholder (minimum 200ms) {
       <div class="ngxsmk-sc-col" style="width: 100%; max-width: 360px; min-height: 56px"></div>

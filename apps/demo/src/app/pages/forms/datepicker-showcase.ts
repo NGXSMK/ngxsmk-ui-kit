@@ -27,13 +27,13 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
         } @placeholder (minimum 200ms) {
           <div style="height: 40px"></div>
         }
-        <small>Date: {{ date() || '—' }}</small>
+        <small>Date: {{ date() || '-' }}</small>
       </div>
     </showcase-example>
 
     <showcase-example
       title="Datepicker (calendar)"
-      description="A feature-rich popover calendar powered by ngxsmk-datepicker — month navigation, ranges, time, i18n, and more."
+      description="A feature-rich popover calendar powered by ngxsmk-datepicker - month navigation, ranges, time, i18n, and more."
       [code]="codeDatepicker"
     >
       <div class="ngxsmk-sc-col" style="width: 100%; max-width: 300px">
@@ -46,7 +46,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
         } @placeholder (minimum 200ms) {
           <div style="height: 40px"></div>
         }
-        <small>Selected: {{ calendarDate() ? calendarDate()!.toLocaleDateString() : '—' }}</small>
+        <small>Selected: {{ calendarDate() ? calendarDate()!.toLocaleDateString() : '-' }}</small>
       </div>
     </showcase-example>
   `,

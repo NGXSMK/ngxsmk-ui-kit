@@ -46,7 +46,7 @@ interface Milestone {
             <div ngxsmkCardHeader>
               <div class="ngxsmk-milestone__top">
                 <ngxsmk-heading level="h3" ngxsmkCardTitle
-                  >{{ m.quarter }} — {{ m.title }}</ngxsmk-heading
+                  >{{ m.quarter }} - {{ m.title }}</ngxsmk-heading
                 >
                 <ngxsmk-badge
                   [variant]="

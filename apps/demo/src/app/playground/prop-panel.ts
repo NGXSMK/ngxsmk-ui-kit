@@ -28,7 +28,7 @@ export interface PropDescriptor {
  * Config-driven editor for a component's inputs. Pass a list of
  * `PropDescriptor`s and a two-way `values` record; it renders one control per
  * descriptor and writes edits back into `values`. Adding support for a new
- * component is purely data — no template changes required.
+ * component is purely data - no template changes required.
  */
 @Component({
   selector: 'ngxsmk-prop-panel',

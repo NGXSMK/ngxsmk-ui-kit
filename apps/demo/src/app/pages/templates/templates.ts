@@ -859,7 +859,7 @@ interface TemplateItem {
       outline: 2px solid var(--ngxsmk-color-ring);
       outline-offset: -2px;
     }
-    /* The mock renders at ~1.67x then scales down to fit — a mini desktop preview */
+    /* The mock renders at ~1.67x then scales down to fit - a mini desktop preview */
     .tpl-card__frame {
       position: absolute;
       top: 0;

@@ -182,6 +182,7 @@ export class NgxsmkTopNavMenu {}
       box-shadow: var(--ngxsmk-shadow-lg);
       z-index: var(--ngxsmk-z-dropdown, 1000);
       cursor: default;
+      white-space: normal;
     }
     :host(:hover) .ngxsmk-top-nav-mega-menu__dropdown {
       display: flex;
