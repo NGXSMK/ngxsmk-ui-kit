@@ -62,6 +62,9 @@ const compatTsConfig = {
     moduleResolution: "bundler",
     importHelpers: false,
   },
+  angularCompilerOptions: {
+    compilationMode: "partial",
+  },
 };
 
 const projects = {};

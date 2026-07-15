@@ -1,5 +1,11 @@
 import { execSync } from 'node:child_process';
-import { readFileSync, writeFileSync, existsSync, rmSync } from 'node:fs';
+import {
+  readFileSync,
+  writeFileSync,
+  existsSync,
+  rmSync,
+  renameSync,
+} from 'node:fs';
 
 // Build with the LOWEST supported Angular so the partial-Ivy output is
 // forward-compatible: a package compiled with an older ng-packagr loads on
@@ -8,12 +14,14 @@ import { readFileSync, writeFileSync, existsSync, rmSync } from 'node:fs';
 const ANGULAR = '17';
 const FLOOR = '17.3';
 const LIBS = ['theme', 'cdk', 'core'];
-const BUILDER = '@angular-devkit/build-angular'; // Angular 17 uses legacy builder
+const BUILDER = '@angular-devkit/build-angular:ng-packagr';
+const ANGULAR_JSON = 'angular.json';
+const BACKUP = 'angular.json.bak-publish';
 
 const run = (cmd) => execSync(cmd, { stdio: 'inherit' });
 
 // 1. Pin the lowest-supported Angular toolchain (--no-save: package.json untouched).
-//    Two-pass install: first pin the Angular packages so we can read the correct
+//    Two-pass install: first pin Angular packages so we can read the correct
 //    TypeScript peer range from compiler-cli, then reinstall everything together
 //    with the matched TypeScript — this prevents npm from rolling back Angular packages.
 console.log(`\nInstalling Angular ${ANGULAR} toolchain...`);
@@ -28,7 +36,7 @@ const PKGS = [
   `@angular/cdk@^${FLOOR}.0`,
   `ng-packagr@^${FLOOR}.0`,
   `@angular/cli@^${FLOOR}.0`,
-  `${BUILDER}@^${FLOOR}.0`,
+  `@angular-devkit/build-angular@^${FLOOR}.0`,
   'tslib',
 ].join(' ');
 
@@ -41,19 +49,50 @@ console.log(`TypeScript peer for Angular ${ANGULAR}: ${tsRange}`);
 
 run(`npm install --no-save --legacy-peer-deps typescript@"${tsRange}" ${PKGS}`);
 
-// 2. Back up the real angular.json and generate a libs-only one.
-const backup = 'angular.json.bak-publish';
-if (existsSync('angular.json')) writeFileSync(backup, readFileSync('angular.json'));
-run(`node tools/scripts/gen-ci-angularjson.mjs ${ANGULAR}`);
+// 2. Back up the real angular.json and write a libs-only one inline.
+//    (We do NOT call gen-ci-angularjson.mjs to avoid its own backup chain.)
+if (existsSync(ANGULAR_JSON)) renameSync(ANGULAR_JSON, BACKUP);
+
+const compatTsConfig = {
+  extends: './tsconfig.lib.json',
+  compilerOptions: { module: 'esnext', moduleResolution: 'bundler', importHelpers: false },
+  angularCompilerOptions: { compilationMode: 'partial' },
+};
+
+const projects = {};
+for (const lib of LIBS) {
+  const compatPath = `packages/${lib}/tsconfig.lib.compat.json`;
+  writeFileSync(compatPath, JSON.stringify(compatTsConfig, null, 2) + '\n');
+  projects[`@ngxsmk/${lib}`] = {
+    projectType: 'library',
+    root: `packages/${lib}`,
+    sourceRoot: `packages/${lib}/src`,
+    prefix: 'ngxsmk',
+    architect: {
+      build: {
+        builder: BUILDER,
+        options: { project: `packages/${lib}/ng-package.json`, tsConfig: compatPath },
+        configurations: {
+          production: { tsConfig: compatPath },
+          development: { tsConfig: compatPath },
+        },
+        defaultConfiguration: 'production',
+      },
+    },
+  };
+}
+writeFileSync(
+  ANGULAR_JSON,
+  JSON.stringify({ version: 1, newProjectRoot: 'projects', projects }, null, 2) + '\n',
+);
 
 try {
-  // 3. Build all three libraries with the matching Angular CLI in production
-  //    (partial compilation mode — required for npm publish).
-  console.log('\nBuilding libraries in partial compilation mode...');
+  // 3. Clean any stale dist artifacts, then build all three libraries.
+  //    Partial compilation mode is guaranteed by the compat tsconfig above.
+  console.log('\nCleaning dist and rebuilding libraries in partial compilation mode...');
+  if (existsSync('dist')) rmSync('dist', { recursive: true, force: true });
   for (const lib of LIBS) {
-    run(
-      `npx -p @angular/cli@${ANGULAR} ng build --project @ngxsmk/${lib} --configuration production`,
-    );
+    run(`npx -p @angular/cli@${ANGULAR} ng build --project @ngxsmk/${lib} --configuration production`);
   }
 
   // 4. Publish (public via publishConfig in each package.json).
@@ -65,11 +104,15 @@ try {
   const version = JSON.parse(readFileSync('./packages/core/package.json', 'utf8')).version;
   console.log(`\n✓ Published @ngxsmk/{cdk,theme,core}@${version} (built with Angular ${ANGULAR}).`);
 } finally {
-  // 5. Always restore angular.json.
-  if (existsSync(backup)) {
-    writeFileSync('angular.json', readFileSync(backup));
-    rmSync(backup);
+  // 5. Always restore angular.json and clean up generated compat tsconfigs.
+  for (const lib of LIBS) {
+    const p = `packages/${lib}/tsconfig.lib.compat.json`;
+    if (existsSync(p)) rmSync(p);
+  }
+  if (existsSync(BACKUP)) {
+    if (existsSync(ANGULAR_JSON)) rmSync(ANGULAR_JSON);
+    renameSync(BACKUP, ANGULAR_JSON);
     console.log('\nRestored angular.json.');
   }
-  console.log('Run `npm install` to restore the Angular 22 development toolchain.');
+  console.log('Run `npm run restore:toolchain` to restore the Angular 22 development toolchain.');
 }
