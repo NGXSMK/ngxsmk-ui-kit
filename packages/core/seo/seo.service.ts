@@ -1,10 +1,10 @@
 import { DOCUMENT } from '@angular/common';
 import {
+  ENVIRONMENT_INITIALIZER,
   EnvironmentProviders,
   Injectable,
   inject,
   makeEnvironmentProviders,
-  provideAppInitializer,
 } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 
@@ -155,8 +155,10 @@ export class NgxsmkSeoService {
  */
 export function provideSeo(config: NgxsmkSeoConfig): EnvironmentProviders {
   return makeEnvironmentProviders([
-    provideAppInitializer(() => {
-      inject(NgxsmkSeoService).update(config);
-    }),
+    {
+      provide: ENVIRONMENT_INITIALIZER,
+      useValue: () => inject(NgxsmkSeoService).update(config),
+      multi: true,
+    },
   ]);
 }
