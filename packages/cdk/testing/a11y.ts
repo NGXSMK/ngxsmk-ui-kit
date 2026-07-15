@@ -12,7 +12,7 @@ export async function expectNoA11yViolations(element: HTMLElement): Promise<void
         (v) =>
           `[${v.id}] ${v.help}\n  - Help URL: ${v.helpUrl}\n  - Nodes affected:\n${v.nodes
             .map((n) => `    * ${n.html}`)
-            .join('\n')}`
+            .join('\n')}`,
       )
       .join('\n\n');
     throw new Error(`Accessibility violations detected:\n\n${formatted}`);

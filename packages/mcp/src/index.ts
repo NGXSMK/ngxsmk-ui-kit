@@ -3,47 +3,51 @@ import * as readline from 'readline';
 const TOOLS = [
   {
     name: 'ngxsmk_search_components',
-    description: 'Search for component definitions, styling capabilities, and inputs/outputs in the ngxsmk-ui-kit library.',
+    description:
+      'Search for component definitions, styling capabilities, and inputs/outputs in the ngxsmk-ui-kit library.',
     inputSchema: {
       type: 'object',
       properties: {
         query: {
           type: 'string',
-          description: 'Keyword search (e.g. "button", "carousel", "ai-chat")'
-        }
+          description: 'Keyword search (e.g. "button", "carousel", "ai-chat")',
+        },
       },
-      required: ['query']
-    }
+      required: ['query'],
+    },
   },
   {
     name: 'ngxsmk_explain_api',
-    description: 'Get deep technical documentation, code snippets, inputs, outputs, and design tokens for a specific ngxsmk component.',
+    description:
+      'Get deep technical documentation, code snippets, inputs, outputs, and design tokens for a specific ngxsmk component.',
     inputSchema: {
       type: 'object',
       properties: {
         component: {
           type: 'string',
-          description: 'The exact component class name or selector (e.g. "NgxsmkAiChat", "ngx-button")'
-        }
+          description:
+            'The exact component class name or selector (e.g. "NgxsmkAiChat", "ngx-button")',
+        },
       },
-      required: ['component']
-    }
+      required: ['component'],
+    },
   },
   {
     name: 'ngxsmk_recommend_layout',
-    description: 'Generate production-ready Angular template layouts using ngxsmk grid, stack, and card systems.',
+    description:
+      'Generate production-ready Angular template layouts using ngxsmk grid, stack, and card systems.',
     inputSchema: {
       type: 'object',
       properties: {
         type: {
           type: 'string',
           enum: ['login', 'dashboard', 'settings', 'ai-assistant'],
-          description: 'The type of application layout to generate'
-        }
+          description: 'The type of application layout to generate',
+        },
       },
-      required: ['type']
-    }
-  }
+      required: ['type'],
+    },
+  },
 ];
 
 const COMPONENT_DATABASE = [
@@ -51,51 +55,81 @@ const COMPONENT_DATABASE = [
     name: 'NgxsmkAiChat',
     selector: 'ngxsmk-ai-chat',
     inputs: [
-      { name: 'messages', type: 'NgxsmkAiMessage[]', default: '[]', desc: 'Array of conversational user/assistant turn messages.' },
-      { name: 'models', type: 'string[]', default: "['gemini-2.5-flash', 'gemini-2.5-pro']", desc: 'List of options in model selector dropdown.' },
-      { name: 'isTyping', type: 'boolean', default: 'false', desc: 'Shows animated typing indicator bubbles.' },
-      { name: 'tokenCount', type: 'number', default: '0', desc: 'Displays total token count usage indicator.' }
+      {
+        name: 'messages',
+        type: 'NgxsmkAiMessage[]',
+        default: '[]',
+        desc: 'Array of conversational user/assistant turn messages.',
+      },
+      {
+        name: 'models',
+        type: 'string[]',
+        default: "['gemini-2.5-flash', 'gemini-2.5-pro']",
+        desc: 'List of options in model selector dropdown.',
+      },
+      {
+        name: 'isTyping',
+        type: 'boolean',
+        default: 'false',
+        desc: 'Shows animated typing indicator bubbles.',
+      },
+      {
+        name: 'tokenCount',
+        type: 'number',
+        default: '0',
+        desc: 'Displays total token count usage indicator.',
+      },
     ],
     outputs: [
-      { name: 'sendMessage', type: 'string', desc: 'Emitted when user submits a message or selects a suggestion chip.' },
-      { name: 'modelChanged', type: 'string', desc: 'Emitted when a new model is selected in the dropdown.' }
+      {
+        name: 'sendMessage',
+        type: 'string',
+        desc: 'Emitted when user submits a message or selects a suggestion chip.',
+      },
+      {
+        name: 'modelChanged',
+        type: 'string',
+        desc: 'Emitted when a new model is selected in the dropdown.',
+      },
     ],
     tokens: [
       '--ngxsmk-color-primary',
       '--ngxsmk-color-surface',
       '--ngxsmk-color-outline',
       '--ngxsmk-radius-lg',
-      '--ngxsmk-space-4'
+      '--ngxsmk-space-4',
     ],
-    snippet: `<ngxsmk-ai-chat\n  [messages]="messages()"\n  [isTyping]="isTyping()"\n  (sendMessage)="onSendMessage($event)"\n/>`
+    snippet: `<ngxsmk-ai-chat\n  [messages]="messages()"\n  [isTyping]="isTyping()"\n  (sendMessage)="onSendMessage($event)"\n/>`,
   },
   {
     name: 'NgxsmkThemeBuilder',
     selector: 'ngxsmk-theme-builder',
     inputs: [],
     outputs: [],
-    tokens: [
-      '--ngxsmk-color-surface',
-      '--ngxsmk-color-outline',
-      '--ngxsmk-radius-lg'
-    ],
-    snippet: `<ngxsmk-theme-builder />`
+    tokens: ['--ngxsmk-color-surface', '--ngxsmk-color-outline', '--ngxsmk-radius-lg'],
+    snippet: `<ngxsmk-theme-builder />`,
   },
   {
     name: 'NgxsmkCarousel',
     selector: 'ngxsmk-carousel',
     inputs: [
-      { name: 'autoplay', type: 'boolean', default: 'false', desc: 'Toggles automated slide cycling interval.' },
-      { name: 'interval', type: 'number', default: '3000', desc: 'Timeout in milliseconds between auto cycles.' }
+      {
+        name: 'autoplay',
+        type: 'boolean',
+        default: 'false',
+        desc: 'Toggles automated slide cycling interval.',
+      },
+      {
+        name: 'interval',
+        type: 'number',
+        default: '3000',
+        desc: 'Timeout in milliseconds between auto cycles.',
+      },
     ],
     outputs: [],
-    tokens: [
-      '--ngxsmk-motion-duration',
-      '--ngxsmk-motion-ease',
-      '--ngxsmk-color-primary'
-    ],
-    snippet: `<ngxsmk-carousel [autoplay]="true">\n  <ngxsmk-carousel-slide>Slide 1</ngxsmk-carousel-slide>\n  <ngxsmk-carousel-slide>Slide 2</ngxsmk-carousel-slide>\n</ngxsmk-carousel>`
-  }
+    tokens: ['--ngxsmk-motion-duration', '--ngxsmk-motion-ease', '--ngxsmk-color-primary'],
+    snippet: `<ngxsmk-carousel [autoplay]="true">\n  <ngxsmk-carousel-slide>Slide 1</ngxsmk-carousel-slide>\n  <ngxsmk-carousel-slide>Slide 2</ngxsmk-carousel-slide>\n</ngxsmk-carousel>`,
+  },
 ];
 
 function handleRequest(message: any): any {
@@ -108,13 +142,13 @@ function handleRequest(message: any): any {
       result: {
         protocolVersion: '2024-11-05',
         capabilities: {
-          tools: {}
+          tools: {},
         },
         serverInfo: {
           name: 'ngxsmk-mcp-server',
-          version: '1.2.0'
-        }
-      }
+          version: '1.2.0',
+        },
+      },
     };
   }
 
@@ -123,8 +157,8 @@ function handleRequest(message: any): any {
       jsonrpc: '2.0',
       id,
       result: {
-        tools: TOOLS
-      }
+        tools: TOOLS,
+      },
     };
   }
 
@@ -133,9 +167,8 @@ function handleRequest(message: any): any {
 
     if (name === 'ngxsmk_search_components') {
       const query = (args.query || '').toLowerCase();
-      const results = COMPONENT_DATABASE.filter(c => 
-        c.name.toLowerCase().includes(query) || 
-        c.selector.toLowerCase().includes(query)
+      const results = COMPONENT_DATABASE.filter(
+        (c) => c.name.toLowerCase().includes(query) || c.selector.toLowerCase().includes(query),
       );
 
       return {
@@ -145,20 +178,20 @@ function handleRequest(message: any): any {
           content: [
             {
               type: 'text',
-              text: results.length > 0 
-                ? `Found ${results.length} components:\n\n${results.map(r => `- **${r.name}** (<${r.selector}>)`).join('\n')}`
-                : `No components matched query: "${query}"`
-            }
-          ]
-        }
+              text:
+                results.length > 0
+                  ? `Found ${results.length} components:\n\n${results.map((r) => `- **${r.name}** (<${r.selector}>)`).join('\n')}`
+                  : `No components matched query: "${query}"`,
+            },
+          ],
+        },
       };
     }
 
     if (name === 'ngxsmk_explain_api') {
       const compName = (args.component || '').toLowerCase();
-      const match = COMPONENT_DATABASE.find(c => 
-        c.name.toLowerCase() === compName || 
-        c.selector.toLowerCase() === compName
+      const match = COMPONENT_DATABASE.find(
+        (c) => c.name.toLowerCase() === compName || c.selector.toLowerCase() === compName,
       );
 
       if (!match) {
@@ -169,16 +202,20 @@ function handleRequest(message: any): any {
             content: [
               {
                 type: 'text',
-                text: `Component "${args.component}" not found in database. Try searching first.`
-              }
-            ]
-          }
+                text: `Component "${args.component}" not found in database. Try searching first.`,
+              },
+            ],
+          },
         };
       }
 
-      const inputsText = match.inputs.map(i => `- \`[${i.name}]\` (${i.type}, default: \`${i.default}\`): ${i.desc}`).join('\n');
-      const outputsText = match.outputs.map(o => `- \`(${o.name})\` (emits: \`${o.type}\`): ${o.desc}`).join('\n');
-      const tokensText = match.tokens.map(t => `- \`${t}\``).join('\n');
+      const inputsText = match.inputs
+        .map((i) => `- \`[${i.name}]\` (${i.type}, default: \`${i.default}\`): ${i.desc}`)
+        .join('\n');
+      const outputsText = match.outputs
+        .map((o) => `- \`(${o.name})\` (emits: \`${o.type}\`): ${o.desc}`)
+        .join('\n');
+      const tokensText = match.tokens.map((t) => `- \`${t}\``).join('\n');
 
       return {
         jsonrpc: '2.0',
@@ -202,10 +239,10 @@ ${tokensText || 'None'}
 \`\`\`html
 ${match.snippet}
 \`\`\`
-`
-            }
-          ]
-        }
+`,
+            },
+          ],
+        },
       };
     }
 
@@ -250,10 +287,10 @@ ${match.snippet}
           content: [
             {
               type: 'text',
-              text: `Recommended layout code:\n\n\`\`\`html\n${template}\n\`\`\``
-            }
-          ]
-        }
+              text: `Recommended layout code:\n\n\`\`\`html\n${template}\n\`\`\``,
+            },
+          ],
+        },
       };
     }
   }
@@ -263,15 +300,15 @@ ${match.snippet}
     id,
     error: {
       code: -32601,
-      message: `Method not found: ${method}`
-    }
+      message: `Method not found: ${method}`,
+    },
   };
 }
 
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
-  terminal: false
+  terminal: false,
 });
 
 rl.on('line', (line: string) => {
@@ -282,12 +319,14 @@ rl.on('line', (line: string) => {
     const response = handleRequest(message);
     console.log(JSON.stringify(response));
   } catch (err) {
-    console.error(JSON.stringify({
-      jsonrpc: '2.0',
-      error: {
-        code: -32700,
-        message: 'Parse error'
-      }
-    }));
+    console.error(
+      JSON.stringify({
+        jsonrpc: '2.0',
+        error: {
+          code: -32700,
+          message: 'Parse error',
+        },
+      }),
+    );
   }
 });

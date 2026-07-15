@@ -41,7 +41,9 @@ describe('NgxsmkCarousel', () => {
     expect(prevBtn).toBeTruthy();
     expect(nextBtn).toBeTruthy();
 
-    const indicators = fixture.nativeElement.querySelectorAll('.ngxsmk-carousel__indicators button');
+    const indicators = fixture.nativeElement.querySelectorAll(
+      '.ngxsmk-carousel__indicators button',
+    );
     expect(indicators.length).toBe(2);
   });
 
@@ -49,11 +51,15 @@ describe('NgxsmkCarousel', () => {
     const fixture = TestBed.createComponent(HostComponent);
     fixture.detectChanges();
 
-    const nextBtn = fixture.nativeElement.querySelector('.ngxsmk-carousel__btn--next') as HTMLButtonElement;
-    const prevBtn = fixture.nativeElement.querySelector('.ngxsmk-carousel__btn--prev') as HTMLButtonElement;
+    const nextBtn = fixture.nativeElement.querySelector(
+      '.ngxsmk-carousel__btn--next',
+    ) as HTMLButtonElement;
+    const prevBtn = fixture.nativeElement.querySelector(
+      '.ngxsmk-carousel__btn--prev',
+    ) as HTMLButtonElement;
 
     const componentInstance = fixture.debugElement.query(
-      (el) => el.componentInstance instanceof NgxsmkCarousel
+      (el) => el.componentInstance instanceof NgxsmkCarousel,
     ).componentInstance as NgxsmkCarousel;
 
     expect(componentInstance.activeIndex()).toBe(0);

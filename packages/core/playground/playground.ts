@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  booleanAttribute,
-  input,
-  signal,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, booleanAttribute, input, signal } from '@angular/core';
 
 export type ViewportSize = 'full' | 'mobile' | 'tablet' | 'desktop';
 
@@ -25,7 +19,9 @@ export type ViewportSize = 'full' | 'mobile' | 'tablet' | 'desktop';
             stroke-linecap="round"
             stroke-linejoin="round"
           >
-            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+            <path
+              d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
+            />
             <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
             <line x1="12" y1="22.08" x2="12" y2="12" />
           </svg>
@@ -40,9 +36,30 @@ export type ViewportSize = 'full' | 'mobile' | 'tablet' | 'desktop';
             [attr.aria-label]="isDark() ? 'Switch to light mode' : 'Switch to dark mode'"
           >
             @if (isDark()) {
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="12" cy="12" r="4" />
+                <path
+                  d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"
+                />
+              </svg>
             } @else {
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+              </svg>
             }
           </button>
 
@@ -85,7 +102,11 @@ export type ViewportSize = 'full' | 'mobile' | 'tablet' | 'desktop';
           </div>
         </main>
 
-        <aside class="ngxsmk-playground__sidebar" role="complementary" aria-label="Properties and configuration">
+        <aside
+          class="ngxsmk-playground__sidebar"
+          role="complementary"
+          aria-label="Properties and configuration"
+        >
           <h4 class="ngxsmk-playground__sidebar-title">Properties & Knobs</h4>
           <div class="ngxsmk-playground__sidebar-content">
             <ng-content select="[knobs]" />
@@ -106,19 +127,19 @@ export type ViewportSize = 'full' | 'mobile' | 'tablet' | 'desktop';
       display: flex;
       flex-direction: column;
       height: 100vh;
-      background: var(--ngxsmk-color-background, #F9FAFB);
-      color: var(--ngxsmk-color-on-surface, #1F2937);
+      background: var(--ngxsmk-color-background, #f9fafb);
+      color: var(--ngxsmk-color-on-surface, #1f2937);
       font-family: var(--ngxsmk-font-sans, sans-serif);
       transition: background-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
     .ngxsmk-playground.dark {
       background: #111827;
-      color: #F9FAFB;
+      color: #f9fafb;
       --ngxsmk-color-background: #111827;
-      --ngxsmk-color-surface: #1F2937;
+      --ngxsmk-color-surface: #1f2937;
       --ngxsmk-color-surface-variant: #374151;
-      --ngxsmk-color-outline: #4B5563;
-      --ngxsmk-color-on-surface: #F9FAFB;
+      --ngxsmk-color-outline: #4b5563;
+      --ngxsmk-color-on-surface: #f9fafb;
     }
 
     .ngxsmk-playground__header {
@@ -126,8 +147,8 @@ export type ViewportSize = 'full' | 'mobile' | 'tablet' | 'desktop';
       justify-content: space-between;
       align-items: center;
       padding: var(--ngxsmk-space-3) var(--ngxsmk-space-6);
-      background: var(--ngxsmk-color-surface, #FFFFFF);
-      border-bottom: 1px solid var(--ngxsmk-color-outline, #E5E7EB);
+      background: var(--ngxsmk-color-surface, #ffffff);
+      border-bottom: 1px solid var(--ngxsmk-color-outline, #e5e7eb);
       z-index: 10;
       box-shadow: var(--ngxsmk-shadow-sm);
     }
@@ -138,7 +159,7 @@ export type ViewportSize = 'full' | 'mobile' | 'tablet' | 'desktop';
       gap: var(--ngxsmk-space-3);
       font-weight: 700;
       font-size: var(--ngxsmk-text-title-sm-size, 1.125rem);
-      color: var(--ngxsmk-color-primary, #7C3AED);
+      color: var(--ngxsmk-color-primary, #7c3aed);
     }
 
     .ngxsmk-playground__actions {
@@ -148,9 +169,9 @@ export type ViewportSize = 'full' | 'mobile' | 'tablet' | 'desktop';
     }
 
     .ngxsmk-playground__btn {
-      background: var(--ngxsmk-color-surface-variant, #F3F4F6);
+      background: var(--ngxsmk-color-surface-variant, #f3f4f6);
       color: var(--ngxsmk-color-on-surface);
-      border: 1px solid var(--ngxsmk-color-outline, #E5E7EB);
+      border: 1px solid var(--ngxsmk-color-outline, #e5e7eb);
       width: 2.25rem;
       height: 2.25rem;
       border-radius: var(--ngxsmk-radius-md, 6px);
@@ -163,15 +184,15 @@ export type ViewportSize = 'full' | 'mobile' | 'tablet' | 'desktop';
       transition: all var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
     .ngxsmk-playground__btn:hover {
-      background: var(--ngxsmk-color-surface-hover, #E5E7EB);
+      background: var(--ngxsmk-color-surface-hover, #e5e7eb);
     }
 
     .ngxsmk-playground__select-wrapper select {
       height: 2.25rem;
       padding: 0 var(--ngxsmk-space-3);
       border-radius: var(--ngxsmk-radius-md, 6px);
-      border: 1px solid var(--ngxsmk-color-outline, #E5E7EB);
-      background: var(--ngxsmk-color-surface-variant, #F3F4F6);
+      border: 1px solid var(--ngxsmk-color-outline, #e5e7eb);
+      background: var(--ngxsmk-color-surface-variant, #f3f4f6);
       color: var(--ngxsmk-color-on-surface);
       font-family: inherit;
       cursor: pointer;
@@ -202,8 +223,8 @@ export type ViewportSize = 'full' | 'mobile' | 'tablet' | 'desktop';
     }
 
     .ngxsmk-playground__viewport {
-      background: var(--ngxsmk-color-surface, #FFFFFF);
-      border: 1px solid var(--ngxsmk-color-outline, #E5E7EB);
+      background: var(--ngxsmk-color-surface, #ffffff);
+      border: 1px solid var(--ngxsmk-color-outline, #e5e7eb);
       border-radius: var(--ngxsmk-radius-lg, 8px);
       box-shadow: var(--ngxsmk-shadow-md);
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -234,8 +255,8 @@ export type ViewportSize = 'full' | 'mobile' | 'tablet' | 'desktop';
 
     .ngxsmk-playground__sidebar {
       width: 320px;
-      background: var(--ngxsmk-color-surface, #FFFFFF);
-      border-left: 1px solid var(--ngxsmk-color-outline, #E5E7EB);
+      background: var(--ngxsmk-color-surface, #ffffff);
+      border-left: 1px solid var(--ngxsmk-color-outline, #e5e7eb);
       display: flex;
       flex-direction: column;
       overflow: hidden;
@@ -247,7 +268,7 @@ export type ViewportSize = 'full' | 'mobile' | 'tablet' | 'desktop';
       padding: var(--ngxsmk-space-4) var(--ngxsmk-space-6);
       font-size: var(--ngxsmk-text-title-sm-size, 1rem);
       font-weight: 600;
-      border-bottom: 1px solid var(--ngxsmk-color-outline, #E5E7EB);
+      border-bottom: 1px solid var(--ngxsmk-color-outline, #e5e7eb);
     }
 
     .ngxsmk-playground__sidebar-content {

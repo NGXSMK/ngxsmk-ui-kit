@@ -8,7 +8,10 @@ function walkDir(dir: string, callback: (filePath: string) => void) {
     const stat = fs.statSync(filePath);
     if (stat.isDirectory()) {
       walkDir(filePath, callback);
-    } else if (stat.isFile() && (file.endsWith('.ts') || file.endsWith('.html') || file.endsWith('.scss'))) {
+    } else if (
+      stat.isFile() &&
+      (file.endsWith('.ts') || file.endsWith('.html') || file.endsWith('.scss'))
+    ) {
       callback(filePath);
     }
   }

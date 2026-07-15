@@ -7,7 +7,9 @@ import { NgxsmkIntersectionObserver } from './intersection-observer';
   standalone: true,
   imports: [NgxsmkIntersectionObserver],
   template: `
-    <div id="target" ngxsmkIntersectionObserver (intersecting)="intersected.set($event)">Target</div>
+    <div id="target" ngxsmkIntersectionObserver (intersecting)="intersected.set($event)">
+      Target
+    </div>
   `,
 })
 class HostComponent {

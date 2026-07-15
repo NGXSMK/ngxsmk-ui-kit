@@ -37,7 +37,9 @@ export interface NgxsmkAiMessage {
             stroke-linecap="round"
             stroke-linejoin="round"
           >
-            <path d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10S2 17.523 2 12A10 10 0 0 1 12 2z" />
+            <path
+              d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10S2 17.523 2 12A10 10 0 0 1 12 2z"
+            />
             <path d="M12 8v8" />
             <path d="M8 12h8" />
           </svg>
@@ -65,9 +67,30 @@ export interface NgxsmkAiMessage {
           >
             <div class="ngxsmk-ai-chat__avatar">
               @if (msg.role === 'user') {
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <svg
+                  viewBox="0 0 24 24"
+                  width="16"
+                  height="16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
               } @else {
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/></svg>
+                <svg
+                  viewBox="0 0 24 24"
+                  width="16"
+                  height="16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"
+                  />
+                </svg>
               }
             </div>
             <div class="ngxsmk-ai-chat__message-content">
@@ -85,9 +108,7 @@ export interface NgxsmkAiMessage {
               @if (msg.citations && msg.citations.length > 0) {
                 <div class="ngxsmk-ai-chat__citations">
                   @for (cite of msg.citations; track cite) {
-                    <span class="ngxsmk-ai-chat__citation">
-                      [{{ $index + 1 }}] {{ cite }}
-                    </span>
+                    <span class="ngxsmk-ai-chat__citation"> [{{ $index + 1 }}] {{ cite }} </span>
                   }
                 </div>
               }
@@ -98,7 +119,18 @@ export interface NgxsmkAiMessage {
         @if (isTyping()) {
           <div class="ngxsmk-ai-chat__message-row">
             <div class="ngxsmk-ai-chat__avatar">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/></svg>
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"
+                />
+              </svg>
             </div>
             <div class="ngxsmk-ai-chat__message-content">
               <div class="ngxsmk-ai-chat__bubble ngxsmk-ai-chat__bubble--typing">
@@ -154,9 +186,7 @@ export interface NgxsmkAiMessage {
           </button>
         </form>
         @if (tokenCount() > 0) {
-          <div class="ngxsmk-ai-chat__token-viewer">
-            Token usage: {{ tokenCount() }}
-          </div>
+          <div class="ngxsmk-ai-chat__token-viewer">Token usage: {{ tokenCount() }}</div>
         }
       </footer>
     </div>
@@ -173,12 +203,12 @@ export interface NgxsmkAiMessage {
       display: flex;
       flex-direction: column;
       height: 100%;
-      background: var(--ngxsmk-color-surface, #FFFFFF);
-      border: 1px solid var(--ngxsmk-color-outline, #E5E7EB);
+      background: var(--ngxsmk-color-surface, #ffffff);
+      border: 1px solid var(--ngxsmk-color-outline, #e5e7eb);
       border-radius: var(--ngxsmk-radius-lg, 8px);
       overflow: hidden;
       font-family: var(--ngxsmk-font-sans, sans-serif);
-      color: var(--ngxsmk-color-on-surface, #1F2937);
+      color: var(--ngxsmk-color-on-surface, #1f2937);
     }
 
     .ngxsmk-ai-chat__header {
@@ -186,8 +216,8 @@ export interface NgxsmkAiMessage {
       justify-content: space-between;
       align-items: center;
       padding: var(--ngxsmk-space-3) var(--ngxsmk-space-4);
-      background: var(--ngxsmk-color-surface-variant, #F9FAFB);
-      border-bottom: 1px solid var(--ngxsmk-color-outline, #E5E7EB);
+      background: var(--ngxsmk-color-surface-variant, #f9fafb);
+      border-bottom: 1px solid var(--ngxsmk-color-outline, #e5e7eb);
     }
 
     .ngxsmk-ai-chat__header-title {
@@ -195,15 +225,15 @@ export interface NgxsmkAiMessage {
       align-items: center;
       gap: var(--ngxsmk-space-2);
       font-weight: 600;
-      color: var(--ngxsmk-color-primary, #7C3AED);
+      color: var(--ngxsmk-color-primary, #7c3aed);
     }
 
     .ngxsmk-ai-chat__header-actions select {
       height: 2rem;
       padding: 0 var(--ngxsmk-space-2);
-      border: 1px solid var(--ngxsmk-color-outline, #E5E7EB);
+      border: 1px solid var(--ngxsmk-color-outline, #e5e7eb);
       border-radius: var(--ngxsmk-radius-md, 4px);
-      background: var(--ngxsmk-color-surface, #FFFFFF);
+      background: var(--ngxsmk-color-surface, #ffffff);
       color: var(--ngxsmk-color-on-surface);
       font-family: inherit;
       cursor: pointer;
@@ -233,7 +263,7 @@ export interface NgxsmkAiMessage {
       width: 2rem;
       height: 2rem;
       border-radius: var(--ngxsmk-radius-full, 50%);
-      background: var(--ngxsmk-color-surface-variant, #F3F4F6);
+      background: var(--ngxsmk-color-surface-variant, #f3f4f6);
       color: var(--ngxsmk-color-on-surface-variant);
       display: flex;
       align-items: center;
@@ -241,7 +271,7 @@ export interface NgxsmkAiMessage {
       flex-shrink: 0;
     }
     .ngxsmk-ai-chat__message-row--user .ngxsmk-ai-chat__avatar {
-      background: var(--ngxsmk-color-primary-container, #EFEFFB);
+      background: var(--ngxsmk-color-primary-container, #efeffb);
       color: var(--ngxsmk-color-primary);
     }
 
@@ -253,7 +283,7 @@ export interface NgxsmkAiMessage {
 
     .ngxsmk-ai-chat__bubble {
       padding: var(--ngxsmk-space-3) var(--ngxsmk-space-4);
-      background: var(--ngxsmk-color-surface-variant, #F3F4F6);
+      background: var(--ngxsmk-color-surface-variant, #f3f4f6);
       border-radius: var(--ngxsmk-radius-md, 6px);
       font-size: var(--ngxsmk-text-body-sm-size, 0.875rem);
       line-height: 1.5;
@@ -262,8 +292,8 @@ export interface NgxsmkAiMessage {
       margin: 0;
     }
     .ngxsmk-ai-chat__message-row--user .ngxsmk-ai-chat__bubble {
-      background: var(--ngxsmk-color-primary, #7C3AED);
-      color: var(--ngxsmk-color-on-primary, #FFFFFF);
+      background: var(--ngxsmk-color-primary, #7c3aed);
+      color: var(--ngxsmk-color-on-primary, #ffffff);
     }
 
     .ngxsmk-ai-chat__reasoning {
@@ -309,15 +339,25 @@ export interface NgxsmkAiMessage {
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: var(--ngxsmk-color-on-surface-variant, #9CA3AF);
+      background: var(--ngxsmk-color-on-surface-variant, #9ca3af);
       animation: ngxsmk-bounce 1.4s infinite ease-in-out both;
     }
-    .ngxsmk-ai-chat__dot:nth-child(1) { animation-delay: -0.32s; }
-    .ngxsmk-ai-chat__dot:nth-child(2) { animation-delay: -0.16s; }
+    .ngxsmk-ai-chat__dot:nth-child(1) {
+      animation-delay: -0.32s;
+    }
+    .ngxsmk-ai-chat__dot:nth-child(2) {
+      animation-delay: -0.16s;
+    }
 
     @keyframes ngxsmk-bounce {
-      0%, 80%, 100% { transform: scale(0); }
-      40% { transform: scale(1.0); }
+      0%,
+      80%,
+      100% {
+        transform: scale(0);
+      }
+      40% {
+        transform: scale(1);
+      }
     }
 
     .ngxsmk-ai-chat__suggestions {
@@ -325,7 +365,7 @@ export interface NgxsmkAiMessage {
       flex-wrap: wrap;
       gap: var(--ngxsmk-space-2);
       padding: var(--ngxsmk-space-3) var(--ngxsmk-space-4);
-      background: var(--ngxsmk-color-background, #F9FAFB);
+      background: var(--ngxsmk-color-background, #f9fafb);
     }
 
     .ngxsmk-ai-chat__suggestion-btn {
@@ -344,8 +384,8 @@ export interface NgxsmkAiMessage {
 
     .ngxsmk-ai-chat__footer {
       padding: var(--ngxsmk-space-3) var(--ngxsmk-space-4);
-      background: var(--ngxsmk-color-surface, #FFFFFF);
-      border-top: 1px solid var(--ngxsmk-color-outline, #E5E7EB);
+      background: var(--ngxsmk-color-surface, #ffffff);
+      border-top: 1px solid var(--ngxsmk-color-outline, #e5e7eb);
     }
 
     .ngxsmk-ai-chat__form {
@@ -357,7 +397,7 @@ export interface NgxsmkAiMessage {
       flex: 1;
       height: 2.5rem;
       padding: 0 var(--ngxsmk-space-3);
-      border: 1px solid var(--ngxsmk-color-outline, #E5E7EB);
+      border: 1px solid var(--ngxsmk-color-outline, #e5e7eb);
       border-radius: var(--ngxsmk-radius-md, 6px);
       background: var(--ngxsmk-color-background);
       color: var(--ngxsmk-color-on-surface);
@@ -365,7 +405,7 @@ export interface NgxsmkAiMessage {
       outline: none;
     }
     .ngxsmk-ai-chat__form input:focus {
-      border-color: var(--ngxsmk-color-primary, #7C3AED);
+      border-color: var(--ngxsmk-color-primary, #7c3aed);
     }
 
     .ngxsmk-ai-chat__form button {
@@ -375,8 +415,8 @@ export interface NgxsmkAiMessage {
       align-items: center;
       justify-content: center;
       border: none;
-      background: var(--ngxsmk-color-primary, #7C3AED);
-      color: var(--ngxsmk-color-on-primary, #FFFFFF);
+      background: var(--ngxsmk-color-primary, #7c3aed);
+      color: var(--ngxsmk-color-on-primary, #ffffff);
       border-radius: var(--ngxsmk-radius-md, 6px);
       cursor: pointer;
     }
@@ -396,11 +436,7 @@ export interface NgxsmkAiMessage {
 })
 export class NgxsmkAiChat {
   readonly messages = input<NgxsmkAiMessage[]>([]);
-  readonly models = input<string[]>([
-    'gemini-2.5-flash',
-    'gemini-2.5-pro',
-    'claude-3.5-sonnet',
-  ]);
+  readonly models = input<string[]>(['gemini-2.5-flash', 'gemini-2.5-pro', 'claude-3.5-sonnet']);
   readonly selectedModel = input<string>('gemini-2.5-flash');
   readonly suggestions = input<string[]>([]);
   readonly isTyping = input(false, { transform: booleanAttribute });

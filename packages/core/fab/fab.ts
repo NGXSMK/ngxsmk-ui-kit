@@ -1,8 +1,4 @@
-import {
-  Directive,
-  booleanAttribute,
-  input,
-} from '@angular/core';
+import { Directive, booleanAttribute, input } from '@angular/core';
 
 @Directive({
   standalone: true,
@@ -21,6 +17,8 @@ export class NgxsmkFab {
   readonly size = input<'sm' | 'md' | 'lg'>('md');
   readonly variant = input<'primary' | 'secondary'>('primary');
   readonly extended = input(false, { transform: booleanAttribute });
-  readonly position = input<'bottom-right' | 'bottom-left' | 'top-right' | 'top-left' | 'none'>('none');
+  readonly position = input<'bottom-right' | 'bottom-left' | 'top-right' | 'top-left' | 'none'>(
+    'none',
+  );
   readonly disabled = input(false, { transform: booleanAttribute });
 }

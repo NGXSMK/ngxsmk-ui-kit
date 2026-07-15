@@ -6,13 +6,7 @@ import { NgxsmkQrCode } from './qr-code';
 @Component({
   standalone: true,
   imports: [NgxsmkQrCode],
-  template: `
-    <ngxsmk-qr-code
-      [value]="value()"
-      [size]="size()"
-      [color]="color()"
-    />
-  `,
+  template: ` <ngxsmk-qr-code [value]="value()" [size]="size()" [color]="color()" /> `,
 })
 class HostComponent {
   readonly value = signal('https://angular.dev');

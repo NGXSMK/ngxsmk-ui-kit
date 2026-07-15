@@ -150,7 +150,7 @@ export class NgxsmkProgressCircle {
 
   protected readonly radius = computed(() => 50 - this.strokeWidth() / 2);
   protected readonly circumference = computed(() => 2 * Math.PI * this.radius());
-  
+
   protected readonly percentage = computed(() => {
     const val = this.value();
     const maxVal = this.max();

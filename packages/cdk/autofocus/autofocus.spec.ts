@@ -6,9 +6,7 @@ import { NgxsmkAutofocus } from './autofocus';
 @Component({
   standalone: true,
   imports: [NgxsmkAutofocus],
-  template: `
-    <input id="input" [ngxsmkAutofocus]="shouldFocus()" />
-  `,
+  template: ` <input id="input" [ngxsmkAutofocus]="shouldFocus()" /> `,
 })
 class HostComponent {
   readonly shouldFocus = signal(true);

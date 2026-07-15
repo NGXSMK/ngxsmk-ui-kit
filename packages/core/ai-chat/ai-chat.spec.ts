@@ -34,7 +34,9 @@ describe('NgxsmkAiChat', () => {
     const fixture = TestBed.createComponent(HostComponent);
     fixture.detectChanges();
 
-    const sugBtn = fixture.nativeElement.querySelector('.ngxsmk-ai-chat__suggestion-btn') as HTMLButtonElement;
+    const sugBtn = fixture.nativeElement.querySelector(
+      '.ngxsmk-ai-chat__suggestion-btn',
+    ) as HTMLButtonElement;
     sugBtn.click();
     fixture.detectChanges();
 

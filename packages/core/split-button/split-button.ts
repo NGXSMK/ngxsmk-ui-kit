@@ -39,7 +39,15 @@ import { NgxsmkButton } from '@ngxsmk/core/button';
         [attr.aria-expanded]="menuOpen()"
         (click)="toggleMenu($event)"
       >
-        <svg viewBox="0 0 16 16" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <svg
+          viewBox="0 0 16 16"
+          width="10"
+          height="10"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+        >
           <path d="M3 6l5 5 5-5" />
         </svg>
       </button>
@@ -135,7 +143,9 @@ export class NgxsmkSplitButton {
   private readonly elementRef = inject(ElementRef);
 
   readonly label = input<string>('');
-  readonly variant = input<'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive'>('primary');
+  readonly variant = input<'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive'>(
+    'primary',
+  );
   readonly size = input<'sm' | 'md' | 'lg'>('md');
   readonly disabled = input(false, { transform: booleanAttribute });
   readonly loading = input(false, { transform: booleanAttribute });

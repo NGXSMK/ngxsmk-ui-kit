@@ -63,25 +63,25 @@ export class HomePage {
   protected readonly motionHero = {
     initial: { opacity: 0, scale: 0.97 },
     animate: { opacity: 1, scale: 1 },
-    transition: { duration: 0.4, easing: 'ease-out' }
+    transition: { duration: 0.4, easing: 'ease-out' },
   };
 
   protected readonly motionTitle = {
     initial: { opacity: 0 },
     animate: { opacity: 1 },
-    transition: { duration: 0.6, delay: 0.1, easing: 'ease-out' }
+    transition: { duration: 0.6, delay: 0.1, easing: 'ease-out' },
   };
 
   protected readonly motionCta = {
     initial: { opacity: 0 },
     animate: { opacity: 1 },
-    transition: { duration: 0.4, delay: 0.25, easing: 'ease-out' }
+    transition: { duration: 0.4, delay: 0.25, easing: 'ease-out' },
   };
 
   protected readonly motionBento = {
     initial: { opacity: 0 },
     animate: { opacity: 1 },
-    transition: { duration: 0.6, delay: 0.35, easing: 'ease-out' }
+    transition: { duration: 0.6, delay: 0.35, easing: 'ease-out' },
   };
 
   protected getItemFragment(item: string): string {

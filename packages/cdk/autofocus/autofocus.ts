@@ -1,4 +1,11 @@
-import { afterNextRender, booleanAttribute, Directive, ElementRef, inject, input } from '@angular/core';
+import {
+  afterNextRender,
+  booleanAttribute,
+  Directive,
+  ElementRef,
+  inject,
+  input,
+} from '@angular/core';
 
 /**
  * Automatically focuses the host element on render.

@@ -13,5 +13,3 @@ export * from '@ngxsmk/cdk/intersection-observer';
 export * from '@ngxsmk/cdk/resize-observer';
 export * from '@ngxsmk/cdk/autofocus';
 export * from '@ngxsmk/cdk/testing';
-
-
