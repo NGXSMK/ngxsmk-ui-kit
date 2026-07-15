@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-  signal,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, signal } from '@angular/core';
 
 export type NgxsmkAvatarSize = 'sm' | 'md' | 'lg' | 'xl';
 
@@ -54,12 +48,30 @@ export type NgxsmkAvatarSize = 'sm' | 'md' | 'lg' | 'xl';
       font-weight: 600;
     }
 
-    :host([data-shape='square']) { border-radius: var(--ngxsmk-radius-lg); }
+    :host([data-shape='square']) {
+      border-radius: var(--ngxsmk-radius-lg);
+    }
 
-    :host([data-size='sm']) { width: 1.75rem; height: 1.75rem; font-size: 0.625rem; }
-    :host([data-size='md']) { width: 2.5rem; height: 2.5rem; font-size: 0.875rem; }
-    :host([data-size='lg']) { width: 3.5rem; height: 3.5rem; font-size: 1.25rem; }
-    :host([data-size='xl']) { width: 5rem; height: 5rem; font-size: 1.75rem; }
+    :host([data-size='sm']) {
+      width: 1.75rem;
+      height: 1.75rem;
+      font-size: 0.625rem;
+    }
+    :host([data-size='md']) {
+      width: 2.5rem;
+      height: 2.5rem;
+      font-size: 0.875rem;
+    }
+    :host([data-size='lg']) {
+      width: 3.5rem;
+      height: 3.5rem;
+      font-size: 1.25rem;
+    }
+    :host([data-size='xl']) {
+      width: 5rem;
+      height: 5rem;
+      font-size: 1.75rem;
+    }
 
     .ngxsmk-avatar__image {
       width: 100%;
@@ -77,9 +89,7 @@ export class NgxsmkAvatar {
 
   protected readonly imageFailed = signal(false);
 
-  protected readonly showImage = computed(
-    () => !!this.src() && !this.imageFailed(),
-  );
+  protected readonly showImage = computed(() => !!this.src() && !this.imageFailed());
 
   protected readonly initials = computed(() => {
     const parts = this.name().trim().split(/\s+/).filter(Boolean);

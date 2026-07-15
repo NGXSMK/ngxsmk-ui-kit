@@ -10,24 +10,24 @@ updates:
     groups:
       angular:
         patterns:
-          - "@angular/*"
-          - "ng-packagr"
-          - "angular-eslint"
-          - "@angular-eslint/*"
+          - '@angular/*'
+          - 'ng-packagr'
+          - 'angular-eslint'
+          - '@angular-eslint/*'
         update-types:
           - minor
           - patch
       eslint:
         patterns:
-          - "eslint"
-          - "@eslint/*"
-          - "typescript-eslint"
+          - 'eslint'
+          - '@eslint/*'
+          - 'typescript-eslint'
       dev-tools:
         patterns:
-          - "prettier"
-          - "tsx"
-          - "vitest"
-          - "jsdom"
+          - 'prettier'
+          - 'tsx'
+          - 'vitest'
+          - 'jsdom'
 
   - package-ecosystem: github-actions
     directory: /

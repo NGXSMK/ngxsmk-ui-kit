@@ -6,9 +6,7 @@ import { NgxsmkProgress } from './progress';
 @Component({
   standalone: true,
   imports: [NgxsmkProgress],
-  template: `
-    <ngxsmk-progress [value]="value()" [label]="label()" />
-  `,
+  template: ` <ngxsmk-progress [value]="value()" [label]="label()" /> `,
 })
 class HostComponent {
   readonly value = signal<number | null>(45);

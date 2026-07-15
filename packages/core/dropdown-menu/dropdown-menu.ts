@@ -27,7 +27,11 @@ export interface NgxsmkDropdownMenuItem {
     </div>
     @if (open()) {
       <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
-      <div class="ngxsmk-dropdown-menu__list" [ngxsmkAnimate]="DROPDOWN_MENU_MOTION" (click)="onClick($event)">
+      <div
+        class="ngxsmk-dropdown-menu__list"
+        [ngxsmkAnimate]="DROPDOWN_MENU_MOTION"
+        (click)="onClick($event)"
+      >
         @for (item of items(); track item.label) {
           @if (item.divider) {
             <div class="ngxsmk-dropdown-menu__divider"></div>
@@ -123,7 +127,9 @@ export class NgxsmkDropdownMenu {
   protected close(): void {
     if (this.closing()) return;
     this.closing.set(true);
-    const el = this.host.nativeElement.querySelector('.ngxsmk-dropdown-menu__list') as HTMLElement | null;
+    const el = this.host.nativeElement.querySelector(
+      '.ngxsmk-dropdown-menu__list',
+    ) as HTMLElement | null;
     void playExit(el ?? this.host.nativeElement, this.DROPDOWN_MENU_MOTION).then(() => {
       this.closing.set(false);
       this.open.set(false);
@@ -144,9 +150,9 @@ export class NgxsmkDropdownMenu {
   protected onClick(event: Event): void {
     const target = (event.target as HTMLElement).closest('[data-action]') as HTMLElement | null;
     if (!target) return;
-    const idx = Array.from(
-      this.host.nativeElement.querySelectorAll('[data-action]')
-    ).indexOf(target);
+    const idx = Array.from(this.host.nativeElement.querySelectorAll('[data-action]')).indexOf(
+      target,
+    );
     if (idx >= 0) {
       const item = this.items()[idx];
       if (!item.disabled) {

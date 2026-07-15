@@ -1,1 +1,1 @@
-export { NgxsmkTableHeaderCell } from "@ngxsmk/core/table-cell";
+export { NgxsmkTableHeaderCell } from '@ngxsmk/core/table-cell';

@@ -54,9 +54,7 @@ function applyStyles(el: HTMLElement, styles: Record<string, string | number>): 
   }
 }
 
-function toOptions(
-  transition?: NgxsmkMotionTransition,
-): Record<string, unknown> | undefined {
+function toOptions(transition?: NgxsmkMotionTransition): Record<string, unknown> | undefined {
   if (!transition) {
     return undefined;
   }

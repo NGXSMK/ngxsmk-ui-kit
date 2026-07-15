@@ -14,7 +14,17 @@ import { NgxsmkHStack, NgxsmkVStack } from '@ngxsmk/core/h-stack';
 import { NgxsmkDropdownMenu, NgxsmkDropdownMenuItem } from '@ngxsmk/core/dropdown-menu';
 import { NgxsmkAlert } from '@ngxsmk/core/alert';
 
-import { Component, computed, signal, input, forwardRef, effect, ChangeDetectionStrategy, ViewChild, ElementRef, inject
+import {
+  Component,
+  computed,
+  signal,
+  input,
+  forwardRef,
+  effect,
+  ChangeDetectionStrategy,
+  ViewChild,
+  ElementRef,
+  inject,
 } from '@angular/core';
 import { NgStyle } from '@angular/common';
 import { AppNav } from '../../nav/nav';
@@ -30,16 +40,16 @@ interface ASTNode {
 function parseJSX(code: string): ASTNode[] {
   code = code.replace(/\{\/\*[\s\S]*?\*\/\}/g, '').replace(/<!--[\s\S]*?-->/g, '');
   let pos = 0;
-  
+
   function parseNode(): ASTNode | null {
     while (pos < code.length && /\s/.test(code.charAt(pos))) pos++;
     if (pos >= code.length) return null;
-    
+
     if (code.charAt(pos) === '<') {
       if (code.startsWith('</', pos)) {
         return null;
       }
-      
+
       const tagStart = pos + 1;
       let tagEnd = tagStart;
       while (tagEnd < code.length && /[a-zA-Z0-9_-]/.test(code.charAt(tagEnd))) {
@@ -47,16 +57,16 @@ function parseJSX(code: string): ASTNode[] {
       }
       const tagName = code.substring(tagStart, tagEnd);
       pos = tagEnd;
-      
+
       const attributes: Record<string, any> = {};
       while (pos < code.length) {
         while (pos < code.length && /\s/.test(code.charAt(pos))) pos++;
         if (pos >= code.length) break;
-        
+
         if (code.charAt(pos) === '/' || code.charAt(pos) === '>') {
           break;
         }
-        
+
         const attrStart = pos;
         let attrEnd = attrStart;
         while (attrEnd < code.length && /[a-zA-Z0-9_-]/.test(code.charAt(attrEnd))) {
@@ -64,13 +74,13 @@ function parseJSX(code: string): ASTNode[] {
         }
         const attrName = code.substring(attrStart, attrEnd);
         pos = attrEnd;
-        
+
         while (pos < code.length && /\s/.test(code.charAt(pos))) pos++;
-        
+
         if (pos < code.length && code.charAt(pos) === '=') {
           pos++;
           while (pos < code.length && /\s/.test(code.charAt(pos))) pos++;
-          
+
           if (pos < code.length && (code.charAt(pos) === '"' || code.charAt(pos) === "'")) {
             const quote = code.charAt(pos);
             pos++;
@@ -104,28 +114,28 @@ function parseJSX(code: string): ASTNode[] {
           attributes[attrName] = true;
         }
       }
-      
+
       while (pos < code.length && /\s/.test(code.charAt(pos))) pos++;
-      
+
       if (pos < code.length && code.startsWith('/>', pos)) {
         pos += 2;
         return { type: tagName, attributes, children: [] };
       }
-      
+
       if (pos < code.length && code.charAt(pos) === '>') {
         pos++;
         const children: ASTNode[] = [];
         while (pos < code.length) {
           while (pos < code.length && /\s/.test(code.charAt(pos))) pos++;
           if (pos >= code.length) break;
-          
+
           if (code.startsWith('</', pos)) {
             pos += 2;
             while (pos < code.length && code.charAt(pos) !== '>') pos++;
             pos++;
             break;
           }
-          
+
           const child = parseNode();
           if (child) {
             children.push(child);
@@ -145,7 +155,7 @@ function parseJSX(code: string): ASTNode[] {
     }
     return null;
   }
-  
+
   const nodes: ASTNode[] = [];
   while (pos < code.length) {
     const node = parseNode();
@@ -184,9 +194,9 @@ function parseJSX(code: string): ASTNode[] {
     @if (node().type === 'TEXT_NODE') {
       {{ node().text }}
     } @else {
-      <div 
-        class="inspect-wrapper" 
-        [class.inspecting]="parent.inspectMode()" 
+      <div
+        class="inspect-wrapper"
+        [class.inspecting]="parent.inspectMode()"
         [class.hovered]="isInspected()"
         (mouseenter)="onMouseEnter($event)"
         (mouseleave)="onMouseLeave()"
@@ -197,9 +207,13 @@ function parseJSX(code: string): ASTNode[] {
 
         @switch (node().type) {
           @case ('Card') {
-            <ngxsmk-card 
-              [style.width.px]="node().attributes['width']" 
-              [style.padding]="node().attributes['padding'] ? 'var(--ngxsmk-space-' + node().attributes['padding'] + ')' : null"
+            <ngxsmk-card
+              [style.width.px]="node().attributes['width']"
+              [style.padding]="
+                node().attributes['padding']
+                  ? 'var(--ngxsmk-space-' + node().attributes['padding'] + ')'
+                  : null
+              "
               style="display:block; margin: 0 auto; max-width: 100%; box-sizing: border-box;"
             >
               @for (c of node().children; track $index) {
@@ -210,11 +224,17 @@ function parseJSX(code: string): ASTNode[] {
           @case ('Layout') {
             <div class="astryx-layout" style="display: flex; flex-direction: column; width: 100%;">
               @if (node().attributes['header']) {
-                <div class="astryx-layout-header" style="border-bottom: 1px solid var(--ngxsmk-color-outline); padding-bottom: var(--ngxsmk-space-3); margin-bottom: var(--ngxsmk-space-3);">
+                <div
+                  class="astryx-layout-header"
+                  style="border-bottom: 1px solid var(--ngxsmk-color-outline); padding-bottom: var(--ngxsmk-space-3); margin-bottom: var(--ngxsmk-space-3);"
+                >
                   <ast-renderer [node]="node().attributes['header']" />
                 </div>
               }
-              <div class="astryx-layout-content" style="flex: 1; display: flex; flex-direction: column; gap: var(--ngxsmk-space-3);">
+              <div
+                class="astryx-layout-content"
+                style="flex: 1; display: flex; flex-direction: column; gap: var(--ngxsmk-space-3);"
+              >
                 @for (c of node().children; track $index) {
                   <ast-renderer [node]="c" />
                 }
@@ -223,7 +243,10 @@ function parseJSX(code: string): ASTNode[] {
                 }
               </div>
               @if (node().attributes['footer']) {
-                <div class="astryx-layout-footer" style="border-top: 1px solid var(--ngxsmk-color-outline); padding-top: var(--ngxsmk-space-3); margin-top: var(--ngxsmk-space-3);">
+                <div
+                  class="astryx-layout-footer"
+                  style="border-top: 1px solid var(--ngxsmk-color-outline); padding-top: var(--ngxsmk-space-3); margin-top: var(--ngxsmk-space-3);"
+                >
                   <ast-renderer [node]="node().attributes['footer']" />
                 </div>
               }
@@ -237,7 +260,10 @@ function parseJSX(code: string): ASTNode[] {
             </div>
           }
           @case ('LayoutContent') {
-            <div class="astryx-layout-content-content" style="display: flex; flex-direction: column; gap: var(--ngxsmk-space-3);">
+            <div
+              class="astryx-layout-content-content"
+              style="display: flex; flex-direction: column; gap: var(--ngxsmk-space-3);"
+            >
               @for (c of node().children; track $index) {
                 <ast-renderer [node]="c" />
               }
@@ -258,14 +284,21 @@ function parseJSX(code: string): ASTNode[] {
             </ngxsmk-heading>
           }
           @case ('Text') {
-            <ngxsmk-text [variant]="node().attributes['type'] || 'body'" [color]="node().attributes['color']">
+            <ngxsmk-text
+              [variant]="node().attributes['type'] || 'body'"
+              [color]="node().attributes['color']"
+            >
               @for (c of node().children; track $index) {
                 <ast-renderer [node]="c" />
               }
             </ngxsmk-text>
           }
           @case ('Button') {
-            <button ngxsmk-button [variant]="node().attributes['variant'] || 'primary'" [size]="node().attributes['size'] || 'md'">
+            <button
+              ngxsmk-button
+              [variant]="node().attributes['variant'] || 'primary'"
+              [size]="node().attributes['size'] || 'md'"
+            >
               {{ node().attributes['label'] }}
               @for (c of node().children; track $index) {
                 <ast-renderer [node]="c" />
@@ -315,20 +348,33 @@ function parseJSX(code: string): ASTNode[] {
             </ngxsmk-chip>
           }
           @case ('Alert') {
-            <ngxsmk-alert [variant]="node().attributes['variant'] || 'info'" [title]="node().attributes['title']">
+            <ngxsmk-alert
+              [variant]="node().attributes['variant'] || 'info'"
+              [title]="node().attributes['title']"
+            >
               @for (c of node().children; track $index) {
                 <ast-renderer [node]="c" />
               }
             </ngxsmk-alert>
           }
           @case ('Progress') {
-            <ngxsmk-progress [value]="node().attributes['value']" [label]="node().attributes['label']" />
+            <ngxsmk-progress
+              [value]="node().attributes['value']"
+              [label]="node().attributes['label']"
+            />
           }
           @case ('Stat') {
-            <ngxsmk-stat [value]="node().attributes['value']" [label]="node().attributes['label']" [trend]="node().attributes['trend']" />
+            <ngxsmk-stat
+              [value]="node().attributes['value']"
+              [label]="node().attributes['label']"
+              [trend]="node().attributes['trend']"
+            />
           }
           @case ('Avatar') {
-            <ngxsmk-avatar [name]="node().attributes['name']" [size]="node().attributes['size'] || 'md'" />
+            <ngxsmk-avatar
+              [name]="node().attributes['name']"
+              [size]="node().attributes['size'] || 'md'"
+            />
           }
           @case ('Divider') {
             <ngxsmk-divider />
@@ -369,12 +415,28 @@ function parseJSX(code: string): ASTNode[] {
       z-index: 100;
       pointer-events: none;
       line-height: 1;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
-    .astryx-layout { display: flex; flex-direction: column; width: 100%; height: 100%; }
-    .astryx-layout-header { padding-bottom: var(--ngxsmk-space-3); margin-bottom: var(--ngxsmk-space-3); }
-    .astryx-layout-footer { padding-top: var(--ngxsmk-space-3); margin-top: var(--ngxsmk-space-3); }
-    .astryx-layout-content { flex: 1; display: flex; flex-direction: column; gap: var(--ngxsmk-space-3); }
+    .astryx-layout {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+    }
+    .astryx-layout-header {
+      padding-bottom: var(--ngxsmk-space-3);
+      margin-bottom: var(--ngxsmk-space-3);
+    }
+    .astryx-layout-footer {
+      padding-top: var(--ngxsmk-space-3);
+      margin-top: var(--ngxsmk-space-3);
+    }
+    .astryx-layout-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: var(--ngxsmk-space-3);
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -387,7 +449,7 @@ export class AstRenderer {
     const lvl = this.node().attributes['level'] || 2;
     return `h${lvl}` as any;
   }
-  
+
   justifyContent() {
     const align = this.node().attributes['hAlign'] || 'start';
     if (align === 'end') return 'flex-end';
@@ -395,7 +457,7 @@ export class AstRenderer {
     if (align === 'between') return 'space-between';
     return 'flex-start';
   }
-  
+
   nodeStyles() {
     const styles: Record<string, string> = {};
     if (this.node().attributes['style']) {
@@ -416,7 +478,7 @@ export class AstRenderer {
       this.isInspected.set(true);
     }
   }
-  
+
   protected onMouseLeave() {
     this.isInspected.set(false);
   }
@@ -640,8 +702,6 @@ export default function ChatExample() {
 </Card>`,
 };
 
-
-
 const RADII = { sm: 4, md: 8, lg: 12, xl: 18 } as const;
 type RadiusKey = keyof typeof RADII;
 
@@ -660,15 +720,61 @@ type RadiusKey = keyof typeof RADII;
   ],
   template: `
     <app-nav />
-    
+
     <div class="pg-container">
       <!-- LEFT SIDENAV (Astryx views selectors) -->
       <aside class="pg-sidenav">
-        <button type="button" aria-label="Code Editor" class="sidenav-btn" [class.active]="tab() === 'code'" (click)="tab.set('code')">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-code-xml"><path d="m18 16 4-4-4-4"></path><path d="m6 8-4 4 4 4"></path><path d="m14.5 4-5 16"></path></svg>
+        <button
+          type="button"
+          aria-label="Code Editor"
+          class="sidenav-btn"
+          [class.active]="tab() === 'code'"
+          (click)="tab.set('code')"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-code-xml"
+          >
+            <path d="m18 16 4-4-4-4"></path>
+            <path d="m6 8-4 4 4 4"></path>
+            <path d="m14.5 4-5 16"></path>
+          </svg>
         </button>
-        <button type="button" aria-label="Theme Editor" class="sidenav-btn" [class.active]="tab() === 'theme'" (click)="tab.set('theme')">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-palette"><path d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z"></path><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"></circle><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"></circle><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"></circle><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"></circle></svg>
+        <button
+          type="button"
+          aria-label="Theme Editor"
+          class="sidenav-btn"
+          [class.active]="tab() === 'theme'"
+          (click)="tab.set('theme')"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-palette"
+          >
+            <path
+              d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z"
+            ></path>
+            <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"></circle>
+            <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"></circle>
+            <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"></circle>
+            <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"></circle>
+          </svg>
         </button>
       </aside>
 
@@ -676,18 +782,60 @@ type RadiusKey = keyof typeof RADII;
       <section class="pg-panel">
         <header class="panel-head">
           <ngxsmk-h-stack justify="space-between" align="center" style="width: 100%;">
-            <ngxsmk-heading level="h3" style="margin: 0; font-size: 1.25rem; font-weight: 700;">Playground</ngxsmk-heading>
-            
+            <ngxsmk-heading level="h3" style="margin: 0; font-size: 1.25rem; font-weight: 700;"
+              >Playground</ngxsmk-heading
+            >
+
             <ngxsmk-h-stack gap="var(--ngxsmk-space-2)">
               <ngxsmk-dropdown-menu [items]="themeMenuItems">
-                <button type="button" ngxsmk-button variant="secondary" size="sm" ngxsmkDropdownTrigger>
-                  Themes <svg style="margin-left:4px;" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                <button
+                  type="button"
+                  ngxsmk-button
+                  variant="secondary"
+                  size="sm"
+                  ngxsmkDropdownTrigger
+                >
+                  Themes
+                  <svg
+                    style="margin-left:4px;"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
                 </button>
               </ngxsmk-dropdown-menu>
 
               <ngxsmk-dropdown-menu [items]="templateMenuItems">
-                <button type="button" ngxsmk-button variant="secondary" size="sm" ngxsmkDropdownTrigger>
-                  Templates <svg style="margin-left:4px;" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                <button
+                  type="button"
+                  ngxsmk-button
+                  variant="secondary"
+                  size="sm"
+                  ngxsmkDropdownTrigger
+                >
+                  Templates
+                  <svg
+                    style="margin-left:4px;"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
                 </button>
               </ngxsmk-dropdown-menu>
             </ngxsmk-h-stack>
@@ -722,9 +870,30 @@ type RadiusKey = keyof typeof RADII;
         @if (tab() === 'theme') {
           <div class="panel-content theme-panel">
             <nav class="theme-tabs">
-              <button type="button" class="theme-tab-btn" [class.active]="themeTab() === 'base'" (click)="themeTab.set('base')">Base Styles</button>
-              <button type="button" class="theme-tab-btn" [class.active]="themeTab() === 'components'" (click)="themeTab.set('components')">Components</button>
-              <button type="button" class="theme-tab-btn" [class.active]="themeTab() === 'advanced'" (click)="themeTab.set('advanced')">Advanced</button>
+              <button
+                type="button"
+                class="theme-tab-btn"
+                [class.active]="themeTab() === 'base'"
+                (click)="themeTab.set('base')"
+              >
+                Base Styles
+              </button>
+              <button
+                type="button"
+                class="theme-tab-btn"
+                [class.active]="themeTab() === 'components'"
+                (click)="themeTab.set('components')"
+              >
+                Components
+              </button>
+              <button
+                type="button"
+                class="theme-tab-btn"
+                [class.active]="themeTab() === 'advanced'"
+                (click)="themeTab.set('advanced')"
+              >
+                Advanced
+              </button>
             </nav>
 
             <div class="theme-tab-content">
@@ -732,7 +901,10 @@ type RadiusKey = keyof typeof RADII;
                 <div class="theme-group">
                   <div class="theme-control-row">
                     <span class="control-label">Create from accent</span>
-                    <ngxsmk-switch [checked]="createFromAccent()" (checkedChange)="createFromAccent.set($event)" />
+                    <ngxsmk-switch
+                      [checked]="createFromAccent()"
+                      (checkedChange)="createFromAccent.set($event)"
+                    />
                   </div>
 
                   <div class="control-divider"></div>
@@ -741,8 +913,18 @@ type RadiusKey = keyof typeof RADII;
                   <div class="theme-control-row">
                     <span class="control-label">Color Accent</span>
                     <div class="color-picker-container">
-                      <input type="color" class="color-swatch" [value]="accent()" (input)="accent.set($any($event.target).value)" />
-                      <input type="text" class="color-input" [value]="accent()" (input)="accent.set($any($event.target).value)" />
+                      <input
+                        type="color"
+                        class="color-swatch"
+                        [value]="accent()"
+                        (input)="accent.set($any($event.target).value)"
+                      />
+                      <input
+                        type="text"
+                        class="color-input"
+                        [value]="accent()"
+                        (input)="accent.set($any($event.target).value)"
+                      />
                     </div>
                   </div>
 
@@ -750,8 +932,18 @@ type RadiusKey = keyof typeof RADII;
                   <div class="theme-control-row">
                     <span class="control-label">Color Neutral</span>
                     <div class="color-picker-container">
-                      <input type="color" class="color-swatch" [value]="neutral()" (input)="neutral.set($any($event.target).value)" />
-                      <input type="text" class="color-input" [value]="neutral()" (input)="neutral.set($any($event.target).value)" />
+                      <input
+                        type="color"
+                        class="color-swatch"
+                        [value]="neutral()"
+                        (input)="neutral.set($any($event.target).value)"
+                      />
+                      <input
+                        type="text"
+                        class="color-input"
+                        [value]="neutral()"
+                        (input)="neutral.set($any($event.target).value)"
+                      />
                     </div>
                   </div>
 
@@ -759,8 +951,18 @@ type RadiusKey = keyof typeof RADII;
                   <div class="theme-control-row">
                     <span class="control-label">Color Card</span>
                     <div class="color-picker-container">
-                      <input type="color" class="color-swatch" [value]="cardBg()" (input)="cardBg.set($any($event.target).value)" />
-                      <input type="text" class="color-input" [value]="cardBg()" (input)="cardBg.set($any($event.target).value)" />
+                      <input
+                        type="color"
+                        class="color-swatch"
+                        [value]="cardBg()"
+                        (input)="cardBg.set($any($event.target).value)"
+                      />
+                      <input
+                        type="text"
+                        class="color-input"
+                        [value]="cardBg()"
+                        (input)="cardBg.set($any($event.target).value)"
+                      />
                     </div>
                   </div>
 
@@ -768,8 +970,18 @@ type RadiusKey = keyof typeof RADII;
                   <div class="theme-control-row">
                     <span class="control-label">Color Surface</span>
                     <div class="color-picker-container">
-                      <input type="color" class="color-swatch" [value]="appBg()" (input)="appBg.set($any($event.target).value)" />
-                      <input type="text" class="color-input" [value]="appBg()" (input)="appBg.set($any($event.target).value)" />
+                      <input
+                        type="color"
+                        class="color-swatch"
+                        [value]="appBg()"
+                        (input)="appBg.set($any($event.target).value)"
+                      />
+                      <input
+                        type="text"
+                        class="color-input"
+                        [value]="appBg()"
+                        (input)="appBg.set($any($event.target).value)"
+                      />
                     </div>
                   </div>
 
@@ -777,8 +989,18 @@ type RadiusKey = keyof typeof RADII;
                   <div class="theme-control-row">
                     <span class="control-label">Color Text Primary</span>
                     <div class="color-picker-container">
-                      <input type="color" class="color-swatch" [value]="text()" (input)="text.set($any($event.target).value)" />
-                      <input type="text" class="color-input" [value]="text()" (input)="text.set($any($event.target).value)" />
+                      <input
+                        type="color"
+                        class="color-swatch"
+                        [value]="text()"
+                        (input)="text.set($any($event.target).value)"
+                      />
+                      <input
+                        type="text"
+                        class="color-input"
+                        [value]="text()"
+                        (input)="text.set($any($event.target).value)"
+                      />
                     </div>
                   </div>
 
@@ -788,10 +1010,38 @@ type RadiusKey = keyof typeof RADII;
                   <div class="theme-control-row col">
                     <span class="control-label">Preset Density</span>
                     <div class="segmented-control">
-                      <button type="button" class="seg-btn" [class.active]="density() === 'compact'" (click)="density.set('compact')">Compact</button>
-                      <button type="button" class="seg-btn" [class.active]="density() === 'default'" (click)="density.set('default')">Default</button>
-                      <button type="button" class="seg-btn" [class.active]="density() === 'comfortable'" (click)="density.set('comfortable')">Comfortable</button>
-                      <button type="button" class="seg-btn" [class.active]="density() === 'gigantic'" (click)="density.set('gigantic')">Gigantic</button>
+                      <button
+                        type="button"
+                        class="seg-btn"
+                        [class.active]="density() === 'compact'"
+                        (click)="density.set('compact')"
+                      >
+                        Compact
+                      </button>
+                      <button
+                        type="button"
+                        class="seg-btn"
+                        [class.active]="density() === 'default'"
+                        (click)="density.set('default')"
+                      >
+                        Default
+                      </button>
+                      <button
+                        type="button"
+                        class="seg-btn"
+                        [class.active]="density() === 'comfortable'"
+                        (click)="density.set('comfortable')"
+                      >
+                        Comfortable
+                      </button>
+                      <button
+                        type="button"
+                        class="seg-btn"
+                        [class.active]="density() === 'gigantic'"
+                        (click)="density.set('gigantic')"
+                      >
+                        Gigantic
+                      </button>
                     </div>
                   </div>
 
@@ -800,24 +1050,42 @@ type RadiusKey = keyof typeof RADII;
                   <!-- HEADING FONT -->
                   <div class="theme-control-row">
                     <span class="control-label">Heading Font</span>
-                    <select class="theme-select" [value]="headingFont()" (change)="headingFont.set($any($event.target).value)">
-                      @for (f of fonts; track f.value) { <option [value]="f.value">{{ f.label }}</option> }
+                    <select
+                      class="theme-select"
+                      [value]="headingFont()"
+                      (change)="headingFont.set($any($event.target).value)"
+                    >
+                      @for (f of fonts; track f.value) {
+                        <option [value]="f.value">{{ f.label }}</option>
+                      }
                     </select>
                   </div>
 
                   <!-- BODY FONT -->
                   <div class="theme-control-row">
                     <span class="control-label">Body Font</span>
-                    <select class="theme-select" [value]="bodyFont()" (change)="bodyFont.set($any($event.target).value)">
-                      @for (f of fonts; track f.value) { <option [value]="f.value">{{ f.label }}</option> }
+                    <select
+                      class="theme-select"
+                      [value]="bodyFont()"
+                      (change)="bodyFont.set($any($event.target).value)"
+                    >
+                      @for (f of fonts; track f.value) {
+                        <option [value]="f.value">{{ f.label }}</option>
+                      }
                     </select>
                   </div>
 
                   <!-- TYPE SCALE -->
                   <div class="theme-control-row">
                     <span class="control-label">Type Scale</span>
-                    <select class="theme-select" [value]="scale()" (change)="scale.set(+$any($event.target).value)">
-                      @for (s of scales; track s.value) { <option [value]="s.value">{{ s.label }}</option> }
+                    <select
+                      class="theme-select"
+                      [value]="scale()"
+                      (change)="scale.set(+$any($event.target).value)"
+                    >
+                      @for (s of scales; track s.value) {
+                        <option [value]="s.value">{{ s.label }}</option>
+                      }
                     </select>
                   </div>
 
@@ -828,7 +1096,14 @@ type RadiusKey = keyof typeof RADII;
                     <span class="control-label">Corner Radius</span>
                     <div class="segmented-control">
                       @for (r of radii; track r.key) {
-                        <button type="button" class="seg-btn" [class.active]="radius() === r.key" (click)="radius.set(r.key)">{{ r.label }}</button>
+                        <button
+                          type="button"
+                          class="seg-btn"
+                          [class.active]="radius() === r.key"
+                          (click)="radius.set(r.key)"
+                        >
+                          {{ r.label }}
+                        </button>
                       }
                     </div>
                   </div>
@@ -838,14 +1113,19 @@ type RadiusKey = keyof typeof RADII;
               @if (themeTab() === 'components') {
                 <div class="theme-group empty-state">
                   <span class="empty-title">Component-specific Styles</span>
-                  <span class="empty-desc">Fine-tune spacing and padding overrides for individual components. Coming soon.</span>
+                  <span class="empty-desc"
+                    >Fine-tune spacing and padding overrides for individual components. Coming
+                    soon.</span
+                  >
                 </div>
               }
 
               @if (themeTab() === 'advanced') {
                 <div class="theme-group empty-state">
                   <span class="empty-title">Advanced Tokens</span>
-                  <span class="empty-desc">Directly edit the underlying StyleX design tokens scale. Coming soon.</span>
+                  <span class="empty-desc"
+                    >Directly edit the underlying StyleX design tokens scale. Coming soon.</span
+                  >
                 </div>
               }
             </div>
@@ -859,21 +1139,64 @@ type RadiusKey = keyof typeof RADII;
         <header class="preview-toolbar">
           <!-- ZOOM -->
           <ngxsmk-h-stack gap="var(--ngxsmk-space-2)">
-            <button type="button" class="toolbar-btn" [class.active]="scaleZoom() === '0.5x'" (click)="scaleZoom.set('0.5x')">0.5×</button>
-            <button type="button" class="toolbar-btn" [class.active]="scaleZoom() === '1x'" (click)="scaleZoom.set('1x')">1×</button>
-            <button type="button" class="toolbar-btn" [class.active]="scaleZoom() === '1.5x'" (click)="scaleZoom.set('1.5x')">1.5×</button>
-            <button type="button" class="toolbar-btn" [class.active]="scaleZoom() === '2x'" (click)="scaleZoom.set('2x')">2×</button>
+            <button
+              type="button"
+              class="toolbar-btn"
+              [class.active]="scaleZoom() === '0.5x'"
+              (click)="scaleZoom.set('0.5x')"
+            >
+              0.5×
+            </button>
+            <button
+              type="button"
+              class="toolbar-btn"
+              [class.active]="scaleZoom() === '1x'"
+              (click)="scaleZoom.set('1x')"
+            >
+              1×
+            </button>
+            <button
+              type="button"
+              class="toolbar-btn"
+              [class.active]="scaleZoom() === '1.5x'"
+              (click)="scaleZoom.set('1.5x')"
+            >
+              1.5×
+            </button>
+            <button
+              type="button"
+              class="toolbar-btn"
+              [class.active]="scaleZoom() === '2x'"
+              (click)="scaleZoom.set('2x')"
+            >
+              2×
+            </button>
           </ngxsmk-h-stack>
 
           <!-- RESPONSIVE VIEWPORTS -->
           <ngxsmk-h-stack gap="var(--ngxsmk-space-2)" class="center-controls">
-            <button type="button" class="toolbar-btn text-btn" [class.active]="viewportMode() === 'desktop'" (click)="viewportMode.set('desktop')">
+            <button
+              type="button"
+              class="toolbar-btn text-btn"
+              [class.active]="viewportMode() === 'desktop'"
+              (click)="viewportMode.set('desktop')"
+            >
               Desktop
             </button>
-            <button type="button" class="toolbar-btn text-btn" [class.active]="viewportMode() === 'phone'" (click)="viewportMode.set('phone')">
+            <button
+              type="button"
+              class="toolbar-btn text-btn"
+              [class.active]="viewportMode() === 'phone'"
+              (click)="viewportMode.set('phone')"
+            >
               Phone
             </button>
-            <button type="button" class="toolbar-btn text-btn" [class.active]="viewportMode() === 'expand'" (click)="viewportMode.set('expand')">
+            <button
+              type="button"
+              class="toolbar-btn text-btn"
+              [class.active]="viewportMode() === 'expand'"
+              (click)="viewportMode.set('expand')"
+            >
               Expand
             </button>
           </ngxsmk-h-stack>
@@ -881,34 +1204,126 @@ type RadiusKey = keyof typeof RADII;
           <!-- ACTIONS -->
           <ngxsmk-h-stack gap="var(--ngxsmk-space-2)">
             <!-- GRID TOGGLE -->
-            <button type="button" class="toolbar-btn icon-btn" [class.active]="showGrid()" (click)="showGrid.set(!showGrid())" title="Toggle Grid Lines">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-grid-3x3"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/><path d="M9 3v18"/><path d="M15 3v18"/></svg>
+            <button
+              type="button"
+              class="toolbar-btn icon-btn"
+              [class.active]="showGrid()"
+              (click)="showGrid.set(!showGrid())"
+              title="Toggle Grid Lines"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-grid-3x3"
+              >
+                <rect width="18" height="18" x="3" y="3" rx="2" />
+                <path d="M3 9h18" />
+                <path d="M3 15h18" />
+                <path d="M9 3v18" />
+                <path d="M15 3v18" />
+              </svg>
             </button>
             <!-- INSPECTOR TOGGLE -->
-            <button type="button" class="toolbar-btn icon-btn" [class.active]="inspectMode()" (click)="inspectMode.set(!inspectMode())" title="Toggle Element Inspector">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mouse-pointer-click"><path d="M14 4.1 12 6"/><path d="m5.1 8-2.9-.8a1 1 0 0 1-.2-1.8l16-12a1 1 0 0 1 1.4 1.4l-12 16a1 1 0 0 1-1.8-.2z"/><path d="m8.3 9.6 1.8 1.8"/><path d="m19 19-5-5"/><path d="M14 19v-3"/><path d="M19 14h-3"/></svg>
+            <button
+              type="button"
+              class="toolbar-btn icon-btn"
+              [class.active]="inspectMode()"
+              (click)="inspectMode.set(!inspectMode())"
+              title="Toggle Element Inspector"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-mouse-pointer-click"
+              >
+                <path d="M14 4.1 12 6" />
+                <path
+                  d="m5.1 8-2.9-.8a1 1 0 0 1-.2-1.8l16-12a1 1 0 0 1 1.4 1.4l-12 16a1 1 0 0 1-1.8-.2z"
+                />
+                <path d="m8.3 9.6 1.8 1.8" />
+                <path d="m19 19-5-5" />
+                <path d="M14 19v-3" />
+                <path d="M19 14h-3" />
+              </svg>
             </button>
             <!-- DARK MODE -->
-            <button type="button" class="toolbar-btn icon-btn" (click)="toggleDarkMode()" title="Toggle dark mode">
+            <button
+              type="button"
+              class="toolbar-btn icon-btn"
+              (click)="toggleDarkMode()"
+              title="Toggle dark mode"
+            >
               @if (mode() === 'dark') {
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-sun"
+                >
+                  <circle cx="12" cy="12" r="4" />
+                  <path d="M12 2v2" />
+                  <path d="M12 20v2" />
+                  <path d="m4.93 4.93 1.41 1.41" />
+                  <path d="m17.66 17.66 1.41 1.41" />
+                  <path d="M2 12h2" />
+                  <path d="M20 12h2" />
+                  <path d="m6.34 17.66-1.41 1.41" />
+                  <path d="m19.07 4.93-1.41 1.41" />
+                </svg>
               } @else {
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-moon"
+                >
+                  <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+                </svg>
               }
             </button>
             <button type="button" class="toolbar-btn text-btn" (click)="copyLink()">
               {{ linkCopied() ? '✓ Copied' : 'Copy URL' }}
             </button>
-            <button type="button" class="toolbar-btn text-btn primary" (click)="showDownloadModal.set(true)">
+            <button
+              type="button"
+              class="toolbar-btn text-btn primary"
+              (click)="showDownloadModal.set(true)"
+            >
               Download theme
             </button>
           </ngxsmk-h-stack>
         </header>
 
         <!-- CANVAS AREA -->
-        <div 
-          class="canvas-scroll-area" 
-          [class.dark]="mode() === 'dark'" 
+        <div
+          class="canvas-scroll-area"
+          [class.dark]="mode() === 'dark'"
           [class.show-grid]="showGrid()"
           [style.background]="mode() === 'dark' ? '#09090b' : '#fafafa'"
         >
@@ -936,14 +1351,39 @@ type RadiusKey = keyof typeof RADII;
         <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
         <div class="modal-card" (click)="$event.stopPropagation()">
           <header class="modal-head">
-            <ngxsmk-heading level="h3" style="margin: 0; font-size: 1.15rem; font-weight: 700;">Export Design System Theme</ngxsmk-heading>
-            <button type="button" class="close-btn" (click)="showDownloadModal.set(false)">&times;</button>
+            <ngxsmk-heading level="h3" style="margin: 0; font-size: 1.15rem; font-weight: 700;"
+              >Export Design System Theme</ngxsmk-heading
+            >
+            <button type="button" class="close-btn" (click)="showDownloadModal.set(false)">
+              &times;
+            </button>
           </header>
 
           <nav class="modal-tabs">
-            <button type="button" class="modal-tab-btn" [class.active]="exportFormat() === 'css'" (click)="exportFormat.set('css')">CSS Variables</button>
-            <button type="button" class="modal-tab-btn" [class.active]="exportFormat() === 'tailwind'" (click)="exportFormat.set('tailwind')">Tailwind CSS</button>
-            <button type="button" class="modal-tab-btn" [class.active]="exportFormat() === 'stylex'" (click)="exportFormat.set('stylex')">StyleX JS</button>
+            <button
+              type="button"
+              class="modal-tab-btn"
+              [class.active]="exportFormat() === 'css'"
+              (click)="exportFormat.set('css')"
+            >
+              CSS Variables
+            </button>
+            <button
+              type="button"
+              class="modal-tab-btn"
+              [class.active]="exportFormat() === 'tailwind'"
+              (click)="exportFormat.set('tailwind')"
+            >
+              Tailwind CSS
+            </button>
+            <button
+              type="button"
+              class="modal-tab-btn"
+              [class.active]="exportFormat() === 'stylex'"
+              (click)="exportFormat.set('stylex')"
+            >
+              StyleX JS
+            </button>
           </nav>
 
           <div class="modal-body">
@@ -951,10 +1391,22 @@ type RadiusKey = keyof typeof RADII;
           </div>
 
           <footer class="modal-footer">
-            <button type="button" ngxsmk-button variant="outline" size="sm" (click)="copyExportCode()">
+            <button
+              type="button"
+              ngxsmk-button
+              variant="outline"
+              size="sm"
+              (click)="copyExportCode()"
+            >
               {{ exportCopied() ? '✓ Copied' : 'Copy Code' }}
             </button>
-            <button type="button" ngxsmk-button variant="primary" size="sm" (click)="triggerDownload()">
+            <button
+              type="button"
+              ngxsmk-button
+              variant="primary"
+              size="sm"
+              (click)="triggerDownload()"
+            >
               Download Config File
             </button>
           </footer>
@@ -1033,7 +1485,9 @@ type RadiusKey = keyof typeof RADII;
     .sidenav-btn.active {
       color: #ffffff;
       background: #27272a;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 0 12px rgba(255, 255, 255, 0.05);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 0 12px rgba(255, 255, 255, 0.05);
     }
 
     /* ---- CONFIG PANEL (Obsidian Glassmorphism) ---- */
@@ -1105,7 +1559,8 @@ type RadiusKey = keyof typeof RADII;
       overflow: hidden;
     }
 
-    .editor-textarea, .highlight-pre {
+    .editor-textarea,
+    .highlight-pre {
       position: absolute;
       top: 0;
       left: 0;
@@ -1139,13 +1594,29 @@ type RadiusKey = keyof typeof RADII;
     }
 
     /* ---- SYNTAX HIGHLIGHT TOKEN COLORS ---- */
-    ::ng-deep .hl-keyword { color: #f472b6 !important; font-weight: 600; }
-    ::ng-deep .hl-tag { color: #818cf8 !important; }
-    ::ng-deep .hl-tag-html { color: #fb7185 !important; }
-    ::ng-deep .hl-attr { color: #38bdf8 !important; }
-    ::ng-deep .hl-str { color: #34d399 !important; }
-    ::ng-deep .hl-brace { color: #fbbf24 !important; }
-    ::ng-deep .hl-comment { color: #71717a !important; font-style: italic; }
+    ::ng-deep .hl-keyword {
+      color: #f472b6 !important;
+      font-weight: 600;
+    }
+    ::ng-deep .hl-tag {
+      color: #818cf8 !important;
+    }
+    ::ng-deep .hl-tag-html {
+      color: #fb7185 !important;
+    }
+    ::ng-deep .hl-attr {
+      color: #38bdf8 !important;
+    }
+    ::ng-deep .hl-str {
+      color: #34d399 !important;
+    }
+    ::ng-deep .hl-brace {
+      color: #fbbf24 !important;
+    }
+    ::ng-deep .hl-comment {
+      color: #71717a !important;
+      font-style: italic;
+    }
 
     /* ---- THEME EDITOR VIEW ---- */
     .theme-panel {
@@ -1225,7 +1696,7 @@ type RadiusKey = keyof typeof RADII;
       border-radius: var(--ngxsmk-radius-md);
       padding: 2px var(--ngxsmk-space-2) 2px 2px;
       background: var(--ngxsmk-color-surface);
-      box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
       transition: border-color 0.2s ease;
     }
 
@@ -1241,7 +1712,7 @@ type RadiusKey = keyof typeof RADII;
       cursor: pointer;
       background: none;
       padding: 0;
-      box-shadow: 0 0 0 1px rgba(0,0,0,0.05);
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
     }
 
     .color-swatch::-webkit-color-swatch-wrapper {
@@ -1276,7 +1747,7 @@ type RadiusKey = keyof typeof RADII;
       border-radius: var(--ngxsmk-radius-md);
       padding: 2px;
       gap: 2px;
-      box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
     }
 
     .seg-btn {
@@ -1295,7 +1766,7 @@ type RadiusKey = keyof typeof RADII;
     .seg-btn.active {
       background: var(--ngxsmk-color-surface);
       color: var(--ngxsmk-color-on-surface);
-      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
     }
 
     .theme-select {
@@ -1447,12 +1918,15 @@ type RadiusKey = keyof typeof RADII;
       background: var(--ngxsmk-color-background);
       border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-xl);
-      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.06);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.06);
       width: 100%;
       max-width: 900px;
       min-height: 500px;
       padding: var(--ngxsmk-space-8);
-      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.15s ease;
+      transition:
+        width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.15s ease;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1568,13 +2042,23 @@ type RadiusKey = keyof typeof RADII;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
     }
 
     @keyframes slideIn {
-      from { transform: translateY(10px) scale(0.98); opacity: 0; }
-      to { transform: translateY(0) scale(1); opacity: 1; }
+      from {
+        transform: translateY(10px) scale(0.98);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
     }
 
     @media (max-width: 1024px) {
@@ -1595,10 +2079,10 @@ type RadiusKey = keyof typeof RADII;
 export class PlaygroundPage {
   @ViewChild('linesEl') linesEl?: ElementRef<HTMLElement>;
   @ViewChild('highlightPreEl') highlightPreEl?: ElementRef<HTMLElement>;
-  
+
   protected readonly tab = signal<'code' | 'theme'>('code');
   protected readonly themeTab = signal<'base' | 'components' | 'advanced'>('base');
-  
+
   private readonly themeService = inject(NgxsmkThemeService);
 
   // Code Editor state
@@ -1619,7 +2103,9 @@ export class PlaygroundPage {
   protected readonly cardBg = signal('#ffffff');
   protected readonly appBg = signal('#fafafa');
   protected readonly text = signal('#09090b');
-  protected readonly density = signal<'compact' | 'default' | 'comfortable' | 'gigantic'>('default');
+  protected readonly density = signal<'compact' | 'default' | 'comfortable' | 'gigantic'>(
+    'default',
+  );
   protected readonly headingFont = signal("'Inter', system-ui, sans-serif");
   protected readonly bodyFont = signal("'Inter', system-ui, sans-serif");
   protected readonly scale = signal(1.2);
@@ -1667,8 +2153,8 @@ export class PlaygroundPage {
     { value: "'Figtree', sans-serif", label: 'Figtree' },
     { value: "'Poppins', sans-serif", label: 'Poppins' },
     { value: "'Montserrat', sans-serif", label: 'Montserrat' },
-    { value: "system-ui, sans-serif", label: 'System' },
-    { value: "Georgia, serif", label: 'Georgia' },
+    { value: 'system-ui, sans-serif', label: 'System' },
+    { value: 'Georgia, serif', label: 'Georgia' },
   ];
 
   protected readonly scales = [
@@ -1692,25 +2178,28 @@ export class PlaygroundPage {
   // Automatically derive neutral/dark settings from accent if createFromAccent is toggled
   constructor() {
     this.restoreFromHash();
-    
+
     // Sync playground dark mode with global theme dark mode
-    effect(() => {
-      const isDark = this.themeService.isDark();
-      const currentMode = this.mode();
-      if (isDark && currentMode === 'light') {
-        this.mode.set('dark');
-        this.cardBg.set('#18181b');
-        this.appBg.set('#09090b');
-        this.text.set('#fafafa');
-        this.neutral.set('#3f3f46');
-      } else if (!isDark && currentMode === 'dark') {
-        this.mode.set('light');
-        this.cardBg.set('#ffffff');
-        this.appBg.set('#fafafa');
-        this.text.set('#09090b');
-        this.neutral.set('#e4e4e7');
-      }
-    }, { allowSignalWrites: true });
+    effect(
+      () => {
+        const isDark = this.themeService.isDark();
+        const currentMode = this.mode();
+        if (isDark && currentMode === 'light') {
+          this.mode.set('dark');
+          this.cardBg.set('#18181b');
+          this.appBg.set('#09090b');
+          this.text.set('#fafafa');
+          this.neutral.set('#3f3f46');
+        } else if (!isDark && currentMode === 'dark') {
+          this.mode.set('light');
+          this.cardBg.set('#ffffff');
+          this.appBg.set('#fafafa');
+          this.text.set('#09090b');
+          this.neutral.set('#e4e4e7');
+        }
+      },
+      { allowSignalWrites: true },
+    );
 
     // Set up effects to update parameters based on Accent toggle if enabled
     effect(() => {
@@ -1833,8 +2322,7 @@ export class PlaygroundPage {
   // --- Dynamic highlight JSX logic ---
   private highlightCode(code: string): string {
     if (!code) return '';
-    const esc = (s: string) =>
-      s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
     const patterns: { re: RegExp; cls: string }[] = [
       { re: /\/\*[\s\S]*?\*\/|\/\/[^\n]*/g, cls: 'hl-comment' },
@@ -1843,7 +2331,10 @@ export class PlaygroundPage {
       { re: /<\/?[a-z][\w-]*/g, cls: 'hl-tag-html' },
       { re: /[A-Za-z_]\w*(?=\s*=)/g, cls: 'hl-attr' },
       { re: /[{}]/g, cls: 'hl-brace' },
-      { re: /\b(?:import|from|export|default|function|return|const|let|interface|class|readonly|protected|private|public|implements|extends)\b/g, cls: 'hl-keyword' },
+      {
+        re: /\b(?:import|from|export|default|function|return|const|let|interface|class|readonly|protected|private|public|implements|extends)\b/g,
+        cls: 'hl-keyword',
+      },
     ];
 
     let result = '';
@@ -1920,7 +2411,7 @@ export const tokens = stylex.defineVars({
     const code = this.exportCode();
     let filename = `theme-${this.accent().replace('#', '')}.css`;
     let type = 'text/css';
-    
+
     if (fmt === 'tailwind') {
       filename = 'tailwind.config.js';
       type = 'application/javascript';
@@ -1941,7 +2432,7 @@ export const tokens = stylex.defineVars({
   }
 
   protected copyLink() {
-    this.compress(this.editorCode()).then(hash => {
+    this.compress(this.editorCode()).then((hash) => {
       const shareUrl = `${location.protocol}//${location.host}${location.pathname}#code=${hash}`;
       navigator.clipboard.writeText(shareUrl).then(() => {
         this.linkCopied.set(true);
@@ -1956,13 +2447,13 @@ export const tokens = stylex.defineVars({
       start(controller) {
         controller.enqueue(bytes);
         controller.close();
-      }
+      },
     });
     const compressionStream = new CompressionStream('deflate-raw');
     const compressedStream = stream.pipeThrough(compressionStream);
     const response = new Response(compressedStream);
     const buffer = await response.arrayBuffer();
-    
+
     let binary = '';
     const bytesArr = new Uint8Array(buffer);
     for (let i = 0; i < bytesArr.byteLength; i++) {
@@ -1986,7 +2477,7 @@ export const tokens = stylex.defineVars({
       start(controller) {
         controller.enqueue(bytes);
         controller.close();
-      }
+      },
     });
     const decompressionStream = new DecompressionStream('deflate-raw');
     const decompressedStream = stream.pipeThrough(decompressionStream);
@@ -1999,10 +2490,10 @@ export const tokens = stylex.defineVars({
     if (hash.includes('code=')) {
       const codeHash = hash.split('code=')[1];
       this.decompress(codeHash).then(
-        text => {
+        (text) => {
           if (text) this.editorCode.set(text);
         },
-        err => console.error('Failed to restore code from hash', err)
+        (err) => console.error('Failed to restore code from hash', err),
       );
     }
   }

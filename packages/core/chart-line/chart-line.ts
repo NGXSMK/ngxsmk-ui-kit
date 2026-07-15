@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 export interface NgxsmkChartDataPoint {
   label: string;
@@ -20,21 +15,13 @@ export interface NgxsmkChartDataPoint {
       [attr.height]="height()"
       [attr.viewBox]="viewBox()"
     >
-      <text
-        class="ngxsmk-chart-line__label"
-        [attr.x]="0"
-        [attr.y]="height() - 4"
-      >{{ minLabel() }}</text>
-      <text
-        class="ngxsmk-chart-line__label"
-        [attr.x]="width() - 30"
-        [attr.y]="height() - 4"
-      >{{ maxLabel() }}</text>
-      <polyline
-        class="ngxsmk-chart-line__line"
-        [attr.points]="points()"
-        [attr.stroke]="color()"
-      />
+      <text class="ngxsmk-chart-line__label" [attr.x]="0" [attr.y]="height() - 4">
+        {{ minLabel() }}
+      </text>
+      <text class="ngxsmk-chart-line__label" [attr.x]="width() - 30" [attr.y]="height() - 4">
+        {{ maxLabel() }}
+      </text>
+      <polyline class="ngxsmk-chart-line__line" [attr.points]="points()" [attr.stroke]="color()" />
     </svg>
   `,
   host: { class: 'ngxsmk-chart-line' },
@@ -77,9 +64,7 @@ export class NgxsmkLineChart {
 
   protected readonly maxLabel = computed(() => String(this.maxVal()));
 
-  protected readonly viewBox = computed(
-    () => `0 0 ${this.width()} ${this.height()}`,
-  );
+  protected readonly viewBox = computed(() => `0 0 ${this.width()} ${this.height()}`);
 
   protected readonly points = computed(() => {
     const w = this.width();

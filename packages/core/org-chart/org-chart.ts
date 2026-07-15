@@ -36,12 +36,42 @@ export interface OrgNode {
   `,
   host: { class: 'ngxsmk-org-chart' },
   styles: `
-    :host { display: block; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; font-family: var(--ngxsmk-font-sans); font-size: 0.8125rem; }
-    .ngxsmk-org-chart__tree { display: flex; flex-direction: column; align-items: center; gap: var(--ngxsmk-space-4); }
-    .ngxsmk-org-chart__children { display: flex; gap: var(--ngxsmk-space-3); margin-top: var(--ngxsmk-space-2); }
-    .ngxsmk-org-chart__card { padding: var(--ngxsmk-space-3) var(--ngxsmk-space-4); background: var(--ngxsmk-color-surface); border: 1px solid var(--ngxsmk-color-outline-variant); border-radius: var(--ngxsmk-radius-md); text-align: center; min-width: 8rem; }
-    .ngxsmk-org-chart__name { font-weight: 600; color: var(--ngxsmk-color-on-surface); }
-    .ngxsmk-org-chart__role { font-size: 0.6875rem; color: var(--ngxsmk-color-on-surface-variant); margin-top: var(--ngxsmk-space-1); }
+    :host {
+      display: block;
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      font-family: var(--ngxsmk-font-sans);
+      font-size: 0.8125rem;
+    }
+    .ngxsmk-org-chart__tree {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--ngxsmk-space-4);
+    }
+    .ngxsmk-org-chart__children {
+      display: flex;
+      gap: var(--ngxsmk-space-3);
+      margin-top: var(--ngxsmk-space-2);
+    }
+    .ngxsmk-org-chart__card {
+      padding: var(--ngxsmk-space-3) var(--ngxsmk-space-4);
+      background: var(--ngxsmk-color-surface);
+      border: 1px solid var(--ngxsmk-color-outline-variant);
+      border-radius: var(--ngxsmk-radius-md);
+      text-align: center;
+      min-width: 8rem;
+    }
+    .ngxsmk-org-chart__name {
+      font-weight: 600;
+      color: var(--ngxsmk-color-on-surface);
+    }
+    .ngxsmk-org-chart__role {
+      font-size: 0.6875rem;
+      color: var(--ngxsmk-color-on-surface-variant);
+      margin-top: var(--ngxsmk-space-1);
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

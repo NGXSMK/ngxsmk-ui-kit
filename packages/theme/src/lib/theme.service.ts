@@ -1,11 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import {
-  Injectable,
-  computed,
-  effect,
-  inject,
-  signal,
-} from '@angular/core';
+import { Injectable, computed, effect, inject, signal } from '@angular/core';
 import { buildThemeCss } from './css';
 import { ThemeConfig } from './types';
 
@@ -36,9 +30,7 @@ export class NgxsmkThemeService {
   );
 
   constructor() {
-    const media = this.document.defaultView?.matchMedia?.(
-      '(prefers-color-scheme: dark)',
-    );
+    const media = this.document.defaultView?.matchMedia?.('(prefers-color-scheme: dark)');
     media?.addEventListener('change', (e) => this.systemDark.set(e.matches));
 
     effect(() => {
@@ -92,9 +84,6 @@ export class NgxsmkThemeService {
   }
 
   private matchSystemDark(): boolean {
-    return (
-      this.document.defaultView?.matchMedia?.('(prefers-color-scheme: dark)')
-        .matches ?? false
-    );
+    return this.document.defaultView?.matchMedia?.('(prefers-color-scheme: dark)').matches ?? false;
   }
 }

@@ -23,11 +23,23 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
       cursor: pointer;
       transition: color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
-    :host(:hover) { color: var(--ngxsmk-color-primary-hover); }
-    :host(:focus-visible) { outline: 2px solid var(--ngxsmk-color-ring); outline-offset: 2px; border-radius: var(--ngxsmk-radius-sm); }
-    :host([data-underline]:hover) { text-decoration: underline; }
-    :host([data-variant='muted']) { color: var(--ngxsmk-color-on-surface-variant); }
-    :host([data-variant='muted']:hover) { color: var(--ngxsmk-color-on-surface); }
+    :host(:hover) {
+      color: var(--ngxsmk-color-primary-hover);
+    }
+    :host(:focus-visible) {
+      outline: 2px solid var(--ngxsmk-color-ring);
+      outline-offset: 2px;
+      border-radius: var(--ngxsmk-radius-sm);
+    }
+    :host([data-underline]:hover) {
+      text-decoration: underline;
+    }
+    :host([data-variant='muted']) {
+      color: var(--ngxsmk-color-on-surface-variant);
+    }
+    :host([data-variant='muted']:hover) {
+      color: var(--ngxsmk-color-on-surface);
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

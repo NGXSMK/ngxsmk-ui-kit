@@ -8,11 +8,7 @@ import { NgxsmkSwitch } from './switch';
   standalone: true,
   imports: [NgxsmkSwitch, ReactiveFormsModule],
   template: `
-    <ngxsmk-switch
-      [formControl]="control"
-      [disabled]="disabled()"
-      (changed)="onChanged($event)"
-    >
+    <ngxsmk-switch [formControl]="control" [disabled]="disabled()" (changed)="onChanged($event)">
       Toggle Switch
     </ngxsmk-switch>
   `,
@@ -46,7 +42,7 @@ describe('NgxsmkSwitch', () => {
 
   it('cascades checked and disabled states to DOM attributes', () => {
     const { fixture, hostEl, inputEl } = setup();
-    
+
     fixture.componentInstance.control.setValue(true);
     fixture.detectChanges();
     expect(inputEl.checked).toBe(true);
@@ -60,7 +56,7 @@ describe('NgxsmkSwitch', () => {
 
   it('updates form control and emits changed output on interaction', () => {
     const { fixture, inputEl } = setup();
-    
+
     inputEl.checked = true;
     inputEl.dispatchEvent(new Event('change'));
     fixture.detectChanges();
@@ -84,7 +80,7 @@ describe('NgxsmkSwitch', () => {
     // Let's test programmatically that disabled state prevents updates.
     fixture.componentInstance.control.disable();
     fixture.detectChanges();
-    
+
     expect(inputEl.disabled).toBe(true);
   });
 });

@@ -6,9 +6,7 @@ import { NgxsmkVisuallyHidden } from './visually-hidden';
 @Component({
   standalone: true,
   imports: [NgxsmkVisuallyHidden],
-  template: `
-    <span ngxsmkVisuallyHidden id="target">Screen Reader Text</span>
-  `,
+  template: ` <span ngxsmkVisuallyHidden id="target">Screen Reader Text</span> `,
 })
 class HostComponent {}
 
@@ -19,7 +17,7 @@ describe('NgxsmkVisuallyHidden', () => {
 
     const target = fixture.nativeElement.querySelector('#target') as HTMLElement;
     expect(target).not.toBeNull();
-    
+
     // Check key styles
     expect(target.style.position).toBe('absolute');
     expect(target.style.width).toBe('1px');

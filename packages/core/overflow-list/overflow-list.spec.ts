@@ -30,11 +30,11 @@ describe('NgxsmkOverflowList', () => {
   it('hides items that exceed the max threshold by default', () => {
     const { items, moreBtn } = setup();
     expect(items.length).toBe(4);
-    
+
     // Max is 2, so the first 2 should be visible
     expect(window.getComputedStyle(items[0]).display).not.toBe('none');
     expect(window.getComputedStyle(items[1]).display).not.toBe('none');
-    
+
     // The next 2 should be hidden
     expect(window.getComputedStyle(items[2]).display).toBe('none');
     expect(window.getComputedStyle(items[3]).display).toBe('none');

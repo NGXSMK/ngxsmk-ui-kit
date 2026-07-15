@@ -7,7 +7,10 @@ import { NgxsmkDropdownMenu, NgxsmkDropdownMenuItem } from '@ngxsmk/core/dropdow
 import { NgxsmkContextMenu, NgxsmkContextMenuItem } from '@ngxsmk/core/context-menu';
 import { NgxsmkLightbox, NgxsmkLightboxImage } from '@ngxsmk/core/lightbox';
 import { NgxsmkThumbnail } from '@ngxsmk/core/thumbnail';
-import { NgxsmkImperativeDialog, NgxsmkImperativeAlertDialog } from '@ngxsmk/core/imperative-dialog';
+import {
+  NgxsmkImperativeDialog,
+  NgxsmkImperativeAlertDialog,
+} from '@ngxsmk/core/imperative-dialog';
 import { NgxsmkButton } from '@ngxsmk/core/button';
 import { NgxsmkCommandPalette, CommandItem } from '@ngxsmk/core/command-palette';
 import { NgxsmkThemeService } from '@ngxsmk/theme';
@@ -35,22 +38,23 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
   template: `
     <h2 class="ngxsmk-page-title">Overlay</h2>
     <p class="ngxsmk-page-desc">
-      Dialogs, tooltips, menus, and floating panels. Overlays render above the
-      page, trap focus where appropriate, and respect Escape and backdrop
-      dismissal — all wired through signals for predictable open state.
+      Dialogs, tooltips, menus, and floating panels. Overlays render above the page, trap focus
+      where appropriate, and respect Escape and backdrop dismissal — all wired through signals for
+      predictable open state.
     </p>
 
     <showcase-example
       title="Dialog"
       description="Modal dialog on the native <dialog> element with a title, body, and footer actions. Two-way bound open state."
-      [code]="codeDialog" [component]="NgxsmkButton">
+      [code]="codeDialog"
+      [component]="NgxsmkButton"
+    >
       <div class="ngxsmk-demo-row">
         <button ngxsmk-button (click)="dialogOpen.set(true)">Open dialog</button>
       </div>
 
       <ngxsmk-dialog [(open)]="dialogOpen" title="Delete file?">
-        This action cannot be undone. The file will be permanently removed from
-        your workspace.
+        This action cannot be undone. The file will be permanently removed from your workspace.
         <div ngxsmkDialogFooter>
           <button ngxsmk-button variant="outline" (click)="dialogOpen.set(false)">Cancel</button>
           <button ngxsmk-button variant="destructive" (click)="onDeleted()">Delete</button>
@@ -61,10 +65,16 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Alert Dialog"
       description="A focused confirmation prompt with confirm/cancel actions and info or destructive variants."
-      [code]="codeAlertDialog" [component]="NgxsmkButton">
+      [code]="codeAlertDialog"
+      [component]="NgxsmkButton"
+    >
       <div class="ngxsmk-demo-row">
-        <button ngxsmk-button variant="outline" (click)="infoAlertOpen.set(true)">Info alert</button>
-        <button ngxsmk-button variant="destructive" (click)="destructiveAlertOpen.set(true)">Destructive alert</button>
+        <button ngxsmk-button variant="outline" (click)="infoAlertOpen.set(true)">
+          Info alert
+        </button>
+        <button ngxsmk-button variant="destructive" (click)="destructiveAlertOpen.set(true)">
+          Destructive alert
+        </button>
       </div>
 
       <ngxsmk-alert-dialog
@@ -95,24 +105,59 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Tooltip"
       description="A directive that shows a short hint on hover or focus. Position it on any side of the trigger."
-      [code]="codeTooltip" [component]="NgxsmkButton">
+      [code]="codeTooltip"
+      [component]="NgxsmkButton"
+    >
       <div class="ngxsmk-demo-row">
-        <button ngxsmk-button variant="outline" [ngxsmkTooltip]="'Appears above'" tooltipPosition="top">Top</button>
-        <button ngxsmk-button variant="outline" [ngxsmkTooltip]="'Appears below'" tooltipPosition="bottom">Bottom</button>
-        <button ngxsmk-button variant="outline" [ngxsmkTooltip]="'Appears to the left'" tooltipPosition="left">Left</button>
-        <button ngxsmk-button variant="outline" [ngxsmkTooltip]="'Appears to the right'" tooltipPosition="right">Right</button>
+        <button
+          ngxsmk-button
+          variant="outline"
+          [ngxsmkTooltip]="'Appears above'"
+          tooltipPosition="top"
+        >
+          Top
+        </button>
+        <button
+          ngxsmk-button
+          variant="outline"
+          [ngxsmkTooltip]="'Appears below'"
+          tooltipPosition="bottom"
+        >
+          Bottom
+        </button>
+        <button
+          ngxsmk-button
+          variant="outline"
+          [ngxsmkTooltip]="'Appears to the left'"
+          tooltipPosition="left"
+        >
+          Left
+        </button>
+        <button
+          ngxsmk-button
+          variant="outline"
+          [ngxsmkTooltip]="'Appears to the right'"
+          tooltipPosition="right"
+        >
+          Right
+        </button>
       </div>
     </showcase-example>
 
     <showcase-example
       title="Hover Card"
       description="A rich popover that opens on hover or focus of its trigger — ideal for profile and link previews."
-      [code]="codeHoverCard" [component]="NgxsmkHoverCard" [customize]="customizeNgxsmkHoverCard">
+      [code]="codeHoverCard"
+      [component]="NgxsmkHoverCard"
+      [customize]="customizeNgxsmkHoverCard"
+    >
       <ngxsmk-hover-card>
         <button ngxsmkHoverCardTrigger ngxsmk-button variant="ghost">&#64;ada_lovelace</button>
         <div class="ngxsmk-demo-stack">
           <strong>Ada Lovelace</strong>
-          <span class="ngxsmk-demo-hint">First computer programmer. Writes about analytical engines and algorithms.</span>
+          <span class="ngxsmk-demo-hint"
+            >First computer programmer. Writes about analytical engines and algorithms.</span
+          >
         </div>
       </ngxsmk-hover-card>
     </showcase-example>
@@ -120,7 +165,9 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Sheet"
       description="A panel that slides in from the left, right, or bottom edge. Great for filters, details, and navigation."
-      [code]="codeSheet" [component]="NgxsmkButton">
+      [code]="codeSheet"
+      [component]="NgxsmkButton"
+    >
       <div class="ngxsmk-demo-row">
         <button ngxsmk-button variant="outline" (click)="openSheet('left')">Open left</button>
         <button ngxsmk-button variant="outline" (click)="openSheet('right')">Open right</button>
@@ -129,7 +176,9 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
       <ngxsmk-sheet [(open)]="sheetOpen" [side]="sheetSide()" title="Settings">
         <div class="ngxsmk-demo-stack">
-          <p>This panel slides in from the <strong>{{ sheetSide() }}</strong> edge.</p>
+          <p>
+            This panel slides in from the <strong>{{ sheetSide() }}</strong> edge.
+          </p>
           <p class="ngxsmk-demo-hint">Click the backdrop or the close button to dismiss.</p>
           <button ngxsmk-button (click)="sheetOpen.set(false)">Done</button>
         </div>
@@ -139,7 +188,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Dropdown Menu"
       description="An actions menu anchored to a trigger button. Closes on selection, outside click, or Escape."
-      [code]="codeDropdown" [component]="NgxsmkDropdownMenu" [customize]="customizeNgxsmkDropdownMenu">
+      [code]="codeDropdown"
+      [component]="NgxsmkDropdownMenu"
+      [customize]="customizeNgxsmkDropdownMenu"
+    >
       <ngxsmk-dropdown-menu [items]="menuItems">
         <button ngxsmkDropdownTrigger ngxsmk-button variant="outline">Actions &#9662;</button>
       </ngxsmk-dropdown-menu>
@@ -152,7 +204,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Context Menu"
       description="A menu that opens at the pointer on right-click. Wire it to any surface via its show() method."
-      [code]="codeContextMenu" [component]="NgxsmkContextMenu" [customize]="customizeNgxsmkContextMenu">
+      [code]="codeContextMenu"
+      [component]="NgxsmkContextMenu"
+      [customize]="customizeNgxsmkContextMenu"
+    >
       <div
         class="ngxsmk-sc-surface"
         style="width:100%;padding:2rem;text-align:center;cursor:context-menu"
@@ -166,7 +221,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Lightbox"
       description="A full-screen image viewer with keyboard navigation. Click a thumbnail to open, or drive it via open state."
-      [code]="codeLightbox" [component]="NgxsmkLightbox" [customize]="customizeNgxsmkLightbox">
+      [code]="codeLightbox"
+      [component]="NgxsmkLightbox"
+      [customize]="customizeNgxsmkLightbox"
+    >
       <ngxsmk-lightbox [images]="galleryImages" [(open)]="lightboxOpen">
         <div class="ngxsmk-demo-row">
           @for (image of galleryImages; track image.src) {
@@ -176,14 +234,18 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
       </ngxsmk-lightbox>
 
       <div class="ngxsmk-demo-row">
-        <button ngxsmk-button variant="outline" (click)="lightboxOpen.set(true)">Open gallery</button>
+        <button ngxsmk-button variant="outline" (click)="lightboxOpen.set(true)">
+          Open gallery
+        </button>
       </div>
     </showcase-example>
 
     <showcase-example
       title="Imperative Dialog"
       description="An injectable service that opens a native <dialog> programmatically — no template binding required."
-      [code]="codeImperativeDialog" [component]="NgxsmkButton">
+      [code]="codeImperativeDialog"
+      [component]="NgxsmkButton"
+    >
       <div class="ngxsmk-demo-row">
         <button ngxsmk-button (click)="openImperative()">Open imperatively</button>
       </div>
@@ -196,9 +258,13 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Imperative Alert Dialog"
       description="An injectable service that resolves a Promise<boolean> from a confirm prompt — great for quick inline confirmations."
-      [code]="codeImperativeAlertDialog" [component]="NgxsmkButton">
+      [code]="codeImperativeAlertDialog"
+      [component]="NgxsmkButton"
+    >
       <div class="ngxsmk-demo-row">
-        <button ngxsmk-button variant="destructive" (click)="openImperativeAlert()">Confirm imperatively</button>
+        <button ngxsmk-button variant="destructive" (click)="openImperativeAlert()">
+          Confirm imperatively
+        </button>
       </div>
 
       @if (alertStatus()) {
@@ -209,7 +275,9 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Spotlight Command Palette (New)"
       description="A premium, keyboard-accessible command menu. Open it by clicking the button below or pressing Ctrl + K (or Cmd + K)."
-      [code]="codeCommandPalette" [component]="NgxsmkButton">
+      [code]="codeCommandPalette"
+      [component]="NgxsmkButton"
+    >
       <div class="ngxsmk-demo-row">
         <button ngxsmk-button (click)="palette.open()">Open Palette (Ctrl + K)</button>
       </div>
@@ -221,7 +289,9 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
       />
 
       @if (lastCommand()) {
-        <p class="ngxsmk-demo-hint">Executed: <strong>{{ lastCommand() }}</strong></p>
+        <p class="ngxsmk-demo-hint">
+          Executed: <strong>{{ lastCommand() }}</strong>
+        </p>
       }
     </showcase-example>
   `,
@@ -307,10 +377,22 @@ ngxsmk-lightbox {
   protected readonly lastCommand = signal('');
   protected readonly commandsList: CommandItem[] = [
     { id: 'home', label: 'Go to Home Page', category: 'Navigation', shortcut: 'G H', icon: '🏠' },
-    { id: 'docs', label: 'Go to Documentation', category: 'Navigation', shortcut: 'G D', icon: '📖' },
+    {
+      id: 'docs',
+      label: 'Go to Documentation',
+      category: 'Navigation',
+      shortcut: 'G D',
+      icon: '📖',
+    },
     { id: 'theme-light', label: 'Set Theme: Light Mode', category: 'Appearance', icon: '☀️' },
     { id: 'theme-dark', label: 'Set Theme: Dark Mode', category: 'Appearance', icon: '🌙' },
-    { id: 'copy-npm', label: 'Copy npm Install Command', category: 'Actions', shortcut: '⌥ C', icon: '📋' },
+    {
+      id: 'copy-npm',
+      label: 'Copy npm Install Command',
+      category: 'Actions',
+      shortcut: '⌥ C',
+      icon: '📋',
+    },
     { id: 'reset', label: 'Reset Demo Settings', category: 'Actions', icon: '🔄' },
   ];
 
@@ -370,15 +452,13 @@ ngxsmk-lightbox {
   protected openImperative(): void {
     this.imperativeDialog.open(
       'Imperative dialog',
-      'This dialog was opened through the NgxsmkImperativeDialog service.'
+      'This dialog was opened through the NgxsmkImperativeDialog service.',
     );
     this.imperativeStatus.set('Dialog opened imperatively');
   }
 
   protected async openImperativeAlert(): Promise<void> {
-    const confirmed = await this.imperativeAlert.confirm(
-      'Discard your unsaved changes?'
-    );
+    const confirmed = await this.imperativeAlert.confirm('Discard your unsaved changes?');
     this.alertStatus.set(confirmed ? 'Confirmed: changes discarded' : 'Cancelled: kept changes');
   }
 

@@ -177,7 +177,9 @@ const DIALOG_MOTION: NgxsmkMotionState = {
       justify-content: flex-end;
       gap: var(--ngxsmk-space-2);
     }
-    .ngxsmk-dialog__footer:empty { display: none; }
+    .ngxsmk-dialog__footer:empty {
+      display: none;
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -195,8 +197,7 @@ export class NgxsmkDialog {
   protected readonly visible = signal(false);
   protected readonly enterMotion = DIALOG_MOTION;
 
-  private readonly dialogRef =
-    viewChild.required<ElementRef<HTMLDialogElement>>('dialog');
+  private readonly dialogRef = viewChild.required<ElementRef<HTMLDialogElement>>('dialog');
   private locked = false;
 
   constructor() {

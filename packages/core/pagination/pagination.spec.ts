@@ -7,11 +7,7 @@ import { NgxsmkPagination } from './pagination';
   standalone: true,
   imports: [NgxsmkPagination],
   template: `
-    <ngxsmk-pagination
-      [(page)]="page"
-      [pageCount]="pageCount"
-      [siblingCount]="siblings"
-    />
+    <ngxsmk-pagination [(page)]="page" [pageCount]="pageCount" [siblingCount]="siblings" />
   `,
 })
 class Host {
@@ -24,8 +20,7 @@ function setup(configure?: (h: Host) => void) {
   const fixture = TestBed.createComponent(Host);
   if (configure) configure(fixture.componentInstance);
   fixture.detectChanges();
-  const host: HTMLElement =
-    fixture.nativeElement.querySelector('ngxsmk-pagination');
+  const host: HTMLElement = fixture.nativeElement.querySelector('ngxsmk-pagination');
   return { fixture, host };
 }
 
@@ -62,9 +57,7 @@ describe('NgxsmkPagination', () => {
 
   it('navigates and clamps out-of-range requests', () => {
     const { fixture, host } = setup((h) => h.page.set(1));
-    const next = host.querySelector<HTMLButtonElement>(
-      '[aria-label="Next page"]',
-    )!;
+    const next = host.querySelector<HTMLButtonElement>('[aria-label="Next page"]')!;
     next.click();
     fixture.detectChanges();
     expect(fixture.componentInstance.page()).toBe(2);
@@ -72,9 +65,8 @@ describe('NgxsmkPagination', () => {
 
   it('disables prev on the first page and next on the last', () => {
     const { host } = setup((h) => h.page.set(1));
-    expect(
-      host.querySelector<HTMLButtonElement>('[aria-label="Previous page"]')!
-        .disabled,
-    ).toBe(true);
+    expect(host.querySelector<HTMLButtonElement>('[aria-label="Previous page"]')!.disabled).toBe(
+      true,
+    );
   });
 });

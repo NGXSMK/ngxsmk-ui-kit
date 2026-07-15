@@ -1,7 +1,10 @@
 import { ChangeDetectionStrategy, Component, Directive, input } from '@angular/core';
 
 @Directive({
-  standalone: true, selector: '[ngxsmkStackItem]', host: { class: 'ngxsmk-stack-item' } })
+  standalone: true,
+  selector: '[ngxsmkStackItem]',
+  host: { class: 'ngxsmk-stack-item' },
+})
 export class NgxsmkStackItem {}
 
 @Component({
@@ -15,7 +18,12 @@ export class NgxsmkStackItem {}
     '[style.justify-content]': 'justify()',
     '[style.flex-wrap]': 'wrap() ? "wrap" : null',
   },
-  styles: `:host { display: flex; flex-direction: row; }`,
+  styles: `
+    :host {
+      display: flex;
+      flex-direction: row;
+    }
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgxsmkHStack {
@@ -35,7 +43,12 @@ export class NgxsmkHStack {
     '[style.align-items]': 'align()',
     '[style.justify-content]': 'justify()',
   },
-  styles: `:host { display: flex; flex-direction: column; }`,
+  styles: `
+    :host {
+      display: flex;
+      flex-direction: column;
+    }
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgxsmkVStack {

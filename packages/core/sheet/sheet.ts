@@ -19,7 +19,7 @@ export type NgxsmkSheetSide = 'left' | 'right' | 'bottom';
   selector: 'ngxsmk-sheet',
   template: `
     @if (open()) {
-        <div class="ngxsmk-sheet__root" [attr.data-side]="side()">
+      <div class="ngxsmk-sheet__root" [attr.data-side]="side()">
         <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
         <div class="ngxsmk-sheet__backdrop" (click)="requestClose()"></div>
         <div
@@ -30,30 +30,37 @@ export type NgxsmkSheetSide = 'left' | 'right' | 'bottom';
           aria-modal="true"
           [attr.aria-label]="title()"
         >
-        <div class="ngxsmk-sheet__header">
-          <h2 class="ngxsmk-sheet__title">{{ title() }}</h2>
-          <button
-            type="button"
+          <div class="ngxsmk-sheet__header">
+            <h2 class="ngxsmk-sheet__title">{{ title() }}</h2>
+            <button
+              type="button"
               class="ngxsmk-sheet__close"
               aria-label="Close"
               (click)="requestClose()"
             >
-            <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
-              <path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-            </svg>
-          </button>
+              <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
+                <path
+                  d="M4 4l8 8M12 4l-8 8"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </button>
+          </div>
+          <div class="ngxsmk-sheet__body">
+            <ng-content />
+          </div>
         </div>
-        <div class="ngxsmk-sheet__body">
-          <ng-content />
-        </div>
-      </div>
       </div>
     }
   `,
-    host: { class: 'ngxsmk-sheet' },
-    imports: [NgxsmkAnimate],
+  host: { class: 'ngxsmk-sheet' },
+  imports: [NgxsmkAnimate],
   styles: `
-    :host { display: contents; }
+    :host {
+      display: contents;
+    }
 
     .ngxsmk-sheet__root {
       position: fixed;
@@ -62,9 +69,15 @@ export type NgxsmkSheetSide = 'left' | 'right' | 'bottom';
       display: flex;
     }
 
-    .ngxsmk-sheet__root[data-side='left'] { justify-content: flex-start; }
-    .ngxsmk-sheet__root[data-side='right'] { justify-content: flex-end; }
-    .ngxsmk-sheet__root[data-side='bottom'] { align-items: flex-end; }
+    .ngxsmk-sheet__root[data-side='left'] {
+      justify-content: flex-start;
+    }
+    .ngxsmk-sheet__root[data-side='right'] {
+      justify-content: flex-end;
+    }
+    .ngxsmk-sheet__root[data-side='bottom'] {
+      align-items: flex-end;
+    }
 
     .ngxsmk-sheet__backdrop {
       position: fixed;
@@ -83,13 +96,13 @@ export type NgxsmkSheetSide = 'left' | 'right' | 'bottom';
       z-index: 1;
     }
 
-    .ngxsmk-sheet__panel[data-side="left"],
-    .ngxsmk-sheet__panel[data-side="right"] {
+    .ngxsmk-sheet__panel[data-side='left'],
+    .ngxsmk-sheet__panel[data-side='right'] {
       width: min(var(--ngxsmk-sheet-width, 24rem), 100vw);
       height: 100%;
     }
 
-    .ngxsmk-sheet__panel[data-side="bottom"] {
+    .ngxsmk-sheet__panel[data-side='bottom'] {
       width: 100%;
       max-height: var(--ngxsmk-sheet-height, 50vh);
       border-radius: var(--ngxsmk-radius-xl) var(--ngxsmk-radius-xl) 0 0;
@@ -167,7 +180,9 @@ export class NgxsmkSheet {
   protected requestClose(): void {
     if (this.closing()) return;
     this.closing.set(true);
-    const el = this.hostEl.nativeElement.querySelector('.ngxsmk-sheet__panel') as HTMLElement | null;
+    const el = this.hostEl.nativeElement.querySelector(
+      '.ngxsmk-sheet__panel',
+    ) as HTMLElement | null;
     void playExit(el ?? this.hostEl.nativeElement, this.SHEET_MOTION).then(() => {
       this.closing.set(false);
       this.open.set(false);

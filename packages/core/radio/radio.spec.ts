@@ -47,7 +47,7 @@ describe('NgxsmkRadio', () => {
 
   it('updates form control on radio option selection', () => {
     const { fixture, proInput } = setup();
-    
+
     proInput.checked = true;
     proInput.dispatchEvent(new Event('change'));
     fixture.detectChanges();

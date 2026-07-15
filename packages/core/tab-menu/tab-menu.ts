@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
   standalone: true,
@@ -16,7 +12,9 @@ import {
   // None: the tab buttons are projected content, so emulated styles can't reach them.
   encapsulation: ViewEncapsulation.None,
   styles: `
-    :host { display: block; }
+    :host {
+      display: block;
+    }
     .ngxsmk-tab-menu__wrapper {
       display: flex;
       gap: var(--ngxsmk-space-1);
@@ -26,7 +24,10 @@ import {
     }
 
     @media (max-width: 768px) {
-      .ngxsmk-tab-menu__wrapper { overflow-x: auto; flex-wrap: nowrap; }
+      .ngxsmk-tab-menu__wrapper {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+      }
     }
 
     .ngxsmk-tab-menu__tab {

@@ -6,17 +6,11 @@ import { NgxsmkStep, NgxsmkStepper } from './stepper';
 @Component({
   standalone: true,
   imports: [NgxsmkStepper],
-  template: `
-    <ngxsmk-stepper [steps]="steps" [(activeIndex)]="index" [linear]="linear" />
-  `,
+  template: ` <ngxsmk-stepper [steps]="steps" [(activeIndex)]="index" [linear]="linear" /> `,
 })
 class Host {
   readonly stepper = viewChild.required(NgxsmkStepper);
-  steps: NgxsmkStep[] = [
-    { label: 'Account' },
-    { label: 'Profile' },
-    { label: 'Confirm' },
-  ];
+  steps: NgxsmkStep[] = [{ label: 'Account' }, { label: 'Profile' }, { label: 'Confirm' }];
   index = signal(0);
   linear = false;
 }
@@ -25,8 +19,7 @@ function setup(configure?: (h: Host) => void) {
   const fixture = TestBed.createComponent(Host);
   if (configure) configure(fixture.componentInstance);
   fixture.detectChanges();
-  const host: HTMLElement =
-    fixture.nativeElement.querySelector('ngxsmk-stepper');
+  const host: HTMLElement = fixture.nativeElement.querySelector('ngxsmk-stepper');
   return { fixture, host };
 }
 
@@ -45,9 +38,7 @@ describe('NgxsmkStepper', () => {
 
   it('selecting a reachable step updates activeIndex', () => {
     const { fixture, host } = setup((h) => h.index.set(2));
-    const triggers = host.querySelectorAll<HTMLButtonElement>(
-      '.ngxsmk-stepper__trigger',
-    );
+    const triggers = host.querySelectorAll<HTMLButtonElement>('.ngxsmk-stepper__trigger');
     triggers[0].click();
     fixture.detectChanges();
     expect(fixture.componentInstance.index()).toBe(0);
@@ -58,9 +49,7 @@ describe('NgxsmkStepper', () => {
       h.linear = true;
       h.index.set(0);
     });
-    const triggers = host.querySelectorAll<HTMLButtonElement>(
-      '.ngxsmk-stepper__trigger',
-    );
+    const triggers = host.querySelectorAll<HTMLButtonElement>('.ngxsmk-stepper__trigger');
     expect(triggers[2].disabled).toBe(true);
     triggers[2].click();
     fixture.detectChanges();

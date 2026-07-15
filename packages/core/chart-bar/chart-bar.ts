@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 export interface NgxsmkBarChartDataPoint {
   label: string;
@@ -60,9 +55,7 @@ export class NgxsmkBarChart {
 
   protected readonly range = computed(() => this.maxVal() - this.minVal() || 1);
 
-  protected readonly viewBox = computed(
-    () => `0 0 ${this.width()} ${this.height()}`,
-  );
+  protected readonly viewBox = computed(() => `0 0 ${this.width()} ${this.height()}`);
 
   protected readonly bars = computed(() => {
     const w = this.width();
@@ -74,7 +67,7 @@ export class NgxsmkBarChart {
     const r = this.range();
     const min = this.minVal();
     const count = vals.length || 1;
-    const barW = plotW / count * 0.7;
+    const barW = (plotW / count) * 0.7;
     return vals.map((v, i) => {
       const barH = ((v - min) / r) * plotH;
       const x = pad + (i / count) * plotW + (plotW / count - barW) / 2;

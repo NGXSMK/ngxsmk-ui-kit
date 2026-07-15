@@ -34,9 +34,15 @@ describe('NgxsmkNumberInput', () => {
   function setup() {
     const fixture = TestBed.createComponent(HostComponent);
     fixture.detectChanges();
-    const decBtn: HTMLButtonElement = fixture.nativeElement.querySelectorAll('.ngxsmk-number-input__btn')[0];
-    const incBtn: HTMLButtonElement = fixture.nativeElement.querySelectorAll('.ngxsmk-number-input__btn')[1];
-    const field: HTMLInputElement = fixture.nativeElement.querySelector('.ngxsmk-number-input__field');
+    const decBtn: HTMLButtonElement = fixture.nativeElement.querySelectorAll(
+      '.ngxsmk-number-input__btn',
+    )[0];
+    const incBtn: HTMLButtonElement = fixture.nativeElement.querySelectorAll(
+      '.ngxsmk-number-input__btn',
+    )[1];
+    const field: HTMLInputElement = fixture.nativeElement.querySelector(
+      '.ngxsmk-number-input__field',
+    );
     return { fixture, decBtn, incBtn, field };
   }
 

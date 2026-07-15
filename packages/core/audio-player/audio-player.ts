@@ -12,11 +12,33 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
   `,
   host: { class: 'ngxsmk-audio-player' },
   styles: `
-    :host { display: block; padding: var(--ngxsmk-space-2) var(--ngxsmk-space-3); background: var(--ngxsmk-color-surface-variant); border-radius: var(--ngxsmk-radius-md); font-family: var(--ngxsmk-font-sans); font-size: 0.8125rem; }
-    .ngxsmk-audio-player__bar { display: flex; align-items: center; gap: var(--ngxsmk-space-3); }
-    .ngxsmk-audio-player__label { font-weight: 500; color: var(--ngxsmk-color-on-surface); min-width: 5rem; }
-    .ngxsmk-audio-player__progress { flex: 1; height: 0.375rem; accent-color: var(--ngxsmk-color-primary); }
-    .ngxsmk-audio-player__time { color: var(--ngxsmk-color-on-surface-variant); white-space: nowrap; }
+    :host {
+      display: block;
+      padding: var(--ngxsmk-space-2) var(--ngxsmk-space-3);
+      background: var(--ngxsmk-color-surface-variant);
+      border-radius: var(--ngxsmk-radius-md);
+      font-family: var(--ngxsmk-font-sans);
+      font-size: 0.8125rem;
+    }
+    .ngxsmk-audio-player__bar {
+      display: flex;
+      align-items: center;
+      gap: var(--ngxsmk-space-3);
+    }
+    .ngxsmk-audio-player__label {
+      font-weight: 500;
+      color: var(--ngxsmk-color-on-surface);
+      min-width: 5rem;
+    }
+    .ngxsmk-audio-player__progress {
+      flex: 1;
+      height: 0.375rem;
+      accent-color: var(--ngxsmk-color-primary);
+    }
+    .ngxsmk-audio-player__time {
+      color: var(--ngxsmk-color-on-surface-variant);
+      white-space: nowrap;
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

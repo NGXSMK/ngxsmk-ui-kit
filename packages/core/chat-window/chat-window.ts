@@ -16,12 +16,32 @@ import { NgxsmkChatMessageBubble } from '@ngxsmk/core/chat-message-bubble';
   `,
   host: { class: 'ngxsmk-chat-window' },
   styles: `
-    :host { display: flex; flex-direction: column; height: 100%; font-family: var(--ngxsmk-font-sans); }
-    .ngxsmk-chat-window__messages { flex: 1; overflow-y: auto; padding: var(--ngxsmk-space-4); display: flex; flex-direction: column; gap: var(--ngxsmk-space-3); }
+    :host {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      font-family: var(--ngxsmk-font-sans);
+    }
+    .ngxsmk-chat-window__messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: var(--ngxsmk-space-4);
+      display: flex;
+      flex-direction: column;
+      gap: var(--ngxsmk-space-3);
+    }
   `,
   imports: [NgxsmkChatMessage, NgxsmkChatMessageBubble],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgxsmkChatWindow {
-  readonly messages = input.required<{ id: string; role: 'user' | 'assistant' | 'system'; content: string; timestamp: Date; tokens?: number }[]>();
+  readonly messages = input.required<
+    {
+      id: string;
+      role: 'user' | 'assistant' | 'system';
+      content: string;
+      timestamp: Date;
+      tokens?: number;
+    }[]
+  >();
 }

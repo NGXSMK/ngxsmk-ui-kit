@@ -28,14 +28,17 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
   template: `
     <h2 class="ngxsmk-page-title">Feedback</h2>
     <p class="ngxsmk-page-desc">
-      Components that communicate status, progress, and system responses —
-      from inline alerts and banners to loaders, skeletons, and presence dots.
+      Components that communicate status, progress, and system responses — from inline alerts and
+      banners to loaders, skeletons, and presence dots.
     </p>
 
     <showcase-example
       title="Alert"
       description="Inline notifications for info, success, warning, and error states. Add dismissible for user-dismissable messages."
-      [code]="codeAlert" [component]="NgxsmkAlert" [customize]="customizeNgxsmkAlert">
+      [code]="codeAlert"
+      [component]="NgxsmkAlert"
+      [customize]="customizeNgxsmkAlert"
+    >
       <div class="ngxsmk-demo-stack ngxsmk-sc-surface">
         <ngxsmk-alert variant="info" title="Heads up">
           A new version of the app is available.
@@ -53,7 +56,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Banner"
       description="Full-width, attention-grabbing messages that sit at the top of a surface. Variants match the alert palette."
-      [code]="codeBanner" [component]="NgxsmkBanner" [customize]="customizeNgxsmkBanner">
+      [code]="codeBanner"
+      [component]="NgxsmkBanner"
+      [customize]="customizeNgxsmkBanner"
+    >
       <div class="ngxsmk-sc-col ngxsmk-sc-surface">
         <ngxsmk-banner variant="info">Scheduled maintenance starts at 2:00 AM UTC.</ngxsmk-banner>
         <ngxsmk-banner variant="success">Your subscription has been renewed.</ngxsmk-banner>
@@ -67,7 +73,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Badge"
       description="Compact, pill-shaped labels for counts, statuses, and tags. Pair with buttons or list rows."
-      [code]="codeBadge" [component]="NgxsmkBadge" [customize]="customizeNgxsmkBadge">
+      [code]="codeBadge"
+      [component]="NgxsmkBadge"
+      [customize]="customizeNgxsmkBadge"
+    >
       <span class="ngxsmk-sc-wrap">
         <ngxsmk-badge variant="primary">Primary</ngxsmk-badge>
         <ngxsmk-badge variant="secondary">Secondary</ngxsmk-badge>
@@ -82,7 +91,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Progress"
       description="Determinate bar with a 0–100 value, or indeterminate when value is null. Use the buttons to drive it live."
-      [code]="codeProgress" [component]="NgxsmkProgress" [customize]="customizeNgxsmkProgress">
+      [code]="codeProgress"
+      [component]="NgxsmkProgress"
+      [customize]="customizeNgxsmkProgress"
+    >
       <div class="ngxsmk-sc-col ngxsmk-sc-surface">
         <ngxsmk-progress [value]="progressValue()" [label]="progressLabel()" />
         <ngxsmk-progress [value]="null" label="Loading" />
@@ -97,7 +109,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Skeleton"
       description="Shimmering placeholders that mirror the shape of upcoming content while data loads."
-      [code]="codeSkeleton" [component]="NgxsmkSkeleton" [customize]="customizeNgxsmkSkeleton">
+      [code]="codeSkeleton"
+      [component]="NgxsmkSkeleton"
+      [customize]="customizeNgxsmkSkeleton"
+    >
       <div class="ngxsmk-sc-grid ngxsmk-sc-grid--3">
         <div class="ngxsmk-sc-col">
           <ngxsmk-skeleton width="100%" height="1rem" />
@@ -117,7 +132,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Spinner"
       description="Indeterminate loading indicators in three sizes, optionally labelled for assistive tech."
-      [code]="codeSpinner" [component]="NgxsmkSpinner" [customize]="customizeNgxsmkSpinner">
+      [code]="codeSpinner"
+      [component]="NgxsmkSpinner"
+      [customize]="customizeNgxsmkSpinner"
+    >
       <span class="ngxsmk-sc-wrap">
         <ngxsmk-spinner size="sm" />
         <ngxsmk-spinner size="md" />
@@ -132,7 +150,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Empty State"
       description="Centered placeholder for empty lists or results. Add actions via projected content."
-      [code]="codeEmptyState" [component]="NgxsmkEmptyState" [customize]="customizeNgxsmkEmptyState">
+      [code]="codeEmptyState"
+      [component]="NgxsmkEmptyState"
+      [customize]="customizeNgxsmkEmptyState"
+    >
       <div class="ngxsmk-sc-surface">
         <ngxsmk-empty-state
           title="No results found"
@@ -146,7 +167,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Status Dot"
       description="Small presence indicator for online, away, busy, and offline states. Combine with text or avatars."
-      [code]="codeStatusDot" [component]="NgxsmkStatusDot" [customize]="customizeNgxsmkStatusDot">
+      [code]="codeStatusDot"
+      [component]="NgxsmkStatusDot"
+      [customize]="customizeNgxsmkStatusDot"
+    >
       <span class="ngxsmk-sc-wrap">
         <span class="ngxsmk-sc-wrap"><ngxsmk-status-dot variant="online" /> Online</span>
         <span class="ngxsmk-sc-wrap"><ngxsmk-status-dot variant="away" /> Away</span>
@@ -274,8 +298,7 @@ ngxsmk-status-dot {
 }`;
 
   protected readonly progressValue = signal(35);
-  protected readonly progressLabel = () =>
-    `Uploading ${this.progressValue()}%`;
+  protected readonly progressLabel = () => `Uploading ${this.progressValue()}%`;
 
   protected increment(): void {
     this.progressValue.update((v) => Math.min(100, v + 10));

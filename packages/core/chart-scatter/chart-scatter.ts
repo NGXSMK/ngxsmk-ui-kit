@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 export interface NgxsmkScatterDataPoint {
   x: number;
@@ -36,7 +31,9 @@ export interface NgxsmkScatterDataPoint {
               [attr.x]="pt.cx"
               [attr.y]="pt.cy - 8"
               text-anchor="middle"
-            >{{ pt.label }}</text>
+            >
+              {{ pt.label }}
+            </text>
           }
         </g>
       }
@@ -51,8 +48,9 @@ export interface NgxsmkScatterDataPoint {
       overflow: visible;
     }
     .ngxsmk-chart-scatter__dot {
-      transition: cx var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
-                  cy var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
+      transition:
+        cx var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
+        cy var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
     .ngxsmk-chart-scatter__label {
       font-family: var(--ngxsmk-font-sans);
@@ -81,17 +79,11 @@ export class NgxsmkScatterChart {
 
   protected readonly maxY = computed(() => Math.max(...this.ys(), 0));
 
-  protected readonly rangeX = computed(
-    () => this.maxX() - this.minX() || 1,
-  );
+  protected readonly rangeX = computed(() => this.maxX() - this.minX() || 1);
 
-  protected readonly rangeY = computed(
-    () => this.maxY() - this.minY() || 1,
-  );
+  protected readonly rangeY = computed(() => this.maxY() - this.minY() || 1);
 
-  protected readonly viewBox = computed(
-    () => `0 0 ${this.width()} ${this.height()}`,
-  );
+  protected readonly viewBox = computed(() => `0 0 ${this.width()} ${this.height()}`);
 
   protected readonly circles = computed(() => {
     const w = this.width();

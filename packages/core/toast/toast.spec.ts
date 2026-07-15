@@ -15,10 +15,7 @@ describe('Toast and Toaster', () => {
     };
 
     TestBed.configureTestingModule({
-      providers: [
-        NgxsmkToast,
-        { provide: NgxsmkLiveAnnouncer, useValue: announcerMock },
-      ],
+      providers: [NgxsmkToast, { provide: NgxsmkLiveAnnouncer, useValue: announcerMock }],
     });
 
     toastService = TestBed.inject(NgxsmkToast);
@@ -30,7 +27,11 @@ describe('Toast and Toaster', () => {
   });
 
   it('should announce toast message and add to toasts list', () => {
-    toastService.show({ title: 'Upload success', description: 'File is ready', variant: 'success' });
+    toastService.show({
+      title: 'Upload success',
+      description: 'File is ready',
+      variant: 'success',
+    });
 
     expect(announcerMock.announce).toHaveBeenCalledWith('Upload success. File is ready', 'polite');
     expect(toastService.toasts().length).toBe(1);

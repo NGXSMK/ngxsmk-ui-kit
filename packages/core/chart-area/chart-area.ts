@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 export interface NgxsmkAreaChartDataPoint {
   label: string;
@@ -21,27 +16,13 @@ export interface NgxsmkAreaChartDataPoint {
       [attr.viewBox]="viewBox()"
     >
       <defs>
-        <linearGradient
-          [id]="gradientId()"
-          x1="0"
-          y1="0"
-          x2="0"
-          y2="1"
-        >
+        <linearGradient [id]="gradientId()" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" [attr.stop-color]="color()" stop-opacity="0.4" />
           <stop offset="100%" [attr.stop-color]="color()" stop-opacity="0.05" />
         </linearGradient>
       </defs>
-      <path
-        class="ngxsmk-chart-area__area"
-        [attr.d]="areaPath()"
-        [attr.fill]="areaFill()"
-      />
-      <polyline
-        class="ngxsmk-chart-area__line"
-        [attr.points]="points()"
-        [attr.stroke]="color()"
-      />
+      <path class="ngxsmk-chart-area__area" [attr.d]="areaPath()" [attr.fill]="areaFill()" />
+      <polyline class="ngxsmk-chart-area__line" [attr.points]="points()" [attr.stroke]="color()" />
     </svg>
   `,
   host: { class: 'ngxsmk-chart-area' },
@@ -67,15 +48,11 @@ export class NgxsmkAreaChart {
   readonly height = input(200);
   readonly color = input('var(--ngxsmk-color-primary)');
 
-  protected readonly uid = computed(() =>
-    `ngxsmk-area-${NgxsmkAreaChart._uid++}`,
-  );
+  protected readonly uid = computed(() => `ngxsmk-area-${NgxsmkAreaChart._uid++}`);
 
   protected readonly gradientId = computed(() => `${this.uid()}-gradient`);
 
-  protected readonly areaFill = computed(
-    () => `url(#${this.gradientId()})`,
-  );
+  protected readonly areaFill = computed(() => `url(#${this.gradientId()})`);
 
   protected readonly values = computed(() => this.data().map((d) => d.value));
 
@@ -85,9 +62,7 @@ export class NgxsmkAreaChart {
 
   protected readonly range = computed(() => this.maxVal() - this.minVal() || 1);
 
-  protected readonly viewBox = computed(
-    () => `0 0 ${this.width()} ${this.height()}`,
-  );
+  protected readonly viewBox = computed(() => `0 0 ${this.width()} ${this.height()}`);
 
   protected readonly coords = computed(() => {
     const w = this.width();
@@ -106,7 +81,9 @@ export class NgxsmkAreaChart {
   });
 
   protected readonly points = computed(() =>
-    this.coords().map((c) => `${c.x},${c.y}`).join(' '),
+    this.coords()
+      .map((c) => `${c.x},${c.y}`)
+      .join(' '),
   );
 
   protected readonly areaPath = computed(() => {

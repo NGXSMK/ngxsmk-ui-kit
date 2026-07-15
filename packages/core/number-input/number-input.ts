@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, booleanAttribute, computed, input, model, output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  booleanAttribute,
+  computed,
+  input,
+  model,
+  output,
+} from '@angular/core';
 
 /**
  * Numeric field with − / + steppers and min/max/step constraints.
@@ -18,7 +26,9 @@ import { ChangeDetectionStrategy, Component, booleanAttribute, computed, input, 
       aria-label="Decrement"
       [disabled]="disabled() || value() <= min()"
       (click)="bump(-1)"
-    >−</button>
+    >
+      −
+    </button>
     <input
       class="ngxsmk-number-input__field"
       type="number"
@@ -38,7 +48,9 @@ import { ChangeDetectionStrategy, Component, booleanAttribute, computed, input, 
       aria-label="Increment"
       [disabled]="disabled() || value() >= max()"
       (click)="bump(1)"
-    >+</button>
+    >
+      +
+    </button>
   `,
   host: { class: 'ngxsmk-number-input' },
   styles: `
@@ -97,8 +109,13 @@ import { ChangeDetectionStrategy, Component, booleanAttribute, computed, input, 
       user-select: none;
       transition: background var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
-    .ngxsmk-number-input__btn:hover:not(:disabled) { background: var(--ngxsmk-color-surface-hover); }
-    .ngxsmk-number-input__btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .ngxsmk-number-input__btn:hover:not(:disabled) {
+      background: var(--ngxsmk-color-surface-hover);
+    }
+    .ngxsmk-number-input__btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -111,8 +128,8 @@ export class NgxsmkNumberInput {
   readonly disabled = input(false, { transform: booleanAttribute });
   readonly changed = output<number>();
 
-  protected readonly clamp = computed(() => (n: number) =>
-    Math.min(this.max(), Math.max(this.min(), n)),
+  protected readonly clamp = computed(
+    () => (n: number) => Math.min(this.max(), Math.max(this.min(), n)),
   );
 
   protected bump(direction: number): void {

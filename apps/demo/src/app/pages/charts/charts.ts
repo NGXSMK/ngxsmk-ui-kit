@@ -26,33 +26,52 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
   template: `
     <h2 class="ngxsmk-page-title">Charts</h2>
     <p class="ngxsmk-page-desc">
-      A lightweight set of data-visualization primitives drawn with inline SVG.
-      Every chart is theme-aware, responsive to its inputs, and drops straight
-      into any layout without a charting dependency.
+      A lightweight set of data-visualization primitives drawn with inline SVG. Every chart is
+      theme-aware, responsive to its inputs, and drops straight into any layout without a charting
+      dependency.
     </p>
 
     <showcase-example
       title="Line Chart"
       description="A continuous series rendered as a polyline. Great for trends over time."
-      [code]="codeLine" [component]="NgxsmkLineChart" [customize]="customizeNgxsmkLineChart">
+      [code]="codeLine"
+      [component]="NgxsmkLineChart"
+      [customize]="customizeNgxsmkLineChart"
+    >
       <div class="ngxsmk-sc-surface" style="width:100%;max-width:520px;height:260px;">
-        <ngxsmk-chart-line [data]="revenue" [width]="480" [height]="240" color="var(--ngxsmk-color-primary)" />
+        <ngxsmk-chart-line
+          [data]="revenue"
+          [width]="480"
+          [height]="240"
+          color="var(--ngxsmk-color-primary)"
+        />
       </div>
     </showcase-example>
 
     <showcase-example
       title="Bar Chart"
       description="Discrete values as columns. Useful for comparing categories at a glance."
-      [code]="codeBar" [component]="NgxsmkBarChart" [customize]="customizeNgxsmkBarChart">
+      [code]="codeBar"
+      [component]="NgxsmkBarChart"
+      [customize]="customizeNgxsmkBarChart"
+    >
       <div class="ngxsmk-sc-surface" style="width:100%;max-width:520px;height:260px;">
-        <ngxsmk-chart-bar [data]="quarters" [width]="480" [height]="240" color="var(--ngxsmk-color-secondary)" />
+        <ngxsmk-chart-bar
+          [data]="quarters"
+          [width]="480"
+          [height]="240"
+          color="var(--ngxsmk-color-secondary)"
+        />
       </div>
     </showcase-example>
 
     <showcase-example
       title="Pie Chart"
       description="Proportional slices of a single total, with an optional donut mode."
-      [code]="codePie" [component]="NgxsmkPieChart" [customize]="customizeNgxsmkPieChart">
+      [code]="codePie"
+      [component]="NgxsmkPieChart"
+      [customize]="customizeNgxsmkPieChart"
+    >
       <div class="ngxsmk-sc-col ngxsmk-sc-wrap">
         <div class="ngxsmk-sc-surface" style="height:240px;">
           <ngxsmk-chart-pie [data]="traffic" [size]="200" />
@@ -66,16 +85,26 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Area Chart"
       description="A line chart with a gradient fill under the curve to emphasize volume."
-      [code]="codeArea" [component]="NgxsmkAreaChart">
+      [code]="codeArea"
+      [component]="NgxsmkAreaChart"
+    >
       <div class="ngxsmk-sc-surface" style="width:100%;max-width:520px;height:260px;">
-        <ngxsmk-chart-area [data]="activeUsers" [width]="480" [height]="240" color="var(--ngxsmk-color-tertiary)" />
+        <ngxsmk-chart-area
+          [data]="activeUsers"
+          [width]="480"
+          [height]="240"
+          color="var(--ngxsmk-color-tertiary)"
+        />
       </div>
     </showcase-example>
 
     <showcase-example
       title="Scatter Chart"
       description="Plot pairs of values to reveal correlation across two axes."
-      [code]="codeScatter" [component]="NgxsmkScatterChart" [customize]="customizeNgxsmkScatterChart">
+      [code]="codeScatter"
+      [component]="NgxsmkScatterChart"
+      [customize]="customizeNgxsmkScatterChart"
+    >
       <div class="ngxsmk-sc-surface" style="width:100%;max-width:520px;height:260px;">
         <ngxsmk-chart-scatter [data]="correlation" [width]="480" [height]="240" />
       </div>
@@ -84,7 +113,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Candlestick Chart"
       description="Open/high/low/close candles for financial time series. Bullish candles are green, bearish red."
-      [code]="codeCandle" [component]="NgxsmkCandlestickChart" [customize]="customizeNgxsmkCandlestickChart">
+      [code]="codeCandle"
+      [component]="NgxsmkCandlestickChart"
+      [customize]="customizeNgxsmkCandlestickChart"
+    >
       <div class="ngxsmk-sc-surface" style="width:100%;max-width:520px;height:260px;">
         <ngxsmk-chart-candlestick [data]="ohlc" [width]="480" [height]="240" />
       </div>
@@ -93,21 +125,22 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Heatmap"
       description="A matrix of cells colored by magnitude, with optional axis labels."
-      [code]="codeHeat" [component]="NgxsmkHeatmapChart" [customize]="customizeNgxsmkHeatmapChart">
+      [code]="codeHeat"
+      [component]="NgxsmkHeatmapChart"
+      [customize]="customizeNgxsmkHeatmapChart"
+    >
       <div class="ngxsmk-sc-surface" style="width:100%;max-width:520px;height:300px;">
-        <ngxsmk-chart-heatmap
-          [data]="matrix"
-          [labels]="heatLabels"
-          [width]="480"
-          [height]="280"
-        />
+        <ngxsmk-chart-heatmap [data]="matrix" [labels]="heatLabels" [width]="480" [height]="280" />
       </div>
     </showcase-example>
 
     <showcase-example
       title="Dashboard"
       description="A responsive grid wrapper that arranges multiple charts into a panel."
-      [code]="codeDashboard" [component]="NgxsmkChartDashboard" [customize]="customizeNgxsmkChartDashboard">
+      [code]="codeDashboard"
+      [component]="NgxsmkChartDashboard"
+      [customize]="customizeNgxsmkChartDashboard"
+    >
       <ngxsmk-chart-dashboard [columns]="3" style="width:100%;">
         <div class="ngxsmk-sc-surface" style="height:200px;">
           <ngxsmk-chart-line [data]="revenue" [width]="300" [height]="180" />
@@ -131,7 +164,9 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     </showcase-example>
   `,
   styles: `
-    :host { display: block; }
+    :host {
+      display: block;
+    }
   `,
 })
 export class ChartsPage {

@@ -30,7 +30,12 @@ import { NgxsmkScrollLock } from '@ngxsmk/cdk';
             (click)="close()"
           >
             <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
-              <path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+              <path
+                d="M4 4l8 8M12 4l-8 8"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+              />
             </svg>
           </button>
           <div class="ngxsmk-chat-composer-drawer__body">
@@ -45,7 +50,9 @@ import { NgxsmkScrollLock } from '@ngxsmk/cdk';
     '(document:keydown.escape)': 'onEscape()',
   },
   styles: `
-    :host { display: block; }
+    :host {
+      display: block;
+    }
 
     .ngxsmk-chat-composer-drawer__root {
       position: fixed;
@@ -114,13 +121,23 @@ import { NgxsmkScrollLock } from '@ngxsmk/cdk';
     }
 
     @keyframes ngxsmk-composer-drawer-fade {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
     }
 
     @keyframes ngxsmk-composer-drawer-in {
-      from { transform: translateY(100%); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+      from {
+        transform: translateY(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

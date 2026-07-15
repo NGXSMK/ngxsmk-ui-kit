@@ -23,56 +23,73 @@ export interface NgxsmkLightboxImage {
     </div>
     @if (open()) {
       <div class="ngxsmk-lightbox__overlay">
-      <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
-      <div class="ngxsmk-lightbox__backdrop" (click)="open.set(false)"></div>
-      <div class="ngxsmk-lightbox__panel">
-        <button
-          type="button"
-          class="ngxsmk-lightbox__close"
-          aria-label="Close"
-          (click)="open.set(false)"
-        >
-          <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
-            <path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-          </svg>
-        </button>
+        <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
+        <div class="ngxsmk-lightbox__backdrop" (click)="open.set(false)"></div>
+        <div class="ngxsmk-lightbox__panel">
+          <button
+            type="button"
+            class="ngxsmk-lightbox__close"
+            aria-label="Close"
+            (click)="open.set(false)"
+          >
+            <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+              <path
+                d="M4 4l8 8M12 4l-8 8"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+              />
+            </svg>
+          </button>
 
-        <button
-          type="button"
-          class="ngxsmk-lightbox__nav ngxsmk-lightbox__nav--prev"
-          aria-label="Previous image"
-          [disabled]="index() <= 0"
-          (click)="prev()"
-        >
-          <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
-            <path d="M10 2L4 8l6 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-        </button>
+          <button
+            type="button"
+            class="ngxsmk-lightbox__nav ngxsmk-lightbox__nav--prev"
+            aria-label="Previous image"
+            [disabled]="index() <= 0"
+            (click)="prev()"
+          >
+            <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+              <path
+                d="M10 2L4 8l6 6"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
 
-        <div class="ngxsmk-lightbox__image-wrap">
-          <img
-            class="ngxsmk-lightbox__image"
-            [src]="currentImage()?.src"
-            [alt]="currentImage()?.alt ?? ''"
-          />
+          <div class="ngxsmk-lightbox__image-wrap">
+            <img
+              class="ngxsmk-lightbox__image"
+              [src]="currentImage()?.src"
+              [alt]="currentImage()?.alt ?? ''"
+            />
+          </div>
+
+          <button
+            type="button"
+            class="ngxsmk-lightbox__nav ngxsmk-lightbox__nav--next"
+            aria-label="Next image"
+            [disabled]="index() >= images().length - 1"
+            (click)="next()"
+          >
+            <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+              <path
+                d="M6 2l6 6-6 6"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+
+          <div class="ngxsmk-lightbox__counter">{{ index() + 1 }} / {{ images().length }}</div>
         </div>
-
-        <button
-          type="button"
-          class="ngxsmk-lightbox__nav ngxsmk-lightbox__nav--next"
-          aria-label="Next image"
-          [disabled]="index() >= images().length - 1"
-          (click)="next()"
-        >
-          <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
-            <path d="M6 2l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-        </button>
-
-        <div class="ngxsmk-lightbox__counter">
-          {{ index() + 1 }} / {{ images().length }}
-        </div>
-      </div>
       </div>
     }
   `,
@@ -87,7 +104,9 @@ export interface NgxsmkLightboxImage {
       display: inline-flex;
       cursor: zoom-in;
     }
-    .ngxsmk-lightbox__trigger:empty { display: none; }
+    .ngxsmk-lightbox__trigger:empty {
+      display: none;
+    }
 
     .ngxsmk-lightbox__overlay {
       position: fixed;
@@ -187,18 +206,31 @@ export interface NgxsmkLightboxImage {
       outline-offset: 2px;
     }
 
-    .ngxsmk-lightbox__nav--prev { left: -3.5rem; }
-    .ngxsmk-lightbox__nav--next { right: -3.5rem; }
+    .ngxsmk-lightbox__nav--prev {
+      left: -3.5rem;
+    }
+    .ngxsmk-lightbox__nav--next {
+      right: -3.5rem;
+    }
 
     @media (max-width: 640px) {
       .ngxsmk-lightbox__panel {
         max-width: 100vw;
         max-height: 100dvh;
       }
-      .ngxsmk-lightbox__nav--prev { left: var(--ngxsmk-space-2); }
-      .ngxsmk-lightbox__nav--next { right: var(--ngxsmk-space-2); }
-      .ngxsmk-lightbox__close { top: var(--ngxsmk-space-2); right: var(--ngxsmk-space-2); }
-      .ngxsmk-lightbox__counter { bottom: var(--ngxsmk-space-2); }
+      .ngxsmk-lightbox__nav--prev {
+        left: var(--ngxsmk-space-2);
+      }
+      .ngxsmk-lightbox__nav--next {
+        right: var(--ngxsmk-space-2);
+      }
+      .ngxsmk-lightbox__close {
+        top: var(--ngxsmk-space-2);
+        right: var(--ngxsmk-space-2);
+      }
+      .ngxsmk-lightbox__counter {
+        bottom: var(--ngxsmk-space-2);
+      }
     }
 
     .ngxsmk-lightbox__counter {

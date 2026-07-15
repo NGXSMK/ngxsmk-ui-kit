@@ -13,11 +13,7 @@ vi.mock('motion', () => ({
   standalone: true,
   imports: [NgxsmkDialog, NgxsmkDialogFooter],
   template: `
-    <ngxsmk-dialog
-      [(open)]="open"
-      [title]="title()"
-      [dismissible]="dismissible()"
-    >
+    <ngxsmk-dialog [(open)]="open" [title]="title()" [dismissible]="dismissible()">
       Modal Content
       <div ngxsmkDialogFooter>
         <button id="close-btn" (click)="open.set(false)">Cancel</button>
@@ -36,10 +32,10 @@ describe('NgxsmkDialog', () => {
 
   beforeEach(() => {
     // Mock native dialog methods which JSDOM does not support
-    HTMLDialogElement.prototype.showModal = vi.fn(function(this: HTMLDialogElement) {
+    HTMLDialogElement.prototype.showModal = vi.fn(function (this: HTMLDialogElement) {
       this.setAttribute('open', '');
     });
-    HTMLDialogElement.prototype.close = vi.fn(function(this: HTMLDialogElement) {
+    HTMLDialogElement.prototype.close = vi.fn(function (this: HTMLDialogElement) {
       this.removeAttribute('open');
       const event = new Event('close');
       this.dispatchEvent(event);
@@ -51,16 +47,15 @@ describe('NgxsmkDialog', () => {
     };
 
     TestBed.configureTestingModule({
-      providers: [
-        { provide: NgxsmkScrollLock, useValue: scrollLockMock }
-      ]
+      providers: [{ provide: NgxsmkScrollLock, useValue: scrollLockMock }],
     });
   });
 
   function setup() {
     const fixture = TestBed.createComponent(HostComponent);
     fixture.detectChanges();
-    const dialogEl: HTMLDialogElement = fixture.nativeElement.querySelector('.ngxsmk-dialog__native');
+    const dialogEl: HTMLDialogElement =
+      fixture.nativeElement.querySelector('.ngxsmk-dialog__native');
     return { fixture, dialogEl };
   }
 
@@ -71,7 +66,7 @@ describe('NgxsmkDialog', () => {
 
   it('opens native dialog modal and locks scroll when open signal changes to true', async () => {
     const { fixture, dialogEl } = setup();
-    
+
     fixture.componentInstance.open.set(true);
     fixture.detectChanges();
     await fixture.whenStable();
@@ -82,7 +77,7 @@ describe('NgxsmkDialog', () => {
 
   it('closes dialog modal and unlocks scroll when close button is clicked', async () => {
     const { fixture } = setup();
-    
+
     fixture.componentInstance.open.set(true);
     fixture.detectChanges();
     await fixture.whenStable();
@@ -90,9 +85,9 @@ describe('NgxsmkDialog', () => {
     const closeBtn = fixture.nativeElement.querySelector('.ngxsmk-dialog__close');
     closeBtn.click();
     fixture.detectChanges();
-    
+
     // Wait for the async animation and dialog close handler to run
-    await new Promise(resolve => setTimeout(resolve, 50));
+    await new Promise((resolve) => setTimeout(resolve, 50));
     fixture.detectChanges();
 
     expect(fixture.componentInstance.open()).toBe(false);

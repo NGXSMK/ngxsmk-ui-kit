@@ -1,1 +1,1 @@
-export { NgxsmkTopNavHeading } from "@ngxsmk/core/top-nav";
+export { NgxsmkTopNavHeading } from '@ngxsmk/core/top-nav';

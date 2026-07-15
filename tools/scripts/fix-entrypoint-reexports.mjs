@@ -6,10 +6,10 @@
 // left untouched. This is required by ng-packagr across all Angular majors
 // (relative re-exports double-compile the secondary and break the build).
 // Line endings are preserved.
-import { readFileSync, writeFileSync, existsSync, readdirSync } from "node:fs";
-import { join } from "node:path";
+import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs';
+import { join } from 'node:path';
 
-const libs = ["cdk", "core"];
+const libs = ['cdk', 'core'];
 
 function subdirs(p) {
   return readdirSync(p, { withFileTypes: true })
@@ -18,15 +18,15 @@ function subdirs(p) {
 }
 
 for (const lib of libs) {
-  const root = join("packages", lib);
+  const root = join('packages', lib);
   // Collect secondary entry-point directory names (any subdir with ng-package.json).
   const secondaries = new Set();
   for (const name of subdirs(root)) {
-    if (existsSync(join(root, name, "ng-package.json"))) secondaries.add(name);
+    if (existsSync(join(root, name, 'ng-package.json'))) secondaries.add(name);
   }
 
-  const apiPath = join(root, "public-api.ts");
-  const content = readFileSync(apiPath, "utf8");
+  const apiPath = join(root, 'public-api.ts');
+  const content = readFileSync(apiPath, 'utf8');
   const re = /(export \* from ')\.\/([^']+)(';)(\r?)/g;
   let changed = 0;
   const out = content.replace(re, (m, p1, name, p3, cr) => {

@@ -10,12 +10,7 @@ import {
 } from '@angular/core';
 
 export type NgxsmkButtonVariant =
-  | 'primary'
-  | 'secondary'
-  | 'outline'
-  | 'ghost'
-  | 'destructive'
-  | 'link';
+  'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'link';
 
 export type NgxsmkButtonSize = 'sm' | 'md' | 'lg';
 
@@ -51,9 +46,7 @@ export class NgxsmkButton {
   readonly loading = input(false, { transform: booleanAttribute });
   readonly disabled = input(false, { transform: booleanAttribute });
 
-  protected readonly isDisabled = computed(
-    () => this.disabled() || this.loading(),
-  );
+  protected readonly isDisabled = computed(() => this.disabled() || this.loading());
 
   private readonly el = inject(ElementRef<HTMLElement>);
   private readonly renderer = inject(Renderer2);

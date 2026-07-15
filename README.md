@@ -49,11 +49,11 @@ and CDK are implemented and supported on Angular **17.3+** (see the
 
 ## Packages
 
-| Package | Purpose |
-|---|---|
-| [`@ngxsmk/theme`](packages/theme) | Universal design-token engine: `ThemeConfig` → `--ngxsmk-*` CSS custom properties, 4 presets, light/dark strategies, runtime switching via `NgxsmkThemeService`. |
-| [`@ngxsmk/cdk`](packages/cdk) | Low-level behaviors: click-outside, focus trap, scroll lock, live announcer, reactive media queries, visually-hidden. |
-| [`@ngxsmk/core`](packages/core) | 170+ standalone, `OnPush`, signals-based components — buttons, badges, tags, chips, cards, dividers, spinners, skeletons, alerts, progress, avatars, form-field, inputs, checks/radios/switches, tabs, accordions, tooltips, dialogs, toasts, and re-exported `ngxsmk-datepicker` / `ngxsmk-tel-input`. Also exposes the `@ngxsmk/core/animation` helpers. |
+| Package                           | Purpose                                                                                                                                                                                                                                                                                                                                                    |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`@ngxsmk/theme`](packages/theme) | Universal design-token engine: `ThemeConfig` → `--ngxsmk-*` CSS custom properties, 4 presets, light/dark strategies, runtime switching via `NgxsmkThemeService`.                                                                                                                                                                                           |
+| [`@ngxsmk/cdk`](packages/cdk)     | Low-level behaviors: click-outside, focus trap, scroll lock, live announcer, reactive media queries, visually-hidden.                                                                                                                                                                                                                                      |
+| [`@ngxsmk/core`](packages/core)   | 170+ standalone, `OnPush`, signals-based components — buttons, badges, tags, chips, cards, dividers, spinners, skeletons, alerts, progress, avatars, form-field, inputs, checks/radios/switches, tabs, accordions, tooltips, dialogs, toasts, and re-exported `ngxsmk-datepicker` / `ngxsmk-tel-input`. Also exposes the `@ngxsmk/core/animation` helpers. |
 
 ## Installation
 
@@ -89,13 +89,14 @@ npm install motion
 ### 1. Provide a zoneless environment
 
 ```ts
-import { ApplicationConfig, provideZonelessChangeDetection, withViewTransitions } from '@angular/core';
+import {
+  ApplicationConfig,
+  provideZonelessChangeDetection,
+  withViewTransitions,
+} from '@angular/core';
 
 export const appConfig: ApplicationConfig = {
-  providers: [
-    provideZonelessChangeDetection(),
-    withViewTransitions(),
-  ],
+  providers: [provideZonelessChangeDetection(), withViewTransitions()],
 };
 ```
 
@@ -160,7 +161,7 @@ Animations are powered by [Motion](https://motion.dev) and are fully optional.
   ```
 
 - **Structural directive:** `NgxsmkPresence` mounts its template, plays an
-  enter animation, and plays an exit animation *before* detaching when its
+  enter animation, and plays an exit animation _before_ detaching when its
   `show` input flips to `false`.
 
   ```html
@@ -181,7 +182,7 @@ Every animation is described by a `NgxsmkMotionState`:
 interface NgxsmkMotionState {
   initial?: Record<string, string | number>; // starting styles, e.g. { opacity: 0, y: 8 }
   animate?: Record<string, string | number>; // target styles on enter, e.g. { opacity: 1, y: 0 }
-  exit?: Record<string, string | number>;    // target styles on leave
+  exit?: Record<string, string | number>; // target styles on leave
   transition?: { duration?: number; delay?: number; easing?: string | number[] }; // seconds!
 }
 ```

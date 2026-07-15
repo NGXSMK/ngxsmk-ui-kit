@@ -36,7 +36,14 @@ import { NgxsmkTable, NgxsmkTableColumn } from '@ngxsmk/core/table';
           aria-label="Previous page"
         >
           <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
-            <path d="M10 4L6 8l4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path
+              d="M10 4L6 8l4 4"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
           </svg>
         </button>
         @for (page of pages(); track page) {
@@ -57,7 +64,14 @@ import { NgxsmkTable, NgxsmkTableColumn } from '@ngxsmk/core/table';
           aria-label="Next page"
         >
           <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
-            <path d="M6 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path
+              d="M6 4l4 4-4 4"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
           </svg>
         </button>
       </div>
@@ -84,7 +98,9 @@ import { NgxsmkTable, NgxsmkTableColumn } from '@ngxsmk/core/table';
       color: var(--ngxsmk-color-on-surface-variant);
     }
 
-    .ngxsmk-data-table__info { flex: 1; }
+    .ngxsmk-data-table__info {
+      flex: 1;
+    }
 
     .ngxsmk-data-table__pagination {
       display: flex;
@@ -170,8 +186,12 @@ export class NgxsmkDataTable {
       data.sort((a, b) => {
         const av = a[field];
         const bv = b[field];
-        if (av == null) { return 1; }
-        if (bv == null) { return -1; }
+        if (av == null) {
+          return 1;
+        }
+        if (bv == null) {
+          return -1;
+        }
         const cmp = typeof av === 'string' ? av.localeCompare(bv) : av - bv;
         return dir === 'asc' ? cmp : -cmp;
       });
@@ -190,7 +210,9 @@ export class NgxsmkDataTable {
 
   protected readonly displayColumns = computed<NgxsmkTableColumn[]>(() => {
     const cols = this.columns();
-    if (!this.sortable()) { return cols; }
+    if (!this.sortable()) {
+      return cols;
+    }
     return cols.map((col) => ({
       ...col,
     }));
@@ -220,12 +242,16 @@ export class NgxsmkDataTable {
   });
 
   protected goToPage(page: number): void {
-    if (page < 1 || page > this.totalPages()) { return; }
+    if (page < 1 || page > this.totalPages()) {
+      return;
+    }
     this.currentPage.set(page);
   }
 
   sortBy(key: string): void {
-    if (!this.sortable()) { return; }
+    if (!this.sortable()) {
+      return;
+    }
     if (this.sortField() === key) {
       this.sortDir.update((d) => (d === 'asc' ? 'desc' : 'asc'));
     } else {

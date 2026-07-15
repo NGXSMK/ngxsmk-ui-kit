@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 /**
  * Loading placeholder that mirrors the shape of upcoming content.
@@ -37,16 +33,26 @@ import {
       animation: ngxsmk-skeleton-shimmer 1.4s ease-in-out infinite;
     }
 
-    :host([data-shape='circle']) { border-radius: var(--ngxsmk-radius-full); }
-    :host([data-shape='rect']) { border-radius: 0; }
+    :host([data-shape='circle']) {
+      border-radius: var(--ngxsmk-radius-full);
+    }
+    :host([data-shape='rect']) {
+      border-radius: 0;
+    }
 
     @keyframes ngxsmk-skeleton-shimmer {
-      from { background-position: 200% 0; }
-      to { background-position: -200% 0; }
+      from {
+        background-position: 200% 0;
+      }
+      to {
+        background-position: -200% 0;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      :host { animation: none; }
+      :host {
+        animation: none;
+      }
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

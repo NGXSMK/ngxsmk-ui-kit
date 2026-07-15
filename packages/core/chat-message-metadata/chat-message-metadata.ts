@@ -6,7 +6,12 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
   template: `{{ formattedTime() }}`,
   host: { class: 'ngxsmk-chat-message-metadata' },
   styles: `
-    :host { display: block; font-size: var(--ngxsmk-text-body-xs-size); color: var(--ngxsmk-color-on-surface-variant); padding: 0 var(--ngxsmk-space-1); }
+    :host {
+      display: block;
+      font-size: var(--ngxsmk-text-body-xs-size);
+      color: var(--ngxsmk-color-on-surface-variant);
+      padding: 0 var(--ngxsmk-space-1);
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

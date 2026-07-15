@@ -21,9 +21,7 @@ import { ngxsmkUniqueId } from '@ngxsmk/core/util';
 @Component({
   standalone: true,
   selector: 'ngxsmk-tab',
-  template: `
-    <ng-template #content><ng-content /></ng-template>
-  `,
+  template: ` <ng-template #content><ng-content /></ng-template> `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgxsmkTab {
@@ -94,7 +92,10 @@ export class NgxsmkTab {
     }
 
     @media (max-width: 768px) {
-      .ngxsmk-tabs__list { overflow-x: auto; flex-wrap: nowrap; }
+      .ngxsmk-tabs__list {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+      }
     }
 
     .ngxsmk-tabs__trigger {
@@ -114,7 +115,9 @@ export class NgxsmkTab {
         border-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
 
-    .ngxsmk-tabs__trigger:hover { color: var(--ngxsmk-color-on-surface); }
+    .ngxsmk-tabs__trigger:hover {
+      color: var(--ngxsmk-color-on-surface);
+    }
 
     .ngxsmk-tabs__trigger[data-active] {
       color: var(--ngxsmk-color-primary);
@@ -208,9 +211,7 @@ export class NgxsmkTabs {
 
     const value = enabled[next].value();
     this.select(value);
-    const triggers = this.host.nativeElement.querySelectorAll<HTMLElement>(
-      '[role="tab"]',
-    );
+    const triggers = this.host.nativeElement.querySelectorAll<HTMLElement>('[role="tab"]');
     for (const trigger of Array.from(triggers)) {
       if (trigger.id === this.triggerId(value)) {
         trigger.focus();

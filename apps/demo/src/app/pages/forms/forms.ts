@@ -88,7 +88,9 @@ interface Option {
       <showcase-example
         title="Button"
         description="Native button/anchor directive with variants, sizes, and a loading state."
-        [code]="codeButton" [component]="NgxsmkButton">
+        [code]="codeButton"
+        [component]="NgxsmkButton"
+      >
         <span class="ngxsmk-sc-wrap">
           <button ngxsmk-button>Primary</button>
           <button ngxsmk-button variant="secondary">Secondary</button>
@@ -104,7 +106,10 @@ interface Option {
       <showcase-example
         title="Button Group"
         description="Segments a set of related actions into a single connected control."
-        [code]="codeButtonGroup" [component]="NgxsmkButtonGroup" [customize]="customizeNgxsmkButtonGroup">
+        [code]="codeButtonGroup"
+        [component]="NgxsmkButtonGroup"
+        [customize]="customizeNgxsmkButtonGroup"
+      >
         <ngxsmk-button-group>
           <button ngxsmk-button variant="outline">Left</button>
           <button ngxsmk-button variant="outline">Center</button>
@@ -115,7 +120,10 @@ interface Option {
       <showcase-example
         title="Toggle Button"
         description="A pressable button that keeps an on/off pressed state."
-        [code]="codeToggleButton" [component]="NgxsmkToggleButton" [customize]="customizeNgxsmkToggleButton">
+        [code]="codeToggleButton"
+        [component]="NgxsmkToggleButton"
+        [customize]="customizeNgxsmkToggleButton"
+      >
         <button ngxsmkToggleButton [(pressed)]="starred">
           {{ starred() ? '★ Starred' : '☆ Star' }}
         </button>
@@ -124,7 +132,10 @@ interface Option {
       <showcase-example
         title="Toggle Button Group"
         description="Groups toggle buttons for formatting-style controls."
-        [code]="codeToggleButtonGroup" [component]="NgxsmkToggleButtonGroup" [customize]="customizeNgxsmkToggleButtonGroup">
+        [code]="codeToggleButtonGroup"
+        [component]="NgxsmkToggleButtonGroup"
+        [customize]="customizeNgxsmkToggleButtonGroup"
+      >
         <ngxsmk-toggle-button-group>
           <button ngxsmkToggleButton [(pressed)]="bold">Bold</button>
           <button ngxsmkToggleButton [(pressed)]="italic">Italic</button>
@@ -135,7 +146,10 @@ interface Option {
       <showcase-example
         title="Input"
         description="Themes native text inputs — pair it with a Form Field for labels."
-        [code]="codeInput" [component]="NgxsmkInput" [customize]="customizeNgxsmkInput">
+        [code]="codeInput"
+        [component]="NgxsmkInput"
+        [customize]="customizeNgxsmkInput"
+      >
         <div class="ngxsmk-sc-col" style="width: 100%; max-width: 320px">
           <ngxsmk-input type="email" placeholder="you@example.com" [(value)]="email" />
           <small>Value: {{ email() || '—' }}</small>
@@ -145,14 +159,20 @@ interface Option {
       <showcase-example
         title="Textarea"
         description="Multi-line input with a configurable row count."
-        [code]="codeTextarea" [component]="NgxsmkTextarea" [customize]="customizeNgxsmkTextarea">
+        [code]="codeTextarea"
+        [component]="NgxsmkTextarea"
+        [customize]="customizeNgxsmkTextarea"
+      >
         <ngxsmk-textarea placeholder="Share your feedback…" [rows]="4" [(value)]="feedback" />
       </showcase-example>
 
       <showcase-example
         title="Number Input"
         description="Numeric field with min, max, and step constraints."
-        [code]="codeNumber" [component]="NgxsmkNumberInput" [customize]="customizeNgxsmkNumberInput">
+        [code]="codeNumber"
+        [component]="NgxsmkNumberInput"
+        [customize]="customizeNgxsmkNumberInput"
+      >
         <div class="ngxsmk-sc-col">
           <ngxsmk-number-input [min]="0" [max]="10" [step]="1" [(value)]="quantity" />
           <small>Quantity: {{ quantity() }}</small>
@@ -162,7 +182,10 @@ interface Option {
       <showcase-example
         title="Select"
         description="Single-choice dropdown with full keyboard nav and typeahead, themed like the input family."
-        [code]="codeSelect" [component]="NgxsmkSelect" [customize]="customizeNgxsmkSelect">
+        [code]="codeSelect"
+        [component]="NgxsmkSelect"
+        [customize]="customizeNgxsmkSelect"
+      >
         <div class="ngxsmk-sc-col" style="width: 100%; max-width: 260px">
           <ngxsmk-select [options]="colors" placeholder="Pick a color" [(value)]="color" />
           <small>Selected: {{ color() || '—' }}</small>
@@ -172,7 +195,10 @@ interface Option {
       <showcase-example
         title="Multi Select"
         description="Choose several values, shown as removable tags."
-        [code]="codeMultiSelect" [component]="NgxsmkMultiSelect" [customize]="customizeNgxsmkMultiSelect">
+        [code]="codeMultiSelect"
+        [component]="NgxsmkMultiSelect"
+        [customize]="customizeNgxsmkMultiSelect"
+      >
         <div class="ngxsmk-sc-col" style="width: 100%; max-width: 320px">
           <ngxsmk-multi-select [options]="colors" placeholder="Add colors" [(value)]="colorList" />
           <small>{{ colorList().length }} selected</small>
@@ -182,7 +208,10 @@ interface Option {
       <showcase-example
         title="Autocomplete"
         description="Free-text input that suggests matching options as you type."
-        [code]="codeAutocomplete" [component]="NgxsmkAutocomplete" [customize]="customizeNgxsmkAutocomplete">
+        [code]="codeAutocomplete"
+        [component]="NgxsmkAutocomplete"
+        [customize]="customizeNgxsmkAutocomplete"
+      >
         <ngxsmk-autocomplete
           [options]="fruitOptions"
           placeholder="Search a fruit…"
@@ -193,7 +222,10 @@ interface Option {
       <showcase-example
         title="Combobox"
         description="Filterable dropdown that resolves to a single selected option."
-        [code]="codeCombobox" [component]="NgxsmkCombobox" [customize]="customizeNgxsmkCombobox">
+        [code]="codeCombobox"
+        [component]="NgxsmkCombobox"
+        [customize]="customizeNgxsmkCombobox"
+      >
         <ngxsmk-combobox
           [options]="countries"
           placeholder="Choose a country…"
@@ -204,7 +236,10 @@ interface Option {
       <showcase-example
         title="Typeahead"
         description="String-list search with keyboard-friendly suggestions."
-        [code]="codeTypeahead" [component]="NgxsmkTypeahead" [customize]="customizeNgxsmkTypeahead">
+        [code]="codeTypeahead"
+        [component]="NgxsmkTypeahead"
+        [customize]="customizeNgxsmkTypeahead"
+      >
         <ngxsmk-typeahead
           [options]="frameworks"
           placeholder="Search a framework…"
@@ -215,7 +250,10 @@ interface Option {
       <showcase-example
         title="Power Search"
         description="A search bar combined with faceted filter dropdowns."
-        [code]="codePowerSearch" [component]="NgxsmkPowerSearch" [customize]="customizeNgxsmkPowerSearch">
+        [code]="codePowerSearch"
+        [component]="NgxsmkPowerSearch"
+        [customize]="customizeNgxsmkPowerSearch"
+      >
         <div class="ngxsmk-sc-col" style="width: 100%; max-width: 480px">
           <ngxsmk-power-search
             placeholder="Search issues…"
@@ -229,14 +267,20 @@ interface Option {
       <showcase-example
         title="Checkbox"
         description="Single boolean control built on a native checkbox."
-        [code]="codeCheckbox" [component]="NgxsmkCheckbox" [customize]="customizeNgxsmkCheckbox">
+        [code]="codeCheckbox"
+        [component]="NgxsmkCheckbox"
+        [customize]="customizeNgxsmkCheckbox"
+      >
         <ngxsmk-checkbox [(checked)]="agreed">I accept the terms</ngxsmk-checkbox>
       </showcase-example>
 
       <showcase-example
         title="Checkbox List"
         description="Multiple checkboxes bound to an array of selected values."
-        [code]="codeCheckboxList" [component]="NgxsmkCheckboxList" [customize]="customizeNgxsmkCheckboxList">
+        [code]="codeCheckboxList"
+        [component]="NgxsmkCheckboxList"
+        [customize]="customizeNgxsmkCheckboxList"
+      >
         <div class="ngxsmk-sc-col">
           <ngxsmk-checkbox-list [items]="topics" [(selected)]="selectedTopics" />
           <small>{{ selectedTopics().length }} topic(s) chosen</small>
@@ -246,7 +290,10 @@ interface Option {
       <showcase-example
         title="Radio"
         description="Mutually exclusive options within a radio group."
-        [code]="codeRadio" [component]="NgxsmkRadioGroup" [customize]="customizeNgxsmkRadioGroup">
+        [code]="codeRadio"
+        [component]="NgxsmkRadioGroup"
+        [customize]="customizeNgxsmkRadioGroup"
+      >
         <ngxsmk-radio-group [(value)]="plan">
           <ngxsmk-radio value="free">Free</ngxsmk-radio>
           <ngxsmk-radio value="pro">Pro</ngxsmk-radio>
@@ -257,14 +304,20 @@ interface Option {
       <showcase-example
         title="Switch"
         description="Instant on/off toggle for settings."
-        [code]="codeSwitch" [component]="NgxsmkSwitch" [customize]="customizeNgxsmkSwitch">
+        [code]="codeSwitch"
+        [component]="NgxsmkSwitch"
+        [customize]="customizeNgxsmkSwitch"
+      >
         <ngxsmk-switch [(checked)]="notifications">Email notifications</ngxsmk-switch>
       </showcase-example>
 
       <showcase-example
         title="Slider"
         description="Range control for selecting a numeric value."
-        [code]="codeSlider" [component]="NgxsmkSlider" [customize]="customizeNgxsmkSlider">
+        [code]="codeSlider"
+        [component]="NgxsmkSlider"
+        [customize]="customizeNgxsmkSlider"
+      >
         <div class="ngxsmk-sc-col" style="width: 100%; max-width: 320px">
           <ngxsmk-slider [min]="0" [max]="100" [step]="5" [(value)]="volume" />
           <small>Volume: {{ volume() }}</small>
@@ -284,21 +337,30 @@ interface Option {
       <showcase-example
         title="Segmented Control"
         description="Compact single-choice switcher for views or modes."
-        [code]="codeSegmented" [component]="NgxsmkSegmentedControl" [customize]="customizeNgxsmkSegmentedControl">
+        [code]="codeSegmented"
+        [component]="NgxsmkSegmentedControl"
+        [customize]="customizeNgxsmkSegmentedControl"
+      >
         <ngxsmk-segmented-control [options]="viewOptions" [(value)]="view" />
       </showcase-example>
 
       <showcase-example
         title="Selector"
         description="Chip-style multi-select for tags and quick filters."
-        [code]="codeSelector" [component]="NgxsmkSelector" [customize]="customizeNgxsmkSelector">
+        [code]="codeSelector"
+        [component]="NgxsmkSelector"
+        [customize]="customizeNgxsmkSelector"
+      >
         <ngxsmk-selector [options]="interests" [(selected)]="selectedInterests" />
       </showcase-example>
 
       <showcase-example
         title="Multi Selector"
         description="Dropdown of checkboxes with a compact summary trigger."
-        [code]="codeMultiSelector" [component]="NgxsmkMultiSelector" [customize]="customizeNgxsmkMultiSelector">
+        [code]="codeMultiSelector"
+        [component]="NgxsmkMultiSelector"
+        [customize]="customizeNgxsmkMultiSelector"
+      >
         <ngxsmk-multi-selector
           [options]="colors"
           placeholder="Select colors"
@@ -309,14 +371,19 @@ interface Option {
       <showcase-example
         title="Tokenizer"
         description="Enter free-form tags; press Enter to add, Backspace to remove."
-        [code]="codeTokenizer" [component]="NgxsmkTokenizer" [customize]="customizeNgxsmkTokenizer">
+        [code]="codeTokenizer"
+        [component]="NgxsmkTokenizer"
+        [customize]="customizeNgxsmkTokenizer"
+      >
         <ngxsmk-tokenizer placeholder="Add a tag…" [(tokens)]="tags" />
       </showcase-example>
 
       <showcase-example
         title="Input Group"
         description="Attach text add-ons before and after an input."
-        [code]="codeInputGroup" [component]="NgxsmkInputGroup">
+        [code]="codeInputGroup"
+        [component]="NgxsmkInputGroup"
+      >
         <ngxsmk-input-group>
           <ngxsmk-input-group-text>$</ngxsmk-input-group-text>
           <ngxsmk-input type="text" placeholder="0.00" />
@@ -327,7 +394,10 @@ interface Option {
       <showcase-example
         title="Field"
         description="Composable layout for a label, control, and status message."
-        [code]="codeField" [component]="NgxsmkField" [customize]="customizeNgxsmkField">
+        [code]="codeField"
+        [component]="NgxsmkField"
+        [customize]="customizeNgxsmkField"
+      >
         <ngxsmk-field hint="Choose a unique handle.">
           <ngxsmk-field-label [required]="true">Username</ngxsmk-field-label>
           <ngxsmk-input type="text" placeholder="e.g. ada_lovelace" />
@@ -338,7 +408,10 @@ interface Option {
       <showcase-example
         title="Form Field"
         description="Batteries-included wrapper wiring label, hint, and error to the control."
-        [code]="codeFormField" [component]="NgxsmkFormField" [customize]="customizeNgxsmkFormField">
+        [code]="codeFormField"
+        [component]="NgxsmkFormField"
+        [customize]="customizeNgxsmkFormField"
+      >
         <ngxsmk-form-field label="Email" required error="Please enter a valid email address.">
           <ngxsmk-input type="email" placeholder="you@example.com" />
         </ngxsmk-form-field>
@@ -347,7 +420,10 @@ interface Option {
       <showcase-example
         title="Checkbox List Item"
         description="Compose a multi-select list from individual NgxsmkCheckboxListItem children with their own checked state and optional descriptions."
-        [code]="codeCheckboxListItem" [component]="NgxsmkCheckboxListItemComponent" [customize]="customizeNgxsmkCheckboxListItemComponent">
+        [code]="codeCheckboxListItem"
+        [component]="NgxsmkCheckboxListItemComponent"
+        [customize]="customizeNgxsmkCheckboxListItemComponent"
+      >
         <div class="ngxsmk-sc-col ngxsmk-sc-surface">
           <ngxsmk-checkbox-list-item
             description="Statically typed, great tooling."

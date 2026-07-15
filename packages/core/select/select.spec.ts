@@ -34,21 +34,22 @@ class HostComponent {
 }
 
 describe('NgxsmkSelect', () => {
-
   beforeEach(() => {
     const mockScroll = vi.fn();
     Element.prototype.scrollIntoView = mockScroll;
     HTMLElement.prototype.scrollIntoView = mockScroll;
     if (typeof window !== 'undefined') {
       if ((window as any).Element) (window as any).Element.prototype.scrollIntoView = mockScroll;
-      if ((window as any).HTMLElement) (window as any).HTMLElement.prototype.scrollIntoView = mockScroll;
+      if ((window as any).HTMLElement)
+        (window as any).HTMLElement.prototype.scrollIntoView = mockScroll;
     }
   });
 
   function setup() {
     const fixture = TestBed.createComponent(HostComponent);
     fixture.detectChanges();
-    const triggerBtn: HTMLButtonElement = fixture.nativeElement.querySelector('.ngxsmk-select__trigger');
+    const triggerBtn: HTMLButtonElement =
+      fixture.nativeElement.querySelector('.ngxsmk-select__trigger');
     const valueEl: HTMLElement = fixture.nativeElement.querySelector('.ngxsmk-select__value');
     return { fixture, triggerBtn, valueEl };
   }

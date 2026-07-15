@@ -16,10 +16,29 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
   `,
   host: { class: 'ngxsmk-spreadsheet' },
   styles: `
-    :host { display: block; overflow: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--ngxsmk-color-outline-variant); border-radius: var(--ngxsmk-radius-md); font-family: var(--ngxsmk-font-mono); font-size: 0.8125rem; }
-    .ngxsmk-spreadsheet__table { display: table; border-collapse: collapse; width: 100%; }
-    .ngxsmk-spreadsheet__row { display: table-row; }
-    .ngxsmk-spreadsheet__cell { display: table-cell; padding: var(--ngxsmk-space-2) var(--ngxsmk-space-3); border: 1px solid var(--ngxsmk-color-outline-variant); min-width: 6rem; }
+    :host {
+      display: block;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+      border: 1px solid var(--ngxsmk-color-outline-variant);
+      border-radius: var(--ngxsmk-radius-md);
+      font-family: var(--ngxsmk-font-mono);
+      font-size: 0.8125rem;
+    }
+    .ngxsmk-spreadsheet__table {
+      display: table;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    .ngxsmk-spreadsheet__row {
+      display: table-row;
+    }
+    .ngxsmk-spreadsheet__cell {
+      display: table-cell;
+      padding: var(--ngxsmk-space-2) var(--ngxsmk-space-3);
+      border: 1px solid var(--ngxsmk-color-outline-variant);
+      min-width: 6rem;
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -1,11 +1,4 @@
-import {
-  Component,
-  computed,
-  input,
-  signal,
-  Type,
-  reflectComponentType,
-} from '@angular/core';
+import { Component, computed, input, signal, Type, reflectComponentType } from '@angular/core';
 import { NgxsmkButton } from '@ngxsmk/core/button';
 
 type ApiPanel = 'code' | 'api' | 'customize';
@@ -96,14 +89,24 @@ interface ApiOutput {
             <div class="ngxsmk-sc-ex__table-wrap">
               <table class="ngxsmk-sc-ex__table">
                 <thead>
-                  <tr><th>Property</th><th>Attribute</th><th>Kind</th></tr>
+                  <tr>
+                    <th>Property</th>
+                    <th>Attribute</th>
+                    <th>Kind</th>
+                  </tr>
                 </thead>
                 <tbody>
                   @for (i of inputs(); track i.propName) {
                     <tr>
-                      <td><code>{{ i.propName }}</code></td>
-                      <td><code>{{ i.templateName }}</code></td>
-                      <td>{{ isModel(i.propName) ? 'two-way' : (i.isSignal ? 'signal' : 'regular') }}</td>
+                      <td>
+                        <code>{{ i.propName }}</code>
+                      </td>
+                      <td>
+                        <code>{{ i.templateName }}</code>
+                      </td>
+                      <td>
+                        {{ isModel(i.propName) ? 'two-way' : i.isSignal ? 'signal' : 'regular' }}
+                      </td>
                     </tr>
                   }
                 </tbody>
@@ -115,13 +118,20 @@ interface ApiOutput {
             <div class="ngxsmk-sc-ex__table-wrap">
               <table class="ngxsmk-sc-ex__table">
                 <thead>
-                  <tr><th>Property</th><th>Event</th></tr>
+                  <tr>
+                    <th>Property</th>
+                    <th>Event</th>
+                  </tr>
                 </thead>
                 <tbody>
                   @for (o of outputs(); track o.propName) {
                     <tr>
-                      <td><code>{{ o.propName }}</code></td>
-                      <td><code>{{ o.templateName }}</code></td>
+                      <td>
+                        <code>{{ o.propName }}</code>
+                      </td>
+                      <td>
+                        <code>{{ o.templateName }}</code>
+                      </td>
                     </tr>
                   }
                 </tbody>
@@ -296,18 +306,12 @@ export class ShowcaseExample {
     return component ? reflectComponentType(component as Type<unknown>) : null;
   });
 
-  protected readonly inputs = computed<readonly ApiInput[]>(
-    () => this.metadata()?.inputs ?? [],
-  );
+  protected readonly inputs = computed<readonly ApiInput[]>(() => this.metadata()?.inputs ?? []);
 
-  protected readonly outputs = computed<readonly ApiOutput[]>(
-    () => this.metadata()?.outputs ?? [],
-  );
+  protected readonly outputs = computed<readonly ApiOutput[]>(() => this.metadata()?.outputs ?? []);
 
   /** Names of the component's outputs, used to detect two-way (`model`) inputs. */
-  protected readonly outputNames = computed(
-    () => new Set(this.outputs().map((o) => o.propName)),
-  );
+  protected readonly outputNames = computed(() => new Set(this.outputs().map((o) => o.propName)));
 
   /** A `model()` input exposes a `propNameChange` output — mark it as two-way. */
   protected isModel(propName: string): boolean {
@@ -315,6 +319,9 @@ export class ShowcaseExample {
   }
 
   protected readonly elementId = computed(() => {
-    return this.title().toLowerCase().trim().replace(/[^a-z0-9]+/g, '-');
+    return this.title()
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9]+/g, '-');
   });
 }

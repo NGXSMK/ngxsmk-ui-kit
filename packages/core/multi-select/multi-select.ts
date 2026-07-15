@@ -235,15 +235,15 @@ export class NgxsmkMultiSelect {
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
 
   protected selectedValues(): string[] {
-    return this.value().filter(v => this.options().some(o => o.value === v));
+    return this.value().filter((v) => this.options().some((o) => o.value === v));
   }
 
   protected labelFor(v: string): string {
-    return this.options().find(o => o.value === v)?.label || v;
+    return this.options().find((o) => o.value === v)?.label || v;
   }
 
   protected remaining(): { value: string; label: string }[] {
-    return this.options().filter(o => !this.value().includes(o.value));
+    return this.options().filter((o) => !this.value().includes(o.value));
   }
 
   protected toggle(): void {
@@ -257,7 +257,7 @@ export class NgxsmkMultiSelect {
   }
 
   protected remove(v: string): void {
-    this.value.set(this.value().filter(x => x !== v));
+    this.value.set(this.value().filter((x) => x !== v));
     this.changed.emit(this.value());
   }
 

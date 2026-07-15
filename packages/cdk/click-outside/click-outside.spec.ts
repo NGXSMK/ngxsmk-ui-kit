@@ -8,9 +8,7 @@ import { NgxsmkClickOutside } from './click-outside';
   imports: [NgxsmkClickOutside],
   template: `
     <div id="outside">Outside</div>
-    <div id="inside" (ngxsmkClickOutside)="clickedOutside.set(true)">
-      Inside
-    </div>
+    <div id="inside" (ngxsmkClickOutside)="clickedOutside.set(true)">Inside</div>
   `,
 })
 class HostComponent {

@@ -126,10 +126,7 @@ export function deriveScale(baseHex: string): ColorScale {
   const scale = {} as ColorScale;
   for (const [step, stop] of Object.entries(LIGHTNESS_STOPS)) {
     const key = Number(step) as keyof ColorScale;
-    scale[key] =
-      key === nearest
-        ? hslToHex(base)
-        : hslToHex({ h: base.h, s: base.s, l: stop });
+    scale[key] = key === nearest ? hslToHex(base) : hslToHex({ h: base.h, s: base.s, l: stop });
   }
   return scale;
 }

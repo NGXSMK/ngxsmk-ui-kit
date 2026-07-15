@@ -1,4 +1,9 @@
-import { NgxsmkCardContent, NgxsmkCardHeader, NgxsmkCardTitle, NgxsmkCard } from '@ngxsmk/core/card';
+import {
+  NgxsmkCardContent,
+  NgxsmkCardHeader,
+  NgxsmkCardTitle,
+  NgxsmkCard,
+} from '@ngxsmk/core/card';
 import { NgxsmkHeading } from '@ngxsmk/core/heading';
 import { NgxsmkText } from '@ngxsmk/core/text';
 import { ChangeDetectionStrategy, Component, computed, input, model, Type } from '@angular/core';
@@ -29,22 +34,31 @@ export interface PlaygroundEntry {
 @Component({
   selector: 'playground-section',
   standalone: true,
-  imports: [NgComponentOutlet, NgxsmkPropPanel, NgxsmkCard, NgxsmkCardHeader, NgxsmkCardTitle, NgxsmkCardContent, NgxsmkHeading, NgxsmkText],
+  imports: [
+    NgComponentOutlet,
+    NgxsmkPropPanel,
+    NgxsmkCard,
+    NgxsmkCardHeader,
+    NgxsmkCardTitle,
+    NgxsmkCardContent,
+    NgxsmkHeading,
+    NgxsmkText,
+  ],
   template: `
     <ngxsmk-card>
       <div ngxsmkCardHeader>
         <ngxsmk-heading level="h3" ngxsmkCardTitle>{{ entry().title }}</ngxsmk-heading>
         @if (entry().description) {
-          <ngxsmk-text variant="caption" color="secondary" class="ngxsmk-pg__desc">{{ entry().description }}</ngxsmk-text>
+          <ngxsmk-text variant="caption" color="secondary" class="ngxsmk-pg__desc">{{
+            entry().description
+          }}</ngxsmk-text>
         }
       </div>
 
       <div ngxsmkCardContent class="ngxsmk-pg">
         <div class="ngxsmk-pg__preview">
           @if (!entry().custom && entry().component) {
-            <ng-container
-              *ngComponentOutlet="entry().component ?? null; inputs: values()"
-            />
+            <ng-container *ngComponentOutlet="entry().component ?? null; inputs: values()" />
           } @else {
             <ng-content />
           }
@@ -57,9 +71,19 @@ export interface PlaygroundEntry {
     </ngxsmk-card>
   `,
   styles: `
-    :host { display: block; }
-    .ngxsmk-pg { display: flex; flex-direction: column; gap: var(--ngxsmk-space-5, 1.25rem); }
-    .ngxsmk-pg__desc { color: var(--ngxsmk-color-on-surface-variant, #71717a); display: block; margin-top: 0.25rem; }
+    :host {
+      display: block;
+    }
+    .ngxsmk-pg {
+      display: flex;
+      flex-direction: column;
+      gap: var(--ngxsmk-space-5, 1.25rem);
+    }
+    .ngxsmk-pg__desc {
+      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      display: block;
+      margin-top: 0.25rem;
+    }
     .ngxsmk-pg__preview {
       display: flex;
       align-items: center;

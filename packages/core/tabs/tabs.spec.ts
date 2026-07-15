@@ -40,9 +40,7 @@ describe('NgxsmkTabs', () => {
     fixture.detectChanges();
 
     expect(host.active()).toBe('b');
-    expect(element.querySelector('[role="tabpanel"]')!.textContent).toContain(
-      'Beta content',
-    );
+    expect(element.querySelector('[role="tabpanel"]')!.textContent).toContain('Beta content');
     expect(triggers[1].getAttribute('aria-selected')).toBe('true');
     expect(triggers[0].getAttribute('aria-selected')).toBe('false');
   });

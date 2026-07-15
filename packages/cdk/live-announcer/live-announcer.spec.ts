@@ -10,7 +10,7 @@ describe('NgxsmkLiveAnnouncer', () => {
   beforeEach(() => {
     vi.useFakeTimers();
     TestBed.configureTestingModule({
-      providers: [NgxsmkLiveAnnouncer]
+      providers: [NgxsmkLiveAnnouncer],
     });
     announcer = TestBed.inject(NgxsmkLiveAnnouncer);
     doc = TestBed.inject(DOCUMENT);

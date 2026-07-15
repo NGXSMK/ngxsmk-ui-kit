@@ -1,9 +1,4 @@
-import {
-  ColorScale,
-  FontFamilies,
-  SemanticColors,
-  TypographyScale,
-} from './types';
+import { ColorScale, FontFamilies, SemanticColors, TypographyScale } from './types';
 
 /**
  * Cool blue-grey neutral scale matching the Astryx (Meta) design language.
@@ -98,10 +93,10 @@ export const SPACING: Record<string, string> = {
  */
 export const RADIUS: Record<string, string> = {
   none: '0px',
-  sm: '0.25rem',   // 4px  — inner (nested chips, checkboxes)
-  md: '0.5rem',    // 8px  — element (buttons, inputs) — default base
-  lg: '0.75rem',   // 12px — container (cards, popovers)
-  xl: '1rem',      // 16px
+  sm: '0.25rem', // 4px  — inner (nested chips, checkboxes)
+  md: '0.5rem', // 8px  — element (buttons, inputs) — default base
+  lg: '0.75rem', // 12px — container (cards, popovers)
+  xl: '1rem', // 16px
   '2xl': '1.25rem', // 20px
   '3xl': '1.75rem', // 28px — page / hero surfaces
   full: '9999px',

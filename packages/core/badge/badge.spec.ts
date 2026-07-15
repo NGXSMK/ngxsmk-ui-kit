@@ -6,9 +6,7 @@ import { NgxsmkBadge, NgxsmkBadgeVariant } from './badge';
 @Component({
   standalone: true,
   imports: [NgxsmkBadge],
-  template: `
-    <ngxsmk-badge [variant]="variant()">{{ label() }}</ngxsmk-badge>
-  `,
+  template: ` <ngxsmk-badge [variant]="variant()">{{ label() }}</ngxsmk-badge> `,
 })
 class HostComponent {
   readonly variant = signal<NgxsmkBadgeVariant>('primary');

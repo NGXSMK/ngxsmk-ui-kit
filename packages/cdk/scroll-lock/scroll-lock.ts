@@ -19,9 +19,7 @@ export class NgxsmkScrollLock {
     }
     const body = this.document.body;
     const window = this.document.defaultView;
-    const scrollbar = window
-      ? window.innerWidth - this.document.documentElement.clientWidth
-      : 0;
+    const scrollbar = window ? window.innerWidth - this.document.documentElement.clientWidth : 0;
 
     this.previousOverflow = body.style.overflow;
     this.previousPaddingRight = body.style.paddingRight;

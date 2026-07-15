@@ -50,7 +50,7 @@ import {
       border-radius: 50%;
       background: var(--ngxsmk-color-primary);
       border: 2px solid var(--ngxsmk-color-surface);
-      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
       cursor: pointer;
       transition: transform var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
@@ -63,7 +63,7 @@ import {
       border-radius: 50%;
       background: var(--ngxsmk-color-primary);
       border: 2px solid var(--ngxsmk-color-surface);
-      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
       cursor: pointer;
     }
     .ngxsmk-slider__control:focus-visible {

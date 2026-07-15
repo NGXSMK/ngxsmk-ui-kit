@@ -286,8 +286,8 @@ export class NgxsmkSelect {
 
   protected readonly listboxId = computed(() => `${this.id()}-listbox`);
 
-  protected readonly selected = computed(() =>
-    this.options().find((o) => o.value === this.value()) ?? null,
+  protected readonly selected = computed(
+    () => this.options().find((o) => o.value === this.value()) ?? null,
   );
 
   protected readonly activeDescendant = computed(() =>
@@ -310,7 +310,7 @@ export class NgxsmkSelect {
       return;
     }
     const idx = this.options().findIndex((o) => o.value === this.value());
-    this.activeIndex.set(idx >= 0 ? idx : (this.placeholder() ? -1 : this.firstEnabled()));
+    this.activeIndex.set(idx >= 0 ? idx : this.placeholder() ? -1 : this.firstEnabled());
     this.open.set(true);
     this.host.nativeElement.setAttribute('data-open', '');
     Promise.resolve().then(() => this.scrollActiveIntoView());
@@ -503,9 +503,7 @@ export class NgxsmkSelect {
 
   private scrollActiveIntoView(): void {
     requestAnimationFrame(() => {
-      const items = this.host.nativeElement.querySelectorAll<HTMLElement>(
-        '.ngxsmk-select__option',
-      );
+      const items = this.host.nativeElement.querySelectorAll<HTMLElement>('.ngxsmk-select__option');
       // The placeholder item, when present, sits in the list before the options.
       const idx =
         this.activeIndex() === -1

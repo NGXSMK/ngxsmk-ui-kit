@@ -45,7 +45,14 @@ import { DOCUMENT } from '@angular/common';
         width="12"
         height="12"
       >
-        <path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path
+          d="M4 6l4 4 4-4"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
       </svg>
     </div>
 
@@ -165,7 +172,7 @@ export class NgxsmkMultiSelector implements OnDestroy {
   protected toggleOption(val: string): void {
     const current = this.value();
     if (current.includes(val)) {
-      this.value.set(current.filter(v => v !== val));
+      this.value.set(current.filter((v) => v !== val));
     } else {
       this.value.set([...current, val]);
     }
@@ -186,9 +193,9 @@ export class NgxsmkMultiSelector implements OnDestroy {
     this.isOpen.set(true);
     this.dropdownView = this.vcr.createEmbeddedView(this.dropdownTpl);
     this.dropdownView.detectChanges();
-    const node = (this.dropdownView.rootNodes.find(
-      (n) => n.nodeType === 1,
-    ) as HTMLElement | undefined) ?? null;
+    const node =
+      (this.dropdownView.rootNodes.find((n) => n.nodeType === 1) as HTMLElement | undefined) ??
+      null;
     if (!node) {
       this.dropdownView.destroy();
       this.dropdownView = null;

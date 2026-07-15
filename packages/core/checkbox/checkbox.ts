@@ -61,7 +61,9 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     '[attr.data-disabled]': 'isDisabled() ? "" : null',
   },
   styles: `
-    :host { display: inline-block; }
+    :host {
+      display: inline-block;
+    }
 
     .ngxsmk-checkbox__wrapper {
       display: inline-flex;
@@ -107,7 +109,11 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
         border-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
 
-    .ngxsmk-checkbox__box svg { opacity: 0; transform: scale(0.6); transition: all var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out); }
+    .ngxsmk-checkbox__box svg {
+      opacity: 0;
+      transform: scale(0.6);
+      transition: all var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
+    }
 
     :host([data-checked]) .ngxsmk-checkbox__box,
     .ngxsmk-checkbox__native:indeterminate + .ngxsmk-checkbox__box {
@@ -142,9 +148,7 @@ export class NgxsmkCheckbox implements ControlValueAccessor {
   readonly changed = output<boolean>();
 
   private readonly cvaDisabled = signal(false);
-  protected readonly isDisabled = computed(
-    () => this.disabled() || this.cvaDisabled(),
-  );
+  protected readonly isDisabled = computed(() => this.disabled() || this.cvaDisabled());
 
   private onChange?: (value: boolean) => void;
   protected onTouched?: () => void;

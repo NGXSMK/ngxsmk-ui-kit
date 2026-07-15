@@ -19,12 +19,28 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
   `,
   host: { class: 'ngxsmk-app-shell' },
   styles: `
-    :host { display: grid; grid-template-columns: auto 1fr; min-height: 100vh; font-family: var(--ngxsmk-font-sans); }
-    .ngxsmk-app-shell__main { display: flex; flex-direction: column; overflow: hidden; }
-    .ngxsmk-app-shell__content { flex: 1; overflow-y: auto; }
+    :host {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      min-height: 100vh;
+      font-family: var(--ngxsmk-font-sans);
+    }
+    .ngxsmk-app-shell__main {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .ngxsmk-app-shell__content {
+      flex: 1;
+      overflow-y: auto;
+    }
     @media (max-width: 768px) {
-      :host { grid-template-columns: 1fr; }
-      .ngxsmk-app-shell__sidebar { width: 100%; }
+      :host {
+        grid-template-columns: 1fr;
+      }
+      .ngxsmk-app-shell__sidebar {
+        width: 100%;
+      }
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

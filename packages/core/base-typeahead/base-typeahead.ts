@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, Directive, input, signal, TemplateRef } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Directive,
+  input,
+  signal,
+  TemplateRef,
+} from '@angular/core';
 import { ngxsmkUniqueId } from '@ngxsmk/core/util';
 
 @Directive({
@@ -36,10 +43,40 @@ export class NgxsmkBaseTypeaheadItem {
   `,
   host: { class: 'ngxsmk-base-typeahead' },
   styles: `
-    :host { display: block; position: relative; font-family: var(--ngxsmk-font-sans); }
-    .ngxsmk-base-typeahead__input { display: block; width: 100%; padding: var(--ngxsmk-space-2) var(--ngxsmk-space-3); border: 1px solid var(--ngxsmk-color-outline); border-radius: var(--ngxsmk-radius-md); font-size: 0.875rem; background: var(--ngxsmk-color-surface); color: var(--ngxsmk-color-on-surface); outline: none; box-sizing: border-box; }
-    .ngxsmk-base-typeahead__input:focus { border-color: var(--ngxsmk-color-primary); }
-    .ngxsmk-base-typeahead__dropdown { position: absolute; top: 100%; left: 0; right: 0; margin-top: var(--ngxsmk-space-1); background: var(--ngxsmk-color-surface); border: 1px solid var(--ngxsmk-color-outline); border-radius: var(--ngxsmk-radius-md); box-shadow: var(--ngxsmk-shadow-lg); max-height: 15rem; overflow-y: auto; z-index: var(--ngxsmk-z-dropdown, 1000); }
+    :host {
+      display: block;
+      position: relative;
+      font-family: var(--ngxsmk-font-sans);
+    }
+    .ngxsmk-base-typeahead__input {
+      display: block;
+      width: 100%;
+      padding: var(--ngxsmk-space-2) var(--ngxsmk-space-3);
+      border: 1px solid var(--ngxsmk-color-outline);
+      border-radius: var(--ngxsmk-radius-md);
+      font-size: 0.875rem;
+      background: var(--ngxsmk-color-surface);
+      color: var(--ngxsmk-color-on-surface);
+      outline: none;
+      box-sizing: border-box;
+    }
+    .ngxsmk-base-typeahead__input:focus {
+      border-color: var(--ngxsmk-color-primary);
+    }
+    .ngxsmk-base-typeahead__dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      margin-top: var(--ngxsmk-space-1);
+      background: var(--ngxsmk-color-surface);
+      border: 1px solid var(--ngxsmk-color-outline);
+      border-radius: var(--ngxsmk-radius-md);
+      box-shadow: var(--ngxsmk-shadow-lg);
+      max-height: 15rem;
+      overflow-y: auto;
+      z-index: var(--ngxsmk-z-dropdown, 1000);
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

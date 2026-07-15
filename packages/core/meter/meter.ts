@@ -33,10 +33,7 @@ export type NgxsmkMeterLevel = 'optimal' | 'suboptimal' | 'poor';
       </div>
     }
     <div class="ngxsmk-meter__track">
-      <div
-        class="ngxsmk-meter__fill"
-        [style.inline-size.%]="percent()"
-      ></div>
+      <div class="ngxsmk-meter__fill" [style.inline-size.%]="percent()"></div>
     </div>
   `,
   host: {
@@ -56,9 +53,15 @@ export type NgxsmkMeterLevel = 'optimal' | 'suboptimal' | 'poor';
       font-family: var(--ngxsmk-font-sans, sans-serif);
       --ngxsmk-meter-color: var(--ngxsmk-color-primary, #6366f1);
     }
-    :host([data-level='optimal']) { --ngxsmk-meter-color: var(--ngxsmk-color-success, #16a34a); }
-    :host([data-level='suboptimal']) { --ngxsmk-meter-color: var(--ngxsmk-color-warning, #f59e0b); }
-    :host([data-level='poor']) { --ngxsmk-meter-color: var(--ngxsmk-color-danger, #dc2626); }
+    :host([data-level='optimal']) {
+      --ngxsmk-meter-color: var(--ngxsmk-color-success, #16a34a);
+    }
+    :host([data-level='suboptimal']) {
+      --ngxsmk-meter-color: var(--ngxsmk-color-warning, #f59e0b);
+    }
+    :host([data-level='poor']) {
+      --ngxsmk-meter-color: var(--ngxsmk-color-danger, #dc2626);
+    }
 
     .ngxsmk-meter__header {
       display: flex;
@@ -68,7 +71,10 @@ export type NgxsmkMeterLevel = 'optimal' | 'suboptimal' | 'poor';
       margin-block-end: var(--ngxsmk-space-1, 0.25rem);
       font-size: var(--ngxsmk-text-body-sm-size, 0.8125rem);
     }
-    .ngxsmk-meter__label { color: var(--ngxsmk-color-on-surface, #0f172a); font-weight: 500; }
+    .ngxsmk-meter__label {
+      color: var(--ngxsmk-color-on-surface, #0f172a);
+      font-weight: 500;
+    }
     .ngxsmk-meter__value {
       color: var(--ngxsmk-color-on-surface-variant, #64748b);
       font-variant-numeric: tabular-nums;
@@ -80,8 +86,12 @@ export type NgxsmkMeterLevel = 'optimal' | 'suboptimal' | 'poor';
       border-radius: var(--ngxsmk-radius-full, 999px);
       overflow: hidden;
     }
-    :host([data-size='sm']) { --ngxsmk-meter-height: 0.375rem; }
-    :host([data-size='lg']) { --ngxsmk-meter-height: 0.75rem; }
+    :host([data-size='sm']) {
+      --ngxsmk-meter-height: 0.375rem;
+    }
+    :host([data-size='lg']) {
+      --ngxsmk-meter-height: 0.75rem;
+    }
     .ngxsmk-meter__fill {
       block-size: 100%;
       background: var(--ngxsmk-meter-color);
@@ -89,7 +99,9 @@ export type NgxsmkMeterLevel = 'optimal' | 'suboptimal' | 'poor';
       transition: inline-size var(--ngxsmk-duration-normal, 250ms) var(--ngxsmk-ease-out, ease);
     }
     @media (prefers-reduced-motion: reduce) {
-      .ngxsmk-meter__fill { transition: none; }
+      .ngxsmk-meter__fill {
+        transition: none;
+      }
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -145,11 +157,7 @@ export class NgxsmkMeter {
     const highBound = high ?? this.max();
     const inLow = value < lowBound;
     const inHigh = value > highBound;
-    const region: 'low' | 'mid' | 'high' = inLow
-      ? 'low'
-      : inHigh
-        ? 'high'
-        : 'mid';
+    const region: 'low' | 'mid' | 'high' = inLow ? 'low' : inHigh ? 'high' : 'mid';
 
     if (optimum === null) {
       // Without an optimum, treat the middle band as good.

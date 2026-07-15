@@ -27,12 +27,40 @@ export interface SegmentedOption {
   `,
   host: { class: 'ngxsmk-segmented-control' },
   styles: `
-    :host { display: inline-flex; font-family: var(--ngxsmk-font-sans); }
-    .ngxsmk-segmented-control__group { display: flex; background: var(--ngxsmk-color-surface-variant); padding: var(--ngxsmk-space-1); border-radius: var(--ngxsmk-radius-lg); gap: var(--ngxsmk-space-1); }
-    .ngxsmk-segmented-control__item { padding: var(--ngxsmk-space-1-5) var(--ngxsmk-space-3); border: none; border-radius: var(--ngxsmk-radius-md); background: transparent; color: var(--ngxsmk-color-on-surface-variant); font-size: var(--ngxsmk-text-body-sm-size); font-weight: 500; cursor: pointer; transition: all var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out); }
-    .ngxsmk-segmented-control__item[aria-checked='true'] { background: var(--ngxsmk-color-surface); color: var(--ngxsmk-color-on-surface); box-shadow: var(--ngxsmk-shadow-sm); }
-    .ngxsmk-segmented-control__item:hover:not([disabled]) { color: var(--ngxsmk-color-on-surface); }
-    .ngxsmk-segmented-control__item[disabled] { opacity: 0.5; cursor: not-allowed; }
+    :host {
+      display: inline-flex;
+      font-family: var(--ngxsmk-font-sans);
+    }
+    .ngxsmk-segmented-control__group {
+      display: flex;
+      background: var(--ngxsmk-color-surface-variant);
+      padding: var(--ngxsmk-space-1);
+      border-radius: var(--ngxsmk-radius-lg);
+      gap: var(--ngxsmk-space-1);
+    }
+    .ngxsmk-segmented-control__item {
+      padding: var(--ngxsmk-space-1-5) var(--ngxsmk-space-3);
+      border: none;
+      border-radius: var(--ngxsmk-radius-md);
+      background: transparent;
+      color: var(--ngxsmk-color-on-surface-variant);
+      font-size: var(--ngxsmk-text-body-sm-size);
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
+    }
+    .ngxsmk-segmented-control__item[aria-checked='true'] {
+      background: var(--ngxsmk-color-surface);
+      color: var(--ngxsmk-color-on-surface);
+      box-shadow: var(--ngxsmk-shadow-sm);
+    }
+    .ngxsmk-segmented-control__item:hover:not([disabled]) {
+      color: var(--ngxsmk-color-on-surface);
+    }
+    .ngxsmk-segmented-control__item[disabled] {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -18,8 +18,7 @@ function setup(configure?: (h: Host) => void) {
   const fixture = TestBed.createComponent(Host);
   if (configure) configure(fixture.componentInstance);
   fixture.detectChanges();
-  const host: HTMLElement =
-    fixture.nativeElement.querySelector('ngxsmk-rating');
+  const host: HTMLElement = fixture.nativeElement.querySelector('ngxsmk-rating');
   return { fixture, host };
 }
 
@@ -32,7 +31,7 @@ describe('NgxsmkRating', () => {
   });
 
   it('increments with ArrowRight and clamps at max', () => {
-    const { fixture, host } = setup((h) => (h.value.set(4)));
+    const { fixture, host } = setup((h) => h.value.set(4));
     host.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight' }));
     fixture.detectChanges();
     expect(fixture.componentInstance.value()).toBe(5);

@@ -6,14 +6,7 @@ import { NgxsmkAvatar, NgxsmkAvatarSize } from './avatar';
 @Component({
   standalone: true,
   imports: [NgxsmkAvatar],
-  template: `
-    <ngxsmk-avatar
-      [src]="src()"
-      [name]="name()"
-      [size]="size()"
-      [shape]="shape()"
-    />
-  `,
+  template: ` <ngxsmk-avatar [src]="src()" [name]="name()" [size]="size()" [shape]="shape()" /> `,
 })
 class HostComponent {
   readonly src = signal('');

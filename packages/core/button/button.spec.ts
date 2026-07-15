@@ -7,9 +7,7 @@ import { NgxsmkButton, NgxsmkButtonVariant } from './button';
   standalone: true,
   imports: [NgxsmkButton],
   template: `
-    <button ngxsmk-button [variant]="variant" size="sm" [loading]="loading()">
-      Save
-    </button>
+    <button ngxsmk-button [variant]="variant" size="sm" [loading]="loading()">Save</button>
   `,
 })
 class HostComponent {
@@ -21,8 +19,7 @@ describe('NgxsmkButton', () => {
   function setup() {
     const fixture = TestBed.createComponent(HostComponent);
     fixture.detectChanges();
-    const button: HTMLButtonElement =
-      fixture.nativeElement.querySelector('button');
+    const button: HTMLButtonElement = fixture.nativeElement.querySelector('button');
     return { fixture, button };
   }
 

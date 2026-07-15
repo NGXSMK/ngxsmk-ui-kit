@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 export interface NgxsmkCandlestickDataPoint {
   date: string;
@@ -71,9 +66,7 @@ export class NgxsmkCandlestickChart {
 
   protected readonly range = computed(() => this.maxVal() - this.minVal() || 1);
 
-  protected readonly viewBox = computed(
-    () => `0 0 ${this.width()} ${this.height()}`,
-  );
+  protected readonly viewBox = computed(() => `0 0 ${this.width()} ${this.height()}`);
 
   protected readonly candles = computed(() => {
     const w = this.width();
@@ -82,11 +75,10 @@ export class NgxsmkCandlestickChart {
     const plotW = w - pad * 2;
     const plotH = h - pad * 2;
     const count = this.data().length || 1;
-    const candleW = plotW / count * 0.6;
+    const candleW = (plotW / count) * 0.6;
     const r = this.range();
     const min = this.minVal();
-    const scale = (v: number) =>
-      pad + plotH - ((v - min) / r) * plotH;
+    const scale = (v: number) => pad + plotH - ((v - min) / r) * plotH;
     return this.data().map((d, i) => {
       const x = pad + (i / count) * plotW + plotW / count / 2;
       const highY = scale(d.high);
@@ -104,9 +96,7 @@ export class NgxsmkCandlestickChart {
         bodyY: bodyTop,
         bodyW: candleW,
         bodyH: Math.max(bodyBottom - bodyTop, 1),
-        fill: isBullish
-          ? 'var(--ngxsmk-color-success)'
-          : 'var(--ngxsmk-color-error)',
+        fill: isBullish ? 'var(--ngxsmk-color-success)' : 'var(--ngxsmk-color-error)',
       };
     });
   });

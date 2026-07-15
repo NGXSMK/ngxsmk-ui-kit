@@ -45,7 +45,7 @@ jobs:
           fi
           # Supported floor is 17.3 (signal output()), so install the 17.3 line.
           FLOOR=$([ "${{ matrix.ng }}" = "17" ] && echo "17.3" || echo "${{ matrix.ng }}")
-          
+
           PKGS=(
             "@angular/core@^${FLOOR}.0"
             "@angular/common@^${FLOOR}.0"
@@ -60,12 +60,12 @@ jobs:
             "$BUILDER@^${FLOOR}.0"
             "tslib"
           )
-          
+
           npm install --no-save --legacy-peer-deps "${PKGS[@]}"
-          
+
           TS=$(node -e "console.log(require('@angular/compiler-cli/package.json').peerDependencies.typescript)")
           echo "TypeScript peer for Angular ${{ matrix.ng }}: $TS"
-          
+
           npm install --no-save --legacy-peer-deps "typescript@$TS" "${PKGS[@]}"
 
       - name: Generate libs-only angular.json

@@ -6,7 +6,12 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
   template: `{{ text() }}`,
   host: { class: 'ngxsmk-chat-tokenized-text' },
   styles: `
-    :host { white-space: pre-wrap; word-wrap: break-word; font-family: var(--ngxsmk-font-sans); line-height: 1.5; }
+    :host {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-family: var(--ngxsmk-font-sans);
+      line-height: 1.5;
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

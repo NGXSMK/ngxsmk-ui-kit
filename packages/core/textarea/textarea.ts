@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, booleanAttribute, input, model, output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  booleanAttribute,
+  input,
+  model,
+  output,
+} from '@angular/core';
 
 /**
  * Multi-line text control with a configurable row count.
@@ -22,7 +29,11 @@ import { ChangeDetectionStrategy, Component, booleanAttribute, input, model, out
   `,
   host: { class: 'ngxsmk-textarea' },
   styles: `
-    :host { display: block; width: 100%; font-family: var(--ngxsmk-font-sans); }
+    :host {
+      display: block;
+      width: 100%;
+      font-family: var(--ngxsmk-font-sans);
+    }
 
     .ngxsmk-textarea__control {
       display: block;
@@ -43,7 +54,9 @@ import { ChangeDetectionStrategy, Component, booleanAttribute, input, model, out
         border-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
         box-shadow var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
-    .ngxsmk-textarea__control::placeholder { color: var(--ngxsmk-color-on-surface-variant); }
+    .ngxsmk-textarea__control::placeholder {
+      color: var(--ngxsmk-color-on-surface-variant);
+    }
     .ngxsmk-textarea__control:focus-visible {
       border-color: var(--ngxsmk-color-ring);
       box-shadow: 0 0 0 3px color-mix(in srgb, var(--ngxsmk-color-ring) 25%, transparent);

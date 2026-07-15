@@ -6,9 +6,7 @@ import { NgxsmkDivider } from './divider';
 @Component({
   standalone: true,
   imports: [NgxsmkDivider],
-  template: `
-    <ngxsmk-divider [orientation]="orientation()" />
-  `,
+  template: ` <ngxsmk-divider [orientation]="orientation()" /> `,
 })
 class HostComponent {
   readonly orientation = signal<'horizontal' | 'vertical'>('horizontal');

@@ -25,9 +25,23 @@ export type NgxsmkStatTrend = 'up' | 'down' | 'flat';
           class="ngxsmk-stat__trend-icon"
         >
           @if (trend() === 'up') {
-            <path d="M8 12V4M4 8l4-4 4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path
+              d="M8 12V4M4 8l4-4 4 4"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
           } @else {
-            <path d="M8 4v8M4 8l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path
+              d="M8 4v8M4 8l4 4 4-4"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
           }
         </svg>
       </div>

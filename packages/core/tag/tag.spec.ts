@@ -8,11 +8,7 @@ import { NgxsmkTag, NgxsmkChip, NgxsmkTagVariant } from './tag';
   imports: [NgxsmkTag, NgxsmkChip],
   template: `
     <ngxsmk-tag [variant]="variant()">{{ tagLabel() }}</ngxsmk-tag>
-    <ngxsmk-chip
-      [removable]="removable()"
-      [disabled]="disabled()"
-      (removed)="onRemoved()"
-    >
+    <ngxsmk-chip [removable]="removable()" [disabled]="disabled()" (removed)="onRemoved()">
       {{ chipLabel() }}
     </ngxsmk-chip>
   `,

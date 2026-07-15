@@ -29,13 +29,37 @@ import { ChangeDetectionStrategy, Component, input, signal, computed } from '@an
       font-family: var(--ngxsmk-font-sans);
       font-weight: 500;
     }
-    :host([data-shape='square']) { border-radius: var(--ngxsmk-radius-md); }
-    :host([data-shape='circle']) { border-radius: var(--ngxsmk-radius-full); }
-    :host([data-size='sm']) { width: 2.5rem; height: 2.5rem; font-size: 0.75rem; }
-    :host([data-size='md']) { width: 4rem; height: 4rem; font-size: 1rem; }
-    :host([data-size='lg']) { width: 6rem; height: 6rem; font-size: 1.25rem; }
-    :host([data-size='xl']) { width: 8rem; height: 8rem; font-size: 1.5rem; }
-    .ngxsmk-thumbnail__img { width: 100%; height: 100%; object-fit: cover; }
+    :host([data-shape='square']) {
+      border-radius: var(--ngxsmk-radius-md);
+    }
+    :host([data-shape='circle']) {
+      border-radius: var(--ngxsmk-radius-full);
+    }
+    :host([data-size='sm']) {
+      width: 2.5rem;
+      height: 2.5rem;
+      font-size: 0.75rem;
+    }
+    :host([data-size='md']) {
+      width: 4rem;
+      height: 4rem;
+      font-size: 1rem;
+    }
+    :host([data-size='lg']) {
+      width: 6rem;
+      height: 6rem;
+      font-size: 1.25rem;
+    }
+    :host([data-size='xl']) {
+      width: 8rem;
+      height: 8rem;
+      font-size: 1.5rem;
+    }
+    .ngxsmk-thumbnail__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

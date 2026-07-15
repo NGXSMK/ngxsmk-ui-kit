@@ -1,12 +1,6 @@
 import { deriveScale, rotateHue, shiftLightness } from './color';
 import { resolveTheme } from './define-config';
-import {
-  ColorScale,
-  ResolvedTheme,
-  ThemeConfig,
-  TypeRoleSize,
-  TypeStyle,
-} from './types';
+import { ColorScale, ResolvedTheme, ThemeConfig, TypeRoleSize, TypeStyle } from './types';
 import { CONTROL_HEIGHT } from './tokens';
 
 type Vars = Record<string, string>;
@@ -200,9 +194,7 @@ function darkVars(theme: ResolvedTheme): Vars {
 }
 
 function block(selector: string, vars: Vars, indent = ''): string {
-  const lines = Object.entries(vars).map(
-    ([name, value]) => `${indent}  ${name}: ${value};`,
-  );
+  const lines = Object.entries(vars).map(([name, value]) => `${indent}  ${name}: ${value};`);
   return `${indent}${selector} {\n${lines.join('\n')}\n${indent}}`;
 }
 
@@ -212,9 +204,10 @@ function block(selector: string, vars: Vars, indent = ''): string {
  * dark-mode roles according to the configured dark-mode strategy.
  */
 export function buildThemeCss(config: ThemeConfig | ResolvedTheme): string {
-  const theme = 'brand' in config && 'spacing' in (config as object)
-    ? (config as ResolvedTheme)
-    : resolveTheme(config as ThemeConfig);
+  const theme =
+    'brand' in config && 'spacing' in (config as object)
+      ? (config as ResolvedTheme)
+      : resolveTheme(config as ThemeConfig);
 
   const root = block(':root', { ...staticVars(theme), ...lightVars(theme) });
   const dark = darkVars(theme);

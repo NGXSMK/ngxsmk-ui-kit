@@ -11,11 +11,7 @@ import {
   signal,
 } from '@angular/core';
 import { NgxsmkClickOutside, NgxsmkFocusTrap } from '@ngxsmk/cdk';
-import {
-  NgxsmkAnimate,
-  NgxsmkMotionState,
-  playExit,
-} from '@ngxsmk/core/animation';
+import { NgxsmkAnimate, NgxsmkMotionState, playExit } from '@ngxsmk/core/animation';
 
 export type NgxsmkPopoverPlacement = 'top' | 'bottom' | 'left' | 'right';
 export type NgxsmkPopoverAlign = 'start' | 'center' | 'end';
@@ -79,7 +75,9 @@ export type NgxsmkPopoverAlign = 'start' | 'center' | 'end';
       position: relative;
       font-family: var(--ngxsmk-font-sans, sans-serif);
     }
-    .ngxsmk-popover__trigger { display: inline-flex; }
+    .ngxsmk-popover__trigger {
+      display: inline-flex;
+    }
 
     .ngxsmk-popover__panel {
       position: absolute;
@@ -98,23 +96,46 @@ export type NgxsmkPopoverAlign = 'start' | 'center' | 'end';
     }
 
     /* Placement: which edge the panel hangs off. */
-    .ngxsmk-popover__panel[data-placement='bottom'] { top: calc(100% + var(--ngxsmk-popover-gap)); }
-    .ngxsmk-popover__panel[data-placement='top'] { bottom: calc(100% + var(--ngxsmk-popover-gap)); }
-    .ngxsmk-popover__panel[data-placement='right'] { left: calc(100% + var(--ngxsmk-popover-gap)); top: 0; }
-    .ngxsmk-popover__panel[data-placement='left'] { right: calc(100% + var(--ngxsmk-popover-gap)); top: 0; }
+    .ngxsmk-popover__panel[data-placement='bottom'] {
+      top: calc(100% + var(--ngxsmk-popover-gap));
+    }
+    .ngxsmk-popover__panel[data-placement='top'] {
+      bottom: calc(100% + var(--ngxsmk-popover-gap));
+    }
+    .ngxsmk-popover__panel[data-placement='right'] {
+      left: calc(100% + var(--ngxsmk-popover-gap));
+      top: 0;
+    }
+    .ngxsmk-popover__panel[data-placement='left'] {
+      right: calc(100% + var(--ngxsmk-popover-gap));
+      top: 0;
+    }
 
     /* Align along the cross axis. */
     .ngxsmk-popover__panel[data-placement='bottom'][data-align='start'],
-    .ngxsmk-popover__panel[data-placement='top'][data-align='start'] { left: 0; }
+    .ngxsmk-popover__panel[data-placement='top'][data-align='start'] {
+      left: 0;
+    }
     .ngxsmk-popover__panel[data-placement='bottom'][data-align='center'],
-    .ngxsmk-popover__panel[data-placement='top'][data-align='center'] { left: 50%; transform: translateX(-50%); }
+    .ngxsmk-popover__panel[data-placement='top'][data-align='center'] {
+      left: 50%;
+      transform: translateX(-50%);
+    }
     .ngxsmk-popover__panel[data-placement='bottom'][data-align='end'],
-    .ngxsmk-popover__panel[data-placement='top'][data-align='end'] { right: 0; }
+    .ngxsmk-popover__panel[data-placement='top'][data-align='end'] {
+      right: 0;
+    }
 
     .ngxsmk-popover__panel[data-placement='left'][data-align='center'],
-    .ngxsmk-popover__panel[data-placement='right'][data-align='center'] { top: 50%; transform: translateY(-50%); }
+    .ngxsmk-popover__panel[data-placement='right'][data-align='center'] {
+      top: 50%;
+      transform: translateY(-50%);
+    }
     .ngxsmk-popover__panel[data-placement='left'][data-align='end'],
-    .ngxsmk-popover__panel[data-placement='right'][data-align='end'] { top: auto; bottom: 0; }
+    .ngxsmk-popover__panel[data-placement='right'][data-align='end'] {
+      top: auto;
+      bottom: 0;
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -167,9 +188,7 @@ export class NgxsmkPopover {
 
   close(): void {
     if (!this.open() || this.closing()) return;
-    const panel = this.host.nativeElement.querySelector<HTMLElement>(
-      '.ngxsmk-popover__panel',
-    );
+    const panel = this.host.nativeElement.querySelector<HTMLElement>('.ngxsmk-popover__panel');
     if (!panel) {
       this.finishClose();
       return;
@@ -187,9 +206,7 @@ export class NgxsmkPopover {
   protected onOutside(event: Event): void {
     if (!this.closeOnOutsideClick()) return;
     // Ignore presses on the trigger — the trigger's own click handles toggle.
-    const trigger = this.host.nativeElement.querySelector(
-      '.ngxsmk-popover__trigger',
-    );
+    const trigger = this.host.nativeElement.querySelector('.ngxsmk-popover__trigger');
     if (trigger?.contains(event.target as Node)) return;
     this.close();
   }

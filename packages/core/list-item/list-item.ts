@@ -37,7 +37,7 @@ export type NgxsmkListItemVariant = 'default' | 'active' | 'disabled';
       cursor: default;
       transition: background var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
-    
+
     /* Apply padding/hover only on non-link hosts to prevent collapse */
     :host:not([data-has-link]) {
       padding: var(--ngxsmk-space-3) var(--ngxsmk-space-4);

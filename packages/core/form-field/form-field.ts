@@ -58,7 +58,9 @@ import { NgxsmkInput } from '@ngxsmk/core/input';
       line-height: var(--ngxsmk-text-label-lg-line);
     }
 
-    .ngxsmk-form-field__required { color: var(--ngxsmk-color-error); }
+    .ngxsmk-form-field__required {
+      color: var(--ngxsmk-color-error);
+    }
 
     .ngxsmk-form-field__hint,
     .ngxsmk-form-field__error {
@@ -66,8 +68,12 @@ import { NgxsmkInput } from '@ngxsmk/core/input';
       font-size: var(--ngxsmk-text-body-sm-size);
       line-height: var(--ngxsmk-text-body-sm-line);
     }
-    .ngxsmk-form-field__hint { color: var(--ngxsmk-color-on-surface-variant); }
-    .ngxsmk-form-field__error { color: var(--ngxsmk-color-error); }
+    .ngxsmk-form-field__hint {
+      color: var(--ngxsmk-color-on-surface-variant);
+    }
+    .ngxsmk-form-field__error {
+      color: var(--ngxsmk-color-error);
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

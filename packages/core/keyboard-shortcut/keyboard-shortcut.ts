@@ -16,10 +16,13 @@ export class NgxsmkKeyboardShortcut {
     const hasCtrl = parts.includes('ctrl');
     const hasShift = parts.includes('shift');
     const hasAlt = parts.includes('alt');
-    const key = parts.find(p => !['ctrl', 'shift', 'alt', 'meta'].includes(p));
+    const key = parts.find((p) => !['ctrl', 'shift', 'alt', 'meta'].includes(p));
     if (
-      e.ctrlKey === hasCtrl && e.shiftKey === hasShift && e.altKey === hasAlt &&
-      key && e.key.toLowerCase() === key
+      e.ctrlKey === hasCtrl &&
+      e.shiftKey === hasShift &&
+      e.altKey === hasAlt &&
+      key &&
+      e.key.toLowerCase() === key
     ) {
       e.preventDefault();
       this.shortcutPressed.emit();

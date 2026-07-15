@@ -6,9 +6,7 @@ import { NgxsmkSkeleton } from './skeleton';
 @Component({
   standalone: true,
   imports: [NgxsmkSkeleton],
-  template: `
-    <ngxsmk-skeleton [width]="width()" [height]="height()" [shape]="shape()" />
-  `,
+  template: ` <ngxsmk-skeleton [width]="width()" [height]="height()" [shape]="shape()" /> `,
 })
 class HostComponent {
   readonly width = signal('200px');

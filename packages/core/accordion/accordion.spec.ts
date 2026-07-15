@@ -26,8 +26,12 @@ describe('NgxsmkAccordion', () => {
   function setup() {
     const fixture = TestBed.createComponent(HostComponent);
     fixture.detectChanges();
-    const item1Trigger: HTMLButtonElement = fixture.nativeElement.querySelector('#item1 .ngxsmk-accordion-item__trigger');
-    const item2Trigger: HTMLButtonElement = fixture.nativeElement.querySelector('#item2 .ngxsmk-accordion-item__trigger');
+    const item1Trigger: HTMLButtonElement = fixture.nativeElement.querySelector(
+      '#item1 .ngxsmk-accordion-item__trigger',
+    );
+    const item2Trigger: HTMLButtonElement = fixture.nativeElement.querySelector(
+      '#item2 .ngxsmk-accordion-item__trigger',
+    );
     const item1Host: HTMLElement = fixture.nativeElement.querySelector('#item1');
     const item2Host: HTMLElement = fixture.nativeElement.querySelector('#item2');
     return { fixture, item1Trigger, item2Trigger, item1Host, item2Host };

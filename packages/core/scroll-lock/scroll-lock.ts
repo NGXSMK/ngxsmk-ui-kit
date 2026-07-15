@@ -14,6 +14,8 @@ export class NgxsmkScrollLock {
     effect(() => {
       this.doc.body.style.overflow = this.ngxsmkScrollLock() ? 'hidden' : '';
     });
-    this.destroyRef.onDestroy(() => { this.doc.body.style.overflow = ''; });
+    this.destroyRef.onDestroy(() => {
+      this.doc.body.style.overflow = '';
+    });
   }
 }

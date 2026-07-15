@@ -91,8 +91,12 @@ const PATTERNS: Record<NgxsmkPinInputType, RegExp> = {
         border-color var(--ngxsmk-duration-fast, 120ms) var(--ngxsmk-ease-out, ease),
         box-shadow var(--ngxsmk-duration-fast, 120ms) var(--ngxsmk-ease-out, ease);
     }
-    :host([data-size='sm']) { --ngxsmk-pin-size: 2.25rem; }
-    :host([data-size='lg']) { --ngxsmk-pin-size: 3.25rem; }
+    :host([data-size='sm']) {
+      --ngxsmk-pin-size: 2.25rem;
+    }
+    :host([data-size='lg']) {
+      --ngxsmk-pin-size: 3.25rem;
+    }
     .ngxsmk-pin-input__cell:focus-visible {
       border-color: var(--ngxsmk-color-primary, #6366f1);
       box-shadow: 0 0 0 3px var(--ngxsmk-color-ring-soft, rgba(99, 102, 241, 0.25));
@@ -102,7 +106,9 @@ const PATTERNS: Record<NgxsmkPinInputType, RegExp> = {
       cursor: not-allowed;
     }
     @media (prefers-reduced-motion: reduce) {
-      .ngxsmk-pin-input__cell { transition: none; }
+      .ngxsmk-pin-input__cell {
+        transition: none;
+      }
     }
   `,
   providers: [
@@ -127,18 +133,13 @@ export class NgxsmkPinInput implements ControlValueAccessor {
   readonly otpAutocomplete = input<'one-time-code' | 'off'>('one-time-code');
   readonly completed = output<string>();
 
-  private readonly inputs =
-    viewChildren<ElementRef<HTMLInputElement>>('cell');
+  private readonly inputs = viewChildren<ElementRef<HTMLInputElement>>('cell');
   private readonly cvaDisabled = signal(false);
 
-  protected readonly isDisabled = computed(
-    () => this.disabled() || this.cvaDisabled(),
-  );
+  protected readonly isDisabled = computed(() => this.disabled() || this.cvaDisabled());
 
   private readonly pattern = computed(() => PATTERNS[this.type()]);
-  protected readonly inputMode = computed(() =>
-    this.type() === 'numeric' ? 'numeric' : 'text',
-  );
+  protected readonly inputMode = computed(() => (this.type() === 'numeric' ? 'numeric' : 'text'));
 
   /** The value split into exactly `length` cells (padded with ''). */
   protected readonly cells = computed(() => {

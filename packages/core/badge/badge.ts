@@ -1,17 +1,7 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 export type NgxsmkBadgeVariant =
-  | 'primary'
-  | 'secondary'
-  | 'outline'
-  | 'success'
-  | 'warning'
-  | 'error'
-  | 'info';
+  'primary' | 'secondary' | 'outline' | 'success' | 'warning' | 'error' | 'info';
 
 /**
  * Small status descriptor for counts and labels.

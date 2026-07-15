@@ -63,13 +63,15 @@ describe('NgxsmkPinInput', () => {
   it('distributes a pasted code across cells', () => {
     const { fixture, cells } = setup();
     const dt = {
-      getData: (format: string) => format === 'text' ? '9876' : '',
-      setData: () => { /* noop */ },
+      getData: (format: string) => (format === 'text' ? '9876' : ''),
+      setData: () => {
+        /* noop */
+      },
     } as any;
     const event = new Event('paste', { bubbles: true });
     Object.defineProperty(event, 'clipboardData', {
       value: dt,
-      configurable: true
+      configurable: true,
     });
     cells[0].dispatchEvent(event);
     fixture.detectChanges();
@@ -78,9 +80,7 @@ describe('NgxsmkPinInput', () => {
 
   it('clears the previous cell on backspace when empty', () => {
     const { fixture, cells } = setup((h) => h.value.set('12'));
-    cells[2].dispatchEvent(
-      new KeyboardEvent('keydown', { key: 'Backspace', bubbles: true }),
-    );
+    cells[2].dispatchEvent(new KeyboardEvent('keydown', { key: 'Backspace', bubbles: true }));
     fixture.detectChanges();
     expect(fixture.componentInstance.value()).toBe('1');
   });

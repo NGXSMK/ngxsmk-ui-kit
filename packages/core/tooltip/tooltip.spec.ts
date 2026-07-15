@@ -12,9 +12,7 @@ vi.mock('motion', () => ({
   standalone: true,
   imports: [NgxsmkTooltip],
   template: `
-    <button [ngxsmkTooltip]="text()" [tooltipPosition]="position()" id="trigger">
-      Button
-    </button>
+    <button [ngxsmkTooltip]="text()" [tooltipPosition]="position()" id="trigger">Button</button>
   `,
 })
 class HostComponent {
@@ -30,7 +28,7 @@ describe('NgxsmkTooltip', () => {
   afterEach(() => {
     vi.useRealTimers();
     // Clean up any remaining tooltips in body
-    document.body.querySelectorAll('.ngxsmk-tooltip').forEach(el => el.remove());
+    document.body.querySelectorAll('.ngxsmk-tooltip').forEach((el) => el.remove());
   });
 
   function setup() {

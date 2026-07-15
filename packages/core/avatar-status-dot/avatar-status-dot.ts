@@ -13,11 +13,28 @@ export type NgxsmkAvatarStatusDotVariant = 'online' | 'away' | 'busy' | 'offline
     role: 'status',
   },
   styles: `
-    :host { position: absolute; bottom: 0; right: 0; display: block; width: 0.625rem; height: 0.625rem; border-radius: var(--ngxsmk-radius-full); border: 2px solid var(--ngxsmk-color-surface); }
-    :host([data-variant='online']) { background: var(--ngxsmk-color-success); }
-    :host([data-variant='away']) { background: var(--ngxsmk-color-warning); }
-    :host([data-variant='busy']) { background: var(--ngxsmk-color-error); }
-    :host([data-variant='offline']) { background: var(--ngxsmk-color-outline); }
+    :host {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      display: block;
+      width: 0.625rem;
+      height: 0.625rem;
+      border-radius: var(--ngxsmk-radius-full);
+      border: 2px solid var(--ngxsmk-color-surface);
+    }
+    :host([data-variant='online']) {
+      background: var(--ngxsmk-color-success);
+    }
+    :host([data-variant='away']) {
+      background: var(--ngxsmk-color-warning);
+    }
+    :host([data-variant='busy']) {
+      background: var(--ngxsmk-color-error);
+    }
+    :host([data-variant='offline']) {
+      background: var(--ngxsmk-color-outline);
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

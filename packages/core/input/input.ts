@@ -65,11 +65,15 @@ import { ngxsmkUniqueId } from '@ngxsmk/core/util';
       border-color: var(--ngxsmk-color-ring);
       box-shadow: 0 0 0 3px color-mix(in srgb, var(--ngxsmk-color-ring) 25%, transparent);
     }
-    :host([aria-invalid='true']) { border-color: var(--ngxsmk-color-error); }
+    :host([aria-invalid='true']) {
+      border-color: var(--ngxsmk-color-error);
+    }
     :host([aria-invalid='true']:focus-within) {
       box-shadow: 0 0 0 3px color-mix(in srgb, var(--ngxsmk-color-error) 25%, transparent);
     }
-    :host([data-disabled]) { opacity: 0.5; }
+    :host([data-disabled]) {
+      opacity: 0.5;
+    }
 
     .ngxsmk-input__control {
       flex: 1;
@@ -84,8 +88,12 @@ import { ngxsmkUniqueId } from '@ngxsmk/core/util';
       font: inherit;
       color: inherit;
     }
-    .ngxsmk-input__control::placeholder { color: var(--ngxsmk-color-on-surface-variant); }
-    .ngxsmk-input__control:disabled { cursor: not-allowed; }
+    .ngxsmk-input__control::placeholder {
+      color: var(--ngxsmk-color-on-surface-variant);
+    }
+    .ngxsmk-input__control:disabled {
+      cursor: not-allowed;
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

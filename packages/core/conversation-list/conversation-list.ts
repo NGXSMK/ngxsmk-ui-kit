@@ -27,13 +27,44 @@ export interface Conversation {
   `,
   host: { class: 'ngxsmk-conversation-list' },
   styles: `
-    :host { display: block; font-family: var(--ngxsmk-font-sans); }
-    .ngxsmk-conversation-list__items { display: flex; flex-direction: column; gap: var(--ngxsmk-space-1); }
-    .ngxsmk-conversation-list__item { display: block; width: 100%; padding: var(--ngxsmk-space-3) var(--ngxsmk-space-4); border: none; background: none; text-align: left; cursor: pointer; border-radius: var(--ngxsmk-radius-md); transition: background var(--ngxsmk-duration-fast); }
-    .ngxsmk-conversation-list__item:hover { background: var(--ngxsmk-color-surface-hover); }
-    .ngxsmk-conversation-list__item[data-active] { background: var(--ngxsmk-color-primary-container); }
-    .ngxsmk-conversation-list__title { font-size: 0.875rem; font-weight: 500; color: var(--ngxsmk-color-on-surface); }
-    .ngxsmk-conversation-list__preview { font-size: 0.75rem; color: var(--ngxsmk-color-on-surface-variant); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    :host {
+      display: block;
+      font-family: var(--ngxsmk-font-sans);
+    }
+    .ngxsmk-conversation-list__items {
+      display: flex;
+      flex-direction: column;
+      gap: var(--ngxsmk-space-1);
+    }
+    .ngxsmk-conversation-list__item {
+      display: block;
+      width: 100%;
+      padding: var(--ngxsmk-space-3) var(--ngxsmk-space-4);
+      border: none;
+      background: none;
+      text-align: left;
+      cursor: pointer;
+      border-radius: var(--ngxsmk-radius-md);
+      transition: background var(--ngxsmk-duration-fast);
+    }
+    .ngxsmk-conversation-list__item:hover {
+      background: var(--ngxsmk-color-surface-hover);
+    }
+    .ngxsmk-conversation-list__item[data-active] {
+      background: var(--ngxsmk-color-primary-container);
+    }
+    .ngxsmk-conversation-list__title {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--ngxsmk-color-on-surface);
+    }
+    .ngxsmk-conversation-list__preview {
+      font-size: 0.75rem;
+      color: var(--ngxsmk-color-on-surface-variant);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
