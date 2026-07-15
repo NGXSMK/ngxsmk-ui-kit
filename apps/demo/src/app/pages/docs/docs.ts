@@ -1,4 +1,4 @@
-import { Component, signal, computed } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { AppNav } from '../../nav/nav';
 import { NgxsmkButton } from '@ngxsmk/core/button';
 import { NgxsmkCard, NgxsmkCardHeader, NgxsmkCardTitle, NgxsmkCardContent } from '@ngxsmk/core/card';

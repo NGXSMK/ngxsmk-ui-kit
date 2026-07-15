@@ -1,5 +1,4 @@
-import { Component, signal } from '@angular/core';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { Component, signal, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ShowcaseExample } from '../../showcase/showcase-example';
 
 /**

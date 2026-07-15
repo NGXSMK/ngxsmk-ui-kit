@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, afterNextRender, input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, afterNextRender, input, signal, inject } from '@angular/core';
 import { NgxsmkResizeHandle } from '@ngxsmk/core/resize-handle';
 
 @Component({
@@ -45,13 +45,14 @@ export class NgxsmkResizable {
   readonly initialHeight = input('');
   readonly orientation = input<'horizontal' | 'vertical'>('horizontal');
 
+  private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly sizeSignal = signal('');
   private startPointer = 0;
   private startSize = 0;
   private readonly el: HTMLElement;
 
-  constructor(elementRef: ElementRef<HTMLElement>) {
-    this.el = elementRef.nativeElement;
+  constructor() {
+    this.el = this.elementRef.nativeElement;
     afterNextRender(() => {
       const init = this.orientation() === 'horizontal' ? this.initialWidth() : this.initialHeight();
       if (init) {

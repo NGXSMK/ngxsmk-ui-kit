@@ -60,6 +60,7 @@ const DIALOG_MOTION: NgxsmkMotionState = {
   selector: 'ngxsmk-dialog',
   imports: [NgxsmkAnimate],
   template: `
+    <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
     <dialog
       #dialog
       class="ngxsmk-dialog__native"

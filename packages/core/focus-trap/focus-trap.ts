@@ -1,4 +1,5 @@
-import { Directive, input } from '@angular/core';
+import { Directive, input, inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 
 @Directive({
   standalone: true,
@@ -10,6 +11,7 @@ import { Directive, input } from '@angular/core';
 })
 export class NgxsmkFocusTrap {
   readonly ngxsmkFocusTrap = input(true);
+  private readonly document = inject(DOCUMENT);
 
   protected onKeydown(e: KeyboardEvent): void {
     if (e.key !== 'Tab' || !this.ngxsmkFocusTrap()) return;
@@ -18,7 +20,7 @@ export class NgxsmkFocusTrap {
     );
     if (!focusable.length) return;
     const first = focusable[0], last = focusable[focusable.length - 1];
-    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    if (e.shiftKey && this.document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && this.document.activeElement === last) { e.preventDefault(); first.focus(); }
   }
 }

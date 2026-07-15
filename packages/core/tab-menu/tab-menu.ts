@@ -2,9 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
-  signal,
 } from '@angular/core';
-import { NgxsmkTabs } from '@ngxsmk/core/tabs';
 
 @Component({
   standalone: true,

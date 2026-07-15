@@ -62,11 +62,16 @@ describe('NgxsmkPinInput', () => {
 
   it('distributes a pasted code across cells', () => {
     const { fixture, cells } = setup();
-    const dt = new DataTransfer();
-    dt.setData('text', '9876');
-    cells[0].dispatchEvent(
-      new ClipboardEvent('paste', { clipboardData: dt, bubbles: true }),
-    );
+    const dt = {
+      getData: (format: string) => format === 'text' ? '9876' : '',
+      setData: () => { /* noop */ },
+    } as any;
+    const event = new Event('paste', { bubbles: true });
+    Object.defineProperty(event, 'clipboardData', {
+      value: dt,
+      configurable: true
+    });
+    cells[0].dispatchEvent(event);
     fixture.detectChanges();
     expect(fixture.componentInstance.value()).toBe('9876');
   });

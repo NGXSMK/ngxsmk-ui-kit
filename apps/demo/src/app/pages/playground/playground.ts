@@ -1,4 +1,4 @@
-import { NgxsmkCardContent, NgxsmkCardHeader, NgxsmkCardTitle, NgxsmkCard, NgxsmkCardFooter } from '@ngxsmk/core/card';
+import { NgxsmkCard } from '@ngxsmk/core/card';
 import { NgxsmkAvatar } from '@ngxsmk/core/avatar';
 import { NgxsmkBadge } from '@ngxsmk/core/badge';
 import { NgxsmkButton } from '@ngxsmk/core/button';
@@ -6,9 +6,7 @@ import { NgxsmkCheckbox } from '@ngxsmk/core/checkbox';
 import { NgxsmkChip } from '@ngxsmk/core/tag';
 import { NgxsmkDivider } from '@ngxsmk/core/divider';
 import { NgxsmkHeading } from '@ngxsmk/core/heading';
-import { NgxsmkInput } from '@ngxsmk/core/input';
 import { NgxsmkProgress } from '@ngxsmk/core/progress';
-import { NgxsmkSelect } from '@ngxsmk/core/select';
 import { NgxsmkStat } from '@ngxsmk/core/stat';
 import { NgxsmkSwitch } from '@ngxsmk/core/switch';
 import { NgxsmkText } from '@ngxsmk/core/text';
@@ -42,9 +40,9 @@ function parseJSX(code: string): ASTNode[] {
         return null;
       }
       
-      let tagStart = pos + 1;
+      const tagStart = pos + 1;
       let tagEnd = tagStart;
-      while (tagEnd < code.length && /[a-zA-Z0-9_\-]/.test(code.charAt(tagEnd))) {
+      while (tagEnd < code.length && /[a-zA-Z0-9_-]/.test(code.charAt(tagEnd))) {
         tagEnd++;
       }
       const tagName = code.substring(tagStart, tagEnd);
@@ -59,9 +57,9 @@ function parseJSX(code: string): ASTNode[] {
           break;
         }
         
-        let attrStart = pos;
+        const attrStart = pos;
         let attrEnd = attrStart;
-        while (attrEnd < code.length && /[a-zA-Z0-9_\-]/.test(code.charAt(attrEnd))) {
+        while (attrEnd < code.length && /[a-zA-Z0-9_-]/.test(code.charAt(attrEnd))) {
           attrEnd++;
         }
         const attrName = code.substring(attrStart, attrEnd);
@@ -76,14 +74,14 @@ function parseJSX(code: string): ASTNode[] {
           if (pos < code.length && (code.charAt(pos) === '"' || code.charAt(pos) === "'")) {
             const quote = code.charAt(pos);
             pos++;
-            let valStart = pos;
+            const valStart = pos;
             while (pos < code.length && code.charAt(pos) !== quote) pos++;
             attributes[attrName] = code.substring(valStart, pos);
             pos++;
           } else if (pos < code.length && code.charAt(pos) === '{') {
             pos++;
             let braceCount = 1;
-            let valStart = pos;
+            const valStart = pos;
             while (pos < code.length && braceCount > 0) {
               if (code.charAt(pos) === '{') braceCount++;
               else if (code.charAt(pos) === '}') braceCount--;
@@ -136,7 +134,7 @@ function parseJSX(code: string): ASTNode[] {
         return { type: tagName, attributes, children };
       }
     } else {
-      let textStart = pos;
+      const textStart = pos;
       while (pos < code.length && code.charAt(pos) !== '<') {
         pos++;
       }
@@ -642,15 +640,7 @@ export default function ChatExample() {
 </Card>`,
 };
 
-interface Preset {
-  name: string;
-  accent: string;
-  card: string;
-  app: string;
-  text: string;
-  neutral: string;
-  mode: 'light' | 'dark';
-}
+
 
 const RADII = { sm: 4, md: 8, lg: 12, xl: 18 } as const;
 type RadiusKey = keyof typeof RADII;
@@ -941,7 +931,9 @@ type RadiusKey = keyof typeof RADII;
 
     <!-- MODERN DOWNLOAD/EXPORT FORMATS MODAL -->
     @if (showDownloadModal()) {
+      <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
       <div class="modal-overlay" (click)="showDownloadModal.set(false)">
+        <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
         <div class="modal-card" (click)="$event.stopPropagation()">
           <header class="modal-head">
             <ngxsmk-heading level="h3" style="margin: 0; font-size: 1.15rem; font-weight: 700;">Export Design System Theme</ngxsmk-heading>

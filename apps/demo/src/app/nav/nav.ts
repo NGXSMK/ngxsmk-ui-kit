@@ -92,7 +92,9 @@ interface SearchItem {
 
     <!-- Global search dialog overlay (Command Palette) -->
     @if (isSearchOpen()) {
+      <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
       <div class="cmd-overlay" (click)="closeSearch()">
+        <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
         <div class="cmd-dialog" (click)="$event.stopPropagation()">
           <div class="cmd-header">
             <svg class="cmd-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -107,11 +109,13 @@ interface SearchItem {
               (input)="onSearchInput(searchInput.value)"
               (keydown)="onSearchKeydown($event)"
             />
+            <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
             <span class="cmd-esc-hint" (click)="closeSearch()">ESC</span>
           </div>
 
           <div class="cmd-results">
             @for (item of filteredSearchItems(); track item.name; let idx = $index) {
+              <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
               <div
                 class="cmd-item"
                 [class.active]="idx === activeIndex()"

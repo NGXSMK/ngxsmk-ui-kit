@@ -85,6 +85,7 @@ export interface NgxsmkSelectOption {
         (keydown)="onListboxKeydown($event)"
       >
         @if (placeholder()) {
+          <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
           <li
             #item
             role="option"
@@ -98,6 +99,7 @@ export interface NgxsmkSelectOption {
           </li>
         }
         @for (opt of options(); track opt.value; let i = $index) {
+          <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
           <li
             #item
             role="option"
@@ -296,7 +298,11 @@ export class NgxsmkSelect {
     if (this.disabled()) {
       return;
     }
-    this.open() ? this.close() : this.openNow();
+    if (this.open()) {
+      this.close();
+    } else {
+      this.openNow();
+    }
   }
 
   protected openNow(): void {

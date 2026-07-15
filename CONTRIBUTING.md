@@ -24,7 +24,7 @@ npm test           # run unit tests for all packages
    - **Token-themed** — read `var(--ngxsmk-*)`; never hard-code colors/spacing.
    - **Accessible** — native elements with visually-hidden inputs where relevant.
 3. Add or update unit tests for the affected package.
-4. Run `npm run build` and `npm test` before pushing.
+4. Run `npm run build`, `npm test`, and `npm run lint` before pushing.
 5. Open a pull request against `main` with a clear description.
 
 ## Commit messages
@@ -39,8 +39,10 @@ docs: update theming guide
 
 ## Coding standards
 
-- Formatting is enforced by Prettier (`.prettierrc`) and EditorConfig
-  (`.editorconfig`). Run your editor's format-on-save or `npx prettier --write`.
+- **Linting** is enforced by ESLint (`eslint.config.js`) with Angular,
+  TypeScript, and accessibility rules. Run `npm run lint` to check.
+- **Formatting** is enforced by Prettier (`.prettierrc`) and EditorConfig
+  (`.editorconfig`). Run `npm run format` or your editor's format-on-save.
 - Prefer deep imports (`@ngxsmk/core/button`) over the barrel in library and app
   code to preserve tree-shaking.
 - Honor `prefers-reduced-motion` in any new animation work.

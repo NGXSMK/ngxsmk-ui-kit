@@ -1,10 +1,11 @@
-import { ChangeDetectionStrategy, Component, input, output, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 
 @Component({
   standalone: true,
   selector: 'ngxsmk-mobile-nav',
   template: `
     @if (open()) {
+      <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
       <div class="ngxsmk-mobile-nav__backdrop" (click)="close()"></div>
       <div class="ngxsmk-mobile-nav__panel" role="dialog" aria-modal="true" [attr.aria-label]="label()">
         <div class="ngxsmk-mobile-nav__header">

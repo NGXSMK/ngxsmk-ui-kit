@@ -21,10 +21,12 @@ export interface NgxsmkDropdownMenuItem {
   standalone: true,
   selector: 'ngxsmk-dropdown-menu',
   template: `
+    <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
     <div class="ngxsmk-dropdown-menu__trigger" (click)="toggle()">
       <ng-content select="[ngxsmkDropdownTrigger]" />
     </div>
     @if (open()) {
+      <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
       <div class="ngxsmk-dropdown-menu__list" [ngxsmkAnimate]="DROPDOWN_MENU_MOTION" (click)="onClick($event)">
         @for (item of items(); track item.label) {
           @if (item.divider) {

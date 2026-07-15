@@ -49,6 +49,7 @@ interface CategoryGroup {
         </div>
       </aside>
       @if (mobileOpen()) {
+        <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
         <div class="ngxsmk-sc-backdrop" (click)="mobileOpen.set(false)"></div>
       }
       <main #contentEl class="ngxsmk-sc-content">

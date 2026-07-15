@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
   standalone: true,
+  /* eslint-disable-next-line @angular-eslint/component-selector */
   selector: 'code[ngxsmk-code]',
   template: `<ng-content />`,
   host: {

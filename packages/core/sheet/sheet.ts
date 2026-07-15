@@ -8,7 +8,6 @@ import {
   input,
   model,
   signal,
-  viewChild,
 } from '@angular/core';
 import { NgxsmkScrollLock } from '@ngxsmk/cdk';
 import { NgxsmkAnimate, NgxsmkMotionState, playExit } from '@ngxsmk/core/animation';
@@ -21,6 +20,7 @@ export type NgxsmkSheetSide = 'left' | 'right' | 'bottom';
   template: `
     @if (open()) {
         <div class="ngxsmk-sheet__root" [attr.data-side]="side()">
+        <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
         <div class="ngxsmk-sheet__backdrop" (click)="requestClose()"></div>
         <div
           class="ngxsmk-sheet__panel"

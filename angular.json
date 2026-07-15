@@ -30,13 +30,19 @@
           "options": {
             "tsConfig": "packages/theme/tsconfig.spec.json"
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["packages/theme/**/*.ts", "packages/theme/**/*.html"]
+          }
         }
       }
     },
     "@ngxsmk/cdk": {
       "projectType": "library",
       "root": "packages/cdk",
-      "sourceRoot": "packages/cdk/src",
+      "sourceRoot": "packages/cdk",
       "prefix": "ngxsmk",
       "architect": {
         "build": {
@@ -56,13 +62,19 @@
           "options": {
             "tsConfig": "packages/cdk/tsconfig.spec.json"
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["packages/cdk/**/*.ts", "packages/cdk/**/*.html"]
+          }
         }
       }
     },
     "@ngxsmk/core": {
       "projectType": "library",
       "root": "packages/core",
-      "sourceRoot": "packages/core/src",
+      "sourceRoot": "packages/core",
       "prefix": "ngxsmk",
       "architect": {
         "build": {
@@ -81,6 +93,12 @@
           "builder": "@angular/build:unit-test",
           "options": {
             "tsConfig": "packages/core/tsconfig.spec.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["packages/core/**/*.ts", "packages/core/**/*.html"]
           }
         }
       }
@@ -180,6 +198,12 @@
             }
           },
           "defaultConfiguration": "development"
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["apps/demo/**/*.ts", "apps/demo/**/*.html"]
+          }
         }
       }
     }

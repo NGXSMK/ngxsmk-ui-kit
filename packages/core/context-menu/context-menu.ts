@@ -22,6 +22,7 @@ export interface NgxsmkContextMenuItem {
   selector: 'ngxsmk-context-menu',
   template: `
     @if (visible()) {
+      <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
       <div
         class="ngxsmk-context-menu__list"
         [ngxsmkAnimate]="CONTEXT_MENU_MOTION"

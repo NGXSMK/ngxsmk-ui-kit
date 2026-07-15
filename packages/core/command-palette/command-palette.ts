@@ -24,7 +24,9 @@ export interface CommandItem {
   standalone: true,
   template: `
     @if (isOpen()) {
+      <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
       <div class="ngxsmk-cmd-backdrop" (click)="close()">
+        <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events -->
         <div class="ngxsmk-cmd-modal" (click)="$event.stopPropagation()" role="dialog" aria-modal="true">
           <div class="ngxsmk-cmd-search">
             <svg class="ngxsmk-cmd-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -52,6 +54,7 @@ export interface CommandItem {
                 <div class="ngxsmk-cmd-group-title">{{ group.category }}</div>
                 
                 @for (cmd of group.items; track cmd.id) {
+                  <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
                   <div
                     class="ngxsmk-cmd-item"
                     [class.ngxsmk-cmd-item--active]="isActive(cmd)"

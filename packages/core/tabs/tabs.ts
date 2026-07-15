@@ -49,6 +49,7 @@ export class NgxsmkTab {
   selector: 'ngxsmk-tabs',
   imports: [NgTemplateOutlet],
   template: `
+    <!-- eslint-disable-next-line @angular-eslint/template/interactive-supports-focus -->
     <div class="ngxsmk-tabs__list" role="tablist" (keydown)="onKeydown($event)">
       @for (tab of tabs(); track tab.value()) {
         <button

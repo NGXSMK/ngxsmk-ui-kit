@@ -296,11 +296,11 @@ export class ShowcaseExample {
     return component ? reflectComponentType(component as Type<unknown>) : null;
   });
 
-  protected readonly inputs = computed<ReadonlyArray<ApiInput>>(
+  protected readonly inputs = computed<readonly ApiInput[]>(
     () => this.metadata()?.inputs ?? [],
   );
 
-  protected readonly outputs = computed<ReadonlyArray<ApiOutput>>(
+  protected readonly outputs = computed<readonly ApiOutput[]>(
     () => this.metadata()?.outputs ?? [],
   );
 

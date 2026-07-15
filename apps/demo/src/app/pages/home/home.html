@@ -157,7 +157,14 @@
 
     <div class="explorer__grid">
       @for (cat of filteredCategories(); track cat.title) {
-        <div class="explorer__cat" (click)="navigateCat(cat.path)">
+        <div
+          class="explorer__cat"
+          tabindex="0"
+          role="button"
+          (click)="navigateCat(cat.path)"
+          (keydown.enter)="navigateCat(cat.path)"
+          (keydown.space)="navigateCat(cat.path); $event.preventDefault()"
+        >
           <h3 class="explorer__cat-title">
             {{ cat.title }}
             <span class="explorer__cat-count">{{ cat.items.length }}</span>

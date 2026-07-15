@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Directive, input, signal, TemplateRef } from '@angular/core';
+import { ngxsmkUniqueId } from '@ngxsmk/core/util';
 
 @Directive({
   selector: '[ngxsmkBaseTypeaheadItem]',
@@ -22,9 +23,10 @@ export class NgxsmkBaseTypeaheadItem {
         role="combobox"
         aria-autocomplete="list"
         [attr.aria-expanded]="open()"
+        [attr.aria-controls]="open() && items().length ? dropdownId : null"
       />
       @if (open() && items().length) {
-        <div class="ngxsmk-base-typeahead__dropdown" role="listbox">
+        <div [id]="dropdownId" class="ngxsmk-base-typeahead__dropdown" role="listbox">
           @for (item of items(); track $index) {
             <ng-content />
           }
@@ -44,6 +46,7 @@ export class NgxsmkBaseTypeaheadItem {
 export class NgxsmkBaseTypeahead {
   readonly items = input.required<unknown[]>();
 
+  protected readonly dropdownId = ngxsmkUniqueId('ngxsmk-base-typeahead-dropdown');
   protected readonly searchQuery = signal('');
   protected readonly open = signal(false);
 
