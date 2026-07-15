@@ -1,4 +1,4 @@
-import { Directive, input, TemplateRef, ViewContainerRef, effect } from '@angular/core';
+import { Directive, effect, inject, input, TemplateRef, ViewContainerRef } from '@angular/core';
 
 export interface NgxsmkLetContext<T> {
   $implicit: T;
@@ -11,11 +11,10 @@ export interface NgxsmkLetContext<T> {
 })
 export class NgxsmkLet<T> {
   readonly ngxsmkLet = input.required<T>();
+  private readonly templateRef = inject<TemplateRef<NgxsmkLetContext<T>>>(TemplateRef);
+  private readonly viewContainer = inject(ViewContainerRef);
 
-  constructor(
-    private templateRef: TemplateRef<NgxsmkLetContext<T>>,
-    private viewContainer: ViewContainerRef,
-  ) {
+  constructor() {
     effect(() => {
       const value = this.ngxsmkLet();
       this.viewContainer.clear();
@@ -26,7 +25,7 @@ export class NgxsmkLet<T> {
     });
   }
 
-  static ngTemplateContextGuard<T>(_dir: NgxsmkLet<T>, ctx: unknown): ctx is NgxsmkLetContext<T> {
+  static ngTemplateContextGuard<T>(_dir: NgxsmkLet<T>, _ctx: unknown): _ctx is NgxsmkLetContext<T> {
     return true;
   }
 }

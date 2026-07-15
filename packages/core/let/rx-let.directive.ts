@@ -1,12 +1,12 @@
 import {
   Directive,
-  inject,
-  input,
-  TemplateRef,
-  ViewContainerRef,
   DestroyRef,
   effect,
+  inject,
+  input,
   signal,
+  TemplateRef,
+  ViewContainerRef,
 } from '@angular/core';
 import { Observable } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -28,11 +28,10 @@ export class NgxsmkRxLet<T> {
   private readonly value = signal<T | undefined>(undefined);
   private readonly error = signal<unknown>(undefined);
   private readonly complete = signal(false);
+  private readonly templateRef = inject<TemplateRef<NgxsmkRxLetContext<T>>>(TemplateRef);
+  private readonly viewContainer = inject(ViewContainerRef);
 
-  constructor(
-    private templateRef: TemplateRef<NgxsmkRxLetContext<T>>,
-    private viewContainer: ViewContainerRef,
-  ) {
+  constructor() {
     const destroyRef = inject(DestroyRef);
 
     effect((onCleanup) => {
@@ -64,8 +63,8 @@ export class NgxsmkRxLet<T> {
 
   static ngTemplateContextGuard<T>(
     _dir: NgxsmkRxLet<T>,
-    ctx: unknown,
-  ): ctx is NgxsmkRxLetContext<T> {
+    _ctx: unknown,
+  ): _ctx is NgxsmkRxLetContext<T> {
     return true;
   }
 }
