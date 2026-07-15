@@ -114,5 +114,10 @@ try {
     renameSync(BACKUP, ANGULAR_JSON);
     console.log('\nRestored angular.json.');
   }
-  console.log('Run `npm run restore:toolchain` to restore the Angular 22 development toolchain.');
+
+  // 6. Auto-restore the Angular 22 development toolchain so the workspace is
+  //    immediately usable after publish without any manual step.
+  console.log('\nRestoring Angular 22 development toolchain...');
+  run('npm install');
+  console.log('✓ Development toolchain restored. Ready to use.');
 }
