@@ -21,7 +21,11 @@ export interface NgxsmkTreeNode<T = any> {
   standalone: true,
   selector: 'ngxsmk-tree-node',
   template: `
-    <li role="treeitem" [attr.aria-expanded]="node().children ? isExpanded() : null" [attr.aria-level]="level() + 1">
+    <li
+      role="treeitem"
+      [attr.aria-expanded]="node().children ? isExpanded() : null"
+      [attr.aria-level]="level() + 1"
+    >
       <div
         class="ngxsmk-tree-node__content"
         [style.paddingLeft.px]="paddingLeft()"
@@ -30,7 +34,12 @@ export interface NgxsmkTreeNode<T = any> {
         (click)="onClick($event)"
       >
         @if (node().children && node().children!.length > 0) {
-          <button type="button" class="ngxsmk-tree-node__toggle" (click)="toggle($event)" aria-label="Toggle node">
+          <button
+            type="button"
+            class="ngxsmk-tree-node__toggle"
+            (click)="toggle($event)"
+            aria-label="Toggle node"
+          >
             <svg
               viewBox="0 0 16 16"
               width="12"

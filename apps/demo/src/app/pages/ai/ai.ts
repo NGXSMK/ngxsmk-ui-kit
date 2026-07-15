@@ -1051,14 +1051,15 @@ ngxsmk-prompt-carousel {
     {
       id: '1',
       role: 'assistant',
-      content: 'Welcome to the ngxsmk assistant. Ask me anything about configuring color scales, applying design tokens, or scaffolding new layout blocks.',
-      reasoning: 'Initializing workspace context. Loaded theme tokens and component list.'
-    }
+      content:
+        'Welcome to the ngxsmk assistant. Ask me anything about configuring color scales, applying design tokens, or scaffolding new layout blocks.',
+      reasoning: 'Initializing workspace context. Loaded theme tokens and component list.',
+    },
   ]);
   protected readonly aiChatSuggestions = signal<string[]>([
     'Explain Angular Signals',
     'How does Zoneless work?',
-    'Show a basic component structure'
+    'Show a basic component structure',
   ]);
   protected readonly aiChatIsTyping = signal(false);
   protected readonly aiChatTokenCount = signal(12);
@@ -1067,11 +1068,11 @@ ngxsmk-prompt-carousel {
     const userMsg: NgxsmkAiMessage = {
       id: String(Date.now()),
       role: 'user',
-      content: text
+      content: text,
     };
-    this.aiChatMessages.update(msgs => [...msgs, userMsg]);
+    this.aiChatMessages.update((msgs) => [...msgs, userMsg]);
     this.aiChatIsTyping.set(true);
-    this.aiChatTokenCount.update(c => c + 15);
+    this.aiChatTokenCount.update((c) => c + 15);
 
     setTimeout(() => {
       const assistantMsg: NgxsmkAiMessage = {
@@ -1085,11 +1086,11 @@ ngxsmk-prompt-carousel {
 
 Would you like me to generate a concrete layout snippet or template structure for this?`,
         reasoning: `User query: "${text}". Generated structured explanation showing how signal states, zoneless architecture, and design tokens work in tandem.`,
-        citations: ['Angular Docs: Signals', 'ngxsmk-ui-kit architecture']
+        citations: ['Angular Docs: Signals', 'ngxsmk-ui-kit architecture'],
       };
-      this.aiChatMessages.update(msgs => [...msgs, assistantMsg]);
+      this.aiChatMessages.update((msgs) => [...msgs, assistantMsg]);
       this.aiChatIsTyping.set(false);
-      this.aiChatTokenCount.update(c => c + 40);
+      this.aiChatTokenCount.update((c) => c + 40);
     }, 1500);
   }
 }

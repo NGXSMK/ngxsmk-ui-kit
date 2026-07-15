@@ -23,7 +23,9 @@ class HostComponent {
   readonly size = signal<'sm' | 'md' | 'lg'>('md');
   readonly variant = signal<'primary' | 'secondary'>('primary');
   readonly extended = signal(false);
-  readonly position = signal<'bottom-right' | 'bottom-left' | 'top-right' | 'top-left' | 'none'>('none');
+  readonly position = signal<'bottom-right' | 'bottom-left' | 'top-right' | 'top-left' | 'none'>(
+    'none',
+  );
   readonly disabled = signal(false);
 }
 

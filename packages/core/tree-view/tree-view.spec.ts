@@ -46,7 +46,9 @@ describe('NgxsmkTreeView', () => {
     let children = fixture.nativeElement.querySelectorAll('ngxsmk-tree-node');
     expect(children.length).toBe(1);
 
-    const toggleBtn = fixture.nativeElement.querySelector('.ngxsmk-tree-node__toggle') as HTMLButtonElement;
+    const toggleBtn = fixture.nativeElement.querySelector(
+      '.ngxsmk-tree-node__toggle',
+    ) as HTMLButtonElement;
     expect(toggleBtn).toBeTruthy();
 
     toggleBtn.click();

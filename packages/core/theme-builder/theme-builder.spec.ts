@@ -20,7 +20,9 @@ describe('NgxsmkThemeBuilder', () => {
     expect(title).toBeTruthy();
     expect(title.textContent).toContain('Visual Theme Builder');
 
-    const primaryColorInput = fixture.nativeElement.querySelector('#primaryColor') as HTMLInputElement;
+    const primaryColorInput = fixture.nativeElement.querySelector(
+      '#primaryColor',
+    ) as HTMLInputElement;
     expect(primaryColorInput).toBeTruthy();
     expect(primaryColorInput.value.toLowerCase()).toBe('#7c3aed');
   });

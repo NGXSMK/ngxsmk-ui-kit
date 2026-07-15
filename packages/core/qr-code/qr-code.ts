@@ -12,10 +12,7 @@ import qrcode from 'qrcode-generator';
       [style.background]="background()"
       class="ngxsmk-qr-code__svg"
     >
-      <path
-        [attr.d]="svgPath()"
-        [attr.fill]="color()"
-      />
+      <path [attr.d]="svgPath()" [attr.fill]="color()" />
     </svg>
   `,
   styles: `

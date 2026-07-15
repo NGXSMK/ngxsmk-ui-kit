@@ -34,7 +34,12 @@ export class NgxsmkCarouselSlide {
   standalone: true,
   selector: 'ngxsmk-carousel',
   template: `
-    <div class="ngxsmk-carousel__viewport" role="region" aria-roledescription="carousel" aria-label="Image gallery">
+    <div
+      class="ngxsmk-carousel__viewport"
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="Image gallery"
+    >
       <div class="ngxsmk-carousel__track" [style.transform]="trackTransform()">
         <ng-content />
       </div>
@@ -47,7 +52,15 @@ export class NgxsmkCarouselSlide {
         aria-label="Previous slide"
         (click)="prev()"
       >
-        <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <svg
+          viewBox="0 0 16 16"
+          width="16"
+          height="16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+        >
           <path d="M10 3L5 8l5 5" />
         </svg>
       </button>
@@ -57,7 +70,15 @@ export class NgxsmkCarouselSlide {
         aria-label="Next slide"
         (click)="next()"
       >
-        <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <svg
+          viewBox="0 0 16 16"
+          width="16"
+          height="16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+        >
           <path d="M6 3l5 5-5 5" />
         </svg>
       </button>
@@ -112,7 +133,7 @@ export class NgxsmkCarouselSlide {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background: var(--ngxsmk-color-surface, #FFFFFF);
+      background: var(--ngxsmk-color-surface, #ffffff);
       color: var(--ngxsmk-color-on-surface);
       border: 1px solid var(--ngxsmk-color-outline);
       width: 2.25rem;

@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-  signal,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { NgxsmkThemeService } from '@ngxsmk/theme';
 import { ThemeConfig, RadiusPreset, DarkModeStrategy } from '@ngxsmk/theme';
 import { buildThemeCss } from '@ngxsmk/theme';
@@ -75,16 +69,10 @@ import { NgxsmkSelect, NgxsmkSelectOption } from '@ngxsmk/core/select';
           <div class="ngxsmk-theme-builder__preview-header">
             <h4 class="ngxsmk-theme-builder__subtitle">Generated Code</h4>
             <div class="ngxsmk-theme-builder__tabs">
-              <button
-                [class.active]="activeTab() === 'json'"
-                (click)="activeTab.set('json')"
-              >
+              <button [class.active]="activeTab() === 'json'" (click)="activeTab.set('json')">
                 JSON
               </button>
-              <button
-                [class.active]="activeTab() === 'css'"
-                (click)="activeTab.set('css')"
-              >
+              <button [class.active]="activeTab() === 'css'" (click)="activeTab.set('css')">
                 CSS
               </button>
             </div>
@@ -172,8 +160,6 @@ import { NgxsmkSelect, NgxsmkSelectOption } from '@ngxsmk/core/select';
       cursor: pointer;
       background: transparent;
     }
-
-
 
     .ngxsmk-theme-builder__preview {
       display: flex;

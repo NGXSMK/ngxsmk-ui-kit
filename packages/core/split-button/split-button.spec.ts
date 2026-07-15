@@ -22,7 +22,9 @@ import { NgxsmkSplitButton } from './split-button';
 })
 class HostComponent {
   readonly label = signal('Save');
-  readonly variant = signal<'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive'>('primary');
+  readonly variant = signal<'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive'>(
+    'primary',
+  );
   readonly size = signal<'sm' | 'md' | 'lg'>('md');
   readonly disabled = signal(false);
   readonly loading = signal(false);
@@ -34,7 +36,9 @@ describe('NgxsmkSplitButton', () => {
     const fixture = TestBed.createComponent(HostComponent);
     fixture.detectChanges();
 
-    const mainBtn = fixture.nativeElement.querySelector('.ngxsmk-split-button__main') as HTMLButtonElement;
+    const mainBtn = fixture.nativeElement.querySelector(
+      '.ngxsmk-split-button__main',
+    ) as HTMLButtonElement;
     expect(mainBtn).toBeTruthy();
     expect(mainBtn.textContent.trim()).toBe('Save');
 
@@ -47,7 +51,9 @@ describe('NgxsmkSplitButton', () => {
     const fixture = TestBed.createComponent(HostComponent);
     fixture.detectChanges();
 
-    const triggerBtn = fixture.nativeElement.querySelector('.ngxsmk-split-button__trigger') as HTMLButtonElement;
+    const triggerBtn = fixture.nativeElement.querySelector(
+      '.ngxsmk-split-button__trigger',
+    ) as HTMLButtonElement;
     expect(triggerBtn).toBeTruthy();
 
     let menu = fixture.nativeElement.querySelector('.ngxsmk-split-button__menu');
