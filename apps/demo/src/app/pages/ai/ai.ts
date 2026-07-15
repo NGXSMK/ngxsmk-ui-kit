@@ -25,6 +25,7 @@ import { NgxsmkAudioPlayer } from '@ngxsmk/core/audio-player';
 import { NgxsmkImageViewer } from '@ngxsmk/core/image-viewer';
 import { NgxsmkAgentCard } from '@ngxsmk/core/agent-card';
 import { NgxsmkPromptCarousel, PromptItem } from '@ngxsmk/core/prompt-carousel';
+import { NgxsmkAiChat, NgxsmkAiMessage } from '@ngxsmk/core/ai-chat';
 import { Component, signal } from '@angular/core';
 import { ShowcaseExample } from '../../showcase/showcase-example';
 
@@ -60,11 +61,12 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     NgxsmkAudioPlayer,
     NgxsmkImageViewer,
     NgxsmkPromptCarousel,
+    NgxsmkAiChat,
   ],
   template: `
     <h2 class="ngxsmk-page-title">AI</h2>
     <p class="ngxsmk-page-desc">
-      Building blocks for conversational and agentic interfaces — from chat windows and streaming
+      Building blocks for conversational and agentic interfaces - from chat windows and streaming
       text to tool calls, reasoning traces, and memory.
     </p>
 
@@ -77,6 +79,23 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     >
       <ngxsmk-agent-card [agent]="agent" />
       <ngxsmk-agent-card [agent]="agentIdle" />
+    </showcase-example>
+
+    <showcase-example
+      title="Interactive AI Chat Assistant"
+      description="Advanced signal-driven conversational interface featuring streaming support, citations, reasoning trace collapsing, and custom suggestions."
+      [code]="codeAiChat"
+      [component]="NgxsmkAiChat"
+    >
+      <div style="height: 500px; width: 100%; max-width: 600px;">
+        <ngxsmk-ai-chat
+          [messages]="aiChatMessages()"
+          [suggestions]="aiChatSuggestions()"
+          [isTyping]="aiChatIsTyping()"
+          [tokenCount]="aiChatTokenCount()"
+          (sendMessage)="handleSendMessage($event)"
+        />
+      </div>
     </showcase-example>
 
     <showcase-example
@@ -221,7 +240,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
               <ngxsmk-chat-composer-token-element label="data.csv" variant="file" />
             </div>
             <p style="margin:0;font-size:0.8125rem;color:var(--ngxsmk-color-on-surface-variant)">
-              Attach files, pick a prompt, or summon a tool — then send.
+              Attach files, pick a prompt, or summon a tool - then send.
             </p>
           </div>
         </ngxsmk-chat-composer-drawer>
@@ -884,7 +903,7 @@ ngxsmk-prompt-carousel {
     {
       id: '4',
       role: 'assistant' as const,
-      content: 'Done — a new key is now active.',
+      content: 'Done - a new key is now active.',
       timestamp: new Date(),
     },
   ];
@@ -920,7 +939,7 @@ ngxsmk-prompt-carousel {
   protected readonly msgAssistant: ChatMessageData = {
     id: 'a1',
     role: 'assistant',
-    content: 'Open Settings → API Keys and choose "Rotate" — I can do it for you.',
+    content: 'Open Settings → API Keys and choose "Rotate" - I can do it for you.',
     timestamp: new Date(),
   };
 
@@ -1017,4 +1036,60 @@ ngxsmk-prompt-carousel {
   protected readonly codeChatMessageMetadata = `<ngxsmk-chat-message-metadata [timestamp]="message.timestamp" />`;
   protected readonly codeChatSystemMessage = `<ngxsmk-chat-system-message [message]="'Assistant is typing…'" />`;
   protected readonly codePromptCarousel = `<ngxsmk-prompt-carousel\n  [prompts]="promptsList"\n  (selected)="onPromptSelected($event)"\n/>`;
+
+  protected readonly NgxsmkAiChat = NgxsmkAiChat;
+
+  protected readonly codeAiChat = `<ngxsmk-ai-chat
+  [messages]="messages()"
+  [suggestions]="suggestions()"
+  [isTyping]="isTyping()"
+  [tokenCount]="tokenCount()"
+  (sendMessage)="handleSendMessage($event)"
+/>`;
+
+  protected readonly aiChatMessages = signal<NgxsmkAiMessage[]>([
+    {
+      id: '1',
+      role: 'assistant',
+      content: 'Welcome to the ngxsmk assistant. Ask me anything about configuring color scales, applying design tokens, or scaffolding new layout blocks.',
+      reasoning: 'Initializing workspace context. Loaded theme tokens and component list.'
+    }
+  ]);
+  protected readonly aiChatSuggestions = signal<string[]>([
+    'Explain Angular Signals',
+    'How does Zoneless work?',
+    'Show a basic component structure'
+  ]);
+  protected readonly aiChatIsTyping = signal(false);
+  protected readonly aiChatTokenCount = signal(12);
+
+  protected handleSendMessage(text: string): void {
+    const userMsg: NgxsmkAiMessage = {
+      id: String(Date.now()),
+      role: 'user',
+      content: text
+    };
+    this.aiChatMessages.update(msgs => [...msgs, userMsg]);
+    this.aiChatIsTyping.set(true);
+    this.aiChatTokenCount.update(c => c + 15);
+
+    setTimeout(() => {
+      const assistantMsg: NgxsmkAiMessage = {
+        id: String(Date.now() + 1),
+        role: 'assistant',
+        content: `Here is how we implement **${text}** in ngxsmk-ui-kit:
+
+1. **Signal State**: Component states are tracked with Angular Signals (e.g. \`signal(false)\`), providing optimal reactive updates.
+2. **Zoneless Detection**: Change detection is triggered automatically via native browser APIs and Signal modifications without ZoneJS runtime overhead.
+3. **Dynamic Tokens**: Run-time appearance adjustments are bound directly to standard design variables like \`var(--ngxsmk-color-primary)\`.
+
+Would you like me to generate a concrete layout snippet or template structure for this?`,
+        reasoning: `User query: "${text}". Generated structured explanation showing how signal states, zoneless architecture, and design tokens work in tandem.`,
+        citations: ['Angular Docs: Signals', 'ngxsmk-ui-kit architecture']
+      };
+      this.aiChatMessages.update(msgs => [...msgs, assistantMsg]);
+      this.aiChatIsTyping.set(false);
+      this.aiChatTokenCount.update(c => c + 40);
+    }, 1500);
+  }
 }

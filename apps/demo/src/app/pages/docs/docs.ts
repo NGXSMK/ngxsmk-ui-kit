@@ -88,7 +88,7 @@ import { NgxsmkSwitch } from '@ngxsmk/core/switch';
             <div class="docs-terminal">
               <div class="terminal-header">
                 <div class="terminal-dots"><i></i><i></i><i></i></div>
-                <span class="terminal-title">bash — npm</span>
+                <span class="terminal-title">bash - npm</span>
               </div>
               <div class="terminal-body">
                 <span class="terminal-prompt">$</span>
@@ -103,7 +103,7 @@ import { NgxsmkSwitch } from '@ngxsmk/core/switch';
             <div class="docs-terminal" style="margin-top: 1rem;">
               <div class="terminal-header">
                 <div class="terminal-dots"><i></i><i></i><i></i></div>
-                <span class="terminal-title">bash — cli</span>
+                <span class="terminal-title">bash - cli</span>
               </div>
               <div class="terminal-body">
                 <span class="terminal-prompt">$</span>

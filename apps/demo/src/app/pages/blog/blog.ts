@@ -111,7 +111,7 @@ export class BlogPage {
     {
       title: 'Introducing NGXSMK',
       excerpt:
-        'Why we built a signals-native, zoneless design system for Angular — and how the universal token engine keeps your brand portable.',
+        'Why we built a signals-native, zoneless design system for Angular - and how the universal token engine keeps your brand portable.',
       tag: 'Announcement',
       date: new Date(Date.now() - 2 * 86400000),
     },
@@ -132,7 +132,7 @@ export class BlogPage {
     {
       title: 'Enterprise widgets, free',
       excerpt:
-        'Kanban, spreadsheet, pivot table, and diagram editors — all MIT-licensed and fully customizable.',
+        'Kanban, spreadsheet, pivot table, and diagram editors - all MIT-licensed and fully customizable.',
       tag: 'Enterprise',
       date: new Date(Date.now() - 40 * 86400000),
     },

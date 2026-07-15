@@ -160,7 +160,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Token"
-      description="Compact, pill-shaped labels — perfect for tags and filters."
+      description="Compact, pill-shaped labels - perfect for tags and filters."
       [code]="codeToken"
       [component]="NgxsmkToken"
       [customize]="customizeNgxsmkToken"

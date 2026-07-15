@@ -138,6 +138,29 @@ interface Release {
 export class ChangelogPage {
   protected readonly releases: Release[] = [
     {
+      version: 'v1.2.0',
+      date: '2026-07-15',
+      summary: 'Partial-Ivy build fix (resolves NG0203) and expanded component surface.',
+      changes: [
+        {
+          type: 'fixed',
+          text: 'Libraries now compile in partial Ivy mode so DI factories run inside the injection context (NG0203).',
+        },
+        {
+          type: 'added',
+          text: 'Select family: @ngxsmk/core/select, multi-select, selector, multi-selector.',
+        },
+        {
+          type: 'added',
+          text: 'Structural directives @ngxsmk/core/let and @ngxsmk/core/rx-let.',
+        },
+        {
+          type: 'added',
+          text: 'i18n entry point with NgxsmkI18nPipe, createI18n, provideI18n, useDirection.',
+        },
+      ],
+    },
+    {
       version: 'v1.1.0',
       date: '2026-07-15',
       summary: 'Stable release with updated toolchain, command palette, and prompt carousel.',

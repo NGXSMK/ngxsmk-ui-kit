@@ -8,7 +8,13 @@
       "@ngxsmk/cdk/*": ["./packages/cdk/*"],
       "@ngxsmk/core": ["./packages/core/public-api.ts"],
       "@ngxsmk/core/*": ["./packages/core/*"],
-      "@ngxsmk/theme": ["./packages/theme/src/public-api.ts"]
+      "@ngxsmk/theme": ["./packages/theme/src/public-api.ts"],
+      "@ngxsmk-ui-kit/cdk": ["./packages/cdk/public-api.ts"],
+      "@ngxsmk-ui-kit/cdk/*": ["./packages/cdk/*"],
+      "@ngxsmk-ui-kit/core": ["./packages/core/public-api.ts"],
+      "@ngxsmk-ui-kit/core/*": ["./packages/core/*"],
+      "@ngxsmk-ui-kit/themes": ["./packages/theme/src/public-api.ts"],
+      "@ngxsmk-ui-kit/themes/*": ["./packages/theme/*"]
     },
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,

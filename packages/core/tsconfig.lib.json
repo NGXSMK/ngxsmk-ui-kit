@@ -11,7 +11,9 @@
     // sources (the root tsconfig maps them to sources for app dev/tests).
     "paths": {
       "@ngxsmk/cdk": ["../../dist/ngxsmk/cdk"],
-      "@ngxsmk/theme": ["../../dist/ngxsmk/theme"]
+      "@ngxsmk/theme": ["../../dist/ngxsmk/theme"],
+      "@ngxsmk-ui-kit/cdk": ["../../dist/ngxsmk/cdk"],
+      "@ngxsmk-ui-kit/themes": ["../../dist/ngxsmk/theme"]
     }
   },
   "include": ["**/*.ts"],

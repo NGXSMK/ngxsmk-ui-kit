@@ -1,7 +1,6 @@
 import { Component, inject, signal, computed, HostListener } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { NgxsmkThemeService } from '@ngxsmk/theme';
-import { NgxsmkTooltip } from '@ngxsmk/core/tooltip';
 
 interface SearchItem {
   name: string;
@@ -12,7 +11,7 @@ interface SearchItem {
 @Component({
   selector: 'app-nav',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, NgxsmkTooltip],
+  imports: [RouterLink, RouterLinkActive],
   template: `
     <nav class="ngxsmk-nav">
       <div class="ngxsmk-nav__inner">
@@ -99,7 +98,6 @@ interface SearchItem {
           <button
             class="ngxsmk-nav__icon-btn"
             [attr.aria-label]="theme.isDark() ? 'Switch to light mode' : 'Switch to dark mode'"
-            [ngxsmkTooltip]="theme.isDark() ? 'Switch to light mode' : 'Switch to dark mode'"
             (click)="theme.toggle()"
           >
             @if (theme.isDark()) {
@@ -139,7 +137,6 @@ interface SearchItem {
             href="https://github.com"
             target="_blank"
             aria-label="GitHub"
-            ngxsmkTooltip="GitHub"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
               <path
@@ -148,7 +145,7 @@ interface SearchItem {
             </svg>
           </a>
 
-          <a class="ngxsmk-nav__cta" routerLink="/">Get started</a>
+          <a class="ngxsmk-nav__cta" routerLink="/showcase">Get started</a>
         </div>
       </div>
     </nav>
@@ -172,7 +169,7 @@ interface SearchItem {
         >
         <a
           class="ngxsmk-nav__cta ngxsmk-nav__mobile-cta"
-          routerLink="/"
+          routerLink="/showcase"
           (click)="mobileOpen.set(false)"
           >Get started</a
         >
@@ -470,12 +467,20 @@ interface SearchItem {
     .cmd-input {
       flex: 1;
       height: 100%;
-      border: none;
-      background: transparent;
-      outline: none;
+      border: none !important;
+      outline: none !important;
+      background: transparent !important;
+      padding: 0 !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
       font-size: 0.9375rem;
       font-family: inherit;
       color: var(--ngxsmk-color-on-surface, #09090b);
+    }
+    .cmd-input:focus {
+      border: none !important;
+      outline: none !important;
+      box-shadow: none !important;
     }
     .cmd-input::placeholder {
       color: var(--ngxsmk-color-on-surface-variant, #71717a);

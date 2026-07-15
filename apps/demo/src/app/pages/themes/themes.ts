@@ -9,6 +9,7 @@ import { NgxsmkHeading } from '@ngxsmk/core/heading';
 import { NgxsmkText } from '@ngxsmk/core/text';
 import { Component, inject } from '@angular/core';
 import { NgxsmkThemeService, presets } from '@ngxsmk/theme';
+import { NgxsmkThemeBuilder } from '@ngxsmk/core/theme-builder';
 import { AppNav } from '../../nav/nav';
 
 @Component({
@@ -22,6 +23,7 @@ import { AppNav } from '../../nav/nav';
     NgxsmkButton,
     NgxsmkHeading,
     NgxsmkText,
+    NgxsmkThemeBuilder,
     AppNav,
   ],
   template: `
@@ -88,6 +90,10 @@ import { AppNav } from '../../nav/nav';
             </div>
           </div>
         </ngxsmk-card>
+      </div>
+
+      <div class="ngxsmk-theme-builder-wrapper" style="margin-top: var(--ngxsmk-space-12);">
+        <ngxsmk-theme-builder />
       </div>
     </div>
   `,
