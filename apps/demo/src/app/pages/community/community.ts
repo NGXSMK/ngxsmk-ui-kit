@@ -9,7 +9,6 @@ import { NgxsmkHeading } from '@ngxsmk/core/heading';
 import { NgxsmkText } from '@ngxsmk/core/text';
 import { Component } from '@angular/core';
 import { AppNav } from '../../nav/nav';
-
 @Component({
   selector: 'community-page',
   standalone: true,
@@ -33,7 +32,6 @@ import { AppNav } from '../../nav/nav';
           built.</ngxsmk-text
         >
       </header>
-
       <div class="ngxsmk-community-grid">
         <ngxsmk-card class="ngxsmk-community-card">
           <div ngxsmkCardHeader>
