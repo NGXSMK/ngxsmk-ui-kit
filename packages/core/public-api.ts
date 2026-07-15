@@ -81,6 +81,8 @@ export * from '@ngxsmk/core/h-stack';
 export * from '@ngxsmk/core/heading';
 export * from '@ngxsmk/core/hover-card';
 export * from '@ngxsmk/core/hooks';
+export * from '@ngxsmk/core/let';
+export * from '@ngxsmk/core/i18n';
 export * from '@ngxsmk/core/image-viewer';
 export * from '@ngxsmk/core/imperative-dialog';
 export * from '@ngxsmk/core/input-group';

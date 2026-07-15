@@ -668,5 +668,101 @@ export function useEntryAnimation(): {
   return { animate, className };
 }
 
+// ─── Signal State Helpers (zoneless) ───────────────────────
+
+export interface SignalStore<T> {
+  readonly state: WritableSignal<T>;
+  set: (value: T) => void;
+  update: (fn: (value: T) => T) => void;
+  patch: (partial: Partial<T>) => void;
+  select: <K>(selector: (state: T) => K) => Signal<K>;
+  asReadonly: () => Signal<T>;
+}
+
+export function createStore<T>(initial: T): SignalStore<T> {
+  const state = signal(initial);
+  return {
+    state,
+    set: (value) => state.set(value),
+    update: (fn) => state.update(fn),
+    patch: (partial) =>
+      state.update((s) => ({ ...(s as Record<string, unknown>), ...partial }) as T),
+    select: (selector) => computed(() => selector(state())),
+    asReadonly: () => state.asReadonly(),
+  };
+}
+
+export interface ReducerStore<S, A> {
+  readonly state: Signal<S>;
+  dispatch: (action: A) => void;
+}
+
+export function reducerSignal<S, A>(
+  reducer: (state: S, action: A) => S,
+  initialState: S,
+): ReducerStore<S, A> {
+  const state = signal(initialState);
+  return {
+    state: state.asReadonly(),
+    dispatch: (action) => state.update((s) => reducer(s, action)),
+  };
+}
+
+export interface TokenStream<T> {
+  readonly tokens: Signal<T[]>;
+  push: (token: T) => void;
+  append: (tokens: T[]) => void;
+  set: (tokens: T[]) => void;
+  clear: () => void;
+}
+
+export function useTokenStream<T>(): TokenStream<T> {
+  const tokens = signal<T[]>([]);
+  return {
+    tokens: tokens.asReadonly(),
+    push: (token) => tokens.update((arr) => [...arr, token]),
+    append: (more) => tokens.update((arr) => [...arr, ...more]),
+    set: (next) => tokens.set(next),
+    clear: () => tokens.set([]),
+  };
+}
+
+export interface AsyncState<T> {
+  readonly data: Signal<T | undefined>;
+  readonly error: Signal<unknown>;
+  readonly loading: Signal<boolean>;
+  run: (fn: () => Promise<T>) => Promise<void>;
+  set: (value: T) => void;
+  reset: () => void;
+}
+
+export function useAsyncState<T>(): AsyncState<T> {
+  const data = signal<T | undefined>(undefined);
+  const error = signal<unknown>(undefined);
+  const loading = signal(false);
+  return {
+    data: data.asReadonly(),
+    error: error.asReadonly(),
+    loading: loading.asReadonly(),
+    run: async (fn) => {
+      loading.set(true);
+      error.set(undefined);
+      try {
+        data.set(await fn());
+      } catch (e) {
+        error.set(e);
+      } finally {
+        loading.set(false);
+      }
+    },
+    set: (value) => data.set(value),
+    reset: () => {
+      data.set(undefined);
+      error.set(undefined);
+      loading.set(false);
+    },
+  };
+}
+
 @Injectable({ providedIn: 'root' })
 export class NgxsmkHooksService {}
