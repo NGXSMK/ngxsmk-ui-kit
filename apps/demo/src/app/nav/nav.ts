@@ -46,7 +46,7 @@ interface SearchItem {
           >
           <a
             class="ngxsmk-nav__link"
-            routerLink="/showcase"
+            routerLink="/showcase/explorer"
             routerLinkActive="ngxsmk-nav__link--active"
             >Components</a
           >
@@ -66,7 +66,13 @@ interface SearchItem {
             class="ngxsmk-nav__link"
             routerLink="/playground"
             routerLinkActive="ngxsmk-nav__link--active"
-            >Playground</a
+            >Theme Playground</a
+          >
+          <a
+            class="ngxsmk-nav__link"
+            routerLink="/playground/component"
+            routerLinkActive="ngxsmk-nav__link--active"
+            >Component Playground</a
           >
         </div>
 
@@ -145,7 +151,7 @@ interface SearchItem {
             </svg>
           </a>
 
-          <a class="ngxsmk-nav__cta" routerLink="/showcase">Get started</a>
+          <a class="ngxsmk-nav__cta" routerLink="/showcase/explorer">Get started</a>
         </div>
       </div>
     </nav>
@@ -155,7 +161,7 @@ interface SearchItem {
         <a class="ngxsmk-nav__mobile-link" routerLink="/docs" (click)="mobileOpen.set(false)"
           >Docs</a
         >
-        <a class="ngxsmk-nav__mobile-link" routerLink="/showcase" (click)="mobileOpen.set(false)"
+        <a class="ngxsmk-nav__mobile-link" routerLink="/showcase/explorer" (click)="mobileOpen.set(false)"
           >Components</a
         >
         <a class="ngxsmk-nav__mobile-link" routerLink="/templates" (click)="mobileOpen.set(false)"
@@ -169,7 +175,7 @@ interface SearchItem {
         >
         <a
           class="ngxsmk-nav__cta ngxsmk-nav__mobile-cta"
-          routerLink="/showcase"
+          routerLink="/showcase/explorer"
           (click)="mobileOpen.set(false)"
           >Get started</a
         >

@@ -44,10 +44,10 @@ interface CategoryGroup {
         <div class="ngxsmk-sc-sidebar__sections">
           <a
             class="ngxsmk-sc-sidebar__overview"
-            routerLink="/showcase"
+            routerLink="/showcase/explorer"
             routerLinkActive="ngxsmk-sc-sidebar__overview--active"
             (click)="mobileOpen.set(false)"
-            >Components</a
+            >Component Explorer</a
           >
 
           @for (group of filteredGroups(); track group.label) {
