@@ -44,7 +44,7 @@ import { AppNav } from '../../nav/nav';
               >Ask questions, share suggestions, and get feedback from developers and contributors
               on our discussions forum.</ngxsmk-text
             >
-            <a ngxsmk-button size="sm" href="https://github.com" target="_blank">Join Discussion</a>
+            <a ngxsmk-button size="sm" href="https://github.com/NGXSMK/ngxsmk-ui-kit/discussions/19" target="_blank">Join Discussion</a>
           </div>
         </ngxsmk-card>
       </div>
