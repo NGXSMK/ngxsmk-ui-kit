@@ -17,19 +17,27 @@ const STYLE_ID = 'ngxsmk-theme';
  */
 @Injectable({ providedIn: 'root' })
 export class NgxsmkThemeService {
-  private readonly document = inject(DOCUMENT);
+  private readonly document: Document;
 
   /** User preference: explicit light/dark or follow the OS. */
-  readonly mode = signal<ThemeMode>(this.restoreMode());
+  readonly mode: ReturnType<typeof signal<ThemeMode>>;
 
-  private readonly systemDark = signal(this.matchSystemDark());
+  private readonly systemDark: ReturnType<typeof signal<boolean>>;
 
   /** Effective darkness after resolving `system` against the OS setting. */
-  readonly isDark = computed(() =>
-    this.mode() === 'system' ? this.systemDark() : this.mode() === 'dark',
-  );
+  readonly isDark: ReturnType<typeof computed<boolean>>;
 
   constructor() {
+    // Inject DOCUMENT first so that restoreMode() and matchSystemDark()
+    // can safely access it when the signals are initialised below.
+    this.document = inject(DOCUMENT);
+
+    this.mode = signal<ThemeMode>(this.restoreMode());
+    this.systemDark = signal(this.matchSystemDark());
+    this.isDark = computed(() =>
+      this.mode() === 'system' ? this.systemDark() : this.mode() === 'dark',
+    );
+
     const media = this.document.defaultView?.matchMedia?.('(prefers-color-scheme: dark)');
     media?.addEventListener('change', (e) => this.systemDark.set(e.matches));
 
