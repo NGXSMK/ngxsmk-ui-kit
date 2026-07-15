@@ -6,7 +6,6 @@ import {
   booleanAttribute,
   input,
   output,
-  signal,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 

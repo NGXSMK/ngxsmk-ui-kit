@@ -1,4 +1,4 @@
-import { Component, inject, signal, computed, AfterViewInit, effect } from '@angular/core';
+import { Component, inject, signal, computed } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ComponentRegistry, ComponentMetadata, CATEGORY_LABELS } from '../../core/component-registry';
 import { SearchService } from '../../core/search.service';

@@ -1,7 +1,6 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  booleanAttribute,
   computed,
   inject,
   input,
@@ -9,7 +8,7 @@ import {
   signal,
 } from '@angular/core';
 
-export interface NgxsmkTreeNode<T = any> {
+export interface NgxsmkTreeNode<T = unknown> {
   id: string | number;
   label: string;
   children?: NgxsmkTreeNode<T>[];
@@ -25,13 +24,16 @@ export interface NgxsmkTreeNode<T = any> {
       role="treeitem"
       [attr.aria-expanded]="node().children ? isExpanded() : null"
       [attr.aria-level]="level() + 1"
+      [attr.aria-selected]="isSelected() ? 'true' : 'false'"
     >
       <div
         class="ngxsmk-tree-node__content"
         [style.paddingLeft.px]="paddingLeft()"
         [class.selected]="isSelected()"
         [class.disabled]="node().disabled"
+        tabindex="0"
         (click)="onClick($event)"
+        (keydown.enter)="onClick($event)"
       >
         @if (node().children && node().children!.length > 0) {
           <button
@@ -147,7 +149,7 @@ export class NgxsmkTreeNodeComponent {
     this.tree.toggleNode(this.node());
   }
 
-  protected onClick(event: MouseEvent): void {
+  protected onClick(_event: MouseEvent): void {
     if (this.node().disabled) {
       return;
     }

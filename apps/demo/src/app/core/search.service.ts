@@ -28,13 +28,13 @@ export interface SearchSuggestion {
 export class SearchService {
   private readonly document = inject(DOCUMENT);
   private index = signal<MiniSearch | null>(null);
-  private documents = signal<any[]>([]);
+  private documents = signal<ComponentMetadata[]>([]);
   private recentSearches = signal<string[]>([]);
   private favorites = signal<string[]>([]);
 
   readonly isIndexed = computed(() => this.index() !== null);
 
-  buildIndex(components: any[]): void {
+  buildIndex(components: ComponentMetadata[]): void {
     const miniSearch = new MiniSearch({
       idField: 'name',
       fields: ['name', 'selector', 'description', 'category', 'tags', 'packageName'],
@@ -44,11 +44,11 @@ export class SearchService {
         fuzzy: 0.2,
         prefix: true,
       },
-      extractField: (document: any, fieldName: string) => {
+      extractField: (document: ComponentMetadata, fieldName: string) => {
         if (fieldName === 'tags' && Array.isArray(document.tags)) {
           return document.tags.join(' ');
         }
-        return document[fieldName];
+        return String((document as unknown as Record<string, unknown>)[fieldName] ?? '');
       },
     });
 
@@ -69,18 +69,21 @@ export class SearchService {
       prefix: true,
     });
 
-    let filtered = results.map((r: any) => ({
-      item: r as any,
-      score: (r as any).score ?? 0,
-      matchedFields: this.getMatchedFields(r, query),
-    }));
+    let filtered = results.map((r) => {
+      const item = this.documents().find((d) => d.name === r.id) ?? (r as unknown as ComponentMetadata);
+      return {
+        item,
+        score: r.score ?? 0,
+        matchedFields: this.getMatchedFields(item, query),
+      };
+    });
 
     if (category) {
-      filtered = filtered.filter((r: any) => r.item.category === category);
+      filtered = filtered.filter((r) => r.item.category === category);
     }
 
     if (tags && tags.length > 0) {
-      filtered = filtered.filter((r: any) =>
+      filtered = filtered.filter((r) =>
         r.item.tags && tags.some(t => r.item.tags?.includes(t))
       );
     }
@@ -103,9 +106,9 @@ export class SearchService {
 
     for (const result of results.slice(0, limit)) {
       suggestions.push({
-        text: (result as any).name,
+        text: String(result.id),
         type: 'component',
-        metadata: result as any,
+        metadata: this.documents().find((d) => d.name === result.id),
       });
     }
 
@@ -134,11 +137,11 @@ export class SearchService {
     return suggestions.slice(0, limit);
   }
 
-  getComponent(name: string): any | undefined {
+  getComponent(name: string): ComponentMetadata | undefined {
     return this.documents().find(d => d.name === name || d.selector === name);
   }
 
-  getByCategory(category: string): any[] {
+  getByCategory(category: string): ComponentMetadata[] {
     return this.documents().filter(d => d.category === category);
   }
 
@@ -154,7 +157,7 @@ export class SearchService {
     return [...tags].sort();
   }
 
-  private getMatchedFields(result: any, query: string): string[] {
+  private getMatchedFields(result: ComponentMetadata, query: string): string[] {
     const matched: string[] = [];
     const queryLower = query.toLowerCase();
 

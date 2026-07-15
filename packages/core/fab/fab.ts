@@ -2,7 +2,7 @@ import { Directive, booleanAttribute, input } from '@angular/core';
 
 @Directive({
   standalone: true,
-  selector: 'button[ngxsmk-fab], a[ngxsmk-fab]',
+  selector: 'button[ngxsmkFab], a[ngxsmkFab]',
   host: {
     class: 'ngxsmk-fab',
     '[attr.data-size]': 'size()',

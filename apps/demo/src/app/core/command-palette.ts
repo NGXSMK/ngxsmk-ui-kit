@@ -1,4 +1,4 @@
-import { Component, inject, signal, computed, ViewChild, ElementRef, AfterViewInit, effect } from '@angular/core';
+import { Component, inject, signal, ViewChild, ElementRef, effect } from '@angular/core';
 import { Router } from '@angular/router';
 import { SearchService, SearchResult } from './search.service';
 import { ComponentRegistry } from './component-registry';
@@ -8,8 +8,8 @@ import { ComponentRegistry } from './component-registry';
   standalone: true,
   template: `
     @if (isOpen()) {
-      <div class="cmd-overlay" (click)="close()">
-        <div class="cmd-dialog" (click)="$event.stopPropagation()">
+      <div class="cmd-overlay" (click)="close()" tabindex="0" (keydown.escape)="close()">
+        <div class="cmd-dialog" (click)="$event.stopPropagation()" tabindex="0" (keydown)="$event.stopPropagation()">
           <div class="cmd-header">
             <svg
               class="cmd-search-icon"
@@ -34,7 +34,7 @@ import { ComponentRegistry } from './component-registry';
               (input)="onInput(searchInput.value)"
               (keydown)="onKeydown($event)"
             />
-            <span class="cmd-esc-hint" (click)="close()">ESC</span>
+            <span class="cmd-esc-hint" (click)="close()" tabindex="0" (keydown.enter)="close()">ESC</span>
           </div>
 
           <div class="cmd-results">
@@ -43,8 +43,10 @@ import { ComponentRegistry } from './component-registry';
                 <div
                   class="cmd-item"
                   [class.active]="idx === activeIndex()"
+                  tabindex="0"
                   (mouseenter)="activeIndex.set(idx)"
                   (click)="selectResult(result)"
+                  (keydown.enter)="selectResult(result)"
                 >
                   <div class="cmd-item-left">
                     <span class="cmd-item-icon">{{ categoryIcon(result.item.category) }}</span>
@@ -65,7 +67,7 @@ import { ComponentRegistry } from './component-registry';
               <div class="cmd-suggestions">
                 <div class="cmd-suggestions-header">Recent searches</div>
                 @for (recent of recentSearches(); track recent) {
-                  <div class="cmd-suggestion-item" (click)="query.set(recent); doSearch(recent)">
+                  <div class="cmd-suggestion-item" (click)="query.set(recent); doSearch(recent)" tabindex="0" (keydown.enter)="query.set(recent); doSearch(recent)">
                     <span class="cmd-suggestion-text">{{ recent }}</span>
                   </div>
                 }
