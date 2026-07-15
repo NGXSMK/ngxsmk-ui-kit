@@ -77,11 +77,19 @@ export type NgxsmkRatingSize = 'sm' | 'md' | 'lg';
       outline: none;
       touch-action: none;
     }
-    :host([data-size='sm']) { --ngxsmk-rating-size: 1.125rem; }
-    :host([data-size='lg']) { --ngxsmk-rating-size: 2rem; }
+    :host([data-size='sm']) {
+      --ngxsmk-rating-size: 1.125rem;
+    }
+    :host([data-size='lg']) {
+      --ngxsmk-rating-size: 2rem;
+    }
     :host([data-readonly]),
-    :host([data-disabled]) { cursor: default; }
-    :host([data-disabled]) { opacity: 0.5; }
+    :host([data-disabled]) {
+      cursor: default;
+    }
+    :host([data-disabled]) {
+      opacity: 0.5;
+    }
 
     .ngxsmk-rating__star {
       position: relative;
@@ -90,7 +98,10 @@ export type NgxsmkRatingSize = 'sm' | 'md' | 'lg';
     }
     /* Empty star painted in the host colour; ::before overlays the gold fill,
        kept full-size and revealed left-to-right via clip-path (0 | 0.5 | 1). */
-    .ngxsmk-rating__star svg { display: block; fill: currentColor; }
+    .ngxsmk-rating__star svg {
+      display: block;
+      fill: currentColor;
+    }
     .ngxsmk-rating__star {
       --ngxsmk-star-fill: 0;
       --ngxsmk-rating-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.8 6.2 20.9l1.1-6.5L2.6 9.3l6.5-.9z'/%3E%3C/svg%3E");
@@ -105,8 +116,12 @@ export type NgxsmkRatingSize = 'sm' | 'md' | 'lg';
       clip-path: inset(0 calc((1 - var(--ngxsmk-star-fill)) * 100%) 0 0);
       transition: clip-path var(--ngxsmk-duration-fast, 120ms) var(--ngxsmk-ease-out, ease);
     }
-    .ngxsmk-rating__star[data-fill='0.5'] { --ngxsmk-star-fill: 0.5; }
-    .ngxsmk-rating__star[data-fill='1'] { --ngxsmk-star-fill: 1; }
+    .ngxsmk-rating__star[data-fill='0.5'] {
+      --ngxsmk-star-fill: 0.5;
+    }
+    .ngxsmk-rating__star[data-fill='1'] {
+      --ngxsmk-star-fill: 1;
+    }
 
     :host(:focus-visible) {
       border-radius: var(--ngxsmk-radius-sm, 4px);
@@ -116,13 +131,20 @@ export type NgxsmkRatingSize = 'sm' | 'md' | 'lg';
 
     .ngxsmk-rating__sr {
       position: absolute;
-      width: 1px; height: 1px;
-      margin: -1px; padding: 0; border: 0;
-      overflow: hidden; clip-path: inset(100%); white-space: nowrap;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      border: 0;
+      overflow: hidden;
+      clip-path: inset(100%);
+      white-space: nowrap;
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .ngxsmk-rating__star[data-fill]::before { transition: none; }
+      .ngxsmk-rating__star[data-fill]::before {
+        transition: none;
+      }
     }
   `,
   providers: [
@@ -147,12 +169,8 @@ export class NgxsmkRating implements ControlValueAccessor {
   private readonly cvaDisabled = signal(false);
   private readonly previewValue = signal<number | null>(null);
 
-  protected readonly isDisabled = computed(
-    () => this.disabled() || this.cvaDisabled(),
-  );
-  protected readonly isInteractive = computed(
-    () => !this.readonly() && !this.isDisabled(),
-  );
+  protected readonly isDisabled = computed(() => this.disabled() || this.cvaDisabled());
+  protected readonly isInteractive = computed(() => !this.readonly() && !this.isDisabled());
   private readonly step = computed(() => (this.allowHalf() ? 0.5 : 1));
 
   /** Value used to paint the stars: the hover preview when present, else value. */
@@ -168,9 +186,7 @@ export class NgxsmkRating implements ControlValueAccessor {
     return out;
   });
 
-  protected readonly valueText = computed(
-    () => `${this.value()} of ${this.max()} stars`,
-  );
+  protected readonly valueText = computed(() => `${this.value()} of ${this.max()} stars`);
 
   private onChange?: (value: number) => void;
   private onTouched?: () => void;

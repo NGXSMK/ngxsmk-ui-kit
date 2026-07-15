@@ -115,7 +115,9 @@ export interface PropDescriptor {
     </div>
   `,
   styles: `
-    :host { display: block; }
+    :host {
+      display: block;
+    }
     .ngxsmk-prop-panel {
       display: flex;
       flex-direction: column;
@@ -135,7 +137,9 @@ export interface PropDescriptor {
       font-weight: 600;
       color: var(--ngxsmk-color-on-surface-variant, #71717a);
     }
-    .ngxsmk-prop-panel__control { grid-area: control; }
+    .ngxsmk-prop-panel__control {
+      grid-area: control;
+    }
     .ngxsmk-prop-panel__hint {
       grid-area: hint;
       margin: 0;
@@ -161,7 +165,10 @@ export interface PropDescriptor {
       border-color: var(--ngxsmk-color-ring, #2563eb);
       box-shadow: 0 0 0 3px color-mix(in srgb, var(--ngxsmk-color-ring, #2563eb) 25%, transparent);
     }
-    .ngxsmk-prop-panel__color { padding: 0.15rem; height: 2.25rem; }
+    .ngxsmk-prop-panel__color {
+      padding: 0.15rem;
+      height: 2.25rem;
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -170,11 +177,11 @@ export class NgxsmkPropPanel {
   readonly values = model<Record<string, unknown>>({});
 
   set(name: string, value: unknown): void {
-    this.values.update(v => ({ ...v, [name]: value }));
+    this.values.update((v) => ({ ...v, [name]: value }));
   }
 
   toggle(name: string): void {
-    this.values.update(v => ({ ...v, [name]: !v[name] }));
+    this.values.update((v) => ({ ...v, [name]: !v[name] }));
   }
 
   toNumber(raw: string): number | null {

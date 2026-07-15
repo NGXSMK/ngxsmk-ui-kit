@@ -24,7 +24,9 @@ export interface PowerSearchFilter {
           <select class="ngxsmk-power-search__filter" (change)="onFilter(f.id, $event)">
             <option value="">{{ f.label }}</option>
             @for (item of f.items; track item.value) {
-              <option [value]="item.value" [selected]="activeFilter(f.id) === item.value">{{ item.label }}</option>
+              <option [value]="item.value" [selected]="activeFilter(f.id) === item.value">
+                {{ item.label }}
+              </option>
             }
           </select>
         }
@@ -33,12 +35,48 @@ export interface PowerSearchFilter {
   `,
   host: { class: 'ngxsmk-power-search' },
   styles: `
-    :host { display: flex; flex-direction: column; gap: var(--ngxsmk-space-2); font-family: var(--ngxsmk-font-sans); }
-    .ngxsmk-power-search__bar { display: flex; gap: var(--ngxsmk-space-2); }
-    .ngxsmk-power-search__input { flex: 1; height: var(--ngxsmk-control-height); padding: 0 var(--ngxsmk-space-3); border: 1px solid var(--ngxsmk-color-outline); border-radius: var(--ngxsmk-radius-md); font-size: var(--ngxsmk-text-body-md-size); line-height: var(--ngxsmk-text-body-md-line); background: var(--ngxsmk-color-surface); color: var(--ngxsmk-color-on-surface); outline: none; }
-    .ngxsmk-power-search__input:focus { border-color: var(--ngxsmk-color-primary); box-shadow: 0 0 0 2px var(--ngxsmk-color-primary-container); }
-    .ngxsmk-power-search__filters { display: flex; flex-wrap: wrap; gap: var(--ngxsmk-space-2); }
-    .ngxsmk-power-search__filter { height: var(--ngxsmk-control-height); padding: 0 var(--ngxsmk-space-2); border: 1px solid var(--ngxsmk-color-outline); border-radius: var(--ngxsmk-radius-md); font-size: var(--ngxsmk-text-body-md-size); line-height: var(--ngxsmk-text-body-md-line); background: var(--ngxsmk-color-surface); color: var(--ngxsmk-color-on-surface); outline: none; }
+    :host {
+      display: flex;
+      flex-direction: column;
+      gap: var(--ngxsmk-space-2);
+      font-family: var(--ngxsmk-font-sans);
+    }
+    .ngxsmk-power-search__bar {
+      display: flex;
+      gap: var(--ngxsmk-space-2);
+    }
+    .ngxsmk-power-search__input {
+      flex: 1;
+      height: var(--ngxsmk-control-height);
+      padding: 0 var(--ngxsmk-space-3);
+      border: 1px solid var(--ngxsmk-color-outline);
+      border-radius: var(--ngxsmk-radius-md);
+      font-size: var(--ngxsmk-text-body-md-size);
+      line-height: var(--ngxsmk-text-body-md-line);
+      background: var(--ngxsmk-color-surface);
+      color: var(--ngxsmk-color-on-surface);
+      outline: none;
+    }
+    .ngxsmk-power-search__input:focus {
+      border-color: var(--ngxsmk-color-primary);
+      box-shadow: 0 0 0 2px var(--ngxsmk-color-primary-container);
+    }
+    .ngxsmk-power-search__filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--ngxsmk-space-2);
+    }
+    .ngxsmk-power-search__filter {
+      height: var(--ngxsmk-control-height);
+      padding: 0 var(--ngxsmk-space-2);
+      border: 1px solid var(--ngxsmk-color-outline);
+      border-radius: var(--ngxsmk-radius-md);
+      font-size: var(--ngxsmk-text-body-md-size);
+      line-height: var(--ngxsmk-text-body-md-line);
+      background: var(--ngxsmk-color-surface);
+      color: var(--ngxsmk-color-on-surface);
+      outline: none;
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

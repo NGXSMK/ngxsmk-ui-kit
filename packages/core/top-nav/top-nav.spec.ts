@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { describe, expect, it } from 'vitest';
-import { 
-  NgxsmkTopNav, 
-  NgxsmkTopNavMegaMenu, 
-  NgxsmkTopNavMegaMenuItem, 
-  NgxsmkTopNavMegaMenuFeaturedCard 
+import {
+  NgxsmkTopNav,
+  NgxsmkTopNavMegaMenu,
+  NgxsmkTopNavMegaMenuItem,
+  NgxsmkTopNavMegaMenuFeaturedCard,
 } from './top-nav';
 
 @Component({
@@ -14,7 +14,7 @@ import {
     NgxsmkTopNav,
     NgxsmkTopNavMegaMenu,
     NgxsmkTopNavMegaMenuItem,
-    NgxsmkTopNavMegaMenuFeaturedCard
+    NgxsmkTopNavMegaMenuFeaturedCard,
   ],
   template: `
     <ngxsmk-top-nav>
@@ -51,7 +51,7 @@ describe('NgxsmkTopNavMegaMenu', () => {
   it('projects columns and featured cards correctly inside the dropdown', () => {
     const { dropdown, colElement, featElement } = setup();
     expect(dropdown).toBeTruthy();
-    
+
     // Check if column is projected inside the grid container
     const grid = dropdown.querySelector('.ngxsmk-top-nav-mega-menu__grid');
     expect(grid).toBeTruthy();

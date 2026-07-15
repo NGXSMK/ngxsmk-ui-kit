@@ -1,1 +1,1 @@
-export { NgxsmkTopNavMenu } from "@ngxsmk/core/top-nav";
+export { NgxsmkTopNavMenu } from '@ngxsmk/core/top-nav';

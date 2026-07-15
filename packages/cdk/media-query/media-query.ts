@@ -1,10 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import {
-  DestroyRef,
-  Signal,
-  inject,
-  signal,
-} from '@angular/core';
+import { DestroyRef, Signal, inject, signal } from '@angular/core';
 
 /**
  * Reactive media query. Must be called in an injection context.
@@ -22,9 +17,7 @@ export function injectMediaQuery(query: string): Signal<boolean> {
     matches.set(media.matches);
     const listener = (event: MediaQueryListEvent) => matches.set(event.matches);
     media.addEventListener('change', listener);
-    inject(DestroyRef).onDestroy(() =>
-      media.removeEventListener('change', listener),
-    );
+    inject(DestroyRef).onDestroy(() => media.removeEventListener('change', listener));
   }
 
   return matches.asReadonly();

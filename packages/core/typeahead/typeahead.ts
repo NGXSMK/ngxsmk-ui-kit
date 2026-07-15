@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, Directive, input, model, signal, TemplateRef } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Directive,
+  input,
+  model,
+  signal,
+  TemplateRef,
+} from '@angular/core';
 import { ngxsmkUniqueId } from '@ngxsmk/core/util';
 
 @Directive({
@@ -46,12 +54,56 @@ export class NgxsmkTypeaheadItem {
   `,
   host: { class: 'ngxsmk-typeahead' },
   styles: `
-    :host { display: block; position: relative; font-family: var(--ngxsmk-font-sans); }
-    .ngxsmk-typeahead__input { display: block; width: 100%; padding: var(--ngxsmk-space-2) var(--ngxsmk-space-3); border: 1px solid var(--ngxsmk-color-outline); border-radius: var(--ngxsmk-radius-md); font-size: 0.875rem; background: var(--ngxsmk-color-surface); color: var(--ngxsmk-color-on-surface); outline: none; box-sizing: border-box; }
-    .ngxsmk-typeahead__input:focus { border-color: var(--ngxsmk-color-primary); box-shadow: 0 0 0 2px var(--ngxsmk-color-primary-container); }
-    .ngxsmk-typeahead__dropdown { position: absolute; top: 100%; left: 0; right: 0; margin-top: var(--ngxsmk-space-1); background: var(--ngxsmk-color-surface); border: 1px solid var(--ngxsmk-color-outline); border-radius: var(--ngxsmk-radius-md); box-shadow: var(--ngxsmk-shadow-lg); max-height: 15rem; overflow-y: auto; z-index: var(--ngxsmk-z-dropdown, 1000); }
-    .ngxsmk-typeahead__option { display: block; width: 100%; padding: var(--ngxsmk-space-2) var(--ngxsmk-space-3); border: none; background: none; text-align: left; color: var(--ngxsmk-color-on-surface); font-size: 0.875rem; cursor: pointer; }
-    .ngxsmk-typeahead__option:hover, .ngxsmk-typeahead__option[aria-selected='true'] { background: var(--ngxsmk-color-surface-hover); }
+    :host {
+      display: block;
+      position: relative;
+      font-family: var(--ngxsmk-font-sans);
+    }
+    .ngxsmk-typeahead__input {
+      display: block;
+      width: 100%;
+      padding: var(--ngxsmk-space-2) var(--ngxsmk-space-3);
+      border: 1px solid var(--ngxsmk-color-outline);
+      border-radius: var(--ngxsmk-radius-md);
+      font-size: 0.875rem;
+      background: var(--ngxsmk-color-surface);
+      color: var(--ngxsmk-color-on-surface);
+      outline: none;
+      box-sizing: border-box;
+    }
+    .ngxsmk-typeahead__input:focus {
+      border-color: var(--ngxsmk-color-primary);
+      box-shadow: 0 0 0 2px var(--ngxsmk-color-primary-container);
+    }
+    .ngxsmk-typeahead__dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      margin-top: var(--ngxsmk-space-1);
+      background: var(--ngxsmk-color-surface);
+      border: 1px solid var(--ngxsmk-color-outline);
+      border-radius: var(--ngxsmk-radius-md);
+      box-shadow: var(--ngxsmk-shadow-lg);
+      max-height: 15rem;
+      overflow-y: auto;
+      z-index: var(--ngxsmk-z-dropdown, 1000);
+    }
+    .ngxsmk-typeahead__option {
+      display: block;
+      width: 100%;
+      padding: var(--ngxsmk-space-2) var(--ngxsmk-space-3);
+      border: none;
+      background: none;
+      text-align: left;
+      color: var(--ngxsmk-color-on-surface);
+      font-size: 0.875rem;
+      cursor: pointer;
+    }
+    .ngxsmk-typeahead__option:hover,
+    .ngxsmk-typeahead__option[aria-selected='true'] {
+      background: var(--ngxsmk-color-surface-hover);
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -68,7 +120,7 @@ export class NgxsmkTypeahead {
   protected onInput(e: Event): void {
     const q = (e.target as HTMLInputElement).value;
     this.value.set(q);
-    this.filteredOptions = this.options().filter(o => o.toLowerCase().includes(q.toLowerCase()));
+    this.filteredOptions = this.options().filter((o) => o.toLowerCase().includes(q.toLowerCase()));
     this.filtered.set(this.filteredOptions);
     this.open.set(true);
   }

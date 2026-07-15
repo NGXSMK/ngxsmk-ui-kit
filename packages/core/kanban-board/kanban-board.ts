@@ -56,8 +56,19 @@ export interface KanbanMove {
   `,
   host: { class: 'ngxsmk-kanban-board' },
   styles: `
-    :host { display: block; font-family: var(--ngxsmk-font-sans); overflow-x: auto; max-width: 100%; -webkit-overflow-scrolling: touch; }
-    .ngxsmk-kanban-board__columns { display: flex; gap: var(--ngxsmk-space-4); min-height: 20rem; padding: var(--ngxsmk-space-4); }
+    :host {
+      display: block;
+      font-family: var(--ngxsmk-font-sans);
+      overflow-x: auto;
+      max-width: 100%;
+      -webkit-overflow-scrolling: touch;
+    }
+    .ngxsmk-kanban-board__columns {
+      display: flex;
+      gap: var(--ngxsmk-space-4);
+      min-height: 20rem;
+      padding: var(--ngxsmk-space-4);
+    }
     .ngxsmk-kanban-board__columns::after {
       content: '';
       display: block;
@@ -78,11 +89,26 @@ export interface KanbanMove {
         outline-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
     .ngxsmk-kanban-board__column--over {
-      background: color-mix(in srgb, var(--ngxsmk-color-primary) 8%, var(--ngxsmk-color-surface-variant));
+      background: color-mix(
+        in srgb,
+        var(--ngxsmk-color-primary) 8%,
+        var(--ngxsmk-color-surface-variant)
+      );
       outline-color: var(--ngxsmk-color-primary);
     }
-    .ngxsmk-kanban-board__header { font-weight: 600; font-size: 0.9375rem; color: var(--ngxsmk-color-on-surface); margin-bottom: var(--ngxsmk-space-3); }
-    .ngxsmk-kanban-board__items { display: flex; flex-direction: column; gap: var(--ngxsmk-space-2); flex: 1 1 auto; min-height: 3rem; }
+    .ngxsmk-kanban-board__header {
+      font-weight: 600;
+      font-size: 0.9375rem;
+      color: var(--ngxsmk-color-on-surface);
+      margin-bottom: var(--ngxsmk-space-3);
+    }
+    .ngxsmk-kanban-board__items {
+      display: flex;
+      flex-direction: column;
+      gap: var(--ngxsmk-space-2);
+      flex: 1 1 auto;
+      min-height: 3rem;
+    }
     .ngxsmk-kanban-board__card {
       padding: var(--ngxsmk-space-3);
       background: var(--ngxsmk-color-surface);
@@ -94,10 +120,22 @@ export interface KanbanMove {
         box-shadow var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
         opacity var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
-    .ngxsmk-kanban-board__card:active { cursor: grabbing; }
-    .ngxsmk-kanban-board__card--dragging { opacity: 0.4; }
-    .ngxsmk-kanban-board__card-title { font-weight: 500; font-size: 0.875rem; color: var(--ngxsmk-color-on-surface); }
-    .ngxsmk-kanban-board__card-desc { font-size: 0.75rem; color: var(--ngxsmk-color-on-surface-variant); margin-top: var(--ngxsmk-space-1); }
+    .ngxsmk-kanban-board__card:active {
+      cursor: grabbing;
+    }
+    .ngxsmk-kanban-board__card--dragging {
+      opacity: 0.4;
+    }
+    .ngxsmk-kanban-board__card-title {
+      font-weight: 500;
+      font-size: 0.875rem;
+      color: var(--ngxsmk-color-on-surface);
+    }
+    .ngxsmk-kanban-board__card-desc {
+      font-size: 0.75rem;
+      color: var(--ngxsmk-color-on-surface-variant);
+      margin-top: var(--ngxsmk-space-1);
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -163,18 +201,18 @@ export class NgxsmkKanbanBoard {
     if (beforeItemId === drag.itemId) return;
 
     // Work on a shallow clone so change detection sees new references.
-    const cols = this.columns().map(c => ({ ...c, items: [...c.items] }));
-    const from = cols.find(c => c.id === drag.fromCol);
-    const to = cols.find(c => c.id === toCol);
+    const cols = this.columns().map((c) => ({ ...c, items: [...c.items] }));
+    const from = cols.find((c) => c.id === drag.fromCol);
+    const to = cols.find((c) => c.id === toCol);
     if (!from || !to) return;
 
-    const fromIdx = from.items.findIndex(i => i.id === drag.itemId);
+    const fromIdx = from.items.findIndex((i) => i.id === drag.itemId);
     if (fromIdx === -1) return;
     const [moved] = from.items.splice(fromIdx, 1);
 
     let insertAt = to.items.length;
     if (beforeItemId != null) {
-      const bIdx = to.items.findIndex(i => i.id === beforeItemId);
+      const bIdx = to.items.findIndex((i) => i.id === beforeItemId);
       if (bIdx !== -1) insertAt = bIdx;
     }
     to.items.splice(insertAt, 0, moved);

@@ -18,25 +18,37 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
   selector: 'utilities-page',
   standalone: true,
   imports: [
-    ShowcaseExample, NgxsmkButton,
-    NgxsmkVisuallyHidden, NgxsmkFocusTrap, NgxsmkClickOutside, NgxsmkKeyboardShortcut,
-    NgxsmkCopyToClipboard, NgxsmkScrollLock, NgxsmkResizeObserver, NgxsmkIntersectionObserver,
-    NgxsmkLayerProvider, NgxsmkMediaQuery, NgxsmkMediaTheme, NgxsmkLazyLoad,
+    ShowcaseExample,
+    NgxsmkButton,
+    NgxsmkVisuallyHidden,
+    NgxsmkFocusTrap,
+    NgxsmkClickOutside,
+    NgxsmkKeyboardShortcut,
+    NgxsmkCopyToClipboard,
+    NgxsmkScrollLock,
+    NgxsmkResizeObserver,
+    NgxsmkIntersectionObserver,
+    NgxsmkLayerProvider,
+    NgxsmkMediaQuery,
+    NgxsmkMediaTheme,
+    NgxsmkLazyLoad,
   ],
   template: `
     <h2 class="ngxsmk-page-title">Utilities &amp; Hooks</h2>
     <p class="ngxsmk-page-desc">
-      Invisible-but-powerful directives and hooks for accessibility, layout, and
-      interaction behavior — each demo below makes the effect visible and interactive.
+      Invisible-but-powerful directives and hooks for accessibility, layout, and interaction
+      behavior — each demo below makes the effect visible and interactive.
     </p>
 
     <showcase-example
       title="Visually Hidden"
       description="Hides content visually while keeping it available to screen readers."
-      [code]="codeVisuallyHidden" [component]="NgxsmkButton">
+      [code]="codeVisuallyHidden"
+      [component]="NgxsmkButton"
+    >
       <div class="ngxsmk-sc-surface" style="flex: 1 1 100%">
         <p style="margin:0 0 .5rem">
-          <button ngxsmk-button size="sm" (click)="showHidden.update(v => !v)">
+          <button ngxsmk-button size="sm" (click)="showHidden.update((v) => !v)">
             {{ showHidden() ? 'Hide' : 'Reveal' }} the hidden text
           </button>
         </p>
@@ -48,17 +60,21 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
         } @else {
           <p style="margin:0">Visible label — extra description only announced to screen readers</p>
         }
-        <p class="ngxsmk-demo-hint">Toggle to compare: the directive removes it from view, not the DOM.</p>
+        <p class="ngxsmk-demo-hint">
+          Toggle to compare: the directive removes it from view, not the DOM.
+        </p>
       </div>
     </showcase-example>
 
     <showcase-example
       title="Focus Trap"
       description="Cycles Tab focus within the element so keyboard users stay contained."
-      [code]="codeFocusTrap" [component]="NgxsmkButton">
+      [code]="codeFocusTrap"
+      [component]="NgxsmkButton"
+    >
       <div class="ngxsmk-sc-surface" style="flex: 1 1 100%">
         <p style="margin:0 0 .5rem">
-          <button ngxsmk-button size="sm" (click)="focusTrapped.update(v => !v)">
+          <button ngxsmk-button size="sm" (click)="focusTrapped.update((v) => !v)">
             Trap is {{ focusTrapped() ? 'ON' : 'OFF' }}
           </button>
         </p>
@@ -68,31 +84,43 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
           <button ngxsmk-button size="sm">Last</button>
           <a ngxsmk-link href="#">A focusable link</a>
         </div>
-        <p class="ngxsmk-demo-hint">Turn the trap on, then press Tab — focus loops inside the box.</p>
+        <p class="ngxsmk-demo-hint">
+          Turn the trap on, then press Tab — focus loops inside the box.
+        </p>
       </div>
     </showcase-example>
 
     <showcase-example
       title="Click Outside"
       description="Emits when a click lands outside the host element — perfect for popovers."
-      [code]="codeClickOutside" [component]="NgxsmkButton">
+      [code]="codeClickOutside"
+      [component]="NgxsmkButton"
+    >
       <div class="ngxsmk-sc-surface" style="flex: 1 1 100%; position: relative">
         <button ngxsmk-button size="sm" (click)="outsideOpen.set(true)">
           {{ outsideOpen() ? 'Popover open' : 'Open popover' }}
         </button>
         @if (outsideOpen()) {
-          <div class="ngxsmk-popover" ngxsmkClickOutside (ngxsmkClickOutside)="outsideOpen.set(false)">
+          <div
+            class="ngxsmk-popover"
+            ngxsmkClickOutside
+            (ngxsmkClickOutside)="outsideOpen.set(false)"
+          >
             I close when you click anywhere outside me.
           </div>
         }
-        <p class="ngxsmk-demo-hint">Open the panel, then click elsewhere on the page to dismiss it.</p>
+        <p class="ngxsmk-demo-hint">
+          Open the panel, then click elsewhere on the page to dismiss it.
+        </p>
       </div>
     </showcase-example>
 
     <showcase-example
       title="Keyboard Shortcut"
       description="Binds a global key combo and fires when it matches."
-      [code]="codeShortcut" [component]="NgxsmkKeyboardShortcut">
+      [code]="codeShortcut"
+      [component]="NgxsmkKeyboardShortcut"
+    >
       <div class="ngxsmk-sc-surface" style="flex: 1 1 100%">
         <p style="margin:0">
           Press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>L</kbd>
@@ -108,14 +136,20 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
     <showcase-example
       title="Copy to Clipboard"
       description="Copies a bound string to the clipboard on click."
-      [code]="codeCopy" [component]="NgxsmkButton">
+      [code]="codeCopy"
+      [component]="NgxsmkButton"
+    >
       <div class="ngxsmk-sc-surface" style="flex: 1 1 100%">
         <code class="ngxsmk-demo-code">npm install @ngxsmk/core</code>
         <button
-          ngxsmk-button size="sm" class="ngxsmk-demo-ml"
+          ngxsmk-button
+          size="sm"
+          class="ngxsmk-demo-ml"
           ngxsmkCopyToClipboard="npm install @ngxsmk/core"
           (copied)="onCopied()"
-        >{{ copied() ? 'Copied!' : 'Copy' }}</button>
+        >
+          {{ copied() ? 'Copied!' : 'Copy' }}
+        </button>
         @if (copied()) {
           <p class="ngxsmk-demo-hint">Copied to your clipboard.</p>
         }
@@ -125,22 +159,31 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
     <showcase-example
       title="Scroll Lock"
       description="Locks the document scroll while active — e.g. behind a modal."
-      [code]="codeScrollLock" [component]="NgxsmkButton">
+      [code]="codeScrollLock"
+      [component]="NgxsmkButton"
+    >
       <div class="ngxsmk-sc-surface" style="flex: 1 1 100%">
         <button
-          ngxsmk-button size="sm"
+          ngxsmk-button
+          size="sm"
           [variant]="scrollLocked() ? 'primary' : 'ghost'"
           [ngxsmkScrollLock]="scrollLocked()"
-          (click)="scrollLocked.update(v => !v)"
-        >Scroll is {{ scrollLocked() ? 'LOCKED' : 'free' }}</button>
-        <p class="ngxsmk-demo-hint">Toggle on, then try scrolling the page — it is frozen until you turn it off.</p>
+          (click)="scrollLocked.update((v) => !v)"
+        >
+          Scroll is {{ scrollLocked() ? 'LOCKED' : 'free' }}
+        </button>
+        <p class="ngxsmk-demo-hint">
+          Toggle on, then try scrolling the page — it is frozen until you turn it off.
+        </p>
       </div>
     </showcase-example>
 
     <showcase-example
       title="Resize Observer"
       description="Streams the element's size whenever it changes."
-      [code]="codeResize" [component]="NgxsmkResizeObserver">
+      [code]="codeResize"
+      [component]="NgxsmkResizeObserver"
+    >
       <div class="ngxsmk-sc-surface" style="flex: 1 1 100%">
         <div class="ngxsmk-resize-box" ngxsmkResizeObserver (sizeChanged)="onResize($event)">
           Drag the corner to resize me
@@ -154,7 +197,9 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
     <showcase-example
       title="Intersection Observer"
       description="Reports whether the element is visible within a scroll container."
-      [code]="codeIntersection" [component]="NgxsmkIntersectionObserver">
+      [code]="codeIntersection"
+      [component]="NgxsmkIntersectionObserver"
+    >
       <div class="ngxsmk-sc-surface" style="flex: 1 1 100%">
         <div class="ngxsmk-scroll-window">
           <div class="ngxsmk-scroll-spacer">Scroll down…</div>
@@ -174,7 +219,9 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
     <showcase-example
       title="Layer Provider"
       description="Establishes a positioned layer context for overlays and portals."
-      [code]="codeLayer" [component]="NgxsmkLayerProvider">
+      [code]="codeLayer"
+      [component]="NgxsmkLayerProvider"
+    >
       <div class="ngxsmk-sc-surface" style="flex: 1 1 100%">
         <div ngxsmkLayerProvider class="ngxsmk-layer-stage">
           <div class="ngxsmk-layer-card ngxsmk-layer-card--back">Base layer</div>
@@ -187,12 +234,15 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
     <showcase-example
       title="Media Query"
       description="Reflects a CSS media query match as a live signal."
-      [code]="codeMediaQuery" [component]="NgxsmkMediaQuery">
+      [code]="codeMediaQuery"
+      [component]="NgxsmkMediaQuery"
+    >
       <div class="ngxsmk-sc-surface" style="flex: 1 1 100%">
         <div ngxsmkMediaQuery="(min-width: 768px)"></div>
         <p style="margin:0">
           Viewport is
-          <strong>{{ mediaMatches() ? '≥ 768px (desktop)' : '< 768px (narrow)' }}</strong>.
+          <strong>{{ mediaMatches() ? '≥ 768px (desktop)' : '< 768px (narrow)' }}</strong
+          >.
         </p>
         <p class="ngxsmk-demo-hint">Resize the window to flip the match.</p>
       </div>
@@ -201,7 +251,9 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
     <showcase-example
       title="Media Theme"
       description="Applies a theme mode attribute from a prefers-* media query."
-      [code]="codeMediaTheme" [component]="NgxsmkMediaTheme">
+      [code]="codeMediaTheme"
+      [component]="NgxsmkMediaTheme"
+    >
       <div class="ngxsmk-sc-surface" style="flex: 1 1 100%">
         <div
           class="ngxsmk-theme-box"
@@ -218,7 +270,9 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
     <showcase-example
       title="Lazy Load"
       description="Defers rendering children until they scroll into view."
-      [code]="codeLazy" [component]="NgxsmkLazyLoad">
+      [code]="codeLazy"
+      [component]="NgxsmkLazyLoad"
+    >
       <div class="ngxsmk-sc-surface" style="flex: 1 1 100%">
         <div class="ngxsmk-scroll-window">
           <div class="ngxsmk-scroll-spacer">Scroll down to load the content…</div>
@@ -235,7 +289,9 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
     <showcase-example
       title="Lazy Load (cards)"
       description="Each card below is wrapped in ngxsmk-lazy-load, so its markup is only created once it scrolls into the viewport — scroll the feed to watch them appear."
-      [code]="codeLazyCards" [component]="NgxsmkLazyLoad">
+      [code]="codeLazyCards"
+      [component]="NgxsmkLazyLoad"
+    >
       <div class="ngxsmk-sc-surface" style="flex: 1 1 100%">
         <div class="ngxsmk-scroll-window">
           <div class="ngxsmk-scroll-spacer">Scroll down — cards load as they enter view…</div>
@@ -256,9 +312,13 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
     </showcase-example>
   `,
   styles: `
-    :host { display: block; }
+    :host {
+      display: block;
+    }
 
-    .ngxsmk-sc-surface { width: 100%; }
+    .ngxsmk-sc-surface {
+      width: 100%;
+    }
 
     .ngxsmk-demo-hint {
       margin: 0.75rem 0 0;
@@ -279,7 +339,9 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
       font-size: 0.8125rem;
     }
 
-    .ngxsmk-demo-ml { margin-left: 0.5rem; }
+    .ngxsmk-demo-ml {
+      margin-left: 0.5rem;
+    }
 
     .ngxsmk-trap-box {
       display: flex;
@@ -299,7 +361,7 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
       background: var(--ngxsmk-color-surface, #fff);
       border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
       border-radius: var(--ngxsmk-radius-md, 0.5rem);
-      box-shadow: var(--ngxsmk-shadow-md, 0 4px 12px rgba(0,0,0,0.12));
+      box-shadow: var(--ngxsmk-shadow-md, 0 4px 12px rgba(0, 0, 0, 0.12));
     }
 
     kbd {
@@ -348,7 +410,9 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
       border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
       background: var(--ngxsmk-color-surface, #fff);
       color: var(--ngxsmk-color-on-surface-variant, #71717a);
-      transition: background 0.2s, color 0.2s;
+      transition:
+        background 0.2s,
+        color 0.2s;
     }
 
     .ngxsmk-observe-target.is-visible {
@@ -371,11 +435,22 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
       justify-content: center;
       border-radius: var(--ngxsmk-radius-md, 0.5rem);
       font-size: 0.8125rem;
-      box-shadow: var(--ngxsmk-shadow-md, 0 4px 12px rgba(0,0,0,0.12));
+      box-shadow: var(--ngxsmk-shadow-md, 0 4px 12px rgba(0, 0, 0, 0.12));
     }
 
-    .ngxsmk-layer-card--back { top: 0; left: 0; background: var(--ngxsmk-color-surface-variant, #f4f4f5); z-index: 1; }
-    .ngxsmk-layer-card--front { top: 30px; left: 60px; background: var(--ngxsmk-color-primary, #4f46e5); color: #fff; z-index: 2; }
+    .ngxsmk-layer-card--back {
+      top: 0;
+      left: 0;
+      background: var(--ngxsmk-color-surface-variant, #f4f4f5);
+      z-index: 1;
+    }
+    .ngxsmk-layer-card--front {
+      top: 30px;
+      left: 60px;
+      background: var(--ngxsmk-color-primary, #4f46e5);
+      color: #fff;
+      z-index: 2;
+    }
 
     .ngxsmk-theme-box {
       padding: 1rem 1.25rem;
@@ -485,59 +560,47 @@ export class UtilitiesPage {
     this.intersecting.set(value);
   }
 
-  protected readonly codeVisuallyHidden =
-`<span ngxsmkVisuallyHidden>Extra description for screen readers</span>`;
+  protected readonly codeVisuallyHidden = `<span ngxsmkVisuallyHidden>Extra description for screen readers</span>`;
 
-  protected readonly codeFocusTrap =
-`<div ngxsmkFocusTrap [ngxsmkFocusTrap]="true">
+  protected readonly codeFocusTrap = `<div ngxsmkFocusTrap [ngxsmkFocusTrap]="true">
   <button>First</button>
   <button>Last</button>
 </div>`;
 
-  protected readonly codeClickOutside =
-`<div ngxsmkClickOutside (ngxsmkClickOutside)="open.set(false)">
+  protected readonly codeClickOutside = `<div ngxsmkClickOutside (ngxsmkClickOutside)="open.set(false)">
   Popover content
 </div>`;
 
-  protected readonly codeShortcut =
-`<span ngxsmkKeyboardShortcut="ctrl+shift+l"
+  protected readonly codeShortcut = `<span ngxsmkKeyboardShortcut="ctrl+shift+l"
       (shortcutPressed)="onShortcut()"></span>`;
 
-  protected readonly codeCopy =
-`<button ngxsmkCopyToClipboard="npm install @ngxsmk/core"
+  protected readonly codeCopy = `<button ngxsmkCopyToClipboard="npm install @ngxsmk/core"
         (copied)="onCopied()">Copy</button>`;
 
-  protected readonly codeScrollLock =
-`<button [ngxsmkScrollLock]="locked()" (click)="locked.set(!locked())">
+  protected readonly codeScrollLock = `<button [ngxsmkScrollLock]="locked()" (click)="locked.set(!locked())">
   Toggle scroll lock
 </button>`;
 
-  protected readonly codeResize =
-`<div ngxsmkResizeObserver (sizeChanged)="onResize($event)">
+  protected readonly codeResize = `<div ngxsmkResizeObserver (sizeChanged)="onResize($event)">
   Resizable
 </div>`;
 
-  protected readonly codeIntersection =
-`<div ngxsmkIntersectionObserver (intersected)="onIntersect($event)">
+  protected readonly codeIntersection = `<div ngxsmkIntersectionObserver (intersected)="onIntersect($event)">
   Watched element
 </div>`;
 
-  protected readonly codeLayer =
-`<div ngxsmkLayerProvider>
+  protected readonly codeLayer = `<div ngxsmkLayerProvider>
   <div class="ngxsmk-overlay">Stacked content</div>
 </div>`;
 
-  protected readonly codeMediaQuery =
-`<div ngxsmkMediaQuery="(min-width: 768px)"></div>
+  protected readonly codeMediaQuery = `<div ngxsmkMediaQuery="(min-width: 768px)"></div>
 <!-- matches() signal reflects the query -->`;
 
-  protected readonly codeMediaTheme =
-`<div ngxsmkMediaTheme query="(prefers-color-scheme: dark)" theme="dark">
+  protected readonly codeMediaTheme = `<div ngxsmkMediaTheme query="(prefers-color-scheme: dark)" theme="dark">
   Theme-aware content
 </div>`;
 
-  protected readonly codeLazy =
-`<ngxsmk-lazy-load rootMargin="0px">
+  protected readonly codeLazy = `<ngxsmk-lazy-load rootMargin="0px">
   <div>Rendered on scroll into view</div>
 </ngxsmk-lazy-load>`;
 
@@ -548,8 +611,7 @@ export class UtilitiesPage {
     { id: 4, title: 'Card Delta', color: 'linear-gradient(135deg,#a855f7,#ec4899)' },
   ];
 
-  protected readonly codeLazyCards =
-`<ngxsmk-lazy-load>
+  protected readonly codeLazyCards = `<ngxsmk-lazy-load>
   <div class="ngxsmk-lazy-card">
     <div class="ngxsmk-lazy-card__thumb"></div>
     <div class="ngxsmk-lazy-card__body">

@@ -10,9 +10,7 @@ import {
 
 export type NgxsmkPaginationSize = 'sm' | 'md' | 'lg';
 
-type PageItem =
-  | { kind: 'page'; page: number }
-  | { kind: 'ellipsis'; key: string };
+type PageItem = { kind: 'page'; page: number } | { kind: 'ellipsis'; key: string };
 
 /**
  * Pagination control with first/prev/next/last and an ellipsis-collapsed page
@@ -72,12 +70,7 @@ type PageItem =
             </button>
           </li>
         } @else {
-          <li
-            class="ngxsmk-pagination__ellipsis"
-            aria-hidden="true"
-          >
-            …
-          </li>
+          <li class="ngxsmk-pagination__ellipsis" aria-hidden="true">…</li>
         }
       }
 
@@ -117,7 +110,10 @@ type PageItem =
     '[attr.data-disabled]': 'disabled() ? "" : null',
   },
   styles: `
-    :host { display: block; font-family: var(--ngxsmk-font-sans, sans-serif); }
+    :host {
+      display: block;
+      font-family: var(--ngxsmk-font-sans, sans-serif);
+    }
     .ngxsmk-pagination__list {
       display: flex;
       flex-wrap: wrap;
@@ -146,8 +142,12 @@ type PageItem =
         background-color var(--ngxsmk-duration-fast, 120ms) var(--ngxsmk-ease-out, ease),
         border-color var(--ngxsmk-duration-fast, 120ms) var(--ngxsmk-ease-out, ease);
     }
-    :host([data-size='sm']) { --ngxsmk-pagination-size: 1.875rem; }
-    :host([data-size='lg']) { --ngxsmk-pagination-size: 2.75rem; }
+    :host([data-size='sm']) {
+      --ngxsmk-pagination-size: 1.875rem;
+    }
+    :host([data-size='lg']) {
+      --ngxsmk-pagination-size: 2.75rem;
+    }
     .ngxsmk-pagination__btn:hover:not(:disabled) {
       background: var(--ngxsmk-color-surface-variant, #f1f5f9);
     }
@@ -177,7 +177,9 @@ type PageItem =
       user-select: none;
     }
     @media (prefers-reduced-motion: reduce) {
-      .ngxsmk-pagination__btn { transition: none; }
+      .ngxsmk-pagination__btn {
+        transition: none;
+      }
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -208,9 +210,7 @@ export class NgxsmkPagination {
   });
 
   protected readonly isFirst = computed(() => this.page() <= 1);
-  protected readonly isLast = computed(
-    () => this.page() >= this.pageCountResolved(),
-  );
+  protected readonly isLast = computed(() => this.page() >= this.pageCountResolved());
 
   protected readonly items = computed<PageItem[]>(() => {
     const count = this.pageCountResolved();

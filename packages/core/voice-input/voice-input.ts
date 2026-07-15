@@ -19,12 +19,46 @@ import { ChangeDetectionStrategy, Component, output, signal } from '@angular/cor
   `,
   host: { class: 'ngxsmk-voice-input' },
   styles: `
-    :host { display: inline-flex; align-items: center; gap: var(--ngxsmk-space-2); font-family: var(--ngxsmk-font-sans); }
-    .ngxsmk-voice-input__button { width: 2.5rem; height: 2.5rem; border-radius: var(--ngxsmk-radius-full); border: none; background: var(--ngxsmk-color-surface-variant); cursor: pointer; font-size: 1.125rem; display: flex; align-items: center; justify-content: center; transition: all var(--ngxsmk-duration-fast); }
-    .ngxsmk-voice-input__button:hover { background: var(--ngxsmk-color-surface-hover); }
-    .ngxsmk-voice-input__button[data-recording] { background: var(--ngxsmk-color-error-container); color: var(--ngxsmk-color-on-error-container); animation: pulse 1s infinite; }
-    .ngxsmk-voice-input__transcript { font-size: 0.875rem; color: var(--ngxsmk-color-on-surface-variant); }
-    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+    :host {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--ngxsmk-space-2);
+      font-family: var(--ngxsmk-font-sans);
+    }
+    .ngxsmk-voice-input__button {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: var(--ngxsmk-radius-full);
+      border: none;
+      background: var(--ngxsmk-color-surface-variant);
+      cursor: pointer;
+      font-size: 1.125rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--ngxsmk-duration-fast);
+    }
+    .ngxsmk-voice-input__button:hover {
+      background: var(--ngxsmk-color-surface-hover);
+    }
+    .ngxsmk-voice-input__button[data-recording] {
+      background: var(--ngxsmk-color-error-container);
+      color: var(--ngxsmk-color-on-error-container);
+      animation: pulse 1s infinite;
+    }
+    .ngxsmk-voice-input__transcript {
+      font-size: 0.875rem;
+      color: var(--ngxsmk-color-on-surface-variant);
+    }
+    @keyframes pulse {
+      0%,
+      100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

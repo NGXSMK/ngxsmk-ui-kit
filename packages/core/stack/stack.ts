@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 export type NgxsmkStackDirection = 'horizontal' | 'vertical';
 export type NgxsmkStackAlign = 'start' | 'end' | 'center' | 'baseline' | 'stretch';
@@ -30,7 +26,11 @@ const ALIGN_MAP: Record<string, string> = {
     '[style.align-items]': 'alignMap()',
     '[style.gap]': 'gap()',
   },
-  styles: `:host { display: flex; }`,
+  styles: `
+    :host {
+      display: flex;
+    }
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgxsmkStack {

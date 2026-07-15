@@ -1,4 +1,13 @@
-import { inject, Injectable, signal, WritableSignal, computed, effect, Signal, DestroyRef } from '@angular/core';
+import {
+  inject,
+  Injectable,
+  signal,
+  WritableSignal,
+  computed,
+  effect,
+  Signal,
+  DestroyRef,
+} from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
 // ─── Core Hooks ─────────────────────────────────────────────
@@ -21,7 +30,9 @@ export function useMediaQuery(query: string): WritableSignal<boolean> {
 export function useTheme(): WritableSignal<'light' | 'dark'> {
   const doc = inject(DOCUMENT);
   const isBrowser = typeof window !== 'undefined';
-  const initial = isBrowser ? doc.documentElement.getAttribute('data-theme') as 'light' | 'dark' || 'light' : 'light';
+  const initial = isBrowser
+    ? (doc.documentElement.getAttribute('data-theme') as 'light' | 'dark') || 'light'
+    : 'light';
   const theme = signal<'light' | 'dark'>(initial);
   effect(() => {
     if (isBrowser) {
@@ -44,7 +55,10 @@ export function useScrollLock(): { locked: WritableSignal<boolean> } {
   return { locked };
 }
 
-export function useToast(): (message: string, variant?: 'info' | 'success' | 'error' | 'warning') => void {
+export function useToast(): (
+  message: string,
+  variant?: 'info' | 'success' | 'error' | 'warning',
+) => void {
   const doc = inject(DOCUMENT);
   return (message: string, variant: 'info' | 'success' | 'error' | 'warning' = 'info') => {
     const el = doc.createElement('div');
@@ -73,7 +87,7 @@ export function useStreamingText(target: string, speed = 30): Signal<string> {
   let index = 0;
   function stream() {
     if (index >= target.length) return;
-    displayed.update(t => t + target[index++]);
+    displayed.update((t) => t + target[index++]);
     setTimeout(stream, speed);
   }
   stream();
@@ -96,12 +110,19 @@ export function useFocusTrap(): {
     if (!active() || e.key !== 'Tab') return;
     const el = trapRef();
     if (!el) return;
-    const focusable = el.querySelectorAll<HTMLElement>('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+    const focusable = el.querySelectorAll<HTMLElement>(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+    );
     if (!focusable.length) return;
     const first = focusable[0];
     const last = focusable[focusable.length - 1];
-    if (e.shiftKey && doc.activeElement === first) { e.preventDefault(); last.focus(); }
-    else if (!e.shiftKey && doc.activeElement === last) { e.preventDefault(); first.focus(); }
+    if (e.shiftKey && doc.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && doc.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
   }
 
   destroyRef.onDestroy(() => doc.removeEventListener('keydown', handleKey));
@@ -109,7 +130,12 @@ export function useFocusTrap(): {
 
   return {
     trapRef,
-    activate: () => { active.set(true); trapRef()?.querySelector<HTMLElement>('button, input, [tabindex]:not([tabindex="-1"])')?.focus(); },
+    activate: () => {
+      active.set(true);
+      trapRef()
+        ?.querySelector<HTMLElement>('button, input, [tabindex]:not([tabindex="-1"])')
+        ?.focus();
+    },
     deactivate: () => active.set(false),
   };
 }
@@ -123,8 +149,14 @@ export function useListFocus(): {
   return {
     activeIndex,
     handleKey(e: KeyboardEvent, length: number) {
-      if (e.key === 'ArrowDown') { e.preventDefault(); activeIndex.update(i => Math.min(i + 1, length - 1)); }
-      if (e.key === 'ArrowUp') { e.preventDefault(); activeIndex.update(i => Math.max(i - 1, 0)); }
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        activeIndex.update((i) => Math.min(i + 1, length - 1));
+      }
+      if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        activeIndex.update((i) => Math.max(i - 1, 0));
+      }
     },
     reset: () => activeIndex.set(-1),
   };
@@ -138,13 +170,26 @@ export function useGridFocus(): {
   const row = signal(0);
   const col = signal(0);
   return {
-    row, col,
+    row,
+    col,
     handleKey(e: KeyboardEvent, rows: number, cols: number) {
       switch (e.key) {
-        case 'ArrowDown': e.preventDefault(); row.update(r => Math.min(r + 1, rows - 1)); break;
-        case 'ArrowUp': e.preventDefault(); row.update(r => Math.max(r - 1, 0)); break;
-        case 'ArrowRight': e.preventDefault(); col.update(c => Math.min(c + 1, cols - 1)); break;
-        case 'ArrowLeft': e.preventDefault(); col.update(c => Math.max(c - 1, 0)); break;
+        case 'ArrowDown':
+          e.preventDefault();
+          row.update((r) => Math.min(r + 1, rows - 1));
+          break;
+        case 'ArrowUp':
+          e.preventDefault();
+          row.update((r) => Math.max(r - 1, 0));
+          break;
+        case 'ArrowRight':
+          e.preventDefault();
+          col.update((c) => Math.min(c + 1, cols - 1));
+          break;
+        case 'ArrowLeft':
+          e.preventDefault();
+          col.update((c) => Math.max(c - 1, 0));
+          break;
       }
     },
   };
@@ -160,9 +205,25 @@ export function useTreeFocus(): {
   const expanded = signal<Set<string>>(new Set());
   return {
     activePath,
-    expand: (id: string) => expanded.update(s => { s.add(id); return s; }),
-    collapse: (id: string) => expanded.update(s => { s.delete(id); return s; }),
-    toggle: (id: string) => expanded.update(s => { if (s.has(id)) { s.delete(id); } else { s.add(id); } return s; }),
+    expand: (id: string) =>
+      expanded.update((s) => {
+        s.add(id);
+        return s;
+      }),
+    collapse: (id: string) =>
+      expanded.update((s) => {
+        s.delete(id);
+        return s;
+      }),
+    toggle: (id: string) =>
+      expanded.update((s) => {
+        if (s.has(id)) {
+          s.delete(id);
+        } else {
+          s.add(id);
+        }
+        return s;
+      }),
   };
 }
 
@@ -212,8 +273,8 @@ export function useInputContainer(): {
 } {
   const focused = signal(false);
   const filled = signal(false);
-  const containerClass = computed(() =>
-    (focused() ? 'ngxsmk-input--focused ' : '') + (filled() ? 'ngxsmk-input--filled ' : '')
+  const containerClass = computed(
+    () => (focused() ? 'ngxsmk-input--focused ' : '') + (filled() ? 'ngxsmk-input--filled ' : ''),
   );
   return { focused, filled, containerClass };
 }
@@ -226,7 +287,9 @@ export function useClickableContainer(): {
   const clicked = signal(0);
   const destroyRef = inject(DestroyRef);
   destroyRef.onDestroy(() => ref()?.removeEventListener('click', handler));
-  function handler() { clicked.update(c => c + 1); }
+  function handler() {
+    clicked.update((c) => c + 1);
+  }
   effect(() => ref()?.addEventListener('click', handler));
   return { ref, clicked };
 }
@@ -240,8 +303,14 @@ export function useLayer(): {
   const zIndex = signal(current);
   return {
     zIndex,
-    increment: () => { current++; zIndex.set(current); },
-    decrement: () => { current = Math.max(100, current - 1); zIndex.set(current); },
+    increment: () => {
+      current++;
+      zIndex.set(current);
+    },
+    decrement: () => {
+      current = Math.max(100, current - 1);
+      zIndex.set(current);
+    },
   };
 }
 
@@ -253,7 +322,7 @@ export function useImageMode(): {
   const src = signal('');
   const darkSrc = signal('');
   const theme = useTheme();
-  const resolved = computed(() => theme() === 'dark' && darkSrc() ? darkSrc() : src());
+  const resolved = computed(() => (theme() === 'dark' && darkSrc() ? darkSrc() : src()));
   return { src, darkSrc, resolved };
 }
 
@@ -273,15 +342,21 @@ export function useTableSortable<T>(): {
     if (!key) return data();
     const dir = sortDir();
     return [...data()].sort((a, b) => {
-      const av = String(a[key] ?? ''), bv = String(b[key] ?? '');
+      const av = String(a[key] ?? ''),
+        bv = String(b[key] ?? '');
       return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
     });
   });
   return {
-    sortKey, sortDir, sortedData,
+    sortKey,
+    sortDir,
+    sortedData,
     toggleSort: (key: keyof T) => {
-      if (sortKey() === key) sortDir.update(d => d === 'asc' ? 'desc' : 'asc');
-      else { sortKey.set(key); sortDir.set('asc'); }
+      if (sortKey() === key) sortDir.update((d) => (d === 'asc' ? 'desc' : 'asc'));
+      else {
+        sortKey.set(key);
+        sortDir.set('asc');
+      }
     },
   };
 }
@@ -306,10 +381,14 @@ export function useTablePagination<T>(): {
     return data().slice(start, start + pageSize());
   });
   return {
-    page, pageSize, total, totalPages, paginatedData,
+    page,
+    pageSize,
+    total,
+    totalPages,
+    paginatedData,
     goTo: (p: number) => page.set(Math.max(1, Math.min(p, totalPages()))),
-    next: () => page.update(p => Math.min(p + 1, totalPages())),
-    prev: () => page.update(p => Math.max(p - 1, 1)),
+    next: () => page.update((p) => Math.min(p + 1, totalPages())),
+    prev: () => page.update((p) => Math.max(p - 1, 1)),
   };
 }
 
@@ -324,14 +403,24 @@ export function useTableSelection<T extends { id: string }>(): {
   const items = signal<T[]>([]);
   const selectedIds = signal<Set<string>>(new Set());
   const allSelected = computed(() => items().length > 0 && selectedIds().size === items().length);
-  const selectedItems = computed(() => items().filter(i => selectedIds().has(i.id)));
+  const selectedItems = computed(() => items().filter((i) => selectedIds().has(i.id)));
   return {
-    selectedIds, allSelected, selectedItems,
-    toggle: (id: string) => selectedIds.update(s => { if (s.has(id)) { s.delete(id); } else { s.add(id); } return s; }),
+    selectedIds,
+    allSelected,
+    selectedItems,
+    toggle: (id: string) =>
+      selectedIds.update((s) => {
+        if (s.has(id)) {
+          s.delete(id);
+        } else {
+          s.add(id);
+        }
+        return s;
+      }),
     toggleAll: (allItems: T[]) => {
-      selectedIds.update(s => {
+      selectedIds.update((s) => {
         if (s.size === allItems.length) s.clear();
-        else allItems.forEach(i => s.add(i.id));
+        else allItems.forEach((i) => s.add(i.id));
         return s;
       });
     },
@@ -350,15 +439,20 @@ export function useTableFiltering<T>(): {
   const filteredData = computed(() => {
     const f = filters();
     if (!Object.keys(f).length) return data();
-    return data().filter(item =>
-      Object.entries(f).every(([key, val]) =>
-        !val || String((item as Record<string, unknown>)[key] ?? '').toLowerCase().includes(val.toLowerCase())
-      )
+    return data().filter((item) =>
+      Object.entries(f).every(
+        ([key, val]) =>
+          !val ||
+          String((item as Record<string, unknown>)[key] ?? '')
+            .toLowerCase()
+            .includes(val.toLowerCase()),
+      ),
     );
   });
   return {
-    filters, filteredData,
-    setFilter: (key: string, value: string) => filters.update(f => ({ ...f, [key]: value })),
+    filters,
+    filteredData,
+    setFilter: (key: string, value: string) => filters.update((f) => ({ ...f, [key]: value })),
     clearFilters: () => filters.set({}),
   };
 }
@@ -373,9 +467,15 @@ export function useTableFilterState(): {
   const filters = signal<Record<string, { value: string; operator: string }>>({});
   const activeCount = computed(() => Object.keys(filters()).length);
   return {
-    filters, activeCount,
-    setFilter: (key: string, value: string, operator = 'contains') => filters.update(f => ({ ...f, [key]: { value, operator } })),
-    removeFilter: (key: string) => filters.update(f => { const { [key]: _, ...rest } = f; return rest; }),
+    filters,
+    activeCount,
+    setFilter: (key: string, value: string, operator = 'contains') =>
+      filters.update((f) => ({ ...f, [key]: { value, operator } })),
+    removeFilter: (key: string) =>
+      filters.update((f) => {
+        const { [key]: _, ...rest } = f;
+        return rest;
+      }),
     clearAll: () => filters.set({}),
   };
 }
@@ -390,7 +490,15 @@ export function useTableRowExpansion(): {
   return {
     expandedIds,
     isExpanded: (id: string) => expandedIds().has(id),
-    toggle: (id: string) => expandedIds.update(s => { if (s.has(id)) { s.delete(id); } else { s.add(id); } return s; }),
+    toggle: (id: string) =>
+      expandedIds.update((s) => {
+        if (s.has(id)) {
+          s.delete(id);
+        } else {
+          s.add(id);
+        }
+        return s;
+      }),
     collapseAll: () => expandedIds.set(new Set()),
   };
 }
@@ -405,9 +513,11 @@ export function useTableSelectionState(): {
   const selectionState = signal<Record<string, boolean>>({});
   const count = computed(() => Object.values(selectionState()).filter(Boolean).length);
   return {
-    selectionState, count,
-    toggle: (id: string) => selectionState.update(s => ({ ...s, [id]: !s[id] })),
-    selectAll: (ids: string[]) => selectionState.set(Object.fromEntries(ids.map(id => [id, true]))),
+    selectionState,
+    count,
+    toggle: (id: string) => selectionState.update((s) => ({ ...s, [id]: !s[id] })),
+    selectAll: (ids: string[]) =>
+      selectionState.set(Object.fromEntries(ids.map((id) => [id, true]))),
     deselectAll: () => selectionState.set({}),
   };
 }
@@ -420,12 +530,16 @@ export function useTableColumnResize(): {
   const columnWidths = signal<Record<string, number>>({});
   const resizing = signal(false);
   return {
-    columnWidths, resizing,
+    columnWidths,
+    resizing,
     startResize: (col: string, startX: number, startWidth: number) => {
       resizing.set(true);
       const doc = inject(DOCUMENT);
       function onMove(e: MouseEvent) {
-        columnWidths.update(w => ({ ...w, [col]: Math.max(60, startWidth + (e.clientX - startX)) }));
+        columnWidths.update((w) => ({
+          ...w,
+          [col]: Math.max(60, startWidth + (e.clientX - startX)),
+        }));
       }
       function onUp() {
         resizing.set(false);
@@ -447,14 +561,24 @@ export function useTableColumnSettings(): {
   const visibleColumns = signal<Set<string>>(new Set());
   const columnOrder = signal<string[]>([]);
   return {
-    visibleColumns, columnOrder,
-    toggleColumn: (col: string) => visibleColumns.update(s => { if (s.has(col)) { s.delete(col); } else { s.add(col); } return s; }),
-    moveColumn: (from: number, to: number) => columnOrder.update(order => {
-      const copy = [...order];
-      const [moved] = copy.splice(from, 1);
-      copy.splice(to, 0, moved);
-      return copy;
-    }),
+    visibleColumns,
+    columnOrder,
+    toggleColumn: (col: string) =>
+      visibleColumns.update((s) => {
+        if (s.has(col)) {
+          s.delete(col);
+        } else {
+          s.add(col);
+        }
+        return s;
+      }),
+    moveColumn: (from: number, to: number) =>
+      columnOrder.update((order) => {
+        const copy = [...order];
+        const [moved] = copy.splice(from, 1);
+        copy.splice(to, 0, moved);
+        return copy;
+      }),
   };
 }
 
@@ -465,7 +589,15 @@ export function useTableStickyColumns(): {
   const stickyColumns = signal<Set<string>>(new Set());
   return {
     stickyColumns,
-    toggleSticky: (col: string) => stickyColumns.update(s => { if (s.has(col)) { s.delete(col); } else { s.add(col); } return s; }),
+    toggleSticky: (col: string) =>
+      stickyColumns.update((s) => {
+        if (s.has(col)) {
+          s.delete(col);
+        } else {
+          s.add(col);
+        }
+        return s;
+      }),
   };
 }
 
@@ -486,16 +618,22 @@ export function usePopover(): {
   const destroyRef = inject(DestroyRef);
   destroyRef.onDestroy(() => doc.removeEventListener('click', handleOutside));
   function handleOutside(e: MouseEvent) {
-    if (isOpen() && !triggerRef()?.contains(e.target as Node) && !contentRef()?.contains(e.target as Node)) {
+    if (
+      isOpen() &&
+      !triggerRef()?.contains(e.target as Node) &&
+      !contentRef()?.contains(e.target as Node)
+    ) {
       isOpen.set(false);
     }
   }
   doc.addEventListener('click', handleOutside);
   return {
-    isOpen, triggerRef, contentRef,
+    isOpen,
+    triggerRef,
+    contentRef,
     open: () => isOpen.set(true),
     close: () => isOpen.set(false),
-    toggle: () => isOpen.update(v => !v),
+    toggle: () => isOpen.update((v) => !v),
   };
 }
 
@@ -509,9 +647,15 @@ export function useHoverCard(): {
   const delay = signal(300);
   let timer: ReturnType<typeof setTimeout> | null = null;
   return {
-    isVisible, delay,
-    show: () => { timer = setTimeout(() => isVisible.set(true), delay()); },
-    hide: () => { if (timer) clearTimeout(timer); isVisible.set(false); },
+    isVisible,
+    delay,
+    show: () => {
+      timer = setTimeout(() => isVisible.set(true), delay());
+    },
+    hide: () => {
+      if (timer) clearTimeout(timer);
+      isVisible.set(false);
+    },
   };
 }
 
@@ -520,7 +664,7 @@ export function useEntryAnimation(): {
   className: Signal<string>;
 } {
   const animate = signal(false);
-  const className = computed(() => animate() ? 'ngxsmk-animate--enter' : '');
+  const className = computed(() => (animate() ? 'ngxsmk-animate--enter' : ''));
   return { animate, className };
 }
 

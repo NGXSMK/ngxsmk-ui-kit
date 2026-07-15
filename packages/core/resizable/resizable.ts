@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, ElementRef, afterNextRender, input, signal, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  afterNextRender,
+  input,
+  signal,
+  inject,
+} from '@angular/core';
 import { NgxsmkResizeHandle } from '@ngxsmk/core/resize-handle';
 
 @Component({
@@ -12,10 +20,7 @@ import { NgxsmkResizeHandle } from '@ngxsmk/core/resize-handle';
     >
       <ng-content />
     </div>
-    <ngxsmk-resize-handle
-      [orientation]="orientation()"
-      (resizing)="onResizing($event)"
-    />
+    <ngxsmk-resize-handle [orientation]="orientation()" (resizing)="onResizing($event)" />
   `,
   host: {
     class: 'ngxsmk-resizable',
@@ -65,13 +70,16 @@ export class NgxsmkResizable {
 
   protected onResizing(event: MouseEvent): void {
     const panel = this.el.querySelector<HTMLElement>('.ngxsmk-resizable__panel');
-    if (!panel) { return; }
+    if (!panel) {
+      return;
+    }
 
     const onMove = (e: MouseEvent) => {
       e.preventDefault();
-      const delta = this.orientation() === 'horizontal'
-        ? e.clientX - this.startPointer
-        : e.clientY - this.startPointer;
+      const delta =
+        this.orientation() === 'horizontal'
+          ? e.clientX - this.startPointer
+          : e.clientY - this.startPointer;
       const newSize = Math.max(50, this.startSize + delta);
       this.sizeSignal.set(`${newSize}px`);
     };

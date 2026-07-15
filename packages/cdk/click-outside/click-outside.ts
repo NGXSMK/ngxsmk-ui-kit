@@ -1,11 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import {
-  DestroyRef,
-  Directive,
-  ElementRef,
-  inject,
-  output,
-} from '@angular/core';
+import { DestroyRef, Directive, ElementRef, inject, output } from '@angular/core';
 
 /**
  * Emits when a pointer press lands outside the host element.
@@ -37,8 +31,6 @@ export class NgxsmkClickOutside {
     // Capture phase so stopped propagation inside other widgets can't
     // swallow the outside press.
     document.addEventListener('pointerdown', onPointerDown, true);
-    destroyRef.onDestroy(() =>
-      document.removeEventListener('pointerdown', onPointerDown, true),
-    );
+    destroyRef.onDestroy(() => document.removeEventListener('pointerdown', onPointerDown, true));
   }
 }

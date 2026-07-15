@@ -26,7 +26,12 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
       box-shadow: 0 1px 0 var(--ngxsmk-color-outline);
       line-height: 1;
     }
-    :host([data-size='lg']) { height: 2rem; min-width: 2rem; padding: 0 0.5rem; font-size: var(--ngxsmk-text-body-md-size); }
+    :host([data-size='lg']) {
+      height: 2rem;
+      min-width: 2rem;
+      padding: 0 0.5rem;
+      font-size: var(--ngxsmk-text-body-md-size);
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

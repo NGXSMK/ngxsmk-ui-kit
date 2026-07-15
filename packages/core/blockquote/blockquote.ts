@@ -24,7 +24,9 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
       color: var(--ngxsmk-color-on-surface);
       font-style: italic;
     }
-    .ngxsmk-blockquote__content { margin: 0; }
+    .ngxsmk-blockquote__content {
+      margin: 0;
+    }
     .ngxsmk-blockquote__footer {
       margin-top: var(--ngxsmk-space-2);
       font-size: var(--ngxsmk-text-body-sm-size);

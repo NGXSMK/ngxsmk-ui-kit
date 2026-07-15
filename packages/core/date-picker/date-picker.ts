@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  input,
-  model,
-  output,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, model, output } from '@angular/core';
 
 @Component({
   standalone: true,
@@ -22,7 +16,10 @@ import {
   `,
   host: { class: 'ngxsmk-date-picker' },
   styles: `
-    :host { display: block; font-family: var(--ngxsmk-font-sans); }
+    :host {
+      display: block;
+      font-family: var(--ngxsmk-font-sans);
+    }
     .ngxsmk-date-picker__control {
       display: block;
       width: 100%;
@@ -35,9 +32,13 @@ import {
       font-family: var(--ngxsmk-font-sans);
       font-size: var(--ngxsmk-text-body-md-size);
       line-height: var(--ngxsmk-text-body-md-line);
-      transition: border-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out), box-shadow var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
+      transition:
+        border-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
+        box-shadow var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
-    .ngxsmk-date-picker__control::placeholder { color: var(--ngxsmk-color-on-surface-variant); }
+    .ngxsmk-date-picker__control::placeholder {
+      color: var(--ngxsmk-color-on-surface-variant);
+    }
     .ngxsmk-date-picker__control:focus-visible {
       outline: none;
       border-color: var(--ngxsmk-color-ring);

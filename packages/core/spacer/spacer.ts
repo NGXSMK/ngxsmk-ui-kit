@@ -13,7 +13,10 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
     '[style.min-height]': 'orientation() === "horizontal" ? size() : null',
   },
   styles: `
-    :host { display: block; flex-shrink: 0; }
+    :host {
+      display: block;
+      flex-shrink: 0;
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

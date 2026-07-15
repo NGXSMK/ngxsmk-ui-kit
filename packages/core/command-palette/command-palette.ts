@@ -8,7 +8,7 @@ import {
   signal,
   computed,
   ChangeDetectionStrategy,
-  effect
+  effect,
 } from '@angular/core';
 
 export interface CommandItem {
@@ -27,10 +27,26 @@ export interface CommandItem {
       <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
       <div class="ngxsmk-cmd-backdrop" (click)="close()">
         <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events -->
-        <div class="ngxsmk-cmd-modal" (click)="$event.stopPropagation()" role="dialog" aria-modal="true">
+        <div
+          class="ngxsmk-cmd-modal"
+          (click)="$event.stopPropagation()"
+          role="dialog"
+          aria-modal="true"
+        >
           <div class="ngxsmk-cmd-search">
-            <svg class="ngxsmk-cmd-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+            <svg
+              class="ngxsmk-cmd-search-icon"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.35-4.35" />
             </svg>
             <input
               #searchInput
@@ -52,7 +68,7 @@ export interface CommandItem {
             @for (group of filteredGroups(); track group.category) {
               <div class="ngxsmk-cmd-group">
                 <div class="ngxsmk-cmd-group-title">{{ group.category }}</div>
-                
+
                 @for (cmd of group.items; track cmd.id) {
                   <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
                   <div
@@ -78,7 +94,8 @@ export interface CommandItem {
 
           <div class="ngxsmk-cmd-footer">
             <span class="ngxsmk-cmd-legend">
-              <kbd>↑↓</kbd> Navigate &nbsp;&bull;&nbsp; <kbd>↵</kbd> Select &nbsp;&bull;&nbsp; <kbd>esc</kbd> Close
+              <kbd>↑↓</kbd> Navigate &nbsp;&bull;&nbsp; <kbd>↵</kbd> Select &nbsp;&bull;&nbsp;
+              <kbd>esc</kbd> Close
             </span>
           </div>
         </div>
@@ -180,7 +197,9 @@ export interface CommandItem {
       font-size: 0.875rem;
       color: var(--ngxsmk-color-on-surface, #09090b);
       cursor: pointer;
-      transition: background 0.1s, color 0.1s;
+      transition:
+        background 0.1s,
+        color 0.1s;
     }
 
     .ngxsmk-cmd-item--active {
@@ -233,16 +252,26 @@ export interface CommandItem {
     }
 
     @keyframes ngxsmk-fade-in {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
     }
 
     @keyframes ngxsmk-scale-up {
-      from { transform: scale(0.95); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
+      from {
+        transform: scale(0.95);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
     }
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgxsmkCommandPalette {
   readonly commands = input<CommandItem[]>([]);
@@ -250,7 +279,7 @@ export class NgxsmkCommandPalette {
 
   readonly isOpen = signal(false);
   readonly selected = output<CommandItem>();
-  
+
   protected readonly searchQuery = signal('');
   protected readonly activeIndex = signal(0);
 
@@ -277,7 +306,7 @@ export class NgxsmkCommandPalette {
     // Toggle on Ctrl+K or Cmd+K
     if (isMeta && key === this.triggerKey().toLowerCase()) {
       event.preventDefault();
-      this.isOpen.update(open => !open);
+      this.isOpen.update((open) => !open);
       return;
     }
 
@@ -321,10 +350,10 @@ export class NgxsmkCommandPalette {
   protected filteredGroups = computed(() => {
     const q = this.searchQuery().toLowerCase().trim();
     const allCmds = this.commands();
-    
+
     const groupsMap = new Map<string, CommandItem[]>();
-    
-    allCmds.forEach(cmd => {
+
+    allCmds.forEach((cmd) => {
       if (!q || cmd.label.toLowerCase().includes(q) || cmd.category.toLowerCase().includes(q)) {
         const groupList = groupsMap.get(cmd.category) || [];
         groupList.push(cmd);
@@ -334,7 +363,7 @@ export class NgxsmkCommandPalette {
 
     return Array.from(groupsMap.entries()).map(([category, items]) => ({
       category,
-      items
+      items,
     }));
   });
 
@@ -352,7 +381,7 @@ export class NgxsmkCommandPalette {
 
   protected setActiveItem(cmd: CommandItem): void {
     const flat = this.flatFilteredItems();
-    const idx = flat.findIndex(item => item.id === cmd.id);
+    const idx = flat.findIndex((item) => item.id === cmd.id);
     if (idx !== -1) {
       this.activeIndex.set(idx);
     }
@@ -366,7 +395,7 @@ export class NgxsmkCommandPalette {
   private moveActive(delta: number): void {
     const flat = this.flatFilteredItems();
     if (flat.length === 0) return;
-    this.activeIndex.update(curr => {
+    this.activeIndex.update((curr) => {
       const next = curr + delta;
       if (next < 0) return flat.length - 1;
       if (next >= flat.length) return 0;

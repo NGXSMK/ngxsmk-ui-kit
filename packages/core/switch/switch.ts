@@ -44,7 +44,9 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     '[attr.data-disabled]': 'isDisabled() ? "" : null',
   },
   styles: `
-    :host { display: inline-block; }
+    :host {
+      display: inline-block;
+    }
 
     .ngxsmk-switch__wrapper {
       display: inline-flex;
@@ -96,8 +98,14 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
       transition: transform var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
 
-    :host([data-checked]) .ngxsmk-switch__track { background: var(--ngxsmk-switch-checked-bg, var(--ngxsmk-color-primary)); }
-    :host([data-checked]) .ngxsmk-switch__thumb { transform: translateX(calc(var(--ngxsmk-switch-width, 2.25rem) - var(--ngxsmk-switch-thumb-size, 0.875rem) - 4px)); }
+    :host([data-checked]) .ngxsmk-switch__track {
+      background: var(--ngxsmk-switch-checked-bg, var(--ngxsmk-color-primary));
+    }
+    :host([data-checked]) .ngxsmk-switch__thumb {
+      transform: translateX(
+        calc(var(--ngxsmk-switch-width, 2.25rem) - var(--ngxsmk-switch-thumb-size, 0.875rem) - 4px)
+      );
+    }
 
     .ngxsmk-switch__native:focus-visible ~ .ngxsmk-switch__track {
       outline: 2px solid var(--ngxsmk-color-ring);
@@ -119,9 +127,7 @@ export class NgxsmkSwitch implements ControlValueAccessor {
   readonly changed = output<boolean>();
 
   private readonly cvaDisabled = signal(false);
-  protected readonly isDisabled = computed(
-    () => this.disabled() || this.cvaDisabled(),
-  );
+  protected readonly isDisabled = computed(() => this.disabled() || this.cvaDisabled());
 
   private onChange?: (value: boolean) => void;
   protected onTouched?: () => void;

@@ -41,12 +41,42 @@ export interface QueryCondition {
   `,
   host: { class: 'ngxsmk-query-builder' },
   styles: `
-    :host { display: block; font-family: var(--ngxsmk-font-sans); font-size: 0.8125rem; }
-    .ngxsmk-query-builder__conditions { display: flex; flex-direction: column; gap: var(--ngxsmk-space-2); }
-    .ngxsmk-query-builder__condition { display: flex; align-items: center; gap: var(--ngxsmk-space-2); flex-wrap: wrap; }
-    .ngxsmk-query-builder__logical { font-weight: 600; font-size: 0.75rem; text-transform: uppercase; color: var(--ngxsmk-color-primary); min-width: 3rem; }
-    .ngxsmk-query-builder__select, .ngxsmk-query-builder__input { padding: var(--ngxsmk-space-1-5) var(--ngxsmk-space-2); border: 1px solid var(--ngxsmk-color-outline); border-radius: var(--ngxsmk-radius-md); font-size: 0.8125rem; background: var(--ngxsmk-color-surface); color: var(--ngxsmk-color-on-surface); }
-    .ngxsmk-query-builder__input { flex: 1; min-width: 8rem; }
+    :host {
+      display: block;
+      font-family: var(--ngxsmk-font-sans);
+      font-size: 0.8125rem;
+    }
+    .ngxsmk-query-builder__conditions {
+      display: flex;
+      flex-direction: column;
+      gap: var(--ngxsmk-space-2);
+    }
+    .ngxsmk-query-builder__condition {
+      display: flex;
+      align-items: center;
+      gap: var(--ngxsmk-space-2);
+      flex-wrap: wrap;
+    }
+    .ngxsmk-query-builder__logical {
+      font-weight: 600;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: var(--ngxsmk-color-primary);
+      min-width: 3rem;
+    }
+    .ngxsmk-query-builder__select,
+    .ngxsmk-query-builder__input {
+      padding: var(--ngxsmk-space-1-5) var(--ngxsmk-space-2);
+      border: 1px solid var(--ngxsmk-color-outline);
+      border-radius: var(--ngxsmk-radius-md);
+      font-size: 0.8125rem;
+      background: var(--ngxsmk-color-surface);
+      color: var(--ngxsmk-color-on-surface);
+    }
+    .ngxsmk-query-builder__input {
+      flex: 1;
+      min-width: 8rem;
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -17,10 +17,21 @@ export interface ChatMessageData {
     '[attr.data-role]': 'message().role',
   },
   styles: `
-    :host { display: flex; gap: var(--ngxsmk-space-3); padding: var(--ngxsmk-space-3) var(--ngxsmk-space-4); font-family: var(--ngxsmk-font-sans); }
-    :host([data-role='assistant']) { flex-direction: row; }
-    :host([data-role='user']) { flex-direction: row-reverse; }
-    :host([data-role='system']) { justify-content: center; }
+    :host {
+      display: flex;
+      gap: var(--ngxsmk-space-3);
+      padding: var(--ngxsmk-space-3) var(--ngxsmk-space-4);
+      font-family: var(--ngxsmk-font-sans);
+    }
+    :host([data-role='assistant']) {
+      flex-direction: row;
+    }
+    :host([data-role='user']) {
+      flex-direction: row-reverse;
+    }
+    :host([data-role='system']) {
+      justify-content: center;
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

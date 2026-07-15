@@ -9,7 +9,7 @@ describe('NgxsmkScrollLock', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [NgxsmkScrollLock]
+      providers: [NgxsmkScrollLock],
     });
     service = TestBed.inject(NgxsmkScrollLock);
     doc = TestBed.inject(DOCUMENT);
@@ -40,7 +40,7 @@ describe('NgxsmkScrollLock', () => {
   it('does not throw or reset below 0 on extra unlocks', () => {
     service.unlock();
     expect(doc.body.style.overflow).toBe('');
-    
+
     service.lock();
     expect(doc.body.style.overflow).toBe('hidden');
     service.unlock();

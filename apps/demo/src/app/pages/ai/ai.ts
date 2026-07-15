@@ -64,14 +64,17 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
   template: `
     <h2 class="ngxsmk-page-title">AI</h2>
     <p class="ngxsmk-page-desc">
-      Building blocks for conversational and agentic interfaces — from chat
-      windows and streaming text to tool calls, reasoning traces, and memory.
+      Building blocks for conversational and agentic interfaces — from chat windows and streaming
+      text to tool calls, reasoning traces, and memory.
     </p>
 
     <showcase-example
       title="Agent Card"
       description="Compact identity card for an AI agent: name, model, status, and description."
-      [code]="codeAgentCard" [component]="NgxsmkAgentCard" [customize]="customizeNgxsmkAgentCard">
+      [code]="codeAgentCard"
+      [component]="NgxsmkAgentCard"
+      [customize]="customizeNgxsmkAgentCard"
+    >
       <ngxsmk-agent-card [agent]="agent" />
       <ngxsmk-agent-card [agent]="agentIdle" />
     </showcase-example>
@@ -79,7 +82,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Chat Window"
       description="Scrollable message list that renders user, assistant, and system turns."
-      [code]="codeChatWindow" [component]="NgxsmkChatWindow" [customize]="customizeNgxsmkChatWindow">
+      [code]="codeChatWindow"
+      [component]="NgxsmkChatWindow"
+      [customize]="customizeNgxsmkChatWindow"
+    >
       <div class="ngxsmk-sc-surface" style="height:360px;width:100%;max-width:440px">
         <ngxsmk-chat-window [messages]="chatMessages" />
       </div>
@@ -88,7 +94,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Chat Input"
       description="Auto-growing composer with a submit output. Project action buttons via the [actions] slot."
-      [code]="codeChatInput" [component]="NgxsmkChatInput" [customize]="customizeNgxsmkChatInput">
+      [code]="codeChatInput"
+      [component]="NgxsmkChatInput"
+      [customize]="customizeNgxsmkChatInput"
+    >
       <div class="ngxsmk-demo-stack" style="width:100%;max-width:440px">
         @if (sentLog().length) {
           <div class="ngxsmk-sc-surface" style="padding:0.5rem 0.75rem;font-size:0.8125rem">
@@ -108,16 +117,24 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Chat Layout"
       description="Full chat shell with sidebar, header, scrolling body, and a pinned input region."
-      [code]="codeChatLayout" [component]="NgxsmkChatLayout" [customize]="customizeNgxsmkChatLayout">
+      [code]="codeChatLayout"
+      [component]="NgxsmkChatLayout"
+      [customize]="customizeNgxsmkChatLayout"
+    >
       <div class="ngxsmk-sc-surface" style="height:360px;width:100%;max-width:560px">
         <ngxsmk-chat-layout style="height:100%">
           <div sidebar class="ngxsmk-sc-surface" style="padding:0.75rem;width:140px">
             <strong>Threads</strong>
-            <div style="margin-top:0.5rem;font-size:0.8125rem;color:var(--ngxsmk-color-on-surface-variant)">
+            <div
+              style="margin-top:0.5rem;font-size:0.8125rem;color:var(--ngxsmk-color-on-surface-variant)"
+            >
               Onboarding<br />Billing<br />Roadmap
             </div>
           </div>
-          <div header style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--ngxsmk-color-outline-variant)">
+          <div
+            header
+            style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--ngxsmk-color-outline-variant)"
+          >
             <strong>Assistant</strong>
           </div>
           <div style="padding:0.75rem;font-size:0.875rem">
@@ -134,18 +151,27 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Chat Send Button &amp; Dictation Button"
       description="Composer controls: a disabled-aware send button and a dictation toggle."
-      [code]="codeComposerButtons" [component]="NgxsmkChatSendButton" [customize]="customizeNgxsmkChatSendButton">
+      [code]="codeComposerButtons"
+      [component]="NgxsmkChatSendButton"
+      [customize]="customizeNgxsmkChatSendButton"
+    >
       <div class="ngxsmk-demo-row">
         <ngxsmk-chat-send-button (clicked)="onSendClick()" />
         <ngxsmk-chat-send-button [disabled]="true" />
-        <ngxsmk-chat-dictation-button [listening]="dictating()" (toggled)="dictating.set(!dictating())" />
+        <ngxsmk-chat-dictation-button
+          [listening]="dictating()"
+          (toggled)="dictating.set(!dictating())"
+        />
       </div>
     </showcase-example>
 
     <showcase-example
       title="Chat Tokenized Text"
       description="Renders text with highlighted mentions, tools, and file tokens."
-      [code]="codeTokens" [component]="NgxsmkChatComposerTokenElement" [customize]="customizeNgxsmkChatComposerTokenElement">
+      [code]="codeTokens"
+      [component]="NgxsmkChatComposerTokenElement"
+      [customize]="customizeNgxsmkChatComposerTokenElement"
+    >
       <div class="ngxsmk-demo-stack" style="width:100%;max-width:520px">
         <div class="ngxsmk-demo-row">
           <ngxsmk-chat-composer-token-element label="@alice" variant="entity" />
@@ -163,16 +189,25 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Conversation List"
       description="Selectable list of past conversations with title and last-message preview."
-      [code]="codeConversations" [component]="NgxsmkConversationList" [customize]="customizeNgxsmkConversationList">
+      [code]="codeConversations"
+      [component]="NgxsmkConversationList"
+      [customize]="customizeNgxsmkConversationList"
+    >
       <div class="ngxsmk-sc-surface" style="width:100%;max-width:320px">
-        <ngxsmk-conversation-list [conversations]="conversations" [(activeId)]="activeConversation" />
+        <ngxsmk-conversation-list
+          [conversations]="conversations"
+          [(activeId)]="activeConversation"
+        />
       </div>
     </showcase-example>
 
     <showcase-example
       title="Composer Drawer"
       description="Slide-up panel for attachments, prompts, and tools. Toggle it open below."
-      [code]="codeDrawer" [component]="NgxsmkChatComposerDrawer" [customize]="customizeNgxsmkChatComposerDrawer">
+      [code]="codeDrawer"
+      [component]="NgxsmkChatComposerDrawer"
+      [customize]="customizeNgxsmkChatComposerDrawer"
+    >
       <div style="position:relative;padding-top:2.5rem;width:100%;max-width:520px">
         <button type="button" class="ngxsmk-demo-toggle" (click)="drawerOpen.set(!drawerOpen())">
           {{ drawerOpen() ? 'Close composer' : 'Open composer' }}
@@ -196,8 +231,14 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Streaming Text"
       description="Types out a string character-by-character with a blinking cursor."
-      [code]="codeStreaming" [component]="NgxsmkStreamingText" [customize]="customizeNgxsmkStreamingText">
-      <div class="ngxsmk-sc-surface" style="padding:0.75rem;width:100%;max-width:520px;font-size:0.875rem">
+      [code]="codeStreaming"
+      [component]="NgxsmkStreamingText"
+      [customize]="customizeNgxsmkStreamingText"
+    >
+      <div
+        class="ngxsmk-sc-surface"
+        style="padding:0.75rem;width:100%;max-width:520px;font-size:0.875rem"
+      >
         <ngxsmk-streaming-text [text]="streamingText" [speed]="18" />
       </div>
     </showcase-example>
@@ -205,7 +246,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Markdown Viewer"
       description="Renders Markdown content into theme-aware styled HTML."
-      [code]="codeMarkdown" [component]="NgxsmkMarkdownViewer" [customize]="customizeNgxsmkMarkdownViewer">
+      [code]="codeMarkdown"
+      [component]="NgxsmkMarkdownViewer"
+      [customize]="customizeNgxsmkMarkdownViewer"
+    >
       <div class="ngxsmk-sc-surface" style="padding:0.75rem;width:100%;max-width:520px">
         <ngxsmk-markdown-viewer>{{ markdownSample }}</ngxsmk-markdown-viewer>
       </div>
@@ -214,7 +258,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Code Block"
       description="Monospaced, scrollable code surface with a language hint."
-      [code]="codeCodeBlock" [component]="NgxsmkCodeBlock" [customize]="customizeNgxsmkCodeBlock">
+      [code]="codeCodeBlock"
+      [component]="NgxsmkCodeBlock"
+      [customize]="customizeNgxsmkCodeBlock"
+    >
       <div style="width:100%;max-width:520px">
         <ngxsmk-code-block language="typescript">{{ codeBlockSample }}</ngxsmk-code-block>
       </div>
@@ -223,7 +270,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Diff Viewer"
       description="Line-by-line diff with add/remove highlighting parsed from a unified source."
-      [code]="codeDiff" [component]="NgxsmkDiffViewer" [customize]="customizeNgxsmkDiffViewer">
+      [code]="codeDiff"
+      [component]="NgxsmkDiffViewer"
+      [customize]="customizeNgxsmkDiffViewer"
+    >
       <div style="width:100%;max-width:520px">
         <ngxsmk-diff-viewer [source]="diffSource" />
       </div>
@@ -232,7 +282,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Citation Viewer"
       description="Source card showing the title, author, and a quoted snippet."
-      [code]="codeCitation" [component]="NgxsmkCitationViewer" [customize]="customizeNgxsmkCitationViewer">
+      [code]="codeCitation"
+      [component]="NgxsmkCitationViewer"
+      [customize]="customizeNgxsmkCitationViewer"
+    >
       <div style="width:100%;max-width:420px">
         <ngxsmk-citation-viewer
           title="Attention Is All You Need"
@@ -245,7 +298,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Tool Call Viewer"
       description="Shows agent tool invocations, arguments, status, and results."
-      [code]="codeToolCall" [component]="NgxsmkToolCallViewer" [customize]="customizeNgxsmkToolCallViewer">
+      [code]="codeToolCall"
+      [component]="NgxsmkToolCallViewer"
+      [customize]="customizeNgxsmkToolCallViewer"
+    >
       <div style="width:100%;max-width:480px">
         <ngxsmk-tool-call-viewer [calls]="toolCalls" />
       </div>
@@ -254,7 +310,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Reasoning Timeline"
       description="Step-by-step trace of the agent's reasoning with optional durations."
-      [code]="codeReasoning" [component]="NgxsmkReasoningTimeline" [customize]="customizeNgxsmkReasoningTimeline">
+      [code]="codeReasoning"
+      [component]="NgxsmkReasoningTimeline"
+      [customize]="customizeNgxsmkReasoningTimeline"
+    >
       <div class="ngxsmk-sc-surface" style="padding:0.75rem;width:100%;max-width:480px">
         <ngxsmk-reasoning-timeline [steps]="reasoningSteps" />
       </div>
@@ -263,7 +322,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Memory Viewer"
       description="Key/value store of what the agent remembers across the session."
-      [code]="codeMemory" [component]="NgxsmkMemoryViewer" [customize]="customizeNgxsmkMemoryViewer">
+      [code]="codeMemory"
+      [component]="NgxsmkMemoryViewer"
+      [customize]="customizeNgxsmkMemoryViewer"
+    >
       <div style="width:100%;max-width:420px">
         <ngxsmk-memory-viewer [entries]="memoryEntries" />
       </div>
@@ -272,7 +334,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Voice Input"
       description="Microphone control that toggles recording and surfaces a transcript."
-      [code]="codeVoice" [component]="NgxsmkVoiceInput" [customize]="customizeNgxsmkVoiceInput">
+      [code]="codeVoice"
+      [component]="NgxsmkVoiceInput"
+      [customize]="customizeNgxsmkVoiceInput"
+    >
       <div class="ngxsmk-demo-row">
         <ngxsmk-voice-input />
       </div>
@@ -281,7 +346,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Audio Player"
       description="Compact progress bar for voice replies and podcast-style playback."
-      [code]="codeAudio" [component]="NgxsmkAudioPlayer" [customize]="customizeNgxsmkAudioPlayer">
+      [code]="codeAudio"
+      [component]="NgxsmkAudioPlayer"
+      [customize]="customizeNgxsmkAudioPlayer"
+    >
       <div style="width:100%;max-width:420px">
         <ngxsmk-audio-player
           label="Voice reply"
@@ -295,16 +363,25 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Image Viewer"
       description="Image preview that expands to a fullscreen lightbox on click."
-      [code]="codeImage" [component]="NgxsmkImageViewer" [customize]="customizeNgxsmkImageViewer">
+      [code]="codeImage"
+      [component]="NgxsmkImageViewer"
+      [customize]="customizeNgxsmkImageViewer"
+    >
       <div style="width:100%;max-width:360px">
-        <ngxsmk-image-viewer src="https://picsum.photos/seed/ngxsmk/600/400" alt="Sample generated image" />
+        <ngxsmk-image-viewer
+          src="https://picsum.photos/seed/ngxsmk/600/400"
+          alt="Sample generated image"
+        />
       </div>
     </showcase-example>
 
     <showcase-example
       title="Chat Message"
       description="Container that lays out a single turn by role (user / assistant / system), aligning the avatar and body accordingly."
-      [code]="codeChatMessage" [component]="NgxsmkChatMessage" [customize]="customizeNgxsmkChatMessage">
+      [code]="codeChatMessage"
+      [component]="NgxsmkChatMessage"
+      [customize]="customizeNgxsmkChatMessage"
+    >
       <div style="width:100%;max-width:480px" class="ngxsmk-sc-surface">
         <ngxsmk-chat-message [message]="msgUser">
           <div class="ngxsmk-msg-avatar" aria-hidden="true">JS</div>
@@ -326,7 +403,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Chat Message Bubble"
       description="The speech bubble that wraps message content. User bubbles are emphasized via the ancestor role."
-      [code]="codeChatMessageBubble" [component]="NgxsmkChatMessage" [customize]="customizeNgxsmkChatMessage">
+      [code]="codeChatMessageBubble"
+      [component]="NgxsmkChatMessage"
+      [customize]="customizeNgxsmkChatMessage"
+    >
       <div style="width:100%;max-width:480px" class="ngxsmk-sc-col">
         <ngxsmk-chat-message [message]="msgUser">
           <ngxsmk-chat-message-bubble>{{ msgUser.content }}</ngxsmk-chat-message-bubble>
@@ -340,7 +420,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Chat Message Metadata"
       description="Renders a compact timestamp (and any status) beneath a message bubble."
-      [code]="codeChatMessageMetadata" [component]="NgxsmkChatMessageMetadata" [customize]="customizeNgxsmkChatMessageMetadata">
+      [code]="codeChatMessageMetadata"
+      [component]="NgxsmkChatMessageMetadata"
+      [customize]="customizeNgxsmkChatMessageMetadata"
+    >
       <div class="ngxsmk-demo-stack" style="width:100%;max-width:360px">
         <ngxsmk-chat-message-metadata [timestamp]="msgUser.timestamp" />
         <ngxsmk-chat-message-metadata [timestamp]="msgAssistant.timestamp" />
@@ -350,18 +433,21 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Chat System Message"
       description="Centered, low-emphasis pill for system notices like connection state or mode changes."
-      [code]="codeChatSystemMessage" [component]="NgxsmkChatSystemMessage" [customize]="customizeNgxsmkChatSystemMessage">
+      [code]="codeChatSystemMessage"
+      [component]="NgxsmkChatSystemMessage"
+      [customize]="customizeNgxsmkChatSystemMessage"
+    >
       <ngxsmk-chat-system-message [message]="systemNotice" />
     </showcase-example>
 
     <showcase-example
       title="Prompt Carousel (New)"
       description="A scrollable horizontal list of pre-configured prompt suggestion cards with customizable color themes."
-      [code]="codePromptCarousel" [component]="NgxsmkPromptCarousel" [customize]="customizeNgxsmkPromptCarousel">
-      <ngxsmk-prompt-carousel
-        [prompts]="promptItemsList"
-        (selected)="onPromptSelected($event)"
-      />
+      [code]="codePromptCarousel"
+      [component]="NgxsmkPromptCarousel"
+      [customize]="customizeNgxsmkPromptCarousel"
+    >
+      <ngxsmk-prompt-carousel [prompts]="promptItemsList" (selected)="onPromptSelected($event)" />
 
       @if (selectedPromptText()) {
         <p class="ngxsmk-demo-hint" style="margin-top: 1rem;">
@@ -371,9 +457,21 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     </showcase-example>
   `,
   styles: `
-    :host { display: block; }
-    .ngxsmk-demo-row { display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap; }
-    .ngxsmk-demo-stack { display: flex; flex-direction: column; gap: 0.75rem; align-items: stretch; }
+    :host {
+      display: block;
+    }
+    .ngxsmk-demo-row {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .ngxsmk-demo-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      align-items: stretch;
+    }
     .ngxsmk-demo-toggle {
       padding: 0.5rem 1rem;
       border: 1px solid var(--ngxsmk-color-outline);
@@ -384,7 +482,9 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
       font-size: 0.8125rem;
       cursor: pointer;
     }
-    .ngxsmk-demo-toggle:hover { background: var(--ngxsmk-color-surface-hover); }
+    .ngxsmk-demo-toggle:hover {
+      background: var(--ngxsmk-color-surface-hover);
+    }
     .ngxsmk-msg-avatar {
       flex: 0 0 auto;
       width: 2rem;
@@ -398,7 +498,12 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
       font-size: 0.75rem;
       font-weight: 600;
     }
-    .ngxsmk-msg-body { display: flex; flex-direction: column; gap: 0.25rem; min-width: 0; }
+    .ngxsmk-msg-body {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      min-width: 0;
+    }
   `,
 })
 export class AiPage {
@@ -693,11 +798,46 @@ ngxsmk-prompt-carousel {
   protected readonly selectedPromptText = signal('');
 
   protected readonly promptItemsList: PromptItem[] = [
-    { id: '1', category: 'Coding', title: 'Refactor Code', prompt: 'Refactor this Angular component to use Signals and remove Zone.js.', icon: '⚡', colorPreset: 'violet' },
-    { id: '2', category: 'Writing', title: 'Email Drafter', prompt: 'Write a polite follow-up email about the project status.', icon: '✉️', colorPreset: 'blue' },
-    { id: '3', category: 'Productivity', title: 'Summarize Meeting', prompt: 'Summarize these transcripts into 5 key action points.', icon: '📋', colorPreset: 'emerald' },
-    { id: '4', category: 'Creativity', title: 'Brainstorm Ideas', prompt: 'Brainstorm 5 naming ideas for a signal-native UI toolkit.', icon: '💡', colorPreset: 'amber' },
-    { id: '5', category: 'Reviewing', title: 'Find Bugs', prompt: 'Perform a security audit and find edge cases in this code.', icon: '🔍', colorPreset: 'rose' }
+    {
+      id: '1',
+      category: 'Coding',
+      title: 'Refactor Code',
+      prompt: 'Refactor this Angular component to use Signals and remove Zone.js.',
+      icon: '⚡',
+      colorPreset: 'violet',
+    },
+    {
+      id: '2',
+      category: 'Writing',
+      title: 'Email Drafter',
+      prompt: 'Write a polite follow-up email about the project status.',
+      icon: '✉️',
+      colorPreset: 'blue',
+    },
+    {
+      id: '3',
+      category: 'Productivity',
+      title: 'Summarize Meeting',
+      prompt: 'Summarize these transcripts into 5 key action points.',
+      icon: '📋',
+      colorPreset: 'emerald',
+    },
+    {
+      id: '4',
+      category: 'Creativity',
+      title: 'Brainstorm Ideas',
+      prompt: 'Brainstorm 5 naming ideas for a signal-native UI toolkit.',
+      icon: '💡',
+      colorPreset: 'amber',
+    },
+    {
+      id: '5',
+      category: 'Reviewing',
+      title: 'Find Bugs',
+      prompt: 'Perform a security audit and find edge cases in this code.',
+      icon: '🔍',
+      colorPreset: 'rose',
+    },
   ];
 
   protected onPromptSelected(item: PromptItem): void {
@@ -728,7 +868,12 @@ ngxsmk-prompt-carousel {
   };
 
   protected readonly chatMessages = [
-    { id: '1', role: 'user' as const, content: 'How do I reset my API key?', timestamp: new Date() },
+    {
+      id: '1',
+      role: 'user' as const,
+      content: 'How do I reset my API key?',
+      timestamp: new Date(),
+    },
     {
       id: '2',
       role: 'assistant' as const,
@@ -736,13 +881,33 @@ ngxsmk-prompt-carousel {
       timestamp: new Date(),
     },
     { id: '3', role: 'user' as const, content: 'Please do.', timestamp: new Date() },
-    { id: '4', role: 'assistant' as const, content: 'Done — a new key is now active.', timestamp: new Date() },
+    {
+      id: '4',
+      role: 'assistant' as const,
+      content: 'Done — a new key is now active.',
+      timestamp: new Date(),
+    },
   ];
 
   protected readonly conversations = [
-    { id: '1', title: 'Onboarding help', lastMessage: 'Thanks, that worked!', updatedAt: new Date() },
-    { id: '2', title: 'Billing question', lastMessage: 'Invoice #1042 attached', updatedAt: new Date() },
-    { id: '3', title: 'Feature request', lastMessage: 'Could we add dark mode?', updatedAt: new Date() },
+    {
+      id: '1',
+      title: 'Onboarding help',
+      lastMessage: 'Thanks, that worked!',
+      updatedAt: new Date(),
+    },
+    {
+      id: '2',
+      title: 'Billing question',
+      lastMessage: 'Invoice #1042 attached',
+      updatedAt: new Date(),
+    },
+    {
+      id: '3',
+      title: 'Feature request',
+      lastMessage: 'Could we add dark mode?',
+      updatedAt: new Date(),
+    },
   ];
 
   protected readonly msgUser: ChatMessageData = {
@@ -797,7 +962,13 @@ ngxsmk-prompt-carousel {
   ].join('\n');
 
   protected readonly toolCalls = [
-    { id: '1', name: 'search', args: { q: 'weather' }, status: 'completed' as const, result: 'Sunny, 24°C' },
+    {
+      id: '1',
+      name: 'search',
+      args: { q: 'weather' },
+      status: 'completed' as const,
+      result: 'Sunny, 24°C',
+    },
     { id: '2', name: 'query_db', args: { table: 'orders' }, status: 'running' as const },
     {
       id: '3',

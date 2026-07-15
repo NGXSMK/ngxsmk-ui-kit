@@ -1,7 +1,12 @@
 import { Component, signal } from '@angular/core';
 import { AppNav } from '../../nav/nav';
 import { NgxsmkButton } from '@ngxsmk/core/button';
-import { NgxsmkCard, NgxsmkCardHeader, NgxsmkCardTitle, NgxsmkCardContent } from '@ngxsmk/core/card';
+import {
+  NgxsmkCard,
+  NgxsmkCardHeader,
+  NgxsmkCardTitle,
+  NgxsmkCardContent,
+} from '@ngxsmk/core/card';
 import { NgxsmkAccordion, NgxsmkAccordionItem } from '@ngxsmk/core/accordion';
 import { NgxsmkTag } from '@ngxsmk/core/tag';
 import { NgxsmkProgress } from '@ngxsmk/core/progress';
@@ -11,21 +16,21 @@ import { NgxsmkSwitch } from '@ngxsmk/core/switch';
   selector: 'docs-page',
   standalone: true,
   imports: [
-    NgxsmkCard, 
-    NgxsmkCardContent, 
-    NgxsmkCardHeader, 
-    NgxsmkCardTitle, 
+    NgxsmkCard,
+    NgxsmkCardContent,
+    NgxsmkCardHeader,
+    NgxsmkCardTitle,
     AppNav,
     NgxsmkButton,
     NgxsmkAccordion,
     NgxsmkAccordionItem,
     NgxsmkTag,
     NgxsmkProgress,
-    NgxsmkSwitch
+    NgxsmkSwitch,
   ],
   template: `
     <app-nav />
-    
+
     <div class="docs-hero-bg">
       <div class="docs-hero-bg__glow docs-hero-bg__glow--1"></div>
       <div class="docs-hero-bg__glow docs-hero-bg__glow--2"></div>
@@ -36,11 +41,21 @@ import { NgxsmkSwitch } from '@ngxsmk/core/switch';
       <header class="docs-header">
         <div class="docs-badges">
           <ngxsmk-tag class="docs-badge">v0.0.1</ngxsmk-tag>
-          <ngxsmk-tag class="docs-badge" style="--ngxsmk-color-surface-variant: rgba(0, 100, 224, 0.1); color: var(--ngxsmk-color-primary)">Zoneless</ngxsmk-tag>
-          <ngxsmk-tag class="docs-badge" style="--ngxsmk-color-surface-variant: rgba(16, 185, 129, 0.1); color: #10b981">Signal-first</ngxsmk-tag>
+          <ngxsmk-tag
+            class="docs-badge"
+            style="--ngxsmk-color-surface-variant: rgba(0, 100, 224, 0.1); color: var(--ngxsmk-color-primary)"
+            >Zoneless</ngxsmk-tag
+          >
+          <ngxsmk-tag
+            class="docs-badge"
+            style="--ngxsmk-color-surface-variant: rgba(16, 185, 129, 0.1); color: #10b981"
+            >Signal-first</ngxsmk-tag
+          >
         </div>
         <h1 class="docs-title">Developer Portal</h1>
-        <p class="docs-subtitle">A high-performance design system designed for modern standalone Angular apps.</p>
+        <p class="docs-subtitle">
+          A high-performance design system designed for modern standalone Angular apps.
+        </p>
       </header>
 
       <!-- QUICK INSTALL & TERMINAL SECTION -->
@@ -48,7 +63,10 @@ import { NgxsmkSwitch } from '@ngxsmk/core/switch';
         <div class="docs-grid-two">
           <div class="docs-install-info">
             <h2 class="docs-section-title">Quick Start</h2>
-            <p class="docs-text">Install core packages and the design engine. You can copy the code directly into your terminal to start immediately.</p>
+            <p class="docs-text">
+              Install core packages and the design engine. You can copy the code directly into your
+              terminal to start immediately.
+            </p>
             <div class="docs-features-checklist">
               <div class="checklist-item">
                 <span class="checklist-icon">✓</span>
@@ -64,7 +82,7 @@ import { NgxsmkSwitch } from '@ngxsmk/core/switch';
               </div>
             </div>
           </div>
-          
+
           <div class="docs-terminal-container">
             <!-- Terminal 1 -->
             <div class="docs-terminal">
@@ -80,7 +98,7 @@ import { NgxsmkSwitch } from '@ngxsmk/core/switch';
                 </button>
               </div>
             </div>
-            
+
             <!-- Terminal 2 -->
             <div class="docs-terminal" style="margin-top: 1rem;">
               <div class="terminal-header">
@@ -109,7 +127,10 @@ import { NgxsmkSwitch } from '@ngxsmk/core/switch';
               <h3 ngxsmkCardTitle>Zoneless Reactivity</h3>
             </div>
             <div ngxsmkCardContent>
-              <p class="docs-card-text">Fully decoupled from Zone.js. Components trigger standard change detection cycles via native signal notification trees for peak performance.</p>
+              <p class="docs-card-text">
+                Fully decoupled from Zone.js. Components trigger standard change detection cycles
+                via native signal notification trees for peak performance.
+              </p>
             </div>
           </ngxsmk-card>
 
@@ -119,7 +140,10 @@ import { NgxsmkSwitch } from '@ngxsmk/core/switch';
               <h3 ngxsmkCardTitle>Copy-Paste Scaffolding</h3>
             </div>
             <div ngxsmkCardContent>
-              <p class="docs-card-text">Directly own the source code. Component modules are scaffolded into your app files, leaving zero bloated dependencies behind in node_modules.</p>
+              <p class="docs-card-text">
+                Directly own the source code. Component modules are scaffolded into your app files,
+                leaving zero bloated dependencies behind in node_modules.
+              </p>
             </div>
           </ngxsmk-card>
 
@@ -129,7 +153,10 @@ import { NgxsmkSwitch } from '@ngxsmk/core/switch';
               <h3 ngxsmkCardTitle>HSL Variable Engine</h3>
             </div>
             <div ngxsmkCardContent>
-              <p class="docs-card-text">Configure global aesthetics in HSL coordinates. Easily generate style outputs compatible with vanilla CSS, SCSS, or Tailwind configurations.</p>
+              <p class="docs-card-text">
+                Configure global aesthetics in HSL coordinates. Easily generate style outputs
+                compatible with vanilla CSS, SCSS, or Tailwind configurations.
+              </p>
             </div>
           </ngxsmk-card>
 
@@ -139,7 +166,10 @@ import { NgxsmkSwitch } from '@ngxsmk/core/switch';
               <h3 ngxsmkCardTitle>AI-First Layouts</h3>
             </div>
             <div ngxsmkCardContent>
-              <p class="docs-card-text">Ship specialized interfaces built for AI streaming, reasoning timelines, custom code editors, and floating card citation viewers.</p>
+              <p class="docs-card-text">
+                Ship specialized interfaces built for AI streaming, reasoning timelines, custom code
+                editors, and floating card citation viewers.
+              </p>
             </div>
           </ngxsmk-card>
         </div>
@@ -150,40 +180,92 @@ import { NgxsmkSwitch } from '@ngxsmk/core/switch';
         <div class="docs-grid-two">
           <div>
             <h2 class="docs-section-title">Token Theming</h2>
-            <p class="docs-text">Dynamic themes are powered by CSS Custom Properties. Click the color presets below to see the interactive sandbox component instantaneously adapt to the new theme variables.</p>
-            
+            <p class="docs-text">
+              Dynamic themes are powered by CSS Custom Properties. Click the color presets below to
+              see the interactive sandbox component instantaneously adapt to the new theme
+              variables.
+            </p>
+
             <div class="theme-preset-selector">
               <span class="preset-label">Choose Accent:</span>
               <div class="preset-buttons">
-                <button class="preset-btn violet" [class.active]="accentColor() === 'violet'" (click)="accentColor.set('violet')">Violet</button>
-                <button class="preset-btn emerald" [class.active]="accentColor() === 'emerald'" (click)="accentColor.set('emerald')">Emerald</button>
-                <button class="preset-btn rose" [class.active]="accentColor() === 'rose'" (click)="accentColor.set('rose')">Rose</button>
-                <button class="preset-btn amber" [class.active]="accentColor() === 'amber'" (click)="accentColor.set('amber')">Amber</button>
-                <button class="preset-btn blue" [class.active]="accentColor() === 'blue'" (click)="accentColor.set('blue')">Blue</button>
+                <button
+                  class="preset-btn violet"
+                  [class.active]="accentColor() === 'violet'"
+                  (click)="accentColor.set('violet')"
+                >
+                  Violet
+                </button>
+                <button
+                  class="preset-btn emerald"
+                  [class.active]="accentColor() === 'emerald'"
+                  (click)="accentColor.set('emerald')"
+                >
+                  Emerald
+                </button>
+                <button
+                  class="preset-btn rose"
+                  [class.active]="accentColor() === 'rose'"
+                  (click)="accentColor.set('rose')"
+                >
+                  Rose
+                </button>
+                <button
+                  class="preset-btn amber"
+                  [class.active]="accentColor() === 'amber'"
+                  (click)="accentColor.set('amber')"
+                >
+                  Amber
+                </button>
+                <button
+                  class="preset-btn blue"
+                  [class.active]="accentColor() === 'blue'"
+                  (click)="accentColor.set('blue')"
+                >
+                  Blue
+                </button>
               </div>
             </div>
 
             <div class="docs-playground-controls">
               <div class="control-row">
                 <label for="progress-range">Simulate progress: ({{ playgroundProgress() }}%)</label>
-                <input id="progress-range" type="range" min="0" max="100" [value]="playgroundProgress()" (input)="updateProgress($event)" />
+                <input
+                  id="progress-range"
+                  type="range"
+                  min="0"
+                  max="100"
+                  [value]="playgroundProgress()"
+                  (input)="updateProgress($event)"
+                />
               </div>
             </div>
           </div>
 
           <div class="docs-preview-sandbox">
             <!-- Sandbox preview card containing components with dynamically overridden variables -->
-            <div class="sandbox-card" [style.--ngxsmk-color-primary]="getAccentColorHex()" [style.--ngxsmk-color-ring]="getAccentColorHex()">
+            <div
+              class="sandbox-card"
+              [style.--ngxsmk-color-primary]="getAccentColorHex()"
+              [style.--ngxsmk-color-ring]="getAccentColorHex()"
+            >
               <div class="sandbox-header">
                 <ngxsmk-tag>Live Sandbox</ngxsmk-tag>
-                <ngxsmk-switch [checked]="playgroundSwitch()" (checkedChange)="playgroundSwitch.set($event)">State</ngxsmk-switch>
+                <ngxsmk-switch
+                  [checked]="playgroundSwitch()"
+                  (checkedChange)="playgroundSwitch.set($event)"
+                  >State</ngxsmk-switch
+                >
               </div>
-              
+
               <div class="sandbox-body">
                 <h4 class="sandbox-item-title">Adaptive Component Stack</h4>
-                
-                <ngxsmk-progress [value]="playgroundProgress()" style="margin-bottom: 1.5rem;"></ngxsmk-progress>
-                
+
+                <ngxsmk-progress
+                  [value]="playgroundProgress()"
+                  style="margin-bottom: 1.5rem;"
+                ></ngxsmk-progress>
+
                 <div class="sandbox-buttons">
                   <button ngxsmk-button [disabled]="!playgroundSwitch()">Apply Action</button>
                   <button ngxsmk-button variant="outline">Reset</button>
@@ -199,16 +281,24 @@ import { NgxsmkSwitch } from '@ngxsmk/core/switch';
         <h2 class="docs-subheading" style="margin-bottom: 1.5rem;">Frequently Asked Questions</h2>
         <ngxsmk-accordion [multiple]="true">
           <ngxsmk-accordion-item label="Is NGXSMK fully Zoneless?">
-            Yes! All components are designed from the ground up to operate without Zone.js. They utilize Angular's modern Signal APIs for lightweight, fine-grained reactivity, leading to much smaller bundle footprints and better runtime performance.
+            Yes! All components are designed from the ground up to operate without Zone.js. They
+            utilize Angular's modern Signal APIs for lightweight, fine-grained reactivity, leading
+            to much smaller bundle footprints and better runtime performance.
           </ngxsmk-accordion-item>
           <ngxsmk-accordion-item label="Can I use it with Tailwind CSS?">
-            Absolutely. NGXSMK's token engine exposes CSS custom properties (variables) that can be easily mapped in your tailwind.config.js. The design parameters are completely decoupled from any single utility framework.
+            Absolutely. NGXSMK's token engine exposes CSS custom properties (variables) that can be
+            easily mapped in your tailwind.config.js. The design parameters are completely decoupled
+            from any single utility framework.
           </ngxsmk-accordion-item>
           <ngxsmk-accordion-item label="How does the copy-paste DX model work?">
-            Instead of importing bloated pre-compiled modules, our CLI tool allows you to copy component source code directly into your workspace. You retain complete ownership, styling control, and structural flexibility.
+            Instead of importing bloated pre-compiled modules, our CLI tool allows you to copy
+            component source code directly into your workspace. You retain complete ownership,
+            styling control, and structural flexibility.
           </ngxsmk-accordion-item>
           <ngxsmk-accordion-item label="What AI layout modules are included?">
-            We provide specialized interfaces built for AI chat applications, such as scroll-locked chat bubbles, streaming text responses, Reasoning Timelines, and formatted Citation card lists.
+            We provide specialized interfaces built for AI chat applications, such as scroll-locked
+            chat bubbles, streaming text responses, Reasoning Timelines, and formatted Citation card
+            lists.
           </ngxsmk-accordion-item>
         </ngxsmk-accordion>
       </section>
@@ -369,9 +459,15 @@ import { NgxsmkSwitch } from '@ngxsmk/core/switch';
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.2);
     }
-    .terminal-dots i:first-child { background: #ef4444; }
-    .terminal-dots i:nth-child(2) { background: #f59e0b; }
-    .terminal-dots i:nth-child(3) { background: #10b981; }
+    .terminal-dots i:first-child {
+      background: #ef4444;
+    }
+    .terminal-dots i:nth-child(2) {
+      background: #f59e0b;
+    }
+    .terminal-dots i:nth-child(3) {
+      background: #10b981;
+    }
     .terminal-title {
       font-size: 0.6875rem;
       color: rgba(255, 255, 255, 0.4);
@@ -406,7 +502,9 @@ import { NgxsmkSwitch } from '@ngxsmk/core/switch';
       padding: 0.2rem 0.5rem;
       font-size: 0.6875rem;
       cursor: pointer;
-      transition: background 0.15s, color 0.15s;
+      transition:
+        background 0.15s,
+        color 0.15s;
     }
     .terminal-copy-btn:hover {
       background: rgba(255, 255, 255, 0.12);
@@ -428,7 +526,9 @@ import { NgxsmkSwitch } from '@ngxsmk/core/switch';
       gap: var(--ngxsmk-space-4);
     }
     .pillar-card {
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition:
+        transform 0.2s,
+        box-shadow 0.2s;
     }
     .pillar-card:hover {
       transform: translateY(-2px);
@@ -483,11 +583,21 @@ import { NgxsmkSwitch } from '@ngxsmk/core/switch';
       border-color: transparent;
       color: #fff;
     }
-    .preset-btn.violet.active { background: #7C3AED; }
-    .preset-btn.emerald.active { background: #059669; }
-    .preset-btn.rose.active { background: #E11D48; }
-    .preset-btn.amber.active { background: #D97706; }
-    .preset-btn.blue.active { background: #2563EB; }
+    .preset-btn.violet.active {
+      background: #7c3aed;
+    }
+    .preset-btn.emerald.active {
+      background: #059669;
+    }
+    .preset-btn.rose.active {
+      background: #e11d48;
+    }
+    .preset-btn.amber.active {
+      background: #d97706;
+    }
+    .preset-btn.blue.active {
+      background: #2563eb;
+    }
 
     .docs-playground-controls {
       display: flex;
@@ -505,7 +615,7 @@ import { NgxsmkSwitch } from '@ngxsmk/core/switch';
       font-weight: 500;
       color: var(--ngxsmk-color-on-surface-variant);
     }
-    .control-row input[type="range"] {
+    .control-row input[type='range'] {
       width: 100%;
       accent-color: var(--ngxsmk-color-primary);
       cursor: pointer;

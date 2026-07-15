@@ -1,11 +1,11 @@
-import { 
-  ChangeDetectionStrategy, 
-  Component, 
-  input, 
-  model, 
-  OnInit, 
+import {
+  ChangeDetectionStrategy,
+  Component,
+  input,
+  model,
+  OnInit,
   OnDestroy,
-  inject
+  inject,
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
@@ -29,8 +29,15 @@ import { DOCUMENT } from '@angular/common';
   `,
   host: { class: 'ngxsmk-outline' },
   styles: `
-    :host { display: block; font-family: var(--ngxsmk-font-sans); }
-    .ngxsmk-outline__nav { display: flex; flex-direction: column; gap: var(--ngxsmk-space-1); }
+    :host {
+      display: block;
+      font-family: var(--ngxsmk-font-sans);
+    }
+    .ngxsmk-outline__nav {
+      display: flex;
+      flex-direction: column;
+      gap: var(--ngxsmk-space-1);
+    }
     .ngxsmk-outline__link {
       display: block;
       padding: var(--ngxsmk-space-1-5) var(--ngxsmk-space-3);
@@ -39,11 +46,20 @@ import { DOCUMENT } from '@angular/common';
       color: var(--ngxsmk-color-on-surface-variant);
       text-decoration: none;
       border-radius: var(--ngxsmk-radius-sm);
-      transition: background var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out), color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
+      transition:
+        background var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
+        color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
       border-left: 2px solid transparent;
     }
-    .ngxsmk-outline__link:hover { background: var(--ngxsmk-color-surface-hover); color: var(--ngxsmk-color-on-surface); }
-    .ngxsmk-outline__link--active { color: var(--ngxsmk-color-primary); border-left-color: var(--ngxsmk-color-primary); font-weight: 500; }
+    .ngxsmk-outline__link:hover {
+      background: var(--ngxsmk-color-surface-hover);
+      color: var(--ngxsmk-color-on-surface);
+    }
+    .ngxsmk-outline__link--active {
+      color: var(--ngxsmk-color-primary);
+      border-left-color: var(--ngxsmk-color-primary);
+      font-weight: 500;
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -90,11 +106,7 @@ export class NgxsmkOutline implements OnInit, OnDestroy {
     event.preventDefault();
     this.activeId.set(id);
     if (typeof window !== 'undefined') {
-      history.pushState(
-        null,
-        '',
-        window.location.pathname + window.location.search + `#${id}`
-      );
+      history.pushState(null, '', window.location.pathname + window.location.search + `#${id}`);
     }
     const el = this.document.getElementById(id);
     if (el) {

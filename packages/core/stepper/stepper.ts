@@ -42,10 +42,7 @@ type StepView = NgxsmkStep & {
   template: `
     <ol class="ngxsmk-stepper__list">
       @for (step of steps_(); track step.index) {
-        <li
-          class="ngxsmk-stepper__item"
-          [attr.data-state]="step.state"
-        >
+        <li class="ngxsmk-stepper__item" [attr.data-state]="step.state">
           <button
             type="button"
             class="ngxsmk-stepper__trigger"
@@ -134,7 +131,9 @@ type StepView = NgxsmkStep & {
       cursor: pointer;
       text-align: start;
     }
-    .ngxsmk-stepper__trigger:disabled { cursor: default; }
+    .ngxsmk-stepper__trigger:disabled {
+      cursor: default;
+    }
     .ngxsmk-stepper__trigger:focus-visible {
       outline: 2px solid var(--ngxsmk-color-ring, #6366f1);
       outline-offset: 1px;
@@ -156,7 +155,11 @@ type StepView = NgxsmkStep & {
         color var(--ngxsmk-duration-fast, 120ms) var(--ngxsmk-ease-out, ease),
         border-color var(--ngxsmk-duration-fast, 120ms) var(--ngxsmk-ease-out, ease);
     }
-    .ngxsmk-stepper__text { display: inline-flex; flex-direction: column; min-width: 0; }
+    .ngxsmk-stepper__text {
+      display: inline-flex;
+      flex-direction: column;
+      min-width: 0;
+    }
     .ngxsmk-stepper__label {
       display: inline-flex;
       align-items: center;
@@ -203,7 +206,9 @@ type StepView = NgxsmkStep & {
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .ngxsmk-stepper__marker { transition: none; }
+      .ngxsmk-stepper__marker {
+        transition: none;
+      }
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -222,11 +227,7 @@ export class NgxsmkStepper {
     const linear = this.linear();
     return this.steps().map((step, index) => {
       const state: StepView['state'] =
-        step.completed || index < active
-          ? 'complete'
-          : index === active
-            ? 'active'
-            : 'upcoming';
+        step.completed || index < active ? 'complete' : index === active ? 'active' : 'upcoming';
       const reachable = !linear || index <= active || step.completed === true;
       return { ...step, index, state, reachable };
     });

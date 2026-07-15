@@ -1,11 +1,4 @@
-import {
-  DestroyRef,
-  Directive,
-  effect,
-  inject,
-  input,
-  signal,
-} from '@angular/core';
+import { DestroyRef, Directive, effect, inject, input, signal } from '@angular/core';
 
 @Directive({
   standalone: true,
@@ -15,7 +8,7 @@ import {
   },
 })
 export class NgxsmkMediaTheme {
-  readonly query = input("(prefers-color-scheme: dark)");
+  readonly query = input('(prefers-color-scheme: dark)');
   readonly theme = input('dark');
 
   protected readonly matched = signal(false);

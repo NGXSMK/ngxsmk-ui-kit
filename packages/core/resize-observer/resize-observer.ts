@@ -1,10 +1,4 @@
-import {
-  Directive,
-  inject,
-  output,
-  ElementRef,
-  DestroyRef,
-} from '@angular/core';
+import { Directive, inject, output, ElementRef, DestroyRef } from '@angular/core';
 
 export interface NgxsmkResizeObserverSize {
   width: number;

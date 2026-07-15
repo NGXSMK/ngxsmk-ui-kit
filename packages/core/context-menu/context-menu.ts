@@ -53,55 +53,55 @@ export interface NgxsmkContextMenuItem {
   imports: [NgxsmkAnimate],
   styles: [
     `
-    .ngxsmk-context-menu__list {
-      position: fixed;
-      z-index: var(--ngxsmk-z-popover, 1500);
-      min-width: 10rem;
-      padding: var(--ngxsmk-space-1);
-      border: 1px solid var(--ngxsmk-color-outline);
-      border-radius: var(--ngxsmk-radius-md);
-      background: var(--ngxsmk-color-surface);
-      color: var(--ngxsmk-color-on-surface);
-      box-shadow: var(--ngxsmk-shadow-lg);
-      font-family: var(--ngxsmk-font-sans);
-    }
+      .ngxsmk-context-menu__list {
+        position: fixed;
+        z-index: var(--ngxsmk-z-popover, 1500);
+        min-width: 10rem;
+        padding: var(--ngxsmk-space-1);
+        border: 1px solid var(--ngxsmk-color-outline);
+        border-radius: var(--ngxsmk-radius-md);
+        background: var(--ngxsmk-color-surface);
+        color: var(--ngxsmk-color-on-surface);
+        box-shadow: var(--ngxsmk-shadow-lg);
+        font-family: var(--ngxsmk-font-sans);
+      }
 
-    .ngxsmk-context-menu__item {
-      display: block;
-      width: 100%;
-      padding: var(--ngxsmk-space-1-5) var(--ngxsmk-space-3);
-      border: none;
-      border-radius: var(--ngxsmk-radius-sm);
-      background: transparent;
-      color: var(--ngxsmk-color-on-surface);
-      font-family: inherit;
-      font-size: var(--ngxsmk-text-body-sm-size);
-      line-height: var(--ngxsmk-text-body-sm-line);
-      text-align: left;
-      cursor: pointer;
-      white-space: nowrap;
-    }
+      .ngxsmk-context-menu__item {
+        display: block;
+        width: 100%;
+        padding: var(--ngxsmk-space-1-5) var(--ngxsmk-space-3);
+        border: none;
+        border-radius: var(--ngxsmk-radius-sm);
+        background: transparent;
+        color: var(--ngxsmk-color-on-surface);
+        font-family: inherit;
+        font-size: var(--ngxsmk-text-body-sm-size);
+        line-height: var(--ngxsmk-text-body-sm-line);
+        text-align: left;
+        cursor: pointer;
+        white-space: nowrap;
+      }
 
-    .ngxsmk-context-menu__item:hover:not(:disabled) {
-      background: var(--ngxsmk-color-surface-hover);
-    }
+      .ngxsmk-context-menu__item:hover:not(:disabled) {
+        background: var(--ngxsmk-color-surface-hover);
+      }
 
-    .ngxsmk-context-menu__item:focus-visible {
-      outline: 2px solid var(--ngxsmk-color-ring);
-      outline-offset: -2px;
-    }
+      .ngxsmk-context-menu__item:focus-visible {
+        outline: 2px solid var(--ngxsmk-color-ring);
+        outline-offset: -2px;
+      }
 
-    .ngxsmk-context-menu__item:disabled {
-      opacity: 0.4;
-      cursor: not-allowed;
-    }
+      .ngxsmk-context-menu__item:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
 
-    .ngxsmk-context-menu__divider {
-      height: 1px;
-      margin: var(--ngxsmk-space-1) 0;
-      background: var(--ngxsmk-color-outline);
-    }
-  `,
+      .ngxsmk-context-menu__divider {
+        height: 1px;
+        margin: var(--ngxsmk-space-1) 0;
+        background: var(--ngxsmk-color-outline);
+      }
+    `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -144,7 +144,9 @@ export class NgxsmkContextMenu {
   hide(): void {
     if (this.closing()) return;
     this.closing.set(true);
-    const el = this.host.nativeElement.querySelector('.ngxsmk-context-menu__list') as HTMLElement | null;
+    const el = this.host.nativeElement.querySelector(
+      '.ngxsmk-context-menu__list',
+    ) as HTMLElement | null;
     void playExit(el ?? this.host.nativeElement, this.CONTEXT_MENU_MOTION).then(() => {
       this.closing.set(false);
       this.visible.set(false);
@@ -154,9 +156,9 @@ export class NgxsmkContextMenu {
   protected onClick(event: Event): void {
     const target = (event.target as HTMLElement).closest('[data-action]') as HTMLElement | null;
     if (!target) return;
-    const idx = Array.from(
-      this.host.nativeElement.querySelectorAll('[data-action]')
-    ).indexOf(target);
+    const idx = Array.from(this.host.nativeElement.querySelectorAll('[data-action]')).indexOf(
+      target,
+    );
     if (idx >= 0) {
       const item = this.items()[idx];
       if (!item.disabled) {

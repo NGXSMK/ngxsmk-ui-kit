@@ -45,7 +45,7 @@ describe('NgxsmkAlert', () => {
 
   it('sets role based on variant', () => {
     const { fixture, alertEl } = setup();
-    
+
     // info -> status
     expect(alertEl.getAttribute('role')).toBe('status');
 

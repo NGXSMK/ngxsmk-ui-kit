@@ -36,7 +36,10 @@ import { ngxsmkUniqueId } from '@ngxsmk/core/util';
       display: flex;
       gap: var(--ngxsmk-space-3);
     }
-    :host([data-orientation='vertical']) { flex-direction: column; gap: var(--ngxsmk-space-2); }
+    :host([data-orientation='vertical']) {
+      flex-direction: column;
+      gap: var(--ngxsmk-space-2);
+    }
   `,
   providers: [
     {
@@ -105,7 +108,9 @@ export class NgxsmkRadioGroup implements ControlValueAccessor {
     '[attr.data-disabled]': 'isDisabled() ? "" : null',
   },
   styles: `
-    :host { display: inline-block; }
+    :host {
+      display: inline-block;
+    }
 
     .ngxsmk-radio__wrapper {
       display: inline-flex;
@@ -159,8 +164,12 @@ export class NgxsmkRadioGroup implements ControlValueAccessor {
       transition: transform var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
 
-    :host([data-checked]) .ngxsmk-radio__circle { border-color: var(--ngxsmk-color-primary); }
-    :host([data-checked]) .ngxsmk-radio__circle::after { transform: scale(1); }
+    :host([data-checked]) .ngxsmk-radio__circle {
+      border-color: var(--ngxsmk-color-primary);
+    }
+    :host([data-checked]) .ngxsmk-radio__circle::after {
+      transform: scale(1);
+    }
 
     .ngxsmk-radio__native:focus-visible + .ngxsmk-radio__circle {
       outline: 2px solid var(--ngxsmk-color-ring);
@@ -175,10 +184,6 @@ export class NgxsmkRadio {
   readonly value = input.required<unknown>();
   readonly disabled = input(false, { transform: booleanAttribute });
 
-  protected readonly checked = computed(
-    () => this.group.value() === this.value(),
-  );
-  protected readonly isDisabled = computed(
-    () => this.disabled() || this.group.isDisabled(),
-  );
+  protected readonly checked = computed(() => this.group.value() === this.value());
+  protected readonly isDisabled = computed(() => this.disabled() || this.group.isDisabled());
 }

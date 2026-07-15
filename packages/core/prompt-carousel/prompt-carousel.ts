@@ -1,9 +1,4 @@
-import {
-  Component,
-  input,
-  output,
-  ChangeDetectionStrategy
-} from '@angular/core';
+import { Component, input, output, ChangeDetectionStrategy } from '@angular/core';
 
 export interface PromptItem {
   id: string;
@@ -20,10 +15,10 @@ export interface PromptItem {
   template: `
     <div class="ngxsmk-prompt-carousel-container">
       <div class="ngxsmk-prompt-carousel-fade ngxsmk-prompt-carousel-fade--left"></div>
-      
+
       <div class="ngxsmk-prompt-carousel-track">
         @for (item of prompts(); track item.id) {
-          <div 
+          <div
             class="ngxsmk-prompt-card"
             [attr.data-preset]="item.colorPreset || 'violet'"
             tabindex="0"
@@ -36,10 +31,10 @@ export interface PromptItem {
               <span class="ngxsmk-prompt-card__icon">{{ item.icon || '✦' }}</span>
               <span class="ngxsmk-prompt-card__cat">{{ item.category }}</span>
             </div>
-            
+
             <h4 class="ngxsmk-prompt-card__title">{{ item.title }}</h4>
             <p class="ngxsmk-prompt-card__preview">"{{ item.prompt }}"</p>
-            
+
             <div class="ngxsmk-prompt-card__footer">
               <span class="ngxsmk-prompt-card__action">Use prompt →</span>
             </div>
@@ -65,8 +60,8 @@ export interface PromptItem {
       scroll-behavior: smooth;
       padding: var(--ngxsmk-space-2, 0.5rem) var(--ngxsmk-space-6, 1.5rem);
       /* Hide scrollbars */
-      -ms-overflow-style: none;  /* IE and Edge */
-      scrollbar-width: none;  /* Firefox */
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
     }
 
     .ngxsmk-prompt-carousel-track::-webkit-scrollbar {
@@ -84,12 +79,20 @@ export interface PromptItem {
 
     .ngxsmk-prompt-carousel-fade--left {
       left: 0;
-      background: linear-gradient(to right, var(--ngxsmk-color-background, #fafafa) 10%, transparent);
+      background: linear-gradient(
+        to right,
+        var(--ngxsmk-color-background, #fafafa) 10%,
+        transparent
+      );
     }
 
     .ngxsmk-prompt-carousel-fade--right {
       right: 0;
-      background: linear-gradient(to left, var(--ngxsmk-color-background, #fafafa) 10%, transparent);
+      background: linear-gradient(
+        to left,
+        var(--ngxsmk-color-background, #fafafa) 10%,
+        transparent
+      );
     }
 
     .ngxsmk-prompt-card {
@@ -107,9 +110,10 @@ export interface PromptItem {
       box-shadow: var(--ngxsmk-shadow-sm, 0 1px 2px rgba(0, 0, 0, 0.05));
       position: relative;
       overflow: hidden;
-      transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1), 
-                  box-shadow 0.2s cubic-bezier(0.2, 0, 0, 1),
-                  border-color 0.2s ease;
+      transition:
+        transform 0.2s cubic-bezier(0.2, 0, 0, 1),
+        box-shadow 0.2s cubic-bezier(0.2, 0, 0, 1),
+        border-color 0.2s ease;
     }
 
     .ngxsmk-prompt-card::before {
@@ -123,11 +127,21 @@ export interface PromptItem {
       opacity: 0.8;
     }
 
-    .ngxsmk-prompt-card[data-preset="violet"]::before { background: #7C3AED; }
-    .ngxsmk-prompt-card[data-preset="emerald"]::before { background: #059669; }
-    .ngxsmk-prompt-card[data-preset="rose"]::before { background: #E11D48; }
-    .ngxsmk-prompt-card[data-preset="amber"]::before { background: #D97706; }
-    .ngxsmk-prompt-card[data-preset="blue"]::before { background: #2563EB; }
+    .ngxsmk-prompt-card[data-preset='violet']::before {
+      background: #7c3aed;
+    }
+    .ngxsmk-prompt-card[data-preset='emerald']::before {
+      background: #059669;
+    }
+    .ngxsmk-prompt-card[data-preset='rose']::before {
+      background: #e11d48;
+    }
+    .ngxsmk-prompt-card[data-preset='amber']::before {
+      background: #d97706;
+    }
+    .ngxsmk-prompt-card[data-preset='blue']::before {
+      background: #2563eb;
+    }
 
     .ngxsmk-prompt-card:hover {
       transform: translateY(-4px) scale(1.01);
@@ -193,7 +207,7 @@ export interface PromptItem {
       color: var(--ngxsmk-color-primary-hover, #6d28d9);
     }
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgxsmkPromptCarousel {
   readonly prompts = input<PromptItem[]>([]);

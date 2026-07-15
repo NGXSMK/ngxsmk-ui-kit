@@ -1,1 +1,1 @@
-export { NgxsmkStackItem } from "@ngxsmk/core/h-stack";
+export { NgxsmkStackItem } from '@ngxsmk/core/h-stack';

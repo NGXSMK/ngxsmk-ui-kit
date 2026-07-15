@@ -188,10 +188,22 @@ export class NgxsmkToast {
       font-family: var(--ngxsmk-font-sans);
     }
 
-    :host([data-position='bottom-right']) { right: 1rem; bottom: 1rem; }
-    :host([data-position='bottom-left']) { left: 1rem; bottom: 1rem; }
-    :host([data-position='top-right']) { right: 1rem; top: 1rem; }
-    :host([data-position='top-left']) { left: 1rem; top: 1rem; }
+    :host([data-position='bottom-right']) {
+      right: 1rem;
+      bottom: 1rem;
+    }
+    :host([data-position='bottom-left']) {
+      left: 1rem;
+      bottom: 1rem;
+    }
+    :host([data-position='top-right']) {
+      right: 1rem;
+      top: 1rem;
+    }
+    :host([data-position='top-left']) {
+      left: 1rem;
+      top: 1rem;
+    }
 
     .ngxsmk-toaster__toast {
       display: flex;
@@ -214,12 +226,23 @@ export class NgxsmkToast {
       border-radius: 0;
       background: var(--ngxsmk-color-outline-strong);
     }
-    .ngxsmk-toaster__toast[data-variant='success'] .ngxsmk-toaster__accent { background: var(--ngxsmk-color-success); }
-    .ngxsmk-toaster__toast[data-variant='error'] .ngxsmk-toaster__accent { background: var(--ngxsmk-color-error); }
-    .ngxsmk-toaster__toast[data-variant='warning'] .ngxsmk-toaster__accent { background: var(--ngxsmk-color-warning); }
-    .ngxsmk-toaster__toast[data-variant='info'] .ngxsmk-toaster__accent { background: var(--ngxsmk-color-info); }
+    .ngxsmk-toaster__toast[data-variant='success'] .ngxsmk-toaster__accent {
+      background: var(--ngxsmk-color-success);
+    }
+    .ngxsmk-toaster__toast[data-variant='error'] .ngxsmk-toaster__accent {
+      background: var(--ngxsmk-color-error);
+    }
+    .ngxsmk-toaster__toast[data-variant='warning'] .ngxsmk-toaster__accent {
+      background: var(--ngxsmk-color-warning);
+    }
+    .ngxsmk-toaster__toast[data-variant='info'] .ngxsmk-toaster__accent {
+      background: var(--ngxsmk-color-info);
+    }
 
-    .ngxsmk-toaster__body { flex: 1; min-width: 0; }
+    .ngxsmk-toaster__body {
+      flex: 1;
+      min-width: 0;
+    }
 
     .ngxsmk-toaster__title {
       margin: 0;
@@ -250,29 +273,46 @@ export class NgxsmkToast {
       color: var(--ngxsmk-color-on-surface-variant);
       cursor: pointer;
     }
-    .ngxsmk-toaster__close:hover { color: var(--ngxsmk-color-on-surface); }
+    .ngxsmk-toaster__close:hover {
+      color: var(--ngxsmk-color-on-surface);
+    }
     .ngxsmk-toaster__close:focus-visible {
       outline: 2px solid var(--ngxsmk-color-ring);
       outline-offset: 1px;
     }
 
     @keyframes ngxsmk-toast-in {
-      from { opacity: 0; transform: translateY(0.5rem); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(0.5rem);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .ngxsmk-toaster__toast.leaving {
-      animation: ngxsmk-toast-out var(--ngxsmk-duration-fast, 150ms) var(--ngxsmk-ease-in, ease-in) forwards;
+      animation: ngxsmk-toast-out var(--ngxsmk-duration-fast, 150ms) var(--ngxsmk-ease-in, ease-in)
+        forwards;
       pointer-events: none;
     }
 
     @keyframes ngxsmk-toast-out {
-      from { opacity: 1; transform: translateY(0); }
-      to { opacity: 0; transform: translateY(0.5rem); }
+      from {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      to {
+        opacity: 0;
+        transform: translateY(0.5rem);
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .ngxsmk-toaster__toast { animation: none; }
+      .ngxsmk-toaster__toast {
+        animation: none;
+      }
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -6,10 +6,7 @@ import { SeoService } from './seo.service';
 
 @Component({
   selector: 'app-root',
-  imports: [
-    RouterOutlet,
-    NgxsmkToaster,
-  ],
+  imports: [RouterOutlet, NgxsmkToaster],
   template: `
     <router-outlet />
     <ngxsmk-toaster />

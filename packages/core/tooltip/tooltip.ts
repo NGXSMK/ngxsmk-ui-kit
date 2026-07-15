@@ -1,12 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import {
-  DestroyRef,
-  Directive,
-  ElementRef,
-  inject,
-  input,
-  signal,
-} from '@angular/core';
+import { DestroyRef, Directive, ElementRef, inject, input, signal } from '@angular/core';
 import { ngxsmkUniqueId } from '@ngxsmk/core/util';
 import { NgxsmkMotionState, playEnter, playExit } from '@ngxsmk/core/animation';
 

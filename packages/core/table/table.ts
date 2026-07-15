@@ -20,11 +20,7 @@ export interface NgxsmkTableColumn {
                 [attr.aria-sort]="ariaSort(col.key)"
               >
                 @if (sortable()) {
-                  <button
-                    type="button"
-                    class="ngxsmk-table__sort-btn"
-                    (click)="onSort(col.key)"
-                  >
+                  <button type="button" class="ngxsmk-table__sort-btn" (click)="onSort(col.key)">
                     <span>{{ col.label }}</span>
                     <span
                       class="ngxsmk-table__sort-icon"
@@ -32,7 +28,14 @@ export interface NgxsmkTableColumn {
                       aria-hidden="true"
                     >
                       <svg viewBox="0 0 16 16" width="12" height="12">
-                        <path d="M4 10l4-4 4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                          d="M4 10l4-4 4 4"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
                       </svg>
                     </span>
                   </button>
@@ -117,8 +120,15 @@ export interface NgxsmkTableColumn {
         opacity var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
         transform var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
-    .ngxsmk-table__sort-icon[data-state='asc'] { opacity: 1; color: var(--ngxsmk-color-primary); }
-    .ngxsmk-table__sort-icon[data-state='desc'] { opacity: 1; color: var(--ngxsmk-color-primary); transform: rotate(180deg); }
+    .ngxsmk-table__sort-icon[data-state='asc'] {
+      opacity: 1;
+      color: var(--ngxsmk-color-primary);
+    }
+    .ngxsmk-table__sort-icon[data-state='desc'] {
+      opacity: 1;
+      color: var(--ngxsmk-color-primary);
+      transform: rotate(180deg);
+    }
 
     .ngxsmk-table__cell {
       padding: var(--ngxsmk-space-3) var(--ngxsmk-space-4);

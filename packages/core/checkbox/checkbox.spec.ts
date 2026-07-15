@@ -17,9 +17,7 @@ describe('NgxsmkCheckbox', () => {
   function setup() {
     const fixture = TestBed.createComponent(HostComponent);
     fixture.detectChanges();
-    const input: HTMLInputElement = fixture.nativeElement.querySelector(
-      'input[type="checkbox"]',
-    );
+    const input: HTMLInputElement = fixture.nativeElement.querySelector('input[type="checkbox"]');
     return { fixture, input, control: fixture.componentInstance.control };
   }
 

@@ -11,7 +11,7 @@ describe('getFocusable', () => {
       get() {
         // Return parentElement as a mock offsetParent if it's not hidden
         return this.style.display === 'none' ? null : this.parentElement;
-      }
+      },
     });
   });
 

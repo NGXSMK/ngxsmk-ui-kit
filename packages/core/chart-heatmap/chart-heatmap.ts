@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 export interface NgxsmkHeatmapLabels {
   x: string[];
@@ -37,7 +32,9 @@ export interface NgxsmkHeatmapLabels {
               [attr.y]="cell.y + cell.h / 2"
               text-anchor="middle"
               dominant-baseline="central"
-            >{{ cell.label }}</text>
+            >
+              {{ cell.label }}
+            </text>
           </g>
         }
       }
@@ -71,7 +68,9 @@ export class NgxsmkHeatmapChart {
   readonly height = input(200);
 
   protected readonly flatValues = computed(() =>
-    this.data().flat().filter((v) => v !== undefined),
+    this.data()
+      .flat()
+      .filter((v) => v !== undefined),
   );
 
   protected readonly minVal = computed(() =>
@@ -82,15 +81,11 @@ export class NgxsmkHeatmapChart {
     this.flatValues().length ? Math.max(...this.flatValues()) : 1,
   );
 
-  protected readonly viewBox = computed(
-    () => `0 0 ${this.width()} ${this.height()}`,
-  );
+  protected readonly viewBox = computed(() => `0 0 ${this.width()} ${this.height()}`);
 
   protected readonly cells = computed(() => {
     const rows = this.data().length || 1;
-    const cols = this.data().length
-      ? Math.max(...this.data().map((r) => r.length), 1)
-      : 1;
+    const cols = this.data().length ? Math.max(...this.data().map((r) => r.length), 1) : 1;
     const labelW = 50;
     const labelH = 20;
     const cellW = (this.width() - labelW) / cols;

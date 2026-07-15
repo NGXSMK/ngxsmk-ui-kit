@@ -40,18 +40,15 @@ export class NgxsmkPresence {
         if (show) {
           if (this.viewContainer.length === 0) {
             const view = this.viewContainer.createEmbeddedView(this.template);
-            const el = view.rootNodes.find(
-              (n): n is HTMLElement => n instanceof HTMLElement,
-            );
+            const el = view.rootNodes.find((n): n is HTMLElement => n instanceof HTMLElement);
             if (el) {
               void playEnter(el, this.motion());
             }
           }
         } else if (this.viewContainer.length > 0) {
           const view = this.viewContainer.get(0) as EmbeddedViewRef<unknown> | null;
-          const el = view?.rootNodes.find(
-            (n): n is HTMLElement => n instanceof HTMLElement,
-          ) ?? null;
+          const el =
+            view?.rootNodes.find((n): n is HTMLElement => n instanceof HTMLElement) ?? null;
           const target = el ?? this.host.nativeElement;
           void playExit(target, this.motion()).then(() => {
             this.viewContainer.clear();

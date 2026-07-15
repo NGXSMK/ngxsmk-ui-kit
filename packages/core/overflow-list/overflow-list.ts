@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, input, signal, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  input,
+  signal,
+  ViewEncapsulation,
+} from '@angular/core';
 
 @Component({
   standalone: true,
@@ -49,16 +55,36 @@ import { ChangeDetectionStrategy, Component, input, signal, ViewEncapsulation } 
     }
 
     /* Declarative nth-child hiding logic based on data-max attribute */
-    .ngxsmk-overflow-list[data-max="1"]:not(.expanded) [item]:nth-child(n+2) { display: none !important; }
-    .ngxsmk-overflow-list[data-max="2"]:not(.expanded) [item]:nth-child(n+3) { display: none !important; }
-    .ngxsmk-overflow-list[data-max="3"]:not(.expanded) [item]:nth-child(n+4) { display: none !important; }
-    .ngxsmk-overflow-list[data-max="4"]:not(.expanded) [item]:nth-child(n+5) { display: none !important; }
-    .ngxsmk-overflow-list[data-max="5"]:not(.expanded) [item]:nth-child(n+6) { display: none !important; }
-    .ngxsmk-overflow-list[data-max="6"]:not(.expanded) [item]:nth-child(n+7) { display: none !important; }
-    .ngxsmk-overflow-list[data-max="7"]:not(.expanded) [item]:nth-child(n+8) { display: none !important; }
-    .ngxsmk-overflow-list[data-max="8"]:not(.expanded) [item]:nth-child(n+9) { display: none !important; }
-    .ngxsmk-overflow-list[data-max="9"]:not(.expanded) [item]:nth-child(n+10) { display: none !important; }
-    .ngxsmk-overflow-list[data-max="10"]:not(.expanded) [item]:nth-child(n+11) { display: none !important; }
+    .ngxsmk-overflow-list[data-max='1']:not(.expanded) [item]:nth-child(n + 2) {
+      display: none !important;
+    }
+    .ngxsmk-overflow-list[data-max='2']:not(.expanded) [item]:nth-child(n + 3) {
+      display: none !important;
+    }
+    .ngxsmk-overflow-list[data-max='3']:not(.expanded) [item]:nth-child(n + 4) {
+      display: none !important;
+    }
+    .ngxsmk-overflow-list[data-max='4']:not(.expanded) [item]:nth-child(n + 5) {
+      display: none !important;
+    }
+    .ngxsmk-overflow-list[data-max='5']:not(.expanded) [item]:nth-child(n + 6) {
+      display: none !important;
+    }
+    .ngxsmk-overflow-list[data-max='6']:not(.expanded) [item]:nth-child(n + 7) {
+      display: none !important;
+    }
+    .ngxsmk-overflow-list[data-max='7']:not(.expanded) [item]:nth-child(n + 8) {
+      display: none !important;
+    }
+    .ngxsmk-overflow-list[data-max='8']:not(.expanded) [item]:nth-child(n + 9) {
+      display: none !important;
+    }
+    .ngxsmk-overflow-list[data-max='9']:not(.expanded) [item]:nth-child(n + 10) {
+      display: none !important;
+    }
+    .ngxsmk-overflow-list[data-max='10']:not(.expanded) [item]:nth-child(n + 11) {
+      display: none !important;
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

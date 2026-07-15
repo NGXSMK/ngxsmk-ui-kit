@@ -54,14 +54,14 @@ describe('NgxsmkInput', () => {
 
   it('binds inputs to native input attributes', () => {
     const { fixture, inputEl, hostEl } = setup();
-    
+
     fixture.componentInstance.type.set('email');
     fixture.componentInstance.placeholder.set('test@example.com');
     fixture.componentInstance.disabled.set(true);
     fixture.componentInstance.id.set('custom-id');
     fixture.componentInstance.ariaInvalid.set(true);
     fixture.componentInstance.ariaDescribedby.set('error-msg');
-    
+
     fixture.detectChanges();
 
     expect(inputEl.type).toBe('email');
@@ -75,7 +75,7 @@ describe('NgxsmkInput', () => {
 
   it('updates value and emits changed output when typing', () => {
     const { fixture, inputEl } = setup();
-    
+
     inputEl.value = 'hello';
     inputEl.dispatchEvent(new Event('input'));
     fixture.detectChanges();

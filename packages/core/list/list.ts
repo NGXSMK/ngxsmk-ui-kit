@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, booleanAttribute, input, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  booleanAttribute,
+  input,
+  ViewEncapsulation,
+} from '@angular/core';
 
 @Component({
   standalone: true,

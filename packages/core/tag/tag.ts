@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  booleanAttribute,
-  input,
-  output,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, booleanAttribute, input, output } from '@angular/core';
 
 export type NgxsmkTagVariant = 'neutral' | 'primary' | 'success' | 'warning' | 'error' | 'info';
 
@@ -109,7 +103,8 @@ export class NgxsmkTag {
       display: inline-flex;
       align-items: center;
       gap: var(--ngxsmk-space-1);
-      padding: var(--ngxsmk-space-0-5) var(--ngxsmk-space-1) var(--ngxsmk-space-0-5) var(--ngxsmk-space-2);
+      padding: var(--ngxsmk-space-0-5) var(--ngxsmk-space-1) var(--ngxsmk-space-0-5)
+        var(--ngxsmk-space-2);
       border-radius: var(--ngxsmk-radius-full);
       background: var(--ngxsmk-color-surface-variant);
       color: var(--ngxsmk-color-on-surface);

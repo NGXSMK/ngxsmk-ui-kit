@@ -14,7 +14,7 @@ export interface SchedulerEvent {
   template: `
     <div class="ngxsmk-scheduler__header">
       @for (day of days(); track day) {
-        <div class="ngxsmk-scheduler__day-header">{{ day | date:'EEE' }}</div>
+        <div class="ngxsmk-scheduler__day-header">{{ day | date: 'EEE' }}</div>
       }
     </div>
     <div class="ngxsmk-scheduler__grid">
@@ -29,16 +29,54 @@ export interface SchedulerEvent {
   `,
   host: { class: 'ngxsmk-scheduler' },
   styles: `
-    :host { display: block; font-family: var(--ngxsmk-font-sans); border: 1px solid var(--ngxsmk-color-outline-variant); border-radius: var(--ngxsmk-radius-lg); overflow: hidden; }
-    .ngxsmk-scheduler__header { display: grid; grid-template-columns: repeat(7, 1fr); background: var(--ngxsmk-color-surface-variant); }
-    .ngxsmk-scheduler__day-header { padding: var(--ngxsmk-space-2); text-align: center; font-size: 0.75rem; font-weight: 600; color: var(--ngxsmk-color-on-surface); }
-    .ngxsmk-scheduler__grid { display: grid; grid-template-columns: repeat(7, 1fr); }
-    .ngxsmk-scheduler__day { min-height: 6rem; padding: var(--ngxsmk-space-1); border-right: 1px solid var(--ngxsmk-color-outline-variant); border-bottom: 1px solid var(--ngxsmk-color-outline-variant); }
-    .ngxsmk-scheduler__event { padding: var(--ngxsmk-space-1) var(--ngxsmk-space-2); margin-bottom: var(--ngxsmk-space-1); background: var(--ngxsmk-color-primary-container); color: var(--ngxsmk-color-on-primary-container); border-radius: var(--ngxsmk-radius-sm); font-size: 0.6875rem; cursor: pointer; }
+    :host {
+      display: block;
+      font-family: var(--ngxsmk-font-sans);
+      border: 1px solid var(--ngxsmk-color-outline-variant);
+      border-radius: var(--ngxsmk-radius-lg);
+      overflow: hidden;
+    }
+    .ngxsmk-scheduler__header {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      background: var(--ngxsmk-color-surface-variant);
+    }
+    .ngxsmk-scheduler__day-header {
+      padding: var(--ngxsmk-space-2);
+      text-align: center;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--ngxsmk-color-on-surface);
+    }
+    .ngxsmk-scheduler__grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+    }
+    .ngxsmk-scheduler__day {
+      min-height: 6rem;
+      padding: var(--ngxsmk-space-1);
+      border-right: 1px solid var(--ngxsmk-color-outline-variant);
+      border-bottom: 1px solid var(--ngxsmk-color-outline-variant);
+    }
+    .ngxsmk-scheduler__event {
+      padding: var(--ngxsmk-space-1) var(--ngxsmk-space-2);
+      margin-bottom: var(--ngxsmk-space-1);
+      background: var(--ngxsmk-color-primary-container);
+      color: var(--ngxsmk-color-on-primary-container);
+      border-radius: var(--ngxsmk-radius-sm);
+      font-size: 0.6875rem;
+      cursor: pointer;
+    }
 
     @media (max-width: 768px) {
-      :host { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-      .ngxsmk-scheduler__header, .ngxsmk-scheduler__grid { grid-template-columns: repeat(7, minmax(4rem, 1fr)); }
+      :host {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .ngxsmk-scheduler__header,
+      .ngxsmk-scheduler__grid {
+        grid-template-columns: repeat(7, minmax(4rem, 1fr));
+      }
     }
   `,
   imports: [DatePipe],
@@ -58,8 +96,6 @@ export class NgxsmkScheduler {
   }
 
   protected eventsForDay(day: Date): SchedulerEvent[] {
-    return this.events().filter(e =>
-      e.start.toDateString() === day.toDateString()
-    );
+    return this.events().filter((e) => e.start.toDateString() === day.toDateString());
   }
 }

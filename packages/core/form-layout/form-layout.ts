@@ -11,7 +11,11 @@ export type NgxsmkFormLayoutColumns = 1 | 2 | 3 | 4;
     '[style.grid-template-columns]': 'columns() > 1 ? "repeat(" + columns() + ", 1fr)" : null',
   },
   styles: `
-    :host { display: grid; grid-template-columns: 1fr; gap: var(--ngxsmk-space-4) var(--ngxsmk-space-6); }
+    :host {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--ngxsmk-space-4) var(--ngxsmk-space-6);
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

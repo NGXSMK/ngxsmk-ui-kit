@@ -79,7 +79,9 @@ export class NgxsmkHoverCard {
   hide(): void {
     if (this.closing()) return;
     this.closing.set(true);
-    const el = this.host.nativeElement.querySelector('.ngxsmk-hover-card__popover') as HTMLElement | null;
+    const el = this.host.nativeElement.querySelector(
+      '.ngxsmk-hover-card__popover',
+    ) as HTMLElement | null;
     void playExit(el ?? this.host.nativeElement, this.HOVER_CARD_MOTION).then(() => {
       this.closing.set(false);
       this.visible.set(false);

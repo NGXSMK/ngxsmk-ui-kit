@@ -75,14 +75,19 @@ import { ChangeDetectionStrategy, Component, input, model } from '@angular/core'
       outline-offset: -2px;
     }
 
-    .ngxsmk-collapsible__title { flex: 1; min-width: 0; }
+    .ngxsmk-collapsible__title {
+      flex: 1;
+      min-width: 0;
+    }
 
     .ngxsmk-collapsible__chevron {
       flex-shrink: 0;
       transition: transform var(--ngxsmk-duration-normal) var(--ngxsmk-ease-out);
     }
 
-    :host([data-open]) .ngxsmk-collapsible__chevron { transform: rotate(180deg); }
+    :host([data-open]) .ngxsmk-collapsible__chevron {
+      transform: rotate(180deg);
+    }
 
     .ngxsmk-collapsible__region {
       overflow: hidden;
@@ -98,7 +103,9 @@ import { ChangeDetectionStrategy, Component, input, model } from '@angular/core'
 
     @media (prefers-reduced-motion: reduce) {
       .ngxsmk-collapsible__region,
-      .ngxsmk-collapsible__chevron { transition: none; }
+      .ngxsmk-collapsible__chevron {
+        transition: none;
+      }
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

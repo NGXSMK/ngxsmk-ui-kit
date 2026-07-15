@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * Progress bar. Omit `value` (or pass `null`) for indeterminate mode.
@@ -49,12 +44,18 @@ import {
     }
 
     @keyframes ngxsmk-progress-slide {
-      from { transform: translateX(-250%); }
-      to { transform: translateX(350%); }
+      from {
+        transform: translateX(-250%);
+      }
+      to {
+        transform: translateX(350%);
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      :host([data-indeterminate]) .ngxsmk-progress__bar { animation-duration: 2.4s; }
+      :host([data-indeterminate]) .ngxsmk-progress__bar {
+        animation-duration: 2.4s;
+      }
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

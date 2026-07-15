@@ -32,14 +32,17 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
   template: `
     <h2 class="ngxsmk-page-title">Content &amp; Typography</h2>
     <p class="ngxsmk-page-desc">
-      Primitives for structuring and styling text. All components inherit the
-      theme token engine, so typography scales and recolors with your brand.
+      Primitives for structuring and styling text. All components inherit the theme token engine, so
+      typography scales and recolors with your brand.
     </p>
 
     <showcase-example
       title="Heading"
       description="Semantic heading levels with adjustable visual size and weight."
-      [code]="codeHeading" [component]="NgxsmkHeading" [customize]="customizeNgxsmkHeading">
+      [code]="codeHeading"
+      [component]="NgxsmkHeading"
+      [customize]="customizeNgxsmkHeading"
+    >
       <ngxsmk-heading level="h1">Display heading</ngxsmk-heading>
       <ngxsmk-heading level="h2">Section heading</ngxsmk-heading>
       <ngxsmk-heading level="h3" weight="bold">Subsection heading</ngxsmk-heading>
@@ -49,7 +52,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Text"
       description="Body, caption, and overline text variants with semantic colors."
-      [code]="codeText" [component]="NgxsmkText" [customize]="customizeNgxsmkText">
+      [code]="codeText"
+      [component]="NgxsmkText"
+      [customize]="customizeNgxsmkText"
+    >
       <ngxsmk-text variant="body">Body text for paragraphs and general copy.</ngxsmk-text>
       <ngxsmk-text variant="caption" color="secondary">A smaller caption for hints.</ngxsmk-text>
       <ngxsmk-text variant="overline" color="brand">Overline eyebrow label</ngxsmk-text>
@@ -58,17 +64,23 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Blockquote"
       description="Quoted content with an optional citation line."
-      [code]="codeBlockquote" [component]="NgxsmkBlockquote" [customize]="customizeNgxsmkBlockquote">
+      [code]="codeBlockquote"
+      [component]="NgxsmkBlockquote"
+      [customize]="customizeNgxsmkBlockquote"
+    >
       <ngxsmk-blockquote cite="'Ada Lovelace'">
-        The Analytical Engine weaves algebraic patterns just as the Jacquard
-        loom weaves flowers and leaves.
+        The Analytical Engine weaves algebraic patterns just as the Jacquard loom weaves flowers and
+        leaves.
       </ngxsmk-blockquote>
     </showcase-example>
 
     <showcase-example
       title="Code"
       description="Inline code styling that respects the mono font token."
-      [code]="codeCode" [component]="NgxsmkCode" [customize]="customizeNgxsmkCode">
+      [code]="codeCode"
+      [component]="NgxsmkCode"
+      [customize]="customizeNgxsmkCode"
+    >
       <p>Install with <code ngxsmk-code>npm i @ngxsmk/core</code> and import a component.</p>
       <p>Larger snippet: <code ngxsmk-code size="lg">ng generate @ngxsmk/core:button</code></p>
     </showcase-example>
@@ -76,7 +88,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Kbd"
       description="Keyboard key affordance for shortcuts and hints."
-      [code]="codeKbd" [component]="NgxsmkKbd" [customize]="customizeNgxsmkKbd">
+      [code]="codeKbd"
+      [component]="NgxsmkKbd"
+      [customize]="customizeNgxsmkKbd"
+    >
       <span class="ngxsmk-sc-wrap">
         <kbd ngxsmk-kbd>Ctrl</kbd>
         <kbd ngxsmk-kbd>K</kbd>
@@ -87,7 +102,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Link"
       description="Accessible links with muted and external variants."
-      [code]="codeLink" [component]="NgxsmkLink" [customize]="customizeNgxsmkLink">
+      [code]="codeLink"
+      [component]="NgxsmkLink"
+      [customize]="customizeNgxsmkLink"
+    >
       <span class="ngxsmk-sc-wrap">
         <a ngxsmk-link href="#">Default link</a>
         <a ngxsmk-link variant="muted" href="#">Muted link</a>
@@ -99,11 +117,29 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Thumbnail"
       description="Image preview with size and shape options plus letter fallback."
-      [code]="codeThumbnail" [component]="NgxsmkThumbnail" [customize]="customizeNgxsmkThumbnail">
+      [code]="codeThumbnail"
+      [component]="NgxsmkThumbnail"
+      [customize]="customizeNgxsmkThumbnail"
+    >
       <span class="ngxsmk-sc-wrap">
-        <ngxsmk-thumbnail src="https://i.pravatar.cc/120?img=12" alt="Ava" size="sm" shape="circle" />
-        <ngxsmk-thumbnail src="https://i.pravatar.cc/120?img=32" alt="Ben" size="md" shape="square" />
-        <ngxsmk-thumbnail src="https://i.pravatar.cc/120?img=5" alt="Cara" size="lg" shape="circle" />
+        <ngxsmk-thumbnail
+          src="https://i.pravatar.cc/120?img=12"
+          alt="Ava"
+          size="sm"
+          shape="circle"
+        />
+        <ngxsmk-thumbnail
+          src="https://i.pravatar.cc/120?img=32"
+          alt="Ben"
+          size="md"
+          shape="square"
+        />
+        <ngxsmk-thumbnail
+          src="https://i.pravatar.cc/120?img=5"
+          alt="Cara"
+          size="lg"
+          shape="circle"
+        />
         <ngxsmk-thumbnail alt="No image" size="md" shape="square" />
       </span>
     </showcase-example>
@@ -111,7 +147,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Timestamp"
       description="Relative, absolute, or smart date formatting."
-      [code]="codeTimestamp" [component]="NgxsmkTimestamp" [customize]="customizeNgxsmkTimestamp">
+      [code]="codeTimestamp"
+      [component]="NgxsmkTimestamp"
+      [customize]="customizeNgxsmkTimestamp"
+    >
       <span class="ngxsmk-sc-wrap">
         <ngxsmk-timestamp [date]="threeHoursAgo" format="relative" />
         <ngxsmk-timestamp [date]="yesterday" format="smart" />
@@ -122,7 +161,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Token"
       description="Compact, pill-shaped labels — perfect for tags and filters."
-      [code]="codeToken" [component]="NgxsmkToken" [customize]="customizeNgxsmkToken">
+      [code]="codeToken"
+      [component]="NgxsmkToken"
+      [customize]="customizeNgxsmkToken"
+    >
       <span class="ngxsmk-sc-wrap">
         <ngxsmk-token>Default</ngxsmk-token>
         <ngxsmk-token variant="primary">Primary</ngxsmk-token>
@@ -135,18 +177,24 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Citation"
       description="Inline numbered citation marker with an optional source link."
-      [code]="codeCitation" [component]="NgxsmkCitation" [customize]="customizeNgxsmkCitation">
+      [code]="codeCitation"
+      [component]="NgxsmkCitation"
+      [customize]="customizeNgxsmkCitation"
+    >
       <p>
         Design systems improve consistency across teams
-        <ngxsmk-citation [index]="1" url="https://example.com/ds" /> and reduce
-        rework <ngxsmk-citation [index]="2" />
+        <ngxsmk-citation [index]="1" url="https://example.com/ds" /> and reduce rework
+        <ngxsmk-citation [index]="2" />
       </p>
     </showcase-example>
 
     <showcase-example
       title="Markdown"
       description="Renders a Markdown string to styled, theme-aware HTML."
-      [code]="codeMarkdown" [component]="NgxsmkMarkdown" [customize]="customizeNgxsmkMarkdown">
+      [code]="codeMarkdown"
+      [component]="NgxsmkMarkdown"
+      [customize]="customizeNgxsmkMarkdown"
+    >
       <ngxsmk-markdown [content]="markdownSample" />
     </showcase-example>
   `,

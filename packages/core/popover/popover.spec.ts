@@ -22,8 +22,7 @@ function setup(configure?: (h: Host) => void) {
   const fixture = TestBed.createComponent(Host);
   if (configure) configure(fixture.componentInstance);
   fixture.detectChanges();
-  const host: HTMLElement =
-    fixture.nativeElement.querySelector('ngxsmk-popover');
+  const host: HTMLElement = fixture.nativeElement.querySelector('ngxsmk-popover');
   return { fixture, host };
 }
 
@@ -44,9 +43,7 @@ describe('NgxsmkPopover', () => {
 
   it('opens on trigger click and renders a dialog panel', () => {
     const { fixture, host } = setup();
-    host
-      .querySelector<HTMLButtonElement>('[ngxsmkPopoverTrigger]')!
-      .parentElement!.click();
+    host.querySelector<HTMLButtonElement>('[ngxsmkPopoverTrigger]')!.parentElement!.click();
     fixture.detectChanges();
     const panel = host.querySelector('.ngxsmk-popover__panel');
     expect(panel).not.toBeNull();

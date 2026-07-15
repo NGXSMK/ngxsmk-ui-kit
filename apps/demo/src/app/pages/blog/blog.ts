@@ -1,4 +1,9 @@
-import { NgxsmkCardContent, NgxsmkCardHeader, NgxsmkCardTitle, NgxsmkCard } from '@ngxsmk/core/card';
+import {
+  NgxsmkCardContent,
+  NgxsmkCardHeader,
+  NgxsmkCardTitle,
+  NgxsmkCard,
+} from '@ngxsmk/core/card';
 import { NgxsmkTag } from '@ngxsmk/core/tag';
 import { NgxsmkHeading } from '@ngxsmk/core/heading';
 import { NgxsmkText } from '@ngxsmk/core/text';
@@ -16,13 +21,25 @@ interface Post {
 @Component({
   selector: 'blog-page',
   standalone: true,
-  imports: [NgxsmkCard, NgxsmkCardContent, NgxsmkCardHeader, NgxsmkCardTitle, NgxsmkTag, NgxsmkHeading, NgxsmkText, NgxsmkTimestamp, AppNav],
+  imports: [
+    NgxsmkCard,
+    NgxsmkCardContent,
+    NgxsmkCardHeader,
+    NgxsmkCardTitle,
+    NgxsmkTag,
+    NgxsmkHeading,
+    NgxsmkText,
+    NgxsmkTimestamp,
+    AppNav,
+  ],
   template: `
     <app-nav />
     <div class="ngxsmk-page">
       <header class="ngxsmk-page__header">
         <ngxsmk-heading level="h1">Blog</ngxsmk-heading>
-        <ngxsmk-text variant="body" class="ngxsmk-page__sub">Latest news, articles, and write-ups from the NGXSMK team.</ngxsmk-text>
+        <ngxsmk-text variant="body" class="ngxsmk-page__sub"
+          >Latest news, articles, and write-ups from the NGXSMK team.</ngxsmk-text
+        >
       </header>
 
       <div class="ngxsmk-blog-grid">
@@ -45,14 +62,48 @@ interface Post {
     </div>
   `,
   styles: `
-    .ngxsmk-page { max-width: 1400px; margin: 0 auto; padding: var(--ngxsmk-space-12,3rem) var(--ngxsmk-space-6,1.5rem); }
-    .ngxsmk-page__header { margin-bottom: var(--ngxsmk-space-12,3rem); }
-    .ngxsmk-page__header h1 { font-size: 2rem; font-weight: 700; margin: 0 0 var(--ngxsmk-space-2,0.5rem); color: var(--ngxsmk-color-on-surface,#09090b); }
-    .ngxsmk-page__sub { color: var(--ngxsmk-color-on-surface-variant,#71717a); margin: 0; font-size: 1rem; }
-    .ngxsmk-blog-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(min(22rem,100%),1fr)); gap: var(--ngxsmk-space-6,1.5rem); }
-    .ngxsmk-blog-card { display: flex; flex-direction: column; height: 100%; }
-    .ngxsmk-blog-card__top { display: flex; align-items: center; justify-content: space-between; gap: var(--ngxsmk-space-2,0.5rem); margin-bottom: var(--ngxsmk-space-2,0.5rem); }
-    .ngxsmk-blog-desc { color: var(--ngxsmk-color-on-surface-variant,#71717a); font-size: 0.875rem; line-height: 1.6; margin: 0 0 var(--ngxsmk-space-4,1rem); }
+    .ngxsmk-page {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: var(--ngxsmk-space-12, 3rem) var(--ngxsmk-space-6, 1.5rem);
+    }
+    .ngxsmk-page__header {
+      margin-bottom: var(--ngxsmk-space-12, 3rem);
+    }
+    .ngxsmk-page__header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 0 0 var(--ngxsmk-space-2, 0.5rem);
+      color: var(--ngxsmk-color-on-surface, #09090b);
+    }
+    .ngxsmk-page__sub {
+      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      margin: 0;
+      font-size: 1rem;
+    }
+    .ngxsmk-blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(22rem, 100%), 1fr));
+      gap: var(--ngxsmk-space-6, 1.5rem);
+    }
+    .ngxsmk-blog-card {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .ngxsmk-blog-card__top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--ngxsmk-space-2, 0.5rem);
+      margin-bottom: var(--ngxsmk-space-2, 0.5rem);
+    }
+    .ngxsmk-blog-desc {
+      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      font-size: 0.875rem;
+      line-height: 1.6;
+      margin: 0 0 var(--ngxsmk-space-4, 1rem);
+    }
   `,
 })
 export class BlogPage {

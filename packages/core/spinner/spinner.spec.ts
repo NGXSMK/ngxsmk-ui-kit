@@ -6,9 +6,7 @@ import { NgxsmkSpinner, NgxsmkSpinnerSize } from './spinner';
 @Component({
   standalone: true,
   imports: [NgxsmkSpinner],
-  template: `
-    <ngxsmk-spinner [size]="size()" [label]="label()" />
-  `,
+  template: ` <ngxsmk-spinner [size]="size()" [label]="label()" /> `,
 })
 class HostComponent {
   readonly size = signal<NgxsmkSpinnerSize>('md');

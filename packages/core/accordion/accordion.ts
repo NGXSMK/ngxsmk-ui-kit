@@ -118,7 +118,9 @@ export class NgxsmkAccordion {
       border-bottom: 1px solid var(--ngxsmk-accordion-border-color, var(--ngxsmk-color-outline));
     }
 
-    .ngxsmk-accordion-item__heading { margin: 0; }
+    .ngxsmk-accordion-item__heading {
+      margin: 0;
+    }
 
     .ngxsmk-accordion-item__trigger {
       display: flex;
@@ -138,7 +140,9 @@ export class NgxsmkAccordion {
       cursor: pointer;
     }
 
-    .ngxsmk-accordion-item__trigger:hover { background: var(--ngxsmk-color-surface-hover); }
+    .ngxsmk-accordion-item__trigger:hover {
+      background: var(--ngxsmk-color-surface-hover);
+    }
 
     .ngxsmk-accordion-item__trigger:disabled {
       opacity: 0.5;
@@ -155,7 +159,9 @@ export class NgxsmkAccordion {
       transition: transform var(--ngxsmk-duration-normal) var(--ngxsmk-ease-out);
     }
 
-    :host([data-expanded]) .ngxsmk-accordion-item__chevron { transform: rotate(180deg); }
+    :host([data-expanded]) .ngxsmk-accordion-item__chevron {
+      transform: rotate(180deg);
+    }
 
     .ngxsmk-accordion-item__region {
       display: grid;
@@ -163,7 +169,9 @@ export class NgxsmkAccordion {
       transition: grid-template-rows var(--ngxsmk-duration-normal) var(--ngxsmk-ease-out);
     }
 
-    :host([data-expanded]) .ngxsmk-accordion-item__region { grid-template-rows: 1fr; }
+    :host([data-expanded]) .ngxsmk-accordion-item__region {
+      grid-template-rows: 1fr;
+    }
 
     .ngxsmk-accordion-item__content {
       overflow: hidden;
@@ -180,7 +188,9 @@ export class NgxsmkAccordion {
 
     @media (prefers-reduced-motion: reduce) {
       .ngxsmk-accordion-item__region,
-      .ngxsmk-accordion-item__chevron { transition: none; }
+      .ngxsmk-accordion-item__chevron {
+        transition: none;
+      }
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -194,14 +204,10 @@ export class NgxsmkAccordionItem {
   readonly disabled = input(false, { transform: booleanAttribute });
 
   private readonly generatedValue = ngxsmkUniqueId('ngxsmk-accordion-item');
-  protected readonly itemValue = computed(
-    () => this.value() || this.generatedValue,
-  );
+  protected readonly itemValue = computed(() => this.value() || this.generatedValue);
 
   protected readonly triggerId = ngxsmkUniqueId('ngxsmk-accordion-trigger');
   protected readonly panelId = ngxsmkUniqueId('ngxsmk-accordion-panel');
 
-  protected readonly expanded = computed(() =>
-    this.accordion.isExpanded(this.itemValue()),
-  );
+  protected readonly expanded = computed(() => this.accordion.isExpanded(this.itemValue()));
 }

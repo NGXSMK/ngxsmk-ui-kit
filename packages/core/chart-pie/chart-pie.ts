@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 export interface NgxsmkPieChartDataPoint {
   label: string;
@@ -21,11 +16,7 @@ export interface NgxsmkPieChartDataPoint {
       [attr.viewBox]="viewBox()"
     >
       @for (slice of slices(); track $index) {
-        <path
-          class="ngxsmk-chart-pie__slice"
-          [attr.d]="slice.d"
-          [attr.fill]="slice.fill"
-        />
+        <path class="ngxsmk-chart-pie__slice" [attr.d]="slice.d" [attr.fill]="slice.fill" />
       }
       @if (donut()) {
         <circle
@@ -64,13 +55,9 @@ export class NgxsmkPieChart {
 
   protected readonly innerRadius = computed(() => this.radius() * 0.55);
 
-  protected readonly viewBox = computed(
-    () => `0 0 ${this.size()} ${this.size()}`,
-  );
+  protected readonly viewBox = computed(() => `0 0 ${this.size()} ${this.size()}`);
 
-  protected readonly total = computed(() =>
-    this.data().reduce((a, d) => a + d.value, 0),
-  );
+  protected readonly total = computed(() => this.data().reduce((a, d) => a + d.value, 0));
 
   protected readonly palette = [
     'var(--ngxsmk-color-primary)',

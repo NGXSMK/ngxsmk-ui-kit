@@ -36,10 +36,10 @@ describe('NgxsmkComposedTableDirectives', () => {
 
   it('applies styling classes and attributes correctly', () => {
     const { row, bodyRow, headerCell, cell } = setup();
-    
+
     expect(row.classList.contains('ngxsmk-table-row')).toBe(true);
     expect(bodyRow.getAttribute('data-selected')).toBe('');
-    
+
     expect(headerCell.classList.contains('ngxsmk-table-header-cell')).toBe(true);
     expect(headerCell.getAttribute('aria-sort')).toBe('asc');
     expect(headerCell.style.cursor).toBe('pointer');

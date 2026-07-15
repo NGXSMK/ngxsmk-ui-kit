@@ -9,28 +9,24 @@
 //
 // Usage:  node tools/scripts/gen-ci-angularjson.mjs <major>
 //         node tools/scripts/gen-ci-angularjson.mjs --restore
-import {
-  writeFileSync,
-  rmSync,
-  existsSync,
-  renameSync,
-} from "node:fs";
+import { writeFileSync, rmSync, existsSync, renameSync } from 'node:fs';
 
 const major = process.argv[2];
 if (!major) {
-  console.error("usage: gen-ci-angularjson.mjs <major> | --restore");
+  console.error('usage: gen-ci-angularjson.mjs <major> | --restore');
   process.exit(1);
 }
 
-const libs = ["theme", "cdk", "core"];
+const libs = ['theme', 'cdk', 'core'];
 const majorNum = parseInt(major, 10);
-const builder = (majorNum === 17 || majorNum === 18)
-  ? "@angular-devkit/build-angular:ng-packagr"
-  : "@angular/build:ng-packagr";
-const ANGULAR_JSON = "angular.json";
-const BACKUP = "angular.json.bak";
+const builder =
+  majorNum === 17 || majorNum === 18
+    ? '@angular-devkit/build-angular:ng-packagr'
+    : '@angular/build:ng-packagr';
+const ANGULAR_JSON = 'angular.json';
+const BACKUP = 'angular.json.bak';
 
-if (major === "--restore") {
+if (major === '--restore') {
   for (const lib of libs) {
     const p = `packages/${lib}/tsconfig.lib.compat.json`;
     if (existsSync(p)) rmSync(p);
@@ -40,7 +36,7 @@ if (major === "--restore") {
   if (existsSync(BACKUP)) {
     if (existsSync(ANGULAR_JSON)) rmSync(ANGULAR_JSON);
     renameSync(BACKUP, ANGULAR_JSON);
-    console.log("Restored original angular.json.");
+    console.log('Restored original angular.json.');
   }
   process.exit(0);
 }
@@ -56,26 +52,26 @@ if (existsSync(ANGULAR_JSON) && !existsSync(BACKUP)) {
 // Secondary entry points are re-exported via package specifiers
 // (@ngxsmk/cdk/focusable) so ng-packagr does not double-compile them.
 const compatTsConfig = {
-  extends: "./tsconfig.lib.json",
+  extends: './tsconfig.lib.json',
   compilerOptions: {
-    module: "esnext",
-    moduleResolution: "bundler",
+    module: 'esnext',
+    moduleResolution: 'bundler',
     importHelpers: false,
   },
   angularCompilerOptions: {
-    compilationMode: "partial",
+    compilationMode: 'partial',
   },
 };
 
 const projects = {};
 for (const lib of libs) {
   const compatPath = `packages/${lib}/tsconfig.lib.compat.json`;
-  writeFileSync(compatPath, JSON.stringify(compatTsConfig, null, 2) + "\n");
+  writeFileSync(compatPath, JSON.stringify(compatTsConfig, null, 2) + '\n');
   projects[`@ngxsmk/${lib}`] = {
-    projectType: "library",
+    projectType: 'library',
     root: `packages/${lib}`,
     sourceRoot: `packages/${lib}/src`,
-    prefix: "ngxsmk",
+    prefix: 'ngxsmk',
     architect: {
       build: {
         builder,
@@ -87,15 +83,14 @@ for (const lib of libs) {
           production: { tsConfig: compatPath },
           development: { tsConfig: compatPath },
         },
-        defaultConfiguration: "production",
+        defaultConfiguration: 'production',
       },
     },
   };
 }
 
 writeFileSync(
-  "angular.json",
-  JSON.stringify({ version: 1, newProjectRoot: "projects", projects }, null, 2) +
-    "\n"
+  'angular.json',
+  JSON.stringify({ version: 1, newProjectRoot: 'projects', projects }, null, 2) + '\n',
 );
 console.log(`Generated angular.json (Angular ${major}, builder ${builder}).`);

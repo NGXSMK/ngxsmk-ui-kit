@@ -29,7 +29,7 @@ describe('NgxsmkFocusTrap', () => {
       configurable: true,
       get() {
         return this.style.display === 'none' ? null : this.parentElement;
-      }
+      },
     });
   });
 
@@ -74,7 +74,11 @@ describe('NgxsmkFocusTrap', () => {
     expect(document.activeElement).toBe(first);
 
     // Press Shift+Tab on first element, should wrap to last
-    const shiftTabEvent = new KeyboardEvent('keydown', { key: 'Tab', shiftKey: true, bubbles: true });
+    const shiftTabEvent = new KeyboardEvent('keydown', {
+      key: 'Tab',
+      shiftKey: true,
+      bubbles: true,
+    });
     first.dispatchEvent(shiftTabEvent);
     fixture.detectChanges();
 

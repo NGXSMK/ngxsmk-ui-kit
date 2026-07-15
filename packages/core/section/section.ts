@@ -11,8 +11,17 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
   `,
   host: { class: 'ngxsmk-section' },
   styles: `
-    :host { display: block; font-family: var(--ngxsmk-font-sans); }
-    .ngxsmk-section__title { margin: 0 0 var(--ngxsmk-space-4); font-size: var(--ngxsmk-text-headline-sm-size); font-weight: 600; line-height: var(--ngxsmk-text-headline-sm-line); color: var(--ngxsmk-color-on-surface); }
+    :host {
+      display: block;
+      font-family: var(--ngxsmk-font-sans);
+    }
+    .ngxsmk-section__title {
+      margin: 0 0 var(--ngxsmk-space-4);
+      font-size: var(--ngxsmk-text-headline-sm-size);
+      font-weight: 600;
+      line-height: var(--ngxsmk-text-headline-sm-line);
+      color: var(--ngxsmk-color-on-surface);
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -29,7 +29,14 @@ export class NgxsmkCheckboxListItem {}
       />
       <span class="ngxsmk-checkbox-list-item__box" aria-hidden="true">
         <svg viewBox="0 0 16 16" width="12" height="12">
-          <path d="M3 8.5l3.5 3.5L13 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          <path
+            d="M3 8.5l3.5 3.5L13 4.5"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
         </svg>
       </span>
       <span class="ngxsmk-checkbox-list-item__content">
@@ -46,7 +53,9 @@ export class NgxsmkCheckboxListItem {}
     '[attr.data-disabled]': 'disabled() ? "" : null',
   },
   styles: `
-    :host { display: block; }
+    :host {
+      display: block;
+    }
     .ngxsmk-checkbox-list-item__wrapper {
       display: flex;
       align-items: center;
@@ -85,14 +94,23 @@ export class NgxsmkCheckboxListItem {}
       border-radius: var(--ngxsmk-radius-sm);
       background: var(--ngxsmk-color-surface);
       color: var(--ngxsmk-color-on-primary);
-      transition: background-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out), border-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
+      transition:
+        background-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
+        border-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
-    .ngxsmk-checkbox-list-item__box svg { opacity: 0; transform: scale(0.6); transition: all var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out); }
+    .ngxsmk-checkbox-list-item__box svg {
+      opacity: 0;
+      transform: scale(0.6);
+      transition: all var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
+    }
     :host([data-checked]) .ngxsmk-checkbox-list-item__box {
       background: var(--ngxsmk-color-primary);
       border-color: var(--ngxsmk-color-primary);
     }
-    :host([data-checked]) .ngxsmk-checkbox-list-item__box svg { opacity: 1; transform: scale(1); }
+    :host([data-checked]) .ngxsmk-checkbox-list-item__box svg {
+      opacity: 1;
+      transform: scale(1);
+    }
     .ngxsmk-checkbox-list-item__content {
       display: flex;
       flex-direction: column;

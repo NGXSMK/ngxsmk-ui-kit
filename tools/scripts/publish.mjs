@@ -1,11 +1,5 @@
 import { execSync } from 'node:child_process';
-import {
-  readFileSync,
-  writeFileSync,
-  existsSync,
-  rmSync,
-  renameSync,
-} from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, rmSync, renameSync } from 'node:fs';
 
 // Build with the LOWEST supported Angular so the partial-Ivy output is
 // forward-compatible: a package compiled with an older ng-packagr loads on
@@ -92,7 +86,9 @@ try {
   console.log('\nCleaning dist and rebuilding libraries in partial compilation mode...');
   if (existsSync('dist')) rmSync('dist', { recursive: true, force: true });
   for (const lib of LIBS) {
-    run(`npx -p @angular/cli@${ANGULAR} ng build --project @ngxsmk/${lib} --configuration production`);
+    run(
+      `npx -p @angular/cli@${ANGULAR} ng build --project @ngxsmk/${lib} --configuration production`,
+    );
   }
 
   // 4. Publish (public via publishConfig in each package.json).

@@ -1,10 +1,4 @@
-import {
-  Directive,
-  InjectionToken,
-  inject,
-  input,
-  TemplateRef,
-} from '@angular/core';
+import { Directive, InjectionToken, inject, input, TemplateRef } from '@angular/core';
 
 export interface NgxsmkLinkContext {
   href: string;

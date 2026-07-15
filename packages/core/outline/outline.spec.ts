@@ -6,9 +6,7 @@ import { NgxsmkOutline, OutlineItem } from './outline';
 @Component({
   standalone: true,
   imports: [NgxsmkOutline],
-  template: `
-    <ngxsmk-outline [items]="items" [(activeId)]="activeId" />
-  `,
+  template: ` <ngxsmk-outline [items]="items" [(activeId)]="activeId" /> `,
 })
 class HostComponent {
   items: OutlineItem[] = [
@@ -32,7 +30,7 @@ describe('NgxsmkOutline', () => {
     expect(links.length).toBe(2);
     expect(links[0].textContent.trim()).toBe('Section 1');
     expect(links[1].textContent.trim()).toBe('Section 2');
-    
+
     // Depth checks
     expect(links[0].style.paddingLeft).toBe('16px'); // 0 * 16 + 16
     expect(links[1].style.paddingLeft).toBe('32px'); // 1 * 16 + 16

@@ -10,7 +10,10 @@ export interface CheckboxListItem {
   selector: 'ngxsmk-checkbox-list',
   template: `
     @for (item of items(); track item.value) {
-      <label class="ngxsmk-checkbox-list__item" [class.ngxsmk-checkbox-list__item--disabled]="item.disabled">
+      <label
+        class="ngxsmk-checkbox-list__item"
+        [class.ngxsmk-checkbox-list__item--disabled]="item.disabled"
+      >
         <input
           type="checkbox"
           [checked]="isChecked(item.value)"
@@ -23,9 +26,24 @@ export interface CheckboxListItem {
   `,
   host: { class: 'ngxsmk-checkbox-list' },
   styles: `
-    :host { display: flex; flex-direction: column; gap: var(--ngxsmk-space-2); font-family: var(--ngxsmk-font-sans); }
-    .ngxsmk-checkbox-list__item { display: flex; align-items: center; gap: var(--ngxsmk-space-2); cursor: pointer; font-size: 0.875rem; color: var(--ngxsmk-color-on-surface); }
-    .ngxsmk-checkbox-list__item--disabled { opacity: 0.5; cursor: not-allowed; }
+    :host {
+      display: flex;
+      flex-direction: column;
+      gap: var(--ngxsmk-space-2);
+      font-family: var(--ngxsmk-font-sans);
+    }
+    .ngxsmk-checkbox-list__item {
+      display: flex;
+      align-items: center;
+      gap: var(--ngxsmk-space-2);
+      cursor: pointer;
+      font-size: 0.875rem;
+      color: var(--ngxsmk-color-on-surface);
+    }
+    .ngxsmk-checkbox-list__item--disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
   `,
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -42,7 +60,7 @@ export class NgxsmkCheckboxList {
   protected toggle(v: string): void {
     const current = [...this.selected()];
     if (this.isChecked(v)) {
-      this.selected.set(current.filter(x => x !== v));
+      this.selected.set(current.filter((x) => x !== v));
     } else {
       this.selected.set([...current, v]);
     }

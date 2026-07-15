@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  booleanAttribute,
-  input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, booleanAttribute, input } from '@angular/core';
 
 export type NgxsmkFlexDirection = 'row' | 'row-reverse' | 'column' | 'column-reverse';
 export type NgxsmkFlexAlign = 'start' | 'end' | 'center' | 'baseline' | 'stretch';
@@ -38,7 +33,11 @@ const JUSTIFY_MAP: Record<string, string> = {
     '[style.gap]': 'gap()',
     '[style.flex-wrap]': 'wrap() ? "wrap" : null',
   },
-  styles: `:host { display: flex; }`,
+  styles: `
+    :host {
+      display: flex;
+    }
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgxsmkFlex {

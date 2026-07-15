@@ -1,17 +1,16 @@
 // Adds `standalone: true` to every @Component / @Directive / @Pipe decorator
 // that does not already declare it. Required for Angular 17/18 (where
 // standalone is opt-in); 19+ default to standalone:true so it is harmless.
-import { readFileSync, writeFileSync, readdirSync } from "node:fs";
-import { join } from "node:path";
+import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
+import { join } from 'node:path';
 
 function walk(dir, files = []) {
   for (const e of readdirSync(dir, { withFileTypes: true })) {
     const p = join(dir, e.name);
     if (e.isDirectory()) {
-      if (e.name === "node_modules" || e.name === "dist" || e.name.startsWith("."))
-        continue;
+      if (e.name === 'node_modules' || e.name === 'dist' || e.name.startsWith('.')) continue;
       walk(p, files);
-    } else if (e.name.endsWith(".ts")) {
+    } else if (e.name.endsWith('.ts')) {
       files.push(p);
     }
   }
@@ -22,15 +21,15 @@ function matchingBrace(src, openIdx) {
   let depth = 0;
   for (let i = openIdx; i < src.length; i++) {
     const c = src[i];
-    if (c === "{") depth++;
-    else if (c === "}") {
+    if (c === '{') depth++;
+    else if (c === '}') {
       depth--;
       if (depth === 0) return i;
-    } else if (c === "'" || c === '"' || c === "`") {
+    } else if (c === "'" || c === '"' || c === '`') {
       const q = c;
       i++;
       while (i < src.length && src[i] !== q) {
-        if (src[i] === "\\") i++;
+        if (src[i] === '\\') i++;
         i++;
       }
     }
@@ -40,7 +39,7 @@ function matchingBrace(src, openIdx) {
 
 function addStandalone(src) {
   const re = /@(Component|Directive|Pipe)\s*\(\s*\{/g;
-  let out = "";
+  let out = '';
   let last = 0;
   let m;
   while ((m = re.exec(src))) {
@@ -56,7 +55,7 @@ function addStandalone(src) {
     if (/\bstandalone\s*:/.test(body)) {
       out += m[0];
     } else {
-      out += m[0] + "\n  standalone: true,";
+      out += m[0] + '\n  standalone: true,';
     }
     last = m.index + m[0].length;
     re.lastIndex = end + 1;
@@ -65,12 +64,12 @@ function addStandalone(src) {
   return out;
 }
 
-const libs = ["theme", "cdk", "core"];
+const libs = ['theme', 'cdk', 'core'];
 let patched = 0;
 let files = 0;
 for (const lib of libs) {
-  for (const f of walk(join("packages", lib))) {
-    const src = readFileSync(f, "utf8");
+  for (const f of walk(join('packages', lib))) {
+    const src = readFileSync(f, 'utf8');
     const next = addStandalone(src);
     if (next !== src) {
       writeFileSync(f, next);

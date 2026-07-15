@@ -33,7 +33,9 @@ describe('NgxsmkTextarea', () => {
     const fixture = TestBed.createComponent(HostComponent);
     fixture.detectChanges();
     const hostEl: HTMLElement = fixture.nativeElement.querySelector('ngxsmk-textarea');
-    const textareaEl: HTMLTextAreaElement = fixture.nativeElement.querySelector('.ngxsmk-textarea__control');
+    const textareaEl: HTMLTextAreaElement = fixture.nativeElement.querySelector(
+      '.ngxsmk-textarea__control',
+    );
     return { fixture, hostEl, textareaEl };
   }
 

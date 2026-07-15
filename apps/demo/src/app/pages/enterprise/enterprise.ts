@@ -1,6 +1,14 @@
 import { NgxsmkScheduler, type SchedulerEvent } from '@ngxsmk/core/scheduler';
-import { type DiagramNode, NgxsmkDiagramBuilder, type DiagramEdge } from '@ngxsmk/core/diagram-builder';
-import { type QueryField, NgxsmkQueryBuilder, type QueryCondition } from '@ngxsmk/core/query-builder';
+import {
+  type DiagramNode,
+  NgxsmkDiagramBuilder,
+  type DiagramEdge,
+} from '@ngxsmk/core/diagram-builder';
+import {
+  type QueryField,
+  NgxsmkQueryBuilder,
+  type QueryCondition,
+} from '@ngxsmk/core/query-builder';
 import { NgxsmkTimelineGantt, type GanttItem } from '@ngxsmk/core/timeline-gantt';
 import { NgxsmkWorkflowBuilder, type WorkflowNode } from '@ngxsmk/core/workflow-builder';
 import { NgxsmkRuleBuilder, type RuleGroup } from '@ngxsmk/core/rule-builder';
@@ -36,15 +44,17 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
   template: `
     <h2 class="ngxsmk-page-title">Enterprise</h2>
     <p class="ngxsmk-page-desc">
-      Heavy-duty building blocks for business applications — boards, schedulers,
-      editors, and data tools. Each one is theme-aware and ready to wire up to
-      your own data sources.
+      Heavy-duty building blocks for business applications — boards, schedulers, editors, and data
+      tools. Each one is theme-aware and ready to wire up to your own data sources.
     </p>
 
     <showcase-example
       title="Kanban Board"
       description="Column-based task board grouped by status, with card titles and descriptions."
-      [code]="codeKanban" [component]="NgxsmkKanbanBoard" [customize]="customizeNgxsmkKanbanBoard">
+      [code]="codeKanban"
+      [component]="NgxsmkKanbanBoard"
+      [customize]="customizeNgxsmkKanbanBoard"
+    >
       <div class="ngxsmk-sc-surface" style="height:340px;overflow:auto;">
         <ngxsmk-kanban-board [columns]="kanbanColumns" />
       </div>
@@ -53,7 +63,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Scheduler"
       description="Weekly calendar grid that lays events out across the seven days of the week."
-      [code]="codeScheduler" [component]="NgxsmkScheduler" [customize]="customizeNgxsmkScheduler">
+      [code]="codeScheduler"
+      [component]="NgxsmkScheduler"
+      [customize]="customizeNgxsmkScheduler"
+    >
       <div class="ngxsmk-sc-surface" style="height:260px;overflow:auto;">
         <ngxsmk-scheduler [events]="schedulerEvents" [weekStart]="weekStart" />
       </div>
@@ -62,7 +75,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Timeline Gantt"
       description="Horizontal timeline of tasks with start offsets, durations, and progress fill."
-      [code]="codeGantt" [component]="NgxsmkTimelineGantt" [customize]="customizeNgxsmkTimelineGantt">
+      [code]="codeGantt"
+      [component]="NgxsmkTimelineGantt"
+      [customize]="customizeNgxsmkTimelineGantt"
+    >
       <div class="ngxsmk-sc-surface">
         <ngxsmk-timeline-gantt [items]="ganttItems" />
       </div>
@@ -71,7 +87,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Workflow Builder"
       description="Canvas of workflow nodes typed by their role in the process."
-      [code]="codeWorkflow" [component]="NgxsmkWorkflowBuilder" [customize]="customizeNgxsmkWorkflowBuilder">
+      [code]="codeWorkflow"
+      [component]="NgxsmkWorkflowBuilder"
+      [customize]="customizeNgxsmkWorkflowBuilder"
+    >
       <div style="height:420px;overflow:auto;">
         <ngxsmk-workflow-builder [nodes]="workflowNodes" [edges]="workflowEdges" />
       </div>
@@ -80,7 +99,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Rule Builder"
       description="Groups conditions under a logical operator for filtering and automation."
-      [code]="codeRule" [component]="NgxsmkRuleBuilder" [customize]="customizeNgxsmkRuleBuilder">
+      [code]="codeRule"
+      [component]="NgxsmkRuleBuilder"
+      [customize]="customizeNgxsmkRuleBuilder"
+    >
       <div class="ngxsmk-sc-col" style="max-width:520px;">
         <ngxsmk-rule-builder [group]="ruleGroup" />
       </div>
@@ -89,7 +111,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Spreadsheet"
       description="Lightweight grid renderer for tabular string data with scrollable cells."
-      [code]="codeSpreadsheet" [component]="NgxsmkSpreadsheet" [customize]="customizeNgxsmkSpreadsheet">
+      [code]="codeSpreadsheet"
+      [component]="NgxsmkSpreadsheet"
+      [customize]="customizeNgxsmkSpreadsheet"
+    >
       <div style="height:260px;overflow:auto;width:100%;">
         <ngxsmk-spreadsheet [data]="spreadsheetData" />
       </div>
@@ -98,20 +123,22 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Pivot Table"
       description="Cross-tabulated summary with a labelled row axis and measured value columns."
-      [code]="codePivot" [component]="NgxsmkPivotTable" [customize]="customizeNgxsmkPivotTable">
+      [code]="codePivot"
+      [component]="NgxsmkPivotTable"
+      [customize]="customizeNgxsmkPivotTable"
+    >
       <div style="height:280px;overflow:auto;width:100%;">
-        <ngxsmk-pivot-table
-          [rows]="pivotRows"
-          [columns]="pivotColumns"
-          rowLabel="Quarter"
-        />
+        <ngxsmk-pivot-table [rows]="pivotRows" [columns]="pivotColumns" rowLabel="Quarter" />
       </div>
     </showcase-example>
 
     <showcase-example
       title="Diagram Builder"
       description="SVG diagram of positioned nodes connected by edges. Click a node to select it."
-      [code]="codeDiagram" [component]="NgxsmkDiagramBuilder" [customize]="customizeNgxsmkDiagramBuilder">
+      [code]="codeDiagram"
+      [component]="NgxsmkDiagramBuilder"
+      [customize]="customizeNgxsmkDiagramBuilder"
+    >
       <div class="ngxsmk-sc-surface" style="height:280px;overflow:hidden;">
         <ngxsmk-diagram-builder
           [nodes]="diagramNodes"
@@ -120,14 +147,19 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
         />
       </div>
       @if (selectedNode()) {
-        <p style="margin:0.5rem 0 0;font-size:0.8125rem;">Selected node: <strong>{{ selectedNode() }}</strong></p>
+        <p style="margin:0.5rem 0 0;font-size:0.8125rem;">
+          Selected node: <strong>{{ selectedNode() }}</strong>
+        </p>
       }
     </showcase-example>
 
     <showcase-example
       title="Flow Editor"
       description="Titled canvas listing flow steps as draggable-looking node chips."
-      [code]="codeFlow" [component]="NgxsmkFlowEditor" [customize]="customizeNgxsmkFlowEditor">
+      [code]="codeFlow"
+      [component]="NgxsmkFlowEditor"
+      [customize]="customizeNgxsmkFlowEditor"
+    >
       <div style="height:420px;">
         <ngxsmk-flow-editor title="Onboarding Flow" [nodes]="flowNodes" style="height:100%;" />
       </div>
@@ -136,7 +168,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="JSON Viewer"
       description="Pretty-printed, syntax-highlighted view of any JSON-serialisable value."
-      [code]="codeJson" [component]="NgxsmkJsonViewer" [customize]="customizeNgxsmkJsonViewer">
+      [code]="codeJson"
+      [component]="NgxsmkJsonViewer"
+      [customize]="customizeNgxsmkJsonViewer"
+    >
       <div style="width:100%;max-width:520px;">
         <ngxsmk-json-viewer [data]="jsonData" />
       </div>
@@ -145,7 +180,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Terminal"
       description="Console emulator that distinguishes input lines and shows a blinking cursor."
-      [code]="codeTerminal" [component]="NgxsmkTerminal" [customize]="customizeNgxsmkTerminal">
+      [code]="codeTerminal"
+      [component]="NgxsmkTerminal"
+      [customize]="customizeNgxsmkTerminal"
+    >
       <div style="width:100%;max-width:600px;">
         <ngxsmk-terminal title="build.log" prompt="$" [lines]="terminalLines" />
       </div>
@@ -154,7 +192,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Org Chart"
       description="Hierarchical tree of people cards showing name and role by reporting line."
-      [code]="codeOrg" [component]="NgxsmkOrgChart" [customize]="customizeNgxsmkOrgChart">
+      [code]="codeOrg"
+      [component]="NgxsmkOrgChart"
+      [customize]="customizeNgxsmkOrgChart"
+    >
       <div style="height:320px;overflow:auto;width:100%;">
         <ngxsmk-org-chart [nodes]="orgNodes" />
       </div>
@@ -163,7 +204,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <showcase-example
       title="Query Builder"
       description="Compose filter conditions across typed fields with operators and values."
-      [code]="codeQuery" [component]="NgxsmkQueryBuilder" [customize]="customizeNgxsmkQueryBuilder">
+      [code]="codeQuery"
+      [component]="NgxsmkQueryBuilder"
+      [customize]="customizeNgxsmkQueryBuilder"
+    >
       <div class="ngxsmk-sc-col" style="max-width:560px;">
         <ngxsmk-query-builder [fields]="queryFields" [(conditions)]="queryConditions" />
       </div>
@@ -366,23 +410,17 @@ ngxsmk-query-builder {
     {
       id: 'progress',
       title: 'In Progress',
-      items: [
-        { id: 'k3', title: 'Build data table', description: 'Sorting + pagination.' },
-      ],
+      items: [{ id: 'k3', title: 'Build data table', description: 'Sorting + pagination.' }],
     },
     {
       id: 'review',
       title: 'In Review',
-      items: [
-        { id: 'k4', title: 'Refactor auth guard' },
-      ],
+      items: [{ id: 'k4', title: 'Refactor auth guard' }],
     },
     {
       id: 'done',
       title: 'Done',
-      items: [
-        { id: 'k5', title: 'Ship theme engine', description: 'Released in v1.2.' },
-      ],
+      items: [{ id: 'k5', title: 'Ship theme engine', description: 'Released in v1.2.' }],
     },
   ];
 

@@ -53,44 +53,64 @@
   font-size: var(--ngxsmk-text-body-lg-size);
 }
 
-.ngxsmk-button[data-icon-only][data-size='sm'] { padding: var(--ngxsmk-space-1); }
-.ngxsmk-button[data-icon-only][data-size='md'] { padding: var(--ngxsmk-space-2); }
-.ngxsmk-button[data-icon-only][data-size='lg'] { padding: var(--ngxsmk-space-3); }
+.ngxsmk-button[data-icon-only][data-size='sm'] {
+  padding: var(--ngxsmk-space-1);
+}
+.ngxsmk-button[data-icon-only][data-size='md'] {
+  padding: var(--ngxsmk-space-2);
+}
+.ngxsmk-button[data-icon-only][data-size='lg'] {
+  padding: var(--ngxsmk-space-3);
+}
 
-.ngxsmk-button[data-variant='primary']:hover { background: var(--ngxsmk-color-primary-hover); }
-.ngxsmk-button[data-variant='primary']:active { background: var(--ngxsmk-color-primary-active); }
+.ngxsmk-button[data-variant='primary']:hover {
+  background: var(--ngxsmk-color-primary-hover);
+}
+.ngxsmk-button[data-variant='primary']:active {
+  background: var(--ngxsmk-color-primary-active);
+}
 
 .ngxsmk-button[data-variant='secondary'] {
   background: var(--ngxsmk-color-surface-variant);
   color: var(--ngxsmk-color-on-surface);
 }
-.ngxsmk-button[data-variant='secondary']:hover { background: var(--ngxsmk-color-outline); }
+.ngxsmk-button[data-variant='secondary']:hover {
+  background: var(--ngxsmk-color-outline);
+}
 
 .ngxsmk-button[data-variant='outline'] {
   background: transparent;
   border-color: var(--ngxsmk-color-outline-strong);
   color: var(--ngxsmk-color-on-surface);
 }
-.ngxsmk-button[data-variant='outline']:hover { background: var(--ngxsmk-color-surface-hover); }
+.ngxsmk-button[data-variant='outline']:hover {
+  background: var(--ngxsmk-color-surface-hover);
+}
 
 .ngxsmk-button[data-variant='ghost'] {
   background: transparent;
   color: var(--ngxsmk-color-on-surface);
 }
-.ngxsmk-button[data-variant='ghost']:hover { background: var(--ngxsmk-color-surface-hover); }
+.ngxsmk-button[data-variant='ghost']:hover {
+  background: var(--ngxsmk-color-surface-hover);
+}
 
 .ngxsmk-button[data-variant='destructive'] {
   background: var(--ngxsmk-color-error);
   color: var(--ngxsmk-color-on-error);
 }
-.ngxsmk-button[data-variant='destructive']:hover { filter: brightness(0.92); }
+.ngxsmk-button[data-variant='destructive']:hover {
+  filter: brightness(0.92);
+}
 
 .ngxsmk-button[data-variant='link'] {
   background: transparent;
   color: var(--ngxsmk-color-primary);
   padding-inline: 0;
 }
-.ngxsmk-button[data-variant='link']:hover { text-decoration: underline; }
+.ngxsmk-button[data-variant='link']:hover {
+  text-decoration: underline;
+}
 
 .ngxsmk-button__spinner {
   width: 1em;
@@ -102,5 +122,7 @@
 }
 
 @keyframes ngxsmk-button-spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }

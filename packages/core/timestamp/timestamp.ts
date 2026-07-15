@@ -6,7 +6,13 @@ import { ChangeDetectionStrategy, Component, input, computed } from '@angular/co
   template: `<time [attr.datetime]="datetime()">{{ display() }}</time>`,
   host: { class: 'ngxsmk-timestamp' },
   styles: `
-    :host { display: inline; font-family: var(--ngxsmk-font-sans); font-size: var(--ngxsmk-text-body-sm-size); color: var(--ngxsmk-color-on-surface-variant); white-space: nowrap; }
+    :host {
+      display: inline;
+      font-family: var(--ngxsmk-font-sans);
+      font-size: var(--ngxsmk-text-body-sm-size);
+      color: var(--ngxsmk-color-on-surface-variant);
+      white-space: nowrap;
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

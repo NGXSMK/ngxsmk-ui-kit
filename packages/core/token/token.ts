@@ -10,7 +10,12 @@ export type NgxsmkTokenVariant = 'default' | 'primary' | 'success' | 'warning' |
     @if (removable()) {
       <button type="button" class="ngxsmk-token__remove" (click)="remove()" aria-label="Remove">
         <svg viewBox="0 0 14 14" width="10" height="10" aria-hidden="true">
-          <path d="M3 3l8 8M11 3l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+          <path
+            d="M3 3l8 8M11 3l-8 8"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+          />
         </svg>
       </button>
     }
@@ -35,18 +40,45 @@ export type NgxsmkTokenVariant = 'default' | 'primary' | 'success' | 'warning' |
       color: var(--ngxsmk-color-on-surface);
       border: 1px solid var(--ngxsmk-color-outline);
     }
-    :host([data-variant='primary']) { background: var(--ngxsmk-color-primary-container); color: var(--ngxsmk-color-on-primary-container); border-color: transparent; }
-    :host([data-variant='success']) { background: var(--ngxsmk-color-success-container); color: var(--ngxsmk-color-on-success-container); border-color: transparent; }
-    :host([data-variant='warning']) { background: var(--ngxsmk-color-warning-container); color: var(--ngxsmk-color-on-warning-container); border-color: transparent; }
-    :host([data-variant='error']) { background: var(--ngxsmk-color-error-container); color: var(--ngxsmk-color-on-error-container); border-color: transparent; }
+    :host([data-variant='primary']) {
+      background: var(--ngxsmk-color-primary-container);
+      color: var(--ngxsmk-color-on-primary-container);
+      border-color: transparent;
+    }
+    :host([data-variant='success']) {
+      background: var(--ngxsmk-color-success-container);
+      color: var(--ngxsmk-color-on-success-container);
+      border-color: transparent;
+    }
+    :host([data-variant='warning']) {
+      background: var(--ngxsmk-color-warning-container);
+      color: var(--ngxsmk-color-on-warning-container);
+      border-color: transparent;
+    }
+    :host([data-variant='error']) {
+      background: var(--ngxsmk-color-error-container);
+      color: var(--ngxsmk-color-on-error-container);
+      border-color: transparent;
+    }
 
     .ngxsmk-token__remove {
-      display: inline-flex; align-items: center; justify-content: center;
-      padding: 0; border: none; background: transparent; color: inherit;
-      cursor: pointer; opacity: 0.7; border-radius: var(--ngxsmk-radius-sm);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      border: none;
+      background: transparent;
+      color: inherit;
+      cursor: pointer;
+      opacity: 0.7;
+      border-radius: var(--ngxsmk-radius-sm);
     }
-    .ngxsmk-token__remove:hover { opacity: 1; }
-    .ngxsmk-token__remove:focus-visible { outline: 2px solid var(--ngxsmk-color-ring); }
+    .ngxsmk-token__remove:hover {
+      opacity: 1;
+    }
+    .ngxsmk-token__remove:focus-visible {
+      outline: 2px solid var(--ngxsmk-color-ring);
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

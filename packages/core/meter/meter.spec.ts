@@ -30,8 +30,7 @@ function setup(configure?: (h: Host) => void) {
   const fixture = TestBed.createComponent(Host);
   if (configure) configure(fixture.componentInstance);
   fixture.detectChanges();
-  const host: HTMLElement =
-    fixture.nativeElement.querySelector('ngxsmk-meter');
+  const host: HTMLElement = fixture.nativeElement.querySelector('ngxsmk-meter');
   return { fixture, host };
 }
 
