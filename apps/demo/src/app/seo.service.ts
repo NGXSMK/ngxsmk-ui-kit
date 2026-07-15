@@ -45,8 +45,7 @@ export class SeoService {
   }
 
   private canonicalUrl(): string {
-    const origin =
-      typeof window !== 'undefined' ? window.location.origin : 'https://ngxsmk.dev';
+    const origin = typeof window !== 'undefined' ? window.location.origin : 'https://ngxsmk.dev';
     return `${origin}${this.router.url || '/'}`;
   }
 }

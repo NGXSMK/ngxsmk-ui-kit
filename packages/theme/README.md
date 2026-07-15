@@ -42,12 +42,12 @@ ngOnInit() {
 
 ## Presets
 
-| Preset    | Primary color     |
-| --------- | ----------------- |
+| Preset    | Primary color       |
+| --------- | ------------------- |
 | `emerald` | `#059669` (default) |
-| `violet`  | `#7C3AED`         |
-| `neutral` | `#18181B`         |
-| `rose`    | `#E11D48`         |
+| `violet`  | `#7C3AED`           |
+| `neutral` | `#18181B`           |
+| `rose`    | `#E11D48`           |
 
 Presets are plain `ThemeConfig` objects exported from the package, so you can spread and override any of them.
 

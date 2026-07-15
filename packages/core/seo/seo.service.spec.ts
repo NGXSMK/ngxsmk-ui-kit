@@ -58,7 +58,11 @@ describe('NgxsmkSeoService', () => {
   });
 
   it('upserts JSON-LD structured data', () => {
-    service.setJsonLd({ '@context': 'https://schema.org', '@type': 'Organization', name: 'NGXSMK' });
+    service.setJsonLd({
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: 'NGXSMK',
+    });
     const script = document.getElementById('ngxsmk-seo-jsonld') as HTMLScriptElement;
     expect(script).toBeTruthy();
     expect(script.type).toBe('application/ld+json');
