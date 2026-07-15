@@ -6,7 +6,7 @@ import { NgxsmkResizeObserver } from './resize-observer';
 @Component({
   standalone: true,
   imports: [NgxsmkResizeObserver],
-  template: ` <div id="target" ngxsmkResizeObserver (resize)="resized.set(true)">Target</div> `,
+  template: ` <div id="target" ngxsmkResizeObserver (resized)="resized.set(true)">Target</div> `,
 })
 class HostComponent {
   readonly resized = signal(false);
