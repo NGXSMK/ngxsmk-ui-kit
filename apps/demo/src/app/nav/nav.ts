@@ -161,7 +161,10 @@ interface SearchItem {
         <a class="ngxsmk-nav__mobile-link" routerLink="/docs" (click)="mobileOpen.set(false)"
           >Docs</a
         >
-        <a class="ngxsmk-nav__mobile-link" routerLink="/showcase/explorer" (click)="mobileOpen.set(false)"
+        <a
+          class="ngxsmk-nav__mobile-link"
+          routerLink="/showcase/explorer"
+          (click)="mobileOpen.set(false)"
           >Components</a
         >
         <a class="ngxsmk-nav__mobile-link" routerLink="/templates" (click)="mobileOpen.set(false)"

@@ -9,7 +9,12 @@ import { ComponentRegistry } from './component-registry';
   template: `
     @if (isOpen()) {
       <div class="cmd-overlay" (click)="close()" tabindex="0" (keydown.escape)="close()">
-        <div class="cmd-dialog" (click)="$event.stopPropagation()" tabindex="0" (keydown)="$event.stopPropagation()">
+        <div
+          class="cmd-dialog"
+          (click)="$event.stopPropagation()"
+          tabindex="0"
+          (keydown)="$event.stopPropagation()"
+        >
           <div class="cmd-header">
             <svg
               class="cmd-search-icon"
@@ -34,7 +39,9 @@ import { ComponentRegistry } from './component-registry';
               (input)="onInput(searchInput.value)"
               (keydown)="onKeydown($event)"
             />
-            <span class="cmd-esc-hint" (click)="close()" tabindex="0" (keydown.enter)="close()">ESC</span>
+            <span class="cmd-esc-hint" (click)="close()" tabindex="0" (keydown.enter)="close()"
+              >ESC</span
+            >
           </div>
 
           <div class="cmd-results">
@@ -67,7 +74,12 @@ import { ComponentRegistry } from './component-registry';
               <div class="cmd-suggestions">
                 <div class="cmd-suggestions-header">Recent searches</div>
                 @for (recent of recentSearches(); track recent) {
-                  <div class="cmd-suggestion-item" (click)="query.set(recent); doSearch(recent)" tabindex="0" (keydown.enter)="query.set(recent); doSearch(recent)">
+                  <div
+                    class="cmd-suggestion-item"
+                    (click)="query.set(recent); doSearch(recent)"
+                    tabindex="0"
+                    (keydown.enter)="query.set(recent); doSearch(recent)"
+                  >
                     <span class="cmd-suggestion-text">{{ recent }}</span>
                   </div>
                 }
@@ -97,8 +109,12 @@ import { ComponentRegistry } from './component-registry';
       animation: cmd-fade-in 0.12s ease-out;
     }
     @keyframes cmd-fade-in {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
     }
 
     .cmd-dialog {
@@ -115,8 +131,12 @@ import { ComponentRegistry } from './component-registry';
       animation: cmd-scale-up 0.12s cubic-bezier(0.16, 1, 0.3, 1);
     }
     @keyframes cmd-scale-up {
-      from { transform: scale(0.96) translateY(-8px); }
-      to { transform: scale(1) translateY(0); }
+      from {
+        transform: scale(0.96) translateY(-8px);
+      }
+      to {
+        transform: scale(1) translateY(0);
+      }
     }
 
     .cmd-header {

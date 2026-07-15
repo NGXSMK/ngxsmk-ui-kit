@@ -121,7 +121,9 @@ export class ThemeContextService {
     const relevant = isDark ? overrides.dark : overrides.light;
     if (!relevant) return;
 
-    const style = this.document.getElementById('ngxsmk-custom-overrides') as HTMLStyleElement | null;
+    const style = this.document.getElementById(
+      'ngxsmk-custom-overrides',
+    ) as HTMLStyleElement | null;
     const css = Object.entries(relevant)
       .map(([prop, value]) => `${prop}: ${value};`)
       .join('\n');
