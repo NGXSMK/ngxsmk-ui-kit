@@ -43,6 +43,18 @@ testem.log
 /typings
 __screenshots__/
 
+# Built package / example / cli output
+packages/cli/dist
+examples/**/dist
+examples/**/node_modules
+examples/**/.angular
+
+# Storybook
+storybook-static/
+
+# TypeScript build info
+*.tsbuildinfo
+
 # System files
 .DS_Store
 Thumbs.db

@@ -1,0 +1,9 @@
+{
+  "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "ng-add": {
+      "description": "Add @ngxsmk UI kit to an Angular project (theme + providers).",
+      "factory": "./dist/ng-add/index#ngAdd"
+    }
+  }
+}
