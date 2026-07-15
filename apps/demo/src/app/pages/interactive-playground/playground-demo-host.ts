@@ -1,7 +1,12 @@
 import { Component, input } from '@angular/core';
 import { NgxsmkButton } from '@ngxsmk/core/button';
 import { NgxsmkBadge } from '@ngxsmk/core/badge';
-import { NgxsmkCard, NgxsmkCardHeader, NgxsmkCardTitle, NgxsmkCardContent } from '@ngxsmk/core/card';
+import {
+  NgxsmkCard,
+  NgxsmkCardHeader,
+  NgxsmkCardTitle,
+  NgxsmkCardContent,
+} from '@ngxsmk/core/card';
 import { NgxsmkAvatar } from '@ngxsmk/core/avatar';
 import { NgxsmkAlert } from '@ngxsmk/core/alert';
 import { NgxsmkSwitch } from '@ngxsmk/core/switch';
@@ -34,13 +39,44 @@ import { NgxsmkFlex } from '@ngxsmk/core/flex';
 import { NgxsmkRadio, NgxsmkRadioGroup } from '@ngxsmk/core/radio';
 
 export const CURATED_COMPONENTS = [
-  NgxsmkButton, NgxsmkBadge, NgxsmkCard, NgxsmkCardHeader, NgxsmkCardTitle, NgxsmkCardContent,
-  NgxsmkAvatar, NgxsmkAlert, NgxsmkSwitch, NgxsmkCheckbox, NgxsmkInput, NgxsmkSelect,
-  NgxsmkSlider, NgxsmkProgress, NgxsmkSpinner, NgxsmkSkeleton, NgxsmkStat, NgxsmkTag,
-  NgxsmkHeading, NgxsmkText, NgxsmkDivider, NgxsmkKbd, NgxsmkCode, NgxsmkBlockquote,
-  NgxsmkLink, NgxsmkStatusDot, NgxsmkRating, NgxsmkEmptyState, NgxsmkProgressCircle,
-  NgxsmkThumbnail, NgxsmkHStack, NgxsmkVStack, NgxsmkCenter, NgxsmkContainer,
-  NgxsmkGrid, NgxsmkFlex, NgxsmkRadio, NgxsmkRadioGroup,
+  NgxsmkButton,
+  NgxsmkBadge,
+  NgxsmkCard,
+  NgxsmkCardHeader,
+  NgxsmkCardTitle,
+  NgxsmkCardContent,
+  NgxsmkAvatar,
+  NgxsmkAlert,
+  NgxsmkSwitch,
+  NgxsmkCheckbox,
+  NgxsmkInput,
+  NgxsmkSelect,
+  NgxsmkSlider,
+  NgxsmkProgress,
+  NgxsmkSpinner,
+  NgxsmkSkeleton,
+  NgxsmkStat,
+  NgxsmkTag,
+  NgxsmkHeading,
+  NgxsmkText,
+  NgxsmkDivider,
+  NgxsmkKbd,
+  NgxsmkCode,
+  NgxsmkBlockquote,
+  NgxsmkLink,
+  NgxsmkStatusDot,
+  NgxsmkRating,
+  NgxsmkEmptyState,
+  NgxsmkProgressCircle,
+  NgxsmkThumbnail,
+  NgxsmkHStack,
+  NgxsmkVStack,
+  NgxsmkCenter,
+  NgxsmkContainer,
+  NgxsmkGrid,
+  NgxsmkFlex,
+  NgxsmkRadio,
+  NgxsmkRadioGroup,
 ];
 
 const SELECT_OPTIONS = [
@@ -65,18 +101,25 @@ const SELECT_OPTIONS = [
             [loading]="bool('loading')"
             [disabled]="bool('disabled')"
             [iconOnly]="bool('iconOnly')"
-          >{{ str('label') || 'Button' }}</button>
+          >
+            {{ str('label') || 'Button' }}
+          </button>
         }
         @case ('NgxsmkBadge') {
           <ngxsmk-badge [variant]="str('variant')">{{ str('label') || 'Badge' }}</ngxsmk-badge>
         }
         @case ('NgxsmkCard') {
-          <ngxsmk-card [attr.data-interactive]="bool('interactive') ? '' : null" style="max-width: 320px;">
+          <ngxsmk-card
+            [attr.data-interactive]="bool('interactive') ? '' : null"
+            style="max-width: 320px;"
+          >
             <div ngxsmkCardHeader>
               <h3 ngxsmkCardTitle>Card title</h3>
             </div>
             <div ngxsmkCardContent>
-              <ngxsmk-text variant="body">A flexible container for related content and actions.</ngxsmk-text>
+              <ngxsmk-text variant="body"
+                >A flexible container for related content and actions.</ngxsmk-text
+              >
             </div>
           </ngxsmk-card>
         }
@@ -93,13 +136,21 @@ const SELECT_OPTIONS = [
             [variant]="str('variant')"
             [title]="str('title')"
             style="max-width: 420px;"
-          >{{ str('label') || 'This is an alert message.' }}</ngxsmk-alert>
+            >{{ str('label') || 'This is an alert message.' }}</ngxsmk-alert
+          >
         }
         @case ('NgxsmkSwitch') {
-          <ngxsmk-switch [checked]="bool('checked')" [disabled]="bool('disabled')">{{ str('label') || 'Enable notifications' }}</ngxsmk-switch>
+          <ngxsmk-switch [checked]="bool('checked')" [disabled]="bool('disabled')">{{
+            str('label') || 'Enable notifications'
+          }}</ngxsmk-switch>
         }
         @case ('NgxsmkCheckbox') {
-          <ngxsmk-checkbox [checked]="bool('checked')" [disabled]="bool('disabled')" [indeterminate]="bool('indeterminate')">{{ str('label') || 'Accept terms' }}</ngxsmk-checkbox>
+          <ngxsmk-checkbox
+            [checked]="bool('checked')"
+            [disabled]="bool('disabled')"
+            [indeterminate]="bool('indeterminate')"
+            >{{ str('label') || 'Accept terms' }}</ngxsmk-checkbox
+          >
         }
         @case ('NgxsmkInput') {
           <ngxsmk-input
@@ -139,24 +190,39 @@ const SELECT_OPTIONS = [
           <ngxsmk-spinner [size]="str('size')" [label]="str('label')"></ngxsmk-spinner>
         }
         @case ('NgxsmkSkeleton') {
-          <ngxsmk-skeleton [shape]="str('shape')" [width]="str('width')" [height]="str('height')"></ngxsmk-skeleton>
+          <ngxsmk-skeleton
+            [shape]="str('shape')"
+            [width]="str('width')"
+            [height]="str('height')"
+          ></ngxsmk-skeleton>
         }
         @case ('NgxsmkStat') {
-          <ngxsmk-stat [value]="str('value')" [label]="str('label')" [trend]="str('trend')" [icon]="str('icon')"></ngxsmk-stat>
+          <ngxsmk-stat
+            [value]="str('value')"
+            [label]="str('label')"
+            [trend]="str('trend')"
+            [icon]="str('icon')"
+          ></ngxsmk-stat>
         }
         @case ('NgxsmkTag') {
           <ngxsmk-tag [variant]="str('variant')">{{ str('label') || 'Tag' }}</ngxsmk-tag>
         }
         @case ('NgxsmkHeading') {
-          <ngxsmk-heading [level]="str('level')" [weight]="str('weight')">{{ str('label') || 'Heading' }}</ngxsmk-heading>
+          <ngxsmk-heading [level]="str('level')" [weight]="str('weight')">{{
+            str('label') || 'Heading'
+          }}</ngxsmk-heading>
         }
         @case ('NgxsmkText') {
-          <ngxsmk-text [variant]="str('variant')" [color]="str('color')">{{ str('label') || 'The quick brown fox jumps over the lazy dog.' }}</ngxsmk-text>
+          <ngxsmk-text [variant]="str('variant')" [color]="str('color')">{{
+            str('label') || 'The quick brown fox jumps over the lazy dog.'
+          }}</ngxsmk-text>
         }
         @case ('NgxsmkDivider') {
           <div style="width: 100%; max-width: 320px;">
             @if (str('orientation') === 'vertical') {
-              <div style="height: 80px;"><ngxsmk-divider [orientation]="str('orientation')"></ngxsmk-divider></div>
+              <div style="height: 80px;">
+                <ngxsmk-divider [orientation]="str('orientation')"></ngxsmk-divider>
+              </div>
             } @else {
               <ngxsmk-divider [orientation]="str('orientation')"></ngxsmk-divider>
             }
@@ -169,10 +235,15 @@ const SELECT_OPTIONS = [
           <code ngxsmk-code>{{ str('label') || 'npm install @ngxsmk/core' }}</code>
         }
         @case ('NgxsmkBlockquote') {
-          <ngxsmk-blockquote [cite]="str('cite')">{{ str('label') || 'Design is not just what it looks like and feels like. Design is how it works.' }}</ngxsmk-blockquote>
+          <ngxsmk-blockquote [cite]="str('cite')">{{
+            str('label') ||
+              'Design is not just what it looks like and feels like. Design is how it works.'
+          }}</ngxsmk-blockquote>
         }
         @case ('NgxsmkLink') {
-          <a ngxsmk-link [variant]="str('variant')" [underline]="bool('underline')">{{ str('label') || 'Link text' }}</a>
+          <a ngxsmk-link [variant]="str('variant')" [underline]="bool('underline')">{{
+            str('label') || 'Link text'
+          }}</a>
         }
         @case ('NgxsmkStatusDot') {
           <ngxsmk-status-dot [variant]="str('variant')"></ngxsmk-status-dot>
@@ -187,7 +258,11 @@ const SELECT_OPTIONS = [
           ></ngxsmk-rating>
         }
         @case ('NgxsmkEmptyState') {
-          <ngxsmk-empty-state [title]="str('title')" [description]="str('description')" [icon]="str('icon')"></ngxsmk-empty-state>
+          <ngxsmk-empty-state
+            [title]="str('title')"
+            [description]="str('description')"
+            [icon]="str('icon')"
+          ></ngxsmk-empty-state>
         }
         @case ('NgxsmkProgressCircle') {
           <ngxsmk-progress-circle
@@ -199,7 +274,12 @@ const SELECT_OPTIONS = [
           ></ngxsmk-progress-circle>
         }
         @case ('NgxsmkThumbnail') {
-          <ngxsmk-thumbnail [src]="str('src')" [alt]="str('alt')" [size]="str('size')" [shape]="str('shape')"></ngxsmk-thumbnail>
+          <ngxsmk-thumbnail
+            [src]="str('src')"
+            [alt]="str('alt')"
+            [size]="str('size')"
+            [shape]="str('shape')"
+          ></ngxsmk-thumbnail>
         }
         @case ('NgxsmkHStack') {
           <ngxsmk-h-stack [justify]="str('justify')" [align]="str('align')" [gap]="str('gap')">
@@ -216,7 +296,9 @@ const SELECT_OPTIONS = [
           </ngxsmk-v-stack>
         }
         @case ('NgxsmkCenter') {
-          <ngxsmk-center style="min-height: 120px; border: 1px dashed var(--ngxsmk-color-outline); border-radius: var(--ngxsmk-radius-md);">
+          <ngxsmk-center
+            style="min-height: 120px; border: 1px dashed var(--ngxsmk-color-outline); border-radius: var(--ngxsmk-radius-md);"
+          >
             <ngxsmk-badge variant="primary">Centered</ngxsmk-badge>
           </ngxsmk-center>
         }
@@ -227,9 +309,21 @@ const SELECT_OPTIONS = [
         }
         @case ('NgxsmkGrid') {
           <ngxsmk-grid [cols]="num('cols')" [gap]="str('gap')">
-            <ngxsmk-card><div ngxsmkCardContent><ngxsmk-text variant="caption">Item 1</ngxsmk-text></div></ngxsmk-card>
-            <ngxsmk-card><div ngxsmkCardContent><ngxsmk-text variant="caption">Item 2</ngxsmk-text></div></ngxsmk-card>
-            <ngxsmk-card><div ngxsmkCardContent><ngxsmk-text variant="caption">Item 3</ngxsmk-text></div></ngxsmk-card>
+            <ngxsmk-card
+              ><div ngxsmkCardContent>
+                <ngxsmk-text variant="caption">Item 1</ngxsmk-text>
+              </div></ngxsmk-card
+            >
+            <ngxsmk-card
+              ><div ngxsmkCardContent>
+                <ngxsmk-text variant="caption">Item 2</ngxsmk-text>
+              </div></ngxsmk-card
+            >
+            <ngxsmk-card
+              ><div ngxsmkCardContent>
+                <ngxsmk-text variant="caption">Item 3</ngxsmk-text>
+              </div></ngxsmk-card
+            >
           </ngxsmk-grid>
         }
         @case ('NgxsmkFlex') {
@@ -241,7 +335,9 @@ const SELECT_OPTIONS = [
         }
         @case ('NgxsmkRadio') {
           <ngxsmk-radio-group [value]="str('value')">
-            <ngxsmk-radio [value]="str('value')" [disabled]="bool('disabled')">{{ str('label') || 'Option' }}</ngxsmk-radio>
+            <ngxsmk-radio [value]="str('value')" [disabled]="bool('disabled')">{{
+              str('label') || 'Option'
+            }}</ngxsmk-radio>
           </ngxsmk-radio-group>
         }
         @default {

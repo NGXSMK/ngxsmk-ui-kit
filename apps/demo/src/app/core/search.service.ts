@@ -38,7 +38,16 @@ export class SearchService {
     const miniSearch = new MiniSearch({
       idField: 'name',
       fields: ['name', 'selector', 'description', 'category', 'tags', 'packageName'],
-      storeFields: ['name', 'selector', 'description', 'category', 'packageName', 'tags', 'subcategory', 'exportName'],
+      storeFields: [
+        'name',
+        'selector',
+        'description',
+        'category',
+        'packageName',
+        'tags',
+        'subcategory',
+        'exportName',
+      ],
       searchOptions: {
         boost: { name: 4, selector: 3, description: 2, tags: 2, category: 1 },
         fuzzy: 0.2,
@@ -70,7 +79,8 @@ export class SearchService {
     });
 
     let filtered = results.map((r) => {
-      const item = this.documents().find((d) => d.name === r.id) ?? (r as unknown as ComponentMetadata);
+      const item =
+        this.documents().find((d) => d.name === r.id) ?? (r as unknown as ComponentMetadata);
       return {
         item,
         score: r.score ?? 0,
@@ -83,9 +93,7 @@ export class SearchService {
     }
 
     if (tags && tags.length > 0) {
-      filtered = filtered.filter((r) =>
-        r.item.tags && tags.some(t => r.item.tags?.includes(t))
-      );
+      filtered = filtered.filter((r) => r.item.tags && tags.some((t) => r.item.tags?.includes(t)));
     }
 
     if (limit) {
@@ -101,7 +109,11 @@ export class SearchService {
     const index = this.index();
     if (!index || !query.trim()) return this.getDefaultSuggestions(limit);
 
-    const results = index.search(query, { prefix: true, fuzzy: 0.2, boost: { name: 3, selector: 2 } });
+    const results = index.search(query, {
+      prefix: true,
+      fuzzy: 0.2,
+      boost: { name: 3, selector: 2 },
+    });
     const suggestions: SearchSuggestion[] = [];
 
     for (const result of results.slice(0, limit)) {
@@ -112,7 +124,7 @@ export class SearchService {
       });
     }
 
-    const categories = [...new Set(this.documents().map(d => d.category))];
+    const categories = [...new Set(this.documents().map((d) => d.category))];
     for (const cat of categories) {
       if (cat.toLowerCase().includes(query.toLowerCase()) && suggestions.length < limit) {
         suggestions.push({ text: cat, type: 'category' });
@@ -129,7 +141,7 @@ export class SearchService {
       suggestions.push({ text: recent, type: 'recent' });
     }
 
-    const categories = [...new Set(this.documents().map(d => d.category))];
+    const categories = [...new Set(this.documents().map((d) => d.category))];
     for (const cat of categories.slice(0, limit - suggestions.length)) {
       suggestions.push({ text: cat, type: 'category' });
     }
@@ -138,15 +150,15 @@ export class SearchService {
   }
 
   getComponent(name: string): ComponentMetadata | undefined {
-    return this.documents().find(d => d.name === name || d.selector === name);
+    return this.documents().find((d) => d.name === name || d.selector === name);
   }
 
   getByCategory(category: string): ComponentMetadata[] {
-    return this.documents().filter(d => d.category === category);
+    return this.documents().filter((d) => d.category === category);
   }
 
   getAllCategories(): string[] {
-    return [...new Set(this.documents().map(d => d.category))].sort();
+    return [...new Set(this.documents().map((d) => d.category))].sort();
   }
 
   getAllTags(): string[] {
@@ -164,7 +176,8 @@ export class SearchService {
     if (result.name?.toLowerCase().includes(queryLower)) matched.push('name');
     if (result.selector?.toLowerCase().includes(queryLower)) matched.push('selector');
     if (result.description?.toLowerCase().includes(queryLower)) matched.push('description');
-    if (result.tags?.some((t: string) => t.toLowerCase().includes(queryLower))) matched.push('tags');
+    if (result.tags?.some((t: string) => t.toLowerCase().includes(queryLower)))
+      matched.push('tags');
     if (result.category?.toLowerCase().includes(queryLower)) matched.push('category');
 
     return matched;
@@ -174,21 +187,21 @@ export class SearchService {
     const trimmed = query.trim();
     if (!trimmed) return;
 
-    this.recentSearches.update(current => {
-      const filtered = current.filter(q => q.toLowerCase() !== trimmed.toLowerCase());
+    this.recentSearches.update((current) => {
+      const filtered = current.filter((q) => q.toLowerCase() !== trimmed.toLowerCase());
       return [trimmed, ...filtered].slice(0, 10);
     });
   }
 
   addToFavorites(componentName: string): void {
-    this.favorites.update(current => {
+    this.favorites.update((current) => {
       if (current.includes(componentName)) return current;
       return [componentName, ...current].slice(0, 20);
     });
   }
 
   removeFromFavorites(componentName: string): void {
-    this.favorites.update(current => current.filter(n => n !== componentName));
+    this.favorites.update((current) => current.filter((n) => n !== componentName));
   }
 
   isFavorite(componentName: string): boolean {
@@ -214,7 +227,9 @@ export class SearchService {
   }
 
   importIndex(json: string): void {
-    const index = MiniSearch.loadJSON(JSON.parse(json), { fields: ['name', 'selector', 'description', 'category', 'tags', 'packageName'] });
+    const index = MiniSearch.loadJSON(JSON.parse(json), {
+      fields: ['name', 'selector', 'description', 'category', 'tags', 'packageName'],
+    });
     this.index.set(index);
   }
 }
@@ -236,15 +251,13 @@ export class KeyboardShortcutsService {
   private listenerAttached = false;
 
   register(shortcut: KeyboardShortcut): void {
-    this.shortcuts.update(current => [...current, shortcut]);
+    this.shortcuts.update((current) => [...current, shortcut]);
     this.ensureListener();
   }
 
   unregister(key: string, ctrlKey?: boolean, metaKey?: boolean): void {
-    this.shortcuts.update(current =>
-      current.filter(s =>
-        !(s.key === key && s.ctrlKey === ctrlKey && s.metaKey === metaKey)
-      )
+    this.shortcuts.update((current) =>
+      current.filter((s) => !(s.key === key && s.ctrlKey === ctrlKey && s.metaKey === metaKey)),
     );
   }
 
@@ -253,7 +266,7 @@ export class KeyboardShortcutsService {
   }
 
   getByCategory(category: string): KeyboardShortcut[] {
-    return this.shortcuts().filter(s => s.category === category);
+    return this.shortcuts().filter((s) => s.category === category);
   }
 
   private ensureListener(): void {
@@ -261,10 +274,12 @@ export class KeyboardShortcutsService {
     this.listenerAttached = true;
 
     document.addEventListener('keydown', (event) => {
-      if (event.target instanceof HTMLInputElement ||
-          event.target instanceof HTMLTextAreaElement ||
-          event.target instanceof HTMLSelectElement ||
-          (event.target as HTMLElement)?.isContentEditable) {
+      if (
+        event.target instanceof HTMLInputElement ||
+        event.target instanceof HTMLTextAreaElement ||
+        event.target instanceof HTMLSelectElement ||
+        (event.target as HTMLElement)?.isContentEditable
+      ) {
         return;
       }
 
@@ -291,7 +306,7 @@ export function defineShortcut(
   action: () => void,
   description: string,
   category: string,
-  modifiers: { ctrlKey?: boolean; metaKey?: boolean; shiftKey?: boolean; altKey?: boolean } = {}
+  modifiers: { ctrlKey?: boolean; metaKey?: boolean; shiftKey?: boolean; altKey?: boolean } = {},
 ): void {
   shortcuts.register({
     key,

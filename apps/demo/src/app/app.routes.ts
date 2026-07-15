@@ -52,7 +52,7 @@ export const routes: Routes = [
     path: 'playground/component',
     loadComponent: () =>
       import('./pages/interactive-playground/interactive-playground').then(
-        m => m.InteractivePlayground,
+        (m) => m.InteractivePlayground,
       ),
     title: 'Component Playground - Live Prop Editing | NGXSMK',
     data: {
@@ -104,7 +104,7 @@ export const routes: Routes = [
       {
         path: 'explorer',
         loadComponent: () =>
-          import('./pages/component-explorer/component-explorer').then(m => m.ComponentExplorer),
+          import('./pages/component-explorer/component-explorer').then((m) => m.ComponentExplorer),
         title: 'Component Explorer — Browse All Components | NGXSMK',
         data: {
           description:

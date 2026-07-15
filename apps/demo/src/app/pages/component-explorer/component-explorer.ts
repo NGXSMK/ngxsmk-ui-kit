@@ -1,6 +1,10 @@
 import { Component, inject, signal, computed } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ComponentRegistry, ComponentMetadata, CATEGORY_LABELS } from '../../core/component-registry';
+import {
+  ComponentRegistry,
+  ComponentMetadata,
+  CATEGORY_LABELS,
+} from '../../core/component-registry';
 import { SearchService } from '../../core/search.service';
 
 const CATEGORY_ICONS: Record<string, string> = {
@@ -26,10 +30,21 @@ const CATEGORY_ICONS: Record<string, string> = {
       <header class="explorer-header">
         <h1 class="explorer-title">Component Library</h1>
         <p class="explorer-subtitle">
-          {{ registry.totalCount() }} signal-native components across {{ registry.categories().length }} categories
+          {{ registry.totalCount() }} signal-native components across
+          {{ registry.categories().length }} categories
         </p>
         <div class="explorer-search">
-          <svg class="explorer-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg
+            class="explorer-search-icon"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
             <circle cx="11" cy="11" r="8" />
             <path d="m21 21-4.35-4.35" />
           </svg>
@@ -42,15 +57,28 @@ const CATEGORY_ICONS: Record<string, string> = {
             (input)="query.set(searchInput.value)"
           />
           @if (query()) {
-            <button class="explorer-search-clear" (click)="query.set(''); searchInput.value = ''; searchInput.focus()">
+            <button
+              class="explorer-search-clear"
+              (click)="query.set(''); searchInput.value = ''; searchInput.focus()"
+            >
               ✕
             </button>
           }
         </div>
         <div class="explorer-tabs">
-          <button class="explorer-tab" [class.active]="!selectedCategory()" (click)="selectedCategory.set(null)">All</button>
+          <button
+            class="explorer-tab"
+            [class.active]="!selectedCategory()"
+            (click)="selectedCategory.set(null)"
+          >
+            All
+          </button>
           @for (cat of registry.categories(); track cat) {
-            <button class="explorer-tab" [class.active]="selectedCategory() === cat" (click)="selectedCategory.set(cat)">
+            <button
+              class="explorer-tab"
+              [class.active]="selectedCategory() === cat"
+              (click)="selectedCategory.set(cat)"
+            >
               {{ iconFor(cat) }} {{ labelFor(cat) }}
             </button>
           }
@@ -73,9 +101,16 @@ const CATEGORY_ICONS: Record<string, string> = {
           </div>
           <div class="explorer-grid">
             @for (comp of group.components; track comp.name) {
-              <a class="explorer-card" [routerLink]="['/showcase', routeFor(comp.category)]" [fragment]="slug(comp.name)">
+              <a
+                class="explorer-card"
+                [routerLink]="['/showcase', routeFor(comp.category)]"
+                [fragment]="slug(comp.name)"
+              >
                 <div class="explorer-card-header">
-                  <span class="explorer-card-dot" [style.background]="colorFor(comp.category)"></span>
+                  <span
+                    class="explorer-card-dot"
+                    [style.background]="colorFor(comp.category)"
+                  ></span>
                   <span class="explorer-card-name">{{ comp.name }}</span>
                 </div>
                 <p class="explorer-card-desc">{{ comp.description }}</p>
@@ -141,12 +176,15 @@ const CATEGORY_ICONS: Record<string, string> = {
       font-size: 0.9375rem;
       color: var(--ngxsmk-color-on-surface, #09090b);
       outline: none;
-      transition: border-color 0.15s, box-shadow 0.15s;
+      transition:
+        border-color 0.15s,
+        box-shadow 0.15s;
       box-sizing: border-box;
     }
     .explorer-search-input:focus {
       border-color: var(--ngxsmk-color-primary, #7c3aed);
-      box-shadow: 0 0 0 3px color-mix(in srgb, var(--ngxsmk-color-primary, #7c3aed) 15%, transparent);
+      box-shadow: 0 0 0 3px
+        color-mix(in srgb, var(--ngxsmk-color-primary, #7c3aed) 15%, transparent);
     }
     .explorer-search-input::placeholder {
       color: var(--ngxsmk-color-on-surface-variant, #71717a);
@@ -265,11 +303,15 @@ const CATEGORY_ICONS: Record<string, string> = {
       background: var(--ngxsmk-color-surface, #fff);
       text-decoration: none;
       color: inherit;
-      transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+      transition:
+        border-color 0.15s,
+        box-shadow 0.15s,
+        transform 0.15s;
     }
     .explorer-card:hover {
       border-color: var(--ngxsmk-color-primary, #7c3aed);
-      box-shadow: 0 4px 12px color-mix(in srgb, var(--ngxsmk-color-primary, #7c3aed) 12%, transparent);
+      box-shadow: 0 4px 12px
+        color-mix(in srgb, var(--ngxsmk-color-primary, #7c3aed) 12%, transparent);
       transform: translateY(-2px);
     }
     .explorer-card-header {
@@ -342,11 +384,12 @@ export class ComponentExplorer {
 
       let filtered = components;
       if (q) {
-        filtered = components.filter(c =>
-          c.name.toLowerCase().includes(q) ||
-          c.description.toLowerCase().includes(q) ||
-          c.tags.some(t => t.toLowerCase().includes(q)) ||
-          c.selector.toLowerCase().includes(q)
+        filtered = components.filter(
+          (c) =>
+            c.name.toLowerCase().includes(q) ||
+            c.description.toLowerCase().includes(q) ||
+            c.tags.some((t) => t.toLowerCase().includes(q)) ||
+            c.selector.toLowerCase().includes(q),
         );
       }
 
@@ -359,7 +402,10 @@ export class ComponentExplorer {
   });
 
   labelFor(category: string): string {
-    return (CATEGORY_LABELS as Record<string, string>)[category] ?? category.charAt(0).toUpperCase() + category.slice(1);
+    return (
+      (CATEGORY_LABELS as Record<string, string>)[category] ??
+      category.charAt(0).toUpperCase() + category.slice(1)
+    );
   }
 
   iconFor(category: string): string {

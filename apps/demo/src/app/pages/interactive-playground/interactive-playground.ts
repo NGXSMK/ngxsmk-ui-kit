@@ -1,6 +1,10 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ComponentRegistry, ComponentMetadata, CATEGORY_LABELS } from '../../core/component-registry';
+import {
+  ComponentRegistry,
+  ComponentMetadata,
+  CATEGORY_LABELS,
+} from '../../core/component-registry';
 import { NgxsmkPropPanel, type PropDescriptor } from '../../playground/prop-panel';
 import { PlaygroundDemoHost } from './playground-demo-host';
 
@@ -38,7 +42,11 @@ export const CURATED_PROPS: Record<string, PropDescriptor[]> = {
     txt('label', 'Button'),
   ],
   NgxsmkBadge: [
-    sel('variant', ['primary', 'secondary', 'outline', 'success', 'warning', 'error', 'info'], 'primary'),
+    sel(
+      'variant',
+      ['primary', 'secondary', 'outline', 'success', 'warning', 'error', 'info'],
+      'primary',
+    ),
     txt('label', 'Badge'),
   ],
   NgxsmkCard: [bool('interactive')],
@@ -53,11 +61,7 @@ export const CURATED_PROPS: Record<string, PropDescriptor[]> = {
     txt('title', 'Heads up'),
     txt('label', 'This is an alert message.'),
   ],
-  NgxsmkSwitch: [
-    bool('checked', true),
-    bool('disabled'),
-    txt('label', 'Enable notifications'),
-  ],
+  NgxsmkSwitch: [bool('checked', true), bool('disabled'), txt('label', 'Enable notifications')],
   NgxsmkCheckbox: [
     bool('checked', true),
     bool('disabled'),
@@ -70,11 +74,7 @@ export const CURATED_PROPS: Record<string, PropDescriptor[]> = {
     txt('placeholder', 'Enter text…'),
     bool('disabled'),
   ],
-  NgxsmkSelect: [
-    txt('value', ''),
-    txt('placeholder', 'Choose an option…'),
-    bool('disabled'),
-  ],
+  NgxsmkSelect: [txt('value', ''), txt('placeholder', 'Choose an option…'), bool('disabled')],
   NgxsmkSlider: [
     num('value', 50),
     num('min', 0),
@@ -121,9 +121,7 @@ export const CURATED_PROPS: Record<string, PropDescriptor[]> = {
     bool('underline', true),
     txt('label', 'Link text'),
   ],
-  NgxsmkStatusDot: [
-    sel('variant', ['online', 'away', 'busy', 'offline'], 'online'),
-  ],
+  NgxsmkStatusDot: [sel('variant', ['online', 'away', 'busy', 'offline'], 'online')],
   NgxsmkRating: [
     num('value', 4),
     num('max', 5),
@@ -152,28 +150,60 @@ export const CURATED_PROPS: Record<string, PropDescriptor[]> = {
   NgxsmkHStack: [
     sel('justify', ['flex-start', 'center', 'flex-end', 'space-between', 'space-around'], 'center'),
     sel('align', ['flex-start', 'center', 'flex-end', 'stretch'], 'center'),
-    sel('gap', ['var(--ngxsmk-space-2)', 'var(--ngxsmk-space-4)', 'var(--ngxsmk-space-6)', 'var(--ngxsmk-space-8)'], 'var(--ngxsmk-space-4)'),
+    sel(
+      'gap',
+      [
+        'var(--ngxsmk-space-2)',
+        'var(--ngxsmk-space-4)',
+        'var(--ngxsmk-space-6)',
+        'var(--ngxsmk-space-8)',
+      ],
+      'var(--ngxsmk-space-4)',
+    ),
   ],
   NgxsmkVStack: [
     sel('justify', ['flex-start', 'center', 'flex-end', 'space-between', 'space-around'], 'center'),
     sel('align', ['flex-start', 'center', 'flex-end', 'stretch'], 'center'),
-    sel('gap', ['var(--ngxsmk-space-2)', 'var(--ngxsmk-space-4)', 'var(--ngxsmk-space-6)', 'var(--ngxsmk-space-8)'], 'var(--ngxsmk-space-4)'),
+    sel(
+      'gap',
+      [
+        'var(--ngxsmk-space-2)',
+        'var(--ngxsmk-space-4)',
+        'var(--ngxsmk-space-6)',
+        'var(--ngxsmk-space-8)',
+      ],
+      'var(--ngxsmk-space-4)',
+    ),
   ],
   NgxsmkCenter: [],
   NgxsmkContainer: [],
   NgxsmkGrid: [
     num('cols', 3),
-    sel('gap', ['var(--ngxsmk-space-2)', 'var(--ngxsmk-space-4)', 'var(--ngxsmk-space-6)', 'var(--ngxsmk-space-8)'], 'var(--ngxsmk-space-4)'),
+    sel(
+      'gap',
+      [
+        'var(--ngxsmk-space-2)',
+        'var(--ngxsmk-space-4)',
+        'var(--ngxsmk-space-6)',
+        'var(--ngxsmk-space-8)',
+      ],
+      'var(--ngxsmk-space-4)',
+    ),
   ],
   NgxsmkFlex: [
     sel('direction', ['row', 'row-reverse', 'column', 'column-reverse'], 'row'),
-    sel('gap', ['var(--ngxsmk-space-2)', 'var(--ngxsmk-space-4)', 'var(--ngxsmk-space-6)', 'var(--ngxsmk-space-8)'], 'var(--ngxsmk-space-4)'),
+    sel(
+      'gap',
+      [
+        'var(--ngxsmk-space-2)',
+        'var(--ngxsmk-space-4)',
+        'var(--ngxsmk-space-6)',
+        'var(--ngxsmk-space-8)',
+      ],
+      'var(--ngxsmk-space-4)',
+    ),
   ],
-  NgxsmkRadio: [
-    txt('value', 'option'),
-    bool('disabled'),
-    txt('label', 'Option'),
-  ],
+  NgxsmkRadio: [txt('value', 'option'), bool('disabled'), txt('label', 'Option')],
 };
 
 const CODE_TAG: Record<string, string> = {
@@ -260,9 +290,7 @@ function buildCode(name: string, values: Record<string, unknown>): string {
     }
   }
   const attrStr = attrs.length ? ' ' + attrs.join(' ') : '';
-  return content
-    ? `<${tag}${attrStr}>${content}</${tagName}>`
-    : `<${tag}${attrStr}></${tagName}>`;
+  return content ? `<${tag}${attrStr}>${content}</${tagName}>` : `<${tag}${attrStr}></${tagName}>`;
 }
 
 @Component({
@@ -286,8 +314,18 @@ function buildCode(name: string, values: Record<string, unknown>): string {
       <div class="pg-shell">
         <aside class="pg-sidebar">
           <div class="pg-search">
-            <svg class="pg-search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-              <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" />
+            <svg
+              class="pg-search-icon"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            >
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.35-4.35" />
             </svg>
             <input
               type="text"
@@ -325,7 +363,11 @@ function buildCode(name: string, values: Record<string, unknown>): string {
                 <span class="pg-stage-name">{{ comp.name }}</span>
                 <span class="pg-stage-badge">live</span>
                 <button class="pg-stage-copy" (click)="copyCode()">
-                  @if (copied()) { Copied! } @else { Copy code }
+                  @if (copied()) {
+                    Copied!
+                  } @else {
+                    Copy code
+                  }
                 </button>
               </div>
               <div class="pg-stage-canvas">
@@ -366,13 +408,27 @@ function buildCode(name: string, values: Record<string, unknown>): string {
                   <h3 class="pg-detail-section-title">Inputs</h3>
                   <div class="pg-table-wrap">
                     <table class="pg-table">
-                      <thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Required</th><th>Description</th></tr></thead>
+                      <thead>
+                        <tr>
+                          <th>Name</th>
+                          <th>Type</th>
+                          <th>Default</th>
+                          <th>Required</th>
+                          <th>Description</th>
+                        </tr>
+                      </thead>
                       <tbody>
                         @for (input of comp.inputs; track input.name) {
                           <tr>
-                            <td><code>{{ input.name }}</code></td>
-                            <td><code>{{ input.type }}</code></td>
-                            <td><code>{{ input.defaultValue || '-' }}</code></td>
+                            <td>
+                              <code>{{ input.name }}</code>
+                            </td>
+                            <td>
+                              <code>{{ input.type }}</code>
+                            </td>
+                            <td>
+                              <code>{{ input.defaultValue || '-' }}</code>
+                            </td>
                             <td>{{ input.required ? 'Yes' : 'No' }}</td>
                             <td>{{ input.description }}</td>
                           </tr>
@@ -388,12 +444,22 @@ function buildCode(name: string, values: Record<string, unknown>): string {
                   <h3 class="pg-detail-section-title">Outputs</h3>
                   <div class="pg-table-wrap">
                     <table class="pg-table">
-                      <thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>
+                      <thead>
+                        <tr>
+                          <th>Name</th>
+                          <th>Type</th>
+                          <th>Description</th>
+                        </tr>
+                      </thead>
                       <tbody>
                         @for (output of comp.outputs; track output.name) {
                           <tr>
-                            <td><code>{{ output.name }}</code></td>
-                            <td><code>{{ output.type }}</code></td>
+                            <td>
+                              <code>{{ output.name }}</code>
+                            </td>
+                            <td>
+                              <code>{{ output.type }}</code>
+                            </td>
                             <td>{{ output.description }}</td>
                           </tr>
                         }
@@ -408,12 +474,23 @@ function buildCode(name: string, values: Record<string, unknown>): string {
                   <h3 class="pg-detail-section-title">Signals</h3>
                   <div class="pg-table-wrap">
                     <table class="pg-table">
-                      <thead><tr><th>Name</th><th>Type</th><th>Readonly</th><th>Description</th></tr></thead>
+                      <thead>
+                        <tr>
+                          <th>Name</th>
+                          <th>Type</th>
+                          <th>Readonly</th>
+                          <th>Description</th>
+                        </tr>
+                      </thead>
                       <tbody>
                         @for (sig of comp.signals; track sig.name) {
                           <tr>
-                            <td><code>{{ sig.name }}</code></td>
-                            <td><code>{{ sig.type }}</code></td>
+                            <td>
+                              <code>{{ sig.name }}</code>
+                            </td>
+                            <td>
+                              <code>{{ sig.type }}</code>
+                            </td>
                             <td>{{ sig.readonly ? 'Yes' : 'No' }}</td>
                             <td>{{ sig.description }}</td>
                           </tr>
@@ -429,13 +506,26 @@ function buildCode(name: string, values: Record<string, unknown>): string {
                   <h3 class="pg-detail-section-title">Methods</h3>
                   <div class="pg-table-wrap">
                     <table class="pg-table">
-                      <thead><tr><th>Name</th><th>Parameters</th><th>Returns</th><th>Description</th></tr></thead>
+                      <thead>
+                        <tr>
+                          <th>Name</th>
+                          <th>Parameters</th>
+                          <th>Returns</th>
+                          <th>Description</th>
+                        </tr>
+                      </thead>
                       <tbody>
                         @for (method of comp.methods; track method.name) {
                           <tr>
-                            <td><code>{{ method.name }}</code></td>
-                            <td><code>{{ method.parameters.join(', ') || '-' }}</code></td>
-                            <td><code>{{ method.returnType }}</code></td>
+                            <td>
+                              <code>{{ method.name }}</code>
+                            </td>
+                            <td>
+                              <code>{{ method.parameters.join(', ') || '-' }}</code>
+                            </td>
+                            <td>
+                              <code>{{ method.returnType }}</code>
+                            </td>
                             <td>{{ method.description }}</td>
                           </tr>
                         }
@@ -474,8 +564,12 @@ function buildCode(name: string, values: Record<string, unknown>): string {
       color: var(--ngxsmk-color-primary, #7c3aed);
       text-decoration: none;
     }
-    .pg-breadcrumb a:hover { text-decoration: underline; }
-    .pg-breadcrumb-sep { margin: 0 0.375rem; }
+    .pg-breadcrumb a:hover {
+      text-decoration: underline;
+    }
+    .pg-breadcrumb-sep {
+      margin: 0 0.375rem;
+    }
 
     .pg-title {
       font-size: 1.5rem;
@@ -505,7 +599,9 @@ function buildCode(name: string, values: Record<string, unknown>): string {
       flex-direction: column;
       gap: 0.75rem;
     }
-    .pg-search { position: relative; }
+    .pg-search {
+      position: relative;
+    }
     .pg-search-icon {
       position: absolute;
       left: 0.75rem;
@@ -539,7 +635,9 @@ function buildCode(name: string, values: Record<string, unknown>): string {
       gap: 0.875rem;
       padding-right: 0.25rem;
     }
-    .pg-groups::-webkit-scrollbar { width: 4px; }
+    .pg-groups::-webkit-scrollbar {
+      width: 4px;
+    }
     .pg-groups::-webkit-scrollbar-thumb {
       background: var(--ngxsmk-color-outline, #e4e4e7);
       border-radius: 2px;
@@ -564,9 +662,13 @@ function buildCode(name: string, values: Record<string, unknown>): string {
       font-family: inherit;
       font-size: 0.8125rem;
       color: var(--ngxsmk-color-on-surface, #09090b);
-      transition: background 0.12s, color 0.12s;
+      transition:
+        background 0.12s,
+        color 0.12s;
     }
-    .pg-item:hover { background: var(--ngxsmk-color-surface-variant, #f4f4f5); }
+    .pg-item:hover {
+      background: var(--ngxsmk-color-surface-variant, #f4f4f5);
+    }
     .pg-item.active {
       background: var(--ngxsmk-color-primary-container, #ede9fe);
       color: var(--ngxsmk-color-on-primary-container, #4c1d95);
@@ -578,7 +680,12 @@ function buildCode(name: string, values: Record<string, unknown>): string {
     }
 
     /* Main */
-    .pg-main { min-width: 0; display: flex; flex-direction: column; gap: 1.25rem; }
+    .pg-main {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
 
     .pg-stage {
       border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
@@ -673,7 +780,9 @@ function buildCode(name: string, values: Record<string, unknown>): string {
       border-radius: 9999px;
       padding: 0.1rem 0.45rem;
     }
-    .pg-card-body { padding: 1rem; }
+    .pg-card-body {
+      padding: 1rem;
+    }
     .pg-muted {
       font-size: 0.8125rem;
       color: var(--ngxsmk-color-on-surface-variant, #71717a);
@@ -694,7 +803,11 @@ function buildCode(name: string, values: Record<string, unknown>): string {
     }
 
     /* API tables */
-    .pg-api { display: flex; flex-direction: column; gap: 1.25rem; }
+    .pg-api {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
     .pg-detail-section {
       border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
       border-radius: var(--ngxsmk-radius-lg, 0.5rem);
@@ -710,13 +823,16 @@ function buildCode(name: string, values: Record<string, unknown>): string {
       border-bottom: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
       background: var(--ngxsmk-color-surface, #fff);
     }
-    .pg-table-wrap { overflow-x: auto; }
+    .pg-table-wrap {
+      overflow-x: auto;
+    }
     .pg-table {
       width: 100%;
       border-collapse: collapse;
       font-size: 0.75rem;
     }
-    .pg-table th, .pg-table td {
+    .pg-table th,
+    .pg-table td {
       text-align: left;
       padding: 0.5rem 1rem;
       border-bottom: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
@@ -731,7 +847,9 @@ function buildCode(name: string, values: Record<string, unknown>): string {
       letter-spacing: 0.05em;
       background: var(--ngxsmk-color-surface-variant, #f4f4f5);
     }
-    .pg-table tr:last-child td { border-bottom: none; }
+    .pg-table tr:last-child td {
+      border-bottom: none;
+    }
     .pg-table code {
       font-family: ui-monospace, monospace;
       font-size: 0.72rem;
@@ -752,15 +870,35 @@ function buildCode(name: string, values: Record<string, unknown>): string {
       border-radius: var(--ngxsmk-radius-xl, 0.75rem);
       background: var(--ngxsmk-color-surface, #fff);
     }
-    .pg-empty-icon { font-size: 2.5rem; opacity: 0.3; margin-bottom: 0.75rem; }
-    .pg-empty h2 { margin: 0 0 0.25rem; font-size: 1.125rem; color: var(--ngxsmk-color-on-surface, #09090b); }
-    .pg-empty p { margin: 0; font-size: 0.875rem; max-width: 320px; }
+    .pg-empty-icon {
+      font-size: 2.5rem;
+      opacity: 0.3;
+      margin-bottom: 0.75rem;
+    }
+    .pg-empty h2 {
+      margin: 0 0 0.25rem;
+      font-size: 1.125rem;
+      color: var(--ngxsmk-color-on-surface, #09090b);
+    }
+    .pg-empty p {
+      margin: 0;
+      font-size: 0.875rem;
+      max-width: 320px;
+    }
 
     @media (max-width: 920px) {
-      .pg-shell { grid-template-columns: 1fr; }
-      .pg-sidebar { position: static; }
-      .pg-groups { max-height: 240px; }
-      .pg-panels { grid-template-columns: 1fr; }
+      .pg-shell {
+        grid-template-columns: 1fr;
+      }
+      .pg-sidebar {
+        position: static;
+      }
+      .pg-groups {
+        max-height: 240px;
+      }
+      .pg-panels {
+        grid-template-columns: 1fr;
+      }
     }
   `,
 })
@@ -793,7 +931,11 @@ export class InteractivePlayground {
     const map = new Map<string, ComponentMetadata[]>();
     for (const c of all) {
       if (!(c.name in CURATED_PROPS)) continue;
-      if (q && !c.name.toLowerCase().includes(q) && !(c.description ?? '').toLowerCase().includes(q)) {
+      if (
+        q &&
+        !c.name.toLowerCase().includes(q) &&
+        !(c.description ?? '').toLowerCase().includes(q)
+      ) {
         continue;
       }
       const arr = map.get(c.category) ?? [];
