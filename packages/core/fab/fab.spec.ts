@@ -8,7 +8,7 @@ import { NgxsmkFab } from './fab';
   imports: [NgxsmkFab],
   template: `
     <button
-      ngxsmk-fab
+      ngxsmkFab
       [size]="size()"
       [variant]="variant()"
       [extended]="extended()"
@@ -34,7 +34,7 @@ describe('NgxsmkFab', () => {
     const fixture = TestBed.createComponent(HostComponent);
     fixture.detectChanges();
 
-    const hostEl = fixture.nativeElement.querySelector('[ngxsmk-fab]');
+    const hostEl = fixture.nativeElement.querySelector('[ngxsmkFab]');
     expect(hostEl).toBeTruthy();
     expect(hostEl.getAttribute('data-size')).toBe('md');
     expect(hostEl.getAttribute('data-variant')).toBe('primary');
@@ -45,7 +45,7 @@ describe('NgxsmkFab', () => {
     fixture.componentInstance.position.set('bottom-right');
     fixture.detectChanges();
 
-    const hostEl = fixture.nativeElement.querySelector('[ngxsmk-fab]');
+    const hostEl = fixture.nativeElement.querySelector('[ngxsmkFab]');
     expect(hostEl.getAttribute('data-position')).toBe('bottom-right');
   });
 
@@ -54,7 +54,7 @@ describe('NgxsmkFab', () => {
     fixture.componentInstance.disabled.set(true);
     fixture.detectChanges();
 
-    const hostEl = fixture.nativeElement.querySelector('[ngxsmk-fab]');
+    const hostEl = fixture.nativeElement.querySelector('[ngxsmkFab]');
     expect(hostEl.hasAttribute('disabled')).toBe(true);
   });
 });
