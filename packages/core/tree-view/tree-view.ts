@@ -32,8 +32,8 @@ export interface NgxsmkTreeNode<T = unknown> {
         [class.selected]="isSelected()"
         [class.disabled]="node().disabled"
         tabindex="0"
-        (click)="onClick($event)"
-        (keydown.enter)="onClick($event)"
+        (click)="onClick()"
+        (keydown.enter)="onClick()"
       >
         @if (node().children && node().children!.length > 0) {
           <button
@@ -149,7 +149,7 @@ export class NgxsmkTreeNodeComponent {
     this.tree.toggleNode(this.node());
   }
 
-  protected onClick(_event: MouseEvent): void {
+  protected onClick(): void {
     if (this.node().disabled) {
       return;
     }
