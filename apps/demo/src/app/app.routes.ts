@@ -49,6 +49,18 @@ export const routes: Routes = [
     },
   },
   {
+    path: 'playground/component',
+    loadComponent: () =>
+      import('./pages/interactive-playground/interactive-playground').then(
+        m => m.InteractivePlayground,
+      ),
+    title: 'Component Playground - Live Prop Editing | NGXSMK',
+    data: {
+      description:
+        'Select any NGXSMK component, edit its properties in real-time, and copy the generated Angular template code.',
+    },
+  },
+  {
     path: 'community',
     loadComponent: () => import('./pages/community/community').then((m) => m.CommunityPage),
     title: 'Community & Contributing - Join the Ecosystem | NGXSMK',
@@ -89,6 +101,16 @@ export const routes: Routes = [
     component: ShowcaseLayout,
     children: [
       { path: '', redirectTo: 'content-typography', pathMatch: 'full' },
+      {
+        path: 'explorer',
+        loadComponent: () =>
+          import('./pages/component-explorer/component-explorer').then(m => m.ComponentExplorer),
+        title: 'Component Explorer — Browse All Components | NGXSMK',
+        data: {
+          description:
+            'Browse the complete NGXSMK component catalog. Search, filter by category, and explore signal-native form controls, AI interfaces, enterprise tools, and layout primitives.',
+        },
+      },
       {
         path: 'content-typography',
         loadComponent: () =>
