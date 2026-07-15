@@ -1,13 +1,24 @@
 import { ChangeDetectionStrategy, Component, input, model, signal } from '@angular/core';
+import { ngxsmkUniqueId } from '@ngxsmk/core/util';
 
 @Component({
   standalone: true,
   selector: 'ngxsmk-combobox',
   template: `
     <div class="ngxsmk-combobox__wrap">
-      <input class="ngxsmk-combobox__input" [value]="displayValue()" (input)="onInput($event)" (focus)="open.set(true)" (blur)="close()" role="combobox" aria-autocomplete="list" [attr.aria-expanded]="open()" />
+      <input
+        class="ngxsmk-combobox__input"
+        [value]="displayValue()"
+        (input)="onInput($event)"
+        (focus)="open.set(true)"
+        (blur)="close()"
+        role="combobox"
+        aria-autocomplete="list"
+        [attr.aria-expanded]="open()"
+        [attr.aria-controls]="open() && filtered().length ? dropdownId : null"
+      />
       @if (open()) {
-        <div class="ngxsmk-combobox__dropdown">
+        <div [id]="dropdownId" class="ngxsmk-combobox__dropdown">
           @for (opt of filtered(); track opt.value) {
             <button type="button" class="ngxsmk-combobox__option" [attr.aria-selected]="value() === opt.value" (mousedown)="select(opt); $event.preventDefault()">{{ opt.label }}</button>
           }
@@ -31,6 +42,7 @@ export class NgxsmkCombobox {
   readonly value = model('');
   readonly placeholder = input('');
 
+  protected readonly dropdownId = ngxsmkUniqueId('ngxsmk-combobox-dropdown');
   protected open = signal(false);
   protected query = signal('');
 

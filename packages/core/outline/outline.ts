@@ -4,8 +4,10 @@ import {
   input, 
   model, 
   OnInit, 
-  OnDestroy 
+  OnDestroy,
+  inject
 } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   standalone: true,
@@ -49,6 +51,7 @@ export class NgxsmkOutline implements OnInit, OnDestroy {
   readonly items = input.required<OutlineItem[]>();
   readonly activeId = model('');
 
+  private readonly document = inject(DOCUMENT);
   private destroyFn?: () => void;
 
   ngOnInit(): void {
@@ -60,7 +63,7 @@ export class NgxsmkOutline implements OnInit, OnDestroy {
 
       let active = items[0].id;
       for (const item of items) {
-        const el = document.getElementById(item.id);
+        const el = this.document.getElementById(item.id);
         if (el) {
           const rect = el.getBoundingClientRect();
           if (rect.top <= 120) {
@@ -93,7 +96,7 @@ export class NgxsmkOutline implements OnInit, OnDestroy {
         window.location.pathname + window.location.search + `#${id}`
       );
     }
-    const el = document.getElementById(id);
+    const el = this.document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }

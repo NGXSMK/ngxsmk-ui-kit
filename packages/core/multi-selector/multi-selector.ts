@@ -16,6 +16,7 @@ import {
   ViewContainerRef,
   OnDestroy,
 } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   standalone: true,
@@ -146,6 +147,7 @@ export class NgxsmkMultiSelector implements OnDestroy {
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly vcr = inject(ViewContainerRef);
   private readonly renderer = inject(Renderer2);
+  private readonly document = inject(DOCUMENT);
 
   readonly options = input.required<{ value: string; label: string }[]>();
   readonly value = model<string[]>([]);
@@ -194,7 +196,7 @@ export class NgxsmkMultiSelector implements OnDestroy {
       return;
     }
     this.dropdownNode = node;
-    this.renderer.appendChild(document.body, node);
+    this.renderer.appendChild(this.document.body, node);
     this.position();
     window.addEventListener('scroll', this.position, true);
     window.addEventListener('resize', this.position);

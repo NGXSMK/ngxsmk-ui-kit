@@ -4,6 +4,7 @@ import { ChangeDetectionStrategy, Component, input, model, output } from '@angul
   standalone: true,
   selector: 'ngxsmk-tokenizer',
   template: `
+    <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
     <div class="ngxsmk-tokenizer__wrap" (click)="input.focus()">
       @for (t of tokens(); track t) {
         <span class="ngxsmk-tokenizer__token">

@@ -18,7 +18,7 @@ export interface GanttItem {
           <div class="ngxsmk-timeline-gantt__label">{{ item.label }}</div>
           <div class="ngxsmk-timeline-gantt__bar-track">
             <div class="ngxsmk-timeline-gantt__bar" [style.margin-left.%]="item.start" [style.width.%]="item.duration">
-              @if (item.progress != null) {
+              @if (item.progress !== null && item.progress !== undefined) {
                 <div class="ngxsmk-timeline-gantt__progress" [style.width.%]="item.progress"></div>
               }
             </div>

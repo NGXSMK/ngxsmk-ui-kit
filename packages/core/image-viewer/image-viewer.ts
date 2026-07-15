@@ -5,8 +5,18 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
   selector: 'ngxsmk-image-viewer',
   template: `
     <div class="ngxsmk-image-viewer__wrap">
-      <img class="ngxsmk-image-viewer__img" [src]="src()" [alt]="alt()" (click)="open = !open" />
+      <img
+        class="ngxsmk-image-viewer__img"
+        [src]="src()"
+        [alt]="alt()"
+        tabindex="0"
+        role="button"
+        (click)="open = !open"
+        (keydown.enter)="open = !open"
+        (keydown.space)="open = !open; $event.preventDefault()"
+      />
       @if (open) {
+        <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
         <div class="ngxsmk-image-viewer__overlay" (click)="open = false">
           <img class="ngxsmk-image-viewer__expanded" [src]="src()" [alt]="alt()" />
         </div>

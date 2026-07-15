@@ -262,7 +262,7 @@ export class NgxsmkStepper {
   }
 
   protected onKeydown(event: KeyboardEvent): void {
-    let delta = 0;
+    let delta: number;
     if (event.key === 'ArrowRight' || event.key === 'ArrowDown') delta = 1;
     else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') delta = -1;
     else return;

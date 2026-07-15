@@ -23,14 +23,14 @@ export interface NgxsmkMotionState {
   transition?: NgxsmkMotionTransition;
 }
 
-type MotionModule = {
+interface MotionModule {
   animate: (
     el: Element,
     keyframes: Record<string, string | number>,
     options?: Record<string, unknown>,
   ) => { finished: Promise<void> };
   style: (el: Element, props: Record<string, string | number>) => void;
-};
+}
 
 let motionModule: MotionModule | null = null;
 

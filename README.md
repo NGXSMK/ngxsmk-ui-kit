@@ -1,7 +1,8 @@
 # NGXSMK UI Kit
 
 [![Angular](https://img.shields.io/badge/Angular-17.3%2B-dd0031?logo=angular&logoColor=white)](https://angular.dev)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178c6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![TypeScript](https://img.shields.io/badge/TypeScript-6.x-3178c6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![Node.js](https://img.shields.io/badge/Node.js-20%2B-339933?logo=nodedotjs&logoColor=white)](https://nodejs.org)
 [![npm @ngxsmk/core](https://img.shields.io/badge/npm-%40ngxsmk%2Fcore-blue)](https://www.npmjs.com/package/@ngxsmk/core)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 
@@ -285,10 +286,16 @@ and peer dependencies.
 
 ## Roadmap
 
-- Stabilize public APIs for a `1.0` release.
+- Comprehensive unit test coverage across all packages.
+- ESLint integration with strict Angular and TypeScript rules.
+- Storybook documentation site with interactive examples.
+- Automated accessibility (a11y) auditing in CI.
 - More preset themes and a visual theme editor.
 - Expanded `NgxsmkPresence`-based overlay animations (sheet, dropdown, hover-card).
 - Form-field validation visuals and more input types.
+- `ng add` / `ng update` schematics.
+- SSR (Angular Universal) compatibility.
+- i18n and RTL layout support.
 
 ## Contributing
 

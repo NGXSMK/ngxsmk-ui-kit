@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Directive, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Directive } from '@angular/core';
 
 @Directive({
   standalone: true,

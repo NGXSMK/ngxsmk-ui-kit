@@ -32,6 +32,7 @@ export type NgxsmkButtonSize = 'sm' | 'md' | 'lg';
  */
 @Directive({
   standalone: true,
+  /* eslint-disable-next-line @angular-eslint/directive-selector */
   selector: 'button[ngxsmk-button], a[ngxsmk-button]',
   host: {
     class: 'ngxsmk-button',

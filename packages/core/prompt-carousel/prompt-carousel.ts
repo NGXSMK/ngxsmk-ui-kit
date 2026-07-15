@@ -26,7 +26,11 @@ export interface PromptItem {
           <div 
             class="ngxsmk-prompt-card"
             [attr.data-preset]="item.colorPreset || 'violet'"
+            tabindex="0"
+            role="button"
             (click)="selectPrompt(item)"
+            (keydown.enter)="selectPrompt(item)"
+            (keydown.space)="selectPrompt(item); $event.preventDefault()"
           >
             <div class="ngxsmk-prompt-card__header">
               <span class="ngxsmk-prompt-card__icon">{{ item.icon || '✦' }}</span>

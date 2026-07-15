@@ -15,6 +15,7 @@ import { NgxsmkScrollLock } from '@ngxsmk/cdk';
   template: `
     @if (open()) {
       <div class="ngxsmk-chat-composer-drawer__root">
+        <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
         <div class="ngxsmk-chat-composer-drawer__overlay" (click)="close()"></div>
         <div
           class="ngxsmk-chat-composer-drawer__panel"

@@ -1,6 +1,6 @@
 import { NgxsmkHeading } from '@ngxsmk/core/heading';
 import { NgxsmkText } from '@ngxsmk/core/text';
-import { NgxsmkDialog, NgxsmkDialogFooter } from '@ngxsmk/core/dialog';
+import { NgxsmkDialog } from '@ngxsmk/core/dialog';
 import { NgxsmkTabs, NgxsmkTab } from '@ngxsmk/core/tabs';
 import { NgxsmkStat } from '@ngxsmk/core/stat';
 import { NgxsmkBadge } from '@ngxsmk/core/badge';

@@ -2,20 +2,23 @@
 
 ## Supported Versions
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
-
 | Version | Supported          |
 | ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+| 1.1.x   | :white_check_mark: |
+| 1.0.x   | :white_check_mark: |
+| < 1.0   | :x:                |
 
 ## Reporting a Vulnerability
 
-Use this section to tell people how to report a vulnerability.
+If you discover a security vulnerability in NGXSMK UI Kit, please report it
+responsibly:
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+1. **Do not** open a public GitHub issue for security vulnerabilities.
+2. Email **[security@ngxsmk.dev](mailto:security@ngxsmk.dev)** with a
+   description of the vulnerability, steps to reproduce, and any relevant logs
+   or screenshots.
+3. You can expect an initial response within **48 hours**.
+4. We will work with you to understand and resolve the issue before any public
+   disclosure.
+
+Thank you for helping keep NGXSMK UI Kit and its users safe.

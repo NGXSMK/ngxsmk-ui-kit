@@ -10,6 +10,7 @@ import {
   signal,
   booleanAttribute,
 } from '@angular/core';
+import { ngxsmkUniqueId } from '@ngxsmk/core/util';
 
 @Component({
   selector: 'ngxsmk-multi-select',
@@ -20,10 +21,18 @@ import {
       class="ngxsmk-multi-select__trigger"
       [class.ngxsmk-multi-select__trigger--open]="open()"
       [class.ngxsmk-multi-select__trigger--disabled]="disabled()"
+      [attr.tabindex]="disabled() ? -1 : 0"
+      role="combobox"
+      [attr.aria-expanded]="open()"
+      [attr.aria-controls]="open() ? listboxId : null"
+      [attr.aria-disabled]="disabled() ? 'true' : null"
       (click)="toggle()"
+      (keydown.enter)="toggle()"
+      (keydown.space)="toggle(); $event.preventDefault()"
     >
       <div class="ngxsmk-multi-select__tags">
         @for (s of selectedValues(); track s) {
+          <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
           <span class="ngxsmk-multi-select__tag" (click)="$event.stopPropagation()">
             <span class="ngxsmk-multi-select__tag-label">{{ labelFor(s) }}</span>
             <button
@@ -58,10 +67,12 @@ import {
     </div>
 
     @if (open()) {
-      <ul class="ngxsmk-multi-select__listbox" role="listbox">
+      <ul [id]="listboxId" class="ngxsmk-multi-select__listbox" role="listbox">
         @for (opt of remaining(); track opt.value) {
+          <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
           <li
             role="option"
+            aria-selected="false"
             class="ngxsmk-multi-select__option"
             (click)="selectOption(opt)"
           >
@@ -219,6 +230,7 @@ export class NgxsmkMultiSelect {
   readonly disabled = input(false, { transform: booleanAttribute });
   readonly changed = output<string[]>();
 
+  protected readonly listboxId = ngxsmkUniqueId('ngxsmk-multi-select-listbox');
   protected readonly open = signal(false);
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
 

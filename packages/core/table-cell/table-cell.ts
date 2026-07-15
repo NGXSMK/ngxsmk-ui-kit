@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Directive, inject, input, output } from '@angular/core';
+import { Directive, inject, input, output } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
 const STYLE_ID = 'ngxsmk-table-composed-styles';

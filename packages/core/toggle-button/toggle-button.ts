@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, input, model, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, model, output } from '@angular/core';
 
 @Component({
   standalone: true,
+  /* eslint-disable-next-line @angular-eslint/component-selector */
   selector: 'button[ngxsmkToggleButton]',
   template: `<ng-content />`,
   host: {

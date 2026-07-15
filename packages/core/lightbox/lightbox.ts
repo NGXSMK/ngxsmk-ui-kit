@@ -17,11 +17,13 @@ export interface NgxsmkLightboxImage {
   standalone: true,
   selector: 'ngxsmk-lightbox',
   template: `
+    <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
     <div class="ngxsmk-lightbox__trigger" (click)="show(0)">
       <ng-content />
     </div>
     @if (open()) {
       <div class="ngxsmk-lightbox__overlay">
+      <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
       <div class="ngxsmk-lightbox__backdrop" (click)="open.set(false)"></div>
       <div class="ngxsmk-lightbox__panel">
         <button

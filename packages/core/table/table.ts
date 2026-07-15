@@ -137,6 +137,7 @@ export interface NgxsmkTableColumn {
 })
 export class NgxsmkTable {
   readonly columns = input<NgxsmkTableColumn[]>([]);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   readonly rows = input<any[]>([]);
   readonly striped = input(false, { transform: booleanAttribute });
 

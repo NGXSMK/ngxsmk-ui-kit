@@ -202,7 +202,7 @@ export class NgxsmkRating implements ControlValueAccessor {
   protected onKeydown(event: KeyboardEvent): void {
     if (!this.isInteractive()) return;
     const step = this.step();
-    let next: number | null = null;
+    let next: number;
     switch (event.key) {
       case 'ArrowRight':
       case 'ArrowUp':

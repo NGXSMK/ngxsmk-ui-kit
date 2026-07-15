@@ -18,6 +18,7 @@ export type NgxsmkAlertDialogVariant = 'info' | 'destructive';
   standalone: true,
   selector: 'ngxsmk-alert-dialog',
   template: `
+    <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
     <dialog #dialog class="ngxsmk-alert-dialog__native" (cancel)="onCancel($event)" (close)="open.set(false)" (click)="onBackdropClick($event)">
       @if (open()) {
         <div class="ngxsmk-alert-dialog__card" [attr.data-variant]="variant()">

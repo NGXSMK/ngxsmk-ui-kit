@@ -41,7 +41,12 @@ export type NgxsmkPopoverAlign = 'start' | 'center' | 'end';
   template: `
     <div
       class="ngxsmk-popover__trigger"
+      tabindex="0"
+      role="button"
+      [attr.aria-expanded]="open()"
       (click)="toggle()"
+      (keydown.enter)="toggle()"
+      (keydown.space)="toggle(); $event.preventDefault()"
       (keydown.escape)="close()"
     >
       <ng-content select="[ngxsmkPopoverTrigger]" />
@@ -147,7 +152,11 @@ export class NgxsmkPopover {
 
   toggle(): void {
     if (this.disabled()) return;
-    this.open() ? this.close() : this.show();
+    if (this.open()) {
+      this.close();
+    } else {
+      this.show();
+    }
   }
 
   show(): void {

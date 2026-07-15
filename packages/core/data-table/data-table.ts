@@ -144,6 +144,7 @@ import { NgxsmkTable, NgxsmkTableColumn } from '@ngxsmk/core/table';
 })
 export class NgxsmkDataTable {
   readonly columns = input<NgxsmkTableColumn[]>([]);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   readonly rows = input<any[]>([]);
   readonly pageSize = input(10);
   readonly sortable = input(false, { transform: booleanAttribute });
@@ -162,7 +163,7 @@ export class NgxsmkDataTable {
   }
 
   private readonly processedRows = computed(() => {
-    let data = [...this.rows()];
+    const data = [...this.rows()];
     const field = this.sortField();
     if (field && this.sortable()) {
       const dir = this.sortDir();

@@ -4,21 +4,29 @@ import { DOCUMENT } from '@angular/common';
 // ─── Core Hooks ─────────────────────────────────────────────
 
 export function useMediaQuery(query: string): WritableSignal<boolean> {
-  const mq = signal(window.matchMedia(query).matches);
-  const destroyRef = inject(DestroyRef);
-  const media = window.matchMedia(query);
-  const handler = (e: MediaQueryListEvent) => mq.set(e.matches);
-  media.addEventListener('change', handler);
-  destroyRef.onDestroy(() => media.removeEventListener('change', handler));
+  const isBrowser = typeof window !== 'undefined' && window.matchMedia;
+  const initial = isBrowser ? window.matchMedia(query).matches : false;
+  const mq = signal(initial);
+
+  if (isBrowser) {
+    const destroyRef = inject(DestroyRef);
+    const media = window.matchMedia(query);
+    const handler = (e: MediaQueryListEvent) => mq.set(e.matches);
+    media.addEventListener('change', handler);
+    destroyRef.onDestroy(() => media.removeEventListener('change', handler));
+  }
   return mq;
 }
 
 export function useTheme(): WritableSignal<'light' | 'dark'> {
-  const theme = signal<'light' | 'dark'>(
-    document.documentElement.getAttribute('data-theme') as 'light' | 'dark' || 'light'
-  );
+  const doc = inject(DOCUMENT);
+  const isBrowser = typeof window !== 'undefined';
+  const initial = isBrowser ? doc.documentElement.getAttribute('data-theme') as 'light' | 'dark' || 'light' : 'light';
+  const theme = signal<'light' | 'dark'>(initial);
   effect(() => {
-    document.documentElement.setAttribute('data-theme', theme());
+    if (isBrowser) {
+      doc.documentElement.setAttribute('data-theme', theme());
+    }
   });
   return theme;
 }
@@ -37,11 +45,12 @@ export function useScrollLock(): { locked: WritableSignal<boolean> } {
 }
 
 export function useToast(): (message: string, variant?: 'info' | 'success' | 'error' | 'warning') => void {
+  const doc = inject(DOCUMENT);
   return (message: string, variant: 'info' | 'success' | 'error' | 'warning' = 'info') => {
-    const el = document.createElement('div');
+    const el = doc.createElement('div');
     el.textContent = message;
     el.style.cssText = `position:fixed;bottom:1rem;right:1rem;padding:0.75rem 1rem;border-radius:8px;background:var(--ngxsmk-color-${variant === 'info' ? 'surface-container' : variant === 'success' ? 'success-container' : variant === 'error' ? 'error-container' : 'warning-container'});color:var(--ngxsmk-color-on-${variant === 'info' ? 'surface' : variant});font-family:var(--ngxsmk-font-sans);z-index:var(--ngxsmk-z-toast, 1600);box-shadow:var(--ngxsmk-shadow-lg);`;
-    document.body.appendChild(el);
+    doc.body.appendChild(el);
     setTimeout(() => el.remove(), 3000);
   };
 }
@@ -80,6 +89,7 @@ export function useFocusTrap(): {
 } {
   const trapRef = signal<HTMLElement | null>(null);
   const active = signal(false);
+  const doc = inject(DOCUMENT);
   const destroyRef = inject(DestroyRef);
 
   function handleKey(e: KeyboardEvent) {
@@ -90,12 +100,12 @@ export function useFocusTrap(): {
     if (!focusable.length) return;
     const first = focusable[0];
     const last = focusable[focusable.length - 1];
-    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    if (e.shiftKey && doc.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && doc.activeElement === last) { e.preventDefault(); first.focus(); }
   }
 
-  destroyRef.onDestroy(() => document.removeEventListener('keydown', handleKey));
-  document.addEventListener('keydown', handleKey);
+  destroyRef.onDestroy(() => doc.removeEventListener('keydown', handleKey));
+  doc.addEventListener('keydown', handleKey);
 
   return {
     trapRef,
@@ -152,7 +162,7 @@ export function useTreeFocus(): {
     activePath,
     expand: (id: string) => expanded.update(s => { s.add(id); return s; }),
     collapse: (id: string) => expanded.update(s => { s.delete(id); return s; }),
-    toggle: (id: string) => expanded.update(s => { s.has(id) ? s.delete(id) : s.add(id); return s; }),
+    toggle: (id: string) => expanded.update(s => { if (s.has(id)) { s.delete(id); } else { s.add(id); } return s; }),
   };
 }
 
@@ -162,8 +172,6 @@ export function useKeyboardHint(): {
 } {
   const hints = signal<{ key: string; label: string }[]>([]);
   const visible = signal(false);
-  const destroyRef = inject(DestroyRef);
-  destroyRef.onDestroy(() => {});
   return { hints, visible };
 }
 
@@ -319,7 +327,7 @@ export function useTableSelection<T extends { id: string }>(): {
   const selectedItems = computed(() => items().filter(i => selectedIds().has(i.id)));
   return {
     selectedIds, allSelected, selectedItems,
-    toggle: (id: string) => selectedIds.update(s => { s.has(id) ? s.delete(id) : s.add(id); return s; }),
+    toggle: (id: string) => selectedIds.update(s => { if (s.has(id)) { s.delete(id); } else { s.add(id); } return s; }),
     toggleAll: (allItems: T[]) => {
       selectedIds.update(s => {
         if (s.size === allItems.length) s.clear();
@@ -372,7 +380,7 @@ export function useTableFilterState(): {
   };
 }
 
-export function useTableRowExpansion<T extends { id: string }>(): {
+export function useTableRowExpansion(): {
   expandedIds: WritableSignal<Set<string>>;
   isExpanded: (id: string) => boolean;
   toggle: (id: string) => void;
@@ -382,12 +390,12 @@ export function useTableRowExpansion<T extends { id: string }>(): {
   return {
     expandedIds,
     isExpanded: (id: string) => expandedIds().has(id),
-    toggle: (id: string) => expandedIds.update(s => { s.has(id) ? s.delete(id) : s.add(id); return s; }),
+    toggle: (id: string) => expandedIds.update(s => { if (s.has(id)) { s.delete(id); } else { s.add(id); } return s; }),
     collapseAll: () => expandedIds.set(new Set()),
   };
 }
 
-export function useTableSelectionState<T extends { id: string }>(): {
+export function useTableSelectionState(): {
   selectionState: WritableSignal<Record<string, boolean>>;
   count: Signal<number>;
   toggle: (id: string) => void;
@@ -415,16 +423,17 @@ export function useTableColumnResize(): {
     columnWidths, resizing,
     startResize: (col: string, startX: number, startWidth: number) => {
       resizing.set(true);
+      const doc = inject(DOCUMENT);
       function onMove(e: MouseEvent) {
         columnWidths.update(w => ({ ...w, [col]: Math.max(60, startWidth + (e.clientX - startX)) }));
       }
       function onUp() {
         resizing.set(false);
-        document.removeEventListener('mousemove', onMove);
-        document.removeEventListener('mouseup', onUp);
+        doc.removeEventListener('mousemove', onMove);
+        doc.removeEventListener('mouseup', onUp);
       }
-      document.addEventListener('mousemove', onMove);
-      document.addEventListener('mouseup', onUp);
+      doc.addEventListener('mousemove', onMove);
+      doc.addEventListener('mouseup', onUp);
     },
   };
 }
@@ -439,7 +448,7 @@ export function useTableColumnSettings(): {
   const columnOrder = signal<string[]>([]);
   return {
     visibleColumns, columnOrder,
-    toggleColumn: (col: string) => visibleColumns.update(s => { s.has(col) ? s.delete(col) : s.add(col); return s; }),
+    toggleColumn: (col: string) => visibleColumns.update(s => { if (s.has(col)) { s.delete(col); } else { s.add(col); } return s; }),
     moveColumn: (from: number, to: number) => columnOrder.update(order => {
       const copy = [...order];
       const [moved] = copy.splice(from, 1);
@@ -456,7 +465,7 @@ export function useTableStickyColumns(): {
   const stickyColumns = signal<Set<string>>(new Set());
   return {
     stickyColumns,
-    toggleSticky: (col: string) => stickyColumns.update(s => { s.has(col) ? s.delete(col) : s.add(col); return s; }),
+    toggleSticky: (col: string) => stickyColumns.update(s => { if (s.has(col)) { s.delete(col); } else { s.add(col); } return s; }),
   };
 }
 
@@ -473,14 +482,15 @@ export function usePopover(): {
   const isOpen = signal(false);
   const triggerRef = signal<HTMLElement | null>(null);
   const contentRef = signal<HTMLElement | null>(null);
+  const doc = inject(DOCUMENT);
   const destroyRef = inject(DestroyRef);
-  destroyRef.onDestroy(() => document.removeEventListener('click', handleOutside));
+  destroyRef.onDestroy(() => doc.removeEventListener('click', handleOutside));
   function handleOutside(e: MouseEvent) {
     if (isOpen() && !triggerRef()?.contains(e.target as Node) && !contentRef()?.contains(e.target as Node)) {
       isOpen.set(false);
     }
   }
-  document.addEventListener('click', handleOutside);
+  doc.addEventListener('click', handleOutside);
   return {
     isOpen, triggerRef, contentRef,
     open: () => isOpen.set(true),

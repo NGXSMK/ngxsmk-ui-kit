@@ -1,6 +1,5 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 /**
  * Isolated showcase for `ngxsmk-tel-input`.
