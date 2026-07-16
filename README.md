@@ -50,7 +50,7 @@ its 170+ components is a standalone, `OnPush`, signal-based component
 properties. The result: instant runtime theming, minimal bundles, and an API
 that feels like modern Angular instead of fighting it.
 
-- ⚡ **Signals-native & zoneless** — no `zone.js` dependency; works in zone-based *and* zoneless apps.
+- ⚡ **Signals-native & zoneless** — no `zone.js` dependency; works in zone-based _and_ zoneless apps.
 - 🎨 **Design-token theming** — every component reads `var(--ngxsmk-*)`; switch themes and dark mode at runtime with zero flash.
 - 🌗 **Light / dark / system** — class, media, and system strategies with 4 built-in presets (`emerald`, `violet`, `neutral`, `rose`).
 - 📊 **Charts built in** — 8 token-themed chart components (bar, line, area, pie/donut, scatter, heatmap, candlestick, dashboard) — no external charting library.
@@ -68,6 +68,7 @@ JSON for Figma.
 
 ## How does NGXSMK compare?
 
+<!-- prettier-ignore -->
 | Capability | NGXSMK | Angular Material | PrimeNG |
 | --- | :-: | :-: | :-: |
 | Signals-first component API (`input()` / `model()`) | ✅ | Partial | Partial |
@@ -80,9 +81,9 @@ JSON for Figma.
 | Visual theme builder with multi-format export | ✅ | ❌ | ✅ |
 | License | MIT | MIT | MIT (core) |
 
-*Angular Material and PrimeNG are excellent libraries — the table highlights
+_Angular Material and PrimeNG are excellent libraries — the table highlights
 scope differences so you can pick the right tool. NGXSMK aims to be the
-all-in-one kit for signal-native, zoneless Angular apps.*
+all-in-one kit for signal-native, zoneless Angular apps._
 
 ## Table of contents
 
