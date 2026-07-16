@@ -1,0 +1,10 @@
+# Dependencies
+node_modules
+
+# Build output
+dist
+**/dist
+**/*.min.js
+
+# Generated theme stylesheets (do not edit by hand)
+packages/theme/styles

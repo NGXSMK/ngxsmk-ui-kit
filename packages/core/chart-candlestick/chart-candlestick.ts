@@ -1,5 +1,11 @@
 import { ChangeDetectionStrategy, Component, computed, effect, input } from '@angular/core';
-import { AbstractCanvasChart, ChartHover, SHARED_CHART_STYLES, niceTicks, rgba } from '@ngxsmk/core/chart-engine';
+import {
+  AbstractCanvasChart,
+  ChartHover,
+  SHARED_CHART_STYLES,
+  niceTicks,
+  rgba,
+} from '@ngxsmk/core/chart-engine';
 
 export interface NgxsmkCandlestickDataPoint {
   date: string;
@@ -55,7 +61,10 @@ export class NgxsmkCandlestickChart extends AbstractCanvasChart {
     const yTicks = niceTicks(min, max, 4).map((v) => ({ y: yAt(v), label: String(v) }));
     const xStep = Math.max(1, Math.ceil(count / 6));
     const xTicks = data
-      .map((d, i) => ({ x: plot.x + slot * (i + 0.5), label: i % xStep === 0 || i === count - 1 ? d.date : undefined }))
+      .map((d, i) => ({
+        x: plot.x + slot * (i + 0.5),
+        label: i % xStep === 0 || i === count - 1 ? d.date : undefined,
+      }))
       .filter((tk) => tk.label != null) as { x: number; label: string }[];
     this.drawCartesianGrid(yTicks, xTicks);
 

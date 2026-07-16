@@ -1,5 +1,10 @@
 import { ChangeDetectionStrategy, Component, computed, effect, input } from '@angular/core';
-import { AbstractCanvasChart, ChartHover, SHARED_CHART_STYLES, rgba } from '@ngxsmk/core/chart-engine';
+import {
+  AbstractCanvasChart,
+  ChartHover,
+  SHARED_CHART_STYLES,
+  rgba,
+} from '@ngxsmk/core/chart-engine';
 
 export interface NgxsmkPieChartDataPoint {
   label: string;
