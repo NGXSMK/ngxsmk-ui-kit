@@ -6,11 +6,11 @@ Thank you for helping to keep NGXSMK UI Kit and its users secure! We take all se
 
 We actively support and provide security updates for the following versions:
 
-| Version | Supported |
-| :------ | :-------- |
+| Version | Supported              |
+| :------ | :--------------------- |
 | 1.3.x   | :white_check_mark: Yes |
 | 1.2.x   | :white_check_mark: Yes |
-| < 1.2.x | :x: No |
+| < 1.2.x | :x: No                 |
 
 ## Reporting a Vulnerability
 
