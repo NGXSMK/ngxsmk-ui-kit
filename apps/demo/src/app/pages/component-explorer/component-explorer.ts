@@ -1,5 +1,6 @@
 import { Component, inject, signal, computed } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 import {
   ComponentRegistry,
   ComponentMetadata,
@@ -24,14 +25,17 @@ const CATEGORY_ICONS: Record<string, string> = {
 @Component({
   selector: 'app-component-explorer',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, TranslatePipe],
   template: `
     <div class="explorer">
       <header class="explorer-header">
-        <h1 class="explorer-title">Component Library</h1>
+        <h1 class="explorer-title">{{ 'explorer.title' | translate }}</h1>
         <p class="explorer-subtitle">
-          {{ registry.totalCount() }} signal-native components across
-          {{ registry.categories().length }} categories
+          {{
+            'explorer.subtitle'
+              | translate
+                : { count: registry.totalCount(), categories: registry.categories().length }
+          }}
         </p>
         <div class="explorer-search">
           <svg
@@ -52,7 +56,7 @@ const CATEGORY_ICONS: Record<string, string> = {
             #searchInput
             type="text"
             class="explorer-search-input"
-            placeholder="Search by name, tag, or description..."
+            [attr.placeholder]="'explorer.searchPlaceholder' | translate"
             [value]="query()"
             (input)="query.set(searchInput.value)"
           />
@@ -71,7 +75,7 @@ const CATEGORY_ICONS: Record<string, string> = {
             [class.active]="!selectedCategory()"
             (click)="selectedCategory.set(null)"
           >
-            All
+            {{ 'explorer.all' | translate }}
           </button>
           @for (cat of registry.categories(); track cat) {
             <button
@@ -88,8 +92,10 @@ const CATEGORY_ICONS: Record<string, string> = {
       @if (filteredGroups().length === 0) {
         <div class="explorer-empty">
           <div class="explorer-empty-icon">◈</div>
-          <p>No components match "{{ query() }}"</p>
-          <button class="explorer-empty-btn" (click)="query.set('')">Clear search</button>
+          <p>{{ 'explorer.noMatch' | translate: { query: query() } }}</p>
+          <button class="explorer-empty-btn" (click)="query.set('')">
+            {{ 'explorer.clearSearch' | translate }}
+          </button>
         </div>
       }
 
@@ -97,7 +103,9 @@ const CATEGORY_ICONS: Record<string, string> = {
         <section class="explorer-group">
           <div class="explorer-group-header">
             <h2 class="explorer-group-title">{{ labelFor(group.category) }}</h2>
-            <span class="explorer-group-count">{{ group.components.length }} components</span>
+            <span class="explorer-group-count">{{
+              'explorer.componentCount' | translate: { count: group.components.length }
+            }}</span>
           </div>
           <div class="explorer-grid">
             @for (comp of group.components; track comp.name) {
@@ -117,10 +125,14 @@ const CATEGORY_ICONS: Record<string, string> = {
                 <div class="explorer-card-meta">
                   <span class="explorer-card-tag">{{ comp.packageName }}</span>
                   @if (comp.inputs.length > 0) {
-                    <span class="explorer-card-prop">{{ comp.inputs.length }} inputs</span>
+                    <span class="explorer-card-prop">{{
+                      'explorer.inputsCount' | translate: { count: comp.inputs.length }
+                    }}</span>
                   }
                   @if (comp.signals.length > 0) {
-                    <span class="explorer-card-prop">{{ comp.signals.length }} signals</span>
+                    <span class="explorer-card-prop">{{
+                      'explorer.signalsCount' | translate: { count: comp.signals.length }
+                    }}</span>
                   }
                 </div>
               </a>

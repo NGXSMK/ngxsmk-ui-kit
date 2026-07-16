@@ -8,6 +8,7 @@ import { NgxsmkBadge } from '@ngxsmk/core/badge';
 import { NgxsmkHeading } from '@ngxsmk/core/heading';
 import { NgxsmkText } from '@ngxsmk/core/text';
 import { Component } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { AppNav } from '../../nav/nav';
 
 interface Change {
@@ -34,15 +35,16 @@ interface Release {
     NgxsmkHeading,
     NgxsmkText,
     AppNav,
+    TranslatePipe,
   ],
   template: `
     <app-nav />
     <div class="ngxsmk-page">
       <header class="ngxsmk-page__header">
-        <ngxsmk-heading level="h1">Changelog</ngxsmk-heading>
-        <ngxsmk-text variant="body" class="ngxsmk-page__sub"
-          >Keep track of the changes, bug fixes, updates, and releases of NGXSMK.</ngxsmk-text
-        >
+        <ngxsmk-heading level="h1">{{ 'changelog.title' | translate }}</ngxsmk-heading>
+        <ngxsmk-text variant="body" class="ngxsmk-page__sub">{{
+          'changelog.subtitle' | translate
+        }}</ngxsmk-text>
       </header>
 
       <div class="ngxsmk-changelog-list">
@@ -56,7 +58,7 @@ interface Release {
             </div>
             <div ngxsmkCardContent>
               <ngxsmk-text variant="body" class="ngxsmk-changelog-desc">{{
-                release.summary
+                release.summary | translate
               }}</ngxsmk-text>
               <ul class="ngxsmk-release__changes">
                 @for (change of release.changes; track change.text) {
@@ -69,9 +71,9 @@ interface Release {
                             ? 'warning'
                             : 'primary'
                       "
-                      >{{ change.type }}</ngxsmk-badge
+                      >{{ change.type | translate }}</ngxsmk-badge
                     >
-                    <span>{{ change.text }}</span>
+                    <span>{{ change.text | translate }}</span>
                   </li>
                 }
               </ul>
@@ -140,105 +142,105 @@ export class ChangelogPage {
     {
       version: 'v1.3.0',
       date: '2026-07-16',
-      summary: 'SEO utilities, emerald default preset, and documentation improvements.',
+      summary: 'changelog.release.v130.summary',
       changes: [
         {
           type: 'added',
-          text: 'SEO service: @ngxsmk/core/seo with NgxsmkSeoService and provideSeo() for title, description, canonical, Open Graph, Twitter Card, robots, and JSON-LD.',
+          text: 'changelog.release.v130.changes.0',
         },
         {
           type: 'changed',
-          text: 'emerald is now the default preset; the astryx preset was removed.',
+          text: 'changelog.release.v130.changes.1',
         },
         {
           type: 'changed',
-          text: 'Richer package READMEs and top-level docs with a component catalog, CLI & schematics, and accessibility guidance.',
+          text: 'changelog.release.v130.changes.2',
         },
       ],
     },
     {
       version: 'v1.2.0',
       date: '2026-07-15',
-      summary: 'Partial-Ivy build fix (resolves NG0203) and expanded component surface.',
+      summary: 'changelog.release.v120.summary',
       changes: [
         {
           type: 'fixed',
-          text: 'Libraries now compile in partial Ivy mode so DI factories run inside the injection context (NG0203).',
+          text: 'changelog.release.v120.changes.0',
         },
         {
           type: 'added',
-          text: 'Select family: @ngxsmk/core/select, multi-select, selector, multi-selector.',
+          text: 'changelog.release.v120.changes.1',
         },
         {
           type: 'added',
-          text: 'Structural directives @ngxsmk/core/let and @ngxsmk/core/rx-let.',
+          text: 'changelog.release.v120.changes.2',
         },
         {
           type: 'added',
-          text: 'i18n entry point with NgxsmkI18nPipe, createI18n, provideI18n, useDirection.',
+          text: 'changelog.release.v120.changes.3',
         },
       ],
     },
     {
       version: 'v1.1.0',
       date: '2026-07-15',
-      summary: 'Stable release with updated toolchain, command palette, and prompt carousel.',
+      summary: 'changelog.release.v110.summary',
       changes: [
         {
           type: 'added',
-          text: 'Command palette component (@ngxsmk/core/command-palette) for quick search and actions.',
+          text: 'changelog.release.v110.changes.0',
         },
         {
           type: 'added',
-          text: 'Prompt carousel component (@ngxsmk/core/prompt-carousel) for AI-focused templates.',
+          text: 'changelog.release.v110.changes.1',
         },
-        { type: 'changed', text: 'Standardized workspace configuration and builder options.' },
-        { type: 'changed', text: 'Verified Angular compatibility across versions 17 through 22.' },
+        { type: 'changed', text: 'changelog.release.v110.changes.2' },
+        { type: 'changed', text: 'changelog.release.v110.changes.3' },
       ],
     },
     {
       version: 'v1.0.0',
       date: '2026-07-15',
-      summary: 'First stable release of the NGXSMK ecosystem.',
+      summary: 'changelog.release.v100.summary',
       changes: [
-        { type: 'added', text: '@ngxsmk/core, @ngxsmk/cdk, and @ngxsmk/theme published at 1.0.0.' },
+        { type: 'added', text: 'changelog.release.v100.changes.0' },
         {
           type: 'added',
-          text: 'Angular 17.3+ support verified across 17, 18, 19, 20, 21, and 22.',
+          text: 'changelog.release.v100.changes.1',
         },
-        { type: 'added', text: '200+ components across forms, AI, enterprise, charts, and more.' },
-        { type: 'added', text: 'Universal token engine with runtime theme switching.' },
+        { type: 'added', text: 'changelog.release.v100.changes.2' },
+        { type: 'added', text: 'changelog.release.v100.changes.3' },
         {
           type: 'changed',
-          text: 'Peer dependencies widened to >=17.3.0 (was pinned to Angular 22).',
+          text: 'changelog.release.v100.changes.4',
         },
       ],
     },
     {
       version: 'v0.0.0-beta.1',
       date: '2026-07-13',
-      summary: 'Initial beta release of the NGXSMK ecosystem.',
+      summary: 'changelog.release.v0beta1.summary',
       changes: [
-        { type: 'added', text: '@ngxsmk/core, @ngxsmk/cdk, and @ngxsmk/theme packages.' },
-        { type: 'added', text: '200+ components across forms, AI, enterprise, charts, and more.' },
-        { type: 'added', text: 'Universal token engine with runtime theme switching.' },
-        { type: 'fixed', text: 'Zoneless change detection compatibility.' },
+        { type: 'added', text: 'changelog.release.v0beta1.changes.0' },
+        { type: 'added', text: 'changelog.release.v0beta1.changes.1' },
+        { type: 'added', text: 'changelog.release.v0beta1.changes.2' },
+        { type: 'fixed', text: 'changelog.release.v0beta1.changes.3' },
       ],
     },
     {
       version: 'v0.0.0-alpha.3',
       date: '2026-06-02',
-      summary: 'Preview of the showcase application and documentation site.',
+      summary: 'changelog.release.v0alpha3.summary',
       changes: [
-        { type: 'added', text: 'Interactive component explorer.' },
-        { type: 'changed', text: 'Migrated all components to signal inputs.' },
+        { type: 'added', text: 'changelog.release.v0alpha3.changes.0' },
+        { type: 'changed', text: 'changelog.release.v0alpha3.changes.1' },
       ],
     },
     {
       version: 'v0.0.0-alpha.1',
       date: '2026-04-15',
-      summary: 'First internal alpha of the core component library.',
-      changes: [{ type: 'added', text: 'Foundational primitives: button, card, input, dialog.' }],
+      summary: 'changelog.release.v0alpha1.summary',
+      changes: [{ type: 'added', text: 'changelog.release.v0alpha1.changes.0' }],
     },
   ];
 }

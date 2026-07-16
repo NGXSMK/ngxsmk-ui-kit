@@ -1,17 +1,20 @@
 import { Component, inject, signal, computed, HostListener } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { NgxsmkThemeService } from '@ngxsmk/theme';
+import { TranslatePipe } from '@ngx-translate/core';
+import { LanguageSwitcher } from '../i18n/language-switcher.component';
 
 interface SearchItem {
   name: string;
   category: string;
+  categoryKey: string;
   path: string;
 }
 
 @Component({
   selector: 'app-nav',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, TranslatePipe, LanguageSwitcher],
   template: `
     <nav class="ngxsmk-nav">
       <div class="ngxsmk-nav__inner">
@@ -24,7 +27,7 @@ interface SearchItem {
           class="ngxsmk-nav__menu-btn"
           type="button"
           [attr.aria-expanded]="mobileOpen()"
-          aria-label="Toggle navigation menu"
+          [attr.aria-label]="'nav.toggleMenu' | translate"
           (click)="mobileOpen.set(!mobileOpen())"
         >
           <svg
@@ -41,38 +44,41 @@ interface SearchItem {
         </button>
 
         <div class="ngxsmk-nav__links">
-          <a class="ngxsmk-nav__link" routerLink="/docs" routerLinkActive="ngxsmk-nav__link--active"
-            >Docs</a
+          <a
+            class="ngxsmk-nav__link"
+            routerLink="/docs"
+            routerLinkActive="ngxsmk-nav__link--active"
+            >{{ 'nav.docs' | translate }}</a
           >
           <a
             class="ngxsmk-nav__link"
             routerLink="/showcase/explorer"
             routerLinkActive="ngxsmk-nav__link--active"
-            >Components</a
+            >{{ 'nav.components' | translate }}</a
           >
           <a
             class="ngxsmk-nav__link"
             routerLink="/templates"
             routerLinkActive="ngxsmk-nav__link--active"
-            >Templates</a
+            >{{ 'nav.templates' | translate }}</a
           >
           <a
             class="ngxsmk-nav__link"
             routerLink="/themes"
             routerLinkActive="ngxsmk-nav__link--active"
-            >Themes</a
+            >{{ 'nav.themes' | translate }}</a
           >
           <a
             class="ngxsmk-nav__link"
             routerLink="/playground"
             routerLinkActive="ngxsmk-nav__link--active"
-            >Theme Playground</a
+            >{{ 'nav.playground' | translate }}</a
           >
           <a
             class="ngxsmk-nav__link"
             routerLink="/playground/component"
             routerLinkActive="ngxsmk-nav__link--active"
-            >Component Playground</a
+            >{{ 'nav.componentPlayground' | translate }}</a
           >
         </div>
 
@@ -81,7 +87,7 @@ interface SearchItem {
           <button
             class="ngxsmk-nav__search-btn"
             (click)="openSearch()"
-            aria-label="Search all components"
+            [attr.aria-label]="'nav.searchAria' | translate"
           >
             <svg
               class="search-icon"
@@ -97,13 +103,13 @@ interface SearchItem {
               <circle cx="11" cy="11" r="8" />
               <path d="m21 21-4.35-4.35" />
             </svg>
-            <span class="search-text">Search...</span>
+            <span class="search-text">{{ 'nav.search' | translate }}</span>
             <span class="search-kbd"><kbd>⌘K</kbd></span>
           </button>
 
           <button
             class="ngxsmk-nav__icon-btn"
-            [attr.aria-label]="theme.isDark() ? 'Switch to light mode' : 'Switch to dark mode'"
+            [attr.aria-label]="(theme.isDark() ? 'nav.lightMode' : 'nav.darkMode') | translate"
             (click)="theme.toggle()"
           >
             @if (theme.isDark()) {
@@ -142,7 +148,7 @@ interface SearchItem {
             class="ngxsmk-nav__icon-btn"
             href="https://github.com"
             target="_blank"
-            aria-label="GitHub"
+            [attr.aria-label]="'nav.github' | translate"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
               <path
@@ -151,36 +157,45 @@ interface SearchItem {
             </svg>
           </a>
 
-          <a class="ngxsmk-nav__cta" routerLink="/showcase/explorer">Get started</a>
+          <app-language-switcher />
+          <a class="ngxsmk-nav__cta" routerLink="/showcase/explorer">{{
+            'nav.getStarted' | translate
+          }}</a>
         </div>
       </div>
     </nav>
 
     @if (mobileOpen()) {
       <div class="ngxsmk-nav__mobile">
-        <a class="ngxsmk-nav__mobile-link" routerLink="/docs" (click)="mobileOpen.set(false)"
-          >Docs</a
-        >
+        <a class="ngxsmk-nav__mobile-link" routerLink="/docs" (click)="mobileOpen.set(false)">{{
+          'nav.docs' | translate
+        }}</a>
         <a
           class="ngxsmk-nav__mobile-link"
           routerLink="/showcase/explorer"
           (click)="mobileOpen.set(false)"
-          >Components</a
+          >{{ 'nav.components' | translate }}</a
         >
-        <a class="ngxsmk-nav__mobile-link" routerLink="/templates" (click)="mobileOpen.set(false)"
-          >Templates</a
+        <a
+          class="ngxsmk-nav__mobile-link"
+          routerLink="/templates"
+          (click)="mobileOpen.set(false)"
+          >{{ 'nav.templates' | translate }}</a
         >
-        <a class="ngxsmk-nav__mobile-link" routerLink="/themes" (click)="mobileOpen.set(false)"
-          >Themes</a
-        >
-        <a class="ngxsmk-nav__mobile-link" routerLink="/playground" (click)="mobileOpen.set(false)"
-          >Playground</a
+        <a class="ngxsmk-nav__mobile-link" routerLink="/themes" (click)="mobileOpen.set(false)">{{
+          'nav.themes' | translate
+        }}</a>
+        <a
+          class="ngxsmk-nav__mobile-link"
+          routerLink="/playground"
+          (click)="mobileOpen.set(false)"
+          >{{ 'nav.playground' | translate }}</a
         >
         <a
           class="ngxsmk-nav__cta ngxsmk-nav__mobile-cta"
           routerLink="/showcase/explorer"
           (click)="mobileOpen.set(false)"
-          >Get started</a
+          >{{ 'nav.getStarted' | translate }}</a
         >
       </div>
     }
@@ -210,7 +225,7 @@ interface SearchItem {
               #searchInput
               type="text"
               class="cmd-input"
-              placeholder="Search components (e.g. Button, Kanban, Chat)..."
+              [attr.placeholder]="'search.placeholder' | translate"
               [value]="searchQuery()"
               (input)="onSearchInput(searchInput.value)"
               (keydown)="onSearchKeydown($event)"
@@ -232,11 +247,13 @@ interface SearchItem {
                   <span class="cmd-item-icon">◈</span>
                   <span class="cmd-item-name">{{ item.name }}</span>
                 </div>
-                <span class="cmd-item-cat">{{ item.category }}</span>
+                <span class="cmd-item-cat">{{ item.categoryKey | translate }}</span>
               </div>
             }
             @if (filteredSearchItems().length === 0) {
-              <div class="cmd-empty">No components match "{{ searchQuery() }}".</div>
+              <div class="cmd-empty">
+                {{ 'search.empty' | translate: { query: searchQuery() } }}
+              </div>
             }
           </div>
         </div>
@@ -873,6 +890,7 @@ export class AppNav {
         items.push({
           name: item,
           category: cat.title,
+          categoryKey: 'category.' + cat.path,
           path: cat.path,
         });
       }

@@ -1,4 +1,5 @@
 import { Component, signal } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { AppNav } from '../../nav/nav';
 import { NgxsmkButton } from '@ngxsmk/core/button';
 import {
@@ -16,6 +17,7 @@ import { NgxsmkSwitch } from '@ngxsmk/core/switch';
   selector: 'docs-page',
   standalone: true,
   imports: [
+    TranslatePipe,
     NgxsmkCard,
     NgxsmkCardContent,
     NgxsmkCardHeader,
@@ -52,9 +54,9 @@ import { NgxsmkSwitch } from '@ngxsmk/core/switch';
             >Signal-first</ngxsmk-tag
           >
         </div>
-        <h1 class="docs-title">Developer Portal</h1>
+        <h1 class="docs-title">{{ 'docs.developerPortal' | translate }}</h1>
         <p class="docs-subtitle">
-          A high-performance design system designed for modern standalone Angular apps.
+          {{ 'docs.subtitle' | translate }}
         </p>
       </header>
 
@@ -62,23 +64,22 @@ import { NgxsmkSwitch } from '@ngxsmk/core/switch';
       <section class="docs-section-card">
         <div class="docs-grid-two">
           <div class="docs-install-info">
-            <h2 class="docs-section-title">Quick Start</h2>
+            <h2 class="docs-section-title">{{ 'docs.quickStart' | translate }}</h2>
             <p class="docs-text">
-              Install core packages and the design engine. You can copy the code directly into your
-              terminal to start immediately.
+              {{ 'docs.quickStartDesc' | translate }}
             </p>
             <div class="docs-features-checklist">
               <div class="checklist-item">
                 <span class="checklist-icon">✓</span>
-                <span>Zero external runtime dependencies.</span>
+                <span>{{ 'docs.checkZeroDeps' | translate }}</span>
               </div>
               <div class="checklist-item">
                 <span class="checklist-icon">✓</span>
-                <span>Fully optimized for Server-Side Rendering (SSR).</span>
+                <span>{{ 'docs.checkSsr' | translate }}</span>
               </div>
               <div class="checklist-item">
                 <span class="checklist-icon">✓</span>
-                <span>Engineered with native standard Web APIs.</span>
+                <span>{{ 'docs.checkWebApis' | translate }}</span>
               </div>
             </div>
           </div>
@@ -94,7 +95,7 @@ import { NgxsmkSwitch } from '@ngxsmk/core/switch';
                 <span class="terminal-prompt">$</span>
                 <code class="terminal-code">npm install &#64;ngxsmk/core &#64;ngxsmk/theme</code>
                 <button class="terminal-copy-btn" (click)="copyCommand('npm')">
-                  {{ copiedNPM() ? 'Copied!' : 'Copy' }}
+                  {{ (copiedNPM() ? 'docs.copied' : 'docs.copy') | translate }}
                 </button>
               </div>
             </div>
@@ -109,7 +110,7 @@ import { NgxsmkSwitch } from '@ngxsmk/core/switch';
                 <span class="terminal-prompt">$</span>
                 <code class="terminal-code">npx ngxsmk add button</code>
                 <button class="terminal-copy-btn" (click)="copyCommand('cli')">
-                  {{ copiedCLI() ? 'Copied!' : 'Copy' }}
+                  {{ (copiedCLI() ? 'docs.copied' : 'docs.copy') | translate }}
                 </button>
               </div>
             </div>
@@ -119,17 +120,16 @@ import { NgxsmkSwitch } from '@ngxsmk/core/switch';
 
       <!-- ARCHITECTURE PILLARS GRID -->
       <section style="margin-bottom: 3rem;">
-        <h2 class="docs-subheading">Core Pillars</h2>
+        <h2 class="docs-subheading">{{ 'docs.corePillars' | translate }}</h2>
         <div class="docs-pillars-grid">
           <ngxsmk-card class="pillar-card">
             <div ngxsmkCardHeader>
               <div class="pillar-icon">⚡</div>
-              <h3 ngxsmkCardTitle>Zoneless Reactivity</h3>
+              <h3 ngxsmkCardTitle>{{ 'docs.pillarZoneless' | translate }}</h3>
             </div>
             <div ngxsmkCardContent>
               <p class="docs-card-text">
-                Fully decoupled from Zone.js. Components trigger standard change detection cycles
-                via native signal notification trees for peak performance.
+                {{ 'docs.pillarZonelessDesc' | translate }}
               </p>
             </div>
           </ngxsmk-card>
@@ -137,12 +137,11 @@ import { NgxsmkSwitch } from '@ngxsmk/core/switch';
           <ngxsmk-card class="pillar-card">
             <div ngxsmkCardHeader>
               <div class="pillar-icon">◇</div>
-              <h3 ngxsmkCardTitle>Copy-Paste Scaffolding</h3>
+              <h3 ngxsmkCardTitle>{{ 'docs.pillarCopyPaste' | translate }}</h3>
             </div>
             <div ngxsmkCardContent>
               <p class="docs-card-text">
-                Directly own the source code. Component modules are scaffolded into your app files,
-                leaving zero bloated dependencies behind in node_modules.
+                {{ 'docs.pillarCopyPasteDesc' | translate }}
               </p>
             </div>
           </ngxsmk-card>
@@ -150,12 +149,11 @@ import { NgxsmkSwitch } from '@ngxsmk/core/switch';
           <ngxsmk-card class="pillar-card">
             <div ngxsmkCardHeader>
               <div class="pillar-icon">🎨</div>
-              <h3 ngxsmkCardTitle>HSL Variable Engine</h3>
+              <h3 ngxsmkCardTitle>{{ 'docs.pillarHslEngine' | translate }}</h3>
             </div>
             <div ngxsmkCardContent>
               <p class="docs-card-text">
-                Configure global aesthetics in HSL coordinates. Easily generate style outputs
-                compatible with vanilla CSS, SCSS, or Tailwind configurations.
+                {{ 'docs.pillarHslEngineDesc' | translate }}
               </p>
             </div>
           </ngxsmk-card>
@@ -163,12 +161,11 @@ import { NgxsmkSwitch } from '@ngxsmk/core/switch';
           <ngxsmk-card class="pillar-card">
             <div ngxsmkCardHeader>
               <div class="pillar-icon">✦</div>
-              <h3 ngxsmkCardTitle>AI-First Layouts</h3>
+              <h3 ngxsmkCardTitle>{{ 'docs.pillarAiFirst' | translate }}</h3>
             </div>
             <div ngxsmkCardContent>
               <p class="docs-card-text">
-                Ship specialized interfaces built for AI streaming, reasoning timelines, custom code
-                editors, and floating card citation viewers.
+                {{ 'docs.pillarAiFirstDesc' | translate }}
               </p>
             </div>
           </ngxsmk-card>
@@ -179,57 +176,57 @@ import { NgxsmkSwitch } from '@ngxsmk/core/switch';
       <section class="docs-section-card" style="margin-bottom: 3rem;">
         <div class="docs-grid-two">
           <div>
-            <h2 class="docs-section-title">Token Theming</h2>
+            <h2 class="docs-section-title">{{ 'docs.tokenTheming' | translate }}</h2>
             <p class="docs-text">
-              Dynamic themes are powered by CSS Custom Properties. Click the color presets below to
-              see the interactive sandbox component instantaneously adapt to the new theme
-              variables.
+              {{ 'docs.tokenThemingDesc' | translate }}
             </p>
 
             <div class="theme-preset-selector">
-              <span class="preset-label">Choose Accent:</span>
+              <span class="preset-label">{{ 'docs.chooseAccent' | translate }}</span>
               <div class="preset-buttons">
                 <button
                   class="preset-btn violet"
                   [class.active]="accentColor() === 'violet'"
                   (click)="accentColor.set('violet')"
                 >
-                  Violet
+                  {{ 'docs.accentViolet' | translate }}
                 </button>
                 <button
                   class="preset-btn emerald"
                   [class.active]="accentColor() === 'emerald'"
                   (click)="accentColor.set('emerald')"
                 >
-                  Emerald
+                  {{ 'docs.accentEmerald' | translate }}
                 </button>
                 <button
                   class="preset-btn rose"
                   [class.active]="accentColor() === 'rose'"
                   (click)="accentColor.set('rose')"
                 >
-                  Rose
+                  {{ 'docs.accentRose' | translate }}
                 </button>
                 <button
                   class="preset-btn amber"
                   [class.active]="accentColor() === 'amber'"
                   (click)="accentColor.set('amber')"
                 >
-                  Amber
+                  {{ 'docs.accentAmber' | translate }}
                 </button>
                 <button
                   class="preset-btn blue"
                   [class.active]="accentColor() === 'blue'"
                   (click)="accentColor.set('blue')"
                 >
-                  Blue
+                  {{ 'docs.accentBlue' | translate }}
                 </button>
               </div>
             </div>
 
             <div class="docs-playground-controls">
               <div class="control-row">
-                <label for="progress-range">Simulate progress: ({{ playgroundProgress() }}%)</label>
+                <label for="progress-range">{{
+                  'docs.simulateProgress' | translate: { value: playgroundProgress() }
+                }}</label>
                 <input
                   id="progress-range"
                   type="range"
@@ -250,16 +247,16 @@ import { NgxsmkSwitch } from '@ngxsmk/core/switch';
               [style.--ngxsmk-color-ring]="getAccentColorHex()"
             >
               <div class="sandbox-header">
-                <ngxsmk-tag>Live Sandbox</ngxsmk-tag>
+                <ngxsmk-tag>{{ 'docs.liveSandbox' | translate }}</ngxsmk-tag>
                 <ngxsmk-switch
                   [checked]="playgroundSwitch()"
                   (checkedChange)="playgroundSwitch.set($event)"
-                  >State</ngxsmk-switch
+                  >{{ 'docs.state' | translate }}</ngxsmk-switch
                 >
               </div>
 
               <div class="sandbox-body">
-                <h4 class="sandbox-item-title">Adaptive Component Stack</h4>
+                <h4 class="sandbox-item-title">{{ 'docs.adaptiveStack' | translate }}</h4>
 
                 <ngxsmk-progress
                   [value]="playgroundProgress()"
@@ -267,8 +264,10 @@ import { NgxsmkSwitch } from '@ngxsmk/core/switch';
                 ></ngxsmk-progress>
 
                 <div class="sandbox-buttons">
-                  <button ngxsmk-button [disabled]="!playgroundSwitch()">Apply Action</button>
-                  <button ngxsmk-button variant="outline">Reset</button>
+                  <button ngxsmk-button [disabled]="!playgroundSwitch()">
+                    {{ 'docs.applyAction' | translate }}
+                  </button>
+                  <button ngxsmk-button variant="outline">{{ 'docs.reset' | translate }}</button>
                 </div>
               </div>
             </div>
@@ -278,27 +277,21 @@ import { NgxsmkSwitch } from '@ngxsmk/core/switch';
 
       <!-- ACCORDION FAQ SECTION -->
       <section style="margin-bottom: 4rem;">
-        <h2 class="docs-subheading" style="margin-bottom: 1.5rem;">Frequently Asked Questions</h2>
+        <h2 class="docs-subheading" style="margin-bottom: 1.5rem;">
+          {{ 'docs.faqTitle' | translate }}
+        </h2>
         <ngxsmk-accordion [multiple]="true">
-          <ngxsmk-accordion-item label="Is NGXSMK fully Zoneless?">
-            Yes! All components are designed from the ground up to operate without Zone.js. They
-            utilize Angular's modern Signal APIs for lightweight, fine-grained reactivity, leading
-            to much smaller bundle footprints and better runtime performance.
+          <ngxsmk-accordion-item [label]="'docs.faqZonelessLabel' | translate">
+            {{ 'docs.faqZonelessAnswer' | translate }}
           </ngxsmk-accordion-item>
-          <ngxsmk-accordion-item label="Can I use it with Tailwind CSS?">
-            Absolutely. NGXSMK's token engine exposes CSS custom properties (variables) that can be
-            easily mapped in your tailwind.config.js. The design parameters are completely decoupled
-            from any single utility framework.
+          <ngxsmk-accordion-item [label]="'docs.faqTailwindLabel' | translate">
+            {{ 'docs.faqTailwindAnswer' | translate }}
           </ngxsmk-accordion-item>
-          <ngxsmk-accordion-item label="How does the copy-paste DX model work?">
-            Instead of importing bloated pre-compiled modules, our CLI tool allows you to copy
-            component source code directly into your workspace. You retain complete ownership,
-            styling control, and structural flexibility.
+          <ngxsmk-accordion-item [label]="'docs.faqCopyPasteLabel' | translate">
+            {{ 'docs.faqCopyPasteAnswer' | translate }}
           </ngxsmk-accordion-item>
-          <ngxsmk-accordion-item label="What AI layout modules are included?">
-            We provide specialized interfaces built for AI chat applications, such as scroll-locked
-            chat bubbles, streaming text responses, Reasoning Timelines, and formatted Citation card
-            lists.
+          <ngxsmk-accordion-item [label]="'docs.faqAiLabel' | translate">
+            {{ 'docs.faqAiAnswer' | translate }}
           </ngxsmk-accordion-item>
         </ngxsmk-accordion>
       </section>

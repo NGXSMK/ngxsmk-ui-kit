@@ -20,6 +20,7 @@ import { NgxsmkTerminal } from '@ngxsmk/core/terminal';
 import { NgxsmkOrgChart, type OrgNode } from '@ngxsmk/core/org-chart';
 import { type KanbanColumn, NgxsmkKanbanBoard } from '@ngxsmk/core/kanban-board';
 import { Component, signal } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { ShowcaseExample } from '../../showcase/showcase-example';
 
 @Component({
@@ -40,17 +41,17 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     NgxsmkTerminal,
     NgxsmkOrgChart,
     NgxsmkQueryBuilder,
+    TranslatePipe,
   ],
   template: `
-    <h2 class="ngxsmk-page-title">Enterprise</h2>
+    <h2 class="ngxsmk-page-title">{{ 'category.enterprise' | translate }}</h2>
     <p class="ngxsmk-page-desc">
-      Heavy-duty building blocks for business applications - boards, schedulers, editors, and data
-      tools. Each one is theme-aware and ready to wire up to your own data sources.
+      {{ 'enterprise.pageDesc' | translate }}
     </p>
 
     <showcase-example
       title="Kanban Board"
-      description="Column-based task board grouped by status, with card titles and descriptions."
+      [description]="'enterprise.kanbanDesc' | translate"
       [code]="codeKanban"
       [component]="NgxsmkKanbanBoard"
       [customize]="customizeNgxsmkKanbanBoard"
@@ -62,7 +63,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Scheduler"
-      description="Weekly calendar grid that lays events out across the seven days of the week."
+      [description]="'enterprise.schedulerDesc' | translate"
       [code]="codeScheduler"
       [component]="NgxsmkScheduler"
       [customize]="customizeNgxsmkScheduler"
@@ -74,7 +75,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Timeline Gantt"
-      description="Horizontal timeline of tasks with start offsets, durations, and progress fill."
+      [description]="'enterprise.timelineGanttDesc' | translate"
       [code]="codeGantt"
       [component]="NgxsmkTimelineGantt"
       [customize]="customizeNgxsmkTimelineGantt"
@@ -86,7 +87,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Workflow Builder"
-      description="Canvas of workflow nodes typed by their role in the process."
+      [description]="'enterprise.workflowDesc' | translate"
       [code]="codeWorkflow"
       [component]="NgxsmkWorkflowBuilder"
       [customize]="customizeNgxsmkWorkflowBuilder"
@@ -98,7 +99,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Rule Builder"
-      description="Groups conditions under a logical operator for filtering and automation."
+      [description]="'enterprise.ruleDesc' | translate"
       [code]="codeRule"
       [component]="NgxsmkRuleBuilder"
       [customize]="customizeNgxsmkRuleBuilder"
@@ -110,7 +111,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Spreadsheet"
-      description="Lightweight grid renderer for tabular string data with scrollable cells."
+      [description]="'enterprise.spreadsheetDesc' | translate"
       [code]="codeSpreadsheet"
       [component]="NgxsmkSpreadsheet"
       [customize]="customizeNgxsmkSpreadsheet"
@@ -122,7 +123,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Pivot Table"
-      description="Cross-tabulated summary with a labelled row axis and measured value columns."
+      [description]="'enterprise.pivotDesc' | translate"
       [code]="codePivot"
       [component]="NgxsmkPivotTable"
       [customize]="customizeNgxsmkPivotTable"
@@ -134,7 +135,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Diagram Builder"
-      description="SVG diagram of positioned nodes connected by edges. Click a node to select it."
+      [description]="'enterprise.diagramDesc' | translate"
       [code]="codeDiagram"
       [component]="NgxsmkDiagramBuilder"
       [customize]="customizeNgxsmkDiagramBuilder"
@@ -148,14 +149,14 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
       </div>
       @if (selectedNode()) {
         <p style="margin:0.5rem 0 0;font-size:0.8125rem;">
-          Selected node: <strong>{{ selectedNode() }}</strong>
+          {{ 'enterprise.selectedNode' | translate }} <strong>{{ selectedNode() }}</strong>
         </p>
       }
     </showcase-example>
 
     <showcase-example
       title="Flow Editor"
-      description="Titled canvas listing flow steps as draggable-looking node chips."
+      [description]="'enterprise.flowDesc' | translate"
       [code]="codeFlow"
       [component]="NgxsmkFlowEditor"
       [customize]="customizeNgxsmkFlowEditor"
@@ -167,7 +168,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="JSON Viewer"
-      description="Pretty-printed, syntax-highlighted view of any JSON-serialisable value."
+      [description]="'enterprise.jsonDesc' | translate"
       [code]="codeJson"
       [component]="NgxsmkJsonViewer"
       [customize]="customizeNgxsmkJsonViewer"
@@ -179,7 +180,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Terminal"
-      description="Console emulator that distinguishes input lines and shows a blinking cursor."
+      [description]="'enterprise.terminalDesc' | translate"
       [code]="codeTerminal"
       [component]="NgxsmkTerminal"
       [customize]="customizeNgxsmkTerminal"
@@ -191,7 +192,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Org Chart"
-      description="Hierarchical tree of people cards showing name and role by reporting line."
+      [description]="'enterprise.orgDesc' | translate"
       [code]="codeOrg"
       [component]="NgxsmkOrgChart"
       [customize]="customizeNgxsmkOrgChart"
@@ -203,7 +204,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Query Builder"
-      description="Compose filter conditions across typed fields with operators and values."
+      [description]="'enterprise.queryDesc' | translate"
       [code]="codeQuery"
       [component]="NgxsmkQueryBuilder"
       [customize]="customizeNgxsmkQueryBuilder"

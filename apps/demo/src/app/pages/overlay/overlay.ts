@@ -15,6 +15,7 @@ import { NgxsmkButton } from '@ngxsmk/core/button';
 import { NgxsmkCommandPalette, CommandItem } from '@ngxsmk/core/command-palette';
 import { NgxsmkThemeService } from '@ngxsmk/theme';
 import { Component, signal, inject } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { ShowcaseExample } from '../../showcase/showcase-example';
 
 @Component({
@@ -34,54 +35,59 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     NgxsmkLightbox,
     NgxsmkThumbnail,
     NgxsmkCommandPalette,
+    TranslatePipe,
   ],
   template: `
-    <h2 class="ngxsmk-page-title">Overlay</h2>
+    <h2 class="ngxsmk-page-title">{{ 'category.overlay' | translate }}</h2>
     <p class="ngxsmk-page-desc">
-      Dialogs, tooltips, menus, and floating panels. Overlays render above the page, trap focus
-      where appropriate, and respect Escape and backdrop dismissal - all wired through signals for
-      predictable open state.
+      {{ 'overlay.desc' | translate }}
     </p>
 
     <showcase-example
-      title="Dialog"
-      description="Modal dialog on the native <dialog> element with a title, body, and footer actions. Two-way bound open state."
+      [title]="'overlay.dialog' | translate"
+      [description]="'overlay.dialogDesc' | translate"
       [code]="codeDialog"
       [component]="NgxsmkButton"
     >
       <div class="ngxsmk-demo-row">
-        <button ngxsmk-button (click)="dialogOpen.set(true)">Open dialog</button>
+        <button ngxsmk-button (click)="dialogOpen.set(true)">
+          {{ 'overlay.openDialog' | translate }}
+        </button>
       </div>
 
-      <ngxsmk-dialog [(open)]="dialogOpen" title="Delete file?">
-        This action cannot be undone. The file will be permanently removed from your workspace.
+      <ngxsmk-dialog [(open)]="dialogOpen" [title]="'overlay.deleteFile' | translate">
+        {{ 'overlay.deleteFileBody' | translate }}
         <div ngxsmkDialogFooter>
-          <button ngxsmk-button variant="outline" (click)="dialogOpen.set(false)">Cancel</button>
-          <button ngxsmk-button variant="destructive" (click)="onDeleted()">Delete</button>
+          <button ngxsmk-button variant="outline" (click)="dialogOpen.set(false)">
+            {{ 'overlay.cancel' | translate }}
+          </button>
+          <button ngxsmk-button variant="destructive" (click)="onDeleted()">
+            {{ 'overlay.delete' | translate }}
+          </button>
         </div>
       </ngxsmk-dialog>
     </showcase-example>
 
     <showcase-example
-      title="Alert Dialog"
-      description="A focused confirmation prompt with confirm/cancel actions and info or destructive variants."
+      [title]="'overlay.alertDialog' | translate"
+      [description]="'overlay.alertDialogDesc' | translate"
       [code]="codeAlertDialog"
       [component]="NgxsmkButton"
     >
       <div class="ngxsmk-demo-row">
         <button ngxsmk-button variant="outline" (click)="infoAlertOpen.set(true)">
-          Info alert
+          {{ 'overlay.infoAlert' | translate }}
         </button>
         <button ngxsmk-button variant="destructive" (click)="destructiveAlertOpen.set(true)">
-          Destructive alert
+          {{ 'overlay.destructiveAlert' | translate }}
         </button>
       </div>
 
       <ngxsmk-alert-dialog
         [(open)]="infoAlertOpen"
-        title="Save changes?"
-        message="Your edits will be applied to the shared document."
-        confirmLabel="Save"
+        [title]="'overlay.saveChanges' | translate"
+        [message]="'overlay.saveChangesMsg' | translate"
+        [confirmLabel]="'overlay.save' | translate"
         variant="info"
         (confirmed)="setAction('Alert confirmed')"
         (cancelled)="setAction('Alert cancelled')"
@@ -89,22 +95,24 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
       <ngxsmk-alert-dialog
         [(open)]="destructiveAlertOpen"
-        title="Delete project?"
-        message="This will permanently remove the project and all of its data."
-        confirmLabel="Delete"
+        [title]="'overlay.deleteProject' | translate"
+        [message]="'overlay.deleteProjectMsg' | translate"
+        [confirmLabel]="'overlay.delete' | translate"
         variant="destructive"
         (confirmed)="setAction('Project deleted')"
         (cancelled)="setAction('Delete cancelled')"
       />
 
       @if (lastAction()) {
-        <p class="ngxsmk-demo-hint">Last action: {{ lastAction() }}</p>
+        <p class="ngxsmk-demo-hint">
+          {{ 'overlay.lastAction' | translate: { action: lastAction() } }}
+        </p>
       }
     </showcase-example>
 
     <showcase-example
-      title="Tooltip"
-      description="A directive that shows a short hint on hover or focus. Position it on any side of the trigger."
+      [title]="'overlay.tooltip' | translate"
+      [description]="'overlay.tooltipDesc' | translate"
       [code]="codeTooltip"
       [component]="NgxsmkButton"
     >
@@ -112,41 +120,41 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
         <button
           ngxsmk-button
           variant="outline"
-          [ngxsmkTooltip]="'Appears above'"
+          [ngxsmkTooltip]="'overlay.appearsAbove' | translate"
           tooltipPosition="top"
         >
-          Top
+          {{ 'overlay.top' | translate }}
         </button>
         <button
           ngxsmk-button
           variant="outline"
-          [ngxsmkTooltip]="'Appears below'"
+          [ngxsmkTooltip]="'overlay.appearsBelow' | translate"
           tooltipPosition="bottom"
         >
-          Bottom
+          {{ 'overlay.bottom' | translate }}
         </button>
         <button
           ngxsmk-button
           variant="outline"
-          [ngxsmkTooltip]="'Appears to the left'"
+          [ngxsmkTooltip]="'overlay.appearsLeft' | translate"
           tooltipPosition="left"
         >
-          Left
+          {{ 'overlay.left' | translate }}
         </button>
         <button
           ngxsmk-button
           variant="outline"
-          [ngxsmkTooltip]="'Appears to the right'"
+          [ngxsmkTooltip]="'overlay.appearsRight' | translate"
           tooltipPosition="right"
         >
-          Right
+          {{ 'overlay.right' | translate }}
         </button>
       </div>
     </showcase-example>
 
     <showcase-example
-      title="Hover Card"
-      description="A rich popover that opens on hover or focus of its trigger - ideal for profile and link previews."
+      [title]="'overlay.hoverCard' | translate"
+      [description]="'overlay.hoverCardDesc' | translate"
       [code]="codeHoverCard"
       [component]="NgxsmkHoverCard"
       [customize]="customizeNgxsmkHoverCard"
@@ -155,55 +163,69 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
         <button ngxsmkHoverCardTrigger ngxsmk-button variant="ghost">&#64;ada_lovelace</button>
         <div class="ngxsmk-demo-stack">
           <strong>Ada Lovelace</strong>
-          <span class="ngxsmk-demo-hint"
-            >First computer programmer. Writes about analytical engines and algorithms.</span
-          >
+          <span class="ngxsmk-demo-hint">{{ 'overlay.adaDesc' | translate }}</span>
         </div>
       </ngxsmk-hover-card>
     </showcase-example>
 
     <showcase-example
-      title="Sheet"
-      description="A panel that slides in from the left, right, or bottom edge. Great for filters, details, and navigation."
+      [title]="'overlay.sheet' | translate"
+      [description]="'overlay.sheetDesc' | translate"
       [code]="codeSheet"
       [component]="NgxsmkButton"
     >
       <div class="ngxsmk-demo-row">
-        <button ngxsmk-button variant="outline" (click)="openSheet('left')">Open left</button>
-        <button ngxsmk-button variant="outline" (click)="openSheet('right')">Open right</button>
-        <button ngxsmk-button variant="outline" (click)="openSheet('bottom')">Open bottom</button>
+        <button ngxsmk-button variant="outline" (click)="openSheet('left')">
+          {{ 'overlay.openLeft' | translate }}
+        </button>
+        <button ngxsmk-button variant="outline" (click)="openSheet('right')">
+          {{ 'overlay.openRight' | translate }}
+        </button>
+        <button ngxsmk-button variant="outline" (click)="openSheet('bottom')">
+          {{ 'overlay.openBottom' | translate }}
+        </button>
       </div>
 
-      <ngxsmk-sheet [(open)]="sheetOpen" [side]="sheetSide()" title="Settings">
+      <ngxsmk-sheet
+        [(open)]="sheetOpen"
+        [side]="sheetSide()"
+        [title]="'overlay.settings' | translate"
+      >
         <div class="ngxsmk-demo-stack">
           <p>
-            This panel slides in from the <strong>{{ sheetSide() }}</strong> edge.
+            {{ 'overlay.sheetBody' | translate: { side: sheetSide() } }}
           </p>
-          <p class="ngxsmk-demo-hint">Click the backdrop or the close button to dismiss.</p>
-          <button ngxsmk-button (click)="sheetOpen.set(false)">Done</button>
+          <p class="ngxsmk-demo-hint">{{ 'overlay.dismissHint' | translate }}</p>
+          <button ngxsmk-button (click)="sheetOpen.set(false)">
+            {{ 'overlay.done' | translate }}
+          </button>
         </div>
       </ngxsmk-sheet>
     </showcase-example>
 
     <showcase-example
-      title="Dropdown Menu"
-      description="An actions menu anchored to a trigger button. Closes on selection, outside click, or Escape."
+      [title]="'overlay.dropdownMenu' | translate"
+      [description]="'overlay.dropdownMenuDesc' | translate"
       [code]="codeDropdown"
       [component]="NgxsmkDropdownMenu"
       [customize]="customizeNgxsmkDropdownMenu"
     >
       <ngxsmk-dropdown-menu [items]="menuItems">
-        <button ngxsmkDropdownTrigger ngxsmk-button variant="outline">Actions &#9662;</button>
+        <button ngxsmkDropdownTrigger ngxsmk-button variant="outline">
+          {{ 'overlay.actions' | translate }} &#9662;
+        </button>
       </ngxsmk-dropdown-menu>
 
       @if (lastAction()) {
-        <p class="ngxsmk-demo-hint">Last action: {{ lastAction() }}</p>
+        <p class="ngxsmk-demo-hint">
+          {{ 'overlay.lastAction' | translate: { action: lastAction() } }}
+        </p>
       }
     </showcase-example>
 
     <showcase-example
-      title="Context Menu"
-      description="A menu that opens at the pointer on right-click. Wire it to any surface via its show() method."
+      [title]="'overlay.contextMenu' | translate"
+      [description]="'overlay.contextMenuDesc' | translate"
       [code]="codeContextMenu"
       [component]="NgxsmkContextMenu"
       [customize]="customizeNgxsmkContextMenu"
@@ -213,14 +235,14 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
         style="width:100%;padding:2rem;text-align:center;cursor:context-menu"
         (contextmenu)="onContextMenu($event, cm)"
       >
-        Right-click anywhere in this area
+        {{ 'overlay.rightClick' | translate }}
         <ngxsmk-context-menu #cm [items]="menuItems" />
       </div>
     </showcase-example>
 
     <showcase-example
-      title="Lightbox"
-      description="A full-screen image viewer with keyboard navigation. Click a thumbnail to open, or drive it via open state."
+      [title]="'overlay.lightbox' | translate"
+      [description]="'overlay.lightboxDesc' | translate"
       [code]="codeLightbox"
       [component]="NgxsmkLightbox"
       [customize]="customizeNgxsmkLightbox"
@@ -235,19 +257,21 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
       <div class="ngxsmk-demo-row">
         <button ngxsmk-button variant="outline" (click)="lightboxOpen.set(true)">
-          Open gallery
+          {{ 'overlay.openGallery' | translate }}
         </button>
       </div>
     </showcase-example>
 
     <showcase-example
-      title="Imperative Dialog"
+      [title]="'overlay.imperativeDialog' | translate"
       description="An injectable service that opens a native <dialog> programmatically - no template binding required."
       [code]="codeImperativeDialog"
       [component]="NgxsmkButton"
     >
       <div class="ngxsmk-demo-row">
-        <button ngxsmk-button (click)="openImperative()">Open imperatively</button>
+        <button ngxsmk-button (click)="openImperative()">
+          {{ 'overlay.openImperatively' | translate }}
+        </button>
       </div>
 
       @if (imperativeStatus()) {
@@ -256,14 +280,14 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     </showcase-example>
 
     <showcase-example
-      title="Imperative Alert Dialog"
-      description="An injectable service that resolves a Promise<boolean> from a confirm prompt - great for quick inline confirmations."
+      [title]="'overlay.imperativeAlertDialog' | translate"
+      [description]="'overlay.imperativeAlertDialogDesc' | translate"
       [code]="codeImperativeAlertDialog"
       [component]="NgxsmkButton"
     >
       <div class="ngxsmk-demo-row">
         <button ngxsmk-button variant="destructive" (click)="openImperativeAlert()">
-          Confirm imperatively
+          {{ 'overlay.confirmImperatively' | translate }}
         </button>
       </div>
 
@@ -273,13 +297,15 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     </showcase-example>
 
     <showcase-example
-      title="Spotlight Command Palette (New)"
-      description="A premium, keyboard-accessible command menu. Open it by clicking the button below or pressing Ctrl + K (or Cmd + K)."
+      [title]="'overlay.commandPalette' | translate"
+      [description]="'overlay.commandPaletteDesc' | translate"
       [code]="codeCommandPalette"
       [component]="NgxsmkButton"
     >
       <div class="ngxsmk-demo-row">
-        <button ngxsmk-button (click)="palette.open()">Open Palette (Ctrl + K)</button>
+        <button ngxsmk-button (click)="palette.open()">
+          {{ 'overlay.openPalette' | translate }}
+        </button>
       </div>
 
       <ngxsmk-command-palette
@@ -290,7 +316,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
       @if (lastCommand()) {
         <p class="ngxsmk-demo-hint">
-          Executed: <strong>{{ lastCommand() }}</strong>
+          {{ 'overlay.executed' | translate: { command: lastCommand() } }}
         </p>
       }
     </showcase-example>

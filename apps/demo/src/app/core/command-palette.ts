@@ -2,10 +2,12 @@ import { Component, inject, signal, ViewChild, ElementRef, effect } from '@angul
 import { Router } from '@angular/router';
 import { SearchService, SearchResult } from './search.service';
 import { ComponentRegistry } from './component-registry';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-command-palette',
   standalone: true,
+  imports: [TranslatePipe],
   template: `
     @if (isOpen()) {
       <div class="cmd-overlay" (click)="close()" tabindex="0" (keydown.escape)="close()">
@@ -34,7 +36,7 @@ import { ComponentRegistry } from './component-registry';
               #searchInput
               type="text"
               class="cmd-input"
-              [attr.placeholder]="placeholder()"
+              [attr.placeholder]="'search.placeholder' | translate"
               [value]="query()"
               (input)="onInput(searchInput.value)"
               (keydown)="onKeydown($event)"
@@ -62,17 +64,19 @@ import { ComponentRegistry } from './component-registry';
                   <div class="cmd-item-right">
                     <span class="cmd-item-cat">{{ categoryLabel(result.item.category) }}</span>
                     @if (result.score > 2) {
-                      <span class="cmd-item-score">best</span>
+                      <span class="cmd-item-score">{{ 'search.best' | translate }}</span>
                     }
                   </div>
                 </div>
               }
               @if (results().length === 0) {
-                <div class="cmd-empty">No results for "{{ query() }}".</div>
+                <div class="cmd-empty">
+                  {{ 'search.noResults' | translate: { query: query() } }}
+                </div>
               }
             } @else {
               <div class="cmd-suggestions">
-                <div class="cmd-suggestions-header">Recent searches</div>
+                <div class="cmd-suggestions-header">{{ 'search.recent' | translate }}</div>
                 @for (recent of recentSearches(); track recent) {
                   <div
                     class="cmd-suggestion-item"
@@ -85,7 +89,7 @@ import { ComponentRegistry } from './component-registry';
                 }
                 @if (recentSearches().length === 0) {
                   <div class="cmd-suggestion-empty">
-                    Search for any component (e.g. Button, Chat, Table)
+                    {{ 'search.suggestionEmpty' | translate }}
                   </div>
                 }
               </div>
@@ -285,7 +289,6 @@ export class CommandPalette {
   readonly query = signal('');
   readonly activeIndex = signal(0);
 
-  readonly placeholder = signal('Search components (e.g. Button, Chat, Table)...');
   readonly results = signal<SearchResult[]>([]);
   readonly recentSearches = signal<string[]>([]);
 

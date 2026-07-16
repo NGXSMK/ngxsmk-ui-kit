@@ -20,6 +20,7 @@ import { NgxsmkButton } from '@ngxsmk/core/button';
 import { Component, signal, computed } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { TranslatePipe } from '@ngx-translate/core';
 import { AppNav } from '../../nav/nav';
 import { APP_VERSION } from '../../core/version';
 
@@ -61,6 +62,7 @@ interface TemplateItem {
     NgxsmkTerminal,
     NgTemplateOutlet,
     FormsModule,
+    TranslatePipe,
     AppNav,
   ],
   template: `
@@ -68,10 +70,12 @@ interface TemplateItem {
     <div class="ngxsmk-page-container">
       <div class="ngxsmk-page">
         <header class="tpl-header">
-          <ngxsmk-heading level="h1" class="tpl-header__title">Templates</ngxsmk-heading>
-          <ngxsmk-text variant="body" class="tpl-header__sub"
-            >Ready-to-use page templates to kickstart your project.</ngxsmk-text
-          >
+          <ngxsmk-heading level="h1" class="tpl-header__title">{{
+            'nav.templates' | translate
+          }}</ngxsmk-heading>
+          <ngxsmk-text variant="body" class="tpl-header__sub">{{
+            'templates.subtitle' | translate
+          }}</ngxsmk-text>
         </header>
 
         <div class="ngxsmk-templates-toolbar">
@@ -108,7 +112,7 @@ interface TemplateItem {
               <input
                 class="ngxsmk-search-input"
                 type="text"
-                placeholder="Search templates..."
+                [attr.placeholder]="'templates.searchPlaceholder' | translate"
                 [ngModel]="searchQuery()"
                 (ngModelChange)="searchQuery.set($event)"
               />
@@ -133,8 +137,9 @@ interface TemplateItem {
           </div>
           <div class="ngxsmk-templates-toolbar-sub">
             <ngxsmk-text variant="caption" class="ngxsmk-result-count">
-              {{ activeCategory() === 'All' ? 'All' : activeCategory() }}
-              templates <span class="count-num">({{ filteredTemplates().length }})</span>
+              {{ activeCategory() === 'All' ? ('templates.all' | translate) : activeCategory() }}
+              {{ 'templates.templatesWord' | translate }}
+              <span class="count-num">({{ filteredTemplates().length }})</span>
             </ngxsmk-text>
           </div>
         </div>
@@ -155,9 +160,7 @@ interface TemplateItem {
               <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
               <polyline points="14 2 14 8 20 8" />
             </svg>
-            <ngxsmk-text variant="body"
-              >No templates match your search. Try a different term.</ngxsmk-text
-            >
+            <ngxsmk-text variant="body">{{ 'templates.empty' | translate }}</ngxsmk-text>
           </div>
         }
 
@@ -168,7 +171,7 @@ interface TemplateItem {
                 class="tpl-card__preview"
                 role="button"
                 tabindex="0"
-                [attr.aria-label]="'Preview ' + tpl.title"
+                [attr.aria-label]="'templates.previewAria' | translate: { title: tpl.title }"
                 (click)="openPreview(tpl)"
                 (keydown.enter)="openPreview(tpl)"
               >
@@ -194,7 +197,7 @@ interface TemplateItem {
                       <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
                       <circle cx="12" cy="12" r="3" />
                     </svg>
-                    Live Preview
+                    {{ 'templates.livePreview' | translate }}
                   </span>
                 </div>
               </div>
@@ -220,7 +223,7 @@ interface TemplateItem {
                       <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
                       <circle cx="12" cy="12" r="3" />
                     </svg>
-                    Preview
+                    {{ 'templates.preview' | translate }}
                   </button>
                   <button ngxsmk-button size="sm" variant="ghost" (click)="openCode(tpl)">
                     <svg
@@ -237,7 +240,7 @@ interface TemplateItem {
                       <polyline points="16 18 22 12 16 6" />
                       <polyline points="8 6 2 12 8 18" />
                     </svg>
-                    Get Code
+                    {{ 'templates.getCode' | translate }}
                   </button>
                 </div>
               </div>
@@ -278,7 +281,9 @@ interface TemplateItem {
           @if (id === 'dashboard') {
             <div class="ngxsmk-mock-dashboard">
               <div class="ngxsmk-mock-header">
-                <ngxsmk-heading level="h4" class="mock-panel-title">Admin Console</ngxsmk-heading>
+                <ngxsmk-heading level="h4" class="mock-panel-title">{{
+                  'templates.mock.adminConsole' | translate
+                }}</ngxsmk-heading>
                 <div style="flex-grow:1"></div>
                 <ngxsmk-badge variant="info">{{ appVersion }}</ngxsmk-badge>
                 <ngxsmk-text
@@ -306,16 +311,28 @@ interface TemplateItem {
                   @switch (adminView()) {
                     @case ('dashboard') {
                       <div class="ngxsmk-mock-stats">
-                        <ngxsmk-stat label="Active Users" value="1,245" trend="up" />
-                        <ngxsmk-stat label="Monthly Revenue" value="$45,231" trend="up" />
-                        <ngxsmk-stat label="Server Load" value="23.4%" trend="down" />
+                        <ngxsmk-stat
+                          label="{{ 'templates.mock.activeUsers' | translate }}"
+                          value="1,245"
+                          trend="up"
+                        />
+                        <ngxsmk-stat
+                          label="{{ 'templates.mock.monthlyRevenue' | translate }}"
+                          value="$45,231"
+                          trend="up"
+                        />
+                        <ngxsmk-stat
+                          label="{{ 'templates.mock.serverLoad' | translate }}"
+                          value="23.4%"
+                          trend="down"
+                        />
                       </div>
                       <div class="ngxsmk-mock-dashboard-grid">
                         <div class="ngxsmk-mock-section table-section">
                           <ngxsmk-heading
                             level="h4"
                             style="margin-bottom: 0.75rem; font-size: 0.9375rem; font-weight: 600;"
-                            >Recent Registrations</ngxsmk-heading
+                            >{{ 'templates.mock.recentRegistrations' | translate }}</ngxsmk-heading
                           >
                           <ngxsmk-table
                             [columns]="tableColumns"
@@ -327,7 +344,7 @@ interface TemplateItem {
                           <ngxsmk-heading
                             level="h4"
                             style="margin-bottom: 0.75rem; font-size: 0.9375rem; font-weight: 600;"
-                            >Weekly Operations</ngxsmk-heading
+                            >{{ 'templates.mock.weeklyOperations' | translate }}</ngxsmk-heading
                           >
                           <div
                             style="display: flex; justify-content: center; align-items: center; height: 160px;"
@@ -339,16 +356,28 @@ interface TemplateItem {
                     }
                     @case ('analytics') {
                       <div class="ngxsmk-mock-stats">
-                        <ngxsmk-stat label="Page Views" value="82.4k" trend="up" />
-                        <ngxsmk-stat label="Bounce Rate" value="38.2%" trend="down" />
-                        <ngxsmk-stat label="Avg. Session" value="4m 12s" trend="up" />
+                        <ngxsmk-stat
+                          label="{{ 'templates.mock.pageViews' | translate }}"
+                          value="82.4k"
+                          trend="up"
+                        />
+                        <ngxsmk-stat
+                          label="{{ 'templates.mock.bounceRate' | translate }}"
+                          value="38.2%"
+                          trend="down"
+                        />
+                        <ngxsmk-stat
+                          label="{{ 'templates.mock.avgSession' | translate }}"
+                          value="4m 12s"
+                          trend="up"
+                        />
                       </div>
                       <div class="ngxsmk-mock-dashboard-grid">
                         <div class="ngxsmk-mock-section">
                           <ngxsmk-heading
                             level="h4"
                             style="margin-bottom: 0.75rem; font-size: 0.9375rem; font-weight: 600;"
-                            >Traffic Overview</ngxsmk-heading
+                            >{{ 'templates.mock.trafficOverview' | translate }}</ngxsmk-heading
                           >
                           <div
                             style="display: flex; justify-content: center; align-items: center; height: 160px;"
@@ -360,7 +389,8 @@ interface TemplateItem {
                           <ngxsmk-heading
                             level="h4"
                             style="margin-bottom: 0.75rem; font-size: 0.9375rem; font-weight: 600;"
-                            >Traffic Sources</ngxsmk-heading
+                            >{{ 'templates.mock.trafficSources' | translate }}</ngxsmk-heading
+                          >
                           >
                           <div class="admin-bars">
                             @for (s of trafficSources; track s.label) {
@@ -381,9 +411,11 @@ interface TemplateItem {
                         <ngxsmk-heading
                           level="h4"
                           style="font-size: 0.9375rem; font-weight: 600; margin: 0;"
-                          >Team Members</ngxsmk-heading
+                          >{{ 'templates.mock.teamMembers' | translate }}</ngxsmk-heading
                         >
-                        <button ngxsmk-button size="sm">+ Add User</button>
+                        <button ngxsmk-button size="sm">
+                          {{ 'templates.mock.addUser' | translate }}
+                        </button>
                       </div>
                       <div class="admin-user-list">
                         @for (u of usersList; track u.email) {
@@ -406,31 +438,40 @@ interface TemplateItem {
                     }
                     @case ('settings') {
                       <div class="admin-settings">
-                        <ngxsmk-form-field label="Display Name" hint="Shown across the workspace.">
+                        <ngxsmk-form-field
+                          label="{{ 'templates.mock.displayName' | translate }}"
+                          hint="{{ 'templates.mock.displayNameHint' | translate }}"
+                        >
                           <ngxsmk-input placeholder="Sachin Dilshan" />
                         </ngxsmk-form-field>
-                        <ngxsmk-form-field label="Email Address">
+                        <ngxsmk-form-field label="{{ 'templates.mock.emailAddress' | translate }}">
                           <ngxsmk-input type="email" placeholder="admin@ngxsmk.dev" />
                         </ngxsmk-form-field>
-                        <ngxsmk-form-field label="Interface Theme">
+                        <ngxsmk-form-field
+                          label="{{ 'templates.mock.interfaceTheme' | translate }}"
+                        >
                           <ngxsmk-select [options]="themeOptions" value="system" />
                         </ngxsmk-form-field>
                         <ngxsmk-divider />
                         <ngxsmk-form-field
-                          label="Email Notifications"
-                          hint="Daily summary of workspace activity."
+                          label="{{ 'templates.mock.emailNotifications' | translate }}"
+                          hint="{{ 'templates.mock.emailNotificationsHint' | translate }}"
                         >
                           <ngxsmk-switch [checked]="true" />
                         </ngxsmk-form-field>
                         <ngxsmk-form-field
-                          label="Two-Factor Authentication"
-                          hint="Require a code on every sign-in."
+                          label="{{ 'templates.mock.twoFactor' | translate }}"
+                          hint="{{ 'templates.mock.twoFactorHint' | translate }}"
                         >
                           <ngxsmk-switch [checked]="false" />
                         </ngxsmk-form-field>
                         <div class="admin-settings-actions">
-                          <button ngxsmk-button size="sm">Save Changes</button>
-                          <button ngxsmk-button size="sm" variant="outline">Cancel</button>
+                          <button ngxsmk-button size="sm">
+                            {{ 'templates.mock.saveChanges' | translate }}
+                          </button>
+                          <button ngxsmk-button size="sm" variant="outline">
+                            {{ 'templates.mock.cancel' | translate }}
+                          </button>
                         </div>
                       </div>
                     }
@@ -444,18 +485,23 @@ interface TemplateItem {
           @if (id === 'ai-chat') {
             <div class="ngxsmk-mock-chat">
               <div class="ngxsmk-mock-chat-header">
-                <ngxsmk-heading level="h4" class="mock-panel-title">AI Assistant</ngxsmk-heading>
+                <ngxsmk-heading level="h4" class="mock-panel-title">{{
+                  'templates.mock.aiAssistant' | translate
+                }}</ngxsmk-heading>
                 <span
                   style="font-size: 0.75rem; color: var(--ngxsmk-color-success); font-weight: 600;"
-                  >● Online</span
+                  >{{ 'templates.mock.online' | translate }}</span
                 >
               </div>
               <div class="ngxsmk-mock-chat-window-wrapper">
                 <ngxsmk-chat-window [messages]="chatMessages" />
               </div>
               <div class="ngxsmk-mock-chat-composer">
-                <ngxsmk-input placeholder="Ask anything..." style="flex: 1;" />
-                <button ngxsmk-button>Send</button>
+                <ngxsmk-input
+                  [attr.placeholder]="'templates.mock.askAnything' | translate"
+                  style="flex: 1;"
+                />
+                <button ngxsmk-button>{{ 'templates.mock.send' | translate }}</button>
               </div>
             </div>
           }
@@ -472,64 +518,74 @@ interface TemplateItem {
                 <div
                   style="display: flex; gap: 1.5rem; font-size: 0.8125rem; font-weight: 500; color: var(--ngxsmk-color-on-surface-variant);"
                 >
-                  <span>Features</span>
-                  <span>Pricing</span>
-                  <span>Docs</span>
+                  <span>{{ 'templates.mock.features' | translate }}</span>
+                  <span>{{ 'templates.mock.pricing' | translate }}</span>
+                  <span>{{ 'nav.docs' | translate }}</span>
                 </div>
-                <button ngxsmk-button size="sm">Get Started</button>
+                <button ngxsmk-button size="sm">{{ 'nav.getStarted' | translate }}</button>
               </div>
 
               <div class="ngxsmk-mock-landing-hero">
                 <ngxsmk-heading
                   level="h1"
                   style="font-size: 2.25rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.2;"
-                  >Innovate Faster</ngxsmk-heading
+                  >{{ 'templates.mock.innovateFaster' | translate }}</ngxsmk-heading
+                >
                 >
                 <ngxsmk-text
                   variant="body"
                   style="font-size: 0.875rem; opacity: 0.8; max-width: 480px; margin: 0.5rem auto 1.5rem; line-height: 1.6;"
                 >
-                  Build state-of-the-art enterprise web applications in minutes using NGXSMK premium
-                  signals-based UI Kit.
+                  {{ 'templates.mock.landingHero' | translate }}
                 </ngxsmk-text>
                 <div style="display: flex; gap: 0.75rem; justify-content: center;">
-                  <button ngxsmk-button>Start Free Trial</button>
-                  <button ngxsmk-button variant="outline">Learn More</button>
+                  <button ngxsmk-button>{{ 'templates.mock.startFreeTrial' | translate }}</button>
+                  <button ngxsmk-button variant="outline">
+                    {{ 'templates.mock.learnMore' | translate }}
+                  </button>
                 </div>
               </div>
 
               <div class="ngxsmk-mock-landing-pricing">
                 <div class="ngxsmk-mock-price-card">
-                  <ngxsmk-heading level="h4" style="font-size: 0.9375rem; font-weight: 600;"
-                    >Starter</ngxsmk-heading
+                  <ngxsmk-heading level="h4" style="font-size: 0.9375rem; font-weight: 600;">{{
+                    'templates.mock.starter' | translate
+                  }}</ngxsmk-heading>
                   >
                   <div class="ngxsmk-mock-price-val">
                     $0<span style="font-size: 0.75rem; font-weight: 400; opacity: 0.7;">/mo</span>
                   </div>
                   <ngxsmk-divider />
                   <ul class="ngxsmk-mock-price-features">
-                    <li>Basic layout UI blocks</li>
-                    <li>Single developer license</li>
-                    <li>Community support</li>
+                    <li>{{ 'templates.mock.starterF1' | translate }}</li>
+                    <li>{{ 'templates.mock.starterF2' | translate }}</li>
+                    <li>{{ 'templates.mock.starterF3' | translate }}</li>
                   </ul>
-                  <button ngxsmk-button variant="outline" style="width: 100%;">Sign Up</button>
+                  <button ngxsmk-button variant="outline" style="width: 100%;">
+                    {{ 'templates.mock.signUp' | translate }}
+                  </button>
                 </div>
 
                 <div class="ngxsmk-mock-price-card highlighted">
-                  <div class="ngxsmk-mock-price-badge">Popular</div>
-                  <ngxsmk-heading level="h4" style="font-size: 0.9375rem; font-weight: 600;"
-                    >Professional</ngxsmk-heading
+                  <div class="ngxsmk-mock-price-badge">
+                    {{ 'templates.mock.popular' | translate }}
+                  </div>
+                  <ngxsmk-heading level="h4" style="font-size: 0.9375rem; font-weight: 600;">{{
+                    'templates.mock.professional' | translate
+                  }}</ngxsmk-heading>
                   >
                   <div class="ngxsmk-mock-price-val">
                     $49<span style="font-size: 0.75rem; font-weight: 400; opacity: 0.7;">/mo</span>
                   </div>
                   <ngxsmk-divider />
                   <ul class="ngxsmk-mock-price-features">
-                    <li>All premium & dashboard blocks</li>
-                    <li>Unlimited dev licenses</li>
-                    <li>Priority Slack support</li>
+                    <li>{{ 'templates.mock.proF1' | translate }}</li>
+                    <li>{{ 'templates.mock.proF2' | translate }}</li>
+                    <li>{{ 'templates.mock.proF3' | translate }}</li>
                   </ul>
-                  <button ngxsmk-button style="width: 100%;">Get Pro</button>
+                  <button ngxsmk-button style="width: 100%;">
+                    {{ 'templates.mock.getPro' | translate }}
+                  </button>
                 </div>
               </div>
             </div>
@@ -539,8 +595,10 @@ interface TemplateItem {
           @if (id === 'kanban') {
             <div class="ngxsmk-mock-kanban">
               <div class="ngxsmk-mock-kanban-header">
-                <ngxsmk-heading level="h4" class="mock-panel-title">Sprint 24 Board</ngxsmk-heading>
-                <ngxsmk-badge>Active Sprint</ngxsmk-badge>
+                <ngxsmk-heading level="h4" class="mock-panel-title">{{
+                  'templates.mock.sprintBoard' | translate
+                }}</ngxsmk-heading>
+                <ngxsmk-badge>{{ 'templates.mock.activeSprint' | translate }}</ngxsmk-badge>
               </div>
               <div class="ngxsmk-mock-kanban-body">
                 <ngxsmk-kanban-board [(columns)]="kanbanColumns" />
@@ -552,40 +610,51 @@ interface TemplateItem {
           @if (id === 'settings') {
             <div class="ngxsmk-mock-settings">
               <div class="ngxsmk-mock-settings-header">
-                <ngxsmk-heading level="h4" class="mock-panel-title"
-                  >System Configuration</ngxsmk-heading
-                >
+                <ngxsmk-heading level="h4" class="mock-panel-title">{{
+                  'templates.mock.systemConfig' | translate
+                }}</ngxsmk-heading>
               </div>
               <div class="ngxsmk-mock-settings-body">
                 <ngxsmk-tabs value="profile">
-                  <ngxsmk-tab value="profile" label="Profile Settings">
+                  <ngxsmk-tab
+                    value="profile"
+                    label="{{ 'templates.mock.profileSettings' | translate }}"
+                  >
                     <div
                       style="display: flex; flex-direction: column; gap: 1rem; padding-top: 1rem; max-width: 480px;"
                     >
-                      <ngxsmk-form-field label="Display Name" hint="How you appear to others.">
+                      <ngxsmk-form-field
+                        label="{{ 'templates.mock.displayName' | translate }}"
+                        hint="{{ 'templates.mock.displayNameHintProfile' | translate }}"
+                      >
                         <ngxsmk-input placeholder="Sachin Dilshan" />
                       </ngxsmk-form-field>
-                      <ngxsmk-form-field label="Workspace Subdomain">
+                      <ngxsmk-form-field
+                        label="{{ 'templates.mock.workspaceSubdomain' | translate }}"
+                      >
                         <ngxsmk-input placeholder="my-org" />
                       </ngxsmk-form-field>
-                      <ngxsmk-form-field label="Interface Theme">
+                      <ngxsmk-form-field label="{{ 'templates.mock.interfaceTheme' | translate }}">
                         <ngxsmk-select [options]="themeOptions" value="system" />
                       </ngxsmk-form-field>
                     </div>
                   </ngxsmk-tab>
-                  <ngxsmk-tab value="notifications" label="Notification Feeds">
+                  <ngxsmk-tab
+                    value="notifications"
+                    label="{{ 'templates.mock.notificationFeeds' | translate }}"
+                  >
                     <div
                       style="display: flex; flex-direction: column; gap: 1.25rem; padding-top: 1rem;"
                     >
                       <ngxsmk-form-field
-                        label="Email Summaries"
-                        hint="Receive a summary of updates every morning."
+                        label="{{ 'templates.mock.emailSummaries' | translate }}"
+                        hint="{{ 'templates.mock.emailSummariesHint' | translate }}"
                       >
                         <ngxsmk-switch [checked]="true" />
                       </ngxsmk-form-field>
                       <ngxsmk-form-field
-                        label="Desktop Push Notifications"
-                        hint="Notify immediately on task assignment."
+                        label="{{ 'templates.mock.desktopPush' | translate }}"
+                        hint="{{ 'templates.mock.desktopPushHint' | translate }}"
                       >
                         <ngxsmk-switch [checked]="false" />
                       </ngxsmk-form-field>
@@ -604,16 +673,16 @@ interface TemplateItem {
                   <div class="gallery-primary-img">
                     <img
                       src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&auto=format&fit=crop&q=60"
-                      alt="Premium Headphones"
+                      [attr.alt]="'templates.mock.headphonesAlt' | translate"
                       class="product-preview-img"
                     />
                   </div>
                 </div>
 
                 <div class="ngxsmk-mock-ecommerce-info">
-                  <ngxsmk-badge variant="info" style="align-self: flex-start;"
-                    >Free Shipping</ngxsmk-badge
-                  >
+                  <ngxsmk-badge variant="info" style="align-self: flex-start;">{{
+                    'templates.mock.freeShipping' | translate
+                  }}</ngxsmk-badge>
                   <ngxsmk-heading
                     level="h2"
                     style="font-size: 1.5rem; font-weight: 700; margin: 0.5rem 0;"
@@ -622,7 +691,9 @@ interface TemplateItem {
 
                   <div class="product-ratings-row">
                     <span class="stars-gold">★★★★★</span>
-                    <span class="ratings-count">(124 reviews)</span>
+                    <span class="ratings-count">{{
+                      'templates.mock.reviewsCount' | translate
+                    }}</span>
                   </div>
 
                   <div class="product-price-row">
@@ -636,12 +707,13 @@ interface TemplateItem {
                     variant="body"
                     style="font-size: 0.8125rem; line-height: 1.6; color: var(--ngxsmk-color-on-surface-variant);"
                   >
-                    Active noise-cancelling headphones featuring 40h battery life, studio acoustics,
-                    and lightweight memory foam cushions.
+                    {{ 'templates.mock.headphonesDesc' | translate }}
                   </ngxsmk-text>
 
                   <div class="product-spec-row">
-                    <span style="font-weight: 600; font-size: 0.8125rem;">Color</span>
+                    <span style="font-weight: 600; font-size: 0.8125rem;">{{
+                      'templates.mock.color' | translate
+                    }}</span>
                     <div class="product-color-selector">
                       <span class="color-dot active" style="background-color: #09090b;"></span>
                       <span class="color-dot" style="background-color: #7c3aed;"></span>
@@ -650,8 +722,12 @@ interface TemplateItem {
                   </div>
 
                   <div style="display: flex; gap: 0.75rem; margin-top: 1rem;">
-                    <button ngxsmk-button style="flex: 1;">Add to Cart</button>
-                    <button ngxsmk-button variant="outline">Buy Now</button>
+                    <button ngxsmk-button style="flex: 1;">
+                      {{ 'templates.mock.addToCart' | translate }}
+                    </button>
+                    <button ngxsmk-button variant="outline">
+                      {{ 'templates.mock.buyNow' | translate }}
+                    </button>
                   </div>
                 </div>
               </div>
@@ -663,13 +739,13 @@ interface TemplateItem {
             <div class="ngxsmk-mock-auth">
               <div class="ngxsmk-mock-auth-card">
                 <div class="ngxsmk-mock-auth-header">
-                  <ngxsmk-heading level="h3" style="font-size: 1.25rem; font-weight: 700;"
-                    >Sign in to account</ngxsmk-heading
-                  >
+                  <ngxsmk-heading level="h3" style="font-size: 1.25rem; font-weight: 700;">{{
+                    'templates.mock.signInToAccount' | translate
+                  }}</ngxsmk-heading>
                   <ngxsmk-text
                     variant="body"
                     style="font-size: 0.75rem; color: var(--ngxsmk-color-on-surface-variant);"
-                    >Enter credentials to access workspace</ngxsmk-text
+                    >{{ 'templates.mock.enterCredentials' | translate }}</ngxsmk-text
                   >
                 </div>
 
@@ -678,34 +754,38 @@ interface TemplateItem {
                     Google
                   </button>
                   <button ngxsmk-button variant="outline" style="flex: 1; font-size: 0.75rem;">
-                    GitHub
+                    {{ 'nav.github' | translate }}
                   </button>
                 </div>
 
                 <div class="auth-divider-line">
-                  <span>or continue with email</span>
+                  <span>{{ 'templates.mock.orContinueEmail' | translate }}</span>
                 </div>
 
                 <div class="ngxsmk-mock-auth-form">
-                  <ngxsmk-form-field label="Email Address">
+                  <ngxsmk-form-field label="{{ 'templates.mock.emailAddress' | translate }}">
                     <ngxsmk-input type="email" placeholder="name@example.com" />
                   </ngxsmk-form-field>
-                  <ngxsmk-form-field label="Password">
+                  <ngxsmk-form-field label="{{ 'templates.mock.password' | translate }}">
                     <ngxsmk-input type="password" placeholder="••••••••" />
                   </ngxsmk-form-field>
 
                   <div
                     style="display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem;"
                   >
-                    <ngxsmk-switch [checked]="true">Keep me signed in</ngxsmk-switch>
+                    <ngxsmk-switch [checked]="true">{{
+                      'templates.mock.keepSignedIn' | translate
+                    }}</ngxsmk-switch>
                     <a
                       href="#"
                       style="color: var(--ngxsmk-color-primary); text-decoration: none; font-weight: 500;"
-                      >Forgot?</a
+                      >{{ 'templates.mock.forgot' | translate }}</a
                     >
                   </div>
 
-                  <button ngxsmk-button style="width: 100%; margin-top: 0.5rem;">Sign In</button>
+                  <button ngxsmk-button style="width: 100%; margin-top: 0.5rem;">
+                    {{ 'templates.mock.signIn' | translate }}
+                  </button>
                 </div>
               </div>
             </div>
@@ -715,34 +795,39 @@ interface TemplateItem {
           @if (id === 'health-monitor') {
             <div class="ngxsmk-mock-health">
               <div class="ngxsmk-mock-health-top">
-                <ngxsmk-heading level="h4" class="mock-panel-title"
-                  >System Status Monitor</ngxsmk-heading
-                >
-                <ngxsmk-badge variant="success">All Systems Operational</ngxsmk-badge>
+                <ngxsmk-heading level="h4" class="mock-panel-title">{{
+                  'templates.mock.systemStatusMonitor' | translate
+                }}</ngxsmk-heading>
+                <ngxsmk-badge variant="success">{{
+                  'templates.mock.allSystemsOperational' | translate
+                }}</ngxsmk-badge>
               </div>
 
               <div class="ngxsmk-mock-health-stats">
                 <div class="health-mini-stat">
-                  <span class="label">CPU Usage</span>
+                  <span class="label">{{ 'templates.mock.cpuUsage' | translate }}</span>
                   <span class="value">14.2%</span>
                   <div class="health-bar"><div class="fill" style="width: 14%;"></div></div>
                 </div>
                 <div class="health-mini-stat">
-                  <span class="label">Memory (RAM)</span>
+                  <span class="label">{{ 'templates.mock.memoryRam' | translate }}</span>
                   <span class="value">64.8%</span>
                   <div class="health-bar">
                     <div class="fill warning" style="width: 64.8%;"></div>
                   </div>
                 </div>
                 <div class="health-mini-stat">
-                  <span class="label">API Latency</span>
+                  <span class="label">{{ 'templates.mock.apiLatency' | translate }}</span>
                   <span class="value">24ms</span>
                   <div class="health-bar"><div class="fill success" style="width: 8%;"></div></div>
                 </div>
               </div>
 
               <div class="ngxsmk-mock-health-terminal">
-                <ngxsmk-terminal title="System Events Log" [lines]="healthLogs" />
+                <ngxsmk-terminal
+                  title="{{ 'templates.mock.systemEventsLog' | translate }}"
+                  [lines]="healthLogs"
+                />
               </div>
             </div>
           }
@@ -758,7 +843,7 @@ interface TemplateItem {
     >
       @if (selectedTemplate()) {
         <ngxsmk-tabs [(value)]="activeTab" class="ngxsmk-custom-tabs">
-          <ngxsmk-tab value="preview" label="Live Preview">
+          <ngxsmk-tab value="preview" label="{{ 'templates.livePreview' | translate }}">
             <div class="ngxsmk-template-preview-viewport">
               <ng-container
                 [ngTemplateOutlet]="miniPreview"
@@ -767,7 +852,7 @@ interface TemplateItem {
             </div>
           </ngxsmk-tab>
 
-          <ngxsmk-tab value="code" label="Source Code">
+          <ngxsmk-tab value="code" label="{{ 'templates.mock.sourceCode' | translate }}">
             <div class="ngxsmk-template-code-viewport">
               <div class="ngxsmk-code-copy-bar">
                 <button
@@ -776,7 +861,11 @@ interface TemplateItem {
                   [ngxsmkCopyToClipboard]="selectedTemplate()?.code ?? ''"
                   (click)="onCodeCopied()"
                 >
-                  {{ copied() ? 'Copied to Clipboard!' : 'Copy Code' }}
+                  {{
+                    copied()
+                      ? ('templates.mock.copied' | translate)
+                      : ('templates.mock.copyCode' | translate)
+                  }}
                 </button>
               </div>
               <ngxsmk-code-block language="html">{{ selectedTemplate()?.code }}</ngxsmk-code-block>

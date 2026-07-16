@@ -2,6 +2,7 @@ import { Component, signal, computed, ElementRef, ViewChild, inject } from '@ang
 import { FormsModule } from '@angular/forms';
 import { RouterOutlet, RouterLink, RouterLinkActive, Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { TranslatePipe } from '@ngx-translate/core';
 import { AppNav } from '../nav/nav';
 
 interface CategoryGroup {
@@ -12,7 +13,7 @@ interface CategoryGroup {
 @Component({
   selector: 'showcase-layout',
   standalone: true,
-  imports: [FormsModule, RouterOutlet, RouterLink, RouterLinkActive, AppNav],
+  imports: [FormsModule, RouterOutlet, RouterLink, RouterLinkActive, AppNav, TranslatePipe],
   template: `
     <app-nav />
     <div class="ngxsmk-sc-layout">
@@ -35,7 +36,7 @@ interface CategoryGroup {
           <input
             class="ngxsmk-sc-sidebar__search-input"
             type="search"
-            placeholder="Search components"
+            [attr.placeholder]="'showcase.searchPlaceholder' | translate"
             [ngModel]="searchQuery()"
             (ngModelChange)="searchQuery.set($event)"
           />
@@ -47,7 +48,7 @@ interface CategoryGroup {
             routerLink="/showcase/explorer"
             routerLinkActive="ngxsmk-sc-sidebar__overview--active"
             (click)="mobileOpen.set(false)"
-            >Component Explorer</a
+            >{{ 'showcase.componentExplorer' | translate }}</a
           >
 
           @for (group of filteredGroups(); track group.label) {
@@ -75,7 +76,7 @@ interface CategoryGroup {
           class="ngxsmk-sc-menu-btn"
           type="button"
           (click)="mobileOpen.set(true)"
-          aria-label="Open component categories"
+          [attr.aria-label]="'showcase.openCategories' | translate"
         >
           <svg
             width="18"
@@ -88,7 +89,7 @@ interface CategoryGroup {
           >
             <path d="M3 6h18M3 12h18M3 18h18" />
           </svg>
-          Categories
+          {{ 'showcase.categories' | translate }}
         </button>
         <router-outlet />
       </main>

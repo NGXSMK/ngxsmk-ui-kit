@@ -1,4 +1,5 @@
 import { Component, input } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { NgxsmkButton } from '@ngxsmk/core/button';
 import { NgxsmkBadge } from '@ngxsmk/core/badge';
 import {
@@ -89,7 +90,7 @@ const SELECT_OPTIONS = [
 @Component({
   selector: 'playground-demo-host',
   standalone: true,
-  imports: [...CURATED_COMPONENTS],
+  imports: [...CURATED_COMPONENTS, TranslatePipe],
   template: `
     <div class="pg-demo-stage">
       @switch (demoId()) {
@@ -102,11 +103,13 @@ const SELECT_OPTIONS = [
             [disabled]="bool('disabled')"
             [iconOnly]="bool('iconOnly')"
           >
-            {{ str('label') || 'Button' }}
+            {{ str('label') || ('iplayground.demo.button' | translate) }}
           </button>
         }
         @case ('NgxsmkBadge') {
-          <ngxsmk-badge [variant]="str('variant')">{{ str('label') || 'Badge' }}</ngxsmk-badge>
+          <ngxsmk-badge [variant]="str('variant')">{{
+            str('label') || ('iplayground.demo.badge' | translate)
+          }}</ngxsmk-badge>
         }
         @case ('NgxsmkCard') {
           <ngxsmk-card
@@ -114,12 +117,12 @@ const SELECT_OPTIONS = [
             style="max-width: 320px;"
           >
             <div ngxsmkCardHeader>
-              <h3 ngxsmkCardTitle>Card title</h3>
+              <h3 ngxsmkCardTitle>{{ 'iplayground.demo.cardTitle' | translate }}</h3>
             </div>
             <div ngxsmkCardContent>
-              <ngxsmk-text variant="body"
-                >A flexible container for related content and actions.</ngxsmk-text
-              >
+              <ngxsmk-text variant="body">{{
+                'iplayground.demo.cardDesc' | translate
+              }}</ngxsmk-text>
             </div>
           </ngxsmk-card>
         }
@@ -136,12 +139,12 @@ const SELECT_OPTIONS = [
             [variant]="str('variant')"
             [title]="str('title')"
             style="max-width: 420px;"
-            >{{ str('label') || 'This is an alert message.' }}</ngxsmk-alert
+            >{{ str('label') || ('iplayground.demo.alertMsg' | translate) }}</ngxsmk-alert
           >
         }
         @case ('NgxsmkSwitch') {
           <ngxsmk-switch [checked]="bool('checked')" [disabled]="bool('disabled')">{{
-            str('label') || 'Enable notifications'
+            str('label') || ('iplayground.demo.enableNotifications' | translate)
           }}</ngxsmk-switch>
         }
         @case ('NgxsmkCheckbox') {
@@ -149,7 +152,7 @@ const SELECT_OPTIONS = [
             [checked]="bool('checked')"
             [disabled]="bool('disabled')"
             [indeterminate]="bool('indeterminate')"
-            >{{ str('label') || 'Accept terms' }}</ngxsmk-checkbox
+            >{{ str('label') || ('iplayground.demo.acceptTerms' | translate) }}</ngxsmk-checkbox
           >
         }
         @case ('NgxsmkInput') {
@@ -205,16 +208,18 @@ const SELECT_OPTIONS = [
           ></ngxsmk-stat>
         }
         @case ('NgxsmkTag') {
-          <ngxsmk-tag [variant]="str('variant')">{{ str('label') || 'Tag' }}</ngxsmk-tag>
+          <ngxsmk-tag [variant]="str('variant')">{{
+            str('label') || ('iplayground.demo.tag' | translate)
+          }}</ngxsmk-tag>
         }
         @case ('NgxsmkHeading') {
           <ngxsmk-heading [level]="str('level')" [weight]="str('weight')">{{
-            str('label') || 'Heading'
+            str('label') || ('iplayground.demo.heading' | translate)
           }}</ngxsmk-heading>
         }
         @case ('NgxsmkText') {
           <ngxsmk-text [variant]="str('variant')" [color]="str('color')">{{
-            str('label') || 'The quick brown fox jumps over the lazy dog.'
+            str('label') || ('iplayground.demo.lorem' | translate)
           }}</ngxsmk-text>
         }
         @case ('NgxsmkDivider') {
@@ -236,13 +241,12 @@ const SELECT_OPTIONS = [
         }
         @case ('NgxsmkBlockquote') {
           <ngxsmk-blockquote [cite]="str('cite')">{{
-            str('label') ||
-              'Design is not just what it looks like and feels like. Design is how it works.'
+            str('label') || ('iplayground.demo.blockquote' | translate)
           }}</ngxsmk-blockquote>
         }
         @case ('NgxsmkLink') {
           <a ngxsmk-link [variant]="str('variant')" [underline]="bool('underline')">{{
-            str('label') || 'Link text'
+            str('label') || ('iplayground.demo.linkText' | translate)
           }}</a>
         }
         @case ('NgxsmkStatusDot') {
@@ -283,68 +287,88 @@ const SELECT_OPTIONS = [
         }
         @case ('NgxsmkHStack') {
           <ngxsmk-h-stack [justify]="str('justify')" [align]="str('align')" [gap]="str('gap')">
-            <button ngxsmk-button variant="primary">Save</button>
-            <button ngxsmk-button variant="outline">Cancel</button>
-            <button ngxsmk-button variant="ghost">More</button>
+            <button ngxsmk-button variant="primary">
+              {{ 'iplayground.demo.save' | translate }}
+            </button>
+            <button ngxsmk-button variant="outline">
+              {{ 'iplayground.demo.cancel' | translate }}
+            </button>
+            <button ngxsmk-button variant="ghost">{{ 'iplayground.demo.more' | translate }}</button>
           </ngxsmk-h-stack>
         }
         @case ('NgxsmkVStack') {
           <ngxsmk-v-stack [justify]="str('justify')" [align]="str('align')" [gap]="str('gap')">
-            <button ngxsmk-button variant="primary">Save</button>
-            <button ngxsmk-button variant="outline">Cancel</button>
-            <button ngxsmk-button variant="ghost">More</button>
+            <button ngxsmk-button variant="primary">
+              {{ 'iplayground.demo.save' | translate }}
+            </button>
+            <button ngxsmk-button variant="outline">
+              {{ 'iplayground.demo.cancel' | translate }}
+            </button>
+            <button ngxsmk-button variant="ghost">{{ 'iplayground.demo.more' | translate }}</button>
           </ngxsmk-v-stack>
         }
         @case ('NgxsmkCenter') {
           <ngxsmk-center
             style="min-height: 120px; border: 1px dashed var(--ngxsmk-color-outline); border-radius: var(--ngxsmk-radius-md);"
           >
-            <ngxsmk-badge variant="primary">Centered</ngxsmk-badge>
+            <ngxsmk-badge variant="primary">{{
+              'iplayground.demo.centered' | translate
+            }}</ngxsmk-badge>
           </ngxsmk-center>
         }
         @case ('NgxsmkContainer') {
           <ngxsmk-container>
-            <ngxsmk-text variant="body">Content constrained to a centered container.</ngxsmk-text>
+            <ngxsmk-text variant="body">{{
+              'iplayground.demo.containerDesc' | translate
+            }}</ngxsmk-text>
           </ngxsmk-container>
         }
         @case ('NgxsmkGrid') {
           <ngxsmk-grid [cols]="num('cols')" [gap]="str('gap')">
             <ngxsmk-card
               ><div ngxsmkCardContent>
-                <ngxsmk-text variant="caption">Item 1</ngxsmk-text>
+                <ngxsmk-text variant="caption">{{
+                  'iplayground.demo.item' | translate: { n: 1 }
+                }}</ngxsmk-text>
               </div></ngxsmk-card
             >
             <ngxsmk-card
               ><div ngxsmkCardContent>
-                <ngxsmk-text variant="caption">Item 2</ngxsmk-text>
+                <ngxsmk-text variant="caption">{{
+                  'iplayground.demo.item' | translate: { n: 2 }
+                }}</ngxsmk-text>
               </div></ngxsmk-card
             >
             <ngxsmk-card
               ><div ngxsmkCardContent>
-                <ngxsmk-text variant="caption">Item 3</ngxsmk-text>
+                <ngxsmk-text variant="caption">{{
+                  'iplayground.demo.item' | translate: { n: 3 }
+                }}</ngxsmk-text>
               </div></ngxsmk-card
             >
           </ngxsmk-grid>
         }
         @case ('NgxsmkFlex') {
           <ngxsmk-flex [direction]="str('direction')" [gap]="str('gap')">
-            <ngxsmk-badge>One</ngxsmk-badge>
-            <ngxsmk-badge>Two</ngxsmk-badge>
-            <ngxsmk-badge>Three</ngxsmk-badge>
+            <ngxsmk-badge>{{ 'iplayground.demo.one' | translate }}</ngxsmk-badge>
+            <ngxsmk-badge>{{ 'iplayground.demo.two' | translate }}</ngxsmk-badge>
+            <ngxsmk-badge>{{ 'iplayground.demo.three' | translate }}</ngxsmk-badge>
           </ngxsmk-flex>
         }
         @case ('NgxsmkRadio') {
           <ngxsmk-radio-group [value]="str('value')">
             <ngxsmk-radio [value]="str('value')" [disabled]="bool('disabled')">{{
-              str('label') || 'Option'
+              str('label') || ('iplayground.demo.option' | translate)
             }}</ngxsmk-radio>
           </ngxsmk-radio-group>
         }
         @default {
           <div class="pg-demo-unavailable">
             <span class="pg-demo-unavailable-icon">◈</span>
-            <p>Live preview is not available for this component yet.</p>
-            <p class="pg-demo-unavailable-hint">Browse its API and generated code on the right.</p>
+            <p>{{ 'iplayground.demo.unavailable' | translate }}</p>
+            <p class="pg-demo-unavailable-hint">
+              {{ 'iplayground.demo.unavailableHint' | translate }}
+            </p>
           </div>
         }
       }

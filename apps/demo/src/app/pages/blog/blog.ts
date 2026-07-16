@@ -9,6 +9,7 @@ import { NgxsmkHeading } from '@ngxsmk/core/heading';
 import { NgxsmkText } from '@ngxsmk/core/text';
 import { NgxsmkTimestamp } from '@ngxsmk/core/timestamp';
 import { Component } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { AppNav } from '../../nav/nav';
 
 interface Post {
@@ -31,15 +32,16 @@ interface Post {
     NgxsmkText,
     NgxsmkTimestamp,
     AppNav,
+    TranslatePipe,
   ],
   template: `
     <app-nav />
     <div class="ngxsmk-page">
       <header class="ngxsmk-page__header">
-        <ngxsmk-heading level="h1">Blog</ngxsmk-heading>
-        <ngxsmk-text variant="body" class="ngxsmk-page__sub"
-          >Latest news, articles, and write-ups from the NGXSMK team.</ngxsmk-text
-        >
+        <ngxsmk-heading level="h1">{{ 'blog.title' | translate }}</ngxsmk-heading>
+        <ngxsmk-text variant="body" class="ngxsmk-page__sub">{{
+          'blog.subtitle' | translate
+        }}</ngxsmk-text>
       </header>
 
       <div class="ngxsmk-blog-grid">
@@ -47,14 +49,20 @@ interface Post {
           <ngxsmk-card class="ngxsmk-blog-card">
             <div ngxsmkCardHeader>
               <div class="ngxsmk-blog-card__top">
-                <ngxsmk-tag variant="primary">{{ post.tag }}</ngxsmk-tag>
+                <ngxsmk-tag variant="primary">{{ post.tag | translate }}</ngxsmk-tag>
                 <ngxsmk-timestamp [date]="post.date" format="relative" />
               </div>
-              <ngxsmk-heading level="h3" ngxsmkCardTitle>{{ post.title }}</ngxsmk-heading>
+              <ngxsmk-heading level="h3" ngxsmkCardTitle>{{
+                post.title | translate
+              }}</ngxsmk-heading>
             </div>
             <div ngxsmkCardContent>
-              <ngxsmk-text variant="body" class="ngxsmk-blog-desc">{{ post.excerpt }}</ngxsmk-text>
-              <a ngxsmk-button size="sm" variant="outline" href="#">Read article</a>
+              <ngxsmk-text variant="body" class="ngxsmk-blog-desc">{{
+                post.excerpt | translate
+              }}</ngxsmk-text>
+              <a ngxsmk-button size="sm" variant="outline" href="#">{{
+                'blog.readArticle' | translate
+              }}</a>
             </div>
           </ngxsmk-card>
         }
@@ -109,31 +117,27 @@ interface Post {
 export class BlogPage {
   protected readonly posts: Post[] = [
     {
-      title: 'Introducing NGXSMK',
-      excerpt:
-        'Why we built a signals-native, zoneless design system for Angular - and how the universal token engine keeps your brand portable.',
-      tag: 'Announcement',
+      title: 'blog.post.introducing.title',
+      excerpt: 'blog.post.introducing.excerpt',
+      tag: 'blog.tag.announcement',
       date: new Date(Date.now() - 2 * 86400000),
     },
     {
-      title: 'Theming without lock-in',
-      excerpt:
-        'One token engine, four outputs: CSS variables, SCSS, Tailwind, and JSON. Swap the entire look at runtime.',
-      tag: 'Theming',
+      title: 'blog.post.theming.title',
+      excerpt: 'blog.post.theming.excerpt',
+      tag: 'blog.tag.theming',
       date: new Date(Date.now() - 9 * 86400000),
     },
     {
-      title: 'Building AI components',
-      excerpt:
-        'A look at the chat window, streaming text, and tool-call viewer primitives that power agent-ready UIs.',
-      tag: 'AI',
+      title: 'blog.post.buildingAi.title',
+      excerpt: 'blog.post.buildingAi.excerpt',
+      tag: 'category.ai',
       date: new Date(Date.now() - 21 * 86400000),
     },
     {
-      title: 'Enterprise widgets, free',
-      excerpt:
-        'Kanban, spreadsheet, pivot table, and diagram editors - all MIT-licensed and fully customizable.',
-      tag: 'Enterprise',
+      title: 'blog.post.enterpriseFree.title',
+      excerpt: 'blog.post.enterpriseFree.excerpt',
+      tag: 'category.enterprise',
       date: new Date(Date.now() - 40 * 86400000),
     },
   ];

@@ -8,6 +8,7 @@ import { NgxsmkButton } from '@ngxsmk/core/button';
 import { NgxsmkHeading } from '@ngxsmk/core/heading';
 import { NgxsmkText } from '@ngxsmk/core/text';
 import { Component } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { AppNav } from '../../nav/nav';
 @Component({
   selector: 'community-page',
@@ -20,34 +21,35 @@ import { AppNav } from '../../nav/nav';
     NgxsmkButton,
     NgxsmkHeading,
     NgxsmkText,
+    TranslatePipe,
     AppNav,
   ],
   template: `
     <app-nav />
     <div class="ngxsmk-page">
       <header class="ngxsmk-page__header">
-        <ngxsmk-heading level="h1">Community & Contribution</ngxsmk-heading>
-        <ngxsmk-text variant="body" class="ngxsmk-page__sub"
-          >Join our growing community, ask questions, propose features, and share what you've
-          built.</ngxsmk-text
-        >
+        <ngxsmk-heading level="h1">{{ 'community.title' | translate }}</ngxsmk-heading>
+        <ngxsmk-text variant="body" class="ngxsmk-page__sub">{{
+          'community.subtitle' | translate
+        }}</ngxsmk-text>
       </header>
       <div class="ngxsmk-community-grid">
         <ngxsmk-card class="ngxsmk-community-card">
           <div ngxsmkCardHeader>
-            <ngxsmk-heading level="h3" ngxsmkCardTitle>GitHub Discussions</ngxsmk-heading>
+            <ngxsmk-heading level="h3" ngxsmkCardTitle>{{
+              'community.githubDiscussions' | translate
+            }}</ngxsmk-heading>
           </div>
           <div ngxsmkCardContent>
-            <ngxsmk-text variant="body" class="ngxsmk-community-desc"
-              >Ask questions, share suggestions, and get feedback from developers and contributors
-              on our discussions forum.</ngxsmk-text
-            >
+            <ngxsmk-text variant="body" class="ngxsmk-community-desc">{{
+              'community.githubDiscussionsDesc' | translate
+            }}</ngxsmk-text>
             <a
               ngxsmk-button
               size="sm"
               href="https://github.com/NGXSMK/ngxsmk-ui-kit/discussions/19"
               target="_blank"
-              >Join Discussion</a
+              >{{ 'community.joinDiscussion' | translate }}</a
             >
           </div>
         </ngxsmk-card>

@@ -10,12 +10,14 @@ import { NgxsmkCitation } from '@ngxsmk/core/citation';
 import { NgxsmkMarkdown } from '@ngxsmk/core/markdown';
 import { NgxsmkHeading } from '@ngxsmk/core/heading';
 import { Component } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { ShowcaseExample } from '../../showcase/showcase-example';
 
 @Component({
   selector: 'content-typography-page',
   standalone: true,
   imports: [
+    TranslatePipe,
     ShowcaseExample,
     NgxsmkHeading,
     NgxsmkText,
@@ -30,15 +32,14 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     NgxsmkMarkdown,
   ],
   template: `
-    <h2 class="ngxsmk-page-title">Content &amp; Typography</h2>
+    <h2 class="ngxsmk-page-title">{{ 'category.content-typography' | translate }}</h2>
     <p class="ngxsmk-page-desc">
-      Primitives for structuring and styling text. All components inherit the theme token engine, so
-      typography scales and recolors with your brand.
+      {{ 'contentTypography.intro' | translate }}
     </p>
 
     <showcase-example
       title="Heading"
-      description="Semantic heading levels with adjustable visual size and weight."
+      [description]="'contentTypography.headingDesc' | translate"
       [code]="codeHeading"
       [component]="NgxsmkHeading"
       [customize]="customizeNgxsmkHeading"
@@ -51,7 +52,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Text"
-      description="Body, caption, and overline text variants with semantic colors."
+      [description]="'contentTypography.textDesc' | translate"
       [code]="codeText"
       [component]="NgxsmkText"
       [customize]="customizeNgxsmkText"
@@ -63,7 +64,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Blockquote"
-      description="Quoted content with an optional citation line."
+      [description]="'contentTypography.blockquoteDesc' | translate"
       [code]="codeBlockquote"
       [component]="NgxsmkBlockquote"
       [customize]="customizeNgxsmkBlockquote"
@@ -76,7 +77,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Code"
-      description="Inline code styling that respects the mono font token."
+      [description]="'contentTypography.codeDesc' | translate"
       [code]="codeCode"
       [component]="NgxsmkCode"
       [customize]="customizeNgxsmkCode"
@@ -87,7 +88,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Kbd"
-      description="Keyboard key affordance for shortcuts and hints."
+      [description]="'contentTypography.kbdDesc' | translate"
       [code]="codeKbd"
       [component]="NgxsmkKbd"
       [customize]="customizeNgxsmkKbd"
@@ -101,7 +102,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Link"
-      description="Accessible links with muted and external variants."
+      [description]="'contentTypography.linkDesc' | translate"
       [code]="codeLink"
       [component]="NgxsmkLink"
       [customize]="customizeNgxsmkLink"
@@ -116,7 +117,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Thumbnail"
-      description="Image preview with size and shape options plus letter fallback."
+      [description]="'contentTypography.thumbnailDesc' | translate"
       [code]="codeThumbnail"
       [component]="NgxsmkThumbnail"
       [customize]="customizeNgxsmkThumbnail"
@@ -146,7 +147,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Timestamp"
-      description="Relative, absolute, or smart date formatting."
+      [description]="'contentTypography.timestampDesc' | translate"
       [code]="codeTimestamp"
       [component]="NgxsmkTimestamp"
       [customize]="customizeNgxsmkTimestamp"
@@ -160,7 +161,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Token"
-      description="Compact, pill-shaped labels - perfect for tags and filters."
+      [description]="'contentTypography.tokenDesc' | translate"
       [code]="codeToken"
       [component]="NgxsmkToken"
       [customize]="customizeNgxsmkToken"
@@ -176,7 +177,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Citation"
-      description="Inline numbered citation marker with an optional source link."
+      [description]="'contentTypography.citationDesc' | translate"
       [code]="codeCitation"
       [component]="NgxsmkCitation"
       [customize]="customizeNgxsmkCitation"
@@ -190,7 +191,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Markdown"
-      description="Renders a Markdown string to styled, theme-aware HTML."
+      [description]="'contentTypography.markdownDesc' | translate"
       [code]="codeMarkdown"
       [component]="NgxsmkMarkdown"
       [customize]="customizeNgxsmkMarkdown"

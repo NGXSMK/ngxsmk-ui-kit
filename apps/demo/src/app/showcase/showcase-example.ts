@@ -1,5 +1,6 @@
 import { Component, computed, input, signal, Type, reflectComponentType } from '@angular/core';
 import { NgxsmkButton } from '@ngxsmk/core/button';
+import { TranslatePipe } from '@ngx-translate/core';
 
 type ApiPanel = 'code' | 'api' | 'customize';
 
@@ -24,7 +25,7 @@ interface ApiOutput {
 @Component({
   selector: 'showcase-example',
   standalone: true,
-  imports: [NgxsmkButton],
+  imports: [NgxsmkButton, TranslatePipe],
   host: {
     '[attr.id]': 'elementId()',
   },
@@ -46,7 +47,11 @@ interface ApiOutput {
               [attr.aria-pressed]="panel() === 'code'"
               (click)="toggle('code')"
             >
-              {{ panel() === 'code' ? 'Hide code' : 'Show code' }}
+              {{
+                panel() === 'code'
+                  ? ('showcaseExample.hideCode' | translate)
+                  : ('showcaseExample.showCode' | translate)
+              }}
             </button>
           }
           @if (component()) {
@@ -57,7 +62,7 @@ interface ApiOutput {
               [attr.aria-pressed]="panel() === 'api'"
               (click)="toggle('api')"
             >
-              API
+              {{ 'showcaseExample.api' | translate }}
             </button>
           }
           @if (customize()) {
@@ -68,7 +73,7 @@ interface ApiOutput {
               [attr.aria-pressed]="panel() === 'customize'"
               (click)="toggle('customize')"
             >
-              Customize
+              {{ 'showcaseExample.customize' | translate }}
             </button>
           }
         </div>
@@ -85,14 +90,16 @@ interface ApiOutput {
       @if (panel() === 'api' && component()) {
         <div class="ngxsmk-sc-ex__api">
           @if (inputs().length) {
-            <h4 class="ngxsmk-sc-ex__api-title">Inputs &amp; properties</h4>
+            <h4 class="ngxsmk-sc-ex__api-title">
+              {{ 'showcaseExample.inputsProperties' | translate }}
+            </h4>
             <div class="ngxsmk-sc-ex__table-wrap">
               <table class="ngxsmk-sc-ex__table">
                 <thead>
                   <tr>
-                    <th>Property</th>
-                    <th>Attribute</th>
-                    <th>Kind</th>
+                    <th>{{ 'showcaseExample.thProperty' | translate }}</th>
+                    <th>{{ 'showcaseExample.thAttribute' | translate }}</th>
+                    <th>{{ 'showcaseExample.thKind' | translate }}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -105,7 +112,13 @@ interface ApiOutput {
                         <code>{{ i.templateName }}</code>
                       </td>
                       <td>
-                        {{ isModel(i.propName) ? 'two-way' : i.isSignal ? 'signal' : 'regular' }}
+                        {{
+                          isModel(i.propName)
+                            ? ('showcaseExample.twoWay' | translate)
+                            : i.isSignal
+                              ? ('showcaseExample.signal' | translate)
+                              : ('showcaseExample.regular' | translate)
+                        }}
                       </td>
                     </tr>
                   }
@@ -114,13 +127,15 @@ interface ApiOutput {
             </div>
           }
           @if (outputs().length) {
-            <h4 class="ngxsmk-sc-ex__api-title">Outputs (events)</h4>
+            <h4 class="ngxsmk-sc-ex__api-title">
+              {{ 'showcaseExample.outputsEvents' | translate }}
+            </h4>
             <div class="ngxsmk-sc-ex__table-wrap">
               <table class="ngxsmk-sc-ex__table">
                 <thead>
                   <tr>
-                    <th>Property</th>
-                    <th>Event</th>
+                    <th>{{ 'showcaseExample.thProperty' | translate }}</th>
+                    <th>{{ 'showcaseExample.thEvent' | translate }}</th>
                   </tr>
                 </thead>
                 <tbody>

@@ -27,6 +27,7 @@ import { NgxsmkAgentCard } from '@ngxsmk/core/agent-card';
 import { NgxsmkPromptCarousel, PromptItem } from '@ngxsmk/core/prompt-carousel';
 import { NgxsmkAiChat, NgxsmkAiMessage } from '@ngxsmk/core/ai-chat';
 import { Component, signal } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { ShowcaseExample } from '../../showcase/showcase-example';
 
 @Component({
@@ -62,17 +63,17 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     NgxsmkImageViewer,
     NgxsmkPromptCarousel,
     NgxsmkAiChat,
+    TranslatePipe,
   ],
   template: `
-    <h2 class="ngxsmk-page-title">AI</h2>
+    <h2 class="ngxsmk-page-title">{{ 'category.ai' | translate }}</h2>
     <p class="ngxsmk-page-desc">
-      Building blocks for conversational and agentic interfaces - from chat windows and streaming
-      text to tool calls, reasoning traces, and memory.
+      {{ 'ai.pageDesc' | translate }}
     </p>
 
     <showcase-example
       title="Agent Card"
-      description="Compact identity card for an AI agent: name, model, status, and description."
+      [description]="'ai.agentCardDesc' | translate"
       [code]="codeAgentCard"
       [component]="NgxsmkAgentCard"
       [customize]="customizeNgxsmkAgentCard"
@@ -83,7 +84,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Interactive AI Chat Assistant"
-      description="Advanced signal-driven conversational interface featuring streaming support, citations, reasoning trace collapsing, and custom suggestions."
+      [description]="'ai.aiChatDesc' | translate"
       [code]="codeAiChat"
       [component]="NgxsmkAiChat"
     >
@@ -100,7 +101,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Chat Window"
-      description="Scrollable message list that renders user, assistant, and system turns."
+      [description]="'ai.chatWindowDesc' | translate"
       [code]="codeChatWindow"
       [component]="NgxsmkChatWindow"
       [customize]="customizeNgxsmkChatWindow"
@@ -112,7 +113,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Chat Input"
-      description="Auto-growing composer with a submit output. Project action buttons via the [actions] slot."
+      [description]="'ai.chatInputDesc' | translate"
       [code]="codeChatInput"
       [component]="NgxsmkChatInput"
       [customize]="customizeNgxsmkChatInput"
@@ -120,7 +121,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
       <div class="ngxsmk-demo-stack" style="width:100%;max-width:440px">
         @if (sentLog().length) {
           <div class="ngxsmk-sc-surface" style="padding:0.5rem 0.75rem;font-size:0.8125rem">
-            <strong>Sent:</strong> {{ sentLog() }}
+            <strong>{{ 'ai.sent' | translate }}</strong> {{ sentLog() }}
           </div>
         }
         <ngxsmk-chat-input
@@ -135,7 +136,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Chat Layout"
-      description="Full chat shell with sidebar, header, scrolling body, and a pinned input region."
+      [description]="'ai.chatLayoutDesc' | translate"
       [code]="codeChatLayout"
       [component]="NgxsmkChatLayout"
       [customize]="customizeNgxsmkChatLayout"
@@ -143,7 +144,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
       <div class="ngxsmk-sc-surface" style="height:360px;width:100%;max-width:560px">
         <ngxsmk-chat-layout style="height:100%">
           <div sidebar class="ngxsmk-sc-surface" style="padding:0.75rem;width:140px">
-            <strong>Threads</strong>
+            <strong>{{ 'ai.threads' | translate }}</strong>
             <div
               style="margin-top:0.5rem;font-size:0.8125rem;color:var(--ngxsmk-color-on-surface-variant)"
             >
@@ -154,7 +155,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
             header
             style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--ngxsmk-color-outline-variant)"
           >
-            <strong>Assistant</strong>
+            <strong>{{ 'ai.assistant' | translate }}</strong>
           </div>
           <div style="padding:0.75rem;font-size:0.875rem">
             Ask me anything about your account.
@@ -169,7 +170,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Chat Send Button &amp; Dictation Button"
-      description="Composer controls: a disabled-aware send button and a dictation toggle."
+      [description]="'ai.composerButtonsDesc' | translate"
       [code]="codeComposerButtons"
       [component]="NgxsmkChatSendButton"
       [customize]="customizeNgxsmkChatSendButton"
@@ -186,7 +187,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Chat Tokenized Text"
-      description="Renders text with highlighted mentions, tools, and file tokens."
+      [description]="'ai.tokenizedTextDesc' | translate"
       [code]="codeTokens"
       [component]="NgxsmkChatComposerTokenElement"
       [customize]="customizeNgxsmkChatComposerTokenElement"
@@ -207,7 +208,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Conversation List"
-      description="Selectable list of past conversations with title and last-message preview."
+      [description]="'ai.conversationListDesc' | translate"
       [code]="codeConversations"
       [component]="NgxsmkConversationList"
       [customize]="customizeNgxsmkConversationList"
@@ -222,18 +223,18 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Composer Drawer"
-      description="Slide-up panel for attachments, prompts, and tools. Toggle it open below."
+      [description]="'ai.composerDrawerDesc' | translate"
       [code]="codeDrawer"
       [component]="NgxsmkChatComposerDrawer"
       [customize]="customizeNgxsmkChatComposerDrawer"
     >
       <div style="position:relative;padding-top:2.5rem;width:100%;max-width:520px">
         <button type="button" class="ngxsmk-demo-toggle" (click)="drawerOpen.set(!drawerOpen())">
-          {{ drawerOpen() ? 'Close composer' : 'Open composer' }}
+          {{ drawerOpen() ? ('ai.closeComposer' | translate) : ('ai.openComposer' | translate) }}
         </button>
         <ngxsmk-chat-composer-drawer [open]="drawerOpen()" (closed)="drawerOpen.set(false)">
           <div class="ngxsmk-demo-stack" style="gap:0.5rem">
-            <strong>Composer tools</strong>
+            <strong>{{ 'ai.composerTools' | translate }}</strong>
             <div class="ngxsmk-demo-row">
               <ngxsmk-chat-composer-token-element label="@team" variant="entity" />
               <ngxsmk-chat-composer-token-element label="query()" variant="tool" />
@@ -249,7 +250,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Streaming Text"
-      description="Types out a string character-by-character with a blinking cursor."
+      [description]="'ai.streamingTextDesc' | translate"
       [code]="codeStreaming"
       [component]="NgxsmkStreamingText"
       [customize]="customizeNgxsmkStreamingText"
@@ -264,7 +265,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Markdown Viewer"
-      description="Renders Markdown content into theme-aware styled HTML."
+      [description]="'ai.markdownViewerDesc' | translate"
       [code]="codeMarkdown"
       [component]="NgxsmkMarkdownViewer"
       [customize]="customizeNgxsmkMarkdownViewer"
@@ -276,7 +277,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Code Block"
-      description="Monospaced, scrollable code surface with a language hint."
+      [description]="'ai.codeBlockDesc' | translate"
       [code]="codeCodeBlock"
       [component]="NgxsmkCodeBlock"
       [customize]="customizeNgxsmkCodeBlock"
@@ -288,7 +289,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Diff Viewer"
-      description="Line-by-line diff with add/remove highlighting parsed from a unified source."
+      [description]="'ai.diffViewerDesc' | translate"
       [code]="codeDiff"
       [component]="NgxsmkDiffViewer"
       [customize]="customizeNgxsmkDiffViewer"
@@ -300,7 +301,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Citation Viewer"
-      description="Source card showing the title, author, and a quoted snippet."
+      [description]="'ai.citationViewerDesc' | translate"
       [code]="codeCitation"
       [component]="NgxsmkCitationViewer"
       [customize]="customizeNgxsmkCitationViewer"
@@ -316,7 +317,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Tool Call Viewer"
-      description="Shows agent tool invocations, arguments, status, and results."
+      [description]="'ai.toolCallViewerDesc' | translate"
       [code]="codeToolCall"
       [component]="NgxsmkToolCallViewer"
       [customize]="customizeNgxsmkToolCallViewer"
@@ -328,7 +329,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Reasoning Timeline"
-      description="Step-by-step trace of the agent's reasoning with optional durations."
+      [description]="'ai.reasoningTimelineDesc' | translate"
       [code]="codeReasoning"
       [component]="NgxsmkReasoningTimeline"
       [customize]="customizeNgxsmkReasoningTimeline"
@@ -340,7 +341,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Memory Viewer"
-      description="Key/value store of what the agent remembers across the session."
+      [description]="'ai.memoryViewerDesc' | translate"
       [code]="codeMemory"
       [component]="NgxsmkMemoryViewer"
       [customize]="customizeNgxsmkMemoryViewer"
@@ -352,7 +353,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Voice Input"
-      description="Microphone control that toggles recording and surfaces a transcript."
+      [description]="'ai.voiceInputDesc' | translate"
       [code]="codeVoice"
       [component]="NgxsmkVoiceInput"
       [customize]="customizeNgxsmkVoiceInput"
@@ -364,7 +365,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Audio Player"
-      description="Compact progress bar for voice replies and podcast-style playback."
+      [description]="'ai.audioPlayerDesc' | translate"
       [code]="codeAudio"
       [component]="NgxsmkAudioPlayer"
       [customize]="customizeNgxsmkAudioPlayer"
@@ -381,7 +382,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Image Viewer"
-      description="Image preview that expands to a fullscreen lightbox on click."
+      [description]="'ai.imageViewerDesc' | translate"
       [code]="codeImage"
       [component]="NgxsmkImageViewer"
       [customize]="customizeNgxsmkImageViewer"
@@ -396,7 +397,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Chat Message"
-      description="Container that lays out a single turn by role (user / assistant / system), aligning the avatar and body accordingly."
+      [description]="'ai.chatMessageDesc' | translate"
       [code]="codeChatMessage"
       [component]="NgxsmkChatMessage"
       [customize]="customizeNgxsmkChatMessage"
@@ -421,7 +422,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Chat Message Bubble"
-      description="The speech bubble that wraps message content. User bubbles are emphasized via the ancestor role."
+      [description]="'ai.chatMessageBubbleDesc' | translate"
       [code]="codeChatMessageBubble"
       [component]="NgxsmkChatMessage"
       [customize]="customizeNgxsmkChatMessage"
@@ -438,7 +439,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Chat Message Metadata"
-      description="Renders a compact timestamp (and any status) beneath a message bubble."
+      [description]="'ai.chatMessageMetadataDesc' | translate"
       [code]="codeChatMessageMetadata"
       [component]="NgxsmkChatMessageMetadata"
       [customize]="customizeNgxsmkChatMessageMetadata"
@@ -451,7 +452,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Chat System Message"
-      description="Centered, low-emphasis pill for system notices like connection state or mode changes."
+      [description]="'ai.chatSystemMessageDesc' | translate"
       [code]="codeChatSystemMessage"
       [component]="NgxsmkChatSystemMessage"
       [customize]="customizeNgxsmkChatSystemMessage"
@@ -461,7 +462,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Prompt Carousel (New)"
-      description="A scrollable horizontal list of pre-configured prompt suggestion cards with customizable color themes."
+      [description]="'ai.promptCarouselDesc' | translate"
       [code]="codePromptCarousel"
       [component]="NgxsmkPromptCarousel"
       [customize]="customizeNgxsmkPromptCarousel"
@@ -470,7 +471,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
       @if (selectedPromptText()) {
         <p class="ngxsmk-demo-hint" style="margin-top: 1rem;">
-          Active selection: <strong>"{{ selectedPromptText() }}"</strong>
+          {{ 'ai.activeSelection' | translate }} <strong>"{{ selectedPromptText() }}"</strong>
         </p>
       }
     </showcase-example>

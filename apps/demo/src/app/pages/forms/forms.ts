@@ -29,6 +29,7 @@ import { NgxsmkCheckboxListItemComponent } from '@ngxsmk/core/checkbox-list-item
 import { NgxsmkButton } from '@ngxsmk/core/button';
 import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { TranslatePipe } from '@ngx-translate/core';
 import { ShowcaseExample } from '../../showcase/showcase-example';
 
 interface Option {
@@ -42,6 +43,7 @@ interface Option {
   imports: [
     ShowcaseExample,
     FormsModule,
+    TranslatePipe,
     NgxsmkButton,
     NgxsmkButtonGroup,
     NgxsmkToggleButton,
@@ -74,258 +76,279 @@ interface Option {
     NgxsmkCheckboxListItemComponent,
   ],
   template: `
-    <h2 class="ngxsmk-page-title">Forms</h2>
+    <h2 class="ngxsmk-page-title">{{ 'category.forms' | translate }}</h2>
     <p class="ngxsmk-page-desc">
-      Buttons, inputs, selects, and rich form controls. Every component below is live and
-      interactive - try them out, then reveal the code to copy it.
+      {{ 'forms.intro' | translate }}
     </p>
 
     <div class="ngxsmk-sc-col">
       <showcase-example
         title="Button"
-        description="Native button/anchor directive with variants, sizes, and a loading state."
+        [description]="'forms.buttonDesc' | translate"
         [code]="codeButton"
         [component]="NgxsmkButton"
       >
         <span class="ngxsmk-sc-wrap">
-          <button ngxsmk-button>Primary</button>
-          <button ngxsmk-button variant="secondary">Secondary</button>
-          <button ngxsmk-button variant="outline">Outline</button>
-          <button ngxsmk-button variant="ghost">Ghost</button>
-          <button ngxsmk-button variant="destructive">Delete</button>
-          <button ngxsmk-button variant="link">Link</button>
-          <button ngxsmk-button loading>Saving</button>
-          <button ngxsmk-button [disabled]="true">Disabled</button>
+          <button ngxsmk-button>{{ 'forms.primary' | translate }}</button>
+          <button ngxsmk-button variant="secondary">{{ 'forms.secondary' | translate }}</button>
+          <button ngxsmk-button variant="outline">{{ 'forms.outline' | translate }}</button>
+          <button ngxsmk-button variant="ghost">{{ 'forms.ghost' | translate }}</button>
+          <button ngxsmk-button variant="destructive">{{ 'forms.delete' | translate }}</button>
+          <button ngxsmk-button variant="link">{{ 'forms.link' | translate }}</button>
+          <button ngxsmk-button loading>{{ 'forms.saving' | translate }}</button>
+          <button ngxsmk-button [disabled]="true">{{ 'forms.disabled' | translate }}</button>
         </span>
       </showcase-example>
 
       <showcase-example
         title="Button Group"
-        description="Segments a set of related actions into a single connected control."
+        [description]="'forms.buttonGroupDesc' | translate"
         [code]="codeButtonGroup"
         [component]="NgxsmkButtonGroup"
         [customize]="customizeNgxsmkButtonGroup"
       >
         <ngxsmk-button-group>
-          <button ngxsmk-button variant="outline">Left</button>
-          <button ngxsmk-button variant="outline">Center</button>
-          <button ngxsmk-button variant="outline">Right</button>
+          <button ngxsmk-button variant="outline">{{ 'forms.left' | translate }}</button>
+          <button ngxsmk-button variant="outline">{{ 'forms.center' | translate }}</button>
+          <button ngxsmk-button variant="outline">{{ 'forms.right' | translate }}</button>
         </ngxsmk-button-group>
       </showcase-example>
 
       <showcase-example
         title="Toggle Button"
-        description="A pressable button that keeps an on/off pressed state."
+        [description]="'forms.toggleButtonDesc' | translate"
         [code]="codeToggleButton"
         [component]="NgxsmkToggleButton"
         [customize]="customizeNgxsmkToggleButton"
       >
         <button ngxsmkToggleButton [(pressed)]="starred">
-          {{ starred() ? '★ Starred' : '☆ Star' }}
+          {{ starred() ? '★ ' + ('forms.starred' | translate) : '☆ ' + ('forms.star' | translate) }}
         </button>
       </showcase-example>
 
       <showcase-example
         title="Toggle Button Group"
-        description="Groups toggle buttons for formatting-style controls."
+        [description]="'forms.toggleButtonGroupDesc' | translate"
         [code]="codeToggleButtonGroup"
         [component]="NgxsmkToggleButtonGroup"
         [customize]="customizeNgxsmkToggleButtonGroup"
       >
         <ngxsmk-toggle-button-group>
-          <button ngxsmkToggleButton [(pressed)]="bold">Bold</button>
-          <button ngxsmkToggleButton [(pressed)]="italic">Italic</button>
-          <button ngxsmkToggleButton [(pressed)]="underline">Underline</button>
+          <button ngxsmkToggleButton [(pressed)]="bold">{{ 'forms.bold' | translate }}</button>
+          <button ngxsmkToggleButton [(pressed)]="italic">{{ 'forms.italic' | translate }}</button>
+          <button ngxsmkToggleButton [(pressed)]="underline">
+            {{ 'forms.underline' | translate }}
+          </button>
         </ngxsmk-toggle-button-group>
       </showcase-example>
 
       <showcase-example
         title="Input"
-        description="Themes native text inputs - pair it with a Form Field for labels."
+        [description]="'forms.inputDesc' | translate"
         [code]="codeInput"
         [component]="NgxsmkInput"
         [customize]="customizeNgxsmkInput"
       >
         <div class="ngxsmk-sc-col" style="width: 100%; max-width: 320px">
-          <ngxsmk-input type="email" placeholder="you@example.com" [(value)]="email" />
-          <small>Value: {{ email() || '-' }}</small>
+          <ngxsmk-input
+            type="email"
+            [placeholder]="'forms.emailPlaceholder' | translate"
+            [(value)]="email"
+          />
+          <small>{{ 'forms.valueLabel' | translate }} {{ email() || '-' }}</small>
         </div>
       </showcase-example>
 
       <showcase-example
         title="Textarea"
-        description="Multi-line input with a configurable row count."
+        [description]="'forms.textareaDesc' | translate"
         [code]="codeTextarea"
         [component]="NgxsmkTextarea"
         [customize]="customizeNgxsmkTextarea"
       >
-        <ngxsmk-textarea placeholder="Share your feedback…" [rows]="4" [(value)]="feedback" />
+        <ngxsmk-textarea
+          [placeholder]="'forms.feedbackPlaceholder' | translate"
+          [rows]="4"
+          [(value)]="feedback"
+        />
       </showcase-example>
 
       <showcase-example
         title="Number Input"
-        description="Numeric field with min, max, and step constraints."
+        [description]="'forms.numberInputDesc' | translate"
         [code]="codeNumber"
         [component]="NgxsmkNumberInput"
         [customize]="customizeNgxsmkNumberInput"
       >
         <div class="ngxsmk-sc-col">
           <ngxsmk-number-input [min]="0" [max]="10" [step]="1" [(value)]="quantity" />
-          <small>Quantity: {{ quantity() }}</small>
+          <small>{{ 'forms.quantityLabel' | translate }} {{ quantity() }}</small>
         </div>
       </showcase-example>
 
       <showcase-example
         title="Select"
-        description="Single-choice dropdown with full keyboard nav and typeahead, themed like the input family."
+        [description]="'forms.selectDesc' | translate"
         [code]="codeSelect"
         [component]="NgxsmkSelect"
         [customize]="customizeNgxsmkSelect"
       >
         <div class="ngxsmk-sc-col" style="width: 100%; max-width: 260px">
-          <ngxsmk-select [options]="colors" placeholder="Pick a color" [(value)]="color" />
-          <small>Selected: {{ color() || '-' }}</small>
+          <ngxsmk-select
+            [options]="colors"
+            [placeholder]="'forms.pickColor' | translate"
+            [(value)]="color"
+          />
+          <small>{{ 'forms.selectedLabel' | translate }} {{ color() || '-' }}</small>
         </div>
       </showcase-example>
 
       <showcase-example
         title="Multi Select"
-        description="Choose several values, shown as removable tags."
+        [description]="'forms.multiSelectDesc' | translate"
         [code]="codeMultiSelect"
         [component]="NgxsmkMultiSelect"
         [customize]="customizeNgxsmkMultiSelect"
       >
         <div class="ngxsmk-sc-col" style="width: 100%; max-width: 320px">
-          <ngxsmk-multi-select [options]="colors" placeholder="Add colors" [(value)]="colorList" />
-          <small>{{ colorList().length }} selected</small>
+          <ngxsmk-multi-select
+            [options]="colors"
+            [placeholder]="'forms.addColors' | translate"
+            [(value)]="colorList"
+          />
+          <small>{{ 'forms.colorsSelected' | translate: { count: colorList().length } }}</small>
         </div>
       </showcase-example>
 
       <showcase-example
         title="Autocomplete"
-        description="Free-text input that suggests matching options as you type."
+        [description]="'forms.autocompleteDesc' | translate"
         [code]="codeAutocomplete"
         [component]="NgxsmkAutocomplete"
         [customize]="customizeNgxsmkAutocomplete"
       >
         <ngxsmk-autocomplete
           [options]="fruitOptions"
-          placeholder="Search a fruit…"
+          [placeholder]="'forms.searchFruit' | translate"
           [(value)]="fruit"
         />
       </showcase-example>
 
       <showcase-example
         title="Combobox"
-        description="Filterable dropdown that resolves to a single selected option."
+        [description]="'forms.comboboxDesc' | translate"
         [code]="codeCombobox"
         [component]="NgxsmkCombobox"
         [customize]="customizeNgxsmkCombobox"
       >
         <ngxsmk-combobox
           [options]="countries"
-          placeholder="Choose a country…"
+          [placeholder]="'forms.chooseCountry' | translate"
           [(value)]="country"
         />
       </showcase-example>
 
       <showcase-example
         title="Typeahead"
-        description="String-list search with keyboard-friendly suggestions."
+        [description]="'forms.typeaheadDesc' | translate"
         [code]="codeTypeahead"
         [component]="NgxsmkTypeahead"
         [customize]="customizeNgxsmkTypeahead"
       >
         <ngxsmk-typeahead
           [options]="frameworks"
-          placeholder="Search a framework…"
+          [placeholder]="'forms.searchFramework' | translate"
           [(value)]="framework"
         />
       </showcase-example>
 
       <showcase-example
         title="Power Search"
-        description="A search bar combined with faceted filter dropdowns."
+        [description]="'forms.powerSearchDesc' | translate"
         [code]="codePowerSearch"
         [component]="NgxsmkPowerSearch"
         [customize]="customizeNgxsmkPowerSearch"
       >
         <div class="ngxsmk-sc-col" style="width: 100%; max-width: 480px">
           <ngxsmk-power-search
-            placeholder="Search issues…"
+            [placeholder]="'forms.searchIssues' | translate"
             [filters]="searchFilters"
             [(query)]="searchQuery"
           />
-          <small>Query: {{ searchQuery() || '-' }}</small>
+          <small>{{ 'forms.queryLabel' | translate }} {{ searchQuery() || '-' }}</small>
         </div>
       </showcase-example>
 
       <showcase-example
         title="Checkbox"
-        description="Single boolean control built on a native checkbox."
+        [description]="'forms.checkboxDesc' | translate"
         [code]="codeCheckbox"
         [component]="NgxsmkCheckbox"
         [customize]="customizeNgxsmkCheckbox"
       >
-        <ngxsmk-checkbox [(checked)]="agreed">I accept the terms</ngxsmk-checkbox>
+        <ngxsmk-checkbox [(checked)]="agreed">{{
+          'forms.acceptTerms' | translate
+        }}</ngxsmk-checkbox>
       </showcase-example>
 
       <showcase-example
         title="Checkbox List"
-        description="Multiple checkboxes bound to an array of selected values."
+        [description]="'forms.checkboxListDesc' | translate"
         [code]="codeCheckboxList"
         [component]="NgxsmkCheckboxList"
         [customize]="customizeNgxsmkCheckboxList"
       >
         <div class="ngxsmk-sc-col">
           <ngxsmk-checkbox-list [items]="topics" [(selected)]="selectedTopics" />
-          <small>{{ selectedTopics().length }} topic(s) chosen</small>
+          <small>{{ 'forms.topicsChosen' | translate: { count: selectedTopics().length } }}</small>
         </div>
       </showcase-example>
 
       <showcase-example
         title="Radio"
-        description="Mutually exclusive options within a radio group."
+        [description]="'forms.radioDesc' | translate"
         [code]="codeRadio"
         [component]="NgxsmkRadioGroup"
         [customize]="customizeNgxsmkRadioGroup"
       >
         <ngxsmk-radio-group [(value)]="plan">
-          <ngxsmk-radio value="free">Free</ngxsmk-radio>
-          <ngxsmk-radio value="pro">Pro</ngxsmk-radio>
-          <ngxsmk-radio value="team">Team</ngxsmk-radio>
+          <ngxsmk-radio value="free">{{ 'forms.free' | translate }}</ngxsmk-radio>
+          <ngxsmk-radio value="pro">{{ 'forms.pro' | translate }}</ngxsmk-radio>
+          <ngxsmk-radio value="team">{{ 'forms.team' | translate }}</ngxsmk-radio>
         </ngxsmk-radio-group>
       </showcase-example>
 
       <showcase-example
         title="Switch"
-        description="Instant on/off toggle for settings."
+        [description]="'forms.switchDesc' | translate"
         [code]="codeSwitch"
         [component]="NgxsmkSwitch"
         [customize]="customizeNgxsmkSwitch"
       >
-        <ngxsmk-switch [(checked)]="notifications">Email notifications</ngxsmk-switch>
+        <ngxsmk-switch [(checked)]="notifications">{{
+          'forms.emailNotifications' | translate
+        }}</ngxsmk-switch>
       </showcase-example>
 
       <showcase-example
         title="Slider"
-        description="Range control for selecting a numeric value."
+        [description]="'forms.sliderDesc' | translate"
         [code]="codeSlider"
         [component]="NgxsmkSlider"
         [customize]="customizeNgxsmkSlider"
       >
         <div class="ngxsmk-sc-col" style="width: 100%; max-width: 320px">
           <ngxsmk-slider [min]="0" [max]="100" [step]="5" [(value)]="volume" />
-          <small>Volume: {{ volume() }}</small>
+          <small>{{ 'forms.volumeLabel' | translate }} {{ volume() }}</small>
         </div>
       </showcase-example>
 
       <showcase-example
         title="Datepicker (calendar)"
-        description="A feature-rich popover calendar - month navigation, ranges, time, and i18n. Ships as a standalone NGXSMK package rather than a component in this kit."
+        [description]="'forms.datepickerDesc' | translate"
       >
         <p style="margin: 0; width: 100%">
-          Refer to the dedicated repository:
+          {{ 'forms.referRepo' | translate }}
           <a
             href="https://github.com/NGXSMK/ngxsmk-datepicker"
             target="_blank"
@@ -335,12 +358,9 @@ interface Option {
         </p>
       </showcase-example>
 
-      <showcase-example
-        title="Telephone input"
-        description="International phone input with country dropdown, flags, and E.164 validation. Ships as a standalone NGXSMK package rather than a component in this kit."
-      >
+      <showcase-example title="Telephone input" [description]="'forms.telInputDesc' | translate">
         <p style="margin: 0; width: 100%">
-          Refer to the dedicated repository:
+          {{ 'forms.referRepo' | translate }}
           <a
             href="https://github.com/NGXSMK/ngxsmk-tel-input"
             target="_blank"
@@ -352,7 +372,7 @@ interface Option {
 
       <showcase-example
         title="Segmented Control"
-        description="Compact single-choice switcher for views or modes."
+        [description]="'forms.segmentedControlDesc' | translate"
         [code]="codeSegmented"
         [component]="NgxsmkSegmentedControl"
         [customize]="customizeNgxsmkSegmentedControl"
@@ -362,7 +382,7 @@ interface Option {
 
       <showcase-example
         title="Selector"
-        description="Chip-style multi-select for tags and quick filters."
+        [description]="'forms.selectorDesc' | translate"
         [code]="codeSelector"
         [component]="NgxsmkSelector"
         [customize]="customizeNgxsmkSelector"
@@ -372,95 +392,101 @@ interface Option {
 
       <showcase-example
         title="Multi Selector"
-        description="Dropdown of checkboxes with a compact summary trigger."
+        [description]="'forms.multiSelectorDesc' | translate"
         [code]="codeMultiSelector"
         [component]="NgxsmkMultiSelector"
         [customize]="customizeNgxsmkMultiSelector"
       >
         <ngxsmk-multi-selector
           [options]="colors"
-          placeholder="Select colors"
+          [placeholder]="'forms.selectColors' | translate"
           [(value)]="selectorColors"
         />
       </showcase-example>
 
       <showcase-example
         title="Tokenizer"
-        description="Enter free-form tags; press Enter to add, Backspace to remove."
+        [description]="'forms.tokenizerDesc' | translate"
         [code]="codeTokenizer"
         [component]="NgxsmkTokenizer"
         [customize]="customizeNgxsmkTokenizer"
       >
-        <ngxsmk-tokenizer placeholder="Add a tag…" [(tokens)]="tags" />
+        <ngxsmk-tokenizer [placeholder]="'forms.addTag' | translate" [(tokens)]="tags" />
       </showcase-example>
 
       <showcase-example
         title="Input Group"
-        description="Attach text add-ons before and after an input."
+        [description]="'forms.inputGroupDesc' | translate"
         [code]="codeInputGroup"
         [component]="NgxsmkInputGroup"
       >
         <ngxsmk-input-group>
           <ngxsmk-input-group-text>$</ngxsmk-input-group-text>
-          <ngxsmk-input type="text" placeholder="0.00" />
+          <ngxsmk-input type="text" [placeholder]="'forms.amountPlaceholder' | translate" />
           <ngxsmk-input-group-text>USD</ngxsmk-input-group-text>
         </ngxsmk-input-group>
       </showcase-example>
 
       <showcase-example
         title="Field"
-        description="Composable layout for a label, control, and status message."
+        [description]="'forms.fieldDesc' | translate"
         [code]="codeField"
         [component]="NgxsmkField"
         [customize]="customizeNgxsmkField"
       >
-        <ngxsmk-field hint="Choose a unique handle.">
-          <ngxsmk-field-label [required]="true">Username</ngxsmk-field-label>
-          <ngxsmk-input type="text" placeholder="e.g. ada_lovelace" />
-          <ngxsmk-field-status variant="error" message="This username is already taken." />
+        <ngxsmk-field [hint]="'forms.usernameHint' | translate">
+          <ngxsmk-field-label [required]="true">{{
+            'forms.username' | translate
+          }}</ngxsmk-field-label>
+          <ngxsmk-input type="text" [placeholder]="'forms.usernamePlaceholder' | translate" />
+          <ngxsmk-field-status variant="error" [message]="'forms.usernameTaken' | translate" />
         </ngxsmk-field>
       </showcase-example>
 
       <showcase-example
         title="Form Field"
-        description="Batteries-included wrapper wiring label, hint, and error to the control."
+        [description]="'forms.formFieldDesc' | translate"
         [code]="codeFormField"
         [component]="NgxsmkFormField"
         [customize]="customizeNgxsmkFormField"
       >
-        <ngxsmk-form-field label="Email" required error="Please enter a valid email address.">
-          <ngxsmk-input type="email" placeholder="you@example.com" />
+        <ngxsmk-form-field
+          [label]="'forms.emailLabel' | translate"
+          required
+          [error]="'forms.emailError' | translate"
+        >
+          <ngxsmk-input type="email" [placeholder]="'forms.emailPlaceholder' | translate" />
         </ngxsmk-form-field>
       </showcase-example>
 
       <showcase-example
         title="Checkbox List Item"
-        description="Compose a multi-select list from individual NgxsmkCheckboxListItem children with their own checked state and optional descriptions."
+        [description]="'forms.checkboxListItemDesc' | translate"
         [code]="codeCheckboxListItem"
         [component]="NgxsmkCheckboxListItemComponent"
         [customize]="customizeNgxsmkCheckboxListItemComponent"
       >
         <div class="ngxsmk-sc-col ngxsmk-sc-surface">
           <ngxsmk-checkbox-list-item
-            description="Statically typed, great tooling."
+            [description]="'forms.tsDesc' | translate"
             [checked]="langs().includes('ts')"
             (changed)="toggleLang('ts', $event)"
             >TypeScript</ngxsmk-checkbox-list-item
           >
           <ngxsmk-checkbox-list-item
-            description="The full-stack framework."
+            [description]="'forms.ngDesc' | translate"
             [checked]="langs().includes('ng')"
             (changed)="toggleLang('ng', $event)"
             >Angular</ngxsmk-checkbox-list-item
           >
           <ngxsmk-checkbox-list-item
-            description="No framework required."
+            [description]="'forms.jsDesc' | translate"
             disabled
             [checked]="langs().includes('js')"
             (changed)="toggleLang('js', $event)"
             >JavaScript</ngxsmk-checkbox-list-item
           >
-          <small>{{ langs().length }} language(s) chosen</small>
+          <small>{{ 'forms.languagesChosen' | translate: { count: langs().length } }}</small>
         </div>
       </showcase-example>
     </div>
