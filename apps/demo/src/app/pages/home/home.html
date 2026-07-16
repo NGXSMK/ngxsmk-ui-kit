@@ -72,8 +72,8 @@
         <div class="bento__tile bento__tile--tags">
           <span class="bento__label">{{ 'home.bentoTags' | translate }}</span>
           <div class="bento__row bento__row--wrap">
-            <ngxsmk-tag>Signals</ngxsmk-tag>
-            <ngxsmk-tag>Zoneless</ngxsmk-tag>
+            <ngxsmk-tag>{{ 'iplayground.signals' | translate }}</ngxsmk-tag>
+            <ngxsmk-tag>{{ 'home.badgeZoneless' | translate }}</ngxsmk-tag>
             <ngxsmk-tag>SSR</ngxsmk-tag>
             <ngxsmk-tag>MIT</ngxsmk-tag>
           </div>
@@ -230,7 +230,7 @@
           <p class="template__desc">{{ template.description | translate }}</p>
           <div class="template__badges">
             @for (badge of template.badges; track badge) {
-              <ngxsmk-tag>{{ badge }}</ngxsmk-tag>
+              <ngxsmk-tag>{{ badge | translate }}</ngxsmk-tag>
             }
           </div>
         </article>

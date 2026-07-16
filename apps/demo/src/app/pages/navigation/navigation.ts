@@ -392,7 +392,7 @@ interface AppOutlineItem {
             [href]="item.href"
             [class.ngxsmk-link--active]="item.href === activeLink()"
             (click)="activeLink.set(item.href)"
-            >{{ item.label }}</a
+            >{{ item.label | translate }}</a
           >
         }
       </nav>
@@ -420,7 +420,7 @@ interface AppOutlineItem {
               <ngxsmk-side-nav-item
                 [active]="sideNavComposedActive() === item.id"
                 (clicked)="sideNavComposedActive.set(item.id)"
-                >{{ item.label }}</ngxsmk-side-nav-item
+                >{{ item.label | translate }}</ngxsmk-side-nav-item
               >
             }
           </ngxsmk-side-nav-section>
@@ -432,7 +432,7 @@ interface AppOutlineItem {
               <ngxsmk-side-nav-item
                 [active]="sideNavComposedActive() === item.id"
                 (clicked)="sideNavComposedActive.set(item.id)"
-                >{{ item.label }}</ngxsmk-side-nav-item
+                >{{ item.label | translate }}</ngxsmk-side-nav-item
               >
             }
           </ngxsmk-side-nav-section>
@@ -457,7 +457,7 @@ interface AppOutlineItem {
             <ngxsmk-top-nav-item
               [active]="topNavComposedActive() === item.id"
               (clicked)="topNavComposedActive.set(item.id)"
-              >{{ item.label }}</ngxsmk-top-nav-item
+              >{{ item.label | translate }}</ngxsmk-top-nav-item
             >
           }
           <ngxsmk-top-nav-menu>
@@ -467,8 +467,8 @@ interface AppOutlineItem {
         <div class="ngxsmk-top-nav-composed__mega">
           @for (item of topNavComposedMega; track item.title) {
             <ngxsmk-top-nav-mega-menu-item
-              [title]="item.title"
-              [description]="item.description"
+              [title]="item.title | translate"
+              [description]="item.description | translate"
               href="#"
             />
           }
@@ -677,34 +677,34 @@ ngxsmk-top-nav-heading {
   protected readonly mobileNavOpen = signal(false);
 
   protected readonly linkItems: { href: string; label: string }[] = [
-    { href: '/overview', label: 'Overview' },
-    { href: '/projects', label: 'Projects' },
-    { href: '/tasks', label: 'Tasks' },
-    { href: '/settings', label: 'Settings' },
+    { href: '/overview', label: 'navigation.overview' },
+    { href: '/projects', label: 'navigation.projects' },
+    { href: '/tasks', label: 'navigation.linkTasks' },
+    { href: '/settings', label: 'navigation.settings' },
   ];
   protected readonly activeLink = signal('/overview');
 
   protected readonly sideNavComposedActive = signal('dashboard');
   protected readonly sideNavComposedMain = [
-    { id: 'dashboard', label: 'Dashboard' },
-    { id: 'analytics', label: 'Analytics' },
-    { id: 'reports', label: 'Reports' },
+    { id: 'dashboard', label: 'navigation.dashboard' },
+    { id: 'analytics', label: 'navigation.analytics' },
+    { id: 'reports', label: 'navigation.reports' },
   ];
   protected readonly sideNavComposedAccount = [
-    { id: 'profile', label: 'Profile' },
-    { id: 'billing', label: 'Billing' },
+    { id: 'profile', label: 'navigation.profile' },
+    { id: 'billing', label: 'navigation.billing' },
   ];
 
   protected readonly topNavComposedActive = signal('home');
   protected readonly topNavComposedLinks = [
-    { id: 'home', label: 'Home' },
-    { id: 'about', label: 'About' },
-    { id: 'contact', label: 'Contact' },
+    { id: 'home', label: 'navigation.home' },
+    { id: 'about', label: 'navigation.about' },
+    { id: 'contact', label: 'navigation.contact' },
   ];
   protected readonly topNavComposedMega = [
-    { title: 'Analytics', description: 'Track your metrics' },
-    { title: 'Automation', description: 'Build workflows' },
-    { title: 'Insights', description: 'Surface trends' },
+    { title: 'navigation.analytics', description: 'navigation.trackMetrics' },
+    { title: 'navigation.automation', description: 'navigation.buildWorkflows' },
+    { title: 'navigation.insights', description: 'navigation.surfaceTrends' },
   ];
 
   protected readonly codeBreadcrumb = `<nav aria-label="Breadcrumb">

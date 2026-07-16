@@ -53,14 +53,16 @@ interface CategoryGroup {
 
           @for (group of filteredGroups(); track group.label) {
             <div class="ngxsmk-sc-sidebar__group">
-              <div class="ngxsmk-sc-sidebar__group-label">{{ group.label }}</div>
+              <div class="ngxsmk-sc-sidebar__group-label">
+                {{ groupLabelKey(group.label) | translate }}
+              </div>
               @for (cat of group.categories; track cat.path) {
                 <a
                   class="ngxsmk-sc-sidebar__link"
                   routerLink="/showcase/{{ cat.path }}"
                   routerLinkActive="ngxsmk-sc-sidebar__link--active"
                   (click)="mobileOpen.set(false)"
-                  >{{ cat.label }}</a
+                  >{{ 'category.' + cat.path | translate }}</a
                 >
               }
             </div>
@@ -572,4 +574,22 @@ export class ShowcaseLayout {
       }))
       .filter((g) => g.categories.length > 0);
   });
+
+  protected readonly GROUP_LABEL_KEY: Record<string, string> = {
+    Content: 'showcase.group.content',
+    Navigation: 'category.navigation',
+    Layout: 'category.layout',
+    Forms: 'category.forms',
+    Feedback: 'category.feedback',
+    'Data Display': 'category.data-display',
+    Overlay: 'category.overlay',
+    Charts: 'category.charts',
+    AI: 'category.ai',
+    Enterprise: 'category.enterprise',
+    Utilities: 'showcase.group.utilities',
+  };
+
+  groupLabelKey(label: string): string {
+    return this.GROUP_LABEL_KEY[label] ?? label;
+  }
 }

@@ -83,7 +83,7 @@ const CATEGORY_ICONS: Record<string, string> = {
               [class.active]="selectedCategory() === cat"
               (click)="selectedCategory.set(cat)"
             >
-              {{ iconFor(cat) }} {{ labelFor(cat) }}
+              {{ iconFor(cat) }} {{ catLabelKey(cat) | translate }}
             </button>
           }
         </div>
@@ -102,7 +102,7 @@ const CATEGORY_ICONS: Record<string, string> = {
       @for (group of filteredGroups(); track group.category) {
         <section class="explorer-group">
           <div class="explorer-group-header">
-            <h2 class="explorer-group-title">{{ labelFor(group.category) }}</h2>
+            <h2 class="explorer-group-title">{{ catLabelKey(group.category) | translate }}</h2>
             <span class="explorer-group-count">{{
               'explorer.componentCount' | translate: { count: group.components.length }
             }}</span>
@@ -418,6 +418,23 @@ export class ComponentExplorer {
       (CATEGORY_LABELS as Record<string, string>)[category] ??
       category.charAt(0).toUpperCase() + category.slice(1)
     );
+  }
+
+  protected readonly CATEGORY_LABEL_KEY: Record<string, string> = {
+    form: 'explorer.cat.form',
+    layout: 'explorer.cat.layout',
+    navigation: 'explorer.cat.navigation',
+    'data-display': 'explorer.cat.dataDisplay',
+    feedback: 'explorer.cat.feedback',
+    overlay: 'explorer.cat.overlay',
+    chart: 'explorer.cat.chart',
+    ai: 'explorer.cat.ai',
+    utility: 'explorer.cat.utility',
+    other: 'explorer.cat.other',
+  };
+
+  catLabelKey(category: string): string {
+    return this.CATEGORY_LABEL_KEY[category] ?? category;
   }
 
   iconFor(category: string): string {

@@ -339,7 +339,7 @@ function buildCode(name: string, values: Record<string, unknown>): string {
           <nav class="pg-groups">
             @for (group of filteredGroups(); track group.category) {
               <div class="pg-group">
-                <div class="pg-group-label">{{ group.label }}</div>
+                <div class="pg-group-label">{{ group.label | translate }}</div>
                 @for (comp of group.comps; track comp.name) {
                   <button
                     class="pg-item"
@@ -500,7 +500,13 @@ function buildCode(name: string, values: Record<string, unknown>): string {
                             <td>
                               <code>{{ sig.type }}</code>
                             </td>
-                            <td>{{ sig.readonly ? 'Yes' : 'No' }}</td>
+                            <td>
+                              {{
+                                sig.readonly
+                                  ? ('iplayground.yes' | translate)
+                                  : ('iplayground.no' | translate)
+                              }}
+                            </td>
                             <td>{{ sig.description }}</td>
                           </tr>
                         }
@@ -954,7 +960,7 @@ export class InteractivePlayground {
     return [...map.entries()]
       .map(([category, comps]) => ({
         category,
-        label: (CATEGORY_LABELS as Record<string, string>)[category] ?? category,
+        label: this.catLabelKey(category),
         comps: comps.sort((a, b) => a.name.localeCompare(b.name)),
       }))
       .sort((a, b) => a.label.localeCompare(b.label));
@@ -962,6 +968,23 @@ export class InteractivePlayground {
 
   protected displayName(name: string): string {
     return name.replace(/^Ngxsmk/i, '');
+  }
+
+  protected readonly CATEGORY_LABEL_KEY: Record<string, string> = {
+    form: 'explorer.cat.form',
+    layout: 'explorer.cat.layout',
+    navigation: 'explorer.cat.navigation',
+    'data-display': 'explorer.cat.dataDisplay',
+    feedback: 'explorer.cat.feedback',
+    overlay: 'explorer.cat.overlay',
+    chart: 'explorer.cat.chart',
+    ai: 'explorer.cat.ai',
+    utility: 'explorer.cat.utility',
+    other: 'explorer.cat.other',
+  };
+
+  catLabelKey(category: string): string {
+    return this.CATEGORY_LABEL_KEY[category] ?? category;
   }
 
   protected selectComponent(name: string): void {

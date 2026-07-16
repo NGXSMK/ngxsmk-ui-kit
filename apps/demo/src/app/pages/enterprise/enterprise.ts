@@ -129,7 +129,11 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
       [customize]="customizeNgxsmkPivotTable"
     >
       <div style="height:280px;overflow:auto;width:100%;">
-        <ngxsmk-pivot-table [rows]="pivotRows" [columns]="pivotColumns" rowLabel="Quarter" />
+        <ngxsmk-pivot-table
+          [rows]="pivotRows"
+          [columns]="pivotColumns"
+          [rowLabel]="'enterprise.pivotRowLabel' | translate"
+        />
       </div>
     </showcase-example>
 
@@ -162,7 +166,11 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
       [customize]="customizeNgxsmkFlowEditor"
     >
       <div style="height:420px;">
-        <ngxsmk-flow-editor title="Onboarding Flow" [nodes]="flowNodes" style="height:100%;" />
+        <ngxsmk-flow-editor
+          [title]="'enterprise.flowTitle' | translate"
+          [nodes]="flowNodes"
+          style="height:100%;"
+        />
       </div>
     </showcase-example>
 
