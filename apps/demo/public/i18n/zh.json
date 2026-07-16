@@ -15,7 +15,8 @@
     "lightMode": "切换到浅色模式",
     "darkMode": "切换到深色模式",
     "github": "GitHub",
-    "getStarted": "开始使用"
+    "getStarted": "开始使用",
+    "starOnGithub": "在 GitHub 上 Star"
   },
   "search": {
     "placeholder": "搜索组件（例如 Button、Kanban、Chat）……",

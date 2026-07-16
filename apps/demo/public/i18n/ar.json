@@ -15,7 +15,8 @@
     "lightMode": "التبديل إلى الوضع الفاتح",
     "darkMode": "التبديل إلى الوضع الداكن",
     "github": "GitHub",
-    "getStarted": "ابدأ الآن"
+    "getStarted": "ابدأ الآن",
+    "starOnGithub": "نجمة على GitHub"
   },
   "search": {
     "placeholder": "ابحث عن المكوّنات (مثل: زر، لوحة كانبان، محادثة)…",

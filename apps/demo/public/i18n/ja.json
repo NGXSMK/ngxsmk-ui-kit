@@ -15,7 +15,8 @@
     "lightMode": "ライトモードに切り替え",
     "darkMode": "ダークモードに切り替え",
     "github": "GitHub",
-    "getStarted": "はじめに"
+    "getStarted": "はじめに",
+    "starOnGithub": "GitHub でスター"
   },
   "search": {
     "placeholder": "コンポーネントを検索（例：Button、Kanban、Chat）…",

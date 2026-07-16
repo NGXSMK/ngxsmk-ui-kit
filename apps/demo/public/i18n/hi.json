@@ -15,7 +15,8 @@
     "lightMode": "लाइट मोड में स्विच करें",
     "darkMode": "डार्क मोड में स्विच करें",
     "github": "GitHub",
-    "getStarted": "आरंभ करें"
+    "getStarted": "आरंभ करें",
+    "starOnGithub": "GitHub पर स्टार करें"
   },
   "search": {
     "placeholder": "कंपोनेंट्स खोजें (जैसे Button, Kanban, Chat)...",

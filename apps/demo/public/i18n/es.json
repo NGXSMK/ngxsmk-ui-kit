@@ -15,7 +15,8 @@
     "lightMode": "Cambiar a modo claro",
     "darkMode": "Cambiar a modo oscuro",
     "github": "GitHub",
-    "getStarted": "Empezar"
+    "getStarted": "Empezar",
+    "starOnGithub": "Star en GitHub"
   },
   "search": {
     "placeholder": "Buscar componentes (p. ej. Button, Kanban, Chat)...",

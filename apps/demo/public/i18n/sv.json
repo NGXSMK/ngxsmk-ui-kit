@@ -15,7 +15,8 @@
     "lightMode": "Byt till ljust läge",
     "darkMode": "Byt till mörkt läge",
     "github": "GitHub",
-    "getStarted": "Kom igång"
+    "getStarted": "Kom igång",
+    "starOnGithub": "Stjärna på GitHub"
   },
   "search": {
     "placeholder": "Sök komponenter (t.ex. Button, Kanban, Chat)…",
