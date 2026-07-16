@@ -101,7 +101,7 @@
       @for (stat of stats; track stat.label) {
         <div class="hero__stat">
           <span class="hero__stat-value">{{ stat.value }}</span>
-          <span class="hero__stat-label">{{ stat.label }}</span>
+          <span class="hero__stat-label">{{ stat.label | translate }}</span>
         </div>
       }
     </div>
