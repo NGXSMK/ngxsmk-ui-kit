@@ -19,7 +19,7 @@ interface SearchItem {
     <nav class="ngxsmk-nav">
       <div class="ngxsmk-nav__inner">
         <a class="ngxsmk-nav__brand" routerLink="/">
-          <span class="ngxsmk-nav__logo" aria-hidden="true">◈</span>
+          <img class="ngxsmk-nav__logo" src="favicon.svg" alt="" aria-hidden="true" />
           <span class="ngxsmk-nav__wordmark">NGXSMK</span>
         </a>
 
@@ -295,15 +295,9 @@ interface SearchItem {
     }
 
     .ngxsmk-nav__logo {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
       width: 1.5rem;
       height: 1.5rem;
-      border-radius: var(--ngxsmk-radius-md, 0.375rem);
-      background: var(--ngxsmk-color-primary, #7c3aed);
-      color: #ffffff;
-      font-size: 0.75rem;
+      flex-shrink: 0;
     }
 
     .ngxsmk-nav__wordmark {

@@ -1,5 +1,31 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <!-- NGXSMK mark: the site's "//" comment eyebrow on the brand emerald tile. -->
-  <rect width="64" height="64" rx="14" fill="#059669"/>
-  <path d="M21 44 L29 20 M35 44 L43 20" stroke="#ffffff" stroke-width="6" stroke-linecap="round" fill="none"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+  <defs>
+    <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34D399"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+    <linearGradient id="badgeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#0B0F14"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="8" y="8" width="224" height="224" rx="52" fill="url(#badgeGrad)"/>
+  <rect x="8" y="8" width="224" height="224" rx="52" fill="none" stroke="#1F2937" stroke-width="2"/>
+
+  <path d="M 58 150
+           L 80 150
+           L 80 88
+           L 150 152
+           L 150 90
+           L 172 90"
+        fill="none"
+        stroke="url(#emeraldGrad)"
+        stroke-width="11"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+
+  <circle cx="80" cy="88" r="7.5" fill="#6EE7B7"/>
+  <circle cx="150" cy="152" r="7.5" fill="#6EE7B7"/>
+  <circle cx="172" cy="90" r="6" fill="#065F46"/>
 </svg>
