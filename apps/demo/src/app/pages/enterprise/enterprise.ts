@@ -523,7 +523,7 @@ ngxsmk-query-builder {
     { text: 'Compiling @ngxsmk/core...' },
     { text: 'Successfully ran target build (4.2s)' },
     { text: 'npm publish --access public', isInput: true },
-    { text: '+ @ngxsmk/core@1.3.0' },
+    { text: '+ @ngxsmk/core@1.3.1' },
   ];
 
   protected readonly orgNodes: OrgNode[] = [

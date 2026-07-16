@@ -205,6 +205,15 @@
       "changed": "changed"
     },
     "release": {
+      "v131": {
+        "summary": "Keyboard navigation, unified focus rings, and dark-mode fixes.",
+        "changes": {
+          "0": "Keyboard navigation for autocomplete, combobox, multi-select, and multi-selector: arrow keys, Home/End, Enter to select, and Escape to close.",
+          "1": "Every component now draws its focus ring from the --ngxsmk-focus-ring token, replacing three inconsistent patterns.",
+          "2": "prefers-reduced-motion now stops all token-driven motion, not just the shared motion duration.",
+          "3": "Fixed dark-mode colors in 14 components that fell back to light-only values."
+        }
+      },
       "v130": {
         "summary": "SEO utilities, emerald default preset, and documentation improvements.",
         "changes": {
@@ -744,6 +753,7 @@
     "bentoBuildProgress": "Build progress",
     "bentoModules": "7 / 8 modules shipped",
     "bentoBrandSub": "design system",
+    "graphAria": "Animated diagram of Angular signals propagating from a source to connected components",
     "whyEyebrow": "Why NGXSMK",
     "everythingTitle": "Everything you need.",
     "nothingTitle": "Nothing you don't.",

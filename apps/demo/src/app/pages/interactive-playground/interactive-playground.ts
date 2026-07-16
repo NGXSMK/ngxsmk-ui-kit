@@ -8,6 +8,7 @@ import {
 } from '../../core/component-registry';
 import { NgxsmkPropPanel, type PropDescriptor } from '../../playground/prop-panel';
 import { PlaygroundDemoHost } from './playground-demo-host';
+import { AppNav } from '../../nav/nav';
 
 function sel(name: string, opts: string[], def: string, description?: string): PropDescriptor {
   return {
@@ -297,11 +298,13 @@ function buildCode(name: string, values: Record<string, unknown>): string {
 @Component({
   selector: 'app-interactive-playground',
   standalone: true,
-  imports: [RouterLink, NgxsmkPropPanel, PlaygroundDemoHost, TranslatePipe],
+  imports: [RouterLink, NgxsmkPropPanel, PlaygroundDemoHost, TranslatePipe, AppNav],
   template: `
+    <app-nav />
     <div class="pg">
       <header class="pg-header">
         <div class="pg-breadcrumb">
+          <span class="pg-breadcrumb-mark">//</span>
           <a routerLink="/showcase/explorer">{{ 'iplayground.explorer' | translate }}</a>
           <span class="pg-breadcrumb-sep">/</span>
           <span>{{ 'nav.componentPlayground' | translate }}</span>
@@ -562,41 +565,57 @@ function buildCode(name: string, values: Record<string, unknown>): string {
     </div>
   `,
   styles: `
+    /* Workbench sibling of the Templates register: same mono-annotation
+       voice, same token discipline. Everything derives from --ngxsmk-*
+       so presets, dark mode, and reduced motion come for free. */
     .pg {
       max-width: 1400px;
       margin: 0 auto;
       padding: 2rem 1.5rem 4rem;
-      font-family: 'DM Sans', var(--ngxsmk-font-sans, system-ui), sans-serif;
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      color: var(--ngxsmk-color-on-surface);
     }
 
     .pg-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+      font-family: var(--ngxsmk-font-mono);
       font-size: 0.75rem;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
-      margin-bottom: 0.5rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--ngxsmk-color-on-surface-variant);
+      margin-bottom: 0.625rem;
+    }
+    .pg-breadcrumb-mark {
+      color: var(--ngxsmk-color-primary);
     }
     .pg-breadcrumb a {
-      color: var(--ngxsmk-color-primary, #7c3aed);
+      color: var(--ngxsmk-color-on-surface-variant);
       text-decoration: none;
     }
     .pg-breadcrumb a:hover {
-      text-decoration: underline;
+      color: var(--ngxsmk-color-primary);
     }
-    .pg-breadcrumb-sep {
-      margin: 0 0.375rem;
+    .pg-breadcrumb a:focus-visible {
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring, var(--ngxsmk-shadow-focus));
+      border-radius: var(--ngxsmk-radius-sm);
     }
 
     .pg-title {
-      font-size: 1.5rem;
+      font-size: clamp(1.75rem, 3.5vw, 2.25rem);
       font-weight: 800;
-      margin: 0 0 0.25rem;
-      font-family: 'Outfit', sans-serif;
+      margin: 0 0 0.375rem;
+      font-family: 'Plus Jakarta Sans', var(--ngxsmk-font-sans, system-ui), sans-serif;
       letter-spacing: -0.03em;
+      line-height: 1.1;
     }
     .pg-subtitle {
-      font-size: 0.875rem;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      font-size: 0.9375rem;
+      color: var(--ngxsmk-color-on-surface-variant);
       margin: 0 0 1.75rem;
+      max-width: 34rem;
+      line-height: 1.6;
     }
 
     .pg-shell {
@@ -622,24 +641,27 @@ function buildCode(name: string, values: Record<string, unknown>): string {
       left: 0.75rem;
       top: 50%;
       transform: translateY(-50%);
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--ngxsmk-color-on-surface-variant);
       pointer-events: none;
     }
     .pg-search-input {
       width: 100%;
       padding: 0.5rem 0.75rem 0.5rem 2.25rem;
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
-      border-radius: var(--ngxsmk-radius-md, 0.375rem);
-      background: var(--ngxsmk-color-surface, #fff);
+      border: 1px solid var(--ngxsmk-color-outline);
+      border-radius: var(--ngxsmk-radius-md);
+      background: var(--ngxsmk-color-surface);
       font-size: 0.8125rem;
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      font-family: inherit;
+      color: var(--ngxsmk-color-on-surface);
       outline: none;
       box-sizing: border-box;
-      transition: border-color 0.15s;
+      transition:
+        border-color var(--ngxsmk-duration-fast, 150ms) var(--ngxsmk-ease-out),
+        box-shadow var(--ngxsmk-duration-fast, 150ms) var(--ngxsmk-ease-out);
     }
     .pg-search-input:focus {
-      border-color: var(--ngxsmk-color-primary, #7c3aed);
-      box-shadow: 0 0 0 3px color-mix(in srgb, var(--ngxsmk-color-primary) 15%, transparent);
+      border-color: var(--ngxsmk-color-ring);
+      box-shadow: var(--ngxsmk-focus-ring, var(--ngxsmk-shadow-focus));
     }
 
     .pg-groups {
@@ -654,44 +676,50 @@ function buildCode(name: string, values: Record<string, unknown>): string {
       width: 4px;
     }
     .pg-groups::-webkit-scrollbar-thumb {
-      background: var(--ngxsmk-color-outline, #e4e4e7);
+      background: var(--ngxsmk-color-outline);
       border-radius: 2px;
     }
     .pg-group-label {
+      font-family: var(--ngxsmk-font-mono);
       font-size: 0.625rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
+      font-weight: 500;
+      letter-spacing: var(--ngxsmk-tracking-wide, 0.08em);
       text-transform: uppercase;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--ngxsmk-color-on-surface-variant);
       margin-bottom: 0.375rem;
     }
     .pg-item {
       display: block;
       width: 100%;
-      text-align: left;
+      text-align: start;
       padding: 0.4rem 0.625rem;
       border: none;
-      border-radius: var(--ngxsmk-radius-md, 0.375rem);
+      border-radius: var(--ngxsmk-radius-md);
       background: transparent;
       cursor: pointer;
       font-family: inherit;
       font-size: 0.8125rem;
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      color: var(--ngxsmk-color-on-surface);
       transition:
-        background 0.12s,
-        color 0.12s;
+        background var(--ngxsmk-duration-fast, 120ms) var(--ngxsmk-ease-out),
+        color var(--ngxsmk-duration-fast, 120ms) var(--ngxsmk-ease-out);
     }
     .pg-item:hover {
-      background: var(--ngxsmk-color-surface-variant, #f4f4f5);
+      background: var(--ngxsmk-color-surface-hover);
     }
+    .pg-item:focus-visible {
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring, var(--ngxsmk-shadow-focus));
+    }
+    /* Inked stamp — same active treatment as the register's filter tabs. */
     .pg-item.active {
-      background: var(--ngxsmk-color-primary-container, #ede9fe);
-      color: var(--ngxsmk-color-on-primary-container, #4c1d95);
+      background: var(--ngxsmk-color-on-surface);
+      color: var(--ngxsmk-color-surface);
       font-weight: 600;
     }
     .pg-empty-hint {
       font-size: 0.8125rem;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--ngxsmk-color-on-surface-variant);
     }
 
     /* Main */
@@ -702,57 +730,66 @@ function buildCode(name: string, values: Record<string, unknown>): string {
       gap: 1.25rem;
     }
 
+    /* The stage: bench top with a title-block bar. */
     .pg-stage {
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
-      border-radius: var(--ngxsmk-radius-lg, 0.5rem);
+      border: 1px solid var(--ngxsmk-color-outline);
+      border-radius: var(--ngxsmk-radius-lg);
       overflow: hidden;
-      background: var(--ngxsmk-color-surface, #fff);
+      background: var(--ngxsmk-color-surface);
     }
     .pg-stage-bar {
       display: flex;
       align-items: center;
       gap: 0.5rem;
       padding: 0.5rem 0.75rem;
-      border-bottom: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
-      background: var(--ngxsmk-color-surface, #fff);
+      border-bottom: 1px solid var(--ngxsmk-color-outline);
+      background: var(--ngxsmk-color-surface);
     }
     .pg-stage-dot {
       width: 0.5rem;
       height: 0.5rem;
       border-radius: 50%;
-      background: #22c55e;
+      background: var(--ngxsmk-color-success);
     }
     .pg-stage-name {
-      font-family: ui-monospace, monospace;
+      font-family: var(--ngxsmk-font-mono);
       font-size: 0.75rem;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      font-weight: 500;
+      color: var(--ngxsmk-color-on-surface);
     }
     .pg-stage-badge {
+      font-family: var(--ngxsmk-font-mono);
       font-size: 0.625rem;
-      font-weight: 700;
+      font-weight: 500;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: #16a34a;
-      background: #f0fdf4;
+      letter-spacing: var(--ngxsmk-tracking-wide, 0.08em);
+      color: var(--ngxsmk-color-on-success-container);
+      background: var(--ngxsmk-color-success-container);
       padding: 0.1rem 0.4rem;
-      border-radius: 9999px;
+      border-radius: var(--ngxsmk-radius-sm);
     }
     .pg-stage-copy {
-      margin-left: auto;
+      margin-inline-start: auto;
       padding: 0.25rem 0.625rem;
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-sm);
-      background: var(--ngxsmk-color-surface, #fff);
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      background: var(--ngxsmk-color-surface);
+      color: var(--ngxsmk-color-on-surface-variant);
       font-size: 0.6875rem;
       font-weight: 600;
       cursor: pointer;
       font-family: inherit;
-      transition: all 0.12s;
+      transition:
+        border-color var(--ngxsmk-duration-fast, 120ms) var(--ngxsmk-ease-out),
+        color var(--ngxsmk-duration-fast, 120ms) var(--ngxsmk-ease-out);
     }
     .pg-stage-copy:hover {
-      border-color: var(--ngxsmk-color-primary, #7c3aed);
-      color: var(--ngxsmk-color-primary, #7c3aed);
+      border-color: var(--ngxsmk-color-primary);
+      color: var(--ngxsmk-color-primary);
+    }
+    .pg-stage-copy:focus-visible {
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring, var(--ngxsmk-shadow-focus));
     }
     .pg-stage-canvas {
       min-height: 220px;
@@ -760,8 +797,8 @@ function buildCode(name: string, values: Record<string, unknown>): string {
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: var(--ngxsmk-color-surface, #fff);
-      background-image: radial-gradient(var(--ngxsmk-color-outline, #e4e4e7) 1px, transparent 1px);
+      background-color: var(--ngxsmk-color-surface);
+      background-image: radial-gradient(var(--ngxsmk-color-outline) 1px, transparent 1px);
       background-size: 16px 16px;
     }
 
@@ -771,28 +808,33 @@ function buildCode(name: string, values: Record<string, unknown>): string {
       gap: 1.25rem;
     }
     .pg-card {
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
-      border-radius: var(--ngxsmk-radius-lg, 0.5rem);
-      background: var(--ngxsmk-color-surface, #fff);
+      border: 1px solid var(--ngxsmk-color-outline);
+      border-radius: var(--ngxsmk-radius-lg);
+      background: var(--ngxsmk-color-surface);
       overflow: hidden;
     }
+    /* Panel titles are mono annotations — the title-block voice. */
     .pg-card-title {
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin: 0;
       padding: 0.75rem 1rem;
-      font-size: 0.8125rem;
-      font-weight: 700;
-      font-family: 'Outfit', sans-serif;
-      border-bottom: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      font-family: var(--ngxsmk-font-mono);
+      font-size: 0.6875rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: var(--ngxsmk-tracking-wide, 0.08em);
+      color: var(--ngxsmk-color-on-surface-variant);
+      border-bottom: 1px solid var(--ngxsmk-color-outline);
     }
     .pg-card-hint {
+      font-family: var(--ngxsmk-font-mono);
       font-size: 0.6875rem;
-      font-weight: 600;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
-      background: var(--ngxsmk-color-surface-variant, #f4f4f5);
-      border-radius: 9999px;
+      font-weight: 500;
+      color: var(--ngxsmk-color-on-surface);
+      background: var(--ngxsmk-color-surface-variant);
+      border-radius: var(--ngxsmk-radius-sm);
       padding: 0.1rem 0.45rem;
     }
     .pg-card-body {
@@ -800,21 +842,21 @@ function buildCode(name: string, values: Record<string, unknown>): string {
     }
     .pg-muted {
       font-size: 0.8125rem;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--ngxsmk-color-on-surface-variant);
       margin: 0;
     }
     .pg-code {
       margin: 0;
       padding: 0.875rem;
-      background: var(--ngxsmk-color-surface-variant, #f4f4f5);
-      border-radius: var(--ngxsmk-radius-md, 0.375rem);
-      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      background: var(--ngxsmk-color-surface-variant);
+      border-radius: var(--ngxsmk-radius-md);
+      font-family: var(--ngxsmk-font-mono);
       font-size: 0.75rem;
       line-height: 1.6;
       overflow-x: auto;
       white-space: pre-wrap;
       word-break: break-word;
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      color: var(--ngxsmk-color-on-surface);
     }
 
     /* API tables */
@@ -824,19 +866,22 @@ function buildCode(name: string, values: Record<string, unknown>): string {
       gap: 1.25rem;
     }
     .pg-detail-section {
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
-      border-radius: var(--ngxsmk-radius-lg, 0.5rem);
-      background: var(--ngxsmk-color-surface, #fff);
+      border: 1px solid var(--ngxsmk-color-outline);
+      border-radius: var(--ngxsmk-radius-lg);
+      background: var(--ngxsmk-color-surface);
       overflow: hidden;
     }
     .pg-detail-section-title {
       margin: 0;
       padding: 0.75rem 1rem;
-      font-size: 0.8125rem;
-      font-weight: 700;
-      font-family: 'Outfit', sans-serif;
-      border-bottom: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
-      background: var(--ngxsmk-color-surface, #fff);
+      font-family: var(--ngxsmk-font-mono);
+      font-size: 0.6875rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: var(--ngxsmk-tracking-wide, 0.08em);
+      color: var(--ngxsmk-color-on-surface-variant);
+      border-bottom: 1px solid var(--ngxsmk-color-outline);
+      background: var(--ngxsmk-color-surface);
     }
     .pg-table-wrap {
       overflow-x: auto;
@@ -848,31 +893,33 @@ function buildCode(name: string, values: Record<string, unknown>): string {
     }
     .pg-table th,
     .pg-table td {
-      text-align: left;
+      text-align: start;
       padding: 0.5rem 1rem;
-      border-bottom: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      border-bottom: 1px solid var(--ngxsmk-color-outline);
+      color: var(--ngxsmk-color-on-surface);
       vertical-align: top;
     }
     .pg-table th {
-      font-weight: 600;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
-      font-size: 0.6875rem;
+      font-family: var(--ngxsmk-font-mono);
+      font-weight: 500;
+      color: var(--ngxsmk-color-on-surface-variant);
+      font-size: 0.625rem;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      background: var(--ngxsmk-color-surface-variant, #f4f4f5);
+      letter-spacing: var(--ngxsmk-tracking-wide, 0.08em);
+      background: var(--ngxsmk-color-surface-variant);
     }
     .pg-table tr:last-child td {
       border-bottom: none;
     }
     .pg-table code {
-      font-family: ui-monospace, monospace;
+      font-family: var(--ngxsmk-font-mono);
       font-size: 0.72rem;
-      background: var(--ngxsmk-color-surface-variant, #f4f4f5);
+      background: var(--ngxsmk-color-surface-variant);
       padding: 0.125rem 0.25rem;
-      border-radius: 2px;
+      border-radius: var(--ngxsmk-radius-sm);
     }
 
+    /* Blank sheet — matches the register's empty state. */
     .pg-empty {
       display: flex;
       flex-direction: column;
@@ -880,20 +927,22 @@ function buildCode(name: string, values: Record<string, unknown>): string {
       justify-content: center;
       padding: 4rem 2rem;
       text-align: center;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
-      border: 1px dashed var(--ngxsmk-color-outline, #e4e4e7);
-      border-radius: var(--ngxsmk-radius-xl, 0.75rem);
-      background: var(--ngxsmk-color-surface, #fff);
+      color: var(--ngxsmk-color-on-surface-variant);
+      border: 1px dashed var(--ngxsmk-color-outline-strong);
+      border-radius: var(--ngxsmk-radius-xl);
+      background: var(--ngxsmk-color-surface);
     }
     .pg-empty-icon {
       font-size: 2.5rem;
-      opacity: 0.3;
+      opacity: var(--ngxsmk-opacity-faint, 0.3);
       margin-bottom: 0.75rem;
     }
     .pg-empty h2 {
       margin: 0 0 0.25rem;
+      font-family: 'Plus Jakarta Sans', var(--ngxsmk-font-sans, system-ui), sans-serif;
       font-size: 1.125rem;
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      letter-spacing: -0.015em;
+      color: var(--ngxsmk-color-on-surface);
     }
     .pg-empty p {
       margin: 0;

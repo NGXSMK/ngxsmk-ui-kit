@@ -36,10 +36,15 @@ interface ASTNode {
   attributes: Record<string, any>;
   children: ASTNode[];
   text?: string;
+  /** Absolute offset of the opening '<' in the editor source (inspector click-to-reveal). */
+  start?: number;
 }
 
-function parseJSX(code: string): ASTNode[] {
-  code = code.replace(/\{\/\*[\s\S]*?\*\/\}/g, '').replace(/<!--[\s\S]*?-->/g, '');
+function parseJSX(code: string, offset = 0): ASTNode[] {
+  // Blank comments out with same-length whitespace so every node's source
+  // offset stays valid against the original editor text.
+  const blank = (m: string) => ' '.repeat(m.length);
+  code = code.replace(/\{\/\*[\s\S]*?\*\/\}/g, blank).replace(/<!--[\s\S]*?-->/g, blank);
   let pos = 0;
 
   function parseNode(): ASTNode | null {
@@ -98,9 +103,11 @@ function parseJSX(code: string): ASTNode[] {
               else if (code.charAt(pos) === '}') braceCount--;
               pos++;
             }
-            const rawVal = code.substring(valStart, pos - 1).trim();
+            const rawFull = code.substring(valStart, pos - 1);
+            const rawVal = rawFull.trim();
             if (rawVal.startsWith('<')) {
-              attributes[attrName] = parseJSX(rawVal)[0] || null;
+              const lead = rawFull.length - rawFull.trimStart().length;
+              attributes[attrName] = parseJSX(rawVal, offset + valStart + lead)[0] || null;
             } else if (rawVal === 'true') {
               attributes[attrName] = true;
             } else if (rawVal === 'false') {
@@ -120,7 +127,7 @@ function parseJSX(code: string): ASTNode[] {
 
       if (pos < code.length && code.startsWith('/>', pos)) {
         pos += 2;
-        return { type: tagName, attributes, children: [] };
+        return { type: tagName, attributes, children: [], start: offset + tagStart - 1 };
       }
 
       if (pos < code.length && code.charAt(pos) === '>') {
@@ -142,7 +149,7 @@ function parseJSX(code: string): ASTNode[] {
             children.push(child);
           }
         }
-        return { type: tagName, attributes, children };
+        return { type: tagName, attributes, children, start: offset + tagStart - 1 };
       }
     } else {
       const textStart = pos;
@@ -195,14 +202,17 @@ function parseJSX(code: string): ASTNode[] {
     @if (node().type === 'TEXT_NODE') {
       {{ node().text }}
     } @else {
+      <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
       <div
         class="inspect-wrapper"
         [class.inspecting]="parent.inspectMode()"
         [class.hovered]="isInspected()"
+        [class.selected]="parent.inspectMode() && parent.inspectedNode() === node()"
         (mouseenter)="onMouseEnter($event)"
         (mouseleave)="onMouseLeave()"
+        (click)="onInspectClick($event)"
       >
-        @if (parent.inspectMode() && isInspected()) {
+        @if (parent.inspectMode() && (isInspected() || parent.inspectedNode() === node())) {
           <div class="inspect-label">{{ node().type }}</div>
         }
 
@@ -397,17 +407,23 @@ function parseJSX(code: string): ASTNode[] {
       transition: outline 0.15s ease;
     }
     .inspect-wrapper.inspecting:hover {
-      outline: 1.5px solid var(--ngxsmk-color-primary, #0064e0);
+      outline: 1.5px solid var(--ngxsmk-color-primary);
       outline-offset: 2px;
-      border-radius: 4px;
+      border-radius: var(--ngxsmk-radius-sm);
       cursor: crosshair;
+    }
+    /* Pinned by click: stays outlined after the pointer leaves. */
+    .inspect-wrapper.selected {
+      outline: 1.5px solid var(--ngxsmk-color-primary);
+      outline-offset: 2px;
+      border-radius: var(--ngxsmk-radius-sm);
     }
     .inspect-label {
       position: absolute;
       top: -18px;
       left: 2px;
-      background: var(--ngxsmk-color-primary, #0064e0);
-      color: #ffffff;
+      background: var(--ngxsmk-color-primary);
+      color: var(--ngxsmk-color-on-primary);
       font-size: 0.625rem;
       font-family: var(--ngxsmk-font-mono, monospace);
       font-weight: 700;
@@ -482,6 +498,14 @@ export class AstRenderer {
 
   protected onMouseLeave() {
     this.isInspected.set(false);
+  }
+
+  /** Inspect mode: click any rendered element to reveal its source in the editor. */
+  protected onInspectClick(event: MouseEvent) {
+    if (!this.parent.inspectMode()) return;
+    event.preventDefault();
+    event.stopPropagation();
+    this.parent.revealNodeSource(this.node());
   }
 }
 
@@ -1260,7 +1284,7 @@ type RadiusKey = keyof typeof RADII;
               type="button"
               class="toolbar-btn icon-btn"
               [class.active]="inspectMode()"
-              (click)="inspectMode.set(!inspectMode())"
+              (click)="toggleInspect()"
               [attr.title]="'playground.toggleInspector' | translate"
             >
               <svg
@@ -1354,7 +1378,9 @@ type RadiusKey = keyof typeof RADII;
           class="canvas-scroll-area"
           [class.dark]="mode() === 'dark'"
           [class.show-grid]="showGrid()"
-          [style.background]="mode() === 'dark' ? '#09090b' : '#fafafa'"
+          [style.background]="
+            mode() === 'dark' ? 'var(--ngxsmk-color-neutral-950)' : 'var(--ngxsmk-color-background)'
+          "
         >
           <div
             class="canvas-viewport"
@@ -1400,6 +1426,14 @@ type RadiusKey = keyof typeof RADII;
             <button
               type="button"
               class="modal-tab-btn"
+              [class.active]="exportFormat() === 'scss'"
+              (click)="exportFormat.set('scss')"
+            >
+              SCSS
+            </button>
+            <button
+              type="button"
+              class="modal-tab-btn"
               [class.active]="exportFormat() === 'tailwind'"
               (click)="exportFormat.set('tailwind')"
             >
@@ -1412,6 +1446,14 @@ type RadiusKey = keyof typeof RADII;
               (click)="exportFormat.set('stylex')"
             >
               {{ 'playground.export.stylex' | translate }}
+            </button>
+            <button
+              type="button"
+              class="modal-tab-btn"
+              [class.active]="exportFormat() === 'figma'"
+              (click)="exportFormat.set('figma')"
+            >
+              Figma
             </button>
           </nav>
 
@@ -1457,7 +1499,7 @@ type RadiusKey = keyof typeof RADII;
       overflow: hidden;
     }
 
-    /* ---- PREMIUM CUSTOM SCROLLBARS ---- */
+    /* ---- CUSTOM SCROLLBARS ---- */
     ::-webkit-scrollbar {
       width: 6px;
       height: 6px;
@@ -1465,16 +1507,15 @@ type RadiusKey = keyof typeof RADII;
     ::-webkit-scrollbar-track {
       background: transparent;
     }
+    /* Default thumb follows the theme; the always-dark editor pane and
+       dark preview override with a light thumb. */
     ::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.15);
+      background: var(--ngxsmk-color-outline-strong);
       border-radius: 99px;
     }
     .dark ::-webkit-scrollbar-thumb,
     .editor-panel ::-webkit-scrollbar-thumb {
       background: rgba(255, 255, 255, 0.12);
-    }
-    .theme-panel ::-webkit-scrollbar-thumb {
-      background: rgba(0, 0, 0, 0.15);
     }
 
     .pg-container {
@@ -1484,7 +1525,9 @@ type RadiusKey = keyof typeof RADII;
       background: var(--ngxsmk-color-background);
     }
 
-    /* ---- LEFT SIDENAV (Glassmorphic Glows) ---- */
+    /* ---- LEFT SIDENAV ----
+       Instrument rail: always dark like a camera body, but built from
+       the neutral scale so every preset harmonizes with it. */
     .pg-sidenav {
       display: flex;
       flex-direction: column;
@@ -1492,8 +1535,8 @@ type RadiusKey = keyof typeof RADII;
       gap: var(--ngxsmk-space-3);
       width: 3.5rem;
       padding: var(--ngxsmk-space-4) 0;
-      background: #09090b;
-      border-right: 1px solid #1f1f23;
+      background: var(--ngxsmk-color-neutral-950);
+      border-inline-end: 1px solid var(--ngxsmk-color-neutral-800);
     }
 
     .sidenav-btn {
@@ -1502,25 +1545,34 @@ type RadiusKey = keyof typeof RADII;
       justify-content: center;
       width: 2.5rem;
       height: 2.5rem;
-      border-radius: 8px;
+      border-radius: var(--ngxsmk-radius-md);
       border: none;
       background: transparent;
-      color: #71717a;
+      color: var(--ngxsmk-color-neutral-400);
       cursor: pointer;
-      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      transition:
+        color var(--ngxsmk-duration-normal, 250ms) var(--ngxsmk-ease-in-out),
+        background var(--ngxsmk-duration-normal, 250ms) var(--ngxsmk-ease-in-out),
+        box-shadow var(--ngxsmk-duration-normal, 250ms) var(--ngxsmk-ease-in-out);
     }
 
     .sidenav-btn:hover {
       color: #ffffff;
-      background: #1f1f23;
+      background: var(--ngxsmk-color-neutral-800);
     }
 
+    .sidenav-btn:focus-visible {
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring, var(--ngxsmk-shadow-focus));
+    }
+
+    /* Active = indicator light: primary edge on the rail. */
     .sidenav-btn.active {
       color: #ffffff;
-      background: #27272a;
+      background: var(--ngxsmk-color-neutral-700);
       box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.1),
-        0 0 12px rgba(255, 255, 255, 0.05);
+        inset 2px 0 0 var(--ngxsmk-color-primary),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
 
     /* ---- CONFIG PANEL (Obsidian Glassmorphism) ---- */
@@ -1534,8 +1586,8 @@ type RadiusKey = keyof typeof RADII;
     }
 
     .dark .pg-panel {
-      background: rgba(24, 24, 27, 0.85);
-      border-right: 1px solid #27272a;
+      background: color-mix(in srgb, var(--ngxsmk-color-neutral-900) 85%, transparent);
+      border-right: 1px solid var(--ngxsmk-color-neutral-800);
     }
 
     .panel-head {
@@ -1546,7 +1598,7 @@ type RadiusKey = keyof typeof RADII;
     }
 
     .dark .panel-head {
-      border-bottom: 1px solid #27272a;
+      border-bottom: 1px solid var(--ngxsmk-color-neutral-800);
     }
 
     .panel-content {
@@ -1554,17 +1606,17 @@ type RadiusKey = keyof typeof RADII;
       overflow-y: auto;
     }
 
-    /* ---- CODE EDITOR VIEW (Obsidian theme syntax highlight) ---- */
+    /* ---- CODE EDITOR VIEW (always-dark instrument surface) ---- */
     .editor-panel {
       padding: 0;
-      background: #09090b;
+      background: var(--ngxsmk-color-neutral-950);
     }
 
     .editor-container {
       display: flex;
       flex-direction: row;
       height: 100%;
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-family: var(--ngxsmk-font-mono);
       font-size: 0.8125rem;
       line-height: 1.6;
       position: relative;
@@ -1574,10 +1626,10 @@ type RadiusKey = keyof typeof RADII;
       padding: var(--ngxsmk-space-4) 0;
       width: 2.75rem;
       text-align: right;
-      color: #3f3f46;
+      color: var(--ngxsmk-color-neutral-600);
       user-select: none;
-      background: #09090b;
-      border-right: 1px solid #1f1f23;
+      background: var(--ngxsmk-color-neutral-950);
+      border-right: 1px solid var(--ngxsmk-color-neutral-800);
       overflow-y: hidden;
       font-size: 0.75rem;
     }
@@ -1620,8 +1672,8 @@ type RadiusKey = keyof typeof RADII;
     }
 
     .highlight-pre {
-      background: #09090b;
-      color: #a1a1aa;
+      background: var(--ngxsmk-color-neutral-950);
+      color: var(--ngxsmk-color-neutral-300);
       z-index: 1;
       pointer-events: none;
     }
@@ -1667,12 +1719,19 @@ type RadiusKey = keyof typeof RADII;
       padding: var(--ngxsmk-space-3) var(--ngxsmk-space-4);
       border: none;
       background: transparent;
+      font-family: inherit;
       font-size: 0.8125rem;
       font-weight: 600;
       color: var(--ngxsmk-color-on-surface-variant);
       cursor: pointer;
       position: relative;
-      transition: color 0.2s ease;
+      transition: color var(--ngxsmk-duration-normal, 200ms) var(--ngxsmk-ease-out);
+    }
+
+    .theme-tab-btn:focus-visible {
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring, var(--ngxsmk-shadow-focus));
+      border-radius: var(--ngxsmk-radius-sm);
     }
 
     .theme-tab-btn.active {
@@ -1789,11 +1848,20 @@ type RadiusKey = keyof typeof RADII;
       border: none;
       background: transparent;
       border-radius: calc(var(--ngxsmk-radius-md) - 2px);
+      font-family: inherit;
       font-size: 0.725rem;
       font-weight: 600;
       color: var(--ngxsmk-color-on-surface-variant);
       cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      transition:
+        background var(--ngxsmk-duration-normal, 200ms) var(--ngxsmk-ease-in-out),
+        color var(--ngxsmk-duration-normal, 200ms) var(--ngxsmk-ease-in-out),
+        box-shadow var(--ngxsmk-duration-normal, 200ms) var(--ngxsmk-ease-in-out);
+    }
+
+    .seg-btn:focus-visible {
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring, var(--ngxsmk-shadow-focus));
     }
 
     .seg-btn.active {
@@ -1861,7 +1929,7 @@ type RadiusKey = keyof typeof RADII;
     }
 
     .dark .preview-toolbar {
-      border-bottom: 1px solid #27272a;
+      border-bottom: 1px solid var(--ngxsmk-color-neutral-800);
     }
 
     .toolbar-btn {
@@ -1869,11 +1937,20 @@ type RadiusKey = keyof typeof RADII;
       border: 1px solid transparent;
       background: transparent;
       border-radius: var(--ngxsmk-radius-md);
+      font-family: inherit;
       font-size: 0.75rem;
       font-weight: 600;
       color: var(--ngxsmk-color-on-surface-variant);
       cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      transition:
+        background var(--ngxsmk-duration-normal, 200ms) var(--ngxsmk-ease-in-out),
+        color var(--ngxsmk-duration-normal, 200ms) var(--ngxsmk-ease-in-out),
+        border-color var(--ngxsmk-duration-normal, 200ms) var(--ngxsmk-ease-in-out);
+    }
+
+    .toolbar-btn:focus-visible {
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring, var(--ngxsmk-shadow-focus));
     }
 
     .toolbar-btn:hover {
@@ -1900,7 +1977,7 @@ type RadiusKey = keyof typeof RADII;
 
     .toolbar-btn.text-btn.primary {
       background: var(--ngxsmk-color-primary);
-      color: #ffffff;
+      color: var(--ngxsmk-color-on-primary);
       border-color: var(--ngxsmk-color-primary);
     }
 
@@ -1938,12 +2015,15 @@ type RadiusKey = keyof typeof RADII;
     }
 
     .canvas-scroll-area.show-grid {
-      background-image: radial-gradient(var(--ngxsmk-color-outline) 1px, transparent 1px);
+      background-image: radial-gradient(
+        color-mix(in srgb, var(--ngxsmk-color-outline-strong) 70%, transparent) 1px,
+        transparent 1px
+      );
       background-size: 20px 20px;
     }
 
     .canvas-scroll-area.dark.show-grid {
-      background-image: radial-gradient(#27272a 1px, transparent 1px);
+      background-image: radial-gradient(var(--ngxsmk-color-neutral-800) 1px, transparent 1px);
       background-size: 20px 20px;
     }
 
@@ -2036,11 +2116,20 @@ type RadiusKey = keyof typeof RADII;
       border: none;
       background: transparent;
       border-radius: var(--ngxsmk-radius-md);
+      font-family: inherit;
       font-size: 0.75rem;
       font-weight: 600;
       color: var(--ngxsmk-color-on-surface-variant);
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition:
+        background var(--ngxsmk-duration-normal, 200ms) var(--ngxsmk-ease-out),
+        color var(--ngxsmk-duration-normal, 200ms) var(--ngxsmk-ease-out),
+        box-shadow var(--ngxsmk-duration-normal, 200ms) var(--ngxsmk-ease-out);
+    }
+
+    .modal-tab-btn:focus-visible {
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring, var(--ngxsmk-shadow-focus));
     }
 
     .modal-tab-btn.active {
@@ -2051,14 +2140,14 @@ type RadiusKey = keyof typeof RADII;
 
     .modal-body {
       padding: var(--ngxsmk-space-5);
-      background: #09090b;
+      background: var(--ngxsmk-color-neutral-950);
       overflow-y: auto;
       max-height: 350px;
     }
 
     .export-pre {
       margin: 0;
-      font-family: 'JetBrains Mono', monospace;
+      font-family: var(--ngxsmk-font-mono);
       font-size: 0.8125rem;
       line-height: 1.6;
       color: #34d399;
@@ -2112,6 +2201,7 @@ type RadiusKey = keyof typeof RADII;
 export class PlaygroundPage {
   @ViewChild('linesEl') linesEl?: ElementRef<HTMLElement>;
   @ViewChild('highlightPreEl') highlightPreEl?: ElementRef<HTMLElement>;
+  @ViewChild('textareaEl') textareaEl?: ElementRef<HTMLTextAreaElement>;
 
   protected readonly tab = signal<'code' | 'theme'>('code');
   protected readonly themeTab = signal<'base' | 'components' | 'advanced'>('base');
@@ -2150,13 +2240,50 @@ export class PlaygroundPage {
   protected readonly viewportMode = signal<'desktop' | 'phone' | 'expand'>('expand');
   protected readonly showGrid = signal(true);
   readonly inspectMode = signal(false);
+  /** Node pinned by an inspector click; drives the persistent outline + label. */
+  readonly inspectedNode = signal<ASTNode | null>(null);
+
+  protected toggleInspect(): void {
+    const next = !this.inspectMode();
+    this.inspectMode.set(next);
+    if (!next) {
+      this.inspectedNode.set(null);
+    }
+  }
+
+  /**
+   * Inspector click-to-reveal: pin the node, switch to the code editor,
+   * scroll to the node's source, and select its opening tag.
+   */
+  revealNodeSource(node: ASTNode): void {
+    this.inspectedNode.set(node);
+    if (node.start == null) return;
+    this.tab.set('code');
+    // The editor sits behind an @if — let it render before driving the DOM.
+    setTimeout(() => {
+      const ta = this.textareaEl?.nativeElement;
+      if (!ta) return;
+      const code = this.editorCode();
+      const start = Math.min(node.start ?? 0, code.length);
+      const tagEnd = Math.min(start + 1 + node.type.length, code.length);
+      ta.focus();
+      ta.setSelectionRange(start, tagEnd);
+      const line = code.slice(0, start).split('\n').length - 1;
+      const lineHeight = parseFloat(getComputedStyle(ta).lineHeight) || 21;
+      ta.scrollTop = Math.max(0, line * lineHeight - ta.clientHeight / 3);
+      // Keep the highlight overlay and gutter in sync with the new position.
+      ta.dispatchEvent(new Event('scroll'));
+    });
+  }
 
   // Link status
   protected readonly linkCopied = signal(false);
 
   // Exporter modal states
   readonly showDownloadModal = signal(false);
-  protected readonly exportFormat = signal<'css' | 'tailwind' | 'stylex'>('css');
+  protected readonly exportFormat = signal<'css' | 'scss' | 'tailwind' | 'stylex' | 'figma'>(
+    'css',
+  );
   protected readonly exportCopied = signal(false);
 
   // Dropdown menus configurations
@@ -2262,7 +2389,9 @@ export class PlaygroundPage {
         const start = returnIndex + 8;
         const end = code.lastIndexOf(');');
         if (end !== -1) {
-          return parseJSX(code.substring(start, end));
+          // Pass the substring's base offset so node.start stays absolute
+          // in the editor text (inspector click-to-reveal relies on it).
+          return parseJSX(code.substring(start, end), start);
         }
       }
       return parseJSX(code);
@@ -2397,6 +2526,40 @@ export class PlaygroundPage {
     const fmt = this.exportFormat();
     if (fmt === 'css') {
       return this.generatedCss();
+    } else if (fmt === 'scss') {
+      // SCSS variables mirroring the CSS custom properties, plus a :root
+      // block so a single @use wires the theme up.
+      const t = this.tokens();
+      const keys = Object.keys(t).filter((k) => k.startsWith('--ngxsmk-'));
+      const vars = keys.map((k) => `$${k.slice(2)}: ${t[k]};`).join('\n');
+      const root = keys.map((k) => `  ${k}: #{$${k.slice(2)}};`).join('\n');
+      return `// NGXSMK theme tokens — generated by the playground\n${vars}\n\n:root {\n${root}\n}`;
+    } else if (fmt === 'figma') {
+      // Tokens Studio (Figma Tokens plugin) JSON. Only the source design
+      // decisions are exported — derived values (color-mix) stay in code.
+      const radius = this.radiusPx();
+      const figma = {
+        ngxsmk: {
+          color: {
+            primary: { value: this.accent(), type: 'color' },
+            surface: { value: this.cardBg(), type: 'color' },
+            background: { value: this.appBg(), type: 'color' },
+            'on-surface': { value: this.text(), type: 'color' },
+            outline: { value: this.neutral(), type: 'color' },
+          },
+          radius: {
+            sm: { value: `${Math.max(2, radius - 2)}px`, type: 'borderRadius' },
+            base: { value: `${radius}px`, type: 'borderRadius' },
+            lg: { value: `${radius * 1.5}px`, type: 'borderRadius' },
+            xl: { value: `${radius * 2}px`, type: 'borderRadius' },
+          },
+          font: {
+            heading: { value: this.headingFont(), type: 'fontFamilies' },
+            body: { value: this.bodyFont(), type: 'fontFamilies' },
+          },
+        },
+      };
+      return JSON.stringify(figma, null, 2);
     } else if (fmt === 'tailwind') {
       const a = this.accent();
       const n = this.neutral();
@@ -2451,6 +2614,13 @@ export const tokens = stylex.defineVars({
     } else if (fmt === 'stylex') {
       filename = 'tokens.stylex.js';
       type = 'application/javascript';
+    } else if (fmt === 'scss') {
+      filename = `_ngxsmk-theme.scss`;
+      type = 'text/x-scss';
+    } else if (fmt === 'figma') {
+      // Import via the Tokens Studio plugin in Figma.
+      filename = 'ngxsmk.tokens.json';
+      type = 'application/json';
     }
 
     const blob = new Blob([code], { type });

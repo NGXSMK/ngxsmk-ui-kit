@@ -205,6 +205,15 @@
       "changed": "مُغيّر"
     },
     "release": {
+      "v131": {
+        "summary": "التنقل بلوحة المفاتيح، وحلقات تركيز موحّدة، وإصلاحات الوضع الداكن.",
+        "changes": {
+          "0": "التنقل بلوحة المفاتيح في autocomplete وcombobox وmulti-select وmulti-selector: مفاتيح الأسهم، وHome/End، وEnter للاختيار، وEscape للإغلاق.",
+          "1": "يرسم كل مكوّن الآن حلقة التركيز من الرمز --ngxsmk-focus-ring بدلاً من ثلاثة أنماط غير متسقة.",
+          "2": "يوقف prefers-reduced-motion الآن كل الحركات المعتمدة على الرموز، وليس مدة الحركة المشتركة فقط.",
+          "3": "إصلاح ألوان الوضع الداكن في 14 مكوّناً كانت تعود إلى قيم مخصصة للوضع الفاتح فقط."
+        }
+      },
       "v130": {
         "summary": "أدوات SEO، وإعداد emerald الافتراضي، وتحسينات التوثيق.",
         "changes": {
@@ -744,6 +753,7 @@
     "bentoBuildProgress": "تقدم البناء",
     "bentoModules": "7 / 8 وحدات مُصدَرة",
     "bentoBrandSub": "نظام تصميم",
+    "graphAria": "Animated diagram of Angular signals propagating from a source to connected components",
     "whyEyebrow": "لماذا NGXSMK",
     "everythingTitle": "كل ما تحتاجه.",
     "nothingTitle": "ولا شيء مما لا تحتاجه.",

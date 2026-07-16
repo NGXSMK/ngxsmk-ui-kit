@@ -205,6 +205,15 @@
       "changed": "geändert"
     },
     "release": {
+      "v131": {
+        "summary": "Tastaturnavigation, einheitliche Fokusringe und Fehlerbehebungen im Dark Mode.",
+        "changes": {
+          "0": "Tastaturnavigation für Autocomplete, Combobox, Multi-Select und Multi-Selector: Pfeiltasten, Pos1/Ende, Enter zum Auswählen und Escape zum Schließen.",
+          "1": "Jede Komponente zeichnet ihren Fokusring jetzt über das Token --ngxsmk-focus-ring und ersetzt damit drei uneinheitliche Muster.",
+          "2": "prefers-reduced-motion stoppt jetzt alle token-gesteuerten Bewegungen, nicht nur die gemeinsame Bewegungsdauer.",
+          "3": "Dark-Mode-Farben in 14 Komponenten korrigiert, die auf reine Light-Mode-Werte zurückfielen."
+        }
+      },
       "v130": {
         "summary": "SEO-Dienstprogramme, smaragdgrüne Standardvoreinstellung und Dokumentationsverbesserungen.",
         "changes": {
@@ -744,6 +753,7 @@
     "bentoBuildProgress": "Build-Fortschritt",
     "bentoModules": "7 / 8 Module ausgeliefert",
     "bentoBrandSub": "Designsystem",
+    "graphAria": "Animated diagram of Angular signals propagating from a source to connected components",
     "whyEyebrow": "Warum NGXSMK",
     "everythingTitle": "Alles, was Sie brauchen.",
     "nothingTitle": "Nichts, was Sie nicht brauchen.",

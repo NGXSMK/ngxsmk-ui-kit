@@ -205,6 +205,15 @@
       "changed": "变更"
     },
     "release": {
+      "v131": {
+        "summary": "键盘导航、统一的焦点环以及深色模式修复。",
+        "changes": {
+          "0": "autocomplete、combobox、multi-select 和 multi-selector 支持键盘导航：方向键、Home/End、Enter 选择、Escape 关闭。",
+          "1": "所有组件现在都通过 --ngxsmk-focus-ring 令牌绘制焦点环，取代了三种不一致的写法。",
+          "2": "prefers-reduced-motion 现在会停止所有由令牌驱动的动效，而不仅仅是共享的动效时长。",
+          "3": "修复了 14 个组件在深色模式下回退为浅色模式取值的颜色问题。"
+        }
+      },
       "v130": {
         "summary": "SEO 工具、emerald 默认预设以及文档改进。",
         "changes": {
@@ -744,6 +753,7 @@
     "bentoBuildProgress": "构建进度",
     "bentoModules": "7 / 8 个模块已发布",
     "bentoBrandSub": "设计系统",
+    "graphAria": "Animated diagram of Angular signals propagating from a source to connected components",
     "whyEyebrow": "为何选择 NGXSMK",
     "everythingTitle": "你需要的一切。",
     "nothingTitle": "没有多余之物。",
