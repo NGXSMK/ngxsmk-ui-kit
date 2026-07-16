@@ -205,6 +205,15 @@
       "changed": "changed"
     },
     "release": {
+      "v131": {
+        "summary": "कीबोर्ड नेविगेशन, एकीकृत फोकस रिंग, और डार्क मोड सुधार।",
+        "changes": {
+          "0": "autocomplete, combobox, multi-select और multi-selector में कीबोर्ड नेविगेशन: तीर कुंजियाँ, Home/End, चुनने के लिए Enter, और बंद करने के लिए Escape।",
+          "1": "अब हर कंपोनेंट अपनी फोकस रिंग --ngxsmk-focus-ring टोकन से बनाता है, जो तीन असंगत पैटर्न की जगह लेता है।",
+          "2": "prefers-reduced-motion अब सभी टोकन-आधारित मोशन रोकता है, केवल साझा मोशन अवधि नहीं।",
+          "3": "14 कंपोनेंट में डार्क मोड के रंग ठीक किए गए जो केवल लाइट मोड के मानों पर लौट रहे थे।"
+        }
+      },
       "v130": {
         "summary": "SEO यूटिलिटीज़, emerald डिफ़ॉल्ट प्रीसेट और दस्तावेज़ सुधार।",
         "changes": {
@@ -744,6 +753,7 @@
     "bentoBuildProgress": "निर्माण प्रगति",
     "bentoModules": "7 / 8 मॉड्यूल शिप किए गए",
     "bentoBrandSub": "डिज़ाइन सिस्टम",
+    "graphAria": "Animated diagram of Angular signals propagating from a source to connected components",
     "whyEyebrow": "NGXSMK क्यों",
     "everythingTitle": "आपको जो चाहिए वह सब कुछ।",
     "nothingTitle": "जो नहीं चाहिए वह कुछ नहीं।",

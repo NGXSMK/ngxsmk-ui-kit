@@ -6,7 +6,7 @@
 [![npm @ngxsmk/core](https://img.shields.io/badge/npm-%40ngxsmk%2Fcore-blue)](https://www.npmjs.com/package/@ngxsmk/core)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 
-> **v1.3.0 · Signals-native · Zoneless** — an Angular-first, open-source UI ecosystem, signals-native, zoneless, and token-themed.
+> **v1.3.1 · Signals-native · Zoneless** — an Angular-first, open-source UI ecosystem, signals-native, zoneless, and token-themed.
 
 ## Table of contents
 
@@ -48,7 +48,7 @@ custom properties, so theming is instant and bundle size stays minimal. No
 
 ## Status
 
-Stable. The `1.3.0` release ships the full component catalog, the token theme
+Stable. The `1.3.1` release ships the full component catalog, the token theme
 engine, CDK behaviors, and the animation helpers. The workspace, theme engine,
 and CDK are implemented and supported on Angular **17.3+** (see the
 version note above).
@@ -61,6 +61,8 @@ version note above).
 - **Light / dark** — class, media, and system strategies with runtime preset switching.
 - **Accessible by default** — native elements wrapped with visually-hidden inputs so `ngModel` / reactive forms just work, plus focus management, live announcer, and ARIA wiring.
 - **Motion-ready** — optional first-class animations via [Motion](https://motion.dev) (`motion` is an optional peer dependency), with `prefers-reduced-motion` honored automatically.
+- **Charts built in** — eight token-themed chart components (`bar`, `line`, `area`, `pie`/donut, `scatter`, `heatmap`, `candlestick`, `dashboard`) that follow the same theming and accessibility standards as every other component — no external charting library to reconcile.
+- **Live theme playground** — the demo app ships a visual token editor (`/playground`): tweak colors, radius, density, and typography live, then export the result as CSS variables, SCSS, Tailwind config, StyleX tokens, or Tokens Studio JSON for Figma.
 - **Tree-shakable** — per-component secondary entry points; import only what you use.
 - **SEO-ready** — `NgxsmkSeoService` / `provideSeo()` manage the document title, meta description, canonical link, Open Graph & Twitter Card tags, robots directive, and JSON-LD from a single API.
 
@@ -385,7 +387,8 @@ tools/
 - ESLint integration with strict Angular and TypeScript rules.
 - Storybook documentation site with interactive examples.
 - Automated accessibility (a11y) auditing in CI.
-- More preset themes and a visual theme editor.
+- More preset themes and richer theme-editor controls (per-component tokens, advanced overrides).
+- Figma component library mirroring the kit (token sync already available via the playground's Tokens Studio JSON export).
 - Expanded `NgxsmkPresence`-based overlay animations (sheet, dropdown, hover-card).
 - Form-field validation visuals and more input types.
 - `ng add` / `ng update` schematics.

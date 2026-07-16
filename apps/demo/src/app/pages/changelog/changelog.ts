@@ -140,6 +140,29 @@ interface Release {
 export class ChangelogPage {
   protected readonly releases: Release[] = [
     {
+      version: 'v1.3.1',
+      date: '2026-07-16',
+      summary: 'changelog.release.v131.summary',
+      changes: [
+        {
+          type: 'added',
+          text: 'changelog.release.v131.changes.0',
+        },
+        {
+          type: 'changed',
+          text: 'changelog.release.v131.changes.1',
+        },
+        {
+          type: 'fixed',
+          text: 'changelog.release.v131.changes.2',
+        },
+        {
+          type: 'fixed',
+          text: 'changelog.release.v131.changes.3',
+        },
+      ],
+    },
+    {
       version: 'v1.3.0',
       date: '2026-07-16',
       summary: 'changelog.release.v130.summary',

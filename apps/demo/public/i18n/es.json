@@ -205,6 +205,15 @@
       "changed": "cambiado"
     },
     "release": {
+      "v131": {
+        "summary": "Navegación por teclado, anillos de foco unificados y correcciones del modo oscuro.",
+        "changes": {
+          "0": "Navegación por teclado en autocomplete, combobox, multi-select y multi-selector: flechas, Inicio/Fin, Enter para seleccionar y Escape para cerrar.",
+          "1": "Todos los componentes dibujan ahora su anillo de foco con el token --ngxsmk-focus-ring, en lugar de tres patrones inconsistentes.",
+          "2": "prefers-reduced-motion ahora detiene todo el movimiento basado en tokens, no solo la duración de movimiento compartida.",
+          "3": "Corregidos los colores del modo oscuro en 14 componentes que recurrían a valores solo para modo claro."
+        }
+      },
       "v130": {
         "summary": "Utilidades SEO, preset predeterminado esmeralda y mejoras de documentación.",
         "changes": {
@@ -744,6 +753,7 @@
     "bentoBuildProgress": "Progreso de construcción",
     "bentoModules": "7 / 8 módulos lanzados",
     "bentoBrandSub": "sistema de diseño",
+    "graphAria": "Animated diagram of Angular signals propagating from a source to connected components",
     "whyEyebrow": "Por qué NGXSMK",
     "everythingTitle": "Todo lo que necesitas.",
     "nothingTitle": "Nada que no necesites.",

@@ -205,6 +205,15 @@
       "changed": "changed"
     },
     "release": {
+      "v131": {
+        "summary": "キーボードナビゲーション、統一されたフォーカスリング、ダークモードの修正。",
+        "changes": {
+          "0": "autocomplete、combobox、multi-select、multi-selector でのキーボード操作: 矢印キー、Home/End、Enter で選択、Escape で閉じる。",
+          "1": "すべてのコンポーネントが --ngxsmk-focus-ring トークンからフォーカスリングを描画するようになり、3 つの不統一なパターンを置き換えました。",
+          "2": "prefers-reduced-motion がトークン駆動のすべてのモーションを停止するようになりました（共有のモーション時間だけではありません）。",
+          "3": "ライトモード専用の値にフォールバックしていた 14 コンポーネントのダークモードの色を修正しました。"
+        }
+      },
       "v130": {
         "summary": "SEOユーティリティ、emerald デフォルトプリセット、ドキュメントの改善。",
         "changes": {
@@ -744,6 +753,7 @@
     "bentoBuildProgress": "構築の進捗",
     "bentoModules": "8 モジュール中 7 個リリース済み",
     "bentoBrandSub": "デザインシステム",
+    "graphAria": "Animated diagram of Angular signals propagating from a source to connected components",
     "whyEyebrow": "なぜ NGXSMK か",
     "everythingTitle": "必要なものはすべて。",
     "nothingTitle": "不要なものは何も。",

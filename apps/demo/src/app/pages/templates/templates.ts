@@ -20,6 +20,7 @@ import { NgxsmkButton } from '@ngxsmk/core/button';
 import { Component, signal, computed } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { AppNav } from '../../nav/nav';
 import { APP_VERSION } from '../../core/version';
@@ -62,6 +63,7 @@ interface TemplateItem {
     NgxsmkTerminal,
     NgTemplateOutlet,
     FormsModule,
+    RouterLink,
     TranslatePipe,
     AppNav,
   ],
@@ -70,12 +72,29 @@ interface TemplateItem {
     <div class="ngxsmk-page-container">
       <div class="ngxsmk-page">
         <header class="tpl-header">
-          <ngxsmk-heading level="h1" class="tpl-header__title">{{
-            'nav.templates' | translate
-          }}</ngxsmk-heading>
-          <ngxsmk-text variant="body" class="tpl-header__sub">{{
-            'templates.subtitle' | translate
-          }}</ngxsmk-text>
+          <div class="tpl-header__lead">
+            <span class="tpl-header__eyebrow">// templates</span>
+            <ngxsmk-heading level="h1" class="tpl-header__title">{{
+              'nav.templates' | translate
+            }}</ngxsmk-heading>
+            <ngxsmk-text variant="body" class="tpl-header__sub">{{
+              'templates.subtitle' | translate
+            }}</ngxsmk-text>
+          </div>
+          <dl class="tpl-header__spec" [attr.aria-label]="'templates.templatesWord' | translate">
+            <div class="tpl-header__spec-cell">
+              <dt>{{ 'templates.templatesWord' | translate }}</dt>
+              <dd>{{ pad(templatesList.length) }}</dd>
+            </div>
+            <div class="tpl-header__spec-cell">
+              <dt>license</dt>
+              <dd>MIT</dd>
+            </div>
+            <div class="tpl-header__spec-cell">
+              <dt>rev</dt>
+              <dd>v{{ appVersion }}</dd>
+            </div>
+          </dl>
         </header>
 
         <div class="ngxsmk-templates-toolbar">
@@ -164,9 +183,23 @@ interface TemplateItem {
           </div>
         }
 
-        <div class="tpl-grid">
-          @for (tpl of filteredTemplates(); track tpl.id) {
-            <article class="tpl-card">
+        <div class="tpl-layout">
+          <aside class="tpl-index" aria-label="Template index">
+            <span class="tpl-index__label">// index</span>
+            <nav class="tpl-index__list">
+              @for (tpl of filteredTemplates(); track tpl.id; let i = $index) {
+                <a class="tpl-index__item" [routerLink]="[]" [fragment]="'tpl-' + tpl.id">
+                  <span class="tpl-index__code">NGX-{{ pad(i + 1) }}</span>
+                  <span class="tpl-index__dot" [attr.data-cat]="tpl.category"></span>
+                  <span class="tpl-index__name">{{ tpl.title | translate }}</span>
+                </a>
+              }
+            </nav>
+          </aside>
+
+          <div class="tpl-grid">
+            @for (tpl of filteredTemplates(); track tpl.id; let i = $index) {
+            <article class="tpl-card" [id]="'tpl-' + tpl.id" [style.--tpl-i]="i">
               <div
                 class="tpl-card__preview"
                 role="button"
@@ -204,9 +237,14 @@ interface TemplateItem {
                 </div>
               </div>
               <div class="tpl-card__body">
-                <span class="tpl-cat" [attr.data-cat]="tpl.category">{{
-                  'templates.cat.' + tpl.category | translate
-                }}</span>
+                <div class="tpl-card__block" [attr.data-cat]="tpl.category">
+                  <span class="tpl-card__sheet">NGX-{{ pad(i + 1) }}</span>
+                  <span class="tpl-card__cat">
+                    <span class="tpl-card__cat-swatch" aria-hidden="true"></span>
+                    {{ 'templates.cat.' + tpl.category | translate }}
+                  </span>
+                  <span class="tpl-card__rev">v{{ appVersion }}</span>
+                </div>
                 <ngxsmk-heading level="h3" class="tpl-card__title">{{
                   tpl.title | translate
                 }}</ngxsmk-heading>
@@ -894,30 +932,196 @@ interface TemplateItem {
       padding: var(--ngxsmk-space-12, 3rem) var(--ngxsmk-space-6, 1.5rem);
     }
 
-    /* === ngxsmk-style header === */
+    /* ============================================================
+       The drawing register.
+       Templates are blueprints; this page is the studio's sheet
+       register. Mono "annotations" (sheet codes, spec cells, title
+       blocks) carry the motif; everything else stays quiet and
+       token-driven so all presets + dark mode work untouched.
+       ============================================================ */
+
+    /* === Register header: title + spec strip === */
     .tpl-header {
       display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: var(--ngxsmk-space-8, 2rem);
+      padding-bottom: var(--ngxsmk-space-6, 1.5rem);
+      border-bottom: 1px solid var(--ngxsmk-color-outline);
+      margin-bottom: var(--ngxsmk-space-6, 1.5rem);
+    }
+    .tpl-header__lead {
+      display: flex;
       flex-direction: column;
-      gap: 0.5rem;
-      margin-bottom: var(--ngxsmk-space-8, 2rem);
+      gap: 0.625rem;
+      min-width: 0;
+    }
+    .tpl-header__eyebrow {
+      font-family: var(--ngxsmk-font-mono);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--ngxsmk-color-primary);
     }
     .tpl-header__title {
-      font-size: 2.5rem;
+      font-family: 'Plus Jakarta Sans', var(--ngxsmk-font-sans, system-ui), sans-serif;
+      font-size: clamp(2.25rem, 5vw, 3rem);
       font-weight: 800;
-      letter-spacing: -0.03em;
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      letter-spacing: -0.035em;
+      line-height: 1.05;
+      color: var(--ngxsmk-color-on-surface);
       margin: 0;
     }
     .tpl-header__sub {
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--ngxsmk-color-on-surface-variant);
       margin: 0;
       font-size: 1.0625rem;
+      max-width: 34rem;
+      line-height: 1.6;
     }
 
-    /* === ngxsmk-style card grid === */
+    /* Spec strip: the page-level title block. Hairline-ruled mono
+       cells (sheets / license / rev) — echoed on every card below. */
+    .tpl-header__spec {
+      display: flex;
+      margin: 0;
+      border: 1px solid var(--ngxsmk-color-outline);
+      border-radius: var(--ngxsmk-radius-md);
+      background: var(--ngxsmk-color-surface);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .tpl-header__spec-cell {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      padding: 0.75rem 1.25rem;
+    }
+    .tpl-header__spec-cell + .tpl-header__spec-cell {
+      border-inline-start: 1px solid var(--ngxsmk-color-outline);
+    }
+    .tpl-header__spec-cell dt {
+      font-family: var(--ngxsmk-font-mono);
+      font-size: 0.625rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ngxsmk-color-on-surface-variant);
+      margin: 0;
+    }
+    .tpl-header__spec-cell dd {
+      font-family: var(--ngxsmk-font-mono);
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--ngxsmk-color-on-surface);
+      margin: 0;
+    }
+    .tpl-header__spec-cell:first-child dd {
+      color: var(--ngxsmk-color-primary);
+    }
+
+    /* === Register layout: index rail + sheet grid === */
+    .tpl-layout {
+      display: grid;
+      grid-template-columns: 13rem minmax(0, 1fr);
+      gap: var(--ngxsmk-space-8, 2rem);
+      align-items: start;
+    }
+
+    /* Index of drawings */
+    .tpl-index {
+      position: sticky;
+      top: 5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .tpl-index__label {
+      font-family: var(--ngxsmk-font-mono);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--ngxsmk-color-primary);
+    }
+    .tpl-index__list {
+      display: flex;
+      flex-direction: column;
+      border-inline-start: 1px solid var(--ngxsmk-color-outline);
+    }
+    .tpl-index__item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4375rem 0.75rem;
+      margin-inline-start: -1px;
+      border-inline-start: 2px solid transparent;
+      text-decoration: none;
+      min-width: 0;
+      transition:
+        border-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
+        background var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
+    }
+    .tpl-index__item:hover {
+      border-inline-start-color: var(--ngxsmk-color-primary);
+      background: var(--ngxsmk-color-surface-hover);
+    }
+    .tpl-index__item:focus-visible {
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring, var(--ngxsmk-shadow-focus));
+      border-radius: var(--ngxsmk-radius-sm);
+    }
+    .tpl-index__code {
+      font-family: var(--ngxsmk-font-mono);
+      font-size: 0.6875rem;
+      font-weight: 500;
+      color: var(--ngxsmk-color-on-surface-variant);
+      flex-shrink: 0;
+    }
+    .tpl-index__item:hover .tpl-index__code {
+      color: var(--ngxsmk-color-primary);
+    }
+    .tpl-index__dot {
+      width: 0.375rem;
+      height: 0.375rem;
+      border-radius: 1px;
+      flex-shrink: 0;
+    }
+    .tpl-index__name {
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: var(--ngxsmk-color-on-surface);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Category accents come from the semantic roles, so they follow
+       every preset and both modes. */
+    .tpl-index__dot[data-cat='Application'],
+    .tpl-card__block[data-cat='Application'] .tpl-card__cat-swatch {
+      background: var(--ngxsmk-color-info);
+    }
+    .tpl-index__dot[data-cat='Marketing'],
+    .tpl-card__block[data-cat='Marketing'] .tpl-card__cat-swatch {
+      background: var(--ngxsmk-color-warning);
+    }
+    .tpl-index__dot[data-cat='E-Commerce'],
+    .tpl-card__block[data-cat='E-Commerce'] .tpl-card__cat-swatch {
+      background: var(--ngxsmk-color-success);
+    }
+    .tpl-index__dot[data-cat='Authentication'],
+    .tpl-card__block[data-cat='Authentication'] .tpl-card__cat-swatch {
+      background: var(--ngxsmk-color-primary);
+    }
+    .tpl-index__dot[data-cat='DevOps'],
+    .tpl-card__block[data-cat='DevOps'] .tpl-card__cat-swatch {
+      background: var(--ngxsmk-color-error);
+    }
+
+    /* === Sheets === */
     .tpl-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: var(--ngxsmk-space-5, 1.25rem);
     }
 
@@ -928,15 +1132,39 @@ interface TemplateItem {
       border-radius: var(--ngxsmk-radius-xl);
       background: var(--ngxsmk-color-surface);
       overflow: hidden;
+      scroll-margin-top: 5rem;
+      /* 'backwards' (not 'both') so the finished animation releases the
+         transform and the hover lift can take over. */
+      animation: tpl-sheet-in var(--ngxsmk-duration-slow, 300ms) var(--ngxsmk-ease-out) backwards;
+      animation-delay: calc(var(--tpl-i, 0) * 45ms);
       transition:
         transform var(--ngxsmk-duration-normal, 220ms) var(--ngxsmk-ease-out),
         box-shadow var(--ngxsmk-duration-normal, 220ms) var(--ngxsmk-ease-out),
         border-color var(--ngxsmk-duration-normal, 220ms) var(--ngxsmk-ease-out);
     }
     .tpl-card:hover {
-      transform: translateY(-4px);
+      transform: var(--ngxsmk-hover-lift, translateY(-1px));
       box-shadow: var(--ngxsmk-shadow-lg);
       border-color: var(--ngxsmk-color-outline-strong);
+    }
+    .tpl-card:hover .tpl-card__sheet {
+      color: var(--ngxsmk-color-primary);
+    }
+
+    @keyframes tpl-sheet-in {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .tpl-card {
+        animation: none;
+      }
     }
 
     /* Live scaled preview area */
@@ -1013,39 +1241,50 @@ interface TemplateItem {
       padding: var(--ngxsmk-space-5);
       flex: 1;
     }
-    .tpl-cat {
-      align-self: flex-start;
-      font-size: 0.625rem;
-      font-weight: 700;
+
+    /* Sheet title block: NGX-01 · category · rev, ruled off from the
+       name below — every sheet in the register carries one. */
+    .tpl-card__block {
+      display: flex;
+      align-items: center;
+      gap: var(--ngxsmk-space-4);
+      padding-bottom: 0.5rem;
+      margin-bottom: 0.25rem;
+      border-bottom: 1px solid var(--ngxsmk-color-outline);
+      font-family: var(--ngxsmk-font-mono);
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      padding: 0.15rem 0.5rem;
-      border-radius: var(--ngxsmk-radius-sm);
     }
-    .tpl-cat[data-cat='Application'] {
-      background: #e0f2fe;
-      color: #0369a1;
+    .tpl-card__sheet {
+      color: var(--ngxsmk-color-on-surface);
+      transition: color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
-    .tpl-cat[data-cat='Marketing'] {
-      background: #fef3c7;
-      color: #b45309;
+    .tpl-card__cat {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4375rem;
+      color: var(--ngxsmk-color-on-surface-variant);
     }
-    .tpl-cat[data-cat='E-Commerce'] {
-      background: #dcfce7;
-      color: #15803d;
+    .tpl-card__cat-swatch {
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 1px;
+      flex-shrink: 0;
     }
-    .tpl-cat[data-cat='Authentication'] {
-      background: #f3e8ff;
-      color: #6b21a8;
+    .tpl-card__rev {
+      margin-inline-start: auto;
+      color: var(--ngxsmk-color-on-surface-variant);
+      opacity: var(--ngxsmk-opacity-muted, 0.7);
     }
-    .tpl-cat[data-cat='DevOps'] {
-      background: #fee2e2;
-      color: #b91c1c;
-    }
+
     .tpl-card__title {
       margin: 0;
-      font-size: 1.15rem;
+      font-family: 'Plus Jakarta Sans', var(--ngxsmk-font-sans, system-ui), sans-serif;
+      font-size: 1.1875rem;
       font-weight: 700;
+      letter-spacing: -0.015em;
       color: var(--ngxsmk-color-on-surface);
     }
     .tpl-card__desc {
@@ -1065,147 +1304,26 @@ interface TemplateItem {
       margin-right: 0.25rem;
     }
 
+    /* === Responsive === */
+    @media (max-width: 1024px) {
+      .tpl-layout {
+        grid-template-columns: 1fr;
+      }
+      .tpl-index {
+        display: none;
+      }
+    }
     @media (max-width: 900px) {
       .tpl-grid {
         grid-template-columns: 1fr;
       }
-    }
-    .ngxsmk-page__header {
-      margin-bottom: var(--ngxsmk-space-12, 3rem);
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .ngxsmk-badge-wrapper {
-      margin-bottom: 0.25rem;
-    }
-    .ngxsmk-pill-badge {
-      background: var(--ngxsmk-color-primary-container, #ede9fe);
-      color: var(--ngxsmk-color-on-primary-container, #4c1d95);
-      font-size: 0.75rem;
-      font-weight: 600;
-      padding: 0.25rem 0.75rem;
-      border-radius: var(--ngxsmk-radius-full);
-      border: 1px solid color-mix(in srgb, var(--ngxsmk-color-primary) 15%, transparent);
-    }
-    .ngxsmk-main-title {
-      font-size: 2.5rem;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      color: var(--ngxsmk-color-on-surface, #09090b);
-      margin: 0;
-    }
-    .ngxsmk-page__sub {
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
-      margin: 0;
-      font-size: 1rem;
-      max-width: 600px;
-      line-height: 1.6;
+      .tpl-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--ngxsmk-space-5, 1.25rem);
+      }
     }
 
-    .ngxsmk-templates-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(min(22rem, 100%), 1fr));
-      gap: var(--ngxsmk-space-6, 1.5rem);
-    }
-
-    .ngxsmk-template-wrapper-card {
-      transition:
-        transform var(--ngxsmk-duration-normal) var(--ngxsmk-ease-out),
-        box-shadow var(--ngxsmk-duration-normal) var(--ngxsmk-ease-out);
-      border-radius: var(--ngxsmk-radius-xl);
-    }
-    .ngxsmk-template-wrapper-card:hover {
-      transform: translateY(-6px);
-      box-shadow: var(--ngxsmk-shadow-lg);
-    }
-
-    .ngxsmk-template-card {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      border: 1px solid var(--ngxsmk-color-outline);
-      border-radius: var(--ngxsmk-radius-xl) !important;
-      background: var(--ngxsmk-color-surface);
-    }
-    .ngxsmk-card-head-custom {
-      padding: var(--ngxsmk-space-5) var(--ngxsmk-space-5) var(--ngxsmk-space-3);
-      border-bottom: none;
-    }
-    .ngxsmk-card-top-row {
-      margin-bottom: 0.5rem;
-    }
-    .ngxsmk-category-tag {
-      font-size: 0.625rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      tracking: 0.05em;
-      padding: 0.125rem 0.5rem;
-      border-radius: var(--ngxsmk-radius-sm);
-    }
-    .ngxsmk-category-tag[data-cat='Application'] {
-      background: #e0f2fe;
-      color: #0369a1;
-    }
-    .ngxsmk-category-tag[data-cat='Marketing'] {
-      background: #fef3c7;
-      color: #b45309;
-    }
-    .ngxsmk-category-tag[data-cat='E-Commerce'] {
-      background: #dcfce7;
-      color: #15803d;
-    }
-    .ngxsmk-category-tag[data-cat='Authentication'] {
-      background: #f3e8ff;
-      color: #6b21a8;
-    }
-    .ngxsmk-category-tag[data-cat='DevOps'] {
-      background: #fee2e2;
-      color: #b91c1c;
-    }
-
-    .ngxsmk-card-title-custom {
-      margin: 0;
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--ngxsmk-color-on-surface);
-    }
-    .ngxsmk-card-content-custom {
-      padding: 0 var(--ngxsmk-space-5) var(--ngxsmk-space-5);
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-    }
-
-    .ngxsmk-template-desc {
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
-      font-size: 0.8125rem;
-      line-height: 1.6;
-      margin: 0 0 var(--ngxsmk-space-5, 1.25rem);
-      flex-grow: 1;
-    }
-    .ngxsmk-template-actions {
-      display: flex;
-      gap: var(--ngxsmk-space-2, 0.5rem);
-    }
-    .ngxsmk-btn-preview {
-      flex: 1;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.375rem;
-      font-weight: 600;
-    }
-    .ngxsmk-btn-code {
-      flex: 1;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.375rem;
-      font-weight: 500;
-    }
     .btn-icon {
       flex-shrink: 0;
     }
@@ -1865,7 +1983,7 @@ interface TemplateItem {
       overflow: hidden;
     }
 
-    /* === Toolbar / Filters === */
+    /* === Toolbar: register filter tabs + search === */
     .ngxsmk-templates-toolbar {
       margin-bottom: var(--ngxsmk-space-8, 2rem);
     }
@@ -1881,32 +1999,43 @@ interface TemplateItem {
       gap: 0.375rem;
       flex-wrap: wrap;
     }
+    /* Filter tabs read like register stamps: quiet rectangles, mono
+       counts; the active one is inked. Primary stays reserved for
+       actions and focus. */
     .ngxsmk-category-chip {
       font-family: inherit;
       font-size: 0.8125rem;
       font-weight: 500;
-      padding: 0.375rem 0.875rem;
-      border-radius: var(--ngxsmk-radius-full, 9999px);
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
-      background: var(--ngxsmk-color-surface, #ffffff);
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      padding: 0.375rem 0.75rem;
+      border-radius: var(--ngxsmk-radius-md);
+      border: 1px solid var(--ngxsmk-color-outline);
+      background: var(--ngxsmk-color-surface);
+      color: var(--ngxsmk-color-on-surface-variant);
       cursor: pointer;
-      transition: all var(--ngxsmk-duration-fast, 150ms) var(--ngxsmk-ease-out);
       white-space: nowrap;
+      transition:
+        background var(--ngxsmk-duration-fast, 150ms) var(--ngxsmk-ease-out),
+        border-color var(--ngxsmk-duration-fast, 150ms) var(--ngxsmk-ease-out),
+        color var(--ngxsmk-duration-fast, 150ms) var(--ngxsmk-ease-out);
     }
     .ngxsmk-category-chip:hover {
-      border-color: var(--ngxsmk-color-primary, #7c3aed);
-      color: var(--ngxsmk-color-primary, #7c3aed);
+      border-color: var(--ngxsmk-color-outline-strong);
+      color: var(--ngxsmk-color-on-surface);
+    }
+    .ngxsmk-category-chip:focus-visible {
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring, var(--ngxsmk-shadow-focus));
     }
     .ngxsmk-category-chip.active {
-      background: var(--ngxsmk-color-primary, #7c3aed);
-      border-color: var(--ngxsmk-color-primary, #7c3aed);
-      color: var(--ngxsmk-color-on-primary, #ffffff);
+      background: var(--ngxsmk-color-on-surface);
+      border-color: var(--ngxsmk-color-on-surface);
+      color: var(--ngxsmk-color-surface);
     }
     .chip-count {
-      font-size: 0.75rem;
-      opacity: 0.7;
-      margin-left: 0.125rem;
+      font-family: var(--ngxsmk-font-mono);
+      font-size: 0.6875rem;
+      opacity: var(--ngxsmk-opacity-muted, 0.7);
+      margin-inline-start: 0.25rem;
     }
     .ngxsmk-category-chip.active .chip-count {
       opacity: 0.85;
@@ -1914,41 +2043,43 @@ interface TemplateItem {
     .ngxsmk-search-wrapper {
       display: flex;
       align-items: center;
-      background: var(--ngxsmk-color-surface, #ffffff);
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
-      border-radius: var(--ngxsmk-radius-full, 9999px);
-      padding: 0.375rem 1rem;
+      background: var(--ngxsmk-color-surface);
+      border: 1px solid var(--ngxsmk-color-outline);
+      border-radius: var(--ngxsmk-radius-md);
+      padding: 0.375rem 0.75rem;
       gap: 0.5rem;
-      min-width: 200px;
-      transition: border-color var(--ngxsmk-duration-fast, 150ms);
+      min-width: 220px;
+      transition:
+        border-color var(--ngxsmk-duration-fast, 150ms) var(--ngxsmk-ease-out),
+        box-shadow var(--ngxsmk-duration-fast, 150ms) var(--ngxsmk-ease-out);
     }
     .ngxsmk-search-wrapper:focus-within {
-      border-color: var(--ngxsmk-color-primary, #7c3aed);
-      box-shadow: 0 0 0 2px color-mix(in srgb, var(--ngxsmk-color-primary) 15%, transparent);
+      border-color: var(--ngxsmk-color-ring);
+      box-shadow: var(--ngxsmk-focus-ring, var(--ngxsmk-shadow-focus));
     }
     .search-icon {
       flex-shrink: 0;
-      opacity: 0.4;
+      opacity: var(--ngxsmk-opacity-faint, 0.4);
     }
     .ngxsmk-search-input {
       border: none;
       background: transparent;
       font-family: inherit;
       font-size: 0.8125rem;
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      color: var(--ngxsmk-color-on-surface);
       outline: none;
       width: 100%;
     }
     .ngxsmk-search-input::placeholder {
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--ngxsmk-color-on-surface-variant);
     }
     .search-clear {
       background: none;
       border: none;
       cursor: pointer;
       padding: 0.125rem;
-      opacity: 0.4;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      opacity: var(--ngxsmk-opacity-faint, 0.4);
+      color: var(--ngxsmk-color-on-surface-variant);
       display: flex;
     }
     .search-clear:hover {
@@ -1959,14 +2090,15 @@ interface TemplateItem {
     }
     .ngxsmk-result-count {
       font-size: 0.8125rem;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--ngxsmk-color-on-surface-variant);
     }
     .count-num {
-      font-weight: 600;
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      font-family: var(--ngxsmk-font-mono);
+      font-weight: 500;
+      color: var(--ngxsmk-color-on-surface);
     }
 
-    /* === Empty State === */
+    /* === Empty state: a blank sheet === */
     .ngxsmk-templates-empty {
       display: flex;
       flex-direction: column;
@@ -1975,44 +2107,23 @@ interface TemplateItem {
       gap: 1rem;
       padding: 4rem 2rem;
       text-align: center;
-    }
-
-    /* === Preview Thumbnail === */
-    .ngxsmk-template-preview-thumb {
-      position: relative;
-      height: 140px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: var(--ngxsmk-radius-xl) var(--ngxsmk-radius-xl) 0 0;
-      overflow: hidden;
-    }
-    .ngxsmk-template-thumb-icon {
-      color: rgba(255, 255, 255, 0.5);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .ngxsmk-template-thumb-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.35);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity var(--ngxsmk-duration-normal, 200ms) var(--ngxsmk-ease-out);
-    }
-    .ngxsmk-template-wrapper-card:hover .ngxsmk-template-thumb-overlay {
-      opacity: 1;
-    }
-    .ngxsmk-btn-view {
-      backdrop-filter: blur(4px);
+      border: 1px dashed var(--ngxsmk-color-outline-strong);
+      border-radius: var(--ngxsmk-radius-xl);
+      background: var(--ngxsmk-color-surface);
+      color: var(--ngxsmk-color-on-surface-variant);
+      margin-bottom: var(--ngxsmk-space-8, 2rem);
     }
   `,
 })
 export class TemplatesPage {
   protected readonly appVersion = APP_VERSION;
+
+  /** Sheet numbers in the register read as NGX-01 … NGX-99. */
+  protected pad(n: number): string {
+    return String(n).padStart(2, '0');
+  }
+
+
   protected readonly categories: TemplateCategory[] = [
     'All',
     'Application',

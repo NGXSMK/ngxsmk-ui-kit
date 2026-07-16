@@ -205,6 +205,15 @@
       "changed": "ändrat"
     },
     "release": {
+      "v131": {
+        "summary": "Tangentbordsnavigering, enhetliga fokusringar och korrigeringar för mörkt läge.",
+        "changes": {
+          "0": "Tangentbordsnavigering för autocomplete, combobox, multi-select och multi-selector: piltangenter, Home/End, Enter för att välja och Escape för att stänga.",
+          "1": "Alla komponenter ritar nu sin fokusring från token --ngxsmk-focus-ring, vilket ersätter tre inkonsekventa mönster.",
+          "2": "prefers-reduced-motion stoppar nu all token-styrd rörelse, inte bara den delade rörelselängden.",
+          "3": "Rättade färger i mörkt läge i 14 komponenter som föll tillbaka på värden avsedda för ljust läge."
+        }
+      },
       "v130": {
         "summary": "SEO-verktyg, emerald som standardförinställning och dokumentationsförbättringar.",
         "changes": {
@@ -744,6 +753,7 @@
     "bentoBuildProgress": "Byggförlopp",
     "bentoModules": "7 / 8 moduler skickade",
     "bentoBrandSub": "designsystem",
+    "graphAria": "Animated diagram of Angular signals propagating from a source to connected components",
     "whyEyebrow": "Varför NGXSMK",
     "everythingTitle": "Allt du behöver.",
     "nothingTitle": "Inget du inte behöver.",

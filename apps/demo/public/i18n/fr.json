@@ -205,6 +205,15 @@
       "changed": "modifié"
     },
     "release": {
+      "v131": {
+        "summary": "Navigation au clavier, anneaux de focus unifiés et corrections du mode sombre.",
+        "changes": {
+          "0": "Navigation au clavier pour autocomplete, combobox, multi-select et multi-selector : flèches, Début/Fin, Entrée pour sélectionner et Échap pour fermer.",
+          "1": "Chaque composant dessine désormais son anneau de focus à partir du token --ngxsmk-focus-ring, remplaçant trois motifs incohérents.",
+          "2": "prefers-reduced-motion arrête maintenant toute animation pilotée par les tokens, et pas seulement la durée de mouvement partagée.",
+          "3": "Correction des couleurs du mode sombre dans 14 composants qui utilisaient des valeurs réservées au mode clair."
+        }
+      },
       "v130": {
         "summary": "Utilitaires SEO, préréglage par défaut émeraude et améliorations de la documentation.",
         "changes": {
@@ -744,6 +753,7 @@
     "bentoBuildProgress": "Progression de construction",
     "bentoModules": "7 / 8 modules livrés",
     "bentoBrandSub": "système de conception",
+    "graphAria": "Animated diagram of Angular signals propagating from a source to connected components",
     "whyEyebrow": "Pourquoi NGXSMK",
     "everythingTitle": "Tout ce dont vous avez besoin.",
     "nothingTitle": "Rien de superflu.",

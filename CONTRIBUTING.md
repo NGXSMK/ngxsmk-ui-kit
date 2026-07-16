@@ -37,6 +37,37 @@ fix(theme): correct dark-mode surface token
 docs: update theming guide
 ```
 
+## Changesets
+
+Any change to `packages/*` that users would notice needs a changeset. From the
+repo root:
+
+```bash
+npm run changeset          # describe the change, pick a bump level
+npm run changeset:status   # preview what would be released
+```
+
+This writes a markdown file to `.changeset/`; commit it with your PR. Docs-only
+or internal-tooling changes don't need one — use `npx changeset add --empty` if
+CI asks for a changeset you don't think is warranted.
+
+The published packages are **version-locked**: bumping one bumps all five
+(`core`, `cdk`, `theme`, `cli`, `mcp`), so they always share a version.
+
+### Releasing
+
+```bash
+npm run changeset:version  # applies changesets: bumps versions + per-package CHANGELOGs
+npm run publish            # builds on the Angular 17 toolchain and publishes from dist/
+```
+
+`changeset version` maintains each `packages/*/CHANGELOG.md`. The root
+`CHANGELOG.md` is curated by hand as the human-readable release story — update it
+alongside a release. Do **not** run `changeset publish`: releases go through
+`tools/scripts/publish.mjs`, which compiles in partial-Ivy mode against the
+lowest supported Angular and publishes the `dist/ngxsmk/*` output rather than
+the source packages.
+
 ## Coding standards
 
 - **Linting** is enforced by ESLint (`eslint.config.js`) with Angular,
