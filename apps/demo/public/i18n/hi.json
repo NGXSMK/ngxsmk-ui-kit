@@ -201,9 +201,9 @@
     "title": "चेंजलॉग",
     "subtitle": "NGXSMK के परिवर्तन, बग फ़िक्स, अपडेट और रिलीज़ को ट्रैक करें।",
     "type": {
-      "added": "added",
-      "fixed": "fixed",
-      "changed": "changed"
+      "added": "जोड़ा गया",
+      "fixed": "सुधारा गया",
+      "changed": "बदला गया"
     },
     "release": {
       "v131": {
@@ -741,9 +741,9 @@
     "offline": "ऑफ़लाइन"
   },
   "home": {
-    "badgeTag": "Signals-native · Zoneless",
-    "heroTitle": "The UI kit",
-    "heroDeserves": "deserves.",
+    "badgeTag": "सिग्नल-नेटिव · ज़ोनलेस",
+    "heroTitle": "यूआई किट जिसके",
+    "heroDeserves": "एंगुलर हकदार है।",
     "heroLede": "217 कंपोनेंट्स। शून्य रनटाइम निर्भरताएँ। एक सार्वभौमिक टोकन इंजन। फ़ॉर्म्स, AI, एंटरप्राइज़ विजेट्स और चार्ट्स - स्रोत कॉपी-पेस्ट करें और हर लाइन का स्वामी बनें।",
     "browseTemplates": "टेम्प्लेट्स ब्राउज़ करें",
     "copyInstall": "इंस्टॉल कमांड कॉपी करें",

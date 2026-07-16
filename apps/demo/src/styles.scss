@@ -286,7 +286,8 @@ select {
   .ngxsmk-page {
     padding: var(--ngxsmk-space-8, 2rem) var(--ngxsmk-space-4, 1rem);
   }
-  .ngxsmk-page__header h1 {
+  .ngxsmk-page__header h1,
+  .ngxsmk-page__header ngxsmk-heading {
     font-size: 1.5rem;
   }
   .ngxsmk-page__header {

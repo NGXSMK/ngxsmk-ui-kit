@@ -44,18 +44,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
       [component]="NgxsmkHeading"
       [customize]="customizeNgxsmkHeading"
     >
-      <ngxsmk-heading level="h1">{{
-        'contentTypography.demoDisplayHeading' | translate
-      }}</ngxsmk-heading>
-      <ngxsmk-heading level="h2">{{
-        'contentTypography.demoSectionHeading' | translate
-      }}</ngxsmk-heading>
-      <ngxsmk-heading level="h3" weight="bold">{{
-        'contentTypography.demoSubsectionHeading' | translate
-      }}</ngxsmk-heading>
-      <ngxsmk-heading level="h4" weight="light">{{
-        'contentTypography.demoLightweightHeading' | translate
-      }}</ngxsmk-heading>
+      <ngxsmk-heading level="h1">Display heading</ngxsmk-heading>
+      <ngxsmk-heading level="h2">Section heading</ngxsmk-heading>
+      <ngxsmk-heading level="h3" weight="bold">Subsection heading</ngxsmk-heading>
+      <ngxsmk-heading level="h4" weight="light">Lightweight heading</ngxsmk-heading>
     </showcase-example>
 
     <showcase-example
@@ -65,13 +57,9 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
       [component]="NgxsmkText"
       [customize]="customizeNgxsmkText"
     >
-      <ngxsmk-text variant="body">{{ 'contentTypography.demoBodyText' | translate }}</ngxsmk-text>
-      <ngxsmk-text variant="caption" color="secondary">{{
-        'contentTypography.demoCaption' | translate
-      }}</ngxsmk-text>
-      <ngxsmk-text variant="overline" color="brand">{{
-        'contentTypography.demoOverline' | translate
-      }}</ngxsmk-text>
+      <ngxsmk-text variant="body">Body text for paragraphs and general copy.</ngxsmk-text>
+      <ngxsmk-text variant="caption" color="secondary">A smaller caption for hints.</ngxsmk-text>
+      <ngxsmk-text variant="overline" color="brand">Overline eyebrow label</ngxsmk-text>
     </showcase-example>
 
     <showcase-example
@@ -82,7 +70,8 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
       [customize]="customizeNgxsmkBlockquote"
     >
       <ngxsmk-blockquote cite="'Ada Lovelace'">
-        {{ 'contentTypography.demoBlockquote' | translate }}
+        The Analytical Engine weaves algebraic patterns just as the Jacquard loom weaves flowers and
+        leaves.
       </ngxsmk-blockquote>
     </showcase-example>
 
@@ -93,15 +82,8 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
       [component]="NgxsmkCode"
       [customize]="customizeNgxsmkCode"
     >
-      <p>
-        {{ 'contentTypography.demoCodeInstallPre' | translate }}
-        <code ngxsmk-code>npm i @ngxsmk/core</code>
-        {{ 'contentTypography.demoCodeInstallPost' | translate }}
-      </p>
-      <p>
-        {{ 'contentTypography.demoCodeLargerSnippet' | translate }}
-        <code ngxsmk-code size="lg">ng generate @ngxsmk/core:button</code>
-      </p>
+      <p>Install with <code ngxsmk-code>npm i @ngxsmk/core</code> and import a component.</p>
+      <p>Larger snippet: <code ngxsmk-code size="lg">ng generate @ngxsmk/core:button</code></p>
     </showcase-example>
 
     <showcase-example
@@ -126,16 +108,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
       [customize]="customizeNgxsmkLink"
     >
       <span class="ngxsmk-sc-wrap">
-        <a ngxsmk-link href="#">{{ 'contentTypography.demoDefaultLink' | translate }}</a>
-        <a ngxsmk-link variant="muted" href="#">{{
-          'contentTypography.demoMutedLink' | translate
-        }}</a>
-        <a ngxsmk-link [underline]="true" href="#">{{
-          'contentTypography.demoUnderlinedLink' | translate
-        }}</a>
-        <a ngxsmk-link [external]="true" href="https://angular.dev">{{
-          'contentTypography.demoExternalLink' | translate
-        }}</a>
+        <a ngxsmk-link href="#">Default link</a>
+        <a ngxsmk-link variant="muted" href="#">Muted link</a>
+        <a ngxsmk-link [underline]="true" href="#">Underlined on hover</a>
+        <a ngxsmk-link [external]="true" href="https://angular.dev">External link</a>
       </span>
     </showcase-example>
 
@@ -165,11 +141,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
           size="lg"
           shape="circle"
         />
-        <ngxsmk-thumbnail
-          [alt]="'contentTypography.demoNoImage' | translate"
-          size="md"
-          shape="square"
-        />
+        <ngxsmk-thumbnail alt="No image" size="md" shape="square" />
       </span>
     </showcase-example>
 
@@ -195,19 +167,11 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
       [customize]="customizeNgxsmkToken"
     >
       <span class="ngxsmk-sc-wrap">
-        <ngxsmk-token>{{ 'contentTypography.demoTokenDefault' | translate }}</ngxsmk-token>
-        <ngxsmk-token variant="primary">{{
-          'contentTypography.demoTokenPrimary' | translate
-        }}</ngxsmk-token>
-        <ngxsmk-token variant="success">{{
-          'contentTypography.demoTokenSuccess' | translate
-        }}</ngxsmk-token>
-        <ngxsmk-token variant="warning">{{
-          'contentTypography.demoTokenWarning' | translate
-        }}</ngxsmk-token>
-        <ngxsmk-token variant="error" [removable]="true">{{
-          'contentTypography.demoTokenError' | translate
-        }}</ngxsmk-token>
+        <ngxsmk-token>Default</ngxsmk-token>
+        <ngxsmk-token variant="primary">Primary</ngxsmk-token>
+        <ngxsmk-token variant="success">Success</ngxsmk-token>
+        <ngxsmk-token variant="warning">Warning</ngxsmk-token>
+        <ngxsmk-token variant="error" [removable]="true">Error</ngxsmk-token>
       </span>
     </showcase-example>
 
@@ -219,9 +183,8 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
       [customize]="customizeNgxsmkCitation"
     >
       <p>
-        {{ 'contentTypography.demoCitationPre' | translate }}
-        <ngxsmk-citation [index]="1" url="https://example.com/ds" />
-        {{ 'contentTypography.demoCitationPost' | translate }}
+        Design systems improve consistency across teams
+        <ngxsmk-citation [index]="1" url="https://example.com/ds" /> and reduce rework
         <ngxsmk-citation [index]="2" />
       </p>
     </showcase-example>

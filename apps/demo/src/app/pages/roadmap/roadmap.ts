@@ -59,11 +59,12 @@ interface Milestone {
                         : 'primary'
                   "
                   >{{
-                    m.status === 'shipped'
+                    (m.status === 'shipped'
                       ? 'roadmap.status.shipped'
                       : m.status === 'in-progress'
                         ? 'roadmap.status.inProgress'
                         : 'roadmap.status.planned'
+                    ) | translate
                   }}</ngxsmk-badge
                 >
               </div>
@@ -89,7 +90,8 @@ interface Milestone {
     .ngxsmk-page__header {
       margin-bottom: var(--ngxsmk-space-12, 3rem);
     }
-    .ngxsmk-page__header h1 {
+    .ngxsmk-page__header h1,
+    .ngxsmk-page__header ngxsmk-heading {
       font-size: 2rem;
       font-weight: 700;
       margin: 0 0 var(--ngxsmk-space-2, 0.5rem);

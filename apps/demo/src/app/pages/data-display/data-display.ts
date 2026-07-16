@@ -76,15 +76,16 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     >
       <div class="ngxsmk-sc-wrap">
         <ngxsmk-tabs [(value)]="activeTab">
-          <ngxsmk-tab value="overview" [label]="'dataDisplay.overview' | translate">{{
-            'dataDisplay.tabOverviewBody' | translate
-          }}</ngxsmk-tab>
-          <ngxsmk-tab value="activity" [label]="'dataDisplay.activity' | translate">{{
-            'dataDisplay.tabActivityBody' | translate
-          }}</ngxsmk-tab>
-          <ngxsmk-tab value="settings" [label]="'dataDisplay.settings' | translate">{{
-            'dataDisplay.tabSettingsBody' | translate
-          }}</ngxsmk-tab>
+          <ngxsmk-tab value="overview" [label]="'dataDisplay.overview' | translate"
+            >The overview panel summarizes account health and recent activity.</ngxsmk-tab
+          >
+          <ngxsmk-tab value="activity" [label]="'dataDisplay.activity' | translate"
+            >Releases, comments, and status changes land here in reverse-chronological
+            order.</ngxsmk-tab
+          >
+          <ngxsmk-tab value="settings" [label]="'dataDisplay.settings' | translate"
+            >Manage notifications, visibility, and integration tokens.</ngxsmk-tab
+          >
         </ngxsmk-tabs>
       </div>
     </showcase-example>
@@ -98,14 +99,14 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     >
       <div class="ngxsmk-sc-wrap">
         <ngxsmk-accordion>
-          <ngxsmk-accordion-item [label]="'dataDisplay.faq1Q' | translate" value="q1">
-            {{ 'dataDisplay.faq1A' | translate }}
+          <ngxsmk-accordion-item label="What is NGXSMK?" value="q1">
+            An Angular-first, signals-native UI ecosystem built on shared design tokens.
           </ngxsmk-accordion-item>
-          <ngxsmk-accordion-item [label]="'dataDisplay.faq2Q' | translate" value="q2">
-            {{ 'dataDisplay.faq2A' | translate }}
+          <ngxsmk-accordion-item label="Is it themeable?" value="q2">
+            Yes â€” a universal token engine drives color, spacing, and type across every component.
           </ngxsmk-accordion-item>
-          <ngxsmk-accordion-item [label]="'dataDisplay.faq3Q' | translate" value="q3">
-            {{ 'dataDisplay.faq3A' | translate }}
+          <ngxsmk-accordion-item label="Is it accessible?" value="q3">
+            Components ship with WAI-ARIA semantics and full keyboard support.
           </ngxsmk-accordion-item>
         </ngxsmk-accordion>
       </div>
@@ -162,10 +163,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
       <div class="ngxsmk-sc-wrap">
         <ngxsmk-tag>angular</ngxsmk-tag>
         <ngxsmk-tag variant="primary">signals</ngxsmk-tag>
-        <ngxsmk-tag variant="success">{{ 'dataDisplay.tagStable' | translate }}</ngxsmk-tag>
-        <ngxsmk-tag variant="warning">{{ 'dataDisplay.tagBeta' | translate }}</ngxsmk-tag>
-        <ngxsmk-tag variant="error">{{ 'dataDisplay.tagDeprecated' | translate }}</ngxsmk-tag>
-        <ngxsmk-tag variant="info">{{ 'dataDisplay.tagDocs' | translate }}</ngxsmk-tag>
+        <ngxsmk-tag variant="success">stable</ngxsmk-tag>
+        <ngxsmk-tag variant="warning">beta</ngxsmk-tag>
+        <ngxsmk-tag variant="error">deprecated</ngxsmk-tag>
+        <ngxsmk-tag variant="info">docs</ngxsmk-tag>
       </div>
     </showcase-example>
 
@@ -219,16 +220,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     >
       <div class="ngxsmk-sc-col" style="width:100%;max-width:28rem">
         <ngxsmk-list [divided]="true">
-          <ngxsmk-list-item variant="active">{{
-            'dataDisplay.listInbox' | translate
-          }}</ngxsmk-list-item>
-          <ngxsmk-list-item>{{ 'dataDisplay.listStarred' | translate }}</ngxsmk-list-item>
-          <ngxsmk-list-item href="#snoozed">{{
-            'dataDisplay.listSnoozed' | translate
-          }}</ngxsmk-list-item>
-          <ngxsmk-list-item variant="disabled">{{
-            'dataDisplay.listArchived' | translate
-          }}</ngxsmk-list-item>
+          <ngxsmk-list-item variant="active">Inbox</ngxsmk-list-item>
+          <ngxsmk-list-item>Starred</ngxsmk-list-item>
+          <ngxsmk-list-item href="#snoozed">Snoozed</ngxsmk-list-item>
+          <ngxsmk-list-item variant="disabled">Archived</ngxsmk-list-item>
         </ngxsmk-list>
       </div>
     </showcase-example>
@@ -243,19 +238,19 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
       <div class="ngxsmk-sc-wrap">
         <ngxsmk-metadata-list>
           <ngxsmk-metadata-list-item
-            ><dt>{{ 'dataDisplay.metaCreated' | translate }}</dt>
+            ><dt>Created</dt>
             <dd>Jul 13, 2026</dd></ngxsmk-metadata-list-item
           >
           <ngxsmk-metadata-list-item
-            ><dt>{{ 'dataDisplay.metaAuthor' | translate }}</dt>
+            ><dt>Author</dt>
             <dd>Ada Lovelace</dd></ngxsmk-metadata-list-item
           >
           <ngxsmk-metadata-list-item
-            ><dt>{{ 'dataDisplay.metaStatus' | translate }}</dt>
-            <dd>{{ 'dataDisplay.metaPublished' | translate }}</dd></ngxsmk-metadata-list-item
+            ><dt>Status</dt>
+            <dd>Published</dd></ngxsmk-metadata-list-item
           >
           <ngxsmk-metadata-list-item
-            ><dt>{{ 'dataDisplay.metaVersion' | translate }}</dt>
+            ><dt>Version</dt>
             <dd>22.0.1</dd></ngxsmk-metadata-list-item
           >
         </ngxsmk-metadata-list>
@@ -271,12 +266,12 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     >
       <div class="ngxsmk-sc-wrap">
         <ngxsmk-overflow-list [max]="3" [total]="6">
-          <span item>{{ 'dataDisplay.ovDesign' | translate }}</span>
-          <span item>{{ 'dataDisplay.ovEngineering' | translate }}</span>
-          <span item>{{ 'dataDisplay.ovProduct' | translate }}</span>
-          <span item>{{ 'dataDisplay.ovResearch' | translate }}</span>
-          <span item>{{ 'dataDisplay.ovMarketing' | translate }}</span>
-          <span item>{{ 'dataDisplay.ovSupport' | translate }}</span>
+          <span item>Design</span>
+          <span item>Engineering</span>
+          <span item>Product</span>
+          <span item>Research</span>
+          <span item>Marketing</span>
+          <span item>Support</span>
         </ngxsmk-overflow-list>
       </div>
     </showcase-example>
@@ -329,11 +324,12 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
       <div class="ngxsmk-sc-wrap">
         <ngxsmk-card style="max-width:24rem">
           <div ngxsmkCardHeader>
-            <h3 ngxsmkCardTitle>{{ 'dataDisplay.cardTitle' | translate }}</h3>
-            <p ngxsmkCardDescription>{{ 'dataDisplay.cardDesc' | translate }}</p>
+            <h3 ngxsmkCardTitle>Quarterly report</h3>
+            <p ngxsmkCardDescription>Performance summary for Q2 2026.</p>
           </div>
           <div ngxsmkCardContent>
-            {{ 'dataDisplay.cardBody' | translate }}
+            Revenue grew 18% quarter-over-quarter, driven by the new enterprise tier. Active
+            accounts crossed the 10k mark with churn holding steady at 2.3%.
           </div>
           <div ngxsmkCardFooter>
             <button ngxsmk-button variant="primary" size="sm">
@@ -357,26 +353,26 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
         <table class="ngxsmk-table" style="width:100%;max-width:32rem">
           <thead>
             <tr ngxsmkTableRow>
-              <th ngxsmkTableHeaderCell>{{ 'dataDisplay.colName' | translate }}</th>
-              <th ngxsmkTableHeaderCell>{{ 'dataDisplay.colRole' | translate }}</th>
-              <th ngxsmkTableHeaderCell>{{ 'dataDisplay.colTeam' | translate }}</th>
+              <th ngxsmkTableHeaderCell>Name</th>
+              <th ngxsmkTableHeaderCell>Role</th>
+              <th ngxsmkTableHeaderCell>Team</th>
             </tr>
           </thead>
           <tbody>
             <tr ngxsmkTableRow>
               <td ngxsmkTableCell>Alice Nguyen</td>
-              <td ngxsmkTableCell>{{ 'dataDisplay.roleAdmin' | translate }}</td>
-              <td ngxsmkTableCell>{{ 'dataDisplay.teamPlatform' | translate }}</td>
+              <td ngxsmkTableCell>Admin</td>
+              <td ngxsmkTableCell>Platform</td>
             </tr>
             <tr ngxsmkTableRow>
               <td ngxsmkTableCell>Bob Martin</td>
-              <td ngxsmkTableCell>{{ 'dataDisplay.roleEditor' | translate }}</td>
-              <td ngxsmkTableCell>{{ 'dataDisplay.teamContent' | translate }}</td>
+              <td ngxsmkTableCell>Editor</td>
+              <td ngxsmkTableCell>Content</td>
             </tr>
             <tr ngxsmkTableRow>
               <td ngxsmkTableCell>Carla Diaz</td>
-              <td ngxsmkTableCell>{{ 'dataDisplay.roleViewer' | translate }}</td>
-              <td ngxsmkTableCell>{{ 'dataDisplay.teamDesign' | translate }}</td>
+              <td ngxsmkTableCell>Viewer</td>
+              <td ngxsmkTableCell>Design</td>
             </tr>
           </tbody>
         </table>

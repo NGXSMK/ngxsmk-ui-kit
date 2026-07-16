@@ -129,11 +129,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
       [customize]="customizeNgxsmkPivotTable"
     >
       <div style="height:280px;overflow:auto;width:100%;">
-        <ngxsmk-pivot-table
-          [rows]="pivotRows"
-          [columns]="pivotColumns"
-          [rowLabel]="'enterprise.pivotRowLabel' | translate"
-        />
+        <ngxsmk-pivot-table [rows]="pivotRows" [columns]="pivotColumns" rowLabel="Quarter" />
       </div>
     </showcase-example>
 
@@ -166,11 +162,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
       [customize]="customizeNgxsmkFlowEditor"
     >
       <div style="height:420px;">
-        <ngxsmk-flow-editor
-          [title]="'enterprise.flowTitle' | translate"
-          [nodes]="flowNodes"
-          style="height:100%;"
-        />
+        <ngxsmk-flow-editor title="Onboarding Flow" [nodes]="flowNodes" style="height:100%;" />
       </div>
     </showcase-example>
 
@@ -523,7 +515,7 @@ ngxsmk-query-builder {
     { text: 'Compiling @ngxsmk/core...' },
     { text: 'Successfully ran target build (4.2s)' },
     { text: 'npm publish --access public', isInput: true },
-    { text: '+ @ngxsmk/core@1.3.1' },
+    { text: '+ @ngxsmk/core@1.3.0' },
   ];
 
   protected readonly orgNodes: OrgNode[] = [

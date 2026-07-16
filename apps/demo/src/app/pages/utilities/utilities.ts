@@ -144,7 +144,7 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
         </p>
         <p style="margin:.5rem 0 0">
           {{ 'utilities.triggered' | translate: { count: shortcutCount() } }}
-          <span class="ngxsmk-demo-log">{{ shortcutLog() | translate }}</span>
+          <span class="ngxsmk-demo-log">{{ shortcutLog() }}</span>
         </p>
       </div>
     </showcase-example>
@@ -338,7 +338,7 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
               <div class="ngxsmk-lazy-card">
                 <div class="ngxsmk-lazy-card__thumb" [style.background]="item.color"></div>
                 <div class="ngxsmk-lazy-card__body">
-                  <strong>{{ item.title | translate }}</strong>
+                  <strong>{{ item.title }}</strong>
                   <span>{{ 'utilities.renderedOnScroll' | translate }}</span>
                 </div>
               </div>
@@ -560,7 +560,7 @@ export class UtilitiesPage {
   protected readonly focusTrapped = signal(true);
   protected readonly outsideOpen = signal(false);
   protected readonly shortcutCount = signal(0);
-  protected readonly shortcutLog = signal('utilities.shortcutLogHint');
+  protected readonly shortcutLog = signal('Press the shortcut to trigger it.');
   protected readonly copied = signal(false);
   protected readonly scrollLocked = signal(false);
   protected readonly size = signal({ width: 0, height: 0 });
@@ -643,10 +643,10 @@ export class UtilitiesPage {
 </ngxsmk-lazy-load>`;
 
   protected readonly lazyCards = [
-    { id: 1, title: 'utilities.cardAlpha', color: 'linear-gradient(135deg,#4f46e5,#22d3ee)' },
-    { id: 2, title: 'utilities.cardBravo', color: 'linear-gradient(135deg,#16a34a,#a3e635)' },
-    { id: 3, title: 'utilities.cardCharlie', color: 'linear-gradient(135deg,#f59e0b,#ef4444)' },
-    { id: 4, title: 'utilities.cardDelta', color: 'linear-gradient(135deg,#a855f7,#ec4899)' },
+    { id: 1, title: 'Card Alpha', color: 'linear-gradient(135deg,#4f46e5,#22d3ee)' },
+    { id: 2, title: 'Card Bravo', color: 'linear-gradient(135deg,#16a34a,#a3e635)' },
+    { id: 3, title: 'Card Charlie', color: 'linear-gradient(135deg,#f59e0b,#ef4444)' },
+    { id: 4, title: 'Card Delta', color: 'linear-gradient(135deg,#a855f7,#ec4899)' },
   ];
 
   protected readonly codeLazyCards = `<ngxsmk-lazy-load>

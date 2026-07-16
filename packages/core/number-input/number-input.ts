@@ -12,7 +12,7 @@
 } from '@angular/core';
 
 /**
- * Numeric field with âˆ’ / + steppers and min/max/step constraints.
+ * Numeric field with − / + steppers and min/max/step constraints.
  *
  * ```html
  * <ngxsmk-number-input [min]="0" [max]="10" [step]="1" [(value)]="quantity" />
@@ -30,7 +30,7 @@
       [disabled]="disabled() || value() <= min()"
       (click)="bump(-1)"
     >
-      âˆ’
+      -
     </button>
     <input
       #field

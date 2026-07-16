@@ -201,9 +201,9 @@
     "title": "変更履歴",
     "subtitle": "NGXSMK の変更、バグ修正、アップデート、リリースを追跡します。",
     "type": {
-      "added": "added",
-      "fixed": "fixed",
-      "changed": "changed"
+      "added": "追加",
+      "fixed": "修正",
+      "changed": "変更"
     },
     "release": {
       "v131": {
