@@ -375,7 +375,7 @@ export class HomePage {
     {
       name: 'home.tplAdminName',
       description: 'home.tplAdminDesc',
-      badges: ['Signals', 'Zoneless'],
+      badges: ['iplayground.signals', 'home.badgeZoneless'],
       glyph: '▦',
     },
     {
@@ -387,7 +387,7 @@ export class HomePage {
     {
       name: 'home.tplLandingName',
       description: 'home.tplLandingDesc',
-      badges: ['Static', 'Fast'],
+      badges: ['home.badgeStatic', 'home.badgeFast'],
       glyph: '◈',
     },
     {

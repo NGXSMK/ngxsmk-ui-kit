@@ -125,7 +125,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
           </div>
         }
         <ngxsmk-chat-input
-          placeholder="Message the assistant…"
+          [placeholder]="'ai.chatInputPlaceholder' | translate"
           [(value)]="draft"
           (submitted)="onSend($event)"
         >
@@ -148,7 +148,8 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
             <div
               style="margin-top:0.5rem;font-size:0.8125rem;color:var(--ngxsmk-color-on-surface-variant)"
             >
-              Onboarding<br />Billing<br />Roadmap
+              {{ 'ai.threadOnboarding' | translate }}<br />{{ 'ai.threadBilling' | translate
+              }}<br />{{ 'ai.threadRoadmap' | translate }}
             </div>
           </div>
           <div
@@ -158,11 +159,11 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
             <strong>{{ 'ai.assistant' | translate }}</strong>
           </div>
           <div style="padding:0.75rem;font-size:0.875rem">
-            Ask me anything about your account.
+            {{ 'ai.chatLayoutBody' | translate }}
             <ngxsmk-chat-layout-scroll-button />
           </div>
           <div input style="padding:0.5rem;background:var(--ngxsmk-color-surface-container)">
-            <ngxsmk-chat-input placeholder="Reply…" />
+            <ngxsmk-chat-input [placeholder]="'ai.chatReplyPlaceholder' | translate" />
           </div>
         </ngxsmk-chat-layout>
       </div>
@@ -241,7 +242,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
               <ngxsmk-chat-composer-token-element label="data.csv" variant="file" />
             </div>
             <p style="margin:0;font-size:0.8125rem;color:var(--ngxsmk-color-on-surface-variant)">
-              Attach files, pick a prompt, or summon a tool - then send.
+              {{ 'ai.composerDrawerHint' | translate }}
             </p>
           </div>
         </ngxsmk-chat-composer-drawer>
@@ -310,7 +311,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
         <ngxsmk-citation-viewer
           title="Attention Is All You Need"
           author="Vaswani et al."
-          snippet="The Transformer allows for significantly more parallelization than recurrent models."
+          [snippet]="'ai.citationSnippet' | translate"
         />
       </div>
     </showcase-example>
@@ -372,7 +373,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     >
       <div style="width:100%;max-width:420px">
         <ngxsmk-audio-player
-          label="Voice reply"
+          [label]="'ai.audioVoiceReply' | translate"
           [progress]="62"
           currentTime="1:58"
           duration="3:12"

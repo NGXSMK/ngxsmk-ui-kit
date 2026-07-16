@@ -71,7 +71,16 @@
     "composerTools": "Composer tools",
     "openComposer": "Open composer",
     "closeComposer": "Close composer",
-    "activeSelection": "Active selection:"
+    "activeSelection": "Active selection:",
+    "threadOnboarding": "Onboarding",
+    "threadBilling": "Billing",
+    "threadRoadmap": "Roadmap",
+    "chatLayoutBody": "Ask me anything about your account.",
+    "chatInputPlaceholder": "Message the assistant…",
+    "chatReplyPlaceholder": "Reply…",
+    "composerDrawerHint": "Attach files, pick a prompt, or summon a tool - then send.",
+    "citationSnippet": "The Transformer allows for significantly more parallelization than recurrent models.",
+    "audioVoiceReply": "Voice reply"
   },
   "enterprise": {
     "pageDesc": "Heavy-duty building blocks for business applications - boards, schedulers, editors, and data tools. Each one is theme-aware and ready to wire up to your own data sources.",
@@ -88,7 +97,9 @@
     "terminalDesc": "Console emulator that distinguishes input lines and shows a blinking cursor.",
     "orgDesc": "Hierarchical tree of people cards showing name and role by reporting line.",
     "queryDesc": "Compose filter conditions across typed fields with operators and values.",
-    "selectedNode": "Selected node:"
+    "selectedNode": "Selected node:",
+    "pivotRowLabel": "Quarter",
+    "flowTitle": "Onboarding Flow"
   },
   "dataDisplay": {
     "pageDesc": "Components for presenting structured information — tabs, disclosure, avatars, tags, tables, lists, and metrics. Every piece is token-driven and accessible by default.",
@@ -104,7 +115,7 @@
     "overflowDesc": "Collapses surplus items behind a single 'more' affordance that expands on demand.",
     "statDesc": "A compact metric with optional trend indicator and icon.",
     "statusDotDesc": "A color-coded presence indicator for online, away, busy, and offline states.",
-    "cardDesc": "A content container composed from header, title, description, content, and footer sub-directives.",
+    "cardDesc": "Performance summary for Q2 2026.",
     "tableComposedDesc": "Build a table from the cell primitives — header cells, rows, and cells — for full layout control.",
     "overview": "Overview",
     "activity": "Activity",
@@ -117,7 +128,46 @@
     "statusBusy": "Busy",
     "statusOffline": "Offline",
     "viewReport": "View report",
-    "export": "Export"
+    "export": "Export",
+    "tabOverviewBody": "The overview panel summarizes account health and recent activity.",
+    "tabActivityBody": "Releases, comments, and status changes land here in reverse-chronological order.",
+    "tabSettingsBody": "Manage notifications, visibility, and integration tokens.",
+    "faq1Q": "What is NGXSMK?",
+    "faq1A": "An Angular-first, signals-native UI ecosystem built on shared design tokens.",
+    "faq2Q": "Is it themeable?",
+    "faq2A": "Yes — a universal token engine drives color, spacing, and type across every component.",
+    "faq3Q": "Is it accessible?",
+    "faq3A": "Components ship with WAI-ARIA semantics and full keyboard support.",
+    "tagStable": "stable",
+    "tagBeta": "beta",
+    "tagDeprecated": "deprecated",
+    "tagDocs": "docs",
+    "listInbox": "Inbox",
+    "listStarred": "Starred",
+    "listSnoozed": "Snoozed",
+    "listArchived": "Archived",
+    "metaCreated": "Created",
+    "metaAuthor": "Author",
+    "metaStatus": "Status",
+    "metaVersion": "Version",
+    "metaPublished": "Published",
+    "ovDesign": "Design",
+    "ovEngineering": "Engineering",
+    "ovProduct": "Product",
+    "ovResearch": "Research",
+    "ovMarketing": "Marketing",
+    "ovSupport": "Support",
+    "cardTitle": "Quarterly report",
+    "cardBody": "Revenue grew 18% quarter-over-quarter, driven by the new enterprise tier. Active accounts crossed the 10k mark with churn holding steady at 2.3%.",
+    "colName": "Name",
+    "colRole": "Role",
+    "colTeam": "Team",
+    "roleAdmin": "Admin",
+    "roleEditor": "Editor",
+    "roleViewer": "Viewer",
+    "teamPlatform": "Platform",
+    "teamContent": "Content",
+    "teamDesign": "Design"
   },
   "blog": {
     "title": "Blog",
@@ -314,6 +364,16 @@
       "copyCode": "Copy Code",
       "copied": "✓ Copied",
       "downloadConfig": "Download Config File"
+    },
+    "scales": {
+      "minorSecond": "1.067 - Minor Second",
+      "majorSecond": "1.125 - Major Second",
+      "minorThird": "1.200 - Minor Third",
+      "majorThird": "1.250 - Major Third",
+      "perfectFourth": "1.333 - Perfect Fourth",
+      "augmentedFourth": "1.414 - Augmented Fourth",
+      "perfectFifth": "1.500 - Perfect Fifth",
+      "goldenRatio": "1.618 - Golden Ratio"
     }
   },
   "charts": {
@@ -339,7 +399,30 @@
     "timestampDesc": "Relative, absolute, or smart date formatting.",
     "tokenDesc": "Compact, pill-shaped labels - perfect for tags and filters.",
     "citationDesc": "Inline numbered citation marker with an optional source link.",
-    "markdownDesc": "Renders a Markdown string to styled, theme-aware HTML."
+    "markdownDesc": "Renders a Markdown string to styled, theme-aware HTML.",
+    "demoDisplayHeading": "Display heading",
+    "demoSectionHeading": "Section heading",
+    "demoSubsectionHeading": "Subsection heading",
+    "demoLightweightHeading": "Lightweight heading",
+    "demoBodyText": "Body text for paragraphs and general copy.",
+    "demoCaption": "A smaller caption for hints.",
+    "demoOverline": "Overline eyebrow label",
+    "demoBlockquote": "The Analytical Engine weaves algebraic patterns just as the Jacquard loom weaves flowers and leaves.",
+    "demoCodeInstallPre": "Install with",
+    "demoCodeInstallPost": "and import a component.",
+    "demoCodeLargerSnippet": "Larger snippet:",
+    "demoDefaultLink": "Default link",
+    "demoMutedLink": "Muted link",
+    "demoUnderlinedLink": "Underlined on hover",
+    "demoExternalLink": "External link",
+    "demoNoImage": "No image",
+    "demoTokenDefault": "Default",
+    "demoTokenPrimary": "Primary",
+    "demoTokenSuccess": "Success",
+    "demoTokenWarning": "Warning",
+    "demoTokenError": "Error",
+    "demoCitationPre": "Design systems improve consistency across teams",
+    "demoCitationPost": "and reduce rework"
   },
   "docs": {
     "developerPortal": "Developer Portal",
@@ -393,7 +476,19 @@
     "clearSearch": "Clear search",
     "componentCount": "{{count}} components",
     "inputsCount": "{{count}} inputs",
-    "signalsCount": "{{count}} signals"
+    "signalsCount": "{{count}} signals",
+    "cat": {
+      "form": "Form Controls",
+      "layout": "Layout Primitives",
+      "navigation": "Navigation",
+      "dataDisplay": "Data Display",
+      "feedback": "Feedback & Status",
+      "overlay": "Overlays & Popovers",
+      "chart": "Charts & Visualization",
+      "ai": "AI Interface",
+      "utility": "Utilities & Hooks",
+      "other": "Other"
+    }
   },
   "iplayground": {
     "explorer": "Explorer",
@@ -453,7 +548,11 @@
     "searchPlaceholder": "Search components",
     "componentExplorer": "Component Explorer",
     "openCategories": "Open component categories",
-    "categories": "Categories"
+    "categories": "Categories",
+    "group": {
+      "content": "Content",
+      "utilities": "Utilities"
+    }
   },
   "propPanel": {
     "on": "On",
@@ -553,7 +652,39 @@
     "tsDesc": "Statically typed, great tooling.",
     "ngDesc": "The full-stack framework.",
     "jsDesc": "No framework required.",
-    "languagesChosen": "{{count}} language(s) chosen"
+    "languagesChosen": "{{count}} language(s) chosen",
+    "colorRed": "Red",
+    "colorGreen": "Green",
+    "colorPurple": "Purple",
+    "fruitApple": "Apple",
+    "fruitApricot": "Apricot",
+    "fruitBanana": "Banana",
+    "fruitBlueberry": "Blueberry",
+    "fruitCherry": "Cherry",
+    "fruitMango": "Mango",
+    "countryUs": "United States",
+    "countryUk": "United Kingdom",
+    "countryDe": "Germany",
+    "countryJp": "Japan",
+    "countryLk": "Sri Lanka",
+    "topicNews": "Product news",
+    "topicTips": "Tips & tricks",
+    "topicEvents": "Events",
+    "interestDesign": "Design",
+    "interestCode": "Engineering",
+    "interestAi": "AI",
+    "interestProduct": "Product",
+    "viewList": "List",
+    "viewBoard": "Board",
+    "filterStatus": "Status",
+    "filterType": "Type",
+    "filterOpen": "Open",
+    "filterClosed": "Closed",
+    "filterBug": "Bug",
+    "filterFeature": "Feature",
+    "langTypeScript": "TypeScript",
+    "langAngular": "Angular",
+    "langJavaScript": "JavaScript"
   },
   "feedback": {
     "intro": "Components that communicate status, progress, and system responses - from inline alerts and banners to loaders, skeletons, and presence dots.",
@@ -662,7 +793,10 @@
     "copyright": "© 2026 NGXSMK · MIT License",
     "deleteTitle": "Delete file?",
     "deleteBody": "This action cannot be undone. The file will be permanently removed from your workspace.",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "badgeZoneless": "Zoneless",
+    "badgeStatic": "Static",
+    "badgeFast": "Fast"
   },
   "navigation": {
     "desc": "Navigation primitives - from tiny breadcrumbs to full app shells - that share the theme token engine, so every link, tab, and menu recolors with your brand.",
@@ -723,7 +857,9 @@
     "sideNavComposedDesc": "Build a vertical nav from the side-nav primitives - sections, headings, items, and a collapse button - inside a constrained container.",
     "topNavComposed": "Top Nav (composed)",
     "topNavComposedDesc": "Assemble a horizontal bar from top-nav primitives - heading, items, a menu, and mega-menu cards - inside a constrained container.",
-    "about": "About"
+    "about": "About",
+    "linkTasks": "Tasks",
+    "contact": "Contact"
   },
   "layout": {
     "desc": "Structural primitives for centering, sectioning, spacing and arranging content. Everything here is theme-aware and composable, so you can build page scaffolding without writing custom CSS.",
@@ -920,7 +1056,12 @@
     "lazyLoadCardsDesc": "Each card below is wrapped in ngxsmk-lazy-load, so its markup is only created once it scrolls into the viewport - scroll the feed to watch them appear.",
     "cardsScrollDown": "Scroll down - cards load as they enter view…",
     "renderedOnScroll": "Rendered on scroll into view",
-    "endOfFeed": "…end of feed."
+    "endOfFeed": "…end of feed.",
+    "cardAlpha": "Card Alpha",
+    "cardBravo": "Card Bravo",
+    "cardCharlie": "Card Charlie",
+    "cardDelta": "Card Delta",
+    "shortcutLogHint": "Press the shortcut to trigger it."
   },
   "templates": {
     "subtitle": "Ready-to-use page templates to kickstart your project.",
@@ -1011,6 +1152,66 @@
       "sourceCode": "Source Code",
       "copied": "Copied to Clipboard!",
       "copyCode": "Copy Code"
+    },
+    "cat": {
+      "All": "All",
+      "Application": "Application",
+      "Marketing": "Marketing",
+      "E-Commerce": "E-Commerce",
+      "Authentication": "Authentication",
+      "DevOps": "DevOps"
+    },
+    "nav": {
+      "dashboard": "Dashboard",
+      "analytics": "Analytics",
+      "users": "Users",
+      "settings": "Settings"
+    },
+    "traffic": {
+      "organic": "Organic",
+      "direct": "Direct",
+      "referral": "Referral",
+      "social": "Social"
+    },
+    "role": {
+      "owner": "Owner",
+      "admin": "Admin",
+      "editor": "Editor",
+      "viewer": "Viewer"
+    },
+    "list": {
+      "dashboard": {
+        "title": "Admin Dashboard",
+        "desc": "A complete dashboard template featuring sidebar navigation, user profile settings, complex data tables, dynamic charts, and stats panels."
+      },
+      "aichat": {
+        "title": "AI Chat Interface",
+        "desc": "A modern, responsive conversational UI featuring message streaming, markdown response formatting, code syntax highlighting, and inline tool calls."
+      },
+      "landing": {
+        "title": "SaaS Landing Page",
+        "desc": "A high-conversion landing page mockup with a beautiful hero section, interactive pricing tables, features grids, and animated FAQ accordions."
+      },
+      "kanban": {
+        "title": "Kanban Task Board",
+        "desc": "An interactive column-based task board to manage sprint tasks, user stories, and bugs. Features drag-and-drop actions."
+      },
+      "settings": {
+        "title": "User Settings Page",
+        "desc": "A comprehensive, multi-section configuration panel for profile options, billing systems, and security switches."
+      },
+      "ecommerce": {
+        "title": "E-Commerce Product Detail",
+        "desc": "A premium product details layout with rating feedback, price old/new offsets, custom color selectors, and cart commands."
+      },
+      "auth": {
+        "title": "Credentials Auth Cards",
+        "desc": "A gorgeous authentication card with email/password input validations, social login quick buttons, and keep-alive switches."
+      },
+      "health": {
+        "title": "System Health Monitor",
+        "desc": "A DevOps administration dashboard with active stat load gauges, health badges, and real-time server command logs."
+      }
     }
   },
   "themes": {
@@ -1022,7 +1223,13 @@
     "modeSwitchingDesc": "Toggle between Light, Dark, or System mode to test your application's appearance across different modes.",
     "light": "Light",
     "dark": "Dark",
-    "system": "System"
+    "system": "System",
+    "color": {
+      "violet": "Violet",
+      "emerald": "Emerald",
+      "rose": "Rose",
+      "neutral": "Neutral"
+    }
   },
   "community": {
     "title": "Community & Contribution",

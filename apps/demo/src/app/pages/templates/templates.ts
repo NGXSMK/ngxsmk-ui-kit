@@ -87,7 +87,7 @@ interface TemplateItem {
                   [class.active]="activeCategory() === cat"
                   (click)="activeCategory.set(cat)"
                 >
-                  {{ cat }}
+                  {{ 'templates.cat.' + cat | translate }}
                   @if (cat !== 'All') {
                     <span class="chip-count">({{ categoryCount(cat) }})</span>
                   }
@@ -137,7 +137,7 @@ interface TemplateItem {
           </div>
           <div class="ngxsmk-templates-toolbar-sub">
             <ngxsmk-text variant="caption" class="ngxsmk-result-count">
-              {{ activeCategory() === 'All' ? ('templates.all' | translate) : activeCategory() }}
+              {{ 'templates.cat.' + activeCategory() | translate }}
               {{ 'templates.templatesWord' | translate }}
               <span class="count-num">({{ filteredTemplates().length }})</span>
             </ngxsmk-text>
@@ -171,7 +171,9 @@ interface TemplateItem {
                 class="tpl-card__preview"
                 role="button"
                 tabindex="0"
-                [attr.aria-label]="'templates.previewAria' | translate: { title: tpl.title }"
+                [attr.aria-label]="
+                  'templates.previewAria' | translate: { title: tpl.title | translate }
+                "
                 (click)="openPreview(tpl)"
                 (keydown.enter)="openPreview(tpl)"
               >
@@ -202,10 +204,14 @@ interface TemplateItem {
                 </div>
               </div>
               <div class="tpl-card__body">
-                <span class="tpl-cat" [attr.data-cat]="tpl.category">{{ tpl.category }}</span>
-                <ngxsmk-heading level="h3" class="tpl-card__title">{{ tpl.title }}</ngxsmk-heading>
+                <span class="tpl-cat" [attr.data-cat]="tpl.category">{{
+                  'templates.cat.' + tpl.category | translate
+                }}</span>
+                <ngxsmk-heading level="h3" class="tpl-card__title">{{
+                  tpl.title | translate
+                }}</ngxsmk-heading>
                 <ngxsmk-text variant="body" class="tpl-card__desc">{{
-                  tpl.description
+                  tpl.description | translate
                 }}</ngxsmk-text>
                 <div class="tpl-card__actions">
                   <button ngxsmk-button size="sm" variant="outline" (click)="openPreview(tpl)">
@@ -302,7 +308,7 @@ interface TemplateItem {
                       [class.active]="adminView() === item.id"
                       (click)="adminView.set(item.id)"
                     >
-                      {{ item.label }}
+                      {{ item.label | translate }}
                     </button>
                   }
                 </div>
@@ -395,7 +401,7 @@ interface TemplateItem {
                           <div class="admin-bars">
                             @for (s of trafficSources; track s.label) {
                               <div class="admin-bar-row">
-                                <span class="admin-bar-label">{{ s.label }}</span>
+                                <span class="admin-bar-label">{{ s.label | translate }}</span>
                                 <div class="admin-bar-track">
                                   <div class="admin-bar-fill" [style.width.%]="s.value"></div>
                                 </div>
@@ -427,7 +433,7 @@ interface TemplateItem {
                               <span class="admin-user-name">{{ u.name }}</span>
                               <span class="admin-user-email">{{ u.email }}</span>
                             </div>
-                            <span class="admin-user-role">{{ u.role }}</span>
+                            <span class="admin-user-role">{{ u.role | translate }}</span>
                             <ngxsmk-badge
                               [variant]="u.status === 'Active' ? 'success' : 'warning'"
                               >{{ u.status }}</ngxsmk-badge
@@ -838,7 +844,7 @@ interface TemplateItem {
     <!-- Live Preview / Get Code Dialog Modal -->
     <ngxsmk-dialog
       [(open)]="dialogOpen"
-      [title]="selectedTemplate()?.title ?? ''"
+      [title]="selectedTemplate()?.title ?? '' | translate"
       style="--ngxsmk-dialog-width: 72rem;"
     >
       @if (selectedTemplate()) {
@@ -2040,10 +2046,10 @@ export class TemplatesPage {
 
   // --- Admin Console (dashboard template) multi-page navigation ---
   protected readonly adminNav = [
-    { id: 'dashboard' as const, label: 'Dashboard' },
-    { id: 'analytics' as const, label: 'Analytics' },
-    { id: 'users' as const, label: 'Users' },
-    { id: 'settings' as const, label: 'Settings' },
+    { id: 'dashboard' as const, label: 'templates.nav.dashboard' },
+    { id: 'analytics' as const, label: 'templates.nav.analytics' },
+    { id: 'users' as const, label: 'templates.nav.users' },
+    { id: 'settings' as const, label: 'templates.nav.settings' },
   ];
   protected readonly adminView = signal<'dashboard' | 'analytics' | 'users' | 'settings'>(
     'dashboard',
@@ -2058,16 +2064,16 @@ export class TemplatesPage {
     { label: 'Jun', value: 88 },
   ];
   protected readonly trafficSources = [
-    { label: 'Organic', value: 48 },
-    { label: 'Direct', value: 27 },
-    { label: 'Referral', value: 15 },
-    { label: 'Social', value: 10 },
+    { label: 'templates.traffic.organic', value: 48 },
+    { label: 'templates.traffic.direct', value: 27 },
+    { label: 'templates.traffic.referral', value: 15 },
+    { label: 'templates.traffic.social', value: 10 },
   ];
   protected readonly usersList = [
     {
       name: 'Ada Lovelace',
       email: 'ada@ngxsmk.dev',
-      role: 'Owner',
+      role: 'templates.role.owner',
       status: 'Active',
       initials: 'AL',
       color: '#7c3aed',
@@ -2075,7 +2081,7 @@ export class TemplatesPage {
     {
       name: 'Alan Turing',
       email: 'alan@ngxsmk.dev',
-      role: 'Admin',
+      role: 'templates.role.admin',
       status: 'Active',
       initials: 'AT',
       color: '#0369a1',
@@ -2083,7 +2089,7 @@ export class TemplatesPage {
     {
       name: 'Grace Hopper',
       email: 'grace@ngxsmk.dev',
-      role: 'Editor',
+      role: 'templates.role.editor',
       status: 'Active',
       initials: 'GH',
       color: '#15803d',
@@ -2091,7 +2097,7 @@ export class TemplatesPage {
     {
       name: 'Linus Torvalds',
       email: 'linus@ngxsmk.dev',
-      role: 'Viewer',
+      role: 'templates.role.viewer',
       status: 'Invited',
       initials: 'LT',
       color: '#b45309',
@@ -2188,10 +2194,9 @@ export class TemplatesPage {
   protected readonly templatesList: TemplateItem[] = [
     {
       id: 'dashboard',
-      title: 'Admin Dashboard',
+      title: 'templates.list.dashboard.title',
       category: 'Application',
-      description:
-        'A complete dashboard template featuring sidebar navigation, user profile settings, complex data tables, dynamic charts, and stats panels.',
+      description: 'templates.list.dashboard.desc',
       gradient: 'linear-gradient(135deg, #1e1b4b, #312e81, #3730a3)',
       code: `<!-- app-dashboard.html -->
 <ngxsmk-app-shell>
@@ -2221,10 +2226,9 @@ export class TemplatesPage {
     },
     {
       id: 'ai-chat',
-      title: 'AI Chat Interface',
+      title: 'templates.list.aichat.title',
       category: 'Application',
-      description:
-        'A modern, responsive conversational UI featuring message streaming, markdown response formatting, code syntax highlighting, and inline tool calls.',
+      description: 'templates.list.aichat.desc',
       gradient: 'linear-gradient(135deg, #064e3b, #065f46, #047857)',
       code: `<!-- ai-chat.html -->
 <ngxsmk-chat-layout>
@@ -2238,10 +2242,9 @@ export class TemplatesPage {
     },
     {
       id: 'landing-page',
-      title: 'SaaS Landing Page',
+      title: 'templates.list.landing.title',
       category: 'Marketing',
-      description:
-        'A high-conversion landing page mockup with a beautiful hero section, interactive pricing tables, features grids, and animated FAQ accordions.',
+      description: 'templates.list.landing.desc',
       gradient: 'linear-gradient(135deg, #701a75, #86198f, #a21caf)',
       code: `<!-- landing-page.html -->
 <div class="landing-nav">
@@ -2294,10 +2297,9 @@ export class TemplatesPage {
     },
     {
       id: 'kanban',
-      title: 'Kanban Task Board',
+      title: 'templates.list.kanban.title',
       category: 'Application',
-      description:
-        'An interactive column-based task board to manage sprint tasks, user stories, and bugs. Features drag-and-drop actions.',
+      description: 'templates.list.kanban.desc',
       gradient: 'linear-gradient(135deg, #1e3a5f, #1e4d8c, #2563eb)',
       code: `<!-- kanban-board.html -->
 <ngxsmk-card>
@@ -2311,10 +2313,9 @@ export class TemplatesPage {
     },
     {
       id: 'settings',
-      title: 'User Settings Page',
+      title: 'templates.list.settings.title',
       category: 'Application',
-      description:
-        'A comprehensive, multi-section configuration panel for profile options, billing systems, and security switches.',
+      description: 'templates.list.settings.desc',
       gradient: 'linear-gradient(135deg, #292524, #44403c, #57534e)',
       code: `<!-- settings.html -->
 <div class="settings-container">
@@ -2347,10 +2348,9 @@ export class TemplatesPage {
     },
     {
       id: 'ecommerce-detail',
-      title: 'E-Commerce Product Detail',
+      title: 'templates.list.ecommerce.title',
       category: 'E-Commerce',
-      description:
-        'A premium product details layout with rating feedback, price old/new offsets, custom color selectors, and cart commands.',
+      description: 'templates.list.ecommerce.desc',
       gradient: 'linear-gradient(135deg, #7c2d12, #9a3412, #c2410c)',
       code: `<!-- product-detail.html -->
 <div class="product-grid">
@@ -2393,10 +2393,9 @@ export class TemplatesPage {
     },
     {
       id: 'auth-cards',
-      title: 'Credentials Auth Cards',
+      title: 'templates.list.auth.title',
       category: 'Authentication',
-      description:
-        'A gorgeous authentication card with email/password input validations, social login quick buttons, and keep-alive switches.',
+      description: 'templates.list.auth.desc',
       gradient: 'linear-gradient(135deg, #3b0764, #581c87, #6b21a8)',
       code: `<!-- auth-card.html -->
 <ngxsmk-card class="auth-card">
@@ -2429,10 +2428,9 @@ export class TemplatesPage {
     },
     {
       id: 'health-monitor',
-      title: 'System Health Monitor',
+      title: 'templates.list.health.title',
       category: 'DevOps',
-      description:
-        'A DevOps administration dashboard with active stat load gauges, health badges, and real-time server command logs.',
+      description: 'templates.list.health.desc',
       gradient: 'linear-gradient(135deg, #0f172a, #1e293b, #334155)',
       code: `<!-- health-monitor.html -->
 <div class="health-header">

@@ -471,20 +471,20 @@ interface Option {
             [description]="'forms.tsDesc' | translate"
             [checked]="langs().includes('ts')"
             (changed)="toggleLang('ts', $event)"
-            >TypeScript</ngxsmk-checkbox-list-item
+            >{{ 'forms.langTypeScript' | translate }}</ngxsmk-checkbox-list-item
           >
           <ngxsmk-checkbox-list-item
             [description]="'forms.ngDesc' | translate"
             [checked]="langs().includes('ng')"
             (changed)="toggleLang('ng', $event)"
-            >Angular</ngxsmk-checkbox-list-item
+            >{{ 'forms.langAngular' | translate }}</ngxsmk-checkbox-list-item
           >
           <ngxsmk-checkbox-list-item
             [description]="'forms.jsDesc' | translate"
             disabled
             [checked]="langs().includes('js')"
             (changed)="toggleLang('js', $event)"
-            >JavaScript</ngxsmk-checkbox-list-item
+            >{{ 'forms.langJavaScript' | translate }}</ngxsmk-checkbox-list-item
           >
           <small>{{ 'forms.languagesChosen' | translate: { count: langs().length } }}</small>
         </div>
@@ -888,58 +888,58 @@ ngxsmk-checkbox-list-item {
 }`;
 
   protected readonly colors: Option[] = [
-    { value: 'red', label: 'Red' },
-    { value: 'green', label: 'Green' },
-    { value: 'blue', label: 'Blue' },
-    { value: 'purple', label: 'Purple' },
+    { value: 'red', label: 'forms.colorRed' },
+    { value: 'green', label: 'forms.colorGreen' },
+    { value: 'blue', label: 'docs.accentBlue' },
+    { value: 'purple', label: 'forms.colorPurple' },
   ];
   protected readonly fruitOptions: Option[] = [
-    { value: 'apple', label: 'Apple' },
-    { value: 'apricot', label: 'Apricot' },
-    { value: 'banana', label: 'Banana' },
-    { value: 'blueberry', label: 'Blueberry' },
-    { value: 'cherry', label: 'Cherry' },
-    { value: 'mango', label: 'Mango' },
+    { value: 'apple', label: 'forms.fruitApple' },
+    { value: 'apricot', label: 'forms.fruitApricot' },
+    { value: 'banana', label: 'forms.fruitBanana' },
+    { value: 'blueberry', label: 'forms.fruitBlueberry' },
+    { value: 'cherry', label: 'forms.fruitCherry' },
+    { value: 'mango', label: 'forms.fruitMango' },
   ];
   protected readonly countries: Option[] = [
-    { value: 'us', label: 'United States' },
-    { value: 'uk', label: 'United Kingdom' },
-    { value: 'de', label: 'Germany' },
-    { value: 'jp', label: 'Japan' },
-    { value: 'lk', label: 'Sri Lanka' },
+    { value: 'us', label: 'forms.countryUs' },
+    { value: 'uk', label: 'forms.countryUk' },
+    { value: 'de', label: 'forms.countryDe' },
+    { value: 'jp', label: 'forms.countryJp' },
+    { value: 'lk', label: 'forms.countryLk' },
   ];
   protected readonly frameworks = ['Angular', 'React', 'Vue', 'Svelte', 'Solid', 'Qwik'];
   protected readonly topics = [
-    { value: 'news', label: 'Product news' },
-    { value: 'tips', label: 'Tips & tricks' },
-    { value: 'events', label: 'Events' },
+    { value: 'news', label: 'forms.topicNews' },
+    { value: 'tips', label: 'forms.topicTips' },
+    { value: 'events', label: 'forms.topicEvents' },
   ];
   protected readonly interests: Option[] = [
-    { value: 'design', label: 'Design' },
-    { value: 'code', label: 'Engineering' },
-    { value: 'ai', label: 'AI' },
-    { value: 'product', label: 'Product' },
+    { value: 'design', label: 'forms.interestDesign' },
+    { value: 'code', label: 'forms.interestCode' },
+    { value: 'ai', label: 'forms.interestAi' },
+    { value: 'product', label: 'forms.interestProduct' },
   ];
   protected readonly viewOptions: Option[] = [
-    { value: 'list', label: 'List' },
-    { value: 'grid', label: 'Grid' },
-    { value: 'board', label: 'Board' },
+    { value: 'list', label: 'forms.viewList' },
+    { value: 'grid', label: 'layout.grid' },
+    { value: 'board', label: 'forms.viewBoard' },
   ];
   protected readonly searchFilters = [
     {
       id: 'status',
-      label: 'Status',
+      label: 'forms.filterStatus',
       items: [
-        { value: 'open', label: 'Open' },
-        { value: 'closed', label: 'Closed' },
+        { value: 'open', label: 'forms.filterOpen' },
+        { value: 'closed', label: 'forms.filterClosed' },
       ],
     },
     {
       id: 'type',
-      label: 'Type',
+      label: 'forms.filterType',
       items: [
-        { value: 'bug', label: 'Bug' },
-        { value: 'feat', label: 'Feature' },
+        { value: 'bug', label: 'forms.filterBug' },
+        { value: 'feat', label: 'forms.filterFeature' },
       ],
     },
   ];

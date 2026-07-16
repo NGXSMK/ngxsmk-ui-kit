@@ -53,22 +53,22 @@ import { AppNav } from '../../nav/nav';
               <button
                 class="ngxsmk-color-btn ngxsmk-violet"
                 (click)="theme.applyTheme(presets['violet'])"
-                title="Violet"
+                [title]="'themes.color.violet' | translate"
               ></button>
               <button
                 class="ngxsmk-color-btn ngxsmk-emerald"
                 (click)="theme.applyTheme(presets['emerald'])"
-                title="Emerald"
+                [title]="'themes.color.emerald' | translate"
               ></button>
               <button
                 class="ngxsmk-color-btn ngxsmk-rose"
                 (click)="theme.applyTheme(presets['rose'])"
-                title="Rose"
+                [title]="'themes.color.rose' | translate"
               ></button>
               <button
                 class="ngxsmk-color-btn ngxsmk-neutral"
                 (click)="theme.applyTheme(presets['neutral'])"
-                title="Neutral"
+                [title]="'themes.color.neutral' | translate"
               ></button>
             </div>
           </div>
