@@ -2281,9 +2281,7 @@ export class PlaygroundPage {
 
   // Exporter modal states
   readonly showDownloadModal = signal(false);
-  protected readonly exportFormat = signal<'css' | 'scss' | 'tailwind' | 'stylex' | 'figma'>(
-    'css',
-  );
+  protected readonly exportFormat = signal<'css' | 'scss' | 'tailwind' | 'stylex' | 'figma'>('css');
   protected readonly exportCopied = signal(false);
 
   // Dropdown menus configurations

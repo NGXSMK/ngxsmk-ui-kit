@@ -199,725 +199,742 @@ interface TemplateItem {
 
           <div class="tpl-grid">
             @for (tpl of filteredTemplates(); track tpl.id; let i = $index) {
-            <article class="tpl-card" [id]="'tpl-' + tpl.id" [style.--tpl-i]="i">
-              <div
-                class="tpl-card__preview"
-                role="button"
-                tabindex="0"
-                [attr.aria-label]="
-                  'templates.previewAria' | translate: { title: tpl.title | translate }
-                "
-                (click)="openPreview(tpl)"
-                (keydown.enter)="openPreview(tpl)"
-              >
-                <div class="tpl-card__frame" aria-hidden="true">
-                  <ng-container
-                    [ngTemplateOutlet]="miniPreview"
-                    [ngTemplateOutletContext]="{ id: tpl.id }"
-                  />
+              <article class="tpl-card" [id]="'tpl-' + tpl.id" [style.--tpl-i]="i">
+                <div
+                  class="tpl-card__preview"
+                  role="button"
+                  tabindex="0"
+                  [attr.aria-label]="
+                    'templates.previewAria' | translate: { title: tpl.title | translate }
+                  "
+                  (click)="openPreview(tpl)"
+                  (keydown.enter)="openPreview(tpl)"
+                >
+                  <div class="tpl-card__frame" aria-hidden="true">
+                    <ng-container
+                      [ngTemplateOutlet]="miniPreview"
+                      [ngTemplateOutletContext]="{ id: tpl.id }"
+                    />
+                  </div>
+                  <div class="tpl-card__fade" aria-hidden="true"></div>
+                  <div class="tpl-card__hover">
+                    <span class="tpl-card__hover-pill">
+                      <svg
+                        viewBox="0 0 24 24"
+                        width="14"
+                        height="14"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                        <circle cx="12" cy="12" r="3" />
+                      </svg>
+                      {{ 'templates.livePreview' | translate }}
+                    </span>
+                  </div>
                 </div>
-                <div class="tpl-card__fade" aria-hidden="true"></div>
-                <div class="tpl-card__hover">
-                  <span class="tpl-card__hover-pill">
-                    <svg
-                      viewBox="0 0 24 24"
-                      width="14"
-                      height="14"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                      <circle cx="12" cy="12" r="3" />
-                    </svg>
-                    {{ 'templates.livePreview' | translate }}
-                  </span>
+                <div class="tpl-card__body">
+                  <div class="tpl-card__block" [attr.data-cat]="tpl.category">
+                    <span class="tpl-card__sheet">NGX-{{ pad(i + 1) }}</span>
+                    <span class="tpl-card__cat">
+                      <span class="tpl-card__cat-swatch" aria-hidden="true"></span>
+                      {{ 'templates.cat.' + tpl.category | translate }}
+                    </span>
+                    <span class="tpl-card__rev">v{{ appVersion }}</span>
+                  </div>
+                  <ngxsmk-heading level="h3" class="tpl-card__title">{{
+                    tpl.title | translate
+                  }}</ngxsmk-heading>
+                  <ngxsmk-text variant="body" class="tpl-card__desc">{{
+                    tpl.description | translate
+                  }}</ngxsmk-text>
+                  <div class="tpl-card__actions">
+                    <button ngxsmk-button size="sm" variant="outline" (click)="openPreview(tpl)">
+                      <svg
+                        class="btn-icon"
+                        viewBox="0 0 24 24"
+                        width="14"
+                        height="14"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                        <circle cx="12" cy="12" r="3" />
+                      </svg>
+                      {{ 'templates.preview' | translate }}
+                    </button>
+                    <button ngxsmk-button size="sm" variant="ghost" (click)="openCode(tpl)">
+                      <svg
+                        class="btn-icon"
+                        viewBox="0 0 24 24"
+                        width="14"
+                        height="14"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polyline points="16 18 22 12 16 6" />
+                        <polyline points="8 6 2 12 8 18" />
+                      </svg>
+                      {{ 'templates.getCode' | translate }}
+                    </button>
+                  </div>
                 </div>
-              </div>
-              <div class="tpl-card__body">
-                <div class="tpl-card__block" [attr.data-cat]="tpl.category">
-                  <span class="tpl-card__sheet">NGX-{{ pad(i + 1) }}</span>
-                  <span class="tpl-card__cat">
-                    <span class="tpl-card__cat-swatch" aria-hidden="true"></span>
-                    {{ 'templates.cat.' + tpl.category | translate }}
-                  </span>
-                  <span class="tpl-card__rev">v{{ appVersion }}</span>
-                </div>
-                <ngxsmk-heading level="h3" class="tpl-card__title">{{
-                  tpl.title | translate
-                }}</ngxsmk-heading>
-                <ngxsmk-text variant="body" class="tpl-card__desc">{{
-                  tpl.description | translate
-                }}</ngxsmk-text>
-                <div class="tpl-card__actions">
-                  <button ngxsmk-button size="sm" variant="outline" (click)="openPreview(tpl)">
-                    <svg
-                      class="btn-icon"
-                      viewBox="0 0 24 24"
-                      width="14"
-                      height="14"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                      <circle cx="12" cy="12" r="3" />
-                    </svg>
-                    {{ 'templates.preview' | translate }}
-                  </button>
-                  <button ngxsmk-button size="sm" variant="ghost" (click)="openCode(tpl)">
-                    <svg
-                      class="btn-icon"
-                      viewBox="0 0 24 24"
-                      width="14"
-                      height="14"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <polyline points="16 18 22 12 16 6" />
-                      <polyline points="8 6 2 12 8 18" />
-                    </svg>
-                    {{ 'templates.getCode' | translate }}
-                  </button>
-                </div>
-              </div>
-            </article>
-          }
+              </article>
+            }
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- Shared mini preview: rendered scaled inside cards and full-size in the dialog -->
-    <ng-template #miniPreview let-id="id">
-      <div class="ngxsmk-mock-window">
-        <div class="ngxsmk-mock-window-titlebar">
-          <div class="ngxsmk-mock-window-dots">
-            <span class="dot red"></span>
-            <span class="dot yellow"></span>
-            <span class="dot green"></span>
+      <!-- Shared mini preview: rendered scaled inside cards and full-size in the dialog -->
+      <ng-template #miniPreview let-id="id">
+        <div class="ngxsmk-mock-window">
+          <div class="ngxsmk-mock-window-titlebar">
+            <div class="ngxsmk-mock-window-dots">
+              <span class="dot red"></span>
+              <span class="dot yellow"></span>
+              <span class="dot green"></span>
+            </div>
+            <div class="ngxsmk-mock-window-address-bar">
+              <svg
+                viewBox="0 0 24 24"
+                width="12"
+                height="12"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                class="lock-icon"
+              >
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+              </svg>
+              <span>https://ngxsmk.design/templates/{{ id }}</span>
+            </div>
           </div>
-          <div class="ngxsmk-mock-window-address-bar">
-            <svg
-              viewBox="0 0 24 24"
-              width="12"
-              height="12"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              class="lock-icon"
-            >
-              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-            </svg>
-            <span>https://ngxsmk.design/templates/{{ id }}</span>
-          </div>
-        </div>
 
-        <div class="ngxsmk-mock-window-content">
-          <!-- 1. Admin Dashboard Template Preview -->
-          @if (id === 'dashboard') {
-            <div class="ngxsmk-mock-dashboard">
-              <div class="ngxsmk-mock-header">
-                <ngxsmk-heading level="h4" class="mock-panel-title">{{
-                  'templates.mock.adminConsole' | translate
-                }}</ngxsmk-heading>
-                <div style="flex-grow:1"></div>
-                <ngxsmk-badge variant="info">{{ appVersion }}</ngxsmk-badge>
-                <ngxsmk-text
-                  variant="body"
-                  style="margin-left: 1rem; font-weight: 500; font-size: 0.8125rem; color: var(--ngxsmk-color-on-surface);"
-                  >Sachin Dilshan</ngxsmk-text
-                >
-              </div>
-
-              <div class="ngxsmk-mock-body">
-                <div class="ngxsmk-mock-sidebar">
-                  @for (item of adminNav; track item.id) {
-                    <button
-                      type="button"
-                      class="ngxsmk-mock-side-item"
-                      [class.active]="adminView() === item.id"
-                      (click)="adminView.set(item.id)"
-                    >
-                      {{ item.label | translate }}
-                    </button>
-                  }
+          <div class="ngxsmk-mock-window-content">
+            <!-- 1. Admin Dashboard Template Preview -->
+            @if (id === 'dashboard') {
+              <div class="ngxsmk-mock-dashboard">
+                <div class="ngxsmk-mock-header">
+                  <ngxsmk-heading level="h4" class="mock-panel-title">{{
+                    'templates.mock.adminConsole' | translate
+                  }}</ngxsmk-heading>
+                  <div style="flex-grow:1"></div>
+                  <ngxsmk-badge variant="info">{{ appVersion }}</ngxsmk-badge>
+                  <ngxsmk-text
+                    variant="body"
+                    style="margin-left: 1rem; font-weight: 500; font-size: 0.8125rem; color: var(--ngxsmk-color-on-surface);"
+                    >Sachin Dilshan</ngxsmk-text
+                  >
                 </div>
 
-                <div class="ngxsmk-mock-content">
-                  @switch (adminView()) {
-                    @case ('dashboard') {
-                      <div class="ngxsmk-mock-stats">
-                        <ngxsmk-stat
-                          label="{{ 'templates.mock.activeUsers' | translate }}"
-                          value="1,245"
-                          trend="up"
-                        />
-                        <ngxsmk-stat
-                          label="{{ 'templates.mock.monthlyRevenue' | translate }}"
-                          value="$45,231"
-                          trend="up"
-                        />
-                        <ngxsmk-stat
-                          label="{{ 'templates.mock.serverLoad' | translate }}"
-                          value="23.4%"
-                          trend="down"
-                        />
-                      </div>
-                      <div class="ngxsmk-mock-dashboard-grid">
-                        <div class="ngxsmk-mock-section table-section">
-                          <ngxsmk-heading
-                            level="h4"
-                            style="margin-bottom: 0.75rem; font-size: 0.9375rem; font-weight: 600;"
-                            >{{ 'templates.mock.recentRegistrations' | translate }}</ngxsmk-heading
-                          >
-                          <ngxsmk-table
-                            [columns]="tableColumns"
-                            [rows]="tableRows"
-                            [striped]="true"
+                <div class="ngxsmk-mock-body">
+                  <div class="ngxsmk-mock-sidebar">
+                    @for (item of adminNav; track item.id) {
+                      <button
+                        type="button"
+                        class="ngxsmk-mock-side-item"
+                        [class.active]="adminView() === item.id"
+                        (click)="adminView.set(item.id)"
+                      >
+                        {{ item.label | translate }}
+                      </button>
+                    }
+                  </div>
+
+                  <div class="ngxsmk-mock-content">
+                    @switch (adminView()) {
+                      @case ('dashboard') {
+                        <div class="ngxsmk-mock-stats">
+                          <ngxsmk-stat
+                            label="{{ 'templates.mock.activeUsers' | translate }}"
+                            value="1,245"
+                            trend="up"
+                          />
+                          <ngxsmk-stat
+                            label="{{ 'templates.mock.monthlyRevenue' | translate }}"
+                            value="$45,231"
+                            trend="up"
+                          />
+                          <ngxsmk-stat
+                            label="{{ 'templates.mock.serverLoad' | translate }}"
+                            value="23.4%"
+                            trend="down"
                           />
                         </div>
-                        <div class="ngxsmk-mock-section chart-section">
-                          <ngxsmk-heading
-                            level="h4"
-                            style="margin-bottom: 0.75rem; font-size: 0.9375rem; font-weight: 600;"
-                            >{{ 'templates.mock.weeklyOperations' | translate }}</ngxsmk-heading
-                          >
-                          <div
-                            style="display: flex; justify-content: center; align-items: center; height: 160px;"
-                          >
-                            <ngxsmk-chart-bar [data]="chartData" [width]="240" [height]="120" />
-                          </div>
-                        </div>
-                      </div>
-                    }
-                    @case ('analytics') {
-                      <div class="ngxsmk-mock-stats">
-                        <ngxsmk-stat
-                          label="{{ 'templates.mock.pageViews' | translate }}"
-                          value="82.4k"
-                          trend="up"
-                        />
-                        <ngxsmk-stat
-                          label="{{ 'templates.mock.bounceRate' | translate }}"
-                          value="38.2%"
-                          trend="down"
-                        />
-                        <ngxsmk-stat
-                          label="{{ 'templates.mock.avgSession' | translate }}"
-                          value="4m 12s"
-                          trend="up"
-                        />
-                      </div>
-                      <div class="ngxsmk-mock-dashboard-grid">
-                        <div class="ngxsmk-mock-section">
-                          <ngxsmk-heading
-                            level="h4"
-                            style="margin-bottom: 0.75rem; font-size: 0.9375rem; font-weight: 600;"
-                            >{{ 'templates.mock.trafficOverview' | translate }}</ngxsmk-heading
-                          >
-                          <div
-                            style="display: flex; justify-content: center; align-items: center; height: 160px;"
-                          >
-                            <ngxsmk-chart-bar [data]="analyticsData" [width]="240" [height]="120" />
-                          </div>
-                        </div>
-                        <div class="ngxsmk-mock-section">
-                          <ngxsmk-heading
-                            level="h4"
-                            style="margin-bottom: 0.75rem; font-size: 0.9375rem; font-weight: 600;"
-                            >{{ 'templates.mock.trafficSources' | translate }}</ngxsmk-heading
-                          >
-                          >
-                          <div class="admin-bars">
-                            @for (s of trafficSources; track s.label) {
-                              <div class="admin-bar-row">
-                                <span class="admin-bar-label">{{ s.label | translate }}</span>
-                                <div class="admin-bar-track">
-                                  <div class="admin-bar-fill" [style.width.%]="s.value"></div>
-                                </div>
-                                <span class="admin-bar-val">{{ s.value }}%</span>
-                              </div>
-                            }
-                          </div>
-                        </div>
-                      </div>
-                    }
-                    @case ('users') {
-                      <div class="admin-users-toolbar">
-                        <ngxsmk-heading
-                          level="h4"
-                          style="font-size: 0.9375rem; font-weight: 600; margin: 0;"
-                          >{{ 'templates.mock.teamMembers' | translate }}</ngxsmk-heading
-                        >
-                        <button ngxsmk-button size="sm">
-                          {{ 'templates.mock.addUser' | translate }}
-                        </button>
-                      </div>
-                      <div class="admin-user-list">
-                        @for (u of usersList; track u.email) {
-                          <div class="admin-user-row">
-                            <span class="admin-avatar" [style.background]="u.color">{{
-                              u.initials
-                            }}</span>
-                            <div class="admin-user-info">
-                              <span class="admin-user-name">{{ u.name }}</span>
-                              <span class="admin-user-email">{{ u.email }}</span>
-                            </div>
-                            <span class="admin-user-role">{{ u.role | translate }}</span>
-                            <ngxsmk-badge
-                              [variant]="u.status === 'Active' ? 'success' : 'warning'"
-                              >{{ u.status }}</ngxsmk-badge
+                        <div class="ngxsmk-mock-dashboard-grid">
+                          <div class="ngxsmk-mock-section table-section">
+                            <ngxsmk-heading
+                              level="h4"
+                              style="margin-bottom: 0.75rem; font-size: 0.9375rem; font-weight: 600;"
+                              >{{
+                                'templates.mock.recentRegistrations' | translate
+                              }}</ngxsmk-heading
                             >
+                            <ngxsmk-table
+                              [columns]="tableColumns"
+                              [rows]="tableRows"
+                              [striped]="true"
+                            />
                           </div>
-                        }
-                      </div>
+                          <div class="ngxsmk-mock-section chart-section">
+                            <ngxsmk-heading
+                              level="h4"
+                              style="margin-bottom: 0.75rem; font-size: 0.9375rem; font-weight: 600;"
+                              >{{ 'templates.mock.weeklyOperations' | translate }}</ngxsmk-heading
+                            >
+                            <div
+                              style="display: flex; justify-content: center; align-items: center; height: 160px;"
+                            >
+                              <ngxsmk-chart-bar [data]="chartData" [width]="240" [height]="120" />
+                            </div>
+                          </div>
+                        </div>
+                      }
+                      @case ('analytics') {
+                        <div class="ngxsmk-mock-stats">
+                          <ngxsmk-stat
+                            label="{{ 'templates.mock.pageViews' | translate }}"
+                            value="82.4k"
+                            trend="up"
+                          />
+                          <ngxsmk-stat
+                            label="{{ 'templates.mock.bounceRate' | translate }}"
+                            value="38.2%"
+                            trend="down"
+                          />
+                          <ngxsmk-stat
+                            label="{{ 'templates.mock.avgSession' | translate }}"
+                            value="4m 12s"
+                            trend="up"
+                          />
+                        </div>
+                        <div class="ngxsmk-mock-dashboard-grid">
+                          <div class="ngxsmk-mock-section">
+                            <ngxsmk-heading
+                              level="h4"
+                              style="margin-bottom: 0.75rem; font-size: 0.9375rem; font-weight: 600;"
+                              >{{ 'templates.mock.trafficOverview' | translate }}</ngxsmk-heading
+                            >
+                            <div
+                              style="display: flex; justify-content: center; align-items: center; height: 160px;"
+                            >
+                              <ngxsmk-chart-bar
+                                [data]="analyticsData"
+                                [width]="240"
+                                [height]="120"
+                              />
+                            </div>
+                          </div>
+                          <div class="ngxsmk-mock-section">
+                            <ngxsmk-heading
+                              level="h4"
+                              style="margin-bottom: 0.75rem; font-size: 0.9375rem; font-weight: 600;"
+                              >{{ 'templates.mock.trafficSources' | translate }}</ngxsmk-heading
+                            >
+                            >
+                            <div class="admin-bars">
+                              @for (s of trafficSources; track s.label) {
+                                <div class="admin-bar-row">
+                                  <span class="admin-bar-label">{{ s.label | translate }}</span>
+                                  <div class="admin-bar-track">
+                                    <div class="admin-bar-fill" [style.width.%]="s.value"></div>
+                                  </div>
+                                  <span class="admin-bar-val">{{ s.value }}%</span>
+                                </div>
+                              }
+                            </div>
+                          </div>
+                        </div>
+                      }
+                      @case ('users') {
+                        <div class="admin-users-toolbar">
+                          <ngxsmk-heading
+                            level="h4"
+                            style="font-size: 0.9375rem; font-weight: 600; margin: 0;"
+                            >{{ 'templates.mock.teamMembers' | translate }}</ngxsmk-heading
+                          >
+                          <button ngxsmk-button size="sm">
+                            {{ 'templates.mock.addUser' | translate }}
+                          </button>
+                        </div>
+                        <div class="admin-user-list">
+                          @for (u of usersList; track u.email) {
+                            <div class="admin-user-row">
+                              <span class="admin-avatar" [style.background]="u.color">{{
+                                u.initials
+                              }}</span>
+                              <div class="admin-user-info">
+                                <span class="admin-user-name">{{ u.name }}</span>
+                                <span class="admin-user-email">{{ u.email }}</span>
+                              </div>
+                              <span class="admin-user-role">{{ u.role | translate }}</span>
+                              <ngxsmk-badge
+                                [variant]="u.status === 'Active' ? 'success' : 'warning'"
+                                >{{ u.status }}</ngxsmk-badge
+                              >
+                            </div>
+                          }
+                        </div>
+                      }
+                      @case ('settings') {
+                        <div class="admin-settings">
+                          <ngxsmk-form-field
+                            label="{{ 'templates.mock.displayName' | translate }}"
+                            hint="{{ 'templates.mock.displayNameHint' | translate }}"
+                          >
+                            <ngxsmk-input placeholder="Sachin Dilshan" />
+                          </ngxsmk-form-field>
+                          <ngxsmk-form-field
+                            label="{{ 'templates.mock.emailAddress' | translate }}"
+                          >
+                            <ngxsmk-input type="email" placeholder="admin@ngxsmk.dev" />
+                          </ngxsmk-form-field>
+                          <ngxsmk-form-field
+                            label="{{ 'templates.mock.interfaceTheme' | translate }}"
+                          >
+                            <ngxsmk-select [options]="themeOptions" value="system" />
+                          </ngxsmk-form-field>
+                          <ngxsmk-divider />
+                          <ngxsmk-form-field
+                            label="{{ 'templates.mock.emailNotifications' | translate }}"
+                            hint="{{ 'templates.mock.emailNotificationsHint' | translate }}"
+                          >
+                            <ngxsmk-switch [checked]="true" />
+                          </ngxsmk-form-field>
+                          <ngxsmk-form-field
+                            label="{{ 'templates.mock.twoFactor' | translate }}"
+                            hint="{{ 'templates.mock.twoFactorHint' | translate }}"
+                          >
+                            <ngxsmk-switch [checked]="false" />
+                          </ngxsmk-form-field>
+                          <div class="admin-settings-actions">
+                            <button ngxsmk-button size="sm">
+                              {{ 'templates.mock.saveChanges' | translate }}
+                            </button>
+                            <button ngxsmk-button size="sm" variant="outline">
+                              {{ 'templates.mock.cancel' | translate }}
+                            </button>
+                          </div>
+                        </div>
+                      }
                     }
-                    @case ('settings') {
-                      <div class="admin-settings">
+                  </div>
+                </div>
+              </div>
+            }
+
+            <!-- 2. AI Chat Interface Template Preview -->
+            @if (id === 'ai-chat') {
+              <div class="ngxsmk-mock-chat">
+                <div class="ngxsmk-mock-chat-header">
+                  <ngxsmk-heading level="h4" class="mock-panel-title">{{
+                    'templates.mock.aiAssistant' | translate
+                  }}</ngxsmk-heading>
+                  <span
+                    style="font-size: 0.75rem; color: var(--ngxsmk-color-success); font-weight: 600;"
+                    >{{ 'templates.mock.online' | translate }}</span
+                  >
+                </div>
+                <div class="ngxsmk-mock-chat-window-wrapper">
+                  <ngxsmk-chat-window [messages]="chatMessages" />
+                </div>
+                <div class="ngxsmk-mock-chat-composer">
+                  <ngxsmk-input
+                    [attr.placeholder]="'templates.mock.askAnything' | translate"
+                    style="flex: 1;"
+                  />
+                  <button ngxsmk-button>{{ 'templates.mock.send' | translate }}</button>
+                </div>
+              </div>
+            }
+
+            <!-- 3. SaaS Landing Page Template Preview -->
+            @if (id === 'landing-page') {
+              <div class="ngxsmk-mock-landing">
+                <div class="ngxsmk-mock-landing-nav">
+                  <div
+                    style="font-weight: 700; font-family: 'Outfit'; font-size: 1rem; color: var(--ngxsmk-color-primary);"
+                  >
+                    ngxsmk SaaS
+                  </div>
+                  <div
+                    style="display: flex; gap: 1.5rem; font-size: 0.8125rem; font-weight: 500; color: var(--ngxsmk-color-on-surface-variant);"
+                  >
+                    <span>{{ 'templates.mock.features' | translate }}</span>
+                    <span>{{ 'templates.mock.pricing' | translate }}</span>
+                    <span>{{ 'nav.docs' | translate }}</span>
+                  </div>
+                  <button ngxsmk-button size="sm">{{ 'nav.getStarted' | translate }}</button>
+                </div>
+
+                <div class="ngxsmk-mock-landing-hero">
+                  <ngxsmk-heading
+                    level="h1"
+                    style="font-size: 2.25rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.2;"
+                    >{{ 'templates.mock.innovateFaster' | translate }}</ngxsmk-heading
+                  >
+                  >
+                  <ngxsmk-text
+                    variant="body"
+                    style="font-size: 0.875rem; opacity: 0.8; max-width: 480px; margin: 0.5rem auto 1.5rem; line-height: 1.6;"
+                  >
+                    {{ 'templates.mock.landingHero' | translate }}
+                  </ngxsmk-text>
+                  <div style="display: flex; gap: 0.75rem; justify-content: center;">
+                    <button ngxsmk-button>{{ 'templates.mock.startFreeTrial' | translate }}</button>
+                    <button ngxsmk-button variant="outline">
+                      {{ 'templates.mock.learnMore' | translate }}
+                    </button>
+                  </div>
+                </div>
+
+                <div class="ngxsmk-mock-landing-pricing">
+                  <div class="ngxsmk-mock-price-card">
+                    <ngxsmk-heading level="h4" style="font-size: 0.9375rem; font-weight: 600;">{{
+                      'templates.mock.starter' | translate
+                    }}</ngxsmk-heading>
+                    >
+                    <div class="ngxsmk-mock-price-val">
+                      $0<span style="font-size: 0.75rem; font-weight: 400; opacity: 0.7;">/mo</span>
+                    </div>
+                    <ngxsmk-divider />
+                    <ul class="ngxsmk-mock-price-features">
+                      <li>{{ 'templates.mock.starterF1' | translate }}</li>
+                      <li>{{ 'templates.mock.starterF2' | translate }}</li>
+                      <li>{{ 'templates.mock.starterF3' | translate }}</li>
+                    </ul>
+                    <button ngxsmk-button variant="outline" style="width: 100%;">
+                      {{ 'templates.mock.signUp' | translate }}
+                    </button>
+                  </div>
+
+                  <div class="ngxsmk-mock-price-card highlighted">
+                    <div class="ngxsmk-mock-price-badge">
+                      {{ 'templates.mock.popular' | translate }}
+                    </div>
+                    <ngxsmk-heading level="h4" style="font-size: 0.9375rem; font-weight: 600;">{{
+                      'templates.mock.professional' | translate
+                    }}</ngxsmk-heading>
+                    >
+                    <div class="ngxsmk-mock-price-val">
+                      $49<span style="font-size: 0.75rem; font-weight: 400; opacity: 0.7;"
+                        >/mo</span
+                      >
+                    </div>
+                    <ngxsmk-divider />
+                    <ul class="ngxsmk-mock-price-features">
+                      <li>{{ 'templates.mock.proF1' | translate }}</li>
+                      <li>{{ 'templates.mock.proF2' | translate }}</li>
+                      <li>{{ 'templates.mock.proF3' | translate }}</li>
+                    </ul>
+                    <button ngxsmk-button style="width: 100%;">
+                      {{ 'templates.mock.getPro' | translate }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            }
+
+            <!-- 4. Kanban Task Board Template Preview -->
+            @if (id === 'kanban') {
+              <div class="ngxsmk-mock-kanban">
+                <div class="ngxsmk-mock-kanban-header">
+                  <ngxsmk-heading level="h4" class="mock-panel-title">{{
+                    'templates.mock.sprintBoard' | translate
+                  }}</ngxsmk-heading>
+                  <ngxsmk-badge>{{ 'templates.mock.activeSprint' | translate }}</ngxsmk-badge>
+                </div>
+                <div class="ngxsmk-mock-kanban-body">
+                  <ngxsmk-kanban-board [(columns)]="kanbanColumns" />
+                </div>
+              </div>
+            }
+
+            <!-- 5. User Settings Page Template Preview -->
+            @if (id === 'settings') {
+              <div class="ngxsmk-mock-settings">
+                <div class="ngxsmk-mock-settings-header">
+                  <ngxsmk-heading level="h4" class="mock-panel-title">{{
+                    'templates.mock.systemConfig' | translate
+                  }}</ngxsmk-heading>
+                </div>
+                <div class="ngxsmk-mock-settings-body">
+                  <ngxsmk-tabs value="profile">
+                    <ngxsmk-tab
+                      value="profile"
+                      label="{{ 'templates.mock.profileSettings' | translate }}"
+                    >
+                      <div
+                        style="display: flex; flex-direction: column; gap: 1rem; padding-top: 1rem; max-width: 480px;"
+                      >
                         <ngxsmk-form-field
                           label="{{ 'templates.mock.displayName' | translate }}"
-                          hint="{{ 'templates.mock.displayNameHint' | translate }}"
+                          hint="{{ 'templates.mock.displayNameHintProfile' | translate }}"
                         >
                           <ngxsmk-input placeholder="Sachin Dilshan" />
                         </ngxsmk-form-field>
-                        <ngxsmk-form-field label="{{ 'templates.mock.emailAddress' | translate }}">
-                          <ngxsmk-input type="email" placeholder="admin@ngxsmk.dev" />
+                        <ngxsmk-form-field
+                          label="{{ 'templates.mock.workspaceSubdomain' | translate }}"
+                        >
+                          <ngxsmk-input placeholder="my-org" />
                         </ngxsmk-form-field>
                         <ngxsmk-form-field
                           label="{{ 'templates.mock.interfaceTheme' | translate }}"
                         >
                           <ngxsmk-select [options]="themeOptions" value="system" />
                         </ngxsmk-form-field>
-                        <ngxsmk-divider />
+                      </div>
+                    </ngxsmk-tab>
+                    <ngxsmk-tab
+                      value="notifications"
+                      label="{{ 'templates.mock.notificationFeeds' | translate }}"
+                    >
+                      <div
+                        style="display: flex; flex-direction: column; gap: 1.25rem; padding-top: 1rem;"
+                      >
                         <ngxsmk-form-field
-                          label="{{ 'templates.mock.emailNotifications' | translate }}"
-                          hint="{{ 'templates.mock.emailNotificationsHint' | translate }}"
+                          label="{{ 'templates.mock.emailSummaries' | translate }}"
+                          hint="{{ 'templates.mock.emailSummariesHint' | translate }}"
                         >
                           <ngxsmk-switch [checked]="true" />
                         </ngxsmk-form-field>
                         <ngxsmk-form-field
-                          label="{{ 'templates.mock.twoFactor' | translate }}"
-                          hint="{{ 'templates.mock.twoFactorHint' | translate }}"
+                          label="{{ 'templates.mock.desktopPush' | translate }}"
+                          hint="{{ 'templates.mock.desktopPushHint' | translate }}"
                         >
                           <ngxsmk-switch [checked]="false" />
                         </ngxsmk-form-field>
-                        <div class="admin-settings-actions">
-                          <button ngxsmk-button size="sm">
-                            {{ 'templates.mock.saveChanges' | translate }}
-                          </button>
-                          <button ngxsmk-button size="sm" variant="outline">
-                            {{ 'templates.mock.cancel' | translate }}
-                          </button>
-                        </div>
                       </div>
-                    }
-                  }
+                    </ngxsmk-tab>
+                  </ngxsmk-tabs>
                 </div>
               </div>
-            </div>
-          }
+            }
 
-          <!-- 2. AI Chat Interface Template Preview -->
-          @if (id === 'ai-chat') {
-            <div class="ngxsmk-mock-chat">
-              <div class="ngxsmk-mock-chat-header">
-                <ngxsmk-heading level="h4" class="mock-panel-title">{{
-                  'templates.mock.aiAssistant' | translate
-                }}</ngxsmk-heading>
-                <span
-                  style="font-size: 0.75rem; color: var(--ngxsmk-color-success); font-weight: 600;"
-                  >{{ 'templates.mock.online' | translate }}</span
-                >
-              </div>
-              <div class="ngxsmk-mock-chat-window-wrapper">
-                <ngxsmk-chat-window [messages]="chatMessages" />
-              </div>
-              <div class="ngxsmk-mock-chat-composer">
-                <ngxsmk-input
-                  [attr.placeholder]="'templates.mock.askAnything' | translate"
-                  style="flex: 1;"
-                />
-                <button ngxsmk-button>{{ 'templates.mock.send' | translate }}</button>
-              </div>
-            </div>
-          }
-
-          <!-- 3. SaaS Landing Page Template Preview -->
-          @if (id === 'landing-page') {
-            <div class="ngxsmk-mock-landing">
-              <div class="ngxsmk-mock-landing-nav">
-                <div
-                  style="font-weight: 700; font-family: 'Outfit'; font-size: 1rem; color: var(--ngxsmk-color-primary);"
-                >
-                  ngxsmk SaaS
-                </div>
-                <div
-                  style="display: flex; gap: 1.5rem; font-size: 0.8125rem; font-weight: 500; color: var(--ngxsmk-color-on-surface-variant);"
-                >
-                  <span>{{ 'templates.mock.features' | translate }}</span>
-                  <span>{{ 'templates.mock.pricing' | translate }}</span>
-                  <span>{{ 'nav.docs' | translate }}</span>
-                </div>
-                <button ngxsmk-button size="sm">{{ 'nav.getStarted' | translate }}</button>
-              </div>
-
-              <div class="ngxsmk-mock-landing-hero">
-                <ngxsmk-heading
-                  level="h1"
-                  style="font-size: 2.25rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.2;"
-                  >{{ 'templates.mock.innovateFaster' | translate }}</ngxsmk-heading
-                >
-                >
-                <ngxsmk-text
-                  variant="body"
-                  style="font-size: 0.875rem; opacity: 0.8; max-width: 480px; margin: 0.5rem auto 1.5rem; line-height: 1.6;"
-                >
-                  {{ 'templates.mock.landingHero' | translate }}
-                </ngxsmk-text>
-                <div style="display: flex; gap: 0.75rem; justify-content: center;">
-                  <button ngxsmk-button>{{ 'templates.mock.startFreeTrial' | translate }}</button>
-                  <button ngxsmk-button variant="outline">
-                    {{ 'templates.mock.learnMore' | translate }}
-                  </button>
-                </div>
-              </div>
-
-              <div class="ngxsmk-mock-landing-pricing">
-                <div class="ngxsmk-mock-price-card">
-                  <ngxsmk-heading level="h4" style="font-size: 0.9375rem; font-weight: 600;">{{
-                    'templates.mock.starter' | translate
-                  }}</ngxsmk-heading>
-                  >
-                  <div class="ngxsmk-mock-price-val">
-                    $0<span style="font-size: 0.75rem; font-weight: 400; opacity: 0.7;">/mo</span>
-                  </div>
-                  <ngxsmk-divider />
-                  <ul class="ngxsmk-mock-price-features">
-                    <li>{{ 'templates.mock.starterF1' | translate }}</li>
-                    <li>{{ 'templates.mock.starterF2' | translate }}</li>
-                    <li>{{ 'templates.mock.starterF3' | translate }}</li>
-                  </ul>
-                  <button ngxsmk-button variant="outline" style="width: 100%;">
-                    {{ 'templates.mock.signUp' | translate }}
-                  </button>
-                </div>
-
-                <div class="ngxsmk-mock-price-card highlighted">
-                  <div class="ngxsmk-mock-price-badge">
-                    {{ 'templates.mock.popular' | translate }}
-                  </div>
-                  <ngxsmk-heading level="h4" style="font-size: 0.9375rem; font-weight: 600;">{{
-                    'templates.mock.professional' | translate
-                  }}</ngxsmk-heading>
-                  >
-                  <div class="ngxsmk-mock-price-val">
-                    $49<span style="font-size: 0.75rem; font-weight: 400; opacity: 0.7;">/mo</span>
-                  </div>
-                  <ngxsmk-divider />
-                  <ul class="ngxsmk-mock-price-features">
-                    <li>{{ 'templates.mock.proF1' | translate }}</li>
-                    <li>{{ 'templates.mock.proF2' | translate }}</li>
-                    <li>{{ 'templates.mock.proF3' | translate }}</li>
-                  </ul>
-                  <button ngxsmk-button style="width: 100%;">
-                    {{ 'templates.mock.getPro' | translate }}
-                  </button>
-                </div>
-              </div>
-            </div>
-          }
-
-          <!-- 4. Kanban Task Board Template Preview -->
-          @if (id === 'kanban') {
-            <div class="ngxsmk-mock-kanban">
-              <div class="ngxsmk-mock-kanban-header">
-                <ngxsmk-heading level="h4" class="mock-panel-title">{{
-                  'templates.mock.sprintBoard' | translate
-                }}</ngxsmk-heading>
-                <ngxsmk-badge>{{ 'templates.mock.activeSprint' | translate }}</ngxsmk-badge>
-              </div>
-              <div class="ngxsmk-mock-kanban-body">
-                <ngxsmk-kanban-board [(columns)]="kanbanColumns" />
-              </div>
-            </div>
-          }
-
-          <!-- 5. User Settings Page Template Preview -->
-          @if (id === 'settings') {
-            <div class="ngxsmk-mock-settings">
-              <div class="ngxsmk-mock-settings-header">
-                <ngxsmk-heading level="h4" class="mock-panel-title">{{
-                  'templates.mock.systemConfig' | translate
-                }}</ngxsmk-heading>
-              </div>
-              <div class="ngxsmk-mock-settings-body">
-                <ngxsmk-tabs value="profile">
-                  <ngxsmk-tab
-                    value="profile"
-                    label="{{ 'templates.mock.profileSettings' | translate }}"
-                  >
-                    <div
-                      style="display: flex; flex-direction: column; gap: 1rem; padding-top: 1rem; max-width: 480px;"
-                    >
-                      <ngxsmk-form-field
-                        label="{{ 'templates.mock.displayName' | translate }}"
-                        hint="{{ 'templates.mock.displayNameHintProfile' | translate }}"
-                      >
-                        <ngxsmk-input placeholder="Sachin Dilshan" />
-                      </ngxsmk-form-field>
-                      <ngxsmk-form-field
-                        label="{{ 'templates.mock.workspaceSubdomain' | translate }}"
-                      >
-                        <ngxsmk-input placeholder="my-org" />
-                      </ngxsmk-form-field>
-                      <ngxsmk-form-field label="{{ 'templates.mock.interfaceTheme' | translate }}">
-                        <ngxsmk-select [options]="themeOptions" value="system" />
-                      </ngxsmk-form-field>
+            <!-- 6. E-Commerce Product Detail Template Preview -->
+            @if (id === 'ecommerce-detail') {
+              <div class="ngxsmk-mock-ecommerce">
+                <div class="ngxsmk-mock-ecommerce-grid">
+                  <div class="ngxsmk-mock-ecommerce-gallery">
+                    <div class="gallery-primary-img">
+                      <img
+                        src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&auto=format&fit=crop&q=60"
+                        [attr.alt]="'templates.mock.headphonesAlt' | translate"
+                        class="product-preview-img"
+                      />
                     </div>
-                  </ngxsmk-tab>
-                  <ngxsmk-tab
-                    value="notifications"
-                    label="{{ 'templates.mock.notificationFeeds' | translate }}"
-                  >
-                    <div
-                      style="display: flex; flex-direction: column; gap: 1.25rem; padding-top: 1rem;"
-                    >
-                      <ngxsmk-form-field
-                        label="{{ 'templates.mock.emailSummaries' | translate }}"
-                        hint="{{ 'templates.mock.emailSummariesHint' | translate }}"
-                      >
-                        <ngxsmk-switch [checked]="true" />
-                      </ngxsmk-form-field>
-                      <ngxsmk-form-field
-                        label="{{ 'templates.mock.desktopPush' | translate }}"
-                        hint="{{ 'templates.mock.desktopPushHint' | translate }}"
-                      >
-                        <ngxsmk-switch [checked]="false" />
-                      </ngxsmk-form-field>
-                    </div>
-                  </ngxsmk-tab>
-                </ngxsmk-tabs>
-              </div>
-            </div>
-          }
+                  </div>
 
-          <!-- 6. E-Commerce Product Detail Template Preview -->
-          @if (id === 'ecommerce-detail') {
-            <div class="ngxsmk-mock-ecommerce">
-              <div class="ngxsmk-mock-ecommerce-grid">
-                <div class="ngxsmk-mock-ecommerce-gallery">
-                  <div class="gallery-primary-img">
-                    <img
-                      src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&auto=format&fit=crop&q=60"
-                      [attr.alt]="'templates.mock.headphonesAlt' | translate"
-                      class="product-preview-img"
-                    />
+                  <div class="ngxsmk-mock-ecommerce-info">
+                    <ngxsmk-badge variant="info" style="align-self: flex-start;">{{
+                      'templates.mock.freeShipping' | translate
+                    }}</ngxsmk-badge>
+                    <ngxsmk-heading
+                      level="h2"
+                      style="font-size: 1.5rem; font-weight: 700; margin: 0.5rem 0;"
+                      >AeroSound Pro Headphones</ngxsmk-heading
+                    >
+
+                    <div class="product-ratings-row">
+                      <span class="stars-gold">★★★★★</span>
+                      <span class="ratings-count">{{
+                        'templates.mock.reviewsCount' | translate
+                      }}</span>
+                    </div>
+
+                    <div class="product-price-row">
+                      <span class="price-current">$199.00</span>
+                      <span class="price-old">$249.00</span>
+                    </div>
+
+                    <ngxsmk-divider />
+
+                    <ngxsmk-text
+                      variant="body"
+                      style="font-size: 0.8125rem; line-height: 1.6; color: var(--ngxsmk-color-on-surface-variant);"
+                    >
+                      {{ 'templates.mock.headphonesDesc' | translate }}
+                    </ngxsmk-text>
+
+                    <div class="product-spec-row">
+                      <span style="font-weight: 600; font-size: 0.8125rem;">{{
+                        'templates.mock.color' | translate
+                      }}</span>
+                      <div class="product-color-selector">
+                        <span class="color-dot active" style="background-color: #09090b;"></span>
+                        <span class="color-dot" style="background-color: #7c3aed;"></span>
+                        <span class="color-dot" style="background-color: #10b981;"></span>
+                      </div>
+                    </div>
+
+                    <div style="display: flex; gap: 0.75rem; margin-top: 1rem;">
+                      <button ngxsmk-button style="flex: 1;">
+                        {{ 'templates.mock.addToCart' | translate }}
+                      </button>
+                      <button ngxsmk-button variant="outline">
+                        {{ 'templates.mock.buyNow' | translate }}
+                      </button>
+                    </div>
                   </div>
                 </div>
+              </div>
+            }
 
-                <div class="ngxsmk-mock-ecommerce-info">
-                  <ngxsmk-badge variant="info" style="align-self: flex-start;">{{
-                    'templates.mock.freeShipping' | translate
+            <!-- 7. Credentials Auth Cards Template Preview -->
+            @if (id === 'auth-cards') {
+              <div class="ngxsmk-mock-auth">
+                <div class="ngxsmk-mock-auth-card">
+                  <div class="ngxsmk-mock-auth-header">
+                    <ngxsmk-heading level="h3" style="font-size: 1.25rem; font-weight: 700;">{{
+                      'templates.mock.signInToAccount' | translate
+                    }}</ngxsmk-heading>
+                    <ngxsmk-text
+                      variant="body"
+                      style="font-size: 0.75rem; color: var(--ngxsmk-color-on-surface-variant);"
+                      >{{ 'templates.mock.enterCredentials' | translate }}</ngxsmk-text
+                    >
+                  </div>
+
+                  <div class="ngxsmk-mock-auth-socials">
+                    <button ngxsmk-button variant="outline" style="flex: 1; font-size: 0.75rem;">
+                      Google
+                    </button>
+                    <button ngxsmk-button variant="outline" style="flex: 1; font-size: 0.75rem;">
+                      {{ 'nav.github' | translate }}
+                    </button>
+                  </div>
+
+                  <div class="auth-divider-line">
+                    <span>{{ 'templates.mock.orContinueEmail' | translate }}</span>
+                  </div>
+
+                  <div class="ngxsmk-mock-auth-form">
+                    <ngxsmk-form-field label="{{ 'templates.mock.emailAddress' | translate }}">
+                      <ngxsmk-input type="email" placeholder="name@example.com" />
+                    </ngxsmk-form-field>
+                    <ngxsmk-form-field label="{{ 'templates.mock.password' | translate }}">
+                      <ngxsmk-input type="password" placeholder="••••••••" />
+                    </ngxsmk-form-field>
+
+                    <div
+                      style="display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem;"
+                    >
+                      <ngxsmk-switch [checked]="true">{{
+                        'templates.mock.keepSignedIn' | translate
+                      }}</ngxsmk-switch>
+                      <a
+                        href="#"
+                        style="color: var(--ngxsmk-color-primary); text-decoration: none; font-weight: 500;"
+                        >{{ 'templates.mock.forgot' | translate }}</a
+                      >
+                    </div>
+
+                    <button ngxsmk-button style="width: 100%; margin-top: 0.5rem;">
+                      {{ 'templates.mock.signIn' | translate }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            }
+
+            <!-- 8. System Health Monitor Template Preview -->
+            @if (id === 'health-monitor') {
+              <div class="ngxsmk-mock-health">
+                <div class="ngxsmk-mock-health-top">
+                  <ngxsmk-heading level="h4" class="mock-panel-title">{{
+                    'templates.mock.systemStatusMonitor' | translate
+                  }}</ngxsmk-heading>
+                  <ngxsmk-badge variant="success">{{
+                    'templates.mock.allSystemsOperational' | translate
                   }}</ngxsmk-badge>
-                  <ngxsmk-heading
-                    level="h2"
-                    style="font-size: 1.5rem; font-weight: 700; margin: 0.5rem 0;"
-                    >AeroSound Pro Headphones</ngxsmk-heading
-                  >
+                </div>
 
-                  <div class="product-ratings-row">
-                    <span class="stars-gold">★★★★★</span>
-                    <span class="ratings-count">{{
-                      'templates.mock.reviewsCount' | translate
-                    }}</span>
+                <div class="ngxsmk-mock-health-stats">
+                  <div class="health-mini-stat">
+                    <span class="label">{{ 'templates.mock.cpuUsage' | translate }}</span>
+                    <span class="value">14.2%</span>
+                    <div class="health-bar"><div class="fill" style="width: 14%;"></div></div>
                   </div>
-
-                  <div class="product-price-row">
-                    <span class="price-current">$199.00</span>
-                    <span class="price-old">$249.00</span>
-                  </div>
-
-                  <ngxsmk-divider />
-
-                  <ngxsmk-text
-                    variant="body"
-                    style="font-size: 0.8125rem; line-height: 1.6; color: var(--ngxsmk-color-on-surface-variant);"
-                  >
-                    {{ 'templates.mock.headphonesDesc' | translate }}
-                  </ngxsmk-text>
-
-                  <div class="product-spec-row">
-                    <span style="font-weight: 600; font-size: 0.8125rem;">{{
-                      'templates.mock.color' | translate
-                    }}</span>
-                    <div class="product-color-selector">
-                      <span class="color-dot active" style="background-color: #09090b;"></span>
-                      <span class="color-dot" style="background-color: #7c3aed;"></span>
-                      <span class="color-dot" style="background-color: #10b981;"></span>
+                  <div class="health-mini-stat">
+                    <span class="label">{{ 'templates.mock.memoryRam' | translate }}</span>
+                    <span class="value">64.8%</span>
+                    <div class="health-bar">
+                      <div class="fill warning" style="width: 64.8%;"></div>
                     </div>
                   </div>
-
-                  <div style="display: flex; gap: 0.75rem; margin-top: 1rem;">
-                    <button ngxsmk-button style="flex: 1;">
-                      {{ 'templates.mock.addToCart' | translate }}
-                    </button>
-                    <button ngxsmk-button variant="outline">
-                      {{ 'templates.mock.buyNow' | translate }}
-                    </button>
+                  <div class="health-mini-stat">
+                    <span class="label">{{ 'templates.mock.apiLatency' | translate }}</span>
+                    <span class="value">24ms</span>
+                    <div class="health-bar">
+                      <div class="fill success" style="width: 8%;"></div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          }
 
-          <!-- 7. Credentials Auth Cards Template Preview -->
-          @if (id === 'auth-cards') {
-            <div class="ngxsmk-mock-auth">
-              <div class="ngxsmk-mock-auth-card">
-                <div class="ngxsmk-mock-auth-header">
-                  <ngxsmk-heading level="h3" style="font-size: 1.25rem; font-weight: 700;">{{
-                    'templates.mock.signInToAccount' | translate
-                  }}</ngxsmk-heading>
-                  <ngxsmk-text
-                    variant="body"
-                    style="font-size: 0.75rem; color: var(--ngxsmk-color-on-surface-variant);"
-                    >{{ 'templates.mock.enterCredentials' | translate }}</ngxsmk-text
-                  >
-                </div>
-
-                <div class="ngxsmk-mock-auth-socials">
-                  <button ngxsmk-button variant="outline" style="flex: 1; font-size: 0.75rem;">
-                    Google
-                  </button>
-                  <button ngxsmk-button variant="outline" style="flex: 1; font-size: 0.75rem;">
-                    {{ 'nav.github' | translate }}
-                  </button>
-                </div>
-
-                <div class="auth-divider-line">
-                  <span>{{ 'templates.mock.orContinueEmail' | translate }}</span>
-                </div>
-
-                <div class="ngxsmk-mock-auth-form">
-                  <ngxsmk-form-field label="{{ 'templates.mock.emailAddress' | translate }}">
-                    <ngxsmk-input type="email" placeholder="name@example.com" />
-                  </ngxsmk-form-field>
-                  <ngxsmk-form-field label="{{ 'templates.mock.password' | translate }}">
-                    <ngxsmk-input type="password" placeholder="••••••••" />
-                  </ngxsmk-form-field>
-
-                  <div
-                    style="display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem;"
-                  >
-                    <ngxsmk-switch [checked]="true">{{
-                      'templates.mock.keepSignedIn' | translate
-                    }}</ngxsmk-switch>
-                    <a
-                      href="#"
-                      style="color: var(--ngxsmk-color-primary); text-decoration: none; font-weight: 500;"
-                      >{{ 'templates.mock.forgot' | translate }}</a
-                    >
-                  </div>
-
-                  <button ngxsmk-button style="width: 100%; margin-top: 0.5rem;">
-                    {{ 'templates.mock.signIn' | translate }}
-                  </button>
+                <div class="ngxsmk-mock-health-terminal">
+                  <ngxsmk-terminal
+                    title="{{ 'templates.mock.systemEventsLog' | translate }}"
+                    [lines]="healthLogs"
+                  />
                 </div>
               </div>
-            </div>
-          }
+            }
+          </div>
+        </div>
+      </ng-template>
 
-          <!-- 8. System Health Monitor Template Preview -->
-          @if (id === 'health-monitor') {
-            <div class="ngxsmk-mock-health">
-              <div class="ngxsmk-mock-health-top">
-                <ngxsmk-heading level="h4" class="mock-panel-title">{{
-                  'templates.mock.systemStatusMonitor' | translate
-                }}</ngxsmk-heading>
-                <ngxsmk-badge variant="success">{{
-                  'templates.mock.allSystemsOperational' | translate
-                }}</ngxsmk-badge>
-              </div>
-
-              <div class="ngxsmk-mock-health-stats">
-                <div class="health-mini-stat">
-                  <span class="label">{{ 'templates.mock.cpuUsage' | translate }}</span>
-                  <span class="value">14.2%</span>
-                  <div class="health-bar"><div class="fill" style="width: 14%;"></div></div>
-                </div>
-                <div class="health-mini-stat">
-                  <span class="label">{{ 'templates.mock.memoryRam' | translate }}</span>
-                  <span class="value">64.8%</span>
-                  <div class="health-bar">
-                    <div class="fill warning" style="width: 64.8%;"></div>
-                  </div>
-                </div>
-                <div class="health-mini-stat">
-                  <span class="label">{{ 'templates.mock.apiLatency' | translate }}</span>
-                  <span class="value">24ms</span>
-                  <div class="health-bar"><div class="fill success" style="width: 8%;"></div></div>
-                </div>
-              </div>
-
-              <div class="ngxsmk-mock-health-terminal">
-                <ngxsmk-terminal
-                  title="{{ 'templates.mock.systemEventsLog' | translate }}"
-                  [lines]="healthLogs"
+      <!-- Live Preview / Get Code Dialog Modal -->
+      <ngxsmk-dialog
+        [(open)]="dialogOpen"
+        [title]="selectedTemplate()?.title ?? '' | translate"
+        style="--ngxsmk-dialog-width: 72rem;"
+      >
+        @if (selectedTemplate()) {
+          <ngxsmk-tabs [(value)]="activeTab" class="ngxsmk-custom-tabs">
+            <ngxsmk-tab value="preview" label="{{ 'templates.livePreview' | translate }}">
+              <div class="ngxsmk-template-preview-viewport">
+                <ng-container
+                  [ngTemplateOutlet]="miniPreview"
+                  [ngTemplateOutletContext]="{ id: selectedTemplate()?.id }"
                 />
               </div>
-            </div>
-          }
-        </div>
-      </div>
-    </ng-template>
+            </ngxsmk-tab>
 
-    <!-- Live Preview / Get Code Dialog Modal -->
-    <ngxsmk-dialog
-      [(open)]="dialogOpen"
-      [title]="selectedTemplate()?.title ?? '' | translate"
-      style="--ngxsmk-dialog-width: 72rem;"
-    >
-      @if (selectedTemplate()) {
-        <ngxsmk-tabs [(value)]="activeTab" class="ngxsmk-custom-tabs">
-          <ngxsmk-tab value="preview" label="{{ 'templates.livePreview' | translate }}">
-            <div class="ngxsmk-template-preview-viewport">
-              <ng-container
-                [ngTemplateOutlet]="miniPreview"
-                [ngTemplateOutletContext]="{ id: selectedTemplate()?.id }"
-              />
-            </div>
-          </ngxsmk-tab>
-
-          <ngxsmk-tab value="code" label="{{ 'templates.mock.sourceCode' | translate }}">
-            <div class="ngxsmk-template-code-viewport">
-              <div class="ngxsmk-code-copy-bar">
-                <button
-                  ngxsmk-button
-                  size="sm"
-                  [ngxsmkCopyToClipboard]="selectedTemplate()?.code ?? ''"
-                  (click)="onCodeCopied()"
-                >
-                  {{
-                    copied()
-                      ? ('templates.mock.copied' | translate)
-                      : ('templates.mock.copyCode' | translate)
-                  }}
-                </button>
+            <ngxsmk-tab value="code" label="{{ 'templates.mock.sourceCode' | translate }}">
+              <div class="ngxsmk-template-code-viewport">
+                <div class="ngxsmk-code-copy-bar">
+                  <button
+                    ngxsmk-button
+                    size="sm"
+                    [ngxsmkCopyToClipboard]="selectedTemplate()?.code ?? ''"
+                    (click)="onCodeCopied()"
+                  >
+                    {{
+                      copied()
+                        ? ('templates.mock.copied' | translate)
+                        : ('templates.mock.copyCode' | translate)
+                    }}
+                  </button>
+                </div>
+                <ngxsmk-code-block language="html">{{
+                  selectedTemplate()?.code
+                }}</ngxsmk-code-block>
               </div>
-              <ngxsmk-code-block language="html">{{ selectedTemplate()?.code }}</ngxsmk-code-block>
-            </div>
-          </ngxsmk-tab>
-        </ngxsmk-tabs>
-      }
-    </ngxsmk-dialog>
+            </ngxsmk-tab>
+          </ngxsmk-tabs>
+        }
+      </ngxsmk-dialog>
+    </div>
   `,
   styles: `
     .ngxsmk-page-container {
@@ -2122,7 +2139,6 @@ export class TemplatesPage {
   protected pad(n: number): string {
     return String(n).padStart(2, '0');
   }
-
 
   protected readonly categories: TemplateCategory[] = [
     'All',
