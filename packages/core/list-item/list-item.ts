@@ -51,7 +51,7 @@ export type NgxsmkListItemVariant = 'default' | 'active' | 'disabled';
       font-weight: 500;
     }
     :host([data-variant='disabled']) {
-      opacity: 0.5;
+      opacity: var(--ngxsmk-opacity-disabled);
       pointer-events: none;
     }
 

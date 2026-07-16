@@ -133,7 +133,7 @@ type PageItem = { kind: 'page'; page: number } | { kind: 'ellipsis'; key: string
       font: inherit;
       font-size: var(--ngxsmk-text-body-md-size, 0.9375rem);
       font-variant-numeric: tabular-nums;
-      color: var(--ngxsmk-color-on-surface, #0f172a);
+      color: var(--ngxsmk-color-on-surface);
       background: transparent;
       border: 1px solid transparent;
       border-radius: var(--ngxsmk-radius-md, 8px);
@@ -149,22 +149,22 @@ type PageItem = { kind: 'page'; page: number } | { kind: 'ellipsis'; key: string
       --ngxsmk-pagination-size: 2.75rem;
     }
     .ngxsmk-pagination__btn:hover:not(:disabled) {
-      background: var(--ngxsmk-color-surface-variant, #f1f5f9);
+      background: var(--ngxsmk-color-surface-variant);
     }
     .ngxsmk-pagination__btn:focus-visible {
-      outline: 2px solid var(--ngxsmk-color-ring, #6366f1);
-      outline-offset: 2px;
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring);
     }
     .ngxsmk-pagination__btn--active {
-      background: var(--ngxsmk-color-primary, #6366f1);
-      color: var(--ngxsmk-color-on-primary, #fff);
+      background: var(--ngxsmk-color-primary);
+      color: var(--ngxsmk-color-on-primary);
       font-weight: 600;
     }
     .ngxsmk-pagination__btn--active:hover:not(:disabled) {
-      background: var(--ngxsmk-color-primary, #6366f1);
+      background: var(--ngxsmk-color-primary);
     }
     .ngxsmk-pagination__btn:disabled {
-      opacity: 0.45;
+      opacity: var(--ngxsmk-opacity-disabled);
       cursor: not-allowed;
     }
     .ngxsmk-pagination__ellipsis {
@@ -173,7 +173,7 @@ type PageItem = { kind: 'page'; page: number } | { kind: 'ellipsis'; key: string
       justify-content: center;
       min-width: var(--ngxsmk-pagination-size, 2.25rem);
       height: var(--ngxsmk-pagination-size, 2.25rem);
-      color: var(--ngxsmk-color-on-surface-variant, #64748b);
+      color: var(--ngxsmk-color-on-surface-variant);
       user-select: none;
     }
     @media (prefers-reduced-motion: reduce) {

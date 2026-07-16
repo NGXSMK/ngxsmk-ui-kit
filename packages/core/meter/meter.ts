@@ -51,16 +51,16 @@ export type NgxsmkMeterLevel = 'optimal' | 'suboptimal' | 'poor';
     :host {
       display: block;
       font-family: var(--ngxsmk-font-sans, sans-serif);
-      --ngxsmk-meter-color: var(--ngxsmk-color-primary, #6366f1);
+      --ngxsmk-meter-color: var(--ngxsmk-color-primary);
     }
     :host([data-level='optimal']) {
-      --ngxsmk-meter-color: var(--ngxsmk-color-success, #16a34a);
+      --ngxsmk-meter-color: var(--ngxsmk-color-success);
     }
     :host([data-level='suboptimal']) {
-      --ngxsmk-meter-color: var(--ngxsmk-color-warning, #f59e0b);
+      --ngxsmk-meter-color: var(--ngxsmk-color-warning);
     }
     :host([data-level='poor']) {
-      --ngxsmk-meter-color: var(--ngxsmk-color-danger, #dc2626);
+      --ngxsmk-meter-color: var(--ngxsmk-color-error);
     }
 
     .ngxsmk-meter__header {
@@ -72,17 +72,17 @@ export type NgxsmkMeterLevel = 'optimal' | 'suboptimal' | 'poor';
       font-size: var(--ngxsmk-text-body-sm-size, 0.8125rem);
     }
     .ngxsmk-meter__label {
-      color: var(--ngxsmk-color-on-surface, #0f172a);
+      color: var(--ngxsmk-color-on-surface);
       font-weight: 500;
     }
     .ngxsmk-meter__value {
-      color: var(--ngxsmk-color-on-surface-variant, #64748b);
+      color: var(--ngxsmk-color-on-surface-variant);
       font-variant-numeric: tabular-nums;
     }
     .ngxsmk-meter__track {
       inline-size: 100%;
       block-size: var(--ngxsmk-meter-height, 0.5rem);
-      background: var(--ngxsmk-color-surface-variant, #e2e8f0);
+      background: var(--ngxsmk-color-surface-variant);
       border-radius: var(--ngxsmk-radius-full, 999px);
       overflow: hidden;
     }

@@ -51,14 +51,14 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     }
     ::ng-deep ul,
     ::ng-deep ol {
-      padding-left: 1.5em;
+      padding-inline-start: 1.5em;
       margin: 0.5em 0;
     }
     ::ng-deep li {
       margin: 0.25em 0;
     }
     ::ng-deep blockquote {
-      border-left: 3px solid var(--ngxsmk-color-primary);
+      border-inline-start: 3px solid var(--ngxsmk-color-primary);
       margin: 0.75em 0;
       padding: 0.25em 1em;
       color: var(--ngxsmk-color-on-surface-variant);

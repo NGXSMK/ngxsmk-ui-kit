@@ -44,7 +44,7 @@ export class NgxsmkTopNav {}
     :host {
       display: flex;
       align-items: center;
-      margin-right: var(--ngxsmk-space-4);
+      margin-inline-end: var(--ngxsmk-space-4);
     }
     .ngxsmk-top-nav-heading__link {
       font-family: var(--ngxsmk-font-sans);
@@ -305,7 +305,7 @@ export class NgxsmkTopNavMegaMenuItem {
       font-family: var(--ngxsmk-font-sans);
     }
     .ngxsmk-top-nav-mega-menu-featured:hover {
-      filter: brightness(0.95);
+      background: color-mix(in srgb, var(--ngxsmk-color-primary-container) 92%, black);
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

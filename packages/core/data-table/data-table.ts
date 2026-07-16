@@ -136,13 +136,13 @@ import { NgxsmkTable, NgxsmkTableColumn } from '@ngxsmk/core/table';
     }
 
     .ngxsmk-data-table__page-btn:disabled {
-      opacity: 0.4;
+      opacity: var(--ngxsmk-opacity-disabled);
       cursor: not-allowed;
     }
 
     .ngxsmk-data-table__page-btn:focus-visible {
-      outline: 2px solid var(--ngxsmk-color-ring);
-      outline-offset: 1px;
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring);
     }
 
     @media (max-width: 768px) {

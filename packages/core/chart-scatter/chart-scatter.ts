@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, input } from '@angular/core';
+import { AbstractCanvasChart, ChartHover, SHARED_CHART_STYLES, easeOutBack, niceTicks, rgba } from '@ngxsmk/core/chart-engine';
 
 export interface NgxsmkScatterDataPoint {
   x: number;
@@ -10,95 +11,96 @@ export interface NgxsmkScatterDataPoint {
   standalone: true,
   selector: 'ngxsmk-chart-scatter',
   template: `
-    <svg
-      class="ngxsmk-chart-scatter__svg"
-      [attr.width]="width()"
-      [attr.height]="height()"
-      [attr.viewBox]="viewBox()"
-    >
-      @for (pt of circles(); track $index) {
-        <g>
-          <circle
-            class="ngxsmk-chart-scatter__dot"
-            [attr.cx]="pt.cx"
-            [attr.cy]="pt.cy"
-            r="4"
-            [attr.fill]="color()"
-          />
-          @if (pt.label) {
-            <text
-              class="ngxsmk-chart-scatter__label"
-              [attr.x]="pt.cx"
-              [attr.y]="pt.cy - 8"
-              text-anchor="middle"
-            >
-              {{ pt.label }}
-            </text>
-          }
-        </g>
-      }
-    </svg>
+    <div class="ngxsmk-chart-surface">
+      <canvas #canvas></canvas>
+      <div #tooltip class="ngxsmk-chart-tip"></div>
+    </div>
   `,
   host: { class: 'ngxsmk-chart-scatter' },
-  styles: `
-    .ngxsmk-chart-scatter__svg {
-      display: block;
-      max-width: 100%;
-      height: auto;
-      overflow: visible;
-    }
-    .ngxsmk-chart-scatter__dot {
-      transition:
-        cx var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
-        cy var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
-    }
-    .ngxsmk-chart-scatter__label {
-      font-family: var(--ngxsmk-font-sans);
-      font-size: var(--ngxsmk-text-label-sm-size);
-      fill: var(--ngxsmk-color-on-surface-variant);
-    }
-  `,
+  styles: SHARED_CHART_STYLES,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NgxsmkScatterChart {
+export class NgxsmkScatterChart extends AbstractCanvasChart {
   readonly data = input<NgxsmkScatterDataPoint[]>([]);
-  readonly width = input(400);
-  readonly height = input(200);
+  readonly color = input('var(--ngxsmk-color-primary)');
 
-  protected readonly color = input('var(--ngxsmk-color-primary)');
+  private readonly xs = computed(() => this.data().map((d) => d.x));
+  private readonly ys = computed(() => this.data().map((d) => d.y));
 
-  protected readonly xs = computed(() => this.data().map((d) => d.x));
+  constructor() {
+    super();
+    effect(() => {
+      this.data();
+      this.color();
+      this.requestRender();
+    });
+  }
 
-  protected readonly ys = computed(() => this.data().map((d) => d.y));
+  protected draw(progress: number): void {
+    const ctx = this.ctx;
+    const t = this.theme;
+    const data = this.data();
+    if (!data.length) return;
 
-  protected readonly minX = computed(() => Math.min(...this.xs(), 0));
+    const minX = Math.min(...this.xs(), 0);
+    const maxX = Math.max(...this.xs(), 0);
+    const minY = Math.min(...this.ys(), 0);
+    const maxY = Math.max(...this.ys(), 0);
+    const rx = maxX - minX || 1;
+    const ry = maxY - minY || 1;
+    const plot = this.plot;
+    const xAt = (v: number) => plot.x + ((v - minX) / rx) * plot.w;
+    const yAt = (v: number) => plot.y + plot.h - ((v - minY) / ry) * plot.h;
 
-  protected readonly maxX = computed(() => Math.max(...this.xs(), 0));
+    const yTicks = niceTicks(minY, maxY, 4).map((v) => ({ y: yAt(v), label: String(v) }));
+    const xTicks = niceTicks(minX, maxX, 4).map((v) => ({ x: xAt(v), label: String(v) }));
+    this.drawCartesianGrid(yTicks, xTicks);
 
-  protected readonly minY = computed(() => Math.min(...this.ys(), 0));
+    const color = this.colorVar(this.color(), t.primary);
+    const n = data.length;
+    data.forEach((d, i) => {
+      const local = Math.max(0, Math.min(1, (progress * n - i) / 1));
+      if (local <= 0) return;
+      const r = 5 * easeOutBack(local);
+      const x = xAt(d.x);
+      const y = yAt(d.y);
+      ctx.beginPath();
+      ctx.arc(x, y, Math.max(0.5, r), 0, Math.PI * 2);
+      ctx.fillStyle = rgba(color, 0.85);
+      ctx.fill();
+      ctx.lineWidth = 1.5;
+      ctx.strokeStyle = rgba(t.surface, 1);
+      ctx.stroke();
+    });
+  }
 
-  protected readonly maxY = computed(() => Math.max(...this.ys(), 0));
-
-  protected readonly rangeX = computed(() => this.maxX() - this.minX() || 1);
-
-  protected readonly rangeY = computed(() => this.maxY() - this.minY() || 1);
-
-  protected readonly viewBox = computed(() => `0 0 ${this.width()} ${this.height()}`);
-
-  protected readonly circles = computed(() => {
-    const w = this.width();
-    const h = this.height();
-    const pad = 20;
-    const plotW = w - pad * 2;
-    const plotH = h - pad * 2;
-    const minX = this.minX();
-    const minY = this.minY();
-    const rx = this.rangeX();
-    const ry = this.rangeY();
-    return this.data().map((d) => ({
-      cx: pad + ((d.x - minX) / rx) * plotW,
-      cy: pad + plotH - ((d.y - minY) / ry) * plotH,
-      label: d.label,
-    }));
-  });
+  protected hitTest(x: number, y: number): ChartHover | null {
+    const data = this.data();
+    if (!data.length) return null;
+    const minX = Math.min(...this.xs(), 0);
+    const maxX = Math.max(...this.xs(), 0);
+    const minY = Math.min(...this.ys(), 0);
+    const maxY = Math.max(...this.ys(), 0);
+    const rx = maxX - minX || 1;
+    const ry = maxY - minY || 1;
+    const plot = this.plot;
+    const xAt = (v: number) => plot.x + ((v - minX) / rx) * plot.w;
+    const yAt = (v: number) => plot.y + plot.h - ((v - minY) / ry) * plot.h;
+    let best = -1;
+    let bestD = Infinity;
+    data.forEach((d, i) => {
+      const dx = x - xAt(d.x);
+      const dy = y - yAt(d.y);
+      const d2 = dx * dx + dy * dy;
+      if (d2 < bestD) {
+        bestD = d2;
+        best = i;
+      }
+    });
+    if (best < 0 || bestD > 100) return null;
+    const d = data[best];
+    const lines = [`x: ${d.x}`, `y: ${d.y}`];
+    if (d.label) lines.unshift(d.label);
+    return { title: d.label, lines, color: rgba(this.colorVar(this.color(), this.theme.primary), 1) };
+  }
 }

@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, input } from '@angular/core';
+import { AbstractCanvasChart, ChartHover, RGBA, SHARED_CHART_STYLES, niceTicks, rgba } from '@ngxsmk/core/chart-engine';
 
 export interface NgxsmkChartDataPoint {
   label: string;
@@ -9,78 +10,117 @@ export interface NgxsmkChartDataPoint {
   standalone: true,
   selector: 'ngxsmk-chart-line',
   template: `
-    <svg
-      class="ngxsmk-chart-line__svg"
-      [attr.width]="width()"
-      [attr.height]="height()"
-      [attr.viewBox]="viewBox()"
-    >
-      <text class="ngxsmk-chart-line__label" [attr.x]="0" [attr.y]="height() - 4">
-        {{ minLabel() }}
-      </text>
-      <text class="ngxsmk-chart-line__label" [attr.x]="width() - 30" [attr.y]="height() - 4">
-        {{ maxLabel() }}
-      </text>
-      <polyline class="ngxsmk-chart-line__line" [attr.points]="points()" [attr.stroke]="color()" />
-    </svg>
+    <div class="ngxsmk-chart-surface">
+      <canvas #canvas></canvas>
+      <div #tooltip class="ngxsmk-chart-tip"></div>
+    </div>
   `,
   host: { class: 'ngxsmk-chart-line' },
-  styles: `
-    .ngxsmk-chart-line__svg {
-      display: block;
-      max-width: 100%;
-      height: auto;
-      overflow: visible;
-    }
-    .ngxsmk-chart-line__line {
-      fill: none;
-      stroke-width: 2;
-      stroke-linejoin: round;
-      stroke-linecap: round;
-    }
-    .ngxsmk-chart-line__label {
-      font-family: var(--ngxsmk-font-sans);
-      font-size: var(--ngxsmk-text-label-sm-size);
-      fill: var(--ngxsmk-color-on-surface-variant);
-    }
-  `,
+  styles: SHARED_CHART_STYLES,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NgxsmkLineChart {
+export class NgxsmkLineChart extends AbstractCanvasChart {
   readonly data = input<NgxsmkChartDataPoint[]>([]);
-  readonly width = input(400);
-  readonly height = input(200);
   readonly color = input('var(--ngxsmk-color-primary)');
 
-  protected readonly values = computed(() => this.data().map((d) => d.value));
+  private readonly values = computed(() => this.data().map((d) => d.value));
 
-  protected readonly minVal = computed(() => Math.min(...this.values(), 0));
+  constructor() {
+    super();
+    effect(() => {
+      this.data();
+      this.color();
+      this.requestRender();
+    });
+  }
 
-  protected readonly maxVal = computed(() => Math.max(...this.values(), 0));
-
-  protected readonly range = computed(() => this.maxVal() - this.minVal() || 1);
-
-  protected readonly minLabel = computed(() => String(this.minVal()));
-
-  protected readonly maxLabel = computed(() => String(this.maxVal()));
-
-  protected readonly viewBox = computed(() => `0 0 ${this.width()} ${this.height()}`);
-
-  protected readonly points = computed(() => {
-    const w = this.width();
-    const h = this.height();
-    const pad = 16;
-    const plotW = w - pad * 2;
-    const plotH = h - pad * 2;
+  protected draw(progress: number): void {
+    const ctx = this.ctx;
+    const t = this.theme;
+    const data = this.data();
     const vals = this.values();
-    const r = this.range();
-    const min = this.minVal();
-    return vals
-      .map((v, i) => {
-        const x = pad + (i / (vals.length - 1 || 1)) * plotW;
-        const y = pad + plotH - ((v - min) / r) * plotH;
-        return `${x},${y}`;
-      })
-      .join(' ');
-  });
+    const n = vals.length;
+    if (n === 0) return;
+
+    const min = Math.min(...vals, 0);
+    const max = Math.max(...vals, 0);
+    const range = max - min || 1;
+    const plot = this.plot;
+    const xAt = (i: number) => (n === 1 ? plot.x + plot.w / 2 : plot.x + (i / (n - 1)) * plot.w);
+    const yAt = (v: number) => plot.y + plot.h - ((v - min) / range) * plot.h;
+
+    const yTicks = niceTicks(min, max, 4).map((v) => ({ y: yAt(v), label: String(v) }));
+    const xStep = Math.max(1, Math.ceil(n / 6));
+    const xTicks = data
+      .map((d, i) => ({ x: xAt(i), label: i % xStep === 0 || i === n - 1 ? d.label : undefined }))
+      .filter((tk) => tk.label != null) as { x: number; label: string }[];
+    this.drawCartesianGrid(yTicks, xTicks);
+
+    const color = this.colorVar(this.color(), t.primary);
+    const grad = ctx.createLinearGradient(0, plot.y, 0, plot.y + plot.h);
+    grad.addColorStop(0, rgba(color, 1));
+    grad.addColorStop(1, rgba(color, 0.5));
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(plot.x, 0, plot.w * progress, this.H);
+    ctx.clip();
+
+    ctx.beginPath();
+    data.forEach((d, i) => {
+      const x = xAt(i);
+      const y = yAt(d.value);
+      if (i) ctx.lineTo(x, y);
+      else ctx.moveTo(x, y);
+    });
+    ctx.strokeStyle = grad;
+    ctx.lineWidth = 2.5;
+    ctx.lineJoin = 'round';
+    ctx.lineCap = 'round';
+    ctx.stroke();
+
+    data.forEach((d, i) => {
+      const x = xAt(i);
+      const y = yAt(d.value);
+      ctx.beginPath();
+      ctx.arc(x, y, 3.5, 0, Math.PI * 2);
+      ctx.fillStyle = rgba(t.surface, 1);
+      ctx.fill();
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = rgba(color, 1);
+      ctx.stroke();
+    });
+    ctx.restore();
+  }
+
+  protected hitTest(x: number, y: number): ChartHover | null {
+    const data = this.data();
+    const vals = this.values();
+    const n = vals.length;
+    if (!n) return null;
+    const min = Math.min(...vals, 0);
+    const max = Math.max(...vals, 0);
+    const range = max - min || 1;
+    const plot = this.plot;
+    const xAt = (i: number) => (n === 1 ? plot.x + plot.w / 2 : plot.x + (i / (n - 1)) * plot.w);
+    const yAt = (v: number) => plot.y + plot.h - ((v - min) / range) * plot.h;
+    let best = -1;
+    let bestD = Infinity;
+    data.forEach((d, i) => {
+      const dx = x - xAt(i);
+      const dy = y - yAt(d.value);
+      const d2 = dx * dx + dy * dy;
+      if (d2 < bestD) {
+        bestD = d2;
+        best = i;
+      }
+    });
+    if (best < 0 || bestD > 400) return null;
+    const d = data[best];
+    return {
+      title: d.label,
+      lines: [`${d.value}`],
+      color: rgba(this.colorVar(this.color(), this.theme.primary), 1),
+    };
+  }
 }

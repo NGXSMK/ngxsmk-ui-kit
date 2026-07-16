@@ -70,7 +70,7 @@ export class NgxsmkCheckboxListItem {}
     }
     :host([data-disabled]) .ngxsmk-checkbox-list-item__wrapper {
       cursor: not-allowed;
-      opacity: 0.5;
+      opacity: var(--ngxsmk-opacity-disabled);
     }
     .ngxsmk-checkbox-list-item__native {
       position: absolute;
@@ -101,7 +101,13 @@ export class NgxsmkCheckboxListItem {}
     .ngxsmk-checkbox-list-item__box svg {
       opacity: 0;
       transform: scale(0.6);
-      transition: all var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
+      transition:
+        color,
+        background-color,
+        border-color,
+        box-shadow,
+        transform,
+        opacity var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
     :host([data-checked]) .ngxsmk-checkbox-list-item__box {
       background: var(--ngxsmk-color-primary);

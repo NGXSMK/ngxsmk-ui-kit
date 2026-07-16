@@ -66,6 +66,40 @@ export const DEFAULT_TYPOGRAPHY: TypographyScale = {
  */
 export const CONTROL_HEIGHT = '2.5rem';
 
+/**
+ * Control-height ladder. `md` mirrors CONTROL_HEIGHT (the family default);
+ * `sm`/`lg` give dense and comfortable variants the same rhythm.
+ */
+export const CONTROL_HEIGHTS: Record<string, string> = {
+  sm: '2rem',
+  md: CONTROL_HEIGHT,
+  lg: '3rem',
+};
+
+/**
+ * Opacity roles. Components must use these instead of ad-hoc literals so
+ * disabled/muted content reads identically across the whole kit.
+ */
+export const OPACITY: Record<string, string> = {
+  disabled: '0.5',
+  muted: '0.7',
+  faint: '0.4',
+};
+
+/** Icon sizing ladder — aligns glyph boxes with the text roles they sit next to. */
+export const ICON_SIZE: Record<string, string> = {
+  sm: '1rem',
+  md: '1.25rem',
+  lg: '1.5rem',
+};
+
+/** Letter-spacing roles: tight for display/headline, wide for overline/labels. */
+export const TRACKING: Record<string, string> = {
+  tight: '-0.02em',
+  normal: '0',
+  wide: '0.08em',
+};
+
 export const SPACING: Record<string, string> = {
   '0': '0px',
   '0-5': '0.125rem',
@@ -102,16 +136,18 @@ export const RADIUS: Record<string, string> = {
 };
 
 /**
- * Soft, diffuse, layered shadows (two stacked blurs, low alpha). Overlay
- * CSS resolves these to slightly stronger values in dark mode via the
- * elevation tokens on each surface.
+ * Soft, diffuse, layered shadows: a 1px hairline "contact" line keeps edges
+ * crisp on white, a tight key shadow gives definition, and a wide low-alpha
+ * ambient blur supplies the soft depth. Overlay CSS resolves these to
+ * slightly stronger values in dark mode via the elevation tokens on each
+ * surface.
  */
 export const SHADOW: Record<string, string> = {
-  sm: '0 1px 1px rgb(0 0 0 / 0.08), 0 2px 8px rgb(0 0 0 / 0.08)',
-  md: '0 1px 2px rgb(0 0 0 / 0.1), 0 2px 12px rgb(0 0 0 / 0.1)',
-  lg: '0 2px 2px rgb(0 0 0 / 0.1), 0 8px 24px rgb(0 0 0 / 0.12)',
-  xl: '0 4px 6px rgb(0 0 0 / 0.1), 0 12px 32px rgb(0 0 0 / 0.16)',
-  '2xl': '0 8px 12px rgb(0 0 0 / 0.14), 0 24px 48px rgb(0 0 0 / 0.22)',
+  sm: '0 0 0 1px rgb(0 0 0 / 0.03), 0 1px 1px rgb(0 0 0 / 0.07), 0 2px 8px rgb(0 0 0 / 0.07)',
+  md: '0 0 0 1px rgb(0 0 0 / 0.03), 0 1px 2px rgb(0 0 0 / 0.09), 0 4px 16px rgb(0 0 0 / 0.09)',
+  lg: '0 0 0 1px rgb(0 0 0 / 0.04), 0 2px 4px rgb(0 0 0 / 0.09), 0 10px 28px rgb(0 0 0 / 0.11)',
+  xl: '0 0 0 1px rgb(0 0 0 / 0.04), 0 4px 8px rgb(0 0 0 / 0.1), 0 16px 40px rgb(0 0 0 / 0.15)',
+  '2xl': '0 0 0 1px rgb(0 0 0 / 0.05), 0 8px 16px rgb(0 0 0 / 0.13), 0 28px 56px rgb(0 0 0 / 0.2)',
 };
 
 /**

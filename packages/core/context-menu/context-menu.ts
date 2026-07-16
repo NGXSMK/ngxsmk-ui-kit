@@ -87,12 +87,12 @@ export interface NgxsmkContextMenuItem {
       }
 
       .ngxsmk-context-menu__item:focus-visible {
-        outline: 2px solid var(--ngxsmk-color-ring);
-        outline-offset: -2px;
+        outline: none;
+        box-shadow: var(--ngxsmk-focus-ring);
       }
 
       .ngxsmk-context-menu__item:disabled {
-        opacity: 0.4;
+        opacity: var(--ngxsmk-opacity-disabled);
         cursor: not-allowed;
       }
 

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input, signal, computed } from '@angular/core';
+﻿import { ChangeDetectionStrategy, Component, input, signal, computed } from '@angular/core';
 
 @Component({
   standalone: true,
@@ -38,12 +38,12 @@ import { ChangeDetectionStrategy, Component, input, signal, computed } from '@an
     :host([data-size='sm']) {
       width: 2.5rem;
       height: 2.5rem;
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-label-md-size);
     }
     :host([data-size='md']) {
       width: 4rem;
       height: 4rem;
-      font-size: 1rem;
+      font-size: var(--ngxsmk-text-body-lg-size);
     }
     :host([data-size='lg']) {
       width: 6rem;
@@ -53,7 +53,7 @@ import { ChangeDetectionStrategy, Component, input, signal, computed } from '@an
     :host([data-size='xl']) {
       width: 8rem;
       height: 8rem;
-      font-size: 1.5rem;
+      font-size: var(--ngxsmk-text-headline-sm-size);
     }
     .ngxsmk-thumbnail__img {
       width: 100%;

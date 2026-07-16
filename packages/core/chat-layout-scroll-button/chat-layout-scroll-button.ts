@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, output } from '@angular/core';
+﻿import { ChangeDetectionStrategy, Component, output } from '@angular/core';
 
 @Component({
   standalone: true,
   selector: 'ngxsmk-chat-layout-scroll-button',
-  template: `↓`,
+  template: `â†“`,
   host: {
     class: 'ngxsmk-chat-layout-scroll-button',
     '(click)': 'scrolled.emit()',
@@ -26,7 +26,7 @@ import { ChangeDetectionStrategy, Component, output } from '@angular/core';
       justify-content: center;
       cursor: pointer;
       box-shadow: var(--ngxsmk-shadow-md);
-      font-size: 1.125rem;
+      font-size: var(--ngxsmk-text-title-md-size);
     }
     :host(:hover) {
       background: var(--ngxsmk-color-primary);

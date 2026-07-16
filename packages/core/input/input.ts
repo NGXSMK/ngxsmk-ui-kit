@@ -63,16 +63,16 @@ import { ngxsmkUniqueId } from '@ngxsmk/core/util';
     }
     :host(:focus-within) {
       border-color: var(--ngxsmk-color-ring);
-      box-shadow: 0 0 0 3px color-mix(in srgb, var(--ngxsmk-color-ring) 25%, transparent);
+      box-shadow: var(--ngxsmk-focus-ring);
     }
     :host([aria-invalid='true']) {
       border-color: var(--ngxsmk-color-error);
     }
     :host([aria-invalid='true']:focus-within) {
-      box-shadow: 0 0 0 3px color-mix(in srgb, var(--ngxsmk-color-error) 25%, transparent);
+      box-shadow: var(--ngxsmk-focus-ring-error);
     }
     :host([data-disabled]) {
-      opacity: 0.5;
+      opacity: var(--ngxsmk-opacity-disabled);
     }
 
     .ngxsmk-input__control {

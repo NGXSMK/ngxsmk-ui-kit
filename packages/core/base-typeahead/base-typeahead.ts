@@ -1,4 +1,4 @@
-import {
+﻿import {
   ChangeDetectionStrategy,
   Component,
   Directive,
@@ -54,7 +54,7 @@ export class NgxsmkBaseTypeaheadItem {
       padding: var(--ngxsmk-space-2) var(--ngxsmk-space-3);
       border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-md);
-      font-size: 0.875rem;
+      font-size: var(--ngxsmk-text-label-lg-size);
       background: var(--ngxsmk-color-surface);
       color: var(--ngxsmk-color-on-surface);
       outline: none;

@@ -12,4 +12,8 @@ export * from '@ngxsmk/cdk/visually-hidden';
 export * from '@ngxsmk/cdk/intersection-observer';
 export * from '@ngxsmk/cdk/resize-observer';
 export * from '@ngxsmk/cdk/autofocus';
-export * from '@ngxsmk/cdk/testing';
+
+// NOTE: '@ngxsmk/cdk/testing' is intentionally NOT re-exported here. It pulls in
+// axe-core (a CommonJS dependency) which would otherwise leak into every runtime
+// bundle that imports the main '@ngxsmk/cdk' barrel. Import test helpers directly
+// from the dedicated entry point instead: `import { ... } from '@ngxsmk/cdk/testing'`.

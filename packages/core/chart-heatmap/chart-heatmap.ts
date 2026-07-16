@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, input } from '@angular/core';
+import { AbstractCanvasChart, ChartHover, SHARED_CHART_STYLES, mix, rgba } from '@ngxsmk/core/chart-engine';
 
 export interface NgxsmkHeatmapLabels {
   x: string[];
@@ -9,106 +10,105 @@ export interface NgxsmkHeatmapLabels {
   standalone: true,
   selector: 'ngxsmk-chart-heatmap',
   template: `
-    <svg
-      class="ngxsmk-chart-heatmap__svg"
-      [attr.width]="width()"
-      [attr.height]="height()"
-      [attr.viewBox]="viewBox()"
-    >
-      @for (row of cells(); track $index) {
-        @for (cell of row; track $index) {
-          <g>
-            <rect
-              class="ngxsmk-chart-heatmap__cell"
-              [attr.x]="cell.x"
-              [attr.y]="cell.y"
-              [attr.width]="cell.w"
-              [attr.height]="cell.h"
-              [attr.fill]="cell.fill"
-            />
-            <text
-              class="ngxsmk-chart-heatmap__value"
-              [attr.x]="cell.x + cell.w / 2"
-              [attr.y]="cell.y + cell.h / 2"
-              text-anchor="middle"
-              dominant-baseline="central"
-            >
-              {{ cell.label }}
-            </text>
-          </g>
-        }
-      }
-    </svg>
+    <div class="ngxsmk-chart-surface">
+      <canvas #canvas></canvas>
+      <div #tooltip class="ngxsmk-chart-tip"></div>
+    </div>
   `,
   host: { class: 'ngxsmk-chart-heatmap' },
-  styles: `
-    .ngxsmk-chart-heatmap__svg {
-      display: block;
-      max-width: 100%;
-      height: auto;
-      overflow: visible;
-    }
-    .ngxsmk-chart-heatmap__cell {
-      stroke: var(--ngxsmk-color-surface);
-      stroke-width: 1;
-    }
-    .ngxsmk-chart-heatmap__value {
-      font-family: var(--ngxsmk-font-sans);
-      font-size: var(--ngxsmk-text-label-sm-size);
-      fill: var(--ngxsmk-color-on-surface);
-      pointer-events: none;
-    }
-  `,
+  styles: SHARED_CHART_STYLES,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NgxsmkHeatmapChart {
+export class NgxsmkHeatmapChart extends AbstractCanvasChart {
   readonly data = input<number[][]>([]);
   readonly labels = input<NgxsmkHeatmapLabels>({ x: [], y: [] });
-  readonly width = input(400);
-  readonly height = input(200);
+  readonly color = input('var(--ngxsmk-color-primary)');
 
-  protected readonly flatValues = computed(() =>
-    this.data()
-      .flat()
-      .filter((v) => v !== undefined),
-  );
+  private readonly flat = computed(() => this.data().flat().filter((v) => v !== undefined));
+  private readonly minVal = computed(() => (this.flat().length ? Math.min(...this.flat()) : 0));
+  private readonly maxVal = computed(() => (this.flat().length ? Math.max(...this.flat()) : 1));
 
-  protected readonly minVal = computed(() =>
-    this.flatValues().length ? Math.min(...this.flatValues()) : 0,
-  );
+  constructor() {
+    super();
+    effect(() => {
+      this.data();
+      this.labels();
+      this.color();
+      this.requestRender();
+    });
+  }
 
-  protected readonly maxVal = computed(() =>
-    this.flatValues().length ? Math.max(...this.flatValues()) : 1,
-  );
+  protected draw(progress: number): void {
+    const ctx = this.ctx;
+    const t = this.theme;
+    const data = this.data();
+    const rows = data.length;
+    if (!rows) return;
+    const cols = Math.max(...data.map((r) => r.length), 1);
+    const labelW = 48;
+    const labelH = 22;
+    const plot = this.plot;
+    const cellW = (this.W - labelW) / cols;
+    const cellH = (this.H - labelH) / rows;
+    const lo = this.minVal();
+    const hi = this.maxVal();
+    const range = hi - lo || 1;
+    const high = this.colorVar(this.color(), t.primary);
+    const low = mix(t.surfaceVariant, t.surface, 0.4);
 
-  protected readonly viewBox = computed(() => `0 0 ${this.width()} ${this.height()}`);
+    data.forEach((row, ri) => {
+      row.forEach((val, ci) => {
+        const x = labelW + ci * cellW;
+        const y = labelH + ri * cellH;
+        const tt = (val - lo) / range;
+        const color = mix(low, high, tt);
+        const local = Math.max(0, Math.min(1, progress * 1.4 - (ri + ci) / (rows + cols)));
+        ctx.globalAlpha = Math.max(0, local);
+        ctx.fillStyle = rgba(color, 1);
+        ctx.fillRect(x + 1, y + 1, cellW - 2, cellH - 2);
+        ctx.globalAlpha = 1;
+      });
+    });
 
-  protected readonly cells = computed(() => {
-    const rows = this.data().length || 1;
-    const cols = this.data().length ? Math.max(...this.data().map((r) => r.length), 1) : 1;
-    const labelW = 50;
-    const labelH = 20;
-    const cellW = (this.width() - labelW) / cols;
-    const cellH = (this.height() - labelH) / rows;
-    const range = this.maxVal() - this.minVal() || 1;
+    ctx.fillStyle = rgba(t.onSurfaceVariant, 1);
+    ctx.font = this.font;
+    ctx.textBaseline = 'middle';
+    ctx.textAlign = 'right';
+    const yLabels = this.labels().y;
+    data.forEach((_, ri) => {
+      const y = labelH + ri * cellH + cellH / 2;
+      ctx.fillText(yLabels[ri] ?? '', labelW - 6, y);
+    });
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+    const xLabels = this.labels().x;
+    for (let ci = 0; ci < cols; ci++) {
+      const x = labelW + ci * cellW + cellW / 2;
+      ctx.fillText(xLabels[ci] ?? '', x, 4);
+    }
+  }
 
-    const interpolate = (val: number) => {
-      const t = (val - this.minVal()) / range;
-      const r = Math.round(255 - t * 200);
-      const g = Math.round(255 - t * 200);
-      const b = 255;
-      return `rgb(${r},${g},${b})`;
+  protected hitTest(x: number, y: number): ChartHover | null {
+    const data = this.data();
+    const rows = data.length;
+    if (!rows) return null;
+    const cols = Math.max(...data.map((r) => r.length), 1);
+    const labelW = 48;
+    const labelH = 22;
+    const cellW = (this.W - labelW) / cols;
+    const cellH = (this.H - labelH) / rows;
+    const ci = Math.floor((x - labelW) / cellW);
+    const ri = Math.floor((y - labelH) / cellH);
+    if (ri < 0 || ri >= rows || ci < 0 || ci >= cols) return null;
+    const row = data[ri];
+    const val = row?.[ci];
+    if (val === undefined) return null;
+    const xLabel = this.labels().x[ci] ?? '';
+    const yLabel = this.labels().y[ri] ?? '';
+    return {
+      title: xLabel && yLabel ? `${yLabel} · ${xLabel}` : xLabel || yLabel,
+      lines: [`${val}`],
+      color: rgba(this.colorVar(this.color(), this.theme.primary), 1),
     };
-
-    return this.data().map((row, ri) =>
-      row.map((val, ci) => ({
-        x: labelW + ci * cellW,
-        y: labelH + ri * cellH,
-        w: cellW,
-        h: cellH,
-        fill: interpolate(val),
-        label: String(val),
-      })),
-    );
-  });
+  }
 }

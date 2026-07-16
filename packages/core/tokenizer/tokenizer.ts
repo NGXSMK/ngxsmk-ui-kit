@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input, model, output } from '@angular/core';
+﻿import { ChangeDetectionStrategy, Component, input, model, output } from '@angular/core';
 
 @Component({
   standalone: true,
@@ -61,11 +61,11 @@ import { ChangeDetectionStrategy, Component, input, model, output } from '@angul
       border: none;
       background: none;
       cursor: pointer;
-      font-size: 1rem;
+      font-size: var(--ngxsmk-text-body-lg-size);
       line-height: 1;
       padding: 0;
       color: inherit;
-      opacity: 0.7;
+      opacity: var(--ngxsmk-opacity-muted);
     }
     .ngxsmk-tokenizer__remove:hover {
       opacity: 1;
@@ -76,7 +76,7 @@ import { ChangeDetectionStrategy, Component, input, model, output } from '@angul
       border: none;
       outline: none;
       padding: var(--ngxsmk-space-1);
-      font-size: 0.875rem;
+      font-size: var(--ngxsmk-text-label-lg-size);
       background: transparent;
     }
   `,

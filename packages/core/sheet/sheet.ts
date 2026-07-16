@@ -145,8 +145,8 @@ export type NgxsmkSheetSide = 'left' | 'right' | 'bottom';
     }
 
     .ngxsmk-sheet__close:focus-visible {
-      outline: 2px solid var(--ngxsmk-color-ring);
-      outline-offset: 1px;
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring);
     }
 
     .ngxsmk-sheet__body {

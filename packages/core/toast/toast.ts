@@ -277,8 +277,8 @@ export class NgxsmkToast {
       color: var(--ngxsmk-color-on-surface);
     }
     .ngxsmk-toaster__close:focus-visible {
-      outline: 2px solid var(--ngxsmk-color-ring);
-      outline-offset: 1px;
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring);
     }
 
     @keyframes ngxsmk-toast-in {

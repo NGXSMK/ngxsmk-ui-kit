@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+﻿import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 
 export interface DiagramNode {
   id: string;
@@ -63,7 +63,7 @@ export interface DiagramEdge {
     }
     .ngxsmk-diagram-builder__node text {
       fill: var(--ngxsmk-color-on-surface);
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-label-md-size);
       pointer-events: none;
     }
   `,

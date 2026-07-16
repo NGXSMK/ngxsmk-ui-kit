@@ -70,14 +70,15 @@ export type NgxsmkTokenVariant = 'default' | 'primary' | 'success' | 'warning' |
       background: transparent;
       color: inherit;
       cursor: pointer;
-      opacity: 0.7;
+      opacity: var(--ngxsmk-opacity-muted);
       border-radius: var(--ngxsmk-radius-sm);
     }
     .ngxsmk-token__remove:hover {
       opacity: 1;
     }
     .ngxsmk-token__remove:focus-visible {
-      outline: 2px solid var(--ngxsmk-color-ring);
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring);
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

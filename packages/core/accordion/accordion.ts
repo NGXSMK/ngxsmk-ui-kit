@@ -145,13 +145,13 @@ export class NgxsmkAccordion {
     }
 
     .ngxsmk-accordion-item__trigger:disabled {
-      opacity: 0.5;
+      opacity: var(--ngxsmk-opacity-disabled);
       cursor: not-allowed;
     }
 
     .ngxsmk-accordion-item__trigger:focus-visible {
-      outline: 2px solid var(--ngxsmk-color-ring);
-      outline-offset: -2px;
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring);
     }
 
     .ngxsmk-accordion-item__chevron {

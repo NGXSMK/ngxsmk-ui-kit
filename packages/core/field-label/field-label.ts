@@ -18,7 +18,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
     }
     .ngxsmk-field-label__req {
       color: var(--ngxsmk-color-error);
-      margin-left: var(--ngxsmk-space-1);
+      margin-inline-start: var(--ngxsmk-space-1);
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

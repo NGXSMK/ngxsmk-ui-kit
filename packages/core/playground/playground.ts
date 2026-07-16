@@ -127,19 +127,21 @@ export type ViewportSize = 'full' | 'mobile' | 'tablet' | 'desktop';
       display: flex;
       flex-direction: column;
       height: 100vh;
-      background: var(--ngxsmk-color-background, #f9fafb);
-      color: var(--ngxsmk-color-on-surface, #1f2937);
+      background: var(--ngxsmk-color-background);
+      color: var(--ngxsmk-color-on-surface);
       font-family: var(--ngxsmk-font-sans, sans-serif);
       transition: background-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
+    /* Scoped dark preview: mirrors the kit's real dark-mode surface values so
+       the playground pane matches an actual .dark theme. */
     .ngxsmk-playground.dark {
-      background: #111827;
-      color: #f9fafb;
-      --ngxsmk-color-background: #111827;
-      --ngxsmk-color-surface: #1f2937;
-      --ngxsmk-color-surface-variant: #374151;
-      --ngxsmk-color-outline: #4b5563;
-      --ngxsmk-color-on-surface: #f9fafb;
+      background: #111112;
+      color: #dfe2e5;
+      --ngxsmk-color-background: #111112;
+      --ngxsmk-color-surface: #1f1f22;
+      --ngxsmk-color-surface-variant: #28292c;
+      --ngxsmk-color-outline: rgb(242 244 246 / 0.1);
+      --ngxsmk-color-on-surface: #dfe2e5;
     }
 
     .ngxsmk-playground__header {
@@ -147,8 +149,8 @@ export type ViewportSize = 'full' | 'mobile' | 'tablet' | 'desktop';
       justify-content: space-between;
       align-items: center;
       padding: var(--ngxsmk-space-3) var(--ngxsmk-space-6);
-      background: var(--ngxsmk-color-surface, #ffffff);
-      border-bottom: 1px solid var(--ngxsmk-color-outline, #e5e7eb);
+      background: var(--ngxsmk-color-surface);
+      border-bottom: 1px solid var(--ngxsmk-color-outline);
       z-index: 10;
       box-shadow: var(--ngxsmk-shadow-sm);
     }
@@ -159,7 +161,7 @@ export type ViewportSize = 'full' | 'mobile' | 'tablet' | 'desktop';
       gap: var(--ngxsmk-space-3);
       font-weight: 700;
       font-size: var(--ngxsmk-text-title-sm-size, 1.125rem);
-      color: var(--ngxsmk-color-primary, #7c3aed);
+      color: var(--ngxsmk-color-primary);
     }
 
     .ngxsmk-playground__actions {
@@ -169,9 +171,9 @@ export type ViewportSize = 'full' | 'mobile' | 'tablet' | 'desktop';
     }
 
     .ngxsmk-playground__btn {
-      background: var(--ngxsmk-color-surface-variant, #f3f4f6);
+      background: var(--ngxsmk-color-surface-variant);
       color: var(--ngxsmk-color-on-surface);
-      border: 1px solid var(--ngxsmk-color-outline, #e5e7eb);
+      border: 1px solid var(--ngxsmk-color-outline);
       width: 2.25rem;
       height: 2.25rem;
       border-radius: var(--ngxsmk-radius-md, 6px);
@@ -181,18 +183,24 @@ export type ViewportSize = 'full' | 'mobile' | 'tablet' | 'desktop';
       cursor: pointer;
       font-weight: 600;
       font-size: var(--ngxsmk-text-label-sm-size, 0.875rem);
-      transition: all var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
+      transition:
+        color,
+        background-color,
+        border-color,
+        box-shadow,
+        transform,
+        opacity var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
     .ngxsmk-playground__btn:hover {
-      background: var(--ngxsmk-color-surface-hover, #e5e7eb);
+      background: var(--ngxsmk-color-surface-hover);
     }
 
     .ngxsmk-playground__select-wrapper select {
       height: 2.25rem;
       padding: 0 var(--ngxsmk-space-3);
       border-radius: var(--ngxsmk-radius-md, 6px);
-      border: 1px solid var(--ngxsmk-color-outline, #e5e7eb);
-      background: var(--ngxsmk-color-surface-variant, #f3f4f6);
+      border: 1px solid var(--ngxsmk-color-outline);
+      background: var(--ngxsmk-color-surface-variant);
       color: var(--ngxsmk-color-on-surface);
       font-family: inherit;
       cursor: pointer;
@@ -223,11 +231,16 @@ export type ViewportSize = 'full' | 'mobile' | 'tablet' | 'desktop';
     }
 
     .ngxsmk-playground__viewport {
-      background: var(--ngxsmk-color-surface, #ffffff);
-      border: 1px solid var(--ngxsmk-color-outline, #e5e7eb);
+      background: var(--ngxsmk-color-surface);
+      border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-lg, 8px);
       box-shadow: var(--ngxsmk-shadow-md);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition:
+        width,
+        height,
+        transform,
+        opacity,
+        box-shadow var(--ngxsmk-duration-slow) var(--ngxsmk-ease-in-out);
       width: 100%;
       height: 100%;
       display: flex;
@@ -255,8 +268,8 @@ export type ViewportSize = 'full' | 'mobile' | 'tablet' | 'desktop';
 
     .ngxsmk-playground__sidebar {
       width: 320px;
-      background: var(--ngxsmk-color-surface, #ffffff);
-      border-left: 1px solid var(--ngxsmk-color-outline, #e5e7eb);
+      background: var(--ngxsmk-color-surface);
+      border-inline-start: 1px solid var(--ngxsmk-color-outline);
       display: flex;
       flex-direction: column;
       overflow: hidden;
@@ -268,7 +281,7 @@ export type ViewportSize = 'full' | 'mobile' | 'tablet' | 'desktop';
       padding: var(--ngxsmk-space-4) var(--ngxsmk-space-6);
       font-size: var(--ngxsmk-text-title-sm-size, 1rem);
       font-weight: 600;
-      border-bottom: 1px solid var(--ngxsmk-color-outline, #e5e7eb);
+      border-bottom: 1px solid var(--ngxsmk-color-outline);
     }
 
     .ngxsmk-playground__sidebar-content {

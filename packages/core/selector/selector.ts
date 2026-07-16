@@ -41,7 +41,13 @@ export interface SelectorOption {
       color: var(--ngxsmk-color-on-surface);
       font-size: var(--ngxsmk-text-body-sm-size);
       cursor: pointer;
-      transition: all var(--ngxsmk-duration-fast);
+      transition:
+        color,
+        background-color,
+        border-color,
+        box-shadow,
+        transform,
+        opacity var(--ngxsmk-duration-fast);
     }
     .ngxsmk-selector__chip[data-selected] {
       background: var(--ngxsmk-color-primary-container);

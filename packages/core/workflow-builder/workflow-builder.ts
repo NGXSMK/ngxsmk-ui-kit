@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+﻿import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 export interface WorkflowNode {
   id: string;
@@ -54,11 +54,11 @@ export interface WorkflowEdge {
     }
     .ngxsmk-workflow-builder__node-label {
       font-weight: 500;
-      font-size: 0.875rem;
+      font-size: var(--ngxsmk-text-label-lg-size);
       color: var(--ngxsmk-color-on-surface);
     }
     .ngxsmk-workflow-builder__node-type {
-      font-size: 0.6875rem;
+      font-size: var(--ngxsmk-text-label-sm-size);
       color: var(--ngxsmk-color-on-surface-variant);
     }
   `,
