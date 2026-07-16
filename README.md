@@ -1,57 +1,198 @@
-# NGXSMK UI Kit
+<div align="center">
 
-[![Angular](https://img.shields.io/badge/Angular-17.3%2B-dd0031?logo=angular&logoColor=white)](https://angular.dev)
-[![TypeScript](https://img.shields.io/badge/TypeScript-6.x-3178c6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
-[![Node.js](https://img.shields.io/badge/Node.js-20%2B-339933?logo=nodedotjs&logoColor=white)](https://nodejs.org)
-[![npm @ngxsmk/core](https://img.shields.io/badge/npm-%40ngxsmk%2Fcore-blue)](https://www.npmjs.com/package/@ngxsmk/core)
+<img src="apps/demo/public/favicon.svg" alt="NGXSMK logo" width="72" height="72" />
+
+# NGXSMK — The Open-Source Angular UI Kit
+
+**170+ free Angular components. Signals-native. Zoneless. Token-themed. Dark mode built in.**
+
+The modern Angular component library & design system for Angular 17.3 → 22 —
+forms, data tables, charts, AI chat UI, and enterprise widgets that ship as
+tree-shakable standalone components.
+
+[![npm version](https://img.shields.io/npm/v/@ngxsmk/core?label=npm&color=blue)](https://www.npmjs.com/package/@ngxsmk/core)
+[![npm downloads](https://img.shields.io/npm/dm/@ngxsmk/core?color=blue)](https://www.npmjs.com/package/@ngxsmk/core)
+[![CI](https://github.com/NGXSMK/ngxsmk-ui-kit/actions/workflows/ci.yml/badge.svg)](https://github.com/NGXSMK/ngxsmk-ui-kit/actions/workflows/ci.yml)
+[![Angular compatibility](https://github.com/NGXSMK/ngxsmk-ui-kit/actions/workflows/compatibility.yml/badge.svg)](https://github.com/NGXSMK/ngxsmk-ui-kit/actions/workflows/compatibility.yml)
+[![Angular](https://img.shields.io/badge/Angular-17.3%20→%2022-dd0031?logo=angular&logoColor=white)](https://angular.dev)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/NGXSMK/ngxsmk-ui-kit?style=social)](https://github.com/NGXSMK/ngxsmk-ui-kit/stargazers)
 
-> **v1.3.1 · Signals-native · Zoneless** — an Angular-first, open-source UI ecosystem, signals-native, zoneless, and token-themed.
+[**Live Demo**](https://ngxsmk.dev) · [**Component Explorer**](https://ngxsmk.dev/showcase/explorer) · [**Theme Playground**](https://ngxsmk.dev/playground) · [Report a Bug](https://github.com/NGXSMK/ngxsmk-ui-kit/issues) · [Request a Feature](https://github.com/NGXSMK/ngxsmk-ui-kit/issues)
+
+</div>
+
+---
+
+```bash
+npm install @ngxsmk/core @ngxsmk/theme
+```
+
+```ts
+import { NgxsmkButton } from '@ngxsmk/core/button';
+
+@Component({
+  selector: 'app-root',
+  imports: [NgxsmkButton],
+  template: `<button ngxsmk-button variant="primary">Get started</button>`,
+})
+export class App {}
+```
+
+That's it — no `zone.js`, no global module, no CSS framework required.
+
+## Why NGXSMK?
+
+Most Angular UI libraries were designed before signals, standalone components,
+and zoneless change detection existed. NGXSMK was built **after** — every one of
+its 170+ components is a standalone, `OnPush`, signal-based component
+(`input()`, `output()`, `model()`) that reads design tokens from CSS custom
+properties. The result: instant runtime theming, minimal bundles, and an API
+that feels like modern Angular instead of fighting it.
+
+- ⚡ **Signals-native & zoneless** — no `zone.js` dependency; works in zone-based *and* zoneless apps.
+- 🎨 **Design-token theming** — every component reads `var(--ngxsmk-*)`; switch themes and dark mode at runtime with zero flash.
+- 🌗 **Light / dark / system** — class, media, and system strategies with 4 built-in presets (`emerald`, `violet`, `neutral`, `rose`).
+- 📊 **Charts built in** — 8 token-themed chart components (bar, line, area, pie/donut, scatter, heatmap, candlestick, dashboard) — no external charting library.
+- 🤖 **AI & chat UI** — chat windows, streaming text, reasoning timelines, agent cards, voice input: the building blocks for LLM apps in Angular.
+- 🏢 **Enterprise widgets** — kanban board, scheduler, Gantt timeline, spreadsheet, pivot table, org chart, workflow & rule builders.
+- ♿ **Accessible by default** — WCAG 2.1 AA target: native form primitives, focus management, ARIA patterns, `prefers-reduced-motion`.
+- 🌲 **Tree-shakable** — a secondary entry point per component (`@ngxsmk/core/button`); import only what you use.
+- 🧰 **Batteries included** — SEO service, i18n-friendly primitives, animation helpers, CLI with `ng add`.
+- 🆓 **MIT licensed** — free for personal and commercial use, forever.
+
+**Try everything live at [ngxsmk.dev](https://ngxsmk.dev)** — including a
+[visual theme editor](https://ngxsmk.dev/playground) that exports your brand
+theme as CSS variables, SCSS, Tailwind config, StyleX tokens, or Tokens Studio
+JSON for Figma.
+
+## How does NGXSMK compare?
+
+| Capability | NGXSMK | Angular Material | PrimeNG |
+| --- | :-: | :-: | :-: |
+| Signals-first component API (`input()` / `model()`) | ✅ | Partial | Partial |
+| Designed zoneless-first (no `zone.js` assumptions) | ✅ | Works | Works |
+| Runtime theme switching via CSS design tokens | ✅ | Partial | ✅ |
+| Built-in charts (no third-party chart lib) | ✅ 8 types | ❌ | Wrapper (Chart.js) |
+| AI / chat / LLM UI components | ✅ | ❌ | ❌ |
+| Enterprise widgets (kanban, Gantt, spreadsheet, pivot) | ✅ | ❌ | Partial |
+| Per-component tree-shakable entry points | ✅ | ✅ | ✅ |
+| Visual theme builder with multi-format export | ✅ | ❌ | ✅ |
+| License | MIT | MIT | MIT (core) |
+
+*Angular Material and PrimeNG are excellent libraries — the table highlights
+scope differences so you can pick the right tool. NGXSMK aims to be the
+all-in-one kit for signal-native, zoneless Angular apps.*
 
 ## Table of contents
 
+- [Quick start](#quick-start)
 - [Features](#features)
 - [Packages](#packages)
 - [Components](#components)
-- [SEO utilities](#seo-utilities)
-- [Installation](#installation)
-- [Quick start](#quick-start)
 - [Theming & design tokens](#theming--design-tokens)
 - [Animations](#animations)
+- [SEO utilities](#seo-utilities)
 - [CLI & schematics](#cli--schematics)
 - [Accessibility](#accessibility)
 - [Performance & tree-shaking](#performance--tree-shaking)
 - [Integrated third-party components](#integrated-third-party-components)
+- [FAQ](#faq)
 - [Development](#development)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
 - [License](#license)
 
-NGXSMK is a component library for modern Angular (**v17.3+**). Every component is a
-standalone, `OnPush`, signal-based component that reads design tokens from CSS
-custom properties, so theming is instant and bundle size stays minimal. No
-`zone.js` required — it works with both zone-based and zoneless apps.
+## Angular version support
 
-> **Angular version note:** the source targets Angular **17.3** as the minimum
-> (signal `input`/`model` and signal `viewChild`/`contentChild` queries). It uses
-> no Angular 18+/19+/20+‑only runtime APIs, so the same components run on 17.3,
-> 18, 19, 20, 21, and 22. The demo app in this repo additionally uses
-> zoneless change detection (`provideZonelessChangeDetection`), which needs
-> Angular 18+ (stable in 19), so the demo itself targets 18+.
->
-> **Verified:** all three publishable packages (`@ngxsmk/theme`, `@ngxsmk/cdk`,
-> `@ngxsmk/core`) are compiled against every supported major in CI
-> (`.github/workflows/compatibility.yml`) — the libraries build cleanly on
-> Angular 17.3. Peer dependencies are declared as `>=17.3.0`.
+The source targets Angular **17.3** as the minimum (signal `input`/`model` and
+signal `viewChild`/`contentChild` queries). It uses no Angular 18+/19+/20+-only
+runtime APIs, so the same components run on **17.3, 18, 19, 20, 21, and 22**.
+The demo app additionally uses zoneless change detection
+(`provideZonelessChangeDetection`), which needs Angular 18+.
 
----
+> **Verified in CI:** all three publishable packages (`@ngxsmk/theme`,
+> `@ngxsmk/cdk`, `@ngxsmk/core`) are compiled against every supported major
+> (`.github/workflows/compatibility.yml`). Peer dependencies are declared as
+> `>=17.3.0`.
 
-## Status
+## Quick start
 
-Stable. The `1.3.1` release ships the full component catalog, the token theme
-engine, CDK behaviors, and the animation helpers. The workspace, theme engine,
-and CDK are implemented and supported on Angular **17.3+** (see the
-version note above).
+### 1. Install
+
+```bash
+npm install @ngxsmk/core @ngxsmk/theme
+```
+
+Or let the schematic wire everything for you:
+
+```bash
+ng add @ngxsmk/core
+```
+
+**Requirements:** Angular **17.3+**, Node **20+**, TypeScript **5.x+**.
+
+### 2. Load the base styles
+
+In your global stylesheet (or `angular.json` `styles`):
+
+```scss
+@import '@ngxsmk/theme/styles/ngxsmk.css';
+```
+
+This ships a single base stylesheet — themes are generated on demand at runtime.
+
+### 3. (Optional) Go zoneless
+
+```ts
+import {
+  ApplicationConfig,
+  provideZonelessChangeDetection,
+  withViewTransitions,
+} from '@angular/core';
+
+export const appConfig: ApplicationConfig = {
+  providers: [provideZonelessChangeDetection(), withViewTransitions()],
+};
+```
+
+### 4. Use a component
+
+```ts
+import { NgxsmkButton } from '@ngxsmk/core/button';
+
+@Component({
+  selector: 'app-root',
+  imports: [NgxsmkButton],
+  template: `<button ngxsmk-button variant="primary">Get started</button>`,
+})
+export class App {}
+```
+
+> **Prefer deep imports** (`@ngxsmk/core/button`) over the barrel
+> (`@ngxsmk/core`) so the bundler tree-shakes unused components.
+
+### Peer dependencies
+
+`@ngxsmk/core` declares these **peer dependencies** (you already have the
+`@angular/*` ones in any Angular app):
+
+```bash
+# Always required
+npm install @angular/common @angular/core @angular/forms @ngxsmk/cdk
+
+# Only if you use the datepicker component
+npm install ngxsmk-datepicker luxon
+
+# Only if you use the telephone input component
+npm install ngxsmk-tel-input @angular/material @angular/cdk intl-tel-input libphonenumber-js
+
+# Only if you enable animations (optional)
+npm install motion
+```
+
+> `motion` is an **optional** peer — components work without it; animations are
+> lazy-loaded and only pulled in when an animation actually runs.
 
 ## Features
 
@@ -77,7 +218,8 @@ version note above).
 ## Components
 
 A curated slice of the catalog — every name below is a deep entry point
-(`@ngxsmk/core/<name>`). Import only what you use.
+(`@ngxsmk/core/<name>`). Import only what you use, and browse them all in the
+[live component explorer](https://ngxsmk.dev/showcase/explorer).
 
 - **Forms & inputs** — `input`, `textarea`, `select`, `multi-select`, `combobox`, `autocomplete`, `typeahead`, `number-input`, `pin-input`, `slider`, `checkbox`, `radio`, `switch`, `form-field`, `datepicker`, `tel-input`, `tag`, `segmented-control`, `rating`, `toggle-button`
 - **Buttons & actions** — `button`, `button-group`, `fab`, `split-button`, `link`
@@ -91,120 +233,6 @@ A curated slice of the catalog — every name below is a deep entry point
 - **Enterprise & data** — `kanban-board`, `scheduler`, `workflow-builder`, `flow-editor`, `spreadsheet`, `pivot-table`, `org-chart`, `diagram-builder`, `query-builder`, `rule-builder`, `timeline-gantt`, `memory-viewer`
 - **Media** — `audio-player`, `image-viewer`, `carousel`, `prompt-carousel`, `lightbox`, `qr-code`
 - **Utilities & helpers** — `copy-to-clipboard`, `keyboard-shortcut`, `click-outside`, `scroll-lock`, `media-query`, `lazy-load`, `visually-hidden`, `focus-trap`, `intersection-observer`, `resize-observer`, `i18n`, `seo`, `animation` (`NgxsmkAnimate` / `NgxsmkPresence`), `let`, `hooks`, `diff-viewer`, `json-viewer`
-
-See the live [demo app](apps/demo) for interactive examples of every component.
-
-## SEO utilities
-
-`NgxsmkSeoService` (from `@ngxsmk/core/seo`) keeps your app crawlable and
-social-share friendly from one place. Set app-wide defaults at bootstrap with
-`provideSeo()`, then update per route from a router subscription:
-
-```ts
-import { provideSeo } from '@ngxsmk/core/seo';
-
-bootstrapApplication(App, {
-  providers: [
-    provideSeo({
-      siteName: 'NGXSMK',
-      image: 'https://example.com/og.png',
-      twitterCard: 'summary_large_image',
-    }),
-  ],
-});
-```
-
-```ts
-import { NgxsmkSeoService } from '@ngxsmk/core/seo';
-
-// inside a NavigationEnd subscription
-seo.update({
-  title: routeTitle,
-  description: routeDescription,
-  canonical: fullUrl,
-  type: 'website',
-  jsonLd: { '@type': 'WebSite', name: 'NGXSMK' },
-});
-```
-
-> **Repo discoverability:** add GitHub **topics** (`angular`, `ui-kit`,
-> `design-system`, `components`, `signals`, `zoneless`, `theming`) and set a
-> social-preview image in the repository Settings — these can't be configured
-> from files, so do them once in the GitHub UI.
-
-## Installation
-
-Install the packages you need. `@ngxsmk/core` re-exports the CDK and theme
-internals, so most apps only need:
-
-```bash
-npm install @ngxsmk/core @ngxsmk/theme
-```
-
-**Requirements:** Angular **17.3+**, Node **20+**, TypeScript **5.x+** (peer
-Angular packages `@angular/core`, `@angular/common`, `@angular/forms`).
-
-`@ngxsmk/core` declares these **peer dependencies** (you already have the
-`@angular/*` ones in any Angular app):
-
-```bash
-# Always required
-npm install @angular/common @angular/core @angular/forms @ngxsmk/cdk
-
-# Only if you use the datepicker component
-npm install ngxsmk-datepicker luxon
-
-# Only if you use the telephone input component
-npm install ngxsmk-tel-input @angular/material @angular/cdk intl-tel-input libphonenumber-js
-
-# Only if you enable animations (optional)
-npm install motion
-```
-
-> `motion` is an **optional** peer — components work without it; animations are
-> lazy-loaded and only pulled in when an animation actually runs.
-
-## Quick start
-
-### 1. Provide a zoneless environment
-
-```ts
-import {
-  ApplicationConfig,
-  provideZonelessChangeDetection,
-  withViewTransitions,
-} from '@angular/core';
-
-export const appConfig: ApplicationConfig = {
-  providers: [provideZonelessChangeDetection(), withViewTransitions()],
-};
-```
-
-### 2. Load the base styles
-
-In your global stylesheet (or `angular.json` `styles`):
-
-```scss
-@import '@ngxsmk/theme/styles/ngxsmk.css';
-```
-
-This ships a single base stylesheet — themes are generated on demand at runtime.
-
-### 3. Use a component
-
-```ts
-import { NgxsmkButton } from '@ngxsmk/core/button';
-
-@Component({
-  selector: 'app-root',
-  imports: [NgxsmkButton],
-  template: `<button ngxsmk-button variant="primary">Get started</button>`,
-})
-export class App {}
-```
-
-> **Prefer deep imports** (`@ngxsmk/core/button`) over the barrel
-> (`@ngxsmk/core`) so the bundler tree-shakes unused components.
 
 ## Theming & design tokens
 
@@ -300,6 +328,39 @@ on enter and the `exit` state on leave before detaching. The built-in `dialog`,
 pulled in when an animation actually runs, so the library type-checks and
 bundles cleanly whether or not `motion` is installed.
 
+## SEO utilities
+
+`NgxsmkSeoService` (from `@ngxsmk/core/seo`) keeps your app crawlable and
+social-share friendly from one place. Set app-wide defaults at bootstrap with
+`provideSeo()`, then update per route from a router subscription:
+
+```ts
+import { provideSeo } from '@ngxsmk/core/seo';
+
+bootstrapApplication(App, {
+  providers: [
+    provideSeo({
+      siteName: 'NGXSMK',
+      image: 'https://example.com/og.png',
+      twitterCard: 'summary_large_image',
+    }),
+  ],
+});
+```
+
+```ts
+import { NgxsmkSeoService } from '@ngxsmk/core/seo';
+
+// inside a NavigationEnd subscription
+seo.update({
+  title: routeTitle,
+  description: routeDescription,
+  canonical: fullUrl,
+  type: 'website',
+  jsonLd: { '@type': 'WebSite', name: 'NGXSMK' },
+});
+```
+
 ## CLI & schematics
 
 [`@ngxsmk/cli`](packages/cli) provides an `ng add` schematic that wires the
@@ -324,16 +385,6 @@ NGXSMK targets WCAG 2.1 AA:
 - **Reduced motion** — animations honor `prefers-reduced-motion` automatically (Motion jumps to the final state).
 - **Semantic tokens** — status colors ship with paired foreground tokens for AA contrast in both light and dark modes.
 
-## Integrated third-party components
-
-`@ngxsmk/core` re-exports two external libraries so consumers get them from one
-place (each is an isolated, lazy entry point):
-
-- **`ngxsmk-datepicker`** → `NgxsmkDatepicker` (peer: `luxon`)
-- **`ngxsmk-tel-input`** → `NgxsmkTelInput` (peers: `@angular/material`, `@angular/cdk`, `intl-tel-input`, `libphonenumber-js`)
-
-They are only pulled into your bundle when you import those specific components.
-
 ## Performance & tree-shaking
 
 The library is built to stay out of your critical path:
@@ -350,6 +401,81 @@ The library is built to stay out of your critical path:
 - **Lazy heavy peers.** `tel-input` and `datepicker` are isolated entry points.
 - **Runtime themes.** Themes are generated on demand; the app ships a single
   base stylesheet, not every preset.
+
+## Integrated third-party components
+
+`@ngxsmk/core` re-exports two external libraries so consumers get them from one
+place (each is an isolated, lazy entry point):
+
+- **`ngxsmk-datepicker`** → `NgxsmkDatepicker` (peer: `luxon`)
+- **`ngxsmk-tel-input`** → `NgxsmkTelInput` (peers: `@angular/material`, `@angular/cdk`, `intl-tel-input`, `libphonenumber-js`)
+
+They are only pulled into your bundle when you import those specific components.
+
+## FAQ
+
+<details>
+<summary><b>Is NGXSMK free for commercial projects?</b></summary>
+
+Yes. NGXSMK is MIT-licensed — free for personal, open-source, and commercial
+use with no paid tiers or license keys.
+
+</details>
+
+<details>
+<summary><b>Which Angular versions are supported?</b></summary>
+
+Angular **17.3 through 22**. The packages are compiled against every supported
+major in CI. The zoneless demo app targets Angular 18+, but the libraries
+themselves work in zone-based Angular 17.3 apps too.
+
+</details>
+
+<details>
+<summary><b>Do I need zone.js?</b></summary>
+
+No. NGXSMK components are signal-based and zoneless-first — they work with
+`provideZonelessChangeDetection()` and in classic zone-based apps alike.
+
+</details>
+
+<details>
+<summary><b>How is NGXSMK different from Angular Material or PrimeNG?</b></summary>
+
+NGXSMK is built signals-first for modern Angular, themes exclusively through
+CSS design tokens, and bundles categories the others leave to third parties:
+charts, AI/chat UI, and enterprise widgets like kanban boards, Gantt timelines,
+spreadsheets, and pivot tables. See the [comparison table](#how-does-ngxsmk-compare).
+
+</details>
+
+<details>
+<summary><b>Can I use my own brand theme?</b></summary>
+
+Yes — pass a custom `ThemeConfig` (brand color, radius, typography, token
+overrides) to `NgxsmkThemeService`, or design it visually in the
+[theme playground](https://ngxsmk.dev/playground) and export CSS variables,
+SCSS, Tailwind config, StyleX tokens, or Tokens Studio JSON.
+
+</details>
+
+<details>
+<summary><b>Does it work with Tailwind CSS?</b></summary>
+
+Yes. NGXSMK styles itself through `--ngxsmk-*` custom properties and doesn't
+impose a global CSS reset, so it coexists with Tailwind utilities — and the
+theme playground can export your token set as a Tailwind config.
+
+</details>
+
+<details>
+<summary><b>Is server-side rendering (SSR) supported?</b></summary>
+
+SSR/Angular Universal compatibility is on the [roadmap](#roadmap). The
+components use native DOM APIs behind Angular abstractions where possible; full
+SSR verification is planned.
+
+</details>
 
 ## Development
 
@@ -400,6 +526,30 @@ tools/
 Contributions are welcome! Please read [CONTRIBUTING.md](./CONTRIBUTING.md) for
 setup, branching, and PR guidelines before opening a pull request.
 
+Found a bug or have an idea?
+[Open an issue](https://github.com/NGXSMK/ngxsmk-ui-kit/issues) — every report
+makes the kit better.
+
+## Support the project
+
+If NGXSMK saves you time, **[star the repository](https://github.com/NGXSMK/ngxsmk-ui-kit)** ⭐ —
+stars are the main way other Angular developers discover open-source projects
+like this one. Sharing the [live demo](https://ngxsmk.dev) with your team helps
+too.
+
+[![Star History Chart](https://api.star-history.com/svg?repos=NGXSMK/ngxsmk-ui-kit&type=Date)](https://star-history.com/#NGXSMK/ngxsmk-ui-kit&Date)
+
 ## License
 
 [MIT](./LICENSE) © NGXSMK contributors.
+
+---
+
+<div align="center">
+
+**NGXSMK** — Angular UI kit · Angular component library · Angular design system ·
+signals · zoneless · dark mode · design tokens · charts · AI chat UI · enterprise components
+
+Made with ❤️ for the Angular community
+
+</div>
