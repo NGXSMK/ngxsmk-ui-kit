@@ -1,4 +1,4 @@
-import {
+﻿import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
@@ -25,10 +25,10 @@ import { ngxsmkUniqueId } from '@ngxsmk/core/util';
       role="combobox"
       [attr.aria-expanded]="open()"
       [attr.aria-controls]="open() ? listboxId : null"
+      [attr.aria-activedescendant]="activeDescendant()"
       [attr.aria-disabled]="disabled() ? 'true' : null"
       (click)="toggle()"
-      (keydown.enter)="toggle()"
-      (keydown.space)="toggle(); $event.preventDefault()"
+      (keydown)="onKeydown($event)"
     >
       <div class="ngxsmk-multi-select__tags">
         @for (s of selectedValues(); track s) {
@@ -68,13 +68,16 @@ import { ngxsmkUniqueId } from '@ngxsmk/core/util';
 
     @if (open()) {
       <ul [id]="listboxId" class="ngxsmk-multi-select__listbox" role="listbox">
-        @for (opt of remaining(); track opt.value) {
+        @for (opt of remaining(); track opt.value; let i = $index) {
           <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
           <li
+            [id]="listboxId + '-' + i"
             role="option"
             aria-selected="false"
             class="ngxsmk-multi-select__option"
+            [class.ngxsmk-multi-select__option--active]="i === activeIndex()"
             (click)="selectOption(opt)"
+            (mouseenter)="activeIndex.set(i)"
           >
             {{ opt.label }}
           </li>
@@ -159,11 +162,11 @@ import { ngxsmkUniqueId } from '@ngxsmk/core/util';
       border: none;
       background: none;
       cursor: pointer;
-      font-size: 1rem;
+      font-size: var(--ngxsmk-text-body-lg-size);
       line-height: 1;
       padding: 0;
       color: inherit;
-      opacity: 0.7;
+      opacity: var(--ngxsmk-opacity-muted);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -210,7 +213,8 @@ import { ngxsmkUniqueId } from '@ngxsmk/core/util';
       color: var(--ngxsmk-color-on-surface);
     }
 
-    .ngxsmk-multi-select__option:hover {
+    .ngxsmk-multi-select__option:hover,
+    .ngxsmk-multi-select__option--active {
       background: var(--ngxsmk-color-surface-hover);
     }
 
@@ -218,7 +222,7 @@ import { ngxsmkUniqueId } from '@ngxsmk/core/util';
       padding: var(--ngxsmk-space-2) var(--ngxsmk-space-3);
       color: var(--ngxsmk-color-on-surface-variant);
       text-align: center;
-      font-size: 0.875rem;
+      font-size: var(--ngxsmk-text-label-lg-size);
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -232,7 +236,14 @@ export class NgxsmkMultiSelect {
 
   protected readonly listboxId = ngxsmkUniqueId('ngxsmk-multi-select-listbox');
   protected readonly open = signal(false);
+  protected readonly activeIndex = signal(-1);
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
+
+  protected activeDescendant(): string | null {
+    return this.open() && this.activeIndex() >= 0
+      ? `${this.listboxId}-${this.activeIndex()}`
+      : null;
+  }
 
   protected selectedValues(): string[] {
     return this.value().filter((v) => this.options().some((o) => o.value === v));
@@ -248,12 +259,77 @@ export class NgxsmkMultiSelect {
 
   protected toggle(): void {
     if (this.disabled()) return;
-    this.open.set(!this.open());
+    const next = !this.open();
+    this.open.set(next);
+    this.activeIndex.set(next && this.remaining().length ? 0 : -1);
+  }
+
+  protected onKeydown(event: KeyboardEvent): void {
+    if (this.disabled()) return;
+    switch (event.key) {
+      case 'ArrowDown':
+        event.preventDefault();
+        if (!this.open()) {
+          this.open.set(true);
+          this.activeIndex.set(this.remaining().length ? 0 : -1);
+        } else {
+          this.move(1);
+        }
+        break;
+      case 'ArrowUp':
+        event.preventDefault();
+        if (this.open()) {
+          this.move(-1);
+        }
+        break;
+      case 'Home':
+        if (this.open() && this.remaining().length) {
+          event.preventDefault();
+          this.activeIndex.set(0);
+          this.scrollActiveIntoView();
+        }
+        break;
+      case 'End':
+        if (this.open() && this.remaining().length) {
+          event.preventDefault();
+          this.activeIndex.set(this.remaining().length - 1);
+          this.scrollActiveIntoView();
+        }
+        break;
+      case 'Enter':
+      case ' ':
+      case 'Spacebar': {
+        event.preventDefault();
+        if (!this.open()) {
+          this.toggle();
+          break;
+        }
+        const opt = this.remaining()[this.activeIndex()];
+        if (opt) {
+          this.selectOption(opt);
+        }
+        break;
+      }
+      case 'Escape':
+        if (this.open()) {
+          event.preventDefault();
+          this.open.set(false);
+          this.activeIndex.set(-1);
+        }
+        break;
+      default:
+        break;
+    }
   }
 
   protected selectOption(opt: { value: string; label: string }): void {
     this.value.set([...this.value(), opt.value]);
     this.changed.emit(this.value());
+    // The picked option leaves `remaining()`; keep the highlight in bounds so
+    // continued arrowing lands on a real row.
+    const count = this.remaining().length;
+    this.activeIndex.set(count ? Math.min(this.activeIndex(), count - 1) : -1);
+    this.scrollActiveIntoView();
   }
 
   protected remove(v: string): void {
@@ -265,6 +341,31 @@ export class NgxsmkMultiSelect {
   protected onDocumentClick(event: MouseEvent): void {
     if (this.open() && !this.host.nativeElement.contains(event.target as Node)) {
       this.open.set(false);
+      this.activeIndex.set(-1);
     }
+  }
+
+  private move(delta: number): void {
+    const list = this.remaining();
+    if (!list.length) {
+      return;
+    }
+    let next = this.activeIndex() + delta;
+    if (next < 0) {
+      next = list.length - 1;
+    } else if (next >= list.length) {
+      next = 0;
+    }
+    this.activeIndex.set(next);
+    this.scrollActiveIntoView();
+  }
+
+  private scrollActiveIntoView(): void {
+    requestAnimationFrame(() => {
+      const items = this.host.nativeElement.querySelectorAll<HTMLElement>(
+        '.ngxsmk-multi-select__option',
+      );
+      items[this.activeIndex()]?.scrollIntoView({ block: 'nearest' });
+    });
   }
 }

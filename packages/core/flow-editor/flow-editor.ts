@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+﻿import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
   standalone: true,
@@ -30,7 +30,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
     }
     .ngxsmk-flow-editor__title {
       font-weight: 600;
-      font-size: 0.875rem;
+      font-size: var(--ngxsmk-text-label-lg-size);
       color: var(--ngxsmk-color-on-surface);
     }
     .ngxsmk-flow-editor__canvas {

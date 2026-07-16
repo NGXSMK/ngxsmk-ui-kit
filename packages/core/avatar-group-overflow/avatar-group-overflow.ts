@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+﻿import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
   standalone: true,
@@ -16,7 +16,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
       background: var(--ngxsmk-color-surface-variant);
       color: var(--ngxsmk-color-on-surface-variant);
       font-family: var(--ngxsmk-font-sans);
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-label-md-size);
       font-weight: 500;
       border: 2px solid var(--ngxsmk-color-surface);
     }

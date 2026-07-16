@@ -108,8 +108,8 @@ import { NgxsmkScrollLock } from '@ngxsmk/cdk';
     }
 
     .ngxsmk-chat-composer-drawer__close:focus-visible {
-      outline: 2px solid var(--ngxsmk-color-ring);
-      outline-offset: 1px;
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring);
     }
 
     .ngxsmk-chat-composer-drawer__body {

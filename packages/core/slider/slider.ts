@@ -67,11 +67,11 @@ import {
       cursor: pointer;
     }
     .ngxsmk-slider__control:focus-visible {
-      outline: 2px solid var(--ngxsmk-color-ring);
-      outline-offset: 2px;
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring);
     }
     :host([data-disabled]) .ngxsmk-slider__control {
-      opacity: 0.5;
+      opacity: var(--ngxsmk-opacity-disabled);
       cursor: not-allowed;
     }
   `,

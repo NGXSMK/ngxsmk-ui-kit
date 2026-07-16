@@ -82,9 +82,9 @@ const PATTERNS: Record<NgxsmkPinInputType, RegExp> = {
       text-align: center;
       font-size: var(--ngxsmk-text-title-md-size, 1.125rem);
       font-variant-numeric: tabular-nums;
-      color: var(--ngxsmk-color-on-surface, #0f172a);
-      background: var(--ngxsmk-color-surface, #fff);
-      border: 1.5px solid var(--ngxsmk-color-outline-strong, #cbd5e1);
+      color: var(--ngxsmk-color-on-surface);
+      background: var(--ngxsmk-color-surface);
+      border: 1.5px solid var(--ngxsmk-color-outline-strong);
       border-radius: var(--ngxsmk-radius-md, 8px);
       outline: none;
       transition:
@@ -98,11 +98,11 @@ const PATTERNS: Record<NgxsmkPinInputType, RegExp> = {
       --ngxsmk-pin-size: 3.25rem;
     }
     .ngxsmk-pin-input__cell:focus-visible {
-      border-color: var(--ngxsmk-color-primary, #6366f1);
-      box-shadow: 0 0 0 3px var(--ngxsmk-color-ring-soft, rgba(99, 102, 241, 0.25));
+      border-color: var(--ngxsmk-color-ring);
+      box-shadow: var(--ngxsmk-focus-ring);
     }
     :host([data-disabled]) .ngxsmk-pin-input__cell {
-      opacity: 0.5;
+      opacity: var(--ngxsmk-opacity-disabled);
       cursor: not-allowed;
     }
     @media (prefers-reduced-motion: reduce) {

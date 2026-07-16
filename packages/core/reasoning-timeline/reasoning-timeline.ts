@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+﻿import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 export interface ReasoningStep {
   label: string;
@@ -35,7 +35,7 @@ export interface ReasoningStep {
     .ngxsmk-reasoning-timeline__step {
       display: flex;
       gap: var(--ngxsmk-space-3);
-      padding-left: var(--ngxsmk-space-2);
+      padding-inline-start: var(--ngxsmk-space-2);
       position: relative;
     }
     .ngxsmk-reasoning-timeline__step:not(:last-child) {
@@ -61,7 +61,7 @@ export interface ReasoningStep {
       margin-top: var(--ngxsmk-space-1);
     }
     .ngxsmk-reasoning-timeline__duration {
-      font-size: 0.6875rem;
+      font-size: var(--ngxsmk-text-label-sm-size);
       color: var(--ngxsmk-color-outline);
       margin-top: var(--ngxsmk-space-1);
     }

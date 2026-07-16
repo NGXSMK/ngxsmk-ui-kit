@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+﻿import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
   standalone: true,
@@ -12,7 +12,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
       padding: var(--ngxsmk-space-0-5) var(--ngxsmk-space-2);
       border-radius: var(--ngxsmk-radius-sm);
       font-family: var(--ngxsmk-font-sans);
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-label-md-size);
       white-space: nowrap;
     }
     :host([data-variant='entity']) {

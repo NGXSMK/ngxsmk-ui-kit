@@ -171,8 +171,8 @@ export interface NgxsmkLightboxImage {
     }
 
     .ngxsmk-lightbox__close:focus-visible {
-      outline: 2px solid var(--ngxsmk-color-ring);
-      outline-offset: 2px;
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring);
     }
 
     .ngxsmk-lightbox__nav {
@@ -197,13 +197,13 @@ export interface NgxsmkLightboxImage {
     }
 
     .ngxsmk-lightbox__nav:disabled {
-      opacity: 0.3;
+      opacity: var(--ngxsmk-opacity-faint);
       cursor: not-allowed;
     }
 
     .ngxsmk-lightbox__nav:focus-visible {
-      outline: 2px solid var(--ngxsmk-color-ring);
-      outline-offset: 2px;
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring);
     }
 
     .ngxsmk-lightbox__nav--prev {

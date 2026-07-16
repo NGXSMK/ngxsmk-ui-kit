@@ -35,7 +35,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
       margin: 0;
       border: 0;
       background: transparent;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--ngxsmk-color-on-surface-variant);
       font: inherit;
       font-size: var(--ngxsmk-text-label-md-size, 0.75rem);
       font-weight: 500;
@@ -50,18 +50,18 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 
     .ngxsmk-tab-menu__tab:hover {
       background: var(--ngxsmk-color-surface-hover, rgba(0, 0, 0, 0.05));
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      color: var(--ngxsmk-color-on-surface);
     }
 
     .ngxsmk-tab-menu__tab--active {
-      background: var(--ngxsmk-color-surface, #fff);
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      background: var(--ngxsmk-color-surface);
+      color: var(--ngxsmk-color-on-surface);
       box-shadow: var(--ngxsmk-shadow-sm, 0 1px 2px rgba(0, 0, 0, 0.08));
     }
 
     .ngxsmk-tab-menu__tab:focus-visible {
-      outline: 2px solid var(--ngxsmk-color-ring, #7c3aed);
-      outline-offset: 2px;
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring);
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

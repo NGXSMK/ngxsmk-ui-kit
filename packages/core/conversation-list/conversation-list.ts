@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input, model } from '@angular/core';
+﻿import { ChangeDetectionStrategy, Component, input, model } from '@angular/core';
 
 export interface Conversation {
   id: string;
@@ -54,12 +54,12 @@ export interface Conversation {
       background: var(--ngxsmk-color-primary-container);
     }
     .ngxsmk-conversation-list__title {
-      font-size: 0.875rem;
+      font-size: var(--ngxsmk-text-label-lg-size);
       font-weight: 500;
       color: var(--ngxsmk-color-on-surface);
     }
     .ngxsmk-conversation-list__preview {
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-label-md-size);
       color: var(--ngxsmk-color-on-surface-variant);
       overflow: hidden;
       text-overflow: ellipsis;

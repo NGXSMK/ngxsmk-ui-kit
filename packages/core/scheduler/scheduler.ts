@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+﻿import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { DatePipe } from '@angular/common';
 
 export interface SchedulerEvent {
@@ -44,7 +44,7 @@ export interface SchedulerEvent {
     .ngxsmk-scheduler__day-header {
       padding: var(--ngxsmk-space-2);
       text-align: center;
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-label-md-size);
       font-weight: 600;
       color: var(--ngxsmk-color-on-surface);
     }
@@ -55,7 +55,7 @@ export interface SchedulerEvent {
     .ngxsmk-scheduler__day {
       min-height: 6rem;
       padding: var(--ngxsmk-space-1);
-      border-right: 1px solid var(--ngxsmk-color-outline-variant);
+      border-inline-end: 1px solid var(--ngxsmk-color-outline-variant);
       border-bottom: 1px solid var(--ngxsmk-color-outline-variant);
     }
     .ngxsmk-scheduler__event {
@@ -64,7 +64,7 @@ export interface SchedulerEvent {
       background: var(--ngxsmk-color-primary-container);
       color: var(--ngxsmk-color-on-primary-container);
       border-radius: var(--ngxsmk-radius-sm);
-      font-size: 0.6875rem;
+      font-size: var(--ngxsmk-text-label-sm-size);
       cursor: pointer;
     }
 

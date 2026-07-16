@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+﻿import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
   standalone: true,
@@ -35,7 +35,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
       padding: var(--ngxsmk-space-2) var(--ngxsmk-space-4);
       background: var(--ngxsmk-color-neutral-900);
       color: var(--ngxsmk-color-neutral-400);
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-label-md-size);
       font-weight: 600;
       border-bottom: 1px solid var(--ngxsmk-color-neutral-800);
     }
@@ -50,7 +50,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
     }
     .ngxsmk-terminal__prompt {
       color: var(--ngxsmk-terminal-prompt, var(--ngxsmk-color-success));
-      margin-right: var(--ngxsmk-space-2);
+      margin-inline-end: var(--ngxsmk-space-2);
       user-select: none;
     }
     .ngxsmk-terminal__line--input {
@@ -71,5 +71,5 @@ export class NgxsmkTerminal {
   readonly title = input('Terminal');
   readonly lines = input.required<{ text: string; isInput?: boolean }[]>();
   readonly prompt = input('$');
-  protected cursor = '▊';
+  protected cursor = 'â–Š';
 }

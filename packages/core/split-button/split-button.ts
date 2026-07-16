@@ -80,14 +80,14 @@ import { NgxsmkButton } from '@ngxsmk/core/button';
     .ngxsmk-split-button__main {
       border-top-right-radius: 0 !important;
       border-bottom-right-radius: 0 !important;
-      border-right-width: 0 !important;
+      border-inline-end-width: 0 !important;
     }
 
     .ngxsmk-split-button__trigger {
       border-top-left-radius: 0 !important;
       border-bottom-left-radius: 0 !important;
-      padding-left: var(--ngxsmk-space-2) !important;
-      padding-right: var(--ngxsmk-space-2) !important;
+      padding-inline-start: var(--ngxsmk-space-2) !important;
+      padding-inline-end: var(--ngxsmk-space-2) !important;
     }
 
     .ngxsmk-split-button__menu {
@@ -132,8 +132,8 @@ import { NgxsmkButton } from '@ngxsmk/core/button';
 
     .ngxsmk-split-button__menu ::ng-deep button:focus-visible,
     .ngxsmk-split-button__menu ::ng-deep a:focus-visible {
-      outline: 2px solid var(--ngxsmk-color-ring);
-      outline-offset: -2px;
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring);
       background: var(--ngxsmk-color-surface-hover);
     }
   `,

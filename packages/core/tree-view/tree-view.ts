@@ -89,7 +89,7 @@ export interface NgxsmkTreeNode<T = unknown> {
       align-items: center;
       gap: var(--ngxsmk-space-2);
       height: 2.25rem;
-      padding-right: var(--ngxsmk-space-3);
+      padding-inline-end: var(--ngxsmk-space-3);
       cursor: pointer;
       border-radius: var(--ngxsmk-radius-md);
       transition: background-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
@@ -103,7 +103,7 @@ export interface NgxsmkTreeNode<T = unknown> {
       color: var(--ngxsmk-color-on-primary-container);
     }
     .ngxsmk-tree-node__content.disabled {
-      opacity: 0.5;
+      opacity: var(--ngxsmk-opacity-disabled);
       cursor: not-allowed;
     }
 

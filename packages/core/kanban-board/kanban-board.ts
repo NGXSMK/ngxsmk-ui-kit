@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, model, output, signal } from '@angular/core';
+﻿import { ChangeDetectionStrategy, Component, model, output, signal } from '@angular/core';
 
 export interface KanbanColumn {
   id: string;
@@ -124,15 +124,15 @@ export interface KanbanMove {
       cursor: grabbing;
     }
     .ngxsmk-kanban-board__card--dragging {
-      opacity: 0.4;
+      opacity: var(--ngxsmk-opacity-faint);
     }
     .ngxsmk-kanban-board__card-title {
       font-weight: 500;
-      font-size: 0.875rem;
+      font-size: var(--ngxsmk-text-label-lg-size);
       color: var(--ngxsmk-color-on-surface);
     }
     .ngxsmk-kanban-board__card-desc {
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-label-md-size);
       color: var(--ngxsmk-color-on-surface-variant);
       margin-top: var(--ngxsmk-space-1);
     }

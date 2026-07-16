@@ -11,7 +11,7 @@ import { ChangeDetectionStrategy, Component, input, output, signal, inject } fro
       flex-direction: column;
       width: var(--ngxsmk-sidenav-width, 16rem);
       background: var(--ngxsmk-color-surface);
-      border-right: 1px solid var(--ngxsmk-color-outline);
+      border-inline-end: 1px solid var(--ngxsmk-color-outline);
       transition: width var(--ngxsmk-duration-normal) var(--ngxsmk-ease-out);
       overflow: hidden;
     }
@@ -129,7 +129,7 @@ export class NgxsmkSideNavHeading {}
       font-weight: 500;
     }
     :host([data-disabled]) .ngxsmk-side-nav-item__link {
-      opacity: 0.5;
+      opacity: var(--ngxsmk-opacity-disabled);
       pointer-events: none;
     }
     .ngxsmk-side-nav-item__icon {

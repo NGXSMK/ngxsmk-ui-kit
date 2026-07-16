@@ -108,14 +108,14 @@ export interface NgxsmkTableColumn {
       border-radius: var(--ngxsmk-radius-sm);
     }
     .ngxsmk-table__sort-btn:focus-visible {
-      outline: 2px solid var(--ngxsmk-color-ring);
-      outline-offset: 2px;
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring);
     }
 
     .ngxsmk-table__sort-icon {
       display: inline-flex;
       color: var(--ngxsmk-color-on-surface-variant);
-      opacity: 0.4;
+      opacity: var(--ngxsmk-opacity-faint);
       transition:
         opacity var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
         transform var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);

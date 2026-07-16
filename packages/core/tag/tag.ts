@@ -116,7 +116,7 @@ export class NgxsmkTag {
     }
 
     :host([data-disabled]) {
-      opacity: 0.5;
+      opacity: var(--ngxsmk-opacity-disabled);
       pointer-events: none;
     }
 
@@ -141,8 +141,8 @@ export class NgxsmkTag {
     }
 
     .ngxsmk-chip__remove:focus-visible {
-      outline: 2px solid var(--ngxsmk-color-ring);
-      outline-offset: 1px;
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring);
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

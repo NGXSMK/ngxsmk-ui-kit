@@ -15,7 +15,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
       display: block;
       margin: 0;
       padding: var(--ngxsmk-space-4) var(--ngxsmk-space-6);
-      border-left: 3px solid var(--ngxsmk-color-primary);
+      border-inline-start: 3px solid var(--ngxsmk-color-primary);
       background: var(--ngxsmk-color-surface-variant);
       border-radius: var(--ngxsmk-radius-md);
       font-family: var(--ngxsmk-font-sans);

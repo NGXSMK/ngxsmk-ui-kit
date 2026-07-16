@@ -133,7 +133,7 @@ export class NgxsmkCarouselSlide {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background: var(--ngxsmk-color-surface, #ffffff);
+      background: var(--ngxsmk-color-surface);
       color: var(--ngxsmk-color-on-surface);
       border: 1px solid var(--ngxsmk-color-outline);
       width: 2.25rem;
@@ -175,7 +175,9 @@ export class NgxsmkCarouselSlide {
       background: var(--ngxsmk-color-outline-strong, rgba(255, 255, 255, 0.5));
       cursor: pointer;
       padding: 0;
-      transition: all var(--ngxsmk-motion-duration) var(--ngxsmk-motion-ease);
+      transition:
+        width,
+        background-color var(--ngxsmk-motion-duration) var(--ngxsmk-motion-ease);
     }
     .ngxsmk-carousel__indicators button.active {
       background: var(--ngxsmk-color-primary, white);

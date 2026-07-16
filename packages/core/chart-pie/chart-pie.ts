@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, input } from '@angular/core';
+import { AbstractCanvasChart, ChartHover, SHARED_CHART_STYLES, rgba } from '@ngxsmk/core/chart-engine';
 
 export interface NgxsmkPieChartDataPoint {
   label: string;
@@ -9,87 +10,106 @@ export interface NgxsmkPieChartDataPoint {
   standalone: true,
   selector: 'ngxsmk-chart-pie',
   template: `
-    <svg
-      class="ngxsmk-chart-pie__svg"
-      [attr.width]="size()"
-      [attr.height]="size()"
-      [attr.viewBox]="viewBox()"
-    >
-      @for (slice of slices(); track $index) {
-        <path class="ngxsmk-chart-pie__slice" [attr.d]="slice.d" [attr.fill]="slice.fill" />
-      }
-      @if (donut()) {
-        <circle
-          class="ngxsmk-chart-pie__hole"
-          [attr.cx]="cx()"
-          [attr.cy]="cy()"
-          [attr.r]="innerRadius()"
-        />
-      }
-    </svg>
+    <div class="ngxsmk-chart-surface">
+      <canvas #canvas></canvas>
+      <div #tooltip class="ngxsmk-chart-tip"></div>
+    </div>
   `,
   host: { class: 'ngxsmk-chart-pie' },
-  styles: `
-    .ngxsmk-chart-pie__svg {
-      display: block;
-      max-width: 100%;
-      height: auto;
-      overflow: visible;
-    }
-    .ngxsmk-chart-pie__hole {
-      fill: var(--ngxsmk-color-surface, #fff);
-    }
-  `,
+  styles: SHARED_CHART_STYLES,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NgxsmkPieChart {
+export class NgxsmkPieChart extends AbstractCanvasChart {
   readonly data = input<NgxsmkPieChartDataPoint[]>([]);
   readonly size = input(200);
   readonly donut = input(false);
 
-  protected readonly cx = computed(() => this.size() / 2);
+  private readonly total = computed(() => this.data().reduce((a, d) => a + d.value, 0) || 1);
 
-  protected readonly cy = computed(() => this.size() / 2);
+  protected override get drawWidth(): number {
+    return this.responsive() && this.measured.w ? this.measured.w : this.size();
+  }
+  protected override get drawHeight(): number {
+    return this.responsive() && this.measured.w ? this.measured.w : this.size();
+  }
 
-  protected readonly radius = computed(() => this.size() / 2 - 8);
-
-  protected readonly innerRadius = computed(() => this.radius() * 0.55);
-
-  protected readonly viewBox = computed(() => `0 0 ${this.size()} ${this.size()}`);
-
-  protected readonly total = computed(() => this.data().reduce((a, d) => a + d.value, 0));
-
-  protected readonly palette = [
-    'var(--ngxsmk-color-primary)',
-    'var(--ngxsmk-color-secondary)',
-    'var(--ngxsmk-color-tertiary)',
-    'var(--ngxsmk-color-error)',
-    'var(--ngxsmk-color-warning)',
-    'var(--ngxsmk-color-success)',
-    'var(--ngxsmk-color-info)',
-    'var(--ngxsmk-color-surface-variant)',
-  ];
-
-  protected readonly slices = computed(() => {
-    const total = this.total() || 1;
-    const r = this.radius();
-    const cx = this.cx();
-    const cy = this.cy();
-    let startAngle = 0;
-    return this.data().map((d, i) => {
-      const sliceAngle = (d.value / total) * 360;
-      const endAngle = startAngle + sliceAngle;
-      const startRad = ((startAngle - 90) * Math.PI) / 180;
-      const endRad = ((endAngle - 90) * Math.PI) / 180;
-      const x1 = cx + r * Math.cos(startRad);
-      const y1 = cy + r * Math.sin(startRad);
-      const x2 = cx + r * Math.cos(endRad);
-      const y2 = cy + r * Math.sin(endRad);
-      const largeArc = sliceAngle > 180 ? 1 : 0;
-      const pathData = `M ${cx} ${cy} L ${x1} ${y1} A ${r} ${r} 0 ${largeArc} 1 ${x2} ${y2} Z`;
-      const slice = { d: pathData, fill: this.palette[i % this.palette.length] };
-      startAngle = endAngle;
-      return slice;
+  constructor() {
+    super();
+    effect(() => {
+      this.data();
+      this.donut();
+      this.size();
+      this.requestRender();
     });
-  });
+  }
+
+  protected draw(progress: number): void {
+    const ctx = this.ctx;
+    const t = this.theme;
+    const data = this.data();
+    if (!data.length) return;
+
+    const cx = this.W / 2;
+    const cy = this.H / 2 - 8;
+    const radius = Math.min(this.W, this.H) / 2 - 14;
+    const innerR = radius * 0.58;
+    const total = this.total();
+    const scale = 0.9 + 0.1 * progress;
+    const r = radius * scale;
+
+    const legend: { color: string; label: string }[] = [];
+    let acc = -Math.PI / 2;
+    const sweep = Math.PI * 2 * progress;
+    data.forEach((d, i) => {
+      const angle = (d.value / total) * Math.PI * 2;
+      const start = acc;
+      const end = acc + angle;
+      const drawEnd = Math.min(end, -Math.PI / 2 + sweep);
+      if (drawEnd > start) {
+        const color = t.palette[i % t.palette.length];
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.arc(cx, cy, r, start, drawEnd);
+        if (this.donut()) {
+          ctx.arc(cx, cy, innerR, drawEnd, start, true);
+        }
+        ctx.closePath();
+        ctx.fillStyle = rgba(color, 1);
+        ctx.fill();
+      }
+      acc = end;
+      legend.push({ color: rgba(t.palette[i % t.palette.length], 1), label: d.label });
+    });
+
+    this.drawLegend(legend, this.H - 14);
+  }
+
+  protected hitTest(x: number, y: number): ChartHover | null {
+    const data = this.data();
+    if (!data.length) return null;
+    const cx = this.W / 2;
+    const cy = this.H / 2 - 8;
+    const radius = Math.min(this.W, this.H) / 2 - 14;
+    const innerR = radius * 0.58;
+    const dx = x - cx;
+    const dy = y - cy;
+    const dist = Math.hypot(dx, dy);
+    if (dist > radius || (this.donut() && dist < innerR)) return null;
+    let ang = Math.atan2(dy, dx) + Math.PI / 2;
+    if (ang < 0) ang += Math.PI * 2;
+    const total = this.total();
+    let acc = 0;
+    for (let i = 0; i < data.length; i++) {
+      const slice = (data[i].value / total) * Math.PI * 2;
+      if (ang >= acc && ang < acc + slice) {
+        return {
+          title: data[i].label,
+          lines: [`${data[i].value}`, `${((data[i].value / total) * 100).toFixed(1)}%`],
+          color: rgba(this.theme.palette[i % this.theme.palette.length], 1),
+        };
+      }
+      acc += slice;
+    }
+    return null;
+  }
 }

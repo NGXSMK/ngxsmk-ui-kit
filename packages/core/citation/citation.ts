@@ -53,7 +53,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
     .ngxsmk-citation__link {
       display: inline-flex;
       color: var(--ngxsmk-color-primary);
-      opacity: 0.7;
+      opacity: var(--ngxsmk-opacity-muted);
     }
     .ngxsmk-citation__link:hover {
       opacity: 1;

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+﻿import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 
 @Component({
   standalone: true,
@@ -22,13 +22,13 @@ import { ChangeDetectionStrategy, Component, input, output } from '@angular/core
       color: var(--ngxsmk-color-on-primary);
       border-radius: var(--ngxsmk-radius-full);
       font-family: var(--ngxsmk-font-sans);
-      font-size: 0.875rem;
+      font-size: var(--ngxsmk-text-label-lg-size);
       font-weight: 500;
       cursor: pointer;
       transition: opacity var(--ngxsmk-duration-fast);
     }
     :host([disabled]) {
-      opacity: 0.5;
+      opacity: var(--ngxsmk-opacity-disabled);
       cursor: not-allowed;
     }
     :host(:hover:not([disabled])) {

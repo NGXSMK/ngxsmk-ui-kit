@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, input, signal } from '@angular/core';
+﻿import { ChangeDetectionStrategy, Component, computed, input, signal } from '@angular/core';
 
 export type NgxsmkAvatarSize = 'sm' | 'md' | 'lg' | 'xl';
 
@@ -60,7 +60,7 @@ export type NgxsmkAvatarSize = 'sm' | 'md' | 'lg' | 'xl';
     :host([data-size='md']) {
       width: 2.5rem;
       height: 2.5rem;
-      font-size: 0.875rem;
+      font-size: var(--ngxsmk-text-label-lg-size);
     }
     :host([data-size='lg']) {
       width: 3.5rem;
@@ -70,7 +70,7 @@ export type NgxsmkAvatarSize = 'sm' | 'md' | 'lg' | 'xl';
     :host([data-size='xl']) {
       width: 5rem;
       height: 5rem;
-      font-size: 1.75rem;
+      font-size: var(--ngxsmk-text-headline-md-size);
     }
 
     .ngxsmk-avatar__image {

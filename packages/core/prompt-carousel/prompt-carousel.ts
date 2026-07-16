@@ -1,4 +1,4 @@
-import { Component, input, output, ChangeDetectionStrategy } from '@angular/core';
+﻿import { Component, input, output, ChangeDetectionStrategy } from '@angular/core';
 
 export interface PromptItem {
   id: string;
@@ -28,7 +28,7 @@ export interface PromptItem {
             (keydown.space)="selectPrompt(item); $event.preventDefault()"
           >
             <div class="ngxsmk-prompt-card__header">
-              <span class="ngxsmk-prompt-card__icon">{{ item.icon || '✦' }}</span>
+              <span class="ngxsmk-prompt-card__icon">{{ item.icon || 'âœ¦' }}</span>
               <span class="ngxsmk-prompt-card__cat">{{ item.category }}</span>
             </div>
 
@@ -36,7 +36,7 @@ export interface PromptItem {
             <p class="ngxsmk-prompt-card__preview">"{{ item.prompt }}"</p>
 
             <div class="ngxsmk-prompt-card__footer">
-              <span class="ngxsmk-prompt-card__action">Use prompt →</span>
+              <span class="ngxsmk-prompt-card__action">Use prompt â†’</span>
             </div>
           </div>
         }
@@ -79,27 +79,19 @@ export interface PromptItem {
 
     .ngxsmk-prompt-carousel-fade--left {
       left: 0;
-      background: linear-gradient(
-        to right,
-        var(--ngxsmk-color-background, #fafafa) 10%,
-        transparent
-      );
+      background: linear-gradient(to right, var(--ngxsmk-color-background) 10%, transparent);
     }
 
     .ngxsmk-prompt-carousel-fade--right {
       right: 0;
-      background: linear-gradient(
-        to left,
-        var(--ngxsmk-color-background, #fafafa) 10%,
-        transparent
-      );
+      background: linear-gradient(to left, var(--ngxsmk-color-background) 10%, transparent);
     }
 
     .ngxsmk-prompt-card {
       flex: 0 0 240px;
       width: 240px;
-      background: var(--ngxsmk-color-surface, #ffffff);
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      background: var(--ngxsmk-color-surface);
+      border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-lg, 0.5rem);
       padding: var(--ngxsmk-space-4, 1rem);
       display: flex;
@@ -123,30 +115,31 @@ export interface PromptItem {
       left: 0;
       right: 0;
       height: 3px;
-      background: var(--ngxsmk-color-primary, #7c3aed);
+      background: var(--ngxsmk-color-primary);
       opacity: 0.8;
     }
 
+    /* Preset accents track the semantic roles so they adapt to theme + mode. */
     .ngxsmk-prompt-card[data-preset='violet']::before {
-      background: #7c3aed;
+      background: var(--ngxsmk-color-primary);
     }
     .ngxsmk-prompt-card[data-preset='emerald']::before {
-      background: #059669;
+      background: var(--ngxsmk-color-success);
     }
     .ngxsmk-prompt-card[data-preset='rose']::before {
-      background: #e11d48;
+      background: var(--ngxsmk-color-error);
     }
     .ngxsmk-prompt-card[data-preset='amber']::before {
-      background: #d97706;
+      background: var(--ngxsmk-color-warning);
     }
     .ngxsmk-prompt-card[data-preset='blue']::before {
-      background: #2563eb;
+      background: var(--ngxsmk-color-info);
     }
 
     .ngxsmk-prompt-card:hover {
       transform: translateY(-4px) scale(1.01);
       box-shadow: var(--ngxsmk-shadow-md, 0 4px 6px -1px rgba(0, 0, 0, 0.1));
-      border-color: var(--ngxsmk-color-outline-strong, #b5b5be);
+      border-color: var(--ngxsmk-color-outline-strong);
     }
 
     .ngxsmk-prompt-card__header {
@@ -161,26 +154,26 @@ export interface PromptItem {
     }
 
     .ngxsmk-prompt-card__cat {
-      font-size: 0.6875rem;
+      font-size: var(--ngxsmk-text-label-sm-size);
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--ngxsmk-color-on-surface-variant);
     }
 
     .ngxsmk-prompt-card__title {
       margin: 0 0 var(--ngxsmk-space-1, 0.25rem) 0;
       font-family: 'Outfit', var(--ngxsmk-font-sans, system-ui), sans-serif;
-      font-size: 0.875rem;
+      font-size: var(--ngxsmk-text-label-lg-size);
       font-weight: 700;
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      color: var(--ngxsmk-color-on-surface);
       line-height: 1.3;
     }
 
     .ngxsmk-prompt-card__preview {
       margin: 0;
-      font-size: 0.75rem;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      font-size: var(--ngxsmk-text-label-md-size);
+      color: var(--ngxsmk-color-on-surface-variant);
       line-height: 1.4;
       display: -webkit-box;
       -webkit-line-clamp: 2;
@@ -197,14 +190,14 @@ export interface PromptItem {
     }
 
     .ngxsmk-prompt-card__action {
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-label-md-size);
       font-weight: 600;
-      color: var(--ngxsmk-color-primary, #7c3aed);
+      color: var(--ngxsmk-color-primary);
       transition: color 0.15s;
     }
 
     .ngxsmk-prompt-card:hover .ngxsmk-prompt-card__action {
-      color: var(--ngxsmk-color-primary-hover, #6d28d9);
+      color: var(--ngxsmk-color-primary-hover);
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

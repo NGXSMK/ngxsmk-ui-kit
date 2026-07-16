@@ -98,4 +98,42 @@ describe('NgxsmkNumberInput', () => {
     expect(fixture.componentInstance.value()).toBe(10);
     expect(field.value).toBe('10');
   });
+
+  it('keeps the field empty while editing instead of snapping to 0', () => {
+    const { fixture, field } = setup();
+
+    field.focus();
+    field.value = '';
+    field.dispatchEvent(new Event('input'));
+    fixture.detectChanges();
+
+    // Model is untouched while the field is empty and focused.
+    expect(fixture.componentInstance.value()).toBe(5);
+    expect(field.value).toBe('');
+  });
+
+  it('allows typing decimals without resetting the field', () => {
+    const { fixture, field } = setup();
+
+    field.focus();
+    field.value = '1.5';
+    field.dispatchEvent(new Event('input'));
+    fixture.detectChanges();
+
+    expect(fixture.componentInstance.value()).toBe(1.5);
+    expect(field.value).toBe('1.5');
+  });
+
+  it('rounds stepped values to the step precision', () => {
+    const { fixture, incBtn, field } = setup();
+
+    fixture.componentInstance.step.set(0.1);
+    fixture.detectChanges();
+
+    // 5 + 0.1 should not drift to 5.1000000000000005
+    incBtn.click();
+    fixture.detectChanges();
+    expect(fixture.componentInstance.value()).toBe(5.1);
+    expect(field.value).toBe('5.1');
+  });
 });
