@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, input, model } from '@angular/core';
 import { NgxsmkButton } from '@ngxsmk/core/button';
+import { TranslatePipe } from '@ngx-translate/core';
 
 export interface PropOption {
   value: string;
@@ -33,7 +34,7 @@ export interface PropDescriptor {
 @Component({
   selector: 'ngxsmk-prop-panel',
   standalone: true,
-  imports: [NgxsmkButton],
+  imports: [NgxsmkButton, TranslatePipe],
   template: `
     <div class="ngxsmk-prop-panel">
       @for (d of descriptors(); track d.name) {
@@ -52,7 +53,9 @@ export interface PropDescriptor {
                   [variant]="values()[d.name] ? 'primary' : 'outline'"
                   (click)="toggle(d.name)"
                 >
-                  {{ values()[d.name] ? 'On' : 'Off' }}
+                  {{
+                    values()[d.name] ? ('propPanel.on' | translate) : ('propPanel.off' | translate)
+                  }}
                 </button>
               }
               @case ('select') {

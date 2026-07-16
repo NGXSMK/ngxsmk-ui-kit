@@ -8,6 +8,7 @@ import { NgxsmkBadge } from '@ngxsmk/core/badge';
 import { NgxsmkHeading } from '@ngxsmk/core/heading';
 import { NgxsmkText } from '@ngxsmk/core/text';
 import { Component } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { AppNav } from '../../nav/nav';
 
 interface Milestone {
@@ -29,15 +30,16 @@ interface Milestone {
     NgxsmkHeading,
     NgxsmkText,
     AppNav,
+    TranslatePipe,
   ],
   template: `
     <app-nav />
     <div class="ngxsmk-page">
       <header class="ngxsmk-page__header">
-        <ngxsmk-heading level="h1">Roadmap</ngxsmk-heading>
-        <ngxsmk-text variant="body" class="ngxsmk-page__sub"
-          >A preview of what we're working on and what's coming next to NGXSMK.</ngxsmk-text
-        >
+        <ngxsmk-heading level="h1">{{ 'roadmap.title' | translate }}</ngxsmk-heading>
+        <ngxsmk-text variant="body" class="ngxsmk-page__sub">{{
+          'roadmap.subtitle' | translate
+        }}</ngxsmk-text>
       </header>
 
       <div class="ngxsmk-roadmap-list">
@@ -46,7 +48,7 @@ interface Milestone {
             <div ngxsmkCardHeader>
               <div class="ngxsmk-milestone__top">
                 <ngxsmk-heading level="h3" ngxsmkCardTitle
-                  >{{ m.quarter }} - {{ m.title }}</ngxsmk-heading
+                  >{{ m.quarter | translate }} - {{ m.title | translate }}</ngxsmk-heading
                 >
                 <ngxsmk-badge
                   [variant]="
@@ -58,10 +60,10 @@ interface Milestone {
                   "
                   >{{
                     m.status === 'shipped'
-                      ? 'Shipped'
+                      ? 'roadmap.status.shipped'
                       : m.status === 'in-progress'
-                        ? 'In progress'
-                        : 'Planned'
+                        ? 'roadmap.status.inProgress'
+                        : 'roadmap.status.planned'
                   }}</ngxsmk-badge
                 >
               </div>
@@ -69,7 +71,7 @@ interface Milestone {
             <div ngxsmkCardContent>
               <ul class="ngxsmk-milestone__items">
                 @for (item of m.items; track item) {
-                  <li>{{ item }}</li>
+                  <li>{{ item | translate }}</li>
                 }
               </ul>
             </div>
@@ -121,36 +123,36 @@ interface Milestone {
 export class RoadmapPage {
   protected readonly milestones: Milestone[] = [
     {
-      quarter: 'Q3 2026',
-      title: 'CLI Tools & Schematics',
+      quarter: 'roadmap.quarter.q3_2026',
+      title: 'roadmap.milestone.cliTools',
       status: 'in-progress',
+      items: ['roadmap.items.cli.0', 'roadmap.items.cli.1', 'roadmap.items.cli.2'],
+    },
+    {
+      quarter: 'roadmap.quarter.q4_2026',
+      title: 'roadmap.milestone.aiToolkit',
+      status: 'planned',
+      items: ['roadmap.items.ai.0', 'roadmap.items.ai.1', 'roadmap.items.ai.2'],
+    },
+    {
+      quarter: 'roadmap.quarter.q1_2027',
+      title: 'roadmap.milestone.enterpriseSuite',
+      status: 'planned',
       items: [
-        'Schematic generators for add/update components',
-        'Copy-paste installer scripts',
-        'Theme preset scaffolding',
+        'roadmap.items.enterprise.0',
+        'roadmap.items.enterprise.1',
+        'roadmap.items.enterprise.2',
       ],
     },
     {
-      quarter: 'Q4 2026',
-      title: 'AI Toolkit Expansion',
-      status: 'planned',
-      items: [
-        'MCP server for coding assistants',
-        'More agent primitives (guardrails, evaluations)',
-        'Streaming token diff viewer',
-      ],
-    },
-    {
-      quarter: 'Q1 2027',
-      title: 'Enterprise Suite',
-      status: 'planned',
-      items: ['Data-grid virtualization', 'Spreadsheet formula engine', 'Collaborative canvas'],
-    },
-    {
-      quarter: 'Q2 2026',
-      title: 'Foundations',
+      quarter: 'roadmap.quarter.q2_2026',
+      title: 'roadmap.milestone.foundations',
       status: 'shipped',
-      items: ['Universal token engine', '200+ components shipped', 'Zoneless runtime support'],
+      items: [
+        'roadmap.items.foundations.0',
+        'roadmap.items.foundations.1',
+        'roadmap.items.foundations.2',
+      ],
     },
   ];
 }

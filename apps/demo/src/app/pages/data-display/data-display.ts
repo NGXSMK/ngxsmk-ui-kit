@@ -23,6 +23,7 @@ import { NgxsmkAccordion, NgxsmkAccordionItem } from '@ngxsmk/core/accordion';
 import { NgxsmkTabs, NgxsmkTab } from '@ngxsmk/core/tabs';
 import { NgxsmkButton } from '@ngxsmk/core/button';
 import { Component, signal } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { ShowcaseExample } from '../../showcase/showcase-example';
 
 @Component({
@@ -58,31 +59,31 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     NgxsmkTableHeaderCell,
     NgxsmkTableCell,
     NgxsmkTableRow,
+    TranslatePipe,
   ],
   template: `
-    <h2 class="ngxsmk-page-title">Data Display</h2>
+    <h2 class="ngxsmk-page-title">{{ 'category.data-display' | translate }}</h2>
     <p class="ngxsmk-page-desc">
-      Components for presenting structured information â€” tabs, disclosure, avatars, tags, tables,
-      lists, and metrics. Every piece is token-driven and accessible by default.
+      {{ 'dataDisplay.pageDesc' | translate }}
     </p>
 
     <showcase-example
       title="Tabs"
-      description="A labeled, keyboard-navigable tab interface. The active panel is wired to a signal via two-way binding."
+      [description]="'dataDisplay.tabsDesc' | translate"
       [code]="codeTabs"
       [component]="NgxsmkTabs"
       [customize]="customizeNgxsmkTabs"
     >
       <div class="ngxsmk-sc-wrap">
         <ngxsmk-tabs [(value)]="activeTab">
-          <ngxsmk-tab value="overview" label="Overview"
+          <ngxsmk-tab value="overview" [label]="'dataDisplay.overview' | translate"
             >The overview panel summarizes account health and recent activity.</ngxsmk-tab
           >
-          <ngxsmk-tab value="activity" label="Activity"
+          <ngxsmk-tab value="activity" [label]="'dataDisplay.activity' | translate"
             >Releases, comments, and status changes land here in reverse-chronological
             order.</ngxsmk-tab
           >
-          <ngxsmk-tab value="settings" label="Settings"
+          <ngxsmk-tab value="settings" [label]="'dataDisplay.settings' | translate"
             >Manage notifications, visibility, and integration tokens.</ngxsmk-tab
           >
         </ngxsmk-tabs>
@@ -91,7 +92,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Accordion"
-      description="A vertically stacked disclosure widget. Items expand independently to reveal supporting detail."
+      [description]="'dataDisplay.accordionDesc' | translate"
       [code]="codeAccordion"
       [component]="NgxsmkAccordion"
       [customize]="customizeNgxsmkAccordion"
@@ -113,7 +114,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Avatar"
-      description="User imagery with an automatic initials fallback. Combine with a status dot to convey presence."
+      [description]="'dataDisplay.avatarDesc' | translate"
       [code]="codeAvatar"
       [component]="NgxsmkAvatar"
       [customize]="customizeNgxsmkAvatar"
@@ -154,7 +155,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Tag"
-      description="Compact, non-interactive labels for categorizing and filtering content."
+      [description]="'dataDisplay.tagDesc' | translate"
       [code]="codeTag"
       [component]="NgxsmkTag"
       [customize]="customizeNgxsmkTag"
@@ -171,7 +172,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Chip"
-      description="A removable token, ideal for applied filters and selected values."
+      [description]="'dataDisplay.chipDesc' | translate"
       [code]="codeChip"
       [component]="NgxsmkChip"
       [customize]="customizeNgxsmkChip"
@@ -186,7 +187,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Table"
-      description="A simple, lightweight table driven by column and row definitions."
+      [description]="'dataDisplay.tableDesc' | translate"
       [code]="codeTable"
       [component]="NgxsmkTable"
       [customize]="customizeNgxsmkTable"
@@ -196,7 +197,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Data Table"
-      description="A paginated, sortable data table for larger datasets."
+      [description]="'dataDisplay.dataTableDesc' | translate"
       [code]="codeDataTable"
       [component]="NgxsmkDataTable"
       [customize]="customizeNgxsmkDataTable"
@@ -212,7 +213,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="List"
-      description="A vertical list of items, optionally divided or linkable."
+      [description]="'dataDisplay.listDesc' | translate"
       [code]="codeList"
       [component]="NgxsmkList"
       [customize]="customizeNgxsmkList"
@@ -229,7 +230,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Metadata List"
-      description="A definition-style list pairing labels with their values."
+      [description]="'dataDisplay.metadataDesc' | translate"
       [code]="codeMetadata"
       [component]="NgxsmkMetadataList"
       [customize]="customizeNgxsmkMetadataList"
@@ -258,7 +259,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Overflow List"
-      description="Collapses surplus items behind a single 'more' affordance that expands on demand."
+      [description]="'dataDisplay.overflowDesc' | translate"
       [code]="codeOverflow"
       [component]="NgxsmkOverflowList"
       [customize]="customizeNgxsmkOverflowList"
@@ -277,36 +278,45 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Stat"
-      description="A compact metric with optional trend indicator and icon."
+      [description]="'dataDisplay.statDesc' | translate"
       [code]="codeStat"
       [component]="NgxsmkStat"
       [customize]="customizeNgxsmkStat"
     >
       <div class="ngxsmk-sc-grid ngxsmk-sc-grid--3">
-        <ngxsmk-stat label="Active users" value="1,284" trend="up" />
-        <ngxsmk-stat label="Churn" value="2.3%" trend="down" />
-        <ngxsmk-stat label="Open tickets" value="37" trend="flat" />
+        <ngxsmk-stat [label]="'dataDisplay.statActiveUsers' | translate" value="1,284" trend="up" />
+        <ngxsmk-stat [label]="'dataDisplay.statChurn' | translate" value="2.3%" trend="down" />
+        <ngxsmk-stat [label]="'dataDisplay.statOpenTickets' | translate" value="37" trend="flat" />
       </div>
     </showcase-example>
 
     <showcase-example
       title="Status Dot"
-      description="A color-coded presence indicator for online, away, busy, and offline states."
+      [description]="'dataDisplay.statusDotDesc' | translate"
       [code]="codeStatusDot"
       [component]="NgxsmkStatusDot"
       [customize]="customizeNgxsmkStatusDot"
     >
       <div class="ngxsmk-sc-wrap">
-        <span class="ngxsmk-demo-row"><ngxsmk-status-dot variant="online" /> Online</span>
-        <span class="ngxsmk-demo-row"><ngxsmk-status-dot variant="away" /> Away</span>
-        <span class="ngxsmk-demo-row"><ngxsmk-status-dot variant="busy" /> Busy</span>
-        <span class="ngxsmk-demo-row"><ngxsmk-status-dot variant="offline" /> Offline</span>
+        <span class="ngxsmk-demo-row"
+          ><ngxsmk-status-dot variant="online" /> {{ 'dataDisplay.statusOnline' | translate }}</span
+        >
+        <span class="ngxsmk-demo-row"
+          ><ngxsmk-status-dot variant="away" /> {{ 'dataDisplay.statusAway' | translate }}</span
+        >
+        <span class="ngxsmk-demo-row"
+          ><ngxsmk-status-dot variant="busy" /> {{ 'dataDisplay.statusBusy' | translate }}</span
+        >
+        <span class="ngxsmk-demo-row"
+          ><ngxsmk-status-dot variant="offline" />
+          {{ 'dataDisplay.statusOffline' | translate }}</span
+        >
       </div>
     </showcase-example>
 
     <showcase-example
       title="Card"
-      description="A content container composed from header, title, description, content, and footer sub-directives."
+      [description]="'dataDisplay.cardDesc' | translate"
       [code]="codeCard"
       [component]="NgxsmkCard"
       [customize]="customizeNgxsmkCard"
@@ -322,8 +332,12 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
             accounts crossed the 10k mark with churn holding steady at 2.3%.
           </div>
           <div ngxsmkCardFooter>
-            <button ngxsmk-button variant="primary" size="sm">View report</button>
-            <button ngxsmk-button variant="ghost" size="sm">Export</button>
+            <button ngxsmk-button variant="primary" size="sm">
+              {{ 'dataDisplay.viewReport' | translate }}
+            </button>
+            <button ngxsmk-button variant="ghost" size="sm">
+              {{ 'dataDisplay.export' | translate }}
+            </button>
           </div>
         </ngxsmk-card>
       </div>
@@ -331,7 +345,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Table (composed)"
-      description="Build a table from the cell primitives â€” header cells, rows, and cells â€” for full layout control."
+      [description]="'dataDisplay.tableComposedDesc' | translate"
       [code]="codeTableComposed"
       [component]="NgxsmkTableRow"
     >

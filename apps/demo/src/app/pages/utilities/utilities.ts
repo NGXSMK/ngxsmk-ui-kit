@@ -1,4 +1,5 @@
 import { Component, signal } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { ShowcaseExample } from '../../showcase/showcase-example';
 import { NgxsmkButton } from '@ngxsmk/core/button';
 import { NgxsmkVisuallyHidden } from '@ngxsmk/core/visually-hidden';
@@ -32,73 +33,88 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
     NgxsmkMediaQuery,
     NgxsmkMediaTheme,
     NgxsmkLazyLoad,
+    TranslatePipe,
   ],
   template: `
-    <h2 class="ngxsmk-page-title">Utilities &amp; Hooks</h2>
+    <h2 class="ngxsmk-page-title">{{ 'category.utilities' | translate }}</h2>
     <p class="ngxsmk-page-desc">
-      Invisible-but-powerful directives and hooks for accessibility, layout, and interaction
-      behavior - each demo below makes the effect visible and interactive.
+      {{ 'utilities.desc' | translate }}
     </p>
 
     <showcase-example
-      title="Visually Hidden"
-      description="Hides content visually while keeping it available to screen readers."
+      [title]="'utilities.visuallyHidden' | translate"
+      [description]="'utilities.visuallyHiddenDesc' | translate"
       [code]="codeVisuallyHidden"
       [component]="NgxsmkButton"
     >
       <div class="ngxsmk-sc-surface" style="flex: 1 1 100%">
         <p style="margin:0 0 .5rem">
           <button ngxsmk-button size="sm" (click)="showHidden.update((v) => !v)">
-            {{ showHidden() ? 'Hide' : 'Reveal' }} the hidden text
+            {{ (showHidden() ? 'utilities.hide' : 'utilities.reveal') | translate }}
+            {{ 'utilities.theHiddenText' | translate }}
           </button>
         </p>
         @if (showHidden()) {
           <p style="margin:0">
-            Visible label
-            <span ngxsmkVisuallyHidden> - extra description only announced to screen readers</span>
+            {{ 'utilities.visibleLabel' | translate }}
+            <span ngxsmkVisuallyHidden>{{ 'utilities.extraDescription' | translate }}</span>
           </p>
         } @else {
-          <p style="margin:0">Visible label - extra description only announced to screen readers</p>
+          <p style="margin:0">
+            {{ 'utilities.visibleLabel' | translate }}{{ 'utilities.extraDescription' | translate }}
+          </p>
         }
         <p class="ngxsmk-demo-hint">
-          Toggle to compare: the directive removes it from view, not the DOM.
+          {{ 'utilities.toggleCompareHint' | translate }}
         </p>
       </div>
     </showcase-example>
 
     <showcase-example
-      title="Focus Trap"
-      description="Cycles Tab focus within the element so keyboard users stay contained."
+      [title]="'utilities.focusTrap' | translate"
+      [description]="'utilities.focusTrapDesc' | translate"
       [code]="codeFocusTrap"
       [component]="NgxsmkButton"
     >
       <div class="ngxsmk-sc-surface" style="flex: 1 1 100%">
         <p style="margin:0 0 .5rem">
           <button ngxsmk-button size="sm" (click)="focusTrapped.update((v) => !v)">
-            Trap is {{ focusTrapped() ? 'ON' : 'OFF' }}
+            {{
+              'utilities.trapIs'
+                | translate
+                  : {
+                      state: focusTrapped()
+                        ? ('utilities.on' | translate)
+                        : ('utilities.off' | translate),
+                    }
+            }}
           </button>
         </p>
         <div [ngxsmkFocusTrap]="focusTrapped()" class="ngxsmk-trap-box">
-          <button ngxsmk-button size="sm">First</button>
-          <button ngxsmk-button size="sm">Middle</button>
-          <button ngxsmk-button size="sm">Last</button>
-          <a ngxsmk-link href="#">A focusable link</a>
+          <button ngxsmk-button size="sm">{{ 'utilities.first' | translate }}</button>
+          <button ngxsmk-button size="sm">{{ 'utilities.middle' | translate }}</button>
+          <button ngxsmk-button size="sm">{{ 'utilities.last' | translate }}</button>
+          <a ngxsmk-link href="#">{{ 'utilities.focusableLink' | translate }}</a>
         </div>
         <p class="ngxsmk-demo-hint">
-          Turn the trap on, then press Tab - focus loops inside the box.
+          {{ 'utilities.trapHint' | translate }}
         </p>
       </div>
     </showcase-example>
 
     <showcase-example
-      title="Click Outside"
-      description="Emits when a click lands outside the host element - perfect for popovers."
+      [title]="'utilities.clickOutside' | translate"
+      [description]="'utilities.clickOutsideDesc' | translate"
       [code]="codeClickOutside"
       [component]="NgxsmkButton"
     >
       <div class="ngxsmk-sc-surface" style="flex: 1 1 100%; position: relative">
         <button ngxsmk-button size="sm" (click)="outsideOpen.set(true)">
-          {{ outsideOpen() ? 'Popover open' : 'Open popover' }}
+          {{
+            outsideOpen()
+              ? ('utilities.popoverOpen' | translate)
+              : ('utilities.openPopover' | translate)
+          }}
         </button>
         @if (outsideOpen()) {
           <div
@@ -106,18 +122,18 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
             ngxsmkClickOutside
             (ngxsmkClickOutside)="outsideOpen.set(false)"
           >
-            I close when you click anywhere outside me.
+            {{ 'utilities.popoverCloseText' | translate }}
           </div>
         }
         <p class="ngxsmk-demo-hint">
-          Open the panel, then click elsewhere on the page to dismiss it.
+          {{ 'utilities.clickOutsideHint' | translate }}
         </p>
       </div>
     </showcase-example>
 
     <showcase-example
-      title="Keyboard Shortcut"
-      description="Binds a global key combo and fires when it matches."
+      [title]="'utilities.keyboardShortcut' | translate"
+      [description]="'utilities.keyboardShortcutDesc' | translate"
       [code]="codeShortcut"
       [component]="NgxsmkKeyboardShortcut"
     >
@@ -127,15 +143,15 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
           <span ngxsmkKeyboardShortcut="ctrl+shift+l" (shortcutPressed)="onShortcut()"></span>
         </p>
         <p style="margin:.5rem 0 0">
-          Triggered <strong>{{ shortcutCount() }}</strong> time(s).
+          {{ 'utilities.triggered' | translate: { count: shortcutCount() } }}
           <span class="ngxsmk-demo-log">{{ shortcutLog() }}</span>
         </p>
       </div>
     </showcase-example>
 
     <showcase-example
-      title="Copy to Clipboard"
-      description="Copies a bound string to the clipboard on click."
+      [title]="'utilities.copyToClipboard' | translate"
+      [description]="'utilities.copyToClipboardDesc' | translate"
       [code]="codeCopy"
       [component]="NgxsmkButton"
     >
@@ -148,17 +164,17 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
           ngxsmkCopyToClipboard="npm install @ngxsmk/core"
           (copied)="onCopied()"
         >
-          {{ copied() ? 'Copied!' : 'Copy' }}
+          {{ copied() ? ('utilities.copied' | translate) : ('utilities.copy' | translate) }}
         </button>
         @if (copied()) {
-          <p class="ngxsmk-demo-hint">Copied to your clipboard.</p>
+          <p class="ngxsmk-demo-hint">{{ 'utilities.copiedHint' | translate }}</p>
         }
       </div>
     </showcase-example>
 
     <showcase-example
-      title="Scroll Lock"
-      description="Locks the document scroll while active - e.g. behind a modal."
+      [title]="'utilities.scrollLock' | translate"
+      [description]="'utilities.scrollLockDesc' | translate"
       [code]="codeScrollLock"
       [component]="NgxsmkButton"
     >
@@ -170,87 +186,106 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
           [ngxsmkScrollLock]="scrollLocked()"
           (click)="scrollLocked.update((v) => !v)"
         >
-          Scroll is {{ scrollLocked() ? 'LOCKED' : 'free' }}
+          {{
+            'utilities.scrollIs'
+              | translate
+                : {
+                    state: scrollLocked()
+                      ? ('utilities.locked' | translate)
+                      : ('utilities.free' | translate),
+                  }
+          }}
         </button>
         <p class="ngxsmk-demo-hint">
-          Toggle on, then try scrolling the page - it is frozen until you turn it off.
+          {{ 'utilities.scrollHint' | translate }}
         </p>
       </div>
     </showcase-example>
 
     <showcase-example
-      title="Resize Observer"
-      description="Streams the element's size whenever it changes."
+      [title]="'utilities.resizeObserver' | translate"
+      [description]="'utilities.resizeObserverDesc' | translate"
       [code]="codeResize"
       [component]="NgxsmkResizeObserver"
     >
       <div class="ngxsmk-sc-surface" style="flex: 1 1 100%">
         <div class="ngxsmk-resize-box" ngxsmkResizeObserver (sizeChanged)="onResize($event)">
-          Drag the corner to resize me
+          {{ 'utilities.dragCornerResize' | translate }}
         </div>
         <p class="ngxsmk-demo-hint">
-          Current size: <strong>{{ size().width }} × {{ size().height }}px</strong>
+          {{ 'utilities.currentSizeLabel' | translate
+          }}<strong>{{ size().width }} × {{ size().height }}px</strong>
         </p>
       </div>
     </showcase-example>
 
     <showcase-example
-      title="Intersection Observer"
-      description="Reports whether the element is visible within a scroll container."
+      [title]="'utilities.intersectionObserver' | translate"
+      [description]="'utilities.intersectionObserverDesc' | translate"
       [code]="codeIntersection"
       [component]="NgxsmkIntersectionObserver"
     >
       <div class="ngxsmk-sc-surface" style="flex: 1 1 100%">
         <div class="ngxsmk-scroll-window">
-          <div class="ngxsmk-scroll-spacer">Scroll down…</div>
+          <div class="ngxsmk-scroll-spacer">{{ 'utilities.scrollDown' | translate }}</div>
           <div
             class="ngxsmk-observe-target"
             [class.ngxsmk-is-visible]="intersecting()"
             ngxsmkIntersectionObserver
             (intersected)="onIntersect($event)"
           >
-            {{ intersecting() ? 'I am visible 👀' : 'Scroll to reveal me' }}
+            {{
+              intersecting()
+                ? ('utilities.iAmVisible' | translate)
+                : ('utilities.scrollToReveal' | translate)
+            }}
           </div>
-          <div class="ngxsmk-scroll-spacer">…and back up.</div>
+          <div class="ngxsmk-scroll-spacer">{{ 'utilities.andBackUp' | translate }}</div>
         </div>
       </div>
     </showcase-example>
 
     <showcase-example
-      title="Layer Provider"
-      description="Establishes a positioned layer context for overlays and portals."
+      [title]="'utilities.layerProvider' | translate"
+      [description]="'utilities.layerProviderDesc' | translate"
       [code]="codeLayer"
       [component]="NgxsmkLayerProvider"
     >
       <div class="ngxsmk-sc-surface" style="flex: 1 1 100%">
         <div ngxsmkLayerProvider class="ngxsmk-layer-stage">
-          <div class="ngxsmk-layer-card ngxsmk-layer-card--back">Base layer</div>
-          <div class="ngxsmk-layer-card ngxsmk-layer-card--front">Stacked layer</div>
+          <div class="ngxsmk-layer-card ngxsmk-layer-card--back">
+            {{ 'utilities.baseLayer' | translate }}
+          </div>
+          <div class="ngxsmk-layer-card ngxsmk-layer-card--front">
+            {{ 'utilities.stackedLayer' | translate }}
+          </div>
         </div>
-        <p class="ngxsmk-demo-hint">The provider scopes z-index/layering for its children.</p>
+        <p class="ngxsmk-demo-hint">{{ 'utilities.layerHint' | translate }}</p>
       </div>
     </showcase-example>
 
     <showcase-example
-      title="Media Query"
-      description="Reflects a CSS media query match as a live signal."
+      [title]="'utilities.mediaQuery' | translate"
+      [description]="'utilities.mediaQueryDesc' | translate"
       [code]="codeMediaQuery"
       [component]="NgxsmkMediaQuery"
     >
       <div class="ngxsmk-sc-surface" style="flex: 1 1 100%">
         <div ngxsmkMediaQuery="(min-width: 768px)"></div>
         <p style="margin:0">
-          Viewport is
-          <strong>{{ mediaMatches() ? '≥ 768px (desktop)' : '< 768px (narrow)' }}</strong
+          {{ 'utilities.viewportIsLabel' | translate }}
+          <strong>{{
+            mediaMatches() ? ('utilities.desktop' | translate) : ('utilities.narrow' | translate)
+          }}</strong
           >.
         </p>
-        <p class="ngxsmk-demo-hint">Resize the window to flip the match.</p>
+        <p class="ngxsmk-demo-hint">{{ 'utilities.resizeHint' | translate }}</p>
       </div>
     </showcase-example>
 
     <showcase-example
-      title="Media Theme"
-      description="Applies a theme mode attribute from a prefers-* media query."
+      [title]="'utilities.mediaTheme' | translate"
+      [description]="'utilities.mediaThemeDesc' | translate"
       [code]="codeMediaTheme"
       [component]="NgxsmkMediaTheme"
     >
@@ -261,52 +296,55 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
           query="(prefers-color-scheme: dark)"
           theme="dark"
         >
-          data-theme-mode = <strong>{{ prefersDark() ? 'dark' : 'none' }}</strong>
+          {{ 'utilities.dataThemeMode' | translate
+          }}<strong>{{
+            prefersDark() ? ('utilities.dark' | translate) : ('utilities.none' | translate)
+          }}</strong>
         </div>
-        <p class="ngxsmk-demo-hint">Reflects your OS “dark mode” preference.</p>
+        <p class="ngxsmk-demo-hint">{{ 'utilities.mediaThemeHint' | translate }}</p>
       </div>
     </showcase-example>
 
     <showcase-example
-      title="Lazy Load"
-      description="Defers rendering children until they scroll into view."
+      [title]="'utilities.lazyLoad' | translate"
+      [description]="'utilities.lazyLoadDesc' | translate"
       [code]="codeLazy"
       [component]="NgxsmkLazyLoad"
     >
       <div class="ngxsmk-sc-surface" style="flex: 1 1 100%">
         <div class="ngxsmk-scroll-window">
-          <div class="ngxsmk-scroll-spacer">Scroll down to load the content…</div>
+          <div class="ngxsmk-scroll-spacer">{{ 'utilities.scrollToLoad' | translate }}</div>
           <ngxsmk-lazy-load rootMargin="0px">
             <div class="ngxsmk-lazy-content">
-              ✅ Loaded! This markup only rendered once it entered the viewport.
+              {{ 'utilities.loadedContent' | translate }}
             </div>
           </ngxsmk-lazy-load>
-          <div class="ngxsmk-scroll-spacer">…keep scrolling.</div>
+          <div class="ngxsmk-scroll-spacer">{{ 'utilities.keepScrolling' | translate }}</div>
         </div>
       </div>
     </showcase-example>
 
     <showcase-example
-      title="Lazy Load (cards)"
-      description="Each card below is wrapped in ngxsmk-lazy-load, so its markup is only created once it scrolls into the viewport - scroll the feed to watch them appear."
+      [title]="'utilities.lazyLoadCards' | translate"
+      [description]="'utilities.lazyLoadCardsDesc' | translate"
       [code]="codeLazyCards"
       [component]="NgxsmkLazyLoad"
     >
       <div class="ngxsmk-sc-surface" style="flex: 1 1 100%">
         <div class="ngxsmk-scroll-window">
-          <div class="ngxsmk-scroll-spacer">Scroll down - cards load as they enter view…</div>
+          <div class="ngxsmk-scroll-spacer">{{ 'utilities.cardsScrollDown' | translate }}</div>
           @for (item of lazyCards; track item.id) {
             <ngxsmk-lazy-load class="ngxsmk-lazy-slot">
               <div class="ngxsmk-lazy-card">
                 <div class="ngxsmk-lazy-card__thumb" [style.background]="item.color"></div>
                 <div class="ngxsmk-lazy-card__body">
                   <strong>{{ item.title }}</strong>
-                  <span>Rendered on scroll into view</span>
+                  <span>{{ 'utilities.renderedOnScroll' | translate }}</span>
                 </div>
               </div>
             </ngxsmk-lazy-load>
           }
-          <div class="ngxsmk-scroll-spacer">…end of feed.</div>
+          <div class="ngxsmk-scroll-spacer">{{ 'utilities.endOfFeed' | translate }}</div>
         </div>
       </div>
     </showcase-example>

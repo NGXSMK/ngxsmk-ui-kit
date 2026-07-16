@@ -10,6 +10,7 @@ import { NgxsmkText } from '@ngxsmk/core/text';
 import { Component, inject } from '@angular/core';
 import { NgxsmkThemeService, presets } from '@ngxsmk/theme';
 import { NgxsmkThemeBuilder } from '@ngxsmk/core/theme-builder';
+import { TranslatePipe } from '@ngx-translate/core';
 import { AppNav } from '../../nav/nav';
 
 @Component({
@@ -24,29 +25,30 @@ import { AppNav } from '../../nav/nav';
     NgxsmkHeading,
     NgxsmkText,
     NgxsmkThemeBuilder,
+    TranslatePipe,
     AppNav,
   ],
   template: `
     <app-nav />
     <div class="ngxsmk-page">
       <header class="ngxsmk-page__header">
-        <ngxsmk-heading level="h1">Theming</ngxsmk-heading>
-        <ngxsmk-text variant="body" class="ngxsmk-page__sub"
-          >Customize the look and feel of your app at runtime using our robust theme and token
-          system.</ngxsmk-text
-        >
+        <ngxsmk-heading level="h1">{{ 'themes.title' | translate }}</ngxsmk-heading>
+        <ngxsmk-text variant="body" class="ngxsmk-page__sub">{{
+          'themes.subtitle' | translate
+        }}</ngxsmk-text>
       </header>
 
       <div class="ngxsmk-themes-grid">
         <ngxsmk-card class="ngxsmk-theme-card">
           <div ngxsmkCardHeader>
-            <ngxsmk-heading level="h3" ngxsmkCardTitle>Preset Colors</ngxsmk-heading>
+            <ngxsmk-heading level="h3" ngxsmkCardTitle>{{
+              'themes.presetColors' | translate
+            }}</ngxsmk-heading>
           </div>
           <div ngxsmkCardContent>
-            <ngxsmk-text variant="body" class="ngxsmk-theme-desc"
-              >Select one of our carefully curated, premium built-in color palettes to instantly
-              change the vibe.</ngxsmk-text
-            >
+            <ngxsmk-text variant="body" class="ngxsmk-theme-desc">{{
+              'themes.presetColorsDesc' | translate
+            }}</ngxsmk-text>
             <div class="ngxsmk-color-options">
               <button
                 class="ngxsmk-color-btn ngxsmk-violet"
@@ -74,18 +76,23 @@ import { AppNav } from '../../nav/nav';
 
         <ngxsmk-card class="ngxsmk-theme-card">
           <div ngxsmkCardHeader>
-            <ngxsmk-heading level="h3" ngxsmkCardTitle>Mode Switching</ngxsmk-heading>
+            <ngxsmk-heading level="h3" ngxsmkCardTitle>{{
+              'themes.modeSwitching' | translate
+            }}</ngxsmk-heading>
           </div>
           <div ngxsmkCardContent>
-            <ngxsmk-text variant="body" class="ngxsmk-theme-desc"
-              >Toggle between Light, Dark, or System mode to test your application's appearance
-              across different modes.</ngxsmk-text
-            >
+            <ngxsmk-text variant="body" class="ngxsmk-theme-desc">{{
+              'themes.modeSwitchingDesc' | translate
+            }}</ngxsmk-text>
             <div class="ngxsmk-theme-actions">
-              <button ngxsmk-button size="sm" (click)="theme.setMode('light')">Light</button>
-              <button ngxsmk-button size="sm" (click)="theme.setMode('dark')">Dark</button>
+              <button ngxsmk-button size="sm" (click)="theme.setMode('light')">
+                {{ 'themes.light' | translate }}
+              </button>
+              <button ngxsmk-button size="sm" (click)="theme.setMode('dark')">
+                {{ 'themes.dark' | translate }}
+              </button>
               <button ngxsmk-button size="sm" variant="outline" (click)="theme.setMode('system')">
-                System
+                {{ 'themes.system' | translate }}
               </button>
             </div>
           </div>

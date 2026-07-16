@@ -1,5 +1,6 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 import {
   ComponentRegistry,
   ComponentMetadata,
@@ -296,18 +297,18 @@ function buildCode(name: string, values: Record<string, unknown>): string {
 @Component({
   selector: 'app-interactive-playground',
   standalone: true,
-  imports: [RouterLink, NgxsmkPropPanel, PlaygroundDemoHost],
+  imports: [RouterLink, NgxsmkPropPanel, PlaygroundDemoHost, TranslatePipe],
   template: `
     <div class="pg">
       <header class="pg-header">
         <div class="pg-breadcrumb">
-          <a routerLink="/showcase/explorer">Explorer</a>
+          <a routerLink="/showcase/explorer">{{ 'iplayground.explorer' | translate }}</a>
           <span class="pg-breadcrumb-sep">/</span>
-          <span>Component Playground</span>
+          <span>{{ 'nav.componentPlayground' | translate }}</span>
         </div>
-        <h1 class="pg-title">Component Playground</h1>
+        <h1 class="pg-title">{{ 'nav.componentPlayground' | translate }}</h1>
         <p class="pg-subtitle">
-          Tweak inputs on the left, see the live result, and copy the generated template.
+          {{ 'iplayground.subtitle' | translate }}
         </p>
       </header>
 
@@ -330,7 +331,7 @@ function buildCode(name: string, values: Record<string, unknown>): string {
             <input
               type="text"
               class="pg-search-input"
-              placeholder="Filter components…"
+              [attr.placeholder]="'iplayground.filterPlaceholder' | translate"
               [value]="filterQuery()"
               (input)="filterQuery.set($any($event.target).value)"
             />
@@ -350,7 +351,9 @@ function buildCode(name: string, values: Record<string, unknown>): string {
                 }
               </div>
             } @empty {
-              <p class="pg-empty-hint">No components match “{{ filterQuery() }}”.</p>
+              <p class="pg-empty-hint">
+                {{ 'iplayground.noMatch' | translate: { query: filterQuery() } }}
+              </p>
             }
           </nav>
         </aside>
@@ -361,12 +364,12 @@ function buildCode(name: string, values: Record<string, unknown>): string {
               <div class="pg-stage-bar">
                 <span class="pg-stage-dot"></span>
                 <span class="pg-stage-name">{{ comp.name }}</span>
-                <span class="pg-stage-badge">live</span>
+                <span class="pg-stage-badge">{{ 'iplayground.live' | translate }}</span>
                 <button class="pg-stage-copy" (click)="copyCode()">
                   @if (copied()) {
-                    Copied!
+                    {{ 'iplayground.copied' | translate }}
                   } @else {
-                    Copy code
+                    {{ 'iplayground.copyCode' | translate }}
                   }
                 </button>
               </div>
@@ -378,7 +381,7 @@ function buildCode(name: string, values: Record<string, unknown>): string {
             <div class="pg-panels">
               <section class="pg-card">
                 <h3 class="pg-card-title">
-                  Properties
+                  {{ 'iplayground.properties' | translate }}
                   <span class="pg-card-hint">{{ propDescriptors().length }}</span>
                 </h3>
                 <div class="pg-card-body">
@@ -389,13 +392,13 @@ function buildCode(name: string, values: Record<string, unknown>): string {
                       (valuesChange)="propValues.set($event)"
                     />
                   } @else {
-                    <p class="pg-muted">This component has no configurable inputs.</p>
+                    <p class="pg-muted">{{ 'iplayground.noConfigurableInputs' | translate }}</p>
                   }
                 </div>
               </section>
 
               <section class="pg-card">
-                <h3 class="pg-card-title">Generated code</h3>
+                <h3 class="pg-card-title">{{ 'iplayground.generatedCode' | translate }}</h3>
                 <div class="pg-card-body">
                   <pre class="pg-code"><code>{{ generatedCode() }}</code></pre>
                 </div>
@@ -405,16 +408,16 @@ function buildCode(name: string, values: Record<string, unknown>): string {
             <section class="pg-api">
               @if (comp.inputs.length > 0) {
                 <div class="pg-detail-section">
-                  <h3 class="pg-detail-section-title">Inputs</h3>
+                  <h3 class="pg-detail-section-title">{{ 'iplayground.inputs' | translate }}</h3>
                   <div class="pg-table-wrap">
                     <table class="pg-table">
                       <thead>
                         <tr>
-                          <th>Name</th>
-                          <th>Type</th>
-                          <th>Default</th>
-                          <th>Required</th>
-                          <th>Description</th>
+                          <th>{{ 'iplayground.thName' | translate }}</th>
+                          <th>{{ 'iplayground.thType' | translate }}</th>
+                          <th>{{ 'iplayground.thDefault' | translate }}</th>
+                          <th>{{ 'iplayground.thRequired' | translate }}</th>
+                          <th>{{ 'iplayground.thDescription' | translate }}</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -429,7 +432,13 @@ function buildCode(name: string, values: Record<string, unknown>): string {
                             <td>
                               <code>{{ input.defaultValue || '-' }}</code>
                             </td>
-                            <td>{{ input.required ? 'Yes' : 'No' }}</td>
+                            <td>
+                              {{
+                                input.required
+                                  ? ('iplayground.yes' | translate)
+                                  : ('iplayground.no' | translate)
+                              }}
+                            </td>
                             <td>{{ input.description }}</td>
                           </tr>
                         }
@@ -441,14 +450,14 @@ function buildCode(name: string, values: Record<string, unknown>): string {
 
               @if (comp.outputs.length > 0) {
                 <div class="pg-detail-section">
-                  <h3 class="pg-detail-section-title">Outputs</h3>
+                  <h3 class="pg-detail-section-title">{{ 'iplayground.outputs' | translate }}</h3>
                   <div class="pg-table-wrap">
                     <table class="pg-table">
                       <thead>
                         <tr>
-                          <th>Name</th>
-                          <th>Type</th>
-                          <th>Description</th>
+                          <th>{{ 'iplayground.thName' | translate }}</th>
+                          <th>{{ 'iplayground.thType' | translate }}</th>
+                          <th>{{ 'iplayground.thDescription' | translate }}</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -471,15 +480,15 @@ function buildCode(name: string, values: Record<string, unknown>): string {
 
               @if (comp.signals.length > 0) {
                 <div class="pg-detail-section">
-                  <h3 class="pg-detail-section-title">Signals</h3>
+                  <h3 class="pg-detail-section-title">{{ 'iplayground.signals' | translate }}</h3>
                   <div class="pg-table-wrap">
                     <table class="pg-table">
                       <thead>
                         <tr>
-                          <th>Name</th>
-                          <th>Type</th>
-                          <th>Readonly</th>
-                          <th>Description</th>
+                          <th>{{ 'iplayground.thName' | translate }}</th>
+                          <th>{{ 'iplayground.thType' | translate }}</th>
+                          <th>{{ 'iplayground.thReadonly' | translate }}</th>
+                          <th>{{ 'iplayground.thDescription' | translate }}</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -503,15 +512,15 @@ function buildCode(name: string, values: Record<string, unknown>): string {
 
               @if (comp.methods.length > 0) {
                 <div class="pg-detail-section">
-                  <h3 class="pg-detail-section-title">Methods</h3>
+                  <h3 class="pg-detail-section-title">{{ 'iplayground.methods' | translate }}</h3>
                   <div class="pg-table-wrap">
                     <table class="pg-table">
                       <thead>
                         <tr>
-                          <th>Name</th>
-                          <th>Parameters</th>
-                          <th>Returns</th>
-                          <th>Description</th>
+                          <th>{{ 'iplayground.thName' | translate }}</th>
+                          <th>{{ 'iplayground.thParameters' | translate }}</th>
+                          <th>{{ 'iplayground.thReturns' | translate }}</th>
+                          <th>{{ 'iplayground.thDescription' | translate }}</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -538,8 +547,8 @@ function buildCode(name: string, values: Record<string, unknown>): string {
           } @else {
             <div class="pg-empty">
               <div class="pg-empty-icon">◈</div>
-              <h2>Select a component</h2>
-              <p>Pick a component from the sidebar to open its live playground.</p>
+              <h2>{{ 'iplayground.selectComponent' | translate }}</h2>
+              <p>{{ 'iplayground.pickComponent' | translate }}</p>
             </div>
           }
         </main>

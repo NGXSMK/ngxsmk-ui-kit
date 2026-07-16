@@ -7,12 +7,14 @@ import { NgxsmkHeatmapChart } from '@ngxsmk/core/chart-heatmap';
 import { NgxsmkChartDashboard } from '@ngxsmk/core/chart-dashboard';
 import { NgxsmkLineChart } from '@ngxsmk/core/chart-line';
 import { Component } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { ShowcaseExample } from '../../showcase/showcase-example';
 
 @Component({
   selector: 'charts-page',
   standalone: true,
   imports: [
+    TranslatePipe,
     ShowcaseExample,
     NgxsmkLineChart,
     NgxsmkBarChart,
@@ -24,16 +26,14 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     NgxsmkChartDashboard,
   ],
   template: `
-    <h2 class="ngxsmk-page-title">Charts</h2>
+    <h2 class="ngxsmk-page-title">{{ 'category.charts' | translate }}</h2>
     <p class="ngxsmk-page-desc">
-      A lightweight set of data-visualization primitives drawn with inline SVG. Every chart is
-      theme-aware, responsive to its inputs, and drops straight into any layout without a charting
-      dependency.
+      {{ 'charts.intro' | translate }}
     </p>
 
     <showcase-example
       title="Line Chart"
-      description="A continuous series rendered as a polyline. Great for trends over time."
+      [description]="'charts.lineChartDesc' | translate"
       [code]="codeLine"
       [component]="NgxsmkLineChart"
       [customize]="customizeNgxsmkLineChart"
@@ -50,7 +50,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Bar Chart"
-      description="Discrete values as columns. Useful for comparing categories at a glance."
+      [description]="'charts.barChartDesc' | translate"
       [code]="codeBar"
       [component]="NgxsmkBarChart"
       [customize]="customizeNgxsmkBarChart"
@@ -67,7 +67,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Pie Chart"
-      description="Proportional slices of a single total, with an optional donut mode."
+      [description]="'charts.pieChartDesc' | translate"
       [code]="codePie"
       [component]="NgxsmkPieChart"
       [customize]="customizeNgxsmkPieChart"
@@ -84,7 +84,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Area Chart"
-      description="A line chart with a gradient fill under the curve to emphasize volume."
+      [description]="'charts.areaChartDesc' | translate"
       [code]="codeArea"
       [component]="NgxsmkAreaChart"
     >
@@ -100,7 +100,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Scatter Chart"
-      description="Plot pairs of values to reveal correlation across two axes."
+      [description]="'charts.scatterChartDesc' | translate"
       [code]="codeScatter"
       [component]="NgxsmkScatterChart"
       [customize]="customizeNgxsmkScatterChart"
@@ -112,7 +112,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Candlestick Chart"
-      description="Open/high/low/close candles for financial time series. Bullish candles are green, bearish red."
+      [description]="'charts.candlestickChartDesc' | translate"
       [code]="codeCandle"
       [component]="NgxsmkCandlestickChart"
       [customize]="customizeNgxsmkCandlestickChart"
@@ -124,7 +124,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Heatmap"
-      description="A matrix of cells colored by magnitude, with optional axis labels."
+      [description]="'charts.heatmapDesc' | translate"
       [code]="codeHeat"
       [component]="NgxsmkHeatmapChart"
       [customize]="customizeNgxsmkHeatmapChart"
@@ -136,7 +136,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Dashboard"
-      description="A responsive grid wrapper that arranges multiple charts into a panel."
+      [description]="'charts.dashboardDesc' | translate"
       [code]="codeDashboard"
       [component]="NgxsmkChartDashboard"
       [customize]="customizeNgxsmkChartDashboard"

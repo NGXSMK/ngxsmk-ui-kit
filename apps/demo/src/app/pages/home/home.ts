@@ -5,6 +5,7 @@ import { NgxsmkToast, NgxsmkToaster } from '@ngxsmk/core/toast';
 import { NgxsmkAvatar } from '@ngxsmk/core/avatar';
 import { Component, inject, signal, computed } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { TranslatePipe } from '@ngx-translate/core';
 import { Router, RouterLink } from '@angular/router';
 import { AppNav } from '../../nav/nav';
 import { NgxsmkAnimate } from '@ngxsmk/core/animation';
@@ -40,6 +41,7 @@ interface ComponentCategory {
   standalone: true,
   imports: [
     FormsModule,
+    TranslatePipe,
     RouterLink,
     AppNav,
     NgxsmkAvatar,
@@ -99,7 +101,7 @@ export class HomePage {
 
   protected readonly categories: ComponentCategory[] = [
     {
-      title: 'Forms',
+      title: 'category.forms',
       path: 'forms',
       items: [
         'Button',
@@ -133,7 +135,7 @@ export class HomePage {
       ],
     },
     {
-      title: 'AI',
+      title: 'category.ai',
       path: 'ai',
       items: [
         'Interactive AI Chat',
@@ -160,7 +162,7 @@ export class HomePage {
       ],
     },
     {
-      title: 'Enterprise',
+      title: 'category.enterprise',
       path: 'enterprise',
       items: [
         'Kanban Board',
@@ -179,7 +181,7 @@ export class HomePage {
       ],
     },
     {
-      title: 'Content & Typography',
+      title: 'category.content-typography',
       path: 'content-typography',
       items: [
         'Heading',
@@ -196,7 +198,7 @@ export class HomePage {
       ],
     },
     {
-      title: 'Navigation',
+      title: 'category.navigation',
       path: 'navigation',
       items: [
         'Breadcrumb Item',
@@ -211,7 +213,7 @@ export class HomePage {
       ],
     },
     {
-      title: 'Layout',
+      title: 'category.layout',
       path: 'layout',
       items: [
         'Center',
@@ -232,7 +234,7 @@ export class HomePage {
       ],
     },
     {
-      title: 'Feedback',
+      title: 'category.feedback',
       path: 'feedback',
       items: [
         'Alert',
@@ -247,7 +249,7 @@ export class HomePage {
       ],
     },
     {
-      title: 'Data Display',
+      title: 'category.data-display',
       path: 'data-display',
       items: [
         'Tabs',
@@ -267,7 +269,7 @@ export class HomePage {
       ],
     },
     {
-      title: 'Overlay',
+      title: 'category.overlay',
       path: 'overlay',
       items: [
         'Dialog',
@@ -281,7 +283,7 @@ export class HomePage {
       ],
     },
     {
-      title: 'Charts',
+      title: 'category.charts',
       path: 'charts',
       items: [
         'Line Chart',
@@ -295,7 +297,7 @@ export class HomePage {
       ],
     },
     {
-      title: 'Utilities & Hooks',
+      title: 'category.utilities',
       path: 'utilities',
       items: [
         'Theme Builder',
@@ -332,71 +334,65 @@ export class HomePage {
   protected readonly features: Feature[] = [
     {
       icon: '⚡',
-      title: 'Angular-native',
-      description:
-        'Built with signals, standalone components, and zoneless change detection. Never a port - designed for modern Angular.',
+      title: 'home.featNativeTitle',
+      description: 'home.featNativeDesc',
     },
     {
       icon: '◇',
-      title: 'Copy-paste DX',
-      description:
-        'Own your components. npx ngxsmk add drops the source into your project - no black-box dependencies.',
+      title: 'home.featCopyPasteTitle',
+      description: 'home.featCopyPasteDesc',
     },
     {
       icon: '✦',
-      title: 'AI components',
-      description:
-        'Chat windows, streaming text, agent tool calls, and reasoning timelines - a design system built for the AI era.',
+      title: 'home.featAiTitle',
+      description: 'home.featAiDesc',
     },
     {
       icon: '▤',
-      title: 'Enterprise suite',
-      description:
-        'Kanban, workflow, spreadsheet, pivot table, and diagram editors - all free under an MIT license.',
+      title: 'home.featEnterpriseTitle',
+      description: 'home.featEnterpriseDesc',
     },
     {
       icon: '❖',
-      title: 'Universal themes',
-      description:
-        'One token engine outputs CSS variables, SCSS, Tailwind, or JSON. Swap the entire look at runtime with zero lock-in.',
+      title: 'home.featThemesTitle',
+      description: 'home.featThemesDesc',
     },
     {
       icon: '⌘',
-      title: 'Complete ecosystem',
-      description:
-        'CLI, schematics, VS Code extension, playground, and an MCP server for AI coding assistants.',
+      title: 'home.featEcosystemTitle',
+      description: 'home.featEcosystemDesc',
     },
   ];
 
   protected readonly stats: Stat[] = [
-    { value: '217', label: 'Components' },
-    { value: '0', label: 'Runtime deps' },
-    { value: 'WCAG AA', label: 'Accessible' },
-    { value: 'MIT', label: 'Licensed' },
+    { value: '217', label: 'home.statComponents' },
+    { value: '0', label: 'home.statRuntimeDeps' },
+    { value: 'WCAG AA', label: 'home.statAccessible' },
+    { value: 'MIT', label: 'home.statLicensed' },
   ];
 
   protected readonly templates: Template[] = [
     {
-      name: 'Admin dashboard',
-      description: 'Sidebar layout, data tables, charts, and settings.',
+      name: 'home.tplAdminName',
+      description: 'home.tplAdminDesc',
       badges: ['Signals', 'Zoneless'],
       glyph: '▦',
     },
     {
-      name: 'AI assistant',
-      description: 'Chat interface with streaming and tool calls.',
+      name: 'home.tplAiName',
+      description: 'home.tplAiDesc',
       badges: ['AI', 'SSR'],
       glyph: '✦',
     },
     {
-      name: 'Landing page',
-      description: 'Marketing hero, features, and pricing sections.',
+      name: 'home.tplLandingName',
+      description: 'home.tplLandingDesc',
       badges: ['Static', 'Fast'],
       glyph: '◈',
     },
     {
-      name: 'Authentication',
-      description: 'Sign-in, sign-up, and multi-step onboarding flows.',
+      name: 'home.tplAuthName',
+      description: 'home.tplAuthDesc',
       badges: ['Forms', 'A11y'],
       glyph: '⛨',
     },

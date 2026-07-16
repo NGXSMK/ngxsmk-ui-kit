@@ -8,6 +8,7 @@ import { NgxsmkStatusDot } from '@ngxsmk/core/status-dot';
 import { NgxsmkButton } from '@ngxsmk/core/button';
 import { NgxsmkAlert } from '@ngxsmk/core/alert';
 import { Component, signal } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { ShowcaseExample } from '../../showcase/showcase-example';
 
 @Component({
@@ -15,6 +16,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
   standalone: true,
   imports: [
     ShowcaseExample,
+    TranslatePipe,
     NgxsmkAlert,
     NgxsmkBanner,
     NgxsmkBadge,
@@ -26,89 +28,101 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     NgxsmkButton,
   ],
   template: `
-    <h2 class="ngxsmk-page-title">Feedback</h2>
+    <h2 class="ngxsmk-page-title">{{ 'category.feedback' | translate }}</h2>
     <p class="ngxsmk-page-desc">
-      Components that communicate status, progress, and system responses - from inline alerts and
-      banners to loaders, skeletons, and presence dots.
+      {{ 'feedback.intro' | translate }}
     </p>
 
     <showcase-example
       title="Alert"
-      description="Inline notifications for info, success, warning, and error states. Add dismissible for user-dismissable messages."
+      [description]="'feedback.alertDesc' | translate"
       [code]="codeAlert"
       [component]="NgxsmkAlert"
       [customize]="customizeNgxsmkAlert"
     >
       <div class="ngxsmk-demo-stack ngxsmk-sc-surface">
-        <ngxsmk-alert variant="info" title="Heads up">
-          A new version of the app is available.
+        <ngxsmk-alert variant="info" [title]="'feedback.headsUp' | translate">
+          {{ 'feedback.newVersion' | translate }}
         </ngxsmk-alert>
-        <ngxsmk-alert variant="success" title="Saved">Your changes are live.</ngxsmk-alert>
-        <ngxsmk-alert variant="warning" title="Review required">
-          Some settings may affect performance.
+        <ngxsmk-alert variant="success" [title]="'feedback.saved' | translate">{{
+          'feedback.changesLive' | translate
+        }}</ngxsmk-alert>
+        <ngxsmk-alert variant="warning" [title]="'feedback.reviewRequired' | translate">
+          {{ 'feedback.settingsPerf' | translate }}
         </ngxsmk-alert>
-        <ngxsmk-alert variant="error" title="Upload failed" dismissible>
-          The file could not be processed. Try again.
+        <ngxsmk-alert variant="error" [title]="'feedback.uploadFailed' | translate" dismissible>
+          {{ 'feedback.fileProcessed' | translate }}
         </ngxsmk-alert>
       </div>
     </showcase-example>
 
     <showcase-example
       title="Banner"
-      description="Full-width, attention-grabbing messages that sit at the top of a surface. Variants match the alert palette."
+      [description]="'feedback.bannerDesc' | translate"
       [code]="codeBanner"
       [component]="NgxsmkBanner"
       [customize]="customizeNgxsmkBanner"
     >
       <div class="ngxsmk-sc-col ngxsmk-sc-surface">
-        <ngxsmk-banner variant="info">Scheduled maintenance starts at 2:00 AM UTC.</ngxsmk-banner>
-        <ngxsmk-banner variant="success">Your subscription has been renewed.</ngxsmk-banner>
-        <ngxsmk-banner variant="warning">Storage is almost full (92%).</ngxsmk-banner>
+        <ngxsmk-banner variant="info">{{ 'feedback.maintenance' | translate }}</ngxsmk-banner>
+        <ngxsmk-banner variant="success">{{
+          'feedback.subscriptionRenewed' | translate
+        }}</ngxsmk-banner>
+        <ngxsmk-banner variant="warning">{{ 'feedback.storageFull' | translate }}</ngxsmk-banner>
         <ngxsmk-banner variant="error" dismissible>
-          Connection lost. Reconnecting&hellip;
+          {{ 'feedback.connectionLost' | translate }}
         </ngxsmk-banner>
       </div>
     </showcase-example>
 
     <showcase-example
       title="Badge"
-      description="Compact, pill-shaped labels for counts, statuses, and tags. Pair with buttons or list rows."
+      [description]="'feedback.badgeDesc' | translate"
       [code]="codeBadge"
       [component]="NgxsmkBadge"
       [customize]="customizeNgxsmkBadge"
     >
       <span class="ngxsmk-sc-wrap">
-        <ngxsmk-badge variant="primary">Primary</ngxsmk-badge>
-        <ngxsmk-badge variant="secondary">Secondary</ngxsmk-badge>
-        <ngxsmk-badge variant="outline">Outline</ngxsmk-badge>
-        <ngxsmk-badge variant="success">Active</ngxsmk-badge>
-        <ngxsmk-badge variant="warning">Pending</ngxsmk-badge>
-        <ngxsmk-badge variant="error">Failed</ngxsmk-badge>
-        <ngxsmk-badge variant="info">Info</ngxsmk-badge>
+        <ngxsmk-badge variant="primary">{{ 'feedback.badgePrimary' | translate }}</ngxsmk-badge>
+        <ngxsmk-badge variant="secondary">{{ 'feedback.badgeSecondary' | translate }}</ngxsmk-badge>
+        <ngxsmk-badge variant="outline">{{ 'feedback.badgeOutline' | translate }}</ngxsmk-badge>
+        <ngxsmk-badge variant="success">{{ 'feedback.badgeActive' | translate }}</ngxsmk-badge>
+        <ngxsmk-badge variant="warning">{{ 'feedback.badgePending' | translate }}</ngxsmk-badge>
+        <ngxsmk-badge variant="error">{{ 'feedback.badgeFailed' | translate }}</ngxsmk-badge>
+        <ngxsmk-badge variant="info">{{ 'feedback.badgeInfo' | translate }}</ngxsmk-badge>
       </span>
     </showcase-example>
 
     <showcase-example
       title="Progress"
-      description="Determinate bar with a 0–100 value, or indeterminate when value is null. Use the buttons to drive it live."
+      [description]="'feedback.progressDesc' | translate"
       [code]="codeProgress"
       [component]="NgxsmkProgress"
       [customize]="customizeNgxsmkProgress"
     >
       <div class="ngxsmk-sc-col ngxsmk-sc-surface">
-        <ngxsmk-progress [value]="progressValue()" [label]="progressLabel()" />
-        <ngxsmk-progress [value]="null" label="Loading" />
+        <ngxsmk-progress
+          [value]="progressValue()"
+          [label]="'feedback.uploading' | translate: { percent: progressValue() }"
+        />
+        <ngxsmk-progress [value]="null" [label]="'feedback.loading' | translate" />
         <div class="ngxsmk-demo-row">
-          <button ngxsmk-button size="sm" variant="outline" (click)="decrement()">− 10</button>
-          <button ngxsmk-button size="sm" variant="outline" (click)="increment()">+ 10</button>
-          <button ngxsmk-button size="sm" variant="ghost" (click)="reset()">Reset</button>
+          <button ngxsmk-button size="sm" variant="outline" (click)="decrement()">
+            {{ 'feedback.minus10' | translate }}
+          </button>
+          <button ngxsmk-button size="sm" variant="outline" (click)="increment()">
+            {{ 'feedback.plus10' | translate }}
+          </button>
+          <button ngxsmk-button size="sm" variant="ghost" (click)="reset()">
+            {{ 'feedback.reset' | translate }}
+          </button>
         </div>
       </div>
     </showcase-example>
 
     <showcase-example
       title="Skeleton"
-      description="Shimmering placeholders that mirror the shape of upcoming content while data loads."
+      [description]="'feedback.skeletonDesc' | translate"
       [code]="codeSkeleton"
       [component]="NgxsmkSkeleton"
       [customize]="customizeNgxsmkSkeleton"
@@ -131,7 +145,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     <showcase-example
       title="Spinner"
-      description="Indeterminate loading indicators in three sizes, optionally labelled for assistive tech."
+      [description]="'feedback.spinnerDesc' | translate"
       [code]="codeSpinner"
       [component]="NgxsmkSpinner"
       [customize]="customizeNgxsmkSpinner"
@@ -141,41 +155,51 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
         <ngxsmk-spinner size="md" />
         <ngxsmk-spinner size="lg" />
         <span class="ngxsmk-sc-wrap">
-          <ngxsmk-spinner size="sm" label="Saving" />
-          <ngxsmk-spinner size="md" label="Loading results" />
+          <ngxsmk-spinner size="sm" [label]="'feedback.spinnerSaving' | translate" />
+          <ngxsmk-spinner size="md" [label]="'feedback.spinnerLoadingResults' | translate" />
         </span>
       </span>
     </showcase-example>
 
     <showcase-example
       title="Empty State"
-      description="Centered placeholder for empty lists or results. Add actions via projected content."
+      [description]="'feedback.emptyStateDesc' | translate"
       [code]="codeEmptyState"
       [component]="NgxsmkEmptyState"
       [customize]="customizeNgxsmkEmptyState"
     >
       <div class="ngxsmk-sc-surface">
         <ngxsmk-empty-state
-          title="No results found"
-          description="Try adjusting your filters or search terms."
+          [title]="'feedback.noResultsFound' | translate"
+          [description]="'feedback.adjustFilters' | translate"
         >
-          <button ngxsmk-button size="sm" variant="primary">Clear filters</button>
+          <button ngxsmk-button size="sm" variant="primary">
+            {{ 'feedback.clearFilters' | translate }}
+          </button>
         </ngxsmk-empty-state>
       </div>
     </showcase-example>
 
     <showcase-example
       title="Status Dot"
-      description="Small presence indicator for online, away, busy, and offline states. Combine with text or avatars."
+      [description]="'feedback.statusDotDesc' | translate"
       [code]="codeStatusDot"
       [component]="NgxsmkStatusDot"
       [customize]="customizeNgxsmkStatusDot"
     >
       <span class="ngxsmk-sc-wrap">
-        <span class="ngxsmk-sc-wrap"><ngxsmk-status-dot variant="online" /> Online</span>
-        <span class="ngxsmk-sc-wrap"><ngxsmk-status-dot variant="away" /> Away</span>
-        <span class="ngxsmk-sc-wrap"><ngxsmk-status-dot variant="busy" /> Busy</span>
-        <span class="ngxsmk-sc-wrap"><ngxsmk-status-dot variant="offline" /> Offline</span>
+        <span class="ngxsmk-sc-wrap"
+          ><ngxsmk-status-dot variant="online" /> {{ 'feedback.online' | translate }}</span
+        >
+        <span class="ngxsmk-sc-wrap"
+          ><ngxsmk-status-dot variant="away" /> {{ 'feedback.away' | translate }}</span
+        >
+        <span class="ngxsmk-sc-wrap"
+          ><ngxsmk-status-dot variant="busy" /> {{ 'feedback.busy' | translate }}</span
+        >
+        <span class="ngxsmk-sc-wrap"
+          ><ngxsmk-status-dot variant="offline" /> {{ 'feedback.offline' | translate }}</span
+        >
       </span>
     </showcase-example>
   `,

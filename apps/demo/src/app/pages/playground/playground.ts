@@ -27,6 +27,7 @@ import {
   inject,
 } from '@angular/core';
 import { NgStyle } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
 import { AppNav } from '../../nav/nav';
 import { NgxsmkThemeService } from '@ngxsmk/theme';
 
@@ -717,6 +718,7 @@ type RadiusKey = keyof typeof RADII;
     NgxsmkHStack,
     NgxsmkDropdownMenu,
     AstRenderer,
+    TranslatePipe,
   ],
   template: `
     <app-nav />
@@ -726,7 +728,7 @@ type RadiusKey = keyof typeof RADII;
       <aside class="pg-sidenav">
         <button
           type="button"
-          aria-label="Code Editor"
+          [attr.aria-label]="'playground.codeEditor' | translate"
           class="sidenav-btn"
           [class.active]="tab() === 'code'"
           (click)="tab.set('code')"
@@ -750,7 +752,7 @@ type RadiusKey = keyof typeof RADII;
         </button>
         <button
           type="button"
-          aria-label="Theme Editor"
+          [attr.aria-label]="'playground.themeEditor' | translate"
           class="sidenav-btn"
           [class.active]="tab() === 'theme'"
           (click)="tab.set('theme')"
@@ -782,9 +784,9 @@ type RadiusKey = keyof typeof RADII;
       <section class="pg-panel">
         <header class="panel-head">
           <ngxsmk-h-stack justify="space-between" align="center" style="width: 100%;">
-            <ngxsmk-heading level="h3" style="margin: 0; font-size: 1.25rem; font-weight: 700;"
-              >Playground</ngxsmk-heading
-            >
+            <ngxsmk-heading level="h3" style="margin: 0; font-size: 1.25rem; font-weight: 700;">{{
+              'playground.title' | translate
+            }}</ngxsmk-heading>
 
             <ngxsmk-h-stack gap="var(--ngxsmk-space-2)">
               <ngxsmk-dropdown-menu [items]="themeMenuItems">
@@ -795,7 +797,7 @@ type RadiusKey = keyof typeof RADII;
                   size="sm"
                   ngxsmkDropdownTrigger
                 >
-                  Themes
+                  {{ 'nav.themes' | translate }}
                   <svg
                     style="margin-left:4px;"
                     xmlns="http://www.w3.org/2000/svg"
@@ -821,7 +823,7 @@ type RadiusKey = keyof typeof RADII;
                   size="sm"
                   ngxsmkDropdownTrigger
                 >
-                  Templates
+                  {{ 'nav.templates' | translate }}
                   <svg
                     style="margin-left:4px;"
                     xmlns="http://www.w3.org/2000/svg"
@@ -876,7 +878,7 @@ type RadiusKey = keyof typeof RADII;
                 [class.active]="themeTab() === 'base'"
                 (click)="themeTab.set('base')"
               >
-                Base Styles
+                {{ 'playground.tab.baseStyles' | translate }}
               </button>
               <button
                 type="button"
@@ -884,7 +886,7 @@ type RadiusKey = keyof typeof RADII;
                 [class.active]="themeTab() === 'components'"
                 (click)="themeTab.set('components')"
               >
-                Components
+                {{ 'nav.components' | translate }}
               </button>
               <button
                 type="button"
@@ -892,7 +894,7 @@ type RadiusKey = keyof typeof RADII;
                 [class.active]="themeTab() === 'advanced'"
                 (click)="themeTab.set('advanced')"
               >
-                Advanced
+                {{ 'playground.tab.advanced' | translate }}
               </button>
             </nav>
 
@@ -900,7 +902,9 @@ type RadiusKey = keyof typeof RADII;
               @if (themeTab() === 'base') {
                 <div class="theme-group">
                   <div class="theme-control-row">
-                    <span class="control-label">Create from accent</span>
+                    <span class="control-label">{{
+                      'playground.control.createFromAccent' | translate
+                    }}</span>
                     <ngxsmk-switch
                       [checked]="createFromAccent()"
                       (checkedChange)="createFromAccent.set($event)"
@@ -911,7 +915,9 @@ type RadiusKey = keyof typeof RADII;
 
                   <!-- ACCENT -->
                   <div class="theme-control-row">
-                    <span class="control-label">Color Accent</span>
+                    <span class="control-label">{{
+                      'playground.control.colorAccent' | translate
+                    }}</span>
                     <div class="color-picker-container">
                       <input
                         type="color"
@@ -930,7 +936,9 @@ type RadiusKey = keyof typeof RADII;
 
                   <!-- NEUTRAL -->
                   <div class="theme-control-row">
-                    <span class="control-label">Color Neutral</span>
+                    <span class="control-label">{{
+                      'playground.control.colorNeutral' | translate
+                    }}</span>
                     <div class="color-picker-container">
                       <input
                         type="color"
@@ -949,7 +957,9 @@ type RadiusKey = keyof typeof RADII;
 
                   <!-- CARD -->
                   <div class="theme-control-row">
-                    <span class="control-label">Color Card</span>
+                    <span class="control-label">{{
+                      'playground.control.colorCard' | translate
+                    }}</span>
                     <div class="color-picker-container">
                       <input
                         type="color"
@@ -968,7 +978,9 @@ type RadiusKey = keyof typeof RADII;
 
                   <!-- SURFACE / BACKGROUND -->
                   <div class="theme-control-row">
-                    <span class="control-label">Color Surface</span>
+                    <span class="control-label">{{
+                      'playground.control.colorSurface' | translate
+                    }}</span>
                     <div class="color-picker-container">
                       <input
                         type="color"
@@ -987,7 +999,9 @@ type RadiusKey = keyof typeof RADII;
 
                   <!-- TEXT -->
                   <div class="theme-control-row">
-                    <span class="control-label">Color Text Primary</span>
+                    <span class="control-label">{{
+                      'playground.control.colorTextPrimary' | translate
+                    }}</span>
                     <div class="color-picker-container">
                       <input
                         type="color"
@@ -1008,7 +1022,9 @@ type RadiusKey = keyof typeof RADII;
 
                   <!-- DENSITY PRESET -->
                   <div class="theme-control-row col">
-                    <span class="control-label">Preset Density</span>
+                    <span class="control-label">{{
+                      'playground.control.presetDensity' | translate
+                    }}</span>
                     <div class="segmented-control">
                       <button
                         type="button"
@@ -1016,7 +1032,7 @@ type RadiusKey = keyof typeof RADII;
                         [class.active]="density() === 'compact'"
                         (click)="density.set('compact')"
                       >
-                        Compact
+                        {{ 'playground.density.compact' | translate }}
                       </button>
                       <button
                         type="button"
@@ -1024,7 +1040,7 @@ type RadiusKey = keyof typeof RADII;
                         [class.active]="density() === 'default'"
                         (click)="density.set('default')"
                       >
-                        Default
+                        {{ 'playground.density.default' | translate }}
                       </button>
                       <button
                         type="button"
@@ -1032,7 +1048,7 @@ type RadiusKey = keyof typeof RADII;
                         [class.active]="density() === 'comfortable'"
                         (click)="density.set('comfortable')"
                       >
-                        Comfortable
+                        {{ 'playground.density.comfortable' | translate }}
                       </button>
                       <button
                         type="button"
@@ -1040,7 +1056,7 @@ type RadiusKey = keyof typeof RADII;
                         [class.active]="density() === 'gigantic'"
                         (click)="density.set('gigantic')"
                       >
-                        Gigantic
+                        {{ 'playground.density.gigantic' | translate }}
                       </button>
                     </div>
                   </div>
@@ -1049,7 +1065,9 @@ type RadiusKey = keyof typeof RADII;
 
                   <!-- HEADING FONT -->
                   <div class="theme-control-row">
-                    <span class="control-label">Heading Font</span>
+                    <span class="control-label">{{
+                      'playground.control.headingFont' | translate
+                    }}</span>
                     <select
                       class="theme-select"
                       [value]="headingFont()"
@@ -1063,7 +1081,9 @@ type RadiusKey = keyof typeof RADII;
 
                   <!-- BODY FONT -->
                   <div class="theme-control-row">
-                    <span class="control-label">Body Font</span>
+                    <span class="control-label">{{
+                      'playground.control.bodyFont' | translate
+                    }}</span>
                     <select
                       class="theme-select"
                       [value]="bodyFont()"
@@ -1077,7 +1097,9 @@ type RadiusKey = keyof typeof RADII;
 
                   <!-- TYPE SCALE -->
                   <div class="theme-control-row">
-                    <span class="control-label">Type Scale</span>
+                    <span class="control-label">{{
+                      'playground.control.typeScale' | translate
+                    }}</span>
                     <select
                       class="theme-select"
                       [value]="scale()"
@@ -1093,7 +1115,9 @@ type RadiusKey = keyof typeof RADII;
 
                   <!-- CORNER RADIUS -->
                   <div class="theme-control-row col">
-                    <span class="control-label">Corner Radius</span>
+                    <span class="control-label">{{
+                      'playground.control.cornerRadius' | translate
+                    }}</span>
                     <div class="segmented-control">
                       @for (r of radii; track r.key) {
                         <button
@@ -1112,20 +1136,21 @@ type RadiusKey = keyof typeof RADII;
 
               @if (themeTab() === 'components') {
                 <div class="theme-group empty-state">
-                  <span class="empty-title">Component-specific Styles</span>
-                  <span class="empty-desc"
-                    >Fine-tune spacing and padding overrides for individual components. Coming
-                    soon.</span
-                  >
+                  <span class="empty-title">{{
+                    'playground.empty.components.title' | translate
+                  }}</span>
+                  <span class="empty-desc">{{
+                    'playground.empty.components.desc' | translate
+                  }}</span>
                 </div>
               }
 
               @if (themeTab() === 'advanced') {
                 <div class="theme-group empty-state">
-                  <span class="empty-title">Advanced Tokens</span>
-                  <span class="empty-desc"
-                    >Directly edit the underlying StyleX design tokens scale. Coming soon.</span
-                  >
+                  <span class="empty-title">{{
+                    'playground.empty.advanced.title' | translate
+                  }}</span>
+                  <span class="empty-desc">{{ 'playground.empty.advanced.desc' | translate }}</span>
                 </div>
               }
             </div>
@@ -1181,7 +1206,7 @@ type RadiusKey = keyof typeof RADII;
               [class.active]="viewportMode() === 'desktop'"
               (click)="viewportMode.set('desktop')"
             >
-              Desktop
+              {{ 'playground.viewport.desktop' | translate }}
             </button>
             <button
               type="button"
@@ -1189,7 +1214,7 @@ type RadiusKey = keyof typeof RADII;
               [class.active]="viewportMode() === 'phone'"
               (click)="viewportMode.set('phone')"
             >
-              Phone
+              {{ 'playground.viewport.phone' | translate }}
             </button>
             <button
               type="button"
@@ -1197,7 +1222,7 @@ type RadiusKey = keyof typeof RADII;
               [class.active]="viewportMode() === 'expand'"
               (click)="viewportMode.set('expand')"
             >
-              Expand
+              {{ 'playground.viewport.expand' | translate }}
             </button>
           </ngxsmk-h-stack>
 
@@ -1209,7 +1234,7 @@ type RadiusKey = keyof typeof RADII;
               class="toolbar-btn icon-btn"
               [class.active]="showGrid()"
               (click)="showGrid.set(!showGrid())"
-              title="Toggle Grid Lines"
+              [attr.title]="'playground.toggleGrid' | translate"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -1236,7 +1261,7 @@ type RadiusKey = keyof typeof RADII;
               class="toolbar-btn icon-btn"
               [class.active]="inspectMode()"
               (click)="inspectMode.set(!inspectMode())"
-              title="Toggle Element Inspector"
+              [attr.title]="'playground.toggleInspector' | translate"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -1265,7 +1290,7 @@ type RadiusKey = keyof typeof RADII;
               type="button"
               class="toolbar-btn icon-btn"
               (click)="toggleDarkMode()"
-              title="Toggle dark mode"
+              [attr.title]="'playground.toggleDarkMode' | translate"
             >
               @if (mode() === 'dark') {
                 <svg
@@ -1308,14 +1333,18 @@ type RadiusKey = keyof typeof RADII;
               }
             </button>
             <button type="button" class="toolbar-btn text-btn" (click)="copyLink()">
-              {{ linkCopied() ? '✓ Copied' : 'Copy URL' }}
+              {{
+                linkCopied()
+                  ? ('playground.copied' | translate)
+                  : ('playground.copyUrl' | translate)
+              }}
             </button>
             <button
               type="button"
               class="toolbar-btn text-btn primary"
               (click)="showDownloadModal.set(true)"
             >
-              Download theme
+              {{ 'playground.downloadTheme' | translate }}
             </button>
           </ngxsmk-h-stack>
         </header>
@@ -1351,9 +1380,9 @@ type RadiusKey = keyof typeof RADII;
         <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
         <div class="modal-card" (click)="$event.stopPropagation()">
           <header class="modal-head">
-            <ngxsmk-heading level="h3" style="margin: 0; font-size: 1.15rem; font-weight: 700;"
-              >Export Design System Theme</ngxsmk-heading
-            >
+            <ngxsmk-heading level="h3" style="margin: 0; font-size: 1.15rem; font-weight: 700;">{{
+              'playground.export.title' | translate
+            }}</ngxsmk-heading>
             <button type="button" class="close-btn" (click)="showDownloadModal.set(false)">
               &times;
             </button>
@@ -1366,7 +1395,7 @@ type RadiusKey = keyof typeof RADII;
               [class.active]="exportFormat() === 'css'"
               (click)="exportFormat.set('css')"
             >
-              CSS Variables
+              {{ 'playground.export.css' | translate }}
             </button>
             <button
               type="button"
@@ -1374,7 +1403,7 @@ type RadiusKey = keyof typeof RADII;
               [class.active]="exportFormat() === 'tailwind'"
               (click)="exportFormat.set('tailwind')"
             >
-              Tailwind CSS
+              {{ 'playground.export.tailwind' | translate }}
             </button>
             <button
               type="button"
@@ -1382,7 +1411,7 @@ type RadiusKey = keyof typeof RADII;
               [class.active]="exportFormat() === 'stylex'"
               (click)="exportFormat.set('stylex')"
             >
-              StyleX JS
+              {{ 'playground.export.stylex' | translate }}
             </button>
           </nav>
 
@@ -1398,7 +1427,11 @@ type RadiusKey = keyof typeof RADII;
               size="sm"
               (click)="copyExportCode()"
             >
-              {{ exportCopied() ? '✓ Copied' : 'Copy Code' }}
+              {{
+                exportCopied()
+                  ? ('playground.export.copied' | translate)
+                  : ('playground.export.copyCode' | translate)
+              }}
             </button>
             <button
               type="button"
@@ -1407,7 +1440,7 @@ type RadiusKey = keyof typeof RADII;
               size="sm"
               (click)="triggerDownload()"
             >
-              Download Config File
+              {{ 'playground.export.downloadConfig' | translate }}
             </button>
           </footer>
         </div>

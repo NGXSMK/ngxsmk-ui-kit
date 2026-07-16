@@ -22,6 +22,7 @@ import { NgxsmkLinkProvider } from '@ngxsmk/core/link-provider';
 import { NgxsmkMobileNav, NgxsmkMobileNavToggle } from '@ngxsmk/core/mobile-nav';
 import { NgxsmkBreadcrumbItem } from '@ngxsmk/core/breadcrumb-item';
 import { Component, signal } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { ShowcaseExample } from '../../showcase/showcase-example';
 
 interface AppOutlineItem {
@@ -55,31 +56,33 @@ interface AppOutlineItem {
     NgxsmkTopNavMegaMenuFeaturedCard,
     NgxsmkMobileNav,
     NgxsmkMobileNavToggle,
+    TranslatePipe,
   ],
   template: `
-    <h2 class="ngxsmk-page-title">Navigation</h2>
+    <h2 class="ngxsmk-page-title">{{ 'category.navigation' | translate }}</h2>
     <p class="ngxsmk-page-desc">
-      Navigation primitives - from tiny breadcrumbs to full app shells - that share the theme token
-      engine, so every link, tab, and menu recolors with your brand.
+      {{ 'navigation.desc' | translate }}
     </p>
 
     <showcase-example
-      title="Breadcrumb Item"
-      description="Trail of links that shows the current location. Wrap items in a nav with an aria-label; the last item renders as the active page."
+      [title]="'navigation.breadcrumbItem' | translate"
+      [description]="'navigation.breadcrumbItemDesc' | translate"
       [code]="codeBreadcrumb"
       [component]="NgxsmkBreadcrumbItem"
       [customize]="customizeNgxsmkBreadcrumbItem"
     >
-      <nav aria-label="Breadcrumb" class="ngxsmk-sc-wrap">
-        <ngxsmk-breadcrumb-item href="/">Home</ngxsmk-breadcrumb-item>
-        <ngxsmk-breadcrumb-item href="/docs">Docs</ngxsmk-breadcrumb-item>
-        <ngxsmk-breadcrumb-item>Components</ngxsmk-breadcrumb-item>
+      <nav [attr.aria-label]="'navigation.breadcrumbAria' | translate" class="ngxsmk-sc-wrap">
+        <ngxsmk-breadcrumb-item href="/">{{
+          'navigation.home' | translate
+        }}</ngxsmk-breadcrumb-item>
+        <ngxsmk-breadcrumb-item href="/docs">{{ 'nav.docs' | translate }}</ngxsmk-breadcrumb-item>
+        <ngxsmk-breadcrumb-item>{{ 'nav.components' | translate }}</ngxsmk-breadcrumb-item>
       </nav>
     </showcase-example>
 
     <showcase-example
-      title="Outline"
-      description="A page outline / table-of-contents with depth-based indentation and an active entry. Pass the items array and the active id."
+      [title]="'navigation.outline' | translate"
+      [description]="'navigation.outlineDesc' | translate"
       [code]="codeOutline"
       [component]="NgxsmkOutline"
       [customize]="customizeNgxsmkOutline"
@@ -88,8 +91,8 @@ interface AppOutlineItem {
     </showcase-example>
 
     <showcase-example
-      title="Tab Menu"
-      description='A segmented tab strip. Drop any clickable elements inside - here a set of role="tab" buttons.'
+      [title]="'navigation.tabMenu' | translate"
+      [description]="'navigation.tabMenuDesc' | translate"
       [code]="codeTabMenu"
       [component]="NgxsmkTabMenu"
       [customize]="customizeNgxsmkTabMenu"
@@ -101,7 +104,7 @@ interface AppOutlineItem {
           [class.ngxsmk-tab-menu__tab--active]="tabActive() === 'overview'"
           (click)="tabActive.set('overview')"
         >
-          Overview
+          {{ 'navigation.overview' | translate }}
         </button>
         <button
           class="ngxsmk-tab-menu__tab"
@@ -109,7 +112,7 @@ interface AppOutlineItem {
           [class.ngxsmk-tab-menu__tab--active]="tabActive() === 'activity'"
           (click)="tabActive.set('activity')"
         >
-          Activity
+          {{ 'navigation.activity' | translate }}
         </button>
         <button
           class="ngxsmk-tab-menu__tab"
@@ -117,21 +120,21 @@ interface AppOutlineItem {
           [class.ngxsmk-tab-menu__tab--active]="tabActive() === 'settings'"
           (click)="tabActive.set('settings')"
         >
-          Settings
+          {{ 'navigation.settings' | translate }}
         </button>
       </ngxsmk-tab-menu>
     </showcase-example>
 
     <showcase-example
-      title="Nav Icon"
-      description="Compact icon-plus-label entry for vertical toolbars and rail menus. Set active and size as needed."
+      [title]="'navigation.navIcon' | translate"
+      [description]="'navigation.navIconDesc' | translate"
       [code]="codeNavIcon"
       [component]="NgxsmkNavIcon"
       [customize]="customizeNgxsmkNavIcon"
     >
       <span class="ngxsmk-sc-wrap">
         <ngxsmk-nav-icon
-          label="Home"
+          [label]="'navigation.home' | translate"
           [active]="navIconActive() === 'home'"
           (click)="navIconActive.set('home')"
         >
@@ -149,7 +152,7 @@ interface AppOutlineItem {
           </svg>
         </ngxsmk-nav-icon>
         <ngxsmk-nav-icon
-          label="Search"
+          [label]="'navigation.search' | translate"
           [active]="navIconActive() === 'search'"
           (click)="navIconActive.set('search')"
         >
@@ -168,7 +171,7 @@ interface AppOutlineItem {
           </svg>
         </ngxsmk-nav-icon>
         <ngxsmk-nav-icon
-          label="Settings"
+          [label]="'navigation.settings' | translate"
           size="lg"
           [active]="navIconActive() === 'settings'"
           (click)="navIconActive.set('settings')"
@@ -193,25 +196,25 @@ interface AppOutlineItem {
     </showcase-example>
 
     <showcase-example
-      title="Nav Heading Menu"
-      description="A label that expands into a stacked list of sub-links. Mark each entry with the nav-item attribute."
+      [title]="'navigation.navHeadingMenu' | translate"
+      [description]="'navigation.navHeadingMenuDesc' | translate"
       [code]="codeNavHeadingMenu"
       [component]="NgxsmkNavHeadingMenu"
       [customize]="customizeNgxsmkNavHeadingMenu"
     >
       <div class="ngxsmk-sc-surface" style="width: 16rem;">
         <ngxsmk-nav-heading-menu>
-          Products
-          <a nav-item href="#">Overview</a>
-          <a nav-item href="#">Pricing</a>
-          <a nav-item href="#">Changelog</a>
+          {{ 'navigation.products' | translate }}
+          <a nav-item href="#">{{ 'navigation.overview' | translate }}</a>
+          <a nav-item href="#">{{ 'navigation.pricing' | translate }}</a>
+          <a nav-item href="#">{{ 'navigation.changelog' | translate }}</a>
         </ngxsmk-nav-heading-menu>
       </div>
     </showcase-example>
 
     <showcase-example
-      title="Side Nav"
-      description="A collapsible vertical navigation shell. Group items under headings and sections; the collapse button is wired to the shell."
+      [title]="'navigation.sideNav' | translate"
+      [description]="'navigation.sideNavDesc' | translate"
       [code]="codeSideNav"
       [component]="NgxsmkSideNav"
       [customize]="customizeNgxsmkSideNav"
@@ -221,35 +224,39 @@ interface AppOutlineItem {
       >
         <ngxsmk-side-nav>
           <ngxsmk-side-nav-section>
-            <ngxsmk-side-nav-heading>Workspace</ngxsmk-side-nav-heading>
+            <ngxsmk-side-nav-heading>{{
+              'navigation.workspace' | translate
+            }}</ngxsmk-side-nav-heading>
             <ngxsmk-side-nav-item
               [active]="sideNavActive() === 'dashboard'"
               (clicked)="sideNavActive.set('dashboard')"
-              >Dashboard</ngxsmk-side-nav-item
+              >{{ 'navigation.dashboard' | translate }}</ngxsmk-side-nav-item
             >
             <ngxsmk-side-nav-item
               [active]="sideNavActive() === 'analytics'"
               (clicked)="sideNavActive.set('analytics')"
               badge="3"
-              >Analytics</ngxsmk-side-nav-item
+              >{{ 'navigation.analytics' | translate }}</ngxsmk-side-nav-item
             >
             <ngxsmk-side-nav-item
               [active]="sideNavActive() === 'reports'"
               (clicked)="sideNavActive.set('reports')"
-              >Reports</ngxsmk-side-nav-item
+              >{{ 'navigation.reports' | translate }}</ngxsmk-side-nav-item
             >
           </ngxsmk-side-nav-section>
           <ngxsmk-side-nav-section>
-            <ngxsmk-side-nav-heading>Account</ngxsmk-side-nav-heading>
+            <ngxsmk-side-nav-heading>{{
+              'navigation.account' | translate
+            }}</ngxsmk-side-nav-heading>
             <ngxsmk-side-nav-item
               [active]="sideNavActive() === 'profile'"
               (clicked)="sideNavActive.set('profile')"
-              >Profile</ngxsmk-side-nav-item
+              >{{ 'navigation.profile' | translate }}</ngxsmk-side-nav-item
             >
             <ngxsmk-side-nav-item
               [active]="sideNavActive() === 'billing'"
               (clicked)="sideNavActive.set('billing')"
-              >Billing</ngxsmk-side-nav-item
+              >{{ 'navigation.billing' | translate }}</ngxsmk-side-nav-item
             >
           </ngxsmk-side-nav-section>
           <ngxsmk-side-nav-collapse-button />
@@ -258,8 +265,8 @@ interface AppOutlineItem {
     </showcase-example>
 
     <showcase-example
-      title="Top Nav"
-      description="A horizontal application bar. Combine a brand heading, active items, and a dropdown menu."
+      [title]="'navigation.topNav' | translate"
+      [description]="'navigation.topNavDesc' | translate"
       [code]="codeTopNav"
       [component]="NgxsmkTopNav"
       [customize]="customizeNgxsmkTopNav"
@@ -272,23 +279,23 @@ interface AppOutlineItem {
           <ngxsmk-top-nav-item
             [active]="topNavActive() === 'home'"
             (clicked)="topNavActive.set('home')"
-            >Home</ngxsmk-top-nav-item
+            >{{ 'navigation.home' | translate }}</ngxsmk-top-nav-item
           >
           <ngxsmk-top-nav-item
             [active]="topNavActive() === 'about'"
             (clicked)="topNavActive.set('about')"
-            >About</ngxsmk-top-nav-item
+            >{{ 'navigation.about' | translate }}</ngxsmk-top-nav-item
           >
           <ngxsmk-top-nav-menu>
-            <ngxsmk-top-nav-item>Resources ▾</ngxsmk-top-nav-item>
+            <ngxsmk-top-nav-item>{{ 'navigation.resources' | translate }} ▾</ngxsmk-top-nav-item>
           </ngxsmk-top-nav-menu>
         </ngxsmk-top-nav>
       </div>
     </showcase-example>
 
     <showcase-example
-      title="Mega Menu"
-      description="A rich hover-revealed dropdown for the top nav: grouped columns of items plus a featured card. Hover “Products” to reveal it."
+      [title]="'navigation.megaMenu' | translate"
+      [description]="'navigation.megaMenuDesc' | translate"
       [code]="codeMegaMenu"
       [component]="NgxsmkTopNav"
       [customize]="customizeNgxsmkTopNav"
@@ -299,40 +306,44 @@ interface AppOutlineItem {
         <ngxsmk-top-nav>
           <ngxsmk-top-nav-heading>Acme</ngxsmk-top-nav-heading>
           <ngxsmk-top-nav-mega-menu [featured]="true">
-            Products ▾
+            {{ 'navigation.products' | translate }} ▾
             <div mega-column>
               <ngxsmk-top-nav-mega-menu-item
-                title="Analytics"
-                description="Track your metrics"
+                [title]="'navigation.analytics' | translate"
+                [description]="'navigation.trackMetrics' | translate"
                 href="#"
               />
               <ngxsmk-top-nav-mega-menu-item
-                title="Automation"
-                description="Build workflows"
+                [title]="'navigation.automation' | translate"
+                [description]="'navigation.buildWorkflows' | translate"
                 href="#"
               />
               <ngxsmk-top-nav-mega-menu-item
-                title="Insights"
-                description="Surface trends"
+                [title]="'navigation.insights' | translate"
+                [description]="'navigation.surfaceTrends' | translate"
                 href="#"
               />
             </div>
             <div mega-column>
               <ngxsmk-top-nav-mega-menu-item
-                title="Reports"
-                description="Share progress"
+                [title]="'navigation.reports' | translate"
+                [description]="'navigation.shareProgress' | translate"
                 href="#"
               />
               <ngxsmk-top-nav-mega-menu-item
-                title="Integrations"
-                description="Connect tools"
+                [title]="'navigation.integrations' | translate"
+                [description]="'navigation.connectTools' | translate"
                 href="#"
               />
-              <ngxsmk-top-nav-mega-menu-item title="API" description="Build custom apps" href="#" />
+              <ngxsmk-top-nav-mega-menu-item
+                [title]="'navigation.api' | translate"
+                [description]="'navigation.buildCustomApps' | translate"
+                href="#"
+              />
             </div>
             <ngxsmk-top-nav-mega-menu-featured-card mega-featured href="#">
-              <strong>What&rsquo;s new</strong>
-              <span>Explore the v0.1 release notes and fresh templates.</span>
+              <strong>{{ 'navigation.whatsNew' | translate }}</strong>
+              <span>{{ 'navigation.whatsNewDesc' | translate }}</span>
             </ngxsmk-top-nav-mega-menu-featured-card>
           </ngxsmk-top-nav-mega-menu>
         </ngxsmk-top-nav>
@@ -340,8 +351,8 @@ interface AppOutlineItem {
     </showcase-example>
 
     <showcase-example
-      title="Mobile Nav"
-      description="A slide-in drawer for small screens, opened by a hamburger toggle. The toggle emits an event to flip the open signal."
+      [title]="'navigation.mobileNav' | translate"
+      [description]="'navigation.mobileNavDesc' | translate"
       [code]="codeMobileNav"
       [component]="NgxsmkMobileNavToggle"
       [customize]="customizeNgxsmkMobileNavToggle"
@@ -349,28 +360,32 @@ interface AppOutlineItem {
       <div class="ngxsmk-sc-surface" style="position: relative; overflow: hidden;">
         <ngxsmk-mobile-nav-toggle (toggled)="mobileNavOpen.set(!mobileNavOpen())" />
         <p class="ngxsmk-demo-hint">
-          Tap the toggle to open the drawer. (Renders as an overlay in a real app.)
+          {{ 'navigation.tapHint' | translate }}
         </p>
         <ngxsmk-mobile-nav
           [open]="mobileNavOpen()"
           (openedChange)="mobileNavOpen.set($event)"
           label="Acme"
         >
-          <a href="#" class="ngxsmk-demo-mobile-link">Home</a>
-          <a href="#" class="ngxsmk-demo-mobile-link">Projects</a>
-          <a href="#" class="ngxsmk-demo-mobile-link">Settings</a>
-          <a href="#" class="ngxsmk-demo-mobile-link">Sign out</a>
+          <a href="#" class="ngxsmk-demo-mobile-link">{{ 'navigation.home' | translate }}</a>
+          <a href="#" class="ngxsmk-demo-mobile-link">{{ 'navigation.projects' | translate }}</a>
+          <a href="#" class="ngxsmk-demo-mobile-link">{{ 'navigation.settings' | translate }}</a>
+          <a href="#" class="ngxsmk-demo-mobile-link">{{ 'navigation.signOut' | translate }}</a>
         </ngxsmk-mobile-nav>
       </div>
     </showcase-example>
 
     <showcase-example
-      title="Link Provider"
-      description="A directive that supplies a shared link template (via the NGXSMK_LINK_PROVIDER token). Drop nav links in and the active entry is highlighted."
+      [title]="'navigation.linkProvider' | translate"
+      [description]="'navigation.linkProviderDesc' | translate"
       [code]="codeLinkProvider"
       [component]="NgxsmkLinkProvider"
     >
-      <nav class="ngxsmk-sc-wrap" [ngxsmkLinkProvider]="linkTpl" aria-label="Primary">
+      <nav
+        class="ngxsmk-sc-wrap"
+        [ngxsmkLinkProvider]="linkTpl"
+        [attr.aria-label]="'navigation.primaryAria' | translate"
+      >
         @for (item of linkItems; track item.href) {
           <a
             class="ngxsmk-link"
@@ -387,8 +402,8 @@ interface AppOutlineItem {
     </showcase-example>
 
     <showcase-example
-      title="Side Nav (composed)"
-      description="Build a vertical nav from the side-nav primitives - sections, headings, items, and a collapse button - inside a constrained container."
+      [title]="'navigation.sideNavComposed' | translate"
+      [description]="'navigation.sideNavComposedDesc' | translate"
       [code]="codeSideNavComposed"
       [component]="NgxsmkSideNav"
       [customize]="customizeNgxsmkSideNav"
@@ -398,7 +413,9 @@ interface AppOutlineItem {
       >
         <ngxsmk-side-nav>
           <ngxsmk-side-nav-section>
-            <ngxsmk-side-nav-heading>Workspace</ngxsmk-side-nav-heading>
+            <ngxsmk-side-nav-heading>{{
+              'navigation.workspace' | translate
+            }}</ngxsmk-side-nav-heading>
             @for (item of sideNavComposedMain; track item.id) {
               <ngxsmk-side-nav-item
                 [active]="sideNavComposedActive() === item.id"
@@ -408,7 +425,9 @@ interface AppOutlineItem {
             }
           </ngxsmk-side-nav-section>
           <ngxsmk-side-nav-section>
-            <ngxsmk-side-nav-heading>Account</ngxsmk-side-nav-heading>
+            <ngxsmk-side-nav-heading>{{
+              'navigation.account' | translate
+            }}</ngxsmk-side-nav-heading>
             @for (item of sideNavComposedAccount; track item.id) {
               <ngxsmk-side-nav-item
                 [active]="sideNavComposedActive() === item.id"
@@ -423,8 +442,8 @@ interface AppOutlineItem {
     </showcase-example>
 
     <showcase-example
-      title="Top Nav (composed)"
-      description="Assemble a horizontal bar from top-nav primitives - heading, items, a menu, and mega-menu cards - inside a constrained container."
+      [title]="'navigation.topNavComposed' | translate"
+      [description]="'navigation.topNavComposedDesc' | translate"
       [code]="codeTopNavComposed"
       [component]="NgxsmkTopNavHeading"
       [customize]="customizeNgxsmkTopNavHeading"
@@ -442,7 +461,7 @@ interface AppOutlineItem {
             >
           }
           <ngxsmk-top-nav-menu>
-            <ngxsmk-top-nav-item>Resources ▾</ngxsmk-top-nav-item>
+            <ngxsmk-top-nav-item>{{ 'navigation.resources' | translate }} ▾</ngxsmk-top-nav-item>
           </ngxsmk-top-nav-menu>
         </div>
         <div class="ngxsmk-top-nav-composed__mega">
@@ -454,8 +473,8 @@ interface AppOutlineItem {
             />
           }
           <ngxsmk-top-nav-mega-menu-featured-card href="#">
-            <strong>What&rsquo;s new</strong>
-            <span>Explore the v0.1 release notes and fresh templates.</span>
+            <strong>{{ 'navigation.whatsNew' | translate }}</strong>
+            <span>{{ 'navigation.whatsNewDesc' | translate }}</span>
           </ngxsmk-top-nav-mega-menu-featured-card>
         </div>
       </div>
