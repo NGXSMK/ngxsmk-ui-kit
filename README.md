@@ -537,7 +537,8 @@ stars are the main way other Angular developers discover open-source projects
 like this one. Sharing the [live demo](https://ngxsmk.dev) with your team helps
 too.
 
-[![Star History Chart](https://api.star-history.com/svg?repos=NGXSMK/ngxsmk-ui-kit&type=Date)](https://star-history.com/#NGXSMK/ngxsmk-ui-kit&Date)
+[![GitHub stars](https://img.shields.io/github/stars/NGXSMK/ngxsmk-ui-kit?style=for-the-badge&logo=github&label=Star%20on%20GitHub&color=7c3aed)](https://github.com/NGXSMK/ngxsmk-ui-kit/stargazers)
+[![Follow the star history](https://img.shields.io/badge/📈-Star%20history-2694fe?style=for-the-badge)](https://star-history.com/#NGXSMK/ngxsmk-ui-kit&Date)
 
 ## License
 
