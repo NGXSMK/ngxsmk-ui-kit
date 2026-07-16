@@ -1,5 +1,11 @@
 import { ChangeDetectionStrategy, Component, computed, effect, input } from '@angular/core';
-import { AbstractCanvasChart, ChartHover, SHARED_CHART_STYLES, niceTicks, rgba } from '@ngxsmk/core/chart-engine';
+import {
+  AbstractCanvasChart,
+  ChartHover,
+  SHARED_CHART_STYLES,
+  niceTicks,
+  rgba,
+} from '@ngxsmk/core/chart-engine';
 
 export interface NgxsmkBarChartDataPoint {
   label: string;

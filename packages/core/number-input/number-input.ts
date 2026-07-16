@@ -32,18 +32,18 @@
     >
       âˆ’
     </button>
-      <input
-        #field
-        class="ngxsmk-number-input__field"
-        type="number"
-        [min]="min()"
-        [max]="max()"
-        [step]="step()"
-        [disabled]="disabled()"
-        [attr.placeholder]="placeholder() || null"
-        (input)="onInput($event)"
-        (change)="onCommit($event)"
-      />
+    <input
+      #field
+      class="ngxsmk-number-input__field"
+      type="number"
+      [min]="min()"
+      [max]="max()"
+      [step]="step()"
+      [disabled]="disabled()"
+      [attr.placeholder]="placeholder() || null"
+      (input)="onInput($event)"
+      (change)="onCommit($event)"
+    />
     <button
       type="button"
       class="ngxsmk-number-input__btn"

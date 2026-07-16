@@ -1,5 +1,12 @@
 import { ChangeDetectionStrategy, Component, computed, effect, input } from '@angular/core';
-import { AbstractCanvasChart, ChartHover, SHARED_CHART_STYLES, easeOutBack, niceTicks, rgba } from '@ngxsmk/core/chart-engine';
+import {
+  AbstractCanvasChart,
+  ChartHover,
+  SHARED_CHART_STYLES,
+  easeOutBack,
+  niceTicks,
+  rgba,
+} from '@ngxsmk/core/chart-engine';
 
 export interface NgxsmkScatterDataPoint {
   x: number;
@@ -101,6 +108,10 @@ export class NgxsmkScatterChart extends AbstractCanvasChart {
     const d = data[best];
     const lines = [`x: ${d.x}`, `y: ${d.y}`];
     if (d.label) lines.unshift(d.label);
-    return { title: d.label, lines, color: rgba(this.colorVar(this.color(), this.theme.primary), 1) };
+    return {
+      title: d.label,
+      lines,
+      color: rgba(this.colorVar(this.color(), this.theme.primary), 1),
+    };
   }
 }

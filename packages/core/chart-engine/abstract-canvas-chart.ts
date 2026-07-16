@@ -10,14 +10,7 @@ import {
   input,
   viewChild,
 } from '@angular/core';
-import {
-  ChartHover,
-  ChartTheme,
-  RGBA,
-  easeOutCubic,
-  resolveTheme,
-  rgba,
-} from './chart-engine';
+import { ChartHover, ChartTheme, RGBA, easeOutCubic, resolveTheme, rgba } from './chart-engine';
 
 export interface YTick {
   y: number;
@@ -300,7 +293,11 @@ function parse(input: string): RGBA {
   const s = (input || '').trim();
   if (s.startsWith('#')) {
     let hex = s.slice(1);
-    if (hex.length === 3) hex = hex.split('').map((c) => c + c).join('');
+    if (hex.length === 3)
+      hex = hex
+        .split('')
+        .map((c) => c + c)
+        .join('');
     const num = parseInt(hex, 16);
     if (Number.isNaN(num)) return { r: 148, g: 163, b: 184, a: 1 };
     return { r: (num >> 16) & 255, g: (num >> 8) & 255, b: num & 255, a: 1 };

@@ -1,5 +1,11 @@
 import { ChangeDetectionStrategy, Component, computed, effect, input } from '@angular/core';
-import { AbstractCanvasChart, ChartHover, SHARED_CHART_STYLES, mix, rgba } from '@ngxsmk/core/chart-engine';
+import {
+  AbstractCanvasChart,
+  ChartHover,
+  SHARED_CHART_STYLES,
+  mix,
+  rgba,
+} from '@ngxsmk/core/chart-engine';
 
 export interface NgxsmkHeatmapLabels {
   x: string[];
@@ -24,7 +30,11 @@ export class NgxsmkHeatmapChart extends AbstractCanvasChart {
   readonly labels = input<NgxsmkHeatmapLabels>({ x: [], y: [] });
   readonly color = input('var(--ngxsmk-color-primary)');
 
-  private readonly flat = computed(() => this.data().flat().filter((v) => v !== undefined));
+  private readonly flat = computed(() =>
+    this.data()
+      .flat()
+      .filter((v) => v !== undefined),
+  );
   private readonly minVal = computed(() => (this.flat().length ? Math.min(...this.flat()) : 0));
   private readonly maxVal = computed(() => (this.flat().length ? Math.max(...this.flat()) : 1));
 
