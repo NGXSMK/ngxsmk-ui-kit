@@ -146,7 +146,7 @@ interface SearchItem {
 
           <a
             class="ngxsmk-nav__icon-btn"
-            href="https://github.com/NGXSMK/ngxsmk-ui-kit"
+            href="https://github.com"
             target="_blank"
             [attr.aria-label]="'nav.github' | translate"
           >
@@ -158,18 +158,6 @@ interface SearchItem {
           </a>
 
           <app-language-switcher />
-          <a
-            class="ngxsmk-nav__star-btn"
-            href="https://github.com/NGXSMK/ngxsmk-ui-kit"
-            target="_blank"
-          >
-            <svg class="star-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.787 1.4 8.168L12 18.896l-7.334 3.867 1.4-8.168L.132 9.21l8.2-1.192z"
-              />
-            </svg>
-            <span>{{ 'nav.starOnGithub' | translate }}</span>
-          </a>
           <a class="ngxsmk-nav__cta" routerLink="/showcase/explorer">{{
             'nav.getStarted' | translate
           }}</a>
@@ -202,13 +190,6 @@ interface SearchItem {
           routerLink="/playground"
           (click)="mobileOpen.set(false)"
           >{{ 'nav.playground' | translate }}</a
-        >
-        <a
-          class="ngxsmk-nav__mobile-link"
-          href="https://github.com/NGXSMK/ngxsmk-ui-kit"
-          target="_blank"
-          (click)="mobileOpen.set(false)"
-          >★ {{ 'nav.starOnGithub' | translate }}</a
         >
         <a
           class="ngxsmk-nav__cta ngxsmk-nav__mobile-cta"
@@ -654,36 +635,6 @@ interface SearchItem {
         display: inline-flex;
       }
       .ngxsmk-nav__cta {
-        display: none;
-      }
-    }
-
-    .ngxsmk-nav__star-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--ngxsmk-space-2, 0.5rem);
-      padding: 0.4rem 0.75rem;
-      font-size: 0.85rem;
-      font-weight: 600;
-      text-decoration: none;
-      color: var(--ngxsmk-color-on-surface, #09090b);
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
-      border-radius: var(--ngxsmk-radius-md, 0.375rem);
-      background: var(--ngxsmk-color-surface, #ffffff);
-      transition: all 0.2s;
-      cursor: pointer;
-    }
-    .ngxsmk-nav__star-btn:hover {
-      background: var(--ngxsmk-color-surface-hover, #f4f4f5);
-      border-color: var(--ngxsmk-color-outline-hover, #d4d4d8);
-      transform: translateY(-1px);
-    }
-    .ngxsmk-nav__star-btn .star-icon {
-      color: #eab308;
-    }
-
-    @media (max-width: 768px) {
-      .ngxsmk-nav__star-btn {
         display: none;
       }
     }
