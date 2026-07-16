@@ -125,13 +125,13 @@ export class NgxsmkTab {
     }
 
     .ngxsmk-tabs__trigger:disabled {
-      opacity: 0.5;
+      opacity: var(--ngxsmk-opacity-disabled);
       cursor: not-allowed;
     }
 
     .ngxsmk-tabs__trigger:focus-visible {
-      outline: 2px solid var(--ngxsmk-color-ring);
-      outline-offset: -2px;
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring);
       border-radius: var(--ngxsmk-radius-sm);
     }
 
@@ -143,8 +143,8 @@ export class NgxsmkTab {
     }
 
     .ngxsmk-tabs__panel:focus-visible {
-      outline: 2px solid var(--ngxsmk-color-ring);
-      outline-offset: 2px;
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring);
       border-radius: var(--ngxsmk-radius-sm);
     }
   `,

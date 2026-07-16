@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, output, signal } from '@angular/core';
+﻿import { ChangeDetectionStrategy, Component, output, signal } from '@angular/core';
 
 @Component({
   standalone: true,
@@ -11,7 +11,7 @@ import { ChangeDetectionStrategy, Component, output, signal } from '@angular/cor
       (click)="toggle()"
       [attr.aria-label]="recording() ? 'Stop recording' : 'Start recording'"
     >
-      {{ recording() ? '⬤' : '🎤' }}
+      {{ recording() ? 'â¬¤' : 'ðŸŽ¤' }}
     </button>
     @if (transcript()) {
       <span class="ngxsmk-voice-input__transcript">{{ transcript() }}</span>
@@ -32,11 +32,17 @@ import { ChangeDetectionStrategy, Component, output, signal } from '@angular/cor
       border: none;
       background: var(--ngxsmk-color-surface-variant);
       cursor: pointer;
-      font-size: 1.125rem;
+      font-size: var(--ngxsmk-text-title-md-size);
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all var(--ngxsmk-duration-fast);
+      transition:
+        color,
+        background-color,
+        border-color,
+        box-shadow,
+        transform,
+        opacity var(--ngxsmk-duration-fast);
     }
     .ngxsmk-voice-input__button:hover {
       background: var(--ngxsmk-color-surface-hover);
@@ -47,7 +53,7 @@ import { ChangeDetectionStrategy, Component, output, signal } from '@angular/cor
       animation: pulse 1s infinite;
     }
     .ngxsmk-voice-input__transcript {
-      font-size: 0.875rem;
+      font-size: var(--ngxsmk-text-label-lg-size);
       color: var(--ngxsmk-color-on-surface-variant);
     }
     @keyframes pulse {

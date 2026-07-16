@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+﻿import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 
 @Component({
   standalone: true,
   selector: 'ngxsmk-chat-dictation-button',
-  template: `🎤`,
+  template: `ðŸŽ¤`,
   host: {
     class: 'ngxsmk-chat-dictation-button',
     '[attr.data-listening]': 'listening() ? "" : null',
@@ -22,8 +22,14 @@ import { ChangeDetectionStrategy, Component, input, output } from '@angular/core
       border-radius: var(--ngxsmk-radius-full);
       background: transparent;
       cursor: pointer;
-      transition: all var(--ngxsmk-duration-fast);
-      font-size: 1.125rem;
+      transition:
+        color,
+        background-color,
+        border-color,
+        box-shadow,
+        transform,
+        opacity var(--ngxsmk-duration-fast);
+      font-size: var(--ngxsmk-text-title-md-size);
     }
     :host(:hover) {
       background: var(--ngxsmk-color-surface-hover);

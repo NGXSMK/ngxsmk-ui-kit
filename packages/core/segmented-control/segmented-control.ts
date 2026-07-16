@@ -47,7 +47,13 @@ export interface SegmentedOption {
       font-size: var(--ngxsmk-text-body-sm-size);
       font-weight: 500;
       cursor: pointer;
-      transition: all var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
+      transition:
+        color,
+        background-color,
+        border-color,
+        box-shadow,
+        transform,
+        opacity var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
     .ngxsmk-segmented-control__item[aria-checked='true'] {
       background: var(--ngxsmk-color-surface);
@@ -58,7 +64,7 @@ export interface SegmentedOption {
       color: var(--ngxsmk-color-on-surface);
     }
     .ngxsmk-segmented-control__item[disabled] {
-      opacity: 0.5;
+      opacity: var(--ngxsmk-opacity-disabled);
       cursor: not-allowed;
     }
   `,

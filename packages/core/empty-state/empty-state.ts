@@ -43,7 +43,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
       height: 3rem;
       margin-bottom: var(--ngxsmk-space-4);
       color: var(--ngxsmk-color-on-surface-variant);
-      opacity: 0.5;
+      opacity: var(--ngxsmk-opacity-disabled);
     }
 
     .ngxsmk-empty-state__title {

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+﻿import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 export interface ToolCall {
   id: string;
@@ -15,7 +15,7 @@ export interface ToolCall {
     @for (call of calls(); track call.id) {
       <div class="ngxsmk-tool-call-viewer__item" [attr.data-status]="call.status">
         <div class="ngxsmk-tool-call-viewer__header">
-          <span class="ngxsmk-tool-call-viewer__name">🔧 {{ call.name }}</span>
+          <span class="ngxsmk-tool-call-viewer__name">ðŸ”§ {{ call.name }}</span>
           <span class="ngxsmk-tool-call-viewer__status">{{ call.status }}</span>
         </div>
         <div class="ngxsmk-tool-call-viewer__args">{{ stringify(call.args) }}</div>
@@ -50,7 +50,7 @@ export interface ToolCall {
       color: var(--ngxsmk-color-on-surface);
     }
     .ngxsmk-tool-call-viewer__status {
-      font-size: 0.6875rem;
+      font-size: var(--ngxsmk-text-label-sm-size);
       text-transform: uppercase;
     }
     .ngxsmk-tool-call-viewer__item[data-status='running'] .ngxsmk-tool-call-viewer__status {
@@ -65,7 +65,7 @@ export interface ToolCall {
     .ngxsmk-tool-call-viewer__args,
     .ngxsmk-tool-call-viewer__result {
       font-family: var(--ngxsmk-font-mono);
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-label-md-size);
       color: var(--ngxsmk-color-on-surface-variant);
       word-break: break-all;
     }

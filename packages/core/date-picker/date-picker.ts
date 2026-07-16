@@ -42,7 +42,7 @@ import { ChangeDetectionStrategy, Component, input, model, output } from '@angul
     .ngxsmk-date-picker__control:focus-visible {
       outline: none;
       border-color: var(--ngxsmk-color-ring);
-      box-shadow: 0 0 0 3px color-mix(in srgb, var(--ngxsmk-color-ring) 25%, transparent);
+      box-shadow: var(--ngxsmk-focus-ring);
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

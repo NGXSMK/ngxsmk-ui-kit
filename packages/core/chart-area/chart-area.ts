@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, input } from '@angular/core';
+import { AbstractCanvasChart, ChartHover, RGBA, SHARED_CHART_STYLES, niceTicks, rgba } from '@ngxsmk/core/chart-engine';
 
 export interface NgxsmkAreaChartDataPoint {
   label: string;
@@ -9,93 +10,124 @@ export interface NgxsmkAreaChartDataPoint {
   standalone: true,
   selector: 'ngxsmk-chart-area',
   template: `
-    <svg
-      class="ngxsmk-chart-area__svg"
-      [attr.width]="width()"
-      [attr.height]="height()"
-      [attr.viewBox]="viewBox()"
-    >
-      <defs>
-        <linearGradient [id]="gradientId()" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" [attr.stop-color]="color()" stop-opacity="0.4" />
-          <stop offset="100%" [attr.stop-color]="color()" stop-opacity="0.05" />
-        </linearGradient>
-      </defs>
-      <path class="ngxsmk-chart-area__area" [attr.d]="areaPath()" [attr.fill]="areaFill()" />
-      <polyline class="ngxsmk-chart-area__line" [attr.points]="points()" [attr.stroke]="color()" />
-    </svg>
+    <div class="ngxsmk-chart-surface">
+      <canvas #canvas></canvas>
+      <div #tooltip class="ngxsmk-chart-tip"></div>
+    </div>
   `,
   host: { class: 'ngxsmk-chart-area' },
-  styles: `
-    .ngxsmk-chart-area__svg {
-      display: block;
-      max-width: 100%;
-      height: auto;
-      overflow: visible;
-    }
-    .ngxsmk-chart-area__line {
-      fill: none;
-      stroke-width: 2;
-      stroke-linejoin: round;
-      stroke-linecap: round;
-    }
-  `,
+  styles: SHARED_CHART_STYLES,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NgxsmkAreaChart {
+export class NgxsmkAreaChart extends AbstractCanvasChart {
   readonly data = input<NgxsmkAreaChartDataPoint[]>([]);
-  readonly width = input(400);
-  readonly height = input(200);
   readonly color = input('var(--ngxsmk-color-primary)');
 
-  protected readonly uid = computed(() => `ngxsmk-area-${NgxsmkAreaChart._uid++}`);
+  private readonly values = computed(() => this.data().map((d) => d.value));
 
-  protected readonly gradientId = computed(() => `${this.uid()}-gradient`);
-
-  protected readonly areaFill = computed(() => `url(#${this.gradientId()})`);
-
-  protected readonly values = computed(() => this.data().map((d) => d.value));
-
-  protected readonly minVal = computed(() => Math.min(...this.values(), 0));
-
-  protected readonly maxVal = computed(() => Math.max(...this.values(), 0));
-
-  protected readonly range = computed(() => this.maxVal() - this.minVal() || 1);
-
-  protected readonly viewBox = computed(() => `0 0 ${this.width()} ${this.height()}`);
-
-  protected readonly coords = computed(() => {
-    const w = this.width();
-    const h = this.height();
-    const pad = 16;
-    const plotW = w - pad * 2;
-    const plotH = h - pad * 2;
-    const vals = this.values();
-    const r = this.range();
-    const min = this.minVal();
-    return vals.map((v, i) => {
-      const x = pad + (i / (vals.length - 1 || 1)) * plotW;
-      const y = pad + plotH - ((v - min) / r) * plotH;
-      return { x, y };
+  constructor() {
+    super();
+    effect(() => {
+      this.data();
+      this.color();
+      this.requestRender();
     });
-  });
+  }
 
-  protected readonly points = computed(() =>
-    this.coords()
-      .map((c) => `${c.x},${c.y}`)
-      .join(' '),
-  );
+  protected draw(progress: number): void {
+    const ctx = this.ctx;
+    const t = this.theme;
+    const data = this.data();
+    const vals = this.values();
+    const n = vals.length;
+    if (n === 0) return;
 
-  protected readonly areaPath = computed(() => {
-    const h = this.height();
-    const pad = 16;
-    const plotH = h - pad * 2;
-    const baseY = pad + plotH;
-    const coords = this.coords();
-    if (coords.length === 0) return '';
-    const top = coords.map((c) => `${c.x},${c.y}`).join(' L ');
-    return `M ${coords[0].x},${baseY} L ${top} L ${coords[coords.length - 1].x},${baseY} Z`;
-  });
+    const min = Math.min(...vals, 0);
+    const max = Math.max(...vals, 0);
+    const range = max - min || 1;
+    const plot = this.plot;
+    const xAt = (i: number) => (n === 1 ? plot.x + plot.w / 2 : plot.x + (i / (n - 1)) * plot.w);
+    const yAt = (v: number) => plot.y + plot.h - ((v - min) / range) * plot.h;
 
-  private static _uid = 0;
+    const yTicks = niceTicks(min, max, 4).map((v) => ({ y: yAt(v), label: String(v) }));
+    const xStep = Math.max(1, Math.ceil(n / 6));
+    const xTicks = data
+      .map((d, i) => ({ x: xAt(i), label: i % xStep === 0 || i === n - 1 ? d.label : undefined }))
+      .filter((tk) => tk.label != null) as { x: number; label: string }[];
+    this.drawCartesianGrid(yTicks, xTicks);
+
+    const color = this.colorVar(this.color(), t.primary);
+    const baseY = plot.y + plot.h;
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(plot.x, 0, plot.w * progress, this.H);
+    ctx.clip();
+
+    const top = data.map((d, i) => ({ x: xAt(i), y: yAt(d.value) }));
+
+    const fillGrad = ctx.createLinearGradient(0, plot.y, 0, baseY);
+    fillGrad.addColorStop(0, rgba(color, 0.38));
+    fillGrad.addColorStop(1, rgba(color, 0.04));
+    ctx.beginPath();
+    ctx.moveTo(top[0].x, baseY);
+    top.forEach((p) => ctx.lineTo(p.x, p.y));
+    ctx.lineTo(top[top.length - 1].x, baseY);
+    ctx.closePath();
+    ctx.fillStyle = fillGrad;
+    ctx.fill();
+
+    const lineGrad = ctx.createLinearGradient(0, plot.y, 0, baseY);
+    lineGrad.addColorStop(0, rgba(color, 1));
+    lineGrad.addColorStop(1, rgba(color, 0.6));
+    ctx.beginPath();
+    top.forEach((p, i) => (i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y)));
+    ctx.strokeStyle = lineGrad;
+    ctx.lineWidth = 2.5;
+    ctx.lineJoin = 'round';
+    ctx.lineCap = 'round';
+    ctx.stroke();
+
+    top.forEach((p) => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 3.5, 0, Math.PI * 2);
+      ctx.fillStyle = rgba(t.surface, 1);
+      ctx.fill();
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = rgba(color, 1);
+      ctx.stroke();
+    });
+    ctx.restore();
+  }
+
+  protected hitTest(x: number, y: number): ChartHover | null {
+    const data = this.data();
+    const vals = this.values();
+    const n = vals.length;
+    if (!n) return null;
+    const min = Math.min(...vals, 0);
+    const max = Math.max(...vals, 0);
+    const range = max - min || 1;
+    const plot = this.plot;
+    const xAt = (i: number) => (n === 1 ? plot.x + plot.w / 2 : plot.x + (i / (n - 1)) * plot.w);
+    const yAt = (v: number) => plot.y + plot.h - ((v - min) / range) * plot.h;
+    let best = -1;
+    let bestD = Infinity;
+    data.forEach((d, i) => {
+      const dx = x - xAt(i);
+      const dy = y - yAt(d.value);
+      const d2 = dx * dx + dy * dy;
+      if (d2 < bestD) {
+        bestD = d2;
+        best = i;
+      }
+    });
+    if (best < 0 || bestD > 400) return null;
+    const d = data[best];
+    return {
+      title: d.label,
+      lines: [`${d.value}`],
+      color: rgba(this.colorVar(this.color(), this.theme.primary), 1),
+    };
+  }
 }

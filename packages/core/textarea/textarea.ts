@@ -59,10 +59,10 @@ import {
     }
     .ngxsmk-textarea__control:focus-visible {
       border-color: var(--ngxsmk-color-ring);
-      box-shadow: 0 0 0 3px color-mix(in srgb, var(--ngxsmk-color-ring) 25%, transparent);
+      box-shadow: var(--ngxsmk-focus-ring);
     }
     .ngxsmk-textarea__control:disabled {
-      opacity: 0.5;
+      opacity: var(--ngxsmk-opacity-disabled);
       cursor: not-allowed;
       background: var(--ngxsmk-color-surface-variant);
     }

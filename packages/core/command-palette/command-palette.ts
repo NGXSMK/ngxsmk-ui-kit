@@ -1,4 +1,4 @@
-import {
+﻿import {
   Component,
   ElementRef,
   HostListener,
@@ -94,7 +94,7 @@ export interface CommandItem {
 
           <div class="ngxsmk-cmd-footer">
             <span class="ngxsmk-cmd-legend">
-              <kbd>↑↓</kbd> Navigate &nbsp;&bull;&nbsp; <kbd>↵</kbd> Select &nbsp;&bull;&nbsp;
+              <kbd>â†‘â†“</kbd> Navigate &nbsp;&bull;&nbsp; <kbd>â†µ</kbd> Select &nbsp;&bull;&nbsp;
               <kbd>esc</kbd> Close
             </span>
           </div>
@@ -119,8 +119,8 @@ export interface CommandItem {
     .ngxsmk-cmd-modal {
       width: 100%;
       max-width: 540px;
-      background: var(--ngxsmk-color-surface, #ffffff);
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      background: var(--ngxsmk-color-surface);
+      border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-xl, 0.75rem);
       box-shadow: var(--ngxsmk-shadow-2xl, 0 25px 50px -12px rgba(0, 0, 0, 0.25));
       overflow: hidden;
@@ -134,36 +134,36 @@ export interface CommandItem {
       display: flex;
       align-items: center;
       padding: var(--ngxsmk-space-4, 1rem);
-      border-bottom: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      border-bottom: 1px solid var(--ngxsmk-color-outline);
       position: relative;
     }
 
     .ngxsmk-cmd-search-icon {
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
-      margin-right: var(--ngxsmk-space-3, 0.75rem);
+      color: var(--ngxsmk-color-on-surface-variant);
+      margin-inline-end: var(--ngxsmk-space-3, 0.75rem);
     }
 
     .ngxsmk-cmd-input {
       flex: 1;
       border: none;
       background: transparent;
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      color: var(--ngxsmk-color-on-surface);
       font-family: var(--ngxsmk-font-sans, system-ui), sans-serif;
       font-size: 0.9375rem;
       outline: none;
     }
 
     .ngxsmk-cmd-input::placeholder {
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--ngxsmk-color-on-surface-variant);
     }
 
     .ngxsmk-cmd-esc-kbd {
       font-size: 0.625rem;
       padding: 0.15rem 0.35rem;
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-sm, 0.25rem);
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
-      background: var(--ngxsmk-color-background, #fafafa);
+      color: var(--ngxsmk-color-on-surface-variant);
+      background: var(--ngxsmk-color-background);
     }
 
     .ngxsmk-cmd-list {
@@ -175,17 +175,17 @@ export interface CommandItem {
     .ngxsmk-cmd-empty {
       padding: var(--ngxsmk-space-8, 2rem);
       text-align: center;
-      font-size: 0.875rem;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      font-size: var(--ngxsmk-text-label-lg-size);
+      color: var(--ngxsmk-color-on-surface-variant);
     }
 
     .ngxsmk-cmd-group-title {
       padding: var(--ngxsmk-space-2, 0.5rem) var(--ngxsmk-space-3, 0.75rem);
-      font-size: 0.6875rem;
+      font-size: var(--ngxsmk-text-label-sm-size);
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--ngxsmk-color-on-surface-variant);
     }
 
     .ngxsmk-cmd-item {
@@ -194,8 +194,8 @@ export interface CommandItem {
       justify-content: space-between;
       padding: var(--ngxsmk-space-2-5, 0.625rem) var(--ngxsmk-space-3, 0.75rem);
       border-radius: var(--ngxsmk-radius-md, 0.375rem);
-      font-size: 0.875rem;
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      font-size: var(--ngxsmk-text-label-lg-size);
+      color: var(--ngxsmk-color-on-surface);
       cursor: pointer;
       transition:
         background 0.1s,
@@ -203,8 +203,8 @@ export interface CommandItem {
     }
 
     .ngxsmk-cmd-item--active {
-      background: var(--ngxsmk-color-primary-container, #ede9fe);
-      color: var(--ngxsmk-color-on-primary-container, #4c1d95);
+      background: var(--ngxsmk-color-primary-container);
+      color: var(--ngxsmk-color-on-primary-container);
     }
 
     .ngxsmk-cmd-item-left {
@@ -221,32 +221,32 @@ export interface CommandItem {
     }
 
     .ngxsmk-cmd-shortcut {
-      font-size: 0.6875rem;
+      font-size: var(--ngxsmk-text-label-sm-size);
       padding: 0.15rem 0.35rem;
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-sm, 0.25rem);
-      background: var(--ngxsmk-color-surface, #ffffff);
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      background: var(--ngxsmk-color-surface);
+      color: var(--ngxsmk-color-on-surface-variant);
       font-family: var(--ngxsmk-font-mono, monospace);
     }
 
     .ngxsmk-cmd-item--active .ngxsmk-cmd-shortcut {
       border-color: color-mix(in srgb, var(--ngxsmk-color-on-primary-container) 25%, transparent);
       background: color-mix(in srgb, var(--ngxsmk-color-surface) 55%, transparent);
-      color: var(--ngxsmk-color-on-primary-container, #4c1d95);
+      color: var(--ngxsmk-color-on-primary-container);
     }
 
     .ngxsmk-cmd-footer {
       padding: var(--ngxsmk-space-3, 0.75rem) var(--ngxsmk-space-4, 1rem);
-      border-top: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
-      background: var(--ngxsmk-color-background, #fafafa);
-      font-size: 0.6875rem;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      border-top: 1px solid var(--ngxsmk-color-outline);
+      background: var(--ngxsmk-color-background);
+      font-size: var(--ngxsmk-text-label-sm-size);
+      color: var(--ngxsmk-color-on-surface-variant);
     }
 
     .ngxsmk-cmd-legend kbd {
-      background: var(--ngxsmk-color-surface, #ffffff);
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      background: var(--ngxsmk-color-surface);
+      border: 1px solid var(--ngxsmk-color-outline);
       padding: 0.1rem 0.3rem;
       border-radius: var(--ngxsmk-radius-sm, 0.25rem);
     }

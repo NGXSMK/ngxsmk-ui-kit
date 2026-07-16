@@ -1,4 +1,4 @@
-import {
+﻿import {
   ChangeDetectionStrategy,
   Component,
   booleanAttribute,
@@ -127,7 +127,7 @@ type StepView = NgxsmkStep & {
       border: 0;
       border-radius: var(--ngxsmk-radius-md, 8px);
       font: inherit;
-      color: var(--ngxsmk-color-on-surface-variant, #64748b);
+      color: var(--ngxsmk-color-on-surface-variant);
       cursor: pointer;
       text-align: start;
     }
@@ -135,8 +135,8 @@ type StepView = NgxsmkStep & {
       cursor: default;
     }
     .ngxsmk-stepper__trigger:focus-visible {
-      outline: 2px solid var(--ngxsmk-color-ring, #6366f1);
-      outline-offset: 1px;
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring);
     }
     .ngxsmk-stepper__marker {
       display: inline-flex;
@@ -149,7 +149,7 @@ type StepView = NgxsmkStep & {
       font-weight: 600;
       border-radius: var(--ngxsmk-radius-full, 999px);
       border: 2px solid currentColor;
-      background: var(--ngxsmk-color-surface, #fff);
+      background: var(--ngxsmk-color-surface);
       transition:
         background-color var(--ngxsmk-duration-fast, 120ms) var(--ngxsmk-ease-out, ease),
         color var(--ngxsmk-duration-fast, 120ms) var(--ngxsmk-ease-out, ease),
@@ -166,24 +166,24 @@ type StepView = NgxsmkStep & {
       gap: var(--ngxsmk-space-2, 0.5rem);
       font-size: var(--ngxsmk-text-body-md-size, 0.9375rem);
       font-weight: 500;
-      color: var(--ngxsmk-color-on-surface, #0f172a);
+      color: var(--ngxsmk-color-on-surface);
       white-space: nowrap;
     }
     .ngxsmk-stepper__optional {
-      font-size: 0.6875rem;
+      font-size: var(--ngxsmk-text-label-sm-size);
       font-weight: 400;
-      color: var(--ngxsmk-color-on-surface-variant, #64748b);
+      color: var(--ngxsmk-color-on-surface-variant);
     }
     .ngxsmk-stepper__description {
       font-size: var(--ngxsmk-text-body-sm-size, 0.8125rem);
-      color: var(--ngxsmk-color-on-surface-variant, #64748b);
+      color: var(--ngxsmk-color-on-surface-variant);
     }
     .ngxsmk-stepper__connector {
       flex: 1 1 auto;
       height: 2px;
       min-width: var(--ngxsmk-space-4, 1rem);
       margin: 0 var(--ngxsmk-space-1, 0.25rem);
-      background: var(--ngxsmk-color-outline, #e2e8f0);
+      background: var(--ngxsmk-color-outline);
     }
     :host([data-orientation='vertical']) .ngxsmk-stepper__connector {
       width: 2px;
@@ -193,16 +193,16 @@ type StepView = NgxsmkStep & {
     }
 
     .ngxsmk-stepper__item[data-state='active'] .ngxsmk-stepper__marker {
-      color: var(--ngxsmk-color-primary, #6366f1);
-      border-color: var(--ngxsmk-color-primary, #6366f1);
+      color: var(--ngxsmk-color-primary);
+      border-color: var(--ngxsmk-color-primary);
     }
     .ngxsmk-stepper__item[data-state='complete'] .ngxsmk-stepper__marker {
-      color: var(--ngxsmk-color-on-primary, #fff);
-      background: var(--ngxsmk-color-primary, #6366f1);
-      border-color: var(--ngxsmk-color-primary, #6366f1);
+      color: var(--ngxsmk-color-on-primary);
+      background: var(--ngxsmk-color-primary);
+      border-color: var(--ngxsmk-color-primary);
     }
     .ngxsmk-stepper__item[data-state='complete'] .ngxsmk-stepper__connector {
-      background: var(--ngxsmk-color-primary, #6366f1);
+      background: var(--ngxsmk-color-primary);
     }
 
     @media (prefers-reduced-motion: reduce) {

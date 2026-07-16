@@ -27,8 +27,8 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
       color: var(--ngxsmk-color-primary-hover);
     }
     :host(:focus-visible) {
-      outline: 2px solid var(--ngxsmk-color-ring);
-      outline-offset: 2px;
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring);
       border-radius: var(--ngxsmk-radius-sm);
     }
     :host([data-underline]:hover) {

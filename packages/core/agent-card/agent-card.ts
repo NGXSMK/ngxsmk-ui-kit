@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+﻿import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 export interface AgentInfo {
   name: string;
@@ -57,7 +57,7 @@ export interface AgentInfo {
       color: var(--ngxsmk-color-on-surface);
     }
     .ngxsmk-agent-card__model {
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-label-md-size);
       color: var(--ngxsmk-color-on-surface-variant);
     }
     .ngxsmk-agent-card__status {

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+﻿import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 export interface OrgNode {
   id: string;
@@ -68,7 +68,7 @@ export interface OrgNode {
       color: var(--ngxsmk-color-on-surface);
     }
     .ngxsmk-org-chart__role {
-      font-size: 0.6875rem;
+      font-size: var(--ngxsmk-text-label-sm-size);
       color: var(--ngxsmk-color-on-surface-variant);
       margin-top: var(--ngxsmk-space-1);
     }

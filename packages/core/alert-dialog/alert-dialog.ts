@@ -1,4 +1,4 @@
-import {
+﻿import {
   ChangeDetectionStrategy,
   Component,
   effect,
@@ -76,12 +76,12 @@ export type NgxsmkAlertDialogVariant = 'info' | 'destructive';
     }
     .ngxsmk-alert-dialog__title {
       margin: 0;
-      font-size: 1.125rem;
+      font-size: var(--ngxsmk-text-title-md-size);
       font-weight: 600;
     }
     .ngxsmk-alert-dialog__message {
       margin: 0;
-      font-size: 0.875rem;
+      font-size: var(--ngxsmk-text-label-lg-size);
       color: var(--ngxsmk-color-on-surface-variant);
     }
     .ngxsmk-alert-dialog__footer {
@@ -97,7 +97,7 @@ export type NgxsmkAlertDialogVariant = 'info' | 'destructive';
       background: var(--ngxsmk-color-surface);
       color: var(--ngxsmk-color-on-surface);
       font-family: inherit;
-      font-size: 0.875rem;
+      font-size: var(--ngxsmk-text-label-lg-size);
       cursor: pointer;
     }
     .ngxsmk-alert-dialog__btn--confirm {

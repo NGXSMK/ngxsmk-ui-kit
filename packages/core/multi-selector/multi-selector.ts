@@ -17,6 +17,7 @@ import {
   OnDestroy,
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+import { ngxsmkUniqueId } from '@ngxsmk/core/util';
 
 @Component({
   standalone: true,
@@ -28,8 +29,9 @@ import { DOCUMENT } from '@angular/common';
       (click)="toggleOpen()"
       role="button"
       tabindex="0"
-      (keydown.enter)="toggleOpen()"
-      (keydown.space)="toggleOpen(); $event.preventDefault()"
+      [attr.aria-expanded]="isOpen()"
+      [attr.aria-activedescendant]="activeDescendant()"
+      (keydown)="onKeydown($event)"
     >
       <span class="ngxsmk-multi-selector__label">
         @if (selectedCount() === 0) {
@@ -57,9 +59,16 @@ import { DOCUMENT } from '@angular/common';
     </div>
 
     <ng-template #dropdownTpl>
-      <div class="ngxsmk-multi-selector__dropdown">
-        @for (opt of options(); track opt.value) {
-          <label class="ngxsmk-multi-selector__option">
+      <div class="ngxsmk-multi-selector__dropdown" role="listbox" aria-multiselectable="true">
+        @for (opt of options(); track opt.value; let i = $index) {
+          <label
+            [id]="dropdownId + '-' + i"
+            role="option"
+            [attr.aria-selected]="isSelected(opt.value)"
+            class="ngxsmk-multi-selector__option"
+            [class.ngxsmk-multi-selector__option--active]="i === activeIndex()"
+            (mouseenter)="activeIndex.set(i)"
+          >
             <input
               type="checkbox"
               [checked]="isSelected(opt.value)"
@@ -103,7 +112,7 @@ import { DOCUMENT } from '@angular/common';
       border-color: var(--ngxsmk-color-outline);
     }
     :host([data-disabled]) .ngxsmk-multi-selector__trigger {
-      opacity: 0.5;
+      opacity: var(--ngxsmk-opacity-disabled);
       cursor: not-allowed;
     }
     .ngxsmk-multi-selector__label {
@@ -137,7 +146,8 @@ import { DOCUMENT } from '@angular/common';
       cursor: pointer;
       transition: background var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
-    .ngxsmk-multi-selector__option:hover {
+    .ngxsmk-multi-selector__option:hover,
+    .ngxsmk-multi-selector__option--active {
       background: var(--ngxsmk-color-surface-variant);
     }
     .ngxsmk-multi-selector__option-label {
@@ -162,11 +172,101 @@ export class NgxsmkMultiSelector implements OnDestroy {
   readonly disabled = input(false, { transform: booleanAttribute });
   readonly changed = output<string[]>();
 
+  protected readonly dropdownId = ngxsmkUniqueId('ngxsmk-multi-selector-dropdown');
   protected readonly isOpen = signal(false);
+  protected readonly activeIndex = signal(-1);
   protected readonly selectedCount = computed(() => this.value().length);
+
+  protected activeDescendant(): string | null {
+    return this.isOpen() && this.activeIndex() >= 0
+      ? `${this.dropdownId}-${this.activeIndex()}`
+      : null;
+  }
 
   protected isSelected(val: string): boolean {
     return this.value().includes(val);
+  }
+
+  protected onKeydown(event: KeyboardEvent): void {
+    if (this.disabled()) return;
+    switch (event.key) {
+      case 'ArrowDown':
+        event.preventDefault();
+        if (!this.isOpen()) {
+          this.open();
+        } else {
+          this.move(1);
+        }
+        break;
+      case 'ArrowUp':
+        event.preventDefault();
+        if (this.isOpen()) {
+          this.move(-1);
+        }
+        break;
+      case 'Home':
+        if (this.isOpen() && this.options().length) {
+          event.preventDefault();
+          this.activeIndex.set(0);
+          this.scrollActiveIntoView();
+        }
+        break;
+      case 'End':
+        if (this.isOpen() && this.options().length) {
+          event.preventDefault();
+          this.activeIndex.set(this.options().length - 1);
+          this.scrollActiveIntoView();
+        }
+        break;
+      case 'Enter':
+      case ' ':
+      case 'Spacebar': {
+        event.preventDefault();
+        if (!this.isOpen()) {
+          this.open();
+          break;
+        }
+        const opt = this.options()[this.activeIndex()];
+        if (opt) {
+          this.toggleOption(opt.value);
+        }
+        break;
+      }
+      case 'Escape':
+        if (this.isOpen()) {
+          event.preventDefault();
+          this.close();
+        }
+        break;
+      default:
+        break;
+    }
+  }
+
+  private move(delta: number): void {
+    const list = this.options();
+    if (!list.length) {
+      return;
+    }
+    let next = this.activeIndex() + delta;
+    if (next < 0) {
+      next = list.length - 1;
+    } else if (next >= list.length) {
+      next = 0;
+    }
+    this.activeIndex.set(next);
+    this.scrollActiveIntoView();
+  }
+
+  private scrollActiveIntoView(): void {
+    requestAnimationFrame(() => {
+      const node = this.dropdownNode;
+      if (!node) {
+        return;
+      }
+      const items = node.querySelectorAll<HTMLElement>('.ngxsmk-multi-selector__option');
+      items[this.activeIndex()]?.scrollIntoView({ block: 'nearest' });
+    });
   }
 
   protected toggleOption(val: string): void {
@@ -191,6 +291,7 @@ export class NgxsmkMultiSelector implements OnDestroy {
   private open(): void {
     if (this.dropdownView) return;
     this.isOpen.set(true);
+    this.activeIndex.set(this.options().length ? 0 : -1);
     this.dropdownView = this.vcr.createEmbeddedView(this.dropdownTpl);
     this.dropdownView.detectChanges();
     const node =
@@ -217,6 +318,7 @@ export class NgxsmkMultiSelector implements OnDestroy {
       this.dropdownView = null;
     }
     this.dropdownNode = null;
+    this.activeIndex.set(-1);
     if (this.isOpen()) this.isOpen.set(false);
   }
 

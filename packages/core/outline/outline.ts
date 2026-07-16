@@ -49,7 +49,7 @@ import { DOCUMENT } from '@angular/common';
       transition:
         background var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
         color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
-      border-left: 2px solid transparent;
+      border-inline-start: 2px solid transparent;
     }
     .ngxsmk-outline__link:hover {
       background: var(--ngxsmk-color-surface-hover);
@@ -57,7 +57,7 @@ import { DOCUMENT } from '@angular/common';
     }
     .ngxsmk-outline__link--active {
       color: var(--ngxsmk-color-primary);
-      border-left-color: var(--ngxsmk-color-primary);
+      border-inline-start-color: var(--ngxsmk-color-primary);
       font-weight: 500;
     }
   `,

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+﻿import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
   standalone: true,
@@ -17,19 +17,19 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
     :host {
       display: block;
       padding: var(--ngxsmk-space-3);
-      border-left: 3px solid var(--ngxsmk-color-primary);
+      border-inline-start: 3px solid var(--ngxsmk-color-primary);
       background: var(--ngxsmk-color-surface-container);
       border-radius: var(--ngxsmk-radius-md);
       font-family: var(--ngxsmk-font-sans);
     }
     .ngxsmk-citation-viewer__title {
-      font-size: 0.875rem;
+      font-size: var(--ngxsmk-text-label-lg-size);
       font-weight: 500;
       color: var(--ngxsmk-color-on-surface);
       margin-bottom: var(--ngxsmk-space-1);
     }
     .ngxsmk-citation-viewer__meta {
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-label-md-size);
       color: var(--ngxsmk-color-on-surface-variant);
       margin-bottom: var(--ngxsmk-space-1);
     }

@@ -148,14 +148,14 @@ export type NgxsmkAlertVariant = 'info' | 'success' | 'warning' | 'error';
       background: transparent;
       color: inherit;
       cursor: pointer;
-      opacity: 0.7;
+      opacity: var(--ngxsmk-opacity-muted);
     }
     .ngxsmk-alert__close:hover {
       opacity: 1;
     }
     .ngxsmk-alert__close:focus-visible {
-      outline: 2px solid var(--ngxsmk-color-ring);
-      outline-offset: 1px;
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring);
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

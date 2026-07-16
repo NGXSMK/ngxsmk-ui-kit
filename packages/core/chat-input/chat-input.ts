@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input, model, output } from '@angular/core';
+﻿import { ChangeDetectionStrategy, Component, input, model, output } from '@angular/core';
 
 @Component({
   standalone: true,
@@ -38,7 +38,7 @@ import { ChangeDetectionStrategy, Component, input, model, output } from '@angul
       border-radius: var(--ngxsmk-radius-lg);
       padding: var(--ngxsmk-space-2) var(--ngxsmk-space-3);
       font-family: var(--ngxsmk-font-sans);
-      font-size: 0.875rem;
+      font-size: var(--ngxsmk-text-label-lg-size);
       background: var(--ngxsmk-color-surface-container);
       color: var(--ngxsmk-color-on-surface);
       outline: none;

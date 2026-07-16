@@ -61,7 +61,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
     :host([data-disabled]) .ngxsmk-switch__wrapper {
       cursor: not-allowed;
-      opacity: 0.5;
+      opacity: var(--ngxsmk-opacity-disabled);
     }
 
     .ngxsmk-switch__native {
@@ -108,8 +108,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     }
 
     .ngxsmk-switch__native:focus-visible ~ .ngxsmk-switch__track {
-      outline: 2px solid var(--ngxsmk-color-ring);
-      outline-offset: 2px;
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring);
     }
   `,
   providers: [

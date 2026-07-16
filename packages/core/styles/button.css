@@ -22,12 +22,13 @@
   transition:
     background-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
     border-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
-    color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
+    color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
+    transform var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
 }
 
 .ngxsmk-button:focus-visible {
-  outline: 2px solid var(--ngxsmk-color-ring);
-  outline-offset: 2px;
+  outline: none;
+  box-shadow: var(--ngxsmk-focus-ring);
 }
 
 .ngxsmk-button:focus {
@@ -65,9 +66,11 @@
 
 .ngxsmk-button[data-variant='primary']:hover {
   background: var(--ngxsmk-color-primary-hover);
+  transform: var(--ngxsmk-hover-lift);
 }
 .ngxsmk-button[data-variant='primary']:active {
   background: var(--ngxsmk-color-primary-active);
+  transform: var(--ngxsmk-press-scale);
 }
 
 .ngxsmk-button[data-variant='secondary'] {
@@ -76,6 +79,10 @@
 }
 .ngxsmk-button[data-variant='secondary']:hover {
   background: var(--ngxsmk-color-outline);
+  transform: var(--ngxsmk-hover-lift);
+}
+.ngxsmk-button[data-variant='secondary']:active {
+  transform: var(--ngxsmk-press-scale);
 }
 
 .ngxsmk-button[data-variant='outline'] {
@@ -85,6 +92,10 @@
 }
 .ngxsmk-button[data-variant='outline']:hover {
   background: var(--ngxsmk-color-surface-hover);
+  transform: var(--ngxsmk-hover-lift);
+}
+.ngxsmk-button[data-variant='outline']:active {
+  transform: var(--ngxsmk-press-scale);
 }
 
 .ngxsmk-button[data-variant='ghost'] {
@@ -93,6 +104,10 @@
 }
 .ngxsmk-button[data-variant='ghost']:hover {
   background: var(--ngxsmk-color-surface-hover);
+  transform: var(--ngxsmk-hover-lift);
+}
+.ngxsmk-button[data-variant='ghost']:active {
+  transform: var(--ngxsmk-press-scale);
 }
 
 .ngxsmk-button[data-variant='destructive'] {
@@ -100,7 +115,11 @@
   color: var(--ngxsmk-color-on-error);
 }
 .ngxsmk-button[data-variant='destructive']:hover {
-  filter: brightness(0.92);
+  background: color-mix(in srgb, var(--ngxsmk-color-error) 88%, black);
+  transform: var(--ngxsmk-hover-lift);
+}
+.ngxsmk-button[data-variant='destructive']:active {
+  transform: var(--ngxsmk-press-scale);
 }
 
 .ngxsmk-button[data-variant='link'] {
@@ -110,6 +129,10 @@
 }
 .ngxsmk-button[data-variant='link']:hover {
   text-decoration: underline;
+  transform: var(--ngxsmk-hover-lift);
+}
+.ngxsmk-button[data-variant='link']:active {
+  transform: var(--ngxsmk-press-scale);
 }
 
 .ngxsmk-button__spinner {
@@ -138,7 +161,11 @@
   font-family: var(--ngxsmk-font-sans);
   font-weight: 500;
   box-shadow: var(--ngxsmk-shadow-lg);
-  transition: all var(--ngxsmk-motion-duration) var(--ngxsmk-motion-ease);
+  transition:
+    transform,
+    box-shadow,
+    background-color,
+    color var(--ngxsmk-motion-duration) var(--ngxsmk-motion-ease);
   box-sizing: border-box;
   text-decoration: none;
 }
@@ -177,11 +204,11 @@
 }
 .ngxsmk-fab[data-variant='primary']:hover {
   background: var(--ngxsmk-color-primary-hover);
-  transform: translateY(-2px);
+  transform: var(--ngxsmk-hover-lift);
 }
 .ngxsmk-fab[data-variant='primary']:active {
   background: var(--ngxsmk-color-primary-active);
-  transform: translateY(0);
+  transform: var(--ngxsmk-press-scale);
 }
 
 .ngxsmk-fab[data-variant='secondary'] {
@@ -190,11 +217,11 @@
 }
 .ngxsmk-fab[data-variant='secondary']:hover {
   background: var(--ngxsmk-color-secondary-hover);
-  transform: translateY(-2px);
+  transform: var(--ngxsmk-hover-lift);
 }
 .ngxsmk-fab[data-variant='secondary']:active {
   background: var(--ngxsmk-color-secondary-active);
-  transform: translateY(0);
+  transform: var(--ngxsmk-press-scale);
 }
 
 .ngxsmk-fab[data-position] {

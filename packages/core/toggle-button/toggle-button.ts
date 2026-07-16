@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, model, output } from '@angular/core';
+﻿import { ChangeDetectionStrategy, Component, model, output } from '@angular/core';
 
 @Component({
   standalone: true,
@@ -21,9 +21,15 @@ import { ChangeDetectionStrategy, Component, model, output } from '@angular/core
       background: var(--ngxsmk-color-surface);
       color: var(--ngxsmk-color-on-surface);
       font-family: var(--ngxsmk-font-sans);
-      font-size: 0.875rem;
+      font-size: var(--ngxsmk-text-label-lg-size);
       cursor: pointer;
-      transition: all var(--ngxsmk-duration-fast);
+      transition:
+        color,
+        background-color,
+        border-color,
+        box-shadow,
+        transform,
+        opacity var(--ngxsmk-duration-fast);
     }
     :host([aria-pressed='true']) {
       background: var(--ngxsmk-color-primary-container);

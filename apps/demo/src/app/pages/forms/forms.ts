@@ -30,8 +30,6 @@ import { NgxsmkButton } from '@ngxsmk/core/button';
 import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ShowcaseExample } from '../../showcase/showcase-example';
-import { TelInputShowcase } from './tel-input-showcase';
-import { DatepickerShowcase } from './datepicker-showcase';
 
 interface Option {
   value: string;
@@ -74,8 +72,6 @@ interface Option {
     NgxsmkFieldStatus,
     NgxsmkFormField,
     NgxsmkCheckboxListItemComponent,
-    TelInputShowcase,
-    DatepickerShowcase,
   ],
   template: `
     <h2 class="ngxsmk-page-title">Forms</h2>
@@ -324,14 +320,34 @@ interface Option {
         </div>
       </showcase-example>
 
-      <datepicker-showcase />
+      <showcase-example
+        title="Datepicker (calendar)"
+        description="A feature-rich popover calendar - month navigation, ranges, time, and i18n. Ships as a standalone NGXSMK package rather than a component in this kit."
+      >
+        <p style="margin: 0; width: 100%">
+          Refer to the dedicated repository:
+          <a
+            href="https://github.com/NGXSMK/ngxsmk-datepicker"
+            target="_blank"
+            rel="noopener noreferrer"
+            >github.com/NGXSMK/ngxsmk-datepicker</a
+          >
+        </p>
+      </showcase-example>
 
       <showcase-example
         title="Telephone input"
-        description="International phone input (ngxsmk-tel-input) with country dropdown, flags, and E.164 validation via libphonenumber-js."
-        [code]="codeTelInput"
+        description="International phone input with country dropdown, flags, and E.164 validation. Ships as a standalone NGXSMK package rather than a component in this kit."
       >
-        <tel-input-showcase />
+        <p style="margin: 0; width: 100%">
+          Refer to the dedicated repository:
+          <a
+            href="https://github.com/NGXSMK/ngxsmk-tel-input"
+            target="_blank"
+            rel="noopener noreferrer"
+            >github.com/NGXSMK/ngxsmk-tel-input</a
+          >
+        </p>
       </showcase-example>
 
       <showcase-example
@@ -950,7 +966,6 @@ ngxsmk-checkbox-list-item {
   protected readonly codeRadio = `<ngxsmk-radio-group [(value)]="plan">\n  <ngxsmk-radio value="free">Free</ngxsmk-radio>\n  <ngxsmk-radio value="pro">Pro</ngxsmk-radio>\n</ngxsmk-radio-group>`;
   protected readonly codeSwitch = `<ngxsmk-switch [(checked)]="notifications">Email notifications</ngxsmk-switch>`;
   protected readonly codeSlider = `<ngxsmk-slider [min]="0" [max]="100" [step]="5" [(value)]="volume" />`;
-  protected readonly codeTelInput = `<ngxsmk-tel-input [ngModel]="phone()" (ngModelChange)="phone.set($event)" label="Phone" hint="Include area code" [initialCountry]="'US'" [separateDialCode]="true" />`; // requires NO_ERRORS_SCHEMA (see TelInputShowcase)
   protected readonly codeSegmented = `<ngxsmk-segmented-control [options]="viewOptions" [(value)]="view" />`;
   protected readonly codeSelector = `<ngxsmk-selector [options]="interests" [(selected)]="selectedInterests" />`;
   protected readonly codeMultiSelector = `<ngxsmk-multi-selector [options]="colors" [(value)]="selectorColors" placeholder="Select colors" />`;

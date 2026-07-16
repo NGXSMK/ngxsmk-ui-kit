@@ -17,7 +17,7 @@ import { ChangeDetectionStrategy, Component, input, signal, effect } from '@angu
       width: 0.125rem;
       height: 1em;
       background: var(--ngxsmk-color-primary);
-      margin-left: var(--ngxsmk-space-1);
+      margin-inline-start: var(--ngxsmk-space-1);
       animation: blink 0.8s step-end infinite;
       vertical-align: text-bottom;
     }

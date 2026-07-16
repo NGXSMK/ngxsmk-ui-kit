@@ -125,7 +125,7 @@ export class NgxsmkRadioGroup implements ControlValueAccessor {
 
     :host([data-disabled]) .ngxsmk-radio__wrapper {
       cursor: not-allowed;
-      opacity: 0.5;
+      opacity: var(--ngxsmk-opacity-disabled);
     }
 
     .ngxsmk-radio__native {
@@ -172,8 +172,8 @@ export class NgxsmkRadioGroup implements ControlValueAccessor {
     }
 
     .ngxsmk-radio__native:focus-visible + .ngxsmk-radio__circle {
-      outline: 2px solid var(--ngxsmk-color-ring);
-      outline-offset: 2px;
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring);
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

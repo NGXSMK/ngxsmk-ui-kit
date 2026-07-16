@@ -72,7 +72,7 @@ export type NgxsmkRatingSize = 'sm' | 'md' | 'lg';
       gap: 0.15em;
       font-size: var(--ngxsmk-rating-size, 1.5rem);
       line-height: 1;
-      color: var(--ngxsmk-color-outline-strong, #cbd5e1);
+      color: var(--ngxsmk-color-outline-strong);
       cursor: pointer;
       outline: none;
       touch-action: none;
@@ -88,7 +88,7 @@ export type NgxsmkRatingSize = 'sm' | 'md' | 'lg';
       cursor: default;
     }
     :host([data-disabled]) {
-      opacity: 0.5;
+      opacity: var(--ngxsmk-opacity-disabled);
     }
 
     .ngxsmk-rating__star {
@@ -110,7 +110,7 @@ export type NgxsmkRatingSize = 'sm' | 'md' | 'lg';
       content: '';
       position: absolute;
       inset: 0;
-      background: var(--ngxsmk-color-warning, #f59e0b);
+      background: var(--ngxsmk-color-warning);
       -webkit-mask: var(--ngxsmk-rating-mask) center / contain no-repeat;
       mask: var(--ngxsmk-rating-mask) center / contain no-repeat;
       clip-path: inset(0 calc((1 - var(--ngxsmk-star-fill)) * 100%) 0 0);
@@ -124,9 +124,9 @@ export type NgxsmkRatingSize = 'sm' | 'md' | 'lg';
     }
 
     :host(:focus-visible) {
-      border-radius: var(--ngxsmk-radius-sm, 4px);
-      outline: 2px solid var(--ngxsmk-color-ring, #6366f1);
-      outline-offset: 3px;
+      border-radius: var(--ngxsmk-radius-sm);
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring);
     }
 
     .ngxsmk-rating__sr {

@@ -161,16 +161,16 @@ export interface NgxsmkSelectOption {
     .ngxsmk-select__trigger:focus-visible {
       outline: none;
       border-color: var(--ngxsmk-color-ring);
-      box-shadow: 0 0 0 3px color-mix(in srgb, var(--ngxsmk-color-ring) 25%, transparent);
+      box-shadow: var(--ngxsmk-focus-ring);
     }
     :host([aria-invalid='true']) .ngxsmk-select__trigger {
       border-color: var(--ngxsmk-color-error);
     }
     :host([aria-invalid='true']) .ngxsmk-select__trigger:focus-visible {
-      box-shadow: 0 0 0 3px color-mix(in srgb, var(--ngxsmk-color-error) 25%, transparent);
+      box-shadow: var(--ngxsmk-focus-ring-error);
     }
     :host([data-disabled]) .ngxsmk-select__trigger {
-      opacity: 0.5;
+      opacity: var(--ngxsmk-opacity-disabled);
       cursor: not-allowed;
     }
 
@@ -241,7 +241,7 @@ export interface NgxsmkSelectOption {
       color: var(--ngxsmk-color-on-primary-container);
     }
     .ngxsmk-select__option[aria-disabled='true'] {
-      opacity: 0.5;
+      opacity: var(--ngxsmk-opacity-disabled);
       cursor: not-allowed;
     }
 

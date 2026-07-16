@@ -71,8 +71,8 @@ import { ChangeDetectionStrategy, Component, input, model } from '@angular/core'
     }
 
     .ngxsmk-collapsible__trigger:focus-visible {
-      outline: 2px solid var(--ngxsmk-color-ring);
-      outline-offset: -2px;
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring);
     }
 
     .ngxsmk-collapsible__title {

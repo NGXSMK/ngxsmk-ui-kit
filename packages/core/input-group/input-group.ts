@@ -28,7 +28,7 @@ const INPUT_GROUP_CSS = `
 }
 .ngxsmk-input-group.ngxsmk-input-group--core:focus-within {
   border-color: var(--ngxsmk-color-ring);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ngxsmk-color-ring) 25%, transparent);
+  box-shadow: var(--ngxsmk-focus-ring);
 }
 
 /* Text add-ons sit flush against the control with a hairline separator. */
@@ -45,8 +45,8 @@ const INPUT_GROUP_CSS = `
   white-space: nowrap;
   user-select: none;
 }
-.ngxsmk-input-group-text:not(:last-child) { border-right: 1px solid var(--ngxsmk-color-outline); }
-.ngxsmk-input-group-text:not(:first-child) { border-left: 1px solid var(--ngxsmk-color-outline); }
+.ngxsmk-input-group-text:not(:last-child) { border-inline-end: 1px solid var(--ngxsmk-color-outline); }
+.ngxsmk-input-group-text:not(:first-child) { border-inline-start: 1px solid var(--ngxsmk-color-outline); }
 
 /* Nested controls shed their own chrome so the group reads as one field. */
 .ngxsmk-input-group.ngxsmk-input-group--core .ngxsmk-input {

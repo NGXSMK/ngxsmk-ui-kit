@@ -78,7 +78,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
     :host([data-disabled]) .ngxsmk-checkbox__wrapper {
       cursor: not-allowed;
-      opacity: 0.5;
+      opacity: var(--ngxsmk-opacity-disabled);
     }
 
     .ngxsmk-checkbox__native {
@@ -112,7 +112,13 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     .ngxsmk-checkbox__box svg {
       opacity: 0;
       transform: scale(0.6);
-      transition: all var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
+      transition:
+        color,
+        background-color,
+        border-color,
+        box-shadow,
+        transform,
+        opacity var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
 
     :host([data-checked]) .ngxsmk-checkbox__box,
@@ -128,8 +134,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     }
 
     .ngxsmk-checkbox__native:focus-visible + .ngxsmk-checkbox__box {
-      outline: 2px solid var(--ngxsmk-color-ring);
-      outline-offset: 2px;
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring);
     }
   `,
   providers: [

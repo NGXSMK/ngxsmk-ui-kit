@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+﻿import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 export interface RuleGroup {
   operator: 'AND' | 'OR';
@@ -43,7 +43,7 @@ export interface Rule {
     }
     .ngxsmk-rule-builder__operator {
       font-weight: 600;
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-label-md-size);
       text-transform: uppercase;
       color: var(--ngxsmk-color-primary);
     }

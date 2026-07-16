@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input, model } from '@angular/core';
+﻿import { ChangeDetectionStrategy, Component, input, model } from '@angular/core';
 
 export interface QueryField {
   key: string;
@@ -59,7 +59,7 @@ export interface QueryCondition {
     }
     .ngxsmk-query-builder__logical {
       font-weight: 600;
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-label-md-size);
       text-transform: uppercase;
       color: var(--ngxsmk-color-primary);
       min-width: 3rem;

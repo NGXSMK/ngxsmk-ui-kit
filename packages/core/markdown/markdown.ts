@@ -102,7 +102,7 @@ function renderMarkdown(md: string): string {
     .ngxsmk-markdown ul,
     .ngxsmk-markdown ol {
       margin: 0 0 1em;
-      padding-left: 1.5em;
+      padding-inline-start: 1.5em;
     }
     .ngxsmk-markdown li {
       margin-bottom: 0.25em;
@@ -110,7 +110,7 @@ function renderMarkdown(md: string): string {
     .ngxsmk-markdown blockquote {
       margin: 0 0 1em;
       padding: 0.5em 1em;
-      border-left: 3px solid var(--ngxsmk-color-primary);
+      border-inline-start: 3px solid var(--ngxsmk-color-primary);
       background: var(--ngxsmk-color-surface-variant);
       border-radius: var(--ngxsmk-radius-sm);
     }

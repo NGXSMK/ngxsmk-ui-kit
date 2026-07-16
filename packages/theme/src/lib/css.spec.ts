@@ -52,4 +52,26 @@ describe('buildThemeCss', () => {
     });
     expect(overridden).toContain('--ngxsmk-color-primary: #FAFAFA;');
   });
+
+  it('emits the interaction and sizing token groups', () => {
+    expect(css).toContain('--ngxsmk-focus-ring: var(--ngxsmk-shadow-focus);');
+    expect(css).toContain('--ngxsmk-focus-ring-error:');
+    expect(css).toContain('--ngxsmk-opacity-disabled: 0.5;');
+    expect(css).toContain('--ngxsmk-icon-md: 1.25rem;');
+    expect(css).toContain('--ngxsmk-control-height-sm: 2rem;');
+    expect(css).toContain('--ngxsmk-control-height-md: 2.5rem;');
+    expect(css).toContain('--ngxsmk-tracking-wide: 0.08em;');
+    expect(css).toContain('--ngxsmk-hover-lift: translateY(-1px);');
+    expect(css).toContain('--ngxsmk-press-scale: scale(0.98);');
+  });
+
+  it('zeroes every duration token under reduced motion, with a class opt-in', () => {
+    const reduced = css.slice(css.indexOf('@media (prefers-reduced-motion: reduce)'));
+    expect(reduced).toContain('--ngxsmk-duration-fast: 0ms;');
+    expect(reduced).toContain('--ngxsmk-duration-normal: 0ms;');
+    expect(reduced).toContain('--ngxsmk-duration-slower: 0ms;');
+    expect(reduced).toContain('--ngxsmk-hover-lift: none;');
+    expect(reduced).toContain('--ngxsmk-press-scale: none;');
+    expect(reduced).toContain('.ngxsmk-reduce-motion');
+  });
 });
