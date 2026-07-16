@@ -23,6 +23,7 @@ export class NgxsmkPieChart extends AbstractCanvasChart {
   readonly data = input<NgxsmkPieChartDataPoint[]>([]);
   readonly size = input(200);
   readonly donut = input(false);
+  override readonly responsive = input(false);
 
   private readonly total = computed(() => this.data().reduce((a, d) => a + d.value, 0) || 1);
 
