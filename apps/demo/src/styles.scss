@@ -16,6 +16,8 @@ html {
   height: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -281,22 +283,35 @@ select {
   min-width: 0;
 }
 
-/* Demo page padding tightens on small screens. */
+/* iOS Safari zooms the page when a focused field's font-size is below 16px.
+   Component styles are scoped as `.cls[_ngcontent-*]` (specificity 0,2,0), which
+   outranks a bare `input`, so this guard needs !important to actually land. */
 @media (max-width: 640px) {
-  .ngxsmk-page {
+  input,
+  textarea,
+  select {
+    font-size: 1rem !important;
+  }
+}
+
+/* Demo page padding tightens on small screens.
+   The doubled class beats component-scoped `.ngxsmk-page[_ngcontent-*]`
+   rules (emulated encapsulation), which otherwise out-rank this override. */
+@media (max-width: 640px) {
+  body .ngxsmk-page.ngxsmk-page {
     padding: var(--ngxsmk-space-8, 2rem) var(--ngxsmk-space-4, 1rem);
   }
-  .ngxsmk-page__header h1,
-  .ngxsmk-page__header ngxsmk-heading {
+  body .ngxsmk-page__header h1,
+  body .ngxsmk-page__header ngxsmk-heading {
     font-size: 1.5rem;
   }
-  .ngxsmk-page__header {
+  body .ngxsmk-page__header.ngxsmk-page__header {
     margin-bottom: var(--ngxsmk-space-8, 2rem);
   }
   section {
     padding: 1rem;
   }
-  .ngxsmk-page-title {
+  body .ngxsmk-page-title.ngxsmk-page-title {
     font-size: 1.5rem;
   }
 }
@@ -317,6 +332,12 @@ select {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   max-width: 100%;
+  width: 100%;
+}
+
+/* Inside a scroll region, tables may exceed the viewport — that's the point. */
+.ngxsmk-scroll-x table {
+  max-width: none;
 }
 
 /* intl-tel-input flag sprites are copied to /assets/intl-tel-input/img. */

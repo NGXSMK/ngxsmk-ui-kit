@@ -67,7 +67,7 @@
   max-width: var(--demo-max);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
   gap: clamp(2rem, 5vw, 4.5rem);
   align-items: center;
 }
@@ -137,6 +137,7 @@
   display: inline-flex;
   align-items: center;
   gap: var(--ngxsmk-space-3);
+  max-width: 100%;
   margin-top: var(--ngxsmk-space-6);
   padding: 0.7rem 0.7rem 0.7rem 1rem;
   border: 1px solid var(--ngxsmk-color-outline);
@@ -164,6 +165,10 @@
 }
 .hero__install code {
   color: var(--ngxsmk-color-on-surface);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .hero__install-copy {
   padding: 0.25rem 0.6rem;
@@ -177,7 +182,7 @@
 /* -------- Bento showcase -------- */
 .bento {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   grid-template-areas:
     'brand buttons'
     'progress tags'
@@ -342,7 +347,7 @@
   padding-top: clamp(2rem, 4vw, 3rem);
   border-top: 1px solid var(--ngxsmk-color-outline);
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--ngxsmk-space-6);
   text-align: center;
 }
@@ -434,7 +439,7 @@
   max-width: var(--demo-max);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--ngxsmk-space-4);
 }
 .feature {
@@ -612,7 +617,7 @@
   max-width: var(--demo-max);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--ngxsmk-space-4);
 }
 .template {
@@ -718,7 +723,7 @@
   margin: 0 auto;
   padding: var(--ngxsmk-space-16, 4rem) var(--ngxsmk-space-6, 1.5rem) var(--ngxsmk-space-10, 2.5rem);
   display: grid;
-  grid-template-columns: 1.5fr repeat(3, 1fr);
+  grid-template-columns: minmax(0, 1.5fr) repeat(3, minmax(0, 1fr));
   gap: var(--ngxsmk-space-8, 2rem);
 }
 .ngxsmk-footer__logo-link {
@@ -804,33 +809,95 @@
 }
 
 /* ============================================================= RESPONSIVE */
+/* A `1fr` track's automatic minimum is min-content, so any unwrappable child
+   (the install pill, a code block) widens the whole column past the viewport.
+   `minmax(0, 1fr)` lets tracks shrink and keeps children inside the screen. */
 @media (max-width: 960px) {
   .hero__inner {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .feature-bento {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .templates {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 @media (max-width: 640px) {
   .hero__stats {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--ngxsmk-space-6);
   }
   .feature-bento {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .templates {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .bento {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     grid-template-areas: 'brand' 'buttons' 'tags' 'progress' 'code';
   }
   .ngxsmk-footer__grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+/* Small phones: tighter gutters, calmer type, full-width tap targets. */
+@media (max-width: 480px) {
+  .hero {
+    padding-left: var(--ngxsmk-space-4, 1rem);
+    padding-right: var(--ngxsmk-space-4, 1rem);
+  }
+  .hero__title {
+    font-size: clamp(2.1rem, 9.5vw, 2.6rem);
+  }
+  .hero__lede {
+    font-size: 0.9375rem;
+  }
+  .hero__cta a {
+    flex: 1 1 auto;
+    justify-content: center;
+    text-align: center;
+  }
+  .hero__install {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .hero__stats {
+    gap: var(--ngxsmk-space-4) var(--ngxsmk-space-3);
+  }
+  .section {
+    padding-left: var(--ngxsmk-space-4, 1rem);
+    padding-right: var(--ngxsmk-space-4, 1rem);
+  }
+  .section__title {
+    font-size: clamp(1.65rem, 7.5vw, 2rem);
+  }
+  .section__sub {
+    font-size: 0.9375rem;
+  }
+  .cta {
+    padding-left: var(--ngxsmk-space-4, 1rem);
+    padding-right: var(--ngxsmk-space-4, 1rem);
+  }
+  .cta__title {
+    font-size: clamp(1.9rem, 8.5vw, 2.4rem);
+  }
+  .cta__sub {
+    font-size: 0.9375rem;
+  }
+  .bento__tile--code code {
+    font-size: 0.75rem;
+  }
+  .ngxsmk-footer__grid {
+    grid-template-columns: minmax(0, 1fr);
+    padding-top: var(--ngxsmk-space-10, 2.5rem);
+    gap: var(--ngxsmk-space-6, 1.5rem);
+  }
+  .ngxsmk-footer__bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--ngxsmk-space-2, 0.5rem);
   }
 }

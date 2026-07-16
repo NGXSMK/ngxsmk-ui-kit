@@ -180,9 +180,10 @@ interface ApiOutput {
 
     .ngxsmk-sc-ex__head {
       display: flex;
+      flex-wrap: wrap;
       align-items: flex-start;
       justify-content: space-between;
-      gap: var(--ngxsmk-space-4, 1rem);
+      gap: var(--ngxsmk-space-3, 0.75rem) var(--ngxsmk-space-4, 1rem);
       padding: var(--ngxsmk-space-4, 1rem) var(--ngxsmk-space-5, 1.25rem);
       border-bottom: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
     }
@@ -293,6 +294,19 @@ interface ApiOutput {
     .ngxsmk-sc-ex__api-note code {
       font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace;
       font-size: 0.72rem;
+    }
+
+    @media (max-width: 480px) {
+      .ngxsmk-sc-ex__head {
+        padding: var(--ngxsmk-space-3, 0.75rem) var(--ngxsmk-space-4, 1rem);
+      }
+      .ngxsmk-sc-ex__preview {
+        padding: var(--ngxsmk-space-4, 1rem);
+      }
+      .ngxsmk-sc-ex__code,
+      .ngxsmk-sc-ex__api {
+        padding: var(--ngxsmk-space-3, 0.75rem) var(--ngxsmk-space-4, 1rem);
+      }
     }
   `,
 })

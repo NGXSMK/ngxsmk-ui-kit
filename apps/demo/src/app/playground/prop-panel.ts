@@ -128,7 +128,7 @@ export interface PropDescriptor {
     }
     .ngxsmk-prop-panel__row {
       display: grid;
-      grid-template-columns: 7rem 1fr;
+      grid-template-columns: 7rem minmax(0, 1fr);
       grid-template-areas: 'label control' 'label hint';
       column-gap: var(--ngxsmk-space-3, 0.75rem);
       row-gap: 0.15rem;

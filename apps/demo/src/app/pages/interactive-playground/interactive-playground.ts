@@ -620,7 +620,7 @@ function buildCode(name: string, values: Record<string, unknown>): string {
 
     .pg-shell {
       display: grid;
-      grid-template-columns: 240px 1fr;
+      grid-template-columns: 240px minmax(0, 1fr);
       gap: 1.5rem;
       align-items: start;
     }
@@ -952,7 +952,7 @@ function buildCode(name: string, values: Record<string, unknown>): string {
 
     @media (max-width: 920px) {
       .pg-shell {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
       }
       .pg-sidebar {
         position: static;
@@ -961,7 +961,13 @@ function buildCode(name: string, values: Record<string, unknown>): string {
         max-height: 240px;
       }
       .pg-panels {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .pg {
+        padding: 1.25rem 1rem 3rem;
       }
     }
   `,

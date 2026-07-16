@@ -150,6 +150,11 @@ const CATEGORY_ICONS: Record<string, string> = {
       font-family: 'DM Sans', var(--ngxsmk-font-sans, system-ui), sans-serif;
       color: var(--ngxsmk-color-on-surface, #09090b);
     }
+    @media (max-width: 640px) {
+      .explorer {
+        padding: 1.25rem 1rem 3rem;
+      }
+    }
 
     .explorer-header {
       margin-bottom: 2.5rem;

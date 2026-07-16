@@ -192,6 +192,19 @@ interface SearchItem {
           >{{ 'nav.playground' | translate }}</a
         >
         <a
+          class="ngxsmk-nav__mobile-link"
+          routerLink="/playground/component"
+          (click)="mobileOpen.set(false)"
+          >{{ 'nav.componentPlayground' | translate }}</a
+        >
+        <a
+          class="ngxsmk-nav__mobile-link"
+          href="https://github.com"
+          target="_blank"
+          (click)="mobileOpen.set(false)"
+          >{{ 'nav.github' | translate }}</a
+        >
+        <a
           class="ngxsmk-nav__cta ngxsmk-nav__mobile-cta"
           routerLink="/showcase/explorer"
           (click)="mobileOpen.set(false)"
@@ -340,6 +353,7 @@ interface SearchItem {
       align-items: center;
       gap: var(--ngxsmk-space-1-5, 0.375rem);
       flex-shrink: 0;
+      margin-left: auto;
     }
 
     /* Premium Search Bar Pill in Navbar */
@@ -434,7 +448,7 @@ interface SearchItem {
       display: flex;
       align-items: flex-start;
       justify-content: center;
-      padding-top: 10vh;
+      padding: 10vh 1rem 1rem;
       animation: cmd-fade-in 0.15s ease-out;
     }
 
@@ -606,15 +620,17 @@ interface SearchItem {
       flex-direction: column;
       gap: 0.125rem;
       padding: var(--ngxsmk-space-2, 0.5rem);
+      max-height: calc(100dvh - 3.5rem);
+      overflow-y: auto;
       background: var(--ngxsmk-color-surface, #ffffff);
       border-bottom: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
       box-shadow: var(--ngxsmk-shadow-lg, 0 20px 25px -5px rgba(0, 0, 0, 0.1));
       z-index: var(--ngxsmk-z-sticky, 1100);
     }
     .ngxsmk-nav__mobile-link {
-      padding: var(--ngxsmk-space-2, 0.5rem) var(--ngxsmk-space-3, 0.75rem);
+      padding: var(--ngxsmk-space-3, 0.75rem);
       border-radius: var(--ngxsmk-radius-md, 0.375rem);
-      font-size: 0.875rem;
+      font-size: 0.9375rem;
       font-weight: 500;
       text-decoration: none;
       color: var(--ngxsmk-color-on-surface, #09090b);
@@ -640,6 +656,10 @@ interface SearchItem {
     }
 
     @media (max-width: 640px) {
+      .ngxsmk-nav__inner {
+        padding: 0 var(--ngxsmk-space-4, 1rem);
+        gap: var(--ngxsmk-space-3, 0.75rem);
+      }
       .ngxsmk-nav__search-btn {
         width: auto;
         padding: 0;
@@ -653,6 +673,13 @@ interface SearchItem {
       }
       .search-text,
       .search-kbd {
+        display: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      /* Free header space on tight phones: GitHub lives in the mobile menu. */
+      a.ngxsmk-nav__icon-btn {
         display: none;
       }
     }

@@ -192,7 +192,9 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
       [component]="NgxsmkTable"
       [customize]="customizeNgxsmkTable"
     >
-      <ngxsmk-table [columns]="memberColumns" [rows]="memberRows" [striped]="true" />
+      <div class="ngxsmk-scroll-x">
+        <ngxsmk-table [columns]="memberColumns" [rows]="memberRows" [striped]="true" />
+      </div>
     </showcase-example>
 
     <showcase-example
@@ -202,13 +204,15 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
       [component]="NgxsmkDataTable"
       [customize]="customizeNgxsmkDataTable"
     >
-      <ngxsmk-data-table
-        [columns]="orderColumns"
-        [rows]="orderRows"
-        [pageSize]="4"
-        [sortable]="true"
-        [striped]="true"
-      />
+      <div class="ngxsmk-scroll-x">
+        <ngxsmk-data-table
+          [columns]="orderColumns"
+          [rows]="orderRows"
+          [pageSize]="4"
+          [sortable]="true"
+          [striped]="true"
+        />
+      </div>
     </showcase-example>
 
     <showcase-example

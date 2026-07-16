@@ -80,7 +80,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
       [component]="NgxsmkTimelineGantt"
       [customize]="customizeNgxsmkTimelineGantt"
     >
-      <div class="ngxsmk-sc-surface">
+      <div class="ngxsmk-sc-surface ngxsmk-scroll-x">
         <ngxsmk-timeline-gantt [items]="ganttItems" />
       </div>
     </showcase-example>

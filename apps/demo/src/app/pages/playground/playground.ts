@@ -2047,7 +2047,7 @@ type RadiusKey = keyof typeof RADII;
 
     .canvas-viewport.phone {
       width: 400px;
-      max-width: 400px;
+      max-width: min(400px, 100%);
     }
 
     .canvas-viewport.expand {

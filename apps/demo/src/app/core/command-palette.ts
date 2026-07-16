@@ -109,7 +109,7 @@ import { TranslatePipe } from '@ngx-translate/core';
       display: flex;
       align-items: flex-start;
       justify-content: center;
-      padding-top: 12vh;
+      padding: 12vh 1rem 1rem;
       animation: cmd-fade-in 0.12s ease-out;
     }
     @keyframes cmd-fade-in {

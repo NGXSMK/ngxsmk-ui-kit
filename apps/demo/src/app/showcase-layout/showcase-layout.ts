@@ -277,6 +277,12 @@ interface CategoryGroup {
           padding: var(--ngxsmk-space-4, 1rem);
         }
       }
+
+      @media (max-width: 480px) {
+        .ngxsmk-sc-content {
+          padding: var(--ngxsmk-space-3, 0.75rem);
+        }
+      }
     `,
   ],
 })

@@ -379,14 +379,20 @@ import { NgxsmkSwitch } from '@ngxsmk/core/switch';
 
     .docs-grid-two {
       display: grid;
-      grid-template-columns: 1.2fr 1fr;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
       gap: 2.5rem;
       align-items: center;
     }
     @media (max-width: 768px) {
       .docs-grid-two {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
         gap: 1.75rem;
+      }
+      .docs-container {
+        padding: var(--ngxsmk-space-8, 2rem) var(--ngxsmk-space-4, 1rem);
+      }
+      .docs-section-card {
+        padding: var(--ngxsmk-space-5, 1.25rem);
       }
     }
 
