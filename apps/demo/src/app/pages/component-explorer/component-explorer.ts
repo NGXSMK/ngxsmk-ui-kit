@@ -30,7 +30,9 @@ const CATEGORY_ICONS: Record<string, string> = {
   template: `
     <div class="explorer">
       <header class="explorer-header">
-        <ngxsmk-heading level="h1" class="explorer-title">{{ 'explorer.title' | translate }}</ngxsmk-heading>
+        <ngxsmk-heading level="h1" class="explorer-title">{{
+          'explorer.title' | translate
+        }}</ngxsmk-heading>
         <p class="explorer-subtitle">
           {{
             'explorer.subtitle'
@@ -103,7 +105,9 @@ const CATEGORY_ICONS: Record<string, string> = {
       @for (group of filteredGroups(); track group.category) {
         <section class="explorer-group">
           <div class="explorer-group-header">
-            <ngxsmk-heading level="h2" class="explorer-group-title">{{ catLabelKey(group.category) | translate }}</ngxsmk-heading>
+            <ngxsmk-heading level="h2" class="explorer-group-title">{{
+              catLabelKey(group.category) | translate
+            }}</ngxsmk-heading>
             <span class="explorer-group-count">{{
               'explorer.componentCount' | translate: { count: group.components.length }
             }}</span>

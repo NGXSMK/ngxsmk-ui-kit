@@ -52,7 +52,9 @@ import { NgxsmkHeading } from '@ngxsmk/core/heading';
             >Signal-first</ngxsmk-tag
           >
         </div>
-        <ngxsmk-heading level="h1" class="docs-title">{{ 'docs.developerPortal' | translate }}</ngxsmk-heading>
+        <ngxsmk-heading level="h1" class="docs-title">{{
+          'docs.developerPortal' | translate
+        }}</ngxsmk-heading>
         <p class="docs-subtitle">
           {{ 'docs.subtitle' | translate }}
         </p>
@@ -62,7 +64,9 @@ import { NgxsmkHeading } from '@ngxsmk/core/heading';
       <section class="docs-section-card">
         <div class="docs-grid-two">
           <div class="docs-install-info">
-            <ngxsmk-heading level="h2" class="docs-section-title">{{ 'docs.quickStart' | translate }}</ngxsmk-heading>
+            <ngxsmk-heading level="h2" class="docs-section-title">{{
+              'docs.quickStart' | translate
+            }}</ngxsmk-heading>
             <p class="docs-text">
               {{ 'docs.quickStartDesc' | translate }}
             </p>
@@ -118,7 +122,9 @@ import { NgxsmkHeading } from '@ngxsmk/core/heading';
 
       <!-- ARCHITECTURE PILLARS GRID -->
       <section style="margin-bottom: 3rem;">
-        <ngxsmk-heading level="h2" class="docs-subheading">{{ 'docs.corePillars' | translate }}</ngxsmk-heading>
+        <ngxsmk-heading level="h2" class="docs-subheading">{{
+          'docs.corePillars' | translate
+        }}</ngxsmk-heading>
         <div class="docs-pillars-grid">
           <ngxsmk-card class="pillar-card">
             <div ngxsmkCardHeader>
@@ -174,7 +180,9 @@ import { NgxsmkHeading } from '@ngxsmk/core/heading';
       <section class="docs-section-card" style="margin-bottom: 3rem;">
         <div class="docs-grid-two">
           <div>
-            <ngxsmk-heading level="h2" class="docs-section-title">{{ 'docs.aiTooling' | translate }}</ngxsmk-heading>
+            <ngxsmk-heading level="h2" class="docs-section-title">{{
+              'docs.aiTooling' | translate
+            }}</ngxsmk-heading>
             <p class="docs-text">
               {{ 'docs.aiToolingDesc' | translate }}
             </p>
@@ -225,7 +233,9 @@ import { NgxsmkHeading } from '@ngxsmk/core/heading';
       <section class="docs-section-card" style="margin-bottom: 3rem;">
         <div class="docs-grid-two">
           <div>
-            <ngxsmk-heading level="h2" class="docs-section-title">{{ 'docs.tokenTheming' | translate }}</ngxsmk-heading>
+            <ngxsmk-heading level="h2" class="docs-section-title">{{
+              'docs.tokenTheming' | translate
+            }}</ngxsmk-heading>
             <p class="docs-text">
               {{ 'docs.tokenThemingDesc' | translate }}
             </p>

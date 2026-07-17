@@ -76,7 +76,9 @@ interface ApiDb {
         <div class="api-badges">
           @if (db(); as d) {
             <ngxsmk-tag class="api-badge">v{{ d.version }}</ngxsmk-tag>
-            <ngxsmk-tag class="api-badge">{{ 'api.apiCount' | translate: { count: d.components.length } }}</ngxsmk-tag>
+            <ngxsmk-tag class="api-badge">{{
+              'api.apiCount' | translate: { count: d.components.length }
+            }}</ngxsmk-tag>
           }
         </div>
         <ngxsmk-heading level="h1" class="api-title">{{ 'api.title' | translate }}</ngxsmk-heading>
@@ -162,21 +164,27 @@ interface ApiDb {
                         type="button"
                         (click)="copy(c.selector, 'sel-' + c.name)"
                       >
-                        {{ copiedKey() === 'sel-' + c.name ? ('api.copied' | translate) : ('api.copy' | translate) }}
+                        {{
+                          copiedKey() === 'sel-' + c.name
+                            ? ('api.copied' | translate)
+                            : ('api.copy' | translate)
+                        }}
                       </button>
                     </div>
                     <div class="api-meta-row">
                       <code class="api-entry-meta"
-                        >import {{ '{' }} {{ c.name }} {{ '}' }} from '{{
-                          c.entryPoint
-                        }}'</code
+                        >import {{ '{' }} {{ c.name }} {{ '}' }} from '{{ c.entryPoint }}'</code
                       >
                       <button
                         class="api-copy"
                         type="button"
                         (click)="copy(importLine(c), 'imp-' + c.name)"
                       >
-                        {{ copiedKey() === 'imp-' + c.name ? ('api.copied' | translate) : ('api.copy' | translate) }}
+                        {{
+                          copiedKey() === 'imp-' + c.name
+                            ? ('api.copied' | translate)
+                            : ('api.copy' | translate)
+                        }}
                       </button>
                     </div>
                   </div>
@@ -186,7 +194,9 @@ interface ApiDb {
                   }
 
                   @if (c.inputs.length) {
-                    <ngxsmk-heading level="h3" class="api-table-title">{{ 'api.inputs' | translate }}</ngxsmk-heading>
+                    <ngxsmk-heading level="h3" class="api-table-title">{{
+                      'api.inputs' | translate
+                    }}</ngxsmk-heading>
                     <div class="api-table-wrap">
                       <table class="api-table">
                         <thead>
@@ -204,10 +214,14 @@ interface ApiDb {
                                   i.twoWay ? '[(' + i.name + ')]' : '[' + i.name + ']'
                                 }}</code>
                                 @if (i.required) {
-                                  <span class="api-tag api-tag--required">{{ 'api.required' | translate }}</span>
+                                  <span class="api-tag api-tag--required">{{
+                                    'api.required' | translate
+                                  }}</span>
                                 }
                                 @if (i.twoWay) {
-                                  <span class="api-tag api-tag--twoway">{{ 'api.twoway' | translate }}</span>
+                                  <span class="api-tag api-tag--twoway">{{
+                                    'api.twoway' | translate
+                                  }}</span>
                                 }
                               </td>
                               <td>
@@ -228,7 +242,9 @@ interface ApiDb {
                   }
 
                   @if (c.outputs.length) {
-                    <ngxsmk-heading level="h3" class="api-table-title">{{ 'api.outputs' | translate }}</ngxsmk-heading>
+                    <ngxsmk-heading level="h3" class="api-table-title">{{
+                      'api.outputs' | translate
+                    }}</ngxsmk-heading>
                     <div class="api-table-wrap">
                       <table class="api-table">
                         <thead>
@@ -318,7 +334,9 @@ interface ApiDb {
       border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-lg);
       outline: none;
-      transition: border-color 0.15s, box-shadow 0.15s;
+      transition:
+        border-color 0.15s,
+        box-shadow 0.15s;
     }
     .api-search:focus {
       border-color: var(--ngxsmk-color-primary);
@@ -381,7 +399,10 @@ interface ApiDb {
       padding: 0.2rem 0.5rem;
       border-radius: var(--ngxsmk-radius-sm);
       border-left: 2px solid transparent;
-      transition: background 0.15s, color 0.15s, border-color 0.15s;
+      transition:
+        background 0.15s,
+        color 0.15s,
+        border-color 0.15s;
     }
     .api-sidebar-link:hover {
       background: var(--ngxsmk-color-surface-hover, var(--ngxsmk-color-surface-variant));
@@ -474,7 +495,10 @@ interface ApiDb {
       border-radius: var(--ngxsmk-radius-sm);
       cursor: pointer;
       opacity: 0;
-      transition: opacity 0.15s, color 0.15s, border-color 0.15s;
+      transition:
+        opacity 0.15s,
+        color 0.15s,
+        border-color 0.15s;
     }
     .api-entry:hover .api-anchor,
     .api-anchor:focus-visible {
@@ -515,7 +539,10 @@ interface ApiDb {
       border-radius: var(--ngxsmk-radius-sm);
       padding: 0.2rem 0.5rem;
       cursor: pointer;
-      transition: color 0.15s, border-color 0.15s, background 0.15s;
+      transition:
+        color 0.15s,
+        border-color 0.15s,
+        background 0.15s;
     }
     .api-copy:hover {
       color: var(--ngxsmk-color-primary);
@@ -741,9 +768,7 @@ export class ApiReferencePage {
 
   private setupScrollSpy() {
     this.observer?.disconnect();
-    const entries = Array.from(
-      document.querySelectorAll<HTMLElement>('.api-entry'),
-    );
+    const entries = Array.from(document.querySelectorAll<HTMLElement>('.api-entry'));
     if (!entries.length) return;
     this.observer = new IntersectionObserver(
       (observed) => {

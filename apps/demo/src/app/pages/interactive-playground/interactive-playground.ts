@@ -310,7 +310,9 @@ function buildCode(name: string, values: Record<string, unknown>): string {
           <span class="pg-breadcrumb-sep">/</span>
           <span>{{ 'nav.componentPlayground' | translate }}</span>
         </div>
-        <ngxsmk-heading level="h1" class="pg-title">{{ 'nav.componentPlayground' | translate }}</ngxsmk-heading>
+        <ngxsmk-heading level="h1" class="pg-title">{{
+          'nav.componentPlayground' | translate
+        }}</ngxsmk-heading>
         <p class="pg-subtitle">
           {{ 'iplayground.subtitle' | translate }}
         </p>
@@ -402,7 +404,9 @@ function buildCode(name: string, values: Record<string, unknown>): string {
               </section>
 
               <section class="pg-card">
-                <ngxsmk-heading level="h3" class="pg-card-title">{{ 'iplayground.generatedCode' | translate }}</ngxsmk-heading>
+                <ngxsmk-heading level="h3" class="pg-card-title">{{
+                  'iplayground.generatedCode' | translate
+                }}</ngxsmk-heading>
                 <div class="pg-card-body">
                   <pre class="pg-code"><code>{{ generatedCode() }}</code></pre>
                 </div>
@@ -412,7 +416,9 @@ function buildCode(name: string, values: Record<string, unknown>): string {
             <section class="pg-api">
               @if (comp.inputs.length > 0) {
                 <div class="pg-detail-section">
-                    <ngxsmk-heading level="h3" class="pg-detail-section-title">{{ 'iplayground.inputs' | translate }}</ngxsmk-heading>
+                  <ngxsmk-heading level="h3" class="pg-detail-section-title">{{
+                    'iplayground.inputs' | translate
+                  }}</ngxsmk-heading>
                   <div class="pg-table-wrap">
                     <table class="pg-table">
                       <thead>
@@ -454,7 +460,9 @@ function buildCode(name: string, values: Record<string, unknown>): string {
 
               @if (comp.outputs.length > 0) {
                 <div class="pg-detail-section">
-                    <ngxsmk-heading level="h3" class="pg-detail-section-title">{{ 'iplayground.outputs' | translate }}</ngxsmk-heading>
+                  <ngxsmk-heading level="h3" class="pg-detail-section-title">{{
+                    'iplayground.outputs' | translate
+                  }}</ngxsmk-heading>
                   <div class="pg-table-wrap">
                     <table class="pg-table">
                       <thead>
@@ -484,7 +492,9 @@ function buildCode(name: string, values: Record<string, unknown>): string {
 
               @if (comp.signals.length > 0) {
                 <div class="pg-detail-section">
-                    <ngxsmk-heading level="h3" class="pg-detail-section-title">{{ 'iplayground.signals' | translate }}</ngxsmk-heading>
+                  <ngxsmk-heading level="h3" class="pg-detail-section-title">{{
+                    'iplayground.signals' | translate
+                  }}</ngxsmk-heading>
                   <div class="pg-table-wrap">
                     <table class="pg-table">
                       <thead>
@@ -522,7 +532,9 @@ function buildCode(name: string, values: Record<string, unknown>): string {
 
               @if (comp.methods.length > 0) {
                 <div class="pg-detail-section">
-                    <ngxsmk-heading level="h3" class="pg-detail-section-title">{{ 'iplayground.methods' | translate }}</ngxsmk-heading>
+                  <ngxsmk-heading level="h3" class="pg-detail-section-title">{{
+                    'iplayground.methods' | translate
+                  }}</ngxsmk-heading>
                   <div class="pg-table-wrap">
                     <table class="pg-table">
                       <thead>
@@ -557,7 +569,9 @@ function buildCode(name: string, values: Record<string, unknown>): string {
           } @else {
             <div class="pg-empty">
               <div class="pg-empty-icon">◈</div>
-              <ngxsmk-heading level="h2">{{ 'iplayground.selectComponent' | translate }}</ngxsmk-heading>
+              <ngxsmk-heading level="h2">{{
+                'iplayground.selectComponent' | translate
+              }}</ngxsmk-heading>
               <p>{{ 'iplayground.pickComponent' | translate }}</p>
             </div>
           }

@@ -173,9 +173,7 @@ interface SearchItem {
         <a class="ngxsmk-nav__mobile-link" routerLink="/docs" (click)="mobileOpen.set(false)">{{
           'nav.docs' | translate
         }}</a>
-        <a class="ngxsmk-nav__mobile-link" routerLink="/api" (click)="mobileOpen.set(false)"
-          >API</a
-        >
+        <a class="ngxsmk-nav__mobile-link" routerLink="/api" (click)="mobileOpen.set(false)">API</a>
         <a
           class="ngxsmk-nav__mobile-link"
           routerLink="/showcase/explorer"

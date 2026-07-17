@@ -247,4 +247,6 @@ export const COMPONENT_DATABASE: ComponentEntry[] = ${JSON.stringify(components,
 `;
 writeFileSync(join(root, 'packages', 'mcp', 'src', 'component-db.ts'), dbTs);
 
-console.log('Wrote llms.txt, llms-full.txt (root + apps/demo/public) and packages/mcp/src/component-db.ts');
+console.log(
+  'Wrote llms.txt, llms-full.txt (root + apps/demo/public) and packages/mcp/src/component-db.ts',
+);

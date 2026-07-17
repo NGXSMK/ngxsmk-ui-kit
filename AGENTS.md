@@ -2,7 +2,7 @@
 
 NGXSMK is an Angular-first UI kit: 150+ signals-native, zoneless, standalone
 components plus a universal design-token engine. This file tells coding agents
-how to work in this repo and how to generate correct code that *uses* the
+how to work in this repo and how to generate correct code that _uses_ the
 library.
 
 ## Repo layout

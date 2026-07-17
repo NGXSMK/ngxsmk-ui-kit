@@ -44,12 +44,9 @@ import { AppNav } from '../../nav/nav';
             <ngxsmk-text variant="body" class="ngxsmk-community-desc">{{
               'community.githubDiscussionsDesc' | translate
             }}</ngxsmk-text>
-            <a
-              ngxsmk-button
-              size="sm"
-              href="mailto:ngxsmk@gmail.com?subject=NGXSMK%20feedback"
-              >{{ 'community.joinDiscussion' | translate }}</a
-            >
+            <a ngxsmk-button size="sm" href="mailto:ngxsmk@gmail.com?subject=NGXSMK%20feedback">{{
+              'community.joinDiscussion' | translate
+            }}</a>
           </div>
         </ngxsmk-card>
       </div>

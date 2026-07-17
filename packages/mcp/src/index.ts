@@ -66,7 +66,11 @@ function usageSnippet(c: ComponentEntry): string {
   const bindings = c.inputs
     .slice(0, 3)
     .map((i) => (i.twoWay ? `[(${i.name})]="${i.name}"` : `[${i.name}]="${i.name}"`))
-    .concat(c.outputs.slice(0, 2).map((o) => `(${o.name})="on${o.name[0].toUpperCase()}${o.name.slice(1)}($event)"`));
+    .concat(
+      c.outputs
+        .slice(0, 2)
+        .map((o) => `(${o.name})="on${o.name[0].toUpperCase()}${o.name.slice(1)}($event)"`),
+    );
   const attrs = bindings.length ? ' ' + bindings.join(' ') : '';
   if (attr) return `<${attr[1]} ${attr[2]}${attrs}>...</${attr[1]}>`;
   return `<${first}${attrs} />`;
@@ -122,8 +126,7 @@ function handleRequest(message: any): any {
       const query = (args.query || '').toLowerCase();
       const terms = query.split(/\s+/).filter(Boolean);
       const results = COMPONENT_DATABASE.filter((c) => {
-        const haystack =
-          `${c.name} ${c.selector} ${c.entryPoint} ${c.description}`.toLowerCase();
+        const haystack = `${c.name} ${c.selector} ${c.entryPoint} ${c.description}`.toLowerCase();
         return terms.every((t: string) => haystack.includes(t));
       }).slice(0, 25);
 
