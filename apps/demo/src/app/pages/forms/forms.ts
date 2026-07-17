@@ -1,12 +1,11 @@
 import { NgxsmkButtonGroup } from '@ngxsmk/core/button-group';
 import { NgxsmkToggleButton } from '@ngxsmk/core/toggle-button';
 import { NgxsmkToggleButtonGroup } from '@ngxsmk/core/toggle-button-group';
-import { NgxsmkInput } from '@ngxsmk/core/input';
+import { NgxsmkInputDirective } from '@ngxsmk/core/input';
 import { NgxsmkCheckbox } from '@ngxsmk/core/checkbox';
 import { NgxsmkCheckboxList } from '@ngxsmk/core/checkbox-list';
 import { NgxsmkRadio, NgxsmkRadioGroup } from '@ngxsmk/core/radio';
 import { NgxsmkSwitch } from '@ngxsmk/core/switch';
-import { NgxsmkTextarea } from '@ngxsmk/core/textarea';
 import { NgxsmkNumberInput } from '@ngxsmk/core/number-input';
 import { NgxsmkSelect } from '@ngxsmk/core/select';
 import { NgxsmkMultiSelect } from '@ngxsmk/core/multi-select';
@@ -48,13 +47,12 @@ interface Option {
     NgxsmkButtonGroup,
     NgxsmkToggleButton,
     NgxsmkToggleButtonGroup,
-    NgxsmkInput,
+    NgxsmkInputDirective,
     NgxsmkCheckbox,
     NgxsmkCheckboxList,
     NgxsmkRadio,
     NgxsmkRadioGroup,
     NgxsmkSwitch,
-    NgxsmkTextarea,
     NgxsmkNumberInput,
     NgxsmkSelect,
     NgxsmkMultiSelect,
@@ -146,14 +144,15 @@ interface Option {
         title="Input"
         [description]="'forms.inputDesc' | translate"
         [code]="codeInput"
-        [component]="NgxsmkInput"
+        [component]="NgxsmkInputDirective"
         [customize]="customizeNgxsmkInput"
       >
         <div class="ngxsmk-sc-col" style="width: 100%; max-width: 320px">
-          <ngxsmk-input
+          <input
+            ngxsmkInput
             type="email"
             [placeholder]="'forms.emailPlaceholder' | translate"
-            [(value)]="email"
+            [(ngModel)]="email"
           />
           <small>{{ 'forms.valueLabel' | translate }} {{ email() || '-' }}</small>
         </div>
@@ -163,14 +162,15 @@ interface Option {
         title="Textarea"
         [description]="'forms.textareaDesc' | translate"
         [code]="codeTextarea"
-        [component]="NgxsmkTextarea"
+        [component]="NgxsmkInputDirective"
         [customize]="customizeNgxsmkTextarea"
       >
-        <ngxsmk-textarea
+        <textarea
+          ngxsmkInput
           [placeholder]="'forms.feedbackPlaceholder' | translate"
           [rows]="4"
-          [(value)]="feedback"
-        />
+          [(ngModel)]="feedback"
+        ></textarea>
       </showcase-example>
 
       <showcase-example
@@ -422,7 +422,7 @@ interface Option {
       >
         <ngxsmk-input-group>
           <ngxsmk-input-group-text>$</ngxsmk-input-group-text>
-          <ngxsmk-input type="text" [placeholder]="'forms.amountPlaceholder' | translate" />
+          <input ngxsmkInput type="text" [placeholder]="'forms.amountPlaceholder' | translate" />
           <ngxsmk-input-group-text>USD</ngxsmk-input-group-text>
         </ngxsmk-input-group>
       </showcase-example>
@@ -438,7 +438,7 @@ interface Option {
           <ngxsmk-field-label [required]="true">{{
             'forms.username' | translate
           }}</ngxsmk-field-label>
-          <ngxsmk-input type="text" [placeholder]="'forms.usernamePlaceholder' | translate" />
+          <input ngxsmkInput type="text" [placeholder]="'forms.usernamePlaceholder' | translate" />
           <ngxsmk-field-status variant="error" [message]="'forms.usernameTaken' | translate" />
         </ngxsmk-field>
       </showcase-example>
@@ -455,7 +455,7 @@ interface Option {
           required
           [error]="'forms.emailError' | translate"
         >
-          <ngxsmk-input type="email" [placeholder]="'forms.emailPlaceholder' | translate" />
+          <input ngxsmkInput type="email" [placeholder]="'forms.emailPlaceholder' | translate" />
         </ngxsmk-form-field>
       </showcase-example>
 
@@ -522,9 +522,9 @@ ngxsmk-toggle-button-group {
   --ngxsmk-radius-md: ;
   --ngxsmk-space-1: ;
 }`;
-  protected readonly NgxsmkInput = NgxsmkInput;
-  protected readonly customizeNgxsmkInput = `/* Theme <ngxsmk-input> via design tokens */
-ngxsmk-input {
+  protected readonly NgxsmkInputDirective = NgxsmkInputDirective;
+  protected readonly customizeNgxsmkInput = `/* Theme input[ngxsmkInput] via design tokens */
+input[ngxsmkInput] {
   --ngxsmk-color-error: ;
   --ngxsmk-color-on-surface: ;
   --ngxsmk-color-on-surface-variant: ;
@@ -540,9 +540,8 @@ ngxsmk-input {
   --ngxsmk-text-body-md-line: ;
   --ngxsmk-text-body-md-size: ;
 }`;
-  protected readonly NgxsmkTextarea = NgxsmkTextarea;
-  protected readonly customizeNgxsmkTextarea = `/* Theme <ngxsmk-textarea> via design tokens */
-ngxsmk-textarea {
+  protected readonly customizeNgxsmkTextarea = `/* Theme textarea[ngxsmkInput] via design tokens */
+textarea[ngxsmkInput] {
   --ngxsmk-color-on-surface: ;
   --ngxsmk-color-on-surface-variant: ;
   --ngxsmk-color-outline-strong: ;

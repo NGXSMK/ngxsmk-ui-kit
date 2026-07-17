@@ -10,8 +10,12 @@ import {
   model,
   output,
   signal,
+  forwardRef,
 } from '@angular/core';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { ngxsmkUniqueId } from '@ngxsmk/core/util';
+import { NGXSMK_FORM_FIELD_CONTROL, NgxsmkFormFieldControl } from '@ngxsmk/core/form-field';
 
 export interface NgxsmkSelectOption {
   value: string;
@@ -41,9 +45,23 @@ export interface NgxsmkSelectOption {
 @Component({
   standalone: true,
   selector: 'ngxsmk-select',
+  imports: [CdkConnectedOverlay, CdkOverlayOrigin],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => NgxsmkSelect),
+      multi: true,
+    },
+    {
+      provide: NGXSMK_FORM_FIELD_CONTROL,
+      useExisting: forwardRef(() => NgxsmkSelect),
+    },
+  ],
   template: `
     <button
       #trigger
+      cdkOverlayOrigin
+      #triggerOrigin="cdkOverlayOrigin"
       type="button"
       class="ngxsmk-select__trigger"
       role="combobox"
@@ -54,7 +72,7 @@ export interface NgxsmkSelectOption {
       [attr.aria-activedescendant]="open() ? activeDescendant() : null"
       [attr.aria-invalid]="ariaInvalid() ? 'true' : null"
       [attr.aria-describedby]="ariaDescribedby()"
-      [disabled]="disabled()"
+      [disabled]="isDisabled()"
       (click)="toggle()"
       (keydown)="onTriggerKeydown($event)"
     >
@@ -75,7 +93,14 @@ export interface NgxsmkSelectOption {
       </svg>
     </button>
 
-    @if (open()) {
+    <ng-template
+      cdkConnectedOverlay
+      [cdkConnectedOverlayOrigin]="triggerOrigin"
+      [cdkConnectedOverlayOpen]="open()"
+      [cdkConnectedOverlayMinWidth]="triggerWidth"
+      [cdkConnectedOverlayHasBackdrop]="false"
+      (overlayOutsideClick)="close()"
+    >
       <ul
         #listbox
         class="ngxsmk-select__listbox"
@@ -119,14 +144,14 @@ export interface NgxsmkSelectOption {
           <li class="ngxsmk-select__empty" role="presentation">{{ emptyLabel() }}</li>
         }
       </ul>
-    }
+    </ng-template>
   `,
   host: {
     class: 'ngxsmk-select',
     '[attr.id]': 'id()',
     '[attr.aria-invalid]': "ariaInvalid() ? 'true' : null",
     '[attr.aria-describedby]': 'ariaDescribedby()',
-    '[attr.data-disabled]': "disabled() ? '' : null",
+    '[attr.data-disabled]': "isDisabled() ? '' : null",
   },
   styles: `
     :host {
@@ -197,24 +222,19 @@ export interface NgxsmkSelectOption {
     }
 
     /* Listbox */
+    /* Dropdown popup matches search/combobox styling. */
     .ngxsmk-select__listbox {
-      position: absolute;
-      top: calc(100% + var(--ngxsmk-space-1));
-      left: 0;
-      right: 0;
+      box-sizing: border-box;
+      background: var(--ngxsmk-color-surface);
+      border: 1px solid var(--ngxsmk-color-outline);
+      border-radius: var(--ngxsmk-radius-md);
+      box-shadow: var(--ngxsmk-shadow-md);
       z-index: var(--ngxsmk-z-dropdown, 1000);
-      list-style: none;
-      margin: 0;
-      padding: var(--ngxsmk-space-1);
       max-height: 14rem;
       overflow-y: auto;
-      border: 1px solid var(--ngxsmk-color-outline);
-      border-radius: var(--ngxsmk-radius-base);
-      background: var(--ngxsmk-color-surface);
-      box-shadow: var(--ngxsmk-shadow-lg);
-      font-family: var(--ngxsmk-font-sans);
-      font-size: var(--ngxsmk-text-body-md-size);
-      line-height: var(--ngxsmk-text-body-md-line);
+      padding: var(--ngxsmk-space-1) 0;
+      margin: var(--ngxsmk-space-1) 0 0;
+      list-style-type: none;
     }
 
     .ngxsmk-select__option {
@@ -254,7 +274,7 @@ export interface NgxsmkSelectOption {
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NgxsmkSelect {
+export class NgxsmkSelect implements ControlValueAccessor, NgxsmkFormFieldControl {
   readonly options = input.required<NgxsmkSelectOption[]>();
   readonly value = model<string>('');
   readonly placeholder = input('');
@@ -284,6 +304,32 @@ export class NgxsmkSelect {
   private typeaheadBuffer = '';
   private typeaheadClear: ReturnType<typeof setTimeout> | null = null;
 
+  // CVA state hooks
+  private onChange: (val: string) => void = () => {};
+  private onTouched: () => void = () => {};
+  private readonly formDisabled = signal(false);
+  protected readonly isDisabled = computed(() => this.disabled() || this.formDisabled());
+
+  protected get triggerWidth(): number {
+    return this.host.nativeElement.getBoundingClientRect().width;
+  }
+
+  writeValue(val: string): void {
+    this.value.set(val || '');
+  }
+
+  registerOnChange(fn: (val: string) => void): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+    this.formDisabled.set(isDisabled);
+  }
+
   protected readonly listboxId = computed(() => `${this.id()}-listbox`);
 
   protected readonly selected = computed(
@@ -295,7 +341,7 @@ export class NgxsmkSelect {
   );
 
   protected toggle(): void {
-    if (this.disabled()) {
+    if (this.isDisabled()) {
       return;
     }
     if (this.open()) {
@@ -306,7 +352,7 @@ export class NgxsmkSelect {
   }
 
   protected openNow(): void {
-    if (this.disabled()) {
+    if (this.isDisabled()) {
       return;
     }
     const idx = this.options().findIndex((o) => o.value === this.value());
@@ -321,11 +367,13 @@ export class NgxsmkSelect {
     this.activeIndex.set(-1);
     this.host.nativeElement.removeAttribute('data-open');
     this.typeaheadBuffer = '';
+    this.onTouched();
   }
 
   protected selectPlaceholder(): void {
     this.value.set('');
     this.changed.emit('');
+    this.onChange('');
     this.close();
   }
 
@@ -335,6 +383,7 @@ export class NgxsmkSelect {
     }
     this.value.set(opt.value);
     this.changed.emit(opt.value);
+    this.onChange(opt.value);
     this.close();
   }
 
@@ -417,12 +466,7 @@ export class NgxsmkSelect {
     }
   }
 
-  @HostListener('document:click', ['$event'])
-  protected onDocumentClick(event: MouseEvent): void {
-    if (this.open() && !this.host.nativeElement.contains(event.target as Node)) {
-      this.close();
-    }
-  }
+
 
   private move(delta: number): void {
     const opts = this.options();
@@ -482,6 +526,7 @@ export class NgxsmkSelect {
         const opt = this.options()[match];
         this.value.set(opt.value);
         this.changed.emit(opt.value);
+        this.onChange(opt.value);
       }
       this.scrollActiveIntoView();
     }

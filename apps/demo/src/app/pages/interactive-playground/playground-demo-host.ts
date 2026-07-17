@@ -12,7 +12,7 @@ import { NgxsmkAvatar } from '@ngxsmk/core/avatar';
 import { NgxsmkAlert } from '@ngxsmk/core/alert';
 import { NgxsmkSwitch } from '@ngxsmk/core/switch';
 import { NgxsmkCheckbox } from '@ngxsmk/core/checkbox';
-import { NgxsmkInput } from '@ngxsmk/core/input';
+import { NgxsmkInputDirective } from '@ngxsmk/core/input';
 import { NgxsmkSelect } from '@ngxsmk/core/select';
 import { NgxsmkSlider } from '@ngxsmk/core/slider';
 import { NgxsmkProgress } from '@ngxsmk/core/progress';
@@ -50,7 +50,7 @@ export const CURATED_COMPONENTS = [
   NgxsmkAlert,
   NgxsmkSwitch,
   NgxsmkCheckbox,
-  NgxsmkInput,
+  NgxsmkInputDirective,
   NgxsmkSelect,
   NgxsmkSlider,
   NgxsmkProgress,
@@ -156,13 +156,14 @@ const SELECT_OPTIONS = [
           >
         }
         @case ('NgxsmkInput') {
-          <ngxsmk-input
+          <input
+            ngxsmkInput
             style="max-width: 280px;"
             [type]="str('type')"
             [value]="str('value')"
             [placeholder]="str('placeholder')"
             [disabled]="bool('disabled')"
-          ></ngxsmk-input>
+          />
         }
         @case ('NgxsmkSelect') {
           <ngxsmk-select

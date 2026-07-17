@@ -9,7 +9,9 @@ import {
   inject,
   input,
   viewChild,
+  PLATFORM_ID,
 } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { ChartHover, ChartTheme, RGBA, easeOutCubic, resolveTheme, rgba } from './chart-engine';
 
 export interface YTick {
@@ -27,6 +29,7 @@ export abstract class AbstractCanvasChart implements AfterViewInit, OnDestroy {
   protected readonly tooltipRef = viewChild.required<ElementRef<HTMLDivElement>>('tooltip');
   protected readonly hostRef = inject(ElementRef);
   private readonly zone = inject(NgZone);
+  private readonly platformId = inject(PLATFORM_ID);
 
   readonly width = input(400);
   readonly height = input(200);
@@ -63,7 +66,7 @@ export abstract class AbstractCanvasChart implements AfterViewInit, OnDestroy {
       this.width();
       this.height();
       this.responsive();
-      if (this.ready) {
+      if (isPlatformBrowser(this.platformId) && this.ready) {
         this.resize();
         this.animate();
       }

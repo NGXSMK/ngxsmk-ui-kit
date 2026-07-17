@@ -1,20 +1,20 @@
 import { describe, expect, it } from 'vitest';
-import { deriveScale, hexToHsl, hslToHex } from './color';
+import { deriveScale, hexToOklch, oklchToHex } from './color';
 
-describe('hexToHsl / hslToHex', () => {
+describe('hexToOklch / oklchToHex', () => {
   it('round-trips common colors', () => {
     for (const hex of ['#7C3AED', '#10B981', '#EF4444', '#FFFFFF', '#000000']) {
-      expect(hslToHex(hexToHsl(hex))).toBe(hex.toUpperCase());
+      expect(oklchToHex(hexToOklch(hex))).toBe(hex.toUpperCase());
     }
   });
 
   it('expands 3-digit hex', () => {
-    expect(hslToHex(hexToHsl('#fff'))).toBe('#FFFFFF');
+    expect(oklchToHex(hexToOklch('#fff'))).toBe('#FFFFFF');
   });
 
   it('rejects invalid input', () => {
-    expect(() => hexToHsl('not-a-color')).toThrow(/Invalid hex color/);
-    expect(() => hexToHsl('#12345')).toThrow(/Invalid hex color/);
+    expect(() => hexToOklch('not-a-color')).toThrow(/Invalid hex color/);
+    expect(() => hexToOklch('#12345')).toThrow(/Invalid hex color/);
   });
 });
 
@@ -31,7 +31,7 @@ describe('deriveScale', () => {
 
   it('gets monotonically darker', () => {
     const scale = deriveScale('#7C3AED');
-    const lightness = Object.values(scale).map((hex) => hexToHsl(hex).l);
+    const lightness = Object.values(scale).map((hex) => hexToOklch(hex).l);
     for (let i = 1; i < lightness.length; i++) {
       expect(lightness[i]).toBeLessThan(lightness[i - 1]);
     }

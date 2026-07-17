@@ -157,6 +157,7 @@
             "styles": [
               "packages/theme/styles/ngxsmk.css",
               "packages/core/styles/button.css",
+              "packages/core/styles/input.css",
               "node_modules/intl-tel-input/build/css/intlTelInput.css",
               "apps/demo/src/styles.scss"
             ]

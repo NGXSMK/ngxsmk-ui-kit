@@ -1,39 +1,9 @@
+#!/usr/bin/env node
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || (function () {
-    var ownKeys = function(o) {
-        ownKeys = Object.getOwnPropertyNames || function (o) {
-            var ar = [];
-            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
-            return ar;
-        };
-        return ownKeys(o);
-    };
-    return function (mod) {
-        if (mod && mod.__esModule) return mod;
-        var result = {};
-        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
-        __setModuleDefault(result, mod);
-        return result;
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
-const readline = __importStar(require("readline"));
+const index_js_1 = require("@modelcontextprotocol/sdk/server/index.js");
+const stdio_js_1 = require("@modelcontextprotocol/sdk/server/stdio.js");
+const types_js_1 = require("@modelcontextprotocol/sdk/types.js");
 const component_db_1 = require("./component-db");
 const TOOLS = [
     {
@@ -81,7 +51,6 @@ const TOOLS = [
     },
 ];
 function elementTag(selector) {
-    // "button[ngxsmk-button], a[ngxsmk-button]" -> attribute usage; plain selector -> element
     const first = selector.split(',')[0].trim();
     const attr = first.match(/^(\w+)\[([^\]]+)\]$/);
     if (attr)
@@ -94,7 +63,9 @@ function usageSnippet(c) {
     const bindings = c.inputs
         .slice(0, 3)
         .map((i) => (i.twoWay ? `[(${i.name})]="${i.name}"` : `[${i.name}]="${i.name}"`))
-        .concat(c.outputs.slice(0, 2).map((o) => `(${o.name})="on${o.name[0].toUpperCase()}${o.name.slice(1)}($event)"`));
+        .concat(c.outputs
+        .slice(0, 2)
+        .map((o) => `(${o.name})="on${o.name[0].toUpperCase()}${o.name.slice(1)}($event)"`));
     const attrs = bindings.length ? ' ' + bindings.join(' ') : '';
     if (attr)
         return `<${attr[1]} ${attr[2]}${attrs}>...</${attr[1]}>`;
@@ -109,89 +80,64 @@ function findComponent(query) {
             .map((s) => s.trim().toLowerCase())
             .includes(q));
 }
-function handleRequest(message) {
-    const { method, params, id } = message;
-    if (method === 'initialize') {
+const server = new index_js_1.Server({
+    name: 'ngxsmk-mcp-server',
+    version: '1.3.2',
+}, {
+    capabilities: {
+        tools: {},
+    },
+});
+server.setRequestHandler(types_js_1.ListToolsRequestSchema, async () => {
+    return {
+        tools: TOOLS,
+    };
+});
+server.setRequestHandler(types_js_1.CallToolRequestSchema, async (request) => {
+    const { name, arguments: args } = request.params;
+    if (name === 'ngxsmk_search_components') {
+        const query = (args?.query || '').toLowerCase();
+        const terms = query.split(/\s+/).filter(Boolean);
+        const results = component_db_1.COMPONENT_DATABASE.filter((c) => {
+            const haystack = `${c.name} ${c.selector} ${c.entryPoint} ${c.description}`.toLowerCase();
+            return terms.every((t) => haystack.includes(t));
+        }).slice(0, 25);
         return {
-            jsonrpc: '2.0',
-            id,
-            result: {
-                protocolVersion: '2024-11-05',
-                capabilities: {
-                    tools: {},
+            content: [
+                {
+                    type: 'text',
+                    text: results.length > 0
+                        ? `Found ${results.length} components:\n\n${results
+                            .map((r) => `- **${r.name}** (\`${r.selector}\`, import from \`${r.entryPoint}\`)${r.description ? ` — ${r.description}` : ''}`)
+                            .join('\n')}`
+                        : `No components matched query: "${query}"`,
                 },
-                serverInfo: {
-                    name: 'ngxsmk-mcp-server',
-                    version: '1.3.2',
-                },
-            },
+            ],
         };
     }
-    if (method === 'tools/list') {
-        return {
-            jsonrpc: '2.0',
-            id,
-            result: {
-                tools: TOOLS,
-            },
-        };
-    }
-    if (method === 'tools/call') {
-        const { name, arguments: args } = params;
-        if (name === 'ngxsmk_search_components') {
-            const query = (args.query || '').toLowerCase();
-            const terms = query.split(/\s+/).filter(Boolean);
-            const results = component_db_1.COMPONENT_DATABASE.filter((c) => {
-                const haystack = `${c.name} ${c.selector} ${c.entryPoint} ${c.description}`.toLowerCase();
-                return terms.every((t) => haystack.includes(t));
-            }).slice(0, 25);
+    if (name === 'ngxsmk_explain_api') {
+        const match = findComponent(args?.component || '');
+        if (!match) {
             return {
-                jsonrpc: '2.0',
-                id,
-                result: {
-                    content: [
-                        {
-                            type: 'text',
-                            text: results.length > 0
-                                ? `Found ${results.length} components:\n\n${results
-                                    .map((r) => `- **${r.name}** (\`${r.selector}\`, import from \`${r.entryPoint}\`)${r.description ? ` — ${r.description}` : ''}`)
-                                    .join('\n')}`
-                                : `No components matched query: "${query}"`,
-                        },
-                    ],
-                },
+                content: [
+                    {
+                        type: 'text',
+                        text: `Component "${args?.component}" not found in database. Try ngxsmk_search_components first.`,
+                    },
+                ],
             };
         }
-        if (name === 'ngxsmk_explain_api') {
-            const match = findComponent(args.component || '');
-            if (!match) {
-                return {
-                    jsonrpc: '2.0',
-                    id,
-                    result: {
-                        content: [
-                            {
-                                type: 'text',
-                                text: `Component "${args.component}" not found in database. Try ngxsmk_search_components first.`,
-                            },
-                        ],
-                    },
-                };
-            }
-            const inputsText = match.inputs
-                .map((i) => `- \`${i.twoWay ? `[(${i.name})]` : `[${i.name}]`}\` (${i.type}${i.required ? ', required' : ''}${i.default ? `, default: \`${i.default}\`` : ''})`)
-                .join('\n');
-            const outputsText = match.outputs
-                .map((o) => `- \`(${o.name})\` (emits: \`${o.type}\`)`)
-                .join('\n');
-            return {
-                jsonrpc: '2.0',
-                id,
-                result: {
-                    content: [
-                        {
-                            type: 'text',
-                            text: `### API documentation for **${match.name}** (\`${match.selector}\`)
+        const inputsText = match.inputs
+            .map((i) => `- \`${i.twoWay ? `[(${i.name})]` : `[${i.name}]`}\` (${i.type}${i.required ? ', required' : ''}${i.default ? `, default: \`${i.default}\`` : ''})`)
+            .join('\n');
+        const outputsText = match.outputs
+            .map((o) => `- \`(${o.name})\` (emits: \`${o.type}\`)`)
+            .join('\n');
+        return {
+            content: [
+                {
+                    type: 'text',
+                    text: `### API documentation for **${match.name}** (\`${match.selector}\`)
 
 ${match.description || ''}
 
@@ -210,32 +156,31 @@ ${outputsText || 'None'}
 ${usageSnippet(match)}
 \`\`\`
 `,
-                        },
-                    ],
                 },
-            };
-        }
-        if (name === 'ngxsmk_recommend_layout') {
-            const type = args.type;
-            let template = '';
-            if (type === 'login') {
-                template = `<div class="login-container" style="display: flex; align-items: center; justify-content: center; height: 100vh;">
+            ],
+        };
+    }
+    if (name === 'ngxsmk_recommend_layout') {
+        const type = args?.type;
+        let template = '';
+        if (type === 'login') {
+            template = `<div class="login-container" style="display: flex; align-items: center; justify-content: center; height: 100vh;">
   <ngxsmk-card style="width: 100%; max-width: 400px; padding: var(--ngxsmk-space-6);">
     <h2 style="margin-bottom: var(--ngxsmk-space-4);">Sign In</h2>
     <div style="margin-bottom: var(--ngxsmk-space-4);">
       <label style="display: block; margin-bottom: var(--ngxsmk-space-2);">Email</label>
-      <input type="email" style="width: 100%; height: 2.5rem; border: 1px solid var(--ngxsmk-color-outline); border-radius: var(--ngxsmk-radius-md);" />
+      <input ngxsmkInput type="email" style="width: 100%;" />
     </div>
     <div style="margin-bottom: var(--ngxsmk-space-6);">
       <label style="display: block; margin-bottom: var(--ngxsmk-space-2);">Password</label>
-      <input type="password" style="width: 100%; height: 2.5rem; border: 1px solid var(--ngxsmk-color-outline); border-radius: var(--ngxsmk-radius-md);" />
+      <input ngxsmkInput type="password" style="width: 100%;" />
     </div>
     <button ngxsmk-button style="width: 100%;">Sign In</button>
   </ngxsmk-card>
 </div>`;
-            }
-            else if (type === 'ai-assistant') {
-                template = `<div class="assistant-layout" style="display: flex; height: 100vh;">
+        }
+        else if (type === 'ai-assistant') {
+            template = `<div class="assistant-layout" style="display: flex; height: 100vh;">
   <aside style="width: 250px; border-right: 1px solid var(--ngxsmk-color-outline); background: var(--ngxsmk-color-surface);">
     <div style="padding: var(--ngxsmk-space-4); font-weight: bold;">History</div>
   </aside>
@@ -245,53 +190,27 @@ ${usageSnippet(match)}
     </div>
   </main>
 </div>`;
-            }
-            else {
-                template = `<!-- General layout for type: ${type} -->\n<div class="ngxsmk-layout">\n  <ngxsmk-card>General Card</ngxsmk-card>\n</div>`;
-            }
-            return {
-                jsonrpc: '2.0',
-                id,
-                result: {
-                    content: [
-                        {
-                            type: 'text',
-                            text: `Recommended layout code:\n\n\`\`\`html\n${template}\n\`\`\``,
-                        },
-                    ],
-                },
-            };
         }
+        else {
+            template = `<!-- General layout for type: ${type} -->\n<div class="ngxsmk-layout">\n  <ngxsmk-card>General Card</ngxsmk-card>\n</div>`;
+        }
+        return {
+            content: [
+                {
+                    type: 'text',
+                    text: `Recommended layout code:\n\n\`\`\`html\n${template}\n\`\`\``,
+                },
+            ],
+        };
     }
-    return {
-        jsonrpc: '2.0',
-        id,
-        error: {
-            code: -32601,
-            message: `Method not found: ${method}`,
-        },
-    };
-}
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-    terminal: false,
+    throw new Error(`Tool not found: ${name}`);
 });
-rl.on('line', (line) => {
-    if (!line.trim())
-        return;
-    try {
-        const message = JSON.parse(line);
-        const response = handleRequest(message);
-        console.log(JSON.stringify(response));
-    }
-    catch (err) {
-        console.error(JSON.stringify({
-            jsonrpc: '2.0',
-            error: {
-                code: -32700,
-                message: 'Parse error',
-            },
-        }));
-    }
+async function run() {
+    const transport = new stdio_js_1.StdioServerTransport();
+    await server.connect(transport);
+    console.error('ngxsmk-mcp-server running on stdio');
+}
+run().catch((error) => {
+    console.error('Fatal error in main:', error);
+    process.exit(1);
 });

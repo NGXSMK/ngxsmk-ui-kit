@@ -1,0 +1,39 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "tasks": {
+    "//#theme:css": {
+      "inputs": ["packages/theme/src/**/*", "tools/scripts/generate-theme-css.ts"],
+      "outputs": ["packages/theme/styles/*.css"]
+    },
+    "//#build:libs": {
+      "dependsOn": ["//#theme:css"],
+      "inputs": ["packages/core/src/**/*", "packages/cdk/src/**/*", "packages/theme/src/**/*"],
+      "outputs": ["dist/ngxsmk/core/**/*", "dist/ngxsmk/cdk/**/*", "dist/ngxsmk/theme/**/*"]
+    },
+    "//#build:mcp": {
+      "dependsOn": ["//#build:libs"],
+      "inputs": ["packages/mcp/src/**/*", "packages/mcp/tsconfig.json"],
+      "outputs": ["packages/mcp/dist/**/*"]
+    },
+    "//#build:demo": {
+      "dependsOn": ["//#build:libs"],
+      "inputs": ["apps/demo/src/**/*", "angular.json"],
+      "outputs": ["dist/demo/**/*"]
+    },
+    "//#build": {
+      "dependsOn": ["//#theme:css", "//#build:libs", "//#build:mcp", "//#build:demo"],
+      "outputs": []
+    },
+    "test": {
+      "dependsOn": ["//#build:libs"],
+      "inputs": ["packages/**/*.spec.ts"],
+      "outputs": []
+    },
+    "lint": {
+      "outputs": []
+    },
+    "format:check": {
+      "outputs": []
+    }
+  }
+}

@@ -322,7 +322,7 @@ Inputs:
 
 Inputs:
 - `[data]`: NgxsmkAreaChartDataPoint[] (default: `[]`)
-- `[color]`: string (default: `'var(--ngxsmk-color-primary`)
+- `[color]`: string (default: `'var(--ngxsmk-color-primary)'`)
 
 ## NgxsmkBarChart
 
@@ -331,7 +331,7 @@ Inputs:
 
 Inputs:
 - `[data]`: NgxsmkBarChartDataPoint[] (default: `[]`)
-- `[color]`: string (default: `'var(--ngxsmk-color-primary`)
+- `[color]`: string (default: `'var(--ngxsmk-color-primary)'`)
 
 ## NgxsmkCandlestickChart
 
@@ -358,7 +358,7 @@ Inputs:
 Inputs:
 - `[data]`: number[][] (default: `[]`)
 - `[labels]`: NgxsmkHeatmapLabels (default: `{ x: [], y: [] }`)
-- `[color]`: string (default: `'var(--ngxsmk-color-primary`)
+- `[color]`: string (default: `'var(--ngxsmk-color-primary)'`)
 
 ## NgxsmkLineChart
 
@@ -367,7 +367,7 @@ Inputs:
 
 Inputs:
 - `[data]`: NgxsmkChartDataPoint[] (default: `[]`)
-- `[color]`: string (default: `'var(--ngxsmk-color-primary`)
+- `[color]`: string (default: `'var(--ngxsmk-color-primary)'`)
 
 ## NgxsmkPieChart
 
@@ -387,7 +387,7 @@ Inputs:
 
 Inputs:
 - `[data]`: NgxsmkScatterDataPoint[] (default: `[]`)
-- `[color]`: string (default: `'var(--ngxsmk-color-primary`)
+- `[color]`: string (default: `'var(--ngxsmk-color-primary)'`)
 
 ## NgxsmkChatComposerDrawer
 
@@ -468,7 +468,7 @@ Inputs:
 - Import from: `@ngxsmk/core/chat-message-metadata`
 
 Inputs:
-- `[timestamp]`: Date (default: `new Date(`)
+- `[timestamp]`: Date (default: `new Date()`)
 
 ## NgxsmkChatSendButton
 
@@ -503,6 +503,15 @@ Inputs:
 
 - Selector: `ngxsmk-chat-window`
 - Import from: `@ngxsmk/core/chat-window`
+
+Inputs:
+- `[messages]`: {
+      id: string;
+      role: 'user' | 'assistant' | 'system';
+      content: string;
+      timestamp: Date;
+      tokens?: number;
+    }[] (required)
 
 ## NgxsmkCheckbox
 
@@ -681,6 +690,10 @@ Inputs:
 - `[min]`: string (default: `''`)
 - `[max]`: string (default: `''`)
 - `[placeholder]`: string (default: `''`)
+- `[disabled]`: boolean (default: `false`)
+- `[id]`: unknown (default: `ngxsmkUniqueId('ngxsmk-date-picker')`)
+- `[(ariaInvalid)]`: boolean (default: `false`)
+- `[(ariaDescribedby)]`: string | null (default: `null`)
 
 Outputs:
 - `(changed)`: emits `string`
@@ -701,6 +714,7 @@ Outputs:
 
 - Selector: `[ngxsmkDialogFooter]`
 - Import from: `@ngxsmk/core/dialog`
+- Marks content projected into the dialog's footer action row.
 
 ## NgxsmkDialog
 
@@ -757,6 +771,7 @@ Inputs:
 - `[size]`: 'sm' | 'md' | 'lg' (default: `'md'`)
 - `[variant]`: 'primary' | 'secondary' (default: `'primary'`)
 - `[extended]`: boolean (default: `false`)
+- `[position]`: 'bottom-right' | 'bottom-left' | 'top-right' | 'top-left' | 'none' (default: `'none'`)
 - `[disabled]`: boolean (default: `false`)
 
 ## NgxsmkField
@@ -794,7 +809,7 @@ Inputs:
 - `[direction]`: NgxsmkFlexDirection (default: `'row'`)
 - `[align]`: NgxsmkFlexAlign (default: `'stretch'`)
 - `[justify]`: NgxsmkFlexJustify (default: `'start'`)
-- `[gap]`: string (default: `'var(--ngxsmk-space-4`)
+- `[gap]`: string (default: `'var(--ngxsmk-space-4)'`)
 - `[wrap]`: boolean (default: `false`)
 
 ## NgxsmkFlowEditor
@@ -818,7 +833,7 @@ Inputs:
 
 - Selector: `ngxsmk-form-field`
 - Import from: `@ngxsmk/core/form-field`
-- Wraps a form control with label, hint, and error messaging, wiring `for`/`aria-describedby`/`aria-invalid` automatically when the projected control is a `ngxsmk-input`.
+- Wraps a form control with label, hint, and error messaging, wiring `for`/`aria-describedby`/`aria-invalid` automatically when the projected control implements `NgxsmkFormFieldControl`.
 
 Inputs:
 - `[label]`: string (default: `''`)
@@ -841,7 +856,7 @@ Inputs:
 
 Inputs:
 - `[cols]`: number | undefined (default: `undefined`)
-- `[gap]`: string (default: `'var(--ngxsmk-space-4`)
+- `[gap]`: string (default: `'var(--ngxsmk-space-4)'`)
 
 ## NgxsmkStackItem
 
@@ -854,7 +869,7 @@ Inputs:
 - Import from: `@ngxsmk/core/h-stack`
 
 Inputs:
-- `[gap]`: string (default: `'var(--ngxsmk-space-4`)
+- `[gap]`: string (default: `'var(--ngxsmk-space-4)'`)
 - `[align]`: string (default: `'center'`)
 - `[justify]`: string (default: `'flex-start'`)
 - `[wrap]`: boolean (default: `false`)
@@ -865,7 +880,7 @@ Inputs:
 - Import from: `@ngxsmk/core/h-stack`
 
 Inputs:
-- `[gap]`: string (default: `'var(--ngxsmk-space-4`)
+- `[gap]`: string (default: `'var(--ngxsmk-space-4)'`)
 - `[align]`: string (default: `'stretch'`)
 - `[justify]`: string (default: `'flex-start'`)
 
@@ -897,23 +912,16 @@ Inputs:
 - `[src]`: string (required)
 - `[alt]`: string (default: `''`)
 
-## NgxsmkInput
+## NgxsmkInputDirective
 
-- Selector: `ngxsmk-input`
+- Selector: `input[ngxsmkInput], textarea[ngxsmkInput]`
 - Import from: `@ngxsmk/core/input`
-- Themed text input. Pairs with `ngxsmk-form-field` for label, hint, and error wiring, or sits standalone. Uses a `model()` so it composes with the rest of the control family (`ngxsmk-textarea`, `ngxsmk-select`, …).
+- Directive applied to native text inputs and textareas to style them and integrate them with `ngxsmk-form-field`.
 
 Inputs:
-- `[(value)]`: string (default: `''`)
-- `[type]`: string (default: `'text'`)
-- `[placeholder]`: string (default: `''`)
-- `[disabled]`: boolean (default: `false`)
-- `[id]`: unknown (default: `ngxsmkUniqueId('ngxsmk-input'`)
+- `[id]`: unknown (default: `ngxsmkUniqueId('ngxsmk-input')`)
 - `[(ariaInvalid)]`: boolean (default: `false`)
 - `[(ariaDescribedby)]`: string | null (default: `null`)
-
-Outputs:
-- `(changed)`: emits `string`
 
 ## NgxsmkInputGroup
 
@@ -1090,7 +1098,7 @@ Inputs:
 - Import from: `@ngxsmk/core/media-query`
 
 Inputs:
-- `[ngxsmkMediaQuery]`: string (default: `'(min-width: 768px`)
+- `[ngxsmkMediaQuery]`: string (default: `'(min-width: 768px)'`)
 
 ## NgxsmkMediaTheme
 
@@ -1098,7 +1106,7 @@ Inputs:
 - Import from: `@ngxsmk/core/media-theme`
 
 Inputs:
-- `[query]`: string (default: `'(prefers-color-scheme: dark`)
+- `[query]`: string (default: `'(prefers-color-scheme: dark)'`)
 - `[theme]`: string (default: `'dark'`)
 
 ## NgxsmkMemoryViewer
@@ -1214,6 +1222,9 @@ Inputs:
 - `[step]`: number (default: `1`)
 - `[placeholder]`: string (default: `''`)
 - `[disabled]`: boolean (default: `false`)
+- `[id]`: unknown (default: `ngxsmkUniqueId('ngxsmk-number-input')`)
+- `[(ariaInvalid)]`: boolean (default: `false`)
+- `[(ariaDescribedby)]`: string | null (default: `null`)
 
 Outputs:
 - `(changed)`: emits `number`
@@ -1405,6 +1416,7 @@ Inputs:
 
 - Selector: `ngxsmk-radio`
 - Import from: `@ngxsmk/core/radio`
+- Single option inside an `ngxsmk-radio-group`.
 
 Inputs:
 - `[value]`: unknown (required)
@@ -1480,7 +1492,7 @@ Inputs:
 
 Inputs:
 - `[events]`: SchedulerEvent[] (required)
-- `[weekStart]`: unknown (default: `new Date(`)
+- `[weekStart]`: unknown (default: `new Date()`)
 
 ## NgxsmkScrollLock
 
@@ -1522,7 +1534,7 @@ Inputs:
 - `[placeholder]`: string (default: `''`)
 - `[disabled]`: boolean (default: `false`)
 - `[emptyLabel]`: string (default: `'No options'`)
-- `[id]`: unknown (default: `ngxsmkUniqueId('ngxsmk-select'`)
+- `[id]`: unknown (default: `ngxsmkUniqueId('ngxsmk-select')`)
 - `[ariaLabelledby]`: string | null (default: `null`)
 - `[(ariaInvalid)]`: boolean (default: `false`)
 - `[(ariaDescribedby)]`: string | null (default: `null`)
@@ -1623,7 +1635,7 @@ Outputs:
 - Import from: `@ngxsmk/core/spacer`
 
 Inputs:
-- `[size]`: string (default: `'var(--ngxsmk-space-4`)
+- `[size]`: string (default: `'var(--ngxsmk-space-4)'`)
 - `[orientation]`: 'horizontal' | 'vertical' (default: `'horizontal'`)
 
 ## NgxsmkSpinner
@@ -1643,6 +1655,7 @@ Inputs:
 
 Inputs:
 - `[label]`: string (default: `''`)
+- `[variant]`: 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive' (default: `'primary'`)
 - `[size]`: 'sm' | 'md' | 'lg' (default: `'md'`)
 - `[disabled]`: boolean (default: `false`)
 - `[loading]`: boolean (default: `false`)
@@ -1666,7 +1679,7 @@ Inputs:
 
 Inputs:
 - `[direction]`: NgxsmkStackDirection (default: `'vertical'`)
-- `[gap]`: string (default: `'var(--ngxsmk-space-4`)
+- `[gap]`: string (default: `'var(--ngxsmk-space-4)'`)
 - `[align]`: NgxsmkStackAlign (default: `'stretch'`)
 
 ## NgxsmkStat
@@ -1730,6 +1743,14 @@ Outputs:
 
 - Selector: `ngxsmk-tab-menu`
 - Import from: `@ngxsmk/core/tab-menu`
+
+## NgxsmkCellDef
+
+- Selector: `[ngxsmkCell]`
+- Import from: `@ngxsmk/core/table`
+
+Inputs:
+- `[columnKey]`: string (required)
 
 ## NgxsmkTable
 
@@ -1834,21 +1855,6 @@ Inputs:
 - `[color]`: NgxsmkTextColor (default: `'default'`)
 - `[as]`: 'p' | 'span' | 'div' (default: `'p'`)
 
-## NgxsmkTextarea
-
-- Selector: `ngxsmk-textarea`
-- Import from: `@ngxsmk/core/textarea`
-- Multi-line text control with a configurable row count.
-
-Inputs:
-- `[(value)]`: string (default: `''`)
-- `[placeholder]`: string (default: `''`)
-- `[disabled]`: boolean (default: `false`)
-- `[rows]`: number (default: `4`)
-
-Outputs:
-- `(changed)`: emits `string`
-
 ## NgxsmkThemeBuilder
 
 - Selector: `ngxsmk-theme-builder`
@@ -1887,6 +1893,9 @@ Inputs:
 - Selector: `ngxsmk-toaster`
 - Import from: `@ngxsmk/core/toast`
 - Toast outlet. Place once in the root template: `<ngxsmk-toaster />`.
+
+Inputs:
+- `[position]`: 'bottom-right' | 'bottom-left' | 'top-right' | 'top-left' (default: `'bottom-right'`)
 
 ## NgxsmkToggleButton
 

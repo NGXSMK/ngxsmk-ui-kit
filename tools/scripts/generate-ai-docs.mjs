@@ -5,14 +5,15 @@
  *  - packages/mcp/src/component-db.ts — database consumed by the MCP server
  *  - apps/demo/public/component-api.json — data for the demo site's /api page
  *
- * Extraction is line/regex based and relies on the workspace convention of
- * single-file, signal-based components (input()/output()/model()).
+ * Extraction uses the TypeScript AST Compiler API to query standalone
+ * components and directives (inputs/outputs/models).
  *
  * Run: node tools/scripts/generate-ai-docs.mjs
  */
 import { readFileSync, writeFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import ts from 'typescript';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const corePath = join(root, 'packages', 'core');
@@ -20,115 +21,179 @@ const rootPkg = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8'));
 
 const SKIP_DIRS = new Set(['util', 'testing', 'styles']);
 
-/** Extract JSDoc summary immediately preceding a decorator/class at `idx`. */
-function docAbove(lines, idx) {
-  let end = idx - 1;
-  while (end >= 0 && lines[end].trim() === '') end--;
-  if (end < 0 || !lines[end].trim().startsWith('*/')) return '';
-  let start = end;
-  while (start >= 0 && !lines[start].trim().startsWith('/**')) start--;
-  if (start < 0) return '';
-  const body = lines
-    .slice(start + 1, end)
-    .map((l) => l.replace(/^\s*\*\s?/, ''))
-    .filter((l) => !l.startsWith('@'));
-  // Take text up to the first code fence or blank-line-separated example.
-  const cut = body.findIndex((l) => l.startsWith('```'));
-  const text = (cut === -1 ? body : body.slice(0, cut)).join(' ').replace(/\s+/g, ' ').trim();
-  return text;
+function getDecoratorsOfNode(node) {
+  if (node.modifiers) {
+    return node.modifiers.filter((mod) => mod.kind === ts.SyntaxKind.Decorator);
+  }
+  if (node.decorators) {
+    return node.decorators;
+  }
+  return [];
+}
+
+function inferTypeFromCode(defaultCode) {
+  const code = defaultCode.trim();
+  if (code === 'true' || code === 'false' || /booleanAttribute/.test(code)) return 'boolean';
+  if (/^-?\d/.test(code) || /numberAttribute/.test(code)) return 'number';
+  if (/^['"`]/.test(code)) return 'string';
+  if (code === '[]') return 'unknown[]';
+  return 'unknown';
 }
 
 function parseFile(filePath) {
-  const src = readFileSync(filePath, 'utf8');
-  const lines = src.split(/\r?\n/);
+  const sourceCode = readFileSync(filePath, 'utf8');
+  const sourceFile = ts.createSourceFile(
+    filePath,
+    sourceCode,
+    ts.ScriptTarget.Latest,
+    true
+  );
+
   const entries = [];
-  let pending = null; // { selector, description } from last decorator
 
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i];
-    const dec = line.match(/^@(Component|Directive)\(/);
-    if (dec) {
-      pending = { kind: dec[1], selector: '', description: docAbove(lines, i) };
-      // scan ahead for the selector within the decorator block
-      for (let j = i; j < Math.min(i + 40, lines.length); j++) {
-        const sel = lines[j].match(/selector:\s*['"`]([^'"`]+)['"`]/);
-        if (sel) {
-          pending.selector = sel[1];
-          break;
+  function visit(node) {
+    if (ts.isClassDeclaration(node) && node.name) {
+      const className = node.name.text;
+      
+      let decoratorName = null;
+      let selector = '';
+      
+      const decorators = getDecoratorsOfNode(node);
+      for (const dec of decorators) {
+        const expr = dec.expression;
+        if (ts.isCallExpression(expr) && ts.isIdentifier(expr.expression)) {
+          const name = expr.expression.text;
+          if (name === 'Component' || name === 'Directive') {
+            decoratorName = name;
+            
+            if (expr.arguments.length > 0) {
+              const arg = expr.arguments[0];
+              if (ts.isObjectLiteralExpression(arg)) {
+                for (const prop of arg.properties) {
+                  if (
+                    ts.isPropertyAssignment(prop) &&
+                    ts.isIdentifier(prop.name) &&
+                    prop.name.text === 'selector'
+                  ) {
+                    if (ts.isStringLiteral(prop.initializer) || ts.isNoSubstitutionTemplateLiteral(prop.initializer)) {
+                      selector = prop.initializer.text;
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
-        if (/^\}\)/.test(lines[j])) break;
       }
-      continue;
+
+      if (decoratorName && selector) {
+        const jsDocTexts = [];
+        const jsDocComments = node.jsDoc;
+        if (jsDocComments && jsDocComments.length > 0) {
+          for (const commentNode of jsDocComments) {
+            let commentText = '';
+            if (typeof commentNode.comment === 'string') {
+              commentText = commentNode.comment;
+            } else if (Array.isArray(commentNode.comment)) {
+              commentText = commentNode.comment.map(part => part.text).join('');
+            }
+            if (commentText) {
+              const cleanText = commentText
+                .split(/\r?\n/)
+                .map(l => l.replace(/^\s*\*\s?/, ''))
+                .filter(l => !l.startsWith('@'));
+              const cut = cleanText.findIndex(l => l.startsWith('```'));
+              const text = (cut === -1 ? cleanText : cleanText.slice(0, cut)).join(' ').replace(/\s+/g, ' ').trim();
+              jsDocTexts.push(text);
+            }
+          }
+        }
+        const description = jsDocTexts.join(' ').trim();
+
+        const entry = {
+          name: className,
+          kind: decoratorName,
+          selector,
+          description,
+          inputs: [],
+          outputs: []
+        };
+
+        for (const member of node.members) {
+          if (ts.isPropertyDeclaration(member) && member.name && ts.isIdentifier(member.name)) {
+            const memberName = member.name.text;
+            const initializer = member.initializer;
+            
+            if (initializer && ts.isCallExpression(initializer)) {
+              let callExpr = initializer.expression;
+              let isRequired = false;
+              
+              if (
+                ts.isPropertyAccessExpression(callExpr) &&
+                ts.isIdentifier(callExpr.name) &&
+                callExpr.name.text === 'required'
+              ) {
+                isRequired = true;
+                callExpr = callExpr.expression;
+              }
+              
+              if (ts.isIdentifier(callExpr)) {
+                const callName = callExpr.text;
+                if (callName === 'input') {
+                  const typeArg = initializer.typeArguments?.[0];
+                  let type = typeArg ? sourceCode.substring(typeArg.getStart(), typeArg.getEnd()) : '';
+                  const args = initializer.arguments;
+                  const defaultVal = isRequired ? undefined : (args.length > 0 ? sourceCode.substring(args[0].getStart(), args[0].getEnd()) : undefined);
+                  
+                  if (!type) {
+                    type = defaultVal ? inferTypeFromCode(defaultVal) : 'unknown';
+                  }
+                  
+                  entry.inputs.push({
+                    name: memberName,
+                    type,
+                    required: isRequired,
+                    default: defaultVal
+                  });
+                } else if (callName === 'model') {
+                  const typeArg = initializer.typeArguments?.[0];
+                  let type = typeArg ? sourceCode.substring(typeArg.getStart(), typeArg.getEnd()) : '';
+                  const args = initializer.arguments;
+                  const defaultVal = isRequired ? undefined : (args.length > 0 ? sourceCode.substring(args[0].getStart(), args[0].getEnd()) : undefined);
+                  
+                  if (!type) {
+                    type = defaultVal ? inferTypeFromCode(defaultVal) : 'unknown';
+                  }
+
+                  entry.inputs.push({
+                    name: memberName,
+                    type,
+                    required: isRequired,
+                    twoWay: true,
+                    default: defaultVal
+                  });
+                } else if (callName === 'output') {
+                  const typeArg = initializer.typeArguments?.[0];
+                  const type = typeArg ? sourceCode.substring(typeArg.getStart(), typeArg.getEnd()) : 'void';
+                  entry.outputs.push({
+                    name: memberName,
+                    type
+                  });
+                }
+              }
+            }
+          }
+        }
+
+        entries.push(entry);
+      }
     }
-    const cls = line.match(/^export class (\w+)/);
-    if (cls && pending) {
-      entries.push({
-        name: cls[1],
-        kind: pending.kind,
-        selector: pending.selector,
-        description: pending.description,
-        inputs: [],
-        outputs: [],
-        _bodyStart: i,
-      });
-      pending = null;
-    }
+    
+    ts.forEachChild(node, visit);
   }
 
-  // Attribute inputs/outputs to the class whose body they appear in (classes
-  // are sequential in a file; a member belongs to the last class started).
-  for (let i = 0; i < lines.length; i++) {
-    const owner = [...entries].reverse().find((e) => i > e._bodyStart);
-    if (!owner) continue;
-    const line = lines[i];
-
-    let m = line.match(/readonly (\w+)\s*=\s*input(\.required)?(?:<(.+?)>)?\(([^;]*)\);?\s*$/);
-    if (m) {
-      const [, name, required, type, args] = m;
-      owner.inputs.push({
-        name,
-        type: (type || inferType(args)).trim(),
-        required: !!required,
-        default: required ? undefined : extractDefault(args),
-      });
-      continue;
-    }
-    m = line.match(/readonly (\w+)\s*=\s*model(\.required)?(?:<(.+?)>)?\(([^;]*)\);?\s*$/);
-    if (m) {
-      owner.inputs.push({
-        name: m[1],
-        type: (m[3] || inferType(m[4])).trim(),
-        required: !!m[2],
-        twoWay: true,
-        default: m[2] ? undefined : extractDefault(m[4]),
-      });
-      continue;
-    }
-    m = line.match(/readonly (\w+)\s*=\s*output(?:<(.+?)>)?\(/);
-    if (m) {
-      owner.outputs.push({ name: m[1], type: (m[2] || 'void').trim() });
-    }
-  }
-
-  for (const e of entries) delete e._bodyStart;
+  visit(sourceFile);
   return entries.filter((e) => e.selector);
-}
-
-function extractDefault(args) {
-  const s = args.trim();
-  // Array/object literal defaults contain commas — capture to the closing bracket.
-  if (s.startsWith('[')) return (s.match(/^\[[^\]]*\]/) || [undefined])[0];
-  if (s.startsWith('{')) return (s.match(/^\{[^}]*\}/) || [undefined])[0];
-  return (s.match(/^([^,)]*)/)?.[1] || '').trim() || undefined;
-}
-
-function inferType(args) {
-  const v = (args.match(/^\s*([^,)]*)/)?.[1] || '').trim();
-  if (/booleanAttribute/.test(args) || v === 'true' || v === 'false') return 'boolean';
-  if (/numberAttribute/.test(args) || /^-?\d/.test(v)) return 'number';
-  if (/^['"`]/.test(v)) return 'string';
-  if (v === '[]') return 'unknown[]';
-  return 'unknown';
 }
 
 // ---- scan all component dirs -------------------------------------------------

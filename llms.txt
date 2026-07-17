@@ -95,7 +95,7 @@ Usage rules for generated code:
 - NgxsmkDataTable (`ngxsmk-data-table`) — @ngxsmk/core/data-table
 - NgxsmkDatePicker (`ngxsmk-date-picker`) — @ngxsmk/core/date-picker
 - NgxsmkDiagramBuilder (`ngxsmk-diagram-builder`) — @ngxsmk/core/diagram-builder
-- NgxsmkDialogFooter (`[ngxsmkDialogFooter]`) — @ngxsmk/core/dialog
+- NgxsmkDialogFooter (`[ngxsmkDialogFooter]`) — @ngxsmk/core/dialog — Marks content projected into the dialog's footer action row
 - NgxsmkDialog (`ngxsmk-dialog`) — @ngxsmk/core/dialog
 - NgxsmkDiffViewer (`ngxsmk-diff-viewer`) — @ngxsmk/core/diff-viewer
 - NgxsmkDivider (`ngxsmk-divider`) — @ngxsmk/core/divider — Visual separator
@@ -108,7 +108,7 @@ Usage rules for generated code:
 - NgxsmkFlex (`ngxsmk-flex`) — @ngxsmk/core/flex
 - NgxsmkFlowEditor (`ngxsmk-flow-editor`) — @ngxsmk/core/flow-editor
 - NgxsmkFocusTrap (`[ngxsmkFocusTrap]`) — @ngxsmk/core/focus-trap
-- NgxsmkFormField (`ngxsmk-form-field`) — @ngxsmk/core/form-field — Wraps a form control with label, hint, and error messaging, wiring `for`/`aria-describedby`/`aria-invalid` automatically when the projected control is a `ngxsmk-input`
+- NgxsmkFormField (`ngxsmk-form-field`) — @ngxsmk/core/form-field — Wraps a form control with label, hint, and error messaging, wiring `for`/`aria-describedby`/`aria-invalid` automatically when the projected control implements `NgxsmkFormFieldControl`
 - NgxsmkFormLayout (`ngxsmk-form-layout`) — @ngxsmk/core/form-layout
 - NgxsmkGrid (`ngxsmk-grid`) — @ngxsmk/core/grid
 - NgxsmkStackItem (`[ngxsmkStackItem]`) — @ngxsmk/core/h-stack
@@ -117,7 +117,7 @@ Usage rules for generated code:
 - NgxsmkHeading (`ngxsmk-heading`) — @ngxsmk/core/heading
 - NgxsmkHoverCard (`ngxsmk-hover-card`) — @ngxsmk/core/hover-card
 - NgxsmkImageViewer (`ngxsmk-image-viewer`) — @ngxsmk/core/image-viewer
-- NgxsmkInput (`ngxsmk-input`) — @ngxsmk/core/input — Themed text input
+- NgxsmkInputDirective (`input[ngxsmkInput], textarea[ngxsmkInput]`) — @ngxsmk/core/input — Directive applied to native text inputs and textareas to style them and integrate them with `ngxsmk-form-field`
 - NgxsmkInputGroup (`ngxsmk-input-group`) — @ngxsmk/core/input-group — Wraps a native control with text add-ons that sit flush against it, rendered as a single connected field
 - NgxsmkInputGroupText (`[ngxsmkInputGroupText], ngxsmk-input-group-text`) — @ngxsmk/core/input-group-text
 - NgxsmkIntersectionObserver (`[ngxsmkIntersectionObserver]`) — @ngxsmk/core/intersection-observer
@@ -169,7 +169,7 @@ Usage rules for generated code:
 - NgxsmkQrCode (`ngxsmk-qr-code`) — @ngxsmk/core/qr-code
 - NgxsmkQueryBuilder (`ngxsmk-query-builder`) — @ngxsmk/core/query-builder
 - NgxsmkRadioGroup (`ngxsmk-radio-group`) — @ngxsmk/core/radio — Groups `ngxsmk-radio` children and holds the selected value
-- NgxsmkRadio (`ngxsmk-radio`) — @ngxsmk/core/radio
+- NgxsmkRadio (`ngxsmk-radio`) — @ngxsmk/core/radio — Single option inside an `ngxsmk-radio-group`
 - NgxsmkRating (`ngxsmk-rating`) — @ngxsmk/core/rating — Star rating built as a single `role="slider"` widget, so half-step values and full keyboard control come for free and assistive tech announces the value
 - NgxsmkReasoningTimeline (`ngxsmk-reasoning-timeline`) — @ngxsmk/core/reasoning-timeline
 - NgxsmkResizable (`ngxsmk-resizable`) — @ngxsmk/core/resizable
@@ -201,6 +201,7 @@ Usage rules for generated code:
 - NgxsmkStreamingText (`ngxsmk-streaming-text`) — @ngxsmk/core/streaming-text
 - NgxsmkSwitch (`ngxsmk-switch`) — @ngxsmk/core/switch — Toggle switch for immediate on/off settings
 - NgxsmkTabMenu (`ngxsmk-tab-menu`) — @ngxsmk/core/tab-menu
+- NgxsmkCellDef (`[ngxsmkCell]`) — @ngxsmk/core/table
 - NgxsmkTable (`ngxsmk-table`) — @ngxsmk/core/table
 - NgxsmkTableCell (`td[ngxsmkTableCell], ngxsmk-table-cell`) — @ngxsmk/core/table-cell
 - NgxsmkTableHeaderCell (`th[ngxsmkTableHeaderCell], ngxsmk-table-header-cell`) — @ngxsmk/core/table-cell
@@ -211,7 +212,6 @@ Usage rules for generated code:
 - NgxsmkChip (`ngxsmk-chip`) — @ngxsmk/core/tag — Removable tag
 - NgxsmkTerminal (`ngxsmk-terminal`) — @ngxsmk/core/terminal
 - NgxsmkText (`ngxsmk-text`) — @ngxsmk/core/text
-- NgxsmkTextarea (`ngxsmk-textarea`) — @ngxsmk/core/textarea — Multi-line text control with a configurable row count
 - NgxsmkThemeBuilder (`ngxsmk-theme-builder`) — @ngxsmk/core/theme-builder
 - NgxsmkThumbnail (`ngxsmk-thumbnail`) — @ngxsmk/core/thumbnail
 - NgxsmkTimelineGantt (`ngxsmk-timeline-gantt`) — @ngxsmk/core/timeline-gantt

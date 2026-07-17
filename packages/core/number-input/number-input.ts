@@ -1,15 +1,20 @@
-﻿import {
+import {
   ChangeDetectionStrategy,
   Component,
   booleanAttribute,
   computed,
   effect,
   ElementRef,
+  forwardRef,
   input,
   model,
   output,
+  signal,
   viewChild,
 } from '@angular/core';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { ngxsmkUniqueId } from '@ngxsmk/core/util';
+import { NGXSMK_FORM_FIELD_CONTROL, NgxsmkFormFieldControl } from '@ngxsmk/core/form-field';
 
 /**
  * Numeric field with − / + steppers and min/max/step constraints.
@@ -21,13 +26,24 @@
 @Component({
   standalone: true,
   selector: 'ngxsmk-number-input',
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => NgxsmkNumberInput),
+      multi: true,
+    },
+    {
+      provide: NGXSMK_FORM_FIELD_CONTROL,
+      useExisting: forwardRef(() => NgxsmkNumberInput),
+    },
+  ],
   template: `
     <button
       type="button"
       class="ngxsmk-number-input__btn"
       tabindex="-1"
       aria-label="Decrement"
-      [disabled]="disabled() || value() <= min()"
+      [disabled]="isDisabled() || value() <= min()"
       (click)="bump(-1)"
     >
       -
@@ -36,26 +52,35 @@
       #field
       class="ngxsmk-number-input__field"
       type="number"
+      [attr.id]="id()"
+      [attr.aria-invalid]="ariaInvalid() ? 'true' : null"
+      [attr.aria-describedby]="ariaDescribedby()"
       [min]="min()"
       [max]="max()"
       [step]="step()"
-      [disabled]="disabled()"
+      [disabled]="isDisabled()"
       [attr.placeholder]="placeholder() || null"
       (input)="onInput($event)"
       (change)="onCommit($event)"
+      (blur)="onBlur()"
     />
     <button
       type="button"
       class="ngxsmk-number-input__btn"
       tabindex="-1"
       aria-label="Increment"
-      [disabled]="disabled() || value() >= max()"
+      [disabled]="isDisabled() || value() >= max()"
       (click)="bump(1)"
     >
       +
     </button>
   `,
-  host: { class: 'ngxsmk-number-input' },
+  host: {
+    class: 'ngxsmk-number-input',
+    '[attr.id]': 'id()',
+    '[attr.aria-invalid]': "ariaInvalid() ? 'true' : null",
+    '[attr.aria-describedby]': 'ariaDescribedby()',
+  },
   styles: `
     :host {
       display: inline-flex;
@@ -122,16 +147,27 @@
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NgxsmkNumberInput {
+export class NgxsmkNumberInput implements ControlValueAccessor, NgxsmkFormFieldControl {
   readonly value = model(0);
   readonly min = input(0);
   readonly max = input(100);
   readonly step = input(1);
   readonly placeholder = input('');
   readonly disabled = input(false, { transform: booleanAttribute });
+
+  readonly id = input(ngxsmkUniqueId('ngxsmk-number-input'));
+  readonly ariaInvalid = model(false);
+  readonly ariaDescribedby = model<string | null>(null);
+
   readonly changed = output<number>();
 
   private readonly fieldRef = viewChild<ElementRef<HTMLInputElement>>('field');
+
+  // CVA hooks
+  private onChange: (val: number) => void = () => {};
+  private onTouched: () => void = () => {};
+  private readonly formDisabled = signal(false);
+  protected readonly isDisabled = computed(() => this.disabled() || this.formDisabled());
 
   constructor() {
     // Keep the visible field in sync with the model, but never while the user
@@ -143,6 +179,23 @@ export class NgxsmkNumberInput {
         el.value = next;
       }
     });
+  }
+
+  writeValue(val: any): void {
+    const num = val === null || val === undefined ? 0 : Number(val);
+    this.value.set(Number.isNaN(num) ? 0 : num);
+  }
+
+  registerOnChange(fn: (val: number) => void): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+    this.formDisabled.set(isDisabled);
   }
 
   protected readonly clamp = computed(
@@ -163,6 +216,7 @@ export class NgxsmkNumberInput {
     // Let the user type freely; clamp only on commit (blur/change/stepper).
     this.value.set(parsed);
     this.changed.emit(parsed);
+    this.onChange(parsed);
   }
 
   protected onCommit(event: Event): void {
@@ -172,11 +226,16 @@ export class NgxsmkNumberInput {
     this.commit(parsed);
   }
 
+  protected onBlur(): void {
+    this.onTouched();
+  }
+
   private commit(next: number): void {
     const clamped = this.clamp()(Number.isNaN(next) ? this.min() : next);
     const rounded = this.roundToStep(clamped);
     if (rounded !== this.value()) {
       this.value.set(rounded);
+      this.onChange(rounded);
     }
     this.changed.emit(rounded);
   }

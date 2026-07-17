@@ -7,16 +7,16 @@ import {
   effect,
   input,
 } from '@angular/core';
-import { NgxsmkInput } from '@ngxsmk/core/input';
+import { NGXSMK_FORM_FIELD_CONTROL } from './form-field-control';
 
 /**
  * Wraps a form control with label, hint, and error messaging, wiring
  * `for`/`aria-describedby`/`aria-invalid` automatically when the projected
- * control is a `ngxsmk-input`.
+ * control implements `NgxsmkFormFieldControl`.
  *
  * ```html
  * <ngxsmk-form-field label="Email" hint="Work address preferred" [error]="emailError">
- *   <ngxsmk-input type="email" [(value)]="email" />
+ *   <input ngxsmkInput type="email" [(ngModel)]="email" />
  * </ngxsmk-form-field>
  * ```
  */
@@ -83,7 +83,7 @@ export class NgxsmkFormField {
   readonly error = input('');
   readonly required = input(false, { transform: booleanAttribute });
 
-  private readonly control = contentChild(NgxsmkInput);
+  private readonly control = contentChild(NGXSMK_FORM_FIELD_CONTROL);
 
   protected readonly controlId = computed(() => this.control()?.id() ?? null);
   protected readonly messageId = computed(() =>

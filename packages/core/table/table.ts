@@ -1,13 +1,34 @@
-import { ChangeDetectionStrategy, Component, booleanAttribute, input, output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Directive,
+  TemplateRef,
+  booleanAttribute,
+  contentChildren,
+  inject,
+  input,
+  output,
+} from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 
 export interface NgxsmkTableColumn {
   key: string;
   label: string;
 }
 
+@Directive({
+  standalone: true,
+  selector: '[ngxsmkCell]',
+})
+export class NgxsmkCellDef {
+  readonly columnKey = input.required<string>({ alias: 'ngxsmkCell' });
+  readonly templateRef = inject(TemplateRef);
+}
+
 @Component({
   standalone: true,
   selector: 'ngxsmk-table',
+  imports: [NgTemplateOutlet],
   template: `
     <table class="ngxsmk-table__element">
       @if (columns().length) {
@@ -55,7 +76,16 @@ export interface NgxsmkTableColumn {
           >
             @if (columns().length) {
               @for (col of columns(); track col.key) {
-                <td class="ngxsmk-table__cell">{{ row[col.key] }}</td>
+                <td class="ngxsmk-table__cell">
+                  @if (getCellTemplate(col.key); as template) {
+                    <ng-container
+                      [ngTemplateOutlet]="template"
+                      [ngTemplateOutletContext]="{ $implicit: row[col.key], row: row }"
+                    />
+                  } @else {
+                    {{ row[col.key] }}
+                  }
+                </td>
               }
             } @else {
               <td class="ngxsmk-table__cell" colspan="1"><ng-content /></td>
@@ -160,6 +190,13 @@ export class NgxsmkTable {
 
   /** Emits the column key when a sortable header is activated. */
   readonly sortChange = output<string>();
+
+  readonly cellDefs = contentChildren(NgxsmkCellDef);
+
+  protected getCellTemplate(key: string) {
+    const def = this.cellDefs().find((d) => d.columnKey() === key);
+    return def ? def.templateRef : null;
+  }
 
   protected onSort(key: string): void {
     this.sortChange.emit(key);

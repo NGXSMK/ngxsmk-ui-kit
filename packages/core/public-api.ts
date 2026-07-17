@@ -164,7 +164,6 @@ export * from '@ngxsmk/core/tabs';
 export * from '@ngxsmk/core/tag';
 export * from '@ngxsmk/core/terminal';
 export * from '@ngxsmk/core/text';
-export * from '@ngxsmk/core/textarea';
 export * from '@ngxsmk/core/theme-builder';
 export * from '@ngxsmk/core/thumbnail';
 export * from '@ngxsmk/core/toggle-button';

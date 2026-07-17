@@ -62,17 +62,17 @@ describe('NgxsmkSelect', () => {
 
   it('opens and closes dropdown on click', () => {
     const { fixture, triggerBtn } = setup();
-    expect(fixture.nativeElement.querySelector('.ngxsmk-select__listbox')).toBeNull();
+    expect(document.querySelector('.ngxsmk-select__listbox')).toBeNull();
 
     triggerBtn.click();
     fixture.detectChanges();
 
-    const listbox = fixture.nativeElement.querySelector('.ngxsmk-select__listbox');
+    const listbox = document.querySelector('.ngxsmk-select__listbox');
     expect(listbox).toBeTruthy();
 
     triggerBtn.click();
     fixture.detectChanges();
-    expect(fixture.nativeElement.querySelector('.ngxsmk-select__listbox')).toBeNull();
+    expect(document.querySelector('.ngxsmk-select__listbox')).toBeNull();
   });
 
   it('selects option on click and closes dropdown', () => {
@@ -80,21 +80,21 @@ describe('NgxsmkSelect', () => {
     triggerBtn.click();
     fixture.detectChanges();
 
-    const options = fixture.nativeElement.querySelectorAll('.ngxsmk-select__option');
+    const options = document.querySelectorAll('.ngxsmk-select__option');
     // Cherry is third option (placeholder is first if defined, but wait, placeholder option has separate class)
     // Options loop: Apple (idx 0), Banana (idx 1), Cherry (idx 2)
     // Plus Placeholder at the top (since placeholder() is defined)
     // So options list should have Placeholder, Apple, Banana (disabled), Cherry.
     expect(options.length).toBe(4);
 
-    const cherryOpt = options[3]; // Cherry
+    const cherryOpt = options[3] as HTMLElement; // Cherry
     cherryOpt.click();
     fixture.detectChanges();
 
     expect(fixture.componentInstance.value).toBe('cherry');
     expect(fixture.componentInstance.lastChangedValue).toBe('cherry');
     expect(valueEl.textContent?.trim()).toBe('Cherry');
-    expect(fixture.nativeElement.querySelector('.ngxsmk-select__listbox')).toBeNull();
+    expect(document.querySelector('.ngxsmk-select__listbox')).toBeNull();
   });
 
   it('does not select disabled options', () => {
@@ -102,13 +102,13 @@ describe('NgxsmkSelect', () => {
     triggerBtn.click();
     fixture.detectChanges();
 
-    const options = fixture.nativeElement.querySelectorAll('.ngxsmk-select__option');
-    const bananaOpt = options[2]; // Banana is disabled
+    const options = document.querySelectorAll('.ngxsmk-select__option');
+    const bananaOpt = options[2] as HTMLElement; // Banana is disabled
     bananaOpt.click();
     fixture.detectChanges();
 
     expect(fixture.componentInstance.value).toBe('');
-    expect(fixture.nativeElement.querySelector('.ngxsmk-select__listbox')).toBeTruthy(); // listbox remains open
+    expect(document.querySelector('.ngxsmk-select__listbox')).toBeTruthy(); // listbox remains open
   });
 
   it('handles keyboard navigation: ArrowDown and Enter to select', () => {
@@ -119,7 +119,7 @@ describe('NgxsmkSelect', () => {
     triggerBtn.dispatchEvent(arrowDownEvent);
     fixture.detectChanges();
 
-    const listbox = fixture.nativeElement.querySelector('.ngxsmk-select__listbox');
+    const listbox = document.querySelector('.ngxsmk-select__listbox') as HTMLElement;
     expect(listbox).toBeTruthy();
 
     // Send another ArrowDown to move to first option (Apple)
@@ -132,6 +132,6 @@ describe('NgxsmkSelect', () => {
 
     expect(fixture.componentInstance.value).toBe('apple');
     expect(valueEl.textContent?.trim()).toBe('Apple');
-    expect(fixture.nativeElement.querySelector('.ngxsmk-select__listbox')).toBeNull();
+    expect(document.querySelector('.ngxsmk-select__listbox')).toBeNull();
   });
 });

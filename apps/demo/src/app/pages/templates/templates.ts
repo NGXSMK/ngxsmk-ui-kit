@@ -10,7 +10,7 @@ import { NgxsmkCopyToClipboard } from '@ngxsmk/core/copy-to-clipboard';
 import { NgxsmkChatWindow } from '@ngxsmk/core/chat-window';
 import { NgxsmkKanbanBoard, KanbanColumn } from '@ngxsmk/core/kanban-board';
 import { NgxsmkFormField } from '@ngxsmk/core/form-field';
-import { NgxsmkInput } from '@ngxsmk/core/input';
+import { NgxsmkInputDirective } from '@ngxsmk/core/input';
 import { NgxsmkSwitch } from '@ngxsmk/core/switch';
 import { NgxsmkTable } from '@ngxsmk/core/table';
 import { NgxsmkSelect } from '@ngxsmk/core/select';
@@ -55,7 +55,7 @@ interface TemplateItem {
     NgxsmkChatWindow,
     NgxsmkKanbanBoard,
     NgxsmkFormField,
-    NgxsmkInput,
+    NgxsmkInputDirective,
     NgxsmkSwitch,
     NgxsmkTable,
     NgxsmkSelect,
@@ -492,12 +492,12 @@ interface TemplateItem {
                             label="{{ 'templates.mock.displayName' | translate }}"
                             hint="{{ 'templates.mock.displayNameHint' | translate }}"
                           >
-                            <ngxsmk-input placeholder="Sachin Dilshan" />
+                            <input ngxsmkInput placeholder="Sachin Dilshan" />
                           </ngxsmk-form-field>
                           <ngxsmk-form-field
                             label="{{ 'templates.mock.emailAddress' | translate }}"
                           >
-                            <ngxsmk-input type="email" placeholder="admin@ngxsmk.dev" />
+                            <input ngxsmkInput type="email" placeholder="admin@ngxsmk.dev" />
                           </ngxsmk-form-field>
                           <ngxsmk-form-field
                             label="{{ 'templates.mock.interfaceTheme' | translate }}"
@@ -549,7 +549,7 @@ interface TemplateItem {
                   <ngxsmk-chat-window [messages]="chatMessages" />
                 </div>
                 <div class="ngxsmk-mock-chat-composer">
-                  <ngxsmk-input
+                  <input ngxsmkInput
                     [attr.placeholder]="'templates.mock.askAnything' | translate"
                     style="flex: 1;"
                   />
@@ -681,12 +681,12 @@ interface TemplateItem {
                           label="{{ 'templates.mock.displayName' | translate }}"
                           hint="{{ 'templates.mock.displayNameHintProfile' | translate }}"
                         >
-                          <ngxsmk-input placeholder="Sachin Dilshan" />
+                          <input ngxsmkInput placeholder="Sachin Dilshan" />
                         </ngxsmk-form-field>
                         <ngxsmk-form-field
                           label="{{ 'templates.mock.workspaceSubdomain' | translate }}"
                         >
-                          <ngxsmk-input placeholder="my-org" />
+                          <input ngxsmkInput placeholder="my-org" />
                         </ngxsmk-form-field>
                         <ngxsmk-form-field
                           label="{{ 'templates.mock.interfaceTheme' | translate }}"
@@ -820,10 +820,10 @@ interface TemplateItem {
 
                   <div class="ngxsmk-mock-auth-form">
                     <ngxsmk-form-field label="{{ 'templates.mock.emailAddress' | translate }}">
-                      <ngxsmk-input type="email" placeholder="name@example.com" />
+                      <input ngxsmkInput type="email" placeholder="name@example.com" />
                     </ngxsmk-form-field>
                     <ngxsmk-form-field label="{{ 'templates.mock.password' | translate }}">
-                      <ngxsmk-input type="password" placeholder="••••••••" />
+                      <input ngxsmkInput type="password" placeholder="••••••••" />
                     </ngxsmk-form-field>
 
                     <div
@@ -2366,7 +2366,7 @@ export class TemplatesPage {
   <ngxsmk-chat-window [messages]="chatMessages" />
   
   <ngxsmk-chat-composer-drawer>
-    <ngxsmk-input placeholder="Ask anything..." style="flex: 1;" />
+    <input ngxsmkInput placeholder="Ask anything..." style="flex: 1;" />
     <button ngxsmk-button>Send</button>
   </ngxsmk-chat-composer-drawer>
 </ngxsmk-chat-layout>`,
@@ -2454,10 +2454,10 @@ export class TemplatesPage {
     <ngxsmk-tab value="profile" label="Profile">
       <div style="display: flex; flex-direction: column; gap: 1rem; padding-top: 1rem; max-width: 480px;">
         <ngxsmk-form-field label="Display Name" hint="How you appear to others.">
-          <ngxsmk-input placeholder="Jane Doe" />
+          <input ngxsmkInput placeholder="Jane Doe" />
         </ngxsmk-form-field>
         <ngxsmk-form-field label="Workspace Subdomain">
-          <ngxsmk-input placeholder="my-org" />
+          <input ngxsmkInput placeholder="my-org" />
         </ngxsmk-form-field>
         <ngxsmk-form-field label="Interface Theme">
           <ngxsmk-select [options]="themeOptions" value="system" />
@@ -2542,10 +2542,10 @@ export class TemplatesPage {
 
   <ngxsmk-form-layout>
     <ngxsmk-form-field label="Email Address">
-      <ngxsmk-input type="email" placeholder="name@example.com" />
+      <input ngxsmkInput type="email" placeholder="name@example.com" />
     </ngxsmk-form-field>
     <ngxsmk-form-field label="Password">
-      <ngxsmk-input type="password" placeholder="••••••••" />
+      <input ngxsmkInput type="password" placeholder="••••••••" />
     </ngxsmk-form-field>
     
     <div class="options">

@@ -719,7 +719,7 @@ exports.COMPONENT_DATABASE = [
                 "name": "color",
                 "type": "string",
                 "required": false,
-                "default": "'var(--ngxsmk-color-primary"
+                "default": "'var(--ngxsmk-color-primary)'"
             }
         ],
         "outputs": []
@@ -741,7 +741,7 @@ exports.COMPONENT_DATABASE = [
                 "name": "color",
                 "type": "string",
                 "required": false,
-                "default": "'var(--ngxsmk-color-primary"
+                "default": "'var(--ngxsmk-color-primary)'"
             }
         ],
         "outputs": []
@@ -807,7 +807,7 @@ exports.COMPONENT_DATABASE = [
                 "name": "color",
                 "type": "string",
                 "required": false,
-                "default": "'var(--ngxsmk-color-primary"
+                "default": "'var(--ngxsmk-color-primary)'"
             }
         ],
         "outputs": []
@@ -829,7 +829,7 @@ exports.COMPONENT_DATABASE = [
                 "name": "color",
                 "type": "string",
                 "required": false,
-                "default": "'var(--ngxsmk-color-primary"
+                "default": "'var(--ngxsmk-color-primary)'"
             }
         ],
         "outputs": []
@@ -885,7 +885,7 @@ exports.COMPONENT_DATABASE = [
                 "name": "color",
                 "type": "string",
                 "required": false,
-                "default": "'var(--ngxsmk-color-primary"
+                "default": "'var(--ngxsmk-color-primary)'"
             }
         ],
         "outputs": []
@@ -1053,7 +1053,7 @@ exports.COMPONENT_DATABASE = [
                 "name": "timestamp",
                 "type": "Date",
                 "required": false,
-                "default": "new Date("
+                "default": "new Date()"
             }
         ],
         "outputs": []
@@ -1129,7 +1129,13 @@ exports.COMPONENT_DATABASE = [
         "kind": "Component",
         "selector": "ngxsmk-chat-window",
         "description": "",
-        "inputs": [],
+        "inputs": [
+            {
+                "name": "messages",
+                "type": "{\n      id: string;\n      role: 'user' | 'assistant' | 'system';\n      content: string;\n      timestamp: Date;\n      tokens?: number;\n    }[]",
+                "required": true
+            }
+        ],
         "outputs": []
     },
     {
@@ -1559,6 +1565,32 @@ exports.COMPONENT_DATABASE = [
                 "type": "string",
                 "required": false,
                 "default": "''"
+            },
+            {
+                "name": "disabled",
+                "type": "boolean",
+                "required": false,
+                "default": "false"
+            },
+            {
+                "name": "id",
+                "type": "unknown",
+                "required": false,
+                "default": "ngxsmkUniqueId('ngxsmk-date-picker')"
+            },
+            {
+                "name": "ariaInvalid",
+                "type": "boolean",
+                "required": false,
+                "twoWay": true,
+                "default": "false"
+            },
+            {
+                "name": "ariaDescribedby",
+                "type": "string | null",
+                "required": false,
+                "twoWay": true,
+                "default": "null"
             }
         ],
         "outputs": [
@@ -1598,7 +1630,7 @@ exports.COMPONENT_DATABASE = [
         "name": "NgxsmkDialogFooter",
         "kind": "Directive",
         "selector": "[ngxsmkDialogFooter]",
-        "description": "",
+        "description": "Marks content projected into the dialog's footer action row.",
         "inputs": [],
         "outputs": []
     },
@@ -1739,6 +1771,12 @@ exports.COMPONENT_DATABASE = [
                 "default": "false"
             },
             {
+                "name": "position",
+                "type": "'bottom-right' | 'bottom-left' | 'top-right' | 'top-left' | 'none'",
+                "required": false,
+                "default": "'none'"
+            },
+            {
                 "name": "disabled",
                 "type": "boolean",
                 "required": false,
@@ -1836,7 +1874,7 @@ exports.COMPONENT_DATABASE = [
                 "name": "gap",
                 "type": "string",
                 "required": false,
-                "default": "'var(--ngxsmk-space-4"
+                "default": "'var(--ngxsmk-space-4)'"
             },
             {
                 "name": "wrap",
@@ -1889,7 +1927,7 @@ exports.COMPONENT_DATABASE = [
         "name": "NgxsmkFormField",
         "kind": "Component",
         "selector": "ngxsmk-form-field",
-        "description": "Wraps a form control with label, hint, and error messaging, wiring `for`/`aria-describedby`/`aria-invalid` automatically when the projected control is a `ngxsmk-input`.",
+        "description": "Wraps a form control with label, hint, and error messaging, wiring `for`/`aria-describedby`/`aria-invalid` automatically when the projected control implements `NgxsmkFormFieldControl`.",
         "inputs": [
             {
                 "name": "label",
@@ -1951,7 +1989,7 @@ exports.COMPONENT_DATABASE = [
                 "name": "gap",
                 "type": "string",
                 "required": false,
-                "default": "'var(--ngxsmk-space-4"
+                "default": "'var(--ngxsmk-space-4)'"
             }
         ],
         "outputs": []
@@ -1976,7 +2014,7 @@ exports.COMPONENT_DATABASE = [
                 "name": "gap",
                 "type": "string",
                 "required": false,
-                "default": "'var(--ngxsmk-space-4"
+                "default": "'var(--ngxsmk-space-4)'"
             },
             {
                 "name": "align",
@@ -2010,7 +2048,7 @@ exports.COMPONENT_DATABASE = [
                 "name": "gap",
                 "type": "string",
                 "required": false,
-                "default": "'var(--ngxsmk-space-4"
+                "default": "'var(--ngxsmk-space-4)'"
             },
             {
                 "name": "align",
@@ -2100,41 +2138,16 @@ exports.COMPONENT_DATABASE = [
     },
     {
         "entryPoint": "@ngxsmk/core/input",
-        "name": "NgxsmkInput",
-        "kind": "Component",
-        "selector": "ngxsmk-input",
-        "description": "Themed text input. Pairs with `ngxsmk-form-field` for label, hint, and error wiring, or sits standalone. Uses a `model()` so it composes with the rest of the control family (`ngxsmk-textarea`, `ngxsmk-select`, …).",
+        "name": "NgxsmkInputDirective",
+        "kind": "Directive",
+        "selector": "input[ngxsmkInput], textarea[ngxsmkInput]",
+        "description": "Directive applied to native text inputs and textareas to style them and integrate them with `ngxsmk-form-field`.",
         "inputs": [
-            {
-                "name": "value",
-                "type": "string",
-                "required": false,
-                "twoWay": true,
-                "default": "''"
-            },
-            {
-                "name": "type",
-                "type": "string",
-                "required": false,
-                "default": "'text'"
-            },
-            {
-                "name": "placeholder",
-                "type": "string",
-                "required": false,
-                "default": "''"
-            },
-            {
-                "name": "disabled",
-                "type": "boolean",
-                "required": false,
-                "default": "false"
-            },
             {
                 "name": "id",
                 "type": "unknown",
                 "required": false,
-                "default": "ngxsmkUniqueId('ngxsmk-input'"
+                "default": "ngxsmkUniqueId('ngxsmk-input')"
             },
             {
                 "name": "ariaInvalid",
@@ -2151,12 +2164,7 @@ exports.COMPONENT_DATABASE = [
                 "default": "null"
             }
         ],
-        "outputs": [
-            {
-                "name": "changed",
-                "type": "string"
-            }
-        ]
+        "outputs": []
     },
     {
         "entryPoint": "@ngxsmk/core/input-group",
@@ -2508,7 +2516,7 @@ exports.COMPONENT_DATABASE = [
                 "name": "ngxsmkMediaQuery",
                 "type": "string",
                 "required": false,
-                "default": "'(min-width: 768px"
+                "default": "'(min-width: 768px)'"
             }
         ],
         "outputs": []
@@ -2524,7 +2532,7 @@ exports.COMPONENT_DATABASE = [
                 "name": "query",
                 "type": "string",
                 "required": false,
-                "default": "'(prefers-color-scheme: dark"
+                "default": "'(prefers-color-scheme: dark)'"
             },
             {
                 "name": "theme",
@@ -2842,6 +2850,26 @@ exports.COMPONENT_DATABASE = [
                 "type": "boolean",
                 "required": false,
                 "default": "false"
+            },
+            {
+                "name": "id",
+                "type": "unknown",
+                "required": false,
+                "default": "ngxsmkUniqueId('ngxsmk-number-input')"
+            },
+            {
+                "name": "ariaInvalid",
+                "type": "boolean",
+                "required": false,
+                "twoWay": true,
+                "default": "false"
+            },
+            {
+                "name": "ariaDescribedby",
+                "type": "string | null",
+                "required": false,
+                "twoWay": true,
+                "default": "null"
             }
         ],
         "outputs": [
@@ -3390,7 +3418,7 @@ exports.COMPONENT_DATABASE = [
         "name": "NgxsmkRadio",
         "kind": "Component",
         "selector": "ngxsmk-radio",
-        "description": "",
+        "description": "Single option inside an `ngxsmk-radio-group`.",
         "inputs": [
             {
                 "name": "value",
@@ -3573,7 +3601,7 @@ exports.COMPONENT_DATABASE = [
                 "name": "weekStart",
                 "type": "unknown",
                 "required": false,
-                "default": "new Date("
+                "default": "new Date()"
             }
         ],
         "outputs": []
@@ -3678,7 +3706,7 @@ exports.COMPONENT_DATABASE = [
                 "name": "id",
                 "type": "unknown",
                 "required": false,
-                "default": "ngxsmkUniqueId('ngxsmk-select'"
+                "default": "ngxsmkUniqueId('ngxsmk-select')"
             },
             {
                 "name": "ariaLabelledby",
@@ -3941,7 +3969,7 @@ exports.COMPONENT_DATABASE = [
                 "name": "size",
                 "type": "string",
                 "required": false,
-                "default": "'var(--ngxsmk-space-4"
+                "default": "'var(--ngxsmk-space-4)'"
             },
             {
                 "name": "orientation",
@@ -3986,6 +4014,12 @@ exports.COMPONENT_DATABASE = [
                 "type": "string",
                 "required": false,
                 "default": "''"
+            },
+            {
+                "name": "variant",
+                "type": "'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive'",
+                "required": false,
+                "default": "'primary'"
             },
             {
                 "name": "size",
@@ -4051,7 +4085,7 @@ exports.COMPONENT_DATABASE = [
                 "name": "gap",
                 "type": "string",
                 "required": false,
-                "default": "'var(--ngxsmk-space-4"
+                "default": "'var(--ngxsmk-space-4)'"
             },
             {
                 "name": "align",
@@ -4215,6 +4249,21 @@ exports.COMPONENT_DATABASE = [
         "selector": "ngxsmk-tab-menu",
         "description": "",
         "inputs": [],
+        "outputs": []
+    },
+    {
+        "entryPoint": "@ngxsmk/core/table",
+        "name": "NgxsmkCellDef",
+        "kind": "Directive",
+        "selector": "[ngxsmkCell]",
+        "description": "",
+        "inputs": [
+            {
+                "name": "columnKey",
+                "type": "string",
+                "required": true
+            }
+        ],
         "outputs": []
     },
     {
@@ -4462,46 +4511,6 @@ exports.COMPONENT_DATABASE = [
         "outputs": []
     },
     {
-        "entryPoint": "@ngxsmk/core/textarea",
-        "name": "NgxsmkTextarea",
-        "kind": "Component",
-        "selector": "ngxsmk-textarea",
-        "description": "Multi-line text control with a configurable row count.",
-        "inputs": [
-            {
-                "name": "value",
-                "type": "string",
-                "required": false,
-                "twoWay": true,
-                "default": "''"
-            },
-            {
-                "name": "placeholder",
-                "type": "string",
-                "required": false,
-                "default": "''"
-            },
-            {
-                "name": "disabled",
-                "type": "boolean",
-                "required": false,
-                "default": "false"
-            },
-            {
-                "name": "rows",
-                "type": "number",
-                "required": false,
-                "default": "4"
-            }
-        ],
-        "outputs": [
-            {
-                "name": "changed",
-                "type": "string"
-            }
-        ]
-    },
-    {
         "entryPoint": "@ngxsmk/core/theme-builder",
         "name": "NgxsmkThemeBuilder",
         "kind": "Component",
@@ -4586,7 +4595,14 @@ exports.COMPONENT_DATABASE = [
         "kind": "Component",
         "selector": "ngxsmk-toaster",
         "description": "Toast outlet. Place once in the root template: `<ngxsmk-toaster />`.",
-        "inputs": [],
+        "inputs": [
+            {
+                "name": "position",
+                "type": "'bottom-right' | 'bottom-left' | 'top-right' | 'top-left'",
+                "required": false,
+                "default": "'bottom-right'"
+            }
+        ],
         "outputs": []
     },
     {
