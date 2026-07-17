@@ -47,8 +47,7 @@ import { AppNav } from '../../nav/nav';
             <a
               ngxsmk-button
               size="sm"
-              href="https://github.com/NGXSMK/ngxsmk-ui-kit/discussions/19"
-              target="_blank"
+              href="mailto:ngxsmk@gmail.com?subject=NGXSMK%20feedback"
               >{{ 'community.joinDiscussion' | translate }}</a
             >
           </div>

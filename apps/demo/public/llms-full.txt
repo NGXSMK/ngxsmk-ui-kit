@@ -1,0 +1,2076 @@
+# NGXSMK UI Kit
+
+> Angular-first, MIT-licensed UI ecosystem: 214+ signals-native, zoneless
+> standalone components with a universal design-token engine (CSS variables,
+> SCSS, Tailwind, StyleX, Tokens Studio export). MIT licensed, no paid tiers.
+> Current version: 1.3.2. Supports Angular 17.3 through 22.
+
+Packages: `@ngxsmk/core` (components, one secondary entry point per component,
+e.g. `@ngxsmk/core/button`), `@ngxsmk/theme` (design tokens + theme engine),
+`@ngxsmk/cdk` (behavior primitives), `@ngxsmk/mcp` (MCP server for coding agents).
+
+Usage rules for generated code:
+- All components are standalone; import the class and add it to the `imports` array.
+- APIs are signal-based: inputs are `input()` signals (bind with `[prop]`),
+  outputs are `output()` (bind with `(event)`), `model()` inputs support `[(prop)]`.
+- Style via `--ngxsmk-*` CSS custom properties, never by overriding internal classes.
+- Import theme styles once: `@import '@ngxsmk/theme/css';` and toggle dark mode
+  by adding the `dark` class to `<html>`.
+
+- Website & docs: https://ngxsmk.dev
+- Packages on npm: https://www.npmjs.com/org/ngxsmk
+
+## Components
+
+## NgxsmkAccordion
+
+- Selector: `ngxsmk-accordion`
+- Import from: `@ngxsmk/core/accordion`
+- Expandable section container.
+
+Inputs:
+- `[multiple]`: boolean (default: `false`)
+
+## NgxsmkAccordionItem
+
+- Selector: `ngxsmk-accordion-item`
+- Import from: `@ngxsmk/core/accordion`
+
+Inputs:
+- `[label]`: string (required)
+- `[value]`: string (default: `''`)
+- `[disabled]`: boolean (default: `false`)
+
+## NgxsmkAgentCard
+
+- Selector: `ngxsmk-agent-card`
+- Import from: `@ngxsmk/core/agent-card`
+
+Inputs:
+- `[agent]`: AgentInfo (required)
+
+## NgxsmkAiChat
+
+- Selector: `ngxsmk-ai-chat`
+- Import from: `@ngxsmk/core/ai-chat`
+
+Inputs:
+- `[messages]`: NgxsmkAiMessage[] (default: `[]`)
+- `[models]`: string[] (default: `['gemini-2.5-flash', 'gemini-2.5-pro', 'claude-3.5-sonnet']`)
+- `[selectedModel]`: string (default: `'gemini-2.5-flash'`)
+- `[suggestions]`: string[] (default: `[]`)
+- `[isTyping]`: boolean (default: `false`)
+- `[tokenCount]`: number (default: `0`)
+- `[placeholder]`: string (default: `'Ask me anything...'`)
+
+Outputs:
+- `(sendMessage)`: emits `string`
+- `(modelChanged)`: emits `string`
+
+## NgxsmkAlert
+
+- Selector: `ngxsmk-alert`
+- Import from: `@ngxsmk/core/alert`
+- Inline notification.
+
+Inputs:
+- `[variant]`: NgxsmkAlertVariant (default: `'info'`)
+- `[title]`: string (default: `''`)
+- `[dismissible]`: boolean (default: `false`)
+
+Outputs:
+- `(dismissed)`: emits `void`
+
+## NgxsmkAlertDialog
+
+- Selector: `ngxsmk-alert-dialog`
+- Import from: `@ngxsmk/core/alert-dialog`
+
+Inputs:
+- `[(open)]`: boolean (default: `false`)
+- `[title]`: string (default: `''`)
+- `[message]`: string (default: `''`)
+- `[confirmLabel]`: string (default: `'Confirm'`)
+- `[cancelLabel]`: string (default: `'Cancel'`)
+- `[variant]`: NgxsmkAlertDialogVariant (default: `'info'`)
+
+Outputs:
+- `(confirmed)`: emits `void`
+- `(cancelled)`: emits `void`
+
+## NgxsmkAnimate
+
+- Selector: `[ngxsmkAnimate]`
+- Import from: `@ngxsmk/core/animation`
+- Plays an enter animation on the host element once it is rendered. The motion state is supplied via the `ngxsmkAnimate` input.
+
+Inputs:
+- `[ngxsmkAnimate]`: NgxsmkMotionState
+
+## NgxsmkPresence
+
+- Selector: `[ngxsmkPresence]`
+- Import from: `@ngxsmk/core/animation`
+- Structural directive that mounts its template and plays an enter animation, then plays an exit animation before detaching when the `show` input flips to `false`. Mirrors the host's presence so leave animations can complete.
+
+Inputs:
+- `[show]`: boolean (default: `false`)
+- `[motion]`: NgxsmkMotionState
+
+Outputs:
+- `(afterLeave)`: emits `void`
+
+## NgxsmkAppShell
+
+- Selector: `ngxsmk-app-shell`
+- Import from: `@ngxsmk/core/app-shell`
+
+Inputs:
+- `[sidebar]`: boolean (default: `false`)
+- `[topbar]`: boolean (default: `true`)
+- `[footer]`: boolean (default: `false`)
+
+## NgxsmkAspectRatio
+
+- Selector: `ngxsmk-aspect-ratio`
+- Import from: `@ngxsmk/core/aspect-ratio`
+
+Inputs:
+- `[ratio]`: string (default: `'16/9'`)
+
+## NgxsmkAudioPlayer
+
+- Selector: `ngxsmk-audio-player`
+- Import from: `@ngxsmk/core/audio-player`
+
+Inputs:
+- `[label]`: string (default: `'Audio'`)
+- `[progress]`: number (default: `0`)
+- `[currentTime]`: string (default: `'0:00'`)
+- `[duration]`: string (default: `'0:00'`)
+
+## NgxsmkAutocomplete
+
+- Selector: `ngxsmk-autocomplete`
+- Import from: `@ngxsmk/core/autocomplete`
+
+Inputs:
+- `[options]`: { value: string; label: string }[] (required)
+- `[placeholder]`: string (default: `''`)
+- `[(value)]`: string (default: `''`)
+
+## NgxsmkAvatar
+
+- Selector: `ngxsmk-avatar`
+- Import from: `@ngxsmk/core/avatar`
+- User avatar with automatic initials fallback when no image is available or the image fails to load.
+
+Inputs:
+- `[src]`: string (default: `''`)
+- `[name]`: string (default: `''`)
+- `[size]`: NgxsmkAvatarSize (default: `'md'`)
+- `[shape]`: 'circle' | 'square' (default: `'circle'`)
+
+## NgxsmkAvatarGroupOverflow
+
+- Selector: `ngxsmk-avatar-group-overflow`
+- Import from: `@ngxsmk/core/avatar-group-overflow`
+
+Inputs:
+- `[count]`: number (required)
+
+## NgxsmkAvatarStatusDot
+
+- Selector: `ngxsmk-avatar-status-dot`
+- Import from: `@ngxsmk/core/avatar-status-dot`
+
+Inputs:
+- `[variant]`: NgxsmkAvatarStatusDotVariant (default: `'online'`)
+
+## NgxsmkBadge
+
+- Selector: `ngxsmk-badge`
+- Import from: `@ngxsmk/core/badge`
+- Small status descriptor for counts and labels.
+
+Inputs:
+- `[variant]`: NgxsmkBadgeVariant (default: `'primary'`)
+
+## NgxsmkBanner
+
+- Selector: `ngxsmk-banner`
+- Import from: `@ngxsmk/core/banner`
+
+Inputs:
+- `[variant]`: NgxsmkBannerVariant (default: `'info'`)
+- `[dismissible]`: boolean (default: `false`)
+
+Outputs:
+- `(dismissed)`: emits `void`
+
+## NgxsmkBaseTypeaheadItem
+
+- Selector: `[ngxsmkBaseTypeaheadItem]`
+- Import from: `@ngxsmk/core/base-typeahead`
+
+## NgxsmkBaseTypeahead
+
+- Selector: `ngxsmk-base-typeahead`
+- Import from: `@ngxsmk/core/base-typeahead`
+
+Inputs:
+- `[items]`: unknown[] (required)
+
+## NgxsmkBlockquote
+
+- Selector: `ngxsmk-blockquote`
+- Import from: `@ngxsmk/core/blockquote`
+
+Inputs:
+- `[cite]`: string (default: `''`)
+
+## NgxsmkBreadcrumbItem
+
+- Selector: `ngxsmk-breadcrumb-item`
+- Import from: `@ngxsmk/core/breadcrumb-item`
+
+Inputs:
+- `[href]`: string (default: `''`)
+- `[separator]`: string (default: `'/'`)
+
+## NgxsmkButton
+
+- Selector: `button[ngxsmk-button], a[ngxsmk-button]`
+- Import from: `@ngxsmk/core/button`
+- Button applied to native `<button>`/`<a>` elements so browser semantics, forms integration, and keyboard behavior come for free.
+
+Inputs:
+- `[variant]`: NgxsmkButtonVariant (default: `'primary'`)
+- `[size]`: NgxsmkButtonSize (default: `'md'`)
+- `[iconOnly]`: boolean (default: `false`)
+- `[loading]`: boolean (default: `false`)
+- `[disabled]`: boolean (default: `false`)
+
+## NgxsmkButtonGroup
+
+- Selector: `ngxsmk-button-group, [ngxsmkButtonGroup]`
+- Import from: `@ngxsmk/core/button-group`
+
+Inputs:
+- `[direction]`: 'horizontal' | 'vertical' (default: `'horizontal'`)
+
+## NgxsmkCard
+
+- Selector: `ngxsmk-card`
+- Import from: `@ngxsmk/core/card`
+- Content container with optional structural directives:
+
+Inputs:
+- `[interactive]`: boolean (default: `false`)
+
+## NgxsmkCardHeader
+
+- Selector: `[ngxsmkCardHeader]`
+- Import from: `@ngxsmk/core/card`
+
+## NgxsmkCardTitle
+
+- Selector: `[ngxsmkCardTitle]`
+- Import from: `@ngxsmk/core/card`
+
+## NgxsmkCardDescription
+
+- Selector: `[ngxsmkCardDescription]`
+- Import from: `@ngxsmk/core/card`
+
+## NgxsmkCardContent
+
+- Selector: `[ngxsmkCardContent]`
+- Import from: `@ngxsmk/core/card`
+
+## NgxsmkCardFooter
+
+- Selector: `[ngxsmkCardFooter]`
+- Import from: `@ngxsmk/core/card`
+
+## NgxsmkCarouselSlide
+
+- Selector: `ngxsmk-carousel-slide`
+- Import from: `@ngxsmk/core/carousel`
+
+## NgxsmkCarousel
+
+- Selector: `ngxsmk-carousel`
+- Import from: `@ngxsmk/core/carousel`
+
+Inputs:
+- `[autoplay]`: boolean (default: `false`)
+- `[interval]`: number (default: `3000`)
+- `[loop]`: boolean (default: `true`)
+- `[showControls]`: boolean (default: `true`)
+- `[showIndicators]`: boolean (default: `true`)
+
+## NgxsmkCenter
+
+- Selector: `ngxsmk-center`
+- Import from: `@ngxsmk/core/center`
+
+## NgxsmkAreaChart
+
+- Selector: `ngxsmk-chart-area`
+- Import from: `@ngxsmk/core/chart-area`
+
+Inputs:
+- `[data]`: NgxsmkAreaChartDataPoint[] (default: `[]`)
+- `[color]`: string (default: `'var(--ngxsmk-color-primary`)
+
+## NgxsmkBarChart
+
+- Selector: `ngxsmk-chart-bar`
+- Import from: `@ngxsmk/core/chart-bar`
+
+Inputs:
+- `[data]`: NgxsmkBarChartDataPoint[] (default: `[]`)
+- `[color]`: string (default: `'var(--ngxsmk-color-primary`)
+
+## NgxsmkCandlestickChart
+
+- Selector: `ngxsmk-chart-candlestick`
+- Import from: `@ngxsmk/core/chart-candlestick`
+
+Inputs:
+- `[data]`: NgxsmkCandlestickDataPoint[] (default: `[]`)
+
+## NgxsmkChartDashboard
+
+- Selector: `ngxsmk-chart-dashboard`
+- Import from: `@ngxsmk/core/chart-dashboard`
+
+Inputs:
+- `[charts]`: NgxsmkChartConfig[] (default: `[]`)
+- `[columns]`: number (default: `2`)
+
+## NgxsmkHeatmapChart
+
+- Selector: `ngxsmk-chart-heatmap`
+- Import from: `@ngxsmk/core/chart-heatmap`
+
+Inputs:
+- `[data]`: number[][] (default: `[]`)
+- `[labels]`: NgxsmkHeatmapLabels (default: `{ x: [], y: [] }`)
+- `[color]`: string (default: `'var(--ngxsmk-color-primary`)
+
+## NgxsmkLineChart
+
+- Selector: `ngxsmk-chart-line`
+- Import from: `@ngxsmk/core/chart-line`
+
+Inputs:
+- `[data]`: NgxsmkChartDataPoint[] (default: `[]`)
+- `[color]`: string (default: `'var(--ngxsmk-color-primary`)
+
+## NgxsmkPieChart
+
+- Selector: `ngxsmk-chart-pie`
+- Import from: `@ngxsmk/core/chart-pie`
+
+Inputs:
+- `[data]`: NgxsmkPieChartDataPoint[] (default: `[]`)
+- `[size]`: number (default: `200`)
+- `[donut]`: boolean (default: `false`)
+- `[responsive]`: boolean (default: `false`)
+
+## NgxsmkScatterChart
+
+- Selector: `ngxsmk-chart-scatter`
+- Import from: `@ngxsmk/core/chart-scatter`
+
+Inputs:
+- `[data]`: NgxsmkScatterDataPoint[] (default: `[]`)
+- `[color]`: string (default: `'var(--ngxsmk-color-primary`)
+
+## NgxsmkChatComposerDrawer
+
+- Selector: `ngxsmk-chat-composer-drawer`
+- Import from: `@ngxsmk/core/chat-composer-drawer`
+
+Inputs:
+- `[open]`: boolean (default: `false`)
+
+Outputs:
+- `(closed)`: emits `void`
+
+## NgxsmkChatComposerTokenElement
+
+- Selector: `ngxsmk-chat-composer-token-element`
+- Import from: `@ngxsmk/core/chat-composer-token-element`
+
+Inputs:
+- `[label]`: string (default: `''`)
+- `[variant]`: 'entity' | 'tool' | 'file' (default: `'entity'`)
+
+## NgxsmkChatDictationButton
+
+- Selector: `ngxsmk-chat-dictation-button`
+- Import from: `@ngxsmk/core/chat-dictation-button`
+
+Inputs:
+- `[listening]`: boolean (default: `false`)
+
+Outputs:
+- `(toggled)`: emits `void`
+
+## NgxsmkChatInput
+
+- Selector: `ngxsmk-chat-input`
+- Import from: `@ngxsmk/core/chat-input`
+
+Inputs:
+- `[(value)]`: string (default: `''`)
+- `[placeholder]`: string (default: `'Type a message...'`)
+- `[disabled]`: boolean (default: `false`)
+
+Outputs:
+- `(submitted)`: emits `string`
+
+## NgxsmkChatLayout
+
+- Selector: `ngxsmk-chat-layout`
+- Import from: `@ngxsmk/core/chat-layout`
+
+Inputs:
+- `[sidebar]`: boolean (default: `false`)
+
+## NgxsmkChatLayoutScrollButton
+
+- Selector: `ngxsmk-chat-layout-scroll-button`
+- Import from: `@ngxsmk/core/chat-layout-scroll-button`
+
+Outputs:
+- `(scrolled)`: emits `void`
+
+## NgxsmkChatMessage
+
+- Selector: `ngxsmk-chat-message`
+- Import from: `@ngxsmk/core/chat-message`
+
+Inputs:
+- `[message]`: ChatMessageData (required)
+
+## NgxsmkChatMessageBubble
+
+- Selector: `ngxsmk-chat-message-bubble`
+- Import from: `@ngxsmk/core/chat-message-bubble`
+
+## NgxsmkChatMessageMetadata
+
+- Selector: `ngxsmk-chat-message-metadata`
+- Import from: `@ngxsmk/core/chat-message-metadata`
+
+Inputs:
+- `[timestamp]`: Date (default: `new Date(`)
+
+## NgxsmkChatSendButton
+
+- Selector: `ngxsmk-chat-send-button`
+- Import from: `@ngxsmk/core/chat-send-button`
+
+Inputs:
+- `[label]`: string (default: `'Send'`)
+- `[disabled]`: boolean (default: `false`)
+
+Outputs:
+- `(clicked)`: emits `void`
+
+## NgxsmkChatSystemMessage
+
+- Selector: `ngxsmk-chat-system-message`
+- Import from: `@ngxsmk/core/chat-system-message`
+
+Inputs:
+- `[message]`: string (default: `''`)
+
+## NgxsmkChatTokenizedText
+
+- Selector: `ngxsmk-chat-tokenized-text`
+- Import from: `@ngxsmk/core/chat-tokenized-text`
+
+Inputs:
+- `[text]`: string (default: `''`)
+- `[tokens]`: { value: string; label: string }[] (default: `[]`)
+
+## NgxsmkChatWindow
+
+- Selector: `ngxsmk-chat-window`
+- Import from: `@ngxsmk/core/chat-window`
+
+## NgxsmkCheckbox
+
+- Selector: `ngxsmk-checkbox`
+- Import from: `@ngxsmk/core/checkbox`
+- Checkbox built on a visually hidden native input, so forms integration and assistive tech behavior stay native.
+
+Inputs:
+- `[(checked)]`: boolean (default: `false`)
+- `[indeterminate]`: boolean (default: `false`)
+- `[disabled]`: boolean (default: `false`)
+
+Outputs:
+- `(changed)`: emits `boolean`
+
+## NgxsmkCheckboxList
+
+- Selector: `ngxsmk-checkbox-list`
+- Import from: `@ngxsmk/core/checkbox-list`
+
+Inputs:
+- `[items]`: CheckboxListItem[] (required)
+- `[(selected)]`: string[] (default: `[]`)
+
+Outputs:
+- `(changed)`: emits `string[]`
+
+## NgxsmkCheckboxListItem
+
+- Selector: `[ngxsmkCheckboxListItem]`
+- Import from: `@ngxsmk/core/checkbox-list-item`
+
+## NgxsmkCheckboxListItemComponent
+
+- Selector: `ngxsmk-checkbox-list-item, [ngxsmkCheckboxListItem]`
+- Import from: `@ngxsmk/core/checkbox-list-item`
+
+Inputs:
+- `[(checked)]`: boolean (default: `false`)
+- `[disabled]`: boolean (default: `false`)
+- `[description]`: string (default: `''`)
+
+Outputs:
+- `(changed)`: emits `boolean`
+
+## NgxsmkCitation
+
+- Selector: `ngxsmk-citation`
+- Import from: `@ngxsmk/core/citation`
+
+Inputs:
+- `[index]`: number (required)
+- `[url]`: string (default: `''`)
+
+## NgxsmkCitationViewer
+
+- Selector: `ngxsmk-citation-viewer`
+- Import from: `@ngxsmk/core/citation-viewer`
+
+Inputs:
+- `[title]`: string (default: `''`)
+- `[author]`: string (default: `''`)
+- `[snippet]`: string (default: `''`)
+
+## NgxsmkClickOutside
+
+- Selector: `[ngxsmkClickOutside]`
+- Import from: `@ngxsmk/core/click-outside`
+
+Outputs:
+- `(ngxsmkClickOutside)`: emits `void`
+
+## NgxsmkCode
+
+- Selector: `code[ngxsmk-code]`
+- Import from: `@ngxsmk/core/code`
+
+Inputs:
+- `[size]`: 'sm' | 'lg' (default: `'sm'`)
+
+## NgxsmkCodeBlock
+
+- Selector: `ngxsmk-code-block`
+- Import from: `@ngxsmk/core/code-block`
+
+Inputs:
+- `[language]`: string (default: `''`)
+
+## NgxsmkCollapsible
+
+- Selector: `ngxsmk-collapsible`
+- Import from: `@ngxsmk/core/collapsible`
+
+Inputs:
+- `[(open)]`: boolean (default: `false`)
+- `[title]`: string (default: `''`)
+
+## NgxsmkCombobox
+
+- Selector: `ngxsmk-combobox`
+- Import from: `@ngxsmk/core/combobox`
+
+Inputs:
+- `[options]`: { value: string; label: string }[] (required)
+- `[(value)]`: string (default: `''`)
+- `[placeholder]`: string (default: `''`)
+
+## NgxsmkCommandPalette
+
+- Selector: `ngxsmk-command-palette`
+- Import from: `@ngxsmk/core/command-palette`
+
+Inputs:
+- `[commands]`: CommandItem[] (default: `[]`)
+- `[triggerKey]`: string (default: `'k'`)
+
+Outputs:
+- `(selected)`: emits `CommandItem`
+
+## NgxsmkContainer
+
+- Selector: `ngxsmk-container`
+- Import from: `@ngxsmk/core/container`
+
+Inputs:
+- `[size]`: NgxsmkContainerSize (default: `'lg'`)
+
+## NgxsmkContextMenu
+
+- Selector: `ngxsmk-context-menu`
+- Import from: `@ngxsmk/core/context-menu`
+
+Inputs:
+- `[items]`: NgxsmkContextMenuItem[] (required)
+- `[triggerRef]`: HTMLElement
+
+## NgxsmkConversationList
+
+- Selector: `ngxsmk-conversation-list`
+- Import from: `@ngxsmk/core/conversation-list`
+
+Inputs:
+- `[conversations]`: Conversation[] (required)
+- `[(activeId)]`: string (default: `''`)
+
+## NgxsmkCopyToClipboard
+
+- Selector: `[ngxsmkCopyToClipboard]`
+- Import from: `@ngxsmk/core/copy-to-clipboard`
+
+Inputs:
+- `[ngxsmkCopyToClipboard]`: string (default: `''`)
+
+Outputs:
+- `(copied)`: emits `void`
+
+## NgxsmkDataTable
+
+- Selector: `ngxsmk-data-table`
+- Import from: `@ngxsmk/core/data-table`
+
+Inputs:
+- `[columns]`: NgxsmkTableColumn[] (default: `[]`)
+- `[rows]`: any[] (default: `[]`)
+- `[pageSize]`: number (default: `10`)
+- `[sortable]`: boolean (default: `false`)
+- `[striped]`: boolean (default: `false`)
+
+## NgxsmkDatePicker
+
+- Selector: `ngxsmk-date-picker`
+- Import from: `@ngxsmk/core/date-picker`
+
+Inputs:
+- `[(value)]`: string (default: `''`)
+- `[min]`: string (default: `''`)
+- `[max]`: string (default: `''`)
+- `[placeholder]`: string (default: `''`)
+
+Outputs:
+- `(changed)`: emits `string`
+
+## NgxsmkDiagramBuilder
+
+- Selector: `ngxsmk-diagram-builder`
+- Import from: `@ngxsmk/core/diagram-builder`
+
+Inputs:
+- `[nodes]`: DiagramNode[] (required)
+- `[edges]`: DiagramEdge[] (required)
+
+Outputs:
+- `(selected)`: emits `string`
+
+## NgxsmkDialogFooter
+
+- Selector: `[ngxsmkDialogFooter]`
+- Import from: `@ngxsmk/core/dialog`
+
+## NgxsmkDialog
+
+- Selector: `ngxsmk-dialog`
+- Import from: `@ngxsmk/core/dialog`
+
+Inputs:
+- `[(open)]`: boolean (default: `false`)
+- `[title]`: string (default: `''`)
+- `[dismissible]`: boolean (default: `true`)
+
+## NgxsmkDiffViewer
+
+- Selector: `ngxsmk-diff-viewer`
+- Import from: `@ngxsmk/core/diff-viewer`
+
+Inputs:
+- `[source]`: string (default: `''`)
+
+## NgxsmkDivider
+
+- Selector: `ngxsmk-divider`
+- Import from: `@ngxsmk/core/divider`
+- Visual separator.
+
+Inputs:
+- `[orientation]`: 'horizontal' | 'vertical' (default: `'horizontal'`)
+
+## NgxsmkDropdownMenu
+
+- Selector: `ngxsmk-dropdown-menu`
+- Import from: `@ngxsmk/core/dropdown-menu`
+
+Inputs:
+- `[items]`: NgxsmkDropdownMenuItem[] (required)
+- `[(open)]`: boolean (default: `false`)
+
+## NgxsmkEmptyState
+
+- Selector: `ngxsmk-empty-state`
+- Import from: `@ngxsmk/core/empty-state`
+
+Inputs:
+- `[icon]`: string (default: `''`)
+- `[title]`: string (default: `''`)
+- `[description]`: string (default: `''`)
+
+## NgxsmkFab
+
+- Selector: `button[ngxsmkFab], a[ngxsmkFab]`
+- Import from: `@ngxsmk/core/fab`
+
+Inputs:
+- `[size]`: 'sm' | 'md' | 'lg' (default: `'md'`)
+- `[variant]`: 'primary' | 'secondary' (default: `'primary'`)
+- `[extended]`: boolean (default: `false`)
+- `[disabled]`: boolean (default: `false`)
+
+## NgxsmkField
+
+- Selector: `ngxsmk-field`
+- Import from: `@ngxsmk/core/field`
+
+Inputs:
+- `[hint]`: string (default: `''`)
+- `[direction]`: 'vertical' | 'horizontal' (default: `'vertical'`)
+
+## NgxsmkFieldLabel
+
+- Selector: `ngxsmk-field-label, [ngxsmkFieldLabel], label[ngxsmkFieldLabel]`
+- Import from: `@ngxsmk/core/field-label`
+
+Inputs:
+- `[required]`: boolean (default: `false`)
+
+## NgxsmkFieldStatus
+
+- Selector: `ngxsmk-field-status, [ngxsmkFieldStatus]`
+- Import from: `@ngxsmk/core/field-status`
+
+Inputs:
+- `[message]`: string (default: `''`)
+- `[variant]`: NgxsmkFieldStatusVariant (default: `'info'`)
+
+## NgxsmkFlex
+
+- Selector: `ngxsmk-flex`
+- Import from: `@ngxsmk/core/flex`
+
+Inputs:
+- `[direction]`: NgxsmkFlexDirection (default: `'row'`)
+- `[align]`: NgxsmkFlexAlign (default: `'stretch'`)
+- `[justify]`: NgxsmkFlexJustify (default: `'start'`)
+- `[gap]`: string (default: `'var(--ngxsmk-space-4`)
+- `[wrap]`: boolean (default: `false`)
+
+## NgxsmkFlowEditor
+
+- Selector: `ngxsmk-flow-editor`
+- Import from: `@ngxsmk/core/flow-editor`
+
+Inputs:
+- `[title]`: string (default: `'Flow Editor'`)
+- `[nodes]`: { id: string; label: string }[] (required)
+
+## NgxsmkFocusTrap
+
+- Selector: `[ngxsmkFocusTrap]`
+- Import from: `@ngxsmk/core/focus-trap`
+
+Inputs:
+- `[ngxsmkFocusTrap]`: boolean (default: `true`)
+
+## NgxsmkFormField
+
+- Selector: `ngxsmk-form-field`
+- Import from: `@ngxsmk/core/form-field`
+- Wraps a form control with label, hint, and error messaging, wiring `for`/`aria-describedby`/`aria-invalid` automatically when the projected control is a `ngxsmk-input`.
+
+Inputs:
+- `[label]`: string (default: `''`)
+- `[hint]`: string (default: `''`)
+- `[error]`: string (default: `''`)
+- `[required]`: boolean (default: `false`)
+
+## NgxsmkFormLayout
+
+- Selector: `ngxsmk-form-layout`
+- Import from: `@ngxsmk/core/form-layout`
+
+Inputs:
+- `[columns]`: NgxsmkFormLayoutColumns (default: `1`)
+
+## NgxsmkGrid
+
+- Selector: `ngxsmk-grid`
+- Import from: `@ngxsmk/core/grid`
+
+Inputs:
+- `[cols]`: number | undefined (default: `undefined`)
+- `[gap]`: string (default: `'var(--ngxsmk-space-4`)
+
+## NgxsmkStackItem
+
+- Selector: `[ngxsmkStackItem]`
+- Import from: `@ngxsmk/core/h-stack`
+
+## NgxsmkHStack
+
+- Selector: `ngxsmk-h-stack`
+- Import from: `@ngxsmk/core/h-stack`
+
+Inputs:
+- `[gap]`: string (default: `'var(--ngxsmk-space-4`)
+- `[align]`: string (default: `'center'`)
+- `[justify]`: string (default: `'flex-start'`)
+- `[wrap]`: boolean (default: `false`)
+
+## NgxsmkVStack
+
+- Selector: `ngxsmk-v-stack`
+- Import from: `@ngxsmk/core/h-stack`
+
+Inputs:
+- `[gap]`: string (default: `'var(--ngxsmk-space-4`)
+- `[align]`: string (default: `'stretch'`)
+- `[justify]`: string (default: `'flex-start'`)
+
+## NgxsmkHeading
+
+- Selector: `ngxsmk-heading`
+- Import from: `@ngxsmk/core/heading`
+
+Inputs:
+- `[level]`: NgxsmkHeadingLevel (default: `'h2'`)
+- `[size]`: 'inherit' | 'level' (default: `'level'`)
+- `[weight]`: 'light' | 'regular' | 'medium' | 'semibold' | 'bold' (default: `'semibold'`)
+
+## NgxsmkHoverCard
+
+- Selector: `ngxsmk-hover-card`
+- Import from: `@ngxsmk/core/hover-card`
+
+Inputs:
+- `[openDelay]`: number (default: `300`)
+- `[closeDelay]`: number (default: `150`)
+
+## NgxsmkImageViewer
+
+- Selector: `ngxsmk-image-viewer`
+- Import from: `@ngxsmk/core/image-viewer`
+
+Inputs:
+- `[src]`: string (required)
+- `[alt]`: string (default: `''`)
+
+## NgxsmkInput
+
+- Selector: `ngxsmk-input`
+- Import from: `@ngxsmk/core/input`
+- Themed text input. Pairs with `ngxsmk-form-field` for label, hint, and error wiring, or sits standalone. Uses a `model()` so it composes with the rest of the control family (`ngxsmk-textarea`, `ngxsmk-select`, …).
+
+Inputs:
+- `[(value)]`: string (default: `''`)
+- `[type]`: string (default: `'text'`)
+- `[placeholder]`: string (default: `''`)
+- `[disabled]`: boolean (default: `false`)
+- `[id]`: unknown (default: `ngxsmkUniqueId('ngxsmk-input'`)
+- `[(ariaInvalid)]`: boolean (default: `false`)
+- `[(ariaDescribedby)]`: string | null (default: `null`)
+
+Outputs:
+- `(changed)`: emits `string`
+
+## NgxsmkInputGroup
+
+- Selector: `ngxsmk-input-group`
+- Import from: `@ngxsmk/core/input-group`
+- Wraps a native control with text add-ons that sit flush against it, rendered as a single connected field.
+
+## NgxsmkInputGroupText
+
+- Selector: `[ngxsmkInputGroupText], ngxsmk-input-group-text`
+- Import from: `@ngxsmk/core/input-group-text`
+
+## NgxsmkIntersectionObserver
+
+- Selector: `[ngxsmkIntersectionObserver]`
+- Import from: `@ngxsmk/core/intersection-observer`
+
+Outputs:
+- `(intersected)`: emits `boolean`
+
+## NgxsmkJsonViewer
+
+- Selector: `ngxsmk-json-viewer`
+- Import from: `@ngxsmk/core/json-viewer`
+
+Inputs:
+- `[data]`: unknown (required)
+
+## NgxsmkKanbanBoard
+
+- Selector: `ngxsmk-kanban-board`
+- Import from: `@ngxsmk/core/kanban-board`
+
+Inputs:
+- `[(columns)]`: KanbanColumn[] (required)
+
+Outputs:
+- `(itemMoved)`: emits `KanbanMove`
+
+## NgxsmkKbd
+
+- Selector: `kbd[ngxsmk-kbd], ngxsmk-kbd`
+- Import from: `@ngxsmk/core/kbd`
+
+Inputs:
+- `[size]`: 'sm' | 'lg' (default: `'sm'`)
+
+## NgxsmkKeyboardShortcut
+
+- Selector: `[ngxsmkKeyboardShortcut]`
+- Import from: `@ngxsmk/core/keyboard-shortcut`
+
+Inputs:
+- `[ngxsmkKeyboardShortcut]`: string (default: `''`)
+
+Outputs:
+- `(shortcutPressed)`: emits `void`
+
+## NgxsmkLayerProvider
+
+- Selector: `[ngxsmkLayerProvider], ngxsmk-layer-provider`
+- Import from: `@ngxsmk/core/layer-provider`
+
+## NgxsmkLayout
+
+- Selector: `ngxsmk-layout`
+- Import from: `@ngxsmk/core/layout`
+
+## NgxsmkLayoutHeader
+
+- Selector: `ngxsmk-layout-header, [ngxsmkLayoutHeader]`
+- Import from: `@ngxsmk/core/layout`
+
+## NgxsmkLayoutContent
+
+- Selector: `ngxsmk-layout-content, [ngxsmkLayoutContent]`
+- Import from: `@ngxsmk/core/layout`
+
+## NgxsmkLayoutFooter
+
+- Selector: `ngxsmk-layout-footer, [ngxsmkLayoutFooter]`
+- Import from: `@ngxsmk/core/layout`
+
+## NgxsmkLayoutPanel
+
+- Selector: `ngxsmk-layout-panel, [ngxsmkLayoutPanel]`
+- Import from: `@ngxsmk/core/layout`
+
+## NgxsmkLazyLoad
+
+- Selector: `ngxsmk-lazy-load`
+- Import from: `@ngxsmk/core/lazy-load`
+
+Inputs:
+- `[rootMargin]`: string (default: `'200px'`)
+
+## NgxsmkLet
+
+- Selector: `[ngxsmkLet]`
+- Import from: `@ngxsmk/core/let`
+
+Inputs:
+- `[ngxsmkLet]`: T (required)
+
+## NgxsmkRxLet
+
+- Selector: `[ngxsmkRxLet]`
+- Import from: `@ngxsmk/core/let`
+
+Inputs:
+- `[ngxsmkRxLet]`: Observable<T> (required)
+
+## NgxsmkLightbox
+
+- Selector: `ngxsmk-lightbox`
+- Import from: `@ngxsmk/core/lightbox`
+
+Inputs:
+- `[images]`: NgxsmkLightboxImage[] (required)
+- `[(index)]`: number (default: `0`)
+- `[(open)]`: boolean (default: `false`)
+
+## NgxsmkLink
+
+- Selector: `a[ngxsmk-link]`
+- Import from: `@ngxsmk/core/link`
+
+Inputs:
+- `[variant]`: 'default' | 'muted' (default: `'default'`)
+- `[underline]`: boolean (default: `false`)
+- `[external]`: boolean (default: `false`)
+
+## NgxsmkLinkProvider
+
+- Selector: `[ngxsmkLinkProvider]`
+- Import from: `@ngxsmk/core/link-provider`
+
+Inputs:
+- `[ngxsmkLinkProvider]`: TemplateRef<NgxsmkLinkContext>
+
+## NgxsmkList
+
+- Selector: `ngxsmk-list`
+- Import from: `@ngxsmk/core/list`
+
+Inputs:
+- `[divided]`: boolean (default: `false`)
+
+## NgxsmkListItem
+
+- Selector: `ngxsmk-list-item, [ngxsmkListItem]`
+- Import from: `@ngxsmk/core/list-item`
+
+Inputs:
+- `[href]`: string (default: `''`)
+- `[variant]`: NgxsmkListItemVariant (default: `'default'`)
+
+## NgxsmkMarkdown
+
+- Selector: `ngxsmk-markdown`
+- Import from: `@ngxsmk/core/markdown`
+
+Inputs:
+- `[content]`: string (required)
+
+## NgxsmkMarkdownViewer
+
+- Selector: `ngxsmk-markdown-viewer`
+- Import from: `@ngxsmk/core/markdown-viewer`
+
+## NgxsmkMediaQuery
+
+- Selector: `[ngxsmkMediaQuery]`
+- Import from: `@ngxsmk/core/media-query`
+
+Inputs:
+- `[ngxsmkMediaQuery]`: string (default: `'(min-width: 768px`)
+
+## NgxsmkMediaTheme
+
+- Selector: `[ngxsmkMediaTheme]`
+- Import from: `@ngxsmk/core/media-theme`
+
+Inputs:
+- `[query]`: string (default: `'(prefers-color-scheme: dark`)
+- `[theme]`: string (default: `'dark'`)
+
+## NgxsmkMemoryViewer
+
+- Selector: `ngxsmk-memory-viewer`
+- Import from: `@ngxsmk/core/memory-viewer`
+
+Inputs:
+- `[entries]`: { key: string; value: string }[] (required)
+
+## NgxsmkMetadataListItem
+
+- Selector: `ngxsmk-metadata-list-item, [ngxsmkMetadataListItem]`
+- Import from: `@ngxsmk/core/metadata-list`
+
+## NgxsmkMetadataList
+
+- Selector: `ngxsmk-metadata-list`
+- Import from: `@ngxsmk/core/metadata-list`
+
+## NgxsmkMeter
+
+- Selector: `ngxsmk-meter`
+- Import from: `@ngxsmk/core/meter`
+- Semantic meter for a scalar measurement within a known range (disk usage, score, capacity) — distinct from `progress`, which reports task completion. Colour follows the `low`/`high`/`optimum` thresholds like the native `<meter>` element. Pure `computed` output; no effects, SSR-safe.
+
+Inputs:
+- `[value]`: number (default: `0`)
+- `[min]`: number (default: `0`)
+- `[max]`: number (default: `100`)
+- `[low]`: number | null (default: `null`)
+- `[high]`: number | null (default: `null`)
+- `[optimum]`: number | null (default: `null`)
+- `[size]`: NgxsmkMeterSize (default: `'md'`)
+- `[label]`: string (default: `''`)
+- `[ariaLabel]`: string (default: `'Meter'`)
+- `[showValue]`: boolean (default: `false`)
+- `[format]`: (value: number, max: number) => string
+
+## NgxsmkMobileNav
+
+- Selector: `ngxsmk-mobile-nav`
+- Import from: `@ngxsmk/core/mobile-nav`
+
+Inputs:
+- `[open]`: boolean (default: `false`)
+- `[label]`: string (default: `'Navigation'`)
+
+Outputs:
+- `(openedChange)`: emits `boolean`
+
+## NgxsmkMobileNavToggle
+
+- Selector: `ngxsmk-mobile-nav-toggle`
+- Import from: `@ngxsmk/core/mobile-nav`
+
+Outputs:
+- `(toggled)`: emits `void`
+
+## NgxsmkMultiSelect
+
+- Selector: `ngxsmk-multi-select`
+- Import from: `@ngxsmk/core/multi-select`
+
+Inputs:
+- `[options]`: { value: string; label: string }[] (required)
+- `[(value)]`: string[] (default: `[]`)
+- `[placeholder]`: string (default: `''`)
+- `[disabled]`: boolean (default: `false`)
+
+Outputs:
+- `(changed)`: emits `string[]`
+
+## NgxsmkMultiSelector
+
+- Selector: `ngxsmk-multi-selector`
+- Import from: `@ngxsmk/core/multi-selector`
+
+Inputs:
+- `[options]`: { value: string; label: string }[] (required)
+- `[(value)]`: string[] (default: `[]`)
+- `[placeholder]`: string (default: `'Select...'`)
+- `[disabled]`: boolean (default: `false`)
+
+Outputs:
+- `(changed)`: emits `string[]`
+
+## NgxsmkNavHeadingMenu
+
+- Selector: `ngxsmk-nav-heading-menu`
+- Import from: `@ngxsmk/core/nav-heading-menu`
+
+## NgxsmkNavIcon
+
+- Selector: `ngxsmk-nav-icon`
+- Import from: `@ngxsmk/core/nav-icon`
+
+Inputs:
+- `[label]`: string (default: `''`)
+- `[active]`: boolean (default: `false`)
+- `[size]`: NgxsmkNavIconSize (default: `'md'`)
+
+## NgxsmkNumberInput
+
+- Selector: `ngxsmk-number-input`
+- Import from: `@ngxsmk/core/number-input`
+- Numeric field with − / + steppers and min/max/step constraints.
+
+Inputs:
+- `[(value)]`: number (default: `0`)
+- `[min]`: number (default: `0`)
+- `[max]`: number (default: `100`)
+- `[step]`: number (default: `1`)
+- `[placeholder]`: string (default: `''`)
+- `[disabled]`: boolean (default: `false`)
+
+Outputs:
+- `(changed)`: emits `number`
+
+## NgxsmkOrgChart
+
+- Selector: `ngxsmk-org-chart`
+- Import from: `@ngxsmk/core/org-chart`
+
+Inputs:
+- `[nodes]`: OrgNode[] (required)
+
+## NgxsmkOutline
+
+- Selector: `ngxsmk-outline`
+- Import from: `@ngxsmk/core/outline`
+
+Inputs:
+- `[items]`: OutlineItem[] (required)
+- `[(activeId)]`: string (default: `''`)
+
+## NgxsmkOverflowList
+
+- Selector: `ngxsmk-overflow-list`
+- Import from: `@ngxsmk/core/overflow-list`
+
+Inputs:
+- `[max]`: number (default: `3`)
+- `[total]`: number (default: `0`)
+
+## NgxsmkPagination
+
+- Selector: `ngxsmk-pagination`
+- Import from: `@ngxsmk/core/pagination`
+- Pagination control with first/prev/next/last and an ellipsis-collapsed page range. Pure `computed` output — no effects, no DOM measurement — so it is SSR-safe and re-renders only the changed buttons.
+
+Inputs:
+- `[(page)]`: number (default: `1`)
+- `[total]`: number (default: `0`)
+- `[pageSize]`: number (default: `10`)
+- `[pageCount]`: number (default: `0`)
+- `[siblingCount]`: number (default: `1`)
+- `[boundaryCount]`: number (default: `1`)
+- `[showFirstLast]`: boolean (default: `false`)
+- `[showPrevNext]`: boolean (default: `true`)
+- `[disabled]`: boolean (default: `false`)
+- `[size]`: NgxsmkPaginationSize (default: `'md'`)
+- `[label]`: string (default: `'Pagination'`)
+
+## NgxsmkPinInput
+
+- Selector: `ngxsmk-pin-input`
+- Import from: `@ngxsmk/core/pin-input`
+- One-time-code / PIN entry: a row of single-character fields with paste distribution, arrow/backspace navigation, and masking. Integrates with `ngModel` / reactive forms as a single string value.
+
+Inputs:
+- `[(value)]`: string (default: `''`)
+- `[length]`: number (default: `6`)
+- `[type]`: NgxsmkPinInputType (default: `'numeric'`)
+- `[mask]`: boolean (default: `false`)
+- `[disabled]`: boolean (default: `false`)
+- `[placeholder]`: string (default: `''`)
+- `[size]`: NgxsmkPinInputSize (default: `'md'`)
+- `[label]`: string (default: `'Verification code'`)
+- `[otpAutocomplete]`: 'one-time-code' | 'off' (default: `'one-time-code'`)
+
+Outputs:
+- `(completed)`: emits `string`
+
+## NgxsmkPivotTable
+
+- Selector: `ngxsmk-pivot-table`
+- Import from: `@ngxsmk/core/pivot-table`
+
+Inputs:
+- `[rows]`: PivotRow[] (required)
+- `[columns]`: string[] (required)
+- `[rowLabel]`: string (default: `'Category'`)
+
+## NgxsmkPlayground
+
+- Selector: `ngxsmk-playground`
+- Import from: `@ngxsmk/core/playground`
+
+Inputs:
+- `[initialDark]`: boolean (default: `false`)
+
+## NgxsmkPopover
+
+- Selector: `ngxsmk-popover`
+- Import from: `@ngxsmk/core/popover`
+- Click-triggered popover anchored to its trigger. Positioning is done entirely in CSS from `data-placement`/`data-align` — there are **no** `getBoundingClientRect` reads, scroll listeners, or portals — so it never thrashes layout and renders identically under SSR. Outside-click and Escape close it; focus is trapped and restored to the trigger.
+
+Inputs:
+- `[(open)]`: boolean (default: `false`)
+- `[placement]`: NgxsmkPopoverPlacement (default: `'bottom'`)
+- `[align]`: NgxsmkPopoverAlign (default: `'center'`)
+- `[offset]`: number (default: `8`)
+- `[disabled]`: boolean (default: `false`)
+- `[closeOnOutsideClick]`: boolean (default: `true`)
+
+Outputs:
+- `(opened)`: emits `void`
+- `(closed)`: emits `void`
+
+## NgxsmkPowerSearch
+
+- Selector: `ngxsmk-power-search`
+- Import from: `@ngxsmk/core/power-search`
+
+Inputs:
+- `[placeholder]`: string (default: `'Search...'`)
+- `[filters]`: PowerSearchFilter[] (default: `[]`)
+- `[(query)]`: string (default: `''`)
+- `[(filterValues)]`: Record<string, string> (default: `{}`)
+
+Outputs:
+- `(searched)`: emits `string`
+- `(filtered)`: emits `Record<string, string>`
+
+## NgxsmkProgress
+
+- Selector: `ngxsmk-progress`
+- Import from: `@ngxsmk/core/progress`
+- Progress bar. Omit `value` (or pass `null`) for indeterminate mode.
+
+Inputs:
+- `[value]`: number | null (default: `null`)
+- `[label]`: string (default: `'Progress'`)
+
+## NgxsmkProgressCircle
+
+- Selector: `ngxsmk-progress-circle`
+- Import from: `@ngxsmk/core/progress-circle`
+
+Inputs:
+- `[value]`: number (default: `0`)
+- `[max]`: number (default: `100`)
+- `[size]`: 'sm' | 'md' | 'lg' (default: `'md'`)
+- `[strokeWidth]`: number (default: `6`)
+- `[variant]`: 'default' | 'primary' | 'success' | 'warning' | 'error' (default: `'default'`)
+- `[indeterminate]`: boolean (default: `false`)
+- `[showValue]`: boolean (default: `false`)
+
+## NgxsmkPromptCarousel
+
+- Selector: `ngxsmk-prompt-carousel`
+- Import from: `@ngxsmk/core/prompt-carousel`
+
+Inputs:
+- `[prompts]`: PromptItem[] (default: `[]`)
+
+Outputs:
+- `(selected)`: emits `PromptItem`
+
+## NgxsmkQrCode
+
+- Selector: `ngxsmk-qr-code`
+- Import from: `@ngxsmk/core/qr-code`
+
+Inputs:
+- `[value]`: string (required)
+- `[size]`: number (default: `128`)
+- `[level]`: 'L' | 'M' | 'Q' | 'H' (default: `'M'`)
+- `[color]`: string (default: `'currentColor'`)
+- `[background]`: string (default: `'transparent'`)
+
+## NgxsmkQueryBuilder
+
+- Selector: `ngxsmk-query-builder`
+- Import from: `@ngxsmk/core/query-builder`
+
+Inputs:
+- `[fields]`: QueryField[] (required)
+- `[(conditions)]`: QueryCondition[] (default: `[]`)
+
+## NgxsmkRadioGroup
+
+- Selector: `ngxsmk-radio-group`
+- Import from: `@ngxsmk/core/radio`
+- Groups `ngxsmk-radio` children and holds the selected value.
+
+Inputs:
+- `[(value)]`: unknown (default: `null`)
+- `[disabled]`: boolean (default: `false`)
+- `[orientation]`: 'horizontal' | 'vertical' (default: `'vertical'`)
+
+## NgxsmkRadio
+
+- Selector: `ngxsmk-radio`
+- Import from: `@ngxsmk/core/radio`
+
+Inputs:
+- `[value]`: unknown (required)
+- `[disabled]`: boolean (default: `false`)
+
+## NgxsmkRating
+
+- Selector: `ngxsmk-rating`
+- Import from: `@ngxsmk/core/rating`
+- Star rating built as a single `role="slider"` widget, so half-step values and full keyboard control come for free and assistive tech announces the value.
+
+Inputs:
+- `[(value)]`: number (default: `0`)
+- `[max]`: number (default: `5`)
+- `[allowHalf]`: boolean (default: `false`)
+- `[readonly]`: boolean (default: `false`)
+- `[disabled]`: boolean (default: `false`)
+- `[size]`: NgxsmkRatingSize (default: `'md'`)
+- `[label]`: string (default: `'Rating'`)
+
+Outputs:
+- `(changed)`: emits `number`
+
+## NgxsmkReasoningTimeline
+
+- Selector: `ngxsmk-reasoning-timeline`
+- Import from: `@ngxsmk/core/reasoning-timeline`
+
+Inputs:
+- `[steps]`: ReasoningStep[] (required)
+
+## NgxsmkResizable
+
+- Selector: `ngxsmk-resizable`
+- Import from: `@ngxsmk/core/resizable`
+
+Inputs:
+- `[initialWidth]`: string (default: `''`)
+- `[initialHeight]`: string (default: `''`)
+- `[orientation]`: 'horizontal' | 'vertical' (default: `'horizontal'`)
+
+## NgxsmkResizeHandle
+
+- Selector: `ngxsmk-resize-handle`
+- Import from: `@ngxsmk/core/resize-handle`
+
+Inputs:
+- `[orientation]`: 'horizontal' | 'vertical' (default: `'horizontal'`)
+
+Outputs:
+- `(resizing)`: emits `MouseEvent`
+
+## NgxsmkResizeObserver
+
+- Selector: `[ngxsmkResizeObserver]`
+- Import from: `@ngxsmk/core/resize-observer`
+
+Outputs:
+- `(sizeChanged)`: emits `NgxsmkResizeObserverSize`
+
+## NgxsmkRuleBuilder
+
+- Selector: `ngxsmk-rule-builder`
+- Import from: `@ngxsmk/core/rule-builder`
+
+Inputs:
+- `[group]`: RuleGroup (required)
+
+## NgxsmkScheduler
+
+- Selector: `ngxsmk-scheduler`
+- Import from: `@ngxsmk/core/scheduler`
+
+Inputs:
+- `[events]`: SchedulerEvent[] (required)
+- `[weekStart]`: unknown (default: `new Date(`)
+
+## NgxsmkScrollLock
+
+- Selector: `[ngxsmkScrollLock]`
+- Import from: `@ngxsmk/core/scroll-lock`
+
+Inputs:
+- `[ngxsmkScrollLock]`: boolean (default: `false`)
+
+## NgxsmkSection
+
+- Selector: `ngxsmk-section`
+- Import from: `@ngxsmk/core/section`
+
+Inputs:
+- `[title]`: string (default: `''`)
+
+## NgxsmkSegmentedControl
+
+- Selector: `ngxsmk-segmented-control`
+- Import from: `@ngxsmk/core/segmented-control`
+
+Inputs:
+- `[options]`: SegmentedOption[] (required)
+- `[(value)]`: string (default: `''`)
+
+Outputs:
+- `(changed)`: emits `string`
+
+## NgxsmkSelect
+
+- Selector: `ngxsmk-select`
+- Import from: `@ngxsmk/core/select`
+- Themed single-select dropdown. A custom trigger + popup listbox (not a native `<select>`), so it themes consistently across browsers like the rest of the control family and matches `ngxsmk-input`'s visual language exactly. Pairs with `ngxsmk-form-field` for label, hint, and error wiring via the same `id` / `ariaInvalid` / `ariaDescribedby` hooks `ngxsmk-input` exposes.
+
+Inputs:
+- `[options]`: NgxsmkSelectOption[] (required)
+- `[(value)]`: string (default: `''`)
+- `[placeholder]`: string (default: `''`)
+- `[disabled]`: boolean (default: `false`)
+- `[emptyLabel]`: string (default: `'No options'`)
+- `[id]`: unknown (default: `ngxsmkUniqueId('ngxsmk-select'`)
+- `[ariaLabelledby]`: string | null (default: `null`)
+- `[(ariaInvalid)]`: boolean (default: `false`)
+- `[(ariaDescribedby)]`: string | null (default: `null`)
+
+Outputs:
+- `(changed)`: emits `string`
+
+## NgxsmkSelector
+
+- Selector: `ngxsmk-selector`
+- Import from: `@ngxsmk/core/selector`
+
+Inputs:
+- `[options]`: SelectorOption[] (required)
+- `[(selected)]`: string[] (default: `[]`)
+- `[multiple]`: boolean (default: `true`)
+
+Outputs:
+- `(changed)`: emits `string[]`
+
+## NgxsmkSheet
+
+- Selector: `ngxsmk-sheet`
+- Import from: `@ngxsmk/core/sheet`
+
+Inputs:
+- `[(open)]`: boolean (default: `false`)
+- `[side]`: NgxsmkSheetSide (default: `'right'`)
+- `[title]`: string (default: `''`)
+
+## NgxsmkSideNav
+
+- Selector: `ngxsmk-side-nav`
+- Import from: `@ngxsmk/core/side-nav`
+
+Outputs:
+- `(collapsedChange)`: emits `boolean`
+
+## NgxsmkSideNavHeading
+
+- Selector: `ngxsmk-side-nav-heading`
+- Import from: `@ngxsmk/core/side-nav`
+
+## NgxsmkSideNavItem
+
+- Selector: `ngxsmk-side-nav-item`
+- Import from: `@ngxsmk/core/side-nav`
+
+Inputs:
+- `[href]`: string (default: `''`)
+- `[active]`: boolean (default: `false`)
+- `[disabled]`: boolean (default: `false`)
+- `[external]`: boolean (default: `false`)
+- `[badge]`: string (default: `''`)
+
+Outputs:
+- `(clicked)`: emits `void`
+
+## NgxsmkSideNavSection
+
+- Selector: `ngxsmk-side-nav-section`
+- Import from: `@ngxsmk/core/side-nav`
+
+## NgxsmkSideNavCollapseButton
+
+- Selector: `ngxsmk-side-nav-collapse-button`
+- Import from: `@ngxsmk/core/side-nav`
+
+## NgxsmkSkeleton
+
+- Selector: `ngxsmk-skeleton`
+- Import from: `@ngxsmk/core/skeleton`
+- Loading placeholder that mirrors the shape of upcoming content.
+
+Inputs:
+- `[width]`: string (default: `'100%'`)
+- `[height]`: string (default: `'1rem'`)
+- `[shape]`: 'rounded' | 'circle' | 'rect' (default: `'rounded'`)
+
+## NgxsmkSlider
+
+- Selector: `ngxsmk-slider`
+- Import from: `@ngxsmk/core/slider`
+
+Inputs:
+- `[min]`: number (default: `0`)
+- `[max]`: number (default: `100`)
+- `[step]`: number (default: `1`)
+- `[(value)]`: number (default: `0`)
+- `[disabled]`: boolean (default: `false`)
+
+Outputs:
+- `(changed)`: emits `number`
+
+## NgxsmkSpacer
+
+- Selector: `ngxsmk-spacer`
+- Import from: `@ngxsmk/core/spacer`
+
+Inputs:
+- `[size]`: string (default: `'var(--ngxsmk-space-4`)
+- `[orientation]`: 'horizontal' | 'vertical' (default: `'horizontal'`)
+
+## NgxsmkSpinner
+
+- Selector: `ngxsmk-spinner`
+- Import from: `@ngxsmk/core/spinner`
+- Indeterminate loading indicator.
+
+Inputs:
+- `[size]`: NgxsmkSpinnerSize (default: `'md'`)
+- `[label]`: string (default: `'Loading'`)
+
+## NgxsmkSplitButton
+
+- Selector: `ngxsmk-split-button`
+- Import from: `@ngxsmk/core/split-button`
+
+Inputs:
+- `[label]`: string (default: `''`)
+- `[size]`: 'sm' | 'md' | 'lg' (default: `'md'`)
+- `[disabled]`: boolean (default: `false`)
+- `[loading]`: boolean (default: `false`)
+
+Outputs:
+- `(action)`: emits `MouseEvent`
+
+## NgxsmkSpreadsheet
+
+- Selector: `ngxsmk-spreadsheet`
+- Import from: `@ngxsmk/core/spreadsheet`
+
+Inputs:
+- `[data]`: string[][] (required)
+- `[columns]`: string[] (default: `[]`)
+
+## NgxsmkStack
+
+- Selector: `ngxsmk-stack`
+- Import from: `@ngxsmk/core/stack`
+
+Inputs:
+- `[direction]`: NgxsmkStackDirection (default: `'vertical'`)
+- `[gap]`: string (default: `'var(--ngxsmk-space-4`)
+- `[align]`: NgxsmkStackAlign (default: `'stretch'`)
+
+## NgxsmkStat
+
+- Selector: `ngxsmk-stat`
+- Import from: `@ngxsmk/core/stat`
+
+Inputs:
+- `[value]`: string (default: `''`)
+- `[label]`: string (default: `''`)
+- `[trend]`: NgxsmkStatTrend (default: `'flat'`)
+- `[icon]`: string (default: `''`)
+
+## NgxsmkStatusDot
+
+- Selector: `ngxsmk-status-dot`
+- Import from: `@ngxsmk/core/status-dot`
+
+Inputs:
+- `[variant]`: NgxsmkStatusDotVariant (default: `'online'`)
+
+## NgxsmkStepper
+
+- Selector: `ngxsmk-stepper`
+- Import from: `@ngxsmk/core/stepper`
+- Stepper header that renders progress through a sequence of steps. Pair the emitted/`[(activeIndex)]` value with your own content to swap panels.
+
+Inputs:
+- `[steps]`: readonly NgxsmkStep[] (default: `[]`)
+- `[(activeIndex)]`: number (default: `0`)
+- `[orientation]`: NgxsmkStepperOrientation (default: `'horizontal'`)
+- `[linear]`: boolean (default: `false`)
+- `[label]`: string (default: `'Progress'`)
+
+Outputs:
+- `(stepChange)`: emits `number`
+
+## NgxsmkStreamingText
+
+- Selector: `ngxsmk-streaming-text`
+- Import from: `@ngxsmk/core/streaming-text`
+
+Inputs:
+- `[text]`: string (default: `''`)
+- `[speed]`: number (default: `30`)
+
+## NgxsmkSwitch
+
+- Selector: `ngxsmk-switch`
+- Import from: `@ngxsmk/core/switch`
+- Toggle switch for immediate on/off settings.
+
+Inputs:
+- `[(checked)]`: boolean (default: `false`)
+- `[disabled]`: boolean (default: `false`)
+
+Outputs:
+- `(changed)`: emits `boolean`
+
+## NgxsmkTabMenu
+
+- Selector: `ngxsmk-tab-menu`
+- Import from: `@ngxsmk/core/tab-menu`
+
+## NgxsmkTable
+
+- Selector: `ngxsmk-table`
+- Import from: `@ngxsmk/core/table`
+
+Inputs:
+- `[columns]`: NgxsmkTableColumn[] (default: `[]`)
+- `[rows]`: any[] (default: `[]`)
+- `[striped]`: boolean (default: `false`)
+- `[sortable]`: boolean (default: `false`)
+- `[sortField]`: string (default: `''`)
+- `[sortDir]`: 'asc' | 'desc' (default: `'asc'`)
+
+Outputs:
+- `(sortChange)`: emits `string`
+
+## NgxsmkTableCell
+
+- Selector: `td[ngxsmkTableCell], ngxsmk-table-cell`
+- Import from: `@ngxsmk/core/table-cell`
+
+## NgxsmkTableHeaderCell
+
+- Selector: `th[ngxsmkTableHeaderCell], ngxsmk-table-header-cell`
+- Import from: `@ngxsmk/core/table-cell`
+
+Inputs:
+- `[sortable]`: boolean (default: `false`)
+- `[sortDirection]`: 'asc' | 'desc' | '' (default: `''`)
+
+Outputs:
+- `(sorted)`: emits `void`
+
+## NgxsmkTableRow
+
+- Selector: `tr[ngxsmkTableRow], ngxsmk-table-row`
+- Import from: `@ngxsmk/core/table-cell`
+
+Inputs:
+- `[selected]`: boolean (default: `false`)
+
+## NgxsmkTab
+
+- Selector: `ngxsmk-tab`
+- Import from: `@ngxsmk/core/tabs`
+- Single tab. Declares its trigger label and holds its lazily rendered content; `ngxsmk-tabs` renders the active panel.
+
+Inputs:
+- `[value]`: string (required)
+- `[label]`: string (required)
+- `[disabled]`: boolean (default: `false`)
+
+## NgxsmkTabs
+
+- Selector: `ngxsmk-tabs`
+- Import from: `@ngxsmk/core/tabs`
+- Tabbed interface with WAI-ARIA roving tabindex keyboard support.
+
+Inputs:
+- `[(value)]`: string (default: `''`)
+
+## NgxsmkTag
+
+- Selector: `ngxsmk-tag`
+- Import from: `@ngxsmk/core/tag`
+- Label for categorizing content.
+
+Inputs:
+- `[variant]`: NgxsmkTagVariant (default: `'neutral'`)
+
+## NgxsmkChip
+
+- Selector: `ngxsmk-chip`
+- Import from: `@ngxsmk/core/tag`
+- Removable tag. Emits `removed` when the close affordance is activated.
+
+Inputs:
+- `[removable]`: boolean (default: `true`)
+- `[disabled]`: boolean (default: `false`)
+
+Outputs:
+- `(removed)`: emits `void`
+
+## NgxsmkTerminal
+
+- Selector: `ngxsmk-terminal`
+- Import from: `@ngxsmk/core/terminal`
+
+Inputs:
+- `[title]`: string (default: `'Terminal'`)
+- `[lines]`: { text: string; isInput?: boolean }[] (required)
+- `[prompt]`: string (default: `'$'`)
+
+## NgxsmkText
+
+- Selector: `ngxsmk-text`
+- Import from: `@ngxsmk/core/text`
+
+Inputs:
+- `[variant]`: NgxsmkTextVariant (default: `'body'`)
+- `[color]`: NgxsmkTextColor (default: `'default'`)
+- `[as]`: 'p' | 'span' | 'div' (default: `'p'`)
+
+## NgxsmkTextarea
+
+- Selector: `ngxsmk-textarea`
+- Import from: `@ngxsmk/core/textarea`
+- Multi-line text control with a configurable row count.
+
+Inputs:
+- `[(value)]`: string (default: `''`)
+- `[placeholder]`: string (default: `''`)
+- `[disabled]`: boolean (default: `false`)
+- `[rows]`: number (default: `4`)
+
+Outputs:
+- `(changed)`: emits `string`
+
+## NgxsmkThemeBuilder
+
+- Selector: `ngxsmk-theme-builder`
+- Import from: `@ngxsmk/core/theme-builder`
+
+## NgxsmkThumbnail
+
+- Selector: `ngxsmk-thumbnail`
+- Import from: `@ngxsmk/core/thumbnail`
+
+Inputs:
+- `[src]`: string (default: `''`)
+- `[alt]`: string (default: `''`)
+- `[size]`: 'sm' | 'md' | 'lg' | 'xl' (default: `'md'`)
+- `[shape]`: 'square' | 'circle' (default: `'square'`)
+
+## NgxsmkTimelineGantt
+
+- Selector: `ngxsmk-timeline-gantt`
+- Import from: `@ngxsmk/core/timeline-gantt`
+
+Inputs:
+- `[items]`: GanttItem[] (required)
+
+## NgxsmkTimestamp
+
+- Selector: `ngxsmk-timestamp`
+- Import from: `@ngxsmk/core/timestamp`
+
+Inputs:
+- `[date]`: Date | string | number (required)
+- `[format]`: 'relative' | 'absolute' | 'smart' (default: `'smart'`)
+
+## NgxsmkToaster
+
+- Selector: `ngxsmk-toaster`
+- Import from: `@ngxsmk/core/toast`
+- Toast outlet. Place once in the root template: `<ngxsmk-toaster />`.
+
+## NgxsmkToggleButton
+
+- Selector: `button[ngxsmkToggleButton]`
+- Import from: `@ngxsmk/core/toggle-button`
+
+Inputs:
+- `[(pressed)]`: boolean (default: `false`)
+
+Outputs:
+- `(toggled)`: emits `boolean`
+
+## NgxsmkToggleButtonGroup
+
+- Selector: `ngxsmk-toggle-button-group`
+- Import from: `@ngxsmk/core/toggle-button-group`
+
+Inputs:
+- `[(value)]`: string (default: `''`)
+
+Outputs:
+- `(changed)`: emits `string`
+
+## NgxsmkToken
+
+- Selector: `ngxsmk-token`
+- Import from: `@ngxsmk/core/token`
+
+Inputs:
+- `[variant]`: NgxsmkTokenVariant (default: `'default'`)
+- `[removable]`: boolean (default: `false`)
+
+## NgxsmkTokenizer
+
+- Selector: `ngxsmk-tokenizer`
+- Import from: `@ngxsmk/core/tokenizer`
+
+Inputs:
+- `[(tokens)]`: string[] (default: `[]`)
+- `[placeholder]`: string (default: `'Type and press Enter...'`)
+- `[disabled]`: boolean (default: `false`)
+
+Outputs:
+- `(changed)`: emits `string[]`
+
+## NgxsmkToolCallViewer
+
+- Selector: `ngxsmk-tool-call-viewer`
+- Import from: `@ngxsmk/core/tool-call-viewer`
+
+Inputs:
+- `[calls]`: ToolCall[] (required)
+
+## NgxsmkTooltip
+
+- Selector: `[ngxsmkTooltip]`
+- Import from: `@ngxsmk/core/tooltip`
+- Text tooltip on hover/focus.
+
+Inputs:
+- `[ngxsmkTooltip]`: string (required)
+- `[tooltipPosition]`: NgxsmkTooltipPosition (default: `'top'`)
+
+## NgxsmkTopNav
+
+- Selector: `ngxsmk-top-nav`
+- Import from: `@ngxsmk/core/top-nav`
+
+## NgxsmkTopNavHeading
+
+- Selector: `ngxsmk-top-nav-heading`
+- Import from: `@ngxsmk/core/top-nav`
+
+Inputs:
+- `[href]`: string (default: `'/'`)
+
+## NgxsmkTopNavItem
+
+- Selector: `ngxsmk-top-nav-item`
+- Import from: `@ngxsmk/core/top-nav`
+
+Inputs:
+- `[href]`: string (default: `''`)
+- `[active]`: boolean (default: `false`)
+
+Outputs:
+- `(clicked)`: emits `void`
+
+## NgxsmkTopNavMenu
+
+- Selector: `ngxsmk-top-nav-menu`
+- Import from: `@ngxsmk/core/top-nav`
+
+## NgxsmkTopNavMegaMenu
+
+- Selector: `ngxsmk-top-nav-mega-menu`
+- Import from: `@ngxsmk/core/top-nav`
+
+Inputs:
+- `[featured]`: boolean (default: `false`)
+
+## NgxsmkTopNavMegaMenuItem
+
+- Selector: `ngxsmk-top-nav-mega-menu-item`
+- Import from: `@ngxsmk/core/top-nav`
+
+Inputs:
+- `[title]`: string (required)
+- `[href]`: string (default: `''`)
+- `[description]`: string (default: `''`)
+- `[icon]`: string (default: `''`)
+
+## NgxsmkTopNavMegaMenuFeaturedCard
+
+- Selector: `ngxsmk-top-nav-mega-menu-featured-card`
+- Import from: `@ngxsmk/core/top-nav`
+
+Inputs:
+- `[href]`: string (default: `''`)
+
+## NgxsmkTreeNodeComponent
+
+- Selector: `ngxsmk-tree-node`
+- Import from: `@ngxsmk/core/tree-view`
+
+Inputs:
+- `[node]`: NgxsmkTreeNode (required)
+- `[level]`: number (default: `0`)
+- `[selectable]`: 'none' | 'single' | 'multi' (default: `'none'`)
+
+Outputs:
+- `(nodeSelected)`: emits `NgxsmkTreeNode`
+- `(nodeExpanded)`: emits `NgxsmkTreeNode`
+- `(nodeCollapsed)`: emits `NgxsmkTreeNode`
+
+## NgxsmkTreeView
+
+- Selector: `ngxsmk-tree-view`
+- Import from: `@ngxsmk/core/tree-view`
+
+Inputs:
+- `[nodes]`: NgxsmkTreeNode[] (default: `[]`)
+- `[selectable]`: 'none' | 'single' | 'multi' (default: `'none'`)
+
+Outputs:
+- `(nodeSelected)`: emits `NgxsmkTreeNode`
+- `(nodeExpanded)`: emits `NgxsmkTreeNode`
+- `(nodeCollapsed)`: emits `NgxsmkTreeNode`
+
+## NgxsmkTypeaheadItem
+
+- Selector: `[ngxsmkTypeaheadItem]`
+- Import from: `@ngxsmk/core/typeahead`
+
+## NgxsmkTypeahead
+
+- Selector: `ngxsmk-typeahead`
+- Import from: `@ngxsmk/core/typeahead`
+
+Inputs:
+- `[options]`: string[] (required)
+- `[placeholder]`: string (default: `'Type to search...'`)
+- `[(value)]`: string (default: `''`)
+- `[(filtered)]`: string[] (default: `[]`)
+
+## NgxsmkVisuallyHidden
+
+- Selector: `[ngxsmkVisuallyHidden]`
+- Import from: `@ngxsmk/core/visually-hidden`
+
+## NgxsmkVoiceInput
+
+- Selector: `ngxsmk-voice-input`
+- Import from: `@ngxsmk/core/voice-input`
+
+Outputs:
+- `(toggled)`: emits `boolean`
+- `(result)`: emits `string`
+
+## NgxsmkWorkflowBuilder
+
+- Selector: `ngxsmk-workflow-builder`
+- Import from: `@ngxsmk/core/workflow-builder`
+
+Inputs:
+- `[nodes]`: WorkflowNode[] (required)
+- `[edges]`: WorkflowEdge[] (default: `[]`)

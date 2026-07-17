@@ -34,6 +34,7 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 const readline = __importStar(require("readline"));
+const component_db_1 = require("./component-db");
 const TOOLS = [
     {
         name: 'ngxsmk_search_components',
@@ -51,13 +52,13 @@ const TOOLS = [
     },
     {
         name: 'ngxsmk_explain_api',
-        description: 'Get deep technical documentation, code snippets, inputs, outputs, and design tokens for a specific ngxsmk component.',
+        description: 'Get deep technical documentation, code snippets, inputs, outputs, and import paths for a specific ngxsmk component.',
         inputSchema: {
             type: 'object',
             properties: {
                 component: {
                     type: 'string',
-                    description: 'The exact component class name or selector (e.g. "NgxsmkAiChat", "ngx-button")',
+                    description: 'The exact component class name or selector (e.g. "NgxsmkAiChat", "ngxsmk-button")',
                 },
             },
             required: ['component'],
@@ -79,87 +80,35 @@ const TOOLS = [
         },
     },
 ];
-const COMPONENT_DATABASE = [
-    {
-        name: 'NgxsmkAiChat',
-        selector: 'ngxsmk-ai-chat',
-        inputs: [
-            {
-                name: 'messages',
-                type: 'NgxsmkAiMessage[]',
-                default: '[]',
-                desc: 'Array of conversational user/assistant turn messages.',
-            },
-            {
-                name: 'models',
-                type: 'string[]',
-                default: "['gemini-2.5-flash', 'gemini-2.5-pro']",
-                desc: 'List of options in model selector dropdown.',
-            },
-            {
-                name: 'isTyping',
-                type: 'boolean',
-                default: 'false',
-                desc: 'Shows animated typing indicator bubbles.',
-            },
-            {
-                name: 'tokenCount',
-                type: 'number',
-                default: '0',
-                desc: 'Displays total token count usage indicator.',
-            },
-        ],
-        outputs: [
-            {
-                name: 'sendMessage',
-                type: 'string',
-                desc: 'Emitted when user submits a message or selects a suggestion chip.',
-            },
-            {
-                name: 'modelChanged',
-                type: 'string',
-                desc: 'Emitted when a new model is selected in the dropdown.',
-            },
-        ],
-        tokens: [
-            '--ngxsmk-color-primary',
-            '--ngxsmk-color-surface',
-            '--ngxsmk-color-outline',
-            '--ngxsmk-radius-lg',
-            '--ngxsmk-space-4',
-        ],
-        snippet: `<ngxsmk-ai-chat\n  [messages]="messages()"\n  [isTyping]="isTyping()"\n  (sendMessage)="onSendMessage($event)"\n/>`,
-    },
-    {
-        name: 'NgxsmkThemeBuilder',
-        selector: 'ngxsmk-theme-builder',
-        inputs: [],
-        outputs: [],
-        tokens: ['--ngxsmk-color-surface', '--ngxsmk-color-outline', '--ngxsmk-radius-lg'],
-        snippet: `<ngxsmk-theme-builder />`,
-    },
-    {
-        name: 'NgxsmkCarousel',
-        selector: 'ngxsmk-carousel',
-        inputs: [
-            {
-                name: 'autoplay',
-                type: 'boolean',
-                default: 'false',
-                desc: 'Toggles automated slide cycling interval.',
-            },
-            {
-                name: 'interval',
-                type: 'number',
-                default: '3000',
-                desc: 'Timeout in milliseconds between auto cycles.',
-            },
-        ],
-        outputs: [],
-        tokens: ['--ngxsmk-motion-duration', '--ngxsmk-motion-ease', '--ngxsmk-color-primary'],
-        snippet: `<ngxsmk-carousel [autoplay]="true">\n  <ngxsmk-carousel-slide>Slide 1</ngxsmk-carousel-slide>\n  <ngxsmk-carousel-slide>Slide 2</ngxsmk-carousel-slide>\n</ngxsmk-carousel>`,
-    },
-];
+function elementTag(selector) {
+    // "button[ngxsmk-button], a[ngxsmk-button]" -> attribute usage; plain selector -> element
+    const first = selector.split(',')[0].trim();
+    const attr = first.match(/^(\w+)\[([^\]]+)\]$/);
+    if (attr)
+        return `<${attr[1]} ${attr[2]}>...</${attr[1]}>`;
+    return `<${first} />`;
+}
+function usageSnippet(c) {
+    const first = c.selector.split(',')[0].trim();
+    const attr = first.match(/^(\w+)\[([^\]]+)\]$/);
+    const bindings = c.inputs
+        .slice(0, 3)
+        .map((i) => (i.twoWay ? `[(${i.name})]="${i.name}"` : `[${i.name}]="${i.name}"`))
+        .concat(c.outputs.slice(0, 2).map((o) => `(${o.name})="on${o.name[0].toUpperCase()}${o.name.slice(1)}($event)"`));
+    const attrs = bindings.length ? ' ' + bindings.join(' ') : '';
+    if (attr)
+        return `<${attr[1]} ${attr[2]}${attrs}>...</${attr[1]}>`;
+    return `<${first}${attrs} />`;
+}
+function findComponent(query) {
+    const q = query.toLowerCase();
+    return component_db_1.COMPONENT_DATABASE.find((c) => c.name.toLowerCase() === q ||
+        c.selector.toLowerCase() === q ||
+        c.selector
+            .split(',')
+            .map((s) => s.trim().toLowerCase())
+            .includes(q));
+}
 function handleRequest(message) {
     const { method, params, id } = message;
     if (method === 'initialize') {
@@ -173,7 +122,7 @@ function handleRequest(message) {
                 },
                 serverInfo: {
                     name: 'ngxsmk-mcp-server',
-                    version: '1.3.0',
+                    version: '1.3.2',
                 },
             },
         };
@@ -191,7 +140,11 @@ function handleRequest(message) {
         const { name, arguments: args } = params;
         if (name === 'ngxsmk_search_components') {
             const query = (args.query || '').toLowerCase();
-            const results = COMPONENT_DATABASE.filter((c) => c.name.toLowerCase().includes(query) || c.selector.toLowerCase().includes(query));
+            const terms = query.split(/\s+/).filter(Boolean);
+            const results = component_db_1.COMPONENT_DATABASE.filter((c) => {
+                const haystack = `${c.name} ${c.selector} ${c.entryPoint} ${c.description}`.toLowerCase();
+                return terms.every((t) => haystack.includes(t));
+            }).slice(0, 25);
             return {
                 jsonrpc: '2.0',
                 id,
@@ -200,7 +153,9 @@ function handleRequest(message) {
                         {
                             type: 'text',
                             text: results.length > 0
-                                ? `Found ${results.length} components:\n\n${results.map((r) => `- **${r.name}** (<${r.selector}>)`).join('\n')}`
+                                ? `Found ${results.length} components:\n\n${results
+                                    .map((r) => `- **${r.name}** (\`${r.selector}\`, import from \`${r.entryPoint}\`)${r.description ? ` — ${r.description}` : ''}`)
+                                    .join('\n')}`
                                 : `No components matched query: "${query}"`,
                         },
                     ],
@@ -208,8 +163,7 @@ function handleRequest(message) {
             };
         }
         if (name === 'ngxsmk_explain_api') {
-            const compName = (args.component || '').toLowerCase();
-            const match = COMPONENT_DATABASE.find((c) => c.name.toLowerCase() === compName || c.selector.toLowerCase() === compName);
+            const match = findComponent(args.component || '');
             if (!match) {
                 return {
                     jsonrpc: '2.0',
@@ -218,19 +172,18 @@ function handleRequest(message) {
                         content: [
                             {
                                 type: 'text',
-                                text: `Component "${args.component}" not found in database. Try searching first.`,
+                                text: `Component "${args.component}" not found in database. Try ngxsmk_search_components first.`,
                             },
                         ],
                     },
                 };
             }
             const inputsText = match.inputs
-                .map((i) => `- \`[${i.name}]\` (${i.type}, default: \`${i.default}\`): ${i.desc}`)
+                .map((i) => `- \`${i.twoWay ? `[(${i.name})]` : `[${i.name}]`}\` (${i.type}${i.required ? ', required' : ''}${i.default ? `, default: \`${i.default}\`` : ''})`)
                 .join('\n');
             const outputsText = match.outputs
-                .map((o) => `- \`(${o.name})\` (emits: \`${o.type}\`): ${o.desc}`)
+                .map((o) => `- \`(${o.name})\` (emits: \`${o.type}\`)`)
                 .join('\n');
-            const tokensText = match.tokens.map((t) => `- \`${t}\``).join('\n');
             return {
                 jsonrpc: '2.0',
                 id,
@@ -238,7 +191,13 @@ function handleRequest(message) {
                     content: [
                         {
                             type: 'text',
-                            text: `### API documentation for **${match.name}** (${match.selector})
+                            text: `### API documentation for **${match.name}** (\`${match.selector}\`)
+
+${match.description || ''}
+
+- Import: \`import { ${match.name} } from '${match.entryPoint}';\` (standalone — add to the component's \`imports\` array)
+- Element usage: \`${elementTag(match.selector)}\`
+- Styling: use \`--ngxsmk-*\` CSS custom properties; never override internal classes.
 
 #### Inputs
 ${inputsText || 'None'}
@@ -246,12 +205,9 @@ ${inputsText || 'None'}
 #### Outputs
 ${outputsText || 'None'}
 
-#### CSS Design Tokens
-${tokensText || 'None'}
-
 #### Usage Code Snippet
 \`\`\`html
-${match.snippet}
+${usageSnippet(match)}
 \`\`\`
 `,
                         },

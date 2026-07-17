@@ -14,7 +14,7 @@
     "search": "Suchen…",
     "lightMode": "Zum hellen Modus wechseln",
     "darkMode": "Zum dunklen Modus wechseln",
-    "github": "GitHub",
+    "github": "npm",
     "getStarted": "Erste Schritte",
     "starOnGithub": "Star auf GitHub"
   },
@@ -206,6 +206,14 @@
       "changed": "geändert"
     },
     "release": {
+      "v132": {
+        "summary": "KI-freundliche Werkzeuge: MCP-Komponentendatenbank, llms.txt und Agenten-Dokumentation.",
+        "changes": {
+          "0": "Der MCP-Server basiert jetzt auf einer automatisch generierten Datenbank aller 214 Komponenten und stellt Such-, API- und Layout-Werkzeuge für KI-Coding-Agenten bereit.",
+          "1": "Generierte llms.txt- und llms-full.txt-API-Referenzen im Stammverzeichnis der Website sowie eine Claude-Code-Skill für Anwendungen, die das Kit nutzen.",
+          "2": "AGENTS.md- und CLAUDE.md-Leitfäden für KI-Coding-Agenten, die im Repository arbeiten."
+        }
+      },
       "v131": {
         "summary": "Tastaturnavigation, einheitliche Fokusringe und Fehlerbehebungen im Dark Mode.",
         "changes": {
@@ -451,6 +459,13 @@
     "pillarCopyPasteDesc": "Besitzen Sie den Quellcode direkt. Komponentenmodule werden in Ihre App-Dateien scaffoldet, ohne aufgeblähte Abhängigkeiten in node_modules zu hinterlassen.",
     "pillarHslEngine": "HSL-Variablen-Engine",
     "pillarHslEngineDesc": "Konfigurieren Sie globale Ästhetik in HSL-Koordinaten. Generieren Sie leicht Stilausgaben, die mit Vanilla-CSS, SCSS oder Tailwind-Konfigurationen kompatibel sind.",
+    "aiTooling": "Built for AI-assisted development",
+    "aiToolingDesc": "Connect the NGXSMK MCP server to give your AI assistant direct access to component search, API lookup, LLM-readable documentation, and development tools. It works with Claude Code, Cursor, VS Code, Cline, Roo Code, Windsurf, and any MCP-compatible client.",
+    "aiToolingMcp": "MCP-Server mit Komponentensuche und API-Abfrage",
+    "aiToolingLlms": "LLM-readable documentation",
+    "aiToolingClients": "Funktioniert mit vielen MCP-Clients — Claude Code, Cursor, VS Code, Cline, Roo Code und Windsurf",
+    "aiToolingInstall": "Einfache Installation mit einem einzigen Befehl",
+    "aiToolingInstallNote": "Beispiel für Claude Code — Befehle für Cursor, VS Code, Cline, Roo Code und Windsurf stehen in der Dokumentation.",
     "pillarAiFirst": "KI-zuerst-Layouts",
     "pillarAiFirstDesc": "Liefern Sie spezialisierte Oberflächen, die für KI-Streaming, Reasoning-Timelines, benutzerdefinierte Code-Editoren und schwebende Karten-Zitat-Viewer gebaut sind.",
     "tokenTheming": "Token-Theming",
@@ -790,7 +805,7 @@
     "templatesTitle": "Produktionsbereite Ausgangspunkte",
     "templatesSub": "Vollständige Seiten, aus NGXSMK-Komponenten zusammengebaut – klonen Sie eine und verschiffen Sie.",
     "ctaTitle": "Bauen Sie die Sache.",
-    "ctaSub": "Durchsuchen Sie 217 Komponenten, klonen Sie eine Produktionsvorlage und stimmen Sie ein Theme auf Ihre Marke ab. Alles Open Source, alles MIT.",
+    "ctaSub": "Durchsuchen Sie 217 Komponenten, klonen Sie eine Produktionsvorlage und stimmen Sie ein Theme auf Ihre Marke ab. Alles kostenlos, alles MIT-lizenziert.",
     "browseComponents": "Komponenten durchsuchen",
     "tagline": "Das UI-Kit, das Angular verdient.",
     "footerDocs": "Dokumentation",
@@ -1245,8 +1260,28 @@
   "community": {
     "title": "Community & Beitrag",
     "subtitle": "Treten Sie unserer wachsenden Community bei, stellen Sie Fragen, schlagen Sie Funktionen vor und teilen Sie, was Sie gebaut haben.",
-    "githubDiscussions": "GitHub Discussions",
-    "githubDiscussionsDesc": "Stellen Sie Fragen, teilen Sie Vorschläge und erhalten Sie Feedback von Entwicklern und Mitwirkenden in unserem Diskussionsforum.",
-    "joinDiscussion": "Diskussion beitreten"
+    "githubDiscussions": "Kontakt & Feedback",
+    "githubDiscussionsDesc": "Fragen, Ideen oder Fehlerberichte? Kontaktieren Sie den Maintainer direkt — jede Nachricht hilft, das Kit zu verbessern.",
+    "joinDiscussion": "Feedback senden"
+  },
+  "api": {
+    "title": "API-Referenz",
+    "subtitle": "Vollständige Inputs & Outputs für jede Komponente und Direktive, direkt aus dem Quellcode generiert.",
+    "searchPlaceholder": "Komponenten, Selektoren, Inputs durchsuchen…",
+    "allCategories": "Alle Kategorien",
+    "loading": "API-Daten werden geladen…",
+    "noMatch": "Keine Komponenten entsprechen \"{{query}}\".",
+    "inputs": "Inputs",
+    "outputs": "Outputs",
+    "required": "erforderlich",
+    "twoway": "bidirektional",
+    "copy": "Kopieren",
+    "copied": "Kopiert",
+    "colName": "Name",
+    "colType": "Typ",
+    "colDefault": "Standard",
+    "colEmits": "Emittiert",
+    "apiCount": "{{count}} APIs",
+    "copyLink": "Link zu {{name}} kopieren"
   }
 }

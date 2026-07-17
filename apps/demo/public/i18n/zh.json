@@ -14,7 +14,7 @@
     "search": "搜索……",
     "lightMode": "切换到浅色模式",
     "darkMode": "切换到深色模式",
-    "github": "GitHub",
+    "github": "npm",
     "getStarted": "开始使用",
     "starOnGithub": "在 GitHub 上 Star"
   },
@@ -206,6 +206,14 @@
       "changed": "变更"
     },
     "release": {
+      "v132": {
+        "summary": "AI 友好工具：MCP 组件数据库、llms.txt 和智能体文档。",
+        "changes": {
+          "0": "MCP 服务器现在基于自动生成的全部 214 个组件数据库，为 AI 编码智能体提供搜索、API 查询和布局工具。",
+          "1": "在站点根目录提供自动生成的 llms.txt 和 llms-full.txt API 参考，并为使用方应用提供 Claude Code 技能。",
+          "2": "为在仓库中工作的 AI 编码智能体新增 AGENTS.md 和 CLAUDE.md 指南。"
+        }
+      },
       "v131": {
         "summary": "键盘导航、统一的焦点环以及深色模式修复。",
         "changes": {
@@ -451,6 +459,13 @@
     "pillarCopyPasteDesc": "直接拥有源代码。组件模块会被脚手架搭建进你的应用文件，不在 node_modules 中留下任何臃肿的依赖。",
     "pillarHslEngine": "HSL 变量引擎",
     "pillarHslEngineDesc": "在 HSL 坐标系中配置全局美感。轻松生成兼容原生 CSS、SCSS 或 Tailwind 配置的样式输出。",
+    "aiTooling": "Built for AI-assisted development",
+    "aiToolingDesc": "Connect the NGXSMK MCP server to give your AI assistant direct access to component search, API lookup, LLM-readable documentation, and development tools. It works with Claude Code, Cursor, VS Code, Cline, Roo Code, Windsurf, and any MCP-compatible client.",
+    "aiToolingMcp": "带组件搜索和 API 查询的 MCP 服务器",
+    "aiToolingLlms": "LLM-readable documentation",
+    "aiToolingClients": "支持多种 MCP 客户端 — Claude Code、Cursor、VS Code、Cline、Roo Code 和 Windsurf",
+    "aiToolingInstall": "一条命令即可轻松安装",
+    "aiToolingInstallNote": "Claude Code 示例 — Cursor、VS Code、Cline、Roo Code 和 Windsurf 的命令请参阅文档。",
     "pillarAiFirst": "AI 优先布局",
     "pillarAiFirstDesc": "交付专为 AI 流式输出、推理时间线、自定义代码编辑器与浮动卡片引用查看器打造的专用界面。",
     "tokenTheming": "令牌主题",
@@ -790,7 +805,7 @@
     "templatesTitle": "生产就绪的起点",
     "templatesSub": "由 NGXSMK 组件组装而成的完整页面——克隆一个即可上线。",
     "ctaTitle": "去构建它吧。",
-    "ctaSub": "浏览 217 个组件，克隆一个生产模板，并调整主题以匹配你的品牌。全部开源，全部 MIT。",
+    "ctaSub": "浏览 217 个组件，克隆一个生产模板，并调整主题以匹配你的品牌。全部免费，全部采用 MIT 许可。",
     "browseComponents": "浏览组件",
     "tagline": "Angular 应有的 UI 套件。",
     "footerDocs": "文档",
@@ -1245,8 +1260,28 @@
   "community": {
     "title": "社区与贡献",
     "subtitle": "加入我们不断成长的社区，提出问题、提议功能，并分享你构建的成果。",
-    "githubDiscussions": "GitHub Discussions",
-    "githubDiscussionsDesc": "在我们的讨论论坛中向开发者与贡献者提问、分享建议并获取反馈。",
-    "joinDiscussion": "加入讨论"
+    "githubDiscussions": "联系与反馈",
+    "githubDiscussionsDesc": "有问题、想法或错误报告？直接联系维护者 — 每条消息都有助于改进组件库。",
+    "joinDiscussion": "发送反馈"
+  },
+  "api": {
+    "title": "API 参考",
+    "subtitle": "每个组件和指令的完整输入与输出，直接从源代码生成。",
+    "searchPlaceholder": "搜索组件、选择器、输入…",
+    "allCategories": "所有类别",
+    "loading": "正在加载 API 数据…",
+    "noMatch": "没有与 \"{{query}}\" 匹配的组件。",
+    "inputs": "输入",
+    "outputs": "输出",
+    "required": "必填",
+    "twoway": "双向",
+    "copy": "复制",
+    "copied": "已复制",
+    "colName": "名称",
+    "colType": "类型",
+    "colDefault": "默认值",
+    "colEmits": "发出",
+    "apiCount": "{{count}} 个 API",
+    "copyLink": "复制 {{name}} 的链接"
   }
 }

@@ -50,6 +50,9 @@ interface SearchItem {
             routerLinkActive="ngxsmk-nav__link--active"
             >{{ 'nav.docs' | translate }}</a
           >
+          <a class="ngxsmk-nav__link" routerLink="/api" routerLinkActive="ngxsmk-nav__link--active"
+            >API</a
+          >
           <a
             class="ngxsmk-nav__link"
             routerLink="/showcase/explorer"
@@ -146,7 +149,7 @@ interface SearchItem {
 
           <a
             class="ngxsmk-nav__icon-btn"
-            href="https://github.com"
+            href="https://github.com/NGXSMK/ngxsmk-ui-kit"
             target="_blank"
             [attr.aria-label]="'nav.github' | translate"
           >
@@ -170,6 +173,9 @@ interface SearchItem {
         <a class="ngxsmk-nav__mobile-link" routerLink="/docs" (click)="mobileOpen.set(false)">{{
           'nav.docs' | translate
         }}</a>
+        <a class="ngxsmk-nav__mobile-link" routerLink="/api" (click)="mobileOpen.set(false)"
+          >API</a
+        >
         <a
           class="ngxsmk-nav__mobile-link"
           routerLink="/showcase/explorer"
@@ -199,7 +205,7 @@ interface SearchItem {
         >
         <a
           class="ngxsmk-nav__mobile-link"
-          href="https://github.com"
+          href="https://github.com/NGXSMK/ngxsmk-ui-kit"
           target="_blank"
           (click)="mobileOpen.set(false)"
           >{{ 'nav.github' | translate }}</a

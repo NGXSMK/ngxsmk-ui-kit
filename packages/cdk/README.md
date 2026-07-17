@@ -2,7 +2,7 @@
 
 Low-level, zoneless-friendly Angular behaviors that power NGXSMK components. Each behavior is its own secondary entry point, so you only bundle what you import.
 
-Part of the [NGXSMK UI kit](https://github.com/NGXSMK/ngxsmk-ui-kit).
+Part of the [NGXSMK UI kit](https://ngxsmk.dev).
 
 ## Compatibility
 

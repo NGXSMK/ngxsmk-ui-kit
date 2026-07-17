@@ -14,7 +14,7 @@
     "search": "Sök…",
     "lightMode": "Byt till ljust läge",
     "darkMode": "Byt till mörkt läge",
-    "github": "GitHub",
+    "github": "npm",
     "getStarted": "Kom igång",
     "starOnGithub": "Stjärna på GitHub"
   },
@@ -206,6 +206,14 @@
       "changed": "ändrat"
     },
     "release": {
+      "v132": {
+        "summary": "AI-vänliga verktyg: MCP-komponentdatabas, llms.txt och agentdokumentation.",
+        "changes": {
+          "0": "MCP-servern bygger nu på en automatiskt genererad databas med alla 214 komponenter som driver sök-, API- och layoutverktyg för AI-kodningsagenter.",
+          "1": "Genererade llms.txt- och llms-full.txt-API-referenser som serveras i webbplatsens rot, plus en Claude Code-skill för konsumerande appar.",
+          "2": "AGENTS.md- och CLAUDE.md-vägledning för AI-kodningsagenter som arbetar i repositoriet."
+        }
+      },
       "v131": {
         "summary": "Tangentbordsnavigering, enhetliga fokusringar och korrigeringar för mörkt läge.",
         "changes": {
@@ -451,6 +459,13 @@
     "pillarCopyPasteDesc": "Äg källkoden direkt. Komponentmoduler scaffoldas in i dina appfiler, utan uppblåsta beroenden kvar i node_modules.",
     "pillarHslEngine": "HSL-variabelmotor",
     "pillarHslEngineDesc": "Konfigurera global estetik i HSL-koordinater. Generera enkelt stilutdata kompatibla med vanlig CSS, SCSS eller Tailwind-konfigurationer.",
+    "aiTooling": "Built for AI-assisted development",
+    "aiToolingDesc": "Connect the NGXSMK MCP server to give your AI assistant direct access to component search, API lookup, LLM-readable documentation, and development tools. It works with Claude Code, Cursor, VS Code, Cline, Roo Code, Windsurf, and any MCP-compatible client.",
+    "aiToolingMcp": "MCP-server med komponentsökning och API-uppslag",
+    "aiToolingLlms": "LLM-readable documentation",
+    "aiToolingClients": "Fungerar med flera MCP-klienter — Claude Code, Cursor, VS Code, Cline, Roo Code och Windsurf",
+    "aiToolingInstall": "Enkel installation med ett enda kommando",
+    "aiToolingInstallNote": "Exempel för Claude Code — kommandon för Cursor, VS Code, Cline, Roo Code och Windsurf finns i dokumentationen.",
     "pillarAiFirst": "AI-först-layouts",
     "pillarAiFirstDesc": "Leverera specialiserade gränssnitt byggda för AI-strömning, resonemangstidslinjer, anpassade kodredigerare och flytande kort-citatvisningar.",
     "tokenTheming": "Tokentemaläggning",
@@ -790,7 +805,7 @@
     "templatesTitle": "Produktionsredo startpunkter",
     "templatesSub": "Kompletta sidor monterade från NGXSMK-komponenter – klona en och leverera.",
     "ctaTitle": "Bygg grejen.",
-    "ctaSub": "Bläddra 217 komponenter, klona en produktionstemall och justera ett tema för att matcha ditt varumärke. Allt öppen källkod, allt MIT.",
+    "ctaSub": "Bläddra 217 komponenter, klona en produktionstemall och justera ett tema för att matcha ditt varumärke. Allt gratis, allt MIT-licensierat.",
     "browseComponents": "Bläddra bland komponenter",
     "tagline": "UI-kitet som Angular förtjänar.",
     "footerDocs": "Dokumentation",
@@ -1245,8 +1260,28 @@
   "community": {
     "title": "Gemenskap & bidrag",
     "subtitle": "Gå med i vår växande gemenskap, ställ frågor, föreslå funktioner och dela vad du byggt.",
-    "githubDiscussions": "GitHub Discussions",
-    "githubDiscussionsDesc": "Ställ frågor, dela förslag och få feedback från utvecklare och bidragsgivare på vårt diskussionsforum.",
-    "joinDiscussion": "Gå med i diskussionen"
+    "githubDiscussions": "Kontakt & feedback",
+    "githubDiscussionsDesc": "Frågor, idéer eller buggrapporter? Kontakta underhållaren direkt — varje meddelande hjälper till att förbättra kitet.",
+    "joinDiscussion": "Skicka feedback"
+  },
+  "api": {
+    "title": "API-referens",
+    "subtitle": "Kompletta inputs och outputs för varje komponent och direktiv, genererade direkt från källkoden.",
+    "searchPlaceholder": "Sök komponenter, selektorer, inputs…",
+    "allCategories": "Alla kategorier",
+    "loading": "Laddar API-data…",
+    "noMatch": "Inga komponenter matchar \"{{query}}\".",
+    "inputs": "Inputs",
+    "outputs": "Outputs",
+    "required": "obligatorisk",
+    "twoway": "tvåvägs",
+    "copy": "Kopiera",
+    "copied": "Kopierad",
+    "colName": "Namn",
+    "colType": "Typ",
+    "colDefault": "Standard",
+    "colEmits": "Emitterar",
+    "apiCount": "{{count}} APIer",
+    "copyLink": "Kopiera länk till {{name}}"
   }
 }

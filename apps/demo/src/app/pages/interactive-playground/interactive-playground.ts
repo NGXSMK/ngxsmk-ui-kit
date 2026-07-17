@@ -9,6 +9,7 @@ import {
 import { NgxsmkPropPanel, type PropDescriptor } from '../../playground/prop-panel';
 import { PlaygroundDemoHost } from './playground-demo-host';
 import { AppNav } from '../../nav/nav';
+import { NgxsmkHeading } from '@ngxsmk/core/heading';
 
 function sel(name: string, opts: string[], def: string, description?: string): PropDescriptor {
   return {
@@ -298,7 +299,7 @@ function buildCode(name: string, values: Record<string, unknown>): string {
 @Component({
   selector: 'app-interactive-playground',
   standalone: true,
-  imports: [RouterLink, NgxsmkPropPanel, PlaygroundDemoHost, TranslatePipe, AppNav],
+  imports: [RouterLink, NgxsmkPropPanel, PlaygroundDemoHost, TranslatePipe, AppNav, NgxsmkHeading],
   template: `
     <app-nav />
     <div class="pg">
@@ -309,7 +310,7 @@ function buildCode(name: string, values: Record<string, unknown>): string {
           <span class="pg-breadcrumb-sep">/</span>
           <span>{{ 'nav.componentPlayground' | translate }}</span>
         </div>
-        <h1 class="pg-title">{{ 'nav.componentPlayground' | translate }}</h1>
+        <ngxsmk-heading level="h1" class="pg-title">{{ 'nav.componentPlayground' | translate }}</ngxsmk-heading>
         <p class="pg-subtitle">
           {{ 'iplayground.subtitle' | translate }}
         </p>
@@ -383,10 +384,10 @@ function buildCode(name: string, values: Record<string, unknown>): string {
 
             <div class="pg-panels">
               <section class="pg-card">
-                <h3 class="pg-card-title">
+                <ngxsmk-heading level="h3" class="pg-card-title">
                   {{ 'iplayground.properties' | translate }}
                   <span class="pg-card-hint">{{ propDescriptors().length }}</span>
-                </h3>
+                </ngxsmk-heading>
                 <div class="pg-card-body">
                   @if (propDescriptors().length > 0) {
                     <ngxsmk-prop-panel
@@ -401,7 +402,7 @@ function buildCode(name: string, values: Record<string, unknown>): string {
               </section>
 
               <section class="pg-card">
-                <h3 class="pg-card-title">{{ 'iplayground.generatedCode' | translate }}</h3>
+                <ngxsmk-heading level="h3" class="pg-card-title">{{ 'iplayground.generatedCode' | translate }}</ngxsmk-heading>
                 <div class="pg-card-body">
                   <pre class="pg-code"><code>{{ generatedCode() }}</code></pre>
                 </div>
@@ -411,7 +412,7 @@ function buildCode(name: string, values: Record<string, unknown>): string {
             <section class="pg-api">
               @if (comp.inputs.length > 0) {
                 <div class="pg-detail-section">
-                  <h3 class="pg-detail-section-title">{{ 'iplayground.inputs' | translate }}</h3>
+                    <ngxsmk-heading level="h3" class="pg-detail-section-title">{{ 'iplayground.inputs' | translate }}</ngxsmk-heading>
                   <div class="pg-table-wrap">
                     <table class="pg-table">
                       <thead>
@@ -453,7 +454,7 @@ function buildCode(name: string, values: Record<string, unknown>): string {
 
               @if (comp.outputs.length > 0) {
                 <div class="pg-detail-section">
-                  <h3 class="pg-detail-section-title">{{ 'iplayground.outputs' | translate }}</h3>
+                    <ngxsmk-heading level="h3" class="pg-detail-section-title">{{ 'iplayground.outputs' | translate }}</ngxsmk-heading>
                   <div class="pg-table-wrap">
                     <table class="pg-table">
                       <thead>
@@ -483,7 +484,7 @@ function buildCode(name: string, values: Record<string, unknown>): string {
 
               @if (comp.signals.length > 0) {
                 <div class="pg-detail-section">
-                  <h3 class="pg-detail-section-title">{{ 'iplayground.signals' | translate }}</h3>
+                    <ngxsmk-heading level="h3" class="pg-detail-section-title">{{ 'iplayground.signals' | translate }}</ngxsmk-heading>
                   <div class="pg-table-wrap">
                     <table class="pg-table">
                       <thead>
@@ -521,7 +522,7 @@ function buildCode(name: string, values: Record<string, unknown>): string {
 
               @if (comp.methods.length > 0) {
                 <div class="pg-detail-section">
-                  <h3 class="pg-detail-section-title">{{ 'iplayground.methods' | translate }}</h3>
+                    <ngxsmk-heading level="h3" class="pg-detail-section-title">{{ 'iplayground.methods' | translate }}</ngxsmk-heading>
                   <div class="pg-table-wrap">
                     <table class="pg-table">
                       <thead>
@@ -556,7 +557,7 @@ function buildCode(name: string, values: Record<string, unknown>): string {
           } @else {
             <div class="pg-empty">
               <div class="pg-empty-icon">◈</div>
-              <h2>{{ 'iplayground.selectComponent' | translate }}</h2>
+              <ngxsmk-heading level="h2">{{ 'iplayground.selectComponent' | translate }}</ngxsmk-heading>
               <p>{{ 'iplayground.pickComponent' | translate }}</p>
             </div>
           }
@@ -568,6 +569,13 @@ function buildCode(name: string, values: Record<string, unknown>): string {
     /* Workbench sibling of the Templates register: same mono-annotation
        voice, same token discipline. Everything derives from --ngxsmk-*
        so presets, dark mode, and reduced motion come for free. */
+    :host {
+      display: block;
+      background-color: var(--ngxsmk-color-background, #fafafa);
+      background-image: radial-gradient(var(--ngxsmk-color-outline, #e4e4e7) 1px, transparent 1px);
+      background-size: 24px 24px;
+      min-height: 100vh;
+    }
     .pg {
       max-width: 1400px;
       margin: 0 auto;
@@ -602,7 +610,7 @@ function buildCode(name: string, values: Record<string, unknown>): string {
       border-radius: var(--ngxsmk-radius-sm);
     }
 
-    .pg-title {
+    ngxsmk-heading.pg-title {
       font-size: clamp(1.75rem, 3.5vw, 2.25rem);
       font-weight: 800;
       margin: 0 0 0.375rem;
@@ -814,7 +822,7 @@ function buildCode(name: string, values: Record<string, unknown>): string {
       overflow: hidden;
     }
     /* Panel titles are mono annotations — the title-block voice. */
-    .pg-card-title {
+    ngxsmk-heading.pg-card-title {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -871,7 +879,7 @@ function buildCode(name: string, values: Record<string, unknown>): string {
       background: var(--ngxsmk-color-surface);
       overflow: hidden;
     }
-    .pg-detail-section-title {
+    ngxsmk-heading.pg-detail-section-title {
       margin: 0;
       padding: 0.75rem 1rem;
       font-family: var(--ngxsmk-font-mono);
@@ -937,7 +945,7 @@ function buildCode(name: string, values: Record<string, unknown>): string {
       opacity: var(--ngxsmk-opacity-faint, 0.3);
       margin-bottom: 0.75rem;
     }
-    .pg-empty h2 {
+    .pg-empty ngxsmk-heading {
       margin: 0 0 0.25rem;
       font-family: 'Plus Jakarta Sans', var(--ngxsmk-font-sans, system-ui), sans-serif;
       font-size: 1.125rem;

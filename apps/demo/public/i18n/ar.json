@@ -14,7 +14,7 @@
     "search": "بحث…",
     "lightMode": "التبديل إلى الوضع الفاتح",
     "darkMode": "التبديل إلى الوضع الداكن",
-    "github": "GitHub",
+    "github": "npm",
     "getStarted": "ابدأ الآن",
     "starOnGithub": "نجمة على GitHub"
   },
@@ -206,6 +206,14 @@
       "changed": "مُغيّر"
     },
     "release": {
+      "v132": {
+        "summary": "أدوات صديقة للذكاء الاصطناعي: قاعدة بيانات مكونات MCP وملف llms.txt ووثائق الوكلاء.",
+        "changes": {
+          "0": "يعتمد خادم MCP الآن على قاعدة بيانات مُولّدة تلقائيًا لجميع المكونات الـ 214، لتشغيل أدوات البحث والاستعلام عن واجهات البرمجة والتخطيط لوكلاء البرمجة بالذكاء الاصطناعي.",
+          "1": "مراجع API مُولّدة llms.txt وllms-full.txt تُقدَّم في جذر الموقع، بالإضافة إلى مهارة Claude Code للتطبيقات المستهلكة.",
+          "2": "إرشادات AGENTS.md وCLAUDE.md لوكلاء البرمجة بالذكاء الاصطناعي العاملين في المستودع."
+        }
+      },
       "v131": {
         "summary": "التنقل بلوحة المفاتيح، وحلقات تركيز موحّدة، وإصلاحات الوضع الداكن.",
         "changes": {
@@ -451,6 +459,13 @@
     "pillarCopyPasteDesc": "امتلك شفرة المصدر مباشرة. تُهيكل وحدات المكوّنات في ملفات تطبيقك، تاركة صفر اعتماديات منتفخة في node_modules.",
     "pillarHslEngine": "محرّك الرموز HSL",
     "pillarHslEngineDesc": "اضبط الجماليات العامة بإحداثيات HSL. توليد مخرجات أنماط متوافقة بسهولة مع CSS الأصلي أو SCSS أو إعدادات Tailwind.",
+    "aiTooling": "Built for AI-assisted development",
+    "aiToolingDesc": "Connect the NGXSMK MCP server to give your AI assistant direct access to component search, API lookup, LLM-readable documentation, and development tools. It works with Claude Code, Cursor, VS Code, Cline, Roo Code, Windsurf, and any MCP-compatible client.",
+    "aiToolingMcp": "خادم MCP مع بحث المكونات والاستعلام عن واجهات البرمجة",
+    "aiToolingLlms": "LLM-readable documentation",
+    "aiToolingClients": "يعمل مع العديد من عملاء MCP — Claude Code وCursor وVS Code وCline وRoo Code وWindsurf",
+    "aiToolingInstall": "تثبيت سهل بأمر واحد",
+    "aiToolingInstallNote": "مثال Claude Code — أوامر Cursor وVS Code وCline وRoo Code وWindsurf متوفرة في الوثائق.",
     "pillarAiFirst": "تخطيطات أصيلة للذكاء الاصطناعي",
     "pillarAiFirstDesc": "أطلِق واجهات متخصصة مبنية للبث الذكي وسجلات الاستنتاج ومحررات الأكواد المخصصة وعارضات البطاقات العائمة للاقتباس.",
     "tokenTheming": "تنسيق الرموز",
@@ -790,7 +805,7 @@
     "templatesTitle": "نقاط بداية جاهزة للإنتاج",
     "templatesSub": "صفحات كاملة م assembled من مكوّنات NGXSMK — استنسخ واحدة وأطلقها.",
     "ctaTitle": "ابنِ الشيء.",
-    "ctaSub": "تصفّح 217 مكوّنًا، واستنسخ قالبًا إنتاجيًا، ونظّم سمة تطابق علامتك التجارية. كلها مفتوحة المصدر، كلها MIT.",
+    "ctaSub": "تصفّح 217 مكوّنًا، واستنسخ قالبًا إنتاجيًا، ونظّم سمة تطابق علامتك التجارية. كلها مجانية، وكلها بترخيص MIT.",
     "browseComponents": "تصفّح المكوّنات",
     "tagline": "مجموعة الواجهة التي يستحقها Angular.",
     "footerDocs": "التوثيق",
@@ -1245,8 +1260,28 @@
   "community": {
     "title": "المجتمع والمساهمة",
     "subtitle": "انضم إلى مجتمعنا المتنامي، واطرح الأسئلة، واقترح الميزات، وشارك ما بنيته.",
-    "githubDiscussions": "مناقشات GitHub",
-    "githubDiscussionsDesc": "اطرح الأسئلة وشارك الاقتراحات واحصل على ملاحظات من المطوّرين والمساهمين في منتدى المناقشات لدينا.",
-    "joinDiscussion": "انضم إلى النقاش"
+    "githubDiscussions": "التواصل والملاحظات",
+    "githubDiscussionsDesc": "أسئلة أو أفكار أو بلاغات أخطاء؟ تواصل مع المطوّر مباشرة — كل رسالة تساعد في تحسين المجموعة.",
+    "joinDiscussion": "إرسال ملاحظات"
+  },
+  "api": {
+    "title": "مرجع الواجهة البرمجية",
+    "subtitle": "المدخلات والمخرجات الكاملة لكل مكوّن وموجّه، مولّدة مباشرة من الشيفرة المصدرية.",
+    "searchPlaceholder": "ابحث عن المكوّنات والمحدّدات والمدخلات…",
+    "allCategories": "كل الفئات",
+    "loading": "جارٍ تحميل بيانات API…",
+    "noMatch": "لا توجد مكوّنات تطابق \"{{query}}\".",
+    "inputs": "المدخلات",
+    "outputs": "المخرجات",
+    "required": "مطلوب",
+    "twoway": "ثنائي الاتجاه",
+    "copy": "نسخ",
+    "copied": "تم النسخ",
+    "colName": "الاسم",
+    "colType": "النوع",
+    "colDefault": "الافتراضي",
+    "colEmits": "يُصدر",
+    "apiCount": "{{count}} واجهة برمجية",
+    "copyLink": "نسخ رابط {{name}}"
   }
 }

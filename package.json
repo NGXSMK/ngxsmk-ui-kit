@@ -1,7 +1,12 @@
 {
   "name": "ngxsmk-ui-kit",
-  "version": "1.3.1",
-  "description": "NGXSMK — an Angular-first, open-source UI ecosystem: signals-native, zoneless components and a universal token engine.",
+  "version": "1.3.2",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NGXSMK/ngxsmk-ui-kit.git"
+  },
+  "description": "NGXSMK — an Angular-first, MIT-licensed UI ecosystem: signals-native, zoneless components and a universal token engine.",
   "keywords": [
     "angular",
     "ui-kit",

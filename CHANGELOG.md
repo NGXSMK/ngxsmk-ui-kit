@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.2] - 2026-07-17
+
+### Added
+
+- **AI-agent tooling** — the repo and published packages are now AI-friendly:
+  - `@ngxsmk/mcp` is backed by an auto-generated database of all 214 components
+    (previously 3 hand-written entries), powering `ngxsmk_search_components`,
+    `ngxsmk_explain_api`, and `ngxsmk_recommend_layout`.
+  - Generated `llms.txt` / `llms-full.txt` component API references at the repo
+    root and served from the demo site root.
+  - A Claude Code skill (`.claude/skills/using-ngxsmk`) that consumer apps can
+    copy to teach agents the kit's import paths, signal APIs, and theming rules.
+  - `AGENTS.md` / `CLAUDE.md` contributor guidance for coding agents, and a
+    `tools/scripts/generate-ai-docs.mjs` generator that keeps all of the above
+    in sync with component sources.
+
 ## [1.3.1] - 2026-07-16
 
 ### Added

@@ -14,7 +14,7 @@
     "search": "Buscar...",
     "lightMode": "Cambiar a modo claro",
     "darkMode": "Cambiar a modo oscuro",
-    "github": "GitHub",
+    "github": "npm",
     "getStarted": "Empezar",
     "starOnGithub": "Star en GitHub"
   },
@@ -206,6 +206,14 @@
       "changed": "cambiado"
     },
     "release": {
+      "v132": {
+        "summary": "Herramientas para IA: base de datos MCP de componentes, llms.txt y documentación para agentes.",
+        "changes": {
+          "0": "El servidor MCP ahora se basa en una base de datos autogenerada de los 214 componentes, que impulsa las herramientas de búsqueda, consulta de API y diseño para agentes de codificación con IA.",
+          "1": "Referencias de API llms.txt y llms-full.txt generadas y servidas en la raíz del sitio, además de una skill de Claude Code para aplicaciones consumidoras.",
+          "2": "Guías AGENTS.md y CLAUDE.md para agentes de codificación con IA que trabajan en el repositorio."
+        }
+      },
       "v131": {
         "summary": "Navegación por teclado, anillos de foco unificados y correcciones del modo oscuro.",
         "changes": {
@@ -451,6 +459,13 @@
     "pillarCopyPasteDesc": "Posee el código fuente directamente. Los módulos de componentes se generan en los archivos de tu app, dejando cero dependencias infladas en node_modules.",
     "pillarHslEngine": "Motor de variables HSL",
     "pillarHslEngineDesc": "Configura la estética global en coordenadas HSL. Genera fácilmente salidas de estilo compatibles con CSS puro, SCSS o configuraciones de Tailwind.",
+    "aiTooling": "Built for AI-assisted development",
+    "aiToolingDesc": "Connect the NGXSMK MCP server to give your AI assistant direct access to component search, API lookup, LLM-readable documentation, and development tools. It works with Claude Code, Cursor, VS Code, Cline, Roo Code, Windsurf, and any MCP-compatible client.",
+    "aiToolingMcp": "Servidor MCP con búsqueda de componentes y consulta de API",
+    "aiToolingLlms": "LLM-readable documentation",
+    "aiToolingClients": "Funciona con múltiples clientes MCP: Claude Code, Cursor, VS Code, Cline, Roo Code y Windsurf",
+    "aiToolingInstall": "Instalación sencilla con un solo comando",
+    "aiToolingInstallNote": "Ejemplo de Claude Code: los comandos para Cursor, VS Code, Cline, Roo Code y Windsurf están en la documentación.",
     "pillarAiFirst": "Diseños con IA primero",
     "pillarAiFirstDesc": "Despliega interfaces especializadas construidas para streaming de IA, líneas de tiempo de razonamiento, editores de código personalizados y visores de citas de tarjetas flotantes.",
     "tokenTheming": "Temas por tokens",
@@ -790,7 +805,7 @@
     "templatesTitle": "Puntos de partida listos para producción",
     "templatesSub": "Páginas completas ensambladas a partir de componentes NGXSMK - clona una y despliega.",
     "ctaTitle": "Construye lo que sea.",
-    "ctaSub": "Explora 217 componentes, clona una plantilla de producción y ajusta un tema para que coincida con tu marca. Todo código abierto, todo MIT.",
+    "ctaSub": "Explora 217 componentes, clona una plantilla de producción y ajusta un tema para que coincida con tu marca. Todo gratis, todo con licencia MIT.",
     "browseComponents": "Explorar componentes",
     "tagline": "El kit de UI que Angular merece.",
     "footerDocs": "Documentación",
@@ -1245,8 +1260,28 @@
   "community": {
     "title": "Comunidad y contribución",
     "subtitle": "Únete a nuestra creciente comunidad, haz preguntas, propón funcionalidades y comparte lo que has construido.",
-    "githubDiscussions": "GitHub Discussions",
-    "githubDiscussionsDesc": "Haz preguntas, comparte sugerencias y obtén retroalimentación de desarrolladores y contribuyentes en nuestro foro de discusiones.",
-    "joinDiscussion": "Unirse a la discusión"
+    "githubDiscussions": "Contacto y comentarios",
+    "githubDiscussionsDesc": "¿Preguntas, ideas o informes de errores? Contacta directamente con el mantenedor — cada mensaje ayuda a mejorar el kit.",
+    "joinDiscussion": "Enviar comentarios"
+  },
+  "api": {
+    "title": "Referencia de API",
+    "subtitle": "Entradas y salidas completas de cada componente y directiva, generadas directamente desde el código fuente.",
+    "searchPlaceholder": "Buscar componentes, selectores, entradas…",
+    "allCategories": "Todas las categorías",
+    "loading": "Cargando datos de la API…",
+    "noMatch": "Ningún componente coincide con \"{{query}}\".",
+    "inputs": "Entradas",
+    "outputs": "Salidas",
+    "required": "obligatorio",
+    "twoway": "bidireccional",
+    "copy": "Copiar",
+    "copied": "Copiado",
+    "colName": "Nombre",
+    "colType": "Tipo",
+    "colDefault": "Predeterminado",
+    "colEmits": "Emite",
+    "apiCount": "{{count}} APIs",
+    "copyLink": "Copiar enlace a {{name}}"
   }
 }

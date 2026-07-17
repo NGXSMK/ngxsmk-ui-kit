@@ -14,7 +14,7 @@
     "search": "खोजें...",
     "lightMode": "लाइट मोड में स्विच करें",
     "darkMode": "डार्क मोड में स्विच करें",
-    "github": "GitHub",
+    "github": "npm",
     "getStarted": "आरंभ करें",
     "starOnGithub": "GitHub पर स्टार करें"
   },
@@ -206,6 +206,14 @@
       "changed": "बदला गया"
     },
     "release": {
+      "v132": {
+        "summary": "AI-अनुकूल टूलिंग: MCP कंपोनेंट डेटाबेस, llms.txt और एजेंट दस्तावेज़।",
+        "changes": {
+          "0": "MCP सर्वर अब सभी 214 कंपोनेंट्स के स्वतः जनरेट किए गए डेटाबेस पर आधारित है, जो AI कोडिंग एजेंटों के लिए खोज, API जानकारी और लेआउट टूल्स को संचालित करता है।",
+          "1": "साइट रूट पर उपलब्ध जनरेट किए गए llms.txt और llms-full.txt API संदर्भ, साथ ही उपभोक्ता ऐप्स के लिए एक Claude Code स्किल।",
+          "2": "रिपॉज़िटरी में काम करने वाले AI कोडिंग एजेंटों के लिए AGENTS.md और CLAUDE.md मार्गदर्शन।"
+        }
+      },
       "v131": {
         "summary": "कीबोर्ड नेविगेशन, एकीकृत फोकस रिंग, और डार्क मोड सुधार।",
         "changes": {
@@ -451,6 +459,13 @@
     "pillarCopyPasteDesc": "स्रोत कोड का सीधे स्वामित्व लें। कंपोनेंट मॉड्यूल आपकी ऐप फाइल्स में स्कैफोल्ड किए जाते हैं, node_modules में कोई फूला हुआ निर्भरता पीछे नहीं छोड़ते।",
     "pillarHslEngine": "HSL वेरिएबल इंजन",
     "pillarHslEngineDesc": "HSL निर्देशांक में ग्लोबल एस्थेटिक्स कॉन्फ़िगर करें। vanilla CSS, SCSS, या Tailwind कॉन्फ़िगरेशन के साथ संगत स्टाइल आउटपुट आसानी से जेनरेट करें।",
+    "aiTooling": "Built for AI-assisted development",
+    "aiToolingDesc": "Connect the NGXSMK MCP server to give your AI assistant direct access to component search, API lookup, LLM-readable documentation, and development tools. It works with Claude Code, Cursor, VS Code, Cline, Roo Code, Windsurf, and any MCP-compatible client.",
+    "aiToolingMcp": "कंपोनेंट खोज और API जानकारी के साथ MCP सर्वर",
+    "aiToolingLlms": "LLM-readable documentation",
+    "aiToolingClients": "कई MCP क्लाइंट्स के साथ काम करता है — Claude Code, Cursor, VS Code, Cline, Roo Code और Windsurf",
+    "aiToolingInstall": "एक ही कमांड से आसान इंस्टॉलेशन",
+    "aiToolingInstallNote": "Claude Code का उदाहरण — Cursor, VS Code, Cline, Roo Code और Windsurf के कमांड दस्तावेज़ में उपलब्ध हैं।",
     "pillarAiFirst": "AI-First लेआउट्स",
     "pillarAiFirstDesc": "AI स्ट्रीमिंग, रीज़निंग टाइमलाइन्स, कस्टम कोड एडिटर और फ़्लोटिंग कार्ड साइटेशन व्यूअर के लिए बनाए गए विशेष इंटरफेस शिप करें।",
     "tokenTheming": "टोकन थीमिंग",
@@ -790,7 +805,7 @@
     "templatesTitle": "प्रोडक्शन-तैयार आरंभिक बिंदु",
     "templatesSub": "NGXSMK कंपोनेंट्स से बने पूर्ण पेज - एक को क्लोन करें और शिप करें।",
     "ctaTitle": "वह चीज़ बनाएँ।",
-    "ctaSub": "217 कंपोनेंट्स ब्राउज़ करें, एक प्रोडक्शन टेम्प्लेट क्लोन करें, और अपने ब्रांड से मेल खाने के लिए एक थीम ट्यून करें। सब ओपन सोर्स, सब MIT।",
+    "ctaSub": "217 कंपोनेंट्स ब्राउज़ करें, एक प्रोडक्शन टेम्प्लेट क्लोन करें, और अपने ब्रांड से मेल खाने के लिए एक थीम ट्यून करें। सब मुफ़्त, सब MIT-लाइसेंस।",
     "browseComponents": "कंपोनेंट्स ब्राउज़ करें",
     "tagline": "वह UI kit जिसके Angular योग्य है।",
     "footerDocs": "दस्तावेज़",
@@ -1245,8 +1260,28 @@
   "community": {
     "title": "समुदाय और योगदान",
     "subtitle": "हमारे बढ़ते समुदाय से जुड़ें, प्रश्न पूछें, फ़ीचर्स का प्रस्ताव करें और जो आपने बनाया है उसे साझा करें।",
-    "githubDiscussions": "GitHub Discussions",
-    "githubDiscussionsDesc": "हमारे चर्चा फ़ोरम पर डेवलपर्स और योगदानकर्ताओं से प्रश्न पूछें, सुझाव साझा करें और फ़ीडबैक प्राप्त करें।",
-    "joinDiscussion": "चर्चा में शामिल हों"
+    "githubDiscussions": "संपर्क और प्रतिक्रिया",
+    "githubDiscussionsDesc": "प्रश्न, विचार या बग रिपोर्ट? सीधे मेंटेनर से संपर्क करें — हर संदेश किट को बेहतर बनाने में मदद करता है।",
+    "joinDiscussion": "प्रतिक्रिया भेजें"
+  },
+  "api": {
+    "title": "API संदर्भ",
+    "subtitle": "हर कंपोनेंट और डायरेक्टिव के पूर्ण इनपुट और आउटपुट, सीधे सोर्स कोड से जनरेट किए गए।",
+    "searchPlaceholder": "कंपोनेंट, सिलेक्टर, इनपुट खोजें…",
+    "allCategories": "सभी श्रेणियाँ",
+    "loading": "API डेटा लोड हो रहा है…",
+    "noMatch": "\"{{query}}\" से कोई कंपोनेंट मेल नहीं खाता।",
+    "inputs": "इनपुट",
+    "outputs": "आउटपुट",
+    "required": "आवश्यक",
+    "twoway": "दो-तरफ़ा",
+    "copy": "कॉपी करें",
+    "copied": "कॉपी हो गया",
+    "colName": "नाम",
+    "colType": "प्रकार",
+    "colDefault": "डिफ़ॉल्ट",
+    "colEmits": "एमिट करता है",
+    "apiCount": "{{count}} API",
+    "copyLink": "{{name}} का लिंक कॉपी करें"
   }
 }

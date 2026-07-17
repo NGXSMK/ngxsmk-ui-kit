@@ -9,7 +9,7 @@ export const routes: Routes = [
     title: 'NGXSMK - High-Performance Zoneless Angular Design System',
     data: {
       description:
-        'NGXSMK is a premium, open-source Angular design system engineered with signals, zoneless change detection, and modular token customizers. Build AI-first chat interfaces and enterprise tools in minutes.',
+        'NGXSMK is a premium, MIT-licensed Angular design system engineered with signals, zoneless change detection, and modular token customizers. Build AI-first chat interfaces and enterprise tools in minutes.',
     },
   },
   {
@@ -19,6 +19,16 @@ export const routes: Routes = [
     data: {
       description:
         'Get started with NGXSMK. View step-by-step guides, command-line scaffolding commands, architectural pillars, and customizable HSL themes.',
+    },
+  },
+  {
+    path: 'api',
+    loadComponent: () =>
+      import('./pages/api-reference/api-reference').then((m) => m.ApiReferencePage),
+    title: 'API Reference - Generated Component APIs | NGXSMK',
+    data: {
+      description:
+        'Complete generated API reference for every NGXSMK component and directive: signal inputs, two-way models, outputs, types, and defaults — extracted directly from the source.',
     },
   },
   {
@@ -66,7 +76,7 @@ export const routes: Routes = [
     title: 'Community & Contributing - Join the Ecosystem | NGXSMK',
     data: {
       description:
-        'Join the NGXSMK open-source community. Contribute code, suggest features, report issues, and collaborate with other developers.',
+        'Join the NGXSMK community. Suggest features, report issues, and share feedback with the maintainers.',
     },
   },
   {

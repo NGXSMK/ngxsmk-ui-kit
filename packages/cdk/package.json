@@ -1,6 +1,6 @@
 {
   "name": "@ngxsmk/cdk",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "Low-level Angular directives and utilities (click-outside, focus-trap, media-query, scroll-lock) for @ngxsmk.",
   "keywords": [
     "angular",
@@ -12,6 +12,15 @@
     "helpers"
   ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NGXSMK/ngxsmk-ui-kit.git",
+    "directory": "packages/cdk"
+  },
+  "homepage": "https://ngxsmk.dev",
+  "bugs": {
+    "url": "https://github.com/NGXSMK/ngxsmk-ui-kit/issues"
+  },
   "peerDependencies": {
     "@angular/common": ">=17.3.0",
     "@angular/core": ">=17.3.0"

@@ -1,6 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { AppNav } from '../../nav/nav';
+import { APP_VERSION } from '../../core/version';
 import { NgxsmkButton } from '@ngxsmk/core/button';
 import {
   NgxsmkCard,
@@ -12,6 +13,7 @@ import { NgxsmkAccordion, NgxsmkAccordionItem } from '@ngxsmk/core/accordion';
 import { NgxsmkTag } from '@ngxsmk/core/tag';
 import { NgxsmkProgress } from '@ngxsmk/core/progress';
 import { NgxsmkSwitch } from '@ngxsmk/core/switch';
+import { NgxsmkHeading } from '@ngxsmk/core/heading';
 
 @Component({
   selector: 'docs-page',
@@ -29,20 +31,16 @@ import { NgxsmkSwitch } from '@ngxsmk/core/switch';
     NgxsmkTag,
     NgxsmkProgress,
     NgxsmkSwitch,
+    NgxsmkHeading,
   ],
   template: `
     <app-nav />
-
-    <div class="docs-hero-bg">
-      <div class="docs-hero-bg__glow docs-hero-bg__glow--1"></div>
-      <div class="docs-hero-bg__glow docs-hero-bg__glow--2"></div>
-    </div>
 
     <div class="docs-container">
       <!-- HERO HEADER -->
       <header class="docs-header">
         <div class="docs-badges">
-          <ngxsmk-tag class="docs-badge">v0.0.1</ngxsmk-tag>
+          <ngxsmk-tag class="docs-badge">v{{ version }}</ngxsmk-tag>
           <ngxsmk-tag
             class="docs-badge"
             style="--ngxsmk-color-surface-variant: rgba(0, 100, 224, 0.1); color: var(--ngxsmk-color-primary)"
@@ -54,7 +52,7 @@ import { NgxsmkSwitch } from '@ngxsmk/core/switch';
             >Signal-first</ngxsmk-tag
           >
         </div>
-        <h1 class="docs-title">{{ 'docs.developerPortal' | translate }}</h1>
+        <ngxsmk-heading level="h1" class="docs-title">{{ 'docs.developerPortal' | translate }}</ngxsmk-heading>
         <p class="docs-subtitle">
           {{ 'docs.subtitle' | translate }}
         </p>
@@ -64,7 +62,7 @@ import { NgxsmkSwitch } from '@ngxsmk/core/switch';
       <section class="docs-section-card">
         <div class="docs-grid-two">
           <div class="docs-install-info">
-            <h2 class="docs-section-title">{{ 'docs.quickStart' | translate }}</h2>
+            <ngxsmk-heading level="h2" class="docs-section-title">{{ 'docs.quickStart' | translate }}</ngxsmk-heading>
             <p class="docs-text">
               {{ 'docs.quickStartDesc' | translate }}
             </p>
@@ -120,7 +118,7 @@ import { NgxsmkSwitch } from '@ngxsmk/core/switch';
 
       <!-- ARCHITECTURE PILLARS GRID -->
       <section style="margin-bottom: 3rem;">
-        <h2 class="docs-subheading">{{ 'docs.corePillars' | translate }}</h2>
+        <ngxsmk-heading level="h2" class="docs-subheading">{{ 'docs.corePillars' | translate }}</ngxsmk-heading>
         <div class="docs-pillars-grid">
           <ngxsmk-card class="pillar-card">
             <div ngxsmkCardHeader>
@@ -172,11 +170,62 @@ import { NgxsmkSwitch } from '@ngxsmk/core/switch';
         </div>
       </section>
 
+      <!-- AI TOOLING SECTION -->
+      <section class="docs-section-card" style="margin-bottom: 3rem;">
+        <div class="docs-grid-two">
+          <div>
+            <ngxsmk-heading level="h2" class="docs-section-title">{{ 'docs.aiTooling' | translate }}</ngxsmk-heading>
+            <p class="docs-text">
+              {{ 'docs.aiToolingDesc' | translate }}
+            </p>
+            <div class="docs-features-checklist">
+              <div class="checklist-item">
+                <span class="checklist-icon">✓</span>
+                <span>{{ 'docs.aiToolingMcp' | translate }}</span>
+              </div>
+              <div class="checklist-item">
+                <span class="checklist-icon">✓</span>
+                <span
+                  >{{ 'docs.aiToolingLlms' | translate }} —
+                  <a href="/llms.txt" target="_blank" rel="noopener">llms.txt</a> ·
+                  <a href="/llms-full.txt" target="_blank" rel="noopener">llms-full.txt</a></span
+                >
+              </div>
+              <div class="checklist-item">
+                <span class="checklist-icon">✓</span>
+                <span>{{ 'docs.aiToolingClients' | translate }}</span>
+              </div>
+              <div class="checklist-item">
+                <span class="checklist-icon">✓</span>
+                <span>{{ 'docs.aiToolingInstall' | translate }}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="docs-terminal-container">
+            <div class="docs-terminal">
+              <div class="terminal-header">
+                <div class="terminal-dots"><i></i><i></i><i></i></div>
+                <span class="terminal-title">bash — claude code</span>
+              </div>
+              <div class="terminal-body">
+                <span class="terminal-prompt">$</span>
+                <code class="terminal-code">claude mcp add ngxsmk -- npx &#64;ngxsmk/mcp</code>
+                <button class="terminal-copy-btn" (click)="copyCommand('mcp')">
+                  {{ (copiedMCP() ? 'docs.copied' : 'docs.copy') | translate }}
+                </button>
+              </div>
+            </div>
+            <p class="docs-terminal-note">{{ 'docs.aiToolingInstallNote' | translate }}</p>
+          </div>
+        </div>
+      </section>
+
       <!-- INTERACTIVE PREVIEW & ACCENT WORKSPACE -->
       <section class="docs-section-card" style="margin-bottom: 3rem;">
         <div class="docs-grid-two">
           <div>
-            <h2 class="docs-section-title">{{ 'docs.tokenTheming' | translate }}</h2>
+            <ngxsmk-heading level="h2" class="docs-section-title">{{ 'docs.tokenTheming' | translate }}</ngxsmk-heading>
             <p class="docs-text">
               {{ 'docs.tokenThemingDesc' | translate }}
             </p>
@@ -277,9 +326,9 @@ import { NgxsmkSwitch } from '@ngxsmk/core/switch';
 
       <!-- ACCORDION FAQ SECTION -->
       <section style="margin-bottom: 4rem;">
-        <h2 class="docs-subheading" style="margin-bottom: 1.5rem;">
+        <ngxsmk-heading level="h2" class="docs-subheading" style="margin-bottom: 1.5rem;">
           {{ 'docs.faqTitle' | translate }}
-        </h2>
+        </ngxsmk-heading>
         <ngxsmk-accordion [multiple]="true">
           <ngxsmk-accordion-item [label]="'docs.faqZonelessLabel' | translate">
             {{ 'docs.faqZonelessAnswer' | translate }}
@@ -298,35 +347,12 @@ import { NgxsmkSwitch } from '@ngxsmk/core/switch';
     </div>
   `,
   styles: `
-    .docs-hero-bg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 480px;
-      overflow: hidden;
-      pointer-events: none;
-      z-index: 0;
-    }
-    .docs-hero-bg__glow {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(100px);
-      opacity: 0.15;
-    }
-    .docs-hero-bg__glow--1 {
-      top: -10%;
-      left: 10%;
-      width: 400px;
-      height: 400px;
-      background: var(--ngxsmk-color-primary);
-    }
-    .docs-hero-bg__glow--2 {
-      top: 5%;
-      right: 15%;
-      width: 300px;
-      height: 300px;
-      background: #10b981;
+    :host {
+      display: block;
+      background-color: var(--ngxsmk-color-background, #fafafa);
+      background-image: radial-gradient(var(--ngxsmk-color-outline, #e4e4e7) 1px, transparent 1px);
+      background-size: 24px 24px;
+      min-height: 100vh;
     }
 
     .docs-container {
@@ -351,7 +377,7 @@ import { NgxsmkSwitch } from '@ngxsmk/core/switch';
       font-size: 0.7rem;
       font-weight: 600;
     }
-    .docs-title {
+    ngxsmk-heading.docs-title {
       font-family: 'Outfit', var(--ngxsmk-font-sans, system-ui), sans-serif;
       font-size: 2.75rem;
       font-weight: 800;
@@ -396,7 +422,7 @@ import { NgxsmkSwitch } from '@ngxsmk/core/switch';
       }
     }
 
-    .docs-section-title {
+    ngxsmk-heading.docs-section-title {
       font-family: 'Outfit', var(--ngxsmk-font-sans, system-ui), sans-serif;
       font-size: 1.5rem;
       font-weight: 700;
@@ -509,9 +535,14 @@ import { NgxsmkSwitch } from '@ngxsmk/core/switch';
       background: rgba(255, 255, 255, 0.12);
       color: #fff;
     }
+    .docs-terminal-note {
+      margin: 0.625rem 0 0;
+      font-size: 0.75rem;
+      color: var(--ngxsmk-color-on-surface-muted, rgba(255, 255, 255, 0.45));
+    }
 
     /* Pillars Grid */
-    .docs-subheading {
+    ngxsmk-heading.docs-subheading {
       font-family: 'Outfit', var(--ngxsmk-font-sans, system-ui), sans-serif;
       font-size: 1.625rem;
       font-weight: 700;
@@ -666,22 +697,24 @@ import { NgxsmkSwitch } from '@ngxsmk/core/switch';
   `,
 })
 export class DocsPage {
+  protected readonly version = APP_VERSION;
   accentColor = signal<'violet' | 'emerald' | 'rose' | 'amber' | 'blue'>('violet');
   playgroundProgress = signal(65);
   playgroundSwitch = signal(true);
   copiedNPM = signal(false);
   copiedCLI = signal(false);
+  copiedMCP = signal(false);
 
-  copyCommand(type: 'npm' | 'cli') {
-    const cmd = type === 'npm' ? 'npm install @ngxsmk/core @ngxsmk/theme' : 'npx ngxsmk add button';
-    navigator.clipboard.writeText(cmd).then(() => {
-      if (type === 'npm') {
-        this.copiedNPM.set(true);
-        setTimeout(() => this.copiedNPM.set(false), 2000);
-      } else {
-        this.copiedCLI.set(true);
-        setTimeout(() => this.copiedCLI.set(false), 2000);
-      }
+  copyCommand(type: 'npm' | 'cli' | 'mcp') {
+    const commands = {
+      npm: 'npm install @ngxsmk/core @ngxsmk/theme',
+      cli: 'npx ngxsmk add button',
+      mcp: 'claude mcp add ngxsmk -- npx @ngxsmk/mcp',
+    };
+    const flags = { npm: this.copiedNPM, cli: this.copiedCLI, mcp: this.copiedMCP };
+    navigator.clipboard.writeText(commands[type]).then(() => {
+      flags[type].set(true);
+      setTimeout(() => flags[type].set(false), 2000);
     });
   }
 

@@ -16,9 +16,8 @@ We actively support and provide security updates for the following versions:
 
 If you discover a security vulnerability, please report it privately:
 
-1. **Do Not Open a Public Issue:** To protect users, please do not disclose the vulnerability in public GitHub issues, pull requests, or discussion forums until a fix is released.
-2. **Preferred Method:** Use the **[GitHub Security Advisories](https://github.com/NGXSMK/ngxsmk-ui-kit/security/advisories/new)** interface to create a private communication channel between you and the maintainers.
-3. **Email Option:** If you are unable to use the GitHub Advisories feature, email **[ngxsmk@gmail.com](mailto:ngxsmk@gmail.com)** with a detailed description of the issue.
+1. **Do Not Disclose Publicly:** To protect users, please do not disclose the vulnerability in public forums or social media until a fix is released.
+2. **Preferred Method:** Email **[ngxsmk@gmail.com](mailto:ngxsmk@gmail.com)** with a detailed description of the issue.
 
 ### Please Include:
 

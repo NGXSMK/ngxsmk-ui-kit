@@ -14,7 +14,7 @@
     "search": "Search...",
     "lightMode": "Switch to light mode",
     "darkMode": "Switch to dark mode",
-    "github": "GitHub",
+    "github": "npm",
     "getStarted": "Get started",
     "starOnGithub": "Star on GitHub"
   },
@@ -206,6 +206,14 @@
       "changed": "changed"
     },
     "release": {
+      "v132": {
+        "summary": "AI-friendly tooling: MCP component database, llms.txt, and agent docs.",
+        "changes": {
+          "0": "The MCP server is now backed by an auto-generated database of all 214 components, powering search, API lookup, and layout tools for AI coding agents.",
+          "1": "Generated llms.txt and llms-full.txt API references served at the site root, plus a Claude Code skill for consumer apps.",
+          "2": "AGENTS.md and CLAUDE.md guidance for AI coding agents working in the repository."
+        }
+      },
       "v131": {
         "summary": "Keyboard navigation, unified focus rings, and dark-mode fixes.",
         "changes": {
@@ -451,6 +459,13 @@
     "pillarCopyPasteDesc": "Directly own the source code. Component modules are scaffolded into your app files, leaving zero bloated dependencies behind in node_modules.",
     "pillarHslEngine": "HSL Variable Engine",
     "pillarHslEngineDesc": "Configure global aesthetics in HSL coordinates. Easily generate style outputs compatible with vanilla CSS, SCSS, or Tailwind configurations.",
+    "aiTooling": "Built for AI-assisted development",
+    "aiToolingDesc": "Connect the NGXSMK MCP server to give your AI assistant direct access to component search, API lookup, LLM-readable documentation, and development tools. It works with Claude Code, Cursor, VS Code, Cline, Roo Code, Windsurf, and any MCP-compatible client.",
+    "aiToolingMcp": "MCP server with component search and API lookup",
+    "aiToolingLlms": "LLM-readable documentation",
+    "aiToolingClients": "Works across multiple MCP clients — Claude Code, Cursor, VS Code, Cline, Roo Code, and Windsurf",
+    "aiToolingInstall": "Easy installation with a single command",
+    "aiToolingInstallNote": "Claude Code example — commands for Cursor, VS Code, Cline, Roo Code, and Windsurf are in the docs.",
     "pillarAiFirst": "AI-First Layouts",
     "pillarAiFirstDesc": "Ship specialized interfaces built for AI streaming, reasoning timelines, custom code editors, and floating card citation viewers.",
     "tokenTheming": "Token Theming",
@@ -476,6 +491,26 @@
     "faqCopyPasteAnswer": "Instead of importing bloated pre-compiled modules, our CLI tool allows you to copy component source code directly into your workspace. You retain complete ownership, styling control, and structural flexibility.",
     "faqAiLabel": "What AI layout modules are included?",
     "faqAiAnswer": "We provide specialized interfaces built for AI chat applications, such as scroll-locked chat bubbles, streaming text responses, Reasoning Timelines, and formatted Citation card lists."
+  },
+  "api": {
+    "title": "API Reference",
+    "subtitle": "Complete inputs & outputs for every component and directive, generated straight from the source code.",
+    "searchPlaceholder": "Search components, selectors, inputs…",
+    "allCategories": "All categories",
+    "loading": "Loading API data…",
+    "noMatch": "No components match \"{{query}}\".",
+    "inputs": "Inputs",
+    "outputs": "Outputs",
+    "required": "required",
+    "twoway": "two-way",
+    "copy": "Copy",
+    "copied": "Copied",
+    "colName": "Name",
+    "colType": "Type",
+    "colDefault": "Default",
+    "colEmits": "Emits",
+    "apiCount": "{{count}} APIs",
+    "copyLink": "Copy link to {{name}}"
   },
   "explorer": {
     "title": "Component Library",
@@ -790,7 +825,7 @@
     "templatesTitle": "Production-ready starting points",
     "templatesSub": "Full pages assembled from NGXSMK components - clone one and ship.",
     "ctaTitle": "Build the thing.",
-    "ctaSub": "Browse 217 components, clone a production template, and tune a theme to match your brand. All open source, all MIT.",
+    "ctaSub": "Browse 217 components, clone a production template, and tune a theme to match your brand. All free, all MIT-licensed.",
     "browseComponents": "Browse components",
     "tagline": "The UI kit that Angular deserves.",
     "footerDocs": "Docs",
@@ -1245,8 +1280,8 @@
   "community": {
     "title": "Community & Contribution",
     "subtitle": "Join our growing community, ask questions, propose features, and share what you've built.",
-    "githubDiscussions": "GitHub Discussions",
-    "githubDiscussionsDesc": "Ask questions, share suggestions, and get feedback from developers and contributors on our discussions forum.",
-    "joinDiscussion": "Join Discussion"
+    "githubDiscussions": "Contact & Feedback",
+    "githubDiscussionsDesc": "Questions, ideas, or bug reports? Reach the maintainer directly — every message helps improve the kit.",
+    "joinDiscussion": "Send Feedback"
   }
 }

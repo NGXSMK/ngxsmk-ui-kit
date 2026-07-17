@@ -7,6 +7,7 @@ import {
   CATEGORY_LABELS,
 } from '../../core/component-registry';
 import { SearchService } from '../../core/search.service';
+import { NgxsmkHeading } from '@ngxsmk/core/heading';
 
 const CATEGORY_ICONS: Record<string, string> = {
   form: '▦',
@@ -25,11 +26,11 @@ const CATEGORY_ICONS: Record<string, string> = {
 @Component({
   selector: 'app-component-explorer',
   standalone: true,
-  imports: [RouterLink, TranslatePipe],
+  imports: [RouterLink, TranslatePipe, NgxsmkHeading],
   template: `
     <div class="explorer">
       <header class="explorer-header">
-        <h1 class="explorer-title">{{ 'explorer.title' | translate }}</h1>
+        <ngxsmk-heading level="h1" class="explorer-title">{{ 'explorer.title' | translate }}</ngxsmk-heading>
         <p class="explorer-subtitle">
           {{
             'explorer.subtitle'
@@ -102,7 +103,7 @@ const CATEGORY_ICONS: Record<string, string> = {
       @for (group of filteredGroups(); track group.category) {
         <section class="explorer-group">
           <div class="explorer-group-header">
-            <h2 class="explorer-group-title">{{ catLabelKey(group.category) | translate }}</h2>
+            <ngxsmk-heading level="h2" class="explorer-group-title">{{ catLabelKey(group.category) | translate }}</ngxsmk-heading>
             <span class="explorer-group-count">{{
               'explorer.componentCount' | translate: { count: group.components.length }
             }}</span>
@@ -143,6 +144,15 @@ const CATEGORY_ICONS: Record<string, string> = {
     </div>
   `,
   styles: `
+    :host {
+      display: block;
+      margin: calc(-1 * var(--ngxsmk-space-8, 2rem));
+      padding: var(--ngxsmk-space-8, 2rem);
+      min-height: 100%;
+      background-color: var(--ngxsmk-color-background, #fafafa);
+      background-image: radial-gradient(var(--ngxsmk-color-outline, #e4e4e7) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
     .explorer {
       max-width: 1200px;
       margin: 0 auto;
@@ -159,7 +169,7 @@ const CATEGORY_ICONS: Record<string, string> = {
     .explorer-header {
       margin-bottom: 2.5rem;
     }
-    .explorer-title {
+    ngxsmk-heading.explorer-title {
       font-size: 1.75rem;
       font-weight: 800;
       letter-spacing: -0.03em;
@@ -293,7 +303,7 @@ const CATEGORY_ICONS: Record<string, string> = {
       gap: 0.75rem;
       margin-bottom: 1rem;
     }
-    .explorer-group-title {
+    ngxsmk-heading.explorer-group-title {
       font-size: 1.125rem;
       font-weight: 700;
       margin: 0;

@@ -1494,7 +1494,9 @@ type RadiusKey = keyof typeof RADII;
       display: block;
       font-family: var(--ngxsmk-font-sans, system-ui);
       color: var(--ngxsmk-color-on-background);
-      background: var(--ngxsmk-color-background);
+      background-color: var(--ngxsmk-color-background, #fafafa);
+      background-image: radial-gradient(var(--ngxsmk-color-outline, #e4e4e7) 1px, transparent 1px);
+      background-size: 24px 24px;
       height: 100vh;
       overflow: hidden;
     }
@@ -1522,7 +1524,9 @@ type RadiusKey = keyof typeof RADII;
       display: flex;
       flex-direction: row;
       height: calc(100vh - 3.5rem);
-      background: var(--ngxsmk-color-background);
+      background-color: var(--ngxsmk-color-background, #fafafa);
+      background-image: radial-gradient(var(--ngxsmk-color-outline, #e4e4e7) 1px, transparent 1px);
+      background-size: 24px 24px;
     }
 
     /* ---- LEFT SIDENAV ----

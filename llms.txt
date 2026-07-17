@@ -1,0 +1,239 @@
+# NGXSMK UI Kit
+
+> Angular-first, MIT-licensed UI ecosystem: 214+ signals-native, zoneless
+> standalone components with a universal design-token engine (CSS variables,
+> SCSS, Tailwind, StyleX, Tokens Studio export). MIT licensed, no paid tiers.
+> Current version: 1.3.2. Supports Angular 17.3 through 22.
+
+Packages: `@ngxsmk/core` (components, one secondary entry point per component,
+e.g. `@ngxsmk/core/button`), `@ngxsmk/theme` (design tokens + theme engine),
+`@ngxsmk/cdk` (behavior primitives), `@ngxsmk/mcp` (MCP server for coding agents).
+
+Usage rules for generated code:
+- All components are standalone; import the class and add it to the `imports` array.
+- APIs are signal-based: inputs are `input()` signals (bind with `[prop]`),
+  outputs are `output()` (bind with `(event)`), `model()` inputs support `[(prop)]`.
+- Style via `--ngxsmk-*` CSS custom properties, never by overriding internal classes.
+- Import theme styles once: `@import '@ngxsmk/theme/css';` and toggle dark mode
+  by adding the `dark` class to `<html>`.
+
+## Docs
+- Full component API reference: /llms-full.txt
+- Website & docs: https://ngxsmk.dev
+- Packages on npm: https://www.npmjs.com/org/ngxsmk
+
+## Components
+- NgxsmkAccordion (`ngxsmk-accordion`) — @ngxsmk/core/accordion — Expandable section container
+- NgxsmkAccordionItem (`ngxsmk-accordion-item`) — @ngxsmk/core/accordion
+- NgxsmkAgentCard (`ngxsmk-agent-card`) — @ngxsmk/core/agent-card
+- NgxsmkAiChat (`ngxsmk-ai-chat`) — @ngxsmk/core/ai-chat
+- NgxsmkAlert (`ngxsmk-alert`) — @ngxsmk/core/alert — Inline notification
+- NgxsmkAlertDialog (`ngxsmk-alert-dialog`) — @ngxsmk/core/alert-dialog
+- NgxsmkAnimate (`[ngxsmkAnimate]`) — @ngxsmk/core/animation — Plays an enter animation on the host element once it is rendered
+- NgxsmkPresence (`[ngxsmkPresence]`) — @ngxsmk/core/animation — Structural directive that mounts its template and plays an enter animation, then plays an exit animation before detaching when the `show` input flips to `false`
+- NgxsmkAppShell (`ngxsmk-app-shell`) — @ngxsmk/core/app-shell
+- NgxsmkAspectRatio (`ngxsmk-aspect-ratio`) — @ngxsmk/core/aspect-ratio
+- NgxsmkAudioPlayer (`ngxsmk-audio-player`) — @ngxsmk/core/audio-player
+- NgxsmkAutocomplete (`ngxsmk-autocomplete`) — @ngxsmk/core/autocomplete
+- NgxsmkAvatar (`ngxsmk-avatar`) — @ngxsmk/core/avatar — User avatar with automatic initials fallback when no image is available or the image fails to load
+- NgxsmkAvatarGroupOverflow (`ngxsmk-avatar-group-overflow`) — @ngxsmk/core/avatar-group-overflow
+- NgxsmkAvatarStatusDot (`ngxsmk-avatar-status-dot`) — @ngxsmk/core/avatar-status-dot
+- NgxsmkBadge (`ngxsmk-badge`) — @ngxsmk/core/badge — Small status descriptor for counts and labels
+- NgxsmkBanner (`ngxsmk-banner`) — @ngxsmk/core/banner
+- NgxsmkBaseTypeaheadItem (`[ngxsmkBaseTypeaheadItem]`) — @ngxsmk/core/base-typeahead
+- NgxsmkBaseTypeahead (`ngxsmk-base-typeahead`) — @ngxsmk/core/base-typeahead
+- NgxsmkBlockquote (`ngxsmk-blockquote`) — @ngxsmk/core/blockquote
+- NgxsmkBreadcrumbItem (`ngxsmk-breadcrumb-item`) — @ngxsmk/core/breadcrumb-item
+- NgxsmkButton (`button[ngxsmk-button], a[ngxsmk-button]`) — @ngxsmk/core/button — Button applied to native `<button>`/`<a>` elements so browser semantics, forms integration, and keyboard behavior come for free
+- NgxsmkButtonGroup (`ngxsmk-button-group, [ngxsmkButtonGroup]`) — @ngxsmk/core/button-group
+- NgxsmkCard (`ngxsmk-card`) — @ngxsmk/core/card — Content container with optional structural directives:
+- NgxsmkCardHeader (`[ngxsmkCardHeader]`) — @ngxsmk/core/card
+- NgxsmkCardTitle (`[ngxsmkCardTitle]`) — @ngxsmk/core/card
+- NgxsmkCardDescription (`[ngxsmkCardDescription]`) — @ngxsmk/core/card
+- NgxsmkCardContent (`[ngxsmkCardContent]`) — @ngxsmk/core/card
+- NgxsmkCardFooter (`[ngxsmkCardFooter]`) — @ngxsmk/core/card
+- NgxsmkCarouselSlide (`ngxsmk-carousel-slide`) — @ngxsmk/core/carousel
+- NgxsmkCarousel (`ngxsmk-carousel`) — @ngxsmk/core/carousel
+- NgxsmkCenter (`ngxsmk-center`) — @ngxsmk/core/center
+- NgxsmkAreaChart (`ngxsmk-chart-area`) — @ngxsmk/core/chart-area
+- NgxsmkBarChart (`ngxsmk-chart-bar`) — @ngxsmk/core/chart-bar
+- NgxsmkCandlestickChart (`ngxsmk-chart-candlestick`) — @ngxsmk/core/chart-candlestick
+- NgxsmkChartDashboard (`ngxsmk-chart-dashboard`) — @ngxsmk/core/chart-dashboard
+- NgxsmkHeatmapChart (`ngxsmk-chart-heatmap`) — @ngxsmk/core/chart-heatmap
+- NgxsmkLineChart (`ngxsmk-chart-line`) — @ngxsmk/core/chart-line
+- NgxsmkPieChart (`ngxsmk-chart-pie`) — @ngxsmk/core/chart-pie
+- NgxsmkScatterChart (`ngxsmk-chart-scatter`) — @ngxsmk/core/chart-scatter
+- NgxsmkChatComposerDrawer (`ngxsmk-chat-composer-drawer`) — @ngxsmk/core/chat-composer-drawer
+- NgxsmkChatComposerTokenElement (`ngxsmk-chat-composer-token-element`) — @ngxsmk/core/chat-composer-token-element
+- NgxsmkChatDictationButton (`ngxsmk-chat-dictation-button`) — @ngxsmk/core/chat-dictation-button
+- NgxsmkChatInput (`ngxsmk-chat-input`) — @ngxsmk/core/chat-input
+- NgxsmkChatLayout (`ngxsmk-chat-layout`) — @ngxsmk/core/chat-layout
+- NgxsmkChatLayoutScrollButton (`ngxsmk-chat-layout-scroll-button`) — @ngxsmk/core/chat-layout-scroll-button
+- NgxsmkChatMessage (`ngxsmk-chat-message`) — @ngxsmk/core/chat-message
+- NgxsmkChatMessageBubble (`ngxsmk-chat-message-bubble`) — @ngxsmk/core/chat-message-bubble
+- NgxsmkChatMessageMetadata (`ngxsmk-chat-message-metadata`) — @ngxsmk/core/chat-message-metadata
+- NgxsmkChatSendButton (`ngxsmk-chat-send-button`) — @ngxsmk/core/chat-send-button
+- NgxsmkChatSystemMessage (`ngxsmk-chat-system-message`) — @ngxsmk/core/chat-system-message
+- NgxsmkChatTokenizedText (`ngxsmk-chat-tokenized-text`) — @ngxsmk/core/chat-tokenized-text
+- NgxsmkChatWindow (`ngxsmk-chat-window`) — @ngxsmk/core/chat-window
+- NgxsmkCheckbox (`ngxsmk-checkbox`) — @ngxsmk/core/checkbox — Checkbox built on a visually hidden native input, so forms integration and assistive tech behavior stay native
+- NgxsmkCheckboxList (`ngxsmk-checkbox-list`) — @ngxsmk/core/checkbox-list
+- NgxsmkCheckboxListItem (`[ngxsmkCheckboxListItem]`) — @ngxsmk/core/checkbox-list-item
+- NgxsmkCheckboxListItemComponent (`ngxsmk-checkbox-list-item, [ngxsmkCheckboxListItem]`) — @ngxsmk/core/checkbox-list-item
+- NgxsmkCitation (`ngxsmk-citation`) — @ngxsmk/core/citation
+- NgxsmkCitationViewer (`ngxsmk-citation-viewer`) — @ngxsmk/core/citation-viewer
+- NgxsmkClickOutside (`[ngxsmkClickOutside]`) — @ngxsmk/core/click-outside
+- NgxsmkCode (`code[ngxsmk-code]`) — @ngxsmk/core/code
+- NgxsmkCodeBlock (`ngxsmk-code-block`) — @ngxsmk/core/code-block
+- NgxsmkCollapsible (`ngxsmk-collapsible`) — @ngxsmk/core/collapsible
+- NgxsmkCombobox (`ngxsmk-combobox`) — @ngxsmk/core/combobox
+- NgxsmkCommandPalette (`ngxsmk-command-palette`) — @ngxsmk/core/command-palette
+- NgxsmkContainer (`ngxsmk-container`) — @ngxsmk/core/container
+- NgxsmkContextMenu (`ngxsmk-context-menu`) — @ngxsmk/core/context-menu
+- NgxsmkConversationList (`ngxsmk-conversation-list`) — @ngxsmk/core/conversation-list
+- NgxsmkCopyToClipboard (`[ngxsmkCopyToClipboard]`) — @ngxsmk/core/copy-to-clipboard
+- NgxsmkDataTable (`ngxsmk-data-table`) — @ngxsmk/core/data-table
+- NgxsmkDatePicker (`ngxsmk-date-picker`) — @ngxsmk/core/date-picker
+- NgxsmkDiagramBuilder (`ngxsmk-diagram-builder`) — @ngxsmk/core/diagram-builder
+- NgxsmkDialogFooter (`[ngxsmkDialogFooter]`) — @ngxsmk/core/dialog
+- NgxsmkDialog (`ngxsmk-dialog`) — @ngxsmk/core/dialog
+- NgxsmkDiffViewer (`ngxsmk-diff-viewer`) — @ngxsmk/core/diff-viewer
+- NgxsmkDivider (`ngxsmk-divider`) — @ngxsmk/core/divider — Visual separator
+- NgxsmkDropdownMenu (`ngxsmk-dropdown-menu`) — @ngxsmk/core/dropdown-menu
+- NgxsmkEmptyState (`ngxsmk-empty-state`) — @ngxsmk/core/empty-state
+- NgxsmkFab (`button[ngxsmkFab], a[ngxsmkFab]`) — @ngxsmk/core/fab
+- NgxsmkField (`ngxsmk-field`) — @ngxsmk/core/field
+- NgxsmkFieldLabel (`ngxsmk-field-label, [ngxsmkFieldLabel], label[ngxsmkFieldLabel]`) — @ngxsmk/core/field-label
+- NgxsmkFieldStatus (`ngxsmk-field-status, [ngxsmkFieldStatus]`) — @ngxsmk/core/field-status
+- NgxsmkFlex (`ngxsmk-flex`) — @ngxsmk/core/flex
+- NgxsmkFlowEditor (`ngxsmk-flow-editor`) — @ngxsmk/core/flow-editor
+- NgxsmkFocusTrap (`[ngxsmkFocusTrap]`) — @ngxsmk/core/focus-trap
+- NgxsmkFormField (`ngxsmk-form-field`) — @ngxsmk/core/form-field — Wraps a form control with label, hint, and error messaging, wiring `for`/`aria-describedby`/`aria-invalid` automatically when the projected control is a `ngxsmk-input`
+- NgxsmkFormLayout (`ngxsmk-form-layout`) — @ngxsmk/core/form-layout
+- NgxsmkGrid (`ngxsmk-grid`) — @ngxsmk/core/grid
+- NgxsmkStackItem (`[ngxsmkStackItem]`) — @ngxsmk/core/h-stack
+- NgxsmkHStack (`ngxsmk-h-stack`) — @ngxsmk/core/h-stack
+- NgxsmkVStack (`ngxsmk-v-stack`) — @ngxsmk/core/h-stack
+- NgxsmkHeading (`ngxsmk-heading`) — @ngxsmk/core/heading
+- NgxsmkHoverCard (`ngxsmk-hover-card`) — @ngxsmk/core/hover-card
+- NgxsmkImageViewer (`ngxsmk-image-viewer`) — @ngxsmk/core/image-viewer
+- NgxsmkInput (`ngxsmk-input`) — @ngxsmk/core/input — Themed text input
+- NgxsmkInputGroup (`ngxsmk-input-group`) — @ngxsmk/core/input-group — Wraps a native control with text add-ons that sit flush against it, rendered as a single connected field
+- NgxsmkInputGroupText (`[ngxsmkInputGroupText], ngxsmk-input-group-text`) — @ngxsmk/core/input-group-text
+- NgxsmkIntersectionObserver (`[ngxsmkIntersectionObserver]`) — @ngxsmk/core/intersection-observer
+- NgxsmkJsonViewer (`ngxsmk-json-viewer`) — @ngxsmk/core/json-viewer
+- NgxsmkKanbanBoard (`ngxsmk-kanban-board`) — @ngxsmk/core/kanban-board
+- NgxsmkKbd (`kbd[ngxsmk-kbd], ngxsmk-kbd`) — @ngxsmk/core/kbd
+- NgxsmkKeyboardShortcut (`[ngxsmkKeyboardShortcut]`) — @ngxsmk/core/keyboard-shortcut
+- NgxsmkLayerProvider (`[ngxsmkLayerProvider], ngxsmk-layer-provider`) — @ngxsmk/core/layer-provider
+- NgxsmkLayout (`ngxsmk-layout`) — @ngxsmk/core/layout
+- NgxsmkLayoutHeader (`ngxsmk-layout-header, [ngxsmkLayoutHeader]`) — @ngxsmk/core/layout
+- NgxsmkLayoutContent (`ngxsmk-layout-content, [ngxsmkLayoutContent]`) — @ngxsmk/core/layout
+- NgxsmkLayoutFooter (`ngxsmk-layout-footer, [ngxsmkLayoutFooter]`) — @ngxsmk/core/layout
+- NgxsmkLayoutPanel (`ngxsmk-layout-panel, [ngxsmkLayoutPanel]`) — @ngxsmk/core/layout
+- NgxsmkLazyLoad (`ngxsmk-lazy-load`) — @ngxsmk/core/lazy-load
+- NgxsmkLet (`[ngxsmkLet]`) — @ngxsmk/core/let
+- NgxsmkRxLet (`[ngxsmkRxLet]`) — @ngxsmk/core/let
+- NgxsmkLightbox (`ngxsmk-lightbox`) — @ngxsmk/core/lightbox
+- NgxsmkLink (`a[ngxsmk-link]`) — @ngxsmk/core/link
+- NgxsmkLinkProvider (`[ngxsmkLinkProvider]`) — @ngxsmk/core/link-provider
+- NgxsmkList (`ngxsmk-list`) — @ngxsmk/core/list
+- NgxsmkListItem (`ngxsmk-list-item, [ngxsmkListItem]`) — @ngxsmk/core/list-item
+- NgxsmkMarkdown (`ngxsmk-markdown`) — @ngxsmk/core/markdown
+- NgxsmkMarkdownViewer (`ngxsmk-markdown-viewer`) — @ngxsmk/core/markdown-viewer
+- NgxsmkMediaQuery (`[ngxsmkMediaQuery]`) — @ngxsmk/core/media-query
+- NgxsmkMediaTheme (`[ngxsmkMediaTheme]`) — @ngxsmk/core/media-theme
+- NgxsmkMemoryViewer (`ngxsmk-memory-viewer`) — @ngxsmk/core/memory-viewer
+- NgxsmkMetadataListItem (`ngxsmk-metadata-list-item, [ngxsmkMetadataListItem]`) — @ngxsmk/core/metadata-list
+- NgxsmkMetadataList (`ngxsmk-metadata-list`) — @ngxsmk/core/metadata-list
+- NgxsmkMeter (`ngxsmk-meter`) — @ngxsmk/core/meter — Semantic meter for a scalar measurement within a known range (disk usage, score, capacity) — distinct from `progress`, which reports task completion
+- NgxsmkMobileNav (`ngxsmk-mobile-nav`) — @ngxsmk/core/mobile-nav
+- NgxsmkMobileNavToggle (`ngxsmk-mobile-nav-toggle`) — @ngxsmk/core/mobile-nav
+- NgxsmkMultiSelect (`ngxsmk-multi-select`) — @ngxsmk/core/multi-select
+- NgxsmkMultiSelector (`ngxsmk-multi-selector`) — @ngxsmk/core/multi-selector
+- NgxsmkNavHeadingMenu (`ngxsmk-nav-heading-menu`) — @ngxsmk/core/nav-heading-menu
+- NgxsmkNavIcon (`ngxsmk-nav-icon`) — @ngxsmk/core/nav-icon
+- NgxsmkNumberInput (`ngxsmk-number-input`) — @ngxsmk/core/number-input — Numeric field with − / + steppers and min/max/step constraints
+- NgxsmkOrgChart (`ngxsmk-org-chart`) — @ngxsmk/core/org-chart
+- NgxsmkOutline (`ngxsmk-outline`) — @ngxsmk/core/outline
+- NgxsmkOverflowList (`ngxsmk-overflow-list`) — @ngxsmk/core/overflow-list
+- NgxsmkPagination (`ngxsmk-pagination`) — @ngxsmk/core/pagination — Pagination control with first/prev/next/last and an ellipsis-collapsed page range
+- NgxsmkPinInput (`ngxsmk-pin-input`) — @ngxsmk/core/pin-input — One-time-code / PIN entry: a row of single-character fields with paste distribution, arrow/backspace navigation, and masking
+- NgxsmkPivotTable (`ngxsmk-pivot-table`) — @ngxsmk/core/pivot-table
+- NgxsmkPlayground (`ngxsmk-playground`) — @ngxsmk/core/playground
+- NgxsmkPopover (`ngxsmk-popover`) — @ngxsmk/core/popover — Click-triggered popover anchored to its trigger
+- NgxsmkPowerSearch (`ngxsmk-power-search`) — @ngxsmk/core/power-search
+- NgxsmkProgress (`ngxsmk-progress`) — @ngxsmk/core/progress — Progress bar
+- NgxsmkProgressCircle (`ngxsmk-progress-circle`) — @ngxsmk/core/progress-circle
+- NgxsmkPromptCarousel (`ngxsmk-prompt-carousel`) — @ngxsmk/core/prompt-carousel
+- NgxsmkQrCode (`ngxsmk-qr-code`) — @ngxsmk/core/qr-code
+- NgxsmkQueryBuilder (`ngxsmk-query-builder`) — @ngxsmk/core/query-builder
+- NgxsmkRadioGroup (`ngxsmk-radio-group`) — @ngxsmk/core/radio — Groups `ngxsmk-radio` children and holds the selected value
+- NgxsmkRadio (`ngxsmk-radio`) — @ngxsmk/core/radio
+- NgxsmkRating (`ngxsmk-rating`) — @ngxsmk/core/rating — Star rating built as a single `role="slider"` widget, so half-step values and full keyboard control come for free and assistive tech announces the value
+- NgxsmkReasoningTimeline (`ngxsmk-reasoning-timeline`) — @ngxsmk/core/reasoning-timeline
+- NgxsmkResizable (`ngxsmk-resizable`) — @ngxsmk/core/resizable
+- NgxsmkResizeHandle (`ngxsmk-resize-handle`) — @ngxsmk/core/resize-handle
+- NgxsmkResizeObserver (`[ngxsmkResizeObserver]`) — @ngxsmk/core/resize-observer
+- NgxsmkRuleBuilder (`ngxsmk-rule-builder`) — @ngxsmk/core/rule-builder
+- NgxsmkScheduler (`ngxsmk-scheduler`) — @ngxsmk/core/scheduler
+- NgxsmkScrollLock (`[ngxsmkScrollLock]`) — @ngxsmk/core/scroll-lock
+- NgxsmkSection (`ngxsmk-section`) — @ngxsmk/core/section
+- NgxsmkSegmentedControl (`ngxsmk-segmented-control`) — @ngxsmk/core/segmented-control
+- NgxsmkSelect (`ngxsmk-select`) — @ngxsmk/core/select — Themed single-select dropdown
+- NgxsmkSelector (`ngxsmk-selector`) — @ngxsmk/core/selector
+- NgxsmkSheet (`ngxsmk-sheet`) — @ngxsmk/core/sheet
+- NgxsmkSideNav (`ngxsmk-side-nav`) — @ngxsmk/core/side-nav
+- NgxsmkSideNavHeading (`ngxsmk-side-nav-heading`) — @ngxsmk/core/side-nav
+- NgxsmkSideNavItem (`ngxsmk-side-nav-item`) — @ngxsmk/core/side-nav
+- NgxsmkSideNavSection (`ngxsmk-side-nav-section`) — @ngxsmk/core/side-nav
+- NgxsmkSideNavCollapseButton (`ngxsmk-side-nav-collapse-button`) — @ngxsmk/core/side-nav
+- NgxsmkSkeleton (`ngxsmk-skeleton`) — @ngxsmk/core/skeleton — Loading placeholder that mirrors the shape of upcoming content
+- NgxsmkSlider (`ngxsmk-slider`) — @ngxsmk/core/slider
+- NgxsmkSpacer (`ngxsmk-spacer`) — @ngxsmk/core/spacer
+- NgxsmkSpinner (`ngxsmk-spinner`) — @ngxsmk/core/spinner — Indeterminate loading indicator
+- NgxsmkSplitButton (`ngxsmk-split-button`) — @ngxsmk/core/split-button
+- NgxsmkSpreadsheet (`ngxsmk-spreadsheet`) — @ngxsmk/core/spreadsheet
+- NgxsmkStack (`ngxsmk-stack`) — @ngxsmk/core/stack
+- NgxsmkStat (`ngxsmk-stat`) — @ngxsmk/core/stat
+- NgxsmkStatusDot (`ngxsmk-status-dot`) — @ngxsmk/core/status-dot
+- NgxsmkStepper (`ngxsmk-stepper`) — @ngxsmk/core/stepper — Stepper header that renders progress through a sequence of steps
+- NgxsmkStreamingText (`ngxsmk-streaming-text`) — @ngxsmk/core/streaming-text
+- NgxsmkSwitch (`ngxsmk-switch`) — @ngxsmk/core/switch — Toggle switch for immediate on/off settings
+- NgxsmkTabMenu (`ngxsmk-tab-menu`) — @ngxsmk/core/tab-menu
+- NgxsmkTable (`ngxsmk-table`) — @ngxsmk/core/table
+- NgxsmkTableCell (`td[ngxsmkTableCell], ngxsmk-table-cell`) — @ngxsmk/core/table-cell
+- NgxsmkTableHeaderCell (`th[ngxsmkTableHeaderCell], ngxsmk-table-header-cell`) — @ngxsmk/core/table-cell
+- NgxsmkTableRow (`tr[ngxsmkTableRow], ngxsmk-table-row`) — @ngxsmk/core/table-cell
+- NgxsmkTab (`ngxsmk-tab`) — @ngxsmk/core/tabs — Single tab
+- NgxsmkTabs (`ngxsmk-tabs`) — @ngxsmk/core/tabs — Tabbed interface with WAI-ARIA roving tabindex keyboard support
+- NgxsmkTag (`ngxsmk-tag`) — @ngxsmk/core/tag — Label for categorizing content
+- NgxsmkChip (`ngxsmk-chip`) — @ngxsmk/core/tag — Removable tag
+- NgxsmkTerminal (`ngxsmk-terminal`) — @ngxsmk/core/terminal
+- NgxsmkText (`ngxsmk-text`) — @ngxsmk/core/text
+- NgxsmkTextarea (`ngxsmk-textarea`) — @ngxsmk/core/textarea — Multi-line text control with a configurable row count
+- NgxsmkThemeBuilder (`ngxsmk-theme-builder`) — @ngxsmk/core/theme-builder
+- NgxsmkThumbnail (`ngxsmk-thumbnail`) — @ngxsmk/core/thumbnail
+- NgxsmkTimelineGantt (`ngxsmk-timeline-gantt`) — @ngxsmk/core/timeline-gantt
+- NgxsmkTimestamp (`ngxsmk-timestamp`) — @ngxsmk/core/timestamp
+- NgxsmkToaster (`ngxsmk-toaster`) — @ngxsmk/core/toast — Toast outlet
+- NgxsmkToggleButton (`button[ngxsmkToggleButton]`) — @ngxsmk/core/toggle-button
+- NgxsmkToggleButtonGroup (`ngxsmk-toggle-button-group`) — @ngxsmk/core/toggle-button-group
+- NgxsmkToken (`ngxsmk-token`) — @ngxsmk/core/token
+- NgxsmkTokenizer (`ngxsmk-tokenizer`) — @ngxsmk/core/tokenizer
+- NgxsmkToolCallViewer (`ngxsmk-tool-call-viewer`) — @ngxsmk/core/tool-call-viewer
+- NgxsmkTooltip (`[ngxsmkTooltip]`) — @ngxsmk/core/tooltip — Text tooltip on hover/focus
+- NgxsmkTopNav (`ngxsmk-top-nav`) — @ngxsmk/core/top-nav
+- NgxsmkTopNavHeading (`ngxsmk-top-nav-heading`) — @ngxsmk/core/top-nav
+- NgxsmkTopNavItem (`ngxsmk-top-nav-item`) — @ngxsmk/core/top-nav
+- NgxsmkTopNavMenu (`ngxsmk-top-nav-menu`) — @ngxsmk/core/top-nav
+- NgxsmkTopNavMegaMenu (`ngxsmk-top-nav-mega-menu`) — @ngxsmk/core/top-nav
+- NgxsmkTopNavMegaMenuItem (`ngxsmk-top-nav-mega-menu-item`) — @ngxsmk/core/top-nav
+- NgxsmkTopNavMegaMenuFeaturedCard (`ngxsmk-top-nav-mega-menu-featured-card`) — @ngxsmk/core/top-nav
+- NgxsmkTreeNodeComponent (`ngxsmk-tree-node`) — @ngxsmk/core/tree-view
+- NgxsmkTreeView (`ngxsmk-tree-view`) — @ngxsmk/core/tree-view
+- NgxsmkTypeaheadItem (`[ngxsmkTypeaheadItem]`) — @ngxsmk/core/typeahead
+- NgxsmkTypeahead (`ngxsmk-typeahead`) — @ngxsmk/core/typeahead
+- NgxsmkVisuallyHidden (`[ngxsmkVisuallyHidden]`) — @ngxsmk/core/visually-hidden
+- NgxsmkVoiceInput (`ngxsmk-voice-input`) — @ngxsmk/core/voice-input
+- NgxsmkWorkflowBuilder (`ngxsmk-workflow-builder`) — @ngxsmk/core/workflow-builder

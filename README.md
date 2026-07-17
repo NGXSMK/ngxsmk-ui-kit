@@ -12,13 +12,10 @@ tree-shakable standalone components.
 
 [![npm version](https://img.shields.io/npm/v/@ngxsmk/core?label=npm&color=blue)](https://www.npmjs.com/package/@ngxsmk/core)
 [![npm downloads](https://img.shields.io/npm/dm/@ngxsmk/core?color=blue)](https://www.npmjs.com/package/@ngxsmk/core)
-[![CI](https://github.com/NGXSMK/ngxsmk-ui-kit/actions/workflows/ci.yml/badge.svg)](https://github.com/NGXSMK/ngxsmk-ui-kit/actions/workflows/ci.yml)
-[![Angular compatibility](https://github.com/NGXSMK/ngxsmk-ui-kit/actions/workflows/compatibility.yml/badge.svg)](https://github.com/NGXSMK/ngxsmk-ui-kit/actions/workflows/compatibility.yml)
 [![Angular](https://img.shields.io/badge/Angular-17.3%20→%2022-dd0031?logo=angular&logoColor=white)](https://angular.dev)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
-[![GitHub stars](https://img.shields.io/github/stars/NGXSMK/ngxsmk-ui-kit?style=social)](https://github.com/NGXSMK/ngxsmk-ui-kit/stargazers)
 
-[**Live Demo**](https://ngxsmk.dev) · [**Component Explorer**](https://ngxsmk.dev/showcase/explorer) · [**Theme Playground**](https://ngxsmk.dev/playground) · [Report a Bug](https://github.com/NGXSMK/ngxsmk-ui-kit/issues) · [Request a Feature](https://github.com/NGXSMK/ngxsmk-ui-kit/issues)
+[**Live Demo**](https://ngxsmk.dev) · [**Component Explorer**](https://ngxsmk.dev/showcase/explorer) · [**Theme Playground**](https://ngxsmk.dev/playground) · [Community](https://ngxsmk.dev/community)
 
 </div>
 
@@ -76,6 +73,7 @@ JSON for Figma.
 | Runtime theme switching via CSS design tokens | ✅ | Partial | ✅ |
 | Built-in charts (no third-party chart lib) | ✅ 8 types | ❌ | Wrapper (Chart.js) |
 | AI / chat / LLM UI components | ✅ | ❌ | ❌ |
+| AI-agent tooling (MCP server, llms.txt, Claude skill) | ✅ | ❌ | ❌ |
 | Enterprise widgets (kanban, Gantt, spreadsheet, pivot) | ✅ | ❌ | Partial |
 | Per-component tree-shakable entry points | ✅ | ✅ | ✅ |
 | Visual theme builder with multi-format export | ✅ | ❌ | ✅ |
@@ -98,6 +96,7 @@ all-in-one kit for signal-native, zoneless Angular apps._
 - [Accessibility](#accessibility)
 - [Performance & tree-shaking](#performance--tree-shaking)
 - [Integrated third-party components](#integrated-third-party-components)
+- [AI-friendly by design](#ai-friendly-by-design)
 - [FAQ](#faq)
 - [Development](#development)
 - [Roadmap](#roadmap)
@@ -413,6 +412,27 @@ place (each is an isolated, lazy entry point):
 
 They are only pulled into your bundle when you import those specific components.
 
+## AI-friendly by design
+
+NGXSMK ships first-class support for AI coding agents:
+
+- **llms.txt / llms-full.txt** — a generated component index and full API
+  reference (selectors, inputs, outputs) at the repo root and at
+  [ngxsmk.dev/llms.txt](https://ngxsmk.dev/llms.txt), so LLMs generate correct
+  NGXSMK code instead of guessing.
+- **MCP server (`@ngxsmk/mcp`)** — a stdio Model Context Protocol server with
+  `ngxsmk_search_components`, `ngxsmk_explain_api`, and
+  `ngxsmk_recommend_layout` tools, backed by an auto-generated database of
+  every component. Run it with `npm run start:mcp`, or point your MCP client
+  at `node packages/mcp/dist/index.js`.
+- **Claude Code skill** — copy `.claude/skills/using-ngxsmk` into your app to
+  teach Claude the kit's import paths, signal APIs, and theming rules.
+- **AGENTS.md / CLAUDE.md** — repo guidance for agents contributing to the kit
+  itself.
+
+Regenerate all AI docs after API changes:
+`node tools/scripts/generate-ai-docs.mjs`.
+
 ## FAQ
 
 <details>
@@ -522,24 +542,11 @@ tools/
 - SSR (Angular Universal) compatibility.
 - i18n and RTL layout support.
 
-## Contributing
+## Feedback & support
 
-Contributions are welcome! Please read [CONTRIBUTING.md](./CONTRIBUTING.md) for
-setup, branching, and PR guidelines before opening a pull request.
-
-Found a bug or have an idea?
-[Open an issue](https://github.com/NGXSMK/ngxsmk-ui-kit/issues) — every report
-makes the kit better.
-
-## Support the project
-
-If NGXSMK saves you time, **[star the repository](https://github.com/NGXSMK/ngxsmk-ui-kit)** ⭐ —
-stars are the main way other Angular developers discover open-source projects
-like this one. Sharing the [live demo](https://ngxsmk.dev) with your team helps
-too.
-
-[![GitHub stars](https://img.shields.io/github/stars/NGXSMK/ngxsmk-ui-kit?style=for-the-badge&logo=github&label=Star%20on%20GitHub&color=7c3aed)](https://github.com/NGXSMK/ngxsmk-ui-kit/stargazers)
-[![Follow the star history](https://img.shields.io/badge/📈-Star%20history-2694fe?style=for-the-badge)](https://star-history.com/#NGXSMK/ngxsmk-ui-kit&Date)
+Found a bug or have an idea? Reach out through the
+[community page](https://ngxsmk.dev/community) — every report makes the kit
+better. Sharing the [live demo](https://ngxsmk.dev) with your team helps too.
 
 ## License
 

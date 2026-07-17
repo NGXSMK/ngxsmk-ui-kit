@@ -105,6 +105,13 @@ import { AppNav } from '../../nav/nav';
     </div>
   `,
   styles: `
+    :host {
+      display: block;
+      background-color: var(--ngxsmk-color-background, #fafafa);
+      background-image: radial-gradient(var(--ngxsmk-color-outline, #e4e4e7) 1px, transparent 1px);
+      background-size: 24px 24px;
+      min-height: 100vh;
+    }
     .ngxsmk-page {
       max-width: 1400px;
       margin: 0 auto;

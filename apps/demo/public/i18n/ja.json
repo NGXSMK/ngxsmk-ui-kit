@@ -14,7 +14,7 @@
     "search": "検索…",
     "lightMode": "ライトモードに切り替え",
     "darkMode": "ダークモードに切り替え",
-    "github": "GitHub",
+    "github": "npm",
     "getStarted": "はじめに",
     "starOnGithub": "GitHub でスター"
   },
@@ -206,6 +206,14 @@
       "changed": "変更"
     },
     "release": {
+      "v132": {
+        "summary": "AIフレンドリーなツール群：MCPコンポーネントデータベース、llms.txt、エージェント向けドキュメント。",
+        "changes": {
+          "0": "MCPサーバーは全214コンポーネントの自動生成データベースを基盤とし、AIコーディングエージェント向けの検索・API参照・レイアウトツールを提供します。",
+          "1": "サイトルートで配信される自動生成のllms.txtおよびllms-full.txt APIリファレンスと、利用アプリ向けのClaude Codeスキルを追加。",
+          "2": "リポジトリで作業するAIコーディングエージェント向けのAGENTS.mdとCLAUDE.mdガイドを追加。"
+        }
+      },
       "v131": {
         "summary": "キーボードナビゲーション、統一されたフォーカスリング、ダークモードの修正。",
         "changes": {
@@ -451,6 +459,13 @@
     "pillarCopyPasteDesc": "ソースコードを直接所有できます。コンポーネントモジュールはアプリのファイルにスキャフォールドされるため、node_modules に肥大化した依存関係は残りません。",
     "pillarHslEngine": "HSL 変数エンジン",
     "pillarHslEngineDesc": "グローバルな美観を HSL 座標で設定します。バニラ CSS、SCSS、Tailwind の各設定と互換性のあるスタイル出力を簡単に生成できます。",
+    "aiTooling": "Built for AI-assisted development",
+    "aiToolingDesc": "Connect the NGXSMK MCP server to give your AI assistant direct access to component search, API lookup, LLM-readable documentation, and development tools. It works with Claude Code, Cursor, VS Code, Cline, Roo Code, Windsurf, and any MCP-compatible client.",
+    "aiToolingMcp": "コンポーネント検索とAPI参照を備えたMCPサーバー",
+    "aiToolingLlms": "LLM-readable documentation",
+    "aiToolingClients": "複数のMCPクライアントに対応 — Claude Code、Cursor、VS Code、Cline、Roo Code、Windsurf",
+    "aiToolingInstall": "1つのコマンドで簡単にインストール",
+    "aiToolingInstallNote": "Claude Codeの例 — Cursor、VS Code、Cline、Roo Code、Windsurf用のコマンドはドキュメントを参照してください。",
     "pillarAiFirst": "AI ファーストなレイアウト",
     "pillarAiFirstDesc": "AI ストリーミング、推論タイムライン、カスタムコードエディタ、フローティングな引用カードビューア向けに構築された、特化したインターフェースを提供します。",
     "tokenTheming": "トークンテーマ変更",
@@ -790,7 +805,7 @@
     "templatesTitle": "本番環境対応の出発点",
     "templatesSub": "NGXSMK コンポーネントから組み立てられた完全なページ — 1つクローンして出荷できます。",
     "ctaTitle": "作りましょう。",
-    "ctaSub": "217 コンポーネントを参照し、本番テンプレートをクローンし、ブランドに合わせてテーマを調整します。すべてオープンソース、すべて MIT。",
+    "ctaSub": "217 コンポーネントを参照し、本番テンプレートをクローンし、ブランドに合わせてテーマを調整します。すべて無料、すべて MIT ライセンス。",
     "browseComponents": "コンポーネントを参照",
     "tagline": "Angular にふさわしい UI キット。",
     "footerDocs": "ドキュメント",
@@ -1245,8 +1260,28 @@
   "community": {
     "title": "コミュニティと貢献",
     "subtitle": "成長するコミュニティに参加し、質問したり、機能を提案したり、作ったものを共有したりしましょう。",
-    "githubDiscussions": "GitHub Discussions",
-    "githubDiscussionsDesc": "ディスカッションフォーラムで、開発者や貢献者から質問、提案、フィードバックを受け取りましょう。",
-    "joinDiscussion": "ディスカッションに参加"
+    "githubDiscussions": "お問い合わせ・フィードバック",
+    "githubDiscussionsDesc": "質問、アイデア、バグ報告はメンテナーへ直接ご連絡ください。すべてのメッセージがキットの改善に役立ちます。",
+    "joinDiscussion": "フィードバックを送る"
+  },
+  "api": {
+    "title": "APIリファレンス",
+    "subtitle": "すべてのコンポーネントとディレクティブの入力・出力を、ソースコードから直接生成しています。",
+    "searchPlaceholder": "コンポーネント、セレクター、入力を検索…",
+    "allCategories": "すべてのカテゴリ",
+    "loading": "APIデータを読み込み中…",
+    "noMatch": "\"{{query}}\" に一致するコンポーネントはありません。",
+    "inputs": "入力",
+    "outputs": "出力",
+    "required": "必須",
+    "twoway": "双方向",
+    "copy": "コピー",
+    "copied": "コピーしました",
+    "colName": "名前",
+    "colType": "型",
+    "colDefault": "デフォルト",
+    "colEmits": "発行",
+    "apiCount": "{{count}} 個のAPI",
+    "copyLink": "{{name}} へのリンクをコピー"
   }
 }

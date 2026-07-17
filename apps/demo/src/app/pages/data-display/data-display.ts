@@ -103,7 +103,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
             An Angular-first, signals-native UI ecosystem built on shared design tokens.
           </ngxsmk-accordion-item>
           <ngxsmk-accordion-item label="Is it themeable?" value="q2">
-            Yes â€” a universal token engine drives color, spacing, and type across every component.
+            Yes - a universal token engine drives color, spacing, and type across every component.
           </ngxsmk-accordion-item>
           <ngxsmk-accordion-item label="Is it accessible?" value="q3">
             Components ship with WAI-ARIA semantics and full keyboard support.
