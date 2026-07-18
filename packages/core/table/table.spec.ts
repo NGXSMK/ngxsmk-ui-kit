@@ -37,7 +37,7 @@ describe('NgxsmkTable', () => {
   it('renders default text for columns without custom templates', () => {
     const { fixture } = setup();
     const cells = fixture.nativeElement.querySelectorAll('.ngxsmk-table__cell');
-    
+
     // First row: Name cell (Sachin), Role cell (custom template)
     expect(cells[0].textContent?.trim()).toBe('Sachin');
   });
@@ -45,7 +45,7 @@ describe('NgxsmkTable', () => {
   it('renders custom template for columns with ngxsmkCell directive', () => {
     const { fixture } = setup();
     const customBadge = fixture.nativeElement.querySelector('.custom-badge');
-    
+
     expect(customBadge).toBeTruthy();
     expect(customBadge.textContent?.trim()).toBe('ADMIN (Sachin)');
   });

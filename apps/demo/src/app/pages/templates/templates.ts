@@ -549,7 +549,8 @@ interface TemplateItem {
                   <ngxsmk-chat-window [messages]="chatMessages" />
                 </div>
                 <div class="ngxsmk-mock-chat-composer">
-                  <input ngxsmkInput
+                  <input
+                    ngxsmkInput
                     [attr.placeholder]="'templates.mock.askAnything' | translate"
                     style="flex: 1;"
                   />

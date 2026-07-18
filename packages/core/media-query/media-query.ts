@@ -38,4 +38,3 @@ export class NgxsmkMediaQuery implements OnDestroy {
     this.listener = null;
   }
 }
-

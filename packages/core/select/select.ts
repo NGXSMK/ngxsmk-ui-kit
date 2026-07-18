@@ -466,8 +466,6 @@ export class NgxsmkSelect implements ControlValueAccessor, NgxsmkFormFieldContro
     }
   }
 
-
-
   private move(delta: number): void {
     const opts = this.options();
     const hasPlaceholder = !!this.placeholder();

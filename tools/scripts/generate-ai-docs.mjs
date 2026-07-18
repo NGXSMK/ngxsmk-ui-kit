@@ -42,22 +42,17 @@ function inferTypeFromCode(defaultCode) {
 
 function parseFile(filePath) {
   const sourceCode = readFileSync(filePath, 'utf8');
-  const sourceFile = ts.createSourceFile(
-    filePath,
-    sourceCode,
-    ts.ScriptTarget.Latest,
-    true
-  );
+  const sourceFile = ts.createSourceFile(filePath, sourceCode, ts.ScriptTarget.Latest, true);
 
   const entries = [];
 
   function visit(node) {
     if (ts.isClassDeclaration(node) && node.name) {
       const className = node.name.text;
-      
+
       let decoratorName = null;
       let selector = '';
-      
+
       const decorators = getDecoratorsOfNode(node);
       for (const dec of decorators) {
         const expr = dec.expression;
@@ -65,7 +60,7 @@ function parseFile(filePath) {
           const name = expr.expression.text;
           if (name === 'Component' || name === 'Directive') {
             decoratorName = name;
-            
+
             if (expr.arguments.length > 0) {
               const arg = expr.arguments[0];
               if (ts.isObjectLiteralExpression(arg)) {
@@ -75,7 +70,10 @@ function parseFile(filePath) {
                     ts.isIdentifier(prop.name) &&
                     prop.name.text === 'selector'
                   ) {
-                    if (ts.isStringLiteral(prop.initializer) || ts.isNoSubstitutionTemplateLiteral(prop.initializer)) {
+                    if (
+                      ts.isStringLiteral(prop.initializer) ||
+                      ts.isNoSubstitutionTemplateLiteral(prop.initializer)
+                    ) {
                       selector = prop.initializer.text;
                     }
                   }
@@ -95,15 +93,18 @@ function parseFile(filePath) {
             if (typeof commentNode.comment === 'string') {
               commentText = commentNode.comment;
             } else if (Array.isArray(commentNode.comment)) {
-              commentText = commentNode.comment.map(part => part.text).join('');
+              commentText = commentNode.comment.map((part) => part.text).join('');
             }
             if (commentText) {
               const cleanText = commentText
                 .split(/\r?\n/)
-                .map(l => l.replace(/^\s*\*\s?/, ''))
-                .filter(l => !l.startsWith('@'));
-              const cut = cleanText.findIndex(l => l.startsWith('```'));
-              const text = (cut === -1 ? cleanText : cleanText.slice(0, cut)).join(' ').replace(/\s+/g, ' ').trim();
+                .map((l) => l.replace(/^\s*\*\s?/, ''))
+                .filter((l) => !l.startsWith('@'));
+              const cut = cleanText.findIndex((l) => l.startsWith('```'));
+              const text = (cut === -1 ? cleanText : cleanText.slice(0, cut))
+                .join(' ')
+                .replace(/\s+/g, ' ')
+                .trim();
               jsDocTexts.push(text);
             }
           }
@@ -116,18 +117,18 @@ function parseFile(filePath) {
           selector,
           description,
           inputs: [],
-          outputs: []
+          outputs: [],
         };
 
         for (const member of node.members) {
           if (ts.isPropertyDeclaration(member) && member.name && ts.isIdentifier(member.name)) {
             const memberName = member.name.text;
             const initializer = member.initializer;
-            
+
             if (initializer && ts.isCallExpression(initializer)) {
               let callExpr = initializer.expression;
               let isRequired = false;
-              
+
               if (
                 ts.isPropertyAccessExpression(callExpr) &&
                 ts.isIdentifier(callExpr.name) &&
@@ -136,31 +137,43 @@ function parseFile(filePath) {
                 isRequired = true;
                 callExpr = callExpr.expression;
               }
-              
+
               if (ts.isIdentifier(callExpr)) {
                 const callName = callExpr.text;
                 if (callName === 'input') {
                   const typeArg = initializer.typeArguments?.[0];
-                  let type = typeArg ? sourceCode.substring(typeArg.getStart(), typeArg.getEnd()) : '';
+                  let type = typeArg
+                    ? sourceCode.substring(typeArg.getStart(), typeArg.getEnd())
+                    : '';
                   const args = initializer.arguments;
-                  const defaultVal = isRequired ? undefined : (args.length > 0 ? sourceCode.substring(args[0].getStart(), args[0].getEnd()) : undefined);
-                  
+                  const defaultVal = isRequired
+                    ? undefined
+                    : args.length > 0
+                      ? sourceCode.substring(args[0].getStart(), args[0].getEnd())
+                      : undefined;
+
                   if (!type) {
                     type = defaultVal ? inferTypeFromCode(defaultVal) : 'unknown';
                   }
-                  
+
                   entry.inputs.push({
                     name: memberName,
                     type,
                     required: isRequired,
-                    default: defaultVal
+                    default: defaultVal,
                   });
                 } else if (callName === 'model') {
                   const typeArg = initializer.typeArguments?.[0];
-                  let type = typeArg ? sourceCode.substring(typeArg.getStart(), typeArg.getEnd()) : '';
+                  let type = typeArg
+                    ? sourceCode.substring(typeArg.getStart(), typeArg.getEnd())
+                    : '';
                   const args = initializer.arguments;
-                  const defaultVal = isRequired ? undefined : (args.length > 0 ? sourceCode.substring(args[0].getStart(), args[0].getEnd()) : undefined);
-                  
+                  const defaultVal = isRequired
+                    ? undefined
+                    : args.length > 0
+                      ? sourceCode.substring(args[0].getStart(), args[0].getEnd())
+                      : undefined;
+
                   if (!type) {
                     type = defaultVal ? inferTypeFromCode(defaultVal) : 'unknown';
                   }
@@ -170,14 +183,16 @@ function parseFile(filePath) {
                     type,
                     required: isRequired,
                     twoWay: true,
-                    default: defaultVal
+                    default: defaultVal,
                   });
                 } else if (callName === 'output') {
                   const typeArg = initializer.typeArguments?.[0];
-                  const type = typeArg ? sourceCode.substring(typeArg.getStart(), typeArg.getEnd()) : 'void';
+                  const type = typeArg
+                    ? sourceCode.substring(typeArg.getStart(), typeArg.getEnd())
+                    : 'void';
                   entry.outputs.push({
                     name: memberName,
-                    type
+                    type,
                   });
                 }
               }
@@ -188,7 +203,7 @@ function parseFile(filePath) {
         entries.push(entry);
       }
     }
-    
+
     ts.forEachChild(node, visit);
   }
 

@@ -15,7 +15,7 @@ export function ngAdd(_options: NgAddSchema): Rule {
 
     const content = tree.read('angular.json')!.toString('utf-8');
     const json = JSON.parse(content);
-    
+
     const projectName = _options.project || Object.keys(json.projects)[0];
     if (!projectName) {
       throw new SchematicsException('No project found in workspace.');
@@ -28,7 +28,9 @@ export function ngAdd(_options: NgAddSchema): Rule {
 
     const targets = project.architect || project.targets;
     if (!targets) {
-      throw new SchematicsException(`Could not find architect targets for project "${projectName}".`);
+      throw new SchematicsException(
+        `Could not find architect targets for project "${projectName}".`,
+      );
     }
 
     // Add styles to build architect options

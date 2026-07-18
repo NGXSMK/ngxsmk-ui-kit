@@ -47,10 +47,12 @@
       rel="stylesheet"
     />
     <script>
-      (function() {
+      (function () {
         try {
           var mode = localStorage.getItem('ngxsmk-theme-mode') || 'system';
-          var isDark = mode === 'dark' || (mode === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          var isDark =
+            mode === 'dark' ||
+            (mode === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
           if (isDark) {
             document.documentElement.classList.add('dark');
           } else {

@@ -105,7 +105,7 @@ const LIGHTNESS_STOPS: Record<keyof ColorScale, number> = {
   400: 0.66,
   500: 0.56,
   600: 0.48,
-  700: 0.40,
+  700: 0.4,
   800: 0.32,
   900: 0.25,
   950: 0.16,
