@@ -62,3 +62,4 @@ Thumbs.db
 # Playwright visual test output (baselines under tests/visual/__screenshots__ ARE committed)
 /test-results/
 /playwright-report/
+!tests/visual/__screenshots__/
