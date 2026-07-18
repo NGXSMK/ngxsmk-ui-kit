@@ -1,0 +1,26 @@
+{
+  "name": "ngxsmk",
+  "owner": {
+    "name": "NGXSMK",
+    "url": "https://github.com/NGXSMK"
+  },
+  "metadata": {
+    "description": "Official NGXSMK UI kit plugin marketplace: AI tooling for building Angular apps with @ngxsmk packages."
+  },
+  "plugins": [
+    {
+      "name": "ngxsmk",
+      "source": "./plugins/ngxsmk",
+      "description": "NGXSMK UI kit support for Claude Code: the using-ngxsmk skill (imports, signal APIs, theming) plus the @ngxsmk/mcp component-database MCP server.",
+      "version": "1.3.2",
+      "author": {
+        "name": "NGXSMK"
+      },
+      "homepage": "https://ngxsmk.github.io/ngxsmk-ui-kit",
+      "repository": "https://github.com/NGXSMK/ngxsmk-ui-kit",
+      "license": "MIT",
+      "category": "development",
+      "keywords": ["angular", "ui-kit", "components", "signals", "theming", "mcp"]
+    }
+  ]
+}

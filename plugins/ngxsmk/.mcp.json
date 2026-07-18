@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "ngxsmk": {
+      "command": "npx",
+      "args": ["-y", "@ngxsmk/mcp"]
+    }
+  }
+}

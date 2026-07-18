@@ -66,6 +66,14 @@ Node 20/22 LTS.
   generated component index/API reference for LLMs.
 - `@ngxsmk/mcp` — stdio MCP server with `ngxsmk_search_components`,
   `ngxsmk_explain_api`, `ngxsmk_recommend_layout`. Build: `npm run build:mcp`;
-  run: `npm run start:mcp`.
-- `.claude/skills/using-ngxsmk` — a Claude Code skill consumers can copy into
-  their own projects.
+  run: `npm run start:mcp`. Consumers run it via `npx -y @ngxsmk/mcp`; in this
+  repo it is preconfigured via the root `.mcp.json`. `packages/mcp/server.json`
+  is the MCP registry manifest (name `io.github.ngxsmk/ngxsmk-mcp`).
+- `.claude/skills/using-ngxsmk` — the canonical Claude Code skill. A copy is
+  synced into `plugins/ngxsmk/skills/` by `generate-ai-docs.mjs` — edit only
+  the `.claude/skills` original.
+- Claude Code plugin — `.claude-plugin/marketplace.json` (repo root) exposes
+  `plugins/ngxsmk` (skill + MCP server). Install:
+  `/plugin marketplace add NGXSMK/ngxsmk-ui-kit`, then
+  `/plugin install ngxsmk@ngxsmk`. Version fields are stamped from the root
+  `package.json` by `generate-ai-docs.mjs`.

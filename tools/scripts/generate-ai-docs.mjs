@@ -4,13 +4,16 @@
  *  - llms-full.txt       (root + apps/demo/public) — full API reference
  *  - packages/mcp/src/component-db.ts — database consumed by the MCP server
  *  - apps/demo/public/component-api.json — data for the demo site's /api page
+ *  - plugins/ngxsmk/skills/using-ngxsmk/SKILL.md — synced from .claude/skills
+ *  - version stamps in plugins/ngxsmk/.claude-plugin/plugin.json,
+ *    .claude-plugin/marketplace.json and packages/mcp/server.json
  *
  * Extraction uses the TypeScript AST Compiler API to query standalone
  * components and directives (inputs/outputs/models).
  *
  * Run: node tools/scripts/generate-ai-docs.mjs
  */
-import { readFileSync, writeFileSync, readdirSync, statSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, readdirSync, statSync, existsSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import ts from 'typescript';
@@ -327,6 +330,35 @@ export const COMPONENT_DATABASE: ComponentEntry[] = ${JSON.stringify(components,
 `;
 writeFileSync(join(root, 'packages', 'mcp', 'src', 'component-db.ts'), dbTs);
 
+// ---- Claude Code plugin + MCP registry manifests -----------------------------
+// The canonical skill lives in .claude/skills/using-ngxsmk; the plugin ships a
+// synced copy. Version fields track the root package.json version.
+const pluginDir = join(root, 'plugins', 'ngxsmk');
+const pluginSkillDir = join(pluginDir, 'skills', 'using-ngxsmk');
+mkdirSync(pluginSkillDir, { recursive: true });
+writeFileSync(
+  join(pluginSkillDir, 'SKILL.md'),
+  readFileSync(join(root, '.claude', 'skills', 'using-ngxsmk', 'SKILL.md')),
+);
+
+function stampVersion(path, update) {
+  if (!existsSync(path)) return;
+  const json = JSON.parse(readFileSync(path, 'utf8'));
+  update(json);
+  writeFileSync(path, JSON.stringify(json, null, 2) + '\n');
+}
+stampVersion(join(pluginDir, '.claude-plugin', 'plugin.json'), (j) => {
+  j.version = rootPkg.version;
+});
+stampVersion(join(root, '.claude-plugin', 'marketplace.json'), (j) => {
+  for (const p of j.plugins ?? []) if (p.name === 'ngxsmk') p.version = rootPkg.version;
+});
+stampVersion(join(root, 'packages', 'mcp', 'server.json'), (j) => {
+  j.version = rootPkg.version;
+  for (const p of j.packages ?? []) p.version = rootPkg.version;
+});
+
 console.log(
-  'Wrote llms.txt, llms-full.txt (root + apps/demo/public) and packages/mcp/src/component-db.ts',
+  'Wrote llms.txt, llms-full.txt (root + apps/demo/public), packages/mcp/src/component-db.ts, ' +
+    'plugins/ngxsmk skill copy, and version stamps (plugin.json, marketplace.json, server.json)',
 );

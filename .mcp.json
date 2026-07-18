@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "ngxsmk": {
+      "command": "node",
+      "args": ["packages/mcp/dist/index.js"]
+    }
+  }
+}
