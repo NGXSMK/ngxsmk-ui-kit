@@ -16,9 +16,9 @@ export default defineConfig({
   retries: process.env['CI'] ? 1 : 0,
   reporter: process.env['CI'] ? [['github'], ['html', { open: 'never' }]] : 'list',
   use: {
-    // The demo is built with base href /ngxsmk-ui-kit/ (GitHub Pages);
-    // page.goto() paths in specs must be relative (no leading slash).
-    baseURL: 'http://localhost:4300/ngxsmk-ui-kit/',
+    // serve-demo.mjs normalizes any build's base href to "/", so the app is
+    // always rooted here regardless of the GitHub Pages prefix.
+    baseURL: 'http://localhost:4300/',
     viewport: { width: 1280, height: 800 },
   },
   expect: {

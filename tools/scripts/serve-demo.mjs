@@ -34,27 +34,34 @@ const MIME = {
   '.txt': 'text/plain',
 };
 
-// The demo is built with a GitHub Pages base href (e.g. /ngxsmk-ui-kit/);
-// serve the app under that prefix too.
-const indexHtml = await readFile(join(root, 'index.html'), 'utf8');
-const baseHref = indexHtml.match(/<base href="([^"]*)"/)?.[1] ?? '/';
+// The demo may be built with a GitHub Pages base href (/ngxsmk-ui-kit/) or
+// with the default (/). Normalize both to serve at the root: strip the
+// prefix from incoming requests and rewrite <base href> to "/" so the
+// Angular router always resolves routes the same way in tests.
+const rawIndex = await readFile(join(root, 'index.html'), 'utf8');
+const baseHref = rawIndex.match(/<base href="([^"]*)"/)?.[1] ?? '/';
+const indexHtml = rawIndex.replace(/<base href="[^"]*"/, '<base href="/"');
+const prefix = baseHref.replace(/\/$/, '');
 
 createServer(async (req, res) => {
   let urlPath = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
-  if (baseHref !== '/' && urlPath.startsWith(baseHref.replace(/\/$/, ''))) {
-    urlPath = urlPath.slice(baseHref.replace(/\/$/, '').length) || '/';
+  if (prefix && urlPath.startsWith(prefix)) {
+    urlPath = urlPath.slice(prefix.length) || '/';
   }
   let filePath = normalize(join(root, urlPath));
   if (!filePath.startsWith(root)) {
     res.writeHead(403).end();
     return;
   }
-  if (!existsSync(filePath) || statSync(filePath).isDirectory()) {
-    filePath = join(root, 'index.html');
-  }
+  const isIndex =
+    !existsSync(filePath) || statSync(filePath).isDirectory() || filePath.endsWith('index.html');
   try {
-    const body = await readFile(filePath);
-    res.writeHead(200, { 'content-type': MIME[extname(filePath)] ?? 'application/octet-stream' });
+    const body = isIndex ? indexHtml : await readFile(filePath);
+    res.writeHead(200, {
+      'content-type': isIndex
+        ? 'text/html'
+        : (MIME[extname(filePath)] ?? 'application/octet-stream'),
+    });
     res.end(body);
   } catch {
     res.writeHead(500).end();
