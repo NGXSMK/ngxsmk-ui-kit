@@ -17,7 +17,7 @@ Usage rules for generated code:
 - Import theme styles once: `@import '@ngxsmk/theme/css';` and toggle dark mode
   by adding the `dark` class to `<html>`.
 
-- Website & docs: https://ngxsmk.dev
+- Website & docs: https://ngxsmk.github.io/ngxsmk-ui-kit
 - Packages on npm: https://www.npmjs.com/org/ngxsmk
 
 ## Components

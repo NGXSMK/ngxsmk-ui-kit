@@ -23,7 +23,7 @@
     "url": "git+https://github.com/NGXSMK/ngxsmk-ui-kit.git",
     "directory": "packages/cli"
   },
-  "homepage": "https://ngxsmk.dev",
+  "homepage": "https://ngxsmk.github.io/ngxsmk-ui-kit",
   "bugs": {
     "url": "https://github.com/NGXSMK/ngxsmk-ui-kit/issues"
   }

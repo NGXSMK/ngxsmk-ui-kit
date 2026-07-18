@@ -252,7 +252,7 @@ Usage rules for generated code:
 
 ## Docs
 - Full component API reference: /llms-full.txt
-- Website & docs: https://ngxsmk.dev
+- Website & docs: https://ngxsmk.github.io/ngxsmk-ui-kit
 - Packages on npm: https://www.npmjs.com/org/ngxsmk
 
 ## Components

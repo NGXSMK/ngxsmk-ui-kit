@@ -6,7 +6,7 @@ import { NgxsmkSeoService } from '@ngxsmk/core/seo';
 const SITE_NAME = 'NGXSMK';
 const DEFAULT_DESCRIPTION =
   'NGXSMK - Premium Zoneless and Signal-first Angular Design System featuring AI-ready controls and custom tokens.';
-const SOCIAL_IMAGE = 'https://ngxsmk.dev/assets/og-image.png';
+const SOCIAL_IMAGE = 'https://ngxsmk.github.io/ngxsmk-ui-kit/assets/og-image.png';
 
 @Injectable({ providedIn: 'root' })
 export class SeoService {
@@ -45,7 +45,10 @@ export class SeoService {
   }
 
   private canonicalUrl(): string {
-    const origin = typeof window !== 'undefined' ? window.location.origin : 'https://ngxsmk.dev';
+    const origin =
+      typeof window !== 'undefined'
+        ? window.location.origin
+        : 'https://ngxsmk.github.io/ngxsmk-ui-kit';
     return `${origin}${this.router.url || '/'}`;
   }
 }

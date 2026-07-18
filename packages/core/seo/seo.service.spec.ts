@@ -32,25 +32,30 @@ describe('NgxsmkSeoService', () => {
   });
 
   it('upserts a canonical link', () => {
-    service.setCanonical('https://ngxsmk.dev/docs');
+    service.setCanonical('https://ngxsmk.github.io/ngxsmk-ui-kit/docs');
     const link = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
     expect(link).toBeTruthy();
-    expect(link.getAttribute('href')).toBe('https://ngxsmk.dev/docs');
+    expect(link.getAttribute('href')).toBe('https://ngxsmk.github.io/ngxsmk-ui-kit/docs');
 
-    service.setCanonical('https://ngxsmk.dev/about');
+    service.setCanonical('https://ngxsmk.github.io/ngxsmk-ui-kit/about');
     const links = document.querySelectorAll('link[rel="canonical"]');
     expect(links.length).toBe(1);
-    expect((links[0] as HTMLLinkElement).getAttribute('href')).toBe('https://ngxsmk.dev/about');
+    expect((links[0] as HTMLLinkElement).getAttribute('href')).toBe(
+      'https://ngxsmk.github.io/ngxsmk-ui-kit/about',
+    );
   });
 
   it('sets open graph and twitter tags from key maps', () => {
-    service.setOpenGraph({ type: 'website', image: 'https://ngxsmk.dev/og.png' });
+    service.setOpenGraph({
+      type: 'website',
+      image: 'https://ngxsmk.github.io/ngxsmk-ui-kit/og.png',
+    });
     service.setTwitterCard({ card: 'summary_large_image' });
     expect(document.querySelector('meta[property="og:type"]')?.getAttribute('content')).toBe(
       'website',
     );
     expect(document.querySelector('meta[property="og:image"]')?.getAttribute('content')).toBe(
-      'https://ngxsmk.dev/og.png',
+      'https://ngxsmk.github.io/ngxsmk-ui-kit/og.png',
     );
     expect(document.querySelector('meta[name="twitter:card"]')?.getAttribute('content')).toBe(
       'summary_large_image',
@@ -73,9 +78,9 @@ describe('NgxsmkSeoService', () => {
     service.update({
       title: 'Docs',
       description: 'Read the docs',
-      canonical: 'https://ngxsmk.dev/docs',
-      url: 'https://ngxsmk.dev/docs',
-      image: 'https://ngxsmk.dev/og.png',
+      canonical: 'https://ngxsmk.github.io/ngxsmk-ui-kit/docs',
+      url: 'https://ngxsmk.github.io/ngxsmk-ui-kit/docs',
+      image: 'https://ngxsmk.github.io/ngxsmk-ui-kit/og.png',
       siteName: 'NGXSMK',
       type: 'website',
       jsonLd: { '@type': 'WebSite', name: 'NGXSMK' },

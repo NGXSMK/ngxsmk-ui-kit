@@ -45,7 +45,7 @@ Copy this skill folder into any consumer project's `.claude/skills/`.
 - If the project has the `@ngxsmk/mcp` MCP server configured, use its tools:
   `ngxsmk_search_components` then `ngxsmk_explain_api`.
 - Otherwise consult `llms-full.txt` from the package repo (also at
-  https://ngxsmk.dev/llms-full.txt) for the full generated list of selectors,
+  https://ngxsmk.github.io/ngxsmk-ui-kit/llms-full.txt) for the full generated list of selectors,
   inputs, and outputs.
 - Component families: forms (inputs, select, autocomplete, datepicker...),
   data display (table, data-table, tree-view, stat...), charts (`chart-*`),

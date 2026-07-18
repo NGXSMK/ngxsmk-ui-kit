@@ -1,6 +1,6 @@
 # @ngxsmk/core
 
-The component library of the [NGXSMK UI kit](https://ngxsmk.dev): 170+ standalone, `OnPush`, signals-based components — forms, navigation, data display, overlays, AI/chat, charts, and enterprise widgets. Also exposes animation helpers (`@ngxsmk/core/animation`) and an SEO service (`@ngxsmk/core/seo`).
+The component library of the [NGXSMK UI kit](https://ngxsmk.github.io/ngxsmk-ui-kit): 170+ standalone, `OnPush`, signals-based components — forms, navigation, data display, overlays, AI/chat, charts, and enterprise widgets. Also exposes animation helpers (`@ngxsmk/core/animation`) and an SEO service (`@ngxsmk/core/seo`).
 
 ## Compatibility
 
@@ -53,7 +53,7 @@ Load the base theme once (see [`@ngxsmk/theme`](../theme)):
 - **Enterprise** — `kanban-board`, `scheduler`, `workflow-builder`, `spreadsheet`, `pivot-table`, `org-chart`
 - **Utilities** — `copy-to-clipboard`, `seo`, `animation`, `i18n`
 
-See the [live demo](https://ngxsmk.dev) for examples of every component.
+See the [live demo](https://ngxsmk.github.io/ngxsmk-ui-kit) for examples of every component.
 
 ## Tree-shaking
 

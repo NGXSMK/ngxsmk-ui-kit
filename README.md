@@ -15,7 +15,7 @@ tree-shakable standalone components.
 [![Angular](https://img.shields.io/badge/Angular-17.3%20→%2022-dd0031?logo=angular&logoColor=white)](https://angular.dev)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 
-[**Live Demo**](https://ngxsmk.dev) · [**Component Explorer**](https://ngxsmk.dev/showcase/explorer) · [**Theme Playground**](https://ngxsmk.dev/playground) · [Community](https://ngxsmk.dev/community)
+[**Live Demo**](https://ngxsmk.github.io/ngxsmk-ui-kit) · [**Component Explorer**](https://ngxsmk.github.io/ngxsmk-ui-kit/showcase/explorer) · [**Theme Playground**](https://ngxsmk.github.io/ngxsmk-ui-kit/playground) · [Community](https://ngxsmk.github.io/ngxsmk-ui-kit/community)
 
 </div>
 
@@ -58,8 +58,8 @@ that feels like modern Angular instead of fighting it.
 - 🧰 **Batteries included** — SEO service, i18n-friendly primitives, animation helpers, CLI with `ng add`.
 - 🆓 **MIT licensed** — free for personal and commercial use, forever.
 
-**Try everything live at [ngxsmk.dev](https://ngxsmk.dev)** — including a
-[visual theme editor](https://ngxsmk.dev/playground) that exports your brand
+**Try everything live at [ngxsmk.dev](https://ngxsmk.github.io/ngxsmk-ui-kit)** — including a
+[visual theme editor](https://ngxsmk.github.io/ngxsmk-ui-kit/playground) that exports your brand
 theme as CSS variables, SCSS, Tailwind config, StyleX tokens, or Tokens Studio
 JSON for Figma.
 
@@ -219,7 +219,7 @@ npm install motion
 
 A curated slice of the catalog — every name below is a deep entry point
 (`@ngxsmk/core/<name>`). Import only what you use, and browse them all in the
-[live component explorer](https://ngxsmk.dev/showcase/explorer).
+[live component explorer](https://ngxsmk.github.io/ngxsmk-ui-kit/showcase/explorer).
 
 - **Forms & inputs** — `input`, `textarea`, `select`, `multi-select`, `combobox`, `autocomplete`, `typeahead`, `number-input`, `pin-input`, `slider`, `checkbox`, `radio`, `switch`, `form-field`, `datepicker`, `tel-input`, `tag`, `segmented-control`, `rating`, `toggle-button`
 - **Buttons & actions** — `button`, `button-group`, `fab`, `split-button`, `link`
@@ -418,7 +418,7 @@ NGXSMK ships first-class support for AI coding agents:
 
 - **llms.txt / llms-full.txt** — a generated component index and full API
   reference (selectors, inputs, outputs) at the repo root and at
-  [ngxsmk.dev/llms.txt](https://ngxsmk.dev/llms.txt), so LLMs generate correct
+  [ngxsmk.dev/llms.txt](https://ngxsmk.github.io/ngxsmk-ui-kit/llms.txt), so LLMs generate correct
   NGXSMK code instead of guessing.
 - **MCP server (`@ngxsmk/mcp`)** — a stdio Model Context Protocol server with
   `ngxsmk_search_components`, `ngxsmk_explain_api`, and
@@ -475,7 +475,7 @@ spreadsheets, and pivot tables. See the [comparison table](#how-does-ngxsmk-comp
 
 Yes — pass a custom `ThemeConfig` (brand color, radius, typography, token
 overrides) to `NgxsmkThemeService`, or design it visually in the
-[theme playground](https://ngxsmk.dev/playground) and export CSS variables,
+[theme playground](https://ngxsmk.github.io/ngxsmk-ui-kit/playground) and export CSS variables,
 SCSS, Tailwind config, StyleX tokens, or Tokens Studio JSON.
 
 </details>
@@ -545,8 +545,8 @@ tools/
 ## Feedback & support
 
 Found a bug or have an idea? Reach out through the
-[community page](https://ngxsmk.dev/community) — every report makes the kit
-better. Sharing the [live demo](https://ngxsmk.dev) with your team helps too.
+[community page](https://ngxsmk.github.io/ngxsmk-ui-kit/community) — every report makes the kit
+better. Sharing the [live demo](https://ngxsmk.github.io/ngxsmk-ui-kit) with your team helps too.
 
 ## License
 
