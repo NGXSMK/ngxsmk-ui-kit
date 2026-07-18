@@ -58,7 +58,7 @@ that feels like modern Angular instead of fighting it.
 - 🧰 **Batteries included** — SEO service, i18n-friendly primitives, animation helpers, CLI with `ng add`.
 - 🆓 **MIT licensed** — free for personal and commercial use, forever.
 
-**Try everything live at [ngxsmk.dev](https://ngxsmk.github.io/ngxsmk-ui-kit)** — including a
+**Try everything live at [ngxsmk.github.io/ngxsmk-ui-kit](https://ngxsmk.github.io/ngxsmk-ui-kit)** — including a
 [visual theme editor](https://ngxsmk.github.io/ngxsmk-ui-kit/playground) that exports your brand
 theme as CSS variables, SCSS, Tailwind config, StyleX tokens, or Tokens Studio
 JSON for Figma.
@@ -416,17 +416,33 @@ They are only pulled into your bundle when you import those specific components.
 
 NGXSMK ships first-class support for AI coding agents:
 
-- **llms.txt / llms-full.txt** — a generated component index and full API
-  reference (selectors, inputs, outputs) at the repo root and at
-  [ngxsmk.dev/llms.txt](https://ngxsmk.github.io/ngxsmk-ui-kit/llms.txt), so LLMs generate correct
-  NGXSMK code instead of guessing.
+- **Claude Code plugin** — one command installs the `using-ngxsmk` skill _and_
+  the MCP server into Claude Code:
+
+  ```
+  /plugin marketplace add NGXSMK/ngxsmk-ui-kit
+  /plugin install ngxsmk@ngxsmk
+  ```
+
 - **MCP server (`@ngxsmk/mcp`)** — a stdio Model Context Protocol server with
   `ngxsmk_search_components`, `ngxsmk_explain_api`, and
   `ngxsmk_recommend_layout` tools, backed by an auto-generated database of
-  every component. Run it with `npm run start:mcp`, or point your MCP client
-  at `node packages/mcp/dist/index.js`.
-- **Claude Code skill** — copy `.claude/skills/using-ngxsmk` into your app to
-  teach Claude the kit's import paths, signal APIs, and theming rules.
+  every component. Add it to any MCP client:
+
+  ```json
+  { "mcpServers": { "ngxsmk": { "command": "npx", "args": ["-y", "@ngxsmk/mcp"] } } }
+  ```
+
+  Claude Code CLI: `claude mcp add ngxsmk -- npx -y @ngxsmk/mcp`. Inside this
+  repo it is preconfigured via the root `.mcp.json`.
+
+- **llms.txt / llms-full.txt** — a generated component index and full API
+  reference (selectors, inputs, outputs) at the repo root and at
+  [ngxsmk.github.io/ngxsmk-ui-kit/llms.txt](https://ngxsmk.github.io/ngxsmk-ui-kit/llms.txt), so LLMs generate correct
+  NGXSMK code instead of guessing.
+- **Claude Code skill** — installed by the plugin above, or copy
+  `.claude/skills/using-ngxsmk` into your app to teach Claude the kit's import
+  paths, signal APIs, and theming rules.
 - **AGENTS.md / CLAUDE.md** — repo guidance for agents contributing to the kit
   itself.
 
