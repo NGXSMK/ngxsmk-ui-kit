@@ -15,7 +15,7 @@ tree-shakable standalone components.
 [![Angular](https://img.shields.io/badge/Angular-17.3%20→%2022-dd0031?logo=angular&logoColor=white)](https://angular.dev)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 
-[**Live Demo**](https://ngxsmk.github.io/ngxsmk-ui-kit) · [**Component Explorer**](https://ngxsmk.github.io/ngxsmk-ui-kit/showcase/explorer) · [**Theme Playground**](https://ngxsmk.github.io/ngxsmk-ui-kit/playground) · [Community](https://ngxsmk.github.io/ngxsmk-ui-kit/community)
+[**Live Demo**](https://ngxsmk.github.io/ngxsmk-ui-kit)
 
 </div>
 
