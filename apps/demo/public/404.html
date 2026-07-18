@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>NGXSMK — The UI Kit That Angular Deserves</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#059669" />
+    <meta name="robots" content="index, follow" />
+    <meta
+      name="description"
+      content="NGXSMK is an Angular-first, MIT-licensed UI ecosystem — signals-native, zoneless, and themed with a universal token engine."
+    />
+    <link rel="canonical" href="https://ngxsmk.github.io/ngxsmk-ui-kit/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="NGXSMK" />
+    <meta property="og:title" content="NGXSMK — The UI Kit That Angular Deserves" />
+    <meta
+      property="og:description"
+      content="NGXSMK is an Angular-first, MIT-licensed UI ecosystem — signals-native, zoneless, and themed with a universal token engine."
+    />
+    <meta property="og:url" content="https://ngxsmk.github.io/ngxsmk-ui-kit/" />
+    <meta
+      property="og:image"
+      content="https://ngxsmk.github.io/ngxsmk-ui-kit/assets/og-image.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="NGXSMK — The UI Kit That Angular Deserves" />
+    <meta
+      name="twitter:description"
+      content="NGXSMK is an Angular-first, MIT-licensed UI ecosystem — signals-native, zoneless, and themed with a universal token engine."
+    />
+    <meta
+      name="twitter:image"
+      content="https://ngxsmk.github.io/ngxsmk-ui-kit/assets/og-image.png"
+    />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "NGXSMK",
+        "url": "https://ngxsmk.github.io/ngxsmk-ui-kit",
+        "description": "An Angular-first, MIT-licensed UI ecosystem — signals-native, zoneless, and themed with a universal token engine.",
+        "sameAs": ["https://www.npmjs.com/org/ngxsmk"]
+      }
+    </script>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" sizes="32x32" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      (function () {
+        try {
+          var mode = localStorage.getItem('ngxsmk-theme-mode') || 'system';
+          var isDark =
+            mode === 'dark' ||
+            (mode === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          if (isDark) {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <app-root></app-root>
+  </body>
+</html>
