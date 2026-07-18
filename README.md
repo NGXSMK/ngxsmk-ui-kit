@@ -561,7 +561,7 @@ tools/
 ## Feedback & support
 
 Found a bug or have an idea? Reach out through the
-[community page](https://ngxsmk.github.io/ngxsmk-ui-kit/community) — every report makes the kit
+[community page](https://github.com/orgs/NGXSMK/discussions/19) — every report makes the kit
 better. Sharing the [live demo](https://ngxsmk.github.io/ngxsmk-ui-kit) with your team helps too.
 
 ## License
