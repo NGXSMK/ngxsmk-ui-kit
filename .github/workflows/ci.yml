@@ -105,7 +105,7 @@ jobs:
       # baseline (uploaded as an artifact below — commit it from there) while
       # still comparing against every existing one.
       - name: Run visual tests
-        run: npm run visual -- --update-snapshots missing
+        run: npm run visual -- --update-snapshots=missing
 
       - name: Upload baselines
         if: always()

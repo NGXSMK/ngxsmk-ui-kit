@@ -8,7 +8,7 @@
   "cdk/media-query": 525,
   "cdk/resize-observer": 1031,
   "cdk/scroll-lock": 746,
-  "cdk/testing": 437,
+  "cdk/testing": 538,
   "cdk/visually-hidden": 662,
   "cdk/cdk": 423,
   "core/accordion": 2383,
@@ -207,5 +207,5 @@
   "core/voice-input": 1233,
   "core/workflow-builder": 1126,
   "core/core": 1235,
-  "theme/theme": 9206
+  "theme/theme": 9204
 }
