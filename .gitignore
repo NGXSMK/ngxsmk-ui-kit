@@ -58,3 +58,7 @@ storybook-static/
 # System files
 .DS_Store
 Thumbs.db
+
+# Playwright visual test output (baselines under tests/visual/__screenshots__ ARE committed)
+/test-results/
+/playwright-report/

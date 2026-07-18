@@ -30,6 +30,16 @@ library.
 - Regenerate AI docs (llms.txt, llms-full.txt, MCP component DB) after
   adding/changing component APIs: `node tools/scripts/generate-ai-docs.mjs`
 - Lint/format: `npm run lint`, `npm run format`
+- Bundle size check (after `build:libs`): `npm run size` — fails CI if any
+  entry grows >10% over `tools/bundle-size-baseline.json`; accept intentional
+  growth with `npm run size:update` and commit the baseline diff
+- Zoneless check (after `build:libs`): `npm run check:zoneless` — fails if any
+  built FESM chunk references zone.js
+- Visual regression: `npm run visual` (Playwright, built demo, light + dark).
+  Baselines live in `tests/visual/__screenshots__` and must be Linux-rendered:
+  CI bootstraps missing ones and uploads them as the `visual-baselines`
+  artifact — commit baselines from that artifact, never from a local
+  Windows/macOS `visual:update` run (font rendering differs)
 
 Node >= 20 required. Note: Node 26 breaks Angular CLI 22 build/test — use
 Node 20/22 LTS.

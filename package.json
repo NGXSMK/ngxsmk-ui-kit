@@ -28,6 +28,11 @@
     "build:libs": "ng build @ngxsmk/theme && ng build @ngxsmk/cdk && ng build @ngxsmk/core",
     "build:mcp": "npx tsc -p packages/mcp/tsconfig.json",
     "build:demo": "ng build demo",
+    "size": "node tools/scripts/check-bundle-sizes.mjs --top 15",
+    "size:update": "node tools/scripts/check-bundle-sizes.mjs --update",
+    "check:zoneless": "node tools/scripts/check-zoneless.mjs",
+    "visual": "playwright test",
+    "visual:update": "playwright test --update-snapshots",
     "start:mcp": "node packages/mcp/dist/index.js",
     "changeset": "changeset",
     "changeset:status": "changeset status --verbose",
@@ -77,6 +82,7 @@
     "@commitlint/cli": "^19.7.1",
     "@commitlint/config-conventional": "^19.7.1",
     "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.61.1",
     "angular-eslint": "22.1.0",
     "axe-core": "^4.12.1",
     "eslint": "^10.6.0",
@@ -85,9 +91,9 @@
     "ng-packagr": "^22.0.0",
     "prettier": "^3.8.1",
     "tsx": "^4.23.0",
+    "turbo": "^2.0.4",
     "typescript": "~6.0.2",
     "typescript-eslint": "8.62.1",
-    "vitest": "^4.0.8",
-    "turbo": "^2.0.4"
+    "vitest": "^4.0.8"
   }
 }
