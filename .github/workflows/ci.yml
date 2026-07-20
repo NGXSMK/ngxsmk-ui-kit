@@ -109,7 +109,7 @@ jobs:
 
       - name: Upload baselines
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: visual-baselines
           path: tests/visual/__screenshots__/
@@ -117,7 +117,7 @@ jobs:
 
       - name: Upload diff report
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: visual-regression-report
           path: |
