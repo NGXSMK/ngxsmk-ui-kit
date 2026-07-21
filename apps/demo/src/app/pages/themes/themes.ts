@@ -107,7 +107,9 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
         [code]="codeIonicAdapter"
       >
         <div class="ngxsmk-sc-surface">
-          <p style="margin:0 0 1rem; font-size:var(--ngxsmk-text-body-md-size); color:var(--ngxsmk-color-on-surface-variant, #71717a);">
+          <p
+            style="margin:0 0 1rem; font-size:var(--ngxsmk-text-body-md-size); color:var(--ngxsmk-color-on-surface-variant, #71717a);"
+          >
             {{ 'themes.ionicAdapterHint' | translate }}
           </p>
           <div class="ngxsmk-theme-actions">
@@ -119,7 +121,9 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
             </button>
           </div>
           @if (ionicApplied()) {
-            <p style="margin:0.75rem 0 0; font-size:var(--ngxsmk-text-body-sm-size); color:var(--ngxsmk-color-success, #16a34a);">
+            <p
+              style="margin:0.75rem 0 0; font-size:var(--ngxsmk-text-body-sm-size); color:var(--ngxsmk-color-success, #16a34a);"
+            >
               {{ 'themes.ionicActive' | translate }}
             </p>
           }

@@ -808,9 +808,11 @@ type RadiusKey = keyof typeof RADII;
       <section class="pg-panel">
         <header class="panel-head">
           <ngxsmk-h-stack justify="space-between" align="center" style="width: 100%;">
-            <ngxsmk-heading level="h3" style="margin: 0; font-size: var(--ngxsmk-text-title-md-size); font-weight: 700;">{{
-              'playground.title' | translate
-            }}</ngxsmk-heading>
+            <ngxsmk-heading
+              level="h3"
+              style="margin: 0; font-size: var(--ngxsmk-text-title-md-size); font-weight: 700;"
+              >{{ 'playground.title' | translate }}</ngxsmk-heading
+            >
 
             <ngxsmk-h-stack gap="var(--ngxsmk-space-2)">
               <ngxsmk-dropdown-menu [items]="themeMenuItems">
