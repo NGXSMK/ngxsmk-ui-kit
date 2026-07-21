@@ -12,7 +12,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { AppNav } from '../../nav/nav';
 
 interface Change {
-  type: 'added' | 'fixed' | 'changed';
+  type: 'added' | 'fixed' | 'changed' | 'removed';
   text: string;
 }
 
@@ -69,7 +69,9 @@ interface Release {
                           ? 'success'
                           : change.type === 'fixed'
                             ? 'warning'
-                            : 'primary'
+                            : change.type === 'removed'
+                              ? 'error'
+                              : 'primary'
                       "
                       >{{ 'changelog.type.' + change.type | translate }}</ngxsmk-badge
                     >
