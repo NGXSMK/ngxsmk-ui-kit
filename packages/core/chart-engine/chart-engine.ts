@@ -96,27 +96,31 @@ export function resolveTheme(host: HTMLElement): ChartTheme {
   const cs = getComputedStyle(host);
   const v = (name: string, fallback: string) => cs.getPropertyValue(name).trim() || fallback;
   const toRGBA = (name: string, fallback: string) => parseColor(v(name, fallback));
+  // Categorical series palette — a dedicated qualitative set (--ngxsmk-chart-*),
+  // decoupled from the semantic roles so series 4+ no longer inherit the
+  // error/warning/success meanings. Fallbacks are the validated light-mode
+  // steps; the theme CSS re-steps them for dark mode, read here at render time.
   const palette = [
-    toRGBA('--ngxsmk-color-primary', '#059669'),
-    toRGBA('--ngxsmk-color-secondary', '#0ea5e9'),
-    toRGBA('--ngxsmk-color-tertiary', '#8b5cf6'),
-    toRGBA('--ngxsmk-color-error', '#ef4444'),
-    toRGBA('--ngxsmk-color-warning', '#f59e0b'),
-    toRGBA('--ngxsmk-color-success', '#22c55e'),
-    toRGBA('--ngxsmk-color-info', '#06b6d4'),
-    toRGBA('--ngxsmk-color-surface-variant', '#94a3b8'),
+    toRGBA('--ngxsmk-chart-1', '#2A78D6'),
+    toRGBA('--ngxsmk-chart-2', '#1BAF7A'),
+    toRGBA('--ngxsmk-chart-3', '#EDA100'),
+    toRGBA('--ngxsmk-chart-4', '#008300'),
+    toRGBA('--ngxsmk-chart-5', '#4A3AA7'),
+    toRGBA('--ngxsmk-chart-6', '#E34948'),
+    toRGBA('--ngxsmk-chart-7', '#E87BA4'),
+    toRGBA('--ngxsmk-chart-8', '#EB6834'),
   ];
   return {
     font: v('--ngxsmk-font-sans', 'system-ui, sans-serif'),
-    primary: palette[0],
-    secondary: palette[1],
-    tertiary: palette[2],
-    error: palette[3],
-    warning: palette[4],
-    success: palette[5],
-    info: palette[6],
+    primary: toRGBA('--ngxsmk-color-primary', '#059669'),
+    secondary: toRGBA('--ngxsmk-color-secondary', '#0ea5e9'),
+    tertiary: toRGBA('--ngxsmk-color-tertiary', '#8b5cf6'),
+    error: toRGBA('--ngxsmk-color-error', '#ef4444'),
+    warning: toRGBA('--ngxsmk-color-warning', '#f59e0b'),
+    success: toRGBA('--ngxsmk-color-success', '#22c55e'),
+    info: toRGBA('--ngxsmk-color-info', '#06b6d4'),
     surface: toRGBA('--ngxsmk-color-surface', '#ffffff'),
-    surfaceVariant: palette[7],
+    surfaceVariant: toRGBA('--ngxsmk-color-surface-variant', '#94a3b8'),
     surfaceHover: toRGBA('--ngxsmk-color-surface-hover', '#f1f5f9'),
     onSurface: toRGBA('--ngxsmk-color-on-surface', '#0a1317'),
     onSurfaceVariant: toRGBA('--ngxsmk-color-on-surface-variant', '#4e606f'),
@@ -157,14 +161,14 @@ export const SHARED_CHART_STYLES = `
     background: var(--ngxsmk-color-surface, #ffffff);
     color: var(--ngxsmk-color-on-surface, #0a1317);
     border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
-    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.18);
+    box-shadow: var(--ngxsmk-shadow-lg, 0 6px 20px rgba(15, 23, 42, 0.18));
     font-family: var(--ngxsmk-font-sans, system-ui), sans-serif;
     font-size: var(--ngxsmk-text-body-xs-size);
     line-height: 1.45;
     pointer-events: none;
     opacity: 0;
     transform: translate(-9999px, -9999px);
-    transition: opacity 0.12s ease;
+    transition: opacity var(--ngxsmk-duration-fast, 0.12s) var(--ngxsmk-ease-out, ease);
     white-space: nowrap;
   }
   .ngxsmk-chart-tip__title {
