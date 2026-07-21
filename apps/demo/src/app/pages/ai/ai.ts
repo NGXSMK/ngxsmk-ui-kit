@@ -120,7 +120,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     >
       <div class="ngxsmk-demo-stack" style="width:100%;max-width:440px">
         @if (sentLog().length) {
-          <div class="ngxsmk-sc-surface" style="padding:0.5rem 0.75rem;font-size:var(--ngxsmk-text-body-sm-size)">
+          <div
+            class="ngxsmk-sc-surface"
+            style="padding:0.5rem 0.75rem;font-size:var(--ngxsmk-text-body-sm-size)"
+          >
             <strong>{{ 'ai.sent' | translate }}</strong> {{ sentLog() }}
           </div>
         }
@@ -240,7 +243,9 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
               <ngxsmk-chat-composer-token-element label="query()" variant="tool" />
               <ngxsmk-chat-composer-token-element label="data.csv" variant="file" />
             </div>
-            <p style="margin:0;font-size:var(--ngxsmk-text-body-sm-size);color:var(--ngxsmk-color-on-surface-variant)">
+            <p
+              style="margin:0;font-size:var(--ngxsmk-text-body-sm-size);color:var(--ngxsmk-color-on-surface-variant)"
+            >
               Attach files, pick a prompt, or summon a tool - then send.
             </p>
           </div>

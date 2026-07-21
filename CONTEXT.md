@@ -64,15 +64,15 @@
 
 ## Token Namespace
 
-| Prefix | Meaning | Example |
-|--------|---------|---------|
-| `--ngxsmk-color-*` | Semantic color roles | `--ngxsmk-color-primary` |
-| `--ngxsmk-color-brand-*` | Brand scale (11 steps) | `--ngxsmk-color-brand-500` |
-| `--ngxsmk-space-*` | Spacing scale (16 steps) | `--ngxsmk-space-4` |
-| `--ngxsmk-radius-*` | Border radius scale | `--ngxsmk-radius-lg` |
-| `--ngxsmk-shadow-*` | Elevation shadows | `--ngxsmk-shadow-md` |
-| `--ngxsmk-font-*` | Typography families | `--ngxsmk-font-sans` |
-| `--ngxsmk-text-*` | Typography roles | `--ngxsmk-text-body-medium` |
-| `--ngxsmk-duration-*` | Animation speeds | `--ngxsmk-duration-normal` |
-| `--ngxsmk-z-*` | Z-index layers | `--ngxsmk-z-dropdown` |
-| `--ion-*` | Ionic variable namespace | `--ion-color-primary` |
+| Prefix                   | Meaning                  | Example                     |
+| ------------------------ | ------------------------ | --------------------------- |
+| `--ngxsmk-color-*`       | Semantic color roles     | `--ngxsmk-color-primary`    |
+| `--ngxsmk-color-brand-*` | Brand scale (11 steps)   | `--ngxsmk-color-brand-500`  |
+| `--ngxsmk-space-*`       | Spacing scale (16 steps) | `--ngxsmk-space-4`          |
+| `--ngxsmk-radius-*`      | Border radius scale      | `--ngxsmk-radius-lg`        |
+| `--ngxsmk-shadow-*`      | Elevation shadows        | `--ngxsmk-shadow-md`        |
+| `--ngxsmk-font-*`        | Typography families      | `--ngxsmk-font-sans`        |
+| `--ngxsmk-text-*`        | Typography roles         | `--ngxsmk-text-body-medium` |
+| `--ngxsmk-duration-*`    | Animation speeds         | `--ngxsmk-duration-normal`  |
+| `--ngxsmk-z-*`           | Z-index layers           | `--ngxsmk-z-dropdown`       |
+| `--ion-*`                | Ionic variable namespace | `--ion-color-primary`       |
