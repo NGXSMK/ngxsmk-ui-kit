@@ -299,19 +299,19 @@ interface ApiDb {
       margin-bottom: 1rem;
     }
     .api-badge {
-      font-size: 0.7rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       font-weight: 600;
     }
     ngxsmk-heading.api-title {
       font-family: 'Outfit', var(--ngxsmk-font-sans, system-ui), sans-serif;
-      font-size: 2.5rem;
+      font-size: var(--ngxsmk-text-display-md-size);
       font-weight: 800;
       letter-spacing: -0.03em;
       margin: 0 0 0.5rem;
       color: var(--ngxsmk-color-on-surface);
     }
     .api-subtitle {
-      font-size: 1rem;
+      font-size: var(--ngxsmk-text-body-lg-size);
       color: var(--ngxsmk-color-on-surface-variant);
       margin: 0 0 1.5rem;
       max-width: 640px;
@@ -327,7 +327,7 @@ interface ApiDb {
       flex: 1 1 320px;
       max-width: 480px;
       padding: 0.625rem 1rem;
-      font-size: 0.9375rem;
+      font-size: var(--ngxsmk-text-body-md-size);
       font-family: inherit;
       color: var(--ngxsmk-color-on-surface);
       background: var(--ngxsmk-color-surface);
@@ -354,7 +354,7 @@ interface ApiDb {
     }
     .api-loading {
       color: var(--ngxsmk-color-on-surface-variant);
-      font-size: 0.9375rem;
+      font-size: var(--ngxsmk-text-body-md-size);
     }
 
     .api-layout {
@@ -380,7 +380,7 @@ interface ApiDb {
     .api-sidebar-entry {
       display: block;
       font-family: var(--ngxsmk-font-mono);
-      font-size: 0.6875rem;
+      font-size: var(--ngxsmk-text-body-xs-size);
       color: var(--ngxsmk-color-on-surface-variant);
       margin-bottom: 0.25rem;
       word-break: break-all;
@@ -393,7 +393,7 @@ interface ApiDb {
       border: 0;
       background: none;
       cursor: pointer;
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       color: var(--ngxsmk-color-on-surface-variant);
       text-decoration: none;
       padding: 0.2rem 0.5rem;
@@ -444,7 +444,7 @@ interface ApiDb {
     }
     ngxsmk-heading.api-entry-name {
       font-family: 'Outfit', var(--ngxsmk-font-sans, system-ui), sans-serif;
-      font-size: 1.375rem;
+      font-size: var(--ngxsmk-text-title-md-size);
       font-weight: 700;
       letter-spacing: -0.02em;
       margin: 0;
@@ -459,7 +459,7 @@ interface ApiDb {
       color: var(--ngxsmk-color-primary);
     }
     .api-kind {
-      font-size: 0.625rem;
+      font-size: var(--ngxsmk-text-body-xs-size);
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.04em;
@@ -488,7 +488,7 @@ interface ApiDb {
       align-items: center;
       justify-content: center;
       font-family: var(--ngxsmk-font-mono);
-      font-size: 0.875rem;
+      font-size: var(--ngxsmk-text-body-md-size);
       color: var(--ngxsmk-color-on-surface-variant);
       background: transparent;
       border: 1px solid var(--ngxsmk-color-outline);
@@ -522,7 +522,7 @@ interface ApiDb {
     }
     .api-entry-meta {
       font-family: var(--ngxsmk-font-mono);
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       color: var(--ngxsmk-color-on-surface-variant);
       background: var(--ngxsmk-color-surface-variant);
       border-radius: var(--ngxsmk-radius-sm);
@@ -531,7 +531,7 @@ interface ApiDb {
     }
     .api-copy {
       flex: 0 0 auto;
-      font-size: 0.6875rem;
+      font-size: var(--ngxsmk-text-body-xs-size);
       font-weight: 600;
       color: var(--ngxsmk-color-on-surface-variant);
       background: var(--ngxsmk-color-surface);
@@ -549,14 +549,14 @@ interface ApiDb {
       border-color: var(--ngxsmk-color-primary);
     }
     .api-entry-desc {
-      font-size: 0.875rem;
+      font-size: var(--ngxsmk-text-body-md-size);
       color: var(--ngxsmk-color-on-surface-variant);
       line-height: 1.6;
       margin: 0.5rem 0 0;
       max-width: 720px;
     }
     ngxsmk-heading.api-table-title {
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.05em;
@@ -571,7 +571,7 @@ interface ApiDb {
     .api-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
     }
     .api-table thead th {
       position: sticky;
@@ -598,7 +598,7 @@ interface ApiDb {
     }
     .api-table code {
       font-family: var(--ngxsmk-font-mono);
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
     }
     .api-type {
       color: var(--ngxsmk-color-primary);
@@ -607,7 +607,7 @@ interface ApiDb {
     .api-tag {
       display: inline-block;
       margin-left: 0.375rem;
-      font-size: 0.625rem;
+      font-size: var(--ngxsmk-text-body-xs-size);
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.03em;

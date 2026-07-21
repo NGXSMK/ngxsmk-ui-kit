@@ -384,12 +384,12 @@ import { NgxsmkHeading } from '@ngxsmk/core/heading';
       margin-bottom: 1rem;
     }
     .docs-badge {
-      font-size: 0.7rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       font-weight: 600;
     }
     ngxsmk-heading.docs-title {
       font-family: 'Outfit', var(--ngxsmk-font-sans, system-ui), sans-serif;
-      font-size: 2.75rem;
+      font-size: var(--ngxsmk-text-display-md-size);
       font-weight: 800;
       letter-spacing: -0.03em;
       line-height: 1.15;
@@ -397,7 +397,7 @@ import { NgxsmkHeading } from '@ngxsmk/core/heading';
       color: var(--ngxsmk-color-on-surface, #09090b);
     }
     .docs-subtitle {
-      font-size: 1.1rem;
+      font-size: var(--ngxsmk-text-title-md-size);
       color: var(--ngxsmk-color-on-surface-variant, #71717a);
       margin: 0;
       line-height: 1.5;
@@ -434,7 +434,7 @@ import { NgxsmkHeading } from '@ngxsmk/core/heading';
 
     ngxsmk-heading.docs-section-title {
       font-family: 'Outfit', var(--ngxsmk-font-sans, system-ui), sans-serif;
-      font-size: 1.5rem;
+      font-size: var(--ngxsmk-text-headline-sm-size);
       font-weight: 700;
       letter-spacing: -0.02em;
       margin: 0 0 0.75rem;
@@ -442,7 +442,7 @@ import { NgxsmkHeading } from '@ngxsmk/core/heading';
     }
 
     .docs-text {
-      font-size: 0.875rem;
+      font-size: var(--ngxsmk-text-body-md-size);
       color: var(--ngxsmk-color-on-surface-variant);
       line-height: 1.6;
       margin: 0 0 1.25rem;
@@ -457,7 +457,7 @@ import { NgxsmkHeading } from '@ngxsmk/core/heading';
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       color: var(--ngxsmk-color-on-surface);
     }
     .checklist-icon {
@@ -504,7 +504,7 @@ import { NgxsmkHeading } from '@ngxsmk/core/heading';
       background: #10b981;
     }
     .terminal-title {
-      font-size: 0.6875rem;
+      font-size: var(--ngxsmk-text-body-xs-size);
       color: rgba(255, 255, 255, 0.4);
       font-family: var(--ngxsmk-font-mono);
     }
@@ -519,11 +519,11 @@ import { NgxsmkHeading } from '@ngxsmk/core/heading';
       font-weight: bold;
       user-select: none;
       font-family: var(--ngxsmk-font-mono);
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
     }
     .terminal-code {
       font-family: var(--ngxsmk-font-mono);
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       color: rgba(255, 255, 255, 0.85);
       flex: 1;
       white-space: nowrap;
@@ -535,7 +535,7 @@ import { NgxsmkHeading } from '@ngxsmk/core/heading';
       border-radius: var(--ngxsmk-radius-md);
       color: rgba(255, 255, 255, 0.7);
       padding: 0.2rem 0.5rem;
-      font-size: 0.6875rem;
+      font-size: var(--ngxsmk-text-body-xs-size);
       cursor: pointer;
       transition:
         background 0.15s,
@@ -547,14 +547,14 @@ import { NgxsmkHeading } from '@ngxsmk/core/heading';
     }
     .docs-terminal-note {
       margin: 0.625rem 0 0;
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       color: var(--ngxsmk-color-on-surface-muted, rgba(255, 255, 255, 0.45));
     }
 
     /* Pillars Grid */
     ngxsmk-heading.docs-subheading {
       font-family: 'Outfit', var(--ngxsmk-font-sans, system-ui), sans-serif;
-      font-size: 1.625rem;
+      font-size: var(--ngxsmk-text-headline-sm-size);
       font-weight: 700;
       letter-spacing: -0.02em;
       margin: 0 0 1rem;
@@ -575,11 +575,11 @@ import { NgxsmkHeading } from '@ngxsmk/core/heading';
       box-shadow: var(--ngxsmk-shadow-md);
     }
     .pillar-icon {
-      font-size: 1.5rem;
+      font-size: var(--ngxsmk-text-headline-sm-size);
       margin-bottom: 0.5rem;
     }
     .docs-card-text {
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       color: var(--ngxsmk-color-on-surface-variant);
       line-height: 1.55;
       margin: 0;
@@ -591,7 +591,7 @@ import { NgxsmkHeading } from '@ngxsmk/core/heading';
     }
     .preset-label {
       display: block;
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       font-weight: 600;
       color: var(--ngxsmk-color-on-surface);
       text-transform: uppercase;
@@ -605,7 +605,7 @@ import { NgxsmkHeading } from '@ngxsmk/core/heading';
     }
     .preset-btn {
       font-family: inherit;
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       font-weight: 600;
       padding: 0.35rem 0.75rem;
       border-radius: var(--ngxsmk-radius-md);
@@ -651,7 +651,7 @@ import { NgxsmkHeading } from '@ngxsmk/core/heading';
       gap: 0.375rem;
     }
     .control-row label {
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       font-weight: 500;
       color: var(--ngxsmk-color-on-surface-variant);
     }
@@ -693,7 +693,7 @@ import { NgxsmkHeading } from '@ngxsmk/core/heading';
       padding: 1.25rem 1rem;
     }
     .sandbox-item-title {
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       font-weight: 700;
       margin: 0 0 1rem;
       color: var(--ngxsmk-color-on-surface);

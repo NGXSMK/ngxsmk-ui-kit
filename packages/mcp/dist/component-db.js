@@ -2272,15 +2272,6 @@ exports.COMPONENT_DATABASE = [
         ]
     },
     {
-        "entryPoint": "@ngxsmk/core/layer-provider",
-        "name": "NgxsmkLayerProvider",
-        "kind": "Directive",
-        "selector": "[ngxsmkLayerProvider], ngxsmk-layer-provider",
-        "description": "",
-        "inputs": [],
-        "outputs": []
-    },
-    {
         "entryPoint": "@ngxsmk/core/layout",
         "name": "NgxsmkLayout",
         "kind": "Component",

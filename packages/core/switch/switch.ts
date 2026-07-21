@@ -2,14 +2,13 @@ import {
   ChangeDetectionStrategy,
   Component,
   booleanAttribute,
-  computed,
   forwardRef,
   input,
   model,
   output,
-  signal,
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { CvaBase } from '@ngxsmk/cdk/cva-base';
 
 /**
  * Toggle switch for immediate on/off settings.
@@ -30,7 +29,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
         [checked]="checked()"
         [disabled]="isDisabled()"
         (change)="onInteraction($event)"
-        (blur)="onTouched?.()"
+        (blur)="emitTouched()"
       />
       <span class="ngxsmk-switch__track" aria-hidden="true">
         <span class="ngxsmk-switch__thumb"></span>
@@ -121,34 +120,23 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NgxsmkSwitch implements ControlValueAccessor {
+export class NgxsmkSwitch extends CvaBase<boolean> {
   readonly checked = model(false);
   readonly disabled = input(false, { transform: booleanAttribute });
   readonly changed = output<boolean>();
 
-  private readonly cvaDisabled = signal(false);
-  protected readonly isDisabled = computed(() => this.disabled() || this.cvaDisabled());
-
-  private onChange?: (value: boolean) => void;
-  protected onTouched?: () => void;
+  protected inputDisabled(): boolean {
+    return this.disabled();
+  }
 
   protected onInteraction(event: Event): void {
     const checked = (event.target as HTMLInputElement).checked;
     this.checked.set(checked);
-    this.onChange?.(checked);
+    this.emitChange(checked);
     this.changed.emit(checked);
   }
 
   writeValue(value: unknown): void {
     this.checked.set(!!value);
-  }
-  registerOnChange(fn: (value: boolean) => void): void {
-    this.onChange = fn;
-  }
-  registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
-  }
-  setDisabledState(disabled: boolean): void {
-    this.cvaDisabled.set(disabled);
   }
 }

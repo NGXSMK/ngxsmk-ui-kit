@@ -1,6 +1,6 @@
 {
   "name": "@ngxsmk/theme",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "Runtime theming and design-token engine for @ngxsmk/core with light/dark modes and preset palettes.",
   "keywords": [
     "angular",

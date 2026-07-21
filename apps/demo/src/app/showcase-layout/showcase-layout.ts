@@ -140,7 +140,7 @@ interface CategoryGroup {
         border-radius: var(--ngxsmk-radius-md, 0.375rem);
         background: var(--ngxsmk-color-background, #fafafa);
         color: var(--ngxsmk-color-on-surface, #09090b);
-        font-size: 0.8125rem;
+        font-size: var(--ngxsmk-text-body-sm-size);
         outline: none;
         transition: border-color 0.15s;
       }
@@ -167,7 +167,7 @@ interface CategoryGroup {
         display: block;
         padding: var(--ngxsmk-space-2, 0.5rem) var(--ngxsmk-space-3, 0.75rem);
         border-radius: var(--ngxsmk-radius-md, 0.375rem);
-        font-size: 0.8125rem;
+        font-size: var(--ngxsmk-text-body-sm-size);
         font-weight: 600;
         text-decoration: none;
         color: var(--ngxsmk-color-on-surface, #09090b);
@@ -190,7 +190,7 @@ interface CategoryGroup {
 
       .ngxsmk-sc-sidebar__group-label {
         padding: var(--ngxsmk-space-2, 0.5rem) var(--ngxsmk-space-3, 0.75rem);
-        font-size: 0.625rem;
+        font-size: var(--ngxsmk-text-body-xs-size);
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.1em;
@@ -202,7 +202,7 @@ interface CategoryGroup {
         display: block;
         padding: var(--ngxsmk-space-1-5, 0.375rem) var(--ngxsmk-space-3, 0.75rem);
         border-radius: var(--ngxsmk-radius-md, 0.375rem);
-        font-size: 0.8125rem;
+        font-size: var(--ngxsmk-text-body-sm-size);
         text-decoration: none;
         color: var(--ngxsmk-color-on-surface-variant, #71717a);
         transition:
@@ -238,7 +238,7 @@ interface CategoryGroup {
         border-radius: var(--ngxsmk-radius-md, 0.375rem);
         background: var(--ngxsmk-color-surface, #ffffff);
         color: var(--ngxsmk-color-on-surface, #09090b);
-        font-size: 0.8125rem;
+        font-size: var(--ngxsmk-text-body-sm-size);
         font-weight: 600;
         cursor: pointer;
       }

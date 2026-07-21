@@ -8,6 +8,7 @@
   signal,
 } from '@angular/core';
 import { ngxsmkUniqueId } from '@ngxsmk/core/util';
+import { ListboxKeyboard } from '@ngxsmk/cdk/listbox-keyboard';
 
 @Component({
   standalone: true,
@@ -17,6 +18,7 @@ import { ngxsmkUniqueId } from '@ngxsmk/core/util';
       <input
         class="ngxsmk-combobox__input"
         [value]="displayValue()"
+        [placeholder]="placeholder()"
         (input)="onInput($event)"
         (focus)="open.set(true)"
         (blur)="close()"
@@ -68,6 +70,9 @@ import { ngxsmkUniqueId } from '@ngxsmk/core/util';
       outline: none;
       box-sizing: border-box;
     }
+    .ngxsmk-combobox__input::placeholder {
+      color: var(--ngxsmk-color-on-surface-variant);
+    }
     .ngxsmk-combobox__input:focus {
       border-color: var(--ngxsmk-color-primary);
     }
@@ -112,9 +117,16 @@ export class NgxsmkCombobox {
   protected readonly dropdownId = ngxsmkUniqueId('ngxsmk-combobox-dropdown');
   protected open = signal(false);
   protected query = signal('');
-  protected readonly activeIndex = signal(-1);
 
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
+
+  protected readonly kb = new ListboxKeyboard({
+    optionSelector: '.ngxsmk-combobox__option',
+    options: () => this.filtered(),
+    host: this.host,
+  });
+
+  protected readonly activeIndex = this.kb.activeIndex;
 
   protected displayValue(): string {
     return this.options().find((o) => o.value === this.value())?.label || this.query();
@@ -134,55 +146,16 @@ export class NgxsmkCombobox {
   protected onInput(e: Event): void {
     this.query.set((e.target as HTMLInputElement).value);
     this.open.set(true);
-    // Highlight the first match so Enter has an obvious target.
     this.activeIndex.set(this.filtered().length ? 0 : -1);
   }
 
   protected onKeydown(e: KeyboardEvent): void {
-    const list = this.filtered();
-    switch (e.key) {
-      case 'ArrowDown':
-        e.preventDefault();
-        if (!this.open()) {
-          this.open.set(true);
-        }
-        this.move(1);
-        break;
-      case 'ArrowUp':
-        e.preventDefault();
-        this.move(-1);
-        break;
-      case 'Home':
-        if (this.open() && list.length) {
-          e.preventDefault();
-          this.activeIndex.set(0);
-          this.scrollActiveIntoView();
-        }
-        break;
-      case 'End':
-        if (this.open() && list.length) {
-          e.preventDefault();
-          this.activeIndex.set(list.length - 1);
-          this.scrollActiveIntoView();
-        }
-        break;
-      case 'Enter': {
-        const opt = list[this.activeIndex()];
-        if (this.open() && opt) {
-          e.preventDefault();
-          this.select(opt);
-        }
-        break;
-      }
-      case 'Escape':
-        if (this.open()) {
-          e.preventDefault();
-          this.open.set(false);
-        }
-        break;
-      default:
-        break;
-    }
+    this.kb.handleKeydown(e, {
+      onSelect: (i) => this.select(this.filtered()[i]),
+      onOpen: () => this.open.set(true),
+      onClose: () => this.open.set(false),
+      isOpen: () => this.open(),
+    });
   }
 
   protected select(opt: { value: string; label: string }): void {
@@ -194,29 +167,5 @@ export class NgxsmkCombobox {
 
   protected close(): void {
     setTimeout(() => this.open.set(false), 150);
-  }
-
-  private move(delta: number): void {
-    const list = this.filtered();
-    if (!list.length) {
-      return;
-    }
-    let next = this.activeIndex() + delta;
-    if (next < 0) {
-      next = list.length - 1;
-    } else if (next >= list.length) {
-      next = 0;
-    }
-    this.activeIndex.set(next);
-    this.scrollActiveIntoView();
-  }
-
-  private scrollActiveIntoView(): void {
-    requestAnimationFrame(() => {
-      const items = this.host.nativeElement.querySelectorAll<HTMLElement>(
-        '.ngxsmk-combobox__option',
-      );
-      items[this.activeIndex()]?.scrollIntoView({ block: 'nearest' });
-    });
   }
 }

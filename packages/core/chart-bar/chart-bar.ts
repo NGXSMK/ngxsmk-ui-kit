@@ -95,9 +95,6 @@ export class NgxsmkBarChart extends AbstractCanvasChart {
     const vals = this.values();
     const n = vals.length;
     if (!n) return null;
-    const min = Math.min(...vals, 0);
-    const max = Math.max(...vals, 0);
-    const range = max - min || 1;
     const plot = this.plot;
     const slot = plot.w / n;
     const barW = Math.min(46, slot * 0.62);

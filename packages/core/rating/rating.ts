@@ -10,7 +10,8 @@ import {
   output,
   signal,
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { CvaBase } from '@ngxsmk/cdk/cva-base';
 
 export type NgxsmkRatingSize = 'sm' | 'md' | 'lg';
 
@@ -156,7 +157,7 @@ export type NgxsmkRatingSize = 'sm' | 'md' | 'lg';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NgxsmkRating implements ControlValueAccessor {
+export class NgxsmkRating extends CvaBase<number> {
   readonly value = model(0);
   readonly max = input(5, { transform: numberAttribute });
   readonly allowHalf = input(false, { transform: booleanAttribute });
@@ -166,10 +167,12 @@ export class NgxsmkRating implements ControlValueAccessor {
   readonly label = input('Rating');
   readonly changed = output<number>();
 
-  private readonly cvaDisabled = signal(false);
   private readonly previewValue = signal<number | null>(null);
 
-  protected readonly isDisabled = computed(() => this.disabled() || this.cvaDisabled());
+  protected inputDisabled(): boolean {
+    return this.disabled();
+  }
+
   protected readonly isInteractive = computed(() => !this.readonly() && !this.isDisabled());
   private readonly step = computed(() => (this.allowHalf() ? 0.5 : 1));
 
@@ -187,9 +190,6 @@ export class NgxsmkRating implements ControlValueAccessor {
   });
 
   protected readonly valueText = computed(() => `${this.value()} of ${this.max()} stars`);
-
-  private onChange?: (value: number) => void;
-  private onTouched?: () => void;
 
   protected onPointer(event: PointerEvent, index: number): void {
     if (!this.isInteractive()) return;
@@ -244,30 +244,20 @@ export class NgxsmkRating implements ControlValueAccessor {
   private commit(next: number): void {
     this.clearPreview();
     if (next === this.value()) {
-      // Re-emit touched even if unchanged so blur/validation still fire.
-      this.onTouched?.();
+      this.emitTouched();
       return;
     }
     this.value.set(next);
-    this.onChange?.(next);
-    this.onTouched?.();
+    this.emitChange(next);
+    this.emitTouched();
     this.changed.emit(next);
   }
 
   protected onBlur(): void {
-    this.onTouched?.();
+    this.emitTouched();
   }
 
   writeValue(value: unknown): void {
     this.value.set(typeof value === 'number' ? value : 0);
-  }
-  registerOnChange(fn: (value: number) => void): void {
-    this.onChange = fn;
-  }
-  registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
-  }
-  setDisabledState(disabled: boolean): void {
-    this.cvaDisabled.set(disabled);
   }
 }

@@ -13,6 +13,44 @@ function scaleVars(prefix: string, scale: ColorScale): Vars {
   return vars;
 }
 
+/** Default CSS custom properties for each component, emitted once in :root. */
+const COMPONENT_TOKEN_DEFAULTS: Record<string, Vars> = {
+  button: {
+    '--ngxsmk-button-bg': 'var(--ngxsmk-color-primary)',
+    '--ngxsmk-button-color': 'var(--ngxsmk-color-on-primary)',
+    '--ngxsmk-button-font-family': 'var(--ngxsmk-font-sans)',
+    '--ngxsmk-button-font-weight': '500',
+    '--ngxsmk-button-radius': 'var(--ngxsmk-radius-base)',
+    '--ngxsmk-button-disabled-opacity': '0.5',
+  },
+  card: {
+    '--ngxsmk-card-bg': 'var(--ngxsmk-color-surface)',
+    '--ngxsmk-card-radius': 'var(--ngxsmk-radius-xl)',
+    '--ngxsmk-card-shadow': 'var(--ngxsmk-shadow-sm)',
+    '--ngxsmk-card-border-color': 'var(--ngxsmk-color-outline)',
+  },
+  accordion: {
+    '--ngxsmk-accordion-bg': 'var(--ngxsmk-color-surface)',
+    '--ngxsmk-accordion-radius': 'var(--ngxsmk-radius-lg)',
+    '--ngxsmk-accordion-border-color': 'var(--ngxsmk-color-outline)',
+  },
+  progress: {
+    '--ngxsmk-progress-height': '0.5rem',
+    '--ngxsmk-progress-bg': 'var(--ngxsmk-color-surface-variant)',
+    '--ngxsmk-progress-color': 'var(--ngxsmk-color-primary)',
+    '--ngxsmk-progress-radius': 'var(--ngxsmk-radius-full)',
+  },
+  switch: {
+    '--ngxsmk-switch-width': '2.25rem',
+    '--ngxsmk-switch-height': '1.25rem',
+    '--ngxsmk-switch-radius': 'var(--ngxsmk-radius-full)',
+    '--ngxsmk-switch-bg': 'var(--ngxsmk-color-outline-strong)',
+    '--ngxsmk-switch-thumb-size': '0.875rem',
+    '--ngxsmk-switch-thumb-bg': 'var(--ngxsmk-color-surface)',
+    '--ngxsmk-switch-checked-bg': 'var(--ngxsmk-color-primary)',
+  },
+};
+
 /** Tokens that do not change between light and dark mode. */
 function staticVars(theme: ResolvedTheme): Vars {
   const vars: Vars = {
@@ -41,39 +79,11 @@ function staticVars(theme: ResolvedTheme): Vars {
       '0 0 0 2px color-mix(in srgb, var(--ngxsmk-color-error) 15%, transparent), ' +
       '0 0 0 4px color-mix(in srgb, var(--ngxsmk-color-error) 45%, transparent)',
 
-    // Component-specific Tokens (Buttons)
-    '--ngxsmk-button-bg': 'var(--ngxsmk-color-primary)',
-    '--ngxsmk-button-color': 'var(--ngxsmk-color-on-primary)',
-    '--ngxsmk-button-font-family': 'var(--ngxsmk-font-sans)',
-    '--ngxsmk-button-font-weight': '500',
-    '--ngxsmk-button-radius': 'var(--ngxsmk-radius-base)',
-    '--ngxsmk-button-disabled-opacity': '0.5',
-
-    // Component-specific Tokens (Cards)
-    '--ngxsmk-card-bg': 'var(--ngxsmk-color-surface)',
-    '--ngxsmk-card-radius': 'var(--ngxsmk-radius-xl)',
-    '--ngxsmk-card-shadow': 'var(--ngxsmk-shadow-sm)',
-    '--ngxsmk-card-border-color': 'var(--ngxsmk-color-outline)',
-
-    // Component-specific Tokens (Accordion)
-    '--ngxsmk-accordion-bg': 'var(--ngxsmk-color-surface)',
-    '--ngxsmk-accordion-radius': 'var(--ngxsmk-radius-lg)',
-    '--ngxsmk-accordion-border-color': 'var(--ngxsmk-color-outline)',
-
-    // Component-specific Tokens (Progress)
-    '--ngxsmk-progress-height': '0.5rem',
-    '--ngxsmk-progress-bg': 'var(--ngxsmk-color-surface-variant)',
-    '--ngxsmk-progress-color': 'var(--ngxsmk-color-primary)',
-    '--ngxsmk-progress-radius': 'var(--ngxsmk-radius-full)',
-
-    // Component-specific Tokens (Switch)
-    '--ngxsmk-switch-width': '2.25rem',
-    '--ngxsmk-switch-height': '1.25rem',
-    '--ngxsmk-switch-radius': 'var(--ngxsmk-radius-full)',
-    '--ngxsmk-switch-bg': 'var(--ngxsmk-color-outline-strong)',
-    '--ngxsmk-switch-thumb-size': '0.875rem',
-    '--ngxsmk-switch-thumb-bg': 'var(--ngxsmk-color-surface)',
-    '--ngxsmk-switch-checked-bg': 'var(--ngxsmk-color-primary)',
+    // Component-specific token defaults
+    ...Object.values(COMPONENT_TOKEN_DEFAULTS).reduce(
+      (merged, tokens) => ({ ...merged, ...tokens }),
+      {} as Vars,
+    ),
   };
 
   for (const [key, value] of Object.entries(CONTROL_HEIGHTS)) {

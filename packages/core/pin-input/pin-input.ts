@@ -9,10 +9,10 @@ import {
   model,
   numberAttribute,
   output,
-  signal,
   viewChildren,
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { CvaBase } from '@ngxsmk/cdk/cva-base';
 
 export type NgxsmkPinInputType = 'numeric' | 'text' | 'alphanumeric';
 export type NgxsmkPinInputSize = 'sm' | 'md' | 'lg';
@@ -58,7 +58,7 @@ const PATTERNS: Record<NgxsmkPinInputType, RegExp> = {
         (keydown)="onKeydown($event, $index)"
         (focus)="onFocus($event)"
         (paste)="onPaste($event, $index)"
-        (blur)="onTouched?.()"
+        (blur)="emitTouched()"
       />
     }
   `,
@@ -97,6 +97,9 @@ const PATTERNS: Record<NgxsmkPinInputType, RegExp> = {
     :host([data-size='lg']) {
       --ngxsmk-pin-size: 3.25rem;
     }
+    .ngxsmk-pin-input__cell::placeholder {
+      color: var(--ngxsmk-color-on-surface-variant);
+    }
     .ngxsmk-pin-input__cell:focus-visible {
       border-color: var(--ngxsmk-color-ring);
       box-shadow: var(--ngxsmk-focus-ring);
@@ -120,7 +123,7 @@ const PATTERNS: Record<NgxsmkPinInputType, RegExp> = {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NgxsmkPinInput implements ControlValueAccessor {
+export class NgxsmkPinInput extends CvaBase<string> {
   readonly value = model('');
   readonly length = input(6, { transform: numberAttribute });
   readonly type = input<NgxsmkPinInputType>('numeric');
@@ -134,9 +137,10 @@ export class NgxsmkPinInput implements ControlValueAccessor {
   readonly completed = output<string>();
 
   private readonly inputs = viewChildren<ElementRef<HTMLInputElement>>('cell');
-  private readonly cvaDisabled = signal(false);
 
-  protected readonly isDisabled = computed(() => this.disabled() || this.cvaDisabled());
+  protected inputDisabled(): boolean {
+    return this.disabled();
+  }
 
   private readonly pattern = computed(() => PATTERNS[this.type()]);
   protected readonly inputMode = computed(() => (this.type() === 'numeric' ? 'numeric' : 'text'));
@@ -147,9 +151,6 @@ export class NgxsmkPinInput implements ControlValueAccessor {
     const chars = [...this.value()].slice(0, len);
     return Array.from({ length: len }, (_, i) => chars[i] ?? '');
   });
-
-  private onChange?: (value: string) => void;
-  protected onTouched?: () => void;
 
   protected cellLabel(i: number): string {
     return `${this.label()}, digit ${i + 1} of ${this.length()}`;
@@ -234,7 +235,7 @@ export class NgxsmkPinInput implements ControlValueAccessor {
   private setValue(cells: string[]): void {
     const value = cells.join('');
     this.value.set(value);
-    this.onChange?.(value);
+    this.emitChange(value);
     if (value.length === this.length() && !cells.includes('')) {
       this.completed.emit(value);
     }
@@ -250,14 +251,5 @@ export class NgxsmkPinInput implements ControlValueAccessor {
 
   writeValue(value: unknown): void {
     this.value.set(typeof value === 'string' ? value : '');
-  }
-  registerOnChange(fn: (value: string) => void): void {
-    this.onChange = fn;
-  }
-  registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
-  }
-  setDisabledState(disabled: boolean): void {
-    this.cvaDisabled.set(disabled);
   }
 }

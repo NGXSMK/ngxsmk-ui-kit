@@ -55,7 +55,7 @@ export type NgxsmkAvatarSize = 'sm' | 'md' | 'lg' | 'xl';
     :host([data-size='sm']) {
       width: 1.75rem;
       height: 1.75rem;
-      font-size: 0.625rem;
+      font-size: var(--ngxsmk-text-body-xs-size);
     }
     :host([data-size='md']) {
       width: 2.5rem;
@@ -65,7 +65,7 @@ export type NgxsmkAvatarSize = 'sm' | 'md' | 'lg' | 'xl';
     :host([data-size='lg']) {
       width: 3.5rem;
       height: 3.5rem;
-      font-size: 1.25rem;
+      font-size: var(--ngxsmk-text-title-md-size);
     }
     :host([data-size='xl']) {
       width: 5rem;

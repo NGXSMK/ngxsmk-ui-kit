@@ -31,7 +31,7 @@ export interface Rule {
     :host {
       display: block;
       font-family: var(--ngxsmk-font-sans);
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       border: 1px solid var(--ngxsmk-color-outline-variant);
       border-radius: var(--ngxsmk-radius-md);
       padding: var(--ngxsmk-space-3);

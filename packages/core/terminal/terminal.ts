@@ -27,7 +27,7 @@
       border: 1px solid var(--ngxsmk-color-neutral-800);
       border-radius: var(--ngxsmk-radius-lg);
       font-family: var(--ngxsmk-font-mono);
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
     }

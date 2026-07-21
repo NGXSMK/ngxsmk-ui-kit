@@ -1,6 +1,6 @@
 # NGXSMK UI Kit
 
-> Angular-first, MIT-licensed UI ecosystem: 214+ signals-native, zoneless
+> Angular-first, MIT-licensed UI ecosystem: 213+ signals-native, zoneless
 > standalone components with a universal design-token engine (CSS variables,
 > SCSS, Tailwind, StyleX, Tokens Studio export). MIT licensed, no paid tiers.
 > Current version: 1.3.2. Supports Angular 17.3 through 22.
@@ -979,11 +979,6 @@ Inputs:
 
 Outputs:
 - `(shortcutPressed)`: emits `void`
-
-## NgxsmkLayerProvider
-
-- Selector: `[ngxsmkLayerProvider], ngxsmk-layer-provider`
-- Import from: `@ngxsmk/core/layer-provider`
 
 ## NgxsmkLayout
 

@@ -34,7 +34,7 @@
       margin-bottom: var(--ngxsmk-space-1);
     }
     .ngxsmk-citation-viewer__preview {
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       color: var(--ngxsmk-color-on-surface-variant);
       line-height: 1.5;
     }

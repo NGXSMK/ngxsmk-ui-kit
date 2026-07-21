@@ -65,11 +65,14 @@ export class NgxsmkTypeaheadItem {
       padding: var(--ngxsmk-space-2) var(--ngxsmk-space-3);
       border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-md);
-      font-size: var(--ngxsmk-text-label-lg-size);
+      font-size: var(--ngxsmk-text-body-md-size);
       background: var(--ngxsmk-color-surface);
       color: var(--ngxsmk-color-on-surface);
       outline: none;
       box-sizing: border-box;
+    }
+    .ngxsmk-typeahead__input::placeholder {
+      color: var(--ngxsmk-color-on-surface-variant);
     }
     .ngxsmk-typeahead__input:focus {
       border-color: var(--ngxsmk-color-primary);
@@ -97,7 +100,7 @@ export class NgxsmkTypeaheadItem {
       background: none;
       text-align: left;
       color: var(--ngxsmk-color-on-surface);
-      font-size: var(--ngxsmk-text-label-lg-size);
+      font-size: var(--ngxsmk-text-body-md-size);
       cursor: pointer;
     }
     .ngxsmk-typeahead__option:hover,

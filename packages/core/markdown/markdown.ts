@@ -126,7 +126,7 @@ function renderMarkdown(md: string): string {
     }
     .ngxsmk-markdown code {
       font-family: var(--ngxsmk-font-mono);
-      font-size: 0.9em;
+      font-size: var(--ngxsmk-text-body-sm-size);
     }
     .ngxsmk-markdown-inline {
       background: var(--ngxsmk-color-surface-variant);

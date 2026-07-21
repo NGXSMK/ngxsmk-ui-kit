@@ -23,7 +23,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
       border: 1px solid var(--ngxsmk-color-outline-variant);
       border-radius: var(--ngxsmk-radius-md);
       font-family: var(--ngxsmk-font-mono);
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
     }
     .ngxsmk-spreadsheet__table {
       display: table;

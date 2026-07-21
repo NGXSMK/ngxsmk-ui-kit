@@ -7,11 +7,12 @@ import {
 import { NgxsmkButton } from '@ngxsmk/core/button';
 import { NgxsmkHeading } from '@ngxsmk/core/heading';
 import { NgxsmkText } from '@ngxsmk/core/text';
-import { Component, inject } from '@angular/core';
+import { Component, signal, inject } from '@angular/core';
 import { NgxsmkThemeService, presets } from '@ngxsmk/theme';
 import { NgxsmkThemeBuilder } from '@ngxsmk/core/theme-builder';
 import { TranslatePipe } from '@ngx-translate/core';
 import { AppNav } from '../../nav/nav';
+import { ShowcaseExample } from '../../showcase/showcase-example';
 
 @Component({
   selector: 'themes-page',
@@ -25,6 +26,7 @@ import { AppNav } from '../../nav/nav';
     NgxsmkHeading,
     NgxsmkText,
     NgxsmkThemeBuilder,
+    ShowcaseExample,
     TranslatePipe,
     AppNav,
   ],
@@ -99,7 +101,32 @@ import { AppNav } from '../../nav/nav';
         </ngxsmk-card>
       </div>
 
-      <div class="ngxsmk-theme-builder-wrapper" style="margin-top: var(--ngxsmk-space-12);">
+      <showcase-example
+        title="Ionic Theme Adapter"
+        [description]="'themes.ionicAdapterDesc' | translate"
+        [code]="codeIonicAdapter"
+      >
+        <div class="ngxsmk-sc-surface">
+          <p style="margin:0 0 1rem; font-size:var(--ngxsmk-text-body-md-size); color:var(--ngxsmk-color-on-surface-variant, #71717a);">
+            {{ 'themes.ionicAdapterHint' | translate }}
+          </p>
+          <div class="ngxsmk-theme-actions">
+            <button ngxsmk-button size="sm" (click)="applyIonic()">
+              {{ 'themes.applyIonic' | translate }}
+            </button>
+            <button ngxsmk-button size="sm" variant="outline" (click)="clearIonic()">
+              {{ 'themes.clearIonic' | translate }}
+            </button>
+          </div>
+          @if (ionicApplied()) {
+            <p style="margin:0.75rem 0 0; font-size:var(--ngxsmk-text-body-sm-size); color:var(--ngxsmk-color-success, #16a34a);">
+              {{ 'themes.ionicActive' | translate }}
+            </p>
+          }
+        </div>
+      </showcase-example>
+
+      <div class="ngxsmk-theme-builder-wrapper">
         <ngxsmk-theme-builder />
       </div>
     </div>
@@ -122,7 +149,7 @@ import { AppNav } from '../../nav/nav';
     }
     .ngxsmk-page__header h1,
     .ngxsmk-page__header ngxsmk-heading {
-      font-size: 2rem;
+      font-size: var(--ngxsmk-text-headline-lg-size);
       font-weight: 700;
       margin: 0 0 var(--ngxsmk-space-2, 0.5rem);
       color: var(--ngxsmk-color-on-surface, #09090b);
@@ -130,7 +157,7 @@ import { AppNav } from '../../nav/nav';
     .ngxsmk-page__sub {
       color: var(--ngxsmk-color-on-surface-variant, #71717a);
       margin: 0;
-      font-size: 1rem;
+      font-size: var(--ngxsmk-text-body-lg-size);
     }
     .ngxsmk-themes-grid {
       display: grid;
@@ -144,7 +171,7 @@ import { AppNav } from '../../nav/nav';
     }
     .ngxsmk-theme-desc {
       color: var(--ngxsmk-color-on-surface-variant, #71717a);
-      font-size: 0.875rem;
+      font-size: var(--ngxsmk-text-body-md-size);
       line-height: 1.6;
       margin: 0 0 var(--ngxsmk-space-4, 1rem);
     }
@@ -179,9 +206,35 @@ import { AppNav } from '../../nav/nav';
       display: flex;
       gap: var(--ngxsmk-space-2, 0.5rem);
     }
+    showcase-example {
+      margin-top: var(--ngxsmk-space-6, 1.5rem);
+    }
+    .ngxsmk-theme-builder-wrapper {
+      margin-top: var(--ngxsmk-space-8, 2rem);
+    }
   `,
 })
 export class ThemesPage {
   protected readonly theme = inject(NgxsmkThemeService);
   protected readonly presets = presets;
+  protected readonly ionicApplied = signal(false);
+
+  protected readonly codeIonicAdapter = `// Apply Ionic theme adapter alongside NGXSMK theme
+this.theme.applyIonicTheme(presets['violet']);
+
+// Or apply both NGXSMK + Ionic in one call
+this.theme.applyTheme(presets['violet'], ionicVarsAdapter);
+
+// Clear the Ionic adapter
+this.theme.clearIonicTheme();`;
+
+  protected applyIonic(): void {
+    this.theme.applyIonicTheme(presets['violet']);
+    this.ionicApplied.set(true);
+  }
+
+  protected clearIonic(): void {
+    this.theme.clearIonicTheme();
+    this.ionicApplied.set(false);
+  }
 }

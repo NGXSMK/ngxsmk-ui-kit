@@ -602,7 +602,7 @@ function buildCode(name: string, values: Record<string, unknown>): string {
       align-items: center;
       gap: 0.375rem;
       font-family: var(--ngxsmk-font-mono);
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       font-weight: 500;
       letter-spacing: 0.04em;
       color: var(--ngxsmk-color-on-surface-variant);
@@ -633,7 +633,7 @@ function buildCode(name: string, values: Record<string, unknown>): string {
       line-height: 1.1;
     }
     .pg-subtitle {
-      font-size: 0.9375rem;
+      font-size: var(--ngxsmk-text-body-md-size);
       color: var(--ngxsmk-color-on-surface-variant);
       margin: 0 0 1.75rem;
       max-width: 34rem;
@@ -672,7 +672,7 @@ function buildCode(name: string, values: Record<string, unknown>): string {
       border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-md);
       background: var(--ngxsmk-color-surface);
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       font-family: inherit;
       color: var(--ngxsmk-color-on-surface);
       outline: none;
@@ -703,7 +703,7 @@ function buildCode(name: string, values: Record<string, unknown>): string {
     }
     .pg-group-label {
       font-family: var(--ngxsmk-font-mono);
-      font-size: 0.625rem;
+      font-size: var(--ngxsmk-text-body-xs-size);
       font-weight: 500;
       letter-spacing: var(--ngxsmk-tracking-wide, 0.08em);
       text-transform: uppercase;
@@ -720,7 +720,7 @@ function buildCode(name: string, values: Record<string, unknown>): string {
       background: transparent;
       cursor: pointer;
       font-family: inherit;
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       color: var(--ngxsmk-color-on-surface);
       transition:
         background var(--ngxsmk-duration-fast, 120ms) var(--ngxsmk-ease-out),
@@ -740,7 +740,7 @@ function buildCode(name: string, values: Record<string, unknown>): string {
       font-weight: 600;
     }
     .pg-empty-hint {
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       color: var(--ngxsmk-color-on-surface-variant);
     }
 
@@ -775,13 +775,13 @@ function buildCode(name: string, values: Record<string, unknown>): string {
     }
     .pg-stage-name {
       font-family: var(--ngxsmk-font-mono);
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       font-weight: 500;
       color: var(--ngxsmk-color-on-surface);
     }
     .pg-stage-badge {
       font-family: var(--ngxsmk-font-mono);
-      font-size: 0.625rem;
+      font-size: var(--ngxsmk-text-body-xs-size);
       font-weight: 500;
       text-transform: uppercase;
       letter-spacing: var(--ngxsmk-tracking-wide, 0.08em);
@@ -797,7 +797,7 @@ function buildCode(name: string, values: Record<string, unknown>): string {
       border-radius: var(--ngxsmk-radius-sm);
       background: var(--ngxsmk-color-surface);
       color: var(--ngxsmk-color-on-surface-variant);
-      font-size: 0.6875rem;
+      font-size: var(--ngxsmk-text-body-xs-size);
       font-weight: 600;
       cursor: pointer;
       font-family: inherit;
@@ -843,7 +843,7 @@ function buildCode(name: string, values: Record<string, unknown>): string {
       margin: 0;
       padding: 0.75rem 1rem;
       font-family: var(--ngxsmk-font-mono);
-      font-size: 0.6875rem;
+      font-size: var(--ngxsmk-text-body-xs-size);
       font-weight: 500;
       text-transform: uppercase;
       letter-spacing: var(--ngxsmk-tracking-wide, 0.08em);
@@ -852,7 +852,7 @@ function buildCode(name: string, values: Record<string, unknown>): string {
     }
     .pg-card-hint {
       font-family: var(--ngxsmk-font-mono);
-      font-size: 0.6875rem;
+      font-size: var(--ngxsmk-text-body-xs-size);
       font-weight: 500;
       color: var(--ngxsmk-color-on-surface);
       background: var(--ngxsmk-color-surface-variant);
@@ -863,7 +863,7 @@ function buildCode(name: string, values: Record<string, unknown>): string {
       padding: 1rem;
     }
     .pg-muted {
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       color: var(--ngxsmk-color-on-surface-variant);
       margin: 0;
     }
@@ -873,7 +873,7 @@ function buildCode(name: string, values: Record<string, unknown>): string {
       background: var(--ngxsmk-color-surface-variant);
       border-radius: var(--ngxsmk-radius-md);
       font-family: var(--ngxsmk-font-mono);
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       line-height: 1.6;
       overflow-x: auto;
       white-space: pre-wrap;
@@ -897,7 +897,7 @@ function buildCode(name: string, values: Record<string, unknown>): string {
       margin: 0;
       padding: 0.75rem 1rem;
       font-family: var(--ngxsmk-font-mono);
-      font-size: 0.6875rem;
+      font-size: var(--ngxsmk-text-body-xs-size);
       font-weight: 500;
       text-transform: uppercase;
       letter-spacing: var(--ngxsmk-tracking-wide, 0.08em);
@@ -911,7 +911,7 @@ function buildCode(name: string, values: Record<string, unknown>): string {
     .pg-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
     }
     .pg-table th,
     .pg-table td {
@@ -925,7 +925,7 @@ function buildCode(name: string, values: Record<string, unknown>): string {
       font-family: var(--ngxsmk-font-mono);
       font-weight: 500;
       color: var(--ngxsmk-color-on-surface-variant);
-      font-size: 0.625rem;
+      font-size: var(--ngxsmk-text-body-xs-size);
       text-transform: uppercase;
       letter-spacing: var(--ngxsmk-tracking-wide, 0.08em);
       background: var(--ngxsmk-color-surface-variant);
@@ -935,7 +935,7 @@ function buildCode(name: string, values: Record<string, unknown>): string {
     }
     .pg-table code {
       font-family: var(--ngxsmk-font-mono);
-      font-size: 0.72rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       background: var(--ngxsmk-color-surface-variant);
       padding: 0.125rem 0.25rem;
       border-radius: var(--ngxsmk-radius-sm);
@@ -955,20 +955,20 @@ function buildCode(name: string, values: Record<string, unknown>): string {
       background: var(--ngxsmk-color-surface);
     }
     .pg-empty-icon {
-      font-size: 2.5rem;
+      font-size: var(--ngxsmk-text-display-md-size);
       opacity: var(--ngxsmk-opacity-faint, 0.3);
       margin-bottom: 0.75rem;
     }
     .pg-empty ngxsmk-heading {
       margin: 0 0 0.25rem;
       font-family: 'Plus Jakarta Sans', var(--ngxsmk-font-sans, system-ui), sans-serif;
-      font-size: 1.125rem;
+      font-size: var(--ngxsmk-text-title-md-size);
       letter-spacing: -0.015em;
       color: var(--ngxsmk-color-on-surface);
     }
     .pg-empty p {
       margin: 0;
-      font-size: 0.875rem;
+      font-size: var(--ngxsmk-text-body-md-size);
       max-width: 320px;
     }
 

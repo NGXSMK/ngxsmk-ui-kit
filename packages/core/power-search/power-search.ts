@@ -57,6 +57,9 @@ export interface PowerSearchFilter {
       color: var(--ngxsmk-color-on-surface);
       outline: none;
     }
+    .ngxsmk-power-search__input::placeholder {
+      color: var(--ngxsmk-color-on-surface-variant);
+    }
     .ngxsmk-power-search__input:focus {
       border-color: var(--ngxsmk-color-primary);
       box-shadow: 0 0 0 2px var(--ngxsmk-color-primary-container);

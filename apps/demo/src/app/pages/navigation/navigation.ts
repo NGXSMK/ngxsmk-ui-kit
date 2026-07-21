@@ -486,7 +486,7 @@ interface AppOutlineItem {
     }
     .ngxsmk-demo-hint {
       margin: 0.5rem 0 0;
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       color: var(--ngxsmk-color-on-surface-variant);
     }
     .ngxsmk-demo-mobile-link {

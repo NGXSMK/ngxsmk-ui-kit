@@ -8,6 +8,7 @@
   signal,
 } from '@angular/core';
 import { ngxsmkUniqueId } from '@ngxsmk/core/util';
+import { ListboxKeyboard } from '@ngxsmk/cdk/listbox-keyboard';
 
 @Component({
   standalone: true,
@@ -61,11 +62,14 @@ import { ngxsmkUniqueId } from '@ngxsmk/core/util';
       padding: var(--ngxsmk-space-2) var(--ngxsmk-space-3);
       border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-md);
-      font-size: var(--ngxsmk-text-label-lg-size);
+      font-size: var(--ngxsmk-text-body-md-size);
       background: var(--ngxsmk-color-surface);
       color: var(--ngxsmk-color-on-surface);
       outline: none;
       box-sizing: border-box;
+    }
+    .ngxsmk-autocomplete__input::placeholder {
+      color: var(--ngxsmk-color-on-surface-variant);
     }
     .ngxsmk-autocomplete__input:focus {
       border-color: var(--ngxsmk-color-primary);
@@ -91,7 +95,7 @@ import { ngxsmkUniqueId } from '@ngxsmk/core/util';
       border: none;
       background: none;
       text-align: left;
-      font-size: var(--ngxsmk-text-label-lg-size);
+      font-size: var(--ngxsmk-text-body-md-size);
       color: var(--ngxsmk-color-on-surface);
       cursor: pointer;
     }
@@ -110,9 +114,16 @@ export class NgxsmkAutocomplete {
   protected readonly listboxId = ngxsmkUniqueId('ngxsmk-autocomplete-listbox');
   protected readonly open = signal(false);
   protected readonly filtered = signal<{ value: string; label: string }[]>([]);
-  protected readonly activeIndex = signal(-1);
 
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
+
+  protected readonly kb = new ListboxKeyboard({
+    optionSelector: '.ngxsmk-autocomplete__option',
+    options: () => this.filtered(),
+    host: this.host,
+  });
+
+  protected readonly activeIndex = this.kb.activeIndex;
 
   protected activeDescendant(): string | null {
     return this.open() && this.activeIndex() >= 0
@@ -125,83 +136,21 @@ export class NgxsmkAutocomplete {
     this.value.set(q);
     this.filtered.set(this.options().filter((o) => o.label.toLowerCase().includes(q)));
     this.open.set(true);
-    // Highlight the first match so Enter has an obvious target.
     this.activeIndex.set(this.filtered().length ? 0 : -1);
   }
 
   protected onKeydown(e: KeyboardEvent): void {
-    switch (e.key) {
-      case 'ArrowDown':
-        e.preventDefault();
-        if (!this.open()) {
-          this.open.set(true);
-        }
-        this.move(1);
-        break;
-      case 'ArrowUp':
-        e.preventDefault();
-        this.move(-1);
-        break;
-      case 'Home':
-        if (this.open() && this.filtered().length) {
-          e.preventDefault();
-          this.activeIndex.set(0);
-          this.scrollActiveIntoView();
-        }
-        break;
-      case 'End':
-        if (this.open() && this.filtered().length) {
-          e.preventDefault();
-          this.activeIndex.set(this.filtered().length - 1);
-          this.scrollActiveIntoView();
-        }
-        break;
-      case 'Enter': {
-        const opt = this.filtered()[this.activeIndex()];
-        if (this.open() && opt) {
-          e.preventDefault();
-          this.select(opt.value);
-        }
-        break;
-      }
-      case 'Escape':
-        if (this.open()) {
-          e.preventDefault();
-          this.open.set(false);
-        }
-        break;
-      default:
-        break;
-    }
+    this.kb.handleKeydown(e, {
+      onSelect: (i) => this.select(this.filtered()[i].value),
+      onOpen: () => this.open.set(true),
+      onClose: () => this.open.set(false),
+      isOpen: () => this.open(),
+    });
   }
 
   protected select(v: string): void {
     this.value.set(v);
     this.open.set(false);
     this.activeIndex.set(-1);
-  }
-
-  private move(delta: number): void {
-    const list = this.filtered();
-    if (!list.length) {
-      return;
-    }
-    let next = this.activeIndex() + delta;
-    if (next < 0) {
-      next = list.length - 1;
-    } else if (next >= list.length) {
-      next = 0;
-    }
-    this.activeIndex.set(next);
-    this.scrollActiveIntoView();
-  }
-
-  private scrollActiveIntoView(): void {
-    requestAnimationFrame(() => {
-      const items = this.host.nativeElement.querySelectorAll<HTMLElement>(
-        '.ngxsmk-autocomplete__option',
-      );
-      items[this.activeIndex()]?.scrollIntoView({ block: 'nearest' });
-    });
   }
 }

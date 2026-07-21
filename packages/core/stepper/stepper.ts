@@ -145,7 +145,7 @@ type StepView = NgxsmkStep & {
       width: 1.75rem;
       height: 1.75rem;
       flex-shrink: 0;
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       font-weight: 600;
       border-radius: var(--ngxsmk-radius-full, 999px);
       border: 2px solid currentColor;

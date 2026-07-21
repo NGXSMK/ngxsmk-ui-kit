@@ -7,10 +7,10 @@ import {
   inject,
   input,
   model,
-  signal,
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ngxsmkUniqueId } from '@ngxsmk/core/util';
+import { CvaBase } from '@ngxsmk/cdk/cva-base';
 
 /**
  * Groups `ngxsmk-radio` children and holds the selected value.
@@ -50,7 +50,7 @@ import { ngxsmkUniqueId } from '@ngxsmk/core/util';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NgxsmkRadioGroup implements ControlValueAccessor {
+export class NgxsmkRadioGroup extends CvaBase<unknown> {
   readonly value = model<unknown>(null);
   readonly disabled = input(false, { transform: booleanAttribute });
   readonly orientation = input<'horizontal' | 'vertical'>('vertical');
@@ -58,28 +58,22 @@ export class NgxsmkRadioGroup implements ControlValueAccessor {
   /** Shared native `name` so the browser treats the radios as one group. */
   readonly name = ngxsmkUniqueId('ngxsmk-radio-group');
 
-  private readonly cvaDisabled = signal(false);
-  readonly isDisabled = computed(() => this.disabled() || this.cvaDisabled());
-
-  private onChange?: (value: unknown) => void;
-  onTouched?: () => void;
+  protected inputDisabled(): boolean {
+    return this.disabled();
+  }
 
   select(value: unknown): void {
     this.value.set(value);
-    this.onChange?.(value);
+    this.emitChange(value);
+  }
+
+  /** Exposed for child radio components to call on blur. */
+  touch(): void {
+    this.emitTouched();
   }
 
   writeValue(value: unknown): void {
     this.value.set(value);
-  }
-  registerOnChange(fn: (value: unknown) => void): void {
-    this.onChange = fn;
-  }
-  registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
-  }
-  setDisabledState(disabled: boolean): void {
-    this.cvaDisabled.set(disabled);
   }
 }
 
@@ -96,7 +90,7 @@ export class NgxsmkRadioGroup implements ControlValueAccessor {
         [checked]="checked()"
         [disabled]="isDisabled()"
         (change)="group.select(value())"
-        (blur)="group.onTouched?.()"
+        (blur)="group.touch()"
       />
       <span class="ngxsmk-radio__circle" aria-hidden="true"></span>
       <span class="ngxsmk-radio__label"><ng-content /></span>

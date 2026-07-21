@@ -48,7 +48,7 @@
       border: 1px solid var(--ngxsmk-color-primary);
       border-radius: var(--ngxsmk-radius-md);
       cursor: pointer;
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       color: var(--ngxsmk-color-on-surface);
     }
     .ngxsmk-flow-editor__node:hover {

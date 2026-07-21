@@ -48,7 +48,7 @@
     :host([data-size='lg']) {
       width: 6rem;
       height: 6rem;
-      font-size: 1.25rem;
+      font-size: var(--ngxsmk-text-title-md-size);
     }
     :host([data-size='xl']) {
       width: 8rem;

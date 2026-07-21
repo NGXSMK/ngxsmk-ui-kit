@@ -52,7 +52,7 @@ export interface CommandItem {
               #searchInput
               class="ngxsmk-cmd-input"
               type="text"
-              placeholder="Type a command or search..."
+              [placeholder]="placeholder()"
               [value]="searchQuery()"
               (input)="onSearchInput($event)"
               aria-label="Search commands"
@@ -149,7 +149,7 @@ export interface CommandItem {
       background: transparent;
       color: var(--ngxsmk-color-on-surface);
       font-family: var(--ngxsmk-font-sans, system-ui), sans-serif;
-      font-size: 0.9375rem;
+      font-size: var(--ngxsmk-text-body-md-size);
       outline: none;
     }
 
@@ -158,7 +158,7 @@ export interface CommandItem {
     }
 
     .ngxsmk-cmd-esc-kbd {
-      font-size: 0.625rem;
+      font-size: var(--ngxsmk-text-body-xs-size);
       padding: 0.15rem 0.35rem;
       border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-sm, 0.25rem);
@@ -214,7 +214,7 @@ export interface CommandItem {
     }
 
     .ngxsmk-cmd-item-icon {
-      font-size: 1.1rem;
+      font-size: var(--ngxsmk-text-body-lg-size);
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -276,6 +276,7 @@ export interface CommandItem {
 export class NgxsmkCommandPalette {
   readonly commands = input<CommandItem[]>([]);
   readonly triggerKey = input<string>('k');
+  readonly placeholder = input('Type a command or search...');
 
   readonly isOpen = signal(false);
   readonly selected = output<CommandItem>();

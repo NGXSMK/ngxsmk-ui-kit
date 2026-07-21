@@ -12,10 +12,11 @@ import {
   signal,
   forwardRef,
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { ngxsmkUniqueId } from '@ngxsmk/core/util';
 import { NGXSMK_FORM_FIELD_CONTROL, NgxsmkFormFieldControl } from '@ngxsmk/core/form-field';
+import { CvaBase } from '@ngxsmk/cdk/cva-base';
 
 export interface NgxsmkSelectOption {
   value: string;
@@ -274,7 +275,7 @@ export interface NgxsmkSelectOption {
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NgxsmkSelect implements ControlValueAccessor, NgxsmkFormFieldControl {
+export class NgxsmkSelect extends CvaBase<string> implements NgxsmkFormFieldControl {
   readonly options = input.required<NgxsmkSelectOption[]>();
   readonly value = model<string>('');
   readonly placeholder = input('');
@@ -304,11 +305,9 @@ export class NgxsmkSelect implements ControlValueAccessor, NgxsmkFormFieldContro
   private typeaheadBuffer = '';
   private typeaheadClear: ReturnType<typeof setTimeout> | null = null;
 
-  // CVA state hooks
-  private onChange: (val: string) => void = () => {};
-  private onTouched: () => void = () => {};
-  private readonly formDisabled = signal(false);
-  protected readonly isDisabled = computed(() => this.disabled() || this.formDisabled());
+  protected inputDisabled(): boolean {
+    return this.disabled();
+  }
 
   protected get triggerWidth(): number {
     return this.host.nativeElement.getBoundingClientRect().width;
@@ -316,18 +315,6 @@ export class NgxsmkSelect implements ControlValueAccessor, NgxsmkFormFieldContro
 
   writeValue(val: string): void {
     this.value.set(val || '');
-  }
-
-  registerOnChange(fn: (val: string) => void): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
-  }
-
-  setDisabledState(isDisabled: boolean): void {
-    this.formDisabled.set(isDisabled);
   }
 
   protected readonly listboxId = computed(() => `${this.id()}-listbox`);
@@ -367,13 +354,13 @@ export class NgxsmkSelect implements ControlValueAccessor, NgxsmkFormFieldContro
     this.activeIndex.set(-1);
     this.host.nativeElement.removeAttribute('data-open');
     this.typeaheadBuffer = '';
-    this.onTouched();
+    this.emitTouched();
   }
 
   protected selectPlaceholder(): void {
     this.value.set('');
     this.changed.emit('');
-    this.onChange('');
+    this.emitChange('');
     this.close();
   }
 
@@ -383,7 +370,7 @@ export class NgxsmkSelect implements ControlValueAccessor, NgxsmkFormFieldContro
     }
     this.value.set(opt.value);
     this.changed.emit(opt.value);
-    this.onChange(opt.value);
+    this.emitChange(opt.value);
     this.close();
   }
 
@@ -524,7 +511,7 @@ export class NgxsmkSelect implements ControlValueAccessor, NgxsmkFormFieldContro
         const opt = this.options()[match];
         this.value.set(opt.value);
         this.changed.emit(opt.value);
-        this.onChange(opt.value);
+        this.emitChange(opt.value);
       }
       this.scrollActiveIntoView();
     }

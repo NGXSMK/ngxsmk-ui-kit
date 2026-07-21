@@ -148,7 +148,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
         />
       </div>
       @if (selectedNode()) {
-        <p style="margin:0.5rem 0 0;font-size:0.8125rem;">
+        <p style="margin:0.5rem 0 0;font-size:var(--ngxsmk-text-body-sm-size);">
           {{ 'enterprise.selectedNode' | translate }} <strong>{{ selectedNode() }}</strong>
         </p>
       }

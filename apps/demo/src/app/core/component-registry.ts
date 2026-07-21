@@ -1,5 +1,10 @@
 import { Injectable, signal, computed, Type } from '@angular/core';
 import MiniSearch from 'minisearch';
+import {
+  COMPONENT_DATABASE,
+  type ComponentInput as McpInput,
+  type ComponentOutput as McpOutput,
+} from '@ngxsmk/mcp/component-db';
 
 export interface ComponentInput {
   name: string;
@@ -104,613 +109,245 @@ export const CATEGORY_ICONS: Record<ComponentCategory, string> = {
   other: '📦',
 };
 
-const PACKAGE_EXPORTS: Record<
-  string,
-  { name: string; category: ComponentCategory; description: string }[]
-> = {
-  '@ngxsmk/core': [
-    {
-      name: 'NgxsmkButton',
-      category: 'form',
-      description: 'Native button/anchor directive with variants, sizes, and loading state',
-    },
-    {
-      name: 'NgxsmkButtonGroup',
-      category: 'form',
-      description: 'Groups related buttons into a single connected control',
-    },
-    {
-      name: 'NgxsmkToggleButton',
-      category: 'form',
-      description: 'Pressable button that maintains an on/off pressed state',
-    },
-    {
-      name: 'NgxsmkToggleButtonGroup',
-      category: 'form',
-      description: 'Groups toggle buttons for formatting-style controls',
-    },
-    {
-      name: 'NgxsmkInput',
-      category: 'form',
-      description: 'Themed native text input with placeholder and value binding',
-    },
-    {
-      name: 'NgxsmkTextarea',
-      category: 'form',
-      description: 'Multi-line input with configurable row count',
-    },
-    {
-      name: 'NgxsmkNumberInput',
-      category: 'form',
-      description: 'Numeric field with min, max, and step constraints',
-    },
-    {
-      name: 'NgxsmkSelect',
-      category: 'form',
-      description: 'Single-choice dropdown with keyboard navigation and typeahead',
-    },
-    {
-      name: 'NgxsmkMultiSelect',
-      category: 'form',
-      description: 'Multi-value select displayed as removable tags',
-    },
-    {
-      name: 'NgxsmkAutocomplete',
-      category: 'form',
-      description: 'Free-text input with matching option suggestions',
-    },
-    {
-      name: 'NgxsmkCombobox',
-      category: 'form',
-      description: 'Filterable dropdown resolving to a single selected option',
-    },
-    {
-      name: 'NgxsmkTypeahead',
-      category: 'form',
-      description: 'String-list search with keyboard-friendly suggestions',
-    },
-    {
-      name: 'NgxsmkPowerSearch',
-      category: 'form',
-      description: 'Search bar combined with faceted filter dropdowns',
-    },
-    {
-      name: 'NgxsmkCheckbox',
-      category: 'form',
-      description: 'Single boolean control built on native checkbox',
-    },
-    {
-      name: 'NgxsmkCheckboxList',
-      category: 'form',
-      description: 'Multiple checkboxes bound to an array of selected values',
-    },
-    {
-      name: 'NgxsmkCheckboxListItemComponent',
-      category: 'form',
-      description: 'Individual checkbox item for composing multi-select lists',
-    },
-    { name: 'NgxsmkRadio', category: 'form', description: 'Single radio option within a group' },
-    {
-      name: 'NgxsmkRadioGroup',
-      category: 'form',
-      description: 'Mutually exclusive radio options group',
-    },
-    { name: 'NgxsmkSwitch', category: 'form', description: 'Instant on/off toggle for settings' },
-    {
-      name: 'NgxsmkSlider',
-      category: 'form',
-      description: 'Range control for selecting a numeric value',
-    },
-    {
-      name: 'NgxsmkSegmentedControl',
-      category: 'form',
-      description: 'Compact single-choice switcher for views or modes',
-    },
-    {
-      name: 'NgxsmkSelector',
-      category: 'form',
-      description: 'Chip-style multi-select for tags and quick filters',
-    },
-    {
-      name: 'NgxsmkMultiSelector',
-      category: 'form',
-      description: 'Dropdown of checkboxes with compact summary trigger',
-    },
-    {
-      name: 'NgxsmkTokenizer',
-      category: 'form',
-      description: 'Free-form tag entry with Enter to add, Backspace to remove',
-    },
-    {
-      name: 'NgxsmkInputGroup',
-      category: 'form',
-      description: 'Attach text add-ons before and after an input',
-    },
-    { name: 'NgxsmkInputGroupText', category: 'form', description: 'Text add-on for input groups' },
-    {
-      name: 'NgxsmkField',
-      category: 'form',
-      description: 'Composable layout for label, control, and status message',
-    },
-    {
-      name: 'NgxsmkFieldLabel',
-      category: 'form',
-      description: 'Label component for field wrapper',
-    },
-    {
-      name: 'NgxsmkFieldStatus',
-      category: 'form',
-      description: 'Status message (hint/error) for field wrapper',
-    },
-    {
-      name: 'NgxsmkFormField',
-      category: 'form',
-      description: 'Batteries-included wrapper wiring label, hint, and error to control',
-    },
-    {
-      name: 'NgxsmkCheckboxListItemComponent',
-      category: 'form',
-      description: 'Individual checkbox list item component',
-    },
-
-    {
-      name: 'NgxsmkLayout',
-      category: 'layout',
-      description: 'Responsive layout primitive for page-level structure',
-    },
-    {
-      name: 'NgxsmkGrid',
-      category: 'layout',
-      description: 'Responsive grid layout with configurable columns and gaps',
-    },
-    {
-      name: 'NgxsmkFlex',
-      category: 'layout',
-      description: 'Flexbox layout primitive with alignment and gap control',
-    },
-    {
-      name: 'NgxsmkStack',
-      category: 'layout',
-      description: 'Stack layout with configurable spacing and alignment',
-    },
-    {
-      name: 'NgxsmkContainer',
-      category: 'layout',
-      description: 'Constrained width container with responsive padding',
-    },
-    {
-      name: 'NgxsmkHStack',
-      category: 'layout',
-      description: 'Horizontal stack with spacing and alignment',
-    },
-    {
-      name: 'NgxsmkVStack',
-      category: 'layout',
-      description: 'Vertical stack with spacing and alignment',
-    },
-    {
-      name: 'NgxsmkCenter',
-      category: 'layout',
-      description: 'Centers content horizontally and vertically',
-    },
-    {
-      name: 'NgxsmkDivider',
-      category: 'layout',
-      description: 'Horizontal or vertical divider line',
-    },
-    { name: 'NgxsmkSpacer', category: 'layout', description: 'Flexible spacer for layout gaps' },
-    {
-      name: 'NgxsmkResizable',
-      category: 'layout',
-      description: 'Resizable panel with drag handle',
-    },
-    {
-      name: 'NgxsmkResizeHandle',
-      category: 'layout',
-      description: 'Drag handle for resizable panels',
-    },
-    { name: 'NgxsmkResizablePanel', category: 'layout', description: 'Resizable panel component' },
-    {
-      name: 'NgxsmkResizablePanelGroup',
-      category: 'layout',
-      description: 'Group of resizable panels',
-    },
-    {
-      name: 'NgxsmkResizableSplitter',
-      category: 'layout',
-      description: 'Splitter between resizable panels',
-    },
-
-    { name: 'NgxsmkTabs', category: 'navigation', description: 'Tabbed navigation interface' },
-    { name: 'NgxsmkTabMenu', category: 'navigation', description: 'Tab menu navigation component' },
-    {
-      name: 'NgxsmkBreadcrumb',
-      category: 'navigation',
-      description: 'Breadcrumb navigation trail',
-    },
-    {
-      name: 'NgxsmkPagination',
-      category: 'navigation',
-      description: 'Pagination controls for data sets',
-    },
-    { name: 'NgxsmkStepper', category: 'navigation', description: 'Multi-step progress indicator' },
-    {
-      name: 'NgxsmkSideNav',
-      category: 'navigation',
-      description: 'Collapsible side navigation drawer',
-    },
-    {
-      name: 'NgxsmkMobileNav',
-      category: 'navigation',
-      description: 'Mobile-optimized navigation drawer',
-    },
-    {
-      name: 'NgxsmkTopNav',
-      category: 'navigation',
-      description: 'Top navigation bar with branding and actions',
-    },
-    {
-      name: 'NgxsmkNavHeadingMenu',
-      category: 'navigation',
-      description: 'Heading with integrated menu for navigation',
-    },
-    { name: 'NgxsmkNavIcon', category: 'navigation', description: 'Navigation icon component' },
-    { name: 'NgxsmkPagination', category: 'navigation', description: 'Pagination controls' },
-    { name: 'NgxsmkTabs', category: 'navigation', description: 'Tabbed navigation interface' },
-
-    {
-      name: 'NgxsmkDataTable',
-      category: 'data-display',
-      description: 'Feature-rich data table with sorting, filtering, pagination',
-    },
-    { name: 'NgxsmkTable', category: 'data-display', description: 'Base table component' },
-    { name: 'NgxsmkTableCell', category: 'data-display', description: 'Table cell component' },
-    { name: 'NgxsmkList', category: 'data-display', description: 'Styled list component' },
-    { name: 'NgxsmkListItem', category: 'data-display', description: 'List item component' },
-    {
-      name: 'NgxsmkCard',
-      category: 'data-display',
-      description: 'Card container with header, content, footer',
-    },
-    { name: 'NgxsmkCardHeader', category: 'data-display', description: 'Card header section' },
-    { name: 'NgxsmkCardContent', category: 'data-display', description: 'Card content section' },
-    { name: 'NgxsmkCardTitle', category: 'data-display', description: 'Card title element' },
-    {
-      name: 'NgxsmkAvatar',
-      category: 'data-display',
-      description: 'User avatar with fallback initials',
-    },
-    { name: 'NgxsmkChip', category: 'data-display', description: 'Compact tag/chip component' },
-    { name: 'NgxsmkTag', category: 'data-display', description: 'Tag/label component' },
-    {
-      name: 'NgxsmkStat',
-      category: 'data-display',
-      description: 'Statistic display with value and label',
-    },
-    { name: 'NgxsmkProgress', category: 'data-display', description: 'Linear progress indicator' },
-    {
-      name: 'NgxsmkProgressCircle',
-      category: 'data-display',
-      description: 'Circular progress indicator',
-    },
-    {
-      name: 'NgxsmkMetadataList',
-      category: 'data-display',
-      description: 'Metadata key-value display list',
-    },
-    {
-      name: 'NgxsmkTreeView',
-      category: 'data-display',
-      description: 'Hierarchical tree view with expand/collapse',
-    },
-    {
-      name: 'NgxsmkOrgChart',
-      category: 'data-display',
-      description: 'Organizational chart visualization',
-    },
-    {
-      name: 'NgxsmkPivotTable',
-      category: 'data-display',
-      description: 'Pivot table for data aggregation',
-    },
-    {
-      name: 'NgxsmkDiffViewer',
-      category: 'data-display',
-      description: 'Side-by-side diff comparison viewer',
-    },
-    { name: 'NgxsmkQrCode', category: 'data-display', description: 'QR code generator' },
-    {
-      name: 'NgxsmkThumbnail',
-      category: 'data-display',
-      description: 'Image thumbnail with loading states',
-    },
-
-    { name: 'NgxsmkToast', category: 'feedback', description: 'Transient notification toast' },
-    {
-      name: 'NgxsmkAlert',
-      category: 'feedback',
-      description: 'Alert banner for important messages',
-    },
-    { name: 'NgxsmkSkeleton', category: 'feedback', description: 'Placeholder skeleton loader' },
-    { name: 'NgxsmkSpinner', category: 'feedback', description: 'Loading spinner animation' },
-    {
-      name: 'NgxsmkEmptyState',
-      category: 'feedback',
-      description: 'Empty state illustration with message',
-    },
-    { name: 'NgxsmkProgress', category: 'feedback', description: 'Progress bar indicator' },
-    {
-      name: 'NgxsmkProgressCircle',
-      category: 'feedback',
-      description: 'Circular progress indicator',
-    },
-    { name: 'NgxsmkStatusDot', category: 'feedback', description: 'Status indicator dot' },
-    { name: 'NgxsmkRating', category: 'feedback', description: 'Star rating input component' },
-
-    {
-      name: 'NgxsmkDialog',
-      category: 'overlay',
-      description: 'Modal dialog with focus trap and animations',
-    },
-    { name: 'NgxsmkDrawer', category: 'overlay', description: 'Slide-over panel from screen edge' },
-    { name: 'NgxsmkSheet', category: 'overlay', description: 'Bottom sheet modal' },
-    {
-      name: 'NgxsmkPopover',
-      category: 'overlay',
-      description: 'Floating popover anchored to trigger',
-    },
-    {
-      name: 'NgxsmkTooltip',
-      category: 'overlay',
-      description: 'Contextual tooltip on hover/focus',
-    },
-    {
-      name: 'NgxsmkHoverCard',
-      category: 'overlay',
-      description: 'Rich hover card with custom content',
-    },
-    { name: 'NgxsmkLightbox', category: 'overlay', description: 'Image lightbox viewer' },
-    { name: 'NgxsmkContextMenu', category: 'overlay', description: 'Right-click context menu' },
-    {
-      name: 'NgxsmkDropdownMenu',
-      category: 'overlay',
-      description: 'Dropdown menu with keyboard navigation',
-    },
-    {
-      name: 'NgxsmkImperativeDialog',
-      category: 'overlay',
-      description: 'Programmatically controlled dialog',
-    },
-    {
-      name: 'NgxsmkChatComposerDrawer',
-      category: 'overlay',
-      description: 'Drawer for chat composer',
-    },
-
-    { name: 'NgxsmkChartLine', category: 'chart', description: 'Line chart visualization' },
-    { name: 'NgxsmkChartBar', category: 'chart', description: 'Bar chart visualization' },
-    { name: 'NgxsmkChartPie', category: 'chart', description: 'Pie/donut chart visualization' },
-    { name: 'NgxsmkChartArea', category: 'chart', description: 'Area chart visualization' },
-    { name: 'NgxsmkChartScatter', category: 'chart', description: 'Scatter plot visualization' },
-    { name: 'NgxsmkChartHeatmap', category: 'chart', description: 'Heatmap visualization' },
-    {
-      name: 'NgxsmkChartCandlestick',
-      category: 'chart',
-      description: 'Candlestick chart for financial data',
-    },
-    {
-      name: 'NgxsmkChartDashboard',
-      category: 'chart',
-      description: 'Dashboard layout for multiple charts',
-    },
-
-    { name: 'NgxsmkChatLayout', category: 'ai', description: 'Complete chat application layout' },
-    { name: 'NgxsmkChatWindow', category: 'ai', description: 'Chat message display area' },
-    { name: 'NgxsmkChatMessage', category: 'ai', description: 'Individual chat message bubble' },
-    {
-      name: 'NgxsmkChatMessageBubble',
-      category: 'ai',
-      description: 'Chat message bubble component',
-    },
-    {
-      name: 'NgxsmkChatMessageMetadata',
-      category: 'ai',
-      description: 'Message metadata (timestamp, status)',
-    },
-    { name: 'NgxsmkChatComposer', category: 'ai', description: 'Chat message input composer' },
-    { name: 'NgxsmkChatComposerDrawer', category: 'ai', description: 'Drawer for chat composer' },
-    {
-      name: 'NgxsmkChatComposerTokenElement',
-      category: 'ai',
-      description: 'Token element in composer',
-    },
-    { name: 'NgxsmkChatDictationButton', category: 'ai', description: 'Voice dictation button' },
-    { name: 'NgxsmkChatInput', category: 'ai', description: 'Chat message input field' },
-    { name: 'NgxsmkChatSendButton', category: 'ai', description: 'Send button for chat' },
-    { name: 'NgxsmkChatSystemMessage', category: 'ai', description: 'System message display' },
-    { name: 'NgxsmkChatTokenizedText', category: 'ai', description: 'Tokenized text display' },
-    { name: 'NgxsmkChatTokenElement', category: 'ai', description: 'Individual token element' },
-    { name: 'NgxsmkChatTokenElement', category: 'ai', description: 'Chat token element' },
-    {
-      name: 'NgxsmkChatLayoutScrollButton',
-      category: 'ai',
-      description: 'Scroll button for chat layout',
-    },
-    { name: 'NgxsmkCitationViewer', category: 'ai', description: 'Citation reference viewer' },
-    { name: 'NgxsmkCitation', category: 'ai', description: 'Citation reference component' },
-    { name: 'NgxsmkReasoningTimeline', category: 'ai', description: 'AI reasoning step timeline' },
-    { name: 'NgxsmkStreamingText', category: 'ai', description: 'Streaming text animation' },
-    { name: 'NgxsmkVoiceInput', category: 'ai', description: 'Voice input button' },
-    { name: 'NgxsmkDictationButton', category: 'ai', description: 'Dictation button' },
-    { name: 'NgxsmkPromptCarousel', category: 'ai', description: 'Carousel of prompt suggestions' },
-
-    {
-      name: 'NgxsmkHooks',
-      category: 'utility',
-      description: 'Collection of reactive utility hooks',
-    },
-    {
-      name: 'NgxsmkCopyToClipboard',
-      category: 'utility',
-      description: 'Copy text to clipboard directive',
-    },
-    {
-      name: 'NgxsmkKeyboardShortcut',
-      category: 'utility',
-      description: 'Global keyboard shortcut registration',
-    },
-    { name: 'NgxsmkFocusTrap', category: 'utility', description: 'Focus trap for modal dialogs' },
-    {
-      name: 'NgxsmkLazyLoad',
-      category: 'utility',
-      description: 'Lazy load content on viewport intersection',
-    },
-    {
-      name: 'NgxsmkIntersectionObserver',
-      category: 'utility',
-      description: 'Intersection observer directive',
-    },
-    { name: 'NgxsmkResizeObserver', category: 'utility', description: 'Resize observer directive' },
-    { name: 'NgxsmkMediaQuery', category: 'utility', description: 'Reactive media query matching' },
-    { name: 'NgxsmkMediaTheme', category: 'utility', description: 'Media theme detection' },
-    {
-      name: 'NgxsmkClickOutside',
-      category: 'utility',
-      description: 'Click outside detection directive',
-    },
-    { name: 'NgxsmkScrollLock', category: 'utility', description: 'Body scroll locking utility' },
-    { name: 'NgxsmkToken', category: 'utility', description: 'Design token display' },
-    { name: 'NgxsmkTerminal', category: 'utility', description: 'Terminal emulator component' },
-    {
-      name: 'NgxsmkJsonViewer',
-      category: 'utility',
-      description: 'JSON syntax highlighted viewer',
-    },
-    { name: 'NgxsmkMarkdownViewer', category: 'utility', description: 'Markdown renderer' },
-    { name: 'NgxsmkMarkdown', category: 'utility', description: 'Markdown component' },
-    { name: 'NgxsmkDiffViewer', category: 'utility', description: 'Diff comparison viewer' },
-    { name: 'NgxsmkMemoryViewer', category: 'utility', description: 'Memory usage visualization' },
-    { name: 'NgxsmkCodeBlock', category: 'utility', description: 'Syntax highlighted code block' },
-    { name: 'NgxsmkCode', category: 'utility', description: 'Inline code component' },
-    { name: 'NgxsmkKbd', category: 'utility', description: 'Keyboard key display' },
-    {
-      name: 'NgxsmkVisuallyHidden',
-      category: 'utility',
-      description: 'Visually hidden but screen reader accessible',
-    },
-    {
-      name: 'NgxsmkImperativeDialog',
-      category: 'utility',
-      description: 'Imperative dialog service',
-    },
-    {
-      name: 'NgxsmkLayerProvider',
-      category: 'utility',
-      description: 'Portal layer provider for overlays',
-    },
-    {
-      name: 'NgxsmkLinkProvider',
-      category: 'utility',
-      description: 'Link provider for navigation',
-    },
-    {
-      name: 'NgxsmkCommandPalette',
-      category: 'utility',
-      description: 'Command palette for quick actions',
-    },
-    {
-      name: 'NgxsmkPromptCarousel',
-      category: 'utility',
-      description: 'Prompt suggestions carousel',
-    },
-    { name: 'NgxsmkCarousel', category: 'utility', description: 'Carousel/slider component' },
-
-    {
-      name: 'NgxsmkLetDirective',
-      category: 'other',
-      description: 'Structural directive for local variable binding',
-    },
-    {
-      name: 'NgxsmkRxLetDirective',
-      category: 'other',
-      description: 'RxJS-powered structural directive',
-    },
-    { name: 'NgxsmkI18nPipe', category: 'other', description: 'Internationalization pipe' },
-    { name: 'NgxsmkKbd', category: 'other', description: 'Keyboard key display' },
-    { name: 'NgxsmkCode', category: 'other', description: 'Inline code formatting' },
-    { name: 'NgxsmkCodeBlock', category: 'other', description: 'Syntax highlighted code block' },
-    { name: 'NgxsmkJsonViewer', category: 'other', description: 'JSON syntax highlighted viewer' },
-    { name: 'NgxsmkDiffViewer', category: 'other', description: 'Diff comparison viewer' },
-    { name: 'NgxsmkTerminal', category: 'other', description: 'Terminal emulator' },
-    { name: 'NgxsmkTerminal', category: 'other', description: 'Terminal emulator component' },
-  ],
-  '@ngxsmk/theme': [
-    {
-      name: 'NgxsmkThemeService',
-      category: 'utility',
-      description: 'Runtime theme control and dynamic theme application',
-    },
-    {
-      name: 'NgxsmkThemeBuilder',
-      category: 'utility',
-      description: 'Visual theme builder component',
-    },
-    { name: 'NgxsmkI18nPipe', category: 'utility', description: 'Internationalization pipe' },
-    { name: 'NgxsmkCreateI18n', category: 'utility', description: 'Create i18n instance' },
-    { name: 'NgxsmkProvideI18n', category: 'utility', description: 'Provide i18n configuration' },
-    {
-      name: 'NgxsmkUseDirection',
-      category: 'utility',
-      description: 'Use RTL/LTR direction signal',
-    },
-  ],
-  '@ngxsmk/cdk': [
-    {
-      name: 'NgxsmkAutofocusDirective',
-      category: 'utility',
-      description: 'Auto-focus element on render',
-    },
-    {
-      name: 'NgxsmkIntersectionObserverDirective',
-      category: 'utility',
-      description: 'Intersection observer directive',
-    },
-    {
-      name: 'NgxsmkResizeObserverDirective',
-      category: 'utility',
-      description: 'Resize observer directive',
-    },
-    { name: 'NgxsmkFocusTrapDirective', category: 'utility', description: 'Focus trap for modals' },
-    {
-      name: 'NgxsmkClickOutsideDirective',
-      category: 'utility',
-      description: 'Click outside detection',
-    },
-    { name: 'NgxsmkScrollLockDirective', category: 'utility', description: 'Body scroll lock' },
-    { name: 'NgxsmkMediaQuery', category: 'utility', description: 'Reactive media query' },
-    {
-      name: 'NgxsmkLazyLoadDirective',
-      category: 'utility',
-      description: 'Lazy load on viewport entry',
-    },
-    {
-      name: 'NgxsmkResizeHandleDirective',
-      category: 'utility',
-      description: 'Resize handle for panels',
-    },
-    {
-      name: 'NgxsmkA11yTesting',
-      category: 'utility',
-      description: 'Accessibility testing utilities',
-    },
-  ],
+const COMPONENT_CATEGORIES: Record<string, ComponentCategory> = {
+  NgxsmkAccordion: 'overlay',
+  NgxsmkAccordionItem: 'overlay',
+  NgxsmkAgentCard: 'ai',
+  NgxsmkAiChat: 'ai',
+  NgxsmkAlert: 'feedback',
+  NgxsmkAlertDialog: 'overlay',
+  NgxsmkAppShell: 'layout',
+  NgxsmkAspectRatio: 'layout',
+  NgxsmkAudioPlayer: 'data-display',
+  NgxsmkAutocomplete: 'form',
+  NgxsmkAvatar: 'data-display',
+  NgxsmkAvatarGroupOverflow: 'data-display',
+  NgxsmkAvatarStatusDot: 'data-display',
+  NgxsmkBadge: 'data-display',
+  NgxsmkBanner: 'feedback',
+  NgxsmkBlockquote: 'data-display',
+  NgxsmkBreadcrumbItem: 'navigation',
+  NgxsmkButton: 'form',
+  NgxsmkButtonGroup: 'form',
+  NgxsmkCard: 'data-display',
+  NgxsmkCarousel: 'overlay',
+  NgxsmkCenter: 'layout',
+  NgxsmkChartArea: 'chart',
+  NgxsmkChartBar: 'chart',
+  NgxsmkChartCandlestick: 'chart',
+  NgxsmkChartDashboard: 'chart',
+  NgxsmkChartHeatmap: 'chart',
+  NgxsmkChartLine: 'chart',
+  NgxsmkChartPie: 'chart',
+  NgxsmkChartScatter: 'chart',
+  NgxsmkChatComposerDrawer: 'ai',
+  NgxsmkChatComposerTokenElement: 'ai',
+  NgxsmkChatDictationButton: 'ai',
+  NgxsmkChatInput: 'ai',
+  NgxsmkChatLayout: 'ai',
+  NgxsmkChatLayoutScrollButton: 'ai',
+  NgxsmkChatMessage: 'ai',
+  NgxsmkChatMessageBubble: 'ai',
+  NgxsmkChatMessageMetadata: 'ai',
+  NgxsmkChatSendButton: 'ai',
+  NgxsmkChatSystemMessage: 'ai',
+  NgxsmkChatTokenizedText: 'ai',
+  NgxsmkChatWindow: 'ai',
+  NgxsmkCheckbox: 'form',
+  NgxsmkCheckboxList: 'form',
+  NgxsmkCheckboxListItem: 'form',
+  NgxsmkCitation: 'ai',
+  NgxsmkCitationViewer: 'ai',
+  NgxsmkClickOutside: 'utility',
+  NgxsmkCode: 'data-display',
+  NgxsmkCodeBlock: 'data-display',
+  NgxsmkCollapsible: 'overlay',
+  NgxsmkCombobox: 'form',
+  NgxsmkCommandPalette: 'overlay',
+  NgxsmkContainer: 'layout',
+  NgxsmkContextMenu: 'overlay',
+  NgxsmkConversationList: 'ai',
+  NgxsmkCopyToClipboard: 'utility',
+  NgxsmkDataTable: 'data-display',
+  NgxsmkDatePicker: 'form',
+  NgxsmkDatepicker: 'form',
+  NgxsmkDiagramBuilder: 'data-display',
+  NgxsmkDialog: 'overlay',
+  NgxsmkDiffViewer: 'data-display',
+  NgxsmkDivider: 'layout',
+  NgxsmkDropdownMenu: 'overlay',
+  NgxsmkEmptyState: 'feedback',
+  NgxsmkFab: 'form',
+  NgxsmkField: 'form',
+  NgxsmkFieldLabel: 'form',
+  NgxsmkFieldStatus: 'form',
+  NgxsmkFlex: 'layout',
+  NgxsmkFlowEditor: 'data-display',
+  NgxsmkFocusTrap: 'utility',
+  NgxsmkFormField: 'form',
+  NgxsmkFormLayout: 'form',
+  NgxsmkGrid: 'layout',
+  NgxsmkHStack: 'layout',
+  NgxsmkHeading: 'data-display',
+  NgxsmkHoverCard: 'overlay',
+  NgxsmkI18n: 'utility',
+  NgxsmkImageViewer: 'data-display',
+  NgxsmkImperativeDialog: 'overlay',
+  NgxsmkInput: 'form',
+  NgxsmkInputGroup: 'form',
+  NgxsmkInputGroupText: 'form',
+  NgxsmkIntersectionObserver: 'utility',
+  NgxsmkJsonViewer: 'data-display',
+  NgxsmkKanbanBoard: 'data-display',
+  NgxsmkKbd: 'data-display',
+  NgxsmkKeyboardShortcut: 'utility',
+  NgxsmkLayerProvider: 'utility',
+  NgxsmkLazyLoad: 'utility',
+  NgxsmkLet: 'utility',
+  NgxsmkLightbox: 'overlay',
+  NgxsmkLink: 'navigation',
+  NgxsmkLinkProvider: 'utility',
+  NgxsmkList: 'data-display',
+  NgxsmkListItem: 'data-display',
+  NgxsmkLiveDataTable: 'data-display',
+  NgxsmkLiveAnnouncer: 'utility',
+  NgxsmkMarkdown: 'data-display',
+  NgxsmkMarkdownViewer: 'data-display',
+  NgxsmkMediaQuery: 'utility',
+  NgxsmkMediaTheme: 'utility',
+  NgxsmkMemoryViewer: 'ai',
+  NgxsmkMetadataList: 'data-display',
+  NgxsmkMeter: 'data-display',
+  NgxsmkMobileNav: 'navigation',
+  NgxsmkMobileNavToggle: 'navigation',
+  NgxsmkMultiSelect: 'form',
+  NgxsmkMultiSelector: 'form',
+  NgxsmkNavHeadingMenu: 'navigation',
+  NgxsmkNavIcon: 'navigation',
+  NgxsmkNumberInput: 'form',
+  NgxsmkOrgChart: 'data-display',
+  NgxsmkOutline: 'data-display',
+  NgxsmkOverflowList: 'layout',
+  NgxsmkPagination: 'navigation',
+  NgxsmkPinInput: 'form',
+  NgxsmkPivotTable: 'data-display',
+  NgxsmkPopover: 'overlay',
+  NgxsmkPowerSearch: 'form',
+  NgxsmkProgress: 'feedback',
+  NgxsmkProgressCircle: 'feedback',
+  NgxsmkPromptCarousel: 'ai',
+  NgxsmkQrCode: 'data-display',
+  NgxsmkQueryBuilder: 'form',
+  NgxsmkRadio: 'form',
+  NgxsmkRadioGroup: 'form',
+  NgxsmkRating: 'form',
+  NgxsmkReasoningTimeline: 'ai',
+  NgxsmkResizable: 'layout',
+  NgxsmkResizeHandle: 'layout',
+  NgxsmkResizeObserver: 'utility',
+  NgxsmkRuleBuilder: 'form',
+  NgxsmkScheduler: 'data-display',
+  NgxsmkScrollLock: 'utility',
+  NgxsmkSection: 'layout',
+  NgxsmkSegmentedControl: 'form',
+  NgxsmkSelect: 'form',
+  NgxsmkSelector: 'form',
+  NgxsmkSeo: 'utility',
+  NgxsmkSheet: 'overlay',
+  NgxsmkSideNav: 'navigation',
+  NgxsmkSkeleton: 'feedback',
+  NgxsmkSlider: 'form',
+  NgxsmkSpacer: 'layout',
+  NgxsmkSpinner: 'feedback',
+  NgxsmkSplitButton: 'form',
+  NgxsmkSpreadsheet: 'data-display',
+  NgxsmkStack: 'layout',
+  NgxsmkStackItem: 'layout',
+  NgxsmkStat: 'data-display',
+  NgxsmkStatusDot: 'data-display',
+  NgxsmkStepper: 'navigation',
+  NgxsmkStreamingText: 'ai',
+  NgxsmkSwitch: 'form',
+  NgxsmkTabMenu: 'navigation',
+  NgxsmkTable: 'data-display',
+  NgxsmkTableCell: 'data-display',
+  NgxsmkTableHeaderCell: 'data-display',
+  NgxsmkTableRow: 'data-display',
+  NgxsmkTabs: 'navigation',
+  NgxsmkTag: 'data-display',
+  NgxsmkTelInput: 'form',
+  NgxsmkTerminal: 'data-display',
+  NgxsmkText: 'data-display',
+  NgxsmkThemeBuilder: 'utility',
+  NgxsmkThumbnail: 'data-display',
+  NgxsmkTimelineGantt: 'data-display',
+  NgxsmkTimestamp: 'data-display',
+  NgxsmkToast: 'feedback',
+  NgxsmkToggleButton: 'form',
+  NgxsmkToggleButtonGroup: 'form',
+  NgxsmkToken: 'data-display',
+  NgxsmkTokenizer: 'form',
+  NgxsmkToolCallView: 'ai',
+  NgxsmkTooltip: 'overlay',
+  NgxsmkTopNav: 'navigation',
+  NgxsmkTopNavHeading: 'navigation',
+  NgxsmkTopNavMegaMenu: 'navigation',
+  NgxsmkTopNavMegaMenuFeaturedCard: 'navigation',
+  NgxsmkTopNavMegaMenuItem: 'navigation',
+  NgxsmkTopNavMenu: 'navigation',
+  NgxsmkTopNavItem: 'navigation',
+  NgxsmkTreeView: 'data-display',
+  NgxsmkTypeahead: 'form',
+  NgxsmkVisuallyHidden: 'utility',
+  NgxsmkVoiceInput: 'ai',
+  NgxsmkVStack: 'layout',
+  NgxsmkWorkflowBuilder: 'data-display',
 };
+
+function mcpInputToComponentInput(input: McpInput): ComponentInput {
+  return {
+    name: input.name,
+    type: input.type,
+    required: input.required ?? false,
+    defaultValue: input.default,
+    description: '',
+    signal: input.twoWay,
+  };
+}
+
+function mcpOutputToComponentOutput(output: McpOutput): ComponentOutput {
+  return {
+    name: output.name,
+    type: output.type,
+    description: '',
+  };
+}
+
+function entryPointToPackage(entryPoint: string): ComponentMetadata['packageName'] {
+  if (entryPoint.startsWith('@ngxsmk/cdk')) return '@ngxsmk/cdk';
+  if (entryPoint.startsWith('@ngxsmk/theme')) return '@ngxsmk/theme';
+  return '@ngxsmk/core';
+}
+
+export interface SearchResult {
+  item: ComponentMetadata;
+  score: number;
+  matchedFields: string[];
+}
+
+export interface SearchSuggestion {
+  text: string;
+  type: 'component' | 'category' | 'tag' | 'recent';
+  metadata?: ComponentMetadata;
+}
 
 @Injectable({ providedIn: 'root' })
 export class ComponentRegistry {
   private readonly components = signal<ComponentMetadata[]>([]);
   private readonly searchIndex = signal<MiniSearch<ComponentMetadata> | null>(null);
   private readonly initialized = signal(false);
+  private readonly recentSearches = signal<string[]>([]);
+  private readonly favorites = signal<string[]>([]);
 
   readonly allComponents = computed(() => this.components());
   readonly byCategory = computed(() => {
@@ -725,81 +362,54 @@ export class ComponentRegistry {
   readonly categories = computed(() => Array.from(this.byCategory().keys()));
   readonly totalCount = computed(() => this.components().length);
 
-  readonly search = signal<{
-    query: string;
-    results: ComponentMetadata[];
-    loading: boolean;
-  }>({ query: '', results: [], loading: false });
-
   async initialize(): Promise<void> {
     if (this.initialized()) return;
 
-    const components = await this.buildRegistry();
+    const components = this.buildFromMcpDatabase();
     this.components.set(components);
     this.buildSearchIndex(components);
     this.initialized.set(true);
   }
 
-  private async buildRegistry(): Promise<ComponentMetadata[]> {
-    const components: ComponentMetadata[] = [];
+  private buildFromMcpDatabase(): ComponentMetadata[] {
     const seen = new Set<string>();
+    const components: ComponentMetadata[] = [];
 
-    for (const [pkg, exports] of Object.entries(PACKAGE_EXPORTS)) {
-      for (const exp of exports) {
-        if (seen.has(exp.name)) continue;
-        seen.add(exp.name);
-        const meta = this.createMetadata(exp.name, pkg, exp.category, exp.description);
-        components.push(meta);
-      }
+    for (const entry of COMPONENT_DATABASE) {
+      if (seen.has(entry.name)) continue;
+      seen.add(entry.name);
+
+      const category = COMPONENT_CATEGORIES[entry.name] ?? 'other';
+      const packageName = entryPointToPackage(entry.entryPoint);
+      const tags = this.generateTags(entry.name, category);
+
+      components.push({
+        name: entry.name,
+        selector: entry.selector,
+        exportName: entry.name,
+        category,
+        description: entry.description,
+        packageName,
+        inputs: entry.inputs.map(mcpInputToComponentInput),
+        outputs: entry.outputs.map(mcpOutputToComponentOutput),
+        methods: [],
+        signals: [],
+        examples: this.generateExamples(entry.name, entry.selector),
+        tags,
+        accessibility: {
+          score: 95,
+          keyboardSupport: true,
+          ariaSupport: true,
+          screenReaderTested: true,
+        },
+        performance: {
+          bundleSizeKB: 0,
+          renderTimeMs: 0,
+        },
+      });
     }
 
     return components;
-  }
-
-  private createMetadata(
-    name: string,
-    pkg: string,
-    category: ComponentCategory,
-    baseDescription: string,
-  ): ComponentMetadata {
-    const selector = this.nameToSelector(name);
-    const tags = this.generateTags(name, category);
-    const { inputs, signals } = this.inferApi(name);
-
-    return {
-      name,
-      selector,
-      exportName: name,
-      category,
-      description: baseDescription,
-      packageName: pkg as ComponentMetadata['packageName'],
-      inputs,
-      outputs: [],
-      methods: [],
-      signals,
-      examples: this.generateExamples(name),
-      tags,
-      accessibility: {
-        score: 95,
-        keyboardSupport: true,
-        ariaSupport: true,
-        screenReaderTested: true,
-      },
-      performance: {
-        bundleSizeKB: 0,
-        renderTimeMs: 0,
-      },
-    };
-  }
-
-  private nameToSelector(name: string): string {
-    return name
-      .replace(/^Ngxsmk/, '')
-      .replace(/([A-Z])/g, '-$1')
-      .toLowerCase()
-      .replace(/^-/, '')
-      .replace(/([a-z])([A-Z])/g, '$1-$2')
-      .toLowerCase();
   }
 
   private generateTags(name: string, category: ComponentCategory): string[] {
@@ -812,388 +422,7 @@ export class ComponentRegistry {
     return [...base, category, 'ngxsmk', 'angular', 'signals', 'zoneless'];
   }
 
-  private inferApi(name: string): {
-    inputs: ComponentInput[];
-    outputs: ComponentOutput[];
-    signals: ComponentSignal[];
-  } {
-    const lower = name.toLowerCase();
-    const inputs: ComponentInput[] = [];
-    const outputs: ComponentOutput[] = [];
-    const signals: ComponentSignal[] = [];
-
-    if (lower.includes('button') && !lower.includes('group')) {
-      inputs.push(
-        {
-          name: 'variant',
-          type: "'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'link'",
-          required: false,
-          defaultValue: "'primary'",
-          description: 'Visual style variant',
-        },
-        {
-          name: 'size',
-          type: "'sm' | 'md' | 'lg'",
-          required: false,
-          defaultValue: "'md'",
-          description: 'Button size',
-        },
-        {
-          name: 'loading',
-          type: 'boolean',
-          required: false,
-          defaultValue: 'false',
-          description: 'Show loading spinner',
-        },
-        {
-          name: 'disabled',
-          type: 'boolean',
-          required: false,
-          defaultValue: 'false',
-          description: 'Disable the button',
-        },
-      );
-      outputs.push({
-        name: 'clicked',
-        type: 'EventEmitter<void>',
-        description: 'Emitted when button is clicked',
-      });
-    } else if (lower.includes('input') && !lower.includes('group')) {
-      inputs.push(
-        {
-          name: 'value',
-          type: 'string',
-          required: false,
-          defaultValue: "''",
-          description: 'Input value (two-way)',
-          signal: true,
-        },
-        {
-          name: 'placeholder',
-          type: 'string',
-          required: false,
-          defaultValue: "''",
-          description: 'Placeholder text',
-        },
-        {
-          name: 'type',
-          type: "'text' | 'email' | 'password' | 'number' | 'tel' | 'url'",
-          required: false,
-          defaultValue: "'text'",
-          description: 'Input type',
-        },
-        {
-          name: 'disabled',
-          type: 'boolean',
-          required: false,
-          defaultValue: 'false',
-          description: 'Disable the input',
-        },
-        {
-          name: 'required',
-          type: 'boolean',
-          required: false,
-          defaultValue: 'false',
-          description: 'Mark as required',
-        },
-        { name: 'ariaLabel', type: 'string', required: false, description: 'Accessible label' },
-      );
-      outputs.push({
-        name: 'valueChange',
-        type: 'EventEmitter<string>',
-        description: 'Emitted when value changes',
-      });
-    } else if (
-      lower.includes('select') ||
-      lower.includes('autocomplete') ||
-      lower.includes('combobox') ||
-      lower.includes('typeahead')
-    ) {
-      inputs.push(
-        {
-          name: 'options',
-          type: 'NgxsmkSelectOption[]',
-          required: true,
-          description: 'Array of selectable options',
-        },
-        {
-          name: 'value',
-          type: 'string',
-          required: false,
-          defaultValue: "''",
-          description: 'Selected value (two-way)',
-          signal: true,
-        },
-        {
-          name: 'placeholder',
-          type: 'string',
-          required: false,
-          defaultValue: "'Pick an option'",
-          description: 'Placeholder text',
-        },
-        {
-          name: 'disabled',
-          type: 'boolean',
-          required: false,
-          defaultValue: 'false',
-          description: 'Disable the select',
-        },
-        {
-          name: 'searchable',
-          type: 'boolean',
-          required: false,
-          defaultValue: 'false',
-          description: 'Enable search within options',
-        },
-      );
-      outputs.push({
-        name: 'valueChange',
-        type: 'EventEmitter<string>',
-        description: 'Emitted when selection changes',
-      });
-      outputs.push({
-        name: 'selectionChange',
-        type: 'EventEmitter<NgxsmkSelectOption>',
-        description: 'Emitted when option is selected',
-      });
-    } else if (lower.includes('checkbox') && !lower.includes('list')) {
-      inputs.push(
-        {
-          name: 'checked',
-          type: 'boolean',
-          required: false,
-          defaultValue: 'false',
-          description: 'Checked state (two-way)',
-          signal: true,
-        },
-        {
-          name: 'disabled',
-          type: 'boolean',
-          required: false,
-          defaultValue: 'false',
-          description: 'Disable the checkbox',
-        },
-        {
-          name: 'indeterminate',
-          type: 'boolean',
-          required: false,
-          defaultValue: 'false',
-          description: 'Indeterminate state',
-        },
-      );
-      outputs.push({
-        name: 'checkedChange',
-        type: 'EventEmitter<boolean>',
-        description: 'Emitted when checked state changes',
-      });
-    } else if (lower.includes('radio')) {
-      inputs.push(
-        {
-          name: 'value',
-          type: 'string',
-          required: false,
-          defaultValue: "''",
-          description: 'Selected value (two-way)',
-          signal: true,
-        },
-        {
-          name: 'disabled',
-          type: 'boolean',
-          required: false,
-          defaultValue: 'false',
-          description: 'Disable the radio group',
-        },
-      );
-      outputs.push({
-        name: 'valueChange',
-        type: 'EventEmitter<string>',
-        description: 'Emitted when selection changes',
-      });
-    } else if (lower.includes('switch')) {
-      inputs.push(
-        {
-          name: 'checked',
-          type: 'boolean',
-          required: false,
-          defaultValue: 'false',
-          description: 'On/off state (two-way)',
-          signal: true,
-        },
-        {
-          name: 'disabled',
-          type: 'boolean',
-          required: false,
-          defaultValue: 'false',
-          description: 'Disable the switch',
-        },
-      );
-      outputs.push({
-        name: 'checkedChange',
-        type: 'EventEmitter<boolean>',
-        description: 'Emitted when toggled',
-      });
-    } else if (lower.includes('slider')) {
-      inputs.push(
-        {
-          name: 'value',
-          type: 'number',
-          required: false,
-          defaultValue: '0',
-          description: 'Slider value (two-way)',
-          signal: true,
-        },
-        {
-          name: 'min',
-          type: 'number',
-          required: false,
-          defaultValue: '0',
-          description: 'Minimum value',
-        },
-        {
-          name: 'max',
-          type: 'number',
-          required: false,
-          defaultValue: '100',
-          description: 'Maximum value',
-        },
-        {
-          name: 'step',
-          type: 'number',
-          required: false,
-          defaultValue: '1',
-          description: 'Step increment',
-        },
-        {
-          name: 'disabled',
-          type: 'boolean',
-          required: false,
-          defaultValue: 'false',
-          description: 'Disable the slider',
-        },
-      );
-      outputs.push({
-        name: 'valueChange',
-        type: 'EventEmitter<number>',
-        description: 'Emitted when value changes',
-      });
-    } else if (
-      lower.includes('dialog') ||
-      lower.includes('drawer') ||
-      lower.includes('sheet') ||
-      lower.includes('popover') ||
-      lower.includes('tooltip') ||
-      lower.includes('hover') ||
-      lower.includes('lightbox') ||
-      lower.includes('contextmenu') ||
-      lower.includes('dropdown')
-    ) {
-      inputs.push(
-        {
-          name: 'open',
-          type: 'boolean',
-          required: false,
-          defaultValue: 'false',
-          description: 'Open state (two-way)',
-          signal: true,
-        },
-        {
-          name: 'disabled',
-          type: 'boolean',
-          required: false,
-          defaultValue: 'false',
-          description: 'Disable the overlay',
-        },
-      );
-      outputs.push({
-        name: 'openChange',
-        type: 'EventEmitter<boolean>',
-        description: 'Emitted when open state changes',
-      });
-      outputs.push({
-        name: 'closed',
-        type: 'EventEmitter<void>',
-        description: 'Emitted when overlay closes',
-      });
-    } else if (
-      lower.includes('toast') ||
-      lower.includes('alert') ||
-      lower.includes('skeleton') ||
-      lower.includes('spinner') ||
-      lower.includes('empty') ||
-      lower.includes('progress') ||
-      lower.includes('status') ||
-      lower.includes('rating')
-    ) {
-      // Feedback components
-    } else if (lower.includes('chart')) {
-      inputs.push(
-        { name: 'data', type: 'any[]', required: true, description: 'Chart data' },
-        {
-          name: 'config',
-          type: 'ChartConfig',
-          required: false,
-          description: 'Chart configuration',
-        },
-      );
-    } else if (
-      lower.includes('chat') ||
-      lower.includes('ai') ||
-      lower.includes('prompt') ||
-      lower.includes('streaming') ||
-      lower.includes('reasoning') ||
-      lower.includes('citation') ||
-      lower.includes('tokenized') ||
-      lower.includes('voice') ||
-      lower.includes('dictation')
-    ) {
-      // AI components
-    } else if (
-      lower.includes('layout') ||
-      lower.includes('grid') ||
-      lower.includes('flex') ||
-      lower.includes('stack') ||
-      lower.includes('container') ||
-      lower.includes('divider') ||
-      lower.includes('spacer') ||
-      lower.includes('center') ||
-      lower.includes('resizable')
-    ) {
-      // Layout components
-    } else if (
-      lower.includes('hook') ||
-      lower.includes('copy') ||
-      lower.includes('keyboard') ||
-      lower.includes('focus') ||
-      lower.includes('lazy') ||
-      lower.includes('intersection') ||
-      lower.includes('resize') ||
-      lower.includes('media') ||
-      lower.includes('click') ||
-      lower.includes('scroll') ||
-      lower.includes('token') ||
-      lower.includes('terminal') ||
-      lower.includes('json') ||
-      lower.includes('markdown') ||
-      lower.includes('diff') ||
-      lower.includes('memory') ||
-      lower.includes('code') ||
-      lower.includes('kbd') ||
-      lower.includes('visually') ||
-      lower.includes('imperative') ||
-      lower.includes('layer') ||
-      lower.includes('link') ||
-      lower.includes('command') ||
-      lower.includes('prompt') ||
-      lower.includes('carousel')
-    ) {
-      // Utility components
-    }
-
-    return { inputs, outputs, signals };
-  }
-
-  private generateExamples(name: string): ComponentExample[] {
-    const selector = this.nameToSelector(name);
+  private generateExamples(name: string, selector: string): ComponentExample[] {
     return [
       {
         title: 'Basic Usage',
@@ -1209,9 +438,15 @@ export class ComponentRegistry {
       fields: ['name', 'selector', 'description', 'category', 'tags'],
       storeFields: ['name', 'selector', 'description', 'category', 'packageName', 'tags'],
       searchOptions: {
-        boost: { name: 3, selector: 2, description: 1, tags: 1 },
+        boost: { name: 4, selector: 3, description: 2, tags: 2, category: 1 },
         fuzzy: 0.2,
         prefix: true,
+      },
+      extractField: (document: ComponentMetadata, fieldName: string) => {
+        if (fieldName === 'tags' && Array.isArray(document.tags)) {
+          return document.tags.join(' ');
+        }
+        return String((document as unknown as Record<string, unknown>)[fieldName] ?? '');
       },
     });
 
@@ -1229,7 +464,7 @@ export class ComponentRegistry {
     const results = index.search(query, {
       prefix: true,
       fuzzy: 0.2,
-      boost: { name: 3, selector: 2, description: 1, tags: 1 },
+      boost: { name: 4, selector: 3, description: 2, tags: 2, category: 1 },
     });
 
     let filtered = results
@@ -1245,6 +480,138 @@ export class ComponentRegistry {
     }
 
     return filtered;
+  }
+
+  searchWithScore(options: {
+    query: string;
+    category?: string;
+    limit?: number;
+  }): SearchResult[] {
+    const index = this.searchIndex();
+    if (!index || !options.query?.trim()) return [];
+
+    const { query, category, limit = 20 } = options;
+
+    const results = index.search(query, {
+      boost: { name: 4, selector: 3, description: 2, tags: 2, category: 1 },
+      fuzzy: 0.2,
+      prefix: true,
+    });
+
+    let filtered = results.map((r) => {
+      const item = this.getComponent(r.id as string);
+      return {
+        item: item ?? (r as unknown as ComponentMetadata),
+        score: r.score ?? 0,
+        matchedFields: item ? this.getMatchedFields(item, query) : [],
+      };
+    });
+
+    if (category) {
+      filtered = filtered.filter((r) => r.item.category === category);
+    }
+
+    if (limit) {
+      filtered = filtered.slice(0, limit);
+    }
+
+    this.addToRecent(query);
+    return filtered;
+  }
+
+  getSuggestions(query: string, limit = 8): SearchSuggestion[] {
+    const index = this.searchIndex();
+    if (!index || !query.trim()) return this.getDefaultSuggestions(limit);
+
+    const results = index.search(query, {
+      prefix: true,
+      fuzzy: 0.2,
+      boost: { name: 3, selector: 2 },
+    });
+    const suggestions: SearchSuggestion[] = [];
+
+    for (const result of results.slice(0, limit)) {
+      suggestions.push({
+        text: String(result.id),
+        type: 'component',
+        metadata: this.getComponent(result.id as string),
+      });
+    }
+
+    const categories = [...new Set(this.components().map((d) => d.category))];
+    for (const cat of categories) {
+      if (cat.toLowerCase().includes(query.toLowerCase()) && suggestions.length < limit) {
+        suggestions.push({ text: cat, type: 'category' });
+      }
+    }
+
+    return suggestions.slice(0, limit);
+  }
+
+  private getDefaultSuggestions(limit: number): SearchSuggestion[] {
+    const suggestions: SearchSuggestion[] = [];
+
+    for (const recent of this.recentSearches().slice(0, 3)) {
+      suggestions.push({ text: recent, type: 'recent' });
+    }
+
+    const categories = [...new Set(this.components().map((d) => d.category))];
+    for (const cat of categories.slice(0, limit - suggestions.length)) {
+      suggestions.push({ text: cat, type: 'category' });
+    }
+
+    return suggestions.slice(0, limit);
+  }
+
+  private getMatchedFields(result: ComponentMetadata, query: string): string[] {
+    const matched: string[] = [];
+    const queryLower = query.toLowerCase();
+
+    if (result.name?.toLowerCase().includes(queryLower)) matched.push('name');
+    if (result.selector?.toLowerCase().includes(queryLower)) matched.push('selector');
+    if (result.description?.toLowerCase().includes(queryLower)) matched.push('description');
+    if (result.tags?.some((t: string) => t.toLowerCase().includes(queryLower)))
+      matched.push('tags');
+    if (result.category?.toLowerCase().includes(queryLower)) matched.push('category');
+
+    return matched;
+  }
+
+  addToRecent(query: string): void {
+    const trimmed = query.trim();
+    if (!trimmed) return;
+
+    this.recentSearches.update((current) => {
+      const filtered = current.filter((q) => q.toLowerCase() !== trimmed.toLowerCase());
+      return [trimmed, ...filtered].slice(0, 10);
+    });
+  }
+
+  getRecentSearches(): string[] {
+    return this.recentSearches();
+  }
+
+  clearRecent(): void {
+    this.recentSearches.set([]);
+  }
+
+  addToFavorites(componentName: string): void {
+    this.favorites.update((current) => {
+      if (current.includes(componentName)) return current;
+      return [componentName, ...current].slice(0, 20);
+    });
+  }
+
+  removeFromFavorites(componentName: string): void {
+    this.favorites.update((current) => current.filter((n) => n !== componentName));
+  }
+
+  isFavorite(componentName: string): boolean {
+    return this.favorites().includes(componentName);
+  }
+
+  getFavorites(): string[] {
+    return this.favorites();
   }
 
   getComponent(name: string): ComponentMetadata | undefined {

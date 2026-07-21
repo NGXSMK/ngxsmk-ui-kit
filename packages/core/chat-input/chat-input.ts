@@ -44,6 +44,9 @@
       outline: none;
       max-height: 10rem;
     }
+    .ngxsmk-chat-input__textarea::placeholder {
+      color: var(--ngxsmk-color-on-surface-variant);
+    }
     .ngxsmk-chat-input__textarea:focus {
       border-color: var(--ngxsmk-color-primary);
     }

@@ -9,3 +9,5 @@ export * from './lib/define-config';
 export * from './lib/css';
 export * from './lib/presets';
 export * from './lib/theme.service';
+export * from './lib/theme-injector.service';
+export * from './lib/token-adapter';

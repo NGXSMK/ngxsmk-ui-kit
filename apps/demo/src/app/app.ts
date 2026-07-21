@@ -4,7 +4,6 @@ import { NgxsmkToaster } from '@ngxsmk/core/toast';
 import { NgxsmkThemeService } from '@ngxsmk/theme';
 import { SeoService } from './seo.service';
 import { CommandPalette } from './core/command-palette';
-import { SearchService } from './core/search.service';
 import { ComponentRegistry } from './core/component-registry';
 
 @Component({
@@ -19,7 +18,6 @@ import { ComponentRegistry } from './core/component-registry';
 export class App {
   protected readonly theme = inject(NgxsmkThemeService);
   private readonly seo = inject(SeoService);
-  private readonly searchService = inject(SearchService);
   private readonly registry = inject(ComponentRegistry);
 
   readonly cmdPalette = viewChild(CommandPalette);
@@ -39,7 +37,6 @@ export class App {
     afterNextRender({
       write: async () => {
         await this.registry.initialize();
-        this.searchService.buildIndex(this.registry.allComponents());
       },
     });
   }

@@ -1,3 +1,4 @@
+import { DOCUMENT } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -16,8 +17,8 @@ import {
   ViewContainerRef,
   OnDestroy,
 } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
 import { ngxsmkUniqueId } from '@ngxsmk/core/util';
+import { ListboxKeyboard } from '@ngxsmk/cdk/listbox-keyboard';
 
 @Component({
   standalone: true,
@@ -174,8 +175,15 @@ export class NgxsmkMultiSelector implements OnDestroy {
 
   protected readonly dropdownId = ngxsmkUniqueId('ngxsmk-multi-selector-dropdown');
   protected readonly isOpen = signal(false);
-  protected readonly activeIndex = signal(-1);
   protected readonly selectedCount = computed(() => this.value().length);
+
+  /** Updated when the portal node is created so kb can scroll inside it. */
+  private readonly kb = new ListboxKeyboard({
+    optionSelector: '.ngxsmk-multi-selector__option',
+    options: () => this.options(),
+  });
+
+  protected readonly activeIndex = this.kb.activeIndex;
 
   protected activeDescendant(): string | null {
     return this.isOpen() && this.activeIndex() >= 0
@@ -189,83 +197,14 @@ export class NgxsmkMultiSelector implements OnDestroy {
 
   protected onKeydown(event: KeyboardEvent): void {
     if (this.disabled()) return;
-    switch (event.key) {
-      case 'ArrowDown':
-        event.preventDefault();
-        if (!this.isOpen()) {
-          this.open();
-        } else {
-          this.move(1);
-        }
-        break;
-      case 'ArrowUp':
-        event.preventDefault();
-        if (this.isOpen()) {
-          this.move(-1);
-        }
-        break;
-      case 'Home':
-        if (this.isOpen() && this.options().length) {
-          event.preventDefault();
-          this.activeIndex.set(0);
-          this.scrollActiveIntoView();
-        }
-        break;
-      case 'End':
-        if (this.isOpen() && this.options().length) {
-          event.preventDefault();
-          this.activeIndex.set(this.options().length - 1);
-          this.scrollActiveIntoView();
-        }
-        break;
-      case 'Enter':
-      case ' ':
-      case 'Spacebar': {
-        event.preventDefault();
-        if (!this.isOpen()) {
-          this.open();
-          break;
-        }
-        const opt = this.options()[this.activeIndex()];
-        if (opt) {
-          this.toggleOption(opt.value);
-        }
-        break;
-      }
-      case 'Escape':
-        if (this.isOpen()) {
-          event.preventDefault();
-          this.close();
-        }
-        break;
-      default:
-        break;
-    }
-  }
-
-  private move(delta: number): void {
-    const list = this.options();
-    if (!list.length) {
-      return;
-    }
-    let next = this.activeIndex() + delta;
-    if (next < 0) {
-      next = list.length - 1;
-    } else if (next >= list.length) {
-      next = 0;
-    }
-    this.activeIndex.set(next);
-    this.scrollActiveIntoView();
-  }
-
-  private scrollActiveIntoView(): void {
-    requestAnimationFrame(() => {
-      const node = this.dropdownNode;
-      if (!node) {
-        return;
-      }
-      const items = node.querySelectorAll<HTMLElement>('.ngxsmk-multi-selector__option');
-      items[this.activeIndex()]?.scrollIntoView({ block: 'nearest' });
+    this.kb.handleKeydown(event, {
+      onSelect: (i) => {
+        const opt = this.options()[i];
+        if (opt) this.toggleOption(opt.value);
+      },
+      onOpen: () => this.open(),
+      onClose: () => this.close(),
+      isOpen: () => this.isOpen(),
     });
   }
 
@@ -293,17 +232,18 @@ export class NgxsmkMultiSelector implements OnDestroy {
     this.isOpen.set(true);
     this.activeIndex.set(this.options().length ? 0 : -1);
     this.dropdownView = this.vcr.createEmbeddedView(this.dropdownTpl);
-    this.dropdownView.detectChanges();
+    this.dropdownView?.detectChanges();
     const node =
-      (this.dropdownView.rootNodes.find((n) => n.nodeType === 1) as HTMLElement | undefined) ??
+      (this.dropdownView?.rootNodes.find((n) => n.nodeType === 1) as HTMLElement | undefined) ??
       null;
     if (!node) {
-      this.dropdownView.destroy();
+      this.dropdownView?.destroy();
       this.dropdownView = null;
       this.isOpen.set(false);
       return;
     }
     this.dropdownNode = node;
+    this.kb.setHost({ nativeElement: node } as ElementRef<HTMLElement>);
     this.renderer.appendChild(this.document.body, node);
     this.position();
     window.addEventListener('scroll', this.position, true);
