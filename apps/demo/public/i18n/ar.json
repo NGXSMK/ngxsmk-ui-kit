@@ -203,9 +203,21 @@
     "type": {
       "added": "مُضاف",
       "fixed": "مُصلح",
-      "changed": "مُغيّر"
+      "changed": "مُغيّر",
+      "removed": "محذوف"
     },
     "release": {
+      "v133": {
+        "summary": "تعميق المعمارية: فئة أساسية CVA، تنقل بلوحة المفاتيح لـ listbox وتنظيف الكود الميت.",
+        "changes": {
+          "0": "استخراج الفئة المجردة CvaBase<T> في @ngxsmk/cdk/cva-base، لإزالة حوالي 80 سطر من كود النموذج الأولي المكرر لـ ControlValueAccessor عبر 8 مكونات نموذج.",
+          "1": "استخراج فئة ListboxKeyboard في @ngxsmk/cdk/listbox-keyboard، لتوحيد التنقل بأسهم الاتجاه وHome/End وEnter وEscape في combobox وautocomplete وmulti-select وmulti-selector.",
+          "2": "دمج SearchService في ComponentRegistry، لإزالة فهرس MiniSearch المزدوج. حذف KeyboardShortcutsService (غير مستخدم).",
+          "3": "استخراج NgxThemeInjectorService لحقن CSS، لفصل منطق الوضع الداكن عن NgxsmkThemeService.",
+          "4": "استخراج القيم الافتراضية لرموز المكون من css.ts staticVars() في سجل COMPONENT_TOKEN_DEFAULTS.",
+          "5": "حذف 6 رموز renderer يتيمة وتنفيذاتها (popover، tooltip، dialog، sheet، select، tabs)، واستراتيجية overlay CDك، وهيكل base-typeahead غير المستخدم."
+        }
+      },
       "v132": {
         "summary": "أدوات صديقة للذكاء الاصطناعي: قاعدة بيانات مكونات MCP وملف llms.txt ووثائق الوكلاء.",
         "changes": {

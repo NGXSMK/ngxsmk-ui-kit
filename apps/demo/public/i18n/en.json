@@ -203,7 +203,8 @@
     "type": {
       "added": "added",
       "fixed": "fixed",
-      "changed": "changed"
+      "changed": "changed",
+      "removed": "removed"
     },
     "release": {
       "v133": {

@@ -203,9 +203,21 @@
     "type": {
       "added": "adicionado",
       "fixed": "corrigido",
-      "changed": "alterado"
+      "changed": "alterado",
+      "removed": "removido"
     },
     "release": {
+      "v133": {
+        "summary": "Aprofundamento arquitetônico: classe base CVA, navegação por teclado em listbox e limpeza de código morto.",
+        "changes": {
+          "0": "Classe abstrata CvaBase<T> extraída em @ngxsmk/cdk/cva-base, eliminando ~80 linhas de boilerplate duplicado do ControlValueAccessor em 8 componentes de formulário.",
+          "1": "Classe ListboxKeyboard extraída em @ngxsmk/cdk/listbox-keyboard, unificando navegação com setas, Home/End, Enter e Escape em combobox, autocomplete, multi-select e multi-selector.",
+          "2": "SearchService mesclado ao ComponentRegistry, eliminando o índice MiniSearch duplicado. KeyboardShortcutsService (não utilizado) removido.",
+          "3": "NgxThemeInjectorService extraído para injeção CSS, desacoplando a lógica do modo escuro do NgxsmkThemeService.",
+          "4": "Valores padrão de tokens de componente extraídos de css.ts staticVars() em um registro COMPONENT_TOKEN_DEFAULTS.",
+          "5": "6 tokens de renderer órfãos e implementações (popover, tooltip, dialog, sheet, select, tabs), a estratégia de overlay CDK e o esqueleto não utilizado base-typeahead removidos."
+        }
+      },
       "v132": {
         "summary": "Ferramentas para IA: banco de dados MCP de componentes, llms.txt e documentação para agentes.",
         "changes": {

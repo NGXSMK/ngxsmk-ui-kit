@@ -203,9 +203,21 @@
     "type": {
       "added": "新增",
       "fixed": "修复",
-      "changed": "变更"
+      "changed": "变更",
+      "removed": "已删除"
     },
     "release": {
+      "v133": {
+        "summary": "架构深化：CVA 基类、listbox 键盘导航和死代码清理。",
+        "changes": {
+          "0": "在 @ngxsmk/cdk/cva-base 中提取了 CvaBase<T> 抽象类，消除了 8 个表单组件中约 80 行重复的 ControlValueAccessor 样板代码。",
+          "1": "在 @ngxsmk/cdk/listbox-keyboard 中提取了 ListboxKeyboard 类，统一了 combobox、autocomplete、multi-select 和 multi-selector 中的方向键、Home/End、Enter 和 Escape 导航。",
+          "2": "将 SearchService 合并到 ComponentRegistry 中，消除了重复的 MiniSearch 索引。删除了未使用的 KeyboardShortcutsService。",
+          "3": "提取了 NgxThemeInjectorService 用于 CSS 注入，将深色模式逻辑从 NgxsmkThemeService 中解耦。",
+          "4": "将组件 token 默认值从 css.ts staticVars() 提取到 COMPONENT_TOKEN_DEFAULTS 注册表中。",
+          "5": "删除了 6 个孤立的渲染器 token 和实现（popover、tooltip、dialog、sheet、select、tabs）、CDK overlay 策略和未使用的 base-typeahead 骨架。"
+        }
+      },
       "v132": {
         "summary": "AI 友好工具：MCP 组件数据库、llms.txt 和智能体文档。",
         "changes": {
