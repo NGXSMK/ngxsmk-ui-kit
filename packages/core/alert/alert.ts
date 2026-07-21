@@ -149,6 +149,7 @@ export type NgxsmkAlertVariant = 'info' | 'success' | 'warning' | 'error';
       color: inherit;
       cursor: pointer;
       opacity: var(--ngxsmk-opacity-muted);
+      transition: opacity var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
     .ngxsmk-alert__close:hover {
       opacity: 1;

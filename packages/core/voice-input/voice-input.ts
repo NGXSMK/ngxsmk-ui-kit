@@ -37,11 +37,11 @@
       align-items: center;
       justify-content: center;
       transition:
-        color,
-        background-color,
-        border-color,
-        box-shadow,
-        transform,
+        color var(--ngxsmk-duration-fast),
+        background-color var(--ngxsmk-duration-fast),
+        border-color var(--ngxsmk-duration-fast),
+        box-shadow var(--ngxsmk-duration-fast),
+        transform var(--ngxsmk-duration-fast),
         opacity var(--ngxsmk-duration-fast);
     }
     .ngxsmk-voice-input__button:hover {

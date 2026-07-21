@@ -77,6 +77,11 @@ export type NgxsmkPopoverAlign = 'start' | 'center' | 'end';
     }
     .ngxsmk-popover__trigger {
       display: inline-flex;
+      border-radius: var(--ngxsmk-radius-sm);
+    }
+    .ngxsmk-popover__trigger:focus-visible {
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring);
     }
 
     .ngxsmk-popover__panel {

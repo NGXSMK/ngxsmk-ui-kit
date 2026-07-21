@@ -72,6 +72,9 @@ import { CvaBase } from '@ngxsmk/cdk/cva-base';
     .ngxsmk-date-picker__control::placeholder {
       color: var(--ngxsmk-color-on-surface-variant);
     }
+    .ngxsmk-date-picker__control:hover:not(:disabled):not([aria-invalid='true']) {
+      border-color: var(--ngxsmk-color-ring);
+    }
     .ngxsmk-date-picker__control:focus-visible {
       outline: none;
       border-color: var(--ngxsmk-color-ring);

@@ -85,6 +85,13 @@ import { NgxsmkScrollLock } from '@ngxsmk/cdk';
       animation: ngxsmk-composer-drawer-in 0.22s var(--ngxsmk-ease-out, ease) both;
     }
 
+    @media (prefers-reduced-motion: reduce) {
+      .ngxsmk-chat-composer-drawer__overlay,
+      .ngxsmk-chat-composer-drawer__panel {
+        animation: none;
+      }
+    }
+
     .ngxsmk-chat-composer-drawer__close {
       position: absolute;
       top: var(--ngxsmk-space-3);

@@ -24,11 +24,11 @@
       font-size: var(--ngxsmk-text-label-lg-size);
       cursor: pointer;
       transition:
-        color,
-        background-color,
-        border-color,
-        box-shadow,
-        transform,
+        color var(--ngxsmk-duration-fast),
+        background-color var(--ngxsmk-duration-fast),
+        border-color var(--ngxsmk-duration-fast),
+        box-shadow var(--ngxsmk-duration-fast),
+        transform var(--ngxsmk-duration-fast),
         opacity var(--ngxsmk-duration-fast);
     }
     :host([aria-pressed='true']) {
