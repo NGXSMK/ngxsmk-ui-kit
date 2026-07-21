@@ -59,6 +59,18 @@ Presets are plain `ThemeConfig` objects exported from the package, so you can sp
 - **Radius** — global `borderRadius` (`none` / `sm` / `md` / `lg` / `xl`) plus per-corner tokens.
 - **Typography** — font families and a Material-inspired display / headline / title / body / label scale.
 - **Layout** — spacing, shadow, duration, easing, and a shared `z-index` ladder that overlays must respect.
+- **Chart palette** — `--ngxsmk-chart-1` … `--ngxsmk-chart-8`, a fixed 8-hue categorical set (stepped per mode) that the `@ngxsmk/core` charts use for series colors. Independent of the brand hue so adjacent series stay distinguishable; override any slot to rebrand series.
+
+### Chart series colors
+
+Charts read the categorical palette from CSS custom properties at render time, so overriding a slot re-colors every chart — no component input needed:
+
+```css
+:root {
+  --ngxsmk-chart-1: #2563eb;
+  --ngxsmk-chart-2: #db2777;
+}
+```
 
 ## Custom themes
 

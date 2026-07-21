@@ -198,7 +198,7 @@ export interface PromptItem {
       font-size: var(--ngxsmk-text-label-md-size);
       font-weight: 600;
       color: var(--ngxsmk-color-primary);
-      transition: color 0.15s;
+      transition: color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
 
     .ngxsmk-prompt-card:hover .ngxsmk-prompt-card__action {
