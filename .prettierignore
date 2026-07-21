@@ -8,3 +8,11 @@ dist
 
 # Generated theme stylesheets (do not edit by hand)
 packages/theme/styles
+
+# Generated AI docs (do not edit by hand — see tools/scripts/generate-ai-docs.mjs)
+llms.txt
+llms-full.txt
+apps/demo/public/llms.txt
+apps/demo/public/llms-full.txt
+apps/demo/public/component-api.json
+packages/mcp/src/component-db.ts
