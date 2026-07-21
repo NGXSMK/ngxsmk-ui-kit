@@ -601,12 +601,17 @@ interface TemplateItem {
 
                 <div class="ngxsmk-mock-landing-pricing">
                   <div class="ngxsmk-mock-price-card">
-                    <ngxsmk-heading level="h4" style="font-size: var(--ngxsmk-text-body-md-size); font-weight: 600;">{{
-                      'templates.mock.starter' | translate
-                    }}</ngxsmk-heading>
+                    <ngxsmk-heading
+                      level="h4"
+                      style="font-size: var(--ngxsmk-text-body-md-size); font-weight: 600;"
+                      >{{ 'templates.mock.starter' | translate }}</ngxsmk-heading
+                    >
                     >
                     <div class="ngxsmk-mock-price-val">
-                      $0<span style="font-size: var(--ngxsmk-text-body-sm-size); font-weight: 400; opacity: 0.7;">/mo</span>
+                      $0<span
+                        style="font-size: var(--ngxsmk-text-body-sm-size); font-weight: 400; opacity: 0.7;"
+                        >/mo</span
+                      >
                     </div>
                     <ngxsmk-divider />
                     <ul class="ngxsmk-mock-price-features">
@@ -623,12 +628,15 @@ interface TemplateItem {
                     <div class="ngxsmk-mock-price-badge">
                       {{ 'templates.mock.popular' | translate }}
                     </div>
-                    <ngxsmk-heading level="h4" style="font-size: var(--ngxsmk-text-body-md-size); font-weight: 600;">{{
-                      'templates.mock.professional' | translate
-                    }}</ngxsmk-heading>
+                    <ngxsmk-heading
+                      level="h4"
+                      style="font-size: var(--ngxsmk-text-body-md-size); font-weight: 600;"
+                      >{{ 'templates.mock.professional' | translate }}</ngxsmk-heading
+                    >
                     >
                     <div class="ngxsmk-mock-price-val">
-                      $49<span style="font-size: var(--ngxsmk-text-body-sm-size); font-weight: 400; opacity: 0.7;"
+                      $49<span
+                        style="font-size: var(--ngxsmk-text-body-sm-size); font-weight: 400; opacity: 0.7;"
                         >/mo</span
                       >
                     </div>
@@ -796,9 +804,11 @@ interface TemplateItem {
               <div class="ngxsmk-mock-auth">
                 <div class="ngxsmk-mock-auth-card">
                   <div class="ngxsmk-mock-auth-header">
-                    <ngxsmk-heading level="h3" style="font-size: var(--ngxsmk-text-title-md-size); font-weight: 700;">{{
-                      'templates.mock.signInToAccount' | translate
-                    }}</ngxsmk-heading>
+                    <ngxsmk-heading
+                      level="h3"
+                      style="font-size: var(--ngxsmk-text-title-md-size); font-weight: 700;"
+                      >{{ 'templates.mock.signInToAccount' | translate }}</ngxsmk-heading
+                    >
                     <ngxsmk-text
                       variant="body"
                       style="font-size: var(--ngxsmk-text-body-sm-size); color: var(--ngxsmk-color-on-surface-variant);"
@@ -807,10 +817,18 @@ interface TemplateItem {
                   </div>
 
                   <div class="ngxsmk-mock-auth-socials">
-                    <button ngxsmk-button variant="outline" style="flex: 1; font-size: var(--ngxsmk-text-body-sm-size);">
+                    <button
+                      ngxsmk-button
+                      variant="outline"
+                      style="flex: 1; font-size: var(--ngxsmk-text-body-sm-size);"
+                    >
                       Google
                     </button>
-                    <button ngxsmk-button variant="outline" style="flex: 1; font-size: var(--ngxsmk-text-body-sm-size);">
+                    <button
+                      ngxsmk-button
+                      variant="outline"
+                      style="flex: 1; font-size: var(--ngxsmk-text-body-sm-size);"
+                    >
                       {{ 'nav.github' | translate }}
                     </button>
                   </div>

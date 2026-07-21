@@ -34,7 +34,11 @@ export interface QueryCondition {
             <option value="gt">&gt;</option>
             <option value="lt">&lt;</option>
           </select>
-          <input class="ngxsmk-query-builder__input" [value]="cond.value" [placeholder]="placeholder()" />
+          <input
+            class="ngxsmk-query-builder__input"
+            [value]="cond.value"
+            [placeholder]="placeholder()"
+          />
         </div>
       }
     </div>

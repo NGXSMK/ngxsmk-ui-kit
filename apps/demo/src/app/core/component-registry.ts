@@ -482,11 +482,7 @@ export class ComponentRegistry {
     return filtered;
   }
 
-  searchWithScore(options: {
-    query: string;
-    category?: string;
-    limit?: number;
-  }): SearchResult[] {
+  searchWithScore(options: { query: string; category?: string; limit?: number }): SearchResult[] {
     const index = this.searchIndex();
     if (!index || !options.query?.trim()) return [];
 
