@@ -1,5 +1,3 @@
-import { ElementRef } from '@angular/core';
-
 export interface RGBA {
   r: number;
   g: number;
@@ -161,7 +159,7 @@ export const SHARED_CHART_STYLES = `
     border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
     box-shadow: 0 6px 20px rgba(15, 23, 42, 0.18);
     font-family: var(--ngxsmk-font-sans, system-ui), sans-serif;
-    font-size: 12px;
+    font-size: var(--ngxsmk-text-body-xs-size);
     line-height: 1.45;
     pointer-events: none;
     opacity: 0;

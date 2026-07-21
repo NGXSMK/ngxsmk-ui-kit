@@ -206,6 +206,17 @@
       "changed": "changed"
     },
     "release": {
+      "v133": {
+        "summary": "Architectural deepening: CVA base class, listbox keyboard nav, and dead-code cleanup.",
+        "changes": {
+          "0": "Extracted CvaBase<T> abstract class into @ngxsmk/cdk/cva-base, eliminating ~80 lines of duplicated ControlValueAccessor boilerplate across 8 form components.",
+          "1": "Extracted ListboxKeyboard class into @ngxsmk/cdk/listbox-keyboard, unifying arrow-key, Home/End, Enter, and Escape navigation across combobox, autocomplete, multi-select, and multi-selector.",
+          "2": "Merged SearchService into ComponentRegistry, eliminating the double MiniSearch index. Deleted KeyboardShortcutsService (unused).",
+          "3": "Extracted NgxThemeInjectorService for CSS injection, decoupling it from dark-mode switching in NgxsmkThemeService.",
+          "4": "Extracted component token defaults from css.ts staticVars() into a COMPONENT_TOKEN_DEFAULTS registry.",
+          "5": "Deleted 6 orphaned renderer tokens and implementations (popover, tooltip, dialog, sheet, select, tabs), the CDK overlay strategy, and the unused base-typeahead skeleton."
+        }
+      },
       "v132": {
         "summary": "AI-friendly tooling: MCP component database, llms.txt, and agent docs.",
         "changes": {
@@ -1275,7 +1286,12 @@
       "emerald": "Emerald",
       "rose": "Rose",
       "neutral": "Neutral"
-    }
+    },
+    "ionicAdapterDesc": "Generate Ionic-compatible --ion-* CSS variables from NGXSMK theme presets for hybrid apps.",
+    "ionicAdapterHint": "Apply the adapter to generate --ion-* variables alongside the standard --ngxsmk-* tokens.",
+    "applyIonic": "Apply Ionic Adapter",
+    "clearIonic": "Clear Ionic Adapter",
+    "ionicActive": "Ionic adapter active — --ion-* variables are now applied to :root."
   },
   "community": {
     "title": "Community & Contribution",

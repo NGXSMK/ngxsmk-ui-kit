@@ -195,7 +195,7 @@ interface ApiOutput {
     .ngxsmk-sc-ex__title {
       margin: 0;
       font-family: 'Outfit', var(--ngxsmk-font-sans, system-ui), sans-serif;
-      font-size: 0.95rem;
+      font-size: var(--ngxsmk-text-body-md-size);
       font-weight: 600;
       letter-spacing: -0.01em;
       color: var(--ngxsmk-color-on-surface, #09090b);
@@ -203,7 +203,7 @@ interface ApiOutput {
 
     .ngxsmk-sc-ex__desc {
       margin: 0.25rem 0 0;
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       line-height: 1.5;
       color: var(--ngxsmk-color-on-surface-variant, #71717a);
     }
@@ -230,7 +230,7 @@ interface ApiOutput {
       background: var(--ngxsmk-color-surface-variant, #f4f4f5);
       color: var(--ngxsmk-color-on-surface, #09090b);
       font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace;
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       line-height: 1.6;
       overflow-x: auto;
       white-space: pre;
@@ -246,7 +246,7 @@ interface ApiOutput {
     .ngxsmk-sc-ex__api-title {
       margin: 0 0 var(--ngxsmk-space-2, 0.5rem);
       font-family: 'Outfit', var(--ngxsmk-font-sans, system-ui), sans-serif;
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       font-weight: 600;
       color: var(--ngxsmk-color-on-surface, #09090b);
     }
@@ -262,7 +262,7 @@ interface ApiOutput {
     .ngxsmk-sc-ex__table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
     }
 
     .ngxsmk-sc-ex__table th,
@@ -281,19 +281,19 @@ interface ApiOutput {
 
     .ngxsmk-sc-ex__table code {
       font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace;
-      font-size: 0.72rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
     }
 
     .ngxsmk-sc-ex__api-note {
       margin: var(--ngxsmk-space-4, 1rem) 0 0;
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       line-height: 1.55;
       color: var(--ngxsmk-color-on-surface-variant, #71717a);
     }
 
     .ngxsmk-sc-ex__api-note code {
       font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace;
-      font-size: 0.72rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
     }
 
     @media (max-width: 480px) {

@@ -32,7 +32,7 @@ export interface ToolCall {
       flex-direction: column;
       gap: var(--ngxsmk-space-2);
       font-family: var(--ngxsmk-font-sans);
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
     }
     .ngxsmk-tool-call-viewer__item {
       padding: var(--ngxsmk-space-2) var(--ngxsmk-space-3);

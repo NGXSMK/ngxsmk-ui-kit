@@ -93,7 +93,7 @@ export class NgxsmkCandlestickChart extends AbstractCanvasChart {
     });
   }
 
-  protected hitTest(x: number, y: number): ChartHover | null {
+  protected hitTest(x: number, _y: number): ChartHover | null {
     const data = this.data();
     if (!data.length) return null;
     const plot = this.plot;

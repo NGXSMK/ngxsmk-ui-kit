@@ -324,7 +324,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
   styles: `
     .ngxsmk-demo-hint {
       margin: 0;
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       color: var(--ngxsmk-color-on-surface-variant, #71717a);
     }
   `,

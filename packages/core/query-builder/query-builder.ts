@@ -34,7 +34,7 @@ export interface QueryCondition {
             <option value="gt">&gt;</option>
             <option value="lt">&lt;</option>
           </select>
-          <input class="ngxsmk-query-builder__input" [value]="cond.value" placeholder="Value" />
+          <input class="ngxsmk-query-builder__input" [value]="cond.value" [placeholder]="placeholder()" />
         </div>
       }
     </div>
@@ -44,7 +44,7 @@ export interface QueryCondition {
     :host {
       display: block;
       font-family: var(--ngxsmk-font-sans);
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
     }
     .ngxsmk-query-builder__conditions {
       display: flex;
@@ -69,7 +69,7 @@ export interface QueryCondition {
       padding: var(--ngxsmk-space-1-5) var(--ngxsmk-space-2);
       border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-md);
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       background: var(--ngxsmk-color-surface);
       color: var(--ngxsmk-color-on-surface);
     }
@@ -77,10 +77,14 @@ export interface QueryCondition {
       flex: 1;
       min-width: 8rem;
     }
+    .ngxsmk-query-builder__input::placeholder {
+      color: var(--ngxsmk-color-on-surface-variant);
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgxsmkQueryBuilder {
   readonly fields = input.required<QueryField[]>();
   readonly conditions = model<QueryCondition[]>([]);
+  readonly placeholder = input('Value');
 }

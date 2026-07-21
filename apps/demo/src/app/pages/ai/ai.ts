@@ -120,7 +120,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     >
       <div class="ngxsmk-demo-stack" style="width:100%;max-width:440px">
         @if (sentLog().length) {
-          <div class="ngxsmk-sc-surface" style="padding:0.5rem 0.75rem;font-size:0.8125rem">
+          <div class="ngxsmk-sc-surface" style="padding:0.5rem 0.75rem;font-size:var(--ngxsmk-text-body-sm-size)">
             <strong>{{ 'ai.sent' | translate }}</strong> {{ sentLog() }}
           </div>
         }
@@ -146,7 +146,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
           <div sidebar class="ngxsmk-sc-surface" style="padding:0.75rem;width:140px">
             <strong>{{ 'ai.threads' | translate }}</strong>
             <div
-              style="margin-top:0.5rem;font-size:0.8125rem;color:var(--ngxsmk-color-on-surface-variant)"
+              style="margin-top:0.5rem;font-size:var(--ngxsmk-text-body-sm-size);color:var(--ngxsmk-color-on-surface-variant)"
             >
               Onboarding<br />Billing<br />Roadmap
             </div>
@@ -157,7 +157,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
           >
             <strong>{{ 'ai.assistant' | translate }}</strong>
           </div>
-          <div style="padding:0.75rem;font-size:0.875rem">
+          <div style="padding:0.75rem;font-size:var(--ngxsmk-text-body-md-size)">
             Ask me anything about your account.
             <ngxsmk-chat-layout-scroll-button />
           </div>
@@ -240,7 +240,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
               <ngxsmk-chat-composer-token-element label="query()" variant="tool" />
               <ngxsmk-chat-composer-token-element label="data.csv" variant="file" />
             </div>
-            <p style="margin:0;font-size:0.8125rem;color:var(--ngxsmk-color-on-surface-variant)">
+            <p style="margin:0;font-size:var(--ngxsmk-text-body-sm-size);color:var(--ngxsmk-color-on-surface-variant)">
               Attach files, pick a prompt, or summon a tool - then send.
             </p>
           </div>
@@ -257,7 +257,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     >
       <div
         class="ngxsmk-sc-surface"
-        style="padding:0.75rem;width:100%;max-width:520px;font-size:0.875rem"
+        style="padding:0.75rem;width:100%;max-width:520px;font-size:var(--ngxsmk-text-body-md-size)"
       >
         <ngxsmk-streaming-text [text]="streamingText" [speed]="18" />
       </div>
@@ -499,7 +499,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
       background: var(--ngxsmk-color-surface);
       color: var(--ngxsmk-color-on-surface);
       font: inherit;
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       cursor: pointer;
     }
     .ngxsmk-demo-toggle:hover {
@@ -515,7 +515,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       font-weight: 600;
     }
     .ngxsmk-msg-body {

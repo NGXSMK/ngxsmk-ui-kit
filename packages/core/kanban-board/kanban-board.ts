@@ -98,7 +98,7 @@ export interface KanbanMove {
     }
     .ngxsmk-kanban-board__header {
       font-weight: 600;
-      font-size: 0.9375rem;
+      font-size: var(--ngxsmk-text-body-md-size);
       color: var(--ngxsmk-color-on-surface);
       margin-bottom: var(--ngxsmk-space-3);
     }

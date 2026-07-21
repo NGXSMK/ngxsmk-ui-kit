@@ -306,7 +306,7 @@ interface SearchItem {
       text-decoration: none;
       color: var(--ngxsmk-color-on-surface, #09090b);
       font-weight: 700;
-      font-size: 1rem;
+      font-size: var(--ngxsmk-text-body-lg-size);
       flex-shrink: 0;
       font-family: 'Outfit', var(--ngxsmk-font-sans, system-ui), sans-serif;
     }
@@ -332,7 +332,7 @@ interface SearchItem {
     .ngxsmk-nav__link {
       padding: var(--ngxsmk-space-1-5, 0.375rem) var(--ngxsmk-space-3, 0.75rem);
       border-radius: var(--ngxsmk-radius-md, 0.375rem);
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       font-weight: 500;
       text-decoration: none;
       color: var(--ngxsmk-color-on-surface-variant, #71717a);
@@ -390,12 +390,12 @@ interface SearchItem {
       flex-shrink: 0;
     }
     .search-text {
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       font-weight: 500;
       flex: 1;
     }
     .search-kbd {
-      font-size: 0.625rem;
+      font-size: var(--ngxsmk-text-body-xs-size);
       opacity: 0.7;
     }
     .search-kbd kbd {
@@ -432,7 +432,7 @@ interface SearchItem {
       border-radius: var(--ngxsmk-radius-md, 0.375rem);
       background: var(--ngxsmk-color-primary, #7c3aed);
       color: #ffffff;
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       font-weight: 600;
       text-decoration: none;
       transition: opacity 0.15s;
@@ -446,7 +446,7 @@ interface SearchItem {
     .cmd-overlay {
       position: fixed;
       inset: 0;
-      z-index: 10000;
+      z-index: var(--ngxsmk-z-modal, 1400);
       background: rgba(9, 9, 11, 0.4);
       backdrop-filter: blur(8px);
       display: flex;
@@ -511,7 +511,7 @@ interface SearchItem {
       padding: 0 !important;
       border-radius: 0 !important;
       box-shadow: none !important;
-      font-size: 0.9375rem;
+      font-size: var(--ngxsmk-text-body-md-size);
       font-family: inherit;
       color: var(--ngxsmk-color-on-surface, #09090b);
     }
@@ -525,7 +525,7 @@ interface SearchItem {
     }
 
     .cmd-esc-hint {
-      font-size: 0.6875rem;
+      font-size: var(--ngxsmk-text-body-xs-size);
       font-weight: 700;
       color: var(--ngxsmk-color-on-surface-variant, #71717a);
       border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
@@ -555,7 +555,7 @@ interface SearchItem {
       transition:
         background-color 0.1s,
         color 0.1s;
-      font-size: 0.875rem;
+      font-size: var(--ngxsmk-text-body-md-size);
       color: var(--ngxsmk-color-on-surface, #09090b);
     }
 
@@ -571,7 +571,7 @@ interface SearchItem {
     }
 
     .cmd-item-icon {
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       opacity: 0.7;
     }
 
@@ -580,7 +580,7 @@ interface SearchItem {
     }
 
     .cmd-item-cat {
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       color: var(--ngxsmk-color-on-surface-variant, #71717a);
       background: var(--ngxsmk-color-surface-variant, #f4f4f5);
       padding: 0.125rem 0.375rem;
@@ -595,7 +595,7 @@ interface SearchItem {
       padding: var(--ngxsmk-space-8) 0;
       text-align: center;
       color: var(--ngxsmk-color-on-surface-variant, #71717a);
-      font-size: 0.875rem;
+      font-size: var(--ngxsmk-text-body-md-size);
     }
 
     .ngxsmk-nav__menu-btn {
@@ -634,7 +634,7 @@ interface SearchItem {
     .ngxsmk-nav__mobile-link {
       padding: var(--ngxsmk-space-3, 0.75rem);
       border-radius: var(--ngxsmk-radius-md, 0.375rem);
-      font-size: 0.9375rem;
+      font-size: var(--ngxsmk-text-body-md-size);
       font-weight: 500;
       text-decoration: none;
       color: var(--ngxsmk-color-on-surface, #09090b);

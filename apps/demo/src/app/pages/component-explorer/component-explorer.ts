@@ -6,7 +6,6 @@ import {
   ComponentMetadata,
   CATEGORY_LABELS,
 } from '../../core/component-registry';
-import { SearchService } from '../../core/search.service';
 import { NgxsmkHeading } from '@ngxsmk/core/heading';
 
 const CATEGORY_ICONS: Record<string, string> = {
@@ -174,14 +173,14 @@ const CATEGORY_ICONS: Record<string, string> = {
       margin-bottom: 2.5rem;
     }
     ngxsmk-heading.explorer-title {
-      font-size: 1.75rem;
+      font-size: var(--ngxsmk-text-headline-md-size);
       font-weight: 800;
       letter-spacing: -0.03em;
       margin: 0 0 0.25rem;
       font-family: 'Outfit', sans-serif;
     }
     .explorer-subtitle {
-      font-size: 0.875rem;
+      font-size: var(--ngxsmk-text-body-md-size);
       color: var(--ngxsmk-color-on-surface-variant, #71717a);
       margin: 0 0 1.5rem;
     }
@@ -204,7 +203,7 @@ const CATEGORY_ICONS: Record<string, string> = {
       border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
       border-radius: var(--ngxsmk-radius-lg, 0.5rem);
       background: var(--ngxsmk-color-surface, #fff);
-      font-size: 0.9375rem;
+      font-size: var(--ngxsmk-text-body-md-size);
       color: var(--ngxsmk-color-on-surface, #09090b);
       outline: none;
       transition:
@@ -232,7 +231,7 @@ const CATEGORY_ICONS: Record<string, string> = {
       height: 1.5rem;
       border-radius: 50%;
       cursor: pointer;
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -253,7 +252,7 @@ const CATEGORY_ICONS: Record<string, string> = {
       border-radius: var(--ngxsmk-radius-full, 9999px);
       background: var(--ngxsmk-color-surface, #fff);
       color: var(--ngxsmk-color-on-surface-variant, #71717a);
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       font-weight: 500;
       cursor: pointer;
       transition: all 0.15s;
@@ -276,12 +275,12 @@ const CATEGORY_ICONS: Record<string, string> = {
       color: var(--ngxsmk-color-on-surface-variant, #71717a);
     }
     .explorer-empty-icon {
-      font-size: 2.5rem;
+      font-size: var(--ngxsmk-text-display-md-size);
       margin-bottom: 0.75rem;
       opacity: 0.4;
     }
     .explorer-empty p {
-      font-size: 0.9375rem;
+      font-size: var(--ngxsmk-text-body-md-size);
       margin: 0 0 1rem;
     }
     .explorer-empty-btn {
@@ -290,7 +289,7 @@ const CATEGORY_ICONS: Record<string, string> = {
       border-radius: var(--ngxsmk-radius-md, 0.375rem);
       background: var(--ngxsmk-color-surface, #fff);
       color: var(--ngxsmk-color-on-surface, #09090b);
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       cursor: pointer;
       font-family: inherit;
     }
@@ -308,13 +307,13 @@ const CATEGORY_ICONS: Record<string, string> = {
       margin-bottom: 1rem;
     }
     ngxsmk-heading.explorer-group-title {
-      font-size: 1.125rem;
+      font-size: var(--ngxsmk-text-title-md-size);
       font-weight: 700;
       margin: 0;
       font-family: 'Outfit', sans-serif;
     }
     .explorer-group-count {
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       color: var(--ngxsmk-color-on-surface-variant, #71717a);
     }
 
@@ -358,10 +357,10 @@ const CATEGORY_ICONS: Record<string, string> = {
     }
     .explorer-card-name {
       font-weight: 600;
-      font-size: 0.875rem;
+      font-size: var(--ngxsmk-text-body-md-size);
     }
     .explorer-card-desc {
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       color: var(--ngxsmk-color-on-surface-variant, #71717a);
       margin: 0;
       line-height: 1.5;
@@ -378,7 +377,7 @@ const CATEGORY_ICONS: Record<string, string> = {
       padding-top: 0.5rem;
     }
     .explorer-card-tag {
-      font-size: 0.625rem;
+      font-size: var(--ngxsmk-text-body-xs-size);
       font-weight: 600;
       padding: 0.125rem 0.375rem;
       border-radius: var(--ngxsmk-radius-sm);
@@ -388,7 +387,7 @@ const CATEGORY_ICONS: Record<string, string> = {
       letter-spacing: 0.04em;
     }
     .explorer-card-prop {
-      font-size: 0.625rem;
+      font-size: var(--ngxsmk-text-body-xs-size);
       color: var(--ngxsmk-color-on-surface-variant, #71717a);
       padding: 0.125rem 0.375rem;
       border-radius: var(--ngxsmk-radius-sm);
@@ -398,7 +397,6 @@ const CATEGORY_ICONS: Record<string, string> = {
 })
 export class ComponentExplorer {
   protected readonly registry = inject(ComponentRegistry);
-  protected readonly searchService = inject(SearchService);
 
   protected readonly query = signal('');
   protected readonly selectedCategory = signal<string | null>(null);

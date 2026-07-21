@@ -18,7 +18,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
     :host {
       display: block;
       font-family: var(--ngxsmk-font-sans);
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
     }
     .ngxsmk-memory-viewer__items {
       display: flex;

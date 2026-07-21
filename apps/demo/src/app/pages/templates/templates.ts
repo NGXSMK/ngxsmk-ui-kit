@@ -332,7 +332,7 @@ interface TemplateItem {
                   <ngxsmk-badge variant="info">{{ appVersion }}</ngxsmk-badge>
                   <ngxsmk-text
                     variant="body"
-                    style="margin-left: 1rem; font-weight: 500; font-size: 0.8125rem; color: var(--ngxsmk-color-on-surface);"
+                    style="margin-left: 1rem; font-weight: 500; font-size: var(--ngxsmk-text-body-sm-size); color: var(--ngxsmk-color-on-surface);"
                     >Sachin Dilshan</ngxsmk-text
                   >
                 </div>
@@ -375,7 +375,7 @@ interface TemplateItem {
                           <div class="ngxsmk-mock-section table-section">
                             <ngxsmk-heading
                               level="h4"
-                              style="margin-bottom: 0.75rem; font-size: 0.9375rem; font-weight: 600;"
+                              style="margin-bottom: 0.75rem; font-size: var(--ngxsmk-text-body-md-size); font-weight: 600;"
                               >{{
                                 'templates.mock.recentRegistrations' | translate
                               }}</ngxsmk-heading
@@ -389,7 +389,7 @@ interface TemplateItem {
                           <div class="ngxsmk-mock-section chart-section">
                             <ngxsmk-heading
                               level="h4"
-                              style="margin-bottom: 0.75rem; font-size: 0.9375rem; font-weight: 600;"
+                              style="margin-bottom: 0.75rem; font-size: var(--ngxsmk-text-body-md-size); font-weight: 600;"
                               >{{ 'templates.mock.weeklyOperations' | translate }}</ngxsmk-heading
                             >
                             <div
@@ -422,7 +422,7 @@ interface TemplateItem {
                           <div class="ngxsmk-mock-section">
                             <ngxsmk-heading
                               level="h4"
-                              style="margin-bottom: 0.75rem; font-size: 0.9375rem; font-weight: 600;"
+                              style="margin-bottom: 0.75rem; font-size: var(--ngxsmk-text-body-md-size); font-weight: 600;"
                               >{{ 'templates.mock.trafficOverview' | translate }}</ngxsmk-heading
                             >
                             <div
@@ -438,7 +438,7 @@ interface TemplateItem {
                           <div class="ngxsmk-mock-section">
                             <ngxsmk-heading
                               level="h4"
-                              style="margin-bottom: 0.75rem; font-size: 0.9375rem; font-weight: 600;"
+                              style="margin-bottom: 0.75rem; font-size: var(--ngxsmk-text-body-md-size); font-weight: 600;"
                               >{{ 'templates.mock.trafficSources' | translate }}</ngxsmk-heading
                             >
                             >
@@ -460,7 +460,7 @@ interface TemplateItem {
                         <div class="admin-users-toolbar">
                           <ngxsmk-heading
                             level="h4"
-                            style="font-size: 0.9375rem; font-weight: 600; margin: 0;"
+                            style="font-size: var(--ngxsmk-text-body-md-size); font-weight: 600; margin: 0;"
                             >{{ 'templates.mock.teamMembers' | translate }}</ngxsmk-heading
                           >
                           <button ngxsmk-button size="sm">
@@ -541,7 +541,7 @@ interface TemplateItem {
                     'templates.mock.aiAssistant' | translate
                   }}</ngxsmk-heading>
                   <span
-                    style="font-size: 0.75rem; color: var(--ngxsmk-color-success); font-weight: 600;"
+                    style="font-size: var(--ngxsmk-text-body-sm-size); color: var(--ngxsmk-color-success); font-weight: 600;"
                     >{{ 'templates.mock.online' | translate }}</span
                   >
                 </div>
@@ -564,12 +564,12 @@ interface TemplateItem {
               <div class="ngxsmk-mock-landing">
                 <div class="ngxsmk-mock-landing-nav">
                   <div
-                    style="font-weight: 700; font-family: 'Outfit'; font-size: 1rem; color: var(--ngxsmk-color-primary);"
+                    style="font-weight: 700; font-family: 'Outfit'; font-size: var(--ngxsmk-text-body-lg-size); color: var(--ngxsmk-color-primary);"
                   >
                     ngxsmk SaaS
                   </div>
                   <div
-                    style="display: flex; gap: 1.5rem; font-size: 0.8125rem; font-weight: 500; color: var(--ngxsmk-color-on-surface-variant);"
+                    style="display: flex; gap: 1.5rem; font-size: var(--ngxsmk-text-body-sm-size); font-weight: 500; color: var(--ngxsmk-color-on-surface-variant);"
                   >
                     <span>{{ 'templates.mock.features' | translate }}</span>
                     <span>{{ 'templates.mock.pricing' | translate }}</span>
@@ -581,13 +581,13 @@ interface TemplateItem {
                 <div class="ngxsmk-mock-landing-hero">
                   <ngxsmk-heading
                     level="h1"
-                    style="font-size: 2.25rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.2;"
+                    style="font-size: var(--ngxsmk-text-display-sm-size); font-weight: 800; letter-spacing: -0.02em; line-height: 1.2;"
                     >{{ 'templates.mock.innovateFaster' | translate }}</ngxsmk-heading
                   >
                   >
                   <ngxsmk-text
                     variant="body"
-                    style="font-size: 0.875rem; opacity: 0.8; max-width: 480px; margin: 0.5rem auto 1.5rem; line-height: 1.6;"
+                    style="font-size: var(--ngxsmk-text-body-md-size); opacity: 0.8; max-width: 480px; margin: 0.5rem auto 1.5rem; line-height: 1.6;"
                   >
                     {{ 'templates.mock.landingHero' | translate }}
                   </ngxsmk-text>
@@ -601,12 +601,12 @@ interface TemplateItem {
 
                 <div class="ngxsmk-mock-landing-pricing">
                   <div class="ngxsmk-mock-price-card">
-                    <ngxsmk-heading level="h4" style="font-size: 0.9375rem; font-weight: 600;">{{
+                    <ngxsmk-heading level="h4" style="font-size: var(--ngxsmk-text-body-md-size); font-weight: 600;">{{
                       'templates.mock.starter' | translate
                     }}</ngxsmk-heading>
                     >
                     <div class="ngxsmk-mock-price-val">
-                      $0<span style="font-size: 0.75rem; font-weight: 400; opacity: 0.7;">/mo</span>
+                      $0<span style="font-size: var(--ngxsmk-text-body-sm-size); font-weight: 400; opacity: 0.7;">/mo</span>
                     </div>
                     <ngxsmk-divider />
                     <ul class="ngxsmk-mock-price-features">
@@ -623,12 +623,12 @@ interface TemplateItem {
                     <div class="ngxsmk-mock-price-badge">
                       {{ 'templates.mock.popular' | translate }}
                     </div>
-                    <ngxsmk-heading level="h4" style="font-size: 0.9375rem; font-weight: 600;">{{
+                    <ngxsmk-heading level="h4" style="font-size: var(--ngxsmk-text-body-md-size); font-weight: 600;">{{
                       'templates.mock.professional' | translate
                     }}</ngxsmk-heading>
                     >
                     <div class="ngxsmk-mock-price-val">
-                      $49<span style="font-size: 0.75rem; font-weight: 400; opacity: 0.7;"
+                      $49<span style="font-size: var(--ngxsmk-text-body-sm-size); font-weight: 400; opacity: 0.7;"
                         >/mo</span
                       >
                     </div>
@@ -742,7 +742,7 @@ interface TemplateItem {
                     }}</ngxsmk-badge>
                     <ngxsmk-heading
                       level="h2"
-                      style="font-size: 1.5rem; font-weight: 700; margin: 0.5rem 0;"
+                      style="font-size: var(--ngxsmk-text-headline-sm-size); font-weight: 700; margin: 0.5rem 0;"
                       >AeroSound Pro Headphones</ngxsmk-heading
                     >
 
@@ -762,13 +762,13 @@ interface TemplateItem {
 
                     <ngxsmk-text
                       variant="body"
-                      style="font-size: 0.8125rem; line-height: 1.6; color: var(--ngxsmk-color-on-surface-variant);"
+                      style="font-size: var(--ngxsmk-text-body-sm-size); line-height: 1.6; color: var(--ngxsmk-color-on-surface-variant);"
                     >
                       {{ 'templates.mock.headphonesDesc' | translate }}
                     </ngxsmk-text>
 
                     <div class="product-spec-row">
-                      <span style="font-weight: 600; font-size: 0.8125rem;">{{
+                      <span style="font-weight: 600; font-size: var(--ngxsmk-text-body-sm-size);">{{
                         'templates.mock.color' | translate
                       }}</span>
                       <div class="product-color-selector">
@@ -796,21 +796,21 @@ interface TemplateItem {
               <div class="ngxsmk-mock-auth">
                 <div class="ngxsmk-mock-auth-card">
                   <div class="ngxsmk-mock-auth-header">
-                    <ngxsmk-heading level="h3" style="font-size: 1.25rem; font-weight: 700;">{{
+                    <ngxsmk-heading level="h3" style="font-size: var(--ngxsmk-text-title-md-size); font-weight: 700;">{{
                       'templates.mock.signInToAccount' | translate
                     }}</ngxsmk-heading>
                     <ngxsmk-text
                       variant="body"
-                      style="font-size: 0.75rem; color: var(--ngxsmk-color-on-surface-variant);"
+                      style="font-size: var(--ngxsmk-text-body-sm-size); color: var(--ngxsmk-color-on-surface-variant);"
                       >{{ 'templates.mock.enterCredentials' | translate }}</ngxsmk-text
                     >
                   </div>
 
                   <div class="ngxsmk-mock-auth-socials">
-                    <button ngxsmk-button variant="outline" style="flex: 1; font-size: 0.75rem;">
+                    <button ngxsmk-button variant="outline" style="flex: 1; font-size: var(--ngxsmk-text-body-sm-size);">
                       Google
                     </button>
-                    <button ngxsmk-button variant="outline" style="flex: 1; font-size: 0.75rem;">
+                    <button ngxsmk-button variant="outline" style="flex: 1; font-size: var(--ngxsmk-text-body-sm-size);">
                       {{ 'nav.github' | translate }}
                     </button>
                   </div>
@@ -828,7 +828,7 @@ interface TemplateItem {
                     </ngxsmk-form-field>
 
                     <div
-                      style="display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem;"
+                      style="display: flex; justify-content: space-between; align-items: center; font-size: var(--ngxsmk-text-body-sm-size);"
                     >
                       <ngxsmk-switch [checked]="true">{{
                         'templates.mock.keepSignedIn' | translate
@@ -980,7 +980,7 @@ interface TemplateItem {
     }
     .tpl-header__eyebrow {
       font-family: var(--ngxsmk-font-mono);
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       font-weight: 500;
       letter-spacing: 0.08em;
       color: var(--ngxsmk-color-primary);
@@ -997,7 +997,7 @@ interface TemplateItem {
     .tpl-header__sub {
       color: var(--ngxsmk-color-on-surface-variant);
       margin: 0;
-      font-size: 1.0625rem;
+      font-size: var(--ngxsmk-text-body-lg-size);
       max-width: 34rem;
       line-height: 1.6;
     }
@@ -1024,7 +1024,7 @@ interface TemplateItem {
     }
     .tpl-header__spec-cell dt {
       font-family: var(--ngxsmk-font-mono);
-      font-size: 0.625rem;
+      font-size: var(--ngxsmk-text-body-xs-size);
       font-weight: 500;
       text-transform: uppercase;
       letter-spacing: 0.08em;
@@ -1033,7 +1033,7 @@ interface TemplateItem {
     }
     .tpl-header__spec-cell dd {
       font-family: var(--ngxsmk-font-mono);
-      font-size: 1rem;
+      font-size: var(--ngxsmk-text-body-lg-size);
       font-weight: 500;
       color: var(--ngxsmk-color-on-surface);
       margin: 0;
@@ -1060,7 +1060,7 @@ interface TemplateItem {
     }
     .tpl-index__label {
       font-family: var(--ngxsmk-font-mono);
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       font-weight: 500;
       letter-spacing: 0.08em;
       color: var(--ngxsmk-color-primary);
@@ -1094,7 +1094,7 @@ interface TemplateItem {
     }
     .tpl-index__code {
       font-family: var(--ngxsmk-font-mono);
-      font-size: 0.6875rem;
+      font-size: var(--ngxsmk-text-body-xs-size);
       font-weight: 500;
       color: var(--ngxsmk-color-on-surface-variant);
       flex-shrink: 0;
@@ -1109,7 +1109,7 @@ interface TemplateItem {
       flex-shrink: 0;
     }
     .tpl-index__name {
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       font-weight: 500;
       color: var(--ngxsmk-color-on-surface);
       white-space: nowrap;
@@ -1251,7 +1251,7 @@ interface TemplateItem {
       border-radius: var(--ngxsmk-radius-full);
       background: var(--ngxsmk-color-surface);
       color: var(--ngxsmk-color-on-surface);
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       font-weight: 600;
       box-shadow: var(--ngxsmk-shadow-md);
     }
@@ -1274,7 +1274,7 @@ interface TemplateItem {
       margin-bottom: 0.25rem;
       border-bottom: 1px solid var(--ngxsmk-color-outline);
       font-family: var(--ngxsmk-font-mono);
-      font-size: 0.6875rem;
+      font-size: var(--ngxsmk-text-body-xs-size);
       font-weight: 500;
       letter-spacing: 0.06em;
       text-transform: uppercase;
@@ -1304,14 +1304,14 @@ interface TemplateItem {
     .tpl-card__title {
       margin: 0;
       font-family: 'Plus Jakarta Sans', var(--ngxsmk-font-sans, system-ui), sans-serif;
-      font-size: 1.1875rem;
+      font-size: var(--ngxsmk-text-title-md-size);
       font-weight: 700;
       letter-spacing: -0.015em;
       color: var(--ngxsmk-color-on-surface);
     }
     .tpl-card__desc {
       margin: 0;
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       line-height: 1.6;
       color: var(--ngxsmk-color-on-surface-variant);
       flex: 1;
@@ -1429,7 +1429,7 @@ interface TemplateItem {
       background: var(--ngxsmk-color-surface);
       border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-md);
-      font-size: 0.6875rem;
+      font-size: var(--ngxsmk-text-body-xs-size);
       color: var(--ngxsmk-color-on-surface-variant);
       padding: 0.125rem 0.5rem;
       display: flex;
@@ -1470,7 +1470,7 @@ interface TemplateItem {
       background: var(--ngxsmk-color-surface);
     }
     .mock-panel-title {
-      font-size: 0.9375rem;
+      font-size: var(--ngxsmk-text-body-md-size);
       font-weight: 700;
       color: var(--ngxsmk-color-on-surface);
       margin: 0;
@@ -1491,7 +1491,7 @@ interface TemplateItem {
     }
     .ngxsmk-mock-side-item {
       font-family: inherit;
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       font-weight: 500;
       color: var(--ngxsmk-color-on-surface-variant);
       padding: 0.375rem 0.75rem;
@@ -1526,7 +1526,7 @@ interface TemplateItem {
       grid-template-columns: 72px 1fr 40px;
       align-items: center;
       gap: 0.6rem;
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
     }
     .admin-bar-label {
       color: var(--ngxsmk-color-on-surface-variant);
@@ -1576,7 +1576,7 @@ interface TemplateItem {
       height: 2rem;
       border-radius: 50%;
       color: #fff;
-      font-size: 0.6875rem;
+      font-size: var(--ngxsmk-text-body-xs-size);
       font-weight: 700;
       flex-shrink: 0;
     }
@@ -1586,16 +1586,16 @@ interface TemplateItem {
       min-width: 0;
     }
     .admin-user-name {
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       font-weight: 600;
       color: var(--ngxsmk-color-on-surface);
     }
     .admin-user-email {
-      font-size: 0.6875rem;
+      font-size: var(--ngxsmk-text-body-xs-size);
       color: var(--ngxsmk-color-on-surface-variant);
     }
     .admin-user-role {
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       font-weight: 500;
       color: var(--ngxsmk-color-on-surface-variant);
     }
@@ -1718,14 +1718,14 @@ interface TemplateItem {
       right: 0.75rem;
       background: var(--ngxsmk-color-primary);
       color: var(--ngxsmk-color-on-primary);
-      font-size: 0.625rem;
+      font-size: var(--ngxsmk-text-body-xs-size);
       font-weight: 700;
       padding: 0.125rem 0.375rem;
       border-radius: var(--ngxsmk-radius-sm);
       text-transform: uppercase;
     }
     .ngxsmk-mock-price-val {
-      font-size: 1.5rem;
+      font-size: var(--ngxsmk-text-headline-sm-size);
       font-weight: 700;
       color: var(--ngxsmk-color-on-surface);
     }
@@ -1733,7 +1733,7 @@ interface TemplateItem {
       list-style: none;
       padding: 0;
       margin: 0;
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       display: flex;
       flex-direction: column;
       gap: 0.375rem;
@@ -1836,10 +1836,10 @@ interface TemplateItem {
     }
     .stars-gold {
       color: #eab308;
-      font-size: 0.875rem;
+      font-size: var(--ngxsmk-text-body-md-size);
     }
     .ratings-count {
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       color: var(--ngxsmk-color-on-surface-variant);
     }
     .product-price-row {
@@ -1849,12 +1849,12 @@ interface TemplateItem {
       margin-top: 0.25rem;
     }
     .price-current {
-      font-size: 1.5rem;
+      font-size: var(--ngxsmk-text-headline-sm-size);
       font-weight: 700;
       color: var(--ngxsmk-color-on-surface);
     }
     .price-old {
-      font-size: 0.9375rem;
+      font-size: var(--ngxsmk-text-body-md-size);
       text-decoration: line-through;
       color: var(--ngxsmk-color-on-surface-variant);
       opacity: 0.7;
@@ -1915,7 +1915,7 @@ interface TemplateItem {
       display: flex;
       align-items: center;
       text-align: center;
-      font-size: 0.6875rem;
+      font-size: var(--ngxsmk-text-body-xs-size);
       color: var(--ngxsmk-color-on-surface-variant);
       opacity: 0.7;
     }
@@ -1973,12 +1973,12 @@ interface TemplateItem {
       gap: 0.25rem;
     }
     .health-mini-stat .label {
-      font-size: 0.6875rem;
+      font-size: var(--ngxsmk-text-body-xs-size);
       color: #a3a3a3;
       font-weight: 500;
     }
     .health-mini-stat .value {
-      font-size: 1.1rem;
+      font-size: var(--ngxsmk-text-title-md-size);
       font-weight: 700;
       color: #f5f5f5;
     }
@@ -2026,7 +2026,7 @@ interface TemplateItem {
        actions and focus. */
     .ngxsmk-category-chip {
       font-family: inherit;
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       font-weight: 500;
       padding: 0.375rem 0.75rem;
       border-radius: var(--ngxsmk-radius-md);
@@ -2055,7 +2055,7 @@ interface TemplateItem {
     }
     .chip-count {
       font-family: var(--ngxsmk-font-mono);
-      font-size: 0.6875rem;
+      font-size: var(--ngxsmk-text-body-xs-size);
       opacity: var(--ngxsmk-opacity-muted, 0.7);
       margin-inline-start: 0.25rem;
     }
@@ -2087,7 +2087,7 @@ interface TemplateItem {
       border: none;
       background: transparent;
       font-family: inherit;
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       color: var(--ngxsmk-color-on-surface);
       outline: none;
       width: 100%;
@@ -2111,7 +2111,7 @@ interface TemplateItem {
       margin-top: 0.75rem;
     }
     .ngxsmk-result-count {
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       color: var(--ngxsmk-color-on-surface-variant);
     }
     .count-num {
@@ -2391,7 +2391,7 @@ export class TemplatesPage {
 
 <div class="landing-hero">
   <ngxsmk-heading level="h1">Innovate Faster</ngxsmk-heading>
-  <ngxsmk-text variant="body" style="font-size: 1rem; opacity: 0.8; max-width: 480px; margin: 0.5rem auto 1.5rem;">
+  <ngxsmk-text variant="body" style="font-size: var(--ngxsmk-text-body-lg-size); opacity: 0.8; max-width: 480px; margin: 0.5rem auto 1.5rem;">
     Build state-of-the-art enterprise web applications in minutes using NGXSMK premium signals-based UI Kit.
   </ngxsmk-text>
   <div style="display: flex; gap: 0.75rem; justify-content: center;">

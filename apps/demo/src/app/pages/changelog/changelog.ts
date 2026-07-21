@@ -94,7 +94,7 @@ interface Release {
     }
     .ngxsmk-page__header h1,
     .ngxsmk-page__header ngxsmk-heading {
-      font-size: 2rem;
+      font-size: var(--ngxsmk-text-headline-lg-size);
       font-weight: 700;
       margin: 0 0 var(--ngxsmk-space-2, 0.5rem);
       color: var(--ngxsmk-color-on-surface, #09090b);
@@ -102,7 +102,7 @@ interface Release {
     .ngxsmk-page__sub {
       color: var(--ngxsmk-color-on-surface-variant, #71717a);
       margin: 0;
-      font-size: 1rem;
+      font-size: var(--ngxsmk-text-body-lg-size);
     }
     .ngxsmk-changelog-list {
       display: flex;
@@ -117,7 +117,7 @@ interface Release {
     }
     .ngxsmk-changelog-desc {
       color: var(--ngxsmk-color-on-surface-variant, #71717a);
-      font-size: 0.875rem;
+      font-size: var(--ngxsmk-text-body-md-size);
       line-height: 1.6;
       margin: 0 0 var(--ngxsmk-space-3, 0.75rem);
     }
@@ -133,13 +133,44 @@ interface Release {
       display: flex;
       align-items: center;
       gap: var(--ngxsmk-space-2, 0.5rem);
-      font-size: 0.875rem;
+      font-size: var(--ngxsmk-text-body-md-size);
       color: var(--ngxsmk-color-on-surface, #09090b);
     }
   `,
 })
 export class ChangelogPage {
   protected readonly releases: Release[] = [
+    {
+      version: 'v1.3.3',
+      date: '2026-07-21',
+      summary: 'changelog.release.v133.summary',
+      changes: [
+        {
+          type: 'added',
+          text: 'changelog.release.v133.changes.0',
+        },
+        {
+          type: 'added',
+          text: 'changelog.release.v133.changes.1',
+        },
+        {
+          type: 'changed',
+          text: 'changelog.release.v133.changes.2',
+        },
+        {
+          type: 'changed',
+          text: 'changelog.release.v133.changes.3',
+        },
+        {
+          type: 'changed',
+          text: 'changelog.release.v133.changes.4',
+        },
+        {
+          type: 'removed',
+          text: 'changelog.release.v133.changes.5',
+        },
+      ],
+    },
     {
       version: 'v1.3.2',
       date: '2026-07-17',

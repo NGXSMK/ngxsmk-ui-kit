@@ -55,7 +55,7 @@
       background: var(--ngxsmk-color-primary-container);
       color: var(--ngxsmk-color-on-primary-container);
       border-radius: var(--ngxsmk-radius-full);
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
     }
     .ngxsmk-tokenizer__remove {
       border: none;
@@ -78,6 +78,9 @@
       padding: var(--ngxsmk-space-1);
       font-size: var(--ngxsmk-text-label-lg-size);
       background: transparent;
+    }
+    .ngxsmk-tokenizer__input::placeholder {
+      color: var(--ngxsmk-color-on-surface-variant);
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

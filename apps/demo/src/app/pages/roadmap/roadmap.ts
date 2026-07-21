@@ -92,7 +92,7 @@ interface Milestone {
     }
     .ngxsmk-page__header h1,
     .ngxsmk-page__header ngxsmk-heading {
-      font-size: 2rem;
+      font-size: var(--ngxsmk-text-headline-lg-size);
       font-weight: 700;
       margin: 0 0 var(--ngxsmk-space-2, 0.5rem);
       color: var(--ngxsmk-color-on-surface, #09090b);
@@ -100,7 +100,7 @@ interface Milestone {
     .ngxsmk-page__sub {
       color: var(--ngxsmk-color-on-surface-variant, #71717a);
       margin: 0;
-      font-size: 1rem;
+      font-size: var(--ngxsmk-text-body-lg-size);
     }
     .ngxsmk-roadmap-list {
       display: flex;
@@ -117,7 +117,7 @@ interface Milestone {
       margin: 0;
       padding-left: 1.25rem;
       color: var(--ngxsmk-color-on-surface, #09090b);
-      font-size: 0.875rem;
+      font-size: var(--ngxsmk-text-body-md-size);
       line-height: 1.8;
     }
   `,

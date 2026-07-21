@@ -11,6 +11,7 @@
   booleanAttribute,
 } from '@angular/core';
 import { ngxsmkUniqueId } from '@ngxsmk/core/util';
+import { ListboxKeyboard } from '@ngxsmk/cdk/listbox-keyboard';
 
 @Component({
   selector: 'ngxsmk-multi-select',
@@ -154,7 +155,7 @@ import { ngxsmkUniqueId } from '@ngxsmk/core/util';
       background: var(--ngxsmk-color-primary-container);
       color: var(--ngxsmk-color-on-primary-container);
       border-radius: var(--ngxsmk-radius-sm);
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       font-weight: 500;
     }
 
@@ -236,8 +237,16 @@ export class NgxsmkMultiSelect {
 
   protected readonly listboxId = ngxsmkUniqueId('ngxsmk-multi-select-listbox');
   protected readonly open = signal(false);
-  protected readonly activeIndex = signal(-1);
+
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
+
+  protected readonly kb = new ListboxKeyboard({
+    optionSelector: '.ngxsmk-multi-select__option',
+    options: () => this.remaining(),
+    host: this.host,
+  });
+
+  protected readonly activeIndex = this.kb.activeIndex;
 
   protected activeDescendant(): string | null {
     return this.open() && this.activeIndex() >= 0
@@ -266,67 +275,26 @@ export class NgxsmkMultiSelect {
 
   protected onKeydown(event: KeyboardEvent): void {
     if (this.disabled()) return;
-    switch (event.key) {
-      case 'ArrowDown':
-        event.preventDefault();
-        if (!this.open()) {
-          this.open.set(true);
-          this.activeIndex.set(this.remaining().length ? 0 : -1);
-        } else {
-          this.move(1);
-        }
-        break;
-      case 'ArrowUp':
-        event.preventDefault();
-        if (this.open()) {
-          this.move(-1);
-        }
-        break;
-      case 'Home':
-        if (this.open() && this.remaining().length) {
-          event.preventDefault();
-          this.activeIndex.set(0);
-          this.scrollActiveIntoView();
-        }
-        break;
-      case 'End':
-        if (this.open() && this.remaining().length) {
-          event.preventDefault();
-          this.activeIndex.set(this.remaining().length - 1);
-          this.scrollActiveIntoView();
-        }
-        break;
-      case 'Enter':
-      case ' ':
-      case 'Spacebar': {
-        event.preventDefault();
-        if (!this.open()) {
-          this.toggle();
-          break;
-        }
-        const opt = this.remaining()[this.activeIndex()];
-        if (opt) {
-          this.selectOption(opt);
-        }
-        break;
-      }
-      case 'Escape':
-        if (this.open()) {
-          event.preventDefault();
-          this.open.set(false);
-          this.activeIndex.set(-1);
-        }
-        break;
-      default:
-        break;
-    }
+    this.kb.handleKeydown(event, {
+      onSelect: (i) => {
+        const opt = this.remaining()[i];
+        if (opt) this.selectOption(opt);
+      },
+      onOpen: () => {
+        this.open.set(true);
+        this.activeIndex.set(this.remaining().length ? 0 : -1);
+      },
+      onClose: () => {
+        this.open.set(false);
+        this.activeIndex.set(-1);
+      },
+      isOpen: () => this.open(),
+    });
   }
 
   protected selectOption(opt: { value: string; label: string }): void {
     this.value.set([...this.value(), opt.value]);
     this.changed.emit(this.value());
-    // The picked option leaves `remaining()`; keep the highlight in bounds so
-    // continued arrowing lands on a real row.
     const count = this.remaining().length;
     this.activeIndex.set(count ? Math.min(this.activeIndex(), count - 1) : -1);
     this.scrollActiveIntoView();
@@ -345,27 +313,7 @@ export class NgxsmkMultiSelect {
     }
   }
 
-  private move(delta: number): void {
-    const list = this.remaining();
-    if (!list.length) {
-      return;
-    }
-    let next = this.activeIndex() + delta;
-    if (next < 0) {
-      next = list.length - 1;
-    } else if (next >= list.length) {
-      next = 0;
-    }
-    this.activeIndex.set(next);
-    this.scrollActiveIntoView();
-  }
-
   private scrollActiveIntoView(): void {
-    requestAnimationFrame(() => {
-      const items = this.host.nativeElement.querySelectorAll<HTMLElement>(
-        '.ngxsmk-multi-select__option',
-      );
-      items[this.activeIndex()]?.scrollIntoView({ block: 'nearest' });
-    });
+    this.kb.scrollActiveIntoView();
   }
 }

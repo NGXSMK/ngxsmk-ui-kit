@@ -14,7 +14,8 @@
       "@ngxsmk-ui-kit/core": ["./packages/core/public-api.ts"],
       "@ngxsmk-ui-kit/core/*": ["./packages/core/*"],
       "@ngxsmk-ui-kit/themes": ["./packages/theme/src/public-api.ts"],
-      "@ngxsmk-ui-kit/themes/*": ["./packages/theme/*"]
+      "@ngxsmk-ui-kit/themes/*": ["./packages/theme/*"],
+      "@ngxsmk/mcp/component-db": ["./packages/mcp/src/component-db.ts"]
     },
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,

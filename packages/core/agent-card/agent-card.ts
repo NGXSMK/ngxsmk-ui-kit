@@ -53,7 +53,7 @@ export interface AgentInfo {
     }
     .ngxsmk-agent-card__name {
       font-weight: 600;
-      font-size: 0.9375rem;
+      font-size: var(--ngxsmk-text-body-md-size);
       color: var(--ngxsmk-color-on-surface);
     }
     .ngxsmk-agent-card__model {
@@ -75,7 +75,7 @@ export interface AgentInfo {
       background: var(--ngxsmk-color-error);
     }
     .ngxsmk-agent-card__description {
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       color: var(--ngxsmk-color-on-surface-variant);
       line-height: 1.5;
     }

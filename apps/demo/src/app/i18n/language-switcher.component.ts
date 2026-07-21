@@ -58,7 +58,7 @@ import { isRtl } from './langs';
       background: transparent;
       color: var(--ngxsmk-color-on-surface-variant, #71717a);
       cursor: pointer;
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       font-weight: 600;
       transition:
         color 0.15s,
@@ -75,11 +75,11 @@ import { isRtl } from './langs';
     }
 
     .lang__globe {
-      font-size: 0.875rem;
+      font-size: var(--ngxsmk-text-body-md-size);
       line-height: 1;
     }
     .lang__caret {
-      font-size: 0.6rem;
+      font-size: var(--ngxsmk-text-body-xs-size);
       opacity: 0.7;
     }
 
@@ -87,7 +87,7 @@ import { isRtl } from './langs';
       position: absolute;
       top: calc(100% + 0.375rem);
       inset-inline-end: 0;
-      z-index: 1200;
+      z-index: var(--ngxsmk-z-dropdown, 1000);
       margin: 0;
       padding: 0.25rem;
       list-style: none;
@@ -128,7 +128,7 @@ import { isRtl } from './langs';
       background: transparent;
       color: var(--ngxsmk-color-on-surface, #09090b);
       cursor: pointer;
-      font-size: 0.875rem;
+      font-size: var(--ngxsmk-text-body-md-size);
       text-align: start;
     }
     .lang__item:hover {
@@ -140,7 +140,7 @@ import { isRtl } from './langs';
     }
 
     .lang__flag {
-      font-size: 1rem;
+      font-size: var(--ngxsmk-text-body-lg-size);
       line-height: 1;
     }
   `,

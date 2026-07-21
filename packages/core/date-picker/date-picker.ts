@@ -2,16 +2,15 @@ import {
   booleanAttribute,
   ChangeDetectionStrategy,
   Component,
-  computed,
   forwardRef,
   input,
   model,
   output,
-  signal,
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ngxsmkUniqueId } from '@ngxsmk/core/util';
 import { NGXSMK_FORM_FIELD_CONTROL, NgxsmkFormFieldControl } from '@ngxsmk/core/form-field';
+import { CvaBase } from '@ngxsmk/cdk/cva-base';
 
 @Component({
   standalone: true,
@@ -86,7 +85,7 @@ import { NGXSMK_FORM_FIELD_CONTROL, NgxsmkFormFieldControl } from '@ngxsmk/core/
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NgxsmkDatePicker implements ControlValueAccessor, NgxsmkFormFieldControl {
+export class NgxsmkDatePicker extends CvaBase<string> implements NgxsmkFormFieldControl {
   readonly value = model('');
   readonly min = input('');
   readonly max = input('');
@@ -99,36 +98,22 @@ export class NgxsmkDatePicker implements ControlValueAccessor, NgxsmkFormFieldCo
 
   readonly changed = output<string>();
 
-  // CVA hooks
-  private onChange: (val: string) => void = () => {};
-  private onTouched: () => void = () => {};
-  private readonly formDisabled = signal(false);
-  protected readonly isDisabled = computed(() => this.disabled() || this.formDisabled());
-
-  writeValue(val: string): void {
-    this.value.set(val || '');
-  }
-
-  registerOnChange(fn: (val: string) => void): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
-  }
-
-  setDisabledState(isDisabled: boolean): void {
-    this.formDisabled.set(isDisabled);
+  protected inputDisabled(): boolean {
+    return this.disabled();
   }
 
   protected onInput(event: Event): void {
     const val = (event.target as HTMLInputElement).value;
     this.value.set(val);
     this.changed.emit(val);
-    this.onChange(val);
+    this.emitChange(val);
   }
 
   protected onBlur(): void {
-    this.onTouched();
+    this.emitTouched();
+  }
+
+  writeValue(val: string): void {
+    this.value.set(val || '');
   }
 }

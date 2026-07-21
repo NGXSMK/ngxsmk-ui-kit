@@ -1,13 +1,14 @@
 import {
   Directive,
   ElementRef,
-  Renderer2,
   booleanAttribute,
   computed,
   effect,
   inject,
   input,
 } from '@angular/core';
+import { NGXSMK_BUTTON_RENDERER } from './button-renderer';
+import { DefaultButtonRenderer } from './default-renderer';
 
 export type NgxsmkButtonVariant =
   'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'link';
@@ -29,6 +30,7 @@ export type NgxsmkButtonSize = 'sm' | 'md' | 'lg';
   standalone: true,
   /* eslint-disable-next-line @angular-eslint/directive-selector */
   selector: 'button[ngxsmk-button], a[ngxsmk-button]',
+  providers: [{ provide: NGXSMK_BUTTON_RENDERER, useClass: DefaultButtonRenderer }],
   host: {
     class: 'ngxsmk-button',
     '[attr.data-variant]': 'variant()',
@@ -49,27 +51,14 @@ export class NgxsmkButton {
   protected readonly isDisabled = computed(() => this.disabled() || this.loading());
 
   private readonly el = inject(ElementRef<HTMLElement>);
-  private readonly renderer = inject(Renderer2);
-  private spinner: HTMLElement | null = null;
+  private readonly renderer = inject(NGXSMK_BUTTON_RENDERER);
 
   constructor() {
     effect(() => {
       if (this.loading()) {
-        if (!this.spinner) {
-          this.spinner = this.renderer.createElement('span');
-          this.renderer.addClass(this.spinner, 'ngxsmk-button__spinner');
-          this.renderer.setAttribute(this.spinner, 'aria-hidden', 'true');
-          this.renderer.insertBefore(
-            this.el.nativeElement,
-            this.spinner,
-            this.el.nativeElement.firstChild,
-          );
-        }
+        this.renderer.createSpinner(this.el.nativeElement);
       } else {
-        if (this.spinner) {
-          this.renderer.removeChild(this.el.nativeElement, this.spinner);
-          this.spinner = null;
-        }
+        this.renderer.removeSpinner(this.el.nativeElement);
       }
     });
   }

@@ -1,7 +1,6 @@
 import { Component, inject, signal, ViewChild, ElementRef, effect } from '@angular/core';
 import { Router } from '@angular/router';
-import { SearchService, SearchResult } from './search.service';
-import { ComponentRegistry } from './component-registry';
+import { ComponentRegistry, SearchResult } from './component-registry';
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
@@ -103,7 +102,7 @@ import { TranslatePipe } from '@ngx-translate/core';
     .cmd-overlay {
       position: fixed;
       inset: 0;
-      z-index: 10000;
+      z-index: var(--ngxsmk-z-modal, 1400);
       background: rgba(0, 0, 0, 0.4);
       backdrop-filter: blur(8px);
       display: flex;
@@ -162,7 +161,7 @@ import { TranslatePipe } from '@ngx-translate/core';
       outline: none;
       background: transparent;
       padding: 0;
-      font-size: 0.9375rem;
+      font-size: var(--ngxsmk-text-body-md-size);
       font-family: inherit;
       color: var(--ngxsmk-color-on-surface, #09090b);
     }
@@ -170,7 +169,7 @@ import { TranslatePipe } from '@ngx-translate/core';
       color: var(--ngxsmk-color-on-surface-variant, #71717a);
     }
     .cmd-esc-hint {
-      font-size: 0.6875rem;
+      font-size: var(--ngxsmk-text-body-xs-size);
       font-weight: 700;
       color: var(--ngxsmk-color-on-surface-variant, #71717a);
       border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
@@ -197,7 +196,7 @@ import { TranslatePipe } from '@ngx-translate/core';
       padding: 0.5rem 0.75rem;
       border-radius: var(--ngxsmk-radius-md, 0.375rem);
       cursor: pointer;
-      font-size: 0.875rem;
+      font-size: var(--ngxsmk-text-body-md-size);
       color: var(--ngxsmk-color-on-surface, #09090b);
       transition: background-color 0.1s;
     }
@@ -211,7 +210,7 @@ import { TranslatePipe } from '@ngx-translate/core';
       gap: 0.625rem;
     }
     .cmd-item-icon {
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       opacity: 0.7;
     }
     .cmd-item-name {
@@ -223,7 +222,7 @@ import { TranslatePipe } from '@ngx-translate/core';
       gap: 0.375rem;
     }
     .cmd-item-cat {
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       color: var(--ngxsmk-color-on-surface-variant, #71717a);
       background: var(--ngxsmk-color-surface-variant, #f4f4f5);
       padding: 0.125rem 0.375rem;
@@ -234,7 +233,7 @@ import { TranslatePipe } from '@ngx-translate/core';
       color: var(--ngxsmk-color-on-primary-container, #4c1d95);
     }
     .cmd-item-score {
-      font-size: 0.625rem;
+      font-size: var(--ngxsmk-text-body-xs-size);
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.05em;
@@ -245,14 +244,14 @@ import { TranslatePipe } from '@ngx-translate/core';
       padding: 2rem 0;
       text-align: center;
       color: var(--ngxsmk-color-on-surface-variant, #71717a);
-      font-size: 0.875rem;
+      font-size: var(--ngxsmk-text-body-md-size);
     }
 
     .cmd-suggestions {
       padding: 0.5rem;
     }
     .cmd-suggestions-header {
-      font-size: 0.6875rem;
+      font-size: var(--ngxsmk-text-body-xs-size);
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.08em;
@@ -263,7 +262,7 @@ import { TranslatePipe } from '@ngx-translate/core';
       padding: 0.375rem 0.5rem;
       border-radius: var(--ngxsmk-radius-sm);
       cursor: pointer;
-      font-size: 0.875rem;
+      font-size: var(--ngxsmk-text-body-md-size);
       color: var(--ngxsmk-color-on-surface-variant, #71717a);
     }
     .cmd-suggestion-item:hover {
@@ -273,13 +272,12 @@ import { TranslatePipe } from '@ngx-translate/core';
     .cmd-suggestion-empty {
       padding: 1.5rem 0.5rem;
       text-align: center;
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       color: var(--ngxsmk-color-on-surface-variant, #71717a);
     }
   `,
 })
 export class CommandPalette {
-  private readonly searchService = inject(SearchService);
   private readonly registry = inject(ComponentRegistry);
   private readonly router = inject(Router);
 
@@ -310,7 +308,7 @@ export class CommandPalette {
   constructor() {
     effect(() => {
       if (this.isOpen()) {
-        this.recentSearches.set(this.searchService.getRecentSearches());
+        this.recentSearches.set(this.registry.getRecentSearches());
       }
     });
   }
@@ -320,7 +318,7 @@ export class CommandPalette {
     this.activeIndex.set(0);
     this.results.set([]);
     this.isOpen.set(true);
-    this.recentSearches.set(this.searchService.getRecentSearches());
+    this.recentSearches.set(this.registry.getRecentSearches());
     setTimeout(() => this.searchInput?.nativeElement?.focus(), 50);
   }
 
@@ -337,7 +335,7 @@ export class CommandPalette {
       return;
     }
 
-    const results = this.searchService.search({ query: value, limit: 12 });
+    const results = this.registry.searchWithScore({ query: value, limit: 12 });
     this.results.set(results);
   }
 
@@ -369,7 +367,7 @@ export class CommandPalette {
 
   selectResult(result: SearchResult): void {
     this.close();
-    this.searchService.addToFavorites(result.item.name);
+    this.registry.addToFavorites(result.item.name);
     const path = result.item.category.replace(/[^a-z0-9]+/g, '-');
     const fragment = result.item.name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
     this.router.navigate(['/showcase', path], { fragment });

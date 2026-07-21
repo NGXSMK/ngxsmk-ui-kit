@@ -57,7 +57,6 @@ export class NgxsmkHeatmapChart extends AbstractCanvasChart {
     const cols = Math.max(...data.map((r) => r.length), 1);
     const labelW = 48;
     const labelH = 22;
-    const plot = this.plot;
     const cellW = (this.W - labelW) / cols;
     const cellH = (this.H - labelH) / rows;
     const lo = this.minVal();

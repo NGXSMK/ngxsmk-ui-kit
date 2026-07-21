@@ -136,7 +136,7 @@ export interface PropDescriptor {
     }
     .ngxsmk-prop-panel__label {
       grid-area: label;
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       font-weight: 600;
       color: var(--ngxsmk-color-on-surface-variant, #71717a);
     }
@@ -146,7 +146,7 @@ export interface PropDescriptor {
     .ngxsmk-prop-panel__hint {
       grid-area: hint;
       margin: 0;
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       color: var(--ngxsmk-color-on-surface-variant, #71717a);
       opacity: 0.85;
     }
@@ -160,7 +160,7 @@ export interface PropDescriptor {
       background: var(--ngxsmk-color-surface, #fff);
       color: var(--ngxsmk-color-on-surface, #09090b);
       font-family: var(--ngxsmk-font-sans, system-ui), sans-serif;
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
     }
     .ngxsmk-prop-panel__input:focus-visible,
     .ngxsmk-prop-panel__select:focus-visible {

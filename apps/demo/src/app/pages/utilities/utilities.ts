@@ -10,7 +10,6 @@ import { NgxsmkCopyToClipboard } from '@ngxsmk/core/copy-to-clipboard';
 import { NgxsmkScrollLock } from '@ngxsmk/core/scroll-lock';
 import { NgxsmkResizeObserver } from '@ngxsmk/core/resize-observer';
 import { NgxsmkIntersectionObserver } from '@ngxsmk/core/intersection-observer';
-import { NgxsmkLayerProvider } from '@ngxsmk/core/layer-provider';
 import { NgxsmkMediaQuery } from '@ngxsmk/core/media-query';
 import { NgxsmkMediaTheme } from '@ngxsmk/core/media-theme';
 import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
@@ -29,7 +28,6 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
     NgxsmkScrollLock,
     NgxsmkResizeObserver,
     NgxsmkIntersectionObserver,
-    NgxsmkLayerProvider,
     NgxsmkMediaQuery,
     NgxsmkMediaTheme,
     NgxsmkLazyLoad,
@@ -246,25 +244,6 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
     </showcase-example>
 
     <showcase-example
-      [title]="'utilities.layerProvider' | translate"
-      [description]="'utilities.layerProviderDesc' | translate"
-      [code]="codeLayer"
-      [component]="NgxsmkLayerProvider"
-    >
-      <div class="ngxsmk-sc-surface" style="flex: 1 1 100%">
-        <div ngxsmkLayerProvider class="ngxsmk-layer-stage">
-          <div class="ngxsmk-layer-card ngxsmk-layer-card--back">
-            {{ 'utilities.baseLayer' | translate }}
-          </div>
-          <div class="ngxsmk-layer-card ngxsmk-layer-card--front">
-            {{ 'utilities.stackedLayer' | translate }}
-          </div>
-        </div>
-        <p class="ngxsmk-demo-hint">{{ 'utilities.layerHint' | translate }}</p>
-      </div>
-    </showcase-example>
-
-    <showcase-example
       [title]="'utilities.mediaQuery' | translate"
       [description]="'utilities.mediaQueryDesc' | translate"
       [code]="codeMediaQuery"
@@ -360,7 +339,7 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
 
     .ngxsmk-demo-hint {
       margin: 0.75rem 0 0;
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       color: var(--ngxsmk-color-on-surface-variant, #71717a);
     }
 
@@ -374,7 +353,7 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
       background: var(--ngxsmk-color-surface-variant, #f4f4f5);
       padding: 0.25rem 0.5rem;
       border-radius: 4px;
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
     }
 
     .ngxsmk-demo-ml {
@@ -408,7 +387,7 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
       border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
       border-radius: 4px;
       font-family: ui-monospace, monospace;
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       background: var(--ngxsmk-color-surface-variant, #f4f4f5);
     }
 
@@ -421,7 +400,7 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
       border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
       border-radius: var(--ngxsmk-radius-md, 0.5rem);
       background: var(--ngxsmk-color-surface-variant, #f4f4f5);
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
     }
 
     .ngxsmk-scroll-window {
@@ -437,7 +416,7 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
       align-items: center;
       justify-content: center;
       color: var(--ngxsmk-color-on-surface-variant, #71717a);
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
     }
 
     .ngxsmk-observe-target {
@@ -457,37 +436,6 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
       background: var(--ngxsmk-color-primary, #4f46e5);
       color: #fff;
       border-color: transparent;
-    }
-
-    .ngxsmk-layer-stage {
-      position: relative;
-      height: 140px;
-    }
-
-    .ngxsmk-layer-card {
-      position: absolute;
-      width: 160px;
-      height: 90px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: var(--ngxsmk-radius-md, 0.5rem);
-      font-size: 0.8125rem;
-      box-shadow: var(--ngxsmk-shadow-md, 0 4px 12px rgba(0, 0, 0, 0.12));
-    }
-
-    .ngxsmk-layer-card--back {
-      top: 0;
-      left: 0;
-      background: var(--ngxsmk-color-surface-variant, #f4f4f5);
-      z-index: 1;
-    }
-    .ngxsmk-layer-card--front {
-      top: 30px;
-      left: 60px;
-      background: var(--ngxsmk-color-primary, #4f46e5);
-      color: #fff;
-      z-index: 2;
     }
 
     .ngxsmk-theme-box {
@@ -538,7 +486,7 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
     .ngxsmk-lazy-card__body {
       display: flex;
       flex-direction: column;
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
     }
 
     .ngxsmk-lazy-card__body span {
@@ -551,7 +499,6 @@ export class UtilitiesPage {
   protected readonly NgxsmkKeyboardShortcut = NgxsmkKeyboardShortcut;
   protected readonly NgxsmkResizeObserver = NgxsmkResizeObserver;
   protected readonly NgxsmkIntersectionObserver = NgxsmkIntersectionObserver;
-  protected readonly NgxsmkLayerProvider = NgxsmkLayerProvider;
   protected readonly NgxsmkMediaQuery = NgxsmkMediaQuery;
   protected readonly NgxsmkMediaTheme = NgxsmkMediaTheme;
   protected readonly NgxsmkLazyLoad = NgxsmkLazyLoad;
@@ -625,10 +572,6 @@ export class UtilitiesPage {
 
   protected readonly codeIntersection = `<div ngxsmkIntersectionObserver (intersected)="onIntersect($event)">
   Watched element
-</div>`;
-
-  protected readonly codeLayer = `<div ngxsmkLayerProvider>
-  <div class="ngxsmk-overlay">Stacked content</div>
 </div>`;
 
   protected readonly codeMediaQuery = `<div ngxsmkMediaQuery="(min-width: 768px)"></div>

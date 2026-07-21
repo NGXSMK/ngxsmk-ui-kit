@@ -272,7 +272,7 @@ export class NgxsmkTopNavMegaMenu {
       margin-top: var(--ngxsmk-space-0-5);
     }
     .ngxsmk-top-nav-mega-menu-item__icon {
-      font-size: 1.25rem;
+      font-size: var(--ngxsmk-text-title-md-size);
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

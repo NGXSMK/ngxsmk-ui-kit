@@ -1,16 +1,19 @@
 import { DOCUMENT } from '@angular/common';
 import { Injectable, computed, effect, inject, signal } from '@angular/core';
-import { buildThemeCss } from './css';
+import { NgxThemeInjectorService } from './theme-injector.service';
+import { TokenOutputAdapter } from './token-adapter';
 import { ThemeConfig } from './types';
 
 export type ThemeMode = 'light' | 'dark' | 'system';
 
 const STORAGE_KEY = 'ngxsmk-theme-mode';
-const STYLE_ID = 'ngxsmk-theme';
 
 /**
  * Runtime theme control: dark-mode switching (class strategy) and dynamic
  * theme application by injecting generated token CSS into the document.
+ *
+ * CSS injection is delegated to {@link NgxThemeInjectorService} for
+ * consumers who only need token injection without dark-mode logic.
  *
  * SSR-safe: all DOM access goes through the injected document and degrades
  * gracefully when `window`/`matchMedia` are unavailable.
@@ -18,6 +21,7 @@ const STYLE_ID = 'ngxsmk-theme';
 @Injectable({ providedIn: 'root' })
 export class NgxsmkThemeService {
   private readonly document: Document;
+  private readonly injector = inject(NgxThemeInjectorService);
 
   /** User preference: explicit light/dark or follow the OS. */
   readonly mode: ReturnType<typeof signal<ThemeMode>>;
@@ -28,8 +32,6 @@ export class NgxsmkThemeService {
   readonly isDark: ReturnType<typeof computed<boolean>>;
 
   constructor() {
-    // Inject DOCUMENT first so that restoreMode() and matchSystemDark()
-    // can safely access it when the signals are initialised below.
     this.document = inject(DOCUMENT);
 
     this.mode = signal<ThemeMode>(this.restoreMode());
@@ -59,24 +61,24 @@ export class NgxsmkThemeService {
     this.setMode(this.isDark() ? 'light' : 'dark');
   }
 
-  /**
-   * Apply a theme at runtime. Generates token CSS from the config and swaps
-   * it into a dedicated `<style>` element, overriding the build-time theme.
-   */
-  applyTheme(config: ThemeConfig): void {
-    const head = this.document.head;
-    let style = this.document.getElementById(STYLE_ID) as HTMLStyleElement | null;
-    if (!style) {
-      style = this.document.createElement('style');
-      style.id = STYLE_ID;
-      head.appendChild(style);
-    }
-    style.textContent = buildThemeCss(config);
+  /** @see NgxThemeInjectorService.applyTheme */
+  applyTheme(config: ThemeConfig, adapter?: TokenOutputAdapter): void {
+    this.injector.applyTheme(config, adapter);
   }
 
-  /** Remove a runtime-applied theme, falling back to the build-time CSS. */
+  /** @see NgxThemeInjectorService.applyIonicTheme */
+  applyIonicTheme(config: ThemeConfig): void {
+    this.injector.applyIonicTheme(config);
+  }
+
+  /** @see NgxThemeInjectorService.clearTheme */
   clearTheme(): void {
-    this.document.getElementById(STYLE_ID)?.remove();
+    this.injector.clearTheme();
+  }
+
+  /** @see NgxThemeInjectorService.clearIonicTheme */
+  clearIonicTheme(): void {
+    this.injector.clearIonicTheme();
   }
 
   private restoreMode(): ThemeMode {

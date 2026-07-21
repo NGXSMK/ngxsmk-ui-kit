@@ -424,7 +424,7 @@ function parseJSX(code: string, offset = 0): ASTNode[] {
       left: 2px;
       background: var(--ngxsmk-color-primary);
       color: var(--ngxsmk-color-on-primary);
-      font-size: 0.625rem;
+      font-size: var(--ngxsmk-text-body-xs-size);
       font-family: var(--ngxsmk-font-mono, monospace);
       font-weight: 700;
       padding: 1px 4px;
@@ -808,7 +808,7 @@ type RadiusKey = keyof typeof RADII;
       <section class="pg-panel">
         <header class="panel-head">
           <ngxsmk-h-stack justify="space-between" align="center" style="width: 100%;">
-            <ngxsmk-heading level="h3" style="margin: 0; font-size: 1.25rem; font-weight: 700;">{{
+            <ngxsmk-heading level="h3" style="margin: 0; font-size: var(--ngxsmk-text-title-md-size); font-weight: 700;">{{
               'playground.title' | translate
             }}</ngxsmk-heading>
 
@@ -1621,7 +1621,7 @@ type RadiusKey = keyof typeof RADII;
       flex-direction: row;
       height: 100%;
       font-family: var(--ngxsmk-font-mono);
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       line-height: 1.6;
       position: relative;
     }
@@ -1635,7 +1635,7 @@ type RadiusKey = keyof typeof RADII;
       background: var(--ngxsmk-color-neutral-950);
       border-right: 1px solid var(--ngxsmk-color-neutral-800);
       overflow-y: hidden;
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
     }
 
     .line-numbers div {
@@ -1724,7 +1724,7 @@ type RadiusKey = keyof typeof RADII;
       border: none;
       background: transparent;
       font-family: inherit;
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       font-weight: 600;
       color: var(--ngxsmk-color-on-surface-variant);
       cursor: pointer;
@@ -1779,7 +1779,7 @@ type RadiusKey = keyof typeof RADII;
     }
 
     .control-label {
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       font-weight: 600;
       color: var(--ngxsmk-color-on-surface);
     }
@@ -1826,7 +1826,7 @@ type RadiusKey = keyof typeof RADII;
       background: transparent;
       color: var(--ngxsmk-color-on-surface);
       font-family: var(--ngxsmk-font-mono);
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       outline: none;
     }
 
@@ -1853,7 +1853,7 @@ type RadiusKey = keyof typeof RADII;
       background: transparent;
       border-radius: calc(var(--ngxsmk-radius-md) - 2px);
       font-family: inherit;
-      font-size: 0.725rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       font-weight: 600;
       color: var(--ngxsmk-color-on-surface-variant);
       cursor: pointer;
@@ -1881,7 +1881,7 @@ type RadiusKey = keyof typeof RADII;
       border-radius: var(--ngxsmk-radius-md);
       background: var(--ngxsmk-color-surface);
       color: var(--ngxsmk-color-on-surface);
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       outline: none;
       cursor: pointer;
       transition: border-color 0.2s ease;
@@ -1903,14 +1903,14 @@ type RadiusKey = keyof typeof RADII;
     }
 
     .empty-title {
-      font-size: 0.875rem;
+      font-size: var(--ngxsmk-text-body-md-size);
       font-weight: 600;
       color: var(--ngxsmk-color-on-surface);
       margin-bottom: var(--ngxsmk-space-1);
     }
 
     .empty-desc {
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       color: var(--ngxsmk-color-on-surface-variant);
     }
 
@@ -1942,7 +1942,7 @@ type RadiusKey = keyof typeof RADII;
       background: transparent;
       border-radius: var(--ngxsmk-radius-md);
       font-family: inherit;
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       font-weight: 600;
       color: var(--ngxsmk-color-on-surface-variant);
       cursor: pointer;
@@ -2075,7 +2075,7 @@ type RadiusKey = keyof typeof RADII;
       display: flex;
       align-items: center;
       justify-content: center;
-      z-index: var(--ngxsmk-z-modal, 2000);
+      z-index: var(--ngxsmk-z-modal, 1400);
       animation: fadeIn 0.2s ease-out;
     }
 
@@ -2100,7 +2100,7 @@ type RadiusKey = keyof typeof RADII;
     }
 
     .close-btn {
-      font-size: 1.5rem;
+      font-size: var(--ngxsmk-text-headline-sm-size);
       border: none;
       background: transparent;
       cursor: pointer;
@@ -2121,7 +2121,7 @@ type RadiusKey = keyof typeof RADII;
       background: transparent;
       border-radius: var(--ngxsmk-radius-md);
       font-family: inherit;
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       font-weight: 600;
       color: var(--ngxsmk-color-on-surface-variant);
       cursor: pointer;
@@ -2152,7 +2152,7 @@ type RadiusKey = keyof typeof RADII;
     .export-pre {
       margin: 0;
       font-family: var(--ngxsmk-font-mono);
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       line-height: 1.6;
       color: #34d399;
       white-space: pre-wrap;

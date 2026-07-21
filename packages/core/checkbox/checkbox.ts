@@ -2,14 +2,13 @@ import {
   ChangeDetectionStrategy,
   Component,
   booleanAttribute,
-  computed,
   forwardRef,
   input,
   model,
   output,
-  signal,
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { CvaBase } from '@ngxsmk/cdk/cva-base';
 
 /**
  * Checkbox built on a visually hidden native input, so forms integration and
@@ -32,7 +31,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
         [disabled]="isDisabled()"
         [indeterminate]="indeterminate()"
         (change)="onInteraction($event)"
-        (blur)="onTouched?.()"
+        (blur)="emitTouched()"
       />
       <span class="ngxsmk-checkbox__box" aria-hidden="true">
         @if (indeterminate()) {
@@ -147,35 +146,24 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NgxsmkCheckbox implements ControlValueAccessor {
+export class NgxsmkCheckbox extends CvaBase<boolean> {
   readonly checked = model(false);
   readonly indeterminate = input(false, { transform: booleanAttribute });
   readonly disabled = input(false, { transform: booleanAttribute });
   readonly changed = output<boolean>();
 
-  private readonly cvaDisabled = signal(false);
-  protected readonly isDisabled = computed(() => this.disabled() || this.cvaDisabled());
-
-  private onChange?: (value: boolean) => void;
-  protected onTouched?: () => void;
+  protected inputDisabled(): boolean {
+    return this.disabled();
+  }
 
   protected onInteraction(event: Event): void {
     const checked = (event.target as HTMLInputElement).checked;
     this.checked.set(checked);
-    this.onChange?.(checked);
+    this.emitChange(checked);
     this.changed.emit(checked);
   }
 
   writeValue(value: unknown): void {
     this.checked.set(!!value);
-  }
-  registerOnChange(fn: (value: boolean) => void): void {
-    this.onChange = fn;
-  }
-  registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
-  }
-  setDisabledState(disabled: boolean): void {
-    this.cvaDisabled.set(disabled);
   }
 }

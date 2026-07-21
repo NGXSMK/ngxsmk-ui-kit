@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, computed, effect, input } from '@an
 import {
   AbstractCanvasChart,
   ChartHover,
-  RGBA,
   SHARED_CHART_STYLES,
   niceTicks,
   rgba,

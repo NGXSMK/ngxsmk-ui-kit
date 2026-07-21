@@ -150,7 +150,7 @@ export interface PromptItem {
     }
 
     .ngxsmk-prompt-card__icon {
-      font-size: 0.9rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
     }
 
     .ngxsmk-prompt-card__cat {

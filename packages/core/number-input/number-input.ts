@@ -9,12 +9,12 @@ import {
   input,
   model,
   output,
-  signal,
   viewChild,
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ngxsmkUniqueId } from '@ngxsmk/core/util';
 import { NGXSMK_FORM_FIELD_CONTROL, NgxsmkFormFieldControl } from '@ngxsmk/core/form-field';
+import { CvaBase } from '@ngxsmk/cdk/cva-base';
 
 /**
  * Numeric field with − / + steppers and min/max/step constraints.
@@ -116,6 +116,9 @@ import { NGXSMK_FORM_FIELD_CONTROL, NgxsmkFormFieldControl } from '@ngxsmk/core/
       -moz-appearance: textfield;
       appearance: textfield;
     }
+    .ngxsmk-number-input__field::placeholder {
+      color: var(--ngxsmk-color-on-surface-variant);
+    }
     .ngxsmk-number-input__field::-webkit-outer-spin-button,
     .ngxsmk-number-input__field::-webkit-inner-spin-button {
       -webkit-appearance: none;
@@ -147,7 +150,7 @@ import { NGXSMK_FORM_FIELD_CONTROL, NgxsmkFormFieldControl } from '@ngxsmk/core/
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NgxsmkNumberInput implements ControlValueAccessor, NgxsmkFormFieldControl {
+export class NgxsmkNumberInput extends CvaBase<number> implements NgxsmkFormFieldControl {
   readonly value = model(0);
   readonly min = input(0);
   readonly max = input(100);
@@ -163,13 +166,12 @@ export class NgxsmkNumberInput implements ControlValueAccessor, NgxsmkFormFieldC
 
   private readonly fieldRef = viewChild<ElementRef<HTMLInputElement>>('field');
 
-  // CVA hooks
-  private onChange: (val: number) => void = () => {};
-  private onTouched: () => void = () => {};
-  private readonly formDisabled = signal(false);
-  protected readonly isDisabled = computed(() => this.disabled() || this.formDisabled());
+  protected inputDisabled(): boolean {
+    return this.disabled();
+  }
 
   constructor() {
+    super();
     // Keep the visible field in sync with the model, but never while the user
     // is actively editing (focused) so typing/backspacing isn't clobbered.
     effect(() => {
@@ -181,21 +183,9 @@ export class NgxsmkNumberInput implements ControlValueAccessor, NgxsmkFormFieldC
     });
   }
 
-  writeValue(val: any): void {
+  writeValue(val: number | string | null): void {
     const num = val === null || val === undefined ? 0 : Number(val);
     this.value.set(Number.isNaN(num) ? 0 : num);
-  }
-
-  registerOnChange(fn: (val: number) => void): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
-  }
-
-  setDisabledState(isDisabled: boolean): void {
-    this.formDisabled.set(isDisabled);
   }
 
   protected readonly clamp = computed(
@@ -216,7 +206,7 @@ export class NgxsmkNumberInput implements ControlValueAccessor, NgxsmkFormFieldC
     // Let the user type freely; clamp only on commit (blur/change/stepper).
     this.value.set(parsed);
     this.changed.emit(parsed);
-    this.onChange(parsed);
+    this.emitChange(parsed);
   }
 
   protected onCommit(event: Event): void {
@@ -227,7 +217,7 @@ export class NgxsmkNumberInput implements ControlValueAccessor, NgxsmkFormFieldC
   }
 
   protected onBlur(): void {
-    this.onTouched();
+    this.emitTouched();
   }
 
   private commit(next: number): void {
@@ -235,7 +225,7 @@ export class NgxsmkNumberInput implements ControlValueAccessor, NgxsmkFormFieldC
     const rounded = this.roundToStep(clamped);
     if (rounded !== this.value()) {
       this.value.set(rounded);
-      this.onChange(rounded);
+      this.emitChange(rounded);
     }
     this.changed.emit(rounded);
   }

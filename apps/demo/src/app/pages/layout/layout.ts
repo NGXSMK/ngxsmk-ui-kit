@@ -422,7 +422,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
       padding: 0.5rem 1rem;
       background: var(--ngxsmk-color-surface-variant);
       color: var(--ngxsmk-color-on-surface-variant);
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
     }
 
     .ngxsmk-demo-side {
@@ -430,7 +430,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
       padding: 1rem;
       background: var(--ngxsmk-color-surface-variant);
       color: var(--ngxsmk-color-on-surface-variant);
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
     }
 
     .ngxsmk-demo-content {
@@ -441,7 +441,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
       display: flex;
       flex-direction: column;
       gap: 0.25rem;
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       color: var(--ngxsmk-color-on-surface-variant);
     }
 

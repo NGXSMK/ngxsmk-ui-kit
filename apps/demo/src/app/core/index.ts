@@ -7,16 +7,10 @@ export {
   type ComponentMethod,
   type ComponentSignal,
   type ComponentExample,
+  type SearchResult,
+  type SearchSuggestion,
   CATEGORY_LABELS,
 } from './component-registry';
-export {
-  SearchService,
-  KeyboardShortcutsService,
-  type SearchResult,
-  type SearchOptions,
-  type SearchSuggestion,
-  type KeyboardShortcut,
-} from './search.service';
 export {
   ThemeContextService,
   ThemeDirectionService,

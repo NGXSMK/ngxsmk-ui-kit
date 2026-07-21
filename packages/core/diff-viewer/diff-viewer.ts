@@ -19,7 +19,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
     :host {
       display: block;
       font-family: var(--ngxsmk-font-mono);
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       border-radius: var(--ngxsmk-radius-md);
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;

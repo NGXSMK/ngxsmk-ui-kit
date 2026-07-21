@@ -12,7 +12,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
       padding: var(--ngxsmk-space-4);
       border-radius: var(--ngxsmk-radius-md);
       font-family: var(--ngxsmk-font-mono);
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       line-height: 1.6;
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;

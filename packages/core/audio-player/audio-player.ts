@@ -18,7 +18,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
       background: var(--ngxsmk-color-surface-variant);
       border-radius: var(--ngxsmk-radius-md);
       font-family: var(--ngxsmk-font-sans);
-      font-size: 0.8125rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
     }
     .ngxsmk-audio-player__bar {
       display: flex;

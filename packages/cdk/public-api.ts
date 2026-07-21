@@ -12,6 +12,8 @@ export * from '@ngxsmk/cdk/visually-hidden';
 export * from '@ngxsmk/cdk/intersection-observer';
 export * from '@ngxsmk/cdk/resize-observer';
 export * from '@ngxsmk/cdk/autofocus';
+export * from '@ngxsmk/cdk/cva-base';
+export * from '@ngxsmk/cdk/listbox-keyboard';
 
 // NOTE: '@ngxsmk/cdk/testing' is intentionally NOT re-exported here. It pulls in
 // axe-core (a CommonJS dependency) which would otherwise leak into every runtime

@@ -388,13 +388,13 @@ const SELECT_OPTIONS = [
       color: var(--ngxsmk-color-on-surface-variant, #71717a);
     }
     .pg-demo-unavailable-icon {
-      font-size: 2rem;
+      font-size: var(--ngxsmk-text-headline-lg-size);
       opacity: 0.3;
       display: block;
       margin-bottom: 0.5rem;
     }
     .pg-demo-unavailable-hint {
-      font-size: 0.75rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       opacity: 0.8;
     }
   `,
