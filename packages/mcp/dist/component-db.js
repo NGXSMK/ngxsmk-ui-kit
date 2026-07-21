@@ -466,30 +466,6 @@ exports.COMPONENT_DATABASE = [
         ]
     },
     {
-        "entryPoint": "@ngxsmk/core/base-typeahead",
-        "name": "NgxsmkBaseTypeaheadItem",
-        "kind": "Directive",
-        "selector": "[ngxsmkBaseTypeaheadItem]",
-        "description": "",
-        "inputs": [],
-        "outputs": []
-    },
-    {
-        "entryPoint": "@ngxsmk/core/base-typeahead",
-        "name": "NgxsmkBaseTypeahead",
-        "kind": "Component",
-        "selector": "ngxsmk-base-typeahead",
-        "description": "",
-        "inputs": [
-            {
-                "name": "items",
-                "type": "unknown[]",
-                "required": true
-            }
-        ],
-        "outputs": []
-    },
-    {
         "entryPoint": "@ngxsmk/core/blockquote",
         "name": "NgxsmkBlockquote",
         "kind": "Component",
@@ -1406,6 +1382,12 @@ exports.COMPONENT_DATABASE = [
                 "type": "string",
                 "required": false,
                 "default": "'k'"
+            },
+            {
+                "name": "placeholder",
+                "type": "string",
+                "required": false,
+                "default": "'Type a command or search...'"
             }
         ],
         "outputs": [
@@ -3371,6 +3353,12 @@ exports.COMPONENT_DATABASE = [
                 "required": false,
                 "twoWay": true,
                 "default": "[]"
+            },
+            {
+                "name": "placeholder",
+                "type": "string",
+                "required": false,
+                "default": "'Value'"
             }
         ],
         "outputs": []

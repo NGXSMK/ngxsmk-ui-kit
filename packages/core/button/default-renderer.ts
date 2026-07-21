@@ -41,22 +41,7 @@ export class DefaultButtonRenderer implements ButtonRenderer {
   }
 }
 
-/**
- * Ionic button renderer. Wraps `ion-button` instead of native `<button>`.
- *
- * Maps NGXSMK variants to Ionic's `fill`, `color`, and `shape` properties:
- * - `primary` → `fill="solid" color="primary"`
- * - `secondary` → `fill="solid" color="secondary"`
- * - `outline` → `fill="outline"`
- * - `ghost` → `fill="clear"`
- * - `destructive` → `fill="solid" color="danger"`
- * - `link` → `fill="clear"` with underline styling
- *
- * Size mapping:
- * - `sm` → `size="small"`
- * - `md` → (default, no attribute)
- * - `lg` → `size="large"`
- */
+/** Ionic adapter — wraps `ion-button` instead of native `<button>`. */
 export class IonicButtonRenderer implements ButtonRenderer {
   private readonly renderer = inject(Renderer2);
   private spinner: HTMLElement | null = null;

@@ -82,7 +82,7 @@ function findComponent(query) {
 }
 const server = new index_js_1.Server({
     name: 'ngxsmk-mcp-server',
-    version: '1.3.2',
+    version: '1.3.3',
 }, {
     capabilities: {
         tools: {},
