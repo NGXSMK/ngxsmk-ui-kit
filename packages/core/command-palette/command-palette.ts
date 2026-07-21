@@ -130,12 +130,23 @@ export interface CommandItem {
       animation: ngxsmk-scale-up 0.15s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
+    @media (prefers-reduced-motion: reduce) {
+      .ngxsmk-cmd-backdrop,
+      .ngxsmk-cmd-modal {
+        animation: none;
+      }
+    }
+
     .ngxsmk-cmd-search {
       display: flex;
       align-items: center;
       padding: var(--ngxsmk-space-4, 1rem);
       border-bottom: 1px solid var(--ngxsmk-color-outline);
       position: relative;
+      transition: border-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
+    }
+    .ngxsmk-cmd-search:focus-within {
+      border-bottom-color: var(--ngxsmk-color-ring);
     }
 
     .ngxsmk-cmd-search-icon {

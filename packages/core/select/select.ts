@@ -184,6 +184,9 @@ export interface NgxsmkSelectOption {
         border-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
         box-shadow var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
+    .ngxsmk-select__trigger:hover:not(:disabled):not([aria-invalid='true']) {
+      border-color: var(--ngxsmk-color-ring);
+    }
     .ngxsmk-select__trigger:focus-visible {
       outline: none;
       border-color: var(--ngxsmk-color-ring);

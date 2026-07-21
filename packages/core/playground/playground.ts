@@ -184,11 +184,11 @@ export type ViewportSize = 'full' | 'mobile' | 'tablet' | 'desktop';
       font-weight: 600;
       font-size: var(--ngxsmk-text-label-sm-size, 0.875rem);
       transition:
-        color,
-        background-color,
-        border-color,
-        box-shadow,
-        transform,
+        color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
+        background-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
+        border-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
+        box-shadow var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
+        transform var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
         opacity var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
     .ngxsmk-playground__btn:hover {
@@ -236,10 +236,10 @@ export type ViewportSize = 'full' | 'mobile' | 'tablet' | 'desktop';
       border-radius: var(--ngxsmk-radius-lg, 8px);
       box-shadow: var(--ngxsmk-shadow-md);
       transition:
-        width,
-        height,
-        transform,
-        opacity,
+        width var(--ngxsmk-duration-slow) var(--ngxsmk-ease-in-out),
+        height var(--ngxsmk-duration-slow) var(--ngxsmk-ease-in-out),
+        transform var(--ngxsmk-duration-slow) var(--ngxsmk-ease-in-out),
+        opacity var(--ngxsmk-duration-slow) var(--ngxsmk-ease-in-out),
         box-shadow var(--ngxsmk-duration-slow) var(--ngxsmk-ease-in-out);
       width: 100%;
       height: 100%;

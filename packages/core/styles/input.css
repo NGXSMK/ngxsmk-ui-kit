@@ -27,6 +27,11 @@ textarea[ngxsmkInput] {
   resize: vertical;
 }
 
+input[ngxsmkInput]:hover:not(:disabled):not([aria-invalid='true']),
+textarea[ngxsmkInput]:hover:not(:disabled):not([aria-invalid='true']) {
+  border-color: var(--ngxsmk-color-ring);
+}
+
 input[ngxsmkInput]:focus,
 textarea[ngxsmkInput]:focus {
   border-color: var(--ngxsmk-color-ring);
@@ -51,6 +56,7 @@ input[ngxsmkInput]:disabled,
 textarea[ngxsmkInput]:disabled {
   opacity: var(--ngxsmk-opacity-disabled);
   cursor: not-allowed;
+  background: var(--ngxsmk-color-surface-variant);
 }
 
 input[ngxsmkInput]::placeholder,

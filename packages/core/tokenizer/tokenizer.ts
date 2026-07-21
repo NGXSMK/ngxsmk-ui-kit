@@ -46,6 +46,16 @@
       background: var(--ngxsmk-color-surface);
       cursor: text;
       width: 100%;
+      transition:
+        border-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
+        box-shadow var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
+    }
+    .ngxsmk-tokenizer__wrap:hover {
+      border-color: var(--ngxsmk-color-ring);
+    }
+    .ngxsmk-tokenizer__wrap:focus-within {
+      border-color: var(--ngxsmk-color-ring);
+      box-shadow: var(--ngxsmk-focus-ring);
     }
     .ngxsmk-tokenizer__token {
       display: inline-flex;
@@ -69,6 +79,12 @@
     }
     .ngxsmk-tokenizer__remove:hover {
       opacity: 1;
+    }
+    .ngxsmk-tokenizer__remove:focus-visible {
+      outline: none;
+      opacity: 1;
+      border-radius: var(--ngxsmk-radius-full);
+      box-shadow: var(--ngxsmk-focus-ring);
     }
     .ngxsmk-tokenizer__input {
       flex: 1;

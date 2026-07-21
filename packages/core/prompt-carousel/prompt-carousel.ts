@@ -103,9 +103,14 @@ export interface PromptItem {
       position: relative;
       overflow: hidden;
       transition:
-        transform 0.2s cubic-bezier(0.2, 0, 0, 1),
-        box-shadow 0.2s cubic-bezier(0.2, 0, 0, 1),
-        border-color 0.2s ease;
+        transform var(--ngxsmk-duration-normal) var(--ngxsmk-ease-out),
+        box-shadow var(--ngxsmk-duration-normal) var(--ngxsmk-ease-out),
+        border-color var(--ngxsmk-duration-normal) var(--ngxsmk-ease-out);
+    }
+    .ngxsmk-prompt-card:focus-visible {
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring);
+      border-color: var(--ngxsmk-color-ring);
     }
 
     .ngxsmk-prompt-card::before {

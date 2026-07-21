@@ -36,6 +36,10 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
       cursor: pointer;
       transition: opacity var(--ngxsmk-duration-fast);
     }
+    .ngxsmk-image-viewer__img:focus-visible {
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring);
+    }
     .ngxsmk-image-viewer__img:hover {
       opacity: 0.9;
     }

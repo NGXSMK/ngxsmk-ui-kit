@@ -176,7 +176,7 @@ export class NgxsmkCarouselSlide {
       cursor: pointer;
       padding: 0;
       transition:
-        width,
+        width var(--ngxsmk-motion-duration) var(--ngxsmk-motion-ease),
         background-color var(--ngxsmk-motion-duration) var(--ngxsmk-motion-ease);
     }
     .ngxsmk-carousel__indicators button.active {
