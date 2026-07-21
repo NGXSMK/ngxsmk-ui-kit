@@ -48,11 +48,11 @@ export interface SegmentedOption {
       font-weight: 500;
       cursor: pointer;
       transition:
-        color,
-        background-color,
-        border-color,
-        box-shadow,
-        transform,
+        color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
+        background-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
+        border-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
+        box-shadow var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
+        transform var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
         opacity var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
     .ngxsmk-segmented-control__item[aria-checked='true'] {
@@ -62,6 +62,12 @@ export interface SegmentedOption {
     }
     .ngxsmk-segmented-control__item:hover:not([disabled]) {
       color: var(--ngxsmk-color-on-surface);
+    }
+    .ngxsmk-segmented-control__item:focus-visible {
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring);
+      position: relative;
+      z-index: 1;
     }
     .ngxsmk-segmented-control__item[disabled] {
       opacity: var(--ngxsmk-opacity-disabled);

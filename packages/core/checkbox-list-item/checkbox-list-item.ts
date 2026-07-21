@@ -102,11 +102,7 @@ export class NgxsmkCheckboxListItem {}
       opacity: 0;
       transform: scale(0.6);
       transition:
-        color,
-        background-color,
-        border-color,
-        box-shadow,
-        transform,
+        transform var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
         opacity var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
     :host([data-checked]) .ngxsmk-checkbox-list-item__box {

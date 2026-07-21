@@ -110,7 +110,12 @@ import { ListboxKeyboard } from '@ngxsmk/cdk/listbox-keyboard';
       transition: border-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
     .ngxsmk-multi-selector__trigger:hover {
-      border-color: var(--ngxsmk-color-outline);
+      border-color: var(--ngxsmk-color-ring);
+    }
+    .ngxsmk-multi-selector__trigger:focus-visible {
+      outline: none;
+      border-color: var(--ngxsmk-color-ring);
+      box-shadow: var(--ngxsmk-focus-ring);
     }
     :host([data-disabled]) .ngxsmk-multi-selector__trigger {
       opacity: var(--ngxsmk-opacity-disabled);

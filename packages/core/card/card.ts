@@ -40,6 +40,7 @@ import {
     }
 
     :host([data-interactive]) {
+      cursor: pointer;
       transition:
         box-shadow var(--ngxsmk-duration-normal) var(--ngxsmk-ease-out),
         border-color var(--ngxsmk-duration-normal) var(--ngxsmk-ease-out);
@@ -47,6 +48,11 @@ import {
     :host([data-interactive]:hover) {
       box-shadow: var(--ngxsmk-shadow-md);
       border-color: var(--ngxsmk-color-outline-strong);
+    }
+    :host([data-interactive]:focus-visible) {
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring);
+      border-color: var(--ngxsmk-color-ring);
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

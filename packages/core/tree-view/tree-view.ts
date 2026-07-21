@@ -106,6 +106,10 @@ export interface NgxsmkTreeNode<T = unknown> {
       opacity: var(--ngxsmk-opacity-disabled);
       cursor: not-allowed;
     }
+    .ngxsmk-tree-node__content:focus-visible {
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring);
+    }
 
     .ngxsmk-tree-node__toggle {
       background: transparent;

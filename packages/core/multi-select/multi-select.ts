@@ -119,13 +119,19 @@ import { ListboxKeyboard } from '@ngxsmk/cdk/listbox-keyboard';
       transition: border-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
 
-    .ngxsmk-multi-select__trigger:hover {
-      border-color: var(--ngxsmk-color-outline);
+    .ngxsmk-multi-select__trigger:hover:not(.ngxsmk-multi-select__trigger--disabled) {
+      border-color: var(--ngxsmk-color-ring);
+    }
+
+    .ngxsmk-multi-select__trigger:focus-visible {
+      outline: none;
+      border-color: var(--ngxsmk-color-ring);
+      box-shadow: var(--ngxsmk-focus-ring);
     }
 
     .ngxsmk-multi-select__trigger--open {
       border-color: var(--ngxsmk-color-primary);
-      box-shadow: 0 0 0 2px var(--ngxsmk-color-primary-container);
+      box-shadow: var(--ngxsmk-focus-ring);
     }
 
     .ngxsmk-multi-select__trigger--disabled {
