@@ -203,9 +203,21 @@
     "type": {
       "added": "जोड़ा गया",
       "fixed": "सुधारा गया",
-      "changed": "बदला गया"
+      "changed": "बदला गया",
+      "removed": "हटाया गया"
     },
     "release": {
+      "v133": {
+        "summary": "वास्तुकला गहराई: CVA बेस क्लास, listbox कीबोर्ड नेविगेशन और मृत कोड की सफाई।",
+        "changes": {
+          "0": "@ngxsmk/cdk/cva-base में CvaBase<T> अमूर्त क्लास निकाली, 8 फॉर्म कंपोनेंट्स में ~80 पंक्तियों के दोहराए गए ControlValueAccessor बॉयलरप्लेट को समाप्त किया।",
+          "1": "@ngxsmk/cdk/listbox-keyboard में ListboxKeyboard क्लास निकाली, combobox, autocomplete, multi-select और multi-selector में तीर कुंजियाँ, Home/End, Enter और Escape नेविगेशन को एकीकृत किया।",
+          "2": "SearchService को ComponentRegistry में मिलाया, डबल MiniSearch इंडेक्स समाप्त किया। अप्रयुक्त KeyboardShortcutsService हटाया।",
+          "3": "CSS इंजेक्शन के लिए NgxThemeInjectorService निकाला, NgxsmkThemeService से डार्क मोड लॉजिक को अलग किया।",
+          "4": "कंपोनेंट टोकन डिफ़ॉल्ट मान css.ts staticVars() से COMPONENT_TOKEN_DEFAULTS रजिस्ट्री में निकाले।",
+          "5": "6 अनाथ रेंडरर टोकन और कार्यान्वयन (popover, tooltip, dialog, sheet, select, tabs), CDK overlay रणनीति और अप्रयुक्त base-typeahead स्केलेटन हटाए।"
+        }
+      },
       "v132": {
         "summary": "AI-अनुकूल टूलिंग: MCP कंपोनेंट डेटाबेस, llms.txt और एजेंट दस्तावेज़।",
         "changes": {

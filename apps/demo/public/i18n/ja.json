@@ -203,9 +203,21 @@
     "type": {
       "added": "追加",
       "fixed": "修正",
-      "changed": "変更"
+      "changed": "変更",
+      "removed": "削除"
     },
     "release": {
+      "v133": {
+        "summary": "アーキテクチャの深化：CVA ベースクラス、listbox キーボードナビゲーション、デッドコードの整理。",
+        "changes": {
+          "0": "@ngxsmk/cdk/cva-base に CvaBase<T> 抽象クラスを抽出し、8つのフォームコンポーネントの ControlValueAccessor ボイラープレート約80行を削除。",
+          "1": "@ngxsmk/cdk/listbox-keyboard に ListboxKeyboard クラスを抽出し、combobox、autocomplete、multi-select、multi-selector の矢印キー、Home/End、Enter、Escape ナビゲーションを統一。",
+          "2": "SearchService を ComponentRegistry に統合し、重複した MiniSearch インデックスを削除。未使用の KeyboardShortcutsService を削除。",
+          "3": "CSS 注入用の NgxThemeInjectorService を抽出し、NgxsmkThemeService からダークモードロジックを分離。",
+          "4": "コンポーネントトークンのデフォルト値を css.ts staticVars() から COMPONENT_TOKEN_DEFAULTS レジストリに抽出。",
+          "5": "6つの孤立したレンダラートークンと実装（popover、tooltip、dialog、sheet、select、tabs）、CDK overlay 戦略、未使用の base-typeahead スケルトンを削除。"
+        }
+      },
       "v132": {
         "summary": "AIフレンドリーなツール群：MCPコンポーネントデータベース、llms.txt、エージェント向けドキュメント。",
         "changes": {
