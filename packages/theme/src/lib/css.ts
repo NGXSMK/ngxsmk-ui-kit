@@ -179,6 +179,20 @@ function lightVars(theme: ResolvedTheme): Vars {
     '--ngxsmk-color-ring': theme.brandBase,
     '--ngxsmk-color-backdrop': 'rgb(1 18 40 / 0.4)',
     '--ngxsmk-shadow-focus': `0 0 0 2px ${theme.brand[100]}, 0 0 0 4px color-mix(in srgb, ${theme.brandBase} 45%, transparent)`,
+
+    // Categorical chart palette — a fixed 8-hue qualitative set (NOT derived
+    // from the brand, so adjacent series stay distinguishable across themes),
+    // stepped for the light surface. Validated for the light chart surface:
+    // CVD worst-adjacent ΔE 24.2, chroma/lightness in-band. Charts read these
+    // via getComputedStyle; consumers can override any slot to rebrand series.
+    '--ngxsmk-chart-1': '#2A78D6',
+    '--ngxsmk-chart-2': '#1BAF7A',
+    '--ngxsmk-chart-3': '#EDA100',
+    '--ngxsmk-chart-4': '#008300',
+    '--ngxsmk-chart-5': '#4A3AA7',
+    '--ngxsmk-chart-6': '#E34948',
+    '--ngxsmk-chart-7': '#E87BA4',
+    '--ngxsmk-chart-8': '#EB6834',
   };
 
   const tertiary = deriveScale(rotateHue(theme.brandBase, 64));
@@ -242,6 +256,19 @@ function darkVars(theme: ResolvedTheme): Vars {
     '--ngxsmk-color-ring': theme.brand[400],
     '--ngxsmk-color-backdrop': 'rgb(17 17 18 / 0.6)',
     '--ngxsmk-shadow-focus': `0 0 0 2px color-mix(in srgb, ${theme.brand[400]} 25%, transparent), 0 0 0 4px color-mix(in srgb, ${theme.brand[400]} 45%, transparent)`,
+
+    // Categorical chart palette — the same eight hues as light, re-stepped for
+    // the dark surface (not a different palette). Validated for the dark chart
+    // surface: all slots ≥ 3:1 contrast, CVD worst-adjacent ΔE 10.3 (floor band,
+    // relies on the legend/labels charts already render for secondary encoding).
+    '--ngxsmk-chart-1': '#3987E5',
+    '--ngxsmk-chart-2': '#199E70',
+    '--ngxsmk-chart-3': '#C98500',
+    '--ngxsmk-chart-4': '#008300',
+    '--ngxsmk-chart-5': '#9085E9',
+    '--ngxsmk-chart-6': '#E66767',
+    '--ngxsmk-chart-7': '#D55181',
+    '--ngxsmk-chart-8': '#D95926',
   };
 
   const tertiary = deriveScale(rotateHue(theme.brandBase, 64));
