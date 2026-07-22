@@ -1,4 +1,4 @@
-import { Component, signal, computed, ElementRef, ViewChild, inject } from '@angular/core';
+import { Component, signal, computed, ElementRef, ViewChild, inject, effect } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterOutlet, RouterLink, RouterLinkActive, Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
@@ -157,6 +157,8 @@ interface CategoryGroup {
       .ngxsmk-sc-sidebar__sections {
         flex: 1;
         overflow-y: auto;
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
         padding: var(--ngxsmk-space-3, 0.75rem);
         display: flex;
         flex-direction: column;
@@ -224,6 +226,9 @@ interface CategoryGroup {
       .ngxsmk-sc-content {
         flex: 1;
         overflow-y: auto;
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
         padding: var(--ngxsmk-space-8, 2rem);
         background: var(--ngxsmk-color-background, #fafafa);
       }
@@ -295,8 +300,29 @@ export class ShowcaseLayout {
 
   constructor() {
     this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
-      if (this.contentEl) {
-        this.contentEl.nativeElement.scrollTop = 0;
+      setTimeout(() => {
+        const tree = this.router.parseUrl(this.router.url);
+        if (tree.fragment) {
+          const el = document.getElementById(tree.fragment);
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            return;
+          }
+        }
+        if (this.contentEl) {
+          this.contentEl.nativeElement.scrollTop = 0;
+        }
+        window.scrollTo(0, 0);
+      }, 0);
+    });
+
+    effect(() => {
+      if (typeof document !== 'undefined') {
+        if (this.mobileOpen()) {
+          document.body.style.overflow = 'hidden';
+        } else {
+          document.body.style.overflow = '';
+        }
       }
     });
   }

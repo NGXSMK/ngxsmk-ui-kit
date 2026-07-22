@@ -578,6 +578,33 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "outputs": []
   },
   {
+    "entryPoint": "@ngxsmk/core/calendar-heatmap",
+    "name": "NgxsmkCalendarHeatmap",
+    "kind": "Component",
+    "selector": "ngxsmk-calendar-heatmap",
+    "description": "GitHub-style contribution calendar heatmap component for visualizing daily metrics.",
+    "inputs": [
+      {
+        "name": "values",
+        "type": "HeatmapValue[]",
+        "required": false,
+        "default": "[]"
+      },
+      {
+        "name": "startDate",
+        "type": "string",
+        "required": false,
+        "default": "''"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "cellClick",
+        "type": "HeatmapValue"
+      }
+    ]
+  },
+  {
     "entryPoint": "@ngxsmk/core/card",
     "name": "NgxsmkCard",
     "kind": "Component",
@@ -1696,6 +1723,32 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "outputs": []
   },
   {
+    "entryPoint": "@ngxsmk/core/dock",
+    "name": "NgxsmkDock",
+    "kind": "Component",
+    "selector": "ngxsmk-dock",
+    "description": "Floating macOS-style application dock with icon tooltips and magnification hover effects.",
+    "inputs": [
+      {
+        "name": "items",
+        "type": "DockItem[]",
+        "required": true
+      },
+      {
+        "name": "position",
+        "type": "DockPosition",
+        "required": false,
+        "default": "'bottom'"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "itemClick",
+        "type": "DockItem"
+      }
+    ]
+  },
+  {
     "entryPoint": "@ngxsmk/core/dropdown-menu",
     "name": "NgxsmkDropdownMenu",
     "kind": "Component",
@@ -2171,9 +2224,178 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "name": "NgxsmkInputGroup",
     "kind": "Component",
     "selector": "ngxsmk-input-group",
-    "description": "Wraps a native control with text add-ons that sit flush against it, rendered as a single connected field.",
-    "inputs": [],
-    "outputs": []
+    "description": "",
+    "inputs": [
+      {
+        "name": "type",
+        "type": "InputGroupInputType",
+        "required": false,
+        "default": "'text'"
+      },
+      {
+        "name": "variant",
+        "type": "InputGroupVariant",
+        "required": false,
+        "default": "'outlined'"
+      },
+      {
+        "name": "size",
+        "type": "InputGroupSize",
+        "required": false,
+        "default": "'md'"
+      },
+      {
+        "name": "radius",
+        "type": "InputGroupRadius",
+        "required": false,
+        "default": "'md'"
+      },
+      {
+        "name": "density",
+        "type": "InputGroupDensity",
+        "required": false,
+        "default": "'comfortable'"
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "required": false,
+        "default": "''"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": "''"
+      },
+      {
+        "name": "hint",
+        "type": "string",
+        "required": false,
+        "default": "''"
+      },
+      {
+        "name": "required",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "readonly",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "maxLength",
+        "type": "number | undefined",
+        "required": false,
+        "default": "undefined"
+      },
+      {
+        "name": "minLength",
+        "type": "number | undefined",
+        "required": false,
+        "default": "undefined"
+      },
+      {
+        "name": "showClear",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "showCounter",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "fullWidth",
+        "type": "boolean",
+        "required": false,
+        "default": "true"
+      },
+      {
+        "name": "loading",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "floatingLabel",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "addons",
+        "type": "InputGroupAddon[]",
+        "required": false,
+        "default": "[]"
+      },
+      {
+        "name": "inputType",
+        "type": "InputGroupInputType | 'password'",
+        "required": false,
+        "default": "'text'"
+      },
+      {
+        "name": "value",
+        "type": "string",
+        "required": false,
+        "twoWay": true,
+        "default": "''"
+      },
+      {
+        "name": "id",
+        "type": "unknown",
+        "required": false,
+        "default": "ngxsmkUniqueId('ngxsmk-input-group')"
+      },
+      {
+        "name": "ariaInvalid",
+        "type": "boolean",
+        "required": false,
+        "twoWay": true,
+        "default": "false"
+      },
+      {
+        "name": "ariaDescribedby",
+        "type": "string | null",
+        "required": false,
+        "twoWay": true,
+        "default": "null"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "focused",
+        "type": "void"
+      },
+      {
+        "name": "blurred",
+        "type": "void"
+      },
+      {
+        "name": "cleared",
+        "type": "void"
+      },
+      {
+        "name": "valueChanged",
+        "type": "string"
+      },
+      {
+        "name": "validationChanged",
+        "type": "{ status: ValidationStatus; message: string }"
+      }
+    ]
   },
   {
     "entryPoint": "@ngxsmk/core/input-group-text",
@@ -3592,16 +3814,164 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
       {
         "name": "events",
         "type": "SchedulerEvent[]",
-        "required": true
+        "required": true,
+        "twoWay": true
       },
       {
-        "name": "weekStart",
-        "type": "unknown",
+        "name": "view",
+        "type": "ViewType",
+        "required": false,
+        "default": "'timeGridWeek'"
+      },
+      {
+        "name": "date",
+        "type": "Date",
         "required": false,
         "default": "new Date()"
+      },
+      {
+        "name": "resources",
+        "type": "SchedulerResource[]",
+        "required": false,
+        "default": "[]"
+      },
+      {
+        "name": "slotDuration",
+        "type": "number",
+        "required": false,
+        "default": "30"
+      },
+      {
+        "name": "snapDuration",
+        "type": "number",
+        "required": false,
+        "default": "15"
+      },
+      {
+        "name": "visibleHours",
+        "type": "[number, number]",
+        "required": false,
+        "default": "[0, 24]"
+      },
+      {
+        "name": "firstDayOfWeek",
+        "type": "number",
+        "required": false,
+        "default": "1"
+      },
+      {
+        "name": "locale",
+        "type": "string",
+        "required": false,
+        "default": "'en-US'"
+      },
+      {
+        "name": "rtl",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "density",
+        "type": "Density",
+        "required": false,
+        "default": "'comfortable'"
+      },
+      {
+        "name": "showAllDay",
+        "type": "boolean",
+        "required": false,
+        "default": "true"
+      },
+      {
+        "name": "showWeekends",
+        "type": "boolean",
+        "required": false,
+        "default": "true"
+      },
+      {
+        "name": "showCurrentTime",
+        "type": "boolean",
+        "required": false,
+        "default": "true"
+      },
+      {
+        "name": "editable",
+        "type": "boolean",
+        "required": false,
+        "default": "true"
+      },
+      {
+        "name": "selectable",
+        "type": "boolean",
+        "required": false,
+        "default": "true"
+      },
+      {
+        "name": "draggable",
+        "type": "boolean",
+        "required": false,
+        "default": "true"
+      },
+      {
+        "name": "resizable",
+        "type": "boolean",
+        "required": false,
+        "default": "true"
+      },
+      {
+        "name": "plugins",
+        "type": "SchedulerPlugin[]",
+        "required": false,
+        "default": "[]"
       }
     ],
-    "outputs": []
+    "outputs": [
+      {
+        "name": "eventClick",
+        "type": "SchedulerEvent"
+      },
+      {
+        "name": "eventDoubleClick",
+        "type": "SchedulerEvent"
+      },
+      {
+        "name": "eventContextMenu",
+        "type": "{\n    event: SchedulerEvent;\n    position: { x: number; y: number };\n  }"
+      },
+      {
+        "name": "eventDrop",
+        "type": "SchedulerMove"
+      },
+      {
+        "name": "eventResize",
+        "type": "SchedulerResize"
+      },
+      {
+        "name": "eventCreate",
+        "type": "SchedulerCreate"
+      },
+      {
+        "name": "viewChange",
+        "type": "{ view: ViewType; start: Date; end: Date }"
+      },
+      {
+        "name": "dateChange",
+        "type": "Date"
+      },
+      {
+        "name": "prevWeek",
+        "type": "void"
+      },
+      {
+        "name": "nextWeek",
+        "type": "void"
+      },
+      {
+        "name": "todayClick",
+        "type": "void"
+      }
+    ]
   },
   {
     "entryPoint": "@ngxsmk/core/scroll-lock",
@@ -3882,6 +4252,78 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "outputs": []
   },
   {
+    "entryPoint": "@ngxsmk/core/signature-pad",
+    "name": "NgxsmkSignaturePad",
+    "kind": "Component",
+    "selector": "ngxsmk-signature-pad",
+    "description": "Digital signature canvas component with smooth stroke rendering and export capabilities.",
+    "inputs": [
+      {
+        "name": "width",
+        "type": "number",
+        "required": false,
+        "default": "400"
+      },
+      {
+        "name": "height",
+        "type": "number",
+        "required": false,
+        "default": "180"
+      },
+      {
+        "name": "penColor",
+        "type": "string",
+        "required": false,
+        "default": "'#09090b'"
+      },
+      {
+        "name": "penWidth",
+        "type": "number",
+        "required": false,
+        "default": "2"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "value",
+        "type": "string",
+        "required": false,
+        "twoWay": true,
+        "default": "''"
+      },
+      {
+        "name": "id",
+        "type": "unknown",
+        "required": false,
+        "default": "ngxsmkUniqueId('ngxsmk-signature-pad')"
+      },
+      {
+        "name": "ariaInvalid",
+        "type": "boolean",
+        "required": false,
+        "twoWay": true,
+        "default": "false"
+      },
+      {
+        "name": "ariaDescribedby",
+        "type": "string | null",
+        "required": false,
+        "twoWay": true,
+        "default": "null"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "cleared",
+        "type": "void"
+      }
+    ]
+  },
+  {
     "entryPoint": "@ngxsmk/core/skeleton",
     "name": "NgxsmkSkeleton",
     "kind": "Component",
@@ -4052,18 +4494,81 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "description": "",
     "inputs": [
       {
-        "name": "data",
-        "type": "string[][]",
-        "required": true
-      },
-      {
         "name": "columns",
-        "type": "string[]",
+        "type": "ColumnDef[]",
         "required": false,
         "default": "[]"
+      },
+      {
+        "name": "rows",
+        "type": "RowDef[]",
+        "required": false,
+        "default": "[]"
+      },
+      {
+        "name": "density",
+        "type": "SpreadsheetDensity",
+        "required": false,
+        "default": "'comfortable'"
+      },
+      {
+        "name": "editable",
+        "type": "boolean",
+        "required": false,
+        "default": "true"
+      },
+      {
+        "name": "multiSort",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "selectedCells",
+        "type": "CellRange | null",
+        "required": false,
+        "twoWay": true,
+        "default": "null"
       }
     ],
-    "outputs": []
+    "outputs": [
+      {
+        "name": "cellClick",
+        "type": "{ row: number; col: number; value: CellValue }"
+      },
+      {
+        "name": "cellDoubleClick",
+        "type": "{ row: number; col: number; value: CellValue }"
+      },
+      {
+        "name": "cellEdit",
+        "type": "{\n    row: number;\n    col: string;\n    oldValue: CellValue;\n    newValue: CellValue;\n  }"
+      },
+      {
+        "name": "selectionChange",
+        "type": "CellRange | null"
+      },
+      {
+        "name": "sortChange",
+        "type": "SortCriterion[]"
+      },
+      {
+        "name": "filterChange",
+        "type": "FilterCriterion[]"
+      },
+      {
+        "name": "rowInsert",
+        "type": "{ count: number; index: number }"
+      },
+      {
+        "name": "rowDelete",
+        "type": "{ indices: number[]; rows: RowDef[] }"
+      },
+      {
+        "name": "scrolled",
+        "type": "{ scrollTop: number; scrollLeft: number }"
+      }
+    ]
   },
   {
     "entryPoint": "@ngxsmk/core/stack",
@@ -4865,6 +5370,84 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "outputs": []
   },
   {
+    "entryPoint": "@ngxsmk/core/transfer",
+    "name": "NgxsmkTransfer",
+    "kind": "Component",
+    "selector": "ngxsmk-transfer",
+    "description": "Dual listbox component for moving items between two container columns.",
+    "inputs": [
+      {
+        "name": "dataSource",
+        "type": "TransferItem[]",
+        "required": false,
+        "default": "[]"
+      },
+      {
+        "name": "titles",
+        "type": "[string, string]",
+        "required": false,
+        "default": "['Source', 'Target']"
+      },
+      {
+        "name": "showSearch",
+        "type": "boolean",
+        "required": false,
+        "default": "true"
+      },
+      {
+        "name": "searchPlaceholder",
+        "type": "string",
+        "required": false,
+        "default": "'Search...'"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "size",
+        "type": "'sm' | 'md' | 'lg'",
+        "required": false,
+        "default": "'md'"
+      },
+      {
+        "name": "targetKeys",
+        "type": "string[]",
+        "required": false,
+        "twoWay": true,
+        "default": "[]"
+      },
+      {
+        "name": "id",
+        "type": "unknown",
+        "required": false,
+        "default": "ngxsmkUniqueId('ngxsmk-transfer')"
+      },
+      {
+        "name": "ariaInvalid",
+        "type": "boolean",
+        "required": false,
+        "twoWay": true,
+        "default": "false"
+      },
+      {
+        "name": "ariaDescribedby",
+        "type": "string | null",
+        "required": false,
+        "twoWay": true,
+        "default": "null"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "transferChange",
+        "type": "{\n    targetKeys: string[];\n    direction: TransferDirection;\n    moveKeys: string[];\n  }"
+      }
+    ]
+  },
+  {
     "entryPoint": "@ngxsmk/core/tree-view",
     "name": "NgxsmkTreeNodeComponent",
     "kind": "Component",
@@ -4979,6 +5562,34 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
         "required": false,
         "twoWay": true,
         "default": "[]"
+      }
+    ],
+    "outputs": []
+  },
+  {
+    "entryPoint": "@ngxsmk/core/virtual-scroll",
+    "name": "NgxsmkVirtualScroll",
+    "kind": "Component",
+    "selector": "ngxsmk-virtual-scroll",
+    "description": "Signals-native virtual scroll container for rendering massive datasets with 60 FPS performance.",
+    "inputs": [
+      {
+        "name": "items",
+        "type": "T[]",
+        "required": false,
+        "default": "[]"
+      },
+      {
+        "name": "itemHeight",
+        "type": "number",
+        "required": false,
+        "default": "40"
+      },
+      {
+        "name": "buffer",
+        "type": "number",
+        "required": false,
+        "default": "5"
       }
     ],
     "outputs": []

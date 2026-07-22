@@ -420,11 +420,13 @@ interface Option {
         [code]="codeInputGroup"
         [component]="NgxsmkInputGroup"
       >
-        <ngxsmk-input-group>
-          <ngxsmk-input-group-text>$</ngxsmk-input-group-text>
-          <input ngxsmkInput type="text" [placeholder]="'forms.amountPlaceholder' | translate" />
-          <ngxsmk-input-group-text>USD</ngxsmk-input-group-text>
-        </ngxsmk-input-group>
+        <ngxsmk-input-group
+          [placeholder]="'forms.amountPlaceholder' | translate"
+          [addons]="[
+            { id: '1', position: 'leading', contentType: 'text', text: '$' },
+            { id: '2', position: 'trailing', contentType: 'text', text: 'USD' }
+          ]"
+        />
       </showcase-example>
 
       <showcase-example
@@ -995,7 +997,7 @@ ngxsmk-checkbox-list-item {
   protected readonly codeSelector = `<ngxsmk-selector [options]="interests" [(selected)]="selectedInterests" />`;
   protected readonly codeMultiSelector = `<ngxsmk-multi-selector [options]="colors" [(value)]="selectorColors" placeholder="Select colors" />`;
   protected readonly codeTokenizer = `<ngxsmk-tokenizer [(tokens)]="tags" placeholder="Add a tag…" />`;
-  protected readonly codeInputGroup = `<ngxsmk-input-group>\n  <ngxsmk-input-group-text>$</ngxsmk-input-group-text>\n  <ngxsmk-input placeholder="0.00" />\n  <ngxsmk-input-group-text>USD</ngxsmk-input-group-text>\n</ngxsmk-input-group>`;
+  protected readonly codeInputGroup = `<ngxsmk-input-group\n  placeholder="0.00"\n  [addons]="[\n    { id: '1', position: 'leading', contentType: 'text', text: '$' },\n    { id: '2', position: 'trailing', contentType: 'text', text: 'USD' }\n  ]"\n/>`;
   protected readonly codeField = `<ngxsmk-field hint="Choose a unique handle.">\n  <ngxsmk-field-label [required]="true">Username</ngxsmk-field-label>\n  <ngxsmk-input placeholder="e.g. ada_lovelace" />\n  <ngxsmk-field-status variant="error" message="This username is already taken." />\n</ngxsmk-field>`;
   protected readonly codeFormField = `<ngxsmk-form-field label="Email" required error="Please enter a valid email address.">\n  <ngxsmk-input type="email" placeholder="you@example.com" />\n</ngxsmk-form-field>`;
   protected readonly codeCheckboxListItem = `<ngxsmk-checkbox-list-item\n  description="Statically typed, great tooling."\n  [checked]="langs().includes('ts')"\n  (changed)="toggleLang('ts', $event)"\n>TypeScript</ngxsmk-checkbox-list-item>\n<ngxsmk-checkbox-list-item\n  [checked]="langs().includes('ng')"\n  (changed)="toggleLang('ng', $event)"\n>Angular</ngxsmk-checkbox-list-item>`;

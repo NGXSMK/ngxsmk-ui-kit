@@ -1,6 +1,6 @@
 # NGXSMK UI Kit
 
-> Angular-first, MIT-licensed UI ecosystem: 211+ signals-native, zoneless
+> Angular-first, MIT-licensed UI ecosystem: 216+ signals-native, zoneless
 > standalone components with a universal design-token engine (CSS variables,
 > SCSS, Tailwind, StyleX, Tokens Studio export). MIT licensed, no paid tiers.
 > Current version: 1.3.3. Supports Angular 17.3 through 22.
@@ -44,6 +44,7 @@ Usage rules for generated code:
 - NgxsmkBreadcrumbItem (`ngxsmk-breadcrumb-item`) — @ngxsmk/core/breadcrumb-item
 - NgxsmkButton (`button[ngxsmk-button], a[ngxsmk-button]`) — @ngxsmk/core/button — Button applied to native `<button>`/`<a>` elements so browser semantics, forms integration, and keyboard behavior come for free
 - NgxsmkButtonGroup (`ngxsmk-button-group, [ngxsmkButtonGroup]`) — @ngxsmk/core/button-group
+- NgxsmkCalendarHeatmap (`ngxsmk-calendar-heatmap`) — @ngxsmk/core/calendar-heatmap — GitHub-style contribution calendar heatmap component for visualizing daily metrics
 - NgxsmkCard (`ngxsmk-card`) — @ngxsmk/core/card — Content container with optional structural directives:
 - NgxsmkCardHeader (`[ngxsmkCardHeader]`) — @ngxsmk/core/card
 - NgxsmkCardTitle (`[ngxsmkCardTitle]`) — @ngxsmk/core/card
@@ -97,6 +98,7 @@ Usage rules for generated code:
 - NgxsmkDialog (`ngxsmk-dialog`) — @ngxsmk/core/dialog
 - NgxsmkDiffViewer (`ngxsmk-diff-viewer`) — @ngxsmk/core/diff-viewer
 - NgxsmkDivider (`ngxsmk-divider`) — @ngxsmk/core/divider — Visual separator
+- NgxsmkDock (`ngxsmk-dock`) — @ngxsmk/core/dock — Floating macOS-style application dock with icon tooltips and magnification hover effects
 - NgxsmkDropdownMenu (`ngxsmk-dropdown-menu`) — @ngxsmk/core/dropdown-menu
 - NgxsmkEmptyState (`ngxsmk-empty-state`) — @ngxsmk/core/empty-state
 - NgxsmkFab (`button[ngxsmkFab], a[ngxsmkFab]`) — @ngxsmk/core/fab
@@ -116,7 +118,7 @@ Usage rules for generated code:
 - NgxsmkHoverCard (`ngxsmk-hover-card`) — @ngxsmk/core/hover-card
 - NgxsmkImageViewer (`ngxsmk-image-viewer`) — @ngxsmk/core/image-viewer
 - NgxsmkInputDirective (`input[ngxsmkInput], textarea[ngxsmkInput]`) — @ngxsmk/core/input — Directive applied to native text inputs and textareas to style them and integrate them with `ngxsmk-form-field`
-- NgxsmkInputGroup (`ngxsmk-input-group`) — @ngxsmk/core/input-group — Wraps a native control with text add-ons that sit flush against it, rendered as a single connected field
+- NgxsmkInputGroup (`ngxsmk-input-group`) — @ngxsmk/core/input-group
 - NgxsmkInputGroupText (`[ngxsmkInputGroupText], ngxsmk-input-group-text`) — @ngxsmk/core/input-group-text
 - NgxsmkIntersectionObserver (`[ngxsmkIntersectionObserver]`) — @ngxsmk/core/intersection-observer
 - NgxsmkJsonViewer (`ngxsmk-json-viewer`) — @ngxsmk/core/json-viewer
@@ -185,6 +187,7 @@ Usage rules for generated code:
 - NgxsmkSideNavItem (`ngxsmk-side-nav-item`) — @ngxsmk/core/side-nav
 - NgxsmkSideNavSection (`ngxsmk-side-nav-section`) — @ngxsmk/core/side-nav
 - NgxsmkSideNavCollapseButton (`ngxsmk-side-nav-collapse-button`) — @ngxsmk/core/side-nav
+- NgxsmkSignaturePad (`ngxsmk-signature-pad`) — @ngxsmk/core/signature-pad — Digital signature canvas component with smooth stroke rendering and export capabilities
 - NgxsmkSkeleton (`ngxsmk-skeleton`) — @ngxsmk/core/skeleton — Loading placeholder that mirrors the shape of upcoming content
 - NgxsmkSlider (`ngxsmk-slider`) — @ngxsmk/core/slider
 - NgxsmkSpacer (`ngxsmk-spacer`) — @ngxsmk/core/spacer
@@ -227,10 +230,12 @@ Usage rules for generated code:
 - NgxsmkTopNavMegaMenu (`ngxsmk-top-nav-mega-menu`) — @ngxsmk/core/top-nav
 - NgxsmkTopNavMegaMenuItem (`ngxsmk-top-nav-mega-menu-item`) — @ngxsmk/core/top-nav
 - NgxsmkTopNavMegaMenuFeaturedCard (`ngxsmk-top-nav-mega-menu-featured-card`) — @ngxsmk/core/top-nav
+- NgxsmkTransfer (`ngxsmk-transfer`) — @ngxsmk/core/transfer — Dual listbox component for moving items between two container columns
 - NgxsmkTreeNodeComponent (`ngxsmk-tree-node`) — @ngxsmk/core/tree-view
 - NgxsmkTreeView (`ngxsmk-tree-view`) — @ngxsmk/core/tree-view
 - NgxsmkTypeaheadItem (`[ngxsmkTypeaheadItem]`) — @ngxsmk/core/typeahead
 - NgxsmkTypeahead (`ngxsmk-typeahead`) — @ngxsmk/core/typeahead
+- NgxsmkVirtualScroll (`ngxsmk-virtual-scroll`) — @ngxsmk/core/virtual-scroll — Signals-native virtual scroll container for rendering massive datasets with 60 FPS performance
 - NgxsmkVisuallyHidden (`[ngxsmkVisuallyHidden]`) — @ngxsmk/core/visually-hidden
 - NgxsmkVoiceInput (`ngxsmk-voice-input`) — @ngxsmk/core/voice-input
 - NgxsmkWorkflowBuilder (`ngxsmk-workflow-builder`) — @ngxsmk/core/workflow-builder
