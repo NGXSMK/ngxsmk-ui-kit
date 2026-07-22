@@ -42,6 +42,8 @@ import { ngxsmkUniqueId } from '@ngxsmk/core/util';
       <canvas
         #canvas
         class="ngxsmk-signature-pad__canvas"
+        role="img"
+        [attr.aria-label]="ariaLabel()"
         [width]="width()"
         [height]="height()"
         (mousedown)="startDrawing($event)"
@@ -111,9 +113,9 @@ import { ngxsmkUniqueId } from '@ngxsmk/core/util';
       transition: all 0.15s ease;
     }
 
-    .ngxsmk-signature-pad__btn:hover:not(:disabled) {
+    .ngxsmk-signature-pad__btn--clear:hover:not(:disabled) {
       background: var(--ngxsmk-color-error, #ef4444);
-      color: #ffffff;
+      color: var(--ngxsmk-color-on-error, #ffffff);
       border-color: var(--ngxsmk-color-error, #ef4444);
     }
 
@@ -129,6 +131,7 @@ export class NgxsmkSignaturePad extends CvaBase<string> implements NgxsmkFormFie
   readonly penColor = input<string>('#09090b');
   readonly penWidth = input<number>(2);
   readonly disabled = input<boolean>(false);
+  readonly ariaLabel = input<string>('Digital signature pad canvas');
 
   readonly value = model<string>('');
   readonly cleared = output<void>();

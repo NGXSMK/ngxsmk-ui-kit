@@ -560,6 +560,33 @@ exports.COMPONENT_DATABASE = [
         "outputs": []
     },
     {
+        "entryPoint": "@ngxsmk/core/calendar-heatmap",
+        "name": "NgxsmkCalendarHeatmap",
+        "kind": "Component",
+        "selector": "ngxsmk-calendar-heatmap",
+        "description": "GitHub-style contribution calendar heatmap component for visualizing daily metrics.",
+        "inputs": [
+            {
+                "name": "values",
+                "type": "HeatmapValue[]",
+                "required": false,
+                "default": "[]"
+            },
+            {
+                "name": "startDate",
+                "type": "string",
+                "required": false,
+                "default": "''"
+            }
+        ],
+        "outputs": [
+            {
+                "name": "cellClick",
+                "type": "HeatmapValue"
+            }
+        ]
+    },
+    {
         "entryPoint": "@ngxsmk/core/card",
         "name": "NgxsmkCard",
         "kind": "Component",
@@ -636,6 +663,12 @@ exports.COMPONENT_DATABASE = [
         "selector": "ngxsmk-carousel",
         "description": "",
         "inputs": [
+            {
+                "name": "label",
+                "type": "string",
+                "required": false,
+                "default": "'Image gallery'"
+            },
             {
                 "name": "autoplay",
                 "type": "boolean",
@@ -1337,6 +1370,72 @@ exports.COMPONENT_DATABASE = [
         "outputs": []
     },
     {
+        "entryPoint": "@ngxsmk/core/color-picker",
+        "name": "NgxsmkColorPicker",
+        "kind": "Component",
+        "selector": "ngxsmk-color-picker",
+        "description": "Signal-native interactive color picker component with hue slider, presets, and HEX input.",
+        "inputs": [
+            {
+                "name": "value",
+                "type": "string",
+                "required": false,
+                "twoWay": true,
+                "default": "'#7c3aed'"
+            },
+            {
+                "name": "presets",
+                "type": "string[]",
+                "required": false,
+                "default": "[\n    '#ef4444',\n    '#f97316',\n    '#f59e0b',\n    '#10b981',\n    '#06b6d4',\n    '#3b82f6',\n    '#6366f1',\n    '#7c3aed',\n    '#ec4899',\n    '#09090b',\n    '#64748b',\n    '#ffffff',\n  ]"
+            },
+            {
+                "name": "showPresets",
+                "type": "boolean",
+                "required": false,
+                "default": "true"
+            },
+            {
+                "name": "disabled",
+                "type": "boolean",
+                "required": false,
+                "default": "false"
+            },
+            {
+                "name": "ariaLabel",
+                "type": "string",
+                "required": false,
+                "default": "'Color picker'"
+            },
+            {
+                "name": "id",
+                "type": "unknown",
+                "required": false,
+                "default": "ngxsmkUniqueId('ngxsmk-color-picker')"
+            },
+            {
+                "name": "ariaInvalid",
+                "type": "boolean",
+                "required": false,
+                "twoWay": true,
+                "default": "false"
+            },
+            {
+                "name": "ariaDescribedby",
+                "type": "string | null",
+                "required": false,
+                "twoWay": true,
+                "default": "null"
+            }
+        ],
+        "outputs": [
+            {
+                "name": "changed",
+                "type": "string"
+            }
+        ]
+    },
+    {
         "entryPoint": "@ngxsmk/core/combobox",
         "name": "NgxsmkCombobox",
         "kind": "Component",
@@ -1583,6 +1682,66 @@ exports.COMPONENT_DATABASE = [
         ]
     },
     {
+        "entryPoint": "@ngxsmk/core/date-range-picker",
+        "name": "NgxsmkDateRangePicker",
+        "kind": "Component",
+        "selector": "ngxsmk-date-range-picker",
+        "description": "Signal-native date range picker with dual inputs, quick preset range buttons, and calendar grid.",
+        "inputs": [
+            {
+                "name": "range",
+                "type": "DateRange",
+                "required": false,
+                "twoWay": true,
+                "default": "{ start: '', end: '' }"
+            },
+            {
+                "name": "showPresets",
+                "type": "boolean",
+                "required": false,
+                "default": "true"
+            },
+            {
+                "name": "disabled",
+                "type": "boolean",
+                "required": false,
+                "default": "false"
+            },
+            {
+                "name": "ariaLabel",
+                "type": "string",
+                "required": false,
+                "default": "'Date range picker'"
+            },
+            {
+                "name": "id",
+                "type": "unknown",
+                "required": false,
+                "default": "ngxsmkUniqueId('ngxsmk-date-range-picker')"
+            },
+            {
+                "name": "ariaInvalid",
+                "type": "boolean",
+                "required": false,
+                "twoWay": true,
+                "default": "false"
+            },
+            {
+                "name": "ariaDescribedby",
+                "type": "string | null",
+                "required": false,
+                "twoWay": true,
+                "default": "null"
+            }
+        ],
+        "outputs": [
+            {
+                "name": "rangeChange",
+                "type": "DateRange"
+            }
+        ]
+    },
+    {
         "entryPoint": "@ngxsmk/core/diagram-builder",
         "name": "NgxsmkDiagramBuilder",
         "kind": "Component",
@@ -1676,6 +1835,32 @@ exports.COMPONENT_DATABASE = [
             }
         ],
         "outputs": []
+    },
+    {
+        "entryPoint": "@ngxsmk/core/dock",
+        "name": "NgxsmkDock",
+        "kind": "Component",
+        "selector": "ngxsmk-dock",
+        "description": "Floating macOS-style application dock with icon tooltips and magnification hover effects.",
+        "inputs": [
+            {
+                "name": "items",
+                "type": "DockItem[]",
+                "required": true
+            },
+            {
+                "name": "position",
+                "type": "DockPosition",
+                "required": false,
+                "default": "'bottom'"
+            }
+        ],
+        "outputs": [
+            {
+                "name": "itemClick",
+                "type": "DockItem"
+            }
+        ]
     },
     {
         "entryPoint": "@ngxsmk/core/dropdown-menu",
@@ -1826,6 +2011,75 @@ exports.COMPONENT_DATABASE = [
             }
         ],
         "outputs": []
+    },
+    {
+        "entryPoint": "@ngxsmk/core/file-upload",
+        "name": "NgxsmkFileUpload",
+        "kind": "Component",
+        "selector": "ngxsmk-file-upload",
+        "description": "Signal-native drag-and-drop file upload component with format filter, size validation, and file list queue.",
+        "inputs": [
+            {
+                "name": "accept",
+                "type": "string",
+                "required": false,
+                "default": "''"
+            },
+            {
+                "name": "maxSizeMb",
+                "type": "number",
+                "required": false,
+                "default": "10"
+            },
+            {
+                "name": "multiple",
+                "type": "boolean",
+                "required": false,
+                "default": "true"
+            },
+            {
+                "name": "disabled",
+                "type": "boolean",
+                "required": false,
+                "default": "false"
+            },
+            {
+                "name": "ariaLabel",
+                "type": "string",
+                "required": false,
+                "default": "'File upload dropzone'"
+            },
+            {
+                "name": "id",
+                "type": "unknown",
+                "required": false,
+                "default": "ngxsmkUniqueId('ngxsmk-file-upload')"
+            },
+            {
+                "name": "ariaInvalid",
+                "type": "boolean",
+                "required": false,
+                "twoWay": true,
+                "default": "false"
+            },
+            {
+                "name": "ariaDescribedby",
+                "type": "string | null",
+                "required": false,
+                "twoWay": true,
+                "default": "null"
+            }
+        ],
+        "outputs": [
+            {
+                "name": "filesSelected",
+                "type": "File[]"
+            },
+            {
+                "name": "fileRemoved",
+                "type": "File"
+            }
+        ]
     },
     {
         "entryPoint": "@ngxsmk/core/flex",
@@ -2153,9 +2407,178 @@ exports.COMPONENT_DATABASE = [
         "name": "NgxsmkInputGroup",
         "kind": "Component",
         "selector": "ngxsmk-input-group",
-        "description": "Wraps a native control with text add-ons that sit flush against it, rendered as a single connected field.",
-        "inputs": [],
-        "outputs": []
+        "description": "",
+        "inputs": [
+            {
+                "name": "type",
+                "type": "InputGroupInputType",
+                "required": false,
+                "default": "'text'"
+            },
+            {
+                "name": "variant",
+                "type": "InputGroupVariant",
+                "required": false,
+                "default": "'outlined'"
+            },
+            {
+                "name": "size",
+                "type": "InputGroupSize",
+                "required": false,
+                "default": "'md'"
+            },
+            {
+                "name": "radius",
+                "type": "InputGroupRadius",
+                "required": false,
+                "default": "'md'"
+            },
+            {
+                "name": "density",
+                "type": "InputGroupDensity",
+                "required": false,
+                "default": "'comfortable'"
+            },
+            {
+                "name": "placeholder",
+                "type": "string",
+                "required": false,
+                "default": "''"
+            },
+            {
+                "name": "label",
+                "type": "string",
+                "required": false,
+                "default": "''"
+            },
+            {
+                "name": "hint",
+                "type": "string",
+                "required": false,
+                "default": "''"
+            },
+            {
+                "name": "required",
+                "type": "boolean",
+                "required": false,
+                "default": "false"
+            },
+            {
+                "name": "disabled",
+                "type": "boolean",
+                "required": false,
+                "default": "false"
+            },
+            {
+                "name": "readonly",
+                "type": "boolean",
+                "required": false,
+                "default": "false"
+            },
+            {
+                "name": "maxLength",
+                "type": "number | undefined",
+                "required": false,
+                "default": "undefined"
+            },
+            {
+                "name": "minLength",
+                "type": "number | undefined",
+                "required": false,
+                "default": "undefined"
+            },
+            {
+                "name": "showClear",
+                "type": "boolean",
+                "required": false,
+                "default": "false"
+            },
+            {
+                "name": "showCounter",
+                "type": "boolean",
+                "required": false,
+                "default": "false"
+            },
+            {
+                "name": "fullWidth",
+                "type": "boolean",
+                "required": false,
+                "default": "true"
+            },
+            {
+                "name": "loading",
+                "type": "boolean",
+                "required": false,
+                "default": "false"
+            },
+            {
+                "name": "floatingLabel",
+                "type": "boolean",
+                "required": false,
+                "default": "false"
+            },
+            {
+                "name": "addons",
+                "type": "InputGroupAddon[]",
+                "required": false,
+                "default": "[]"
+            },
+            {
+                "name": "inputType",
+                "type": "InputGroupInputType | 'password'",
+                "required": false,
+                "default": "'text'"
+            },
+            {
+                "name": "value",
+                "type": "string",
+                "required": false,
+                "twoWay": true,
+                "default": "''"
+            },
+            {
+                "name": "id",
+                "type": "unknown",
+                "required": false,
+                "default": "ngxsmkUniqueId('ngxsmk-input-group')"
+            },
+            {
+                "name": "ariaInvalid",
+                "type": "boolean",
+                "required": false,
+                "twoWay": true,
+                "default": "false"
+            },
+            {
+                "name": "ariaDescribedby",
+                "type": "string | null",
+                "required": false,
+                "twoWay": true,
+                "default": "null"
+            }
+        ],
+        "outputs": [
+            {
+                "name": "focused",
+                "type": "void"
+            },
+            {
+                "name": "blurred",
+                "type": "void"
+            },
+            {
+                "name": "cleared",
+                "type": "void"
+            },
+            {
+                "name": "valueChanged",
+                "type": "string"
+            },
+            {
+                "name": "validationChanged",
+                "type": "{ status: ValidationStatus; message: string }"
+            }
+        ]
     },
     {
         "entryPoint": "@ngxsmk/core/input-group-text",
@@ -3574,16 +3997,164 @@ exports.COMPONENT_DATABASE = [
             {
                 "name": "events",
                 "type": "SchedulerEvent[]",
-                "required": true
+                "required": true,
+                "twoWay": true
             },
             {
-                "name": "weekStart",
-                "type": "unknown",
+                "name": "view",
+                "type": "ViewType",
+                "required": false,
+                "default": "'timeGridWeek'"
+            },
+            {
+                "name": "date",
+                "type": "Date",
                 "required": false,
                 "default": "new Date()"
+            },
+            {
+                "name": "resources",
+                "type": "SchedulerResource[]",
+                "required": false,
+                "default": "[]"
+            },
+            {
+                "name": "slotDuration",
+                "type": "number",
+                "required": false,
+                "default": "30"
+            },
+            {
+                "name": "snapDuration",
+                "type": "number",
+                "required": false,
+                "default": "15"
+            },
+            {
+                "name": "visibleHours",
+                "type": "[number, number]",
+                "required": false,
+                "default": "[0, 24]"
+            },
+            {
+                "name": "firstDayOfWeek",
+                "type": "number",
+                "required": false,
+                "default": "1"
+            },
+            {
+                "name": "locale",
+                "type": "string",
+                "required": false,
+                "default": "'en-US'"
+            },
+            {
+                "name": "rtl",
+                "type": "boolean",
+                "required": false,
+                "default": "false"
+            },
+            {
+                "name": "density",
+                "type": "Density",
+                "required": false,
+                "default": "'comfortable'"
+            },
+            {
+                "name": "showAllDay",
+                "type": "boolean",
+                "required": false,
+                "default": "true"
+            },
+            {
+                "name": "showWeekends",
+                "type": "boolean",
+                "required": false,
+                "default": "true"
+            },
+            {
+                "name": "showCurrentTime",
+                "type": "boolean",
+                "required": false,
+                "default": "true"
+            },
+            {
+                "name": "editable",
+                "type": "boolean",
+                "required": false,
+                "default": "true"
+            },
+            {
+                "name": "selectable",
+                "type": "boolean",
+                "required": false,
+                "default": "true"
+            },
+            {
+                "name": "draggable",
+                "type": "boolean",
+                "required": false,
+                "default": "true"
+            },
+            {
+                "name": "resizable",
+                "type": "boolean",
+                "required": false,
+                "default": "true"
+            },
+            {
+                "name": "plugins",
+                "type": "SchedulerPlugin[]",
+                "required": false,
+                "default": "[]"
             }
         ],
-        "outputs": []
+        "outputs": [
+            {
+                "name": "eventClick",
+                "type": "SchedulerEvent"
+            },
+            {
+                "name": "eventDoubleClick",
+                "type": "SchedulerEvent"
+            },
+            {
+                "name": "eventContextMenu",
+                "type": "{\n    event: SchedulerEvent;\n    position: { x: number; y: number };\n  }"
+            },
+            {
+                "name": "eventDrop",
+                "type": "SchedulerMove"
+            },
+            {
+                "name": "eventResize",
+                "type": "SchedulerResize"
+            },
+            {
+                "name": "eventCreate",
+                "type": "SchedulerCreate"
+            },
+            {
+                "name": "viewChange",
+                "type": "{ view: ViewType; start: Date; end: Date }"
+            },
+            {
+                "name": "dateChange",
+                "type": "Date"
+            },
+            {
+                "name": "prevWeek",
+                "type": "void"
+            },
+            {
+                "name": "nextWeek",
+                "type": "void"
+            },
+            {
+                "name": "todayClick",
+                "type": "void"
+            }
+        ]
     },
     {
         "entryPoint": "@ngxsmk/core/scroll-lock",
@@ -3864,6 +4435,84 @@ exports.COMPONENT_DATABASE = [
         "outputs": []
     },
     {
+        "entryPoint": "@ngxsmk/core/signature-pad",
+        "name": "NgxsmkSignaturePad",
+        "kind": "Component",
+        "selector": "ngxsmk-signature-pad",
+        "description": "Digital signature canvas component with smooth stroke rendering and export capabilities.",
+        "inputs": [
+            {
+                "name": "width",
+                "type": "number",
+                "required": false,
+                "default": "400"
+            },
+            {
+                "name": "height",
+                "type": "number",
+                "required": false,
+                "default": "180"
+            },
+            {
+                "name": "penColor",
+                "type": "string",
+                "required": false,
+                "default": "'#09090b'"
+            },
+            {
+                "name": "penWidth",
+                "type": "number",
+                "required": false,
+                "default": "2"
+            },
+            {
+                "name": "disabled",
+                "type": "boolean",
+                "required": false,
+                "default": "false"
+            },
+            {
+                "name": "ariaLabel",
+                "type": "string",
+                "required": false,
+                "default": "'Digital signature pad canvas'"
+            },
+            {
+                "name": "value",
+                "type": "string",
+                "required": false,
+                "twoWay": true,
+                "default": "''"
+            },
+            {
+                "name": "id",
+                "type": "unknown",
+                "required": false,
+                "default": "ngxsmkUniqueId('ngxsmk-signature-pad')"
+            },
+            {
+                "name": "ariaInvalid",
+                "type": "boolean",
+                "required": false,
+                "twoWay": true,
+                "default": "false"
+            },
+            {
+                "name": "ariaDescribedby",
+                "type": "string | null",
+                "required": false,
+                "twoWay": true,
+                "default": "null"
+            }
+        ],
+        "outputs": [
+            {
+                "name": "cleared",
+                "type": "void"
+            }
+        ]
+    },
+    {
         "entryPoint": "@ngxsmk/core/skeleton",
         "name": "NgxsmkSkeleton",
         "kind": "Component",
@@ -3928,6 +4577,18 @@ exports.COMPONENT_DATABASE = [
                 "type": "boolean",
                 "required": false,
                 "default": "false"
+            },
+            {
+                "name": "ariaLabel",
+                "type": "string",
+                "required": false,
+                "default": "''"
+            },
+            {
+                "name": "ariaValueText",
+                "type": "string",
+                "required": false,
+                "default": "''"
             }
         ],
         "outputs": [
@@ -4034,18 +4695,81 @@ exports.COMPONENT_DATABASE = [
         "description": "",
         "inputs": [
             {
-                "name": "data",
-                "type": "string[][]",
-                "required": true
-            },
-            {
                 "name": "columns",
-                "type": "string[]",
+                "type": "ColumnDef[]",
                 "required": false,
                 "default": "[]"
+            },
+            {
+                "name": "rows",
+                "type": "RowDef[]",
+                "required": false,
+                "default": "[]"
+            },
+            {
+                "name": "density",
+                "type": "SpreadsheetDensity",
+                "required": false,
+                "default": "'comfortable'"
+            },
+            {
+                "name": "editable",
+                "type": "boolean",
+                "required": false,
+                "default": "true"
+            },
+            {
+                "name": "multiSort",
+                "type": "boolean",
+                "required": false,
+                "default": "false"
+            },
+            {
+                "name": "selectedCells",
+                "type": "CellRange | null",
+                "required": false,
+                "twoWay": true,
+                "default": "null"
             }
         ],
-        "outputs": []
+        "outputs": [
+            {
+                "name": "cellClick",
+                "type": "{ row: number; col: number; value: CellValue }"
+            },
+            {
+                "name": "cellDoubleClick",
+                "type": "{ row: number; col: number; value: CellValue }"
+            },
+            {
+                "name": "cellEdit",
+                "type": "{\n    row: number;\n    col: string;\n    oldValue: CellValue;\n    newValue: CellValue;\n  }"
+            },
+            {
+                "name": "selectionChange",
+                "type": "CellRange | null"
+            },
+            {
+                "name": "sortChange",
+                "type": "SortCriterion[]"
+            },
+            {
+                "name": "filterChange",
+                "type": "FilterCriterion[]"
+            },
+            {
+                "name": "rowInsert",
+                "type": "{ count: number; index: number }"
+            },
+            {
+                "name": "rowDelete",
+                "type": "{ indices: number[]; rows: RowDef[] }"
+            },
+            {
+                "name": "scrolled",
+                "type": "{ scrollTop: number; scrollLeft: number }"
+            }
+        ]
     },
     {
         "entryPoint": "@ngxsmk/core/stack",
@@ -4847,6 +5571,84 @@ exports.COMPONENT_DATABASE = [
         "outputs": []
     },
     {
+        "entryPoint": "@ngxsmk/core/transfer",
+        "name": "NgxsmkTransfer",
+        "kind": "Component",
+        "selector": "ngxsmk-transfer",
+        "description": "Dual listbox component for moving items between two container columns.",
+        "inputs": [
+            {
+                "name": "dataSource",
+                "type": "TransferItem[]",
+                "required": false,
+                "default": "[]"
+            },
+            {
+                "name": "titles",
+                "type": "[string, string]",
+                "required": false,
+                "default": "['Source', 'Target']"
+            },
+            {
+                "name": "showSearch",
+                "type": "boolean",
+                "required": false,
+                "default": "true"
+            },
+            {
+                "name": "searchPlaceholder",
+                "type": "string",
+                "required": false,
+                "default": "'Search...'"
+            },
+            {
+                "name": "disabled",
+                "type": "boolean",
+                "required": false,
+                "default": "false"
+            },
+            {
+                "name": "size",
+                "type": "'sm' | 'md' | 'lg'",
+                "required": false,
+                "default": "'md'"
+            },
+            {
+                "name": "targetKeys",
+                "type": "string[]",
+                "required": false,
+                "twoWay": true,
+                "default": "[]"
+            },
+            {
+                "name": "id",
+                "type": "unknown",
+                "required": false,
+                "default": "ngxsmkUniqueId('ngxsmk-transfer')"
+            },
+            {
+                "name": "ariaInvalid",
+                "type": "boolean",
+                "required": false,
+                "twoWay": true,
+                "default": "false"
+            },
+            {
+                "name": "ariaDescribedby",
+                "type": "string | null",
+                "required": false,
+                "twoWay": true,
+                "default": "null"
+            }
+        ],
+        "outputs": [
+            {
+                "name": "transferChange",
+                "type": "{\n    targetKeys: string[];\n    direction: TransferDirection;\n    moveKeys: string[];\n  }"
+            }
+        ]
+    },
+    {
         "entryPoint": "@ngxsmk/core/tree-view",
         "name": "NgxsmkTreeNodeComponent",
         "kind": "Component",
@@ -4961,6 +5763,34 @@ exports.COMPONENT_DATABASE = [
                 "required": false,
                 "twoWay": true,
                 "default": "[]"
+            }
+        ],
+        "outputs": []
+    },
+    {
+        "entryPoint": "@ngxsmk/core/virtual-scroll",
+        "name": "NgxsmkVirtualScroll",
+        "kind": "Component",
+        "selector": "ngxsmk-virtual-scroll",
+        "description": "Signals-native virtual scroll container for rendering massive datasets with 60 FPS performance.",
+        "inputs": [
+            {
+                "name": "items",
+                "type": "T[]",
+                "required": false,
+                "default": "[]"
+            },
+            {
+                "name": "itemHeight",
+                "type": "number",
+                "required": false,
+                "default": "40"
+            },
+            {
+                "name": "buffer",
+                "type": "number",
+                "required": false,
+                "default": "5"
             }
         ],
         "outputs": []

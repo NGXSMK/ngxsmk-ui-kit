@@ -682,6 +682,12 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "description": "",
     "inputs": [
       {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": "'Image gallery'"
+      },
+      {
         "name": "autoplay",
         "type": "boolean",
         "required": false,
@@ -1382,6 +1388,72 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "outputs": []
   },
   {
+    "entryPoint": "@ngxsmk/core/color-picker",
+    "name": "NgxsmkColorPicker",
+    "kind": "Component",
+    "selector": "ngxsmk-color-picker",
+    "description": "Signal-native interactive color picker component with hue slider, presets, and HEX input.",
+    "inputs": [
+      {
+        "name": "value",
+        "type": "string",
+        "required": false,
+        "twoWay": true,
+        "default": "'#7c3aed'"
+      },
+      {
+        "name": "presets",
+        "type": "string[]",
+        "required": false,
+        "default": "[\n    '#ef4444',\n    '#f97316',\n    '#f59e0b',\n    '#10b981',\n    '#06b6d4',\n    '#3b82f6',\n    '#6366f1',\n    '#7c3aed',\n    '#ec4899',\n    '#09090b',\n    '#64748b',\n    '#ffffff',\n  ]"
+      },
+      {
+        "name": "showPresets",
+        "type": "boolean",
+        "required": false,
+        "default": "true"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "ariaLabel",
+        "type": "string",
+        "required": false,
+        "default": "'Color picker'"
+      },
+      {
+        "name": "id",
+        "type": "unknown",
+        "required": false,
+        "default": "ngxsmkUniqueId('ngxsmk-color-picker')"
+      },
+      {
+        "name": "ariaInvalid",
+        "type": "boolean",
+        "required": false,
+        "twoWay": true,
+        "default": "false"
+      },
+      {
+        "name": "ariaDescribedby",
+        "type": "string | null",
+        "required": false,
+        "twoWay": true,
+        "default": "null"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "changed",
+        "type": "string"
+      }
+    ]
+  },
+  {
     "entryPoint": "@ngxsmk/core/combobox",
     "name": "NgxsmkCombobox",
     "kind": "Component",
@@ -1624,6 +1696,66 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
       {
         "name": "changed",
         "type": "string"
+      }
+    ]
+  },
+  {
+    "entryPoint": "@ngxsmk/core/date-range-picker",
+    "name": "NgxsmkDateRangePicker",
+    "kind": "Component",
+    "selector": "ngxsmk-date-range-picker",
+    "description": "Signal-native date range picker with dual inputs, quick preset range buttons, and calendar grid.",
+    "inputs": [
+      {
+        "name": "range",
+        "type": "DateRange",
+        "required": false,
+        "twoWay": true,
+        "default": "{ start: '', end: '' }"
+      },
+      {
+        "name": "showPresets",
+        "type": "boolean",
+        "required": false,
+        "default": "true"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "ariaLabel",
+        "type": "string",
+        "required": false,
+        "default": "'Date range picker'"
+      },
+      {
+        "name": "id",
+        "type": "unknown",
+        "required": false,
+        "default": "ngxsmkUniqueId('ngxsmk-date-range-picker')"
+      },
+      {
+        "name": "ariaInvalid",
+        "type": "boolean",
+        "required": false,
+        "twoWay": true,
+        "default": "false"
+      },
+      {
+        "name": "ariaDescribedby",
+        "type": "string | null",
+        "required": false,
+        "twoWay": true,
+        "default": "null"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "rangeChange",
+        "type": "DateRange"
       }
     ]
   },
@@ -1897,6 +2029,75 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
       }
     ],
     "outputs": []
+  },
+  {
+    "entryPoint": "@ngxsmk/core/file-upload",
+    "name": "NgxsmkFileUpload",
+    "kind": "Component",
+    "selector": "ngxsmk-file-upload",
+    "description": "Signal-native drag-and-drop file upload component with format filter, size validation, and file list queue.",
+    "inputs": [
+      {
+        "name": "accept",
+        "type": "string",
+        "required": false,
+        "default": "''"
+      },
+      {
+        "name": "maxSizeMb",
+        "type": "number",
+        "required": false,
+        "default": "10"
+      },
+      {
+        "name": "multiple",
+        "type": "boolean",
+        "required": false,
+        "default": "true"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "ariaLabel",
+        "type": "string",
+        "required": false,
+        "default": "'File upload dropzone'"
+      },
+      {
+        "name": "id",
+        "type": "unknown",
+        "required": false,
+        "default": "ngxsmkUniqueId('ngxsmk-file-upload')"
+      },
+      {
+        "name": "ariaInvalid",
+        "type": "boolean",
+        "required": false,
+        "twoWay": true,
+        "default": "false"
+      },
+      {
+        "name": "ariaDescribedby",
+        "type": "string | null",
+        "required": false,
+        "twoWay": true,
+        "default": "null"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "filesSelected",
+        "type": "File[]"
+      },
+      {
+        "name": "fileRemoved",
+        "type": "File"
+      }
+    ]
   },
   {
     "entryPoint": "@ngxsmk/core/flex",
@@ -4289,6 +4490,12 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
         "default": "false"
       },
       {
+        "name": "ariaLabel",
+        "type": "string",
+        "required": false,
+        "default": "'Digital signature pad canvas'"
+      },
+      {
         "name": "value",
         "type": "string",
         "required": false,
@@ -4388,6 +4595,18 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
         "type": "boolean",
         "required": false,
         "default": "false"
+      },
+      {
+        "name": "ariaLabel",
+        "type": "string",
+        "required": false,
+        "default": "''"
+      },
+      {
+        "name": "ariaValueText",
+        "type": "string",
+        "required": false,
+        "default": "''"
       }
     ],
     "outputs": [

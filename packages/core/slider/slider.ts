@@ -19,6 +19,8 @@ import {
       [step]="step()"
       [value]="value()"
       [disabled]="disabled()"
+      [attr.aria-label]="ariaLabel() || null"
+      [attr.aria-valuetext]="ariaValueText() || null"
       (input)="onInput($event)"
     />
   `,
@@ -83,6 +85,10 @@ export class NgxsmkSlider {
   readonly step = input(1);
   readonly value = model(0);
   readonly disabled = input(false, { transform: booleanAttribute });
+  /** Accessible name for the slider — required when not wrapped in a <label>. */
+  readonly ariaLabel = input('');
+  /** Human-readable value description, e.g. 'Medium' instead of '50'. */
+  readonly ariaValueText = input('');
   readonly changed = output<number>();
 
   protected onInput(event: Event): void {

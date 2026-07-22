@@ -25,13 +25,18 @@ export interface HeatmapValue {
     <div class="ngxsmk-heatmap__container" role="grid" aria-label="Contribution calendar">
       <div class="ngxsmk-heatmap__grid">
         @for (day of days(); track day.date) {
-          <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
           <div
             class="ngxsmk-heatmap__cell"
             [attr.data-level]="getLevel(day.count)"
-            [title]="day.date + ': ' + day.count + ' contributions'"
+            [attr.title]="day.date + ': ' + day.count + ' contributions'"
+            [attr.aria-label]="
+              day.date + ': ' + day.count + ' contributions (level ' + getLevel(day.count) + ')'
+            "
             role="gridcell"
+            tabindex="0"
             (click)="onCellClick(day)"
+            (keydown.enter)="onCellClick(day)"
+            (keydown.space)="onCellClick(day)"
           ></div>
         }
       </div>
@@ -88,16 +93,16 @@ export interface HeatmapValue {
       background: var(--ngxsmk-color-surface-variant, #ebedf0);
     }
     .ngxsmk-heatmap__cell[data-level='1'] {
-      background: #9be9a8;
+      background: var(--ngxsmk-heatmap-level-1, #9be9a8);
     }
     .ngxsmk-heatmap__cell[data-level='2'] {
-      background: #40c463;
+      background: var(--ngxsmk-heatmap-level-2, #40c463);
     }
     .ngxsmk-heatmap__cell[data-level='3'] {
-      background: #30a14e;
+      background: var(--ngxsmk-heatmap-level-3, #30a14e);
     }
     .ngxsmk-heatmap__cell[data-level='4'] {
-      background: #216e39;
+      background: var(--ngxsmk-heatmap-level-4, #216e39);
     }
 
     .ngxsmk-heatmap__legend {
@@ -110,6 +115,12 @@ export interface HeatmapValue {
 
     .ngxsmk-heatmap__legend-label {
       margin: 0 4px;
+    }
+
+    /* Focus ring for keyboard navigation */
+    .ngxsmk-heatmap__cell:focus-visible {
+      outline: 2px solid var(--ngxsmk-color-ring, var(--ngxsmk-color-primary));
+      outline-offset: 1px;
     }
   `,
 })

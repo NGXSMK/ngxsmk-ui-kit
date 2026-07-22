@@ -40,7 +40,12 @@ export type DockPosition = 'bottom' | 'top' | 'left' | 'right';
           <span class="ngxsmk-dock__tooltip" role="tooltip">{{ item.label }}</span>
           <span class="ngxsmk-dock__icon" [innerHTML]="item.icon"></span>
           @if (item.badge) {
-            <span class="ngxsmk-dock__badge">{{ item.badge }}</span>
+            <span
+              class="ngxsmk-dock__badge"
+              [attr.aria-label]="item.badge + ' notifications'"
+              aria-live="polite"
+              >{{ item.badge }}</span
+            >
           }
         </button>
       }
@@ -86,7 +91,7 @@ export type DockPosition = 'bottom' | 'top' | 'left' | 'right';
     .ngxsmk-dock__item:hover:not(:disabled) {
       transform: scale(1.25) translateY(-4px);
       background: var(--ngxsmk-color-primary, #7c3aed);
-      color: #ffffff;
+      color: var(--ngxsmk-color-on-primary, #ffffff);
       box-shadow: 0 8px 16px -4px rgba(124, 58, 237, 0.4);
     }
 
@@ -129,7 +134,7 @@ export type DockPosition = 'bottom' | 'top' | 'left' | 'right';
       padding: 0.1rem 0.35rem;
       border-radius: 9999px;
       background: var(--ngxsmk-color-error, #ef4444);
-      color: #ffffff;
+      color: var(--ngxsmk-color-on-error, #ffffff);
       font-size: 0.65rem;
       font-weight: 700;
       line-height: 1;

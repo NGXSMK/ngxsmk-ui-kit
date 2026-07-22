@@ -24,8 +24,13 @@ import { NgxsmkField } from '@ngxsmk/core/field';
 import { NgxsmkFieldLabel } from '@ngxsmk/core/field-label';
 import { NgxsmkFieldStatus } from '@ngxsmk/core/field-status';
 import { NgxsmkFormField } from '@ngxsmk/core/form-field';
-import { NgxsmkCheckboxListItemComponent } from '@ngxsmk/core/checkbox-list-item';
 import { NgxsmkButton } from '@ngxsmk/core/button';
+import { NgxsmkCheckboxListItemComponent } from '@ngxsmk/core/checkbox-list-item';
+import { NgxsmkTransfer } from '@ngxsmk/core/transfer';
+import { NgxsmkSignaturePad } from '@ngxsmk/core/signature-pad';
+import { NgxsmkColorPicker } from '@ngxsmk/core/color-picker';
+import { NgxsmkFileUpload } from '@ngxsmk/core/file-upload';
+import { NgxsmkDateRangePicker } from '@ngxsmk/core/date-range-picker';
 import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -72,6 +77,11 @@ interface Option {
     NgxsmkFieldStatus,
     NgxsmkFormField,
     NgxsmkCheckboxListItemComponent,
+    NgxsmkTransfer,
+    NgxsmkSignaturePad,
+    NgxsmkColorPicker,
+    NgxsmkFileUpload,
+    NgxsmkDateRangePicker,
   ],
   template: `
     <h2 class="ngxsmk-page-title">{{ 'category.forms' | translate }}</h2>
@@ -487,6 +497,48 @@ interface Option {
           >
           <small>{{ 'forms.languagesChosen' | translate: { count: langs().length } }}</small>
         </div>
+      </showcase-example>
+
+      <showcase-example
+        title="Color Picker"
+        description="Interactive HSL/HEX color picker with hue slider, swatches, and hex input."
+        [code]="codeColorPicker"
+      >
+        <ngxsmk-color-picker [(value)]="pickedColor" />
+      </showcase-example>
+
+      <showcase-example
+        title="File Upload"
+        description="Drag-and-drop file upload zone with format filtering and file list queue."
+        [code]="codeFileUpload"
+      >
+        <div style="width: 100%; max-width: 460px;">
+          <ngxsmk-file-upload accept="image/*,.pdf" [maxSizeMb]="10" />
+        </div>
+      </showcase-example>
+
+      <showcase-example
+        title="Date Range Picker"
+        description="Dual date range selector with quick preset pills (Today, Last 7 days, etc.)."
+        [code]="codeDateRangePicker"
+      >
+        <ngxsmk-date-range-picker [(range)]="dateRange" />
+      </showcase-example>
+
+      <showcase-example
+        title="Transfer"
+        description="Dual listbox for moving items between source and target lists."
+        [code]="codeTransfer"
+      >
+        <ngxsmk-transfer [dataSource]="transferData" [(targetKeys)]="selectedTransferKeys" />
+      </showcase-example>
+
+      <showcase-example
+        title="Signature Pad"
+        description="Digital signature canvas with smooth stroke rendering and clear controls."
+        [code]="codeSignaturePad"
+      >
+        <ngxsmk-signature-pad [width]="380" [height]="140" />
       </showcase-example>
     </div>
   `,
@@ -965,6 +1017,15 @@ ngxsmk-checkbox-list-item {
   protected readonly selectorColors = signal<string[]>([]);
   protected readonly tags = signal<string[]>(['angular', 'signals']);
   protected readonly langs = signal<string[]>(['ts', 'ng']);
+  protected readonly pickedColor = signal('#7c3aed');
+  protected readonly dateRange = signal({ start: '2026-07-01', end: '2026-07-22' });
+  protected readonly transferData = [
+    { key: '1', title: 'Authentication Service' },
+    { key: '2', title: 'Payment Gateway' },
+    { key: '3', title: 'Notification Dispatcher' },
+    { key: '4', title: 'Audit Logger' },
+  ];
+  protected readonly selectedTransferKeys = signal<string[]>(['1', '3']);
 
   protected toggleLang(value: string, checked: boolean): void {
     this.langs.update((curr) =>
@@ -998,4 +1059,9 @@ ngxsmk-checkbox-list-item {
   protected readonly codeField = `<ngxsmk-field hint="Choose a unique handle.">\n  <ngxsmk-field-label [required]="true">Username</ngxsmk-field-label>\n  <ngxsmk-input placeholder="e.g. ada_lovelace" />\n  <ngxsmk-field-status variant="error" message="This username is already taken." />\n</ngxsmk-field>`;
   protected readonly codeFormField = `<ngxsmk-form-field label="Email" required error="Please enter a valid email address.">\n  <ngxsmk-input type="email" placeholder="you@example.com" />\n</ngxsmk-form-field>`;
   protected readonly codeCheckboxListItem = `<ngxsmk-checkbox-list-item\n  description="Statically typed, great tooling."\n  [checked]="langs().includes('ts')"\n  (changed)="toggleLang('ts', $event)"\n>TypeScript</ngxsmk-checkbox-list-item>\n<ngxsmk-checkbox-list-item\n  [checked]="langs().includes('ng')"\n  (changed)="toggleLang('ng', $event)"\n>Angular</ngxsmk-checkbox-list-item>`;
+  protected readonly codeColorPicker = `<ngxsmk-color-picker [(value)]="pickedColor" />`;
+  protected readonly codeFileUpload = `<ngxsmk-file-upload accept="image/*,application/pdf" [maxSizeMb]="10" />`;
+  protected readonly codeDateRangePicker = `<ngxsmk-date-range-picker [(range)]="dateRange" />`;
+  protected readonly codeTransfer = `<ngxsmk-transfer [dataSource]="transferData" [(targetKeys)]="selectedTransferKeys" />`;
+  protected readonly codeSignaturePad = `<ngxsmk-signature-pad [width]="400" [height]="160" />`;
 }
