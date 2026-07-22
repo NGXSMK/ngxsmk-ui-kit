@@ -141,7 +141,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
       background-color: var(--ngxsmk-color-background, #fafafa);
       background-image: radial-gradient(var(--ngxsmk-color-outline, #e4e4e7) 1px, transparent 1px);
       background-size: 24px 24px;
-      min-height: 100vh;
+      min-height: 100%;
     }
     .ngxsmk-page {
       max-width: 1400px;

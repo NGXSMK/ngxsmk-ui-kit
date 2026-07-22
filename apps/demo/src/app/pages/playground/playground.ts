@@ -1493,14 +1493,14 @@ type RadiusKey = keyof typeof RADII;
   `,
   styles: `
     :host {
-      display: block;
+      display: flex;
+      flex-direction: column;
       font-family: var(--ngxsmk-font-sans, system-ui);
       color: var(--ngxsmk-color-on-background);
       background-color: var(--ngxsmk-color-background, #fafafa);
       background-image: radial-gradient(var(--ngxsmk-color-outline, #e4e4e7) 1px, transparent 1px);
       background-size: 24px 24px;
-      height: 100vh;
-      overflow: hidden;
+      min-height: calc(100vh - 3.5rem);
     }
 
     /* ---- CUSTOM SCROLLBARS ---- */
