@@ -406,17 +406,25 @@ function parseJSX(code: string, offset = 0): ASTNode[] {
       position: relative;
       transition: outline 0.15s ease;
     }
-    .inspect-wrapper.inspecting:hover {
-      outline: 1.5px solid var(--ngxsmk-color-primary);
+    .inspect-wrapper.inspecting {
+      cursor: crosshair;
+    }
+    .inspect-wrapper.inspecting * {
+      pointer-events: none;
+    }
+    .inspect-wrapper.inspecting:hover,
+    .inspect-wrapper.hovered {
+      outline: 2px solid var(--ngxsmk-color-primary, #7c3aed);
       outline-offset: 2px;
       border-radius: var(--ngxsmk-radius-sm);
-      cursor: crosshair;
     }
     /* Pinned by click: stays outlined after the pointer leaves. */
     .inspect-wrapper.selected {
-      outline: 1.5px solid var(--ngxsmk-color-primary);
+      outline: 2px solid var(--ngxsmk-color-primary, #7c3aed);
       outline-offset: 2px;
       border-radius: var(--ngxsmk-radius-sm);
+      box-shadow: 0 0 0 4px
+        color-mix(in srgb, var(--ngxsmk-color-primary, #7c3aed) 20%, transparent);
     }
     .inspect-label {
       position: absolute;
@@ -1380,7 +1388,8 @@ type RadiusKey = keyof typeof RADII;
           class="canvas-scroll-area"
           [class.dark]="mode() === 'dark'"
           [class.show-grid]="showGrid()"
-          [style.background]="
+          [class.inspect-active]="inspectMode()"
+          [style.background-color]="
             mode() === 'dark' ? 'var(--ngxsmk-color-neutral-950)' : 'var(--ngxsmk-color-background)'
           "
         >
@@ -2018,6 +2027,10 @@ type RadiusKey = keyof typeof RADII;
       padding: var(--ngxsmk-space-8);
       position: relative;
       transition: background 0.2s ease;
+    }
+
+    .canvas-scroll-area.inspect-active {
+      cursor: crosshair;
     }
 
     .canvas-scroll-area.show-grid {
