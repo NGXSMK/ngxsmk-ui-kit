@@ -100,7 +100,8 @@
     "queryDesc": "Ställ samman filtervillkor över typade fält med operatorer och värden.",
     "selectedNode": "Vald nod:",
     "pivotRowLabel": "Kvartal",
-    "flowTitle": "Onboarding-flöde"
+    "flowTitle": "Onboarding-flöde",
+    "inputGroupDesc": "Formulärinmatning kombinerat med inledande och avslutande tillägg som valutasymboler och knappar."
   },
   "dataDisplay": {
     "pageDesc": "Komponenter för att presentera strukturerad information – flikar, expanderbar visning, avatarer, taggar, tabeller, listor och mätvärden. Varje del drivs av tokens och är tillgänglig som standard.",
@@ -415,7 +416,8 @@
     "scatterChartDesc": "Rita par av värden för att avslöja korrelation över två axlar.",
     "candlestickChartDesc": "Öppet/högt/lågt/stängt-ljus för finansiella tidsserier. Bulliska ljus är gröna, björniga röda.",
     "heatmapDesc": "En matris av celler färgade efter storlek, med valfria axel-etiketter.",
-    "dashboardDesc": "En responsiv rutnäts-wrapper som arrangerar flera diagram till en panel."
+    "dashboardDesc": "En responsiv rutnäts-wrapper som arrangerar flera diagram till en panel.",
+    "calendarHeatmapDesc": "GitHub-stil daglig bidragskalender-heatmap med HSL-intensitetsnivåer."
   },
   "contentTypography": {
     "intro": "Primitiver för att strukturera och formatera text. Alla komponenter ärver tematokenmotorn, så typografi skalar och färgas om med ditt varumärke.",
@@ -721,7 +723,9 @@
     "filterFeature": "Funktion",
     "langTypeScript": "TypeScript",
     "langAngular": "Angular",
-    "langJavaScript": "JavaScript"
+    "langJavaScript": "JavaScript",
+    "transferDesc": "Dubbel listbox-container för att flytta valda objekt mellan käll- och mållistor.",
+    "signaturePadDesc": "Digital canvas för att rita och exportera smidiga elektroniska signaturer."
   },
   "feedback": {
     "intro": "Komponenter som kommunicerar status, förlopp och systemrespons – från inline-varningar och banderoller till laddare, skelett och närvaroprickar.",
@@ -897,7 +901,8 @@
     "topNavComposedDesc": "Sätt ihop en horisontell fält från toppnav-primitiven – rubrik, objekt, en meny och megameny-kort – inuti en begränsad behållare.",
     "about": "Om",
     "linkTasks": "Uppgifter",
-    "contact": "Kontakt"
+    "contact": "Kontakt",
+    "dockDesc": "Svävande verktygsfält i macOS-stil med hovringsförstorings-effekter och märken."
   },
   "layout": {
     "desc": "Strukturella primitiver för centrering, sektionering, avstånd och arrangering av innehåll. Allt här är tema medvetet och komponerbart, så du kan bygga sidescaffolding utan att skriva anpassad CSS.",
@@ -1099,7 +1104,8 @@
     "cardBravo": "Kort Bravo",
     "cardCharlie": "Kort Charlie",
     "cardDelta": "Kort Delta",
-    "shortcutLogHint": "Tryck på genvägen för att utlösa den."
+    "shortcutLogHint": "Tryck på genvägen för att utlösa den.",
+    "virtualScrollDesc": "Zonlös virtuell viewport-container för att rendera tusentals objekt i 60 FPS."
   },
   "templates": {
     "subtitle": "Färdiga sidmallar för att kickstarta ditt projekt.",
@@ -1267,7 +1273,12 @@
       "emerald": "Smaragd",
       "rose": "Rosé",
       "neutral": "Neutral"
-    }
+    },
+    "ionicAdapterDesc": "Anpassa NGXSMK-designtokens för att smidigt matcha Ionic CSS-variabler.",
+    "ionicAdapterHint": "Aktivera Ionic-kompatibilitetsläge för att synkronisera bakgrunds-, yts- och textfärger.",
+    "applyIonic": "Använd Ionic-förinställning",
+    "clearIonic": "Återställ Ionic-förinställning",
+    "ionicActive": "Ionic-tema aktivt"
   },
   "community": {
     "title": "Gemenskap & bidrag",

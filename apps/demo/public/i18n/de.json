@@ -100,7 +100,8 @@
     "queryDesc": "Stellen Sie Filterbedingungen über typisierte Felder mit Operatoren und Werten zusammen.",
     "selectedNode": "Ausgewählter Knoten:",
     "pivotRowLabel": "Quartal",
-    "flowTitle": "Onboarding-Flow"
+    "flowTitle": "Onboarding-Flow",
+    "inputGroupDesc": "Formulareingabe kombiniert mit führenden und nachfolgenden Add-ons wie Währungssymbolen und Schaltflächen."
   },
   "dataDisplay": {
     "pageDesc": "Komponenten zur Darstellung strukturierter Informationen – Tabs, Aufklappbereiche, Avatare, Tags, Tabellen, Listen und Kennzahlen. Jedes Teil ist token-gesteuert und standardmäßig zugänglich.",
@@ -415,7 +416,8 @@
     "scatterChartDesc": "Tragen Sie Wertepaare auf, um Korrelation über zwei Achsen aufzuzeigen.",
     "candlestickChartDesc": "Open/High/Low/Close-Kerzen für Finanz-Zeitreihen. Bullische Kerzen sind grün, bärische rot.",
     "heatmapDesc": "Eine Matrix von Zellen, die nach Größe eingefärbt sind, mit optionalen Achsenbeschriftungen.",
-    "dashboardDesc": "Ein responsives Raster-Wrapper, der mehrere Diagramme zu einem Panel anordnet."
+    "dashboardDesc": "Ein responsives Raster-Wrapper, der mehrere Diagramme zu einem Panel anordnet.",
+    "calendarHeatmapDesc": "Tägliche Beitrags-Kalender-Heatmap im GitHub-Stil mit HSL-Intensitätsstufen."
   },
   "contentTypography": {
     "intro": "Primitive zur Strukturierung und Gestaltung von Text. Alle Komponenten erben die Theme-Token-Engine, sodass Typografie mit Ihrer Marke skaliert und neu eingefärbt wird.",
@@ -721,7 +723,9 @@
     "filterFeature": "Funktion",
     "langTypeScript": "TypeScript",
     "langAngular": "Angular",
-    "langJavaScript": "JavaScript"
+    "langJavaScript": "JavaScript",
+    "transferDesc": "Doppel-Listbox-Container zum Verschieben ausgewählter Elemente zwischen Quell- und Ziellisten.",
+    "signaturePadDesc": "Digitale Zeichenfläche zum Zeichnen und Exportieren reibungsloser elektronischer Signaturen."
   },
   "feedback": {
     "intro": "Komponenten, die Status, Fortschritt und Systemantworten kommunizieren – von Inline-Warnungen und Bannern bis hin zu Loadern, Skeletons und Präsenz-Punkten.",
@@ -897,7 +901,8 @@
     "topNavComposedDesc": "Stellen Sie eine horizontale Leiste aus Top-Nav-Primitiven – Überschrift, Elemente, ein Menü und Mega-Menü-Karten – innerhalb eines begrenzten Containers zusammen.",
     "about": "Über",
     "linkTasks": "Aufgaben",
-    "contact": "Kontakt"
+    "contact": "Kontakt",
+    "dockDesc": "Schwimmende Symbolleiste im macOS-Stil mit Hover-Vergrößerungseffekten und Badges."
   },
   "layout": {
     "desc": "Strukturelle Primitive zum Zentrieren, Abschnittsbilden, Abständen und Anordnen von Inhalten. Alles hier ist themenbewusst und komponierbar, sodass Sie Seitengerüste erstellen können, ohne eigenes CSS zu schreiben.",
@@ -1099,7 +1104,8 @@
     "cardBravo": "Karte Bravo",
     "cardCharlie": "Karte Charlie",
     "cardDelta": "Karte Delta",
-    "shortcutLogHint": "Drücken Sie das Tastenkürzel, um es auszulösen."
+    "shortcutLogHint": "Drücken Sie das Tastenkürzel, um es auszulösen.",
+    "virtualScrollDesc": "Zonenloser virtueller Viewport-Container zum Rendern von Tausenden von Elementen mit 60 FPS."
   },
   "templates": {
     "subtitle": "Sofort verwendbare Seitenvorlagen, um Ihr Projekt zu starten.",
@@ -1267,7 +1273,12 @@
       "emerald": "Smaragdgrün",
       "rose": "Rose",
       "neutral": "Neutral"
-    }
+    },
+    "ionicAdapterDesc": "Passen Sie NGXSMK-Designtokens nahtlos an Ionic CSS-Variablen an.",
+    "ionicAdapterHint": "Aktivieren Sie den Ionic-Kompatibilitätsmodus zum Synchronisieren von Farben.",
+    "applyIonic": "Ionic-Voreinstellung anwenden",
+    "clearIonic": "Ionic-Voreinstellung zurücksetzen",
+    "ionicActive": "Ionic-Design aktiv"
   },
   "community": {
     "title": "Community & Beitrag",

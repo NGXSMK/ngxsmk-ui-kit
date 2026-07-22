@@ -100,7 +100,8 @@
     "queryDesc": "Composez des conditions de filtrage sur des champs typés avec opérateurs et valeurs.",
     "selectedNode": "Nœud sélectionné :",
     "pivotRowLabel": "Trimestre",
-    "flowTitle": "Flux d'intégration"
+    "flowTitle": "Flux d'intégration",
+    "inputGroupDesc": "Champ de formulaire combiné à des modules complémentaires de début et de fin tels que des symboles monétaires et des boutons."
   },
   "dataDisplay": {
     "pageDesc": "Composants pour présenter des informations structurées — onglets, sections repliables, avatars, étiquettes, tableaux, listes et métriques. Chaque élément est piloté par jetons et accessible par défaut.",
@@ -415,7 +416,8 @@
     "scatterChartDesc": "Tracez des paires de valeurs pour révéler la corrélation sur deux axes.",
     "candlestickChartDesc": "Bougie ouvert/haut/bas/fermé pour séries temporelles financières. Les bougies haussières sont vertes, les baissières rouges.",
     "heatmapDesc": "Une matrice de cellules colorées selon l'ampleur, avec étiquettes d'axes optionnelles.",
-    "dashboardDesc": "Un conteneur de grille réactif qui dispose plusieurs graphiques dans un panneau."
+    "dashboardDesc": "Un conteneur de grille réactif qui dispose plusieurs graphiques dans un panneau.",
+    "calendarHeatmapDesc": "Carte thermique du calendrier des contributions quotidiennes au style GitHub avec niveaux d intensité HSL."
   },
   "contentTypography": {
     "intro": "Primitives pour structurer et styliser le texte. Tous les composants héritent du moteur de jetons de thème, donc la typographie s'adapte et se recolore avec votre marque.",
@@ -721,7 +723,9 @@
     "filterFeature": "Fonctionnalité",
     "langTypeScript": "TypeScript",
     "langAngular": "Angular",
-    "langJavaScript": "JavaScript"
+    "langJavaScript": "JavaScript",
+    "transferDesc": "Conteneur à double liste pour déplacer les éléments sélectionnés entre les listes source et cible.",
+    "signaturePadDesc": "Canevas numérique pour dessiner et exporter des signatures électroniques fluides."
   },
   "feedback": {
     "intro": "Composants qui communiquent statut, progression et réponses système - des alertes en ligne et bannières aux chargeurs, squelettes et points de présence.",
@@ -897,7 +901,8 @@
     "topNavComposedDesc": "Assemblez une barre horizontale à partir des primitives de navigation supérieure - en-tête, éléments, un menu et cartes méga-menu - dans un conteneur contraint.",
     "about": "À propos",
     "linkTasks": "Tâches",
-    "contact": "Contact"
+    "contact": "Contact",
+    "dockDesc": "Barre d outils flottante de style macOS avec effets d agrandissement au survol et badges."
   },
   "layout": {
     "desc": "Primitives structurelles pour centrer, sectionner, espacer et disposer le contenu. Tout ici est conscient du thème et composable, donc vous pouvez construire l'échafaudage de page sans écrire de CSS personnalisé.",
@@ -1099,7 +1104,8 @@
     "cardBravo": "Carte Bravo",
     "cardCharlie": "Carte Charlie",
     "cardDelta": "Carte Delta",
-    "shortcutLogHint": "Appuyez sur le raccourci pour le déclencher."
+    "shortcutLogHint": "Appuyez sur le raccourci pour le déclencher.",
+    "virtualScrollDesc": "Conteneur de fenêtre virtuelle sans zone pour afficher des milliers d éléments à 60 FPS."
   },
   "templates": {
     "subtitle": "Modèles de page prêts à l'emploi pour lancer votre projet.",
@@ -1267,7 +1273,12 @@
       "emerald": "Émeraude",
       "rose": "Rose",
       "neutral": "Neutre"
-    }
+    },
+    "ionicAdapterDesc": "Adaptez les jetons de conception NGXSMK pour correspondre de manière transparente aux variables CSS Ionic.",
+    "ionicAdapterHint": "Activez le mode de compatibilité Ionic pour synchroniser les couleurs de fond, de surface et de texte.",
+    "applyIonic": "Appliquer le préréglage Ionic",
+    "clearIonic": "Réinitialiser le préréglage Ionic",
+    "ionicActive": "Thème Ionic actif"
   },
   "community": {
     "title": "Communauté et contribution",
