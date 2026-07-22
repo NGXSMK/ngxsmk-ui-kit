@@ -1,6 +1,6 @@
 import type { SpreadsheetPlugin } from './plugin.types';
 import type { SpreadsheetEngine } from '../spreadsheet-engine';
-import type { CellAddress, CellRange } from '../models';
+import type { CellAddress } from '../models';
 
 /**
  * SelectionPlugin manages cell/row/column/range selection state.

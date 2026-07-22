@@ -11,7 +11,7 @@ export class FilterPlugin implements SpreadsheetPlugin {
   readonly priority = 20;
 
   private _engine: SpreadsheetEngine | null = null;
-  private _originalRows: ReadonlyArray<RowDef> = [];
+  private _originalRows: readonly RowDef[] = [];
 
   onInit(engine: SpreadsheetEngine): void {
     this._engine = engine;
@@ -19,7 +19,7 @@ export class FilterPlugin implements SpreadsheetPlugin {
   }
 
   /** Apply filter criteria. */
-  applyFilter(criteria: ReadonlyArray<FilterCriterion>, mode: 'and' | 'or'): void {
+  applyFilter(criteria: readonly FilterCriterion[], mode: 'and' | 'or'): void {
     if (!this._engine) return;
     if (criteria.length === 0) {
       this._engine.rowData.set([...this._originalRows]);

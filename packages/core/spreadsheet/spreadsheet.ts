@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -27,24 +28,16 @@ import {
   type CellValue,
   type ColumnDef,
   type RowDef,
-  type RowData,
   type CellAddress,
   type CellRange,
   type SortCriterion,
   type FilterCriterion,
-  PluginHost,
   SortPlugin,
-  FilterPlugin,
   SelectionPlugin,
   UndoPlugin,
   ClipboardPlugin,
   FormulaPlugin,
-  ValidationPlugin,
-} from '@ngxsmk/cdk/spreadsheet';
-import {
   formatCellValue,
-  colIndexToLetter,
-  cellRef,
   normalizeRange,
   cellsInRange,
 } from '@ngxsmk/cdk/spreadsheet';
@@ -177,7 +170,7 @@ export const SPREADSHEET_ENGINE = new InjectionToken<SpreadsheetEngine>('SPREADS
 
 export function provideSpreadsheet(
   config: Partial<SpreadsheetConfig> = {},
-): Array<{ provider: InjectionToken<unknown>; useValue: unknown }> {
+): { provider: InjectionToken<unknown>; useValue: unknown }[] {
   const engine = new SpreadsheetEngine(config);
 
   // Auto-register default plugins
@@ -198,23 +191,6 @@ export function provideSpreadsheet(
     { provider: SPREADSHEET_CONFIG, useValue: config },
     { provider: SPREADSHEET_ENGINE, useValue: engine },
   ];
-}
-
-// ── Helpers ──
-
-function generateRowId(): string {
-  return `row_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
-}
-
-function createEmptyRow(columns: ColumnDef[]): RowDef {
-  const cells: Record<string, { value: CellValue; meta: { type: string } }> = {};
-  for (const col of columns) {
-    cells[col.id] = {
-      value: (col.defaultValue ?? null) as CellValue,
-      meta: { type: col.cellType ?? 'text' },
-    };
-  }
-  return { id: generateRowId(), cells: cells as RowData, selectable: true, editable: true };
 }
 
 // ── Component ──
@@ -322,7 +298,10 @@ function createEmptyRow(columns: ColumnDef[]): RowDef {
                         ? 'descending'
                         : 'none'
                   "
+                  tabindex="0"
                   (click)="engine.sortBy(col.id)"
+                  (keydown.enter)="engine.sortBy(col.id)"
+                  (keydown.space)="engine.sortBy(col.id)"
                 >
                   @if (tplHeader) {
                     <ng-container
@@ -373,7 +352,10 @@ function createEmptyRow(columns: ColumnDef[]): RowDef {
                   "
                   [style.--_row-top.px]="ri * engine.rowHeight()"
                   [attr.data-row-index]="ri"
+                  tabindex="0"
                   (click)="engine.selectRow(ri)"
+                  (keydown.enter)="engine.selectRow(ri)"
+                  (keydown.space)="engine.selectRow(ri)"
                 >
                   @if (tplRowHeader) {
                     <ng-container
@@ -448,13 +430,14 @@ function createEmptyRow(columns: ColumnDef[]): RowDef {
                             "
                           ></ng-container>
                         } @else {
+                          <!-- eslint-disable-next-line @angular-eslint/template/no-autofocus -->
                           <input
+                            autofocus
                             class="ngxsmk-spreadsheet__cell-editor"
                             [ngModel]="engine.editingValue()"
                             (ngModelChange)="engine.editingValue.set($event)"
                             (keydown)="_onEditorKeydown($event)"
                             (blur)="_commitEdit()"
-                            autofocus
                           />
                         }
                       } @else {
@@ -538,13 +521,14 @@ function createEmptyRow(columns: ColumnDef[]): RowDef {
                             "
                           ></ng-container>
                         } @else {
+                          <!-- eslint-disable-next-line @angular-eslint/template/no-autofocus -->
                           <input
+                            autofocus
                             class="ngxsmk-spreadsheet__cell-editor"
                             [ngModel]="engine.editingValue()"
                             (ngModelChange)="engine.editingValue.set($event)"
                             (keydown)="_onEditorKeydown($event)"
                             (blur)="_commitEdit()"
-                            autofocus
                           />
                         }
                       } @else {
@@ -667,13 +651,14 @@ function createEmptyRow(columns: ColumnDef[]): RowDef {
                             "
                           ></ng-container>
                         } @else {
+                          <!-- eslint-disable-next-line @angular-eslint/template/no-autofocus -->
                           <input
+                            autofocus
                             class="ngxsmk-spreadsheet__cell-editor"
                             [ngModel]="engine.editingValue()"
                             (ngModelChange)="engine.editingValue.set($event)"
                             (keydown)="_onEditorKeydown($event)"
                             (blur)="_commitEdit()"
-                            autofocus
                           />
                         }
                       } @else {
@@ -757,7 +742,9 @@ function createEmptyRow(columns: ColumnDef[]): RowDef {
     @if (_contextMenuVisible()) {
       <div
         class="ngxsmk-spreadsheet__context-menu-overlay"
+        tabindex="0"
         (click)="_contextMenuVisible.set(false)"
+        (keydown.escape)="_contextMenuVisible.set(false)"
         (contextmenu)="_contextMenuVisible.set(false); $event.preventDefault()"
       >
         @if (tplContextMenu) {
@@ -1223,7 +1210,7 @@ function createEmptyRow(columns: ColumnDef[]): RowDef {
     }
   `,
 })
-export class NgxsmkSpreadsheet implements OnInit {
+export class NgxsmkSpreadsheet implements OnInit, AfterViewInit {
   // ── Inputs ──
   readonly columns = input<ColumnDef[]>([]);
   readonly rows = input<RowDef[]>([]);
@@ -1248,7 +1235,7 @@ export class NgxsmkSpreadsheet implements OnInit {
   readonly filterChange = output<FilterCriterion[]>();
   readonly rowInsert = output<{ count: number; index: number }>();
   readonly rowDelete = output<{ indices: number[]; rows: RowDef[] }>();
-  readonly scroll = output<{ scrollTop: number; scrollLeft: number }>();
+  readonly scrolled = output<{ scrollTop: number; scrollLeft: number }>();
 
   // ── Template Refs ──
   protected readonly tplCell = inject(SPREADSHEET_CELL_TEMPLATE, { optional: true });
@@ -1396,7 +1383,7 @@ export class NgxsmkSpreadsheet implements OnInit {
     this._scrollLeft.set(el.scrollLeft);
     this.engine.scrollTop.set(el.scrollTop);
     this.engine.scrollLeft.set(el.scrollLeft);
-    this.scroll.emit({ scrollTop: el.scrollTop, scrollLeft: el.scrollLeft });
+    this.scrolled.emit({ scrollTop: el.scrollTop, scrollLeft: el.scrollLeft });
   }
 
   // ── Column Offsets ──
@@ -1433,7 +1420,6 @@ export class NgxsmkSpreadsheet implements OnInit {
   }
 
   protected _scrollableColOffset(colIndex: number): number {
-    const pinned = this.engine.pinnedLeftColumns().length;
     const cols = this.engine.unpinnedColumns();
     const widths = this.engine.columnWidths();
     let offset = 0;

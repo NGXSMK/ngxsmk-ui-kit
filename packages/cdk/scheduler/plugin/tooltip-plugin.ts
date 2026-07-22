@@ -40,7 +40,7 @@ export class TooltipPlugin implements SchedulerPlugin {
   private _options: Required<TooltipPluginOptions>;
   private _timeout: ReturnType<typeof setTimeout> | null = null;
   private _state: TooltipState = createDefaultTooltipState();
-  private _listeners: Array<() => void> = [];
+  private _listeners: (() => void)[] = [];
 
   constructor(options: TooltipPluginOptions = {}) {
     this._options = {
@@ -49,7 +49,11 @@ export class TooltipPlugin implements SchedulerPlugin {
       placement: options.placement ?? 'top',
       maxWidth: options.maxWidth ?? 280,
       onShow: options.onShow ?? (() => true),
-      onHide: options.onHide ?? (() => {}),
+      onHide:
+        options.onHide ??
+        (() => {
+          /* noop */
+        }),
       content: options.content ?? defaultContent,
     };
   }

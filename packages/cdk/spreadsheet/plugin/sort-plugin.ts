@@ -17,7 +17,7 @@ export class SortPlugin implements SpreadsheetPlugin {
   }
 
   /** Apply all active sort criteria to the engine's row list. */
-  applySort(criteria: ReadonlyArray<SortCriterion>): void {
+  applySort(criteria: readonly SortCriterion[]): void {
     if (!this._engine || criteria.length === 0) return;
 
     const defs = this._engine.columnDefs();
@@ -46,7 +46,7 @@ export class SortPlugin implements SpreadsheetPlugin {
     this._engine.rowData.set(sorted);
   }
 
-  onBeforeSort(colId: string, direction: 'asc' | 'desc' | null): boolean {
+  onBeforeSort(_colId: string, _direction: 'asc' | 'desc' | null): boolean {
     return true;
   }
 

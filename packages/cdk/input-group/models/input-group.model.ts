@@ -130,7 +130,7 @@ export interface InputGroupState {
   /** Current character count. */
   readonly charCount: number;
   /** Registered add-ons. */
-  readonly addons: ReadonlyArray<InputGroupAddon>;
+  readonly addons: readonly InputGroupAddon[];
   /** Whether the input has content (for floating label positioning). */
   readonly hasContent: boolean;
 }

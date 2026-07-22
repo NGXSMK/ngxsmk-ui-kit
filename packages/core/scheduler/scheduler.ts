@@ -19,7 +19,7 @@
   type QueryList,
   type TemplateRef,
 } from '@angular/core';
-import { CommonModule, DatePipe, NgTemplateOutlet } from '@angular/common';
+import { CommonModule, NgTemplateOutlet } from '@angular/common';
 
 import {
   SchedulerEngine,
@@ -30,24 +30,16 @@ import {
   type SchedulerResize,
   type ViewState,
   type ViewType,
-  type WorkingHours,
   type SchedulerPlugin,
   type Density,
   type SchedulerConfig,
-  PluginHost,
   formatHour,
-  formatDateRange,
   isToday,
   isWeekend,
   isPast,
-  isSameDay,
-  addDays,
   addMinutes,
-  diffMinutes,
   snapDateToSlot,
-  timeToMinutes,
   minutesToTime,
-  getWeekDates,
   getMonthGrid,
 } from '@ngxsmk/cdk/scheduler';
 
@@ -100,7 +92,7 @@ export const SCHEDULER_ENGINE = new InjectionToken<SchedulerEngine>('SCHEDULER_E
 
 export function provideScheduler(
   config: SchedulerConfig = {},
-): Array<{ provider: InjectionToken<unknown>; useValue: unknown }> {
+): { provider: InjectionToken<unknown>; useValue: unknown }[] {
   return [
     { provider: SCHEDULER_CONFIG, useValue: config },
     { provider: SCHEDULER_ENGINE, useValue: new SchedulerEngine(config) },
@@ -249,7 +241,10 @@ const HOURS = Array.from({ length: 24 }, (_, i) => i);
                   class="ngxsmk-sch__event ngxsmk-sch__event--allday"
                   [style.background]="event.color || ''"
                   [style.color]="event.textColor || ''"
+                  tabindex="0"
                   (click)="onEventClick(event)"
+                  (keydown.enter)="onEventClick(event)"
+                  (keydown.space)="onEventClick(event)"
                 >
                   {{ event.title }}
                 </div>
@@ -440,7 +435,10 @@ const HOURS = Array.from({ length: 24 }, (_, i) => i);
                         class="ngxsmk-sch__month-event"
                         [style.background]="event.color || ''"
                         [style.color]="event.textColor || ''"
+                        tabindex="0"
                         (click)="onEventClick(event)"
+                        (keydown.enter)="onEventClick(event)"
+                        (keydown.space)="onEventClick(event)"
                       >
                         <span class="ngxsmk-sch__month-event-time">{{
                           event.start | date: 'HH:mm'
@@ -1588,7 +1586,7 @@ export class NgxsmkScheduler implements OnInit {
     this.dragOverDay.set(hit.day.toISOString());
   };
 
-  private _handleDocDragEnd = (pe: PointerEvent): void => {
+  private _handleDocDragEnd = (_pe: PointerEvent): void => {
     document.removeEventListener('pointermove', this._onDocPointerMove!);
     document.removeEventListener('pointerup', this._onDocPointerUp!);
     this._onDocPointerMove = null;

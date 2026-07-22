@@ -13,11 +13,7 @@ import {
 import { NgxsmkTimelineGantt, type GanttItem } from '@ngxsmk/core/timeline-gantt';
 import { NgxsmkWorkflowBuilder, type WorkflowNode } from '@ngxsmk/core/workflow-builder';
 import { NgxsmkRuleBuilder, type RuleGroup } from '@ngxsmk/core/rule-builder';
-import {
-  NgxsmkSpreadsheet,
-  provideSpreadsheet,
-  SPREADSHEET_ENGINE,
-} from '@ngxsmk/core/spreadsheet';
+import { NgxsmkSpreadsheet } from '@ngxsmk/core/spreadsheet';
 import type { ColumnDef, RowDef } from '@ngxsmk/cdk/spreadsheet';
 import { NgxsmkPivotTable, type PivotRow } from '@ngxsmk/core/pivot-table';
 import { NgxsmkFlowEditor } from '@ngxsmk/core/flow-editor';
