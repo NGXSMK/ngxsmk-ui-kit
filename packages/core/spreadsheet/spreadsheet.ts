@@ -41,7 +41,13 @@ import {
   FormulaPlugin,
   ValidationPlugin,
 } from '@ngxsmk/cdk/spreadsheet';
-import { formatCellValue, colIndexToLetter, cellRef, normalizeRange, cellsInRange } from '@ngxsmk/cdk/spreadsheet';
+import {
+  formatCellValue,
+  colIndexToLetter,
+  cellRef,
+  normalizeRange,
+  cellsInRange,
+} from '@ngxsmk/cdk/spreadsheet';
 
 // ── Template Injection Tokens ──
 
@@ -131,45 +137,47 @@ export interface SpreadsheetEditorContext {
 
 // ── Template Tokens ──
 
-export const SPREADSHEET_CELL_TEMPLATE = new InjectionToken<TemplateRef<SpreadsheetCellContext> | null>(
-  'SPREADSHEET_CELL_TEMPLATE',
-);
-export const SPREADSHEET_HEADER_TEMPLATE = new InjectionToken<TemplateRef<SpreadsheetHeaderContext> | null>(
-  'SPREADSHEET_HEADER_TEMPLATE',
-);
-export const SPREADSHEET_ROW_HEADER_TEMPLATE = new InjectionToken<TemplateRef<SpreadsheetRowHeaderContext> | null>(
-  'SPREADSHEET_ROW_HEADER_TEMPLATE',
-);
-export const SPREADSHEET_TOOLBAR_TEMPLATE = new InjectionToken<TemplateRef<SpreadsheetToolbarContext> | null>(
-  'SPREADSHEET_TOOLBAR_TEMPLATE',
-);
-export const SPREADSHEET_CONTEXT_MENU_TEMPLATE = new InjectionToken<TemplateRef<SpreadsheetContextMenuContext> | null>(
-  'SPREADSHEET_CONTEXT_MENU_TEMPLATE',
-);
-export const SPREADSHEET_EMPTY_TEMPLATE = new InjectionToken<TemplateRef<SpreadsheetEmptyContext> | null>(
-  'SPREADSHEET_EMPTY_TEMPLATE',
-);
-export const SPREADSHEET_LOADING_TEMPLATE = new InjectionToken<TemplateRef<SpreadsheetLoadingContext> | null>(
-  'SPREADSHEET_LOADING_TEMPLATE',
-);
-export const SPREADSHEET_STATUS_BAR_TEMPLATE = new InjectionToken<TemplateRef<SpreadsheetStatusBarContext> | null>(
-  'SPREADSHEET_STATUS_BAR_TEMPLATE',
-);
-export const SPREADSHEET_FORMULA_BAR_TEMPLATE = new InjectionToken<TemplateRef<SpreadsheetFormulaBarContext> | null>(
-  'SPREADSHEET_FORMULA_BAR_TEMPLATE',
-);
-export const SPREADSHEET_EDITOR_TEMPLATE = new InjectionToken<TemplateRef<SpreadsheetEditorContext> | null>(
-  'SPREADSHEET_EDITOR_TEMPLATE',
-);
+export const SPREADSHEET_CELL_TEMPLATE =
+  new InjectionToken<TemplateRef<SpreadsheetCellContext> | null>('SPREADSHEET_CELL_TEMPLATE');
+export const SPREADSHEET_HEADER_TEMPLATE =
+  new InjectionToken<TemplateRef<SpreadsheetHeaderContext> | null>('SPREADSHEET_HEADER_TEMPLATE');
+export const SPREADSHEET_ROW_HEADER_TEMPLATE =
+  new InjectionToken<TemplateRef<SpreadsheetRowHeaderContext> | null>(
+    'SPREADSHEET_ROW_HEADER_TEMPLATE',
+  );
+export const SPREADSHEET_TOOLBAR_TEMPLATE =
+  new InjectionToken<TemplateRef<SpreadsheetToolbarContext> | null>('SPREADSHEET_TOOLBAR_TEMPLATE');
+export const SPREADSHEET_CONTEXT_MENU_TEMPLATE =
+  new InjectionToken<TemplateRef<SpreadsheetContextMenuContext> | null>(
+    'SPREADSHEET_CONTEXT_MENU_TEMPLATE',
+  );
+export const SPREADSHEET_EMPTY_TEMPLATE =
+  new InjectionToken<TemplateRef<SpreadsheetEmptyContext> | null>('SPREADSHEET_EMPTY_TEMPLATE');
+export const SPREADSHEET_LOADING_TEMPLATE =
+  new InjectionToken<TemplateRef<SpreadsheetLoadingContext> | null>('SPREADSHEET_LOADING_TEMPLATE');
+export const SPREADSHEET_STATUS_BAR_TEMPLATE =
+  new InjectionToken<TemplateRef<SpreadsheetStatusBarContext> | null>(
+    'SPREADSHEET_STATUS_BAR_TEMPLATE',
+  );
+export const SPREADSHEET_FORMULA_BAR_TEMPLATE =
+  new InjectionToken<TemplateRef<SpreadsheetFormulaBarContext> | null>(
+    'SPREADSHEET_FORMULA_BAR_TEMPLATE',
+  );
+export const SPREADSHEET_EDITOR_TEMPLATE =
+  new InjectionToken<TemplateRef<SpreadsheetEditorContext> | null>('SPREADSHEET_EDITOR_TEMPLATE');
 
 // ── DI Tokens ──
 
-export const SPREADSHEET_CONFIG = new InjectionToken<Partial<SpreadsheetConfig>>('SPREADSHEET_CONFIG');
+export const SPREADSHEET_CONFIG = new InjectionToken<Partial<SpreadsheetConfig>>(
+  'SPREADSHEET_CONFIG',
+);
 export const SPREADSHEET_ENGINE = new InjectionToken<SpreadsheetEngine>('SPREADSHEET_ENGINE');
 
 // ── Provider Function ──
 
-export function provideSpreadsheet(config: Partial<SpreadsheetConfig> = {}): Array<{ provider: InjectionToken<unknown>; useValue: unknown }> {
+export function provideSpreadsheet(
+  config: Partial<SpreadsheetConfig> = {},
+): Array<{ provider: InjectionToken<unknown>; useValue: unknown }> {
   const engine = new SpreadsheetEngine(config);
 
   // Auto-register default plugins
@@ -240,12 +248,15 @@ function createEmptyRow(columns: ColumnDef[]): RowDef {
     @if (tplFormulaBar) {
       <div class="ngxsmk-spreadsheet__formula-bar">
         <ng-container
-          *ngTemplateOutlet="tplFormulaBar; context: {
-            $implicit: engine,
-            engine: engine,
-            activeCell: engine.selection().activeCell,
-            cellValue: _activeCellValue()
-          }"
+          *ngTemplateOutlet="
+            tplFormulaBar;
+            context: {
+              $implicit: engine,
+              engine: engine,
+              activeCell: engine.selection().activeCell,
+              cellValue: _activeCellValue(),
+            }
+          "
         ></ng-container>
       </div>
     }
@@ -260,12 +271,19 @@ function createEmptyRow(columns: ColumnDef[]): RowDef {
         } @else {
           <div class="ngxsmk-spreadsheet__empty">
             <div class="ngxsmk-spreadsheet__empty-icon">
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <rect x="3" y="3" width="18" height="18" rx="2"/>
-                <line x1="3" y1="9" x2="21" y2="9"/>
-                <line x1="3" y1="15" x2="21" y2="15"/>
-                <line x1="9" y1="3" x2="9" y2="21"/>
-                <line x1="15" y1="3" x2="15" y2="21"/>
+              <svg
+                width="48"
+                height="48"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              >
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <line x1="3" y1="9" x2="21" y2="9" />
+                <line x1="3" y1="15" x2="21" y2="15" />
+                <line x1="9" y1="3" x2="9" y2="21" />
+                <line x1="15" y1="3" x2="15" y2="21" />
               </svg>
             </div>
             <p class="ngxsmk-spreadsheet__empty-text">No data to display</p>
@@ -289,24 +307,35 @@ function createEmptyRow(columns: ColumnDef[]): RowDef {
               @for (col of engine.visibleColumns(); track col.id; let ci = $index) {
                 <div
                   class="ngxsmk-spreadsheet__col-header"
-                  [class.ngxsmk-spreadsheet__col-header--sorted]="engine.getColumnState(col.id)?.sort"
+                  [class.ngxsmk-spreadsheet__col-header--sorted]="
+                    engine.getColumnState(col.id)?.sort
+                  "
                   [class.ngxsmk-spreadsheet__col-header--pinned-left]="col.pinned === 'left'"
                   [class.ngxsmk-spreadsheet__col-header--pinned-right]="col.pinned === 'right'"
                   [style.--_col-w.px]="engine.columnWidths().get(col.id)"
                   [style.--_col-left.px]="_colOffset(col.id)"
                   [attr.data-col-index]="ci"
-                  [attr.aria-sort]="engine.getColumnState(col.id)?.sort === 'asc' ? 'ascending' : engine.getColumnState(col.id)?.sort === 'desc' ? 'descending' : 'none'"
+                  [attr.aria-sort]="
+                    engine.getColumnState(col.id)?.sort === 'asc'
+                      ? 'ascending'
+                      : engine.getColumnState(col.id)?.sort === 'desc'
+                        ? 'descending'
+                        : 'none'
+                  "
                   (click)="engine.sortBy(col.id)"
                 >
                   @if (tplHeader) {
                     <ng-container
-                      *ngTemplateOutlet="tplHeader; context: {
-                        $implicit: col,
-                        col: col,
-                        colIndex: ci,
-                        sortDirection: engine.getColumnState(col.id)?.sort ?? null,
-                        resizing: false
-                      }"
+                      *ngTemplateOutlet="
+                        tplHeader;
+                        context: {
+                          $implicit: col,
+                          col: col,
+                          colIndex: ci,
+                          sortDirection: engine.getColumnState(col.id)?.sort ?? null,
+                          resizing: false,
+                        }
+                      "
                     ></ng-container>
                   } @else {
                     <span class="ngxsmk-spreadsheet__col-header-text">{{ col.header }}</span>
@@ -339,18 +368,23 @@ function createEmptyRow(columns: ColumnDef[]): RowDef {
               @if (ri >= _virtualRange().start && ri < _virtualRange().end) {
                 <div
                   class="ngxsmk-spreadsheet__row-header"
-                  [class.ngxsmk-spreadsheet__row-header--selected]="engine.selection().selectedRows.has(ri)"
+                  [class.ngxsmk-spreadsheet__row-header--selected]="
+                    engine.selection().selectedRows.has(ri)
+                  "
                   [style.--_row-top.px]="ri * engine.rowHeight()"
                   [attr.data-row-index]="ri"
                   (click)="engine.selectRow(ri)"
                 >
                   @if (tplRowHeader) {
                     <ng-container
-                      *ngTemplateOutlet="tplRowHeader; context: {
-                        $implicit: ri,
-                        rowIndex: ri,
-                        selected: engine.selection().selectedRows.has(ri)
-                      }"
+                      *ngTemplateOutlet="
+                        tplRowHeader;
+                        context: {
+                          $implicit: ri,
+                          rowIndex: ri,
+                          selected: engine.selection().selectedRows.has(ri),
+                        }
+                      "
                     ></ng-container>
                   } @else {
                     {{ ri + 1 }}
@@ -400,15 +434,18 @@ function createEmptyRow(columns: ColumnDef[]): RowDef {
                       @if (_isEditing(ri, ci)) {
                         @if (tplEditor) {
                           <ng-container
-                            *ngTemplateOutlet="tplEditor; context: {
-                              $implicit: engine.editingValue(),
-                              value: engine.editingValue(),
-                              rowIndex: ri,
-                              colIndex: ci,
-                              col: col,
-                              commit: _commitEdit,
-                              cancel: _cancelEdit
-                            }"
+                            *ngTemplateOutlet="
+                              tplEditor;
+                              context: {
+                                $implicit: engine.editingValue(),
+                                value: engine.editingValue(),
+                                rowIndex: ri,
+                                colIndex: ci,
+                                col: col,
+                                commit: _commitEdit,
+                                cancel: _cancelEdit,
+                              }
+                            "
                           ></ng-container>
                         } @else {
                           <input
@@ -423,18 +460,21 @@ function createEmptyRow(columns: ColumnDef[]): RowDef {
                       } @else {
                         @if (tplCell) {
                           <ng-container
-                            *ngTemplateOutlet="tplCell; context: {
-                              $implicit: row.cells[col.id]?.value,
-                              value: row.cells[col.id]?.value,
-                              rowIndex: ri,
-                              colIndex: ci,
-                              col: col,
-                              row: row,
-                              editing: false,
-                              selected: engine.isCellSelected(ri, ci),
-                              active: engine.isCellActive(ri, ci),
-                              engine: engine
-                            }"
+                            *ngTemplateOutlet="
+                              tplCell;
+                              context: {
+                                $implicit: row.cells[col.id]?.value,
+                                value: row.cells[col.id]?.value,
+                                rowIndex: ri,
+                                colIndex: ci,
+                                col: col,
+                                row: row,
+                                editing: false,
+                                selected: engine.isCellSelected(ri, ci),
+                                active: engine.isCellActive(ri, ci),
+                                engine: engine,
+                              }
+                            "
                           ></ng-container>
                         } @else {
                           <span class="ngxsmk-spreadsheet__cell-text">
@@ -457,32 +497,45 @@ function createEmptyRow(columns: ColumnDef[]): RowDef {
                   @for (row of engine.displayRows(); track row.id; let ri = $index) {
                     <div
                       class="ngxsmk-spreadsheet__cell"
-                      [class.ngxsmk-spreadsheet__cell--selected]="engine.isCellSelected(ri, ci + engine.pinnedLeftColumns().length)"
-                      [class.ngxsmk-spreadsheet__cell--active]="engine.isCellActive(ri, ci + engine.pinnedLeftColumns().length)"
-                      [class.ngxsmk-spreadsheet__cell--editing]="_isEditing(ri, ci + engine.pinnedLeftColumns().length)"
+                      [class.ngxsmk-spreadsheet__cell--selected]="
+                        engine.isCellSelected(ri, ci + engine.pinnedLeftColumns().length)
+                      "
+                      [class.ngxsmk-spreadsheet__cell--active]="
+                        engine.isCellActive(ri, ci + engine.pinnedLeftColumns().length)
+                      "
+                      [class.ngxsmk-spreadsheet__cell--editing]="
+                        _isEditing(ri, ci + engine.pinnedLeftColumns().length)
+                      "
                       [style.--_row-top.px]="ri * engine.rowHeight()"
                       [attr.data-row]="ri"
                       [attr.data-col]="ci + engine.pinnedLeftColumns().length"
                       [attr.data-col-id]="col.id"
                       [attr.aria-rowindex]="ri + 1"
                       [attr.aria-colindex]="ci + engine.pinnedLeftColumns().length + 1"
-                      [attr.aria-selected]="engine.isCellSelected(ri, ci + engine.pinnedLeftColumns().length)"
+                      [attr.aria-selected]="
+                        engine.isCellSelected(ri, ci + engine.pinnedLeftColumns().length)
+                      "
                       role="gridcell"
-                      (mousedown)="_onCellMouseDown(ri, ci + engine.pinnedLeftColumns().length, $event)"
+                      (mousedown)="
+                        _onCellMouseDown(ri, ci + engine.pinnedLeftColumns().length, $event)
+                      "
                       (dblclick)="_onCellDblClick(ri, ci + engine.pinnedLeftColumns().length)"
                     >
                       @if (_isEditing(ri, ci + engine.pinnedLeftColumns().length)) {
                         @if (tplEditor) {
                           <ng-container
-                            *ngTemplateOutlet="tplEditor; context: {
-                              $implicit: engine.editingValue(),
-                              value: engine.editingValue(),
-                              rowIndex: ri,
-                              colIndex: ci + engine.pinnedLeftColumns().length,
-                              col: col,
-                              commit: _commitEdit,
-                              cancel: _cancelEdit
-                            }"
+                            *ngTemplateOutlet="
+                              tplEditor;
+                              context: {
+                                $implicit: engine.editingValue(),
+                                value: engine.editingValue(),
+                                rowIndex: ri,
+                                colIndex: ci + engine.pinnedLeftColumns().length,
+                                col: col,
+                                commit: _commitEdit,
+                                cancel: _cancelEdit,
+                              }
+                            "
                           ></ng-container>
                         } @else {
                           <input
@@ -497,18 +550,27 @@ function createEmptyRow(columns: ColumnDef[]): RowDef {
                       } @else {
                         @if (tplCell) {
                           <ng-container
-                            *ngTemplateOutlet="tplCell; context: {
-                              $implicit: row.cells[col.id]?.value,
-                              value: row.cells[col.id]?.value,
-                              rowIndex: ri,
-                              colIndex: ci + engine.pinnedLeftColumns().length,
-                              col: col,
-                              row: row,
-                              editing: false,
-                              selected: engine.isCellSelected(ri, ci + engine.pinnedLeftColumns().length),
-                              active: engine.isCellActive(ri, ci + engine.pinnedLeftColumns().length),
-                              engine: engine
-                            }"
+                            *ngTemplateOutlet="
+                              tplCell;
+                              context: {
+                                $implicit: row.cells[col.id]?.value,
+                                value: row.cells[col.id]?.value,
+                                rowIndex: ri,
+                                colIndex: ci + engine.pinnedLeftColumns().length,
+                                col: col,
+                                row: row,
+                                editing: false,
+                                selected: engine.isCellSelected(
+                                  ri,
+                                  ci + engine.pinnedLeftColumns().length
+                                ),
+                                active: engine.isCellActive(
+                                  ri,
+                                  ci + engine.pinnedLeftColumns().length
+                                ),
+                                engine: engine,
+                              }
+                            "
                           ></ng-container>
                         } @else {
                           <span class="ngxsmk-spreadsheet__cell-text">
@@ -531,32 +593,78 @@ function createEmptyRow(columns: ColumnDef[]): RowDef {
                   @for (row of engine.displayRows(); track row.id; let ri = $index) {
                     <div
                       class="ngxsmk-spreadsheet__cell"
-                      [class.ngxsmk-spreadsheet__cell--selected]="engine.isCellSelected(ri, ci + engine.pinnedLeftColumns().length + engine.unpinnedColumns().length)"
-                      [class.ngxsmk-spreadsheet__cell--active]="engine.isCellActive(ri, ci + engine.pinnedLeftColumns().length + engine.unpinnedColumns().length)"
-                      [class.ngxsmk-spreadsheet__cell--editing]="_isEditing(ri, ci + engine.pinnedLeftColumns().length + engine.unpinnedColumns().length)"
+                      [class.ngxsmk-spreadsheet__cell--selected]="
+                        engine.isCellSelected(
+                          ri,
+                          ci + engine.pinnedLeftColumns().length + engine.unpinnedColumns().length
+                        )
+                      "
+                      [class.ngxsmk-spreadsheet__cell--active]="
+                        engine.isCellActive(
+                          ri,
+                          ci + engine.pinnedLeftColumns().length + engine.unpinnedColumns().length
+                        )
+                      "
+                      [class.ngxsmk-spreadsheet__cell--editing]="
+                        _isEditing(
+                          ri,
+                          ci + engine.pinnedLeftColumns().length + engine.unpinnedColumns().length
+                        )
+                      "
                       [style.--_row-top.px]="ri * engine.rowHeight()"
                       [attr.data-row]="ri"
-                      [attr.data-col]="ci + engine.pinnedLeftColumns().length + engine.unpinnedColumns().length"
+                      [attr.data-col]="
+                        ci + engine.pinnedLeftColumns().length + engine.unpinnedColumns().length
+                      "
                       [attr.data-col-id]="col.id"
                       [attr.aria-rowindex]="ri + 1"
-                      [attr.aria-colindex]="ci + engine.pinnedLeftColumns().length + engine.unpinnedColumns().length + 1"
-                      [attr.aria-selected]="engine.isCellSelected(ri, ci + engine.pinnedLeftColumns().length + engine.unpinnedColumns().length)"
+                      [attr.aria-colindex]="
+                        ci + engine.pinnedLeftColumns().length + engine.unpinnedColumns().length + 1
+                      "
+                      [attr.aria-selected]="
+                        engine.isCellSelected(
+                          ri,
+                          ci + engine.pinnedLeftColumns().length + engine.unpinnedColumns().length
+                        )
+                      "
                       role="gridcell"
-                      (mousedown)="_onCellMouseDown(ri, ci + engine.pinnedLeftColumns().length + engine.unpinnedColumns().length, $event)"
-                      (dblclick)="_onCellDblClick(ri, ci + engine.pinnedLeftColumns().length + engine.unpinnedColumns().length)"
+                      (mousedown)="
+                        _onCellMouseDown(
+                          ri,
+                          ci + engine.pinnedLeftColumns().length + engine.unpinnedColumns().length,
+                          $event
+                        )
+                      "
+                      (dblclick)="
+                        _onCellDblClick(
+                          ri,
+                          ci + engine.pinnedLeftColumns().length + engine.unpinnedColumns().length
+                        )
+                      "
                     >
-                      @if (_isEditing(ri, ci + engine.pinnedLeftColumns().length + engine.unpinnedColumns().length)) {
+                      @if (
+                        _isEditing(
+                          ri,
+                          ci + engine.pinnedLeftColumns().length + engine.unpinnedColumns().length
+                        )
+                      ) {
                         @if (tplEditor) {
                           <ng-container
-                            *ngTemplateOutlet="tplEditor; context: {
-                              $implicit: engine.editingValue(),
-                              value: engine.editingValue(),
-                              rowIndex: ri,
-                              colIndex: ci + engine.pinnedLeftColumns().length + engine.unpinnedColumns().length,
-                              col: col,
-                              commit: _commitEdit,
-                              cancel: _cancelEdit
-                            }"
+                            *ngTemplateOutlet="
+                              tplEditor;
+                              context: {
+                                $implicit: engine.editingValue(),
+                                value: engine.editingValue(),
+                                rowIndex: ri,
+                                colIndex:
+                                  ci +
+                                  engine.pinnedLeftColumns().length +
+                                  engine.unpinnedColumns().length,
+                                col: col,
+                                commit: _commitEdit,
+                                cancel: _cancelEdit,
+                              }
+                            "
                           ></ng-container>
                         } @else {
                           <input
@@ -571,18 +679,34 @@ function createEmptyRow(columns: ColumnDef[]): RowDef {
                       } @else {
                         @if (tplCell) {
                           <ng-container
-                            *ngTemplateOutlet="tplCell; context: {
-                              $implicit: row.cells[col.id]?.value,
-                              value: row.cells[col.id]?.value,
-                              rowIndex: ri,
-                              colIndex: ci + engine.pinnedLeftColumns().length + engine.unpinnedColumns().length,
-                              col: col,
-                              row: row,
-                              editing: false,
-                              selected: engine.isCellSelected(ri, ci + engine.pinnedLeftColumns().length + engine.unpinnedColumns().length),
-                              active: engine.isCellActive(ri, ci + engine.pinnedLeftColumns().length + engine.unpinnedColumns().length),
-                              engine: engine
-                            }"
+                            *ngTemplateOutlet="
+                              tplCell;
+                              context: {
+                                $implicit: row.cells[col.id]?.value,
+                                value: row.cells[col.id]?.value,
+                                rowIndex: ri,
+                                colIndex:
+                                  ci +
+                                  engine.pinnedLeftColumns().length +
+                                  engine.unpinnedColumns().length,
+                                col: col,
+                                row: row,
+                                editing: false,
+                                selected: engine.isCellSelected(
+                                  ri,
+                                  ci +
+                                    engine.pinnedLeftColumns().length +
+                                    engine.unpinnedColumns().length
+                                ),
+                                active: engine.isCellActive(
+                                  ri,
+                                  ci +
+                                    engine.pinnedLeftColumns().length +
+                                    engine.unpinnedColumns().length
+                                ),
+                                engine: engine,
+                              }
+                            "
                           ></ng-container>
                         } @else {
                           <span class="ngxsmk-spreadsheet__cell-text">
@@ -602,13 +726,16 @@ function createEmptyRow(columns: ColumnDef[]): RowDef {
         @if (tplStatusBar) {
           <div class="ngxsmk-spreadsheet__status-bar">
             <ng-container
-              *ngTemplateOutlet="tplStatusBar; context: {
-                $implicit: engine,
-                engine: engine,
-                selectedCount: _selectedCellCount(),
-                totalRows: engine.totalRows(),
-                totalCols: engine.totalColumns()
-              }"
+              *ngTemplateOutlet="
+                tplStatusBar;
+                context: {
+                  $implicit: engine,
+                  engine: engine,
+                  selectedCount: _selectedCellCount(),
+                  totalRows: engine.totalRows(),
+                  totalCols: engine.totalColumns(),
+                }
+              "
             ></ng-container>
           </div>
         } @else {
@@ -640,12 +767,20 @@ function createEmptyRow(columns: ColumnDef[]): RowDef {
             [style.--_ctx-y.px]="_contextMenuPos().y"
           >
             <ng-container
-              *ngTemplateOutlet="tplContextMenu; context: {
-                $implicit: _contextMenuPos(),
-                cellAddress: { row: _contextMenuPos().row, col: _contextMenuPos().col, x: _contextMenuPos().x, y: _contextMenuPos().y },
-                engine: engine,
-                close: _closeContextMenu
-              }"
+              *ngTemplateOutlet="
+                tplContextMenu;
+                context: {
+                  $implicit: _contextMenuPos(),
+                  cellAddress: {
+                    row: _contextMenuPos().row,
+                    col: _contextMenuPos().col,
+                    x: _contextMenuPos().x,
+                    y: _contextMenuPos().y,
+                  },
+                  engine: engine,
+                  close: _closeContextMenu,
+                }
+              "
             ></ng-container>
           </div>
         } @else {
@@ -658,10 +793,19 @@ function createEmptyRow(columns: ColumnDef[]): RowDef {
             <button class="ngxsmk-spreadsheet__ctx-item" (click)="_ctxCopy()">Copy</button>
             <button class="ngxsmk-spreadsheet__ctx-item" (click)="_ctxPaste()">Paste</button>
             <div class="ngxsmk-spreadsheet__ctx-separator"></div>
-            <button class="ngxsmk-spreadsheet__ctx-item" (click)="_ctxInsertRowAbove()">Insert row above</button>
-            <button class="ngxsmk-spreadsheet__ctx-item" (click)="_ctxInsertRowBelow()">Insert row below</button>
+            <button class="ngxsmk-spreadsheet__ctx-item" (click)="_ctxInsertRowAbove()">
+              Insert row above
+            </button>
+            <button class="ngxsmk-spreadsheet__ctx-item" (click)="_ctxInsertRowBelow()">
+              Insert row below
+            </button>
             <div class="ngxsmk-spreadsheet__ctx-separator"></div>
-            <button class="ngxsmk-spreadsheet__ctx-item ngxsmk-spreadsheet__ctx-item--danger" (click)="_ctxDeleteRow()">Delete row</button>
+            <button
+              class="ngxsmk-spreadsheet__ctx-item ngxsmk-spreadsheet__ctx-item--danger"
+              (click)="_ctxDeleteRow()"
+            >
+              Delete row
+            </button>
           </div>
         }
       </div>
@@ -695,7 +839,8 @@ function createEmptyRow(columns: ColumnDef[]): RowDef {
       display: flex;
       align-items: center;
       padding: var(--ngxsmk-space-1) var(--ngxsmk-space-3);
-      border-bottom: 1px solid var(--ngxsmk-spreadsheet-grid-color, var(--ngxsmk-color-outline-variant));
+      border-bottom: 1px solid
+        var(--ngxsmk-spreadsheet-grid-color, var(--ngxsmk-color-outline-variant));
       background: var(--ngxsmk-spreadsheet-bg, var(--ngxsmk-color-surface));
       min-height: 1.75rem;
       font-family: var(--ngxsmk-spreadsheet-font-mono, var(--ngxsmk-font-mono));
@@ -763,7 +908,8 @@ function createEmptyRow(columns: ColumnDef[]): RowDef {
       overflow: hidden;
       text-overflow: ellipsis;
       transition: background var(--ngxsmk-duration-fast, 100ms) var(--ngxsmk-ease-out);
-      border-right: 1px solid var(--ngxsmk-spreadsheet-grid-color, var(--ngxsmk-color-outline-variant));
+      border-right: 1px solid
+        var(--ngxsmk-spreadsheet-grid-color, var(--ngxsmk-color-outline-variant));
     }
 
     .ngxsmk-spreadsheet__col-header:hover {
@@ -823,14 +969,18 @@ function createEmptyRow(columns: ColumnDef[]): RowDef {
       color: var(--ngxsmk-spreadsheet-header-color, var(--ngxsmk-color-on-surface-variant));
       background: var(--ngxsmk-spreadsheet-header-bg, var(--ngxsmk-color-surface-variant));
       border-right: 1px solid var(--ngxsmk-spreadsheet-border, var(--ngxsmk-color-outline));
-      border-bottom: 1px solid var(--ngxsmk-spreadsheet-grid-color, var(--ngxsmk-color-outline-variant));
+      border-bottom: 1px solid
+        var(--ngxsmk-spreadsheet-grid-color, var(--ngxsmk-color-outline-variant));
       cursor: pointer;
       user-select: none;
       transform: translateY(var(--_row-top, 0));
     }
 
     .ngxsmk-spreadsheet__row-header--selected {
-      background: var(--ngxsmk-spreadsheet-selected-bg, color-mix(in srgb, var(--ngxsmk-color-primary) 12%, transparent));
+      background: var(
+        --ngxsmk-spreadsheet-selected-bg,
+        color-mix(in srgb, var(--ngxsmk-color-primary) 12%, transparent)
+      );
       color: var(--ngxsmk-color-primary);
       font-weight: 600;
     }
@@ -862,8 +1012,10 @@ function createEmptyRow(columns: ColumnDef[]): RowDef {
       width: 100%;
       height: var(--_row-h, 2.25rem);
       padding: var(--ngxsmk-spreadsheet-cell-padding, 6px 10px);
-      border-right: 1px solid var(--ngxsmk-spreadsheet-grid-color, var(--ngxsmk-color-outline-variant));
-      border-bottom: 1px solid var(--ngxsmk-spreadsheet-grid-color, var(--ngxsmk-color-outline-variant));
+      border-right: 1px solid
+        var(--ngxsmk-spreadsheet-grid-color, var(--ngxsmk-color-outline-variant));
+      border-bottom: 1px solid
+        var(--ngxsmk-spreadsheet-grid-color, var(--ngxsmk-color-outline-variant));
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -880,7 +1032,10 @@ function createEmptyRow(columns: ColumnDef[]): RowDef {
     }
 
     .ngxsmk-spreadsheet__cell--selected {
-      background: var(--ngxsmk-spreadsheet-selected-bg, color-mix(in srgb, var(--ngxsmk-color-primary) 12%, transparent));
+      background: var(
+        --ngxsmk-spreadsheet-selected-bg,
+        color-mix(in srgb, var(--ngxsmk-color-primary) 12%, transparent)
+      );
     }
 
     .ngxsmk-spreadsheet__cell--active {
@@ -920,14 +1075,14 @@ function createEmptyRow(columns: ColumnDef[]): RowDef {
       position: sticky;
       z-index: 15;
       background: var(--ngxsmk-spreadsheet-bg, var(--ngxsmk-color-surface));
-      box-shadow: var(--ngxsmk-spreadsheet-frozen-shadow, 2px 0 4px rgba(0,0,0,0.08));
+      box-shadow: var(--ngxsmk-spreadsheet-frozen-shadow, 2px 0 4px rgba(0, 0, 0, 0.08));
     }
 
     .ngxsmk-spreadsheet__col--pinned-right {
       position: sticky;
       z-index: 15;
       background: var(--ngxsmk-spreadsheet-bg, var(--ngxsmk-color-surface));
-      box-shadow: -2px 0 4px rgba(0,0,0,0.08);
+      box-shadow: -2px 0 4px rgba(0, 0, 0, 0.08);
     }
 
     /* ── Empty State ── */
@@ -982,7 +1137,7 @@ function createEmptyRow(columns: ColumnDef[]): RowDef {
       background: var(--ngxsmk-color-surface);
       border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-md);
-      box-shadow: var(--ngxsmk-shadow-lg, 0 4px 16px rgba(0,0,0,0.12));
+      box-shadow: var(--ngxsmk-shadow-lg, 0 4px 16px rgba(0, 0, 0, 0.12));
       padding: var(--ngxsmk-space-1) 0;
       z-index: 1001;
     }
@@ -1041,11 +1196,15 @@ function createEmptyRow(columns: ColumnDef[]): RowDef {
     /* ── Dark Mode ── */
     :host-context(.dark) {
       --ngxsmk-spreadsheet-bg: var(--ngxsmk-color-surface);
-      --ngxsmk-spreadsheet-header-bg: #28292C;
+      --ngxsmk-spreadsheet-header-bg: #28292c;
       --ngxsmk-spreadsheet-grid-color: rgba(242, 244, 246, 0.06);
       --ngxsmk-spreadsheet-hover-bg: rgba(255, 255, 255, 0.05);
-      --ngxsmk-spreadsheet-selected-bg: color-mix(in srgb, var(--ngxsmk-color-primary) 15%, transparent);
-      --ngxsmk-spreadsheet-frozen-shadow: 2px 0 6px rgba(0,0,0,0.3);
+      --ngxsmk-spreadsheet-selected-bg: color-mix(
+        in srgb,
+        var(--ngxsmk-color-primary) 15%,
+        transparent
+      );
+      --ngxsmk-spreadsheet-frozen-shadow: 2px 0 6px rgba(0, 0, 0, 0.3);
     }
 
     /* ── Density Variants ── */
@@ -1078,7 +1237,12 @@ export class NgxsmkSpreadsheet implements OnInit {
   // ── Outputs ──
   readonly cellClick = output<{ row: number; col: number; value: CellValue }>();
   readonly cellDoubleClick = output<{ row: number; col: number; value: CellValue }>();
-  readonly cellEdit = output<{ row: number; col: string; oldValue: CellValue; newValue: CellValue }>();
+  readonly cellEdit = output<{
+    row: number;
+    col: string;
+    oldValue: CellValue;
+    newValue: CellValue;
+  }>();
   readonly selectionChange = output<CellRange | null>();
   readonly sortChange = output<SortCriterion[]>();
   readonly filterChange = output<FilterCriterion[]>();
@@ -1422,7 +1586,13 @@ export class NgxsmkSpreadsheet implements OnInit {
         break;
       default:
         // Start typing into cell
-        if (sel.activeCell && event.key.length === 1 && !event.ctrlKey && !event.metaKey && !event.altKey) {
+        if (
+          sel.activeCell &&
+          event.key.length === 1 &&
+          !event.ctrlKey &&
+          !event.metaKey &&
+          !event.altKey
+        ) {
           const col = this.engine.visibleColumns()[sel.activeCell.col];
           if (col && col.editable !== false && this.engine.editable()) {
             this.engine.startEdit(sel.activeCell.row, col.id);
@@ -1455,29 +1625,34 @@ export class NgxsmkSpreadsheet implements OnInit {
   // ── Clipboard ──
 
   private _copy(): void {
-    const plugin = this.engine.pluginHost.plugins.find((p) => p.name === 'clipboard') as ClipboardPlugin | undefined;
+    const plugin = this.engine.pluginHost.plugins.find((p) => p.name === 'clipboard') as
+      ClipboardPlugin | undefined;
     plugin?.copy();
   }
 
   private _cut(): void {
-    const plugin = this.engine.pluginHost.plugins.find((p) => p.name === 'clipboard') as ClipboardPlugin | undefined;
+    const plugin = this.engine.pluginHost.plugins.find((p) => p.name === 'clipboard') as
+      ClipboardPlugin | undefined;
     plugin?.cut();
   }
 
   private _paste(): void {
-    const plugin = this.engine.pluginHost.plugins.find((p) => p.name === 'clipboard') as ClipboardPlugin | undefined;
+    const plugin = this.engine.pluginHost.plugins.find((p) => p.name === 'clipboard') as
+      ClipboardPlugin | undefined;
     plugin?.paste();
   }
 
   // ── Undo/Redo ──
 
   private _undo(): void {
-    const plugin = this.engine.pluginHost.plugins.find((p) => p.name === 'undo') as UndoPlugin | undefined;
+    const plugin = this.engine.pluginHost.plugins.find((p) => p.name === 'undo') as
+      UndoPlugin | undefined;
     plugin?.undo();
   }
 
   private _redo(): void {
-    const plugin = this.engine.pluginHost.plugins.find((p) => p.name === 'undo') as UndoPlugin | undefined;
+    const plugin = this.engine.pluginHost.plugins.find((p) => p.name === 'undo') as
+      UndoPlugin | undefined;
     plugin?.redo();
   }
 

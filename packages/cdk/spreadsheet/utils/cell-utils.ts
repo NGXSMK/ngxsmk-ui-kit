@@ -131,13 +131,20 @@ export function cloneRow(row: RowDef): RowDef {
   return {
     ...row,
     cells: Object.fromEntries(
-      Object.entries(row.cells).map(([k, v]) => [k, { ...v, meta: v.meta ? { ...v.meta } : undefined }]),
+      Object.entries(row.cells).map(([k, v]) => [
+        k,
+        { ...v, meta: v.meta ? { ...v.meta } : undefined },
+      ]),
     ),
   };
 }
 
 /** Calculate the total width of pinned columns. */
-export function pinnedWidth(columns: ColumnDef[], states: Map<string, number>, side: 'left' | 'right'): number {
+export function pinnedWidth(
+  columns: ColumnDef[],
+  states: Map<string, number>,
+  side: 'left' | 'right',
+): number {
   return columns
     .filter((c) => c.pinned === side)
     .reduce((sum, c) => sum + (states.get(c.id) ?? c.width ?? 150), 0);

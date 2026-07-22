@@ -13,7 +13,11 @@ import {
 import { NgxsmkTimelineGantt, type GanttItem } from '@ngxsmk/core/timeline-gantt';
 import { NgxsmkWorkflowBuilder, type WorkflowNode } from '@ngxsmk/core/workflow-builder';
 import { NgxsmkRuleBuilder, type RuleGroup } from '@ngxsmk/core/rule-builder';
-import { NgxsmkSpreadsheet, provideSpreadsheet, SPREADSHEET_ENGINE } from '@ngxsmk/core/spreadsheet';
+import {
+  NgxsmkSpreadsheet,
+  provideSpreadsheet,
+  SPREADSHEET_ENGINE,
+} from '@ngxsmk/core/spreadsheet';
 import type { ColumnDef, RowDef } from '@ngxsmk/cdk/spreadsheet';
 import { NgxsmkPivotTable, type PivotRow } from '@ngxsmk/core/pivot-table';
 import { NgxsmkFlowEditor } from '@ngxsmk/core/flow-editor';
@@ -498,10 +502,22 @@ ngxsmk-query-builder {
     this.event('s3', 'Sprint planning', 2, 14, 15.5, '#0b57d0'),
     this.event('s4', '1:1 with lead', 4, 15, 15.5, '#6750a4'),
     this.event('s5', 'Demo day', 4, 16, 17, '#6750a4'),
-    { id: 's6', title: 'Company offsite', start: this.daysOffset(3), end: this.daysOffset(5), allDay: true, color: '#0b57d0' },
+    {
+      id: 's6',
+      title: 'Company offsite',
+      start: this.daysOffset(3),
+      end: this.daysOffset(5),
+      allDay: true,
+      color: '#0b57d0',
+    },
   ]);
-  protected readonly onSchedulerCreate = (create: { event: SchedulerEvent; day: Date; start: Date; end: Date }) => {
-    this.schedulerEvents.update(events => [...events, create.event]);
+  protected readonly onSchedulerCreate = (create: {
+    event: SchedulerEvent;
+    day: Date;
+    start: Date;
+    end: Date;
+  }) => {
+    this.schedulerEvents.update((events) => [...events, create.event]);
   };
 
   protected readonly ganttItems: GanttItem[] = [
@@ -543,10 +559,54 @@ ngxsmk-query-builder {
   ];
 
   protected readonly spreadsheetRows: RowDef[] = [
-    { id: 'r1', cells: { product: { value: 'Widgets' }, q1: { value: 1200 }, q2: { value: 1450 }, q3: { value: 1600 }, q4: { value: 1720 } }, selectable: true, editable: true },
-    { id: 'r2', cells: { product: { value: 'Gadgets' }, q1: { value: 980 }, q2: { value: 1010 }, q3: { value: 1240 }, q4: { value: 1380 } }, selectable: true, editable: true },
-    { id: 'r3', cells: { product: { value: 'Gizmos' }, q1: { value: 540 }, q2: { value: 620 }, q3: { value: 710 }, q4: { value: 820 } }, selectable: true, editable: true },
-    { id: 'r4', cells: { product: { value: 'Total' }, q1: { value: 2720 }, q2: { value: 3080 }, q3: { value: 3550 }, q4: { value: 3920 } }, selectable: true, editable: false },
+    {
+      id: 'r1',
+      cells: {
+        product: { value: 'Widgets' },
+        q1: { value: 1200 },
+        q2: { value: 1450 },
+        q3: { value: 1600 },
+        q4: { value: 1720 },
+      },
+      selectable: true,
+      editable: true,
+    },
+    {
+      id: 'r2',
+      cells: {
+        product: { value: 'Gadgets' },
+        q1: { value: 980 },
+        q2: { value: 1010 },
+        q3: { value: 1240 },
+        q4: { value: 1380 },
+      },
+      selectable: true,
+      editable: true,
+    },
+    {
+      id: 'r3',
+      cells: {
+        product: { value: 'Gizmos' },
+        q1: { value: 540 },
+        q2: { value: 620 },
+        q3: { value: 710 },
+        q4: { value: 820 },
+      },
+      selectable: true,
+      editable: true,
+    },
+    {
+      id: 'r4',
+      cells: {
+        product: { value: 'Total' },
+        q1: { value: 2720 },
+        q2: { value: 3080 },
+        q3: { value: 3550 },
+        q4: { value: 3920 },
+      },
+      selectable: true,
+      editable: false,
+    },
   ];
 
   protected readonly pivotRows: PivotRow[] = [

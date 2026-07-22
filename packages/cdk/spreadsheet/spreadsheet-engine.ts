@@ -57,7 +57,9 @@ export interface SpreadsheetConfig {
 /** Lifecycle hooks for before/after operations. */
 export interface SpreadsheetLifecycleHooks {
   beforeEdit: Signal<(rowIndex: number, colId: string) => boolean>;
-  afterEdit: Signal<(rowIndex: number, colId: string, oldValue: CellValue, newValue: CellValue) => void>;
+  afterEdit: Signal<
+    (rowIndex: number, colId: string, oldValue: CellValue, newValue: CellValue) => void
+  >;
   beforeSort: Signal<(colId: string, direction: 'asc' | 'desc' | null) => boolean>;
   afterSort: Signal<() => void>;
   beforeFilter: Signal<() => boolean>;
@@ -142,10 +144,20 @@ export class SpreadsheetEngine {
   readonly displayRows: Signal<RowDef[]>;
 
   /** Visible row range for virtual scrolling (startIndex, endIndex). */
-  readonly virtualRowRange: Signal<{ start: number; end: number; offsetY: number; totalHeight: number }>;
+  readonly virtualRowRange: Signal<{
+    start: number;
+    end: number;
+    offsetY: number;
+    totalHeight: number;
+  }>;
 
   /** Visible column range for horizontal virtual scrolling. */
-  readonly virtualColRange: Signal<{ start: number; end: number; offsetX: number; totalWidth: number }>;
+  readonly virtualColRange: Signal<{
+    start: number;
+    end: number;
+    offsetX: number;
+    totalWidth: number;
+  }>;
 
   /** Row height for current density. */
   readonly rowHeight: Signal<number>;
@@ -299,9 +311,7 @@ export class SpreadsheetEngine {
       this.visibleColumns().filter((c) => c.pinned === 'right'),
     );
 
-    this.unpinnedColumns = computed(() =>
-      this.visibleColumns().filter((c) => !c.pinned),
-    );
+    this.unpinnedColumns = computed(() => this.visibleColumns().filter((c) => !c.pinned));
 
     this.columnWidths = computed(() => {
       const states = this.columnStates();
@@ -634,7 +644,12 @@ export class SpreadsheetEngine {
   // ── Filter ──
 
   /** Apply a filter. */
-  applyFilter(colId: string, operator: FilterCriterion['operator'], value: unknown, valueTo?: unknown): void {
+  applyFilter(
+    colId: string,
+    operator: FilterCriterion['operator'],
+    value: unknown,
+    valueTo?: unknown,
+  ): void {
     const current = this.filterState();
     const existing = current.criteria.filter((c) => c.colId !== colId);
     const criteria = [...existing, { colId, operator, value, valueTo }];
@@ -736,7 +751,10 @@ export class SpreadsheetEngine {
     const allCols = new Set(Array.from({ length: this.totalColumns() }, (_, i) => i));
     this.selection.set({
       activeCell: { row: 0, col: 0 },
-      range: { start: { row: 0, col: 0 }, end: { row: this.totalRows() - 1, col: this.totalColumns() - 1 } },
+      range: {
+        start: { row: 0, col: 0 },
+        end: { row: this.totalRows() - 1, col: this.totalColumns() - 1 },
+      },
       selectedRows: allRows,
       selectedCols: allCols,
       mode: 'range',

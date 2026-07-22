@@ -35,7 +35,8 @@ export class KeyboardPlugin implements SchedulerPlugin {
 
   private _onKeyDown(e: KeyboardEvent): void {
     const target = e.target as HTMLElement;
-    if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable) return;
+    if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable)
+      return;
 
     switch (e.key) {
       case 'ArrowRight':

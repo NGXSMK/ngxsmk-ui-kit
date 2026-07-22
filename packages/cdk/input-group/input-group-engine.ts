@@ -153,13 +153,9 @@ export class InputGroupEngine {
       return false;
     });
 
-    this.leadingAddons = computed(() =>
-      this.addons().filter((a) => a.position === 'leading'),
-    );
+    this.leadingAddons = computed(() => this.addons().filter((a) => a.position === 'leading'));
 
-    this.trailingAddons = computed(() =>
-      this.addons().filter((a) => a.position === 'trailing'),
-    );
+    this.trailingAddons = computed(() => this.addons().filter((a) => a.position === 'trailing'));
 
     this.hasLeading = computed(() => this.leadingAddons().length > 0);
     this.hasTrailing = computed(() => this.trailingAddons().length > 0);

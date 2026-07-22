@@ -64,7 +64,11 @@ const HOUR_HEIGHT_MAP: Record<Density, number> = {
   dense: 36,
 };
 
-function computeRange(type: ViewType, date: Date, firstDayOfWeek: number): { start: Date; end: Date } {
+function computeRange(
+  type: ViewType,
+  date: Date,
+  firstDayOfWeek: number,
+): { start: Date; end: Date } {
   switch (type) {
     case 'timeGridDay':
     case 'dayGridDay':
@@ -164,8 +168,7 @@ export class SchedulerEngine {
       const vs = this.viewState();
       const events = this.events();
       return events.filter(
-        (e) =>
-          !e.allDay && dateRangeOverlaps(e.start, e.end, vs.rangeStart, vs.rangeEnd),
+        (e) => !e.allDay && dateRangeOverlaps(e.start, e.end, vs.rangeStart, vs.rangeEnd),
       );
     });
 
@@ -173,8 +176,7 @@ export class SchedulerEngine {
       const vs = this.viewState();
       const events = this.events();
       return events.filter(
-        (e) =>
-          e.allDay && dateRangeOverlaps(e.start, e.end, vs.rangeStart, vs.rangeEnd),
+        (e) => e.allDay && dateRangeOverlaps(e.start, e.end, vs.rangeStart, vs.rangeEnd),
       );
     });
 
@@ -203,14 +205,18 @@ export class SchedulerEngine {
 
     this.weekLabel = computed(() => {
       const vs = this.viewState();
-      return vs.rangeStart.toLocaleDateString(vs.locale, {
-        month: 'short',
-        day: 'numeric',
-      }) + ' – ' + vs.rangeEnd.toLocaleDateString(vs.locale, {
-        month: 'short',
-        day: 'numeric',
-        year: 'numeric',
-      });
+      return (
+        vs.rangeStart.toLocaleDateString(vs.locale, {
+          month: 'short',
+          day: 'numeric',
+        }) +
+        ' – ' +
+        vs.rangeEnd.toLocaleDateString(vs.locale, {
+          month: 'short',
+          day: 'numeric',
+          year: 'numeric',
+        })
+      );
     });
   }
 
@@ -295,7 +301,9 @@ export class SchedulerEngine {
 
     this.events.update((evts) =>
       evts.map((e) =>
-        e.id === id ? { ...e, start: newStart, end: newEnd, resourceId: resourceId ?? e.resourceId } : e,
+        e.id === id
+          ? { ...e, start: newStart, end: newEnd, resourceId: resourceId ?? e.resourceId }
+          : e,
       ),
     );
 

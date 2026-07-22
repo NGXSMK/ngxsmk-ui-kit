@@ -46,7 +46,9 @@ export class UndoPlugin implements SpreadsheetPlugin {
   }
 
   /** Record a bulk edit (multiple cells). */
-  recordBulkEdit(edits: { rowIndex: number; colId: string; oldValue: CellValue; newValue: CellValue }[]): void {
+  recordBulkEdit(
+    edits: { rowIndex: number; colId: string; oldValue: CellValue; newValue: CellValue }[],
+  ): void {
     if (edits.length === 0) return;
     this._push({ type: 'edit', timestamp: Date.now(), edits });
   }
@@ -104,7 +106,10 @@ export class UndoPlugin implements SpreadsheetPlugin {
             ...rows[edit.rowIndex],
             cells: {
               ...rows[edit.rowIndex].cells,
-              [edit.colId]: { value: edit.oldValue, meta: rows[edit.rowIndex].cells[edit.colId]?.meta },
+              [edit.colId]: {
+                value: edit.oldValue,
+                meta: rows[edit.rowIndex].cells[edit.colId]?.meta,
+              },
             },
           };
         }
@@ -132,7 +137,10 @@ export class UndoPlugin implements SpreadsheetPlugin {
             ...rows[edit.rowIndex],
             cells: {
               ...rows[edit.rowIndex].cells,
-              [edit.colId]: { value: edit.newValue, meta: rows[edit.rowIndex].cells[edit.colId]?.meta },
+              [edit.colId]: {
+                value: edit.newValue,
+                meta: rows[edit.rowIndex].cells[edit.colId]?.meta,
+              },
             },
           };
         }

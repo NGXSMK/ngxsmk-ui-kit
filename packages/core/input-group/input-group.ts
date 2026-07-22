@@ -32,10 +32,7 @@ import {
   type ValidationStatus,
 } from '@ngxsmk/cdk/input-group';
 import { CvaBase } from '@ngxsmk/cdk/cva-base';
-import {
-  NGXSMK_FORM_FIELD_CONTROL,
-  type NgxsmkFormFieldControl,
-} from '@ngxsmk/core/form-field';
+import { NGXSMK_FORM_FIELD_CONTROL, type NgxsmkFormFieldControl } from '@ngxsmk/core/form-field';
 import { ngxsmkUniqueId } from '@ngxsmk/core/util';
 
 // ── Template Injection Tokens ──
@@ -82,31 +79,26 @@ export interface InputGroupClearContext {
   visible: boolean;
 }
 
-export const INPUT_GROUP_LABEL_TEMPLATE = new InjectionToken<TemplateRef<InputGroupLabelContext> | null>(
-  'INPUT_GROUP_LABEL_TEMPLATE',
-);
-export const INPUT_GROUP_HINT_TEMPLATE = new InjectionToken<TemplateRef<InputGroupHintContext> | null>(
-  'INPUT_GROUP_HINT_TEMPLATE',
-);
-export const INPUT_GROUP_ERROR_TEMPLATE = new InjectionToken<TemplateRef<InputGroupErrorContext> | null>(
-  'INPUT_GROUP_ERROR_TEMPLATE',
-);
-export const INPUT_GROUP_COUNTER_TEMPLATE = new InjectionToken<TemplateRef<InputGroupCounterContext> | null>(
-  'INPUT_GROUP_COUNTER_TEMPLATE',
-);
-export const INPUT_GROUP_LOADING_TEMPLATE = new InjectionToken<TemplateRef<InputGroupLoadingContext> | null>(
-  'INPUT_GROUP_LOADING_TEMPLATE',
-);
-export const INPUT_GROUP_ADDON_TEMPLATE = new InjectionToken<TemplateRef<InputGroupAddonContext> | null>(
-  'INPUT_GROUP_ADDON_TEMPLATE',
-);
-export const INPUT_GROUP_CLEAR_TEMPLATE = new InjectionToken<TemplateRef<InputGroupClearContext> | null>(
-  'INPUT_GROUP_CLEAR_TEMPLATE',
-);
+export const INPUT_GROUP_LABEL_TEMPLATE =
+  new InjectionToken<TemplateRef<InputGroupLabelContext> | null>('INPUT_GROUP_LABEL_TEMPLATE');
+export const INPUT_GROUP_HINT_TEMPLATE =
+  new InjectionToken<TemplateRef<InputGroupHintContext> | null>('INPUT_GROUP_HINT_TEMPLATE');
+export const INPUT_GROUP_ERROR_TEMPLATE =
+  new InjectionToken<TemplateRef<InputGroupErrorContext> | null>('INPUT_GROUP_ERROR_TEMPLATE');
+export const INPUT_GROUP_COUNTER_TEMPLATE =
+  new InjectionToken<TemplateRef<InputGroupCounterContext> | null>('INPUT_GROUP_COUNTER_TEMPLATE');
+export const INPUT_GROUP_LOADING_TEMPLATE =
+  new InjectionToken<TemplateRef<InputGroupLoadingContext> | null>('INPUT_GROUP_LOADING_TEMPLATE');
+export const INPUT_GROUP_ADDON_TEMPLATE =
+  new InjectionToken<TemplateRef<InputGroupAddonContext> | null>('INPUT_GROUP_ADDON_TEMPLATE');
+export const INPUT_GROUP_CLEAR_TEMPLATE =
+  new InjectionToken<TemplateRef<InputGroupClearContext> | null>('INPUT_GROUP_CLEAR_TEMPLATE');
 
 // ── Provider Function ──
 
-export function provideInputGroup(config: Partial<InputGroupConfig> = {}): Array<{ provider: InjectionToken<unknown>; useValue: unknown }> {
+export function provideInputGroup(
+  config: Partial<InputGroupConfig> = {},
+): Array<{ provider: InjectionToken<unknown>; useValue: unknown }> {
   const engine = new InputGroupEngine(config);
   return [{ provider: INPUT_GROUP_ENGINE, useValue: engine }];
 }
@@ -173,7 +165,10 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
         >
           @if (tplAddon) {
             <ng-container
-              *ngTemplateOutlet="tplAddon; context: { $implicit: addon, addon: addon, disabled: addon.disabled }"
+              *ngTemplateOutlet="
+                tplAddon;
+                context: { $implicit: addon, addon: addon, disabled: addon.disabled }
+              "
             ></ng-container>
           } @else if (addon.contentType === 'text') {
             <span class="ngxsmk-input-group__addon-text">{{ addon.text }}</span>
@@ -242,10 +237,20 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
           />
 
           <!-- Clear Button -->
-          @if (engine.showClear() && engine.hasContent() && !engine.disabled() && !engine.readonly()) {
+          @if (
+            engine.showClear() && engine.hasContent() && !engine.disabled() && !engine.readonly()
+          ) {
             @if (tplClear) {
               <ng-container
-                *ngTemplateOutlet="tplClear; context: { $implicit: _clear, clear: _clear, disabled: engine.disabled(), visible: engine.showClear() && engine.hasContent() }"
+                *ngTemplateOutlet="
+                  tplClear;
+                  context: {
+                    $implicit: _clear,
+                    clear: _clear,
+                    disabled: engine.disabled(),
+                    visible: engine.showClear() && engine.hasContent(),
+                  }
+                "
               ></ng-container>
             } @else {
               <button
@@ -255,7 +260,16 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
                 tabindex="-1"
                 aria-label="Clear input"
               >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
                   <line x1="18" y1="6" x2="6" y2="18"></line>
                   <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
@@ -274,12 +288,32 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
               [attr.aria-pressed]="engine.passwordVisible()"
             >
               @if (engine.passwordVisible()) {
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"
+                  ></path>
                   <line x1="1" y1="1" x2="23" y2="23"></line>
                 </svg>
               } @else {
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
                   <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
                   <circle cx="12" cy="12" r="3"></circle>
                 </svg>
@@ -291,43 +325,94 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
           @if (engine.showCounter()) {
             @if (tplCounter) {
               <ng-container
-                *ngTemplateOutlet="tplCounter; context: { $implicit: engine.charCount(), count: engine.charCount(), maxLength: engine.maxLength() }"
+                *ngTemplateOutlet="
+                  tplCounter;
+                  context: {
+                    $implicit: engine.charCount(),
+                    count: engine.charCount(),
+                    maxLength: engine.maxLength(),
+                  }
+                "
               ></ng-container>
             } @else {
               <span
                 class="ngxsmk-input-group__counter"
                 [class.ngxsmk-input-group__counter--over]="engine.isOverLength()"
               >
-                {{ engine.charCount() }}@if (engine.maxLength()) { /{{ engine.maxLength() }} }
+                {{ engine.charCount() }}
+                @if (engine.maxLength()) {
+                  /{{ engine.maxLength() }}
+                }
               </span>
             }
           }
 
           <!-- Status Icon -->
           @if (engine.status() === 'success') {
-            <span class="ngxsmk-input-group__status-icon ngxsmk-input-group__status-icon--success" aria-hidden="true">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <span
+              class="ngxsmk-input-group__status-icon ngxsmk-input-group__status-icon--success"
+              aria-hidden="true"
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
                 <polyline points="20 6 9 17 4 12"></polyline>
               </svg>
             </span>
           } @else if (engine.status() === 'error') {
-            <span class="ngxsmk-input-group__status-icon ngxsmk-input-group__status-icon--error" aria-hidden="true">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <span
+              class="ngxsmk-input-group__status-icon ngxsmk-input-group__status-icon--error"
+              aria-hidden="true"
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
                 <circle cx="12" cy="12" r="10"></circle>
                 <line x1="15" y1="9" x2="9" y2="15"></line>
                 <line x1="9" y1="9" x2="15" y2="15"></line>
               </svg>
             </span>
           } @else if (engine.status() === 'warning') {
-            <span class="ngxsmk-input-group__status-icon ngxsmk-input-group__status-icon--warning" aria-hidden="true">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+            <span
+              class="ngxsmk-input-group__status-icon ngxsmk-input-group__status-icon--warning"
+              aria-hidden="true"
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"
+                ></path>
                 <line x1="12" y1="9" x2="12" y2="13"></line>
                 <line x1="12" y1="17" x2="12.01" y2="17"></line>
               </svg>
             </span>
           } @else if (engine.status() === 'pending') {
-            <span class="ngxsmk-input-group__status-icon ngxsmk-input-group__status-icon--pending" aria-hidden="true">
+            <span
+              class="ngxsmk-input-group__status-icon ngxsmk-input-group__status-icon--pending"
+              aria-hidden="true"
+            >
               <span class="ngxsmk-input-group__spinner ngxsmk-input-group__spinner--sm"></span>
             </span>
           }
@@ -346,7 +431,10 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
         >
           @if (tplAddon) {
             <ng-container
-              *ngTemplateOutlet="tplAddon; context: { $implicit: addon, addon: addon, disabled: addon.disabled }"
+              *ngTemplateOutlet="
+                tplAddon;
+                context: { $implicit: addon, addon: addon, disabled: addon.disabled }
+              "
             ></ng-container>
           } @else if (addon.contentType === 'text') {
             <span class="ngxsmk-input-group__addon-text">{{ addon.text }}</span>
@@ -365,10 +453,21 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
     @if (engine.hasError() && engine.message()) {
       @if (tplError) {
         <ng-container
-          *ngTemplateOutlet="tplError; context: { $implicit: engine.message(), message: engine.message(), status: engine.status() }"
+          *ngTemplateOutlet="
+            tplError;
+            context: {
+              $implicit: engine.message(),
+              message: engine.message(),
+              status: engine.status(),
+            }
+          "
         ></ng-container>
       } @else {
-        <p class="ngxsmk-input-group__message ngxsmk-input-group__message--error" role="alert" [id]="_messageId()">
+        <p
+          class="ngxsmk-input-group__message ngxsmk-input-group__message--error"
+          role="alert"
+          [id]="_messageId()"
+        >
           {{ engine.message() }}
         </p>
       }
@@ -378,7 +477,10 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
           *ngTemplateOutlet="tplHint; context: { $implicit: engine.hint(), hint: engine.hint() }"
         ></ng-container>
       } @else {
-        <p class="ngxsmk-input-group__message ngxsmk-input-group__message--hint" [id]="_messageId()">
+        <p
+          class="ngxsmk-input-group__message ngxsmk-input-group__message--hint"
+          [id]="_messageId()"
+        >
           {{ engine.hint() }}
         </p>
       }
@@ -392,7 +494,7 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
       font-family: var(--ngxsmk-input-group-font, var(--ngxsmk-font-sans));
       font-size: var(--ngxsmk-text-body-sm-size, 0.875rem);
       line-height: 1.5;
-      color: var(--ngxsmk-color-on-surface, #0A1317);
+      color: var(--ngxsmk-color-on-surface, #0a1317);
       width: auto;
     }
 
@@ -407,7 +509,7 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
       left: var(--ngxsmk-input-group-padding, 0.75rem);
       transform: translateY(-50%);
       font-size: var(--ngxsmk-text-body-md-size, 1rem);
-      color: var(--ngxsmk-color-on-surface-variant, #6B7280);
+      color: var(--ngxsmk-color-on-surface-variant, #6b7280);
       pointer-events: none;
       transition: all var(--ngxsmk-duration-fast, 100ms) var(--ngxsmk-ease-out);
       z-index: 1;
@@ -424,7 +526,7 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
     }
 
     .ngxsmk-input-group__floating-label--error {
-      color: var(--ngxsmk-color-error, #DC2626);
+      color: var(--ngxsmk-color-error, #dc2626);
     }
 
     /* ── Container ── */
@@ -433,7 +535,8 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
       align-items: stretch;
       position: relative;
       background: var(--ngxsmk-input-group-bg, var(--ngxsmk-color-surface));
-      border: 1.5px solid var(--ngxsmk-input-group-border, var(--ngxsmk-color-outline-strong, #D1D5DB));
+      border: 1.5px solid
+        var(--ngxsmk-input-group-border, var(--ngxsmk-color-outline-strong, #d1d5db));
       border-radius: var(--ngxsmk-input-group-radius, var(--ngxsmk-radius-md, 0.5rem));
       box-shadow: var(--ngxsmk-input-group-shadow, none);
       transition:
@@ -446,7 +549,10 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
 
     :host(.ngxsmk-input-group--focused) .ngxsmk-input-group__container {
       border-color: var(--ngxsmk-input-group-focus-border, var(--ngxsmk-color-primary));
-      box-shadow: var(--ngxsmk-input-group-focus-shadow, 0 0 0 3px color-mix(in srgb, var(--ngxsmk-color-primary) 15%, transparent));
+      box-shadow: var(
+        --ngxsmk-input-group-focus-shadow,
+        0 0 0 3px color-mix(in srgb, var(--ngxsmk-color-primary) 15%, transparent)
+      );
     }
 
     :host(.ngxsmk-input-group--error) .ngxsmk-input-group__container {
@@ -454,7 +560,10 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
     }
 
     :host(.ngxsmk-input-group--error.ngxsmk-input-group--focused) .ngxsmk-input-group__container {
-      box-shadow: var(--ngxsmk-input-group-error-focus-shadow, 0 0 0 3px color-mix(in srgb, var(--ngxsmk-color-error) 15%, transparent));
+      box-shadow: var(
+        --ngxsmk-input-group-error-focus-shadow,
+        0 0 0 3px color-mix(in srgb, var(--ngxsmk-color-error) 15%, transparent)
+      );
     }
 
     :host(.ngxsmk-input-group--success) .ngxsmk-input-group__container {
@@ -517,7 +626,7 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
     :host([data-variant='underline']) .ngxsmk-input-group__container {
       background: transparent;
       border: none;
-      border-bottom: 2px solid var(--ngxsmk-color-outline-strong, #D1D5DB);
+      border-bottom: 2px solid var(--ngxsmk-color-outline-strong, #d1d5db);
       border-radius: 0;
     }
 
@@ -566,16 +675,16 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
       font-size: var(--ngxsmk-text-label-lg-size, 0.875rem);
       font-weight: var(--ngxsmk-text-label-lg-weight, 500);
       line-height: var(--ngxsmk-text-label-lg-line, 1.25);
-      color: var(--ngxsmk-color-on-surface, #0A1317);
+      color: var(--ngxsmk-color-on-surface, #0a1317);
       margin-bottom: var(--ngxsmk-space-1, 0.25rem);
     }
 
     .ngxsmk-input-group__label--error {
-      color: var(--ngxsmk-color-error, #DC2626);
+      color: var(--ngxsmk-color-error, #dc2626);
     }
 
     .ngxsmk-input-group__required {
-      color: var(--ngxsmk-color-error, #DC2626);
+      color: var(--ngxsmk-color-error, #dc2626);
       margin-left: 2px;
     }
 
@@ -601,11 +710,11 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
       font-family: var(--ngxsmk-input-group-font, var(--ngxsmk-font-sans));
       font-size: var(--ngxsmk-text-body-md-size, 1rem);
       line-height: 1.5;
-      color: var(--ngxsmk-color-on-surface, #0A1317);
+      color: var(--ngxsmk-color-on-surface, #0a1317);
     }
 
     .ngxsmk-input-group__input::placeholder {
-      color: var(--ngxsmk-color-on-surface-variant, #6B7280);
+      color: var(--ngxsmk-color-on-surface-variant, #6b7280);
       opacity: 0.7;
     }
 
@@ -623,18 +732,18 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
       display: flex;
       align-items: center;
       padding: 0 var(--ngxsmk-space-3, 0.75rem);
-      color: var(--ngxsmk-color-on-surface-variant, #6B7280);
+      color: var(--ngxsmk-color-on-surface-variant, #6b7280);
       font-size: var(--ngxsmk-text-body-sm-size, 0.875rem);
       white-space: nowrap;
       background: var(--ngxsmk-color-surface-variant);
-      border-left: 1px solid var(--ngxsmk-color-outline-variant, #E5E7EB);
+      border-left: 1px solid var(--ngxsmk-color-outline-variant, #e5e7eb);
       user-select: none;
       min-height: 100%;
     }
 
     .ngxsmk-input-group__addon--leading {
       border-left: none;
-      border-right: 1px solid var(--ngxsmk-color-outline-variant, #E5E7EB);
+      border-right: 1px solid var(--ngxsmk-color-outline-variant, #e5e7eb);
     }
 
     .ngxsmk-input-group__addon--interactive {
@@ -643,7 +752,7 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
     }
 
     .ngxsmk-input-group__addon--interactive:hover {
-      background: var(--ngxsmk-color-surface-hover, rgba(0,0,0,0.05));
+      background: var(--ngxsmk-color-surface-hover, rgba(0, 0, 0, 0.05));
     }
 
     .ngxsmk-input-group__addon--disabled {
@@ -666,7 +775,7 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
       border: none;
       background: transparent;
       border-radius: var(--ngxsmk-radius-full, 9999px);
-      color: var(--ngxsmk-color-on-surface-variant, #6B7280);
+      color: var(--ngxsmk-color-on-surface-variant, #6b7280);
       cursor: pointer;
       padding: 0;
       flex-shrink: 0;
@@ -675,20 +784,20 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
 
     .ngxsmk-input-group__clear:hover,
     .ngxsmk-input-group__toggle-password:hover {
-      background: var(--ngxsmk-color-surface-hover, rgba(0,0,0,0.05));
-      color: var(--ngxsmk-color-on-surface, #0A1317);
+      background: var(--ngxsmk-color-surface-hover, rgba(0, 0, 0, 0.05));
+      color: var(--ngxsmk-color-on-surface, #0a1317);
     }
 
     /* ── Counter ── */
     .ngxsmk-input-group__counter {
       font-size: var(--ngxsmk-text-body-xs-size, 0.75rem);
-      color: var(--ngxsmk-color-on-surface-variant, #6B7280);
+      color: var(--ngxsmk-color-on-surface-variant, #6b7280);
       white-space: nowrap;
       flex-shrink: 0;
     }
 
     .ngxsmk-input-group__counter--over {
-      color: var(--ngxsmk-color-error, #DC2626);
+      color: var(--ngxsmk-color-error, #dc2626);
       font-weight: 600;
     }
 
@@ -700,19 +809,19 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
     }
 
     .ngxsmk-input-group__status-icon--success {
-      color: var(--ngxsmk-color-success, #16A34A);
+      color: var(--ngxsmk-color-success, #16a34a);
     }
 
     .ngxsmk-input-group__status-icon--error {
-      color: var(--ngxsmk-color-error, #DC2626);
+      color: var(--ngxsmk-color-error, #dc2626);
     }
 
     .ngxsmk-input-group__status-icon--warning {
-      color: var(--ngxsmk-color-warning, #F59E0B);
+      color: var(--ngxsmk-color-warning, #f59e0b);
     }
 
     .ngxsmk-input-group__status-icon--pending {
-      color: var(--ngxsmk-color-on-surface-variant, #6B7280);
+      color: var(--ngxsmk-color-on-surface-variant, #6b7280);
     }
 
     /* ── Spinner ── */
@@ -720,7 +829,7 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
       display: inline-block;
       width: 1rem;
       height: 1rem;
-      border: 2px solid var(--ngxsmk-color-outline-variant, #E5E7EB);
+      border: 2px solid var(--ngxsmk-color-outline-variant, #e5e7eb);
       border-top-color: var(--ngxsmk-color-primary);
       border-radius: 50%;
       animation: ngxsmk-spin 0.6s linear infinite;
@@ -733,7 +842,9 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
     }
 
     @keyframes ngxsmk-spin {
-      to { transform: rotate(360deg); }
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     .ngxsmk-input-group__loading {
@@ -752,35 +863,38 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
     }
 
     .ngxsmk-input-group__message--error {
-      color: var(--ngxsmk-color-error, #DC2626);
+      color: var(--ngxsmk-color-error, #dc2626);
     }
 
     .ngxsmk-input-group__message--hint {
-      color: var(--ngxsmk-color-on-surface-variant, #6B7280);
+      color: var(--ngxsmk-color-on-surface-variant, #6b7280);
     }
 
     /* ── Dark Mode ── */
     :host-context(.dark) .ngxsmk-input-group__container {
       background: var(--ngxsmk-input-group-bg, var(--ngxsmk-color-surface));
-      border-color: var(--ngxsmk-input-group-border, var(--ngxsmk-color-outline-strong, #4B5563));
+      border-color: var(--ngxsmk-input-group-border, var(--ngxsmk-color-outline-strong, #4b5563));
     }
 
     :host-context(.dark) .ngxsmk-input-group__addon {
-      background: #28292C;
-      border-color: rgba(255,255,255,0.06);
+      background: #28292c;
+      border-color: rgba(255, 255, 255, 0.06);
     }
 
     :host-context(.dark) .ngxsmk-input-group__input::placeholder {
-      color: var(--ngxsmk-color-on-surface-variant, #9CA3AF);
+      color: var(--ngxsmk-color-on-surface-variant, #9ca3af);
     }
 
     :host-context(.dark) .ngxsmk-input-group__input:-webkit-autofill {
-      -webkit-box-shadow: 0 0 0 30px #1F1F22 inset !important;
+      -webkit-box-shadow: 0 0 0 30px #1f1f22 inset !important;
       -webkit-text-fill-color: var(--ngxsmk-color-on-surface) !important;
     }
   `,
 })
-export class NgxsmkInputGroup extends CvaBase<string> implements NgxsmkFormFieldControl, AfterViewInit {
+export class NgxsmkInputGroup
+  extends CvaBase<string>
+  implements NgxsmkFormFieldControl, AfterViewInit
+{
   // ── Inputs ──
   readonly type = input<InputGroupInputType>('text');
   readonly variant = input<InputGroupVariant>('outlined');
@@ -845,25 +959,63 @@ export class NgxsmkInputGroup extends CvaBase<string> implements NgxsmkFormField
     this.engine = engine;
 
     // ── Sync inputs → engine ──
-    effect(() => { this.engine.type.set(this.type()); });
-    effect(() => { this.engine.variant.set(this.variant()); });
-    effect(() => { this.engine.size.set(this.size()); });
-    effect(() => { this.engine.radius.set(this.radius()); });
-    effect(() => { this.engine.density.set(this.density()); });
-    effect(() => { this.engine.disabled.set(this.disabled()); });
-    effect(() => { this.engine.readonly.set(this.readonly()); });
-    effect(() => { this.engine.placeholder.set(this.placeholder()); });
-    effect(() => { this.engine.label.set(this.label()); });
-    effect(() => { this.engine.hint.set(this.hint()); });
-    effect(() => { this.engine.required.set(this.required()); });
-    effect(() => { this.engine.maxLength.set(this.maxLength()); });
-    effect(() => { this.engine.minLength.set(this.minLength()); });
-    effect(() => { this.engine.showClear.set(this.showClear()); });
-    effect(() => { this.engine.showCounter.set(this.showCounter()); });
-    effect(() => { this.engine.fullWidth.set(this.fullWidth()); });
-    effect(() => { this.engine.loading.set(this.loading()); });
-    effect(() => { this.engine.floatingLabel.set(this.floatingLabel()); });
-    effect(() => { this.engine.addons.set(this.addons()); });
+    effect(() => {
+      this.engine.type.set(this.type());
+    });
+    effect(() => {
+      this.engine.variant.set(this.variant());
+    });
+    effect(() => {
+      this.engine.size.set(this.size());
+    });
+    effect(() => {
+      this.engine.radius.set(this.radius());
+    });
+    effect(() => {
+      this.engine.density.set(this.density());
+    });
+    effect(() => {
+      this.engine.disabled.set(this.disabled());
+    });
+    effect(() => {
+      this.engine.readonly.set(this.readonly());
+    });
+    effect(() => {
+      this.engine.placeholder.set(this.placeholder());
+    });
+    effect(() => {
+      this.engine.label.set(this.label());
+    });
+    effect(() => {
+      this.engine.hint.set(this.hint());
+    });
+    effect(() => {
+      this.engine.required.set(this.required());
+    });
+    effect(() => {
+      this.engine.maxLength.set(this.maxLength());
+    });
+    effect(() => {
+      this.engine.minLength.set(this.minLength());
+    });
+    effect(() => {
+      this.engine.showClear.set(this.showClear());
+    });
+    effect(() => {
+      this.engine.showCounter.set(this.showCounter());
+    });
+    effect(() => {
+      this.engine.fullWidth.set(this.fullWidth());
+    });
+    effect(() => {
+      this.engine.loading.set(this.loading());
+    });
+    effect(() => {
+      this.engine.floatingLabel.set(this.floatingLabel());
+    });
+    effect(() => {
+      this.engine.addons.set(this.addons());
+    });
 
     // ── Sync engine → model + CVA ──
     effect(() => {

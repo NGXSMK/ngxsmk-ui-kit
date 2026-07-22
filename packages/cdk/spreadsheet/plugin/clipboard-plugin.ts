@@ -23,7 +23,12 @@ export class ClipboardPlugin implements SpreadsheetPlugin {
     const sel = this._engine.selection();
     if (!sel.range) return;
 
-    const tsv = this._selectionToTsv(sel.range.start.row, sel.range.start.col, sel.range.end.row, sel.range.end.col);
+    const tsv = this._selectionToTsv(
+      sel.range.start.row,
+      sel.range.start.col,
+      sel.range.end.row,
+      sel.range.end.col,
+    );
     try {
       await navigator.clipboard.writeText(tsv);
     } catch {
@@ -136,7 +141,12 @@ export class ClipboardPlugin implements SpreadsheetPlugin {
     this._engine.rowData.set(rows);
   }
 
-  private _selectionToTsv(startRow: number, startCol: number, endRow: number, endCol: number): string {
+  private _selectionToTsv(
+    startRow: number,
+    startCol: number,
+    endRow: number,
+    endCol: number,
+  ): string {
     if (!this._engine) return '';
     const rows = this._engine.rowData();
     const cols = this._engine.columnDefs();
