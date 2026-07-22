@@ -75,6 +75,7 @@ interface SearchItem {
             class="ngxsmk-nav__link"
             routerLink="/playground"
             routerLinkActive="ngxsmk-nav__link--active"
+            [routerLinkActiveOptions]="{ exact: true }"
             >{{ 'nav.playground' | translate }}</a
           >
           <a
