@@ -72,7 +72,7 @@ export interface FormulaDependency {
   /** Cell that contains the formula. */
   readonly source: string;
   /** Cell(s) the formula depends on. */
-  readonly targets: ReadonlyArray<string>;
+  readonly targets: readonly string[];
 }
 
 /** Built-in function signature. */

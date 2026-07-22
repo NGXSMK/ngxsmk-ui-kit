@@ -3,8 +3,6 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  computed,
-  contentChild,
   DestroyRef,
   effect,
   ElementRef,
@@ -19,7 +17,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import {
   InputGroupEngine,
   type InputGroupConfig,
@@ -98,7 +96,7 @@ export const INPUT_GROUP_CLEAR_TEMPLATE =
 
 export function provideInputGroup(
   config: Partial<InputGroupConfig> = {},
-): Array<{ provider: InjectionToken<unknown>; useValue: unknown }> {
+): { provider: InjectionToken<unknown>; useValue: unknown }[] {
   const engine = new InputGroupEngine(config);
   return [{ provider: INPUT_GROUP_ENGINE, useValue: engine }];
 }
@@ -135,6 +133,12 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
     '(mouseenter)': 'engine.hovered.set(true)',
     '(mouseleave)': 'engine.hovered.set(false)',
   },
+  providers: [
+    {
+      provide: NGXSMK_FORM_FIELD_CONTROL,
+      useExisting: forwardRef(() => NgxsmkInputGroup),
+    },
+  ],
   template: `
     <!-- Floating Label -->
     @if (engine.label() && engine.floatingLabel()) {
@@ -1106,7 +1110,7 @@ export class NgxsmkInputGroup
     }
   }
 
-  protected _onKeyup(event: KeyboardEvent): void {
+  protected _onKeyup(_event: KeyboardEvent): void {
     // No-op, extensible
   }
 

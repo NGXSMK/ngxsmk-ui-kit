@@ -1,9 +1,7 @@
 import { computed, signal, type WritableSignal, type Signal } from '@angular/core';
 import type {
-  Cell,
   CellValue,
   CellAddress,
-  CellRange,
   CellMeta,
   ColumnDef,
   ColumnState,
@@ -274,23 +272,41 @@ export class SpreadsheetEngine {
     // Lifecycle hooks
     this.lifecycle = {
       beforeEdit: signal(() => true),
-      afterEdit: signal(() => {}),
+      afterEdit: signal(() => {
+        /* noop */
+      }),
       beforeSort: signal(() => true),
-      afterSort: signal(() => {}),
+      afterSort: signal(() => {
+        /* noop */
+      }),
       beforeFilter: signal(() => true),
-      afterFilter: signal(() => {}),
+      afterFilter: signal(() => {
+        /* noop */
+      }),
       beforeInsertRows: signal(() => true),
-      afterInsertRows: signal(() => {}),
+      afterInsertRows: signal(() => {
+        /* noop */
+      }),
       beforeDeleteRows: signal(() => true),
-      afterDeleteRows: signal(() => {}),
+      afterDeleteRows: signal(() => {
+        /* noop */
+      }),
       beforeInsertColumns: signal(() => true),
-      afterInsertColumns: signal(() => {}),
+      afterInsertColumns: signal(() => {
+        /* noop */
+      }),
       beforeDeleteColumns: signal(() => true),
-      afterDeleteColumns: signal(() => {}),
+      afterDeleteColumns: signal(() => {
+        /* noop */
+      }),
       beforeCopy: signal(() => true),
-      afterCopy: signal(() => {}),
+      afterCopy: signal(() => {
+        /* noop */
+      }),
       beforePaste: signal(() => true),
-      afterPaste: signal(() => {}),
+      afterPaste: signal(() => {
+        /* noop */
+      }),
     };
 
     // ── Computed ──
@@ -375,7 +391,6 @@ export class SpreadsheetEngine {
       const cols = this.unpinnedColumns();
       const buffer = 3;
 
-      let offsetX = 0;
       let start = 0;
       let end = cols.length;
 
@@ -385,7 +400,6 @@ export class SpreadsheetEngine {
         const w = widths.get(cols[i].id) ?? 150;
         if (accWidth + w > sl) {
           start = Math.max(0, i - buffer);
-          offsetX = accWidth;
           break;
         }
         accWidth += w;
@@ -687,7 +701,7 @@ export class SpreadsheetEngine {
   }
 
   /** Scroll to make a cell visible. */
-  scrollToCell(rowIndex: number, colIndex: number): void {
+  scrollToCell(rowIndex: number, _colIndex: number): void {
     const rh = this.rowHeight();
     const cellTop = rowIndex * rh;
     const cellBottom = cellTop + rh;

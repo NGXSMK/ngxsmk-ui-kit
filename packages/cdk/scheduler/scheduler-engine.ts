@@ -3,12 +3,10 @@ import type {
   SchedulerEvent,
   SchedulerResource,
   SchedulerMove,
-  SchedulerCreate,
   SchedulerResize,
   ViewState,
   ViewType,
   SelectionState,
-  DateRange,
   WorkingHours,
   Density,
 } from './models';
@@ -20,7 +18,6 @@ import {
   startOfMonth,
   endOfMonth,
   addDays,
-  addWeeks,
   diffMinutes,
   isSameDay,
   dateRangeOverlaps,
@@ -121,17 +118,29 @@ export class SchedulerEngine {
 
     this._lifecycle = {
       beforeRender: signal(() => true),
-      afterRender: signal(() => {}),
+      afterRender: signal(() => {
+        /* noop */
+      }),
       beforeCreate: signal(() => true),
-      afterCreate: signal(() => {}),
+      afterCreate: signal(() => {
+        /* noop */
+      }),
       beforeUpdate: signal(() => true),
-      afterUpdate: signal(() => {}),
+      afterUpdate: signal(() => {
+        /* noop */
+      }),
       beforeDelete: signal(() => true),
-      afterDelete: signal(() => {}),
+      afterDelete: signal(() => {
+        /* noop */
+      }),
       beforeDrag: signal(() => true),
-      afterDrag: signal(() => {}),
+      afterDrag: signal(() => {
+        /* noop */
+      }),
       beforeResize: signal(() => true),
-      afterResize: signal(() => {}),
+      afterResize: signal(() => {
+        /* noop */
+      }),
     };
 
     this.events = signal(config.initialEvents ?? []);

@@ -198,7 +198,7 @@ export class PluginHost {
   }
 
   /** Get all registered plugins. */
-  get plugins(): ReadonlyArray<SpreadsheetPlugin> {
+  get plugins(): readonly SpreadsheetPlugin[] {
     return this._plugins;
   }
 }

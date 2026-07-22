@@ -25,6 +25,6 @@ export interface FilterCriterion {
 
 /** The engine's filter state. */
 export interface FilterState {
-  readonly criteria: ReadonlyArray<FilterCriterion>;
+  readonly criteria: readonly FilterCriterion[];
   readonly mode: 'and' | 'or';
 }

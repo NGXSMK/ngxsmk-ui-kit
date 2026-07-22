@@ -38,7 +38,6 @@ export class DragPlugin implements SchedulerPlugin {
     if (!event || event.draggable === false) return false;
     if (this._options.onDragStart && !this._options.onDragStart(event)) return false;
 
-    const hh = this._engine.hourHeight();
     const scrollTop = dayEl.closest('.ngxsmk-sch__scroll')?.scrollTop ?? 0;
     const colTop = dayEl.getBoundingClientRect().top;
     const eventTop = this._engine.eventTop(event);

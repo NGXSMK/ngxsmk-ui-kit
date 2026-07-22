@@ -16,7 +16,7 @@ export class ValidationPlugin implements SpreadsheetPlugin {
   readonly priority = 40;
 
   private _engine: SpreadsheetEngine | null = null;
-  private _rules: Map<string, (value: CellValue) => string | null> = new Map();
+  private _rules = new Map<string, (value: CellValue) => string | null>();
 
   onInit(engine: SpreadsheetEngine): void {
     this._engine = engine;
@@ -60,7 +60,7 @@ export class ValidationPlugin implements SpreadsheetPlugin {
     return errors;
   }
 
-  onBeforeEdit(rowIndex: number, colId: string): boolean {
+  onBeforeEdit(_rowIndex: number, _colId: string): boolean {
     return true;
   }
 

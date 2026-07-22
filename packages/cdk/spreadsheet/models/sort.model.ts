@@ -10,6 +10,6 @@ export interface SortCriterion {
 
 /** The engine's sort state. */
 export interface SortState {
-  readonly criteria: ReadonlyArray<SortCriterion>;
+  readonly criteria: readonly SortCriterion[];
   readonly multiSort: boolean;
 }

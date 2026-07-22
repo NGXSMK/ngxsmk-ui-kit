@@ -1,7 +1,6 @@
 import { computed, signal, type WritableSignal, type Signal } from '@angular/core';
 import type {
   InputGroupConfig,
-  InputGroupState,
   InputGroupAddon,
   InputGroupInputType,
   InputGroupVariant,
@@ -115,11 +114,21 @@ export class InputGroupEngine {
     }
 
     // Lifecycle hooks
-    this.onFocus = signal(() => {});
-    this.onBlur = signal(() => {});
-    this.onChange = signal(() => {});
-    this.onClear = signal(() => {});
-    this.onValidationChange = signal(() => {});
+    this.onFocus = signal(() => {
+      /* noop */
+    });
+    this.onBlur = signal(() => {
+      /* noop */
+    });
+    this.onChange = signal(() => {
+      /* noop */
+    });
+    this.onClear = signal(() => {
+      /* noop */
+    });
+    this.onValidationChange = signal(() => {
+      /* noop */
+    });
 
     // ── Computed ──
 

@@ -23,7 +23,7 @@ export class FormulaPlugin implements SpreadsheetPlugin {
   readonly priority = 50;
 
   private _engine: SpreadsheetEngine | null = null;
-  private _functions: Map<string, FormulaFunction> = new Map();
+  private _functions = new Map<string, FormulaFunction>();
 
   constructor() {
     this._registerBuiltinFunctions();
@@ -500,8 +500,6 @@ export class FormulaPlugin implements SpreadsheetPlugin {
     }
   }
 }
-
-type BinaryOp = '+' | '-' | '*' | '/' | '&' | '=' | '<>' | '>' | '<' | '>=' | '<=';
 
 function parseCellRefStr(ref: string): { col: string; row: number } {
   const match = ref.match(/^([A-Z]+)(\d+)$/i);
