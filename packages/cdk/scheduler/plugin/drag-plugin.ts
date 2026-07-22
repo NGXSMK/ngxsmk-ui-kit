@@ -71,7 +71,10 @@ export class DragPlugin implements SchedulerPlugin {
     if (!this._dragging) return null;
 
     const event = this._engine.events().find((e) => e.id === this._dragging!.eventId);
-    if (!event) { this._dragging = null; return null; }
+    if (!event) {
+      this._dragging = null;
+      return null;
+    }
 
     const hh = this._engine.hourHeight();
     const minutes = (top / hh) * 60;

@@ -108,7 +108,11 @@ export class TooltipPlugin implements SchedulerPlugin {
     return this._state.visible;
   }
 
-  private _computePosition(rect: DOMRect): { x: number; y: number; placement: 'top' | 'bottom' | 'left' | 'right' } {
+  private _computePosition(rect: DOMRect): {
+    x: number;
+    y: number;
+    placement: 'top' | 'bottom' | 'left' | 'right';
+  } {
     const placement = this._options.placement;
     const offset = 8;
 

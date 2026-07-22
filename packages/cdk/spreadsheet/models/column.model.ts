@@ -51,7 +51,8 @@ export interface ColumnDef {
   /** Custom cell CSS class factory. */
   readonly cellClassName?: string | ((value: unknown, rowIndex: number) => string);
   /** Custom cell style factory. */
-  readonly cellStyle?: Record<string, string> | ((value: unknown, rowIndex: number) => Record<string, string>);
+  readonly cellStyle?:
+    Record<string, string> | ((value: unknown, rowIndex: number) => Record<string, string>);
   /** Cell meta applied to every cell in this column. */
   readonly cellMeta?: Partial<CellMeta>;
   /** Default value for new rows. */

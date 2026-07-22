@@ -32,7 +32,8 @@ export type ValidationStatus = 'error' | 'warning' | 'success' | 'info' | 'pendi
 export type AddonPosition = 'leading' | 'trailing';
 
 /** Content type for an add-on slot. */
-export type AddonContentType = 'text' | 'icon' | 'button' | 'avatar' | 'badge' | 'chip' | 'toggle' | 'spinner' | 'custom';
+export type AddonContentType =
+  'text' | 'icon' | 'button' | 'avatar' | 'badge' | 'chip' | 'toggle' | 'spinner' | 'custom';
 
 /** Configuration for a single add-on element. */
 export interface InputGroupAddon {

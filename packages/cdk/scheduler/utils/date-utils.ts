@@ -139,7 +139,10 @@ export function getMonthGrid(date: Date, firstDayOfWeek: number): Date[][] {
   return weeks;
 }
 
-export function getDayNames(locale = 'en-US', format: 'long' | 'short' | 'narrow' = 'short'): string[] {
+export function getDayNames(
+  locale = 'en-US',
+  format: 'long' | 'short' | 'narrow' = 'short',
+): string[] {
   return Array.from({ length: 7 }, (_, i) => {
     const d = new Date(2026, 0, 4 + i);
     return d.toLocaleDateString(locale, { weekday: format });

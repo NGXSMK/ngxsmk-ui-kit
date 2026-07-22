@@ -239,7 +239,10 @@ export class FormulaPlugin implements SpreadsheetPlugin {
     // Number
     if ((ch >= '0' && ch <= '9') || ch === '.') {
       let numStr = '';
-      while (ctx.pos < expr.length && ((expr[ctx.pos] >= '0' && expr[ctx.pos] <= '9') || expr[ctx.pos] === '.')) {
+      while (
+        ctx.pos < expr.length &&
+        ((expr[ctx.pos] >= '0' && expr[ctx.pos] <= '9') || expr[ctx.pos] === '.')
+      ) {
         numStr += expr[ctx.pos++];
       }
       return { type: 'number', value: parseFloat(numStr) } as NumberNode;
@@ -314,7 +317,10 @@ export class FormulaPlugin implements SpreadsheetPlugin {
 
   // ── Evaluator ──
 
-  private _evalNode(node: FormulaNode, getCellValue: (ref: string) => unknown): number | string | boolean | null {
+  private _evalNode(
+    node: FormulaNode,
+    getCellValue: (ref: string) => unknown,
+  ): number | string | boolean | null {
     switch (node.type) {
       case 'number':
         return (node as NumberNode).value;
@@ -363,18 +369,30 @@ export class FormulaPlugin implements SpreadsheetPlugin {
     const rn = typeof r === 'number' ? r : parseFloat(String(r)) || 0;
 
     switch (op) {
-      case '+': return ln + rn;
-      case '-': return ln - rn;
-      case '*': return ln * rn;
-      case '/': return rn !== 0 ? ln / rn : null as unknown as number;
-      case '&': return String(l ?? '') + String(r ?? '');
-      case '=': return l === r || ln === rn;
-      case '<>': return l !== r && ln !== rn;
-      case '>': return ln > rn;
-      case '<': return ln < rn;
-      case '>=': return ln >= rn;
-      case '<=': return ln <= rn;
-      default: return 0;
+      case '+':
+        return ln + rn;
+      case '-':
+        return ln - rn;
+      case '*':
+        return ln * rn;
+      case '/':
+        return rn !== 0 ? ln / rn : (null as unknown as number);
+      case '&':
+        return String(l ?? '') + String(r ?? '');
+      case '=':
+        return l === r || ln === rn;
+      case '<>':
+        return l !== r && ln !== rn;
+      case '>':
+        return ln > rn;
+      case '<':
+        return ln < rn;
+      case '>=':
+        return ln >= rn;
+      case '<=':
+        return ln <= rn;
+      default:
+        return 0;
     }
   }
 
@@ -393,57 +411,84 @@ export class FormulaPlugin implements SpreadsheetPlugin {
   private _registerBuiltinFunctions(): void {
     const fns: FormulaFunction[] = [
       {
-        name: 'SUM', minArgs: 1, maxArgs: Infinity,
+        name: 'SUM',
+        minArgs: 1,
+        maxArgs: Infinity,
         fn: (args) => args.reduce<number>((s, v) => s + (Number(v) || 0), 0),
       },
       {
-        name: 'AVERAGE', minArgs: 1, maxArgs: Infinity,
+        name: 'AVERAGE',
+        minArgs: 1,
+        maxArgs: Infinity,
         fn: (args) => {
           const nums = args.map(Number).filter((n) => !isNaN(n));
           return nums.length ? nums.reduce((s, v) => s + v, 0) / nums.length : 0;
         },
       },
       {
-        name: 'COUNT', minArgs: 1, maxArgs: Infinity,
+        name: 'COUNT',
+        minArgs: 1,
+        maxArgs: Infinity,
         fn: (args) => args.filter((v) => v != null && v !== '').length,
       },
       {
-        name: 'MIN', minArgs: 1, maxArgs: Infinity,
+        name: 'MIN',
+        minArgs: 1,
+        maxArgs: Infinity,
         fn: (args) => Math.min(...args.map(Number).filter((n) => !isNaN(n))),
       },
       {
-        name: 'MAX', minArgs: 1, maxArgs: Infinity,
+        name: 'MAX',
+        minArgs: 1,
+        maxArgs: Infinity,
         fn: (args) => Math.max(...args.map(Number).filter((n) => !isNaN(n))),
       },
       {
-        name: 'IF', minArgs: 3, maxArgs: 3,
-        fn: (args) => args[0] ? args[1] : args[2],
+        name: 'IF',
+        minArgs: 3,
+        maxArgs: 3,
+        fn: (args) => (args[0] ? args[1] : args[2]),
       },
       {
-        name: 'AND', minArgs: 1, maxArgs: Infinity,
+        name: 'AND',
+        minArgs: 1,
+        maxArgs: Infinity,
         fn: (args) => args.every(Boolean),
       },
       {
-        name: 'OR', minArgs: 1, maxArgs: Infinity,
+        name: 'OR',
+        minArgs: 1,
+        maxArgs: Infinity,
         fn: (args) => args.some(Boolean),
       },
       {
-        name: 'NOT', minArgs: 1, maxArgs: 1,
+        name: 'NOT',
+        minArgs: 1,
+        maxArgs: 1,
         fn: (args) => !args[0],
       },
       {
-        name: 'CONCAT', minArgs: 1, maxArgs: Infinity,
+        name: 'CONCAT',
+        minArgs: 1,
+        maxArgs: Infinity,
         fn: (args) => args.join(''),
       },
       {
-        name: 'ROUND', minArgs: 1, maxArgs: 2,
+        name: 'ROUND',
+        minArgs: 1,
+        maxArgs: 2,
         fn: (args) => {
           const decimals = args[1] != null ? Number(args[1]) : 0;
           return Math.round(Number(args[0]) * Math.pow(10, decimals)) / Math.pow(10, decimals);
         },
       },
       { name: 'ABS', minArgs: 1, maxArgs: 1, fn: (args) => Math.abs(Number(args[0])) },
-      { name: 'POWER', minArgs: 2, maxArgs: 2, fn: (args) => Math.pow(Number(args[0]), Number(args[1])) },
+      {
+        name: 'POWER',
+        minArgs: 2,
+        maxArgs: 2,
+        fn: (args) => Math.pow(Number(args[0]), Number(args[1])),
+      },
       { name: 'SQRT', minArgs: 1, maxArgs: 1, fn: (args) => Math.sqrt(Number(args[0])) },
       { name: 'LEN', minArgs: 1, maxArgs: 1, fn: (args) => String(args[0]).length },
       { name: 'UPPER', minArgs: 1, maxArgs: 1, fn: (args) => String(args[0]).toUpperCase() },

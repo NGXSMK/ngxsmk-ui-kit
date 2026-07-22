@@ -75,7 +75,10 @@ export class ValidationPlugin implements SpreadsheetPlugin {
           ...row,
           cells: {
             ...row.cells,
-            [colId]: { value: newValue as CellValue, meta: { ...cell?.meta, errors: [err], type: cell?.meta?.type ?? 'text' } },
+            [colId]: {
+              value: newValue as CellValue,
+              meta: { ...cell?.meta, errors: [err], type: cell?.meta?.type ?? 'text' },
+            },
           },
         };
         this._engine.rowData.set(rows);

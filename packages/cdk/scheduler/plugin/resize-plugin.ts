@@ -72,7 +72,10 @@ export class ResizePlugin implements SchedulerPlugin {
     if (!this._resizing) return null;
 
     const event = this._engine.events().find((e) => e.id === this._resizing!.eventId);
-    if (!event) { this._resizing = null; return null; }
+    if (!event) {
+      this._resizing = null;
+      return null;
+    }
 
     const resize: SchedulerResize = {
       event,

@@ -56,7 +56,8 @@ const COMPONENT_TOKEN_DEFAULTS: Record<string, Vars> = {
     '--ngxsmk-spreadsheet-border': 'var(--ngxsmk-color-outline)',
     '--ngxsmk-spreadsheet-grid-color': 'var(--ngxsmk-color-outline-variant)',
     '--ngxsmk-spreadsheet-hover-bg': 'var(--ngxsmk-color-surface-hover)',
-    '--ngxsmk-spreadsheet-selected-bg': 'color-mix(in srgb, var(--ngxsmk-color-primary) 12%, transparent)',
+    '--ngxsmk-spreadsheet-selected-bg':
+      'color-mix(in srgb, var(--ngxsmk-color-primary) 12%, transparent)',
     '--ngxsmk-spreadsheet-active-border': 'var(--ngxsmk-color-primary)',
     '--ngxsmk-spreadsheet-font': 'var(--ngxsmk-font-sans)',
     '--ngxsmk-spreadsheet-font-mono': 'var(--ngxsmk-font-mono)',
@@ -70,9 +71,11 @@ const COMPONENT_TOKEN_DEFAULTS: Record<string, Vars> = {
     '--ngxsmk-spreadsheet-edit-bg': 'var(--ngxsmk-color-surface)',
     '--ngxsmk-spreadsheet-edit-border': 'var(--ngxsmk-color-primary)',
     '--ngxsmk-spreadsheet-row-hover-bg': 'var(--ngxsmk-color-surface-hover)',
-    '--ngxsmk-spreadsheet-col-hover-bg': 'color-mix(in srgb, var(--ngxsmk-color-primary) 6%, transparent)',
+    '--ngxsmk-spreadsheet-col-hover-bg':
+      'color-mix(in srgb, var(--ngxsmk-color-primary) 6%, transparent)',
     '--ngxsmk-spreadsheet-frozen-shadow': '2px 0 4px rgba(0,0,0,0.08)',
-    '--ngxsmk-spreadsheet-selection-range': 'color-mix(in srgb, var(--ngxsmk-color-primary) 8%, transparent)',
+    '--ngxsmk-spreadsheet-selection-range':
+      'color-mix(in srgb, var(--ngxsmk-color-primary) 8%, transparent)',
   },
   inputGroup: {
     '--ngxsmk-input-group-bg': 'var(--ngxsmk-color-surface)',
@@ -80,9 +83,11 @@ const COMPONENT_TOKEN_DEFAULTS: Record<string, Vars> = {
     '--ngxsmk-input-group-radius': 'var(--ngxsmk-radius-md)',
     '--ngxsmk-input-group-shadow': 'none',
     '--ngxsmk-input-group-focus-border': 'var(--ngxsmk-color-primary)',
-    '--ngxsmk-input-group-focus-shadow': '0 0 0 3px color-mix(in srgb, var(--ngxsmk-color-primary) 15%, transparent)',
+    '--ngxsmk-input-group-focus-shadow':
+      '0 0 0 3px color-mix(in srgb, var(--ngxsmk-color-primary) 15%, transparent)',
     '--ngxsmk-input-group-error-border': 'var(--ngxsmk-color-error)',
-    '--ngxsmk-input-group-error-focus-shadow': '0 0 0 3px color-mix(in srgb, var(--ngxsmk-color-error) 15%, transparent)',
+    '--ngxsmk-input-group-error-focus-shadow':
+      '0 0 0 3px color-mix(in srgb, var(--ngxsmk-color-error) 15%, transparent)',
     '--ngxsmk-input-group-success-border': 'var(--ngxsmk-color-success)',
     '--ngxsmk-input-group-warning-border': 'var(--ngxsmk-color-warning)',
     '--ngxsmk-input-group-height': '2.5rem',
