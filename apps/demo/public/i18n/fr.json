@@ -1255,6 +1255,22 @@
       "health": {
         "title": "Moniteur de santé système",
         "desc": "Un tableau de bord d'administration DevOps avec jauges de charge actives, badges de santé et journaux de commandes serveur en temps réel."
+      },
+      "aiworkbench": {
+        "title": "Espace de travail agent IA",
+        "desc": "Espace de travail interactif pour agents IA avec barres d outils et listes de transfert."
+      },
+      "fintech": {
+        "title": "Tableau de bord de trading financier",
+        "desc": "Tableau de bord d analyse financière en temps réel avec cartes thermiques de portefeuille."
+      },
+      "devportal": {
+        "title": "Portail développeur & signature",
+        "desc": "Portail développeur DevOps avec signature de contrats électroniques et journaux virtuels."
+      },
+      "checkout": {
+        "title": "Paiement multi-étapes & 2FA",
+        "desc": "Flux de paiement e-commerce sécurisé avec vérification PIN à 2 facteurs."
       }
     }
   },

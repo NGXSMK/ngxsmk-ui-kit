@@ -1275,6 +1275,22 @@
       "health": {
         "title": "System Health Monitor",
         "desc": "A DevOps administration dashboard with active stat load gauges, health badges, and real-time server command logs."
+      },
+      "aiworkbench": {
+        "title": "AI Agent Workbench",
+        "desc": "Interactive AI agent workspace featuring dock toolbars, model transfer listboxes, and execution pipelines."
+      },
+      "fintech": {
+        "title": "Financial Trading Dashboard",
+        "desc": "Real-time financial analytics dashboard with portfolio heatmaps, stock metrics, and transaction logs."
+      },
+      "devportal": {
+        "title": "Developer API Portal & Sign-off",
+        "desc": "DevOps developer portal featuring e-signature contract sign-offs and 60 FPS virtual scroll audit logs."
+      },
+      "checkout": {
+        "title": "Multi-Step Checkout & 2FA",
+        "desc": "Secure e-commerce checkout flow with 2-factor PIN verification and order confirmation."
       }
     }
   },

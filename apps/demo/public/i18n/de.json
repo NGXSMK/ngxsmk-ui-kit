@@ -1255,6 +1255,22 @@
       "health": {
         "title": "System-Gesundheitsmonitor",
         "desc": "Ein DevOps-Verwaltungs-Dashboard mit aktiven Stat-Last-Anzeigen, Gesundheits-Badges und Echtzeit-Server-Befehlsprotokollen."
+      },
+      "aiworkbench": {
+        "title": "KI-Agent-Workbench",
+        "desc": "Interaktiver KI-Agenten-Arbeitsbereich mit Dock-Symbolleisten und Modellübertragungslisten."
+      },
+      "fintech": {
+        "title": "Finanzhandels-Dashboard",
+        "desc": "Echtzeit-Finanzanalyse-Dashboard mit Portfolio-Heatmaps und Aktienkennzahlen."
+      },
+      "devportal": {
+        "title": "Entwicklerportal & Unterzeichnung",
+        "desc": "DevOps-Entwicklerportal mit elektronischer Vertragsunterzeichnung und virtuellen Logs."
+      },
+      "checkout": {
+        "title": "Mehrstufiger Checkout & 2FA",
+        "desc": "Sicherer E-Commerce-Checkout-Ablauf mit 2-Faktor-PIN-Verifizierung."
       }
     }
   },

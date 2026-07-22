@@ -1255,6 +1255,22 @@
       "health": {
         "title": "Systemhälsomonitor",
         "desc": "En DevOps-administrationsinstrumentpanel med aktiva stat-lastmätare, hälso-märken och realtids serverkommandologgar."
+      },
+      "aiworkbench": {
+        "title": "AI-agent-arbetsbänk",
+        "desc": "Interaktiv AI-agentarbetsyta med dockverktygsfält och modellöverföringslistor."
+      },
+      "fintech": {
+        "title": "Finansiell handelspanel",
+        "desc": "Realstidsanalyspanel för ekonomi med portfölj-heatmaps och aktiemått."
+      },
+      "devportal": {
+        "title": "Utvecklarportal & signering",
+        "desc": "DevOps-utvecklarportal med e-signatursignering och virtuella loggar."
+      },
+      "checkout": {
+        "title": "Flersetegsutcheckning & 2FA",
+        "desc": "Säkert e-handelsutcheckningsflöde med 2-faktors PIN-verifiering."
       }
     }
   },
