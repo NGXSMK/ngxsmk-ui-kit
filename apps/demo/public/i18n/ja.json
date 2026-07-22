@@ -100,7 +100,8 @@
     "queryDesc": "演算子と値を用いて、型付きフィールドにわたるフィルタ条件を構成します。",
     "selectedNode": "選択中のノード：",
     "pivotRowLabel": "四半期",
-    "flowTitle": "オンボーディングフロー"
+    "flowTitle": "オンボーディングフロー",
+    "inputGroupDesc": "通貨記号やボタンなどの先頭および末尾のアドオンと組み合わせたフォーム入力。"
   },
   "dataDisplay": {
     "pageDesc": "構造化された情報を提示するためのコンポーネント — タブ、開示、アバター、タグ、テーブル、リスト、メトリクス。すべての要素はトークン駆動で、デフォルトでアクセス可能です。",
@@ -415,7 +416,8 @@
     "scatterChartDesc": "2つの軸にわたる相関を明らかにするための値のペアをプロットします。",
     "candlestickChartDesc": "金融時系列用の始値／高値／安値／終値のローソク。上昇ローソクは緑、下降ローソクは赤です。",
     "heatmapDesc": "大きさによって色付けされたセルの行列。軸ラベルは任意です。",
-    "dashboardDesc": "複数のチャートをパネルに配置する、レスポンシブなグリッドラッパー。"
+    "dashboardDesc": "複数のチャートをパネルに配置する、レスポンシブなグリッドラッパー。",
+    "calendarHeatmapDesc": "HSL強度階層を備えたGitHubスタイルの日次貢献カレンダーヒートマップ。"
   },
   "contentTypography": {
     "intro": "テキストを構造化しスタイルを付けるためのプリミティブ。すべてのコンポーネントはテーマトークンエンジンを継承するため、タイポグラフィはブランドに合わせて拡大縮小し、色が変わります。",
@@ -721,7 +723,9 @@
     "filterFeature": "機能",
     "langTypeScript": "TypeScript",
     "langAngular": "Angular",
-    "langJavaScript": "JavaScript"
+    "langJavaScript": "JavaScript",
+    "transferDesc": "ソースリストとターゲットリスト間で選択した項目を移動するためのデュアルリストボックスコンテナ。",
+    "signaturePadDesc": "スムーズな電子署名を描画およびエクスポートするためのデジタルキャンバス。"
   },
   "feedback": {
     "intro": "状態、進捗、システム応答を伝えるコンポーネント — インラインアラートやバナーから、ローダー、スケルトン、在席ドットまで。",
@@ -897,7 +901,8 @@
     "topNavComposedDesc": "top-nav プリミティブ — 見出し、アイテム、メニュー、メガメニューカード — を、制約されたコンテナ内で水平のバーとして組み立てます。",
     "about": "概要",
     "linkTasks": "タスク",
-    "contact": "お問い合わせ"
+    "contact": "お問い合わせ",
+    "dockDesc": "ホバー拡大エフェクトとバッジを備えたmacOSスタイルのフローティングツールバー。"
   },
   "layout": {
     "desc": "中央揃え、セクション化、間隔、コンテンツの配置のための構造的プリミティブ。ここにあるものはすべてテーマ対応で構成可能なため、独自の CSS を書かずにページの骨組みを構築できます。",
@@ -1099,7 +1104,8 @@
     "cardBravo": "カード Bravo",
     "cardCharlie": "カード Charlie",
     "cardDelta": "カード Delta",
-    "shortcutLogHint": "ショートカットを押してトリガーします。"
+    "shortcutLogHint": "ショートカットを押してトリガーします。",
+    "virtualScrollDesc": "60 FPSで thousands の項目をレンダリングするためのゾーンレス仮想ビューポートコンテナ。"
   },
   "templates": {
     "subtitle": "プロジェクトを素早く始めるための、すぐに使えるページテンプレート。",
@@ -1267,7 +1273,12 @@
       "emerald": "エメラルド",
       "rose": "ローズ",
       "neutral": "ニュートラル"
-    }
+    },
+    "ionicAdapterDesc": "NGXSMKデザイン トークンをIonic CSS変数とシームレスに一致するように適応させます。",
+    "ionicAdapterHint": "Ionic互換モードを有効にして、背景、サーフェス、テキストの色を同期します。",
+    "applyIonic": "Ionicプリセットを適用",
+    "clearIonic": "Ionicプリセットをリセット",
+    "ionicActive": "Ionicテーマがアクティブ"
   },
   "community": {
     "title": "コミュニティと貢献",

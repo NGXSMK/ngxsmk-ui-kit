@@ -100,7 +100,8 @@
     "queryDesc": "Compone condiciones de filtro en campos tipados con operadores y valores.",
     "selectedNode": "Nodo seleccionado:",
     "pivotRowLabel": "Trimestre",
-    "flowTitle": "Flujo de incorporación"
+    "flowTitle": "Flujo de incorporación",
+    "inputGroupDesc": "Entrada de formulario combinada con complementos iniciales y finales como símbolos de moneda y botones."
   },
   "dataDisplay": {
     "pageDesc": "Componentes para presentar información estructurada — pestañas, divulgación, avatares, etiquetas, tablas, listas y métricas. Cada pieza es impulsada por tokens y accesible por defecto.",
@@ -415,7 +416,8 @@
     "scatterChartDesc": "Traza pares de valores para revelar correlación en dos ejes.",
     "candlestickChartDesc": "Velas abrir/máximo/mínimo/cerrar para series temporales financieras. Las velas alcistas son verdes, las bajistas rojas.",
     "heatmapDesc": "Una matriz de celdas coloreadas por magnitud, con etiquetas de ejes opcionales.",
-    "dashboardDesc": "Un envoltorio de cuadrícula responsivo que organiza múltiples gráficos en un panel."
+    "dashboardDesc": "Un envoltorio de cuadrícula responsivo que organiza múltiples gráficos en un panel.",
+    "calendarHeatmapDesc": "Mapa de calor de calendario de contribuciones diarias al estilo GitHub con niveles de intensidad HSL."
   },
   "contentTypography": {
     "intro": "Primitivas para estructurar y dar estilo al texto. Todos los componentes heredan el motor de tokens del tema, por lo que la tipografía escala y se recolorea con tu marca.",
@@ -721,7 +723,9 @@
     "filterFeature": "Funcionalidad",
     "langTypeScript": "TypeScript",
     "langAngular": "Angular",
-    "langJavaScript": "JavaScript"
+    "langJavaScript": "JavaScript",
+    "transferDesc": "Contenedor de lista doble para mover elementos seleccionados entre listas de origen y destino.",
+    "signaturePadDesc": "Lienzo digital para dibujar y exportar firmas electrónicas fluidas."
   },
   "feedback": {
     "intro": "Componentes que comunican estado, progreso y respuestas del sistema - desde alertas y banners en línea hasta cargadores, esqueletos y puntos de presencia.",
@@ -897,7 +901,8 @@
     "topNavComposedDesc": "Ensambla una barra horizontal a partir de primitivas top-nav - encabezado, elementos, un menú y tarjetas mega-menú - dentro de un contenedor restringido.",
     "about": "Acerca de",
     "linkTasks": "Tareas",
-    "contact": "Contacto"
+    "contact": "Contacto",
+    "dockDesc": "Barra de herramientas flotante al estilo macOS con efectos de ampliación al pasar el cursor y insignias."
   },
   "layout": {
     "desc": "Primitivas estructurales para centrar, seccionar, espaciar y organizar contenido. Todo aquí es consciente del tema y componible, para que puedas construir el andamiaje de páginas sin escribir CSS personalizado.",
@@ -1099,7 +1104,8 @@
     "cardBravo": "Tarjeta Bravo",
     "cardCharlie": "Tarjeta Charlie",
     "cardDelta": "Tarjeta Delta",
-    "shortcutLogHint": "Pulsa el atajo para dispararlo."
+    "shortcutLogHint": "Pulsa el atajo para dispararlo.",
+    "virtualScrollDesc": "Contenedor de vista virtual sin zonas para renderizar miles de elementos a 60 FPS."
   },
   "templates": {
     "subtitle": "Plantillas de página listas para usar para impulsar tu proyecto.",
@@ -1267,7 +1273,12 @@
       "emerald": "Esmeralda",
       "rose": "Rosa",
       "neutral": "Neutral"
-    }
+    },
+    "ionicAdapterDesc": "Adapte los tokens de diseño de NGXSMK para que coincidan sin problemas con las variables CSS de Ionic.",
+    "ionicAdapterHint": "Habilite el modo de compatibilidad de Ionic para sincronizar los colores de fondo, superficie y texto.",
+    "applyIonic": "Aplicar preajuste de Ionic",
+    "clearIonic": "Restablecer preajuste de Ionic",
+    "ionicActive": "Tema de Ionic activo"
   },
   "community": {
     "title": "Comunidad y contribución",

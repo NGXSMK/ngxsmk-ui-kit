@@ -98,7 +98,7 @@
     "terminalDesc": "Console emulator that distinguishes input lines and shows a blinking cursor.",
     "orgDesc": "Hierarchical tree of people cards showing name and role by reporting line.",
     "queryDesc": "Compose filter conditions across typed fields with operators and values.",
-    "inputGroupDesc": "Versatile input wrapper with floating labels, validation states, add-ons, password toggle, character counter, and multiple visual variants.",
+    "inputGroupDesc": "Form input combined with leading and trailing add-ons such as currency symbols, dropdowns, and button triggers.",
     "selectedNode": "Selected node:",
     "pivotRowLabel": "Quarter",
     "flowTitle": "Onboarding Flow"
@@ -416,7 +416,8 @@
     "scatterChartDesc": "Plot pairs of values to reveal correlation across two axes.",
     "candlestickChartDesc": "Open/high/low/close candles for financial time series. Bullish candles are green, bearish red.",
     "heatmapDesc": "A matrix of cells colored by magnitude, with optional axis labels.",
-    "dashboardDesc": "A responsive grid wrapper that arranges multiple charts into a panel."
+    "dashboardDesc": "A responsive grid wrapper that arranges multiple charts into a panel.",
+    "calendarHeatmapDesc": "GitHub-style daily contribution calendar heatmap with HSL intensity tiers."
   },
   "contentTypography": {
     "intro": "Primitives for structuring and styling text. All components inherit the theme token engine, so typography scales and recolors with your brand.",
@@ -742,7 +743,9 @@
     "filterFeature": "Feature",
     "langTypeScript": "TypeScript",
     "langAngular": "Angular",
-    "langJavaScript": "JavaScript"
+    "langJavaScript": "JavaScript",
+    "transferDesc": "Dual listbox container for moving selected items between source and target lists.",
+    "signaturePadDesc": "Digital canvas for drawing and exporting smooth electronic signatures."
   },
   "feedback": {
     "intro": "Components that communicate status, progress, and system responses - from inline alerts and banners to loaders, skeletons, and presence dots.",
@@ -918,7 +921,8 @@
     "topNavComposedDesc": "Assemble a horizontal bar from top-nav primitives - heading, items, a menu, and mega-menu cards - inside a constrained container.",
     "about": "About",
     "linkTasks": "Tasks",
-    "contact": "Contact"
+    "contact": "Contact",
+    "dockDesc": "macOS-style floating toolbar with hover magnification effects and badges."
   },
   "layout": {
     "desc": "Structural primitives for centering, sectioning, spacing and arranging content. Everything here is theme-aware and composable, so you can build page scaffolding without writing custom CSS.",
@@ -1120,7 +1124,8 @@
     "cardBravo": "Card Bravo",
     "cardCharlie": "Card Charlie",
     "cardDelta": "Card Delta",
-    "shortcutLogHint": "Press the shortcut to trigger it."
+    "shortcutLogHint": "Press the shortcut to trigger it.",
+    "virtualScrollDesc": "Zoneless virtualized viewport container for rendering thousands of items at 60 FPS."
   },
   "templates": {
     "subtitle": "Ready-to-use page templates to kickstart your project.",
@@ -1289,11 +1294,11 @@
       "rose": "Rose",
       "neutral": "Neutral"
     },
-    "ionicAdapterDesc": "Generate Ionic-compatible --ion-* CSS variables from NGXSMK theme presets for hybrid apps.",
-    "ionicAdapterHint": "Apply the adapter to generate --ion-* variables alongside the standard --ngxsmk-* tokens.",
-    "applyIonic": "Apply Ionic Adapter",
-    "clearIonic": "Clear Ionic Adapter",
-    "ionicActive": "Ionic adapter active — --ion-* variables are now applied to :root."
+    "ionicAdapterDesc": "Adapt NGXSMK design tokens to match Ionic CSS variables seamlessly.",
+    "ionicAdapterHint": "Enable Ionic compatibility mode to sync background, surface, and text colors.",
+    "applyIonic": "Apply Ionic Preset",
+    "clearIonic": "Reset Ionic Preset",
+    "ionicActive": "Ionic Theme Active"
   },
   "community": {
     "title": "Community & Contribution",

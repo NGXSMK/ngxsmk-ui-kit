@@ -53,6 +53,27 @@ interface ApiOutput {
                   : ('showcaseExample.showCode' | translate)
               }}
             </button>
+            <button
+              ngxsmk-button
+              size="sm"
+              variant="ghost"
+              (click)="openStackBlitz()"
+              aria-label="Open in StackBlitz"
+            >
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                <polyline points="15 3 21 3 21 9"></polyline>
+                <line x1="10" y1="14" x2="21" y2="3"></line>
+              </svg>
+              StackBlitz
+            </button>
           }
           @if (component()) {
             <button
@@ -353,4 +374,48 @@ export class ShowcaseExample {
       .trim()
       .replace(/[^a-z0-9]+/g, '-');
   });
+
+  protected openStackBlitz(): void {
+    if (typeof document === 'undefined') return;
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = 'https://stackblitz.com/run';
+    form.target = '_blank';
+
+    const addField = (name: string, value: string) => {
+      const inputEl = document.createElement('input');
+      inputEl.type = 'hidden';
+      inputEl.name = name;
+      inputEl.value = value;
+      form.appendChild(inputEl);
+    };
+
+    addField('project[title]', `NGXSMK - ${this.title()}`);
+    addField('project[description]', this.description() || 'NGXSMK Component Live Sandbox');
+    addField('project[template]', 'angular-cli');
+    addField(
+      'project[dependencies]',
+      JSON.stringify({
+        '@angular/core': '^19.0.0',
+        '@angular/common': '^19.0.0',
+        '@angular/forms': '^19.0.0',
+        '@ngxsmk/core': '^1.3.3',
+        '@ngxsmk/theme': '^1.3.3',
+        rxjs: '~7.8.0',
+        tslib: '^2.3.0',
+      }),
+    );
+    addField(
+      'project[files][src/app/demo.component.ts]',
+      `import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-root',\n  template: \`${this.code()}\`,\n})\nexport class DemoComponent {}\n`,
+    );
+    addField(
+      'project[files][src/styles.css]',
+      `@import '@ngxsmk/theme/css';\n\nbody { font-family: system-ui, sans-serif; padding: 2rem; }\n`,
+    );
+
+    document.body.appendChild(form);
+    form.submit();
+    document.body.removeChild(form);
+  }
 }

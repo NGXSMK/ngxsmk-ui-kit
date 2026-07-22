@@ -100,7 +100,8 @@
     "queryDesc": "跨类型化字段组合带运算符和值的过滤条件。",
     "selectedNode": "已选中节点：",
     "pivotRowLabel": "季度",
-    "flowTitle": "入门引导流程"
+    "flowTitle": "入门引导流程",
+    "inputGroupDesc": "表单输入与货币符号、下拉菜单和按钮触发器等前置和后置附加组件相结合。"
   },
   "dataDisplay": {
     "pageDesc": "用于呈现结构化信息的组件——标签页、折叠面板、头像、标签、表格、列表与指标。每个部件默认由令牌驱动且可访问。",
@@ -415,7 +416,8 @@
     "scatterChartDesc": "绘制数值对，以揭示两个坐标轴之间的相关性。",
     "candlestickChartDesc": "用于金融时间序列的开/高/低/收蜡烛图。看涨蜡烛为绿色，看跌为红色。",
     "heatmapDesc": "按大小着色、带可选坐标轴标签的单元格矩阵。",
-    "dashboardDesc": "将多个图表排列成面板的响应式网格容器。"
+    "dashboardDesc": "将多个图表排列成面板的响应式网格容器。",
+    "calendarHeatmapDesc": "具有 HSL 强度层级的 GitHub 风格每日贡献日历热力图。"
   },
   "contentTypography": {
     "intro": "用于结构化与样式化文本的原语。所有组件都继承主题令牌引擎，因此排版会随你的品牌进行缩放与重新着色。",
@@ -721,7 +723,9 @@
     "filterFeature": "功能",
     "langTypeScript": "TypeScript",
     "langAngular": "Angular",
-    "langJavaScript": "JavaScript"
+    "langJavaScript": "JavaScript",
+    "transferDesc": "双列表框容器，用于在源列表和目标列表之间移动所选项目。",
+    "signaturePadDesc": "用于绘制和导出流畅电子签名的数字画布。"
   },
   "feedback": {
     "intro": "用于传达状态、进度与系统响应的组件——从行内警报和横幅，到加载器、骨架屏与在线状态点。",
@@ -897,7 +901,8 @@
     "topNavComposedDesc": "在受限容器内，使用 top-nav 原语——标题、项、菜单与巨型菜单卡片——组装水平栏。",
     "about": "关于",
     "linkTasks": "任务",
-    "contact": "联系"
+    "contact": "联系",
+    "dockDesc": "macOS 风格的浮动工具栏，具有悬停放大效果和徽章。"
   },
   "layout": {
     "desc": "用于居中、分区、间距与排布内容的结构化原语。这里的每件事物都支持主题感知且可组合，因此你可以在不编写自定义 CSS 的情况下搭建页面骨架。",
@@ -1099,7 +1104,8 @@
     "cardBravo": "卡片 Bravo",
     "cardCharlie": "卡片 Charlie",
     "cardDelta": "卡片 Delta",
-    "shortcutLogHint": "按下快捷键以触发它。"
+    "shortcutLogHint": "按下快捷键以触发它。",
+    "virtualScrollDesc": "无区域虚拟视口容器，用于以 60 FPS 渲染数千个项目。"
   },
   "templates": {
     "subtitle": "可用于快速启动项目的现成页面模板。",
@@ -1267,7 +1273,12 @@
       "emerald": "翡翠绿",
       "rose": "玫瑰红",
       "neutral": "中性"
-    }
+    },
+    "ionicAdapterDesc": "调整 NGXSMK 设计令牌以无缝匹配 Ionic CSS 变量。",
+    "ionicAdapterHint": "启用 Ionic 兼容模式以同步背景、表面和文本颜色。",
+    "applyIonic": "应用 Ionic 预设",
+    "clearIonic": "重置 Ionic 预设",
+    "ionicActive": "Ionic 主题已激活"
   },
   "community": {
     "title": "社区与贡献",
