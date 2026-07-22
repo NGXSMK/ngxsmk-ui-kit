@@ -38,7 +38,7 @@ export class NgxsmkCarouselSlide {
       class="ngxsmk-carousel__viewport"
       role="region"
       aria-roledescription="carousel"
-      aria-label="Image gallery"
+      [attr.aria-label]="label()"
     >
       <div class="ngxsmk-carousel__track" [style.transform]="trackTransform()">
         <ng-content />
@@ -195,6 +195,7 @@ export class NgxsmkCarouselSlide {
 export class NgxsmkCarousel {
   private readonly platformId = inject(PLATFORM_ID);
 
+  readonly label = input<string>('Image gallery');
   readonly autoplay = input(false, { transform: booleanAttribute });
   readonly interval = input<number>(3000);
   readonly loop = input(true, { transform: booleanAttribute });

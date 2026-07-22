@@ -1,6 +1,6 @@
 # NGXSMK UI Kit
 
-> Angular-first, MIT-licensed UI ecosystem: 216+ signals-native, zoneless
+> Angular-first, MIT-licensed UI ecosystem: 219+ signals-native, zoneless
 > standalone components with a universal design-token engine (CSS variables,
 > SCSS, Tailwind, StyleX, Tokens Studio export). MIT licensed, no paid tiers.
 > Current version: 1.3.3. Supports Angular 17.3 through 22.
@@ -85,6 +85,7 @@ Usage rules for generated code:
 - NgxsmkCode (`code[ngxsmk-code]`) — @ngxsmk/core/code
 - NgxsmkCodeBlock (`ngxsmk-code-block`) — @ngxsmk/core/code-block
 - NgxsmkCollapsible (`ngxsmk-collapsible`) — @ngxsmk/core/collapsible
+- NgxsmkColorPicker (`ngxsmk-color-picker`) — @ngxsmk/core/color-picker — Signal-native interactive color picker component with hue slider, presets, and HEX input
 - NgxsmkCombobox (`ngxsmk-combobox`) — @ngxsmk/core/combobox
 - NgxsmkCommandPalette (`ngxsmk-command-palette`) — @ngxsmk/core/command-palette
 - NgxsmkContainer (`ngxsmk-container`) — @ngxsmk/core/container
@@ -93,6 +94,7 @@ Usage rules for generated code:
 - NgxsmkCopyToClipboard (`[ngxsmkCopyToClipboard]`) — @ngxsmk/core/copy-to-clipboard
 - NgxsmkDataTable (`ngxsmk-data-table`) — @ngxsmk/core/data-table
 - NgxsmkDatePicker (`ngxsmk-date-picker`) — @ngxsmk/core/date-picker
+- NgxsmkDateRangePicker (`ngxsmk-date-range-picker`) — @ngxsmk/core/date-range-picker — Signal-native date range picker with dual inputs, quick preset range buttons, and calendar grid
 - NgxsmkDiagramBuilder (`ngxsmk-diagram-builder`) — @ngxsmk/core/diagram-builder
 - NgxsmkDialogFooter (`[ngxsmkDialogFooter]`) — @ngxsmk/core/dialog — Marks content projected into the dialog's footer action row
 - NgxsmkDialog (`ngxsmk-dialog`) — @ngxsmk/core/dialog
@@ -105,6 +107,7 @@ Usage rules for generated code:
 - NgxsmkField (`ngxsmk-field`) — @ngxsmk/core/field
 - NgxsmkFieldLabel (`ngxsmk-field-label, [ngxsmkFieldLabel], label[ngxsmkFieldLabel]`) — @ngxsmk/core/field-label
 - NgxsmkFieldStatus (`ngxsmk-field-status, [ngxsmkFieldStatus]`) — @ngxsmk/core/field-status
+- NgxsmkFileUpload (`ngxsmk-file-upload`) — @ngxsmk/core/file-upload — Signal-native drag-and-drop file upload component with format filter, size validation, and file list queue
 - NgxsmkFlex (`ngxsmk-flex`) — @ngxsmk/core/flex
 - NgxsmkFlowEditor (`ngxsmk-flow-editor`) — @ngxsmk/core/flow-editor
 - NgxsmkFocusTrap (`[ngxsmkFocusTrap]`) — @ngxsmk/core/focus-trap

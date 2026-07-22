@@ -1,6 +1,6 @@
 # NGXSMK UI Kit
 
-> Angular-first, MIT-licensed UI ecosystem: 216+ signals-native, zoneless
+> Angular-first, MIT-licensed UI ecosystem: 219+ signals-native, zoneless
 > standalone components with a universal design-token engine (CSS variables,
 > SCSS, Tailwind, StyleX, Tokens Studio export). MIT licensed, no paid tiers.
 > Current version: 1.3.3. Supports Angular 17.3 through 22.
@@ -304,6 +304,7 @@ Inputs:
 - Import from: `@ngxsmk/core/carousel`
 
 Inputs:
+- `[label]`: string (default: `'Image gallery'`)
 - `[autoplay]`: boolean (default: `false`)
 - `[interval]`: number (default: `3000`)
 - `[loop]`: boolean (default: `true`)
@@ -609,6 +610,38 @@ Inputs:
 - `[(open)]`: boolean (default: `false`)
 - `[title]`: string (default: `''`)
 
+## NgxsmkColorPicker
+
+- Selector: `ngxsmk-color-picker`
+- Import from: `@ngxsmk/core/color-picker`
+- Signal-native interactive color picker component with hue slider, presets, and HEX input.
+
+Inputs:
+- `[(value)]`: string (default: `'#7c3aed'`)
+- `[presets]`: string[] (default: `[
+    '#ef4444',
+    '#f97316',
+    '#f59e0b',
+    '#10b981',
+    '#06b6d4',
+    '#3b82f6',
+    '#6366f1',
+    '#7c3aed',
+    '#ec4899',
+    '#09090b',
+    '#64748b',
+    '#ffffff',
+  ]`)
+- `[showPresets]`: boolean (default: `true`)
+- `[disabled]`: boolean (default: `false`)
+- `[ariaLabel]`: string (default: `'Color picker'`)
+- `[id]`: unknown (default: `ngxsmkUniqueId('ngxsmk-color-picker')`)
+- `[(ariaInvalid)]`: boolean (default: `false`)
+- `[(ariaDescribedby)]`: string | null (default: `null`)
+
+Outputs:
+- `(changed)`: emits `string`
+
 ## NgxsmkCombobox
 
 - Selector: `ngxsmk-combobox`
@@ -698,6 +731,24 @@ Inputs:
 
 Outputs:
 - `(changed)`: emits `string`
+
+## NgxsmkDateRangePicker
+
+- Selector: `ngxsmk-date-range-picker`
+- Import from: `@ngxsmk/core/date-range-picker`
+- Signal-native date range picker with dual inputs, quick preset range buttons, and calendar grid.
+
+Inputs:
+- `[(range)]`: DateRange (default: `{ start: '', end: '' }`)
+- `[showPresets]`: boolean (default: `true`)
+- `[disabled]`: boolean (default: `false`)
+- `[ariaLabel]`: string (default: `'Date range picker'`)
+- `[id]`: unknown (default: `ngxsmkUniqueId('ngxsmk-date-range-picker')`)
+- `[(ariaInvalid)]`: boolean (default: `false`)
+- `[(ariaDescribedby)]`: string | null (default: `null`)
+
+Outputs:
+- `(rangeChange)`: emits `DateRange`
 
 ## NgxsmkDiagramBuilder
 
@@ -813,6 +864,26 @@ Inputs:
 Inputs:
 - `[message]`: string (default: `''`)
 - `[variant]`: NgxsmkFieldStatusVariant (default: `'info'`)
+
+## NgxsmkFileUpload
+
+- Selector: `ngxsmk-file-upload`
+- Import from: `@ngxsmk/core/file-upload`
+- Signal-native drag-and-drop file upload component with format filter, size validation, and file list queue.
+
+Inputs:
+- `[accept]`: string (default: `''`)
+- `[maxSizeMb]`: number (default: `10`)
+- `[multiple]`: boolean (default: `true`)
+- `[disabled]`: boolean (default: `false`)
+- `[ariaLabel]`: string (default: `'File upload dropzone'`)
+- `[id]`: unknown (default: `ngxsmkUniqueId('ngxsmk-file-upload')`)
+- `[(ariaInvalid)]`: boolean (default: `false`)
+- `[(ariaDescribedby)]`: string | null (default: `null`)
+
+Outputs:
+- `(filesSelected)`: emits `File[]`
+- `(fileRemoved)`: emits `File`
 
 ## NgxsmkFlex
 
@@ -1690,6 +1761,7 @@ Inputs:
 - `[penColor]`: string (default: `'#09090b'`)
 - `[penWidth]`: number (default: `2`)
 - `[disabled]`: boolean (default: `false`)
+- `[ariaLabel]`: string (default: `'Digital signature pad canvas'`)
 - `[(value)]`: string (default: `''`)
 - `[id]`: unknown (default: `ngxsmkUniqueId('ngxsmk-signature-pad')`)
 - `[(ariaInvalid)]`: boolean (default: `false`)
@@ -1720,6 +1792,8 @@ Inputs:
 - `[step]`: number (default: `1`)
 - `[(value)]`: number (default: `0`)
 - `[disabled]`: boolean (default: `false`)
+- `[ariaLabel]`: string (default: `''`)
+- `[ariaValueText]`: string (default: `''`)
 
 Outputs:
 - `(changed)`: emits `number`
