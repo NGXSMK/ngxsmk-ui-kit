@@ -1,4 +1,5 @@
-import { NgxsmkScheduler, type SchedulerEvent } from '@ngxsmk/core/scheduler';
+import { NgxsmkScheduler } from '@ngxsmk/core/scheduler';
+import type { SchedulerEvent, ViewType } from '@ngxsmk/cdk/scheduler';
 import {
   type DiagramNode,
   NgxsmkDiagramBuilder,
@@ -12,13 +13,15 @@ import {
 import { NgxsmkTimelineGantt, type GanttItem } from '@ngxsmk/core/timeline-gantt';
 import { NgxsmkWorkflowBuilder, type WorkflowNode } from '@ngxsmk/core/workflow-builder';
 import { NgxsmkRuleBuilder, type RuleGroup } from '@ngxsmk/core/rule-builder';
-import { NgxsmkSpreadsheet } from '@ngxsmk/core/spreadsheet';
+import { NgxsmkSpreadsheet, provideSpreadsheet, SPREADSHEET_ENGINE } from '@ngxsmk/core/spreadsheet';
+import type { ColumnDef, RowDef } from '@ngxsmk/cdk/spreadsheet';
 import { NgxsmkPivotTable, type PivotRow } from '@ngxsmk/core/pivot-table';
 import { NgxsmkFlowEditor } from '@ngxsmk/core/flow-editor';
 import { NgxsmkJsonViewer } from '@ngxsmk/core/json-viewer';
 import { NgxsmkTerminal } from '@ngxsmk/core/terminal';
 import { NgxsmkOrgChart, type OrgNode } from '@ngxsmk/core/org-chart';
 import { type KanbanColumn, NgxsmkKanbanBoard } from '@ngxsmk/core/kanban-board';
+import { NgxsmkInputGroup } from '@ngxsmk/core/input-group';
 import { Component, signal } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ShowcaseExample } from '../../showcase/showcase-example';
@@ -41,6 +44,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     NgxsmkTerminal,
     NgxsmkOrgChart,
     NgxsmkQueryBuilder,
+    NgxsmkInputGroup,
     TranslatePipe,
   ],
   template: `
@@ -68,8 +72,13 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
       [component]="NgxsmkScheduler"
       [customize]="customizeNgxsmkScheduler"
     >
-      <div class="ngxsmk-sc-surface" style="height:260px;overflow:auto;">
-        <ngxsmk-scheduler [events]="schedulerEvents" [weekStart]="weekStart" />
+      <div class="ngxsmk-sc-surface" style="height:340px;overflow:hidden;">
+        <ngxsmk-scheduler
+          [events]="schedulerEvents()"
+          [view]="schedulerView()"
+          (viewChange)="schedulerView.set($event.view)"
+          (eventCreate)="onSchedulerCreate($event)"
+        />
       </div>
     </showcase-example>
 
@@ -117,7 +126,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
       [customize]="customizeNgxsmkSpreadsheet"
     >
       <div style="height:260px;overflow:auto;width:100%;">
-        <ngxsmk-spreadsheet [data]="spreadsheetData" />
+        <ngxsmk-spreadsheet [columns]="spreadsheetColumns" [rows]="spreadsheetRows" />
       </div>
     </showcase-example>
 
@@ -213,6 +222,51 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
         <ngxsmk-query-builder [fields]="queryFields" [(conditions)]="queryConditions" />
       </div>
     </showcase-example>
+
+    <showcase-example
+      title="Input Group"
+      [description]="'enterprise.inputGroupDesc' | translate"
+      [code]="codeInputGroup"
+      [component]="NgxsmkInputGroup"
+      [customize]="customizeNgxsmkInputGroup"
+    >
+      <div class="ngxsmk-sc-col" style="max-width:420px;gap:1.5rem;">
+        <ngxsmk-input-group
+          label="Email"
+          placeholder="you@company.com"
+          hint="We'll never share your email."
+          type="email"
+          [showClear]="true"
+        />
+        <ngxsmk-input-group
+          label="Password"
+          placeholder="Enter password"
+          type="password"
+          [required]="true"
+          [showClear]="true"
+          variant="filled"
+        />
+        <ngxsmk-input-group
+          label="Username"
+          placeholder="Pick a username"
+          hint="3-20 characters"
+          [minLength]="3"
+          [maxLength]="20"
+          [showCounter]="true"
+          variant="soft"
+          [floatingLabel]="true"
+        />
+        <ngxsmk-input-group
+          label="API Key"
+          placeholder="sk-..."
+          hint="Found in your dashboard settings."
+          variant="outlined"
+          [loading]="true"
+          radius="pill"
+          size="lg"
+        />
+      </div>
+    </showcase-example>
   `,
 })
 export class EnterprisePage {
@@ -295,11 +349,20 @@ ngxsmk-rule-builder {
   protected readonly NgxsmkSpreadsheet = NgxsmkSpreadsheet;
   protected readonly customizeNgxsmkSpreadsheet = `/* Theme <ngxsmk-spreadsheet> via design tokens */
 ngxsmk-spreadsheet {
-  --ngxsmk-color-outline-variant: ;
-  --ngxsmk-font-mono: ;
-  --ngxsmk-radius-md: ;
-  --ngxsmk-space-2: ;
-  --ngxsmk-space-3: ;
+  --ngxsmk-spreadsheet-bg: ;
+  --ngxsmk-spreadsheet-header-bg: ;
+  --ngxsmk-spreadsheet-border: ;
+  --ngxsmk-spreadsheet-grid-color: ;
+  --ngxsmk-spreadsheet-hover-bg: ;
+  --ngxsmk-spreadsheet-selected-bg: ;
+  --ngxsmk-spreadsheet-active-border: ;
+  --ngxsmk-spreadsheet-font: ;
+  --ngxsmk-spreadsheet-font-mono: ;
+  --ngxsmk-spreadsheet-row-height: ;
+  --ngxsmk-spreadsheet-header-height: ;
+  --ngxsmk-spreadsheet-cell-padding: ;
+  --ngxsmk-spreadsheet-radius: ;
+  --ngxsmk-spreadsheet-shadow: ;
 }`;
   protected readonly NgxsmkPivotTable = NgxsmkPivotTable;
   protected readonly customizeNgxsmkPivotTable = `/* Theme <ngxsmk-pivot-table> via design tokens */
@@ -398,6 +461,9 @@ ngxsmk-query-builder {
 }`;
 
   protected readonly selectedNode = signal<string | null>(null);
+  protected readonly NgxsmkInputGroup = NgxsmkInputGroup;
+
+  private readonly weekStart = new Date();
 
   protected readonly kanbanColumns: KanbanColumn[] = [
     {
@@ -425,14 +491,18 @@ ngxsmk-query-builder {
     },
   ];
 
-  protected readonly weekStart = new Date();
-  protected readonly schedulerEvents: SchedulerEvent[] = [
-    this.event('s1', 'Standup', 0, 9),
-    this.event('s2', 'Design review', 1, 11),
-    this.event('s3', 'Sprint planning', 2, 14),
-    this.event('s4', '1:1 with lead', 4, 15),
-    this.event('s5', 'Demo day', 4, 16),
-  ];
+  protected readonly schedulerView = signal<ViewType>('timeGridWeek');
+  protected readonly schedulerEvents = signal<SchedulerEvent[]>([
+    this.event('s1', 'Standup', 0, 9, 9.5, '#6750a4'),
+    this.event('s2', 'Design review', 1, 11, 12, '#0b57d0'),
+    this.event('s3', 'Sprint planning', 2, 14, 15.5, '#0b57d0'),
+    this.event('s4', '1:1 with lead', 4, 15, 15.5, '#6750a4'),
+    this.event('s5', 'Demo day', 4, 16, 17, '#6750a4'),
+    { id: 's6', title: 'Company offsite', start: this.daysOffset(3), end: this.daysOffset(5), allDay: true, color: '#0b57d0' },
+  ]);
+  protected readonly onSchedulerCreate = (create: { event: SchedulerEvent; day: Date; start: Date; end: Date }) => {
+    this.schedulerEvents.update(events => [...events, create.event]);
+  };
 
   protected readonly ganttItems: GanttItem[] = [
     { id: 'g1', label: 'Discovery', start: 0, duration: 20, progress: 100 },
@@ -464,12 +534,19 @@ ngxsmk-query-builder {
     ],
   };
 
-  protected readonly spreadsheetData: string[][] = [
-    ['Product', 'Q1', 'Q2', 'Q3', 'Q4'],
-    ['Widgets', '1,200', '1,450', '1,600', '1,720'],
-    ['Gadgets', '980', '1,010', '1,240', '1,380'],
-    ['Gizmos', '540', '620', '710', '820'],
-    ['Total', '2,720', '3,080', '3,550', '3,920'],
+  protected readonly spreadsheetColumns: ColumnDef[] = [
+    { id: 'product', header: 'Product', sortable: true },
+    { id: 'q1', header: 'Q1', cellType: 'number', sortable: true },
+    { id: 'q2', header: 'Q2', cellType: 'number', sortable: true },
+    { id: 'q3', header: 'Q3', cellType: 'number', sortable: true },
+    { id: 'q4', header: 'Q4', cellType: 'number', sortable: true },
+  ];
+
+  protected readonly spreadsheetRows: RowDef[] = [
+    { id: 'r1', cells: { product: { value: 'Widgets' }, q1: { value: 1200 }, q2: { value: 1450 }, q3: { value: 1600 }, q4: { value: 1720 } }, selectable: true, editable: true },
+    { id: 'r2', cells: { product: { value: 'Gadgets' }, q1: { value: 980 }, q2: { value: 1010 }, q3: { value: 1240 }, q4: { value: 1380 } }, selectable: true, editable: true },
+    { id: 'r3', cells: { product: { value: 'Gizmos' }, q1: { value: 540 }, q2: { value: 620 }, q3: { value: 710 }, q4: { value: 820 } }, selectable: true, editable: true },
+    { id: 'r4', cells: { product: { value: 'Total' }, q1: { value: 2720 }, q2: { value: 3080 }, q3: { value: 3550 }, q4: { value: 3920 } }, selectable: true, editable: false },
   ];
 
   protected readonly pivotRows: PivotRow[] = [
@@ -542,13 +619,26 @@ ngxsmk-query-builder {
     { field: 'age', operator: 'gt', value: '18' },
   ]);
 
-  private event(id: string, title: string, dayOffset: number, hour: number): SchedulerEvent {
+  private event(
+    id: string,
+    title: string,
+    dayOffset: number,
+    hour: number,
+    endHour?: number,
+    color?: string,
+  ): SchedulerEvent {
     const start = new Date(this.weekStart);
     start.setDate(start.getDate() + dayOffset);
     start.setHours(hour, 0, 0, 0);
     const end = new Date(start);
-    end.setHours(hour + 1);
-    return { id, title, start, end };
+    end.setHours(endHour ?? hour + 1);
+    return { id, title, start, end, color };
+  }
+
+  private daysOffset(n: number): Date {
+    const d = new Date(this.weekStart);
+    d.setDate(d.getDate() + n);
+    return d;
   }
 
   protected readonly codeKanban = `<ngxsmk-kanban-board [columns]="columns" />
@@ -558,9 +648,14 @@ columns = [
   { id: 'done', title: 'Done', items: [{ id: 'k5', title: 'Ship engine' }] },
 ];`;
 
-  protected readonly codeScheduler = `<ngxsmk-scheduler [events]="events" [weekStart]="weekStart" />
+  protected readonly codeScheduler = `<ngxsmk-scheduler
+  [view]="view()"
+  (viewChange)="view.set($event.view)"
+  (eventCreate)="onCreate($event)"
+/>
 
-events = [{ id: 's1', title: 'Standup', start: date, end: date }];`;
+view = signal('week');
+onCreate = (e) => this.events.update(ev => [...ev, e.event]);`;
 
   protected readonly codeGantt = `<ngxsmk-timeline-gantt [items]="items" />
 
@@ -577,9 +672,15 @@ group = {
   rules: [{ field: 'plan', operator: 'equals', value: 'enterprise' }],
 };`;
 
-  protected readonly codeSpreadsheet = `<ngxsmk-spreadsheet [data]="data" />
+  protected readonly codeSpreadsheet = `<ngxsmk-spreadsheet [columns]="columns" [rows]="rows" />
 
-data = [['Product', 'Q1'], ['Widgets', '1,200']];`;
+columns = [
+  { id: 'product', header: 'Product', sortable: true },
+  { id: 'q1', header: 'Q1', cellType: 'number' },
+];
+rows = [
+  { id: 'r1', cells: { product: { value: 'Widgets' }, q1: { value: 1200 } } },
+];`;
 
   protected readonly codePivot = `<ngxsmk-pivot-table [rows]="rows" [columns]="cols" rowLabel="Quarter" />
 
@@ -612,4 +713,47 @@ nodes = [{ id: 'o1', name: 'Grace Hopper', role: 'CEO',
   protected readonly codeQuery = `<ngxsmk-query-builder [fields]="fields" [(conditions)]="conditions" />
 
 fields = [{ key: 'name', label: 'Name', type: 'string' }];`;
+
+  protected readonly customizeNgxsmkInputGroup = `/* Theme <ngxsmk-input-group> via design tokens */
+ngxsmk-input-group {
+  --ngxsmk-input-group-bg: ;
+  --ngxsmk-input-group-border: ;
+  --ngxsmk-input-group-radius: ;
+  --ngxsmk-input-group-shadow: ;
+  --ngxsmk-input-group-focus-border: ;
+  --ngxsmk-input-group-focus-shadow: ;
+  --ngxsmk-input-group-error-border: ;
+  --ngxsmk-input-group-error-focus-shadow: ;
+  --ngxsmk-input-group-success-border: ;
+  --ngxsmk-input-group-warning-border: ;
+  --ngxsmk-input-group-height: ;
+  --ngxsmk-input-group-padding: ;
+  --ngxsmk-input-group-gap: ;
+  --ngxsmk-input-group-font: ;
+}`;
+
+  protected readonly codeInputGroup = `<ngxsmk-input-group
+  label="Email"
+  placeholder="you@company.com"
+  hint="We'll never share your email."
+  type="email"
+  [showClear]="true"
+/>
+
+<ngxsmk-input-group
+  label="Password"
+  type="password"
+  [required]="true"
+  variant="filled"
+/>
+
+<ngxsmk-input-group
+  label="Username"
+  hint="3-20 characters"
+  [minLength]="3"
+  [maxLength]="20"
+  [showCounter]="true"
+  variant="soft"
+  [floatingLabel]="true"
+/>`;
 }
