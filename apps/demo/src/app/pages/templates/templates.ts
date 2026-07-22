@@ -222,6 +222,12 @@ interface TemplateItem {
                   (click)="openPreview(tpl)"
                   (keydown.enter)="openPreview(tpl)"
                 >
+                  <!-- Gradient accent strip unique to each template -->
+                  <div
+                    class="tpl-card__gradient-strip"
+                    [style.background]="tpl.gradient"
+                    aria-hidden="true"
+                  ></div>
                   <div class="tpl-card__frame" aria-hidden="true">
                     <ng-container
                       [ngTemplateOutlet]="miniPreview"
@@ -923,62 +929,109 @@ interface TemplateItem {
 
             <!-- 9. AI Agent Workbench Preview -->
             @if (id === 'ai-workbench') {
-              <div
-                class="ngxsmk-mock-workbench"
-                style="padding: 1.5rem; display: flex; flex-direction: column; gap: 1.5rem; align-items: center;"
-              >
-                <ngxsmk-heading level="h3">AI Agent Workbench</ngxsmk-heading>
-                <ngxsmk-dock [items]="dockItems" />
-                <ngxsmk-transfer
-                  [dataSource]="transferItems"
-                  [titles]="['Available Models', 'Active Pipeline']"
-                />
+              <div class="ngxsmk-mock-workbench">
+                <div class="ngxsmk-mock-workbench-header">
+                  <div class="ngxsmk-mock-workbench-brand">
+                    <span class="workbench-status-dot"></span>
+                    <span class="workbench-title">AI Agent Workbench</span>
+                  </div>
+                  <ngxsmk-badge variant="info">3 Models Active</ngxsmk-badge>
+                </div>
+                <div class="ngxsmk-mock-workbench-body">
+                  <div class="ngxsmk-mock-workbench-transfer">
+                    <ngxsmk-transfer
+                      [dataSource]="transferItems"
+                      [titles]="['Available Models', 'Active Pipeline']"
+                    />
+                  </div>
+                  <div class="ngxsmk-mock-workbench-dock-row">
+                    <ngxsmk-dock [items]="dockItems" />
+                  </div>
+                </div>
               </div>
             }
 
             <!-- 10. Financial Trading Preview -->
             @if (id === 'fintech-trading') {
-              <div
-                class="ngxsmk-mock-fintech"
-                style="padding: 1.5rem; display: flex; flex-direction: column; gap: 1.5rem;"
-              >
-                <div style="display: flex; gap: 1rem; align-items: center;">
+              <div class="ngxsmk-mock-fintech">
+                <div class="ngxsmk-mock-fintech-header">
+                  <ngxsmk-heading level="h4" class="mock-panel-title"
+                    >Trading Portfolio</ngxsmk-heading
+                  >
+                  <ngxsmk-badge variant="success">Markets Open</ngxsmk-badge>
+                </div>
+                <div class="ngxsmk-mock-fintech-stats">
                   <ngxsmk-stat label="Portfolio Return" value="+24.8%" trend="up" />
                   <ngxsmk-stat label="Daily Volume" value="$2.4M" trend="up" />
+                  <ngxsmk-stat label="Risk Score" value="Low" trend="down" />
                 </div>
-                <ngxsmk-calendar-heatmap [values]="heatmapValues" />
+                <div class="ngxsmk-mock-fintech-heatmap">
+                  <ngxsmk-heading
+                    level="h4"
+                    style="font-size: var(--ngxsmk-text-body-sm-size); font-weight: 600; margin-bottom: 0.5rem;"
+                    >Activity Heatmap</ngxsmk-heading
+                  >
+                  <ngxsmk-calendar-heatmap [values]="heatmapValues" />
+                </div>
               </div>
             }
 
             <!-- 11. Developer Portal Preview -->
             @if (id === 'dev-portal') {
-              <div
-                class="ngxsmk-mock-devportal"
-                style="padding: 1.5rem; display: flex; flex-direction: column; gap: 1.5rem;"
-              >
-                <ngxsmk-heading level="h4">E-Signature Contract Sign-off</ngxsmk-heading>
-                <ngxsmk-signature-pad [width]="380" [height]="120" />
-                <ngxsmk-heading level="h4">Audit Log Virtual Stream</ngxsmk-heading>
-                <ngxsmk-virtual-scroll
-                  [items]="virtualItems"
-                  [itemHeight]="36"
-                  style="height: 160px;"
-                />
+              <div class="ngxsmk-mock-devportal">
+                <div class="ngxsmk-mock-devportal-header">
+                  <ngxsmk-heading level="h4" class="mock-panel-title"
+                    >Developer Portal</ngxsmk-heading
+                  >
+                  <ngxsmk-badge>API v3.1</ngxsmk-badge>
+                </div>
+                <div class="ngxsmk-mock-devportal-body">
+                  <div class="ngxsmk-mock-devportal-sig">
+                    <span class="devportal-section-label">Contract Sign-off</span>
+                    <ngxsmk-signature-pad [width]="380" [height]="100" />
+                  </div>
+                  <div class="ngxsmk-mock-devportal-log">
+                    <span class="devportal-section-label">Audit Log Stream</span>
+                    <ngxsmk-virtual-scroll
+                      [items]="virtualItems"
+                      [itemHeight]="32"
+                      style="height: 130px;"
+                    />
+                  </div>
+                </div>
               </div>
             }
 
             <!-- 12. Checkout Flow Preview -->
             @if (id === 'checkout-flow') {
-              <div
-                class="ngxsmk-mock-checkout"
-                style="padding: 1.5rem; max-width: 420px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.25rem;"
-              >
-                <ngxsmk-heading level="h3">2-Factor Security Verification</ngxsmk-heading>
-                <ngxsmk-text variant="body"
-                  >Enter the 4-digit code sent to your registered phone number.</ngxsmk-text
-                >
-                <ngxsmk-pin-input [length]="4" />
-                <button ngxsmk-button style="width: 100%;">Confirm Payment</button>
+              <div class="ngxsmk-mock-checkout">
+                <div class="ngxsmk-mock-checkout-steps">
+                  <span class="checkout-step done">Cart</span>
+                  <span class="checkout-step-line"></span>
+                  <span class="checkout-step done">Shipping</span>
+                  <span class="checkout-step-line"></span>
+                  <span class="checkout-step active">Payment</span>
+                  <span class="checkout-step-line"></span>
+                  <span class="checkout-step">Confirm</span>
+                </div>
+                <div class="ngxsmk-mock-checkout-card">
+                  <ngxsmk-heading
+                    level="h3"
+                    style="font-size: var(--ngxsmk-text-title-sm-size); font-weight: 700; margin-bottom: 0.25rem;"
+                    >2-Factor Security Verification</ngxsmk-heading
+                  >
+                  <ngxsmk-text
+                    variant="body"
+                    style="font-size: var(--ngxsmk-text-body-sm-size); color: var(--ngxsmk-color-on-surface-variant);"
+                    >Enter the 4-digit code sent to your registered phone.</ngxsmk-text
+                  >
+                  <div class="checkout-pin-row">
+                    <ngxsmk-pin-input [length]="4" />
+                  </div>
+                  <button ngxsmk-button style="width: 100%; margin-top: 0.25rem;">
+                    Confirm Payment
+                  </button>
+                </div>
               </div>
             }
           </div>
@@ -1280,12 +1333,28 @@ interface TemplateItem {
       }
     }
 
+    /* Gradient accent strip — unique color per template, runs across the top */
+    .tpl-card__gradient-strip {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      z-index: 2;
+      opacity: 0.85;
+      transition: opacity var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
+    }
+    .tpl-card:hover .tpl-card__gradient-strip {
+      opacity: 1;
+      height: 4px;
+    }
+
     /* Live scaled preview area */
     .tpl-card__preview {
       position: relative;
       display: block;
       width: 100%;
-      height: 300px;
+      height: 340px;
       border: none;
       border-bottom: 1px solid var(--ngxsmk-color-outline);
       background: var(--ngxsmk-color-surface-variant, #f4f4f5);
@@ -1443,13 +1512,14 @@ interface TemplateItem {
 
     /* Dialog Previews Style */
     .ngxsmk-template-preview-viewport {
-      min-height: 520px;
-      padding: var(--ngxsmk-space-5);
+      min-height: 600px;
+      padding: var(--ngxsmk-space-6);
       background-color: var(--ngxsmk-color-surface-variant, #f4f4f5);
       background-image: radial-gradient(var(--ngxsmk-color-outline, #e4e4e7) 1px, transparent 1px);
       background-size: 20px 20px;
-      border-radius: var(--ngxsmk-radius-lg);
-      border: 1px dashed var(--ngxsmk-color-outline);
+      border-radius: var(--ngxsmk-radius-xl);
+      border: 1px solid var(--ngxsmk-color-outline);
+      box-shadow: inset 0 1px 3px color-mix(in srgb, var(--ngxsmk-color-on-surface) 4%, transparent);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -1535,7 +1605,7 @@ interface TemplateItem {
     .ngxsmk-mock-window-content {
       background: var(--ngxsmk-color-surface-variant, #f4f4f5);
       padding: var(--ngxsmk-space-4);
-      height: 460px;
+      height: 500px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
@@ -2094,6 +2164,194 @@ interface TemplateItem {
     .ngxsmk-mock-health-terminal {
       flex: 1;
       overflow: hidden;
+    }
+
+    /* === New Template Layouts === */
+
+    /* AI Agent Workbench */
+    .ngxsmk-mock-workbench {
+      background: var(--ngxsmk-color-surface);
+      border: 1px solid var(--ngxsmk-color-outline);
+      border-radius: var(--ngxsmk-radius-lg);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .ngxsmk-mock-workbench-header {
+      height: 3rem;
+      border-bottom: 1px solid var(--ngxsmk-color-outline);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--ngxsmk-space-4);
+      background: var(--ngxsmk-color-surface);
+    }
+    .ngxsmk-mock-workbench-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .workbench-status-dot {
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 50%;
+      background: var(--ngxsmk-color-success);
+      box-shadow: 0 0 0 2px color-mix(in srgb, var(--ngxsmk-color-success) 25%, transparent);
+    }
+    .workbench-title {
+      font-size: var(--ngxsmk-text-body-md-size);
+      font-weight: 700;
+      color: var(--ngxsmk-color-on-surface);
+    }
+    .ngxsmk-mock-workbench-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: var(--ngxsmk-space-4);
+      padding: var(--ngxsmk-space-4);
+      overflow-y: auto;
+    }
+    .ngxsmk-mock-workbench-transfer {
+      flex: 1;
+    }
+    .ngxsmk-mock-workbench-dock-row {
+      display: flex;
+      justify-content: center;
+      padding-bottom: var(--ngxsmk-space-2);
+    }
+
+    /* Financial Trading Dashboard */
+    .ngxsmk-mock-fintech {
+      background: var(--ngxsmk-color-surface);
+      border: 1px solid var(--ngxsmk-color-outline);
+      border-radius: var(--ngxsmk-radius-lg);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .ngxsmk-mock-fintech-header {
+      height: 3rem;
+      border-bottom: 1px solid var(--ngxsmk-color-outline);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--ngxsmk-space-4);
+      background: var(--ngxsmk-color-surface);
+    }
+    .ngxsmk-mock-fintech-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--ngxsmk-space-3);
+      padding: var(--ngxsmk-space-4) var(--ngxsmk-space-4) 0;
+    }
+    .ngxsmk-mock-fintech-heatmap {
+      padding: var(--ngxsmk-space-4);
+      flex: 1;
+      overflow: hidden;
+    }
+
+    /* Developer Portal */
+    .ngxsmk-mock-devportal {
+      background: var(--ngxsmk-color-surface);
+      border: 1px solid var(--ngxsmk-color-outline);
+      border-radius: var(--ngxsmk-radius-lg);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .ngxsmk-mock-devportal-header {
+      height: 3rem;
+      border-bottom: 1px solid var(--ngxsmk-color-outline);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--ngxsmk-space-4);
+      background: var(--ngxsmk-color-surface);
+    }
+    .ngxsmk-mock-devportal-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: var(--ngxsmk-space-4);
+      padding: var(--ngxsmk-space-4);
+      overflow-y: auto;
+    }
+    .ngxsmk-mock-devportal-sig,
+    .ngxsmk-mock-devportal-log {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .devportal-section-label {
+      font-size: var(--ngxsmk-text-body-xs-size);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ngxsmk-color-on-surface-variant);
+      font-family: var(--ngxsmk-font-mono);
+    }
+
+    /* Checkout Flow */
+    .ngxsmk-mock-checkout {
+      background: var(--ngxsmk-color-surface-variant);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--ngxsmk-space-4);
+      padding: var(--ngxsmk-space-5);
+    }
+    .ngxsmk-mock-checkout-steps {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      font-size: var(--ngxsmk-text-body-xs-size);
+      font-weight: 600;
+    }
+    .checkout-step {
+      padding: 0.25rem 0.625rem;
+      border-radius: var(--ngxsmk-radius-full);
+      background: var(--ngxsmk-color-surface);
+      border: 1px solid var(--ngxsmk-color-outline);
+      color: var(--ngxsmk-color-on-surface-variant);
+      white-space: nowrap;
+    }
+    .checkout-step.active {
+      background: var(--ngxsmk-color-primary);
+      border-color: var(--ngxsmk-color-primary);
+      color: var(--ngxsmk-color-on-primary);
+    }
+    .checkout-step.done {
+      background: var(--ngxsmk-color-success-container);
+      border-color: var(--ngxsmk-color-success);
+      color: var(--ngxsmk-color-on-success-container);
+    }
+    .checkout-step-line {
+      height: 1px;
+      width: 1.5rem;
+      background: var(--ngxsmk-color-outline);
+      flex-shrink: 0;
+    }
+    .ngxsmk-mock-checkout-card {
+      background: var(--ngxsmk-color-surface);
+      border: 1px solid var(--ngxsmk-color-outline);
+      border-radius: var(--ngxsmk-radius-xl);
+      padding: var(--ngxsmk-space-5);
+      width: 100%;
+      max-width: 360px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      box-shadow: var(--ngxsmk-shadow-md);
+    }
+    .checkout-pin-row {
+      display: flex;
+      justify-content: center;
+      margin: 0.5rem 0;
     }
 
     /* === Toolbar: register filter tabs + search === */
