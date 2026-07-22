@@ -362,7 +362,7 @@ import { NgxsmkHeading } from '@ngxsmk/core/heading';
       background-color: var(--ngxsmk-color-background, #fafafa);
       background-image: radial-gradient(var(--ngxsmk-color-outline, #e4e4e7) 1px, transparent 1px);
       background-size: 24px 24px;
-      min-height: 100vh;
+      min-height: calc(100vh - 3.5rem);
     }
 
     .docs-container {

@@ -588,7 +588,7 @@ function buildCode(name: string, values: Record<string, unknown>): string {
       background-color: var(--ngxsmk-color-background, #fafafa);
       background-image: radial-gradient(var(--ngxsmk-color-outline, #e4e4e7) 1px, transparent 1px);
       background-size: 24px 24px;
-      min-height: 100vh;
+      min-height: calc(100vh - 3.5rem);
     }
     .pg {
       max-width: 1400px;
@@ -650,7 +650,7 @@ function buildCode(name: string, values: Record<string, unknown>): string {
     /* Sidebar */
     .pg-sidebar {
       position: sticky;
-      top: 1rem;
+      top: 5rem;
       display: flex;
       flex-direction: column;
       gap: 0.75rem;
@@ -687,7 +687,7 @@ function buildCode(name: string, values: Record<string, unknown>): string {
     }
 
     .pg-groups {
-      max-height: calc(100vh - 220px);
+      max-height: calc(100vh - 7rem);
       overflow-y: auto;
       display: flex;
       flex-direction: column;

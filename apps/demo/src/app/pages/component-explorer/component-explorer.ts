@@ -149,9 +149,8 @@ const CATEGORY_ICONS: Record<string, string> = {
   styles: `
     :host {
       display: block;
-      margin: calc(-1 * var(--ngxsmk-space-8, 2rem));
       padding: var(--ngxsmk-space-8, 2rem);
-      min-height: 100%;
+      min-height: calc(100vh - 3.5rem);
       background-color: var(--ngxsmk-color-background, #fafafa);
       background-image: radial-gradient(var(--ngxsmk-color-outline, #e4e4e7) 1px, transparent 1px);
       background-size: 24px 24px;
