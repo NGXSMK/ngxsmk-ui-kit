@@ -430,7 +430,7 @@ export function provideSpreadsheet(
                             "
                           ></ng-container>
                         } @else {
-                          <!-- eslint-disable-next-line @angular-eslint/template/no-autofocus -->
+                          <!-- eslint-disable @angular-eslint/template/no-autofocus -->
                           <input
                             autofocus
                             class="ngxsmk-spreadsheet__cell-editor"
@@ -439,6 +439,7 @@ export function provideSpreadsheet(
                             (keydown)="_onEditorKeydown($event)"
                             (blur)="_commitEdit()"
                           />
+                          <!-- eslint-enable @angular-eslint/template/no-autofocus -->
                         }
                       } @else {
                         @if (tplCell) {
@@ -521,7 +522,7 @@ export function provideSpreadsheet(
                             "
                           ></ng-container>
                         } @else {
-                          <!-- eslint-disable-next-line @angular-eslint/template/no-autofocus -->
+                          <!-- eslint-disable @angular-eslint/template/no-autofocus -->
                           <input
                             autofocus
                             class="ngxsmk-spreadsheet__cell-editor"
@@ -530,6 +531,7 @@ export function provideSpreadsheet(
                             (keydown)="_onEditorKeydown($event)"
                             (blur)="_commitEdit()"
                           />
+                          <!-- eslint-enable @angular-eslint/template/no-autofocus -->
                         }
                       } @else {
                         @if (tplCell) {
@@ -651,7 +653,7 @@ export function provideSpreadsheet(
                             "
                           ></ng-container>
                         } @else {
-                          <!-- eslint-disable-next-line @angular-eslint/template/no-autofocus -->
+                          <!-- eslint-disable @angular-eslint/template/no-autofocus -->
                           <input
                             autofocus
                             class="ngxsmk-spreadsheet__cell-editor"
@@ -660,6 +662,7 @@ export function provideSpreadsheet(
                             (keydown)="_onEditorKeydown($event)"
                             (blur)="_commitEdit()"
                           />
+                          <!-- eslint-enable @angular-eslint/template/no-autofocus -->
                         }
                       } @else {
                         @if (tplCell) {
