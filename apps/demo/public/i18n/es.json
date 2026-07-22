@@ -1255,6 +1255,22 @@
       "health": {
         "title": "Monitor de salud del sistema",
         "desc": "Un panel de administración DevOps con medidores de carga de estadísticas activas, insignias de salud y registros de comandos de servidor en tiempo real."
+      },
+      "aiworkbench": {
+        "title": "Banco de trabajo de agente de IA",
+        "desc": "Espacio de trabajo interactivo para agentes de IA con barras de herramientas y listas de transferencia."
+      },
+      "fintech": {
+        "title": "Panel de comercio financiero",
+        "desc": "Panel de análisis financiero en tiempo real con mapas de calor de cartera y métricas."
+      },
+      "devportal": {
+        "title": "Portal de desarrolladores y firma",
+        "desc": "Portal de desarrolladores DevOps con firma de contratos electrónicos y registros virtuales."
+      },
+      "checkout": {
+        "title": "Pago en varios pasos y 2FA",
+        "desc": "Flujo de pago de comercio electrónico seguro con verificación PIN de 2 factores."
       }
     }
   },

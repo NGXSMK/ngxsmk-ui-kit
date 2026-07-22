@@ -17,6 +17,12 @@ import { NgxsmkSelect } from '@ngxsmk/core/select';
 import { NgxsmkBarChart } from '@ngxsmk/core/chart-bar';
 import { NgxsmkTerminal } from '@ngxsmk/core/terminal';
 import { NgxsmkButton } from '@ngxsmk/core/button';
+import { NgxsmkTransfer } from '@ngxsmk/core/transfer';
+import { NgxsmkSignaturePad } from '@ngxsmk/core/signature-pad';
+import { NgxsmkDock } from '@ngxsmk/core/dock';
+import { NgxsmkCalendarHeatmap } from '@ngxsmk/core/calendar-heatmap';
+import { NgxsmkVirtualScroll } from '@ngxsmk/core/virtual-scroll';
+import { NgxsmkPinInput } from '@ngxsmk/core/pin-input';
 import { Component, signal, computed } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -61,6 +67,12 @@ interface TemplateItem {
     NgxsmkSelect,
     NgxsmkBarChart,
     NgxsmkTerminal,
+    NgxsmkTransfer,
+    NgxsmkSignaturePad,
+    NgxsmkDock,
+    NgxsmkCalendarHeatmap,
+    NgxsmkVirtualScroll,
+    NgxsmkPinInput,
     NgTemplateOutlet,
     FormsModule,
     RouterLink,
@@ -906,6 +918,67 @@ interface TemplateItem {
                     [lines]="healthLogs"
                   />
                 </div>
+              </div>
+            }
+
+            <!-- 9. AI Agent Workbench Preview -->
+            @if (id === 'ai-workbench') {
+              <div
+                class="ngxsmk-mock-workbench"
+                style="padding: 1.5rem; display: flex; flex-direction: column; gap: 1.5rem; align-items: center;"
+              >
+                <ngxsmk-heading level="h3">AI Agent Workbench</ngxsmk-heading>
+                <ngxsmk-dock [items]="dockItems" />
+                <ngxsmk-transfer
+                  [dataSource]="transferItems"
+                  [titles]="['Available Models', 'Active Pipeline']"
+                />
+              </div>
+            }
+
+            <!-- 10. Financial Trading Preview -->
+            @if (id === 'fintech-trading') {
+              <div
+                class="ngxsmk-mock-fintech"
+                style="padding: 1.5rem; display: flex; flex-direction: column; gap: 1.5rem;"
+              >
+                <div style="display: flex; gap: 1rem; align-items: center;">
+                  <ngxsmk-stat label="Portfolio Return" value="+24.8%" trend="up" />
+                  <ngxsmk-stat label="Daily Volume" value="$2.4M" trend="up" />
+                </div>
+                <ngxsmk-calendar-heatmap [values]="heatmapValues" />
+              </div>
+            }
+
+            <!-- 11. Developer Portal Preview -->
+            @if (id === 'dev-portal') {
+              <div
+                class="ngxsmk-mock-devportal"
+                style="padding: 1.5rem; display: flex; flex-direction: column; gap: 1.5rem;"
+              >
+                <ngxsmk-heading level="h4">E-Signature Contract Sign-off</ngxsmk-heading>
+                <ngxsmk-signature-pad [width]="380" [height]="120" />
+                <ngxsmk-heading level="h4">Audit Log Virtual Stream</ngxsmk-heading>
+                <ngxsmk-virtual-scroll
+                  [items]="virtualItems"
+                  [itemHeight]="36"
+                  style="height: 160px;"
+                />
+              </div>
+            }
+
+            <!-- 12. Checkout Flow Preview -->
+            @if (id === 'checkout-flow') {
+              <div
+                class="ngxsmk-mock-checkout"
+                style="padding: 1.5rem; max-width: 420px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.25rem;"
+              >
+                <ngxsmk-heading level="h3">2-Factor Security Verification</ngxsmk-heading>
+                <ngxsmk-text variant="body"
+                  >Enter the 4-digit code sent to your registered phone number.</ngxsmk-text
+                >
+                <ngxsmk-pin-input [length]="4" />
+                <button ngxsmk-button style="width: 100%;">Confirm Payment</button>
               </div>
             }
           </div>
@@ -2595,6 +2668,56 @@ export class TemplatesPage {
 </div>
 
 <ngxsmk-terminal title="System Events Log" [lines]="logs" />`,
+    },
+    {
+      id: 'ai-workbench',
+      title: 'templates.list.aiworkbench.title',
+      category: 'Application',
+      description: 'templates.list.aiworkbench.desc',
+      gradient: 'linear-gradient(135deg, #0284c7, #0369a1, #075985)',
+      code: `<!-- ai-workbench.html -->
+<div class="ai-workbench">
+  <ngxsmk-heading level="h3">AI Agent Workbench</ngxsmk-heading>
+  <ngxsmk-dock [items]="dockItems" />
+  <ngxsmk-transfer [dataSource]="transferItems" [titles]="['Available Models', 'Active Pipeline']" />
+</div>`,
+    },
+    {
+      id: 'fintech-trading',
+      title: 'templates.list.fintech.title',
+      category: 'Application',
+      description: 'templates.list.fintech.desc',
+      gradient: 'linear-gradient(135deg, #059669, #047857, #065f46)',
+      code: `<!-- fintech-trading.html -->
+<div class="trading-dashboard">
+  <ngxsmk-stat label="Portfolio Return" value="+24.8%" trend="up" />
+  <ngxsmk-calendar-heatmap [values]="heatmapValues" />
+</div>`,
+    },
+    {
+      id: 'dev-portal',
+      title: 'templates.list.devportal.title',
+      category: 'DevOps',
+      description: 'templates.list.devportal.desc',
+      gradient: 'linear-gradient(135deg, #4f46e5, #4338ca, #3730a3)',
+      code: `<!-- dev-portal.html -->
+<div class="dev-portal">
+  <ngxsmk-signature-pad [width]="380" [height]="120" />
+  <ngxsmk-virtual-scroll [items]="virtualItems" [itemHeight]="36" />
+</div>`,
+    },
+    {
+      id: 'checkout-flow',
+      title: 'templates.list.checkout.title',
+      category: 'E-Commerce',
+      description: 'templates.list.checkout.desc',
+      gradient: 'linear-gradient(135deg, #d97706, #b45309, #92400e)',
+      code: `<!-- checkout-flow.html -->
+<div class="checkout-card">
+  <ngxsmk-heading level="h3">2-Factor Security Verification</ngxsmk-heading>
+  <ngxsmk-pin-input [length]="4" />
+  <button ngxsmk-button style="width: 100%;">Confirm Payment</button>
+</div>`,
     },
   ];
 
