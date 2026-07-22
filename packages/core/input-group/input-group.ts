@@ -157,6 +157,9 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
 
     <!-- Main Container -->
     <div class="ngxsmk-input-group__container">
+      <!-- Projected Leading Content -->
+      <ng-content select="ngxsmk-input-group-text:not([trailing]), [ngxsmkInputGroupText]:not([trailing])"></ng-content>
+
       <!-- Leading Add-ons -->
       @for (addon of engine.leadingAddons(); track addon.id) {
         <div
@@ -451,6 +454,9 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
           }
         </div>
       }
+
+      <!-- Projected Trailing Content -->
+      <ng-content select="ngxsmk-input-group-text[trailing], [ngxsmkInputGroupText][trailing]"></ng-content>
     </div>
 
     <!-- Hint / Error Message -->
@@ -692,6 +698,15 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
       margin-left: 2px;
     }
 
+    /* ── Input Wrapper ── */
+    .ngxsmk-input-group__input-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex: 1;
+      min-width: 0;
+    }
+
     /* ── Input Row ── */
     .ngxsmk-input-group__input-row {
       display: flex;
@@ -700,6 +715,7 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
       position: relative;
       flex: 1;
       min-width: 0;
+      height: 100%;
     }
 
     /* ── Input ── */
@@ -732,22 +748,36 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
     }
 
     /* ── Add-ons ── */
-    .ngxsmk-input-group__addon {
+    .ngxsmk-input-group__addon,
+    ::ng-deep .ngxsmk-input-group-text {
       display: flex;
       align-items: center;
+      justify-content: center;
       padding: 0 var(--ngxsmk-space-3, 0.75rem);
       color: var(--ngxsmk-color-on-surface-variant, #6b7280);
       font-size: var(--ngxsmk-text-body-sm-size, 0.875rem);
+      font-weight: 500;
       white-space: nowrap;
       background: var(--ngxsmk-color-surface-variant);
-      border-left: 1px solid var(--ngxsmk-color-outline-variant, #e5e7eb);
+      border-left: 1px solid
+        var(--ngxsmk-input-group-border, var(--ngxsmk-color-outline-strong, #d1d5db));
       user-select: none;
       min-height: 100%;
+      transition:
+        background var(--ngxsmk-duration-fast, 100ms) var(--ngxsmk-ease-out),
+        border-color var(--ngxsmk-duration-fast, 100ms) var(--ngxsmk-ease-out);
     }
 
-    .ngxsmk-input-group__addon--leading {
+    .ngxsmk-input-group__addon--leading,
+    ::ng-deep .ngxsmk-input-group-text:not([trailing]) {
       border-left: none;
-      border-right: 1px solid var(--ngxsmk-color-outline-variant, #e5e7eb);
+      border-right: 1px solid
+        var(--ngxsmk-input-group-border, var(--ngxsmk-color-outline-strong, #d1d5db));
+    }
+
+    :host(.ngxsmk-input-group--focused) .ngxsmk-input-group__addon,
+    :host(.ngxsmk-input-group--focused) ::ng-deep .ngxsmk-input-group-text {
+      border-color: var(--ngxsmk-input-group-focus-border, var(--ngxsmk-color-primary));
     }
 
     .ngxsmk-input-group__addon--interactive {

@@ -1,6 +1,6 @@
 # NGXSMK UI Kit
 
-> Angular-first, MIT-licensed UI ecosystem: 211+ signals-native, zoneless
+> Angular-first, MIT-licensed UI ecosystem: 216+ signals-native, zoneless
 > standalone components with a universal design-token engine (CSS variables,
 > SCSS, Tailwind, StyleX, Tokens Studio export). MIT licensed, no paid tiers.
 > Current version: 1.3.3. Supports Angular 17.3 through 22.
@@ -245,6 +245,19 @@ Inputs:
 
 Inputs:
 - `[direction]`: 'horizontal' | 'vertical' (default: `'horizontal'`)
+
+## NgxsmkCalendarHeatmap
+
+- Selector: `ngxsmk-calendar-heatmap`
+- Import from: `@ngxsmk/core/calendar-heatmap`
+- GitHub-style contribution calendar heatmap component for visualizing daily metrics.
+
+Inputs:
+- `[values]`: HeatmapValue[] (default: `[]`)
+- `[startDate]`: string (default: `''`)
+
+Outputs:
+- `(cellClick)`: emits `HeatmapValue`
 
 ## NgxsmkCard
 
@@ -731,6 +744,19 @@ Inputs:
 Inputs:
 - `[orientation]`: 'horizontal' | 'vertical' (default: `'horizontal'`)
 
+## NgxsmkDock
+
+- Selector: `ngxsmk-dock`
+- Import from: `@ngxsmk/core/dock`
+- Floating macOS-style application dock with icon tooltips and magnification hover effects.
+
+Inputs:
+- `[items]`: DockItem[] (required)
+- `[position]`: DockPosition (default: `'bottom'`)
+
+Outputs:
+- `(itemClick)`: emits `DockItem`
+
 ## NgxsmkDropdownMenu
 
 - Selector: `ngxsmk-dropdown-menu`
@@ -915,7 +941,39 @@ Inputs:
 
 - Selector: `ngxsmk-input-group`
 - Import from: `@ngxsmk/core/input-group`
-- Wraps a native control with text add-ons that sit flush against it, rendered as a single connected field.
+
+Inputs:
+- `[type]`: InputGroupInputType (default: `'text'`)
+- `[variant]`: InputGroupVariant (default: `'outlined'`)
+- `[size]`: InputGroupSize (default: `'md'`)
+- `[radius]`: InputGroupRadius (default: `'md'`)
+- `[density]`: InputGroupDensity (default: `'comfortable'`)
+- `[placeholder]`: string (default: `''`)
+- `[label]`: string (default: `''`)
+- `[hint]`: string (default: `''`)
+- `[required]`: boolean (default: `false`)
+- `[disabled]`: boolean (default: `false`)
+- `[readonly]`: boolean (default: `false`)
+- `[maxLength]`: number | undefined (default: `undefined`)
+- `[minLength]`: number | undefined (default: `undefined`)
+- `[showClear]`: boolean (default: `false`)
+- `[showCounter]`: boolean (default: `false`)
+- `[fullWidth]`: boolean (default: `true`)
+- `[loading]`: boolean (default: `false`)
+- `[floatingLabel]`: boolean (default: `false`)
+- `[addons]`: InputGroupAddon[] (default: `[]`)
+- `[inputType]`: InputGroupInputType | 'password' (default: `'text'`)
+- `[(value)]`: string (default: `''`)
+- `[id]`: unknown (default: `ngxsmkUniqueId('ngxsmk-input-group')`)
+- `[(ariaInvalid)]`: boolean (default: `false`)
+- `[(ariaDescribedby)]`: string | null (default: `null`)
+
+Outputs:
+- `(focused)`: emits `void`
+- `(blurred)`: emits `void`
+- `(cleared)`: emits `void`
+- `(valueChanged)`: emits `string`
+- `(validationChanged)`: emits `{ status: ValidationStatus; message: string }`
 
 ## NgxsmkInputGroupText
 
@@ -1475,8 +1533,41 @@ Inputs:
 - Import from: `@ngxsmk/core/scheduler`
 
 Inputs:
-- `[events]`: SchedulerEvent[] (required)
-- `[weekStart]`: unknown (default: `new Date()`)
+- `[(events)]`: SchedulerEvent[] (required)
+- `[view]`: ViewType (default: `'timeGridWeek'`)
+- `[date]`: Date (default: `new Date()`)
+- `[resources]`: SchedulerResource[] (default: `[]`)
+- `[slotDuration]`: number (default: `30`)
+- `[snapDuration]`: number (default: `15`)
+- `[visibleHours]`: [number, number] (default: `[0, 24]`)
+- `[firstDayOfWeek]`: number (default: `1`)
+- `[locale]`: string (default: `'en-US'`)
+- `[rtl]`: boolean (default: `false`)
+- `[density]`: Density (default: `'comfortable'`)
+- `[showAllDay]`: boolean (default: `true`)
+- `[showWeekends]`: boolean (default: `true`)
+- `[showCurrentTime]`: boolean (default: `true`)
+- `[editable]`: boolean (default: `true`)
+- `[selectable]`: boolean (default: `true`)
+- `[draggable]`: boolean (default: `true`)
+- `[resizable]`: boolean (default: `true`)
+- `[plugins]`: SchedulerPlugin[] (default: `[]`)
+
+Outputs:
+- `(eventClick)`: emits `SchedulerEvent`
+- `(eventDoubleClick)`: emits `SchedulerEvent`
+- `(eventContextMenu)`: emits `{
+    event: SchedulerEvent;
+    position: { x: number; y: number };
+  }`
+- `(eventDrop)`: emits `SchedulerMove`
+- `(eventResize)`: emits `SchedulerResize`
+- `(eventCreate)`: emits `SchedulerCreate`
+- `(viewChange)`: emits `{ view: ViewType; start: Date; end: Date }`
+- `(dateChange)`: emits `Date`
+- `(prevWeek)`: emits `void`
+- `(nextWeek)`: emits `void`
+- `(todayClick)`: emits `void`
 
 ## NgxsmkScrollLock
 
@@ -1587,6 +1678,26 @@ Outputs:
 - Selector: `ngxsmk-side-nav-collapse-button`
 - Import from: `@ngxsmk/core/side-nav`
 
+## NgxsmkSignaturePad
+
+- Selector: `ngxsmk-signature-pad`
+- Import from: `@ngxsmk/core/signature-pad`
+- Digital signature canvas component with smooth stroke rendering and export capabilities.
+
+Inputs:
+- `[width]`: number (default: `400`)
+- `[height]`: number (default: `180`)
+- `[penColor]`: string (default: `'#09090b'`)
+- `[penWidth]`: number (default: `2`)
+- `[disabled]`: boolean (default: `false`)
+- `[(value)]`: string (default: `''`)
+- `[id]`: unknown (default: `ngxsmkUniqueId('ngxsmk-signature-pad')`)
+- `[(ariaInvalid)]`: boolean (default: `false`)
+- `[(ariaDescribedby)]`: string | null (default: `null`)
+
+Outputs:
+- `(cleared)`: emits `void`
+
 ## NgxsmkSkeleton
 
 - Selector: `ngxsmk-skeleton`
@@ -1653,8 +1764,28 @@ Outputs:
 - Import from: `@ngxsmk/core/spreadsheet`
 
 Inputs:
-- `[data]`: string[][] (required)
-- `[columns]`: string[] (default: `[]`)
+- `[columns]`: ColumnDef[] (default: `[]`)
+- `[rows]`: RowDef[] (default: `[]`)
+- `[density]`: SpreadsheetDensity (default: `'comfortable'`)
+- `[editable]`: boolean (default: `true`)
+- `[multiSort]`: boolean (default: `false`)
+- `[(selectedCells)]`: CellRange | null (default: `null`)
+
+Outputs:
+- `(cellClick)`: emits `{ row: number; col: number; value: CellValue }`
+- `(cellDoubleClick)`: emits `{ row: number; col: number; value: CellValue }`
+- `(cellEdit)`: emits `{
+    row: number;
+    col: string;
+    oldValue: CellValue;
+    newValue: CellValue;
+  }`
+- `(selectionChange)`: emits `CellRange | null`
+- `(sortChange)`: emits `SortCriterion[]`
+- `(filterChange)`: emits `FilterCriterion[]`
+- `(rowInsert)`: emits `{ count: number; index: number }`
+- `(rowDelete)`: emits `{ indices: number[]; rows: RowDef[] }`
+- `(scrolled)`: emits `{ scrollTop: number; scrollLeft: number }`
 
 ## NgxsmkStack
 
@@ -2000,6 +2131,31 @@ Inputs:
 Inputs:
 - `[href]`: string (default: `''`)
 
+## NgxsmkTransfer
+
+- Selector: `ngxsmk-transfer`
+- Import from: `@ngxsmk/core/transfer`
+- Dual listbox component for moving items between two container columns.
+
+Inputs:
+- `[dataSource]`: TransferItem[] (default: `[]`)
+- `[titles]`: [string, string] (default: `['Source', 'Target']`)
+- `[showSearch]`: boolean (default: `true`)
+- `[searchPlaceholder]`: string (default: `'Search...'`)
+- `[disabled]`: boolean (default: `false`)
+- `[size]`: 'sm' | 'md' | 'lg' (default: `'md'`)
+- `[(targetKeys)]`: string[] (default: `[]`)
+- `[id]`: unknown (default: `ngxsmkUniqueId('ngxsmk-transfer')`)
+- `[(ariaInvalid)]`: boolean (default: `false`)
+- `[(ariaDescribedby)]`: string | null (default: `null`)
+
+Outputs:
+- `(transferChange)`: emits `{
+    targetKeys: string[];
+    direction: TransferDirection;
+    moveKeys: string[];
+  }`
+
 ## NgxsmkTreeNodeComponent
 
 - Selector: `ngxsmk-tree-node`
@@ -2044,6 +2200,17 @@ Inputs:
 - `[placeholder]`: string (default: `'Type to search...'`)
 - `[(value)]`: string (default: `''`)
 - `[(filtered)]`: string[] (default: `[]`)
+
+## NgxsmkVirtualScroll
+
+- Selector: `ngxsmk-virtual-scroll`
+- Import from: `@ngxsmk/core/virtual-scroll`
+- Signals-native virtual scroll container for rendering massive datasets with 60 FPS performance.
+
+Inputs:
+- `[items]`: T[] (default: `[]`)
+- `[itemHeight]`: number (default: `40`)
+- `[buffer]`: number (default: `5`)
 
 ## NgxsmkVisuallyHidden
 

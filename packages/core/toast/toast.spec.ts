@@ -39,19 +39,19 @@ describe('Toast and Toaster', () => {
   });
 
   it('should automatically dismiss after duration', () => {
-    toastService.show({ title: 'Auto close', duration: 3000 });
+    const id = toastService.show({ title: 'Auto close', duration: 3000 });
     expect(toastService.toasts().length).toBe(1);
 
     // Advance time past 3000ms
     vi.advanceTimersByTime(3000);
-    expect(toastService.isLeaving(toastService.toasts()[0].id)).toBe(true);
+    expect(toastService.isLeaving(id)).toBe(true);
   });
 
   it('should render items in NgxsmkToaster and dismiss on click', () => {
     const fixture = TestBed.createComponent(NgxsmkToaster);
     fixture.detectChanges();
 
-    toastService.show({ title: 'Toaster Message', description: 'Desc text' });
+    const id = toastService.show({ title: 'Toaster Message', description: 'Desc text' });
     fixture.detectChanges();
 
     const toastEl = fixture.nativeElement.querySelector('.ngxsmk-toaster__toast');
@@ -64,7 +64,7 @@ describe('Toast and Toaster', () => {
     closeBtn.click();
     fixture.detectChanges();
 
-    expect(toastService.isLeaving(0)).toBe(true);
+    expect(toastService.isLeaving(id)).toBe(true);
 
     // Simulate animationend for ngxsmk-toast-out to clear it completely
     const animEvent = new Event('animationend');
