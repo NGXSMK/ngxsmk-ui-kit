@@ -2332,6 +2332,29 @@ export class TemplatesPage {
     return this.templatesList.filter((t) => t.category === cat).length;
   }
 
+  protected readonly dockItems = [
+    { id: '1', label: 'Chat', icon: '💬' },
+    { id: '2', label: 'Code', icon: '⚡' },
+    { id: '3', label: 'Settings', icon: '⚙️' },
+  ];
+
+  protected readonly transferItems = [
+    { key: '1', title: 'GPT-4o', description: 'Multimodal Flagship' },
+    { key: '2', title: 'Gemini 1.5 Pro', description: '1M Context Window' },
+    { key: '3', title: 'Claude 3.5 Sonnet', description: 'High Reasoning' },
+  ];
+
+  protected readonly heatmapValues = [
+    { date: '2026-07-22', count: 8 },
+    { date: '2026-07-21', count: 4 },
+    { date: '2026-07-20', count: 9 },
+  ];
+
+  protected readonly virtualItems = Array.from({ length: 500 }, (_, i) => ({
+    id: i + 1,
+    name: 'Audit Log Event #' + (i + 1),
+  }));
+
   protected readonly tableColumns = [
     { key: 'user', label: 'User Name' },
     { key: 'status', label: 'Billing Plan' },
