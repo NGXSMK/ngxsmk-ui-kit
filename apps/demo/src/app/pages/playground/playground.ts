@@ -1974,9 +1974,24 @@ type RadiusKey = keyof typeof RADII;
     }
 
     .toolbar-btn.active {
-      background: var(--ngxsmk-color-surface-variant);
-      color: var(--ngxsmk-color-on-surface);
-      border-color: var(--ngxsmk-color-outline);
+      background: var(--ngxsmk-color-primary, #7c3aed);
+      color: var(--ngxsmk-color-on-primary, #ffffff);
+      border-color: var(--ngxsmk-color-primary, #7c3aed);
+      box-shadow: 0 2px 8px
+        color-mix(in srgb, var(--ngxsmk-color-primary, #7c3aed) 35%, transparent);
+    }
+
+    .toolbar-btn.active:hover {
+      background: var(--ngxsmk-color-primary-hover, #6d28d9);
+      color: var(--ngxsmk-color-on-primary, #ffffff);
+    }
+
+    .toolbar-btn.icon-btn.active {
+      background: var(--ngxsmk-color-primary, #7c3aed);
+      color: var(--ngxsmk-color-on-primary, #ffffff);
+      border-color: var(--ngxsmk-color-primary, #7c3aed);
+      box-shadow: 0 0 0 3px
+        color-mix(in srgb, var(--ngxsmk-color-primary, #7c3aed) 30%, transparent);
     }
 
     .toolbar-btn.text-btn {
@@ -1985,9 +2000,11 @@ type RadiusKey = keyof typeof RADII;
     }
 
     .toolbar-btn.text-btn.active {
-      background: var(--ngxsmk-color-primary-container);
-      color: var(--ngxsmk-color-on-primary-container);
-      border-color: var(--ngxsmk-color-primary);
+      background: var(--ngxsmk-color-primary, #7c3aed);
+      color: var(--ngxsmk-color-on-primary, #ffffff);
+      border-color: var(--ngxsmk-color-primary, #7c3aed);
+      box-shadow: 0 0 0 3px
+        color-mix(in srgb, var(--ngxsmk-color-primary, #7c3aed) 30%, transparent);
     }
 
     .toolbar-btn.text-btn.primary {
