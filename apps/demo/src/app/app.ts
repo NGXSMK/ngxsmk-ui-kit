@@ -6,14 +6,16 @@ import { NgxsmkThemeService } from '@ngxsmk/theme';
 import { SeoService } from './seo.service';
 import { CommandPalette } from './core/command-palette';
 import { ComponentRegistry } from './core/component-registry';
+import { ScrollToTop } from './core/scroll-to-top';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NgxsmkToaster, CommandPalette],
+  imports: [RouterOutlet, NgxsmkToaster, CommandPalette, ScrollToTop],
   template: `
     <router-outlet />
     <ngxsmk-toaster />
     <app-command-palette />
+    <app-scroll-to-top />
   `,
 })
 export class App {
