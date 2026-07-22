@@ -1752,12 +1752,7 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
         "default": "null"
       }
     ],
-    "outputs": [
-      {
-        "name": "rangeChange",
-        "type": "DateRange"
-      }
-    ]
+    "outputs": []
   },
   {
     "entryPoint": "@ngxsmk/core/diagram-builder",

@@ -747,9 +747,6 @@ Inputs:
 - `[(ariaInvalid)]`: boolean (default: `false`)
 - `[(ariaDescribedby)]`: string | null (default: `null`)
 
-Outputs:
-- `(rangeChange)`: emits `DateRange`
-
 ## NgxsmkDiagramBuilder
 
 - Selector: `ngxsmk-diagram-builder`
