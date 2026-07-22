@@ -8,7 +8,9 @@ describe('NgxsmkCalendarHeatmap', () => {
     fixture.componentRef.setInput('values', [{ date: '2026-07-22', count: 5 }]);
     fixture.detectChanges();
 
-    const cells = fixture.nativeElement.querySelectorAll('.ngxsmk-heatmap__grid .ngxsmk-heatmap__cell');
+    const cells = fixture.nativeElement.querySelectorAll(
+      '.ngxsmk-heatmap__grid .ngxsmk-heatmap__cell',
+    );
     expect(cells.length).toBeGreaterThan(0);
   });
 });

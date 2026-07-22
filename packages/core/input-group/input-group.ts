@@ -158,7 +158,9 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
     <!-- Main Container -->
     <div class="ngxsmk-input-group__container">
       <!-- Projected Leading Content -->
-      <ng-content select="ngxsmk-input-group-text:not([trailing]), [ngxsmkInputGroupText]:not([trailing])"></ng-content>
+      <ng-content
+        select="ngxsmk-input-group-text:not([trailing]), [ngxsmkInputGroupText]:not([trailing])"
+      ></ng-content>
 
       <!-- Leading Add-ons -->
       @for (addon of engine.leadingAddons(); track addon.id) {
@@ -456,7 +458,9 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
       }
 
       <!-- Projected Trailing Content -->
-      <ng-content select="ngxsmk-input-group-text[trailing], [ngxsmkInputGroupText][trailing]"></ng-content>
+      <ng-content
+        select="ngxsmk-input-group-text[trailing], [ngxsmkInputGroupText][trailing]"
+      ></ng-content>
     </div>
 
     <!-- Hint / Error Message -->

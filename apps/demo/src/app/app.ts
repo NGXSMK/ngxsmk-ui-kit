@@ -25,9 +25,11 @@ export class App {
 
   constructor() {
     this.seo.init();
-    inject(Router).events.pipe(filter((e) => e instanceof NavigationEnd)).subscribe(() => {
-      window.scrollTo(0, 0);
-    });
+    inject(Router)
+      .events.pipe(filter((e) => e instanceof NavigationEnd))
+      .subscribe(() => {
+        window.scrollTo(0, 0);
+      });
     let stored: string | null = null;
     try {
       stored = document.defaultView?.localStorage?.getItem('ngxsmk-theme-mode') ?? null;

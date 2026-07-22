@@ -114,7 +114,14 @@ export type TransferDirection = 'left' | 'right';
         (click)="moveToRight()"
         aria-label="Move selected right"
       >
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
           <polyline points="9 18 15 12 9 6"></polyline>
         </svg>
       </button>
@@ -125,7 +132,14 @@ export type TransferDirection = 'left' | 'right';
         (click)="moveToLeft()"
         aria-label="Move selected left"
       >
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
           <polyline points="15 18 9 12 15 6"></polyline>
         </svg>
       </button>
