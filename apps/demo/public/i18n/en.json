@@ -98,6 +98,7 @@
     "terminalDesc": "Console emulator that distinguishes input lines and shows a blinking cursor.",
     "orgDesc": "Hierarchical tree of people cards showing name and role by reporting line.",
     "queryDesc": "Compose filter conditions across typed fields with operators and values.",
+    "inputGroupDesc": "Versatile input wrapper with floating labels, validation states, add-ons, password toggle, character counter, and multiple visual variants.",
     "selectedNode": "Selected node:",
     "pivotRowLabel": "Quarter",
     "flowTitle": "Onboarding Flow"
