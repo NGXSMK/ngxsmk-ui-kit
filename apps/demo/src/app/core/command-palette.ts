@@ -365,10 +365,24 @@ export class CommandPalette {
     }
   }
 
+  private readonly CATEGORY_ROUTE: Record<string, string> = {
+    form: 'forms',
+    layout: 'layout',
+    navigation: 'navigation',
+    'data-display': 'data-display',
+    feedback: 'feedback',
+    overlay: 'overlay',
+    chart: 'charts',
+    ai: 'ai',
+    enterprise: 'enterprise',
+    utility: 'utilities',
+    other: 'content-typography',
+  };
+
   selectResult(result: SearchResult): void {
     this.close();
     this.registry.addToFavorites(result.item.name);
-    const path = result.item.category.replace(/[^a-z0-9]+/g, '-');
+    const path = this.CATEGORY_ROUTE[result.item.category] ?? 'content-typography';
     const fragment = result.item.name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
     this.router.navigate(['/showcase', path], { fragment });
   }

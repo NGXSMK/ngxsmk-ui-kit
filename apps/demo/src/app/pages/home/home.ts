@@ -2,7 +2,6 @@ import { NgxsmkButton } from '@ngxsmk/core/button';
 import { NgxsmkDialog, NgxsmkDialogFooter } from '@ngxsmk/core/dialog';
 import { NgxsmkTag } from '@ngxsmk/core/tag';
 import { NgxsmkToast, NgxsmkToaster } from '@ngxsmk/core/toast';
-import { NgxsmkAvatar } from '@ngxsmk/core/avatar';
 import { Component, inject, signal, computed } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -44,7 +43,6 @@ interface ComponentCategory {
     TranslatePipe,
     RouterLink,
     AppNav,
-    NgxsmkAvatar,
     NgxsmkButton,
     NgxsmkDialog,
     NgxsmkDialogFooter,
@@ -65,27 +63,21 @@ export class HomePage {
   protected readonly searchQuery = signal('');
 
   protected readonly motionHero = {
-    initial: { opacity: 0, scale: 0.97 },
-    animate: { opacity: 1, scale: 1 },
-    transition: { duration: 0.4, easing: 'ease-out' },
+    initial: { opacity: 0, y: 12 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.5, easing: 'ease-out' },
   };
 
   protected readonly motionTitle = {
-    initial: { opacity: 0 },
-    animate: { opacity: 1 },
+    initial: { opacity: 0, y: 16 },
+    animate: { opacity: 1, y: 0 },
     transition: { duration: 0.6, delay: 0.1, easing: 'ease-out' },
   };
 
   protected readonly motionCta = {
-    initial: { opacity: 0 },
-    animate: { opacity: 1 },
+    initial: { opacity: 0, y: 12 },
+    animate: { opacity: 1, y: 0 },
     transition: { duration: 0.4, delay: 0.25, easing: 'ease-out' },
-  };
-
-  protected readonly motionBento = {
-    initial: { opacity: 0 },
-    animate: { opacity: 1 },
-    transition: { duration: 0.6, delay: 0.35, easing: 'ease-out' },
   };
 
   protected getItemFragment(item: string): string {
@@ -106,8 +98,6 @@ export class HomePage {
       items: [
         'Button',
         'Button Group',
-        'FAB (Floating Action)',
-        'Split Button',
         'Toggle Button',
         'Toggle Button Group',
         'Input',
@@ -138,7 +128,6 @@ export class HomePage {
       title: 'category.ai',
       path: 'ai',
       items: [
-        'Interactive AI Chat',
         'Agent Card',
         'Chat Window',
         'Chat Input',
@@ -241,7 +230,6 @@ export class HomePage {
         'Banner',
         'Badge',
         'Progress',
-        'Progress Circle',
         'Skeleton',
         'Spinner',
         'Empty State',
@@ -263,9 +251,6 @@ export class HomePage {
         'Overflow List',
         'Stat',
         'Status Dot',
-        'Carousel',
-        'Tree View',
-        'QR Code',
       ],
     },
     {
@@ -399,9 +384,6 @@ export class HomePage {
   ];
 
   protected readonly copied = signal(false);
-
-  protected readonly agreed = signal(true);
-  protected readonly notifications = signal(false);
   protected readonly dialogOpen = signal(false);
 
   constructor() {

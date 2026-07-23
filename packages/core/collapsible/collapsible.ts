@@ -1,4 +1,16 @@
-import { ChangeDetectionStrategy, Component, input, model } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  ElementRef,
+  effect,
+  inject,
+  input,
+  model,
+  untracked,
+  viewChild,
+} from '@angular/core';
+import { loadMotion, prefersReducedMotion } from '@ngxsmk/core/animation';
 
 @Component({
   standalone: true,
@@ -28,7 +40,7 @@ import { ChangeDetectionStrategy, Component, input, model } from '@angular/core'
         />
       </svg>
     </button>
-    <div class="ngxsmk-collapsible__region" [style.max-height]="open() ? contentHeight : '0px'">
+    <div class="ngxsmk-collapsible__region" #region>
       <div class="ngxsmk-collapsible__content" #content>
         <ng-content />
       </div>
@@ -111,12 +123,57 @@ import { ChangeDetectionStrategy, Component, input, model } from '@angular/core'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgxsmkCollapsible {
+  private readonly destroyRef = inject(DestroyRef);
+
   readonly open = model(false);
   readonly title = input('');
 
-  protected readonly contentHeight = 'var(--ngxsmk-collapsible-content-height, 500px)';
+  /** Expand/collapse animation duration in seconds. Default `0.2`. */
+  readonly collapsibleDuration = input<number>(0.2);
+
+  /** Easing name or cubic-bezier array. Default `'ease-out'`. */
+  readonly collapsibleEase = input<string | number[]>('ease-out');
+
+  /** Animation mode: `'css'` (default) or `'motion'` (motion.dev animate). */
+  readonly collapsibleAnimation = input<'css' | 'motion'>('css');
+
+  private readonly regionRef = viewChild<ElementRef<HTMLElement>>('region');
+
+  constructor() {
+    effect(() => {
+      const mode = this.collapsibleAnimation();
+      const open = this.open();
+      if (mode !== 'motion') return;
+
+      untracked(() => {
+        void this.animateToggle(open);
+      });
+    });
+  }
 
   toggle(): void {
     this.open.update((v) => !v);
+  }
+
+  private async animateToggle(open: boolean): Promise<void> {
+    if (prefersReducedMotion()) return;
+
+    const region = this.regionRef()?.nativeElement;
+    if (!region) return;
+
+    const motion = await loadMotion();
+    if (!motion) return;
+
+    const duration = this.collapsibleDuration();
+    const ease = this.collapsibleEase();
+
+    if (open) {
+      region.style.maxHeight = '0px';
+      const content = region.firstElementChild;
+      const targetHeight = content ? `${content.scrollHeight}px` : '500px';
+      await motion.animate(region, { maxHeight: targetHeight }, { duration, ease }).finished;
+    } else {
+      await motion.animate(region, { maxHeight: '0px' }, { duration, ease }).finished;
+    }
   }
 }

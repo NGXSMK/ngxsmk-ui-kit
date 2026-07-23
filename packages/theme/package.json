@@ -9,7 +9,9 @@
     "design-tokens",
     "css-variables",
     "dark-mode",
-    "themes"
+    "themes",
+    "tailwind",
+    "tailwindcss"
   ],
   "license": "MIT",
   "repository": {
@@ -25,12 +27,32 @@
     "@angular/common": ">=17.3.0",
     "@angular/core": ">=17.3.0"
   },
+  "peerDependenciesMeta": {
+    "tailwindcss": {
+      "optional": true
+    }
+  },
   "dependencies": {
     "tslib": "^2.3.0"
   },
   "sideEffects": [
     "**/*.css"
   ],
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./index.js"
+    },
+    "./tailwind": {
+      "types": "./tailwind/index.d.ts",
+      "default": "./tailwind/index.js"
+    },
+    "./tailwind/v3": {
+      "types": "./tailwind/preset-v3.d.ts",
+      "default": "./tailwind/preset-v3.js"
+    },
+    "./tailwind/v4.css": "./tailwind-v4.css"
+  },
   "publishConfig": {
     "access": "public"
   }

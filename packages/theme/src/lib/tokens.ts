@@ -28,7 +28,7 @@ export const DEFAULT_SEMANTIC: SemanticColors = {
 
 export const DEFAULT_FONT_FAMILY: FontFamilies = {
   sans: "'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif",
-  mono: "'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace",
+  mono: "'Geist Mono', 'Geist Mono Fallback', monospace",
 };
 
 export const DEFAULT_TYPOGRAPHY: TypographyScale = {

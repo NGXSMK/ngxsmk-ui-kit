@@ -193,6 +193,7 @@ interface ApiOutput {
     }
 
     .ngxsmk-sc-ex {
+      width: 100%;
       border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
       border-radius: var(--ngxsmk-radius-lg, 0.5rem);
       background: var(--ngxsmk-color-surface, #ffffff);
@@ -250,7 +251,7 @@ interface ApiOutput {
       border-top: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
       background: var(--ngxsmk-color-surface-variant, #f4f4f5);
       color: var(--ngxsmk-color-on-surface, #09090b);
-      font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace;
+      font-family: var(--ngxsmk-font-mono);
       font-size: var(--ngxsmk-text-body-sm-size);
       line-height: 1.6;
       overflow-x: auto;
@@ -301,7 +302,7 @@ interface ApiOutput {
     }
 
     .ngxsmk-sc-ex__table code {
-      font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace;
+      font-family: var(--ngxsmk-font-mono);
       font-size: var(--ngxsmk-text-body-sm-size);
     }
 
@@ -313,7 +314,7 @@ interface ApiOutput {
     }
 
     .ngxsmk-sc-ex__api-note code {
-      font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace;
+      font-family: var(--ngxsmk-font-mono);
       font-size: var(--ngxsmk-text-body-sm-size);
     }
 
@@ -377,21 +378,193 @@ export class ShowcaseExample {
 
   protected openStackBlitz(): void {
     if (typeof document === 'undefined') return;
+    if (!this.code()) return;
+
+    const project = {
+      title: `NGXSMK - ${this.title()}`,
+      description: this.description() || 'NGXSMK Component Live Sandbox',
+      template: 'node' as const,
+      files: {
+        'package.json': JSON.stringify(
+          {
+            name: 'ngxsmk-demo',
+            version: '0.0.0',
+            scripts: {
+              start: 'ng serve',
+              build: 'ng build',
+            },
+            dependencies: {
+              '@angular/core': '^19.0.0',
+              '@angular/common': '^19.0.0',
+              '@angular/compiler': '^19.0.0',
+              '@angular/forms': '^19.0.0',
+              '@angular/platform-browser': '^19.0.0',
+              '@angular/platform-browser-dynamic': '^19.0.0',
+              '@angular/router': '^19.0.0',
+              '@ngxsmk/core': 'latest',
+              '@ngxsmk/theme': 'latest',
+              rxjs: '~7.8.0',
+              tslib: '^2.3.0',
+              'zone.js': '~0.15.0',
+            },
+            devDependencies: {
+              '@angular-devkit/build-angular': '^19.0.0',
+              '@angular/cli': '^19.0.0',
+              '@angular/compiler-cli': '^19.0.0',
+              typescript: '~5.6.0',
+            },
+          },
+          null,
+          2,
+        ),
+        'angular.json': JSON.stringify(
+          {
+            $schema: './node_modules/@angular/cli/lib/config/schema.json',
+            version: 1,
+            newProjectRoot: 'projects',
+            projects: {
+              demo: {
+                projectType: 'application',
+                root: '',
+                sourceRoot: 'src',
+                architect: {
+                  build: {
+                    builder: '@angular-devkit/build-angular:application',
+                    options: {
+                      outputPath: 'dist/demo',
+                      index: 'src/index.html',
+                      browser: 'src/main.ts',
+                      polyfills: ['zone.js'],
+                      tsConfig: 'tsconfig.app.json',
+                      styles: ['src/styles.css'],
+                    },
+                  },
+                  serve: {
+                    builder: '@angular-devkit/build-angular:dev-server',
+                    options: { buildTarget: 'demo:build' },
+                  },
+                },
+              },
+            },
+          },
+          null,
+          2,
+        ),
+        'tsconfig.json': JSON.stringify(
+          {
+            compileOnSave: false,
+            compilerOptions: {
+              outDir: './dist/out-tsc',
+              forceConsistentCasingInFileNames: true,
+              strict: false,
+              noImplicitOverride: true,
+              noPropertyAccessFromIndexSignature: false,
+              noImplicitReturns: true,
+              noFallthroughCasesInSwitch: true,
+              sourceMap: true,
+              declaration: false,
+              downlevelIteration: true,
+              experimentalDecorators: true,
+              moduleResolution: 'node',
+              importHelpers: true,
+              target: 'ES2022',
+              module: 'ES2022',
+              useDefineForClassFields: false,
+              lib: ['ES2022', 'dom'],
+            },
+            angularCompilerOptions: { enableI18nLegacyMessageIdFormat: false },
+          },
+          null,
+          2,
+        ),
+        'tsconfig.app.json': JSON.stringify(
+          {
+            extends: './tsconfig.json',
+            compilerOptions: {
+              outDir: './out-tsc/app',
+              types: [],
+            },
+            files: ['src/main.ts'],
+            include: ['src/**/*.d.ts'],
+          },
+          null,
+          2,
+        ),
+        'src/index.html':
+          '<!doctype html>\n<html lang="en">\n<head><meta charset="utf-8"><title>Demo</title><base href="/"><meta name="viewport" content="width=device-width, initial-scale=1"></head>\n<body><app-root></app-root></body>\n</html>',
+        'src/main.ts': [
+          "import { bootstrapApplication } from '@angular/platform-browser';",
+          "import { AppComponent } from './app/app.component';",
+          '',
+          'bootstrapApplication(AppComponent);',
+        ].join('\n'),
+        'src/app/app.component.ts': [
+          "import { Component } from '@angular/core';",
+          "import { DemoComponent } from './demo.component';",
+          '',
+          '@Component({',
+          "  selector: 'app-root',",
+          '  imports: [DemoComponent],',
+          "  template: '<app-demo />',",
+          '})',
+          'export class AppComponent {}',
+        ].join('\n'),
+        'src/app/demo.component.ts': [
+          "import { Component } from '@angular/core';",
+          '',
+          '@Component({',
+          "  selector: 'app-demo',",
+          '  template: `' +
+            this.code().replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\$/g, '\\$') +
+            '`,',
+          '})',
+          'export class DemoComponent {}',
+        ].join('\n'),
+        'src/styles.css':
+          "@import '@ngxsmk/theme/css';\n\nbody { font-family: system-ui, sans-serif; padding: 2rem; }\n",
+      },
+    };
+
+    const script = document.createElement('script');
+    script.src = 'https://unpkg.com/@stackblitz/sdk@1/bundles/sdk.umd.js';
+    script.onload = () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const sdk = (window as any).StackBlitzSDK as
+        { openProject: (project: unknown, opts?: Record<string, unknown>) => void } | undefined;
+      if (sdk) {
+        sdk.openProject(project, {
+          newWindow: true,
+          openFile: 'src/app/demo.component.ts',
+        });
+      } else {
+        this.fallbackFormPost(project);
+      }
+    };
+    script.onerror = () => this.fallbackFormPost(project);
+    document.body.appendChild(script);
+  }
+
+  private fallbackFormPost(project: {
+    title: string;
+    description: string;
+    files: Record<string, string>;
+  }): void {
     const form = document.createElement('form');
     form.method = 'POST';
     form.action = 'https://stackblitz.com/run';
     form.target = '_blank';
+    form.style.display = 'none';
 
     const addField = (name: string, value: string) => {
-      const inputEl = document.createElement('input');
-      inputEl.type = 'hidden';
-      inputEl.name = name;
-      inputEl.value = value;
-      form.appendChild(inputEl);
+      const field = document.createElement('input');
+      field.type = 'hidden';
+      field.name = name;
+      field.value = value;
+      form.appendChild(field);
     };
 
-    addField('project[title]', `NGXSMK - ${this.title()}`);
-    addField('project[description]', this.description() || 'NGXSMK Component Live Sandbox');
+    addField('project[title]', project.title);
+    addField('project[description]', project.description);
     addField('project[template]', 'angular-cli');
     addField(
       'project[dependencies]',
@@ -399,23 +572,19 @@ export class ShowcaseExample {
         '@angular/core': '^19.0.0',
         '@angular/common': '^19.0.0',
         '@angular/forms': '^19.0.0',
-        '@ngxsmk/core': '^1.3.3',
-        '@ngxsmk/theme': '^1.3.3',
+        '@ngxsmk/core': 'latest',
+        '@ngxsmk/theme': 'latest',
         rxjs: '~7.8.0',
         tslib: '^2.3.0',
       }),
     );
-    addField(
-      'project[files][src/app/demo.component.ts]',
-      `import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-root',\n  template: \`${this.code()}\`,\n})\nexport class DemoComponent {}\n`,
-    );
-    addField(
-      'project[files][src/styles.css]',
-      `@import '@ngxsmk/theme/css';\n\nbody { font-family: system-ui, sans-serif; padding: 2rem; }\n`,
-    );
+
+    for (const [path, content] of Object.entries(project.files)) {
+      addField(`project[files][${path}]`, content);
+    }
 
     document.body.appendChild(form);
     form.submit();
-    document.body.removeChild(form);
+    setTimeout(() => document.body.removeChild(form), 100);
   }
 }

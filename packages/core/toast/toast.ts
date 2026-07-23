@@ -8,6 +8,7 @@ import {
   signal,
 } from '@angular/core';
 import { NgxsmkLiveAnnouncer } from '@ngxsmk/cdk';
+import { NgxsmkMotionState, prefersReducedMotion } from '@ngxsmk/core/animation';
 
 export type NgxsmkToastVariant = 'default' | 'success' | 'error' | 'warning' | 'info';
 
@@ -17,18 +18,17 @@ export interface NgxsmkToastOptions {
   variant?: NgxsmkToastVariant;
   /** Auto-dismiss delay in ms; 0 keeps the toast until dismissed. */
   duration?: number;
+  /** Override the default toast motion state. */
+  motion?: NgxsmkMotionState;
 }
 
-export interface NgxsmkActiveToast extends Required<Omit<NgxsmkToastOptions, 'description'>> {
+export interface NgxsmkActiveToast extends Required<Omit<NgxsmkToastOptions, 'description' | 'motion'>> {
   id: number;
   description: string;
+  motion?: NgxsmkMotionState;
 }
 
 const DEFAULT_DURATION_MS = 5000;
-
-const prefersReducedMotion = (): boolean =>
-  typeof window !== 'undefined' &&
-  window.matchMedia?.('(prefers-reduced-motion: reduce)').matches === true;
 
 /**
  * Toast state and API. Render `<ngxsmk-toaster />` once near the app root,
@@ -56,6 +56,7 @@ export class NgxsmkToast {
       description: opts.description ?? '',
       variant: opts.variant ?? 'default',
       duration: opts.duration ?? DEFAULT_DURATION_MS,
+      motion: opts.motion,
     };
 
     this.items.update((list) => [...list, toast]);

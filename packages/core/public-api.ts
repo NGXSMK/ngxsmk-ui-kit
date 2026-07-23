@@ -182,3 +182,6 @@ export * from '@ngxsmk/core/workflow-builder';
 export * from '@ngxsmk/core/command-palette';
 export * from '@ngxsmk/core/prompt-carousel';
 export * from '@ngxsmk/core/carousel';
+export * from '@ngxsmk/core/pull-to-refresh';
+export * from '@ngxsmk/core/morph-modal';
+export * from '@ngxsmk/core/expanding-arrow-button';

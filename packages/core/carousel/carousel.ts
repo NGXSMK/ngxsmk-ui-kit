@@ -1,6 +1,8 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
+  ElementRef,
   PLATFORM_ID,
   booleanAttribute,
   computed,
@@ -9,8 +11,10 @@ import {
   inject,
   input,
   signal,
+  viewChild,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { loadMotion, prefersReducedMotion } from '@ngxsmk/core/animation';
 
 let nextSlideId = 0;
 
@@ -194,6 +198,7 @@ export class NgxsmkCarouselSlide {
 })
 export class NgxsmkCarousel {
   private readonly platformId = inject(PLATFORM_ID);
+  private readonly destroyRef = inject(DestroyRef);
 
   readonly label = input<string>('Image gallery');
   readonly autoplay = input(false, { transform: booleanAttribute });
@@ -202,8 +207,28 @@ export class NgxsmkCarousel {
   readonly showControls = input(true, { transform: booleanAttribute });
   readonly showIndicators = input(true, { transform: booleanAttribute });
 
+  /** Animation mode: `'css'` (default, CSS transition) or `'motion'` (motion.dev animate). */
+  readonly carouselAnimation = input<'css' | 'motion'>('css');
+
+  /** Slide transition duration in seconds. Default `0.3`. */
+  readonly carouselDuration = input<number>(0.3);
+
+  /** Easing name or cubic-bezier array. Default `'ease-out'`. */
+  readonly carouselEase = input<string | number[]>('ease-out');
+
+  /** Animation type: `'tween'` or `'spring'`. Default `'tween'`. */
+  readonly carouselType = input<'tween' | 'spring'>('tween');
+
+  /** Spring stiffness (when type is 'spring'). */
+  readonly carouselStiffness = input<number>();
+
+  /** Spring damping (when type is 'spring'). */
+  readonly carouselDamping = input<number>();
+
   readonly slides = contentChildren(NgxsmkCarouselSlide);
   readonly activeIndex = signal(0);
+
+  private readonly trackRef = viewChild<ElementRef<HTMLElement>>('track');
 
   protected readonly trackTransform = computed(() => {
     return `translateX(-${this.activeIndex() * 100}%)`;
@@ -220,33 +245,79 @@ export class NgxsmkCarousel {
     });
   }
 
+  private buildMotionOptions(): Record<string, unknown> {
+    const type = this.carouselType();
+    if (type === 'spring') {
+      const opts: Record<string, unknown> = { type: 'spring' };
+      const stiffness = this.carouselStiffness();
+      const damping = this.carouselDamping();
+      if (stiffness != null) opts['stiffness'] = stiffness;
+      if (damping != null) opts['damping'] = damping;
+      return opts;
+    }
+    return { duration: this.carouselDuration(), ease: this.carouselEase() };
+  }
+
+  private async animateTrackTo(targetPercent: number): Promise<void> {
+    if (this.carouselAnimation() !== 'motion') return;
+    if (prefersReducedMotion()) return;
+
+    const track = this.trackRef()?.nativeElement;
+    if (!track) return;
+
+    const motion = await loadMotion();
+    if (!motion) return;
+
+    track.style.transition = 'none';
+    await motion.animate(
+      track,
+      { transform: `translateX(-${targetPercent}%)` },
+      this.buildMotionOptions(),
+    ).finished;
+    track.style.transition = '';
+  }
+
   next(): void {
     const len = this.slides().length;
     if (len <= 1) return;
 
+    const fromIdx = this.activeIndex();
     this.activeIndex.update((idx) => {
       if (idx === len - 1) {
         return this.loop() ? 0 : idx;
       }
       return idx + 1;
     });
+    const toIdx = this.activeIndex();
+    if (fromIdx !== toIdx) {
+      void this.animateTrackTo(toIdx * 100);
+    }
   }
 
   prev(): void {
     const len = this.slides().length;
     if (len <= 1) return;
 
+    const fromIdx = this.activeIndex();
     this.activeIndex.update((idx) => {
       if (idx === 0) {
         return this.loop() ? len - 1 : idx;
       }
       return idx - 1;
     });
+    const toIdx = this.activeIndex();
+    if (fromIdx !== toIdx) {
+      void this.animateTrackTo(toIdx * 100);
+    }
   }
 
   goTo(index: number): void {
     if (index >= 0 && index < this.slides().length) {
+      const fromIdx = this.activeIndex();
       this.activeIndex.set(index);
+      if (fromIdx !== index) {
+        void this.animateTrackTo(index * 100);
+      }
     }
   }
 }

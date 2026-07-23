@@ -16,15 +16,15 @@ interface SearchItem {
   standalone: true,
   imports: [RouterLink, RouterLinkActive, TranslatePipe, LanguageSwitcher],
   template: `
-    <nav class="ngxsmk-nav">
-      <div class="ngxsmk-nav__inner">
-        <a class="ngxsmk-nav__brand" routerLink="/">
-          <img class="ngxsmk-nav__logo" src="favicon.svg" alt="" aria-hidden="true" />
-          <span class="ngxsmk-nav__wordmark">NGXSMK</span>
+    <nav class="nav">
+      <div class="nav__inner">
+        <a class="nav__brand" routerLink="/">
+          <img class="nav__logo" src="favicon.svg" alt="" aria-hidden="true" />
+          <span class="nav__wordmark">NGXSMK</span>
         </a>
 
         <button
-          class="ngxsmk-nav__menu-btn"
+          class="nav__menu-btn"
           type="button"
           [attr.aria-expanded]="mobileOpen()"
           [attr.aria-label]="'nav.toggleMenu' | translate"
@@ -43,60 +43,30 @@ interface SearchItem {
           </svg>
         </button>
 
-        <div class="ngxsmk-nav__links">
-          <a
-            class="ngxsmk-nav__link"
-            routerLink="/docs"
-            routerLinkActive="ngxsmk-nav__link--active"
-            >{{ 'nav.docs' | translate }}</a
-          >
-          <a class="ngxsmk-nav__link" routerLink="/api" routerLinkActive="ngxsmk-nav__link--active"
-            >API</a
-          >
-          <a
-            class="ngxsmk-nav__link"
-            routerLink="/showcase/explorer"
-            routerLinkActive="ngxsmk-nav__link--active"
-            >{{ 'nav.components' | translate }}</a
-          >
-          <a
-            class="ngxsmk-nav__link"
-            routerLink="/templates"
-            routerLinkActive="ngxsmk-nav__link--active"
-            >{{ 'nav.templates' | translate }}</a
-          >
-          <a
-            class="ngxsmk-nav__link"
-            routerLink="/themes"
-            routerLinkActive="ngxsmk-nav__link--active"
-            >{{ 'nav.themes' | translate }}</a
-          >
-          <a
-            class="ngxsmk-nav__link"
-            routerLink="/playground"
-            routerLinkActive="ngxsmk-nav__link--active"
-            [routerLinkActiveOptions]="{ exact: true }"
-            >{{ 'nav.playground' | translate }}</a
-          >
-          <a
-            class="ngxsmk-nav__link"
-            routerLink="/playground/component"
-            routerLinkActive="ngxsmk-nav__link--active"
-            >{{ 'nav.componentPlayground' | translate }}</a
-          >
+        <div class="nav__links">
+          <a class="nav__link" routerLink="/showcase/explorer" routerLinkActive="nav__link--active">
+            {{ 'nav.components' | translate }}
+          </a>
+          <a class="nav__link" routerLink="/docs" routerLinkActive="nav__link--active">
+            {{ 'nav.docs' | translate }}
+          </a>
+          <a class="nav__link" routerLink="/templates" routerLinkActive="nav__link--active">
+            {{ 'nav.templates' | translate }}
+          </a>
+          <a class="nav__link" routerLink="/themes" routerLinkActive="nav__link--active">
+            {{ 'nav.themes' | translate }}
+          </a>
         </div>
 
-        <div class="ngxsmk-nav__actions">
-          <!-- Premium search bar pill in navbar -->
+        <div class="nav__actions">
           <button
-            class="ngxsmk-nav__search-btn"
+            class="nav__search"
             (click)="openSearch()"
             [attr.aria-label]="'nav.searchAria' | translate"
           >
             <svg
-              class="search-icon"
-              width="14"
-              height="14"
+              width="15"
+              height="15"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -107,12 +77,12 @@ interface SearchItem {
               <circle cx="11" cy="11" r="8" />
               <path d="m21 21-4.35-4.35" />
             </svg>
-            <span class="search-text">{{ 'nav.search' | translate }}</span>
-            <span class="search-kbd"><kbd>⌘K</kbd></span>
+            <span class="nav__search-text">{{ 'nav.search' | translate }}</span>
+            <kbd class="nav__search-kbd">⌘K</kbd>
           </button>
 
           <button
-            class="ngxsmk-nav__icon-btn"
+            class="nav__icon-btn"
             [attr.aria-label]="(theme.isDark() ? 'nav.lightMode' : 'nav.darkMode') | translate"
             (click)="theme.toggle()"
           >
@@ -149,7 +119,7 @@ interface SearchItem {
           </button>
 
           <a
-            class="ngxsmk-nav__icon-btn"
+            class="nav__icon-btn"
             href="https://github.com/NGXSMK/ngxsmk-ui-kit"
             target="_blank"
             [attr.aria-label]="'nav.github' | translate"
@@ -162,59 +132,35 @@ interface SearchItem {
           </a>
 
           <app-language-switcher />
-          <a class="ngxsmk-nav__cta" routerLink="/showcase/explorer">{{
-            'nav.getStarted' | translate
-          }}</a>
         </div>
       </div>
     </nav>
 
     @if (mobileOpen()) {
-      <div class="ngxsmk-nav__mobile">
-        <a class="ngxsmk-nav__mobile-link" routerLink="/docs" (click)="mobileOpen.set(false)">{{
-          'nav.docs' | translate
-        }}</a>
-        <a class="ngxsmk-nav__mobile-link" routerLink="/api" (click)="mobileOpen.set(false)">API</a>
+      <div class="nav__mobile">
+        <a class="nav__mobile-link" routerLink="/showcase/explorer" (click)="mobileOpen.set(false)">
+          {{ 'nav.components' | translate }}
+        </a>
+        <a class="nav__mobile-link" routerLink="/docs" (click)="mobileOpen.set(false)">
+          {{ 'nav.docs' | translate }}
+        </a>
+        <a class="nav__mobile-link" routerLink="/templates" (click)="mobileOpen.set(false)">
+          {{ 'nav.templates' | translate }}
+        </a>
+        <a class="nav__mobile-link" routerLink="/themes" (click)="mobileOpen.set(false)">
+          {{ 'nav.themes' | translate }}
+        </a>
+        <a class="nav__mobile-link" routerLink="/playground" (click)="mobileOpen.set(false)">
+          {{ 'nav.playground' | translate }}
+        </a>
         <a
-          class="ngxsmk-nav__mobile-link"
-          routerLink="/showcase/explorer"
-          (click)="mobileOpen.set(false)"
-          >{{ 'nav.components' | translate }}</a
-        >
-        <a
-          class="ngxsmk-nav__mobile-link"
-          routerLink="/templates"
-          (click)="mobileOpen.set(false)"
-          >{{ 'nav.templates' | translate }}</a
-        >
-        <a class="ngxsmk-nav__mobile-link" routerLink="/themes" (click)="mobileOpen.set(false)">{{
-          'nav.themes' | translate
-        }}</a>
-        <a
-          class="ngxsmk-nav__mobile-link"
-          routerLink="/playground"
-          (click)="mobileOpen.set(false)"
-          >{{ 'nav.playground' | translate }}</a
-        >
-        <a
-          class="ngxsmk-nav__mobile-link"
-          routerLink="/playground/component"
-          (click)="mobileOpen.set(false)"
-          >{{ 'nav.componentPlayground' | translate }}</a
-        >
-        <a
-          class="ngxsmk-nav__mobile-link"
+          class="nav__mobile-link"
           href="https://github.com/NGXSMK/ngxsmk-ui-kit"
           target="_blank"
           (click)="mobileOpen.set(false)"
-          >{{ 'nav.github' | translate }}</a
         >
-        <a
-          class="ngxsmk-nav__cta ngxsmk-nav__mobile-cta"
-          routerLink="/showcase/explorer"
-          (click)="mobileOpen.set(false)"
-          >{{ 'nav.getStarted' | translate }}</a
-        >
+          {{ 'nav.github' | translate }}
+        </a>
       </div>
     }
 
@@ -249,7 +195,7 @@ interface SearchItem {
               (keydown)="onSearchKeydown($event)"
             />
             <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
-            <span class="cmd-esc-hint" (click)="closeSearch()">ESC</span>
+            <span class="cmd-esc" (click)="closeSearch()">ESC</span>
           </div>
 
           <div class="cmd-results">
@@ -279,28 +225,27 @@ interface SearchItem {
     }
   `,
   styles: `
-    .ngxsmk-nav {
+    .nav {
       position: sticky;
       top: 0;
       z-index: var(--ngxsmk-z-sticky, 1100);
       border-bottom: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
-      background: color-mix(in srgb, var(--ngxsmk-color-surface, #ffffff) 85%, transparent);
-      backdrop-filter: saturate(1.4) blur(16px);
-      transition: border-color 0.2s;
-      font-family: 'DM Sans', var(--ngxsmk-font-sans, system-ui), sans-serif;
+      background: color-mix(in srgb, var(--ngxsmk-color-surface, #ffffff) 80%, transparent);
+      backdrop-filter: saturate(1.5) blur(20px);
+      -webkit-backdrop-filter: saturate(1.5) blur(20px);
     }
 
-    .ngxsmk-nav__inner {
+    .nav__inner {
       max-width: 1400px;
       margin: 0 auto;
       padding: 0 var(--ngxsmk-space-6, 1.5rem);
       height: 3.5rem;
       display: flex;
       align-items: center;
-      gap: var(--ngxsmk-space-8, 2rem);
+      gap: var(--ngxsmk-space-6, 1.5rem);
     }
 
-    .ngxsmk-nav__brand {
+    .nav__brand {
       display: flex;
       align-items: center;
       gap: var(--ngxsmk-space-2, 0.5rem);
@@ -312,25 +257,25 @@ interface SearchItem {
       font-family: 'Outfit', var(--ngxsmk-font-sans, system-ui), sans-serif;
     }
 
-    .ngxsmk-nav__logo {
+    .nav__logo {
       width: 1.5rem;
       height: 1.5rem;
       flex-shrink: 0;
     }
 
-    .ngxsmk-nav__wordmark {
+    .nav__wordmark {
       letter-spacing: -0.02em;
       font-weight: 800;
     }
 
-    .ngxsmk-nav__links {
+    .nav__links {
       display: flex;
       align-items: center;
       gap: var(--ngxsmk-space-1, 0.25rem);
       margin-right: auto;
     }
 
-    .ngxsmk-nav__link {
+    .nav__link {
       padding: var(--ngxsmk-space-1-5, 0.375rem) var(--ngxsmk-space-3, 0.75rem);
       border-radius: var(--ngxsmk-radius-md, 0.375rem);
       font-size: var(--ngxsmk-text-body-sm-size);
@@ -342,18 +287,18 @@ interface SearchItem {
         background 0.15s;
     }
 
-    .ngxsmk-nav__link:hover {
+    .nav__link:hover {
       color: var(--ngxsmk-color-on-surface, #09090b);
       background: color-mix(in srgb, var(--ngxsmk-color-on-surface, #09090b) 4%, transparent);
     }
 
-    .ngxsmk-nav__link--active {
+    .nav__link--active {
       color: var(--ngxsmk-color-on-surface, #09090b);
       background: color-mix(in srgb, var(--ngxsmk-color-on-surface, #09090b) 4%, transparent);
       font-weight: 600;
     }
 
-    .ngxsmk-nav__actions {
+    .nav__actions {
       display: flex;
       align-items: center;
       gap: var(--ngxsmk-space-1-5, 0.375rem);
@@ -361,25 +306,26 @@ interface SearchItem {
       margin-left: auto;
     }
 
-    /* Premium Search Bar Pill in Navbar */
-    .ngxsmk-nav__search-btn {
+    /* Search pill */
+    .nav__search {
       display: flex;
       align-items: center;
       gap: 0.5rem;
       border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
       background: var(--ngxsmk-color-surface-variant, #f4f4f5);
-      border-radius: var(--ngxsmk-radius-md, 0.375rem);
-      padding: 0.375rem 0.5rem 0.375rem 0.75rem;
-      height: 2rem;
+      border-radius: var(--ngxsmk-radius-lg, 0.5rem);
+      padding: 0.375rem 0.625rem 0.375rem 0.75rem;
+      height: 2.125rem;
       cursor: pointer;
       color: var(--ngxsmk-color-on-surface-variant, #71717a);
       transition:
         background-color 0.15s,
         border-color 0.15s;
-      width: 140px;
+      min-width: 160px;
       text-align: left;
     }
-    .ngxsmk-nav__search-btn:hover {
+
+    .nav__search:hover {
       background: var(--ngxsmk-color-surface-hover, #e4e4e7);
       border-color: color-mix(
         in srgb,
@@ -387,23 +333,24 @@ interface SearchItem {
         var(--ngxsmk-color-primary)
       );
     }
-    .search-icon {
-      flex-shrink: 0;
-    }
-    .search-text {
+
+    .nav__search-text {
       font-size: var(--ngxsmk-text-body-sm-size);
       font-weight: 500;
       flex: 1;
     }
-    .search-kbd {
-      font-size: var(--ngxsmk-text-body-xs-size);
-      opacity: 0.7;
-    }
-    .search-kbd kbd {
+
+    .nav__search-kbd {
       font-family: inherit;
+      font-size: var(--ngxsmk-text-body-xs-size);
+      opacity: 0.6;
+      border: 1px solid var(--ngxsmk-color-outline);
+      padding: 0.1rem 0.35rem;
+      border-radius: var(--ngxsmk-radius-sm);
+      line-height: 1;
     }
 
-    .ngxsmk-nav__icon-btn {
+    .nav__icon-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -420,27 +367,9 @@ interface SearchItem {
       text-decoration: none;
     }
 
-    .ngxsmk-nav__icon-btn:hover {
+    .nav__icon-btn:hover {
       color: var(--ngxsmk-color-on-surface, #09090b);
       background: color-mix(in srgb, var(--ngxsmk-color-on-surface, #09090b) 4%, transparent);
-    }
-
-    .ngxsmk-nav__cta {
-      display: inline-flex;
-      align-items: center;
-      padding: var(--ngxsmk-space-2, 0.5rem) var(--ngxsmk-space-4, 1rem);
-      margin-left: var(--ngxsmk-space-2, 0.5rem);
-      border-radius: var(--ngxsmk-radius-md, 0.375rem);
-      background: var(--ngxsmk-color-primary, #7c3aed);
-      color: #ffffff;
-      font-size: var(--ngxsmk-text-body-sm-size);
-      font-weight: 600;
-      text-decoration: none;
-      transition: opacity 0.15s;
-    }
-
-    .ngxsmk-nav__cta:hover {
-      opacity: 0.9;
     }
 
     /* Command Palette Overlay */
@@ -468,7 +397,7 @@ interface SearchItem {
 
     .cmd-dialog {
       width: 100%;
-      max-width: 600px;
+      max-width: 560px;
       background: var(--ngxsmk-color-surface, #ffffff);
       border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
       border-radius: var(--ngxsmk-radius-xl, 0.75rem);
@@ -516,16 +445,18 @@ interface SearchItem {
       font-family: inherit;
       color: var(--ngxsmk-color-on-surface, #09090b);
     }
+
     .cmd-input:focus {
       border: none !important;
       outline: none !important;
       box-shadow: none !important;
     }
+
     .cmd-input::placeholder {
       color: var(--ngxsmk-color-on-surface-variant, #71717a);
     }
 
-    .cmd-esc-hint {
+    .cmd-esc {
       font-size: var(--ngxsmk-text-body-xs-size);
       font-weight: 700;
       color: var(--ngxsmk-color-on-surface-variant, #71717a);
@@ -587,6 +518,7 @@ interface SearchItem {
       padding: 0.125rem 0.375rem;
       border-radius: var(--ngxsmk-radius-sm);
     }
+
     .cmd-item.active .cmd-item-cat {
       background: rgba(255, 255, 255, 0.4);
       color: var(--ngxsmk-color-on-primary-container, #4c1d95);
@@ -599,7 +531,7 @@ interface SearchItem {
       font-size: var(--ngxsmk-text-body-md-size);
     }
 
-    .ngxsmk-nav__menu-btn {
+    .nav__menu-btn {
       display: none;
       align-items: center;
       justify-content: center;
@@ -611,12 +543,13 @@ interface SearchItem {
       color: var(--ngxsmk-color-on-surface-variant, #71717a);
       cursor: pointer;
     }
-    .ngxsmk-nav__menu-btn:hover {
+
+    .nav__menu-btn:hover {
       color: var(--ngxsmk-color-on-surface, #09090b);
       background: color-mix(in srgb, var(--ngxsmk-color-on-surface, #09090b) 4%, transparent);
     }
 
-    .ngxsmk-nav__mobile {
+    .nav__mobile {
       position: absolute;
       top: 3.5rem;
       left: 0;
@@ -632,7 +565,8 @@ interface SearchItem {
       box-shadow: var(--ngxsmk-shadow-lg, 0 20px 25px -5px rgba(0, 0, 0, 0.1));
       z-index: var(--ngxsmk-z-sticky, 1100);
     }
-    .ngxsmk-nav__mobile-link {
+
+    .nav__mobile-link {
       padding: var(--ngxsmk-space-3, 0.75rem);
       border-radius: var(--ngxsmk-radius-md, 0.375rem);
       font-size: var(--ngxsmk-text-body-md-size);
@@ -640,51 +574,44 @@ interface SearchItem {
       text-decoration: none;
       color: var(--ngxsmk-color-on-surface, #09090b);
     }
-    .ngxsmk-nav__mobile-link:hover {
+
+    .nav__mobile-link:hover {
       background: color-mix(in srgb, var(--ngxsmk-color-on-surface, #09090b) 4%, transparent);
-    }
-    .ngxsmk-nav__mobile-cta {
-      margin: var(--ngxsmk-space-2, 0.5rem) 0 0;
-      justify-content: center;
     }
 
     @media (max-width: 768px) {
-      .ngxsmk-nav__links {
+      .nav__links {
         display: none;
       }
-      .ngxsmk-nav__menu-btn {
+      .nav__menu-btn {
         display: inline-flex;
-      }
-      .ngxsmk-nav__cta {
-        display: none;
       }
     }
 
     @media (max-width: 640px) {
-      .ngxsmk-nav__inner {
+      .nav__inner {
         padding: 0 var(--ngxsmk-space-4, 1rem);
         gap: var(--ngxsmk-space-3, 0.75rem);
       }
-      .ngxsmk-nav__search-btn {
-        width: auto;
+      .nav__search {
+        min-width: 0;
         padding: 0;
         justify-content: center;
         width: 2rem;
         border: none;
         background: transparent;
       }
-      .ngxsmk-nav__search-btn:hover {
+      .nav__search:hover {
         background: color-mix(in srgb, var(--ngxsmk-color-on-surface, #09090b) 4%, transparent);
       }
-      .search-text,
-      .search-kbd {
+      .nav__search-text,
+      .nav__search-kbd {
         display: none;
       }
     }
 
     @media (max-width: 480px) {
-      /* Free header space on tight phones: GitHub lives in the mobile menu. */
-      a.ngxsmk-nav__icon-btn {
+      a.nav__icon-btn {
         display: none;
       }
     }
@@ -927,7 +854,7 @@ export class AppNav {
   protected readonly filteredSearchItems = computed(() => {
     const q = this.searchQuery().toLowerCase().trim();
     const items = this.flatItems();
-    if (!q) return items.slice(0, 10); // Show first 10 by default
+    if (!q) return items.slice(0, 10);
     return items.filter(
       (item) => item.name.toLowerCase().includes(q) || item.category.toLowerCase().includes(q),
     );

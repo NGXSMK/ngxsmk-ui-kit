@@ -1,100 +1,47 @@
 <app-nav />
 
-<main class="ngxsmk-home">
+<main class="home">
   <!-- ============ HERO ============ -->
   <section class="hero">
     <div class="hero__bg" aria-hidden="true"></div>
-    <div class="hero__grid-overlay" aria-hidden="true"></div>
 
     <div class="hero__inner">
-      <div class="hero__copy">
-        <span class="hero__badge" [ngxsmkAnimate]="motionHero">
-          <span class="hero__badge-dot" aria-hidden="true"></span>
-          {{ appVersion }} · {{ 'home.badgeTag' | translate }}
-        </span>
-        <h1 class="hero__title" [ngxsmkAnimate]="motionTitle">
-          {{ 'home.heroTitle' | translate }}<br />
-          Angular <span class="hero__grad">{{ 'home.heroDeserves' | translate }}</span>
-        </h1>
-        <p class="hero__lede">
-          {{ 'home.heroLede' | translate }}
-        </p>
+      <span class="hero__badge" [ngxsmkAnimate]="motionHero">
+        <span class="hero__badge-dot" aria-hidden="true"></span>
+        {{ appVersion }} · {{ 'home.badgeTag' | translate }}
+      </span>
 
-        <div class="hero__cta" [ngxsmkAnimate]="motionCta">
-          <a ngxsmk-button size="lg" routerLink="/showcase">{{ 'nav.getStarted' | translate }} →</a>
-          <a ngxsmk-button size="lg" variant="outline" routerLink="/templates">{{
-            'home.browseTemplates' | translate
-          }}</a>
-        </div>
+      <h1 class="hero__title" [ngxsmkAnimate]="motionTitle">
+        {{ 'home.heroTitle' | translate }}<br />
+        Angular <span class="hero__grad">{{ 'home.heroDeserves' | translate }}</span>
+      </h1>
 
-        <button
-          type="button"
-          class="hero__install"
-          [attr.aria-label]="'home.copyInstall' | translate"
-          (click)="copyInstall()"
+      <p class="hero__lede" [ngxsmkAnimate]="motionTitle">
+        {{ 'home.heroLede' | translate }}
+      </p>
+
+      <div class="hero__cta" [ngxsmkAnimate]="motionCta">
+        <a ngxsmk-button size="lg" routerLink="/showcase/explorer"
+          >{{ 'nav.getStarted' | translate }} →</a
         >
-          <span class="hero__install-prompt" aria-hidden="true">$</span>
-          <code>{{ installCommand }}</code>
-          <span class="hero__install-copy">{{
-            copied() ? ('home.copied' | translate) : ('home.copy' | translate)
-          }}</span>
-        </button>
+        <a ngxsmk-button size="lg" variant="outline" routerLink="/templates">{{
+          'home.browseTemplates' | translate
+        }}</a>
       </div>
 
-      <!-- Self-referential bento: the kit showing off the kit -->
-      <div class="bento" [ngxsmkAnimate]="motionBento">
-        <div class="bento__tile bento__tile--brand">
-          <img class="bento__logo" src="favicon.svg" alt="" aria-hidden="true" />
-          <span class="bento__wordmark">NGXSMK</span>
-          <span class="bento__brand-sub">{{ 'home.bentoBrandSub' | translate }}</span>
-        </div>
-
-        <div class="bento__tile bento__tile--buttons">
-          <span class="bento__label">{{ 'home.bentoButtons' | translate }}</span>
-          <div class="bento__stack">
-            <div class="bento__row">
-              <button ngxsmk-button size="sm">{{ 'forms.primary' | translate }}</button>
-              <button ngxsmk-button size="sm" variant="outline">
-                {{ 'forms.outline' | translate }}
-              </button>
-            </div>
-            <div class="bento__row">
-              <button ngxsmk-button size="sm" variant="ghost">
-                {{ 'forms.ghost' | translate }}
-              </button>
-              <button ngxsmk-button size="sm" variant="destructive">
-                {{ 'forms.delete' | translate }}
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div class="bento__tile bento__tile--tags">
-          <span class="bento__label">{{ 'home.bentoTags' | translate }}</span>
-          <div class="bento__row bento__row--wrap">
-            <ngxsmk-tag>{{ 'iplayground.signals' | translate }}</ngxsmk-tag>
-            <ngxsmk-tag>{{ 'home.badgeZoneless' | translate }}</ngxsmk-tag>
-            <ngxsmk-tag>SSR</ngxsmk-tag>
-            <ngxsmk-tag>MIT</ngxsmk-tag>
-          </div>
-        </div>
-
-        <div class="bento__tile bento__tile--progress">
-          <div class="bento__profile">
-            <ngxsmk-avatar initials="NG" size="sm" />
-            <span>{{ 'home.bentoBuildProgress' | translate }}</span>
-          </div>
-          <div class="bento__bar"><span style="width: 87%"></span></div>
-          <span class="bento__meta">{{ 'home.bentoModules' | translate }}</span>
-        </div>
-
-        <div class="bento__tile bento__tile--code">
-          <div class="bento__code-dots" aria-hidden="true"><i></i><i></i><i></i></div>
-          <pre><code>&lt;button <b>ngxsmk-button</b>&gt;
-  Ship it →
-&lt;/button&gt;</code></pre>
-        </div>
-      </div>
+      <button
+        type="button"
+        class="hero__install"
+        [attr.aria-label]="'home.copyInstall' | translate"
+        (click)="copyInstall()"
+        [ngxsmkAnimate]="motionCta"
+      >
+        <span class="hero__install-prompt" aria-hidden="true">$</span>
+        <code>{{ installCommand }}</code>
+        <span class="hero__install-copy">
+          {{ copied() ? ('home.copied' | translate) : ('home.copy' | translate) }}
+        </span>
+      </button>
     </div>
 
     <div class="hero__stats">
@@ -107,23 +54,6 @@
     </div>
   </section>
 
-  <!-- ============ MARQUEE ============ -->
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee__track">
-      @for (n of [0, 1]; track n) {
-        <span>{{ 'category.forms' | translate }}</span
-        ><span class="marquee__dot">◆</span> <span>{{ 'category.ai' | translate }}</span
-        ><span class="marquee__dot">◆</span> <span>{{ 'category.enterprise' | translate }}</span
-        ><span class="marquee__dot">◆</span> <span>{{ 'category.charts' | translate }}</span
-        ><span class="marquee__dot">◆</span> <span>{{ 'category.overlay' | translate }}</span
-        ><span class="marquee__dot">◆</span> <span>{{ 'category.navigation' | translate }}</span
-        ><span class="marquee__dot">◆</span> <span>{{ 'category.layout' | translate }}</span
-        ><span class="marquee__dot">◆</span> <span>{{ 'category.data-display' | translate }}</span
-        ><span class="marquee__dot">◆</span>
-      }
-    </div>
-  </div>
-
   <!-- ============ FEATURES ============ -->
   <section class="section" id="features">
     <header class="section__head">
@@ -133,9 +63,9 @@
       </h2>
     </header>
 
-    <div class="feature-bento">
-      @for (feature of features; track feature.title; let i = $index) {
-        <article class="feature" [class.feature--wide]="i === 0">
+    <div class="features">
+      @for (feature of features; track feature.title) {
+        <article class="feature">
           <span class="feature__icon" aria-hidden="true">{{ feature.icon }}</span>
           <h3 class="feature__title">{{ feature.title | translate }}</h3>
           <p class="feature__desc">{{ feature.description | translate }}</p>
@@ -243,12 +173,12 @@
     <div class="cta__glow" aria-hidden="true"></div>
     <div class="cta__inner">
       <h2 class="cta__title">{{ 'home.ctaTitle' | translate }}</h2>
-      <p class="cta__sub">
-        {{ 'home.ctaSub' | translate }}
-      </p>
+      <p class="cta__sub">{{ 'home.ctaSub' | translate }}</p>
       <div class="hero__cta hero__cta--center">
-        <a ngxsmk-button size="lg" routerLink="/showcase">{{ 'nav.getStarted' | translate }} →</a>
-        <a ngxsmk-button size="lg" variant="outline" routerLink="/showcase">{{
+        <a ngxsmk-button size="lg" routerLink="/showcase/explorer"
+          >{{ 'nav.getStarted' | translate }} →</a
+        >
+        <a ngxsmk-button size="lg" variant="outline" routerLink="/showcase/explorer">{{
           'home.browseComponents' | translate
         }}</a>
       </div>
@@ -256,55 +186,41 @@
   </section>
 </main>
 
-<footer class="ngxsmk-footer">
-  <div class="ngxsmk-footer__grid">
-    <div class="ngxsmk-footer__brand">
-      <a class="ngxsmk-footer__logo-link" routerLink="/">
-        <img class="ngxsmk-nav__logo" src="favicon.svg" alt="" aria-hidden="true" />
-        <span class="ngxsmk-nav__wordmark">NGXSMK</span>
+<footer class="footer">
+  <div class="footer__grid">
+    <div class="footer__brand">
+      <a class="footer__logo-link" routerLink="/">
+        <img class="footer__logo" src="favicon.svg" alt="" aria-hidden="true" />
+        <span class="footer__wordmark">NGXSMK</span>
       </a>
-      <p class="ngxsmk-footer__tagline">{{ 'home.tagline' | translate }}</p>
-      <div class="ngxsmk-footer__social">
-        <a
-          href="https://github.com/NGXSMK/ngxsmk-ui-kit"
-          target="_blank"
-          [attr.aria-label]="'nav.github' | translate"
-        >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M0 4h24v16H0V4zm2 2v12h10V8h4v10h6V6H2z" />
-          </svg>
-        </a>
-      </div>
+      <p class="footer__tagline">{{ 'home.tagline' | translate }}</p>
     </div>
 
-    <div class="ngxsmk-footer__col">
-      <h4 class="ngxsmk-footer__heading">{{ 'home.footerDocs' | translate }}</h4>
+    <div class="footer__col">
+      <h4 class="footer__heading">{{ 'home.footerDocs' | translate }}</h4>
       <a routerLink="/docs">{{ 'home.footerGettingStarted' | translate }}</a>
-      <a routerLink="/showcase">{{ 'nav.components' | translate }}</a>
+      <a routerLink="/showcase/explorer">{{ 'nav.components' | translate }}</a>
       <a routerLink="/templates">{{ 'nav.templates' | translate }}</a>
       <a routerLink="/themes">{{ 'nav.themes' | translate }}</a>
-      <a routerLink="/playground">{{ 'nav.playground' | translate }}</a>
     </div>
-    <div class="ngxsmk-footer__col">
-      <h4 class="ngxsmk-footer__heading">{{ 'home.footerResources' | translate }}</h4>
+    <div class="footer__col">
+      <h4 class="footer__heading">{{ 'home.footerResources' | translate }}</h4>
       <a routerLink="/blog">{{ 'home.footerBlog' | translate }}</a>
       <a routerLink="/changelog">{{ 'home.footerChangelog' | translate }}</a>
       <a routerLink="/roadmap">{{ 'home.footerRoadmap' | translate }}</a>
       <a routerLink="/community">{{ 'home.footerCommunity' | translate }}</a>
     </div>
-    <div class="ngxsmk-footer__col">
-      <h4 class="ngxsmk-footer__heading">{{ 'home.footerConnect' | translate }}</h4>
+    <div class="footer__col">
+      <h4 class="footer__heading">{{ 'home.footerConnect' | translate }}</h4>
       <a href="https://github.com/NGXSMK/ngxsmk-ui-kit" target="_blank">{{
         'nav.github' | translate
       }}</a>
     </div>
   </div>
 
-  <div class="ngxsmk-footer__bar">
+  <div class="footer__bar">
     <span>{{ 'home.copyright' | translate }}</span>
-    <span class="ngxsmk-footer__built"
-      >Built with @ngxsmk/core, @ngxsmk/cdk &amp; @ngxsmk/theme</span
-    >
+    <span class="footer__built">Built with @ngxsmk/core, @ngxsmk/cdk &amp; @ngxsmk/theme</span>
   </div>
 </footer>
 

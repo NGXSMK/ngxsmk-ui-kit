@@ -120,7 +120,7 @@ export class NgxsmkContextMenu {
     initial: { opacity: 0, y: -6 },
     animate: { opacity: 1, y: 0 },
     exit: { opacity: 0, y: -6 },
-    transition: { duration: 0.14, easing: 'ease-out' },
+    transition: { duration: 0.14, ease: 'ease-out' },
   };
 
   constructor() {
