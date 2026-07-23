@@ -386,7 +386,7 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
       padding: 0.1rem 0.4rem;
       border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
       border-radius: 4px;
-      font-family: ui-monospace, monospace;
+      font-family: var(--ngxsmk-font-mono);
       font-size: var(--ngxsmk-text-body-sm-size);
       background: var(--ngxsmk-color-surface-variant, #f4f4f5);
     }

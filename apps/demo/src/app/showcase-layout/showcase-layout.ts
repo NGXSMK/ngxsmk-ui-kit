@@ -16,13 +16,13 @@ interface CategoryGroup {
   imports: [FormsModule, RouterOutlet, RouterLink, RouterLinkActive, AppNav, TranslatePipe],
   template: `
     <app-nav />
-    <div class="ngxsmk-sc-layout">
-      <aside class="ngxsmk-sc-sidebar" [class.ngxsmk-sc-sidebar--open]="mobileOpen()">
-        <div class="ngxsmk-sc-sidebar__search">
+    <div class="sc-layout">
+      <aside class="sc-sidebar" [class.sc-sidebar--open]="mobileOpen()">
+        <div class="sc-sidebar__search">
           <svg
-            class="ngxsmk-sc-sidebar__search-icon"
-            width="16"
-            height="16"
+            class="sc-sidebar__search-icon"
+            width="15"
+            height="15"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -34,7 +34,7 @@ interface CategoryGroup {
             <path d="m21 21-4.35-4.35" />
           </svg>
           <input
-            class="ngxsmk-sc-sidebar__search-input"
+            class="sc-sidebar__search-input"
             type="search"
             [attr.placeholder]="'showcase.searchPlaceholder' | translate"
             [ngModel]="searchQuery()"
@@ -42,40 +42,44 @@ interface CategoryGroup {
           />
         </div>
 
-        <div class="ngxsmk-sc-sidebar__sections">
+        <div class="sc-sidebar__nav">
           <a
-            class="ngxsmk-sc-sidebar__overview"
+            class="sc-sidebar__overview"
             routerLink="/showcase/explorer"
-            routerLinkActive="ngxsmk-sc-sidebar__overview--active"
+            routerLinkActive="sc-sidebar__overview--active"
             (click)="mobileOpen.set(false)"
-            >{{ 'showcase.componentExplorer' | translate }}</a
           >
+            {{ 'showcase.componentExplorer' | translate }}
+          </a>
 
           @for (group of filteredGroups(); track group.label) {
-            <div class="ngxsmk-sc-sidebar__group">
-              <div class="ngxsmk-sc-sidebar__group-label">
+            <div class="sc-sidebar__group">
+              <div class="sc-sidebar__group-label">
                 {{ groupLabelKey(group.label) | translate }}
               </div>
               @for (cat of group.categories; track cat.path) {
                 <a
-                  class="ngxsmk-sc-sidebar__link"
+                  class="sc-sidebar__link"
                   routerLink="/showcase/{{ cat.path }}"
-                  routerLinkActive="ngxsmk-sc-sidebar__link--active"
+                  routerLinkActive="sc-sidebar__link--active"
                   (click)="mobileOpen.set(false)"
-                  >{{ 'category.' + cat.path | translate }}</a
                 >
+                  {{ 'category.' + cat.path | translate }}
+                </a>
               }
             </div>
           }
         </div>
       </aside>
+
       @if (mobileOpen()) {
         <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
-        <div class="ngxsmk-sc-backdrop" (click)="mobileOpen.set(false)"></div>
+        <div class="sc-backdrop" (click)="mobileOpen.set(false)"></div>
       }
-      <main #contentEl class="ngxsmk-sc-content">
+
+      <main #contentEl class="sc-content">
         <button
-          class="ngxsmk-sc-menu-btn"
+          class="sc-menu-btn"
           type="button"
           (click)="mobileOpen.set(true)"
           [attr.aria-label]="'showcase.openCategories' | translate"
@@ -99,17 +103,16 @@ interface CategoryGroup {
   `,
   styles: [
     `
-      .ngxsmk-sc-layout {
-        display: flex;
+      .sc-layout {
+        display: grid;
+        grid-template-columns: 1fr 4fr;
         height: calc(100dvh - 3.5rem);
-        font-family: 'DM Sans', var(--ngxsmk-font-sans, system-ui), sans-serif;
+        font-family: 'Inter', var(--ngxsmk-font-sans, system-ui), sans-serif;
         color: var(--ngxsmk-color-on-surface, #09090b);
         background: var(--ngxsmk-color-background, #fafafa);
       }
 
-      .ngxsmk-sc-sidebar {
-        width: 240px;
-        min-width: 240px;
+      .sc-sidebar {
         border-right: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
         display: flex;
         flex-direction: column;
@@ -117,25 +120,24 @@ interface CategoryGroup {
         overflow: hidden;
       }
 
-      .ngxsmk-sc-sidebar__search {
+      .sc-sidebar__search {
         position: relative;
         padding: var(--ngxsmk-space-3, 0.75rem);
         border-bottom: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
       }
 
-      .ngxsmk-sc-sidebar__search-icon {
+      .sc-sidebar__search-icon {
         position: absolute;
-        left: calc(0.75rem + 0.625rem);
+        left: calc(0.75rem + 0.5rem);
         top: 50%;
         transform: translateY(-50%);
         color: var(--ngxsmk-color-on-surface-variant, #71717a);
         pointer-events: none;
       }
 
-      .ngxsmk-sc-sidebar__search-input {
+      .sc-sidebar__search-input {
         width: 100%;
-        padding: var(--ngxsmk-space-2, 0.5rem) var(--ngxsmk-space-2, 0.5rem)
-          var(--ngxsmk-space-2, 0.5rem) 2.25rem;
+        padding: 0.4rem 0.5rem 0.4rem 2rem;
         border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
         border-radius: var(--ngxsmk-radius-md, 0.375rem);
         background: var(--ngxsmk-color-background, #fafafa);
@@ -145,29 +147,29 @@ interface CategoryGroup {
         transition: border-color 0.15s;
       }
 
-      .ngxsmk-sc-sidebar__search-input:focus {
+      .sc-sidebar__search-input:focus {
         border-color: var(--ngxsmk-color-primary, #7c3aed);
         background: var(--ngxsmk-color-surface, #ffffff);
       }
 
-      .ngxsmk-sc-sidebar__search-input::placeholder {
+      .sc-sidebar__search-input::placeholder {
         color: var(--ngxsmk-color-on-surface-variant, #71717a);
       }
 
-      .ngxsmk-sc-sidebar__sections {
+      .sc-sidebar__nav {
         flex: 1;
         overflow-y: auto;
         overscroll-behavior: contain;
         -webkit-overflow-scrolling: touch;
-        padding: var(--ngxsmk-space-3, 0.75rem);
+        padding: var(--ngxsmk-space-2, 0.5rem) var(--ngxsmk-space-3, 0.75rem);
         display: flex;
         flex-direction: column;
-        gap: var(--ngxsmk-space-4, 1rem);
+        gap: var(--ngxsmk-space-3, 0.75rem);
       }
 
-      .ngxsmk-sc-sidebar__overview {
+      .sc-sidebar__overview {
         display: block;
-        padding: var(--ngxsmk-space-2, 0.5rem) var(--ngxsmk-space-3, 0.75rem);
+        padding: var(--ngxsmk-space-2, 0.5rem) var(--ngxsmk-space-2, 0.5rem);
         border-radius: var(--ngxsmk-radius-md, 0.375rem);
         font-size: var(--ngxsmk-text-body-sm-size);
         font-weight: 600;
@@ -176,33 +178,32 @@ interface CategoryGroup {
         transition: background 0.15s;
       }
 
-      .ngxsmk-sc-sidebar__overview:hover {
+      .sc-sidebar__overview:hover {
         background: color-mix(in srgb, var(--ngxsmk-color-on-surface, #09090b) 4%, transparent);
       }
 
-      .ngxsmk-sc-sidebar__overview--active {
+      .sc-sidebar__overview--active {
         color: var(--ngxsmk-color-primary, #7c3aed);
       }
 
-      .ngxsmk-sc-sidebar__group {
+      .sc-sidebar__group {
         display: flex;
         flex-direction: column;
-        gap: 2px;
+        gap: 1px;
       }
 
-      .ngxsmk-sc-sidebar__group-label {
-        padding: var(--ngxsmk-space-2, 0.5rem) var(--ngxsmk-space-3, 0.75rem);
+      .sc-sidebar__group-label {
+        padding: var(--ngxsmk-space-2, 0.5rem) var(--ngxsmk-space-2, 0.5rem);
         font-size: var(--ngxsmk-text-body-xs-size);
         font-weight: 700;
         text-transform: uppercase;
-        letter-spacing: 0.1em;
+        letter-spacing: 0.08em;
         color: var(--ngxsmk-color-on-surface-variant, #71717a);
-        font-family: 'Outfit', var(--ngxsmk-font-sans, system-ui), sans-serif;
       }
 
-      .ngxsmk-sc-sidebar__link {
+      .sc-sidebar__link {
         display: block;
-        padding: var(--ngxsmk-space-1-5, 0.375rem) var(--ngxsmk-space-3, 0.75rem);
+        padding: var(--ngxsmk-space-1-5, 0.375rem) var(--ngxsmk-space-2, 0.5rem);
         border-radius: var(--ngxsmk-radius-md, 0.375rem);
         font-size: var(--ngxsmk-text-body-sm-size);
         text-decoration: none;
@@ -212,19 +213,19 @@ interface CategoryGroup {
           background 0.15s;
       }
 
-      .ngxsmk-sc-sidebar__link:hover {
+      .sc-sidebar__link:hover {
         color: var(--ngxsmk-color-on-surface, #09090b);
         background: color-mix(in srgb, var(--ngxsmk-color-on-surface, #09090b) 4%, transparent);
       }
 
-      .ngxsmk-sc-sidebar__link--active {
+      .sc-sidebar__link--active {
         background: var(--ngxsmk-color-primary-container, #ede9fe);
         color: var(--ngxsmk-color-on-primary-container, #4c1d95);
         font-weight: 600;
       }
 
-      .ngxsmk-sc-content {
-        flex: 1;
+      .sc-content {
+        grid-column: 2;
         overflow-y: auto;
         overscroll-behavior: contain;
         -webkit-overflow-scrolling: touch;
@@ -233,7 +234,7 @@ interface CategoryGroup {
         background: var(--ngxsmk-color-background, #fafafa);
       }
 
-      .ngxsmk-sc-menu-btn {
+      .sc-menu-btn {
         display: none;
         align-items: center;
         gap: 0.5rem;
@@ -248,43 +249,43 @@ interface CategoryGroup {
         cursor: pointer;
       }
 
-      .ngxsmk-sc-backdrop {
+      .sc-backdrop {
         display: none;
       }
 
       @media (max-width: 768px) {
-        .ngxsmk-sc-sidebar {
+        .sc-sidebar {
           position: fixed;
           top: 3.5rem;
           bottom: 0;
           left: 0;
-          width: min(240px, 82vw);
-          min-width: min(240px, 82vw);
+          width: min(220px, 82vw);
+          min-width: min(220px, 82vw);
           z-index: var(--ngxsmk-z-overlay, 1200);
           transform: translateX(-100%);
           transition: transform 0.2s ease;
           box-shadow: var(--ngxsmk-shadow-xl, 0 20px 25px -5px rgba(0, 0, 0, 0.1));
         }
-        .ngxsmk-sc-sidebar--open {
+        .sc-sidebar--open {
           transform: translateX(0);
         }
-        .ngxsmk-sc-backdrop {
+        .sc-backdrop {
           display: block;
           position: fixed;
           inset: 3.5rem 0 0 0;
           z-index: var(--ngxsmk-z-overlay, 1200);
           background: rgba(9, 9, 11, 0.4);
         }
-        .ngxsmk-sc-menu-btn {
+        .sc-menu-btn {
           display: inline-flex;
         }
-        .ngxsmk-sc-content {
+        .sc-content {
           padding: var(--ngxsmk-space-4, 1rem);
         }
       }
 
       @media (max-width: 480px) {
-        .ngxsmk-sc-content {
+        .sc-content {
           padding: var(--ngxsmk-space-3, 0.75rem);
         }
       }

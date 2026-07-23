@@ -1,13 +1,19 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
+  ElementRef,
   booleanAttribute,
   computed,
+  effect,
   inject,
   input,
   signal,
+  untracked,
+  viewChild,
 } from '@angular/core';
 import { ngxsmkUniqueId } from '@ngxsmk/core/util';
+import { loadMotion, prefersReducedMotion } from '@ngxsmk/core/animation';
 
 /**
  * Expandable section container.
@@ -38,6 +44,15 @@ import { ngxsmkUniqueId } from '@ngxsmk/core/util';
 export class NgxsmkAccordion {
   /** Allow several items open at once. */
   readonly multiple = input(false, { transform: booleanAttribute });
+
+  /** Expand/collapse animation duration in seconds. Default `0.2`. */
+  readonly accordionDuration = input<number>(0.2);
+
+  /** Easing name or cubic-bezier array. Default `'ease-out'`. */
+  readonly accordionEase = input<string | number[]>('ease-out');
+
+  /** Animation mode: `'css'` (default, CSS grid transition) or `'motion'` (motion.dev animate). */
+  readonly accordionAnimation = input<'css' | 'motion'>('css');
 
   private readonly expandedValues = signal<ReadonlySet<string>>(new Set());
 
@@ -197,6 +212,7 @@ export class NgxsmkAccordion {
 })
 export class NgxsmkAccordionItem {
   protected readonly accordion = inject(NgxsmkAccordion);
+  private readonly destroyRef = inject(DestroyRef);
 
   readonly label = input.required<string>();
   /** Identity within the accordion; defaults to a generated id. */
@@ -210,4 +226,39 @@ export class NgxsmkAccordionItem {
   protected readonly panelId = ngxsmkUniqueId('ngxsmk-accordion-panel');
 
   protected readonly expanded = computed(() => this.accordion.isExpanded(this.itemValue()));
+
+  private readonly regionRef = viewChild<ElementRef<HTMLElement>>('region');
+
+  constructor() {
+    // When motion.dev animation mode is enabled, use motion.animate for expand/collapse
+    effect(() => {
+      const mode = this.accordion.accordionAnimation();
+      const expanded = this.expanded();
+      if (mode !== 'motion') return;
+
+      untracked(() => {
+        void this.animateExpand(expanded);
+      });
+    });
+  }
+
+  private async animateExpand(expand: boolean): Promise<void> {
+    if (prefersReducedMotion()) return;
+
+    const region = this.regionRef()?.nativeElement;
+    if (!region) return;
+
+    const motion = await loadMotion();
+    if (!motion) return;
+
+    const duration = this.accordion.accordionDuration();
+    const ease = this.accordion.accordionEase();
+
+    if (expand) {
+      region.style.gridTemplateRows = '0fr';
+      await motion.animate(region, { gridTemplateRows: '1fr' }, { duration, ease }).finished;
+    } else {
+      await motion.animate(region, { gridTemplateRows: '0fr' }, { duration, ease }).finished;
+    }
+  }
 }

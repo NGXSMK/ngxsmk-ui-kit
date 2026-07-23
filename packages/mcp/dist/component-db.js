@@ -1734,12 +1734,7 @@ exports.COMPONENT_DATABASE = [
                 "default": "null"
             }
         ],
-        "outputs": [
-            {
-                "name": "rangeChange",
-                "type": "DateRange"
-            }
-        ]
+        "outputs": []
     },
     {
         "entryPoint": "@ngxsmk/core/diagram-builder",

@@ -1,0 +1,234 @@
+/*
+ * Tailwind CSS v4 theme for NGXSMK.
+ *
+ * Usage:
+ * ```css
+ * @import "tailwindcss";
+ * @import "@ngxsmk/theme/tailwind/v4.css";
+ * ```
+ */
+@import 'tailwindcss';
+
+@theme {
+  /* ── Colors ────────────────────────────────────────────── */
+  --color-primary: var(--ngxsmk-color-primary);
+  --color-primary-hover: var(--ngxsmk-color-primary-hover);
+  --color-primary-active: var(--ngxsmk-color-primary-active);
+  --color-primary-container: var(--ngxsmk-color-primary-container);
+  --color-on-primary: var(--ngxsmk-color-on-primary);
+  --color-on-primary-container: var(--ngxsmk-color-on-primary-container);
+
+  --color-primary-50: var(--ngxsmk-color-brand-50);
+  --color-primary-100: var(--ngxsmk-color-brand-100);
+  --color-primary-200: var(--ngxsmk-color-brand-200);
+  --color-primary-300: var(--ngxsmk-color-brand-300);
+  --color-primary-400: var(--ngxsmk-color-brand-400);
+  --color-primary-500: var(--ngxsmk-color-brand-500);
+  --color-primary-600: var(--ngxsmk-color-brand-600);
+  --color-primary-700: var(--ngxsmk-color-brand-700);
+  --color-primary-800: var(--ngxsmk-color-brand-800);
+  --color-primary-900: var(--ngxsmk-color-brand-900);
+  --color-primary-950: var(--ngxsmk-color-brand-950);
+
+  --color-secondary: var(--ngxsmk-color-secondary);
+  --color-secondary-hover: var(--ngxsmk-color-secondary-hover);
+  --color-secondary-active: var(--ngxsmk-color-secondary-active);
+  --color-secondary-container: var(--ngxsmk-color-secondary-container);
+  --color-on-secondary: var(--ngxsmk-color-on-secondary);
+  --color-on-secondary-container: var(--ngxsmk-color-on-secondary-container);
+
+  --color-secondary-50: var(--ngxsmk-color-secondary-50);
+  --color-secondary-100: var(--ngxsmk-color-secondary-100);
+  --color-secondary-200: var(--ngxsmk-color-secondary-200);
+  --color-secondary-300: var(--ngxsmk-color-secondary-300);
+  --color-secondary-400: var(--ngxsmk-color-secondary-400);
+  --color-secondary-500: var(--ngxsmk-color-secondary-500);
+  --color-secondary-600: var(--ngxsmk-color-secondary-600);
+  --color-secondary-700: var(--ngxsmk-color-secondary-700);
+  --color-secondary-800: var(--ngxsmk-color-secondary-800);
+  --color-secondary-900: var(--ngxsmk-color-secondary-900);
+  --color-secondary-950: var(--ngxsmk-color-secondary-950);
+
+  --color-tertiary: var(--ngxsmk-color-tertiary);
+  --color-tertiary-container: var(--ngxsmk-color-tertiary-container);
+  --color-on-tertiary: var(--ngxsmk-color-on-tertiary);
+  --color-on-tertiary-container: var(--ngxsmk-color-on-tertiary-container);
+
+  --color-neutral-50: var(--ngxsmk-color-neutral-50);
+  --color-neutral-100: var(--ngxsmk-color-neutral-100);
+  --color-neutral-200: var(--ngxsmk-color-neutral-200);
+  --color-neutral-300: var(--ngxsmk-color-neutral-300);
+  --color-neutral-400: var(--ngxsmk-color-neutral-400);
+  --color-neutral-500: var(--ngxsmk-color-neutral-500);
+  --color-neutral-600: var(--ngxsmk-color-neutral-600);
+  --color-neutral-700: var(--ngxsmk-color-neutral-700);
+  --color-neutral-800: var(--ngxsmk-color-neutral-800);
+  --color-neutral-900: var(--ngxsmk-color-neutral-900);
+  --color-neutral-950: var(--ngxsmk-color-neutral-950);
+
+  --color-background: var(--ngxsmk-color-background);
+  --color-on-background: var(--ngxsmk-color-on-background);
+  --color-surface: var(--ngxsmk-color-surface);
+  --color-surface-variant: var(--ngxsmk-color-surface-variant);
+  --color-surface-hover: var(--ngxsmk-color-surface-hover);
+  --color-surface-active: var(--ngxsmk-color-surface-active);
+  --color-surface-container: var(--ngxsmk-color-surface-container);
+  --color-surface-1: var(--ngxsmk-color-surface-1);
+  --color-surface-2: var(--ngxsmk-color-surface-2);
+  --color-surface-3: var(--ngxsmk-color-surface-3);
+  --color-surface-4: var(--ngxsmk-color-surface-4);
+  --color-surface-5: var(--ngxsmk-color-surface-5);
+  --color-on-surface: var(--ngxsmk-color-on-surface);
+  --color-on-surface-variant: var(--ngxsmk-color-on-surface-variant);
+  --color-outline: var(--ngxsmk-color-outline);
+  --color-outline-strong: var(--ngxsmk-color-outline-strong);
+  --color-outline-variant: var(--ngxsmk-color-outline-variant);
+  --color-ring: var(--ngxsmk-color-ring);
+  --color-backdrop: var(--ngxsmk-color-backdrop);
+
+  --color-error: var(--ngxsmk-color-error);
+  --color-error-container: var(--ngxsmk-color-error-container);
+  --color-on-error: var(--ngxsmk-color-on-error);
+  --color-on-error-container: var(--ngxsmk-color-on-error-container);
+  --color-success: var(--ngxsmk-color-success);
+  --color-success-container: var(--ngxsmk-color-success-container);
+  --color-on-success: var(--ngxsmk-color-on-success);
+  --color-on-success-container: var(--ngxsmk-color-on-success-container);
+  --color-warning: var(--ngxsmk-color-warning);
+  --color-warning-container: var(--ngxsmk-color-warning-container);
+  --color-on-warning: var(--ngxsmk-color-on-warning);
+  --color-on-warning-container: var(--ngxsmk-color-on-warning-container);
+  --color-info: var(--ngxsmk-color-info);
+  --color-info-container: var(--ngxsmk-color-info-container);
+  --color-on-info: var(--ngxsmk-color-on-info);
+  --color-on-info-container: var(--ngxsmk-color-on-info-container);
+
+  --color-chart-1: var(--ngxsmk-chart-1);
+  --color-chart-2: var(--ngxsmk-chart-2);
+  --color-chart-3: var(--ngxsmk-chart-3);
+  --color-chart-4: var(--ngxsmk-chart-4);
+  --color-chart-5: var(--ngxsmk-chart-5);
+  --color-chart-6: var(--ngxsmk-chart-6);
+  --color-chart-7: var(--ngxsmk-chart-7);
+  --color-chart-8: var(--ngxsmk-chart-8);
+
+  /* ── Border Radius ─────────────────────────────────────── */
+  --radius-none: var(--ngxsmk-radius-none);
+  --radius-sm: var(--ngxsmk-radius-sm);
+  --radius-md: var(--ngxsmk-radius-md);
+  --radius-lg: var(--ngxsmk-radius-lg);
+  --radius-xl: var(--ngxsmk-radius-xl);
+  --radius-2xl: var(--ngxsmk-radius-2xl);
+  --radius-3xl: var(--ngxsmk-radius-3xl);
+  --radius-full: var(--ngxsmk-radius-full);
+
+  /* ── Spacing ───────────────────────────────────────────── */
+  --spacing-ngxsmk-0: var(--ngxsmk-space-0);
+  --spacing-ngxsmk-0-5: var(--ngxsmk-space-0-5);
+  --spacing-ngxsmk-1: var(--ngxsmk-space-1);
+  --spacing-ngxsmk-1-5: var(--ngxsmk-space-1-5);
+  --spacing-ngxsmk-2: var(--ngxsmk-space-2);
+  --spacing-ngxsmk-3: var(--ngxsmk-space-3);
+  --spacing-ngxsmk-4: var(--ngxsmk-space-4);
+  --spacing-ngxsmk-5: var(--ngxsmk-space-5);
+  --spacing-ngxsmk-6: var(--ngxsmk-space-6);
+  --spacing-ngxsmk-8: var(--ngxsmk-space-8);
+  --spacing-ngxsmk-10: var(--ngxsmk-space-10);
+  --spacing-ngxsmk-12: var(--ngxsmk-space-12);
+  --spacing-ngxsmk-16: var(--ngxsmk-space-16);
+  --spacing-ngxsmk-20: var(--ngxsmk-space-20);
+  --spacing-ngxsmk-24: var(--ngxsmk-space-24);
+  --spacing-ngxsmk-32: var(--ngxsmk-space-32);
+
+  /* ── Shadows ───────────────────────────────────────────── */
+  --shadow-sm: var(--ngxsmk-shadow-sm);
+  --shadow-md: var(--ngxsmk-shadow-md);
+  --shadow-lg: var(--ngxsmk-shadow-lg);
+  --shadow-xl: var(--ngxsmk-shadow-xl);
+  --shadow-2xl: var(--ngxsmk-shadow-2xl);
+
+  /* ── Fonts ─────────────────────────────────────────────── */
+  --font-sans: var(--ngxsmk-font-sans);
+  --font-mono: var(--ngxsmk-font-mono);
+
+  /* ── Font Sizes (typography roles) ─────────────────────── */
+  --text-display-lg: var(--ngxsmk-text-display-lg-size);
+  --text-display-md: var(--ngxsmk-text-display-md-size);
+  --text-display-sm: var(--ngxsmk-text-display-sm-size);
+  --text-headline-lg: var(--ngxsmk-text-headline-lg-size);
+  --text-headline-md: var(--ngxsmk-text-headline-md-size);
+  --text-headline-sm: var(--ngxsmk-text-headline-sm-size);
+  --text-title-lg: var(--ngxsmk-text-title-lg-size);
+  --text-title-md: var(--ngxsmk-text-title-md-size);
+  --text-title-sm: var(--ngxsmk-text-title-sm-size);
+  --text-body-lg: var(--ngxsmk-text-body-lg-size);
+  --text-body-md: var(--ngxsmk-text-body-md-size);
+  --text-body-sm: var(--ngxsmk-text-body-sm-size);
+  --text-body-xs: var(--ngxsmk-text-body-xs-size);
+  --text-label-lg: var(--ngxsmk-text-label-lg-size);
+  --text-label-md: var(--ngxsmk-text-label-md-size);
+  --text-label-sm: var(--ngxsmk-text-label-sm-size);
+
+  /* ── Line Heights ──────────────────────────────────────── */
+  --leading-display-lg: var(--ngxsmk-text-display-lg-line);
+  --leading-display-md: var(--ngxsmk-text-display-md-line);
+  --leading-display-sm: var(--ngxsmk-text-display-sm-line);
+  --leading-headline-lg: var(--ngxsmk-text-headline-lg-line);
+  --leading-headline-md: var(--ngxsmk-text-headline-md-line);
+  --leading-headline-sm: var(--ngxsmk-text-headline-sm-line);
+  --leading-title-lg: var(--ngxsmk-text-title-lg-line);
+  --leading-title-md: var(--ngxsmk-text-title-md-line);
+  --leading-title-sm: var(--ngxsmk-text-title-sm-line);
+  --leading-body-lg: var(--ngxsmk-text-body-lg-line);
+  --leading-body-md: var(--ngxsmk-text-body-md-line);
+  --leading-body-sm: var(--ngxsmk-text-body-sm-line);
+  --leading-body-xs: var(--ngxsmk-text-body-xs-line);
+  --leading-label-lg: var(--ngxsmk-text-label-lg-line);
+  --leading-label-md: var(--ngxsmk-text-label-md-line);
+  --leading-label-sm: var(--ngxsmk-text-label-sm-line);
+
+  /* ── Font Weights ──────────────────────────────────────── */
+  --font-weight-display-lg: var(--ngxsmk-text-display-lg-weight);
+  --font-weight-display-md: var(--ngxsmk-text-display-md-weight);
+  --font-weight-display-sm: var(--ngxsmk-text-display-sm-weight);
+  --font-weight-headline-lg: var(--ngxsmk-text-headline-lg-weight);
+  --font-weight-headline-md: var(--ngxsmk-text-headline-md-weight);
+  --font-weight-headline-sm: var(--ngxsmk-text-headline-sm-weight);
+  --font-weight-title-lg: var(--ngxsmk-text-title-lg-weight);
+  --font-weight-title-md: var(--ngxsmk-text-title-md-weight);
+  --font-weight-title-sm: var(--ngxsmk-text-title-sm-weight);
+  --font-weight-body-lg: var(--ngxsmk-text-body-lg-weight);
+  --font-weight-body-md: var(--ngxsmk-text-body-md-weight);
+  --font-weight-body-sm: var(--ngxsmk-text-body-sm-weight);
+  --font-weight-body-xs: var(--ngxsmk-text-body-xs-weight);
+  --font-weight-label-lg: var(--ngxsmk-text-label-lg-weight);
+  --font-weight-label-md: var(--ngxsmk-text-label-md-weight);
+  --font-weight-label-sm: var(--ngxsmk-text-label-sm-weight);
+
+  /* ── Transitions ───────────────────────────────────────── */
+  --duration-instant: var(--ngxsmk-duration-instant);
+  --duration-fast: var(--ngxsmk-duration-fast);
+  --duration-normal: var(--ngxsmk-duration-normal);
+  --duration-slow: var(--ngxsmk-duration-slow);
+  --duration-slower: var(--ngxsmk-duration-slower);
+  --ease-linear: var(--ngxsmk-ease-linear);
+  --ease-in: var(--ngxsmk-ease-in);
+  --ease-out: var(--ngxsmk-ease-out);
+  --ease-in-out: var(--ngxsmk-ease-in-out);
+  --ease-emphasized: var(--ngxsmk-ease-emphasized);
+
+  /* ── Z-Index ───────────────────────────────────────────── */
+  --z-dropdown: var(--ngxsmk-z-dropdown);
+  --z-sticky: var(--ngxsmk-z-sticky);
+  --z-banner: var(--ngxsmk-z-banner);
+  --z-overlay: var(--ngxsmk-z-overlay);
+  --z-modal: var(--ngxsmk-z-modal);
+  --z-popover: var(--ngxsmk-z-popover);
+  --z-toast: var(--ngxsmk-z-toast);
+  --z-tooltip: var(--ngxsmk-z-tooltip);
+
+  /* ── Opacity ───────────────────────────────────────────── */
+  --opacity-disabled: var(--ngxsmk-opacity-disabled);
+  --opacity-muted: var(--ngxsmk-opacity-muted);
+  --opacity-faint: var(--ngxsmk-opacity-faint);
+}

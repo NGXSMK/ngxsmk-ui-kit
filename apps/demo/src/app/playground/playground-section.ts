@@ -99,7 +99,7 @@ export interface PlaygroundEntry {
       padding: var(--ngxsmk-space-4, 1rem);
       background: var(--ngxsmk-color-surface-variant, #f4f4f5);
       border-radius: var(--ngxsmk-radius-md, 0.375rem);
-      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-family: var(--ngxsmk-font-mono);
       font-size: var(--ngxsmk-text-body-sm-size);
       line-height: 1.6;
       overflow-x: auto;
