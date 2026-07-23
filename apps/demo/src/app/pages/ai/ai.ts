@@ -144,27 +144,43 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
       [component]="NgxsmkChatLayout"
       [customize]="customizeNgxsmkChatLayout"
     >
-      <div class="ngxsmk-sc-surface" style="height:360px;width:100%;max-width:560px">
-        <ngxsmk-chat-layout style="height:100%">
-          <div sidebar class="ngxsmk-sc-surface" style="padding:0.75rem;width:140px">
-            <strong>{{ 'ai.threads' | translate }}</strong>
-            <div
-              style="margin-top:0.5rem;font-size:var(--ngxsmk-text-body-sm-size);color:var(--ngxsmk-color-on-surface-variant)"
-            >
-              Onboarding<br />Billing<br />Roadmap
+      <div class="ngxsmk-sc-surface" style="height:420px;width:100%;max-width:640px;border-radius:var(--ngxsmk-radius-lg);overflow:hidden">
+        <ngxsmk-chat-layout
+          style="height:100%"
+          [sidebarOpen]="chatSidebarOpen()"
+          (sidebarToggle)="chatSidebarOpen.set(!chatSidebarOpen())"
+        >
+          <div chatLayoutSidebar style="padding:var(--ngxsmk-space-3)">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--ngxsmk-space-3)">
+              <span style="font-size:var(--ngxsmk-text-title-sm-size);font-weight:600">
+                {{ 'ai.threads' | translate }}
+              </span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:var(--ngxsmk-space-1)">
+              @for (thread of chatThreads; track thread.id) {
+                <button
+                  type="button"
+                  style="display:block;width:100%;padding:var(--ngxsmk-space-2) var(--ngxsmk-space-3);border:none;background:transparent;text-align:left;cursor:pointer;border-radius:var(--ngxsmk-radius-md);font-size:var(--ngxsmk-text-body-sm-size);color:var(--ngxsmk-color-on-surface);transition:background 100ms"
+                  [style.background]="thread.active ? 'var(--ngxsmk-color-primary-container)' : ''"
+                >
+                  <div style="font-weight:500">{{ thread.title }}</div>
+                  <div style="color:var(--ngxsmk-color-on-surface-variant);font-size:var(--ngxsmk-text-label-sm-size);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">
+                    {{ thread.preview }}
+                  </div>
+                </button>
+              }
             </div>
           </div>
-          <div
-            header
-            style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--ngxsmk-color-outline-variant)"
-          >
+          <div chatLayoutHeader>
             <strong>{{ 'ai.assistant' | translate }}</strong>
+            <span style="font-size:var(--ngxsmk-text-label-sm-size);color:var(--ngxsmk-color-on-surface-variant)">
+              {{ 'ai.online' | translate }}
+            </span>
           </div>
-          <div style="padding:0.75rem;font-size:var(--ngxsmk-text-body-md-size)">
-            Ask me anything about your account.
-            <ngxsmk-chat-layout-scroll-button />
+          <div style="padding:var(--ngxsmk-space-4);font-size:var(--ngxsmk-text-body-md-size)">
+            {{ 'ai.chatLayoutExampleMsg' | translate }}
           </div>
-          <div input style="padding:0.5rem;background:var(--ngxsmk-color-surface-container)">
+          <div chatLayoutInput>
             <ngxsmk-chat-input placeholder="Reply…" />
           </div>
         </ngxsmk-chat-layout>
@@ -576,7 +592,11 @@ ngxsmk-chat-input {
   protected readonly customizeNgxsmkChatLayout = `/* Theme <ngxsmk-chat-layout> via design tokens */
 ngxsmk-chat-layout {
   --ngxsmk-color-surface: ;
+  --ngxsmk-color-surface-container: ;
+  --ngxsmk-color-outline-variant: ;
   --ngxsmk-font-sans: ;
+  --ngxsmk-duration-normal: ;
+  --ngxsmk-ease-out: ;
 }`;
   protected readonly NgxsmkChatSendButton = NgxsmkChatSendButton;
   protected readonly customizeNgxsmkChatSendButton = `/* Theme <ngxsmk-chat-send-button> via design tokens */
@@ -821,6 +841,13 @@ ngxsmk-prompt-carousel {
   protected readonly drawerOpen = signal(false);
   protected readonly activeConversation = signal('1');
   protected readonly selectedPromptText = signal('');
+  protected readonly chatSidebarOpen = signal(true);
+
+  protected readonly chatThreads = [
+    { id: '1', title: 'Onboarding Setup', preview: 'How do I configure SSO?', active: true },
+    { id: '2', title: 'Billing Question', preview: 'Invoice for July is...', active: false },
+    { id: '3', title: 'Feature Roadmap', preview: 'Q3 priorities are...', active: false },
+  ];
 
   protected readonly promptItemsList: PromptItem[] = [
     {
@@ -1021,7 +1048,7 @@ ngxsmk-prompt-carousel {
   protected readonly codeAgentCard = `<ngxsmk-agent-card [agent]="agent" />`;
   protected readonly codeChatWindow = `<ngxsmk-chat-window [messages]="messages" />`;
   protected readonly codeChatInput = `<ngxsmk-chat-input placeholder="Message…" (submitted)="onSend($event)">\n  <ngxsmk-chat-send-button actions />\n</ngxsmk-chat-input>`;
-  protected readonly codeChatLayout = `<ngxsmk-chat-layout>\n  <div sidebar>Threads</div>\n  <div header>Assistant</div>\n  <div>Body</div>\n  <div input><ngxsmk-chat-input /></div>\n</ngxsmk-chat-layout>`;
+  protected readonly codeChatLayout = `<ngxsmk-chat-layout\n  [sidebarOpen]="isOpen()"\n  (sidebarToggle)="isOpen.set(!isOpen())">\n  <div chatLayoutSidebar>Threads</div>\n  <div chatLayoutHeader>Assistant</div>\n  <div>Messages go here</div>\n  <div chatLayoutEmpty>Start a conversation</div>\n  <div chatLayoutInput>\n    <ngxsmk-chat-input placeholder="Reply..." />\n  </div>\n</ngxsmk-chat-layout>`;
   protected readonly codeComposerButtons = `<ngxsmk-chat-send-button (clicked)="send()" />\n<ngxsmk-chat-dictation-button [listening]="rec" (toggled)="rec = !rec" />`;
   protected readonly codeTokens = `<ngxsmk-chat-tokenized-text [text]="text" [tokens]="tokens" />\n<ngxsmk-chat-composer-token-element label="@alice" variant="entity" />`;
   protected readonly codeConversations = `<ngxsmk-conversation-list [conversations]="list" [activeId]="active" />`;

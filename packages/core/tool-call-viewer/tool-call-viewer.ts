@@ -1,4 +1,4 @@
-﻿import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 export interface ToolCall {
   id: string;
@@ -15,7 +15,10 @@ export interface ToolCall {
     @for (call of calls(); track call.id) {
       <div class="ngxsmk-tool-call-viewer__item" [attr.data-status]="call.status">
         <div class="ngxsmk-tool-call-viewer__header">
-          <span class="ngxsmk-tool-call-viewer__name">ðŸ”§ {{ call.name }}</span>
+          <span class="ngxsmk-tool-call-viewer__name">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block;vertical-align:-2px;margin-right:4px;"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            {{ call.name }}
+          </span>
           <span class="ngxsmk-tool-call-viewer__status">{{ call.status }}</span>
         </div>
         <div class="ngxsmk-tool-call-viewer__args">{{ stringify(call.args) }}</div>
