@@ -1,4 +1,4 @@
-﻿import { Component, input, output, ChangeDetectionStrategy } from '@angular/core';
+import { Component, input, output, ChangeDetectionStrategy } from '@angular/core';
 
 export interface PromptItem {
   id: string;
@@ -28,7 +28,7 @@ export interface PromptItem {
             (keydown.space)="selectPrompt(item); $event.preventDefault()"
           >
             <div class="ngxsmk-prompt-card__header">
-              <span class="ngxsmk-prompt-card__icon">{{ item.icon || 'âœ¦' }}</span>
+              <span class="ngxsmk-prompt-card__icon">{{ item.icon || '✦' }}</span>
               <span class="ngxsmk-prompt-card__cat">{{ item.category }}</span>
             </div>
 
@@ -36,7 +36,7 @@ export interface PromptItem {
             <p class="ngxsmk-prompt-card__preview">"{{ item.prompt }}"</p>
 
             <div class="ngxsmk-prompt-card__footer">
-              <span class="ngxsmk-prompt-card__action">Use prompt â†’</span>
+              <span class="ngxsmk-prompt-card__action">Use prompt →</span>
             </div>
           </div>
         }

@@ -1,4 +1,4 @@
-﻿import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
   standalone: true,
@@ -71,5 +71,5 @@ export class NgxsmkTerminal {
   readonly title = input('Terminal');
   readonly lines = input.required<{ text: string; isInput?: boolean }[]>();
   readonly prompt = input('$');
-  protected cursor = 'â–Š';
+  protected cursor = '▋';
 }

@@ -615,14 +615,14 @@ ngxsmk-card {
   ];
 
   protected readonly codeTabs = `<ngxsmk-tabs [(value)]="activeTab">
-  <ngxsmk-tab value="overview" label="Overview">â€¦</ngxsmk-tab>
-  <ngxsmk-tab value="activity" label="Activity">â€¦</ngxsmk-tab>
-  <ngxsmk-tab value="settings" label="Settings">â€¦</ngxsmk-tab>
+  <ngxsmk-tab value="overview" label="Overview">…</ngxsmk-tab>
+  <ngxsmk-tab value="activity" label="Activity">…</ngxsmk-tab>
+  <ngxsmk-tab value="settings" label="Settings">…</ngxsmk-tab>
 </ngxsmk-tabs>`;
 
   protected readonly codeAccordion = `<ngxsmk-accordion>
-  <ngxsmk-accordion-item label="What is NGXSMK?" value="q1">â€¦</ngxsmk-accordion-item>
-  <ngxsmk-accordion-item label="Is it themeable?" value="q2">â€¦</ngxsmk-accordion-item>
+  <ngxsmk-accordion-item label="What is NGXSMK?" value="q1">…</ngxsmk-accordion-item>
+  <ngxsmk-accordion-item label="Is it themeable?" value="q2">…</ngxsmk-accordion-item>
 </ngxsmk-accordion>`;
 
   protected readonly codeAvatar = `<ngxsmk-avatar src="/u/12.png" alt="Ava Chen" size="lg" />
@@ -688,7 +688,7 @@ ngxsmk-card {
     <p ngxsmkCardDescription>Performance summary for Q2 2026.</p>
   </div>
   <div ngxsmkCardContent>
-    Revenue grew 18% quarter-over-quarterâ€¦
+    Revenue grew 18% quarter-over-quarter…
   </div>
   <div ngxsmkCardFooter>
     <ngxsmk-button variant="primary" size="sm">View report</ngxsmk-button>

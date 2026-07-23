@@ -34,7 +34,7 @@
   --ngxsmk-color-neutral-900: #18181A;
   --ngxsmk-color-neutral-950: #111112;
   --ngxsmk-font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --ngxsmk-font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+  --ngxsmk-font-mono: 'Geist Mono', 'Geist Mono Fallback', monospace;
   --ngxsmk-radius-base: 0.5rem;
   --ngxsmk-control-height: 2.5rem;
   --ngxsmk-motion-duration: var(--ngxsmk-duration-normal);

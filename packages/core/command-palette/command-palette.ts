@@ -1,4 +1,4 @@
-﻿import {
+import {
   Component,
   ElementRef,
   HostListener,
@@ -94,7 +94,7 @@ export interface CommandItem {
 
           <div class="ngxsmk-cmd-footer">
             <span class="ngxsmk-cmd-legend">
-              <kbd>â†‘â†“</kbd> Navigate &nbsp;&bull;&nbsp; <kbd>â†µ</kbd> Select &nbsp;&bull;&nbsp;
+              <kbd>↑↓</kbd> Navigate &nbsp;&bull;&nbsp; <kbd>↵</kbd> Select &nbsp;&bull;&nbsp;
               <kbd>esc</kbd> Close
             </span>
           </div>
