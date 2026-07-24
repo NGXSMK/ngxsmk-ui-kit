@@ -163,46 +163,43 @@ export class NgxsmkHover {
       const enterState = this._enterState();
       const leaveState = this._leaveState();
 
-      const cancelHover = motion.hover(
-        nativeEl,
-        () => {
-          this.hovered.emit(true);
-          const opts: Record<string, unknown> = {};
-          if (enterState.transition) {
-            if (!enterState.transition.type || enterState.transition.type === 'tween') {
-              const t = enterState.transition as NgxsmkTweenTransition;
-              if (t.duration != null) opts['duration'] = t.duration;
-              if (t.ease != null) opts['ease'] = t.ease;
-            } else if (enterState.transition.type === 'spring') {
-              const s = enterState.transition as NgxsmkSpringTransition;
-              opts['type'] = 'spring';
-              if (s.stiffness != null) opts['stiffness'] = s.stiffness;
-              if (s.damping != null) opts['damping'] = s.damping;
-              if (s.mass != null) opts['mass'] = s.mass;
+      const cancelHover = motion.hover(nativeEl, () => {
+        this.hovered.emit(true);
+        const opts: Record<string, unknown> = {};
+        if (enterState.transition) {
+          if (!enterState.transition.type || enterState.transition.type === 'tween') {
+            const t = enterState.transition as NgxsmkTweenTransition;
+            if (t.duration != null) opts['duration'] = t.duration;
+            if (t.ease != null) opts['ease'] = t.ease;
+          } else if (enterState.transition.type === 'spring') {
+            const s = enterState.transition as NgxsmkSpringTransition;
+            opts['type'] = 'spring';
+            if (s.stiffness != null) opts['stiffness'] = s.stiffness;
+            if (s.damping != null) opts['damping'] = s.damping;
+            if (s.mass != null) opts['mass'] = s.mass;
+          }
+        }
+        motion.animate(nativeEl, enterState.animate ?? {}, opts);
+
+        return () => {
+          this.hovered.emit(false);
+          const leaveOpts: Record<string, unknown> = {};
+          if (leaveState.transition) {
+            if (!leaveState.transition.type || leaveState.transition.type === 'tween') {
+              const t = leaveState.transition as NgxsmkTweenTransition;
+              if (t.duration != null) leaveOpts['duration'] = t.duration;
+              if (t.ease != null) leaveOpts['ease'] = t.ease;
+            } else if (leaveState.transition.type === 'spring') {
+              const s = leaveState.transition as NgxsmkSpringTransition;
+              leaveOpts['type'] = 'spring';
+              if (s.stiffness != null) leaveOpts['stiffness'] = s.stiffness;
+              if (s.damping != null) leaveOpts['damping'] = s.damping;
+              if (s.mass != null) leaveOpts['mass'] = s.mass;
             }
           }
-          motion.animate(nativeEl, enterState.animate ?? {}, opts);
-
-          return () => {
-            this.hovered.emit(false);
-            const leaveOpts: Record<string, unknown> = {};
-            if (leaveState.transition) {
-              if (!leaveState.transition.type || leaveState.transition.type === 'tween') {
-                const t = leaveState.transition as NgxsmkTweenTransition;
-                if (t.duration != null) leaveOpts['duration'] = t.duration;
-                if (t.ease != null) leaveOpts['ease'] = t.ease;
-              } else if (leaveState.transition.type === 'spring') {
-                const s = leaveState.transition as NgxsmkSpringTransition;
-                leaveOpts['type'] = 'spring';
-                if (s.stiffness != null) leaveOpts['stiffness'] = s.stiffness;
-                if (s.damping != null) leaveOpts['damping'] = s.damping;
-                if (s.mass != null) leaveOpts['mass'] = s.mass;
-              }
-            }
-            motion.animate(nativeEl, leaveState.animate ?? {}, leaveOpts);
-          };
-        },
-      );
+          motion.animate(nativeEl, leaveState.animate ?? {}, leaveOpts);
+        };
+      });
 
       this.destroyRef.onDestroy(() => cancelHover());
     });

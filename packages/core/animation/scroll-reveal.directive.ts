@@ -237,9 +237,12 @@ export class NgxsmkScrollReveal {
       },
       {
         rootMargin: this.scrollRevealMargin(),
-        threshold: this.scrollRevealAmount() === 'some' ? 0.1 :
-          this.scrollRevealAmount() === 'all' ? 1 :
-          (this.scrollRevealAmount() as number),
+        threshold:
+          this.scrollRevealAmount() === 'some'
+            ? 0.1
+            : this.scrollRevealAmount() === 'all'
+              ? 1
+              : (this.scrollRevealAmount() as number),
       },
     );
 

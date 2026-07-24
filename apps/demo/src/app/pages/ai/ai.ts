@@ -144,14 +144,19 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
       [component]="NgxsmkChatLayout"
       [customize]="customizeNgxsmkChatLayout"
     >
-      <div class="ngxsmk-sc-surface" style="height:420px;width:100%;max-width:640px;border-radius:var(--ngxsmk-radius-lg);overflow:hidden">
+      <div
+        class="ngxsmk-sc-surface"
+        style="height:420px;width:100%;max-width:640px;border-radius:var(--ngxsmk-radius-lg);overflow:hidden"
+      >
         <ngxsmk-chat-layout
           style="height:100%"
           [sidebarOpen]="chatSidebarOpen()"
           (sidebarToggle)="chatSidebarOpen.set(!chatSidebarOpen())"
         >
           <div chatLayoutSidebar style="padding:var(--ngxsmk-space-3)">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--ngxsmk-space-3)">
+            <div
+              style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--ngxsmk-space-3)"
+            >
               <span style="font-size:var(--ngxsmk-text-title-sm-size);font-weight:600">
                 {{ 'ai.threads' | translate }}
               </span>
@@ -164,7 +169,9 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
                   [style.background]="thread.active ? 'var(--ngxsmk-color-primary-container)' : ''"
                 >
                   <div style="font-weight:500">{{ thread.title }}</div>
-                  <div style="color:var(--ngxsmk-color-on-surface-variant);font-size:var(--ngxsmk-text-label-sm-size);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">
+                  <div
+                    style="color:var(--ngxsmk-color-on-surface-variant);font-size:var(--ngxsmk-text-label-sm-size);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"
+                  >
                     {{ thread.preview }}
                   </div>
                 </button>
@@ -173,7 +180,9 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
           </div>
           <div chatLayoutHeader>
             <strong>{{ 'ai.assistant' | translate }}</strong>
-            <span style="font-size:var(--ngxsmk-text-label-sm-size);color:var(--ngxsmk-color-on-surface-variant)">
+            <span
+              style="font-size:var(--ngxsmk-text-label-sm-size);color:var(--ngxsmk-color-on-surface-variant)"
+            >
               {{ 'ai.online' | translate }}
             </span>
           </div>

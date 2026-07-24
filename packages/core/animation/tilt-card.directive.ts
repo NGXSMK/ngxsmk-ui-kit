@@ -101,51 +101,48 @@ export class NgxsmkTiltCard {
     motion: NonNullable<Awaited<ReturnType<typeof loadMotion>>>,
     nativeEl: HTMLElement,
   ): void {
-    const cancelHover = motion.hover(
-      nativeEl,
-      (_el) => {
-        const onMove = (e: PointerEvent): void => {
-          const rect = nativeEl.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          const centerX = rect.width / 2;
-          const centerY = rect.height / 2;
+    const cancelHover = motion.hover(nativeEl, (_el) => {
+      const onMove = (e: PointerEvent): void => {
+        const rect = nativeEl.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
 
-          const maxTilt = untracked(() => this.ngxsmkTiltCard());
-          const scale = untracked(() => this.tiltCardScale());
-          const perspective = untracked(() => this.tiltCardPerspective());
+        const maxTilt = untracked(() => this.ngxsmkTiltCard());
+        const scale = untracked(() => this.tiltCardScale());
+        const perspective = untracked(() => this.tiltCardPerspective());
 
-          const rotateX = ((y - centerY) / centerY) * -maxTilt;
-          const rotateY = ((x - centerX) / centerX) * maxTilt;
+        const rotateX = ((y - centerY) / centerY) * -maxTilt;
+        const rotateY = ((x - centerX) / centerX) * maxTilt;
 
-          const opts = this._buildMotionOptions();
-          motion.animate(
-            nativeEl,
-            {
-              transform: `perspective(${perspective}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(${scale}, ${scale}, 1)`,
-            },
-            opts,
-          );
-        };
+        const opts = this._buildMotionOptions();
+        motion.animate(
+          nativeEl,
+          {
+            transform: `perspective(${perspective}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(${scale}, ${scale}, 1)`,
+          },
+          opts,
+        );
+      };
 
-        nativeEl.addEventListener('pointermove', onMove);
+      nativeEl.addEventListener('pointermove', onMove);
 
-        // Return cleanup function
-        return () => {
-          nativeEl.removeEventListener('pointermove', onMove);
-          // Animate back to neutral
-          const perspective = untracked(() => this.tiltCardPerspective());
-          const opts = this._buildMotionOptions();
-          motion.animate(
-            nativeEl,
-            {
-              transform: `perspective(${perspective}px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`,
-            },
-            opts,
-          );
-        };
-      },
-    );
+      // Return cleanup function
+      return () => {
+        nativeEl.removeEventListener('pointermove', onMove);
+        // Animate back to neutral
+        const perspective = untracked(() => this.tiltCardPerspective());
+        const opts = this._buildMotionOptions();
+        motion.animate(
+          nativeEl,
+          {
+            transform: `perspective(${perspective}px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`,
+          },
+          opts,
+        );
+      };
+    });
 
     this.destroyRef.onDestroy(() => cancelHover());
   }

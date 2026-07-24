@@ -1,4 +1,14 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, afterNextRender, inject, input, signal, effect } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  ElementRef,
+  afterNextRender,
+  inject,
+  input,
+  signal,
+  effect,
+} from '@angular/core';
 import { loadMotion, prefersReducedMotion } from '@ngxsmk/core/animation';
 
 @Component({
@@ -61,16 +71,12 @@ export class NgxsmkStreamingText {
       const cursor = cursorEl.nativeElement;
       // Override CSS animation with motion.dev infinite blink
       cursor.style.animation = 'none';
-      motion.animate(
-        cursor,
-        { opacity: [1, 0] } as unknown as Record<string, string | number>,
-        {
-          duration: 0.8,
-          ease: 'steps(1)',
-          repeat: Infinity,
-          repeatType: 'reverse',
-        },
-      );
+      motion.animate(cursor, { opacity: [1, 0] } as unknown as Record<string, string | number>, {
+        duration: 0.8,
+        ease: 'steps(1)',
+        repeat: Infinity,
+        repeatType: 'reverse',
+      });
     });
   }
 

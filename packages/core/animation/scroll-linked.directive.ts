@@ -1,11 +1,4 @@
-import {
-  DestroyRef,
-  Directive,
-  ElementRef,
-  afterNextRender,
-  inject,
-  input,
-} from '@angular/core';
+import { DestroyRef, Directive, ElementRef, afterNextRender, inject, input } from '@angular/core';
 import { loadMotion, prefersReducedMotion } from './animate';
 
 /**
@@ -56,7 +49,8 @@ export class NgxsmkScrollLinked {
    * Keyframes map: `{ cssProp: [from, to] }` or `{ cssProp: value }`.
    * Values are interpolated from 0→1 scroll progress.
    */
-  readonly ngxsmkScrollLinked = input.required<Record<string, [string | number, string | number] | string | number>>();
+  readonly ngxsmkScrollLinked =
+    input.required<Record<string, [string | number, string | number] | string | number>>();
 
   /**
    * Scroll offsets: `[target, container]` intersection strings.

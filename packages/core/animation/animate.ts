@@ -75,9 +75,7 @@ export interface NgxsmkInertiaTransition {
 
 /** Union of all supported transition types. */
 export type NgxsmkTransition =
-  | NgxsmkTweenTransition
-  | NgxsmkSpringTransition
-  | NgxsmkInertiaTransition;
+  NgxsmkTweenTransition | NgxsmkSpringTransition | NgxsmkInertiaTransition;
 
 // ---------------------------------------------------------------------------
 // Stagger config
@@ -136,10 +134,7 @@ interface MotionModule {
     options?: Record<string, unknown>,
   ) => { finished: Promise<void>; stop: () => void; cancel: () => void };
   style: (el: Element, props: Record<string, string | number>) => void;
-  stagger: (
-    num: number,
-    options?: Record<string, unknown>,
-  ) => number;
+  stagger: (num: number, options?: Record<string, unknown>) => number;
   hover: (
     el: Element | string,
     callback: (el: Element, e: PointerEvent) => (() => void) | void,
@@ -247,10 +242,7 @@ export function toMotionOptions(
 /**
  * Convert a `NgxsmkStagger` config into motion.dev's `delay: stagger(...)`.
  */
-function toStaggerDelay(
-  motion: MotionModule,
-  stagger: NgxsmkStagger,
-): number {
+function toStaggerDelay(motion: MotionModule, stagger: NgxsmkStagger): number {
   const opts: Record<string, unknown> = {};
   if (stagger.startDelay != null) opts['startDelay'] = stagger.startDelay;
   if (stagger.from != null) opts['from'] = stagger.from;
@@ -282,10 +274,7 @@ function mergePerProperty(
 // ---------------------------------------------------------------------------
 
 /** Animate an element in (enter). Resolves when the animation finishes. */
-export async function playEnter(
-  el: HTMLElement,
-  state?: NgxsmkMotionState,
-): Promise<void> {
+export async function playEnter(el: HTMLElement, state?: NgxsmkMotionState): Promise<void> {
   if (!state?.animate) return;
 
   if (prefersReducedMotion()) {
@@ -315,10 +304,7 @@ export async function playEnter(
 }
 
 /** Animate an element out (exit). Resolves when the animation finishes. */
-export async function playExit(
-  el: HTMLElement,
-  state?: NgxsmkMotionState,
-): Promise<void> {
+export async function playExit(el: HTMLElement, state?: NgxsmkMotionState): Promise<void> {
   if (!state?.exit || prefersReducedMotion()) return;
 
   const motion = await loadMotion();

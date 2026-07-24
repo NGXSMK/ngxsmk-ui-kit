@@ -1,11 +1,4 @@
-import {
-  Directive,
-  ElementRef,
-  computed,
-  afterNextRender,
-  inject,
-  input,
-} from '@angular/core';
+import { Directive, ElementRef, computed, afterNextRender, inject, input } from '@angular/core';
 import {
   NgxsmkMotionState,
   NgxsmkTransition,
