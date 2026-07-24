@@ -158,6 +158,34 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     ]
   },
   {
+    "entryPoint": "@ngxsmk/core/ai-thinking-indicator",
+    "name": "NgxsmkAiThinkingIndicator",
+    "kind": "Component",
+    "selector": "ngxsmk-ai-thinking-indicator",
+    "description": "Animated glowing orb, pulse wave, and skeleton indicator for active AI reasoning.",
+    "inputs": [
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": "'Thinking...'"
+      },
+      {
+        "name": "variant",
+        "type": "NgxsmkAiThinkingVariant",
+        "required": false,
+        "default": "'orb'"
+      },
+      {
+        "name": "size",
+        "type": "number",
+        "required": false,
+        "default": "24"
+      }
+    ],
+    "outputs": []
+  },
+  {
     "entryPoint": "@ngxsmk/core/alert",
     "name": "NgxsmkAlert",
     "kind": "Component",
@@ -1124,6 +1152,52 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
         "type": "string",
         "required": false,
         "default": "'0:00'"
+      }
+    ],
+    "outputs": []
+  },
+  {
+    "entryPoint": "@ngxsmk/core/audio-visualizer",
+    "name": "NgxsmkAudioVisualizer",
+    "kind": "Component",
+    "selector": "ngxsmk-audio-visualizer",
+    "description": "Animated real-time spectrum bar and wave audio visualizer component for AI voice streams, active dictation, and media players.",
+    "inputs": [
+      {
+        "name": "active",
+        "type": "boolean",
+        "required": false,
+        "default": "true"
+      },
+      {
+        "name": "bars",
+        "type": "number",
+        "required": false,
+        "default": "12"
+      },
+      {
+        "name": "variant",
+        "type": "NgxsmkAudioVisualizerVariant",
+        "required": false,
+        "default": "'bars'"
+      },
+      {
+        "name": "color",
+        "type": "string",
+        "required": false,
+        "default": "'var(--ngxsmk-color-primary, #7c3aed)'"
+      },
+      {
+        "name": "height",
+        "type": "number",
+        "required": false,
+        "default": "32"
+      },
+      {
+        "name": "ariaLabel",
+        "type": "string",
+        "required": false,
+        "default": "'Audio activity visualizer'"
       }
     ],
     "outputs": []
@@ -2219,6 +2293,41 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "outputs": []
   },
   {
+    "entryPoint": "@ngxsmk/core/code-editor",
+    "name": "NgxsmkCodeEditor",
+    "kind": "Component",
+    "selector": "ngxsmk-code-editor",
+    "description": "Code editor container with line numbers, language tag header, copy button, and editable canvas.",
+    "inputs": [
+      {
+        "name": "language",
+        "type": "string",
+        "required": false,
+        "default": "'typescript'"
+      },
+      {
+        "name": "readonly",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "code",
+        "type": "string",
+        "required": false,
+        "default": "''"
+      },
+      {
+        "name": "value",
+        "type": "string",
+        "required": false,
+        "twoWay": true,
+        "default": "''"
+      }
+    ],
+    "outputs": []
+  },
+  {
     "entryPoint": "@ngxsmk/core/collapsible",
     "name": "NgxsmkCollapsible",
     "kind": "Component",
@@ -2387,6 +2496,47 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     ]
   },
   {
+    "entryPoint": "@ngxsmk/core/compare-image",
+    "name": "NgxsmkCompareImage",
+    "kind": "Component",
+    "selector": "ngxsmk-compare-image",
+    "description": "Interactive before/after split drag-slider image comparison component.",
+    "inputs": [
+      {
+        "name": "before",
+        "type": "string",
+        "required": false,
+        "default": "''"
+      },
+      {
+        "name": "after",
+        "type": "string",
+        "required": false,
+        "default": "''"
+      },
+      {
+        "name": "beforeLabel",
+        "type": "string",
+        "required": false,
+        "default": "'Before'"
+      },
+      {
+        "name": "afterLabel",
+        "type": "string",
+        "required": false,
+        "default": "'After'"
+      },
+      {
+        "name": "position",
+        "type": "number",
+        "required": false,
+        "twoWay": true,
+        "default": "50"
+      }
+    ],
+    "outputs": []
+  },
+  {
     "entryPoint": "@ngxsmk/core/container",
     "name": "NgxsmkContainer",
     "kind": "Component",
@@ -2464,6 +2614,50 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
         "type": "void"
       }
     ]
+  },
+  {
+    "entryPoint": "@ngxsmk/core/credit-card-input",
+    "name": "NgxsmkCreditCardInput",
+    "kind": "Component",
+    "selector": "ngxsmk-credit-card-input",
+    "description": "Auto-formatting credit/debit card number, expiry, and CVV payment input component with brand detection.",
+    "inputs": [
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "value",
+        "type": "string",
+        "required": false,
+        "twoWay": true,
+        "default": "''"
+      },
+      {
+        "name": "cardNumber",
+        "type": "string",
+        "required": false,
+        "twoWay": true,
+        "default": "''"
+      },
+      {
+        "name": "expiry",
+        "type": "string",
+        "required": false,
+        "twoWay": true,
+        "default": "''"
+      },
+      {
+        "name": "cvv",
+        "type": "string",
+        "required": false,
+        "twoWay": true,
+        "default": "''"
+      }
+    ],
+    "outputs": []
   },
   {
     "entryPoint": "@ngxsmk/core/data-table",
@@ -2960,6 +3154,34 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "outputs": []
   },
   {
+    "entryPoint": "@ngxsmk/core/file-tree",
+    "name": "NgxsmkFileTree",
+    "kind": "Component",
+    "selector": "ngxsmk-file-tree",
+    "description": "Directory explorer file tree component with folder collapse/expand and file selection.",
+    "inputs": [
+      {
+        "name": "nodes",
+        "type": "NgxsmkFileTreeNode[]",
+        "required": false,
+        "default": "[]"
+      },
+      {
+        "name": "selectedId",
+        "type": "string",
+        "required": false,
+        "twoWay": true,
+        "default": "''"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "nodeSelect",
+        "type": "NgxsmkFileTreeNode"
+      }
+    ]
+  },
+  {
     "entryPoint": "@ngxsmk/core/file-upload",
     "name": "NgxsmkFileUpload",
     "kind": "Component",
@@ -3027,6 +3249,29 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
         "type": "File"
       }
     ]
+  },
+  {
+    "entryPoint": "@ngxsmk/core/filter-builder",
+    "name": "NgxsmkFilterBuilder",
+    "kind": "Component",
+    "selector": "ngxsmk-filter-builder",
+    "description": "Dynamic filter predicate builder component (Field, Operator, Value condition rows).",
+    "inputs": [
+      {
+        "name": "fields",
+        "type": "NgxsmkFilterField[]",
+        "required": false,
+        "default": "[]"
+      },
+      {
+        "name": "conditions",
+        "type": "NgxsmkFilterCondition[]",
+        "required": false,
+        "twoWay": true,
+        "default": "[]"
+      }
+    ],
+    "outputs": []
   },
   {
     "entryPoint": "@ngxsmk/core/flex",
@@ -3151,6 +3396,76 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
         "type": "NgxsmkFormLayoutColumns",
         "required": false,
         "default": "1"
+      }
+    ],
+    "outputs": []
+  },
+  {
+    "entryPoint": "@ngxsmk/core/gauge",
+    "name": "NgxsmkGauge",
+    "kind": "Component",
+    "selector": "ngxsmk-gauge",
+    "description": "Circular arc gauge & speedometer meter component.",
+    "inputs": [
+      {
+        "name": "value",
+        "type": "number",
+        "required": false,
+        "default": "0"
+      },
+      {
+        "name": "min",
+        "type": "number",
+        "required": false,
+        "default": "0"
+      },
+      {
+        "name": "max",
+        "type": "number",
+        "required": false,
+        "default": "100"
+      },
+      {
+        "name": "size",
+        "type": "number",
+        "required": false,
+        "default": "160"
+      },
+      {
+        "name": "thickness",
+        "type": "number",
+        "required": false,
+        "default": "12"
+      },
+      {
+        "name": "color",
+        "type": "string",
+        "required": false,
+        "default": "'var(--ngxsmk-color-primary, #7c3aed)'"
+      },
+      {
+        "name": "variant",
+        "type": "NgxsmkGaugeVariant",
+        "required": false,
+        "default": "'arch'"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": "''"
+      },
+      {
+        "name": "units",
+        "type": "string",
+        "required": false,
+        "default": "''"
+      },
+      {
+        "name": "showValue",
+        "type": "boolean",
+        "required": false,
+        "default": "true"
       }
     ],
     "outputs": []
@@ -3297,6 +3612,40 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
       }
     ],
     "outputs": []
+  },
+  {
+    "entryPoint": "@ngxsmk/core/image-cropper",
+    "name": "NgxsmkImageCropper",
+    "kind": "Component",
+    "selector": "ngxsmk-image-cropper",
+    "description": "Image aspect ratio crop, rotation, and zoom control box.",
+    "inputs": [
+      {
+        "name": "src",
+        "type": "string",
+        "required": false,
+        "default": "''"
+      },
+      {
+        "name": "aspectRatio",
+        "type": "number",
+        "required": false,
+        "default": "1"
+      },
+      {
+        "name": "zoom",
+        "type": "number",
+        "required": false,
+        "twoWay": true,
+        "default": "1"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "cropped",
+        "type": "string"
+      }
+    ]
   },
   {
     "entryPoint": "@ngxsmk/core/image-viewer",
@@ -3447,6 +3796,12 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
         "default": "false"
       },
       {
+        "name": "showStatusIcon",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
         "name": "fullWidth",
         "type": "boolean",
         "required": false,
@@ -3570,19 +3925,31 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "name": "NgxsmkKanbanBoard",
     "kind": "Component",
     "selector": "ngxsmk-kanban-board",
-    "description": "",
+    "description": "Multi-column Kanban task board component with native HTML5 drag-and-drop.",
     "inputs": [
       {
         "name": "columns",
-        "type": "KanbanColumn[]",
-        "required": true,
-        "twoWay": true
+        "type": "NgxsmkKanbanColumn[]",
+        "required": false,
+        "twoWay": true,
+        "default": "[]"
+      },
+      {
+        "name": "items",
+        "type": "NgxsmkKanbanItem[]",
+        "required": false,
+        "twoWay": true,
+        "default": "[]"
       }
     ],
     "outputs": [
       {
-        "name": "itemMoved",
-        "type": "KanbanMove"
+        "name": "cardClick",
+        "type": "NgxsmkKanbanItem"
+      },
+      {
+        "name": "itemDropped",
+        "type": "{ item: NgxsmkKanbanItem; fromColumnId: string; toColumnId: string }"
       }
     ]
   },
@@ -3846,6 +4213,34 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "selector": "ngxsmk-markdown-viewer",
     "description": "",
     "inputs": [],
+    "outputs": []
+  },
+  {
+    "entryPoint": "@ngxsmk/core/masonry-grid",
+    "name": "NgxsmkMasonryGrid",
+    "kind": "Component",
+    "selector": "ngxsmk-masonry-grid",
+    "description": "Staggered multi-column media layout (masonry/waterfall grid) container.",
+    "inputs": [
+      {
+        "name": "items",
+        "type": "T[]",
+        "required": false,
+        "default": "[]"
+      },
+      {
+        "name": "columns",
+        "type": "number",
+        "required": false,
+        "default": "3"
+      },
+      {
+        "name": "gap",
+        "type": "number",
+        "required": false,
+        "default": "16"
+      }
+    ],
     "outputs": []
   },
   {
@@ -4264,6 +4659,48 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "outputs": []
   },
   {
+    "entryPoint": "@ngxsmk/core/notification-center",
+    "name": "NgxsmkNotificationCenter",
+    "kind": "Component",
+    "selector": "ngxsmk-notification-center",
+    "description": "Notification Center bell toggle button and panel container.",
+    "inputs": [
+      {
+        "name": "title",
+        "type": "string",
+        "required": false,
+        "default": "'Notifications'"
+      },
+      {
+        "name": "ariaLabel",
+        "type": "string",
+        "required": false,
+        "default": "'Open notification center'"
+      },
+      {
+        "name": "notifications",
+        "type": "NgxsmkNotificationItem[]",
+        "required": false,
+        "twoWay": true,
+        "default": "[]"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "markAsRead",
+        "type": "string"
+      },
+      {
+        "name": "markAllRead",
+        "type": "void"
+      },
+      {
+        "name": "actionClick",
+        "type": "{ id: string; action: string }"
+      }
+    ]
+  },
+  {
     "entryPoint": "@ngxsmk/core/number-input",
     "name": "NgxsmkNumberInput",
     "kind": "Component",
@@ -4349,6 +4786,64 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
       }
     ],
     "outputs": []
+  },
+  {
+    "entryPoint": "@ngxsmk/core/otp-input",
+    "name": "NgxsmkOtpInput",
+    "kind": "Component",
+    "selector": "ngxsmk-otp-input",
+    "description": "Multi-digit One-Time Password (OTP) verification input control. Features auto-advancing focus, backspace auto-reverse, paste support, and full keyboard navigation.",
+    "inputs": [
+      {
+        "name": "length",
+        "type": "number",
+        "required": false,
+        "default": "6"
+      },
+      {
+        "name": "type",
+        "type": "'numeric' | 'alphanumeric' | 'text'",
+        "required": false,
+        "default": "'numeric'"
+      },
+      {
+        "name": "masked",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "required": false,
+        "default": "'•'"
+      },
+      {
+        "name": "ariaLabel",
+        "type": "string",
+        "required": false,
+        "default": "'One time password input'"
+      },
+      {
+        "name": "value",
+        "type": "string",
+        "required": false,
+        "twoWay": true,
+        "default": "''"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "completed",
+        "type": "string"
+      }
+    ]
   },
   {
     "entryPoint": "@ngxsmk/core/outline",
@@ -4467,6 +4962,29 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
         "type": "string",
         "required": false,
         "default": "'Pagination'"
+      }
+    ],
+    "outputs": []
+  },
+  {
+    "entryPoint": "@ngxsmk/core/password-strength-meter",
+    "name": "NgxsmkPasswordStrengthMeter",
+    "kind": "Component",
+    "selector": "ngxsmk-password-strength-meter",
+    "description": "Real-time password strength entropy meter and requirement checklist.",
+    "inputs": [
+      {
+        "name": "password",
+        "type": "string",
+        "required": false,
+        "twoWay": true,
+        "default": "''"
+      },
+      {
+        "name": "showRequirements",
+        "type": "boolean",
+        "required": false,
+        "default": "true"
       }
     ],
     "outputs": []
@@ -4780,6 +5298,85 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     ]
   },
   {
+    "entryPoint": "@ngxsmk/core/prompt-input",
+    "name": "NgxsmkPromptInput",
+    "kind": "Component",
+    "selector": "ngxsmk-prompt-input",
+    "description": "Multi-line AI prompt composer with model selection, attachment button, and send action.",
+    "inputs": [
+      {
+        "name": "placeholder",
+        "type": "string",
+        "required": false,
+        "default": "'Ask anything or type / for commands...'"
+      },
+      {
+        "name": "models",
+        "type": "NgxsmkPromptModelOption[]",
+        "required": false,
+        "default": "[]"
+      },
+      {
+        "name": "value",
+        "type": "string",
+        "required": false,
+        "twoWay": true,
+        "default": "''"
+      },
+      {
+        "name": "selectedModel",
+        "type": "string",
+        "required": false,
+        "twoWay": true,
+        "default": "''"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "submit",
+        "type": "string"
+      },
+      {
+        "name": "fileAttach",
+        "type": "FileList"
+      }
+    ]
+  },
+  {
+    "entryPoint": "@ngxsmk/core/prompt-library",
+    "name": "NgxsmkPromptLibrary",
+    "kind": "Component",
+    "selector": "ngxsmk-prompt-library",
+    "description": "Searchable prompt template library grid with quick selection and tag filtering.",
+    "inputs": [
+      {
+        "name": "prompts",
+        "type": "NgxsmkPromptLibraryItem[]",
+        "required": false,
+        "default": "[]"
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "required": false,
+        "default": "'Search prompts...'"
+      },
+      {
+        "name": "searchQuery",
+        "type": "string",
+        "required": false,
+        "twoWay": true,
+        "default": "''"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "selected",
+        "type": "NgxsmkPromptLibraryItem"
+      }
+    ]
+  },
+  {
     "entryPoint": "@ngxsmk/core/pull-to-refresh",
     "name": "NgxsmkPullToRefresh",
     "kind": "Component",
@@ -4983,6 +5580,66 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "outputs": []
   },
   {
+    "entryPoint": "@ngxsmk/core/range-slider",
+    "name": "NgxsmkRangeSlider",
+    "kind": "Component",
+    "selector": "ngxsmk-range-slider",
+    "description": "Dual-thumb range slider for selecting lower and upper numeric thresholds.",
+    "inputs": [
+      {
+        "name": "min",
+        "type": "number",
+        "required": false,
+        "default": "0"
+      },
+      {
+        "name": "max",
+        "type": "number",
+        "required": false,
+        "default": "100"
+      },
+      {
+        "name": "step",
+        "type": "number",
+        "required": false,
+        "default": "1"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "ariaMinLabel",
+        "type": "string",
+        "required": false,
+        "default": "'Minimum value'"
+      },
+      {
+        "name": "ariaMaxLabel",
+        "type": "string",
+        "required": false,
+        "default": "'Maximum value'"
+      },
+      {
+        "name": "minValue",
+        "type": "number",
+        "required": false,
+        "twoWay": true,
+        "default": "20"
+      },
+      {
+        "name": "maxValue",
+        "type": "number",
+        "required": false,
+        "twoWay": true,
+        "default": "80"
+      }
+    ],
+    "outputs": []
+  },
+  {
     "entryPoint": "@ngxsmk/core/rating",
     "name": "NgxsmkRating",
     "kind": "Component",
@@ -5117,6 +5774,41 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
         "type": "NgxsmkResizeObserverSize"
       }
     ]
+  },
+  {
+    "entryPoint": "@ngxsmk/core/rich-text-editor",
+    "name": "NgxsmkRichTextEditor",
+    "kind": "Component",
+    "selector": "ngxsmk-rich-text-editor",
+    "description": "Lightweight WYSIWYG rich text editor control with formatting toolbar.",
+    "inputs": [
+      {
+        "name": "placeholder",
+        "type": "string",
+        "required": false,
+        "default": "'Write content...'"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "minHeight",
+        "type": "number",
+        "required": false,
+        "default": "140"
+      },
+      {
+        "name": "value",
+        "type": "string",
+        "required": false,
+        "twoWay": true,
+        "default": "''"
+      }
+    ],
+    "outputs": []
   },
   {
     "entryPoint": "@ngxsmk/core/rule-builder",
@@ -5314,6 +6006,41 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
         "type": "boolean",
         "required": false,
         "default": "false"
+      }
+    ],
+    "outputs": []
+  },
+  {
+    "entryPoint": "@ngxsmk/core/scroll-spy",
+    "name": "NgxsmkScrollSpy",
+    "kind": "Component",
+    "selector": "ngxsmk-scroll-spy",
+    "description": "ScrollSpy component & table-of-contents tracker. Automatically monitors document/container scroll position and highlights active section headings.",
+    "inputs": [
+      {
+        "name": "items",
+        "type": "NgxsmkScrollSpyItem[]",
+        "required": false,
+        "default": "[]"
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "required": false,
+        "default": "'On this page'"
+      },
+      {
+        "name": "offset",
+        "type": "number",
+        "required": false,
+        "default": "100"
+      },
+      {
+        "name": "activeId",
+        "type": "string",
+        "required": false,
+        "twoWay": true,
+        "default": "''"
       }
     ],
     "outputs": []
@@ -5767,6 +6494,82 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "outputs": []
   },
   {
+    "entryPoint": "@ngxsmk/core/sparkline",
+    "name": "NgxsmkSparkline",
+    "kind": "Component",
+    "selector": "ngxsmk-sparkline",
+    "description": "Compact SVG micro-chart (sparkline) for inline dashboard metrics, trend indicators, and stat cards.",
+    "inputs": [
+      {
+        "name": "data",
+        "type": "number[]",
+        "required": false,
+        "default": "[]"
+      },
+      {
+        "name": "variant",
+        "type": "NgxsmkSparklineVariant",
+        "required": false,
+        "default": "'line'"
+      },
+      {
+        "name": "width",
+        "type": "number | string",
+        "required": false,
+        "default": "120"
+      },
+      {
+        "name": "height",
+        "type": "number | string",
+        "required": false,
+        "default": "32"
+      },
+      {
+        "name": "color",
+        "type": "string",
+        "required": false,
+        "default": "'var(--ngxsmk-color-primary, #7c3aed)'"
+      },
+      {
+        "name": "fillOpacity",
+        "type": "number",
+        "required": false,
+        "default": "0.2"
+      },
+      {
+        "name": "strokeWidth",
+        "type": "number",
+        "required": false,
+        "default": "2"
+      },
+      {
+        "name": "dotRadius",
+        "type": "number",
+        "required": false,
+        "default": "2"
+      },
+      {
+        "name": "showDots",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "interactive",
+        "type": "boolean",
+        "required": false,
+        "default": "true"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": "'Sparkline chart'"
+      }
+    ],
+    "outputs": []
+  },
+  {
     "entryPoint": "@ngxsmk/core/spinner",
     "name": "NgxsmkSpinner",
     "kind": "Component",
@@ -5975,6 +6778,58 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
         "type": "string",
         "required": false,
         "default": "''"
+      }
+    ],
+    "outputs": []
+  },
+  {
+    "entryPoint": "@ngxsmk/core/stat-trend-card",
+    "name": "NgxsmkStatTrendCard",
+    "kind": "Component",
+    "selector": "ngxsmk-stat-trend-card",
+    "description": "KPI dashboard metric card with embedded sparkline trend visualization and directional change badge.",
+    "inputs": [
+      {
+        "name": "title",
+        "type": "string",
+        "required": false,
+        "default": "''"
+      },
+      {
+        "name": "value",
+        "type": "string | number",
+        "required": false,
+        "default": "''"
+      },
+      {
+        "name": "trend",
+        "type": "number | string",
+        "required": false,
+        "default": "0"
+      },
+      {
+        "name": "isPositive",
+        "type": "boolean | undefined",
+        "required": false,
+        "default": "undefined"
+      },
+      {
+        "name": "trendPeriod",
+        "type": "string",
+        "required": false,
+        "default": "'vs last month'"
+      },
+      {
+        "name": "sparklineData",
+        "type": "number[]",
+        "required": false,
+        "default": "[]"
+      },
+      {
+        "name": "sparkData",
+        "type": "number[]",
+        "required": false,
+        "default": "[]"
       }
     ],
     "outputs": []
@@ -6424,6 +7279,22 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "outputs": []
   },
   {
+    "entryPoint": "@ngxsmk/core/timeline-stepper",
+    "name": "NgxsmkTimelineStepper",
+    "kind": "Component",
+    "selector": "ngxsmk-timeline-stepper",
+    "description": "Vertical milestone timeline node step tracker component.",
+    "inputs": [
+      {
+        "name": "steps",
+        "type": "NgxsmkTimelineStep[]",
+        "required": false,
+        "default": "[]"
+      }
+    ],
+    "outputs": []
+  },
+  {
     "entryPoint": "@ngxsmk/core/timestamp",
     "name": "NgxsmkTimestamp",
     "kind": "Component",
@@ -6522,6 +7393,52 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
         "type": "boolean",
         "required": false,
         "default": "false"
+      }
+    ],
+    "outputs": []
+  },
+  {
+    "entryPoint": "@ngxsmk/core/token-counter",
+    "name": "NgxsmkTokenCounter",
+    "kind": "Component",
+    "selector": "ngxsmk-token-counter",
+    "description": "Visual LLM context window token usage meter with cost estimation.",
+    "inputs": [
+      {
+        "name": "used",
+        "type": "number",
+        "required": false,
+        "default": "0"
+      },
+      {
+        "name": "limit",
+        "type": "number",
+        "required": false,
+        "default": "128000"
+      },
+      {
+        "name": "modelName",
+        "type": "string",
+        "required": false,
+        "default": "''"
+      },
+      {
+        "name": "costPer1k",
+        "type": "number",
+        "required": false,
+        "default": "0.0025"
+      },
+      {
+        "name": "showCost",
+        "type": "boolean",
+        "required": false,
+        "default": "true"
+      },
+      {
+        "name": "showPercentage",
+        "type": "boolean",
+        "required": false,
+        "default": "true"
       }
     ],
     "outputs": []
@@ -6723,6 +7640,41 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "outputs": []
   },
   {
+    "entryPoint": "@ngxsmk/core/tour",
+    "name": "NgxsmkTour",
+    "kind": "Component",
+    "selector": "ngxsmk-tour",
+    "description": "Guided product tour spotlight overlay and onboarding step guide.",
+    "inputs": [
+      {
+        "name": "steps",
+        "type": "NgxsmkTourStep[]",
+        "required": false,
+        "default": "[]"
+      },
+      {
+        "name": "active",
+        "type": "boolean",
+        "required": false,
+        "twoWay": true,
+        "default": "false"
+      },
+      {
+        "name": "currentStep",
+        "type": "number",
+        "required": false,
+        "twoWay": true,
+        "default": "0"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "completed",
+        "type": "void"
+      }
+    ]
+  },
+  {
     "entryPoint": "@ngxsmk/core/transfer",
     "name": "NgxsmkTransfer",
     "kind": "Component",
@@ -6799,6 +7751,42 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
         "type": "{\n    targetKeys: string[];\n    direction: TransferDirection;\n    moveKeys: string[];\n  }"
       }
     ]
+  },
+  {
+    "entryPoint": "@ngxsmk/core/tree-select",
+    "name": "NgxsmkTreeSelect",
+    "kind": "Component",
+    "selector": "ngxsmk-tree-select",
+    "description": "Hierarchical tree dropdown selector with multi-checkbox nodes and tag preview.",
+    "inputs": [
+      {
+        "name": "nodes",
+        "type": "NgxsmkTreeSelectNode[]",
+        "required": false,
+        "default": "[]"
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "required": false,
+        "default": "'Select items...'"
+      },
+      {
+        "name": "selectedIds",
+        "type": "string[]",
+        "required": false,
+        "twoWay": true,
+        "default": "[]"
+      },
+      {
+        "name": "selectedKeys",
+        "type": "string[]",
+        "required": false,
+        "twoWay": true,
+        "default": "[]"
+      }
+    ],
+    "outputs": []
   },
   {
     "entryPoint": "@ngxsmk/core/tree-view",

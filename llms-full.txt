@@ -1,9 +1,9 @@
 # NGXSMK UI Kit
 
-> Angular-first, MIT-licensed UI ecosystem: 234+ signals-native, zoneless
+> Angular-first, MIT-licensed UI ecosystem: 258+ signals-native, zoneless
 > standalone components with a universal design-token engine (CSS variables,
 > SCSS, Tailwind, StyleX, Tokens Studio export). MIT licensed, no paid tiers.
-> Current version: 1.3.3. Supports Angular 17.3 through 22.
+> Current version: 2.0.0. Supports Angular 17.3 through 22.
 
 Packages: `@ngxsmk/core` (components, one secondary entry point per component,
 e.g. `@ngxsmk/core/button`), `@ngxsmk/theme` (design tokens + theme engine),
@@ -69,6 +69,17 @@ Inputs:
 Outputs:
 - `(sendMessage)`: emits `string`
 - `(modelChanged)`: emits `string`
+
+## NgxsmkAiThinkingIndicator
+
+- Selector: `ngxsmk-ai-thinking-indicator`
+- Import from: `@ngxsmk/core/ai-thinking-indicator`
+- Animated glowing orb, pulse wave, and skeleton indicator for active AI reasoning.
+
+Inputs:
+- `[label]`: string (default: `'Thinking...'`)
+- `[variant]`: NgxsmkAiThinkingVariant (default: `'orb'`)
+- `[size]`: number (default: `24`)
 
 ## NgxsmkAlert
 
@@ -370,6 +381,20 @@ Inputs:
 - `[progress]`: number (default: `0`)
 - `[currentTime]`: string (default: `'0:00'`)
 - `[duration]`: string (default: `'0:00'`)
+
+## NgxsmkAudioVisualizer
+
+- Selector: `ngxsmk-audio-visualizer`
+- Import from: `@ngxsmk/core/audio-visualizer`
+- Animated real-time spectrum bar and wave audio visualizer component for AI voice streams, active dictation, and media players.
+
+Inputs:
+- `[active]`: boolean (default: `true`)
+- `[bars]`: number (default: `12`)
+- `[variant]`: NgxsmkAudioVisualizerVariant (default: `'bars'`)
+- `[color]`: string (default: `'var(--ngxsmk-color-primary, #7c3aed)'`)
+- `[height]`: number (default: `32`)
+- `[ariaLabel]`: string (default: `'Audio activity visualizer'`)
 
 ## NgxsmkAutocomplete
 
@@ -840,6 +865,18 @@ Inputs:
 Inputs:
 - `[language]`: string (default: `''`)
 
+## NgxsmkCodeEditor
+
+- Selector: `ngxsmk-code-editor`
+- Import from: `@ngxsmk/core/code-editor`
+- Code editor container with line numbers, language tag header, copy button, and editable canvas.
+
+Inputs:
+- `[language]`: string (default: `'typescript'`)
+- `[readonly]`: boolean (default: `false`)
+- `[code]`: string (default: `''`)
+- `[(value)]`: string (default: `''`)
+
 ## NgxsmkCollapsible
 
 - Selector: `ngxsmk-collapsible`
@@ -907,6 +944,19 @@ Inputs:
 Outputs:
 - `(selected)`: emits `CommandItem`
 
+## NgxsmkCompareImage
+
+- Selector: `ngxsmk-compare-image`
+- Import from: `@ngxsmk/core/compare-image`
+- Interactive before/after split drag-slider image comparison component.
+
+Inputs:
+- `[before]`: string (default: `''`)
+- `[after]`: string (default: `''`)
+- `[beforeLabel]`: string (default: `'Before'`)
+- `[afterLabel]`: string (default: `'After'`)
+- `[(position)]`: number (default: `50`)
+
 ## NgxsmkContainer
 
 - Selector: `ngxsmk-container`
@@ -943,6 +993,19 @@ Inputs:
 
 Outputs:
 - `(copied)`: emits `void`
+
+## NgxsmkCreditCardInput
+
+- Selector: `ngxsmk-credit-card-input`
+- Import from: `@ngxsmk/core/credit-card-input`
+- Auto-formatting credit/debit card number, expiry, and CVV payment input component with brand detection.
+
+Inputs:
+- `[disabled]`: boolean (default: `false`)
+- `[(value)]`: string (default: `''`)
+- `[(cardNumber)]`: string (default: `''`)
+- `[(expiry)]`: string (default: `''`)
+- `[(cvv)]`: string (default: `''`)
 
 ## NgxsmkDataTable
 
@@ -1121,6 +1184,19 @@ Inputs:
 - `[message]`: string (default: `''`)
 - `[variant]`: NgxsmkFieldStatusVariant (default: `'info'`)
 
+## NgxsmkFileTree
+
+- Selector: `ngxsmk-file-tree`
+- Import from: `@ngxsmk/core/file-tree`
+- Directory explorer file tree component with folder collapse/expand and file selection.
+
+Inputs:
+- `[nodes]`: NgxsmkFileTreeNode[] (default: `[]`)
+- `[(selectedId)]`: string (default: `''`)
+
+Outputs:
+- `(nodeSelect)`: emits `NgxsmkFileTreeNode`
+
 ## NgxsmkFileUpload
 
 - Selector: `ngxsmk-file-upload`
@@ -1140,6 +1216,16 @@ Inputs:
 Outputs:
 - `(filesSelected)`: emits `File[]`
 - `(fileRemoved)`: emits `File`
+
+## NgxsmkFilterBuilder
+
+- Selector: `ngxsmk-filter-builder`
+- Import from: `@ngxsmk/core/filter-builder`
+- Dynamic filter predicate builder component (Field, Operator, Value condition rows).
+
+Inputs:
+- `[fields]`: NgxsmkFilterField[] (default: `[]`)
+- `[(conditions)]`: NgxsmkFilterCondition[] (default: `[]`)
 
 ## NgxsmkFlex
 
@@ -1189,6 +1275,24 @@ Inputs:
 
 Inputs:
 - `[columns]`: NgxsmkFormLayoutColumns (default: `1`)
+
+## NgxsmkGauge
+
+- Selector: `ngxsmk-gauge`
+- Import from: `@ngxsmk/core/gauge`
+- Circular arc gauge & speedometer meter component.
+
+Inputs:
+- `[value]`: number (default: `0`)
+- `[min]`: number (default: `0`)
+- `[max]`: number (default: `100`)
+- `[size]`: number (default: `160`)
+- `[thickness]`: number (default: `12`)
+- `[color]`: string (default: `'var(--ngxsmk-color-primary, #7c3aed)'`)
+- `[variant]`: NgxsmkGaugeVariant (default: `'arch'`)
+- `[label]`: string (default: `''`)
+- `[units]`: string (default: `''`)
+- `[showValue]`: boolean (default: `true`)
 
 ## NgxsmkGrid
 
@@ -1244,6 +1348,20 @@ Inputs:
 - `[openDelay]`: number (default: `300`)
 - `[closeDelay]`: number (default: `150`)
 
+## NgxsmkImageCropper
+
+- Selector: `ngxsmk-image-cropper`
+- Import from: `@ngxsmk/core/image-cropper`
+- Image aspect ratio crop, rotation, and zoom control box.
+
+Inputs:
+- `[src]`: string (default: `''`)
+- `[aspectRatio]`: number (default: `1`)
+- `[(zoom)]`: number (default: `1`)
+
+Outputs:
+- `(cropped)`: emits `string`
+
 ## NgxsmkImageViewer
 
 - Selector: `ngxsmk-image-viewer`
@@ -1285,6 +1403,7 @@ Inputs:
 - `[minLength]`: number | undefined (default: `undefined`)
 - `[showClear]`: boolean (default: `false`)
 - `[showCounter]`: boolean (default: `false`)
+- `[showStatusIcon]`: boolean (default: `false`)
 - `[fullWidth]`: boolean (default: `true`)
 - `[loading]`: boolean (default: `false`)
 - `[floatingLabel]`: boolean (default: `false`)
@@ -1327,12 +1446,15 @@ Inputs:
 
 - Selector: `ngxsmk-kanban-board`
 - Import from: `@ngxsmk/core/kanban-board`
+- Multi-column Kanban task board component with native HTML5 drag-and-drop.
 
 Inputs:
-- `[(columns)]`: KanbanColumn[] (required)
+- `[(columns)]`: NgxsmkKanbanColumn[] (default: `[]`)
+- `[(items)]`: NgxsmkKanbanItem[] (default: `[]`)
 
 Outputs:
-- `(itemMoved)`: emits `KanbanMove`
+- `(cardClick)`: emits `NgxsmkKanbanItem`
+- `(itemDropped)`: emits `{ item: NgxsmkKanbanItem; fromColumnId: string; toColumnId: string }`
 
 ## NgxsmkKbd
 
@@ -1459,6 +1581,17 @@ Inputs:
 
 - Selector: `ngxsmk-markdown-viewer`
 - Import from: `@ngxsmk/core/markdown-viewer`
+
+## NgxsmkMasonryGrid
+
+- Selector: `ngxsmk-masonry-grid`
+- Import from: `@ngxsmk/core/masonry-grid`
+- Staggered multi-column media layout (masonry/waterfall grid) container.
+
+Inputs:
+- `[items]`: T[] (default: `[]`)
+- `[columns]`: number (default: `3`)
+- `[gap]`: number (default: `16`)
 
 ## NgxsmkMediaQuery
 
@@ -1621,6 +1754,22 @@ Inputs:
 - `[active]`: boolean (default: `false`)
 - `[size]`: NgxsmkNavIconSize (default: `'md'`)
 
+## NgxsmkNotificationCenter
+
+- Selector: `ngxsmk-notification-center`
+- Import from: `@ngxsmk/core/notification-center`
+- Notification Center bell toggle button and panel container.
+
+Inputs:
+- `[title]`: string (default: `'Notifications'`)
+- `[ariaLabel]`: string (default: `'Open notification center'`)
+- `[(notifications)]`: NgxsmkNotificationItem[] (default: `[]`)
+
+Outputs:
+- `(markAsRead)`: emits `string`
+- `(markAllRead)`: emits `void`
+- `(actionClick)`: emits `{ id: string; action: string }`
+
 ## NgxsmkNumberInput
 
 - Selector: `ngxsmk-number-input`
@@ -1648,6 +1797,24 @@ Outputs:
 
 Inputs:
 - `[nodes]`: OrgNode[] (required)
+
+## NgxsmkOtpInput
+
+- Selector: `ngxsmk-otp-input`
+- Import from: `@ngxsmk/core/otp-input`
+- Multi-digit One-Time Password (OTP) verification input control. Features auto-advancing focus, backspace auto-reverse, paste support, and full keyboard navigation.
+
+Inputs:
+- `[length]`: number (default: `6`)
+- `[type]`: 'numeric' | 'alphanumeric' | 'text' (default: `'numeric'`)
+- `[masked]`: boolean (default: `false`)
+- `[disabled]`: boolean (default: `false`)
+- `[placeholder]`: string (default: `'•'`)
+- `[ariaLabel]`: string (default: `'One time password input'`)
+- `[(value)]`: string (default: `''`)
+
+Outputs:
+- `(completed)`: emits `string`
 
 ## NgxsmkOutline
 
@@ -1685,6 +1852,16 @@ Inputs:
 - `[disabled]`: boolean (default: `false`)
 - `[size]`: NgxsmkPaginationSize (default: `'md'`)
 - `[label]`: string (default: `'Pagination'`)
+
+## NgxsmkPasswordStrengthMeter
+
+- Selector: `ngxsmk-password-strength-meter`
+- Import from: `@ngxsmk/core/password-strength-meter`
+- Real-time password strength entropy meter and requirement checklist.
+
+Inputs:
+- `[(password)]`: string (default: `''`)
+- `[showRequirements]`: boolean (default: `true`)
 
 ## NgxsmkPinInput
 
@@ -1792,6 +1969,36 @@ Inputs:
 Outputs:
 - `(selected)`: emits `PromptItem`
 
+## NgxsmkPromptInput
+
+- Selector: `ngxsmk-prompt-input`
+- Import from: `@ngxsmk/core/prompt-input`
+- Multi-line AI prompt composer with model selection, attachment button, and send action.
+
+Inputs:
+- `[placeholder]`: string (default: `'Ask anything or type / for commands...'`)
+- `[models]`: NgxsmkPromptModelOption[] (default: `[]`)
+- `[(value)]`: string (default: `''`)
+- `[(selectedModel)]`: string (default: `''`)
+
+Outputs:
+- `(submit)`: emits `string`
+- `(fileAttach)`: emits `FileList`
+
+## NgxsmkPromptLibrary
+
+- Selector: `ngxsmk-prompt-library`
+- Import from: `@ngxsmk/core/prompt-library`
+- Searchable prompt template library grid with quick selection and tag filtering.
+
+Inputs:
+- `[prompts]`: NgxsmkPromptLibraryItem[] (default: `[]`)
+- `[placeholder]`: string (default: `'Search prompts...'`)
+- `[(searchQuery)]`: string (default: `''`)
+
+Outputs:
+- `(selected)`: emits `NgxsmkPromptLibraryItem`
+
 ## NgxsmkPullToRefresh
 
 - Selector: `ngxsmk-pull-to-refresh`
@@ -1858,6 +2065,22 @@ Inputs:
 - `[value]`: unknown (required)
 - `[disabled]`: boolean (default: `false`)
 
+## NgxsmkRangeSlider
+
+- Selector: `ngxsmk-range-slider`
+- Import from: `@ngxsmk/core/range-slider`
+- Dual-thumb range slider for selecting lower and upper numeric thresholds.
+
+Inputs:
+- `[min]`: number (default: `0`)
+- `[max]`: number (default: `100`)
+- `[step]`: number (default: `1`)
+- `[disabled]`: boolean (default: `false`)
+- `[ariaMinLabel]`: string (default: `'Minimum value'`)
+- `[ariaMaxLabel]`: string (default: `'Maximum value'`)
+- `[(minValue)]`: number (default: `20`)
+- `[(maxValue)]`: number (default: `80`)
+
 ## NgxsmkRating
 
 - Selector: `ngxsmk-rating`
@@ -1912,6 +2135,18 @@ Outputs:
 
 Outputs:
 - `(sizeChanged)`: emits `NgxsmkResizeObserverSize`
+
+## NgxsmkRichTextEditor
+
+- Selector: `ngxsmk-rich-text-editor`
+- Import from: `@ngxsmk/core/rich-text-editor`
+- Lightweight WYSIWYG rich text editor control with formatting toolbar.
+
+Inputs:
+- `[placeholder]`: string (default: `'Write content...'`)
+- `[disabled]`: boolean (default: `false`)
+- `[minHeight]`: number (default: `140`)
+- `[(value)]`: string (default: `''`)
 
 ## NgxsmkRuleBuilder
 
@@ -1970,6 +2205,18 @@ Outputs:
 
 Inputs:
 - `[ngxsmkScrollLock]`: boolean (default: `false`)
+
+## NgxsmkScrollSpy
+
+- Selector: `ngxsmk-scroll-spy`
+- Import from: `@ngxsmk/core/scroll-spy`
+- ScrollSpy component & table-of-contents tracker. Automatically monitors document/container scroll position and highlights active section headings.
+
+Inputs:
+- `[items]`: NgxsmkScrollSpyItem[] (default: `[]`)
+- `[title]`: string (default: `'On this page'`)
+- `[offset]`: number (default: `100`)
+- `[(activeId)]`: string (default: `''`)
 
 ## NgxsmkSection
 
@@ -2130,6 +2377,25 @@ Inputs:
 - `[size]`: string (default: `'var(--ngxsmk-space-4)'`)
 - `[orientation]`: 'horizontal' | 'vertical' (default: `'horizontal'`)
 
+## NgxsmkSparkline
+
+- Selector: `ngxsmk-sparkline`
+- Import from: `@ngxsmk/core/sparkline`
+- Compact SVG micro-chart (sparkline) for inline dashboard metrics, trend indicators, and stat cards.
+
+Inputs:
+- `[data]`: number[] (default: `[]`)
+- `[variant]`: NgxsmkSparklineVariant (default: `'line'`)
+- `[width]`: number | string (default: `120`)
+- `[height]`: number | string (default: `32`)
+- `[color]`: string (default: `'var(--ngxsmk-color-primary, #7c3aed)'`)
+- `[fillOpacity]`: number (default: `0.2`)
+- `[strokeWidth]`: number (default: `2`)
+- `[dotRadius]`: number (default: `2`)
+- `[showDots]`: boolean (default: `false`)
+- `[interactive]`: boolean (default: `true`)
+- `[label]`: string (default: `'Sparkline chart'`)
+
 ## NgxsmkSpinner
 
 - Selector: `ngxsmk-spinner`
@@ -2204,6 +2470,21 @@ Inputs:
 - `[label]`: string (default: `''`)
 - `[trend]`: NgxsmkStatTrend (default: `'flat'`)
 - `[icon]`: string (default: `''`)
+
+## NgxsmkStatTrendCard
+
+- Selector: `ngxsmk-stat-trend-card`
+- Import from: `@ngxsmk/core/stat-trend-card`
+- KPI dashboard metric card with embedded sparkline trend visualization and directional change badge.
+
+Inputs:
+- `[title]`: string (default: `''`)
+- `[value]`: string | number (default: `''`)
+- `[trend]`: number | string (default: `0`)
+- `[isPositive]`: boolean | undefined (default: `undefined`)
+- `[trendPeriod]`: string (default: `'vs last month'`)
+- `[sparklineData]`: number[] (default: `[]`)
+- `[sparkData]`: number[] (default: `[]`)
 
 ## NgxsmkStatusDot
 
@@ -2392,6 +2673,15 @@ Inputs:
 Inputs:
 - `[items]`: GanttItem[] (required)
 
+## NgxsmkTimelineStepper
+
+- Selector: `ngxsmk-timeline-stepper`
+- Import from: `@ngxsmk/core/timeline-stepper`
+- Vertical milestone timeline node step tracker component.
+
+Inputs:
+- `[steps]`: NgxsmkTimelineStep[] (default: `[]`)
+
 ## NgxsmkTimestamp
 
 - Selector: `ngxsmk-timestamp`
@@ -2440,6 +2730,20 @@ Outputs:
 Inputs:
 - `[variant]`: NgxsmkTokenVariant (default: `'default'`)
 - `[removable]`: boolean (default: `false`)
+
+## NgxsmkTokenCounter
+
+- Selector: `ngxsmk-token-counter`
+- Import from: `@ngxsmk/core/token-counter`
+- Visual LLM context window token usage meter with cost estimation.
+
+Inputs:
+- `[used]`: number (default: `0`)
+- `[limit]`: number (default: `128000`)
+- `[modelName]`: string (default: `''`)
+- `[costPer1k]`: number (default: `0.0025`)
+- `[showCost]`: boolean (default: `true`)
+- `[showPercentage]`: boolean (default: `true`)
 
 ## NgxsmkTokenizer
 
@@ -2529,6 +2833,20 @@ Inputs:
 Inputs:
 - `[href]`: string (default: `''`)
 
+## NgxsmkTour
+
+- Selector: `ngxsmk-tour`
+- Import from: `@ngxsmk/core/tour`
+- Guided product tour spotlight overlay and onboarding step guide.
+
+Inputs:
+- `[steps]`: NgxsmkTourStep[] (default: `[]`)
+- `[(active)]`: boolean (default: `false`)
+- `[(currentStep)]`: number (default: `0`)
+
+Outputs:
+- `(completed)`: emits `void`
+
 ## NgxsmkTransfer
 
 - Selector: `ngxsmk-transfer`
@@ -2553,6 +2871,18 @@ Outputs:
     direction: TransferDirection;
     moveKeys: string[];
   }`
+
+## NgxsmkTreeSelect
+
+- Selector: `ngxsmk-tree-select`
+- Import from: `@ngxsmk/core/tree-select`
+- Hierarchical tree dropdown selector with multi-checkbox nodes and tag preview.
+
+Inputs:
+- `[nodes]`: NgxsmkTreeSelectNode[] (default: `[]`)
+- `[placeholder]`: string (default: `'Select items...'`)
+- `[(selectedIds)]`: string[] (default: `[]`)
+- `[(selectedKeys)]`: string[] (default: `[]`)
 
 ## NgxsmkTreeNodeComponent
 
