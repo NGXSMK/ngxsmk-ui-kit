@@ -83,30 +83,30 @@ interface TemplateItem {
     <app-nav />
     <div class="ngxsmk-page-container">
       <div class="ngxsmk-page">
-        <header class="tpl-header">
-          <div class="tpl-header__lead">
-            <span class="tpl-header__eyebrow">// templates</span>
-            <ngxsmk-heading level="h1" class="tpl-header__title">{{
-              'nav.templates' | translate
-            }}</ngxsmk-heading>
-            <ngxsmk-text variant="body" class="tpl-header__sub">{{
-              'templates.subtitle' | translate
-            }}</ngxsmk-text>
+        <!-- ═══════════════ HERO ═══════════════ -->
+        <header class="tpl-hero">
+          <div class="tpl-hero__inner">
+            <span class="tpl-hero__pill">Templates</span>
+            <h1 class="tpl-hero__title">Production-ready page layouts</h1>
+            <p class="tpl-hero__sub">
+              Ready-to-use page templates to kickstart your project. Browse, preview, and copy the
+              Angular source code.
+            </p>
+            <div class="tpl-hero__stats">
+              <div class="tpl-hero__stat">
+                <span class="tpl-hero__stat-val">{{ templatesList.length }}</span>
+                <span class="tpl-hero__stat-label">Templates</span>
+              </div>
+              <div class="tpl-hero__stat">
+                <span class="tpl-hero__stat-val">{{ categories.length - 1 }}</span>
+                <span class="tpl-hero__stat-label">Categories</span>
+              </div>
+              <div class="tpl-hero__stat">
+                <span class="tpl-hero__stat-val">v{{ appVersion }}</span>
+                <span class="tpl-hero__stat-label">Version</span>
+              </div>
+            </div>
           </div>
-          <dl class="tpl-header__spec" [attr.aria-label]="'templates.templatesWord' | translate">
-            <div class="tpl-header__spec-cell">
-              <dt>{{ 'templates.templatesWord' | translate }}</dt>
-              <dd>{{ pad(templatesList.length) }}</dd>
-            </div>
-            <div class="tpl-header__spec-cell">
-              <dt>license</dt>
-              <dd>MIT</dd>
-            </div>
-            <div class="tpl-header__spec-cell">
-              <dt>rev</dt>
-              <dd>v{{ appVersion }}</dd>
-            </div>
-          </dl>
         </header>
 
         <div class="ngxsmk-templates-toolbar">
@@ -1106,84 +1106,95 @@ interface TemplateItem {
        token-driven so all presets + dark mode work untouched.
        ============================================================ */
 
-    /* === Register header: title + spec strip === */
-    .tpl-header {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: var(--ngxsmk-space-8, 2rem);
-      padding-bottom: var(--ngxsmk-space-6, 1.5rem);
-      border-bottom: 1px solid var(--ngxsmk-color-outline);
+    /* === Hero === */
+    .tpl-hero {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(3rem, 6vw, 4.5rem) 0 clamp(2rem, 4vw, 3rem);
+      text-align: center;
       margin-bottom: var(--ngxsmk-space-6, 1.5rem);
     }
-    .tpl-header__lead {
+    .tpl-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: radial-gradient(
+        55% 55% at 50% 0%,
+        color-mix(in srgb, var(--ngxsmk-color-primary) 12%, transparent),
+        transparent 70%
+      );
+    }
+    .tpl-hero__inner {
+      position: relative;
+      z-index: 1;
+      max-width: 38rem;
+      margin: 0 auto;
       display: flex;
       flex-direction: column;
-      gap: 0.625rem;
-      min-width: 0;
+      align-items: center;
     }
-    .tpl-header__eyebrow {
-      font-family: var(--ngxsmk-font-mono);
-      font-size: var(--ngxsmk-text-body-sm-size);
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      color: var(--ngxsmk-color-primary);
+    .tpl-hero__pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.25rem 0.75rem;
+      border: 1px solid var(--ngxsmk-color-outline);
+      border-radius: var(--ngxsmk-radius-full, 999px);
+      background: color-mix(in srgb, var(--ngxsmk-color-surface) 60%, transparent);
+      backdrop-filter: blur(6px);
+      font-size: var(--ngxsmk-text-body-sm-size, 0.8125rem);
+      font-weight: 600;
+      color: var(--ngxsmk-color-on-surface);
+      margin-bottom: var(--ngxsmk-space-4, 1rem);
+      letter-spacing: 0.04em;
     }
-    .tpl-header__title {
-      font-family: 'Plus Jakarta Sans', var(--ngxsmk-font-sans, system-ui), sans-serif;
-      font-size: clamp(2.25rem, 5vw, 3rem);
+    .tpl-hero__title {
+      font-family: 'Outfit', var(--ngxsmk-font-sans), system-ui, sans-serif;
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
       font-weight: 800;
       letter-spacing: -0.035em;
-      line-height: 1.05;
-      color: var(--ngxsmk-color-on-surface);
-      margin: 0;
+      line-height: 1.1;
+      margin: 0 0 var(--ngxsmk-space-3, 0.75rem);
+      background: linear-gradient(
+        135deg,
+        var(--ngxsmk-color-on-surface),
+        var(--ngxsmk-color-on-surface-variant, #71717a)
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
-    .tpl-header__sub {
-      color: var(--ngxsmk-color-on-surface-variant);
-      margin: 0;
-      font-size: var(--ngxsmk-text-body-lg-size);
-      max-width: 34rem;
+    .tpl-hero__sub {
+      font-size: var(--ngxsmk-text-body-md-size, 0.9375rem);
+      color: var(--ngxsmk-color-on-surface-variant, #71717a);
       line-height: 1.6;
+      margin: 0 0 var(--ngxsmk-space-5, 1.25rem);
+      max-width: 30rem;
     }
-
-    /* Spec strip: the page-level title block. Hairline-ruled mono
-       cells (sheets / license / rev) — echoed on every card below. */
-    .tpl-header__spec {
+    .tpl-hero__stats {
       display: flex;
-      margin: 0;
-      border: 1px solid var(--ngxsmk-color-outline);
-      border-radius: var(--ngxsmk-radius-md);
-      background: var(--ngxsmk-color-surface);
-      overflow: hidden;
-      flex-shrink: 0;
+      gap: var(--ngxsmk-space-8, 2rem);
     }
-    .tpl-header__spec-cell {
+    .tpl-hero__stat {
       display: flex;
       flex-direction: column;
-      gap: 0.25rem;
-      padding: 0.75rem 1.25rem;
+      align-items: center;
+      gap: 0.1rem;
     }
-    .tpl-header__spec-cell + .tpl-header__spec-cell {
-      border-inline-start: 1px solid var(--ngxsmk-color-outline);
-    }
-    .tpl-header__spec-cell dt {
-      font-family: var(--ngxsmk-font-mono);
-      font-size: var(--ngxsmk-text-body-xs-size);
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--ngxsmk-color-on-surface-variant);
-      margin: 0;
-    }
-    .tpl-header__spec-cell dd {
-      font-family: var(--ngxsmk-font-mono);
-      font-size: var(--ngxsmk-text-body-lg-size);
-      font-weight: 500;
+    .tpl-hero__stat-val {
+      font-family: 'Outfit', var(--ngxsmk-font-sans), system-ui, sans-serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
       color: var(--ngxsmk-color-on-surface);
-      margin: 0;
     }
-    .tpl-header__spec-cell:first-child dd {
-      color: var(--ngxsmk-color-primary);
+    .tpl-hero__stat-label {
+      font-size: var(--ngxsmk-text-body-xs-size, 0.75rem);
+      font-weight: 500;
+      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
     }
 
     /* === Register layout: index rail + sheet grid === */
