@@ -3931,7 +3931,7 @@ exports.COMPONENT_DATABASE = [
             },
             {
                 "name": "itemDropped",
-                "type": "{ item: NgxsmkKanbanItem; fromColumnId: string; toColumnId: string }"
+                "type": "{\n    item: NgxsmkKanbanItem;\n    fromColumnId: string;\n    toColumnId: string;\n  }"
             }
         ]
     },
@@ -5315,7 +5315,7 @@ exports.COMPONENT_DATABASE = [
         ],
         "outputs": [
             {
-                "name": "submit",
+                "name": "submitPrompt",
                 "type": "string"
             },
             {
