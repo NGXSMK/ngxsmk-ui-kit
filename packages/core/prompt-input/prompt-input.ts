@@ -1,8 +1,6 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
-  ViewChild,
   input,
   model,
   output,
@@ -17,7 +15,7 @@ export interface NgxsmkPromptModelOption {
  * Multi-line AI prompt composer with model selection, attachment button, and send action.
  *
  * ```html
- * <ngxsmk-prompt-input [(value)]="promptText" (submit)="onSend($event)" />
+ * <ngxsmk-prompt-input [(value)]="promptText" (submitPrompt)="onSend($event)" />
  * ```
  */
 @Component({
@@ -223,7 +221,7 @@ export class NgxsmkPromptInput {
   readonly selectedModel = model<string>('');
 
   /** Emits text prompt when submit action triggered. */
-  readonly submit = output<string>();
+  readonly submitPrompt = output<string>();
 
   /** Emits FileList when attachments selected. */
   readonly fileAttach = output<FileList>();
@@ -243,7 +241,7 @@ export class NgxsmkPromptInput {
   protected onSubmit(): void {
     const text = this.value().trim();
     if (text) {
-      this.submit.emit(text);
+      this.submitPrompt.emit(text);
       this.value.set('');
     }
   }
