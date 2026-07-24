@@ -12,7 +12,7 @@ export type KanbanColumn = NgxsmkKanbanColumn;
 
 export interface NgxsmkKanbanItem {
   id: string;
-  columnId: string;
+  columnId?: string;
   title: string;
   description?: string;
   tags?: string[];
@@ -327,7 +327,7 @@ export class NgxsmkKanbanBoard {
     const item = this.draggedItem();
     if (!item) return;
 
-    const fromColId = item.columnId;
+    const fromColId = item.columnId || '';
     if (fromColId === toColId) {
       this.draggedItem.set(null);
       return;
