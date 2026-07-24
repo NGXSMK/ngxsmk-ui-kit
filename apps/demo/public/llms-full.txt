@@ -1,6 +1,6 @@
 # NGXSMK UI Kit
 
-> Angular-first, MIT-licensed UI ecosystem: 219+ signals-native, zoneless
+> Angular-first, MIT-licensed UI ecosystem: 234+ signals-native, zoneless
 > standalone components with a universal design-token engine (CSS variables,
 > SCSS, Tailwind, StyleX, Tokens Studio export). MIT licensed, no paid tiers.
 > Current version: 1.3.3. Supports Angular 17.3 through 22.
@@ -30,6 +30,9 @@ Usage rules for generated code:
 
 Inputs:
 - `[multiple]`: boolean (default: `false`)
+- `[accordionDuration]`: number (default: `0.2`)
+- `[accordionEase]`: string | number[] (default: `'ease-out'`)
+- `[accordionAnimation]`: 'css' | 'motion' (default: `'css'`)
 
 ## NgxsmkAccordionItem
 
@@ -102,23 +105,242 @@ Outputs:
 
 - Selector: `[ngxsmkAnimate]`
 - Import from: `@ngxsmk/core/animation`
-- Plays an enter animation on the host element once it is rendered. The motion state is supplied via the `ngxsmkAnimate` input.
+- Plays an enter animation on the host element once it is rendered. Supports two APIs: 1. **State API** — pass a full `NgxsmkMotionState` via `ngxsmkAnimate`. 2. **Param API** — pass individual signal inputs (`animateDuration`, `animateType`, etc.). These compose into a `NgxsmkMotionState` internally. When both are provided the state object takes precedence.
 
 Inputs:
 - `[ngxsmkAnimate]`: NgxsmkMotionState
+- `[animateInitial]`: Record<string, string | number>
+- `[animateTarget]`: Record<string, string | number>
+- `[animateExit]`: Record<string, string | number>
+- `[animateType]`: 'tween' | 'spring' | 'inertia' (default: `'tween'`)
+- `[animateDuration]`: number (default: `0.3`)
+- `[animateDelay]`: number (default: `0`)
+- `[animateEase]`: string | number[] (default: `'ease-out'`)
+- `[animateStiffness]`: number
+- `[animateDamping]`: number
+- `[animateMass]`: number
+- `[animateBounce]`: number
+- `[animateVisualDuration]`: number
+- `[animatePower]`: number
+- `[animateTimeConstant]`: number
+
+## NgxsmkDrag
+
+- Selector: `[ngxsmkDrag]`
+- Import from: `@ngxsmk/core/animation`
+- Enables drag gestures on the host element using `motion`'s drag system. When `motion` is not installed, this directive is a no-op.
+
+Inputs:
+- `[ngxsmkDrag]`: boolean (default: `true`)
+- `[dragAxis]`: 'x' | 'y' | 'both' (default: `'both'`)
+- `[dragElastic]`: number (default: `0.2`)
+- `[dragMomentum]`: boolean (default: `true`)
+- `[dragSnapToOrigin]`: boolean (default: `false`)
+- `[dragBounce]`: number (default: `0`)
+- `[dragConstraints]`: {
+    top?: number;
+    left?: number;
+    right?: number;
+    bottom?: number;
+  }
+- `[dragSnapDuration]`: number (default: `0.3`)
+
+Outputs:
+- `(dragStarted)`: emits `void`
+- `(dragging)`: emits `{ x: number; y: number }`
+- `(dragEnded)`: emits `{ x: number; y: number }`
+
+## NgxsmkHover
+
+- Selector: `[ngxsmkHover]`
+- Import from: `@ngxsmk/core/animation`
+- Animates the host element on hover using `motion.hover()`. When `motion` is not installed, this directive is a no-op.
+
+Inputs:
+- `[ngxsmkHover]`: NgxsmkMotionState
+- `[hoverScale]`: number (default: `1.05`)
+- `[hoverOpacity]`: number (default: `1`)
+- `[hoverRotate]`: number (default: `0`)
+- `[hoverType]`: 'tween' | 'spring' (default: `'tween'`)
+- `[hoverDuration]`: number (default: `0.2`)
+- `[hoverEase]`: string | number[] (default: `'ease-out'`)
+- `[hoverStiffness]`: number
+- `[hoverDamping]`: number
+- `[hoverMass]`: number
+
+Outputs:
+- `(hovered)`: emits `boolean`
+
+## NgxsmkMarquee
+
+- Selector: `[ngxsmkMarquee]`
+- Import from: `@ngxsmk/core/animation`
+- Creates a continuous scrolling marquee animation from the host element's content. The content is cloned to fill the viewport. When `motion` is installed, uses `motion.animate()` with `repeat: Infinity` for smooth hardware-accelerated scrolling. Falls back to CSS
+
+Inputs:
+- `[ngxsmkMarquee]`: 'horizontal' | 'vertical' (default: `'horizontal'`)
+- `[marqueeSpeed]`: number (default: `15`)
+- `[marqueePauseOnHover]`: boolean (default: `true`)
+- `[marqueeDirection]`: 'normal' | 'reverse' (default: `'normal'`)
+- `[marqueeEasing]`: string | number[] (default: `'linear'`)
+- `[marqueeRepeatType]`: 'loop' | 'reverse' | 'mirror' (default: `'loop'`)
+
+## NgxsmkNumberTicker
+
+- Selector: `[ngxsmkNumberTicker]`
+- Import from: `@ngxsmk/core/animation`
+- Animates the host element's text content from a start number to a target number. Uses `motion.animate()` when available for smooth easing and spring physics; falls back to `requestAnimationFrame`.
+
+Inputs:
+- `[ngxsmkNumberTicker]`: number (required)
+- `[numberTickerFrom]`: number (default: `0`)
+- `[numberTickerType]`: 'tween' | 'spring' | 'inertia' (default: `'tween'`)
+- `[numberTickerDuration]`: number (default: `1`)
+- `[numberTickerDelay]`: number (default: `0`)
+- `[numberTickerStiffness]`: number
+- `[numberTickerDamping]`: number
+- `[numberTickerMass]`: number
+- `[numberTickerBounce]`: number
+- `[numberTickerVisualDuration]`: number
+- `[numberTickerEase]`: string | number[] (default: `'easeOut'`)
+- `[numberTickerFormat]`: Intl.NumberFormatOptions (default: `{}`)
+- `[numberTickerPrefix]`: string (default: `''`)
+- `[numberTickerSuffix]`: string (default: `''`)
 
 ## NgxsmkPresence
 
 - Selector: `[ngxsmkPresence]`
 - Import from: `@ngxsmk/core/animation`
-- Structural directive that mounts its template and plays an enter animation, then plays an exit animation before detaching when the `show` input flips to `false`. Mirrors the host's presence so leave animations can complete.
+- Structural directive that mounts its template and plays an enter animation, then plays an exit animation before detaching when the `show` input flips to `false`. Mirrors the host's presence so leave animations can complete. Supports two APIs: 1. **State API** — pass a full `NgxsmkMotionState` via `motion`. 2. **Param API** — pass individual signal inputs (`presenceDuration`, etc.).
 
 Inputs:
 - `[show]`: boolean (default: `false`)
 - `[motion]`: NgxsmkMotionState
+- `[presenceInitial]`: Record<string, string | number>
+- `[presenceAnimate]`: Record<string, string | number>
+- `[presenceExit]`: Record<string, string | number>
+- `[presenceType]`: 'tween' | 'spring' | 'inertia' (default: `'tween'`)
+- `[presenceDuration]`: number (default: `0.2`)
+- `[presenceDelay]`: number (default: `0`)
+- `[presenceEase]`: string | number[] (default: `'ease-out'`)
+- `[presenceStiffness]`: number
+- `[presenceDamping]`: number
+- `[presenceMass]`: number
+- `[presenceBounce]`: number
+- `[presenceVisualDuration]`: number
+- `[presencePower]`: number
+- `[presenceTimeConstant]`: number
 
 Outputs:
 - `(afterLeave)`: emits `void`
+
+## NgxsmkPress
+
+- Selector: `[ngxsmkPress]`
+- Import from: `@ngxsmk/core/animation`
+- Animates the host element on press (pointer down) using `motion.press()`. When `motion` is not installed, this directive is a no-op.
+
+Inputs:
+- `[ngxsmkPress]`: NgxsmkMotionState
+- `[pressScale]`: number (default: `0.95`)
+- `[pressOpacity]`: number (default: `0.8`)
+- `[pressType]`: 'tween' | 'spring' (default: `'tween'`)
+- `[pressDuration]`: number (default: `0.1`)
+- `[pressEase]`: string | number[] (default: `'ease-out'`)
+- `[pressStiffness]`: number
+- `[pressDamping]`: number
+- `[pressMass]`: number
+
+Outputs:
+- `(pressed)`: emits `boolean`
+
+## NgxsmkScrollLinked
+
+- Selector: `[ngxsmkScrollLinked]`
+- Import from: `@ngxsmk/core/animation`
+- Links animation progress to scroll position using `motion.scroll()`. The element's style properties are driven by scroll progress (0→1). When `motion` is not installed, this directive is a no-op.
+
+Inputs:
+- `[ngxsmkScrollLinked]`: Record<string, [string | number, string | number] | string | number> (required)
+- `[scrollLinkedOffset]`: [string, string] (default: `['start end', 'end start']`)
+- `[scrollLinkedAxis]`: 'x' | 'y' (default: `'y'`)
+- `[scrollLinkedTarget]`: HTMLElement
+- `[scrollLinkedContainer]`: HTMLElement
+
+## NgxsmkScrollReveal
+
+- Selector: `[ngxsmkScrollReveal]`
+- Import from: `@ngxsmk/core/animation`
+- Animates an element when it enters the viewport. When `motion` is installed, uses `motion.inView()` for detection and `motion.animate()` for the animation. Falls back to IntersectionObserver when motion is not installed.
+
+Inputs:
+- `[ngxsmkScrollReveal]`: NgxsmkMotionState
+- `[scrollRevealInitial]`: Record<string, string | number> (default: `{
+    opacity: 0,
+    y: 24,
+  }`)
+- `[scrollRevealAnimate]`: Record<string, string | number> (default: `{
+    opacity: 1,
+    y: 0,
+  }`)
+- `[scrollRevealExit]`: Record<string, string | number>
+- `[scrollRevealType]`: 'tween' | 'spring' | 'inertia' (default: `'tween'`)
+- `[scrollRevealDuration]`: number (default: `0.6`)
+- `[scrollRevealDelay]`: number (default: `0`)
+- `[scrollRevealEase]`: string | number[] (default: `'ease-out'`)
+- `[scrollRevealStiffness]`: number
+- `[scrollRevealDamping]`: number
+- `[scrollRevealMass]`: number
+- `[scrollRevealBounce]`: number
+- `[scrollRevealVisualDuration]`: number
+- `[scrollRevealMargin]`: string (default: `'0px'`)
+- `[scrollRevealAmount]`: 'some' | 'all' | number (default: `'some'`)
+- `[scrollRevealOnce]`: boolean (default: `true`)
+- `[scrollRevealDirection]`: 'enter' | 'exit' (default: `'enter'`)
+
+Outputs:
+- `(scrolled)`: emits `boolean`
+
+## NgxsmkTextReveal
+
+- Selector: `[ngxsmkTextReveal]`
+- Import from: `@ngxsmk/core/animation`
+- Splits the host element's text content into words or letters and staggers an animation on each unit. Replaces the element's text content, so the host should contain only a text node.
+
+Inputs:
+- `[ngxsmkTextReveal]`: NgxsmkMotionState | 'word' | 'letter' (default: `'word'`)
+- `[textRevealMode]`: 'word' | 'letter' (default: `'word'`)
+- `[textRevealStagger]`: number (default: `0.05`)
+- `[textRevealDuration]`: number (default: `0.4`)
+- `[textRevealInitial]`: Record<string, string | number> (default: `{
+    opacity: 0,
+    y: 8,
+  }`)
+- `[textRevealAnimate]`: Record<string, string | number> (default: `{
+    opacity: 1,
+    y: 0,
+  }`)
+- `[textRevealType]`: 'tween' | 'spring' | 'inertia' (default: `'tween'`)
+- `[textRevealStiffness]`: number
+- `[textRevealDamping]`: number
+- `[textRevealMass]`: number
+- `[textRevealEase]`: string | number[] (default: `'cubic-bezier(0.2, 0, 0, 1)'`)
+
+## NgxsmkTiltCard
+
+- Selector: `[ngxsmkTiltCard]`
+- Import from: `@ngxsmk/core/animation`
+- Applies a 3D tilt transform to the host element based on the pointer position. The tilt angle is clamped by `maxTilt` and scales down when the pointer moves away from the center. When `motion` is installed, uses `motion.hover()` for gesture detection (filters touch emulation) and `motion.animate()` for smooth transitions. Falls back to manual pointermove/pointerleave when motion is not installed.
+
+Inputs:
+- `[ngxsmkTiltCard]`: number (default: `15`)
+- `[tiltCardScale]`: number (default: `1.02`)
+- `[tiltCardPerspective]`: number (default: `1000`)
+- `[tiltCardType]`: 'tween' | 'spring' (default: `'tween'`)
+- `[tiltCardTransition]`: number (default: `400`)
+- `[tiltCardStiffness]`: number
+- `[tiltCardDamping]`: number
+- `[tiltCardMass]`: number
 
 ## NgxsmkAppShell
 
@@ -310,6 +532,12 @@ Inputs:
 - `[loop]`: boolean (default: `true`)
 - `[showControls]`: boolean (default: `true`)
 - `[showIndicators]`: boolean (default: `true`)
+- `[carouselAnimation]`: 'css' | 'motion' (default: `'css'`)
+- `[carouselDuration]`: number (default: `0.3`)
+- `[carouselEase]`: string | number[] (default: `'ease-out'`)
+- `[carouselType]`: 'tween' | 'spring' (default: `'tween'`)
+- `[carouselStiffness]`: number
+- `[carouselDamping]`: number
 
 ## NgxsmkCenter
 
@@ -438,14 +666,25 @@ Outputs:
 
 - Selector: `ngxsmk-chat-layout`
 - Import from: `@ngxsmk/core/chat-layout`
+- Full-featured chat layout with collapsible sidebar, auto-scroll, scroll-to-bottom FAB, and responsive behavior. Designed for modern AI chat interfaces.
 
 Inputs:
-- `[sidebar]`: boolean (default: `false`)
+- `[sidebarOpen]`: boolean (default: `true`)
+- `[sidebarWidth]`: string | number (default: `280`)
+- `[collapsedWidth]`: number (default: `0`)
+- `[mobileBreakpoint]`: number (default: `768`)
+- `[autoScroll]`: boolean (default: `true`)
+- `[scrollThreshold]`: number (default: `150`)
+
+Outputs:
+- `(sidebarToggle)`: emits `void`
+- `(scrollToBottomClick)`: emits `void`
 
 ## NgxsmkChatLayoutScrollButton
 
 - Selector: `ngxsmk-chat-layout-scroll-button`
 - Import from: `@ngxsmk/core/chat-layout-scroll-button`
+- Floating scroll-to-bottom button for chat layouts. Positioned absolutely within a relatively-positioned parent. Works with `NgxsmkChatLayout`'s built-in FAB or can be used standalone.
 
 Outputs:
 - `(scrolled)`: emits `void`
@@ -609,6 +848,9 @@ Inputs:
 Inputs:
 - `[(open)]`: boolean (default: `false`)
 - `[title]`: string (default: `''`)
+- `[collapsibleDuration]`: number (default: `0.2`)
+- `[collapsibleEase]`: string | number[] (default: `'ease-out'`)
+- `[collapsibleAnimation]`: 'css' | 'motion' (default: `'css'`)
 
 ## NgxsmkColorPicker
 
@@ -823,6 +1065,23 @@ Inputs:
 - `[icon]`: string (default: `''`)
 - `[title]`: string (default: `''`)
 - `[description]`: string (default: `''`)
+
+## NgxsmkExpandingArrowButton
+
+- Selector: `ngxsmk-expanding-arrow-button`
+- Import from: `@ngxsmk/core/expanding-arrow-button`
+- An accent-tile button that expands into a dotted-arrow trail on hover or focus. The accent area grows from a small square to fill the width, revealing a trail of chevron dots that fade in with staggered delay. When `motion` is installed, uses `motion.animate()` with `stagger()` for the dot reveal. Falls back to CSS transitions when motion is not installed.
+
+Inputs:
+- `[disabled]`: boolean (default: `false`)
+- `[accentBg]`: string (default: `'var(--ngxsmk-color-primary, #18181b)'`)
+- `[accentColor]`: string (default: `'var(--ngxsmk-color-on-primary, #fafafa)'`)
+- `[eabAnimation]`: 'css' | 'motion' (default: `'css'`)
+- `[eabDuration]`: number (default: `0.32`)
+- `[eabEase]`: string | number[] (default: `'cubic-bezier(0.36, 0, 0.66, -0.56)'`)
+- `[eabType]`: 'tween' | 'spring' (default: `'tween'`)
+- `[eabStiffness]`: number
+- `[eabDamping]`: number
 
 ## NgxsmkFab
 
@@ -1275,6 +1534,50 @@ Outputs:
 Outputs:
 - `(toggled)`: emits `void`
 
+## NgxsmkMorphModal
+
+- Selector: `ngxsmk-morph-modal`
+- Import from: `@ngxsmk/core/morph-modal`
+- A modal whose full-size surface unfolds outward from its exact center using clip-path animation, then folds back the same way. When `motion` is installed, uses `motion.animate()` for smooth spring/keyframe clip-path transitions. Falls back to CSS transitions when motion is not installed.
+
+Outputs:
+- `(openChange)`: emits `boolean`
+
+## NgxsmkMorphModalTrigger
+
+- Selector: `[ngxsmkMorphModalTrigger]`
+- Import from: `@ngxsmk/core/morph-modal`
+- Trigger directive that toggles a parent `NgxsmkMorphModal`.
+
+## NgxsmkMorphModalClose
+
+- Selector: `[ngxsmkMorphModalClose]`
+- Import from: `@ngxsmk/core/morph-modal`
+- Close directive that closes the parent `NgxsmkMorphModal` on click.
+
+## NgxsmkMorphModalContent
+
+- Selector: `[ngxsmkMorphModalContent]`
+- Import from: `@ngxsmk/core/morph-modal`
+- Content panel for the morph modal. Renders into the document body via a portal and applies clip-path animation. When `motion` is installed, uses `motion.animate()` for the clip-path unfold. Falls back to CSS transitions when motion is not installed.
+
+Inputs:
+- `[morphModalAriaLabel]`: string (required)
+- `[morphModalAriaDescribedBy]`: string
+- `[morphModalDismissible]`: boolean (default: `true`)
+- `[morphModalShowClose]`: boolean (default: `true`)
+- `[morphModalCloseLabel]`: string (default: `'Close modal'`)
+- `[morphModalRadius]`: number (default: `30`)
+- `[morphModalDuration]`: number (default: `0.43`)
+- `[morphModalEase]`: string | number[] (default: `'ease-out'`)
+- `[morphModalType]`: 'tween' | 'spring' (default: `'tween'`)
+- `[morphModalStiffness]`: number
+- `[morphModalDamping]`: number
+
+Outputs:
+- `(afterOpen)`: emits `void`
+- `(afterClose)`: emits `void`
+
 ## NgxsmkMultiSelect
 
 - Selector: `ngxsmk-multi-select`
@@ -1488,6 +1791,29 @@ Inputs:
 
 Outputs:
 - `(selected)`: emits `PromptItem`
+
+## NgxsmkPullToRefresh
+
+- Selector: `ngxsmk-pull-to-refresh`
+- Import from: `@ngxsmk/core/pull-to-refresh`
+- Native-feeling pull-to-refresh container with drag resistance, threshold feedback, and async refresh handling. Supports both touch and pointer events.
+
+Inputs:
+- `[pullToRefresh]`: () => void | Promise<void> (required)
+- `[refreshing]`: boolean (default: `false`)
+- `[disabled]`: boolean (default: `false`)
+- `[pullThreshold]`: number (default: `76`)
+- `[maxPull]`: number (default: `132`)
+- `[holdDistance]`: number (default: `68`)
+- `[pullingLabel]`: string (default: `'Pull to refresh'`)
+- `[releaseLabel]`: string (default: `'Release to refresh'`)
+- `[refreshingLabel]`: string (default: `'Refreshing'`)
+- `[ptrAnimation]`: 'css' | 'motion' (default: `'css'`)
+- `[ptrDuration]`: number (default: `0.2`)
+- `[ptrEase]`: string | number[] (default: `'ease-out'`)
+
+Outputs:
+- `(statusChange)`: emits `PullToRefreshStatus`
 
 ## NgxsmkQrCode
 
@@ -1911,6 +2237,7 @@ Outputs:
 Inputs:
 - `[text]`: string (default: `''`)
 - `[speed]`: number (default: `30`)
+- `[streamingCursorAnimation]`: 'css' | 'motion' (default: `'css'`)
 
 ## NgxsmkSwitch
 
