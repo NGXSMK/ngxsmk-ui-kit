@@ -22,6 +22,11 @@ import { NgxsmkStatusDot } from '@ngxsmk/core/status-dot';
 import { NgxsmkAccordion, NgxsmkAccordionItem } from '@ngxsmk/core/accordion';
 import { NgxsmkTabs, NgxsmkTab } from '@ngxsmk/core/tabs';
 import { NgxsmkButton } from '@ngxsmk/core/button';
+import { NgxsmkFileTree, type FileNode } from '@ngxsmk/core/file-tree';
+import { NgxsmkTimelineStepper, type TimelineStep } from '@ngxsmk/core/timeline-stepper';
+import { NgxsmkCodeEditor } from '@ngxsmk/core/code-editor';
+import { NgxsmkStatTrendCard } from '@ngxsmk/core/stat-trend-card';
+import { NgxsmkFilterBuilder, type FilterCondition } from '@ngxsmk/core/filter-builder';
 import { Component, signal } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ShowcaseExample } from '../../showcase/showcase-example';
@@ -59,6 +64,11 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     NgxsmkTableHeaderCell,
     NgxsmkTableCell,
     NgxsmkTableRow,
+    NgxsmkFileTree,
+    NgxsmkTimelineStepper,
+    NgxsmkCodeEditor,
+    NgxsmkStatTrendCard,
+    NgxsmkFilterBuilder,
     TranslatePipe,
   ],
   template: `
@@ -380,6 +390,74 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
             </tr>
           </tbody>
         </table>
+      </div>
+    </showcase-example>
+
+    <showcase-example
+      title="File Tree"
+      [description]="'dataDisplay.fileTreeDesc' | translate"
+      [code]="codeFileTree"
+      [component]="NgxsmkFileTree"
+    >
+      <div style="width: 100%; max-width: 380px;">
+        <ngxsmk-file-tree [nodes]="fileTreeNodes" />
+      </div>
+    </showcase-example>
+
+    <showcase-example
+      title="Timeline Stepper"
+      [description]="'dataDisplay.timelineDesc' | translate"
+      [code]="codeTimeline"
+      [component]="NgxsmkTimelineStepper"
+    >
+      <div style="width: 100%; max-width: 420px;">
+        <ngxsmk-timeline-stepper [steps]="timelineSteps" />
+      </div>
+    </showcase-example>
+
+    <showcase-example
+      title="Code Editor"
+      [description]="'dataDisplay.codeEditorDesc' | translate"
+      [code]="codeCodeEditor"
+      [component]="NgxsmkCodeEditor"
+    >
+      <div style="width: 100%; max-width: 480px;">
+        <ngxsmk-code-editor [code]="sampleCode" language="typescript" />
+      </div>
+    </showcase-example>
+
+    <showcase-example
+      title="Stat Trend Card"
+      [description]="'dataDisplay.statTrendDesc' | translate"
+      [code]="codeStatTrend"
+      [component]="NgxsmkStatTrendCard"
+    >
+      <div class="ngxsmk-sc-row" style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <ngxsmk-stat-trend-card
+          title="Monthly Revenue"
+          value="$84,230"
+          trend="+12.4%"
+          [isPositive]="true"
+          [sparkData]="[12, 18, 15, 22, 28, 35, 42]"
+        />
+        <ngxsmk-stat-trend-card
+          title="Churn Rate"
+          value="1.8%"
+          trend="-0.4%"
+          [isPositive]="true"
+          [sparkData]="[4.2, 3.8, 3.1, 2.6, 2.1, 1.8]"
+        />
+      </div>
+    </showcase-example>
+
+    <showcase-example
+      title="Filter Builder"
+      [description]="'dataDisplay.filterBuilderDesc' | translate"
+      [code]="codeFilterBuilder"
+      [component]="NgxsmkFilterBuilder"
+    >
+      <div style="width: 100%; max-width: 520px;">
+        <ngxsmk-filter-builder [(conditions)]="filterConditions" />
       </div>
     </showcase-example>
   `,
@@ -717,4 +795,65 @@ ngxsmk-card {
     </tr>
   </tbody>
 </table>`;
+
+  protected readonly NgxsmkFileTree = NgxsmkFileTree;
+  protected readonly NgxsmkTimelineStepper = NgxsmkTimelineStepper;
+  protected readonly NgxsmkCodeEditor = NgxsmkCodeEditor;
+  protected readonly NgxsmkStatTrendCard = NgxsmkStatTrendCard;
+  protected readonly NgxsmkFilterBuilder = NgxsmkFilterBuilder;
+
+  protected readonly fileTreeNodes: FileNode[] = [
+    {
+      name: 'src',
+      type: 'folder',
+      expanded: true,
+      children: [
+        { name: 'app.component.ts', type: 'file' },
+        { name: 'app.config.ts', type: 'file' },
+        { name: 'styles.css', type: 'file' },
+      ],
+    },
+    { name: 'package.json', type: 'file' },
+    { name: 'tsconfig.json', type: 'file' },
+  ];
+
+  protected readonly timelineSteps: TimelineStep[] = [
+    {
+      title: 'Project Kickoff',
+      description: 'Requirements gathered & team assigned.',
+      date: 'Jan 10',
+      status: 'completed',
+    },
+    {
+      title: 'Design Review',
+      description: 'UI tokens & component specs approved.',
+      date: 'Feb 04',
+      status: 'completed',
+    },
+    {
+      title: 'Beta Release',
+      description: 'Core library deployed for testing.',
+      date: 'Mar 15',
+      status: 'active',
+    },
+    {
+      title: 'Production Launch',
+      description: 'Public release on npm.',
+      date: 'Apr 01',
+      status: 'pending',
+    },
+  ];
+
+  protected readonly sampleCode = `import { Component, signal } from '@angular/core';\n\n@Component({\n  selector: 'app-counter',\n  template: \`<button (click)="inc()">Count: {{ count() }}</button>\`\n})\nexport class CounterComponent {\n  readonly count = signal(0);\n  inc() { this.count.update(c => c + 1); }\n}`;
+
+  protected readonly filterConditions = signal<FilterCondition[]>([
+    { field: 'status', operator: 'equals', value: 'active' },
+    { field: 'role', operator: 'contains', value: 'admin' },
+  ]);
+
+  protected readonly codeFileTree = `<ngxsmk-file-tree [nodes]="fileTreeNodes" />`;
+  protected readonly codeTimeline = `<ngxsmk-timeline-stepper [steps]="timelineSteps" />`;
+  protected readonly codeCodeEditor = `<ngxsmk-code-editor [code]="sampleCode" language="typescript" />`;
+  protected readonly codeStatTrend = `<ngxsmk-stat-trend-card title="Revenue" value="$84,230" trend="+12.4%" [isPositive]="true" [sparkData]="[12, 18, 25, 42]" />`;
+  protected readonly codeFilterBuilder = `<ngxsmk-filter-builder [(conditions)]="filterConditions" />`;
 }

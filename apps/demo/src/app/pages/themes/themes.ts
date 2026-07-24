@@ -551,7 +551,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     }
 
     .ngxsmk-type-item__size {
-      width: 3rem;
+      min-width: 5.5rem;
       font-family: var(--ngxsmk-font-mono);
       font-size: var(--ngxsmk-text-body-sm-size);
       color: var(--ngxsmk-color-on-surface-variant, #71717a);

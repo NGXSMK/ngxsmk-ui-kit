@@ -140,13 +140,12 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
     },
   ],
   template: `
-    <!-- Floating Label -->
-    @if (engine.label() && engine.floatingLabel()) {
+    <!-- Standard Label (rendered outside container) -->
+    @if (engine.label() && !engine.floatingLabel()) {
       <label
-        class="ngxsmk-input-group__floating-label"
-        [class.ngxsmk-input-group__floating-label--active]="engine.shouldFloat()"
-        [class.ngxsmk-input-group__floating-label--error]="engine.hasError()"
+        class="ngxsmk-input-group__label"
         [attr.for]="id()"
+        [class.ngxsmk-input-group__label--error]="engine.hasError()"
       >
         {{ engine.label() }}
         @if (engine.required()) {
@@ -157,6 +156,21 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
 
     <!-- Main Container -->
     <div class="ngxsmk-input-group__container">
+      <!-- Floating Label -->
+      @if (engine.label() && engine.floatingLabel()) {
+        <label
+          class="ngxsmk-input-group__floating-label"
+          [class.ngxsmk-input-group__floating-label--active]="engine.shouldFloat()"
+          [class.ngxsmk-input-group__floating-label--error]="engine.hasError()"
+          [attr.for]="id()"
+        >
+          {{ engine.label() }}
+          @if (engine.required()) {
+            <span class="ngxsmk-input-group__required" aria-hidden="true">*</span>
+          }
+        </label>
+      }
+
       <!-- Projected Leading Content -->
       <ng-content
         select="ngxsmk-input-group-text:not([trailing]), [ngxsmkInputGroupText]:not([trailing])"
@@ -193,21 +207,6 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
 
       <!-- Input Wrapper -->
       <div class="ngxsmk-input-group__input-wrapper">
-        @if (!engine.label() || engine.floatingLabel()) {
-          <!-- No external label or floating mode — render native placeholder -->
-        } @else {
-          <label
-            class="ngxsmk-input-group__label"
-            [attr.for]="id()"
-            [class.ngxsmk-input-group__label--error]="engine.hasError()"
-          >
-            {{ engine.label() }}
-            @if (engine.required()) {
-              <span class="ngxsmk-input-group__required" aria-hidden="true">*</span>
-            }
-          </label>
-        }
-
         <div class="ngxsmk-input-group__input-row">
           @if (engine.loading()) {
             <span class="ngxsmk-input-group__loading" aria-hidden="true">
@@ -224,6 +223,7 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
           <input
             #inputEl
             class="ngxsmk-input-group__input"
+            [class.ngxsmk-input-group__input--has-loading]="engine.loading()"
             [id]="id()"
             [type]="engine.inputType()"
             [placeholder]="engine.floatingLabel() ? '' : engine.placeholder()"
@@ -357,73 +357,75 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
           }
 
           <!-- Status Icon -->
-          @if (engine.status() === 'success') {
-            <span
-              class="ngxsmk-input-group__status-icon ngxsmk-input-group__status-icon--success"
-              aria-hidden="true"
-            >
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+          @if (showStatusIcon()) {
+            @if (engine.status() === 'success') {
+              <span
+                class="ngxsmk-input-group__status-icon ngxsmk-input-group__status-icon--success"
+                aria-hidden="true"
               >
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-            </span>
-          } @else if (engine.status() === 'error') {
-            <span
-              class="ngxsmk-input-group__status-icon ngxsmk-input-group__status-icon--error"
-              aria-hidden="true"
-            >
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </span>
+            } @else if (engine.status() === 'error') {
+              <span
+                class="ngxsmk-input-group__status-icon ngxsmk-input-group__status-icon--error"
+                aria-hidden="true"
               >
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="15" y1="9" x2="9" y2="15"></line>
-                <line x1="9" y1="9" x2="15" y2="15"></line>
-              </svg>
-            </span>
-          } @else if (engine.status() === 'warning') {
-            <span
-              class="ngxsmk-input-group__status-icon ngxsmk-input-group__status-icon--warning"
-              aria-hidden="true"
-            >
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="15" y1="9" x2="9" y2="15"></line>
+                  <line x1="9" y1="9" x2="15" y2="15"></line>
+                </svg>
+              </span>
+            } @else if (engine.status() === 'warning') {
+              <span
+                class="ngxsmk-input-group__status-icon ngxsmk-input-group__status-icon--warning"
+                aria-hidden="true"
               >
-                <path
-                  d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"
-                ></path>
-                <line x1="12" y1="9" x2="12" y2="13"></line>
-                <line x1="12" y1="17" x2="12.01" y2="17"></line>
-              </svg>
-            </span>
-          } @else if (engine.status() === 'pending') {
-            <span
-              class="ngxsmk-input-group__status-icon ngxsmk-input-group__status-icon--pending"
-              aria-hidden="true"
-            >
-              <span class="ngxsmk-input-group__spinner ngxsmk-input-group__spinner--sm"></span>
-            </span>
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"
+                  ></path>
+                  <line x1="12" y1="9" x2="12" y2="13"></line>
+                  <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+              </span>
+            } @else if (engine.status() === 'pending') {
+              <span
+                class="ngxsmk-input-group__status-icon ngxsmk-input-group__status-icon--pending"
+                aria-hidden="true"
+              >
+                <span class="ngxsmk-input-group__spinner ngxsmk-input-group__spinner--sm"></span>
+              </span>
+            }
           }
         </div>
       </div>
@@ -502,14 +504,19 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
   `,
   styles: `
     :host {
+      position: relative;
       display: inline-flex;
       flex-direction: column;
-      gap: var(--ngxsmk-space-1-5, 0.375rem);
+      gap: var(--ngxsmk-space-1, 0.25rem);
       font-family: var(--ngxsmk-input-group-font, var(--ngxsmk-font-sans));
       font-size: var(--ngxsmk-text-body-sm-size, 0.875rem);
       line-height: var(--ngxsmk-leading-normal, 1.5);
       color: var(--ngxsmk-color-on-surface, #0a1317);
       width: auto;
+    }
+
+    :host(.ngxsmk-input-group--floating) {
+      margin-top: 0.5rem;
     }
 
     :host(.ngxsmk-input-group--full-width) {
@@ -522,21 +529,24 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
       top: 50%;
       left: var(--ngxsmk-input-group-padding, 0.75rem);
       transform: translateY(-50%);
-      font-size: var(--ngxsmk-text-body-md-size, 1rem);
+      font-size: var(--ngxsmk-text-body-md-size, 0.9rem);
       color: var(--ngxsmk-color-on-surface-variant, #6b7280);
       pointer-events: none;
       transition: all var(--ngxsmk-duration-fast, 100ms) var(--ngxsmk-ease-out);
-      z-index: 1;
+      z-index: 5;
       background: transparent;
     }
 
     .ngxsmk-input-group__floating-label--active {
-      top: -0.5rem;
-      left: calc(var(--ngxsmk-input-group-padding, 0.75rem) - 0.25rem);
-      font-size: var(--ngxsmk-text-body-xs-size, 0.75rem);
-      background: var(--ngxsmk-input-group-bg, var(--ngxsmk-color-surface));
+      top: 0;
+      left: 0.65rem;
+      transform: translateY(-50%);
+      font-size: var(--ngxsmk-text-body-xs-size, 0.725rem);
+      font-weight: 600;
+      background: var(--ngxsmk-input-group-bg, var(--ngxsmk-color-surface, #ffffff));
       padding: 0 0.25rem;
-      color: var(--ngxsmk-color-primary, var(--ngxsmk-color-primary));
+      border-radius: var(--ngxsmk-radius-sm, 0.2rem);
+      color: var(--ngxsmk-color-primary, #7c3aed);
     }
 
     .ngxsmk-input-group__floating-label--error {
@@ -548,7 +558,7 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
       display: flex;
       align-items: stretch;
       position: relative;
-      background: var(--ngxsmk-input-group-bg, var(--ngxsmk-color-surface));
+      background: var(--ngxsmk-input-group-bg, var(--ngxsmk-color-surface, #ffffff));
       border: 1.5px solid
         var(--ngxsmk-input-group-border, var(--ngxsmk-color-outline-strong, #d1d5db));
       border-radius: var(--ngxsmk-input-group-radius, var(--ngxsmk-radius-md, 0.5rem));
@@ -557,8 +567,13 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
         border-color var(--ngxsmk-duration-fast, 100ms) var(--ngxsmk-ease-out),
         box-shadow var(--ngxsmk-duration-fast, 100ms) var(--ngxsmk-ease-out),
         background-color var(--ngxsmk-duration-fast, 100ms) var(--ngxsmk-ease-out);
-      overflow: hidden;
+      overflow: visible;
       min-height: var(--ngxsmk-input-group-height, 2.5rem);
+    }
+
+    /* ── Loading input padding ── */
+    .ngxsmk-input-group__input--has-loading {
+      padding-left: 2rem !important;
     }
 
     :host(.ngxsmk-input-group--focused) .ngxsmk-input-group__container {
@@ -720,6 +735,11 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
       flex: 1;
       min-width: 0;
       height: 100%;
+      padding-right: var(--ngxsmk-input-group-padding, 0.75rem);
+    }
+
+    :host([data-radius='pill']) .ngxsmk-input-group__input-row {
+      padding-right: 1.25rem;
     }
 
     /* ── Input ── */
@@ -730,7 +750,8 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
       border: none;
       outline: none;
       background: transparent;
-      padding: var(--ngxsmk-space-2, 0.5rem) var(--ngxsmk-input-group-padding, 0.75rem);
+      padding: var(--ngxsmk-space-2, 0.5rem) 0 var(--ngxsmk-space-2, 0.5rem)
+        var(--ngxsmk-input-group-padding, 0.75rem);
       font-family: var(--ngxsmk-input-group-font, var(--ngxsmk-font-sans));
       font-size: var(--ngxsmk-text-body-md-size, 1rem);
       line-height: var(--ngxsmk-leading-normal, 1.5);
@@ -949,6 +970,7 @@ export class NgxsmkInputGroup
   readonly minLength = input<number | undefined>(undefined);
   readonly showClear = input(false);
   readonly showCounter = input(false);
+  readonly showStatusIcon = input(false);
   readonly fullWidth = input(true);
   readonly loading = input(false);
   readonly floatingLabel = input(false);

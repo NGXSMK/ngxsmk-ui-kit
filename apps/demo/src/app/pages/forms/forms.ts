@@ -31,6 +31,11 @@ import { NgxsmkSignaturePad } from '@ngxsmk/core/signature-pad';
 import { NgxsmkColorPicker } from '@ngxsmk/core/color-picker';
 import { NgxsmkFileUpload } from '@ngxsmk/core/file-upload';
 import { NgxsmkDateRangePicker } from '@ngxsmk/core/date-range-picker';
+import { NgxsmkOtpInput } from '@ngxsmk/core/otp-input';
+import { NgxsmkRangeSlider } from '@ngxsmk/core/range-slider';
+import { NgxsmkCreditCardInput } from '@ngxsmk/core/credit-card-input';
+import { NgxsmkPasswordStrengthMeter } from '@ngxsmk/core/password-strength-meter';
+import { NgxsmkTreeSelect, type TreeNode } from '@ngxsmk/core/tree-select';
 import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -82,6 +87,11 @@ interface Option {
     NgxsmkColorPicker,
     NgxsmkFileUpload,
     NgxsmkDateRangePicker,
+    NgxsmkOtpInput,
+    NgxsmkRangeSlider,
+    NgxsmkCreditCardInput,
+    NgxsmkPasswordStrengthMeter,
+    NgxsmkTreeSelect,
   ],
   template: `
     <h2 class="ngxsmk-page-title">{{ 'category.forms' | translate }}</h2>
@@ -539,6 +549,74 @@ interface Option {
         [code]="codeSignaturePad"
       >
         <ngxsmk-signature-pad [width]="380" [height]="140" />
+      </showcase-example>
+
+      <showcase-example
+        title="OTP Input"
+        description="Multi-digit security PIN/OTP verification input with auto-advance and paste support."
+        [code]="codeOtpInput"
+      >
+        <div class="ngxsmk-sc-col" style="gap:1rem;">
+          <ngxsmk-otp-input [(value)]="otpCode" [length]="6" />
+        </div>
+      </showcase-example>
+
+      <showcase-example
+        title="Range Slider"
+        description="Dual-thumb range slider for selecting min and max thresholds."
+        [code]="codeRangeSlider"
+      >
+        <div style="width: 100%; max-width: 360px;">
+          <ngxsmk-range-slider
+            [(minValue)]="rangeMin"
+            [(maxValue)]="rangeMax"
+            [min]="0"
+            [max]="100"
+            [step]="5"
+          />
+          <small
+            style="margin-top: 0.5rem; display: block; color: var(--ngxsmk-color-on-surface-variant);"
+          >
+            Selected Range: {{ rangeMin() }} — {{ rangeMax() }}
+          </small>
+        </div>
+      </showcase-example>
+
+      <showcase-example
+        title="Credit Card Input"
+        [description]="'forms.creditCardDesc' | translate"
+        [code]="codeCreditCard"
+        [component]="NgxsmkCreditCardInput"
+      >
+        <div style="width: 100%; max-width: 360px;">
+          <ngxsmk-credit-card-input [(value)]="cardNumber" />
+        </div>
+      </showcase-example>
+
+      <showcase-example
+        title="Password Strength Meter"
+        [description]="'forms.passwordStrengthDesc' | translate"
+        [code]="codePasswordStrength"
+        [component]="NgxsmkPasswordStrengthMeter"
+      >
+        <div style="width: 100%; max-width: 380px;">
+          <ngxsmk-password-strength-meter [(password)]="passVal" />
+        </div>
+      </showcase-example>
+
+      <showcase-example
+        title="Tree Select"
+        [description]="'forms.treeSelectDesc' | translate"
+        [code]="codeTreeSelect"
+        [component]="NgxsmkTreeSelect"
+      >
+        <div style="width: 100%; max-width: 380px;">
+          <ngxsmk-tree-select
+            [nodes]="treeSelectNodes"
+            [(selectedKeys)]="selectedTreeKeys"
+            [placeholder]="'forms.selectCategories' | translate"
+          />
+        </div>
       </showcase-example>
     </div>
   `,
@@ -1064,4 +1142,31 @@ ngxsmk-checkbox-list-item {
   protected readonly codeDateRangePicker = `<ngxsmk-date-range-picker [(range)]="dateRange" />`;
   protected readonly codeTransfer = `<ngxsmk-transfer [dataSource]="transferData" [(targetKeys)]="selectedTransferKeys" />`;
   protected readonly codeSignaturePad = `<ngxsmk-signature-pad [width]="400" [height]="160" />`;
+  protected readonly NgxsmkOtpInput = NgxsmkOtpInput;
+  protected readonly NgxsmkRangeSlider = NgxsmkRangeSlider;
+  protected readonly NgxsmkCreditCardInput = NgxsmkCreditCardInput;
+  protected readonly NgxsmkPasswordStrengthMeter = NgxsmkPasswordStrengthMeter;
+  protected readonly NgxsmkTreeSelect = NgxsmkTreeSelect;
+  protected readonly otpCode = signal('482091');
+  protected readonly rangeMin = signal(25);
+  protected readonly rangeMax = signal(75);
+  protected readonly cardNumber = signal('');
+  protected readonly passVal = signal('P@ssw0rd2026!');
+  protected readonly selectedTreeKeys = signal<string[]>(['src']);
+  protected readonly treeSelectNodes: TreeNode[] = [
+    {
+      key: 'src',
+      label: 'src',
+      children: [
+        { key: 'app', label: 'app' },
+        { key: 'assets', label: 'assets' },
+      ],
+    },
+    { key: 'node_modules', label: 'node_modules' },
+  ];
+  protected readonly codeOtpInput = `<ngxsmk-otp-input [(value)]="otpCode" [length]="6" />`;
+  protected readonly codeRangeSlider = `<ngxsmk-range-slider [(minValue)]="rangeMin" [(maxValue)]="rangeMax" [min]="0" [max]="100" [step]="5" />`;
+  protected readonly codeCreditCard = `<ngxsmk-credit-card-input [(value)]="cardNumber" />`;
+  protected readonly codePasswordStrength = `<ngxsmk-password-strength-meter [(password)]="passVal" />`;
+  protected readonly codeTreeSelect = `<ngxsmk-tree-select [nodes]="treeSelectNodes" [(selectedKeys)]="selectedTreeKeys" placeholder="Select categories..." />`;
 }
