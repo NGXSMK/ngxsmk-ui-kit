@@ -1,6 +1,6 @@
 # NGXSMK UI Kit
 
-> Angular-first, MIT-licensed UI ecosystem: 219+ signals-native, zoneless
+> Angular-first, MIT-licensed UI ecosystem: 234+ signals-native, zoneless
 > standalone components with a universal design-token engine (CSS variables,
 > SCSS, Tailwind, StyleX, Tokens Studio export). MIT licensed, no paid tiers.
 > Current version: 1.3.3. Supports Angular 17.3 through 22.
@@ -30,7 +30,16 @@ Usage rules for generated code:
 - NgxsmkAlert (`ngxsmk-alert`) — @ngxsmk/core/alert — Inline notification
 - NgxsmkAlertDialog (`ngxsmk-alert-dialog`) — @ngxsmk/core/alert-dialog
 - NgxsmkAnimate (`[ngxsmkAnimate]`) — @ngxsmk/core/animation — Plays an enter animation on the host element once it is rendered
+- NgxsmkDrag (`[ngxsmkDrag]`) — @ngxsmk/core/animation — Enables drag gestures on the host element using `motion`'s drag system
+- NgxsmkHover (`[ngxsmkHover]`) — @ngxsmk/core/animation — Animates the host element on hover using `motion.hover()`
+- NgxsmkMarquee (`[ngxsmkMarquee]`) — @ngxsmk/core/animation — Creates a continuous scrolling marquee animation from the host element's content
+- NgxsmkNumberTicker (`[ngxsmkNumberTicker]`) — @ngxsmk/core/animation — Animates the host element's text content from a start number to a target number
 - NgxsmkPresence (`[ngxsmkPresence]`) — @ngxsmk/core/animation — Structural directive that mounts its template and plays an enter animation, then plays an exit animation before detaching when the `show` input flips to `false`
+- NgxsmkPress (`[ngxsmkPress]`) — @ngxsmk/core/animation — Animates the host element on press (pointer down) using `motion.press()`
+- NgxsmkScrollLinked (`[ngxsmkScrollLinked]`) — @ngxsmk/core/animation — Links animation progress to scroll position using `motion.scroll()`
+- NgxsmkScrollReveal (`[ngxsmkScrollReveal]`) — @ngxsmk/core/animation — Animates an element when it enters the viewport
+- NgxsmkTextReveal (`[ngxsmkTextReveal]`) — @ngxsmk/core/animation — Splits the host element's text content into words or letters and staggers an animation on each unit
+- NgxsmkTiltCard (`[ngxsmkTiltCard]`) — @ngxsmk/core/animation — Applies a 3D tilt transform to the host element based on the pointer position
 - NgxsmkAppShell (`ngxsmk-app-shell`) — @ngxsmk/core/app-shell
 - NgxsmkAspectRatio (`ngxsmk-aspect-ratio`) — @ngxsmk/core/aspect-ratio
 - NgxsmkAudioPlayer (`ngxsmk-audio-player`) — @ngxsmk/core/audio-player
@@ -66,8 +75,8 @@ Usage rules for generated code:
 - NgxsmkChatComposerTokenElement (`ngxsmk-chat-composer-token-element`) — @ngxsmk/core/chat-composer-token-element
 - NgxsmkChatDictationButton (`ngxsmk-chat-dictation-button`) — @ngxsmk/core/chat-dictation-button
 - NgxsmkChatInput (`ngxsmk-chat-input`) — @ngxsmk/core/chat-input
-- NgxsmkChatLayout (`ngxsmk-chat-layout`) — @ngxsmk/core/chat-layout
-- NgxsmkChatLayoutScrollButton (`ngxsmk-chat-layout-scroll-button`) — @ngxsmk/core/chat-layout-scroll-button
+- NgxsmkChatLayout (`ngxsmk-chat-layout`) — @ngxsmk/core/chat-layout — Full-featured chat layout with collapsible sidebar, auto-scroll, scroll-to-bottom FAB, and responsive behavior
+- NgxsmkChatLayoutScrollButton (`ngxsmk-chat-layout-scroll-button`) — @ngxsmk/core/chat-layout-scroll-button — Floating scroll-to-bottom button for chat layouts
 - NgxsmkChatMessage (`ngxsmk-chat-message`) — @ngxsmk/core/chat-message
 - NgxsmkChatMessageBubble (`ngxsmk-chat-message-bubble`) — @ngxsmk/core/chat-message-bubble
 - NgxsmkChatMessageMetadata (`ngxsmk-chat-message-metadata`) — @ngxsmk/core/chat-message-metadata
@@ -103,6 +112,7 @@ Usage rules for generated code:
 - NgxsmkDock (`ngxsmk-dock`) — @ngxsmk/core/dock — Floating macOS-style application dock with icon tooltips and magnification hover effects
 - NgxsmkDropdownMenu (`ngxsmk-dropdown-menu`) — @ngxsmk/core/dropdown-menu
 - NgxsmkEmptyState (`ngxsmk-empty-state`) — @ngxsmk/core/empty-state
+- NgxsmkExpandingArrowButton (`ngxsmk-expanding-arrow-button`) — @ngxsmk/core/expanding-arrow-button — An accent-tile button that expands into a dotted-arrow trail on hover or focus
 - NgxsmkFab (`button[ngxsmkFab], a[ngxsmkFab]`) — @ngxsmk/core/fab
 - NgxsmkField (`ngxsmk-field`) — @ngxsmk/core/field
 - NgxsmkFieldLabel (`ngxsmk-field-label, [ngxsmkFieldLabel], label[ngxsmkFieldLabel]`) — @ngxsmk/core/field-label
@@ -151,6 +161,10 @@ Usage rules for generated code:
 - NgxsmkMeter (`ngxsmk-meter`) — @ngxsmk/core/meter — Semantic meter for a scalar measurement within a known range (disk usage, score, capacity) — distinct from `progress`, which reports task completion
 - NgxsmkMobileNav (`ngxsmk-mobile-nav`) — @ngxsmk/core/mobile-nav
 - NgxsmkMobileNavToggle (`ngxsmk-mobile-nav-toggle`) — @ngxsmk/core/mobile-nav
+- NgxsmkMorphModal (`ngxsmk-morph-modal`) — @ngxsmk/core/morph-modal — A modal whose full-size surface unfolds outward from its exact center using clip-path animation, then folds back the same way
+- NgxsmkMorphModalTrigger (`[ngxsmkMorphModalTrigger]`) — @ngxsmk/core/morph-modal — Trigger directive that toggles a parent `NgxsmkMorphModal`
+- NgxsmkMorphModalClose (`[ngxsmkMorphModalClose]`) — @ngxsmk/core/morph-modal — Close directive that closes the parent `NgxsmkMorphModal` on click
+- NgxsmkMorphModalContent (`[ngxsmkMorphModalContent]`) — @ngxsmk/core/morph-modal — Content panel for the morph modal
 - NgxsmkMultiSelect (`ngxsmk-multi-select`) — @ngxsmk/core/multi-select
 - NgxsmkMultiSelector (`ngxsmk-multi-selector`) — @ngxsmk/core/multi-selector
 - NgxsmkNavHeadingMenu (`ngxsmk-nav-heading-menu`) — @ngxsmk/core/nav-heading-menu
@@ -168,6 +182,7 @@ Usage rules for generated code:
 - NgxsmkProgress (`ngxsmk-progress`) — @ngxsmk/core/progress — Progress bar
 - NgxsmkProgressCircle (`ngxsmk-progress-circle`) — @ngxsmk/core/progress-circle
 - NgxsmkPromptCarousel (`ngxsmk-prompt-carousel`) — @ngxsmk/core/prompt-carousel
+- NgxsmkPullToRefresh (`ngxsmk-pull-to-refresh`) — @ngxsmk/core/pull-to-refresh — Native-feeling pull-to-refresh container with drag resistance, threshold feedback, and async refresh handling
 - NgxsmkQrCode (`ngxsmk-qr-code`) — @ngxsmk/core/qr-code
 - NgxsmkQueryBuilder (`ngxsmk-query-builder`) — @ngxsmk/core/query-builder
 - NgxsmkRadioGroup (`ngxsmk-radio-group`) — @ngxsmk/core/radio — Groups `ngxsmk-radio` children and holds the selected value

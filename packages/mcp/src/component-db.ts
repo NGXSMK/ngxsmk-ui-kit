@@ -32,6 +32,24 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
         "type": "boolean",
         "required": false,
         "default": "false"
+      },
+      {
+        "name": "accordionDuration",
+        "type": "number",
+        "required": false,
+        "default": "0.2"
+      },
+      {
+        "name": "accordionEase",
+        "type": "string | number[]",
+        "required": false,
+        "default": "'ease-out'"
+      },
+      {
+        "name": "accordionAnimation",
+        "type": "'css' | 'motion'",
+        "required": false,
+        "default": "'css'"
       }
     ],
     "outputs": []
@@ -233,12 +251,361 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "name": "NgxsmkAnimate",
     "kind": "Directive",
     "selector": "[ngxsmkAnimate]",
-    "description": "Plays an enter animation on the host element once it is rendered. The motion state is supplied via the `ngxsmkAnimate` input.",
+    "description": "Plays an enter animation on the host element once it is rendered. Supports two APIs: 1. **State API** — pass a full `NgxsmkMotionState` via `ngxsmkAnimate`. 2. **Param API** — pass individual signal inputs (`animateDuration`, `animateType`, etc.). These compose into a `NgxsmkMotionState` internally. When both are provided the state object takes precedence.",
     "inputs": [
       {
         "name": "ngxsmkAnimate",
         "type": "NgxsmkMotionState",
         "required": false
+      },
+      {
+        "name": "animateInitial",
+        "type": "Record<string, string | number>",
+        "required": false
+      },
+      {
+        "name": "animateTarget",
+        "type": "Record<string, string | number>",
+        "required": false
+      },
+      {
+        "name": "animateExit",
+        "type": "Record<string, string | number>",
+        "required": false
+      },
+      {
+        "name": "animateType",
+        "type": "'tween' | 'spring' | 'inertia'",
+        "required": false,
+        "default": "'tween'"
+      },
+      {
+        "name": "animateDuration",
+        "type": "number",
+        "required": false,
+        "default": "0.3"
+      },
+      {
+        "name": "animateDelay",
+        "type": "number",
+        "required": false,
+        "default": "0"
+      },
+      {
+        "name": "animateEase",
+        "type": "string | number[]",
+        "required": false,
+        "default": "'ease-out'"
+      },
+      {
+        "name": "animateStiffness",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "animateDamping",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "animateMass",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "animateBounce",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "animateVisualDuration",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "animatePower",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "animateTimeConstant",
+        "type": "number",
+        "required": false
+      }
+    ],
+    "outputs": []
+  },
+  {
+    "entryPoint": "@ngxsmk/core/animation",
+    "name": "NgxsmkDrag",
+    "kind": "Directive",
+    "selector": "[ngxsmkDrag]",
+    "description": "Enables drag gestures on the host element using `motion`'s drag system. When `motion` is not installed, this directive is a no-op.",
+    "inputs": [
+      {
+        "name": "ngxsmkDrag",
+        "type": "boolean",
+        "required": false,
+        "default": "true"
+      },
+      {
+        "name": "dragAxis",
+        "type": "'x' | 'y' | 'both'",
+        "required": false,
+        "default": "'both'"
+      },
+      {
+        "name": "dragElastic",
+        "type": "number",
+        "required": false,
+        "default": "0.2"
+      },
+      {
+        "name": "dragMomentum",
+        "type": "boolean",
+        "required": false,
+        "default": "true"
+      },
+      {
+        "name": "dragSnapToOrigin",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "dragBounce",
+        "type": "number",
+        "required": false,
+        "default": "0"
+      },
+      {
+        "name": "dragConstraints",
+        "type": "{\n    top?: number;\n    left?: number;\n    right?: number;\n    bottom?: number;\n  }",
+        "required": false
+      },
+      {
+        "name": "dragSnapDuration",
+        "type": "number",
+        "required": false,
+        "default": "0.3"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "dragStarted",
+        "type": "void"
+      },
+      {
+        "name": "dragging",
+        "type": "{ x: number; y: number }"
+      },
+      {
+        "name": "dragEnded",
+        "type": "{ x: number; y: number }"
+      }
+    ]
+  },
+  {
+    "entryPoint": "@ngxsmk/core/animation",
+    "name": "NgxsmkHover",
+    "kind": "Directive",
+    "selector": "[ngxsmkHover]",
+    "description": "Animates the host element on hover using `motion.hover()`. When `motion` is not installed, this directive is a no-op.",
+    "inputs": [
+      {
+        "name": "ngxsmkHover",
+        "type": "NgxsmkMotionState",
+        "required": false
+      },
+      {
+        "name": "hoverScale",
+        "type": "number",
+        "required": false,
+        "default": "1.05"
+      },
+      {
+        "name": "hoverOpacity",
+        "type": "number",
+        "required": false,
+        "default": "1"
+      },
+      {
+        "name": "hoverRotate",
+        "type": "number",
+        "required": false,
+        "default": "0"
+      },
+      {
+        "name": "hoverType",
+        "type": "'tween' | 'spring'",
+        "required": false,
+        "default": "'tween'"
+      },
+      {
+        "name": "hoverDuration",
+        "type": "number",
+        "required": false,
+        "default": "0.2"
+      },
+      {
+        "name": "hoverEase",
+        "type": "string | number[]",
+        "required": false,
+        "default": "'ease-out'"
+      },
+      {
+        "name": "hoverStiffness",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "hoverDamping",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "hoverMass",
+        "type": "number",
+        "required": false
+      }
+    ],
+    "outputs": [
+      {
+        "name": "hovered",
+        "type": "boolean"
+      }
+    ]
+  },
+  {
+    "entryPoint": "@ngxsmk/core/animation",
+    "name": "NgxsmkMarquee",
+    "kind": "Directive",
+    "selector": "[ngxsmkMarquee]",
+    "description": "Creates a continuous scrolling marquee animation from the host element's content. The content is cloned to fill the viewport. When `motion` is installed, uses `motion.animate()` with `repeat: Infinity` for smooth hardware-accelerated scrolling. Falls back to CSS",
+    "inputs": [
+      {
+        "name": "ngxsmkMarquee",
+        "type": "'horizontal' | 'vertical'",
+        "required": false,
+        "default": "'horizontal'"
+      },
+      {
+        "name": "marqueeSpeed",
+        "type": "number",
+        "required": false,
+        "default": "15"
+      },
+      {
+        "name": "marqueePauseOnHover",
+        "type": "boolean",
+        "required": false,
+        "default": "true"
+      },
+      {
+        "name": "marqueeDirection",
+        "type": "'normal' | 'reverse'",
+        "required": false,
+        "default": "'normal'"
+      },
+      {
+        "name": "marqueeEasing",
+        "type": "string | number[]",
+        "required": false,
+        "default": "'linear'"
+      },
+      {
+        "name": "marqueeRepeatType",
+        "type": "'loop' | 'reverse' | 'mirror'",
+        "required": false,
+        "default": "'loop'"
+      }
+    ],
+    "outputs": []
+  },
+  {
+    "entryPoint": "@ngxsmk/core/animation",
+    "name": "NgxsmkNumberTicker",
+    "kind": "Directive",
+    "selector": "[ngxsmkNumberTicker]",
+    "description": "Animates the host element's text content from a start number to a target number. Uses `motion.animate()` when available for smooth easing and spring physics; falls back to `requestAnimationFrame`.",
+    "inputs": [
+      {
+        "name": "ngxsmkNumberTicker",
+        "type": "number",
+        "required": true
+      },
+      {
+        "name": "numberTickerFrom",
+        "type": "number",
+        "required": false,
+        "default": "0"
+      },
+      {
+        "name": "numberTickerType",
+        "type": "'tween' | 'spring' | 'inertia'",
+        "required": false,
+        "default": "'tween'"
+      },
+      {
+        "name": "numberTickerDuration",
+        "type": "number",
+        "required": false,
+        "default": "1"
+      },
+      {
+        "name": "numberTickerDelay",
+        "type": "number",
+        "required": false,
+        "default": "0"
+      },
+      {
+        "name": "numberTickerStiffness",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "numberTickerDamping",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "numberTickerMass",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "numberTickerBounce",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "numberTickerVisualDuration",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "numberTickerEase",
+        "type": "string | number[]",
+        "required": false,
+        "default": "'easeOut'"
+      },
+      {
+        "name": "numberTickerFormat",
+        "type": "Intl.NumberFormatOptions",
+        "required": false,
+        "default": "{}"
+      },
+      {
+        "name": "numberTickerPrefix",
+        "type": "string",
+        "required": false,
+        "default": "''"
+      },
+      {
+        "name": "numberTickerSuffix",
+        "type": "string",
+        "required": false,
+        "default": "''"
       }
     ],
     "outputs": []
@@ -248,7 +615,7 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "name": "NgxsmkPresence",
     "kind": "Directive",
     "selector": "[ngxsmkPresence]",
-    "description": "Structural directive that mounts its template and plays an enter animation, then plays an exit animation before detaching when the `show` input flips to `false`. Mirrors the host's presence so leave animations can complete.",
+    "description": "Structural directive that mounts its template and plays an enter animation, then plays an exit animation before detaching when the `show` input flips to `false`. Mirrors the host's presence so leave animations can complete. Supports two APIs: 1. **State API** — pass a full `NgxsmkMotionState` via `motion`. 2. **Param API** — pass individual signal inputs (`presenceDuration`, etc.).",
     "inputs": [
       {
         "name": "show",
@@ -260,6 +627,80 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
         "name": "motion",
         "type": "NgxsmkMotionState",
         "required": false
+      },
+      {
+        "name": "presenceInitial",
+        "type": "Record<string, string | number>",
+        "required": false
+      },
+      {
+        "name": "presenceAnimate",
+        "type": "Record<string, string | number>",
+        "required": false
+      },
+      {
+        "name": "presenceExit",
+        "type": "Record<string, string | number>",
+        "required": false
+      },
+      {
+        "name": "presenceType",
+        "type": "'tween' | 'spring' | 'inertia'",
+        "required": false,
+        "default": "'tween'"
+      },
+      {
+        "name": "presenceDuration",
+        "type": "number",
+        "required": false,
+        "default": "0.2"
+      },
+      {
+        "name": "presenceDelay",
+        "type": "number",
+        "required": false,
+        "default": "0"
+      },
+      {
+        "name": "presenceEase",
+        "type": "string | number[]",
+        "required": false,
+        "default": "'ease-out'"
+      },
+      {
+        "name": "presenceStiffness",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "presenceDamping",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "presenceMass",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "presenceBounce",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "presenceVisualDuration",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "presencePower",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "presenceTimeConstant",
+        "type": "number",
+        "required": false
       }
     ],
     "outputs": [
@@ -268,6 +709,346 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
         "type": "void"
       }
     ]
+  },
+  {
+    "entryPoint": "@ngxsmk/core/animation",
+    "name": "NgxsmkPress",
+    "kind": "Directive",
+    "selector": "[ngxsmkPress]",
+    "description": "Animates the host element on press (pointer down) using `motion.press()`. When `motion` is not installed, this directive is a no-op.",
+    "inputs": [
+      {
+        "name": "ngxsmkPress",
+        "type": "NgxsmkMotionState",
+        "required": false
+      },
+      {
+        "name": "pressScale",
+        "type": "number",
+        "required": false,
+        "default": "0.95"
+      },
+      {
+        "name": "pressOpacity",
+        "type": "number",
+        "required": false,
+        "default": "0.8"
+      },
+      {
+        "name": "pressType",
+        "type": "'tween' | 'spring'",
+        "required": false,
+        "default": "'tween'"
+      },
+      {
+        "name": "pressDuration",
+        "type": "number",
+        "required": false,
+        "default": "0.1"
+      },
+      {
+        "name": "pressEase",
+        "type": "string | number[]",
+        "required": false,
+        "default": "'ease-out'"
+      },
+      {
+        "name": "pressStiffness",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "pressDamping",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "pressMass",
+        "type": "number",
+        "required": false
+      }
+    ],
+    "outputs": [
+      {
+        "name": "pressed",
+        "type": "boolean"
+      }
+    ]
+  },
+  {
+    "entryPoint": "@ngxsmk/core/animation",
+    "name": "NgxsmkScrollLinked",
+    "kind": "Directive",
+    "selector": "[ngxsmkScrollLinked]",
+    "description": "Links animation progress to scroll position using `motion.scroll()`. The element's style properties are driven by scroll progress (0→1). When `motion` is not installed, this directive is a no-op.",
+    "inputs": [
+      {
+        "name": "ngxsmkScrollLinked",
+        "type": "Record<string, [string | number, string | number] | string | number>",
+        "required": true
+      },
+      {
+        "name": "scrollLinkedOffset",
+        "type": "[string, string]",
+        "required": false,
+        "default": "['start end', 'end start']"
+      },
+      {
+        "name": "scrollLinkedAxis",
+        "type": "'x' | 'y'",
+        "required": false,
+        "default": "'y'"
+      },
+      {
+        "name": "scrollLinkedTarget",
+        "type": "HTMLElement",
+        "required": false
+      },
+      {
+        "name": "scrollLinkedContainer",
+        "type": "HTMLElement",
+        "required": false
+      }
+    ],
+    "outputs": []
+  },
+  {
+    "entryPoint": "@ngxsmk/core/animation",
+    "name": "NgxsmkScrollReveal",
+    "kind": "Directive",
+    "selector": "[ngxsmkScrollReveal]",
+    "description": "Animates an element when it enters the viewport. When `motion` is installed, uses `motion.inView()` for detection and `motion.animate()` for the animation. Falls back to IntersectionObserver when motion is not installed.",
+    "inputs": [
+      {
+        "name": "ngxsmkScrollReveal",
+        "type": "NgxsmkMotionState",
+        "required": false
+      },
+      {
+        "name": "scrollRevealInitial",
+        "type": "Record<string, string | number>",
+        "required": false,
+        "default": "{\n    opacity: 0,\n    y: 24,\n  }"
+      },
+      {
+        "name": "scrollRevealAnimate",
+        "type": "Record<string, string | number>",
+        "required": false,
+        "default": "{\n    opacity: 1,\n    y: 0,\n  }"
+      },
+      {
+        "name": "scrollRevealExit",
+        "type": "Record<string, string | number>",
+        "required": false
+      },
+      {
+        "name": "scrollRevealType",
+        "type": "'tween' | 'spring' | 'inertia'",
+        "required": false,
+        "default": "'tween'"
+      },
+      {
+        "name": "scrollRevealDuration",
+        "type": "number",
+        "required": false,
+        "default": "0.6"
+      },
+      {
+        "name": "scrollRevealDelay",
+        "type": "number",
+        "required": false,
+        "default": "0"
+      },
+      {
+        "name": "scrollRevealEase",
+        "type": "string | number[]",
+        "required": false,
+        "default": "'ease-out'"
+      },
+      {
+        "name": "scrollRevealStiffness",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "scrollRevealDamping",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "scrollRevealMass",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "scrollRevealBounce",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "scrollRevealVisualDuration",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "scrollRevealMargin",
+        "type": "string",
+        "required": false,
+        "default": "'0px'"
+      },
+      {
+        "name": "scrollRevealAmount",
+        "type": "'some' | 'all' | number",
+        "required": false,
+        "default": "'some'"
+      },
+      {
+        "name": "scrollRevealOnce",
+        "type": "boolean",
+        "required": false,
+        "default": "true"
+      },
+      {
+        "name": "scrollRevealDirection",
+        "type": "'enter' | 'exit'",
+        "required": false,
+        "default": "'enter'"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "scrolled",
+        "type": "boolean"
+      }
+    ]
+  },
+  {
+    "entryPoint": "@ngxsmk/core/animation",
+    "name": "NgxsmkTextReveal",
+    "kind": "Directive",
+    "selector": "[ngxsmkTextReveal]",
+    "description": "Splits the host element's text content into words or letters and staggers an animation on each unit. Replaces the element's text content, so the host should contain only a text node.",
+    "inputs": [
+      {
+        "name": "ngxsmkTextReveal",
+        "type": "NgxsmkMotionState | 'word' | 'letter'",
+        "required": false,
+        "default": "'word'"
+      },
+      {
+        "name": "textRevealMode",
+        "type": "'word' | 'letter'",
+        "required": false,
+        "default": "'word'"
+      },
+      {
+        "name": "textRevealStagger",
+        "type": "number",
+        "required": false,
+        "default": "0.05"
+      },
+      {
+        "name": "textRevealDuration",
+        "type": "number",
+        "required": false,
+        "default": "0.4"
+      },
+      {
+        "name": "textRevealInitial",
+        "type": "Record<string, string | number>",
+        "required": false,
+        "default": "{\n    opacity: 0,\n    y: 8,\n  }"
+      },
+      {
+        "name": "textRevealAnimate",
+        "type": "Record<string, string | number>",
+        "required": false,
+        "default": "{\n    opacity: 1,\n    y: 0,\n  }"
+      },
+      {
+        "name": "textRevealType",
+        "type": "'tween' | 'spring' | 'inertia'",
+        "required": false,
+        "default": "'tween'"
+      },
+      {
+        "name": "textRevealStiffness",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "textRevealDamping",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "textRevealMass",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "textRevealEase",
+        "type": "string | number[]",
+        "required": false,
+        "default": "'cubic-bezier(0.2, 0, 0, 1)'"
+      }
+    ],
+    "outputs": []
+  },
+  {
+    "entryPoint": "@ngxsmk/core/animation",
+    "name": "NgxsmkTiltCard",
+    "kind": "Directive",
+    "selector": "[ngxsmkTiltCard]",
+    "description": "Applies a 3D tilt transform to the host element based on the pointer position. The tilt angle is clamped by `maxTilt` and scales down when the pointer moves away from the center. When `motion` is installed, uses `motion.hover()` for gesture detection (filters touch emulation) and `motion.animate()` for smooth transitions. Falls back to manual pointermove/pointerleave when motion is not installed.",
+    "inputs": [
+      {
+        "name": "ngxsmkTiltCard",
+        "type": "number",
+        "required": false,
+        "default": "15"
+      },
+      {
+        "name": "tiltCardScale",
+        "type": "number",
+        "required": false,
+        "default": "1.02"
+      },
+      {
+        "name": "tiltCardPerspective",
+        "type": "number",
+        "required": false,
+        "default": "1000"
+      },
+      {
+        "name": "tiltCardType",
+        "type": "'tween' | 'spring'",
+        "required": false,
+        "default": "'tween'"
+      },
+      {
+        "name": "tiltCardTransition",
+        "type": "number",
+        "required": false,
+        "default": "400"
+      },
+      {
+        "name": "tiltCardStiffness",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "tiltCardDamping",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "tiltCardMass",
+        "type": "number",
+        "required": false
+      }
+    ],
+    "outputs": []
   },
   {
     "entryPoint": "@ngxsmk/core/app-shell",
@@ -716,6 +1497,40 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
         "type": "boolean",
         "required": false,
         "default": "true"
+      },
+      {
+        "name": "carouselAnimation",
+        "type": "'css' | 'motion'",
+        "required": false,
+        "default": "'css'"
+      },
+      {
+        "name": "carouselDuration",
+        "type": "number",
+        "required": false,
+        "default": "0.3"
+      },
+      {
+        "name": "carouselEase",
+        "type": "string | number[]",
+        "required": false,
+        "default": "'ease-out'"
+      },
+      {
+        "name": "carouselType",
+        "type": "'tween' | 'spring'",
+        "required": false,
+        "default": "'tween'"
+      },
+      {
+        "name": "carouselStiffness",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "carouselDamping",
+        "type": "number",
+        "required": false
       }
     ],
     "outputs": []
@@ -1020,23 +1835,62 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "name": "NgxsmkChatLayout",
     "kind": "Component",
     "selector": "ngxsmk-chat-layout",
-    "description": "",
+    "description": "Full-featured chat layout with collapsible sidebar, auto-scroll, scroll-to-bottom FAB, and responsive behavior. Designed for modern AI chat interfaces.",
     "inputs": [
       {
-        "name": "sidebar",
+        "name": "sidebarOpen",
         "type": "boolean",
         "required": false,
-        "default": "false"
+        "default": "true"
+      },
+      {
+        "name": "sidebarWidth",
+        "type": "string | number",
+        "required": false,
+        "default": "280"
+      },
+      {
+        "name": "collapsedWidth",
+        "type": "number",
+        "required": false,
+        "default": "0"
+      },
+      {
+        "name": "mobileBreakpoint",
+        "type": "number",
+        "required": false,
+        "default": "768"
+      },
+      {
+        "name": "autoScroll",
+        "type": "boolean",
+        "required": false,
+        "default": "true"
+      },
+      {
+        "name": "scrollThreshold",
+        "type": "number",
+        "required": false,
+        "default": "150"
       }
     ],
-    "outputs": []
+    "outputs": [
+      {
+        "name": "sidebarToggle",
+        "type": "void"
+      },
+      {
+        "name": "scrollToBottomClick",
+        "type": "void"
+      }
+    ]
   },
   {
     "entryPoint": "@ngxsmk/core/chat-layout-scroll-button",
     "name": "NgxsmkChatLayoutScrollButton",
     "kind": "Component",
     "selector": "ngxsmk-chat-layout-scroll-button",
-    "description": "",
+    "description": "Floating scroll-to-bottom button for chat layouts. Positioned absolutely within a relatively-positioned parent. Works with `NgxsmkChatLayout`'s built-in FAB or can be used standalone.",
     "inputs": [],
     "outputs": [
       {
@@ -1383,6 +2237,24 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
         "type": "string",
         "required": false,
         "default": "''"
+      },
+      {
+        "name": "collapsibleDuration",
+        "type": "number",
+        "required": false,
+        "default": "0.2"
+      },
+      {
+        "name": "collapsibleEase",
+        "type": "string | number[]",
+        "required": false,
+        "default": "'ease-out'"
+      },
+      {
+        "name": "collapsibleAnimation",
+        "type": "'css' | 'motion'",
+        "required": false,
+        "default": "'css'"
       }
     ],
     "outputs": []
@@ -1921,6 +2793,68 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
         "type": "string",
         "required": false,
         "default": "''"
+      }
+    ],
+    "outputs": []
+  },
+  {
+    "entryPoint": "@ngxsmk/core/expanding-arrow-button",
+    "name": "NgxsmkExpandingArrowButton",
+    "kind": "Component",
+    "selector": "ngxsmk-expanding-arrow-button",
+    "description": "An accent-tile button that expands into a dotted-arrow trail on hover or focus. The accent area grows from a small square to fill the width, revealing a trail of chevron dots that fade in with staggered delay. When `motion` is installed, uses `motion.animate()` with `stagger()` for the dot reveal. Falls back to CSS transitions when motion is not installed.",
+    "inputs": [
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "accentBg",
+        "type": "string",
+        "required": false,
+        "default": "'var(--ngxsmk-color-primary, #18181b)'"
+      },
+      {
+        "name": "accentColor",
+        "type": "string",
+        "required": false,
+        "default": "'var(--ngxsmk-color-on-primary, #fafafa)'"
+      },
+      {
+        "name": "eabAnimation",
+        "type": "'css' | 'motion'",
+        "required": false,
+        "default": "'css'"
+      },
+      {
+        "name": "eabDuration",
+        "type": "number",
+        "required": false,
+        "default": "0.32"
+      },
+      {
+        "name": "eabEase",
+        "type": "string | number[]",
+        "required": false,
+        "default": "'cubic-bezier(0.36, 0, 0.66, -0.56)'"
+      },
+      {
+        "name": "eabType",
+        "type": "'tween' | 'spring'",
+        "required": false,
+        "default": "'tween'"
+      },
+      {
+        "name": "eabStiffness",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "eabDamping",
+        "type": "number",
+        "required": false
       }
     ],
     "outputs": []
@@ -3102,6 +4036,119 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     ]
   },
   {
+    "entryPoint": "@ngxsmk/core/morph-modal",
+    "name": "NgxsmkMorphModal",
+    "kind": "Component",
+    "selector": "ngxsmk-morph-modal",
+    "description": "A modal whose full-size surface unfolds outward from its exact center using clip-path animation, then folds back the same way. When `motion` is installed, uses `motion.animate()` for smooth spring/keyframe clip-path transitions. Falls back to CSS transitions when motion is not installed.",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "openChange",
+        "type": "boolean"
+      }
+    ]
+  },
+  {
+    "entryPoint": "@ngxsmk/core/morph-modal",
+    "name": "NgxsmkMorphModalTrigger",
+    "kind": "Directive",
+    "selector": "[ngxsmkMorphModalTrigger]",
+    "description": "Trigger directive that toggles a parent `NgxsmkMorphModal`.",
+    "inputs": [],
+    "outputs": []
+  },
+  {
+    "entryPoint": "@ngxsmk/core/morph-modal",
+    "name": "NgxsmkMorphModalClose",
+    "kind": "Directive",
+    "selector": "[ngxsmkMorphModalClose]",
+    "description": "Close directive that closes the parent `NgxsmkMorphModal` on click.",
+    "inputs": [],
+    "outputs": []
+  },
+  {
+    "entryPoint": "@ngxsmk/core/morph-modal",
+    "name": "NgxsmkMorphModalContent",
+    "kind": "Directive",
+    "selector": "[ngxsmkMorphModalContent]",
+    "description": "Content panel for the morph modal. Renders into the document body via a portal and applies clip-path animation. When `motion` is installed, uses `motion.animate()` for the clip-path unfold. Falls back to CSS transitions when motion is not installed.",
+    "inputs": [
+      {
+        "name": "morphModalAriaLabel",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "morphModalAriaDescribedBy",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "morphModalDismissible",
+        "type": "boolean",
+        "required": false,
+        "default": "true"
+      },
+      {
+        "name": "morphModalShowClose",
+        "type": "boolean",
+        "required": false,
+        "default": "true"
+      },
+      {
+        "name": "morphModalCloseLabel",
+        "type": "string",
+        "required": false,
+        "default": "'Close modal'"
+      },
+      {
+        "name": "morphModalRadius",
+        "type": "number",
+        "required": false,
+        "default": "30"
+      },
+      {
+        "name": "morphModalDuration",
+        "type": "number",
+        "required": false,
+        "default": "0.43"
+      },
+      {
+        "name": "morphModalEase",
+        "type": "string | number[]",
+        "required": false,
+        "default": "'ease-out'"
+      },
+      {
+        "name": "morphModalType",
+        "type": "'tween' | 'spring'",
+        "required": false,
+        "default": "'tween'"
+      },
+      {
+        "name": "morphModalStiffness",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "morphModalDamping",
+        "type": "number",
+        "required": false
+      }
+    ],
+    "outputs": [
+      {
+        "name": "afterOpen",
+        "type": "void"
+      },
+      {
+        "name": "afterClose",
+        "type": "void"
+      }
+    ]
+  },
+  {
     "entryPoint": "@ngxsmk/core/multi-select",
     "name": "NgxsmkMultiSelect",
     "kind": "Component",
@@ -3729,6 +4776,92 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
       {
         "name": "selected",
         "type": "PromptItem"
+      }
+    ]
+  },
+  {
+    "entryPoint": "@ngxsmk/core/pull-to-refresh",
+    "name": "NgxsmkPullToRefresh",
+    "kind": "Component",
+    "selector": "ngxsmk-pull-to-refresh",
+    "description": "Native-feeling pull-to-refresh container with drag resistance, threshold feedback, and async refresh handling. Supports both touch and pointer events.",
+    "inputs": [
+      {
+        "name": "pullToRefresh",
+        "type": "() => void | Promise<void>",
+        "required": true
+      },
+      {
+        "name": "refreshing",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "pullThreshold",
+        "type": "number",
+        "required": false,
+        "default": "76"
+      },
+      {
+        "name": "maxPull",
+        "type": "number",
+        "required": false,
+        "default": "132"
+      },
+      {
+        "name": "holdDistance",
+        "type": "number",
+        "required": false,
+        "default": "68"
+      },
+      {
+        "name": "pullingLabel",
+        "type": "string",
+        "required": false,
+        "default": "'Pull to refresh'"
+      },
+      {
+        "name": "releaseLabel",
+        "type": "string",
+        "required": false,
+        "default": "'Release to refresh'"
+      },
+      {
+        "name": "refreshingLabel",
+        "type": "string",
+        "required": false,
+        "default": "'Refreshing'"
+      },
+      {
+        "name": "ptrAnimation",
+        "type": "'css' | 'motion'",
+        "required": false,
+        "default": "'css'"
+      },
+      {
+        "name": "ptrDuration",
+        "type": "number",
+        "required": false,
+        "default": "0.2"
+      },
+      {
+        "name": "ptrEase",
+        "type": "string | number[]",
+        "required": false,
+        "default": "'ease-out'"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "statusChange",
+        "type": "PullToRefreshStatus"
       }
     ]
   },
@@ -4926,6 +6059,12 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
         "type": "number",
         "required": false,
         "default": "30"
+      },
+      {
+        "name": "streamingCursorAnimation",
+        "type": "'css' | 'motion'",
+        "required": false,
+        "default": "'css'"
       }
     ],
     "outputs": []
