@@ -7,8 +7,7 @@ if (!major) {
   process.exit(1);
 }
 
-const BUILDER =
-  major === '17' || major === '18' ? '@angular-devkit/build-angular' : '@angular/build';
+const BUILDER = Number(major) <= 19 ? '@angular-devkit/build-angular' : '@angular/build';
 
 // The supported floor is 17.3 (signal `output()` etc.), so the 17 job must
 // install the 17.3 line, not the 17.0 line.

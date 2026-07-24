@@ -54,7 +54,7 @@ jobs:
 
       - name: Pin Angular ${{ matrix.ng }} toolchain & TypeScript
         run: |
-          if [ "${{ matrix.ng }}" = "17" ] || [ "${{ matrix.ng }}" = "18" ]; then
+          if [ "${{ matrix.ng }}" = "17" ] || [ "${{ matrix.ng }}" = "18" ] || [ "${{ matrix.ng }}" = "19" ]; then
             BUILDER="@angular-devkit/build-angular"
           else
             BUILDER="@angular/build"
@@ -89,6 +89,6 @@ jobs:
 
       - name: Build libraries
         run: |
-          npx -p @angular/cli@${{ matrix.ng }} ng build --project @ngxsmk/theme --configuration development
-          npx -p @angular/cli@${{ matrix.ng }} ng build --project @ngxsmk/cdk --configuration development
-          npx -p @angular/cli@${{ matrix.ng }} ng build --project @ngxsmk/core --configuration development
+          node node_modules/@angular/cli/bin/ng.js build @ngxsmk/theme --configuration development
+          node node_modules/@angular/cli/bin/ng.js build @ngxsmk/cdk --configuration development
+          node node_modules/@angular/cli/bin/ng.js build @ngxsmk/core --configuration development

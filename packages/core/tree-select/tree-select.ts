@@ -32,7 +32,14 @@ export type TreeNode = NgxsmkTreeSelectNode;
   template: `
     <div class="ngxsmk-tree-sel">
       <!-- SELECT CONTROL TRIGGER BUTTON -->
-      <div class="ngxsmk-tree-sel__trigger" role="button" tabindex="0" (click)="toggleOpen()" (keydown.enter)="toggleOpen()" (keydown.space)="toggleOpen()">
+      <div
+        class="ngxsmk-tree-sel__trigger"
+        role="button"
+        tabindex="0"
+        (click)="toggleOpen()"
+        (keydown.enter)="toggleOpen()"
+        (keydown.space)="toggleOpen()"
+      >
         @if (activeSelectedIds().length === 0) {
           <span class="ngxsmk-tree-sel__ph">{{ placeholder() }}</span>
         } @else {

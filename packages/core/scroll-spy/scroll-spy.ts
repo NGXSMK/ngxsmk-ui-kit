@@ -1,11 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnDestroy,
-  OnInit,
-  input,
-  model,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, input, model } from '@angular/core';
 
 export interface NgxsmkScrollSpyItem {
   id: string;

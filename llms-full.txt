@@ -1454,7 +1454,11 @@ Inputs:
 
 Outputs:
 - `(cardClick)`: emits `NgxsmkKanbanItem`
-- `(itemDropped)`: emits `{ item: NgxsmkKanbanItem; fromColumnId: string; toColumnId: string }`
+- `(itemDropped)`: emits `{
+    item: NgxsmkKanbanItem;
+    fromColumnId: string;
+    toColumnId: string;
+  }`
 
 ## NgxsmkKbd
 
@@ -1982,7 +1986,7 @@ Inputs:
 - `[(selectedModel)]`: string (default: `''`)
 
 Outputs:
-- `(submit)`: emits `string`
+- `(submitPrompt)`: emits `string`
 - `(fileAttach)`: emits `FileList`
 
 ## NgxsmkPromptLibrary

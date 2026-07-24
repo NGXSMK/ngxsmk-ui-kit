@@ -86,9 +86,7 @@ try {
   console.log('\nCleaning dist and rebuilding libraries in partial compilation mode...');
   if (existsSync('dist')) rmSync('dist', { recursive: true, force: true });
   for (const lib of LIBS) {
-    run(
-      `npx -p @angular/cli@${ANGULAR} ng build --project @ngxsmk/${lib} --configuration production`,
-    );
+    run(`node node_modules/@angular/cli/bin/ng.js build @ngxsmk/${lib} --configuration production`);
   }
 
   // 4. Publish (public via publishConfig in each package.json).
