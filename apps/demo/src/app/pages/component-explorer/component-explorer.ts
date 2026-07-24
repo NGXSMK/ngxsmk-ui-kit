@@ -1,4 +1,11 @@
-import { Component, inject, signal, computed } from '@angular/core';
+import {
+  Component,
+  inject,
+  signal,
+  computed,
+  HostListener,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import {
@@ -116,7 +123,7 @@ const CATEGORY_ICONS: Record<string, string> = {
               <a
                 class="explorer-card"
                 [routerLink]="['/showcase', routeFor(comp.category)]"
-                [fragment]="slug(comp.name)"
+                [fragment]="slug(comp)"
               >
                 <div class="explorer-card-header">
                   <span
@@ -143,6 +150,30 @@ const CATEGORY_ICONS: Record<string, string> = {
             }
           </div>
         </section>
+      }
+
+      <!-- SCROLL TO TOP FLOATING BUTTON -->
+      @if (showScrollTop()) {
+        <button
+          type="button"
+          class="explorer-scroll-top"
+          (click)="scrollToTop()"
+          [title]="'explorer.scrollTop' | translate"
+          [attr.aria-label]="'explorer.scrollTop' | translate"
+        >
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="18 15 12 9 6 15" />
+          </svg>
+        </button>
       }
     </div>
   `,
@@ -392,13 +423,53 @@ const CATEGORY_ICONS: Record<string, string> = {
       border-radius: var(--ngxsmk-radius-sm);
       background: var(--ngxsmk-color-surface-variant, #f4f4f5);
     }
+    .explorer-scroll-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 100;
+      width: 2.75rem;
+      height: 2.75rem;
+      border-radius: 9999px;
+      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      background: var(--ngxsmk-color-surface, #ffffff);
+      color: var(--ngxsmk-color-primary, #7c3aed);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+      transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+    .explorer-scroll-top:hover {
+      transform: translateY(-3px);
+      background: var(--ngxsmk-color-primary-container, #ede9fe);
+      box-shadow: 0 6px 20px rgba(124, 58, 237, 0.25);
+    }
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ComponentExplorer {
   protected readonly registry = inject(ComponentRegistry);
 
   protected readonly query = signal('');
   protected readonly selectedCategory = signal<string | null>(null);
+  protected readonly showScrollTop = signal(false);
+
+  @HostListener('window:scroll')
+  protected onWindowScroll(): void {
+    if (typeof window === 'undefined') return;
+    const yOffset = window.pageYOffset || document.documentElement.scrollTop;
+    this.showScrollTop.set(yOffset > 300);
+  }
+
+  protected scrollToTop(): void {
+    if (typeof window === 'undefined') return;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 
   protected readonly categories = computed(() => this.registry.categories());
 
@@ -492,7 +563,24 @@ export class ComponentExplorer {
     return CATEGORY_ROUTE[category] ?? 'content-typography';
   }
 
-  slug(name: string): string {
-    return name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  slug(comp: ComponentMetadata | string): string {
+    if (typeof comp === 'string') {
+      return comp
+        .replace(/^Ngxsmk/, '')
+        .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-');
+    }
+    if (comp.selector) {
+      return comp.selector
+        .replace(/^\[?ngxsmk-?/, '')
+        .replace(/\]?$/, '')
+        .replace(/[^a-z0-9]+/g, '-');
+    }
+    return comp.name
+      .replace(/^Ngxsmk/, '')
+      .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-');
   }
 }

@@ -315,6 +315,7 @@ interface ApiOutput {
   styles: `
     :host {
       display: block;
+      scroll-margin-top: 5rem;
     }
 
     .ngxsmk-sc-ex {
@@ -323,7 +324,7 @@ interface ApiOutput {
       border-radius: var(--ngxsmk-radius-lg, 0.5rem);
       background: var(--ngxsmk-color-surface, #ffffff);
       margin-block-end: var(--ngxsmk-space-6, 1.5rem);
-      overflow: hidden;
+      overflow: visible;
       transition: box-shadow 0.2s ease;
     }
 
@@ -341,6 +342,8 @@ interface ApiOutput {
       gap: var(--ngxsmk-space-3, 0.75rem) var(--ngxsmk-space-4, 1rem);
       padding: var(--ngxsmk-space-4, 1rem) var(--ngxsmk-space-5, 1.25rem);
       border-bottom: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      border-top-left-radius: var(--ngxsmk-radius-lg, 0.5rem);
+      border-top-right-radius: var(--ngxsmk-radius-lg, 0.5rem);
     }
 
     .ngxsmk-sc-ex__heading {
@@ -365,6 +368,7 @@ interface ApiOutput {
 
     .ngxsmk-sc-ex__preview {
       position: relative;
+      z-index: 10;
       padding: var(--ngxsmk-space-8, 2rem);
       display: flex;
       flex-wrap: wrap;

@@ -25,6 +25,11 @@ import { NgxsmkImageViewer } from '@ngxsmk/core/image-viewer';
 import { NgxsmkAgentCard } from '@ngxsmk/core/agent-card';
 import { NgxsmkPromptCarousel, PromptItem } from '@ngxsmk/core/prompt-carousel';
 import { NgxsmkAiChat, NgxsmkAiMessage } from '@ngxsmk/core/ai-chat';
+import { NgxsmkAudioVisualizer } from '@ngxsmk/core/audio-visualizer';
+import { NgxsmkTokenCounter } from '@ngxsmk/core/token-counter';
+import { NgxsmkPromptInput } from '@ngxsmk/core/prompt-input';
+import { NgxsmkPromptLibrary } from '@ngxsmk/core/prompt-library';
+import { NgxsmkAiThinkingIndicator } from '@ngxsmk/core/ai-thinking-indicator';
 import { Component, signal } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ShowcaseExample } from '../../showcase/showcase-example';
@@ -61,8 +66,14 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     NgxsmkImageViewer,
     NgxsmkPromptCarousel,
     NgxsmkAiChat,
+    NgxsmkAudioVisualizer,
+    NgxsmkTokenCounter,
+    NgxsmkPromptInput,
+    NgxsmkPromptLibrary,
+    NgxsmkAiThinkingIndicator,
     TranslatePipe,
   ],
+
   template: `
     <h2 class="ngxsmk-page-title">{{ 'category.ai' | translate }}</h2>
     <p class="ngxsmk-page-desc">
@@ -503,7 +514,77 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
         </p>
       }
     </showcase-example>
+
+    <showcase-example
+      title="Audio Visualizer"
+      description="Animated real-time spectrum bar, wave line, and pulsing dot audio visualizer."
+      [code]="codeAudioVisualizer"
+    >
+      <div class="ngxsmk-sc-row ngxsmk-sc-wrap" style="gap: 2rem; align-items: center;">
+        <ngxsmk-audio-visualizer [active]="true" [bars]="12" variant="bars" />
+        <ngxsmk-audio-visualizer
+          [active]="true"
+          [bars]="16"
+          variant="wave"
+          color="var(--ngxsmk-color-secondary)"
+        />
+        <ngxsmk-audio-visualizer
+          [active]="true"
+          [bars]="6"
+          variant="dots"
+          color="var(--ngxsmk-color-success)"
+        />
+      </div>
+    </showcase-example>
+
+    <showcase-example
+      title="Token Counter"
+      description="LLM context window token usage progress meter with cost estimation."
+      [code]="codeTokenCounter"
+    >
+      <div style="width: 100%; max-width: 440px;">
+        <ngxsmk-token-counter [used]="16450" [limit]="128000" modelName="Claude 3.5 Sonnet" />
+      </div>
+    </showcase-example>
+
+    <showcase-example
+      title="AI Prompt Input"
+      description="Multi-line AI prompt composer with model selection dropdown and attachment button."
+      [code]="codePromptInput"
+    >
+      <div style="width: 100%; max-width: 560px;">
+        <ngxsmk-prompt-input
+          [(value)]="demoPromptValue"
+          [models]="demoModelOptions"
+          (submit)="sentLog.set($event)"
+        />
+      </div>
+    </showcase-example>
+
+    <showcase-example
+      title="AI Thinking Indicator"
+      description="Animated glowing orb, pulse wave, and skeleton indicator for active LLM reasoning."
+      [code]="codeThinking"
+    >
+      <div class="ngxsmk-sc-row ngxsmk-sc-wrap" style="gap: 2rem; align-items: center;">
+        <ngxsmk-ai-thinking-indicator label="Synthesizing response..." variant="orb" />
+        <ngxsmk-ai-thinking-indicator label="Reasoning..." variant="wave" />
+        <ngxsmk-ai-thinking-indicator label="Generating code..." variant="dots" />
+      </div>
+    </showcase-example>
+
+    <showcase-example
+      title="Prompt Library"
+      description="Searchable card grid of saved AI prompt templates with tag filters."
+      [code]="codePromptLib"
+    >
+      <ngxsmk-prompt-library
+        [prompts]="demoPromptLibItems"
+        (selected)="selectedPromptText.set($event.content)"
+      />
+    </showcase-example>
   `,
+
   styles: `
     :host {
       display: block;
@@ -1133,4 +1214,43 @@ Would you like me to generate a concrete layout snippet or template structure fo
       this.aiChatTokenCount.update((c) => c + 40);
     }, 1500);
   }
+
+  protected readonly NgxsmkAudioVisualizer = NgxsmkAudioVisualizer;
+  protected readonly NgxsmkTokenCounter = NgxsmkTokenCounter;
+  protected readonly codeAudioVisualizer = `<ngxsmk-audio-visualizer [active]="true" [bars]="12" variant="bars" />\n<ngxsmk-audio-visualizer [active]="true" [bars]="16" variant="wave" color="var(--ngxsmk-color-secondary)" />\n<ngxsmk-audio-visualizer [active]="true" [bars]="6" variant="dots" color="var(--ngxsmk-color-success)" />`;
+  protected readonly codeTokenCounter = `<ngxsmk-token-counter [used]="16450" [limit]="128000" modelName="Claude 3.5 Sonnet" />`;
+  protected readonly codePromptInput = `<ngxsmk-prompt-input [(value)]="text" [models]="modelsList" (submit)="onSend($event)" />`;
+  protected readonly codeThinking = `<ngxsmk-ai-thinking-indicator label="Synthesizing response..." variant="orb" />`;
+  protected readonly codePromptLib = `<ngxsmk-prompt-library [prompts]="promptsList" (selected)="onUse($event)" />`;
+
+  protected readonly demoPromptValue = signal('');
+  protected readonly demoModelOptions = [
+    { id: 'gpt-4o', name: 'GPT-4o (OpenAI)' },
+    { id: 'claude-3-5', name: 'Claude 3.5 Sonnet (Anthropic)' },
+    { id: 'gemini-1-5', name: 'Gemini 1.5 Pro (Google)' },
+  ];
+  protected readonly demoPromptLibItems = [
+    {
+      id: '1',
+      title: 'Angular Signal Component',
+      category: 'Coding',
+      content:
+        'Write a standalone Angular 19 component using input(), model(), and output() signals.',
+      tags: ['angular', 'signals', 'typescript'],
+    },
+    {
+      id: '2',
+      title: 'Design System Audit',
+      category: 'UX',
+      content: 'Analyze this color palette and recommend token names for light and dark modes.',
+      tags: ['design-tokens', 'css', 'accessibility'],
+    },
+    {
+      id: '3',
+      title: 'SQL Query Optimizer',
+      category: 'Database',
+      content: 'Optimize this slow SQL query with proper JOINs and INDEX recommendations.',
+      tags: ['sql', 'performance'],
+    },
+  ];
 }

@@ -6,6 +6,8 @@ import { NgxsmkCandlestickChart } from '@ngxsmk/core/chart-candlestick';
 import { NgxsmkHeatmapChart } from '@ngxsmk/core/chart-heatmap';
 import { NgxsmkChartDashboard } from '@ngxsmk/core/chart-dashboard';
 import { NgxsmkLineChart } from '@ngxsmk/core/chart-line';
+import { NgxsmkSparkline } from '@ngxsmk/core/sparkline';
+import { NgxsmkGauge } from '@ngxsmk/core/gauge';
 import { Component } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ShowcaseExample } from '../../showcase/showcase-example';
@@ -24,6 +26,8 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     NgxsmkCandlestickChart,
     NgxsmkHeatmapChart,
     NgxsmkChartDashboard,
+    NgxsmkSparkline,
+    NgxsmkGauge,
   ],
   template: `
     <h2 class="ngxsmk-page-title">{{ 'category.charts' | translate }}</h2>
@@ -162,7 +166,40 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
         </div>
       </ngxsmk-chart-dashboard>
     </showcase-example>
+
+    <showcase-example
+      title="Sparkline"
+      description="Inline SVG micro-charts for dashboard stat cards and compact metrics (line, area, bar variants)."
+      [code]="codeSparkline"
+      [component]="NgxsmkSparkline"
+    >
+      <div class="ngxsmk-sc-row ngxsmk-sc-wrap" style="gap:2rem;align-items:center;">
+        <ngxsmk-sparkline [data]="[10, 25, 18, 40, 32, 55, 48, 65]" variant="line" />
+        <ngxsmk-sparkline [data]="[10, 25, 18, 40, 32, 55, 48, 65]" variant="area" />
+        <ngxsmk-sparkline [data]="[12, 5, 20, 15, 30, 25, 40]" variant="bar" />
+      </div>
+    </showcase-example>
+
+    <showcase-example
+      title="Gauge Meter"
+      description="Circular speedometer and performance gauge arcs."
+      [code]="codeGauge"
+      [component]="NgxsmkGauge"
+    >
+      <div class="ngxsmk-sc-row ngxsmk-sc-wrap" style="gap:2rem;align-items:center;">
+        <ngxsmk-gauge [value]="78" label="Performance" units="%" [size]="150" />
+        <ngxsmk-gauge
+          [value]="140"
+          [min]="0"
+          [max]="200"
+          units="km/h"
+          variant="half"
+          [size]="150"
+        />
+      </div>
+    </showcase-example>
   `,
+
   styles: `
     :host {
       display: block;
@@ -170,6 +207,8 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
   `,
 })
 export class ChartsPage {
+  protected readonly NgxsmkSparkline = NgxsmkSparkline;
+  protected readonly NgxsmkGauge = NgxsmkGauge;
   protected readonly NgxsmkLineChart = NgxsmkLineChart;
   protected readonly customizeNgxsmkLineChart = `/* Theme <ngxsmk-chart-line> via design tokens */
 ngxsmk-chart-line {
@@ -290,5 +329,7 @@ ngxsmk-chart-dashboard {
   protected readonly codeScatter = `<ngxsmk-chart-scatter [data]="correlation" [width]="480" [height]="240" />`;
   protected readonly codeCandle = `<ngxsmk-chart-candlestick [data]="ohlc" [width]="480" [height]="240" />`;
   protected readonly codeHeat = `<ngxsmk-chart-heatmap [data]="matrix" [labels]="heatLabels" [width]="480" [height]="280" />`;
+  protected readonly codeSparkline = `<ngxsmk-sparkline [data]="[10, 25, 18, 40, 32, 55, 48, 65]" variant="line" />\n<ngxsmk-sparkline [data]="[10, 25, 18, 40, 32, 55, 48, 65]" variant="area" />\n<ngxsmk-sparkline [data]="[12, 5, 20, 15, 30, 25, 40]" variant="bar" />`;
+  protected readonly codeGauge = `<ngxsmk-gauge [value]="78" label="Performance" units="%" [size]="150" />\n<ngxsmk-gauge [value]="140" [min]="0" [max]="200" units="km/h" variant="half" [size]="150" opacity="1" />`;
   protected readonly codeDashboard = `<ngxsmk-chart-dashboard [columns]="3">\n  <ngxsmk-chart-line [data]="revenue" [width]="300" [height]="180" />\n  <ngxsmk-chart-pie [data]="traffic" [size]="180" />\n</ngxsmk-chart-dashboard>`;
 }
