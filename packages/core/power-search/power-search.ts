@@ -62,7 +62,7 @@ export interface PowerSearchFilter {
     }
     .ngxsmk-power-search__input:focus {
       border-color: var(--ngxsmk-color-primary);
-      box-shadow: 0 0 0 2px var(--ngxsmk-color-primary-container);
+      box-shadow: var(--ngxsmk-shadow-focus);
     }
     .ngxsmk-power-search__filters {
       display: flex;

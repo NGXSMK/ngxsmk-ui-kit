@@ -100,6 +100,22 @@ export const TRACKING: Record<string, string> = {
   wide: '0.08em',
 };
 
+/** Font-weight tokens — standalone scale for direct use outside typography presets. */
+export const FONT_WEIGHT: Record<string, string> = {
+  regular: '400',
+  medium: '500',
+  semibold: '600',
+  bold: '700',
+};
+
+/** Line-height tokens — unitless multipliers for flexible leading control. */
+export const LEADING: Record<string, string> = {
+  none: '1',
+  tight: '1.25',
+  normal: '1.5',
+  relaxed: '1.625',
+};
+
 export const SPACING: Record<string, string> = {
   '0': '0px',
   '0-5': '0.125rem',

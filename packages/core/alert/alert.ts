@@ -128,7 +128,7 @@ export type NgxsmkAlertVariant = 'info' | 'success' | 'warning' | 'error';
 
     .ngxsmk-alert__title {
       margin: 0 0 var(--ngxsmk-space-0-5);
-      font-weight: 600;
+      font-weight: var(--ngxsmk-font-weight-semibold, 600);
     }
 
     .ngxsmk-alert__content {

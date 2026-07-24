@@ -55,7 +55,7 @@ export interface Conversation {
     }
     .ngxsmk-conversation-list__title {
       font-size: var(--ngxsmk-text-label-lg-size);
-      font-weight: 500;
+      font-weight: var(--ngxsmk-font-weight-medium, 500);
       color: var(--ngxsmk-color-on-surface);
     }
     .ngxsmk-conversation-list__preview {

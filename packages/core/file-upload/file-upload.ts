@@ -174,8 +174,8 @@ export interface UploadedFileItem {
       cursor: pointer;
       text-align: center;
       transition:
-        border-color 0.2s ease,
-        background-color 0.2s ease;
+        border-color var(--ngxsmk-duration-normal, 200ms) ease,
+        background-color var(--ngxsmk-duration-normal, 200ms) ease;
     }
 
     .ngxsmk-file-upload__dropzone:hover,
@@ -216,7 +216,7 @@ export interface UploadedFileItem {
 
     .ngxsmk-file-upload__link {
       color: var(--ngxsmk-color-primary, #7c3aed);
-      font-weight: 600;
+      font-weight: var(--ngxsmk-font-weight-semibold, 600);
     }
 
     .ngxsmk-file-upload__sub-text {
@@ -253,7 +253,7 @@ export interface UploadedFileItem {
     }
 
     .ngxsmk-file-upload__item-name {
-      font-weight: 500;
+      font-weight: var(--ngxsmk-font-weight-medium, 500);
       color: var(--ngxsmk-color-on-surface, #09090b);
       white-space: nowrap;
       overflow: hidden;

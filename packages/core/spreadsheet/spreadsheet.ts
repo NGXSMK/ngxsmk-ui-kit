@@ -889,7 +889,7 @@ export function provideSpreadsheet(
       min-width: var(--_col-w, 150px);
       height: var(--_header-h, 2.5rem);
       padding: 0 var(--ngxsmk-space-2);
-      font-weight: 600;
+      font-weight: var(--ngxsmk-font-weight-semibold, 600);
       font-size: var(--ngxsmk-text-body-xs-size);
       color: var(--ngxsmk-spreadsheet-header-color, var(--ngxsmk-color-on-surface-variant));
       cursor: pointer;
@@ -972,7 +972,7 @@ export function provideSpreadsheet(
         color-mix(in srgb, var(--ngxsmk-color-primary) 12%, transparent)
       );
       color: var(--ngxsmk-color-primary);
-      font-weight: 600;
+      font-weight: var(--ngxsmk-font-weight-semibold, 600);
     }
 
     /* ── Cell Grid ── */
@@ -1186,9 +1186,12 @@ export function provideSpreadsheet(
     /* ── Dark Mode ── */
     :host-context(.dark) {
       --ngxsmk-spreadsheet-bg: var(--ngxsmk-color-surface);
-      --ngxsmk-spreadsheet-header-bg: #28292c;
-      --ngxsmk-spreadsheet-grid-color: rgba(242, 244, 246, 0.06);
-      --ngxsmk-spreadsheet-hover-bg: rgba(255, 255, 255, 0.05);
+      --ngxsmk-spreadsheet-header-bg: var(--ngxsmk-color-surface-container, #28292c);
+      --ngxsmk-spreadsheet-grid-color: var(
+        --ngxsmk-color-outline-variant,
+        rgba(242, 244, 246, 0.06)
+      );
+      --ngxsmk-spreadsheet-hover-bg: var(--ngxsmk-color-surface-hover, rgba(255, 255, 255, 0.05));
       --ngxsmk-spreadsheet-selected-bg: color-mix(
         in srgb,
         var(--ngxsmk-color-primary) 15%,

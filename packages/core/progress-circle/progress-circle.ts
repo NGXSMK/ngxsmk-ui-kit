@@ -90,7 +90,7 @@ import {
     .ngxsmk-progress-circle__text {
       position: absolute;
       font-size: var(--ngxsmk-text-label-sm-size);
-      font-weight: 600;
+      font-weight: var(--ngxsmk-font-weight-semibold, 600);
       color: var(--ngxsmk-color-on-surface);
     }
 

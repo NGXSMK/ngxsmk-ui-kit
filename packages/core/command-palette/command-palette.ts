@@ -113,7 +113,7 @@ export interface CommandItem {
       align-items: flex-start;
       justify-content: center;
       padding-top: 10vh;
-      animation: ngxsmk-fade-in 0.15s ease-out;
+      animation: ngxsmk-fade-in var(--ngxsmk-duration-fast, 150ms) ease-out;
     }
 
     .ngxsmk-cmd-modal {
@@ -127,7 +127,7 @@ export interface CommandItem {
       display: flex;
       flex-direction: column;
       max-height: 480px;
-      animation: ngxsmk-scale-up 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+      animation: ngxsmk-scale-up var(--ngxsmk-duration-fast, 150ms) cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -193,7 +193,7 @@ export interface CommandItem {
     .ngxsmk-cmd-group-title {
       padding: var(--ngxsmk-space-2, 0.5rem) var(--ngxsmk-space-3, 0.75rem);
       font-size: var(--ngxsmk-text-label-sm-size);
-      font-weight: 700;
+      font-weight: var(--ngxsmk-font-weight-bold, 700);
       text-transform: uppercase;
       letter-spacing: 0.05em;
       color: var(--ngxsmk-color-on-surface-variant);

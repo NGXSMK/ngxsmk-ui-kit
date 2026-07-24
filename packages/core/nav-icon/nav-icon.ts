@@ -51,7 +51,7 @@ export type NgxsmkNavIconSize = 'sm' | 'md' | 'lg';
       height: 1.25rem;
     }
     .ngxsmk-nav-icon__label {
-      font-weight: 500;
+      font-weight: var(--ngxsmk-font-weight-medium, 500);
     }
     :host([data-size='lg']) {
       padding: var(--ngxsmk-space-3) var(--ngxsmk-space-4);

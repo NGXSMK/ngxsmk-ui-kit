@@ -62,7 +62,7 @@ export interface QueryCondition {
       flex-wrap: wrap;
     }
     .ngxsmk-query-builder__logical {
-      font-weight: 600;
+      font-weight: var(--ngxsmk-font-weight-semibold, 600);
       font-size: var(--ngxsmk-text-label-md-size);
       text-transform: uppercase;
       color: var(--ngxsmk-color-primary);

@@ -223,7 +223,7 @@ export interface NgxsmkAiMessage {
       display: flex;
       align-items: center;
       gap: var(--ngxsmk-space-2);
-      font-weight: 600;
+      font-weight: var(--ngxsmk-font-weight-semibold, 600);
       color: var(--ngxsmk-color-primary);
     }
 
@@ -285,7 +285,7 @@ export interface NgxsmkAiMessage {
       background: var(--ngxsmk-color-surface-variant);
       border-radius: var(--ngxsmk-radius-md, 6px);
       font-size: var(--ngxsmk-text-body-sm-size, 0.875rem);
-      line-height: 1.5;
+      line-height: var(--ngxsmk-leading-normal, 1.5);
     }
     .ngxsmk-ai-chat__bubble p {
       margin: 0;

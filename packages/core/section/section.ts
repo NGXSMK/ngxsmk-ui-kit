@@ -18,7 +18,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
     .ngxsmk-section__title {
       margin: 0 0 var(--ngxsmk-space-4);
       font-size: var(--ngxsmk-text-headline-sm-size);
-      font-weight: 600;
+      font-weight: var(--ngxsmk-font-weight-semibold, 600);
       line-height: var(--ngxsmk-text-headline-sm-line);
       color: var(--ngxsmk-color-on-surface);
     }

@@ -43,7 +43,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
       background: transparent;
       color: var(--ngxsmk-color-on-surface);
       font-size: var(--ngxsmk-text-body-sm-size);
-      font-weight: 500;
+      font-weight: var(--ngxsmk-font-weight-medium, 500);
       cursor: pointer;
     }
     .ngxsmk-nav-heading-menu__trigger:hover {

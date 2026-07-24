@@ -42,7 +42,7 @@ export interface Rule {
       gap: var(--ngxsmk-space-2);
     }
     .ngxsmk-rule-builder__operator {
-      font-weight: 600;
+      font-weight: var(--ngxsmk-font-weight-semibold, 600);
       font-size: var(--ngxsmk-text-label-md-size);
       text-transform: uppercase;
       color: var(--ngxsmk-color-primary);
@@ -55,7 +55,7 @@ export interface Rule {
       border-radius: var(--ngxsmk-radius-sm);
     }
     .ngxsmk-rule-builder__field {
-      font-weight: 500;
+      font-weight: var(--ngxsmk-font-weight-medium, 500);
       color: var(--ngxsmk-color-on-surface);
     }
     .ngxsmk-rule-builder__op {

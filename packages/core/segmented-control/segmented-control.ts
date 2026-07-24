@@ -45,7 +45,7 @@ export interface SegmentedOption {
       background: transparent;
       color: var(--ngxsmk-color-on-surface-variant);
       font-size: var(--ngxsmk-text-body-sm-size);
-      font-weight: 500;
+      font-weight: var(--ngxsmk-font-weight-medium, 500);
       cursor: pointer;
       transition:
         color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),

@@ -16,7 +16,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
       background: var(--ngxsmk-color-surface-container);
       color: var(--ngxsmk-color-on-surface);
       font-size: var(--ngxsmk-text-body-md-size);
-      line-height: 1.5;
+      line-height: var(--ngxsmk-leading-normal, 1.5);
       word-wrap: break-word;
     }
     ::ng-deep [data-role='user'] ngxsmk-chat-message-bubble .ngxsmk-chat-message-bubble__bubble {

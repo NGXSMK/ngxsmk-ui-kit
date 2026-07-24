@@ -26,7 +26,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
       gap: var(--ngxsmk-space-3);
     }
     .ngxsmk-audio-player__label {
-      font-weight: 500;
+      font-weight: var(--ngxsmk-font-weight-medium, 500);
       color: var(--ngxsmk-color-on-surface);
       min-width: 5rem;
     }

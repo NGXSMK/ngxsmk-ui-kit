@@ -158,7 +158,7 @@ type PageItem = { kind: 'page'; page: number } | { kind: 'ellipsis'; key: string
     .ngxsmk-pagination__btn--active {
       background: var(--ngxsmk-color-primary);
       color: var(--ngxsmk-color-on-primary);
-      font-weight: 600;
+      font-weight: var(--ngxsmk-font-weight-semibold, 600);
     }
     .ngxsmk-pagination__btn--active:hover:not(:disabled) {
       background: var(--ngxsmk-color-primary);

@@ -29,7 +29,7 @@
       border-bottom: 1px solid var(--ngxsmk-color-outline-variant);
     }
     .ngxsmk-flow-editor__title {
-      font-weight: 600;
+      font-weight: var(--ngxsmk-font-weight-semibold, 600);
       font-size: var(--ngxsmk-text-label-lg-size);
       color: var(--ngxsmk-color-on-surface);
     }

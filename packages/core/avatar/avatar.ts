@@ -45,7 +45,7 @@ export type NgxsmkAvatarSize = 'sm' | 'md' | 'lg' | 'xl';
       overflow: hidden;
       user-select: none;
       font-family: var(--ngxsmk-font-sans);
-      font-weight: 600;
+      font-weight: var(--ngxsmk-font-weight-semibold, 600);
     }
 
     :host([data-shape='square']) {

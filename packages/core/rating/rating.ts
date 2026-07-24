@@ -72,7 +72,7 @@ export type NgxsmkRatingSize = 'sm' | 'md' | 'lg';
       align-items: center;
       gap: 0.15em;
       font-size: var(--ngxsmk-rating-size, 1.5rem);
-      line-height: 1;
+      line-height: var(--ngxsmk-leading-none, 1);
       color: var(--ngxsmk-color-outline-strong);
       cursor: pointer;
       outline: none;

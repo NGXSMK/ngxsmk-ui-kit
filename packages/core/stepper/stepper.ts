@@ -146,7 +146,7 @@ type StepView = NgxsmkStep & {
       height: 1.75rem;
       flex-shrink: 0;
       font-size: var(--ngxsmk-text-body-sm-size);
-      font-weight: 600;
+      font-weight: var(--ngxsmk-font-weight-semibold, 600);
       border-radius: var(--ngxsmk-radius-full, 999px);
       border: 2px solid currentColor;
       background: var(--ngxsmk-color-surface);
@@ -165,13 +165,13 @@ type StepView = NgxsmkStep & {
       align-items: center;
       gap: var(--ngxsmk-space-2, 0.5rem);
       font-size: var(--ngxsmk-text-body-md-size, 0.9375rem);
-      font-weight: 500;
+      font-weight: var(--ngxsmk-font-weight-medium, 500);
       color: var(--ngxsmk-color-on-surface);
       white-space: nowrap;
     }
     .ngxsmk-stepper__optional {
       font-size: var(--ngxsmk-text-label-sm-size);
-      font-weight: 400;
+      font-weight: var(--ngxsmk-font-weight-regular, 400);
       color: var(--ngxsmk-color-on-surface-variant);
     }
     .ngxsmk-stepper__description {

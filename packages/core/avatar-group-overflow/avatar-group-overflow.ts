@@ -17,7 +17,7 @@
       color: var(--ngxsmk-color-on-surface-variant);
       font-family: var(--ngxsmk-font-sans);
       font-size: var(--ngxsmk-text-label-md-size);
-      font-weight: 500;
+      font-weight: var(--ngxsmk-font-weight-medium, 500);
       border: 2px solid var(--ngxsmk-color-surface);
     }
   `,

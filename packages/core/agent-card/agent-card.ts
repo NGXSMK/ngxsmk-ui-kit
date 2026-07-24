@@ -46,13 +46,13 @@ export interface AgentInfo {
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 600;
+      font-weight: var(--ngxsmk-font-weight-semibold, 600);
     }
     .ngxsmk-agent-card__info {
       flex: 1;
     }
     .ngxsmk-agent-card__name {
-      font-weight: 600;
+      font-weight: var(--ngxsmk-font-weight-semibold, 600);
       font-size: var(--ngxsmk-text-body-md-size);
       color: var(--ngxsmk-color-on-surface);
     }
@@ -77,7 +77,7 @@ export interface AgentInfo {
     .ngxsmk-agent-card__description {
       font-size: var(--ngxsmk-text-body-sm-size);
       color: var(--ngxsmk-color-on-surface-variant);
-      line-height: 1.5;
+      line-height: var(--ngxsmk-leading-normal, 1.5);
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

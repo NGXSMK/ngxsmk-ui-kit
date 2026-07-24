@@ -1,7 +1,15 @@
 import { deriveScale, rotateHue, shiftLightness } from './color';
 import { resolveTheme } from './define-config';
 import { ColorScale, ResolvedTheme, ThemeConfig, TypeRoleSize, TypeStyle } from './types';
-import { CONTROL_HEIGHT, CONTROL_HEIGHTS, ICON_SIZE, OPACITY, TRACKING } from './tokens';
+import {
+  CONTROL_HEIGHT,
+  CONTROL_HEIGHTS,
+  FONT_WEIGHT,
+  ICON_SIZE,
+  LEADING,
+  OPACITY,
+  TRACKING,
+} from './tokens';
 
 type Vars = Record<string, string>;
 
@@ -143,6 +151,12 @@ function staticVars(theme: ResolvedTheme): Vars {
   }
   for (const [key, value] of Object.entries(TRACKING)) {
     vars[`--ngxsmk-tracking-${key}`] = value;
+  }
+  for (const [key, value] of Object.entries(FONT_WEIGHT)) {
+    vars[`--ngxsmk-font-weight-${key}`] = value;
+  }
+  for (const [key, value] of Object.entries(LEADING)) {
+    vars[`--ngxsmk-leading-${key}`] = value;
   }
   for (const [key, value] of Object.entries(theme.spacing)) {
     vars[`--ngxsmk-space-${key}`] = value;

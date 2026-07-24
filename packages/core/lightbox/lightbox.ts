@@ -162,12 +162,12 @@ export interface NgxsmkLightboxImage {
       border: none;
       border-radius: var(--ngxsmk-radius-md);
       background: transparent;
-      color: white;
+      color: var(--ngxsmk-color-on-surface, #fff);
       cursor: pointer;
     }
 
     .ngxsmk-lightbox__close:hover {
-      background: rgb(255 255 255 / 0.15);
+      background: color-mix(in srgb, var(--ngxsmk-color-on-surface, #fff) 15%, transparent);
     }
 
     .ngxsmk-lightbox__close:focus-visible {
@@ -187,13 +187,13 @@ export interface NgxsmkLightboxImage {
       padding: 0;
       border: none;
       border-radius: 50%;
-      background: rgb(255 255 255 / 0.1);
-      color: white;
+      background: color-mix(in srgb, var(--ngxsmk-color-on-surface, #fff) 10%, transparent);
+      color: var(--ngxsmk-color-on-surface, #fff);
       cursor: pointer;
     }
 
     .ngxsmk-lightbox__nav:hover:not(:disabled) {
-      background: rgb(255 255 255 / 0.25);
+      background: color-mix(in srgb, var(--ngxsmk-color-on-surface, #fff) 25%, transparent);
     }
 
     .ngxsmk-lightbox__nav:disabled {

@@ -10,7 +10,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
       white-space: pre-wrap;
       word-wrap: break-word;
       font-family: var(--ngxsmk-font-sans);
-      line-height: 1.5;
+      line-height: var(--ngxsmk-leading-normal, 1.5);
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

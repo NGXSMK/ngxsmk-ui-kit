@@ -507,7 +507,7 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
       gap: var(--ngxsmk-space-1-5, 0.375rem);
       font-family: var(--ngxsmk-input-group-font, var(--ngxsmk-font-sans));
       font-size: var(--ngxsmk-text-body-sm-size, 0.875rem);
-      line-height: 1.5;
+      line-height: var(--ngxsmk-leading-normal, 1.5);
       color: var(--ngxsmk-color-on-surface, #0a1317);
       width: auto;
     }
@@ -733,7 +733,7 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
       padding: var(--ngxsmk-space-2, 0.5rem) var(--ngxsmk-input-group-padding, 0.75rem);
       font-family: var(--ngxsmk-input-group-font, var(--ngxsmk-font-sans));
       font-size: var(--ngxsmk-text-body-md-size, 1rem);
-      line-height: 1.5;
+      line-height: var(--ngxsmk-leading-normal, 1.5);
       color: var(--ngxsmk-color-on-surface, #0a1317);
     }
 
@@ -760,7 +760,7 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
       padding: 0 var(--ngxsmk-space-3, 0.75rem);
       color: var(--ngxsmk-color-on-surface-variant, #6b7280);
       font-size: var(--ngxsmk-text-body-sm-size, 0.875rem);
-      font-weight: 500;
+      font-weight: var(--ngxsmk-font-weight-medium, 500);
       white-space: nowrap;
       background: var(--ngxsmk-color-surface-variant);
       border-left: 1px solid
@@ -799,7 +799,7 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
     }
 
     .ngxsmk-input-group__addon-text {
-      font-weight: 500;
+      font-weight: var(--ngxsmk-font-weight-medium, 500);
     }
 
     /* ── Clear Button ── */
@@ -836,7 +836,7 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
 
     .ngxsmk-input-group__counter--over {
       color: var(--ngxsmk-color-error, #dc2626);
-      font-weight: 600;
+      font-weight: var(--ngxsmk-font-weight-semibold, 600);
     }
 
     /* ── Status Icon ── */
@@ -915,8 +915,8 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
     }
 
     :host-context(.dark) .ngxsmk-input-group__addon {
-      background: #28292c;
-      border-color: rgba(255, 255, 255, 0.06);
+      background: var(--ngxsmk-color-surface-container, #28292c);
+      border-color: var(--ngxsmk-color-outline-variant, rgba(255, 255, 255, 0.06));
     }
 
     :host-context(.dark) .ngxsmk-input-group__input::placeholder {
@@ -924,7 +924,7 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
     }
 
     :host-context(.dark) .ngxsmk-input-group__input:-webkit-autofill {
-      -webkit-box-shadow: 0 0 0 30px #1f1f22 inset !important;
+      -webkit-box-shadow: 0 0 0 30px var(--ngxsmk-color-surface, #1f1f22) inset !important;
       -webkit-text-fill-color: var(--ngxsmk-color-on-surface) !important;
     }
   `,

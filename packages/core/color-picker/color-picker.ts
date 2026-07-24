@@ -148,7 +148,7 @@ export type ColorFormat = 'hex' | 'hsl' | 'rgb';
       color: var(--ngxsmk-color-on-surface, #09090b);
       font-family: var(--ngxsmk-font-mono, monospace);
       font-size: var(--ngxsmk-text-body-xs-size, 0.75rem);
-      font-weight: 600;
+      font-weight: var(--ngxsmk-font-weight-semibold, 600);
       text-transform: uppercase;
       outline: none;
       box-sizing: border-box;
@@ -156,8 +156,7 @@ export type ColorFormat = 'hex' | 'hsl' | 'rgb';
 
     .ngxsmk-color-picker__input:focus {
       border-color: var(--ngxsmk-color-primary, #7c3aed);
-      box-shadow: 0 0 0 2px
-        color-mix(in srgb, var(--ngxsmk-color-primary, #7c3aed) 20%, transparent);
+      box-shadow: var(--ngxsmk-shadow-focus);
     }
 
     .ngxsmk-color-picker__hue-wrap {
@@ -168,7 +167,7 @@ export type ColorFormat = 'hex' | 'hsl' | 'rgb';
 
     .ngxsmk-color-picker__label {
       font-size: var(--ngxsmk-text-body-xs-size, 0.75rem);
-      font-weight: 500;
+      font-weight: var(--ngxsmk-font-weight-medium, 500);
       color: var(--ngxsmk-color-on-surface-variant, #71717a);
     }
 
@@ -177,7 +176,7 @@ export type ColorFormat = 'hex' | 'hsl' | 'rgb';
       appearance: none;
       width: 100%;
       height: 0.75rem;
-      border-radius: 9999px;
+      border-radius: var(--ngxsmk-radius-full, 9999px);
       background: linear-gradient(
         to right,
         #ff0000 0%,
@@ -220,8 +219,8 @@ export type ColorFormat = 'hex' | 'hsl' | 'rgb';
       cursor: pointer;
       padding: 0;
       transition:
-        transform 0.15s ease,
-        box-shadow 0.15s ease;
+        transform var(--ngxsmk-duration-fast, 150ms) ease,
+        box-shadow var(--ngxsmk-duration-fast, 150ms) ease;
     }
 
     .ngxsmk-color-picker__preset-btn:hover:not(:disabled) {

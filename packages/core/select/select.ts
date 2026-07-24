@@ -257,7 +257,7 @@ export interface NgxsmkSelectOption {
       background: var(--ngxsmk-color-surface-hover);
     }
     .ngxsmk-select__option--selected {
-      font-weight: 600;
+      font-weight: var(--ngxsmk-font-weight-semibold, 600);
       color: var(--ngxsmk-color-primary);
     }
     .ngxsmk-select__option--selected.ngxsmk-select__option--active {

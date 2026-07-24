@@ -53,7 +53,7 @@ export interface ReasoningStep {
       flex: 1;
     }
     .ngxsmk-reasoning-timeline__label {
-      font-weight: 500;
+      font-weight: var(--ngxsmk-font-weight-medium, 500);
       color: var(--ngxsmk-color-on-surface);
     }
     .ngxsmk-reasoning-timeline__content {

@@ -23,7 +23,7 @@ const TABLE_CSS = `
   padding: var(--ngxsmk-space-3) var(--ngxsmk-space-4);
   background: var(--ngxsmk-color-surface-variant);
   color: var(--ngxsmk-color-on-surface);
-  font-weight: 600;
+  font-weight: var(--ngxsmk-font-weight-semibold, 600);
   text-align: start;
   border-bottom: 2px solid var(--ngxsmk-color-outline-strong);
   white-space: nowrap;

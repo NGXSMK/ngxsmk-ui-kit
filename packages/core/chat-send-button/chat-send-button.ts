@@ -23,7 +23,7 @@
       border-radius: var(--ngxsmk-radius-full);
       font-family: var(--ngxsmk-font-sans);
       font-size: var(--ngxsmk-text-label-lg-size);
-      font-weight: 500;
+      font-weight: var(--ngxsmk-font-weight-medium, 500);
       cursor: pointer;
       transition: opacity var(--ngxsmk-duration-fast);
     }

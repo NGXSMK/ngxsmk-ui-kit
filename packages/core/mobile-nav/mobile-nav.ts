@@ -43,7 +43,7 @@ import { ChangeDetectionStrategy, Component, input, output } from '@angular/core
     .ngxsmk-mobile-nav__backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.5);
+      background: var(--ngxsmk-color-backdrop, rgba(0, 0, 0, 0.5));
       z-index: var(--ngxsmk-z-overlay, 1300);
     }
     .ngxsmk-mobile-nav__panel {
@@ -69,7 +69,7 @@ import { ChangeDetectionStrategy, Component, input, output } from '@angular/core
     .ngxsmk-mobile-nav__title {
       font-family: var(--ngxsmk-font-sans);
       font-size: var(--ngxsmk-text-title-md-size);
-      font-weight: 600;
+      font-weight: var(--ngxsmk-font-weight-semibold, 600);
     }
     .ngxsmk-mobile-nav__close {
       display: inline-flex;

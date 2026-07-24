@@ -77,7 +77,7 @@ function renderMarkdown(md: string): string {
     .ngxsmk-markdown h4,
     .ngxsmk-markdown h5 {
       margin: 1.5em 0 0.5em;
-      font-weight: 600;
+      font-weight: var(--ngxsmk-font-weight-semibold, 600);
       color: var(--ngxsmk-color-on-surface);
     }
     .ngxsmk-markdown h1 {
@@ -159,7 +159,7 @@ function renderMarkdown(md: string): string {
     }
     .ngxsmk-markdown th {
       background: var(--ngxsmk-color-surface-variant);
-      font-weight: 600;
+      font-weight: var(--ngxsmk-font-weight-semibold, 600);
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -77,7 +77,7 @@ export type NgxsmkAlertDialogVariant = 'info' | 'destructive';
     .ngxsmk-alert-dialog__title {
       margin: 0;
       font-size: var(--ngxsmk-text-title-md-size);
-      font-weight: 600;
+      font-weight: var(--ngxsmk-font-weight-semibold, 600);
     }
     .ngxsmk-alert-dialog__message {
       margin: 0;
