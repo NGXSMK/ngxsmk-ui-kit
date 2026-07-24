@@ -172,8 +172,18 @@
     "teamDesign": "التصميم"
   },
   "blog": {
-    "title": "المدوّنة",
-    "subtitle": "آخر الأخبار والمقالات والكتابات من فريق NGXSMK.",
+    "pill": "المدونة",
+    "title": "آخر أخبار NGXSMK",
+    "subtitle": "تحليلات تقنية عميقة، وإعلانات الإصدارات، وأدلة لبناء واجهات مستخدم إنتاجية باستخدام مكونات Angular الأصلية بالإشارات.",
+    "statArticles": "مقالات",
+    "statTopics": "مواضيع",
+    "statCadence": "التوتر",
+    "featured": "مميز",
+    "all": "الكل",
+    "newsletter": "ابقَ على اطلاع",
+    "newsletterSub": "احصل على أحدث تحديثات NGXSMK والأدلة وأبرز أحداث المجتمع مباشرة في بريدك الإلكتروني.",
+    "subscribe": "اشترك",
+    "topicsTitle": "مواضيع",
     "readArticle": "اقرأ المقال",
     "tag": {
       "announcement": "إعلان",
@@ -198,9 +208,27 @@
       }
     }
   },
+  "blogPost": {
+    "backToBlog": "العودة إلى المدونة",
+    "quickStart": "بداية سريعة",
+    "copyLink": "نسخ الرابط",
+    "copied": "✓ تم النسخ",
+    "moreArticles": "مقالات أخرى",
+    "postNotFound": "المقال غير موجود",
+    "postNotFoundDesc": "المقال الذي تبحث عنه غير موجود.",
+    "ngxsmkTeam": "فريق NGXSMK"
+  },
   "changelog": {
+    "pill": "سجل التغييرات",
     "title": "سجل التغييرات",
     "subtitle": "تابع التغييرات وإصلاحات الأخطاء والتحديثات والإصدارات الخاصة بـ NGXSMK.",
+    "statReleases": "إصدارات",
+    "statChanges": "تغييرات",
+    "statSince": "منذ",
+    "all": "الكل",
+    "latest": "الأحدث",
+    "footerTitle": "تابعنا على GitHub",
+    "footerSub": "افتح مشاكل، أو ساهم، أو تتبع الإصدارات القادمة في المستودع العام.",
     "type": {
       "added": "مُضاف",
       "fixed": "مُصلح",
@@ -208,6 +236,24 @@
       "removed": "محذوف"
     },
     "release": {
+      "v200": {
+        "summary": "إصدار رئيسي: نظام رسوم متحركة motion.dev، إعادة تصميم كاملة لواجهة المستخدم، دعم Tailwind CSS، وأدوات الذكاء الاصطناعي.",
+        "changes": {
+          "0": "نظام رسوم متحركة motion.dev مع NgxsmkMotionDirective و NgxsmkAnimateDirective للرسوم المتحركة التصريحية للدخول والخروج والتمرير.",
+          "1": "أربع توجيهات لإيماءات اللمس: NgxsmkHoverDirective و NgxsmkFocusDirective و NgxsmkDragDirective و NgxsmkPressDirective.",
+          "2": "إعداد Tailwind CSS v3 وسمة CSS v4 لتكامل Tailwind بدون تكوين.",
+          "3": "صفحة عرض المكونات مع شريط جانبي للتنقل، وتجميع حسب الفئات، ومساحة لعب StackBlitz مباشرة.",
+          "4": "إعادة تصميم كاملة لواجهة تطبيق العرض: الصفحات الرئيسية والوثائق والسمات والمدونة وسجل التغييرات.",
+          "5": "استبدال رموز التصميم في أكثر من 70 مكونًا للحصول على لغة بصرية متسقة.",
+          "6": "مزخرفات @Input/@Output المهملة — جميع واجهات البرمجة الآن إشارات فقط.",
+          "7": "استخراج الفئة المجردة CvaBase<T> إلى @ngxsmk/cdk/cva-base، وإزالة حوالي 80 سطرًا من كود ControlValueAccessor المكرر في 8 مكونات نموذج.",
+          "8": "استخراج فئة ListboxKeyboard إلى @ngxsmk/cdk/listbox-keyboard، وتوحيد التنقل بالسهمات و Home/End و Enter و Escape.",
+          "9": "دمج SearchService في ComponentRegistry، وإزالة فهرس MiniSearch المكرر.",
+          "10": "استخراج NgxThemeInjectorService لحقن CSS، وفصله عن تبديل الوضع الداكن.",
+          "11": "استخراج القيم الافتراضية لرموز المكون من css.ts staticVars() إلى سجل COMPONENT_TOKEN_DEFAULTS.",
+          "12": "حذف 6 رموز عارض يتيمة وتنفيذات، واستراتيجية CDK overlay، والهيكل غير المستخدم base-typeahead."
+        }
+      },
       "v133": {
         "summary": "تعميق المعمارية: فئة أساسية CVA، تنقل بلوحة المفاتيح لـ listbox وتنظيف الكود الميت.",
         "changes": {
@@ -297,8 +343,15 @@
     }
   },
   "roadmap": {
+    "pill": "خارطة الطريق",
     "title": "خارطة الطريق",
     "subtitle": "لمحة عمّا نعمل عليه وما هو قادم تاليًا إلى NGXSMK.",
+    "statShipped": "تم الإصدار",
+    "statInProgress": "قيد التنفيذ",
+    "statPlanned": "مخطط",
+    "footerTitle": "هل لديك طلب ميزة؟",
+    "footerSub": "نطور بناءً على ملاحظات المجتمع. افتح مشكلة أو ابدأ مناقشة على GitHub.",
+    "footerCta": "طلب ميزة",
     "quarter": {
       "q3_2026": "الربع الثالث 2026",
       "q4_2026": "الربع الرابع 2026",

@@ -172,8 +172,18 @@
     "teamDesign": "Design"
   },
   "blog": {
-    "title": "Blog",
-    "subtitle": "Neueste Nachrichten, Artikel und Berichte vom NGXSMK-Team.",
+    "pill": "Blog",
+    "title": "Neuestes aus NGXSMK",
+    "subtitle": "Technische Deep-Dive-Analysen, Versionsankündigungen und Anleitungen zur Erstellung produktionsfertiger UIs mit signal-nativen Angular-Komponenten.",
+    "statArticles": "Artikel",
+    "statTopics": "Themen",
+    "statCadence": "Takt",
+    "featured": "Empfohlen",
+    "all": "Alle",
+    "newsletter": "Bleiben Sie auf dem Laufenden",
+    "newsletterSub": "Erhalten Sie die neuesten NGXSMK-Updates, Anleitungen und Community-Highlights direkt in Ihrem Posteingang.",
+    "subscribe": "Abonnieren",
+    "topicsTitle": "Themen",
     "readArticle": "Artikel lesen",
     "tag": {
       "announcement": "Ankündigung",
@@ -198,9 +208,27 @@
       }
     }
   },
+  "blogPost": {
+    "backToBlog": "Zurück zum Blog",
+    "quickStart": "Schnellstart",
+    "copyLink": "Link kopieren",
+    "copied": "✓ Kopiert",
+    "moreArticles": "Weitere Artikel",
+    "postNotFound": "Artikel nicht gefunden",
+    "postNotFoundDesc": "Der gesuchte Artikel existiert nicht.",
+    "ngxsmkTeam": "NGXSMK-Team"
+  },
   "changelog": {
+    "pill": "Änderungsprotokoll",
     "title": "Änderungsprotokoll",
     "subtitle": "Verfolgen Sie die Änderungen, Fehlerbehebungen, Updates und Veröffentlichungen von NGXSMK.",
+    "statReleases": "Veröffentlichungen",
+    "statChanges": "Änderungen",
+    "statSince": "Seit",
+    "all": "Alle",
+    "latest": "Neueste",
+    "footerTitle": "Folgen Sie auf GitHub",
+    "footerSub": "Erstellen Sie Issues, tragen Sie bei oder verfolgen Sie kommende Veröffentlichungen im öffentlichen Repository.",
     "type": {
       "added": "hinzugefügt",
       "fixed": "behoben",
@@ -208,6 +236,24 @@
       "removed": "entfernt"
     },
     "release": {
+      "v200": {
+        "summary": "Große Veröffentlichung: motion.dev-Animationssystem, vollständiges UI/UX-Redesign, Tailwind CSS-Unterstützung und KI-erste Werkzeuge.",
+        "changes": {
+          "0": "motion.dev-Animationssystem mit NgxsmkMotionDirective und NgxsmkAnimateDirective für deklarative Ein-/Aus-/Scroll-Animationen.",
+          "1": "Vier Gesture-Direktiven: NgxsmkHoverDirective, NgxsmkFocusDirective, NgxsmkDragDirective und NgxsmkPressDirective.",
+          "2": "Tailwind CSS v3-Preset und v4-CSS-Theme für Null-Konfigurations-Tailwind-Integration.",
+          "3": "Komponenten-Showcase-Seite mit Seitenleistennavigation, Kategoriegruppierung und StackBlitz-Live-Playground.",
+          "4": "Vollständiges UI/UX-Redesign der Demo-App: Home-, Docs-, Themes-, Blog- und Changelog-Seiten.",
+          "5": "Design-Token-Ersetzung in 70+ Komponenten für konsistente visuelle Sprache.",
+          "6": "Deprecated @Input/@Output-Dekoratoren — alle APIs sind jetzt nur Signal-basiert.",
+          "7": "CvaBase<T>-Abstraktklasse in @ngxsmk/cdk/cva-base extrahiert, die ~80 Zeilen doppelte ControlValueAccessor-Boilerplate in 8 Formular-Komponenten eliminiert.",
+          "8": "ListboxKeyboard-Klasse in @ngxsmk/cdk/listbox-keyboard extrahiert, die Pfeil-, Home/End-, Enter- und Escape-Navigation vereinheitlicht.",
+          "9": "SearchService in ComponentRegistry zusammengefügt und das doppelte MiniSearch-Index eliminiert.",
+          "10": "NgxThemeInjectorService für CSS-Injektion extrahiert, der die Dunkelmodus-Logik entkoppelt.",
+          "11": "Komponenten-Token-Standardwerte aus css.ts staticVars() in eine COMPONENT_TOKEN_DEFAULTS-Registry extrahiert.",
+          "12": "6 verwaiste Renderer-Tokens und Implementierungen, die CDK-Overlay-Strategie und das ungenutzte base-typeahead-Skelett gelöscht."
+        }
+      },
       "v133": {
         "summary": "Architektur-Vertiefung: CVA-Basisklasse, Listbox-Tastaturnavigation und Aufräumen ungenutzten Codes.",
         "changes": {
@@ -297,8 +343,15 @@
     }
   },
   "roadmap": {
+    "pill": "Roadmap",
     "title": "Roadmap",
     "subtitle": "Ein Vorschau darauf, woran wir arbeiten und was als Nächstes zu NGXSMK kommt.",
+    "statShipped": "Veröffentlicht",
+    "statInProgress": "In Bearbeitung",
+    "statPlanned": "Geplant",
+    "footerTitle": "Haben Sie eine Funktionsanfrage?",
+    "footerSub": "Wir veröffentlichen basierend auf Community-Feedback. Erstellen Sie ein Issue oder starten Sie eine Diskussion auf GitHub.",
+    "footerCta": "Funktion anfragen",
     "quarter": {
       "q3_2026": "Q3 2026",
       "q4_2026": "Q4 2026",
@@ -1297,11 +1350,49 @@
     "ionicActive": "Ionic-Design aktiv"
   },
   "community": {
-    "title": "Community & Beitrag",
-    "subtitle": "Treten Sie unserer wachsenden Community bei, stellen Sie Fragen, schlagen Sie Funktionen vor und teilen Sie, was Sie gebaut haben.",
-    "githubDiscussions": "Kontakt & Feedback",
-    "githubDiscussionsDesc": "Fragen, Ideen oder Fehlerberichte? Kontaktieren Sie den Maintainer direkt — jede Nachricht hilft, das Kit zu verbessern.",
-    "joinDiscussion": "Feedback senden"
+    "pill": "Community",
+    "title": "Built together, ship faster",
+    "subtitle": "Join a growing community of Angular developers. Ask questions, propose features, report bugs, and share what you've built with NGXSMK.",
+    "statOpen": "Open",
+    "statSource": "Source",
+    "statMit": "MIT",
+    "statLicense": "License",
+    "statComponents": "Components",
+    "channelTitle": "How to contribute",
+    "channelSub": "Whether it's a bug report, feature idea, docs improvement, or a pull request — every contribution matters.",
+    "channelGithubTitle": "GitHub Issues",
+    "channelGithubDesc": "Report bugs, request features, or suggest improvements. Every issue is triaged within 48 hours.",
+    "channelGithubCta": "Open an issue",
+    "channelPrTitle": "Pull Requests",
+    "channelPrDesc": "Fork, branch, and open a PR. We follow conventional commits and review within 48 hours.",
+    "channelPrCta": "Start a PR",
+    "channelEmailTitle": "Email the maintainer",
+    "channelEmailDesc": "For private feedback, security disclosures, or partnership inquiries — reach out directly.",
+    "channelEmailCta": "Send an email",
+    "channelDocsTitle": "Documentation",
+    "channelDocsDesc": "Found a typo or unclear guide? Docs PRs are the fastest way to contribute — no code review needed.",
+    "channelDocsCta": "Improve the docs",
+    "guidelinesTitle": "Contribution guidelines",
+    "guidelinesSub": "Follow these conventions to keep the codebase consistent and reviews fast.",
+    "rule1Title": "Conventional commits",
+    "rule1Desc": "Use feat:, fix:, chore:, docs:, or refactor: prefixes. The commitlint hook enforces this automatically.",
+    "rule2Title": "Signal-only APIs",
+    "rule2Desc": "All new inputs must use input() / input.required(). No @Input() decorators. Two-way bindings use model().",
+    "rule3Title": "Standalone components",
+    "rule3Desc": "Every component and directive must be standalone: true. No NgModules in new code.",
+    "rule4Title": "Token-driven styling",
+    "rule4Desc": "Use --ngxsmk-* CSS custom properties. Never hardcode colors, radii, or spacing values.",
+    "rule5Title": "One component per file",
+    "rule5Desc": "Keep components small and focused. Extract shared logic into @ngxsmk/cdk utilities.",
+    "rule6Title": "Run the full pipeline",
+    "rule6Desc": "Before pushing: npm run build, npm test, npm run lint, npm run format. All must pass.",
+    "cocTitle": "Code of Conduct",
+    "cocDesc": "We are committed to providing a welcoming and inclusive experience for everyone. Be respectful, constructive, and assume good intent.",
+    "footerTitle": "Ready to contribute?",
+    "footerSub": "Fork the repo, pick an issue labeled",
+    "footerGoodFirst": "good first issue",
+    "footerSub2": ", and open a pull request. We review within 48 hours.",
+    "footerCta": "Open on GitHub"
   },
   "api": {
     "title": "API-Referenz",

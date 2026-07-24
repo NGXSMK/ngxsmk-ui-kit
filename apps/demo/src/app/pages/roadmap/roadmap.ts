@@ -1,5 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
+import { TranslatePipe } from '@ngx-translate/core';
 import { AppNav } from '../../nav/nav';
 import { NgxsmkButton } from '@ngxsmk/core/button';
 
@@ -25,7 +26,7 @@ const STATUS_META: Record<string, { color: string; bg: string; icon: string }> =
 @Component({
   selector: 'roadmap-page',
   standalone: true,
-  imports: [AppNav, NgxsmkButton],
+  imports: [AppNav, NgxsmkButton, TranslatePipe],
   template: `
     <app-nav />
 
@@ -33,24 +34,23 @@ const STATUS_META: Record<string, { color: string; bg: string; icon: string }> =
       <!-- ═══════════════ HERO ═══════════════ -->
       <header class="rm-hero">
         <div class="rm-hero__inner">
-          <span class="rm-hero__pill">Roadmap</span>
-          <h1 class="rm-hero__title">What we're building next</h1>
+          <span class="rm-hero__pill">{{ 'roadmap.pill' | translate }}</span>
+          <h1 class="rm-hero__title">{{ 'roadmap.title' | translate }}</h1>
           <p class="rm-hero__sub">
-            A living preview of the features, tools, and infrastructure coming to NGXSMK. Milestones
-            are reviewed quarterly.
+            {{ 'roadmap.subtitle' | translate }}
           </p>
           <div class="rm-hero__stats">
             <div class="rm-hero__stat">
               <span class="rm-hero__stat-val" style="color: #22c55e">{{ shippedCount }}</span>
-              <span class="rm-hero__stat-label">Shipped</span>
+              <span class="rm-hero__stat-label">{{ 'roadmap.statShipped' | translate }}</span>
             </div>
             <div class="rm-hero__stat">
               <span class="rm-hero__stat-val" style="color: #f59e0b">{{ inProgressCount }}</span>
-              <span class="rm-hero__stat-label">In Progress</span>
+              <span class="rm-hero__stat-label">{{ 'roadmap.statInProgress' | translate }}</span>
             </div>
             <div class="rm-hero__stat">
               <span class="rm-hero__stat-val" style="color: #7c3aed">{{ plannedCount }}</span>
-              <span class="rm-hero__stat-label">Planned</span>
+              <span class="rm-hero__stat-label">{{ 'roadmap.statPlanned' | translate }}</span>
             </div>
           </div>
         </div>
@@ -93,10 +93,10 @@ const STATUS_META: Record<string, { color: string; bg: string; icon: string }> =
                   {{ STATUS_META[m.status].icon }}
                   {{
                     m.status === 'in-progress'
-                      ? 'In Progress'
+                      ? ('roadmap.status.inProgress' | translate)
                       : m.status === 'shipped'
-                        ? 'Shipped'
-                        : 'Planned'
+                        ? ('roadmap.status.shipped' | translate)
+                        : ('roadmap.status.planned' | translate)
                   }}
                 </span>
               </div>
@@ -148,9 +148,9 @@ const STATUS_META: Record<string, { color: string; bg: string; icon: string }> =
               />
             </svg>
           </div>
-          <h3 class="rm-footer__title">Have a feature request?</h3>
+          <h3 class="rm-footer__title">{{ 'roadmap.footerTitle' | translate }}</h3>
           <p class="rm-footer__sub">
-            We ship based on community feedback. Open an issue or start a discussion on GitHub.
+            {{ 'roadmap.footerSub' | translate }}
           </p>
           <div class="rm-footer__actions">
             <a
@@ -160,7 +160,7 @@ const STATUS_META: Record<string, { color: string; bg: string; icon: string }> =
               target="_blank"
               rel="noopener"
             >
-              Request a feature
+              {{ 'roadmap.footerCta' | translate }}
             </a>
           </div>
         </div>

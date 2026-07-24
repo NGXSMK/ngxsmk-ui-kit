@@ -1,19 +1,20 @@
 import { Component, signal, computed, inject, OnInit } from '@angular/core';
 import { TitleCasePipe } from '@angular/common';
 import { Title, Meta } from '@angular/platform-browser';
+import { TranslatePipe } from '@ngx-translate/core';
 import { AppNav } from '../../nav/nav';
 import { NgxsmkButton } from '@ngxsmk/core/button';
 import { APP_VERSION } from '../../core/version';
 
 interface Change {
   type: 'added' | 'fixed' | 'changed' | 'removed';
-  text: string;
+  i18nKey: string;
 }
 
 interface Release {
   version: string;
   date: string;
-  summary: string;
+  i18nKey: string;
   changes: Change[];
 }
 
@@ -27,7 +28,7 @@ const TYPE_COLORS: Record<string, string> = {
 @Component({
   selector: 'changelog-page',
   standalone: true,
-  imports: [TitleCasePipe, AppNav, NgxsmkButton],
+  imports: [TitleCasePipe, TranslatePipe, AppNav, NgxsmkButton],
   template: `
     <app-nav />
 
@@ -35,25 +36,25 @@ const TYPE_COLORS: Record<string, string> = {
       <!-- ═══════════════ HERO ═══════════════ -->
       <header class="cl-hero">
         <div class="cl-hero__inner">
-          <span class="cl-hero__pill">Changelog</span>
-          <h1 class="cl-hero__title">What's new in NGXSMK</h1>
+          <span class="cl-hero__pill">{{ 'changelog.pill' | translate }}</span>
+          <h1 class="cl-hero__title">{{ 'changelog.title' | translate }}</h1>
           <p class="cl-hero__sub">
-            Every release, every breaking change, every fix — documented here. Currently at
+            {{ 'changelog.subtitle' | translate }}
             <strong>{{ currentVersion }}</strong
             >.
           </p>
           <div class="cl-hero__stats">
             <div class="cl-hero__stat">
               <span class="cl-hero__stat-val">{{ releases.length }}</span>
-              <span class="cl-hero__stat-label">Releases</span>
+              <span class="cl-hero__stat-label">{{ 'changelog.statReleases' | translate }}</span>
             </div>
             <div class="cl-hero__stat">
               <span class="cl-hero__stat-val">{{ totalChanges }}</span>
-              <span class="cl-hero__stat-label">Changes</span>
+              <span class="cl-hero__stat-label">{{ 'changelog.statChanges' | translate }}</span>
             </div>
             <div class="cl-hero__stat">
               <span class="cl-hero__stat-val">Apr '26</span>
-              <span class="cl-hero__stat-label">Since</span>
+              <span class="cl-hero__stat-label">{{ 'changelog.statSince' | translate }}</span>
             </div>
           </div>
         </div>
@@ -66,7 +67,7 @@ const TYPE_COLORS: Record<string, string> = {
           [class.cl-filter--active]="activeFilter() === 'all'"
           (click)="activeFilter.set('all')"
         >
-          All
+          {{ 'changelog.all' | translate }}
         </button>
         @for (t of types; track t) {
           <button
@@ -92,16 +93,16 @@ const TYPE_COLORS: Record<string, string> = {
               <div class="cl-release__version-row">
                 <span class="cl-release__version">{{ release.version }}</span>
                 @if (i === 0) {
-                  <span class="cl-release__latest">Latest</span>
+                  <span class="cl-release__latest">{{ 'changelog.latest' | translate }}</span>
                 }
               </div>
               <time class="cl-release__date">{{ formatDate(release.date) }}</time>
             </div>
 
-            <p class="cl-release__summary">{{ release.summary }}</p>
+            <p class="cl-release__summary">{{ release.i18nKey + '.summary' | translate }}</p>
 
             <ul class="cl-release__changes">
-              @for (change of release.changes; track change.text) {
+              @for (change of release.changes; track change.i18nKey) {
                 <li class="cl-change">
                   <span
                     class="cl-change__type"
@@ -110,7 +111,7 @@ const TYPE_COLORS: Record<string, string> = {
                   >
                     {{ change.type | titlecase }}
                   </span>
-                  <span class="cl-change__text">{{ change.text }}</span>
+                  <span class="cl-change__text">{{ change.i18nKey | translate }}</span>
                 </li>
               }
             </ul>
@@ -129,9 +130,9 @@ const TYPE_COLORS: Record<string, string> = {
               />
             </svg>
           </div>
-          <h3 class="cl-footer__title">Follow along on GitHub</h3>
+          <h3 class="cl-footer__title">{{ 'changelog.footerTitle' | translate }}</h3>
           <p class="cl-footer__sub">
-            Open issues, contribute, or track upcoming releases in the public repository.
+            {{ 'changelog.footerSub' | translate }}
           </p>
           <a
             ngxsmk-button
@@ -490,204 +491,113 @@ export class ChangelogPage implements OnInit {
     {
       version: 'v2.0.0',
       date: '2026-07-24',
-      summary:
-        'Major release: motion.dev animation system, full UI/UX redesign, Tailwind CSS support, and AI-first tooling.',
+      i18nKey: 'changelog.release.v200',
       changes: [
-        {
-          type: 'added',
-          text: 'motion.dev animation system with NgxsmkMotionDirective and NgxsmkAnimateDirective for declarative enter/exit/scroll animations.',
-        },
-        {
-          type: 'added',
-          text: 'Four gesture directives: NgxsmkHoverDirective, NgxsmkFocusDirective, NgxsmkDragDirective, and NgxsmkPressDirective.',
-        },
-        {
-          type: 'added',
-          text: 'Tailwind CSS v3 preset and v4 CSS theme in @ngxsmk/theme for zero-config Tailwind integration.',
-        },
-        {
-          type: 'added',
-          text: 'Component showcase page with sidebar navigation, category grouping, and StackBlitz live playground.',
-        },
-        {
-          type: 'changed',
-          text: 'Complete UI/UX redesign of the demo app: home, docs, themes, blog, and changelog pages.',
-        },
-        {
-          type: 'changed',
-          text: 'Design token replacement across 70+ components for consistent visual language.',
-        },
-        {
-          type: 'removed',
-          text: 'Deprecated @Input/@Output decorators — all APIs are now signal-only.',
-        },
-        {
-          type: 'added',
-          text: 'Extracted CvaBase<T> abstract class into @ngxsmk/cdk/cva-base, eliminating ~80 lines of duplicated ControlValueAccessor boilerplate across 8 form components.',
-        },
-        {
-          type: 'added',
-          text: 'Extracted ListboxKeyboard class into @ngxsmk/cdk/listbox-keyboard, unifying arrow-key, Home/End, Enter, and Escape navigation.',
-        },
-        {
-          type: 'changed',
-          text: 'Merged SearchService into ComponentRegistry, eliminating the double MiniSearch index.',
-        },
-        {
-          type: 'changed',
-          text: 'Extracted NgxThemeInjectorService for CSS injection, decoupling it from dark-mode switching.',
-        },
-        {
-          type: 'changed',
-          text: 'Extracted component token defaults from css.ts staticVars() into a COMPONENT_TOKEN_DEFAULTS registry.',
-        },
-        {
-          type: 'removed',
-          text: 'Deleted 6 orphaned renderer tokens and implementations, the CDK overlay strategy, and the unused base-typeahead skeleton.',
-        },
+        { type: 'added', i18nKey: 'changelog.release.v200.changes.0' },
+        { type: 'added', i18nKey: 'changelog.release.v200.changes.1' },
+        { type: 'added', i18nKey: 'changelog.release.v200.changes.2' },
+        { type: 'added', i18nKey: 'changelog.release.v200.changes.3' },
+        { type: 'changed', i18nKey: 'changelog.release.v200.changes.4' },
+        { type: 'changed', i18nKey: 'changelog.release.v200.changes.5' },
+        { type: 'removed', i18nKey: 'changelog.release.v200.changes.6' },
+        { type: 'added', i18nKey: 'changelog.release.v200.changes.7' },
+        { type: 'added', i18nKey: 'changelog.release.v200.changes.8' },
+        { type: 'changed', i18nKey: 'changelog.release.v200.changes.9' },
+        { type: 'changed', i18nKey: 'changelog.release.v200.changes.10' },
+        { type: 'changed', i18nKey: 'changelog.release.v200.changes.11' },
+        { type: 'removed', i18nKey: 'changelog.release.v200.changes.12' },
       ],
     },
     {
       version: 'v1.3.2',
       date: '2026-07-17',
-      summary: 'AI-friendly tooling: MCP component database, llms.txt, and agent docs.',
+      i18nKey: 'changelog.release.v132',
       changes: [
-        {
-          type: 'added',
-          text: 'The MCP server is now backed by an auto-generated database of all 214 components, powering search, API lookup, and layout tools for AI coding agents.',
-        },
-        {
-          type: 'added',
-          text: 'Generated llms.txt and llms-full.txt API references served at the site root, plus a Claude Code skill for consumer apps.',
-        },
-        {
-          type: 'added',
-          text: 'AGENTS.md and CLAUDE.md guidance for AI coding agents working in the repository.',
-        },
+        { type: 'added', i18nKey: 'changelog.release.v132.changes.0' },
+        { type: 'added', i18nKey: 'changelog.release.v132.changes.1' },
+        { type: 'added', i18nKey: 'changelog.release.v132.changes.2' },
       ],
     },
     {
       version: 'v1.3.1',
       date: '2026-07-16',
-      summary: 'Keyboard navigation, unified focus rings, and dark-mode fixes.',
+      i18nKey: 'changelog.release.v131',
       changes: [
-        {
-          type: 'added',
-          text: 'Keyboard navigation for autocomplete, combobox, multi-select, and multi-selector.',
-        },
-        {
-          type: 'changed',
-          text: 'Every component now draws its focus ring from the --ngxsmk-focus-ring token.',
-        },
-        {
-          type: 'fixed',
-          text: 'prefers-reduced-motion now stops all token-driven motion, not just the shared motion duration.',
-        },
-        {
-          type: 'fixed',
-          text: 'Fixed dark-mode colors in 14 components that fell back to light-only values.',
-        },
+        { type: 'added', i18nKey: 'changelog.release.v131.changes.0' },
+        { type: 'changed', i18nKey: 'changelog.release.v131.changes.1' },
+        { type: 'fixed', i18nKey: 'changelog.release.v131.changes.2' },
+        { type: 'fixed', i18nKey: 'changelog.release.v131.changes.3' },
       ],
     },
     {
       version: 'v1.3.0',
       date: '2026-07-16',
-      summary: 'SEO utilities, emerald default preset, and documentation improvements.',
+      i18nKey: 'changelog.release.v130',
       changes: [
-        {
-          type: 'added',
-          text: 'SEO service: @ngxsmk/core/seo with NgxsmkSeoService and provideSeo() for title, description, canonical, Open Graph, Twitter Card, and JSON-LD.',
-        },
-        {
-          type: 'changed',
-          text: 'emerald is now the default preset; the astryx preset was removed.',
-        },
-        {
-          type: 'changed',
-          text: 'Richer package READMEs and top-level docs with a component catalog, CLI & schematics, and accessibility guidance.',
-        },
+        { type: 'added', i18nKey: 'changelog.release.v130.changes.0' },
+        { type: 'changed', i18nKey: 'changelog.release.v130.changes.1' },
+        { type: 'changed', i18nKey: 'changelog.release.v130.changes.2' },
       ],
     },
     {
       version: 'v1.2.0',
       date: '2026-07-15',
-      summary: 'Partial-Ivy build fix (resolves NG0203) and expanded component surface.',
+      i18nKey: 'changelog.release.v120',
       changes: [
-        {
-          type: 'fixed',
-          text: 'Libraries now compile in partial Ivy mode so DI factories run inside the injection context (NG0203).',
-        },
-        {
-          type: 'added',
-          text: 'Select family: @ngxsmk/core/select, multi-select, selector, multi-selector.',
-        },
-        { type: 'added', text: 'Structural directives @ngxsmk/core/let and @ngxsmk/core/rx-let.' },
-        {
-          type: 'added',
-          text: 'i18n entry point with NgxsmkI18nPipe, createI18n, provideI18n, useDirection.',
-        },
+        { type: 'fixed', i18nKey: 'changelog.release.v120.changes.0' },
+        { type: 'added', i18nKey: 'changelog.release.v120.changes.1' },
+        { type: 'added', i18nKey: 'changelog.release.v120.changes.2' },
+        { type: 'added', i18nKey: 'changelog.release.v120.changes.3' },
       ],
     },
     {
       version: 'v1.1.0',
       date: '2026-07-15',
-      summary: 'Stable release with updated toolchain, command palette, and prompt carousel.',
+      i18nKey: 'changelog.release.v110',
       changes: [
-        {
-          type: 'added',
-          text: 'Command palette component (@ngxsmk/core/command-palette) for quick search and actions.',
-        },
-        {
-          type: 'added',
-          text: 'Prompt carousel component (@ngxsmk/core/prompt-carousel) for AI-focused templates.',
-        },
-        { type: 'changed', text: 'Standardized workspace configuration and builder options.' },
-        { type: 'changed', text: 'Verified Angular compatibility across versions 17 through 22.' },
+        { type: 'added', i18nKey: 'changelog.release.v110.changes.0' },
+        { type: 'added', i18nKey: 'changelog.release.v110.changes.1' },
+        { type: 'changed', i18nKey: 'changelog.release.v110.changes.2' },
+        { type: 'changed', i18nKey: 'changelog.release.v110.changes.3' },
       ],
     },
     {
       version: 'v1.0.0',
       date: '2026-07-15',
-      summary: 'First stable release of the NGXSMK ecosystem.',
+      i18nKey: 'changelog.release.v100',
       changes: [
-        { type: 'added', text: '@ngxsmk/core, @ngxsmk/cdk, and @ngxsmk/theme published at 1.0.0.' },
-        {
-          type: 'added',
-          text: 'Angular 17.3+ support verified across 17, 18, 19, 20, 21, and 22.',
-        },
-        { type: 'added', text: '200+ components across forms, AI, enterprise, charts, and more.' },
-        { type: 'added', text: 'Universal token engine with runtime theme switching.' },
-        {
-          type: 'changed',
-          text: 'Peer dependencies widened to >=17.3.0 (was pinned to Angular 22).',
-        },
+        { type: 'added', i18nKey: 'changelog.release.v100.changes.0' },
+        { type: 'added', i18nKey: 'changelog.release.v100.changes.1' },
+        { type: 'added', i18nKey: 'changelog.release.v100.changes.2' },
+        { type: 'added', i18nKey: 'changelog.release.v100.changes.3' },
+        { type: 'changed', i18nKey: 'changelog.release.v100.changes.4' },
       ],
     },
     {
       version: 'v0.0.0-beta.1',
       date: '2026-07-13',
-      summary: 'Initial beta release of the NGXSMK ecosystem.',
+      i18nKey: 'changelog.release.v0beta1',
       changes: [
-        { type: 'added', text: '@ngxsmk/core, @ngxsmk/cdk, and @ngxsmk/theme packages.' },
-        { type: 'added', text: '200+ components across forms, AI, enterprise, charts, and more.' },
-        { type: 'added', text: 'Universal token engine with runtime theme switching.' },
-        { type: 'fixed', text: 'Zoneless change detection compatibility.' },
+        { type: 'added', i18nKey: 'changelog.release.v0beta1.changes.0' },
+        { type: 'added', i18nKey: 'changelog.release.v0beta1.changes.1' },
+        { type: 'added', i18nKey: 'changelog.release.v0beta1.changes.2' },
+        { type: 'fixed', i18nKey: 'changelog.release.v0beta1.changes.3' },
       ],
     },
     {
       version: 'v0.0.0-alpha.3',
       date: '2026-06-02',
-      summary: 'Preview of the showcase application and documentation site.',
+      i18nKey: 'changelog.release.v0alpha3',
       changes: [
-        { type: 'added', text: 'Interactive component explorer.' },
-        { type: 'changed', text: 'Migrated all components to signal inputs.' },
+        { type: 'added', i18nKey: 'changelog.release.v0alpha3.changes.0' },
+        { type: 'changed', i18nKey: 'changelog.release.v0alpha3.changes.1' },
       ],
     },
     {
       version: 'v0.0.0-alpha.1',
       date: '2026-04-15',
-      summary: 'First internal alpha of the core component library.',
-      changes: [{ type: 'added', text: 'Foundational primitives: button, card, input, dialog.' }],
+      i18nKey: 'changelog.release.v0alpha1',
+      changes: [{ type: 'added', i18nKey: 'changelog.release.v0alpha1.changes.0' }],
     },
   ];
 

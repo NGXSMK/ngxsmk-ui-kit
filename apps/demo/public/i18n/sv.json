@@ -172,8 +172,18 @@
     "teamDesign": "Design"
   },
   "blog": {
-    "title": "Blogg",
-    "subtitle": "Senaste nyheter, artiklar och skriverier från NGXSMK-teamet.",
+    "pill": "Blogg",
+    "title": "Senaste från NGXSMK",
+    "subtitle": "Tekniska djupdyk, releaseannonseringar och guider för att bygga produktionsklara UI med signalnativa Angular-komponenter.",
+    "statArticles": "Artiklar",
+    "statTopics": "Ämnen",
+    "statCadence": "Frekvens",
+    "featured": "Utvalt",
+    "all": "Alla",
+    "newsletter": "Håll dig uppdaterad",
+    "newsletterSub": "Få de senaste NGXSMK-uppdateringarna, guiderna och community-höjdpunkterna direkt i din inkorg.",
+    "subscribe": "Prenumerera",
+    "topicsTitle": "Ämnen",
     "readArticle": "Läs artikel",
     "tag": {
       "announcement": "Meddelande",
@@ -198,9 +208,27 @@
       }
     }
   },
+  "blogPost": {
+    "backToBlog": "Tillbaka till bloggen",
+    "quickStart": "Snabbstart",
+    "copyLink": "Kopiera länk",
+    "copied": "✓ Kopierad",
+    "moreArticles": "Fler artiklar",
+    "postNotFound": "Artikeln hittades inte",
+    "postNotFoundDesc": "Artikeln du söker finns inte.",
+    "ngxsmkTeam": "NGXSMK-teamet"
+  },
   "changelog": {
+    "pill": "Ändringslogg",
     "title": "Ändringslogg",
     "subtitle": "Håll koll på ändringar, buggfixar, uppdateringar och versioner av NGXSMK.",
+    "statReleases": "Releaser",
+    "statChanges": "Ändringar",
+    "statSince": "Sedan",
+    "all": "Alla",
+    "latest": "Senaste",
+    "footerTitle": "Följ oss på GitHub",
+    "footerSub": "Öppna issues, bidra eller spåra kommande releaser i det publika repositoriet.",
     "type": {
       "added": "tillagt",
       "fixed": "åtgärdat",
@@ -208,6 +236,24 @@
       "removed": "borttaget"
     },
     "release": {
+      "v200": {
+        "summary": "Stor release: motion.dev-animationssystem, komplett UI/UX-omdesign, Tailwind CSS-stöd och AI-först-verktyg.",
+        "changes": {
+          "0": "motion.dev-animationssystem med NgxsmkMotionDirective och NgxsmkAnimateDirective för deklarativa enter/exit/scroll-animationer.",
+          "1": "Fyra gestdirektiv: NgxsmkHoverDirective, NgxsmkFocusDirective, NgxsmkDragDirective och NgxsmkPressDirective.",
+          "2": "Tailwind CSS v3-preset och v4 CSS-tema för nollkonfigurations-Tillwind-integration.",
+          "3": "Komponent-showcase-sida med sidofältsnavigering, kategorigruppering och StackBlitz-liveplayground.",
+          "4": "Komplett UI/UX-omdesign av demo-appen: startsida, dokumentation, teman, blogg och ändringslogg.",
+          "5": "Designtokenutbyte i 70+ komponenter för konsekvent visuellt språk.",
+          "6": "Föråldrade @Input/@Output-dekoratörer — alla API:er är nu enbart signalbaserade.",
+          "7": "Abstrakta CvaBase<T>-klassen extraherad till @ngxsmk/cdk/cva-base, eliminerar ~80 rader duplicerad ControlValueAccessor-boilerplate i 8 formulärkomponenter.",
+          "8": "ListboxKeyboard-klassen extraherad till @ngxsmk/cdk/listbox-keyboard, enhetlig pil-, Home/End-, Enter- och Escape-navigering.",
+          "9": "SearchService sammanfogad till ComponentRegistry, eliminerar dubbla MiniSearch-indexet.",
+          "10": "NgxThemeInjectorService extraherad för CSS-injektion, kopplar från mörkerlägesbyte.",
+          "11": "Komponent-token-standardvärden extraherade från css.ts staticVars() till en COMPONENT_TOKEN_DEFAULTS-registret.",
+          "12": "6 övergivna rendertoken och implementationer, CDK-overlaystrategin och oanvända base-typeahead-skelettet borttagna."
+        }
+      },
       "v133": {
         "summary": "Djupare arkitektur: CVA-basklass, tangentbordsnavigering för listbox och rensning av död kod.",
         "changes": {
@@ -297,8 +343,15 @@
     }
   },
   "roadmap": {
+    "pill": "Vägkarta",
     "title": "Färdplan",
     "subtitle": "En förhandsvisning av vad vi arbetar med och vad som kommer härnäst till NGXSMK.",
+    "statShipped": "Utgivet",
+    "statInProgress": "Pågående",
+    "statPlanned": "Planerat",
+    "footerTitle": "Har du en funktionsbegäran?",
+    "footerSub": "Vi utvecklar baserat på communityfeedback. Öppna en issue eller starta en diskussion på GitHub.",
+    "footerCta": "Begär en funktion",
     "quarter": {
       "q3_2026": "Q3 2026",
       "q4_2026": "Q4 2026",
