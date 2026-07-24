@@ -48,7 +48,7 @@ import { ChangeDetectionStrategy, Component, computed, input, model, signal } fr
           </li>
           <li [class.ngxsmk-pass-meter__req--valid]="reqs().special">
             <span class="ngxsmk-pass-meter__icon">{{ reqs().special ? '✓' : '•' }}</span>
-            Special character (!@#$)
+            Special character (!&#64;#$)
           </li>
         </ul>
       }
