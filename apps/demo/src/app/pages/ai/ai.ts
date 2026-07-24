@@ -1,7 +1,6 @@
 import { NgxsmkChatWindow } from '@ngxsmk/core/chat-window';
 import { NgxsmkChatInput } from '@ngxsmk/core/chat-input';
 import { NgxsmkChatLayout } from '@ngxsmk/core/chat-layout';
-import { NgxsmkChatLayoutScrollButton } from '@ngxsmk/core/chat-layout-scroll-button';
 import { NgxsmkChatMessage, type ChatMessageData } from '@ngxsmk/core/chat-message';
 import { NgxsmkChatMessageBubble } from '@ngxsmk/core/chat-message-bubble';
 import { NgxsmkChatMessageMetadata } from '@ngxsmk/core/chat-message-metadata';
@@ -39,7 +38,6 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     NgxsmkChatWindow,
     NgxsmkChatInput,
     NgxsmkChatLayout,
-    NgxsmkChatLayoutScrollButton,
     NgxsmkChatMessage,
     NgxsmkChatMessageBubble,
     NgxsmkChatMessageMetadata,
