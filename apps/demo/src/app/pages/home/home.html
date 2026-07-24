@@ -1,32 +1,43 @@
 <app-nav />
 
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareSourceCode",
+    "name": "NGXSMK",
+    "description": "Signal-native, zoneless Angular component library with 150+ standalone components and a universal design-token engine.",
+    "url": "https://ngxsmk.github.io/ngxsmk-ui-kit",
+    "programmingLanguage": "TypeScript",
+    "runtimePlatform": "Angular",
+    "license": "https://opensource.org/licenses/MIT",
+    "codeRepository": "https://github.com/NGXSMK/ngxsmk-ui-kit",
+    "keywords": ["angular", "components", "signals", "zoneless", "design-system", "ui-kit"]
+  }
+</script>
+
 <main class="home">
-  <!-- ============ HERO ============ -->
+  <!-- ═══════════════ HERO ═══════════════ -->
   <section class="hero">
     <div class="hero__bg" aria-hidden="true"></div>
-
     <div class="hero__inner">
       <span class="hero__badge" [ngxsmkAnimate]="motionHero">
         <span class="hero__badge-dot" aria-hidden="true"></span>
-        {{ appVersion }} · {{ 'home.badgeTag' | translate }}
+        v{{ appVersion }} · Signals-native · Zoneless
       </span>
 
       <h1 class="hero__title" [ngxsmkAnimate]="motionTitle">
-        {{ 'home.heroTitle' | translate }}<br />
-        Angular <span class="hero__grad">{{ 'home.heroDeserves' | translate }}</span>
+        The UI kit<br />
+        Angular <span class="hero__grad">deserves.</span>
       </h1>
 
       <p class="hero__lede" [ngxsmkAnimate]="motionTitle">
-        {{ 'home.heroLede' | translate }}
+        150+ signal-native components. Zero runtime dependencies. One universal token engine.
+        Copy-paste scaffolding, AI-first tooling, and enterprise widgets — all MIT licensed.
       </p>
 
       <div class="hero__cta" [ngxsmkAnimate]="motionCta">
-        <a ngxsmk-button size="lg" routerLink="/showcase/explorer"
-          >{{ 'nav.getStarted' | translate }} →</a
-        >
-        <a ngxsmk-button size="lg" variant="outline" routerLink="/templates">{{
-          'home.browseTemplates' | translate
-        }}</a>
+        <a ngxsmk-button size="lg" routerLink="/showcase/explorer"> Get Started → </a>
+        <a ngxsmk-button size="lg" variant="outline" routerLink="/docs"> Documentation </a>
       </div>
 
       <button
@@ -39,7 +50,7 @@
         <span class="hero__install-prompt" aria-hidden="true">$</span>
         <code>{{ installCommand }}</code>
         <span class="hero__install-copy">
-          {{ copied() ? ('home.copied' | translate) : ('home.copy' | translate) }}
+          {{ copied() ? '✓ Copied' : 'Copy' }}
         </span>
       </button>
     </div>
@@ -47,39 +58,143 @@
     <div class="hero__stats">
       @for (stat of stats; track stat.label) {
         <div class="hero__stat">
-          <span class="hero__stat-value">{{ stat.value }}</span>
-          <span class="hero__stat-label">{{ stat.label | translate }}</span>
+          <span class="hero__stat-value" [style.color]="stat.accent">{{ stat.value }}</span>
+          <span class="hero__stat-label">{{ stat.label }}</span>
         </div>
       }
     </div>
   </section>
 
-  <!-- ============ FEATURES ============ -->
+  <!-- ═══════════════ BENTO FEATURES ═══════════════ -->
   <section class="section" id="features">
     <header class="section__head">
-      <p class="section__eyebrow">{{ 'home.whyEyebrow' | translate }}</p>
-      <h2 class="section__title">
-        {{ 'home.everythingTitle' | translate }}<br />{{ 'home.nothingTitle' | translate }}
-      </h2>
+      <p class="section__eyebrow">Why NGXSMK</p>
+      <h2 class="section__title">Everything you need.<br />Nothing you don't.</h2>
     </header>
 
-    <div class="features">
-      @for (feature of features; track feature.title) {
-        <article class="feature">
-          <span class="feature__icon" aria-hidden="true">{{ feature.icon }}</span>
-          <h3 class="feature__title">{{ feature.title | translate }}</h3>
-          <p class="feature__desc">{{ feature.description | translate }}</p>
+    <div class="bento">
+      @for (card of bentoCards; track card.title) {
+        <article
+          class="bento__card"
+          [class.bento__card--wide]="card.span === 'wide'"
+          [class.bento__card--tall]="card.span === 'tall'"
+          [class.bento__card--full]="card.span === 'full'"
+          [style.--bento-accent]="card.accent"
+        >
+          <span class="bento__icon" aria-hidden="true">{{ card.icon }}</span>
+          <h3 class="bento__title">{{ card.title | translate }}</h3>
+          <p class="bento__desc">{{ card.desc | translate }}</p>
         </article>
       }
     </div>
   </section>
 
-  <!-- ============ COMPONENT EXPLORER ============ -->
+  <!-- ═══════════════ CODE SHOWCASE ═══════════════ -->
+  <section class="section section--tint" id="code">
+    <header class="section__head">
+      <p class="section__eyebrow">Developer Experience</p>
+      <h2 class="section__title">Copy. Paste. Ship.</h2>
+      <p class="section__sub">
+        Every component is a standalone Angular import. Signal inputs, token-driven styling, and
+        zero boilerplate. Copy any example directly into your template.
+      </p>
+    </header>
+
+    <div class="code-showcase">
+      <div class="code-showcase__terminal">
+        <div class="code-showcase__head">
+          <div class="code-showcase__dots"><i></i><i></i><i></i></div>
+          <span class="code-showcase__label">app.component.html</span>
+        </div>
+        <pre class="code-showcase__code"><code>{{ codeExample }}</code></pre>
+      </div>
+
+      <div class="code-showcase__features">
+        <h3 class="code-showcase__feat-title">Built for Angular Developers</h3>
+        @for (feat of techFeatures; track feat.label) {
+          <div class="code-showcase__feat">
+            <span class="code-showcase__feat-label">{{ feat.label }}</span>
+            <span class="code-showcase__feat-desc">{{ feat.desc }}</span>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ TECH SPECS ═══════════════ -->
+  <section class="section" id="tech">
+    <header class="section__head">
+      <p class="section__eyebrow">Architecture</p>
+      <h2 class="section__title">Three Layers. One Token Engine.</h2>
+      <p class="section__sub">
+        The CDK is pure TypeScript. Core adds the Angular shell. Theme provides the design-token
+        engine that powers everything.
+      </p>
+    </header>
+
+    <div class="arch-layers">
+      <div class="arch-layer arch-layer--cdk">
+        <span class="arch-layer__tag">CDK</span>
+        <h3 class="arch-layer__name">Behavior Primitives</h3>
+        <p class="arch-layer__desc">
+          Pure TypeScript. CVA base, form models, focus management, keyboard navigation, and
+          animation helpers — no Angular dependency.
+        </p>
+        <code class="arch-layer__pkg">@ngxsmk/cdk</code>
+      </div>
+
+      <div class="arch-connector" aria-hidden="true">
+        <svg viewBox="0 0 24 32" fill="none" width="24" height="32">
+          <path
+            d="M12 0v32M5 25l7 7 7-7"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </div>
+
+      <div class="arch-layer arch-layer--core">
+        <span class="arch-layer__tag">Core</span>
+        <h3 class="arch-layer__name">Angular Components</h3>
+        <p class="arch-layer__desc">
+          150+ standalone components. Signal inputs, template outlets via InjectionTokens,
+          token-driven styling, and optional motion.dev integration.
+        </p>
+        <code class="arch-layer__pkg">@ngxsmk/core/*</code>
+      </div>
+
+      <div class="arch-connector" aria-hidden="true">
+        <svg viewBox="0 0 24 32" fill="none" width="24" height="32">
+          <path
+            d="M12 0v32M5 25l7 7 7-7"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </div>
+
+      <div class="arch-layer arch-layer--theme">
+        <span class="arch-layer__tag">Theme</span>
+        <h3 class="arch-layer__name">Design-Token Engine</h3>
+        <p class="arch-layer__desc">
+          HSL coordinates → CSS custom properties. Supports vanilla CSS, SCSS, Tailwind v3 preset,
+          v4 theme, and Ionic adapter. Dark mode via <code>.dark</code> class.
+        </p>
+        <code class="arch-layer__pkg">@ngxsmk/theme</code>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ COMPONENT EXPLORER ═══════════════ -->
   <section class="section section--tint" id="showcase">
     <header class="section__head">
-      <p class="section__eyebrow">{{ 'home.explorerEyebrow' | translate }}</p>
-      <h2 class="section__title">{{ 'home.exploreTitle' | translate }}</h2>
-      <p class="section__sub">{{ 'home.exploreSub' | translate }}</p>
+      <p class="section__eyebrow">Interactive Explorer</p>
+      <h2 class="section__title">Explore all 150+ components</h2>
+      <p class="section__sub">Search across every native component, directive, and custom hook.</p>
       <div class="explorer__search">
         <svg
           class="explorer__search-icon"
@@ -98,31 +213,33 @@
         <input
           class="explorer__search-input"
           type="text"
-          [placeholder]="'search.placeholder' | translate"
+          placeholder="Search components..."
           [ngModel]="searchQuery()"
           (ngModelChange)="searchQuery.set($event)"
         />
       </div>
     </header>
 
-    <div class="explorer__grid">
+    <div class="cat-grid">
       @for (cat of filteredCategories(); track cat.title) {
-        <div
-          class="explorer__cat"
+        <article
+          class="cat-card"
           tabindex="0"
           role="button"
           (click)="navigateCat(cat.path)"
           (keydown.enter)="navigateCat(cat.path)"
           (keydown.space)="navigateCat(cat.path); $event.preventDefault()"
+          [style.--cat-color]="cat.color"
         >
-          <h3 class="explorer__cat-title">
-            {{ cat.title | translate }}
-            <span class="explorer__cat-count">{{ cat.items.length }}</span>
-          </h3>
-          <div class="explorer__items">
+          <div class="cat-card__head">
+            <span class="cat-card__icon">{{ cat.icon }}</span>
+            <span class="cat-card__count">{{ cat.count }}</span>
+          </div>
+          <h3 class="cat-card__title">{{ cat.title }}</h3>
+          <div class="cat-card__items">
             @for (item of cat.items; track item) {
               <a
-                class="explorer__item"
+                class="cat-card__item"
                 [routerLink]="['/showcase', cat.path]"
                 [fragment]="getItemFragment(item)"
                 (click)="$event.stopPropagation()"
@@ -131,56 +248,29 @@
               </a>
             }
           </div>
-          <span class="explorer__cat-cta"
-            >{{ 'home.openCategory' | translate }} {{ cat.title | translate }} →</span
-          >
-        </div>
+          <span class="cat-card__cta">View all →</span>
+        </article>
       }
     </div>
     @if (filteredCategories().length === 0) {
       <div class="explorer__empty">
-        <p>{{ 'search.empty' | translate: { query: searchQuery() } }}</p>
+        <p>No components match "{{ searchQuery() }}".</p>
       </div>
     }
   </section>
 
-  <!-- ============ TEMPLATES ============ -->
-  <section class="section" id="templates">
-    <header class="section__head">
-      <p class="section__eyebrow">{{ 'home.templatesEyebrow' | translate }}</p>
-      <h2 class="section__title">{{ 'home.templatesTitle' | translate }}</h2>
-      <p class="section__sub">{{ 'home.templatesSub' | translate }}</p>
-    </header>
-
-    <div class="templates">
-      @for (template of templates; track template.name) {
-        <article class="template">
-          <div class="template__thumb" aria-hidden="true">{{ template.glyph }}</div>
-          <h3 class="template__title">{{ template.name | translate }}</h3>
-          <p class="template__desc">{{ template.description | translate }}</p>
-          <div class="template__badges">
-            @for (badge of template.badges; track badge) {
-              <ngxsmk-tag>{{ badge | translate }}</ngxsmk-tag>
-            }
-          </div>
-        </article>
-      }
-    </div>
-  </section>
-
-  <!-- ============ FINAL CTA ============ -->
+  <!-- ═══════════════ FINAL CTA ═══════════════ -->
   <section class="cta">
     <div class="cta__glow" aria-hidden="true"></div>
     <div class="cta__inner">
-      <h2 class="cta__title">{{ 'home.ctaTitle' | translate }}</h2>
-      <p class="cta__sub">{{ 'home.ctaSub' | translate }}</p>
+      <h2 class="cta__title">Build the thing.</h2>
+      <p class="cta__sub">
+        Browse 150+ components, clone a production template, and tune a theme to match your brand.
+        All free, all MIT-licensed.
+      </p>
       <div class="hero__cta hero__cta--center">
-        <a ngxsmk-button size="lg" routerLink="/showcase/explorer"
-          >{{ 'nav.getStarted' | translate }} →</a
-        >
-        <a ngxsmk-button size="lg" variant="outline" routerLink="/showcase/explorer">{{
-          'home.browseComponents' | translate
-        }}</a>
+        <a ngxsmk-button size="lg" routerLink="/showcase/explorer"> Get Started → </a>
+        <a ngxsmk-button size="lg" variant="outline" routerLink="/docs"> Documentation </a>
       </div>
     </div>
   </section>
@@ -193,47 +283,34 @@
         <img class="footer__logo" src="favicon.svg" alt="" aria-hidden="true" />
         <span class="footer__wordmark">NGXSMK</span>
       </a>
-      <p class="footer__tagline">{{ 'home.tagline' | translate }}</p>
+      <p class="footer__tagline">The UI kit that Angular deserves.</p>
     </div>
 
     <div class="footer__col">
-      <h4 class="footer__heading">{{ 'home.footerDocs' | translate }}</h4>
-      <a routerLink="/docs">{{ 'home.footerGettingStarted' | translate }}</a>
-      <a routerLink="/showcase/explorer">{{ 'nav.components' | translate }}</a>
-      <a routerLink="/templates">{{ 'nav.templates' | translate }}</a>
-      <a routerLink="/themes">{{ 'nav.themes' | translate }}</a>
+      <h4 class="footer__heading">Docs</h4>
+      <a routerLink="/docs">Getting started</a>
+      <a routerLink="/showcase/explorer">Components</a>
+      <a routerLink="/templates">Templates</a>
+      <a routerLink="/themes">Themes</a>
     </div>
     <div class="footer__col">
-      <h4 class="footer__heading">{{ 'home.footerResources' | translate }}</h4>
-      <a routerLink="/blog">{{ 'home.footerBlog' | translate }}</a>
-      <a routerLink="/changelog">{{ 'home.footerChangelog' | translate }}</a>
-      <a routerLink="/roadmap">{{ 'home.footerRoadmap' | translate }}</a>
-      <a routerLink="/community">{{ 'home.footerCommunity' | translate }}</a>
+      <h4 class="footer__heading">Resources</h4>
+      <a routerLink="/blog">Blog</a>
+      <a routerLink="/changelog">Changelog</a>
+      <a routerLink="/roadmap">Roadmap</a>
+      <a routerLink="/community">Community</a>
     </div>
     <div class="footer__col">
-      <h4 class="footer__heading">{{ 'home.footerConnect' | translate }}</h4>
-      <a href="https://github.com/NGXSMK/ngxsmk-ui-kit" target="_blank">{{
-        'nav.github' | translate
-      }}</a>
+      <h4 class="footer__heading">Connect</h4>
+      <a href="https://github.com/NGXSMK/ngxsmk-ui-kit" target="_blank">GitHub</a>
+      <a href="https://www.npmjs.com/org/ngxsmk" target="_blank">npm</a>
     </div>
   </div>
 
   <div class="footer__bar">
-    <span>{{ 'home.copyright' | translate }}</span>
+    <span>© 2026 NGXSMK · MIT License</span>
     <span class="footer__built">Built with @ngxsmk/core, @ngxsmk/cdk &amp; @ngxsmk/theme</span>
   </div>
 </footer>
-
-<ngxsmk-dialog [(open)]="dialogOpen" [title]="'home.deleteTitle' | translate">
-  {{ 'home.deleteBody' | translate }}
-  <div ngxsmkDialogFooter>
-    <button ngxsmk-button variant="outline" (click)="dialogOpen.set(false)">
-      {{ 'home.cancel' | translate }}
-    </button>
-    <button ngxsmk-button variant="destructive" (click)="confirmDialog()">
-      {{ 'forms.delete' | translate }}
-    </button>
-  </div>
-</ngxsmk-dialog>
 
 <ngxsmk-toaster />

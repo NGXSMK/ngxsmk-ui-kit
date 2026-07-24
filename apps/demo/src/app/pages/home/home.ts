@@ -1,38 +1,36 @@
 import { NgxsmkButton } from '@ngxsmk/core/button';
-import { NgxsmkDialog, NgxsmkDialogFooter } from '@ngxsmk/core/dialog';
-import { NgxsmkTag } from '@ngxsmk/core/tag';
 import { NgxsmkToast, NgxsmkToaster } from '@ngxsmk/core/toast';
-import { Component, inject, signal, computed } from '@angular/core';
+import { Component, inject, signal, computed, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Router, RouterLink } from '@angular/router';
+import { Title, Meta } from '@angular/platform-browser';
 import { AppNav } from '../../nav/nav';
 import { NgxsmkAnimate } from '@ngxsmk/core/animation';
 import { NgxsmkThemeService } from '@ngxsmk/theme';
 import { APP_VERSION } from '../../core/version';
 
-interface Feature {
+interface BentoCard {
   icon: string;
   title: string;
-  description: string;
+  desc: string;
+  span?: 'wide' | 'tall' | 'full';
+  accent?: string;
 }
 
 interface Stat {
   value: string;
   label: string;
+  accent?: string;
 }
 
-interface Template {
-  name: string;
-  description: string;
-  badges: string[];
-  glyph: string;
-}
-
-interface ComponentCategory {
+interface CategoryGroup {
   title: string;
+  icon: string;
   path: string;
+  count: number;
   items: string[];
+  color: string;
 }
 
 @Component({
@@ -44,20 +42,19 @@ interface ComponentCategory {
     RouterLink,
     AppNav,
     NgxsmkButton,
-    NgxsmkDialog,
-    NgxsmkDialogFooter,
-    NgxsmkTag,
     NgxsmkToaster,
     NgxsmkAnimate,
   ],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
-export class HomePage {
+export class HomePage implements OnInit {
   protected readonly appVersion = APP_VERSION;
   protected readonly theme = inject(NgxsmkThemeService);
   private readonly toast = inject(NgxsmkToast);
   private readonly router = inject(Router);
+  private readonly title = inject(Title);
+  private readonly meta = inject(Meta);
 
   protected readonly installCommand = 'npm install @ngxsmk/core @ngxsmk/theme';
   protected readonly searchQuery = signal('');
@@ -80,313 +77,28 @@ export class HomePage {
     transition: { duration: 0.4, delay: 0.25, easing: 'ease-out' },
   };
 
-  protected getItemFragment(item: string): string {
-    return item
-      .toLowerCase()
-      .trim()
-      .replace(/[^a-z0-9]+/g, '-');
-  }
+  ngOnInit(): void {
+    this.title.setTitle('NGXSMK — Signal-Native Angular UI Kit | 150+ Components');
+    this.meta.updateTag({
+      name: 'description',
+      content:
+        'NGXSMK is a signal-native, zoneless Angular component library with 150+ standalone components, a universal design-token engine, and AI-first tooling. MIT licensed, zero runtime dependencies.',
+    });
+    this.meta.updateTag({
+      property: 'og:title',
+      content: 'NGXSMK — Signal-Native Angular UI Kit | 150+ Components',
+    });
+    this.meta.updateTag({
+      property: 'og:description',
+      content:
+        'Signal-native, zoneless Angular components with a universal token engine. Copy-paste scaffolding, AI tooling, and enterprise widgets — all MIT licensed.',
+    });
+    this.meta.updateTag({
+      name: 'keywords',
+      content:
+        'Angular UI kit, Angular components, signal components, zoneless Angular, design system, Angular 19, Angular 20, standalone components, token engine, MIT, AI components, enterprise widgets',
+    });
 
-  protected navigateCat(path: string): void {
-    this.router.navigate(['/showcase', path]);
-  }
-
-  protected readonly categories: ComponentCategory[] = [
-    {
-      title: 'category.forms',
-      path: 'forms',
-      items: [
-        'Button',
-        'Button Group',
-        'Toggle Button',
-        'Toggle Button Group',
-        'Input',
-        'Checkbox',
-        'Checkbox List',
-        'Radio',
-        'Switch',
-        'Textarea',
-        'Number Input',
-        'Select',
-        'Multi Select',
-        'Autocomplete',
-        'Combobox',
-        'Typeahead',
-        'Power Search',
-        'Slider',
-        'Date Picker',
-        'Segmented Control',
-        'Selector',
-        'Multi Selector',
-        'Tokenizer',
-        'Input Group',
-        'Field',
-        'Form Field',
-      ],
-    },
-    {
-      title: 'category.ai',
-      path: 'ai',
-      items: [
-        'Agent Card',
-        'Chat Window',
-        'Chat Input',
-        'Chat Layout',
-        'Chat Send Button',
-        'Chat Dictation Button',
-        'Chat Tokens',
-        'Conversation List',
-        'Composer Drawer',
-        'Streaming Text',
-        'Markdown Viewer',
-        'Code Block',
-        'Diff Viewer',
-        'Citation Viewer',
-        'Tool Call Viewer',
-        'Reasoning Timeline',
-        'Memory Viewer',
-        'Voice Input',
-        'Audio Player',
-        'Image Viewer',
-      ],
-    },
-    {
-      title: 'category.enterprise',
-      path: 'enterprise',
-      items: [
-        'Kanban Board',
-        'Scheduler',
-        'Timeline Gantt',
-        'Workflow Builder',
-        'Rule Builder',
-        'Spreadsheet',
-        'Pivot Table',
-        'Diagram Builder',
-        'Flow Editor',
-        'JSON Viewer',
-        'Terminal',
-        'Org Chart',
-        'Query Builder',
-      ],
-    },
-    {
-      title: 'category.content-typography',
-      path: 'content-typography',
-      items: [
-        'Heading',
-        'Text',
-        'Blockquote',
-        'Code',
-        'Kbd',
-        'Link',
-        'Thumbnail',
-        'Timestamp',
-        'Token',
-        'Citation',
-        'Markdown',
-      ],
-    },
-    {
-      title: 'category.navigation',
-      path: 'navigation',
-      items: [
-        'Breadcrumb Item',
-        'Outline',
-        'Tab Menu',
-        'Nav Icon',
-        'Nav Heading Menu',
-        'Side Nav',
-        'Top Nav',
-        'Mega Menu',
-        'Mobile Nav',
-      ],
-    },
-    {
-      title: 'category.layout',
-      path: 'layout',
-      items: [
-        'Center',
-        'Section',
-        'Container',
-        'Grid',
-        'Flex',
-        'HStack',
-        'VStack',
-        'Stack',
-        'Divider',
-        'Aspect Ratio',
-        'Spacer',
-        'Collapsible',
-        'Resizable',
-        'App Shell',
-        'Form Layout',
-      ],
-    },
-    {
-      title: 'category.feedback',
-      path: 'feedback',
-      items: [
-        'Alert',
-        'Banner',
-        'Badge',
-        'Progress',
-        'Skeleton',
-        'Spinner',
-        'Empty State',
-        'Status Dot',
-      ],
-    },
-    {
-      title: 'category.data-display',
-      path: 'data-display',
-      items: [
-        'Tabs',
-        'Accordion',
-        'Avatar',
-        'Tag & Chip',
-        'Table',
-        'Data Table',
-        'List',
-        'Metadata List',
-        'Overflow List',
-        'Stat',
-        'Status Dot',
-      ],
-    },
-    {
-      title: 'category.overlay',
-      path: 'overlay',
-      items: [
-        'Dialog',
-        'Alert Dialog',
-        'Tooltip',
-        'Hover Card',
-        'Sheet',
-        'Dropdown Menu',
-        'Context Menu',
-        'Lightbox',
-      ],
-    },
-    {
-      title: 'category.charts',
-      path: 'charts',
-      items: [
-        'Line Chart',
-        'Bar Chart',
-        'Pie Chart',
-        'Area Chart',
-        'Scatter Chart',
-        'Candlestick Chart',
-        'Heatmap',
-        'Dashboard',
-      ],
-    },
-    {
-      title: 'category.utilities',
-      path: 'utilities',
-      items: [
-        'Theme Builder',
-        'Component Playground',
-        'Visually Hidden',
-        'Focus Trap',
-        'Click Outside',
-        'Keyboard Shortcut',
-        'Copy to Clipboard',
-        'Scroll Lock',
-        'Resize Observer',
-        'Intersection Observer',
-        'Lazy Load',
-        'Layer Provider',
-        'Media Query',
-        'Media Theme',
-      ],
-    },
-  ];
-
-  protected readonly filteredCategories = computed(() => {
-    const q = this.searchQuery().toLowerCase().trim();
-    if (!q) return this.categories;
-    return this.categories
-      .map((c) => ({
-        ...c,
-        items: c.items.filter(
-          (item) => item.toLowerCase().includes(q) || c.title.toLowerCase().includes(q),
-        ),
-      }))
-      .filter((c) => c.items.length > 0);
-  });
-
-  protected readonly features: Feature[] = [
-    {
-      icon: '⚡',
-      title: 'home.featNativeTitle',
-      description: 'home.featNativeDesc',
-    },
-    {
-      icon: '◇',
-      title: 'home.featCopyPasteTitle',
-      description: 'home.featCopyPasteDesc',
-    },
-    {
-      icon: '✦',
-      title: 'home.featAiTitle',
-      description: 'home.featAiDesc',
-    },
-    {
-      icon: '▤',
-      title: 'home.featEnterpriseTitle',
-      description: 'home.featEnterpriseDesc',
-    },
-    {
-      icon: '❖',
-      title: 'home.featThemesTitle',
-      description: 'home.featThemesDesc',
-    },
-    {
-      icon: '⌘',
-      title: 'home.featEcosystemTitle',
-      description: 'home.featEcosystemDesc',
-    },
-  ];
-
-  protected readonly stats: Stat[] = [
-    { value: '217', label: 'home.statComponents' },
-    { value: '0', label: 'home.statRuntimeDeps' },
-    { value: 'WCAG AA', label: 'home.statAccessible' },
-    { value: 'MIT', label: 'home.statLicensed' },
-  ];
-
-  protected readonly templates: Template[] = [
-    {
-      name: 'home.tplAdminName',
-      description: 'home.tplAdminDesc',
-      badges: ['iplayground.signals', 'home.badgeZoneless'],
-      glyph: '▦',
-    },
-    {
-      name: 'home.tplAiName',
-      description: 'home.tplAiDesc',
-      badges: ['AI', 'SSR'],
-      glyph: '✦',
-    },
-    {
-      name: 'home.tplLandingName',
-      description: 'home.tplLandingDesc',
-      badges: ['home.badgeStatic', 'home.badgeFast'],
-      glyph: '◈',
-    },
-    {
-      name: 'home.tplAuthName',
-      description: 'home.tplAuthDesc',
-      badges: ['Forms', 'A11y'],
-      glyph: '⛨',
-    },
-  ];
-
-  protected readonly copied = signal(false);
-  protected readonly dialogOpen = signal(false);
-
-  constructor() {
     let stored: string | null = null;
     try {
       stored = document.defaultView?.localStorage?.getItem('ngxsmk-theme-mode') ?? null;
@@ -398,6 +110,150 @@ export class HomePage {
     }
   }
 
+  protected getItemFragment(item: string): string {
+    return item
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9]+/g, '-');
+  }
+
+  protected navigateCat(path: string): void {
+    this.router.navigate(['/showcase', path]);
+  }
+
+  protected readonly bentoCards: BentoCard[] = [
+    {
+      icon: '⚡',
+      title: 'home.featNativeTitle',
+      desc: 'home.featNativeDesc',
+      span: 'wide',
+      accent: '#6366f1',
+    },
+    {
+      icon: '◇',
+      title: 'home.featCopyPasteTitle',
+      desc: 'home.featCopyPasteDesc',
+      accent: '#f59e0b',
+    },
+    {
+      icon: '✦',
+      title: 'home.featAiTitle',
+      desc: 'home.featAiDesc',
+      accent: '#7c3aed',
+    },
+    {
+      icon: '❖',
+      title: 'home.featThemesTitle',
+      desc: 'home.featThemesDesc',
+      span: 'wide',
+      accent: '#10b981',
+    },
+    {
+      icon: '▤',
+      title: 'home.featEnterpriseTitle',
+      desc: 'home.featEnterpriseDesc',
+      accent: '#ef4444',
+    },
+    {
+      icon: '⌘',
+      title: 'home.featEcosystemTitle',
+      desc: 'home.featEcosystemDesc',
+      accent: '#3b82f6',
+    },
+  ];
+
+  protected readonly stats: Stat[] = [
+    { value: '150+', label: 'Components', accent: '#6366f1' },
+    { value: '0', label: 'Runtime deps', accent: '#10b981' },
+    { value: 'WCAG AA', label: 'Accessible', accent: '#f59e0b' },
+    { value: 'MIT', label: 'Licensed', accent: '#3b82f6' },
+  ];
+
+  protected readonly codeExample = `<button ngxsmk-button>
+  Get Started
+</button>
+
+<button ngxsmk-button variant="outline">
+  Learn More
+</button>
+
+<ngxsmk-badge variant="primary">
+  v2.0.0
+</ngxsmk-badge>
+
+<ngxsmk-progress [value]="75" />`;
+
+  protected readonly techFeatures = [
+    { label: 'Signals', desc: 'input(), model(), computed(), effect()' },
+    { label: 'Standalone', desc: 'No NgModules — every component is standalone' },
+    { label: 'Zoneless', desc: 'No Zone.js dependency — pure signal reactivity' },
+    { label: 'SSR', desc: 'Server-side rendering ready out of the box' },
+    { label: 'OnPush', desc: 'All components use OnPush change detection' },
+    { label: 'Dark Mode', desc: 'CSS custom properties with .dark class toggle' },
+  ];
+
+  protected readonly categoryGroups: CategoryGroup[] = [
+    {
+      title: 'Forms',
+      icon: '📝',
+      path: 'forms',
+      count: 25,
+      color: '#6366f1',
+      items: ['Button', 'Input', 'Checkbox', 'Radio', 'Switch', 'Select', 'Slider', 'DatePicker'],
+    },
+    {
+      title: 'AI',
+      icon: '✦',
+      path: 'ai',
+      count: 21,
+      color: '#7c3aed',
+      items: ['ChatWindow', 'StreamingText', 'MarkdownViewer', 'CodeBlock', 'DiffViewer'],
+    },
+    {
+      title: 'Enterprise',
+      icon: '🏢',
+      path: 'enterprise',
+      count: 13,
+      color: '#ef4444',
+      items: ['Kanban', 'Scheduler', 'Spreadsheet', 'Gantt', 'Workflow'],
+    },
+    {
+      title: 'Data Display',
+      icon: '📊',
+      path: 'data-display',
+      count: 11,
+      color: '#10b981',
+      items: ['Table', 'Accordion', 'Tabs', 'List', 'Stat'],
+    },
+    {
+      title: 'Overlay',
+      icon: '🪟',
+      path: 'overlay',
+      count: 8,
+      color: '#f59e0b',
+      items: ['Dialog', 'Sheet', 'Tooltip', 'ContextMenu'],
+    },
+    {
+      title: 'Charts',
+      icon: '📈',
+      path: 'charts',
+      count: 8,
+      color: '#3b82f6',
+      items: ['Line', 'Bar', 'Pie', 'Area', 'Heatmap'],
+    },
+  ];
+
+  protected readonly filteredCategories = computed(() => {
+    const q = this.searchQuery().toLowerCase().trim();
+    if (!q) return this.categoryGroups;
+    return this.categoryGroups.filter(
+      (c) =>
+        c.title.toLowerCase().includes(q) || c.items.some((item) => item.toLowerCase().includes(q)),
+    );
+  });
+
+  protected readonly copied = signal(false);
+
   protected copyInstall(): void {
     document.defaultView?.navigator?.clipboard
       ?.writeText(this.installCommand)
@@ -406,10 +262,5 @@ export class HomePage {
         setTimeout(() => this.copied.set(false), 2000);
       })
       .catch(() => this.toast.error('Copy failed', 'Clipboard is unavailable.'));
-  }
-
-  protected confirmDialog(): void {
-    this.dialogOpen.set(false);
-    this.toast.info('Deleted', 'The file has been removed.');
   }
 }

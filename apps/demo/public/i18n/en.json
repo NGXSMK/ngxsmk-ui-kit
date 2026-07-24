@@ -622,8 +622,12 @@
   "showcaseExample": {
     "hideCode": "Hide code",
     "showCode": "Show code",
+    "code": "Code",
     "api": "API",
     "customize": "Customize",
+    "copyCode": "Copy code",
+    "copy": "Copy",
+    "copied": "Copied!",
     "inputsProperties": "Inputs & properties",
     "thProperty": "Property",
     "thAttribute": "Attribute",

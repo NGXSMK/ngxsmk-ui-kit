@@ -1,5 +1,4 @@
 import { Component, computed, input, signal, Type, reflectComponentType } from '@angular/core';
-import { NgxsmkButton } from '@ngxsmk/core/button';
 import { TranslatePipe } from '@ngx-translate/core';
 
 type ApiPanel = 'code' | 'api' | 'customize';
@@ -25,7 +24,7 @@ interface ApiOutput {
 @Component({
   selector: 'showcase-example',
   standalone: true,
-  imports: [NgxsmkButton, TranslatePipe],
+  imports: [TranslatePipe],
   host: {
     '[attr.id]': 'elementId()',
   },
@@ -38,28 +37,20 @@ interface ApiOutput {
             <p class="ngxsmk-sc-ex__desc">{{ description() }}</p>
           }
         </div>
-        <div class="ngxsmk-sc-ex__actions">
-          @if (code()) {
-            <button
-              ngxsmk-button
-              size="sm"
-              variant="ghost"
-              [attr.aria-pressed]="panel() === 'code'"
-              (click)="toggle('code')"
-            >
-              {{
-                panel() === 'code'
-                  ? ('showcaseExample.hideCode' | translate)
-                  : ('showcaseExample.showCode' | translate)
-              }}
-            </button>
-            <button
-              ngxsmk-button
-              size="sm"
-              variant="ghost"
-              (click)="openStackBlitz()"
-              aria-label="Open in StackBlitz"
-            >
+      </div>
+
+      <div class="ngxsmk-sc-ex__preview">
+        <div class="ngxsmk-sc-ex__preview-content">
+          <ng-content />
+        </div>
+        @if (code()) {
+          <button
+            class="ngxsmk-sc-ex__copy-btn"
+            type="button"
+            (click)="copyPreviewCode()"
+            [attr.aria-label]="'showcaseExample.copy' | translate"
+          >
+            @if (copiedPreview()) {
               <svg
                 width="14"
                 height="14"
@@ -67,45 +58,173 @@ interface ApiOutput {
                 fill="none"
                 stroke="currentColor"
                 stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
               >
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                <polyline points="15 3 21 3 21 9"></polyline>
-                <line x1="10" y1="14" x2="21" y2="3"></line>
+                <polyline points="20 6 9 17 4 12" />
               </svg>
-              StackBlitz
-            </button>
-          }
-          @if (component()) {
-            <button
-              ngxsmk-button
-              size="sm"
-              variant="ghost"
-              [attr.aria-pressed]="panel() === 'api'"
-              (click)="toggle('api')"
-            >
-              {{ 'showcaseExample.api' | translate }}
-            </button>
-          }
-          @if (customize()) {
-            <button
-              ngxsmk-button
-              size="sm"
-              variant="ghost"
-              [attr.aria-pressed]="panel() === 'customize'"
-              (click)="toggle('customize')"
-            >
-              {{ 'showcaseExample.customize' | translate }}
-            </button>
-          }
-        </div>
+              {{ 'showcaseExample.copied' | translate }}
+            } @else {
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="9" y="9" width="13" height="13" rx="2" />
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+              </svg>
+              {{ 'showcaseExample.copyCode' | translate }}
+            }
+          </button>
+        }
       </div>
 
-      <div class="ngxsmk-sc-ex__preview">
-        <ng-content />
+      <div class="ngxsmk-sc-ex__actions">
+        @if (code()) {
+          <button
+            class="ngxsmk-sc-ex__tab"
+            type="button"
+            [class.ngxsmk-sc-ex__tab--active]="panel() === 'code'"
+            (click)="toggle('code')"
+          >
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="16 18 22 12 16 6" />
+              <polyline points="8 6 2 12 8 18" />
+            </svg>
+            {{ 'showcaseExample.code' | translate }}
+          </button>
+        }
+        @if (component()) {
+          <button
+            class="ngxsmk-sc-ex__tab"
+            type="button"
+            [class.ngxsmk-sc-ex__tab--active]="panel() === 'api'"
+            (click)="toggle('api')"
+          >
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+              <line x1="16" y1="13" x2="8" y2="13" />
+              <line x1="16" y1="17" x2="8" y2="17" />
+              <polyline points="10 9 9 9 8 9" />
+            </svg>
+            {{ 'showcaseExample.api' | translate }}
+          </button>
+        }
+        @if (customize()) {
+          <button
+            class="ngxsmk-sc-ex__tab"
+            type="button"
+            [class.ngxsmk-sc-ex__tab--active]="panel() === 'customize'"
+            (click)="toggle('customize')"
+          >
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="3" />
+              <path
+                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
+              />
+            </svg>
+            {{ 'showcaseExample.customize' | translate }}
+          </button>
+        }
+        @if (code()) {
+          <button
+            class="ngxsmk-sc-ex__tab ngxsmk-sc-ex__tab--stackblitz"
+            type="button"
+            (click)="openStackBlitz()"
+          >
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+              <polyline points="15 3 21 3 21 9" />
+              <line x1="10" y1="14" x2="21" y2="3" />
+            </svg>
+            StackBlitz
+          </button>
+        }
       </div>
 
       @if (panel() === 'code' && code()) {
-        <pre class="ngxsmk-sc-ex__code"><code>{{ code() }}</code></pre>
+        <div class="ngxsmk-sc-ex__code-wrap">
+          <button
+            class="ngxsmk-sc-ex__code-copy"
+            type="button"
+            (click)="copyCode()"
+            [attr.aria-label]="'showcaseExample.copyCode' | translate"
+          >
+            @if (copiedCode()) {
+              <svg
+                width="13"
+                height="13"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              {{ 'showcaseExample.copied' | translate }}
+            } @else {
+              <svg
+                width="13"
+                height="13"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="9" y="9" width="13" height="13" rx="2" />
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+              </svg>
+              {{ 'showcaseExample.copyCode' | translate }}
+            }
+          </button>
+          <pre class="ngxsmk-sc-ex__code"><code>{{ code() }}</code></pre>
+        </div>
       }
 
       @if (panel() === 'api' && component()) {
@@ -133,13 +252,19 @@ interface ApiOutput {
                         <code>{{ i.templateName }}</code>
                       </td>
                       <td>
-                        {{
-                          isModel(i.propName)
-                            ? ('showcaseExample.twoWay' | translate)
-                            : i.isSignal
-                              ? ('showcaseExample.signal' | translate)
-                              : ('showcaseExample.regular' | translate)
-                        }}
+                        <span
+                          class="ngxsmk-sc-ex__badge"
+                          [class.ngxsmk-sc-ex__badge--model]="isModel(i.propName)"
+                          [class.ngxsmk-sc-ex__badge--signal]="i.isSignal && !isModel(i.propName)"
+                        >
+                          {{
+                            isModel(i.propName)
+                              ? ('showcaseExample.twoWay' | translate)
+                              : i.isSignal
+                                ? ('showcaseExample.signal' | translate)
+                                : ('showcaseExample.regular' | translate)
+                          }}
+                        </span>
                       </td>
                     </tr>
                   }
@@ -175,7 +300,7 @@ interface ApiOutput {
             </div>
           }
           <p class="ngxsmk-sc-ex__api-note">
-            Customize through design tokens - override the component's <code>--ngxsmk-*</code>
+            Customize through design tokens — override the component's <code>--ngxsmk-*</code>
             variables on the host element or at the theme level. Switch to the
             <strong>Customize</strong> tab for a concrete snippet.
           </p>
@@ -198,6 +323,14 @@ interface ApiOutput {
       border-radius: var(--ngxsmk-radius-lg, 0.5rem);
       background: var(--ngxsmk-color-surface, #ffffff);
       margin-block-end: var(--ngxsmk-space-6, 1.5rem);
+      overflow: hidden;
+      transition: box-shadow 0.2s ease;
+    }
+
+    .ngxsmk-sc-ex:hover {
+      box-shadow:
+        0 2px 8px -2px rgba(0, 0, 0, 0.06),
+        0 1px 2px -1px rgba(0, 0, 0, 0.04);
     }
 
     .ngxsmk-sc-ex__head {
@@ -230,25 +363,146 @@ interface ApiOutput {
       color: var(--ngxsmk-color-on-surface-variant, #71717a);
     }
 
-    .ngxsmk-sc-ex__actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--ngxsmk-space-2, 0.5rem);
-      flex-shrink: 0;
-    }
-
     .ngxsmk-sc-ex__preview {
-      padding: var(--ngxsmk-space-6, 1.5rem);
+      position: relative;
+      padding: var(--ngxsmk-space-8, 2rem);
       display: flex;
       flex-wrap: wrap;
       gap: var(--ngxsmk-space-4, 1rem);
       align-items: center;
+      background-image: radial-gradient(
+        circle,
+        var(--ngxsmk-color-outline, #e4e4e7) 1px,
+        transparent 1px
+      );
+      background-size: 16px 16px;
+    }
+
+    .ngxsmk-sc-ex__preview-content {
+      display: contents;
+    }
+
+    .ngxsmk-sc-ex__copy-btn {
+      position: absolute;
+      top: var(--ngxsmk-space-3, 0.75rem);
+      right: var(--ngxsmk-space-3, 0.75rem);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.3rem 0.6rem;
+      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      border-radius: var(--ngxsmk-radius-md, 0.375rem);
+      background: var(--ngxsmk-color-surface, #ffffff);
+      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      font-family: inherit;
+      font-size: 0.7rem;
+      font-weight: 500;
+      cursor: pointer;
+      opacity: 0;
+      transition:
+        opacity 0.15s,
+        background 0.15s,
+        color 0.15s;
+      z-index: 1;
+    }
+
+    .ngxsmk-sc-ex:hover .ngxsmk-sc-ex__copy-btn {
+      opacity: 1;
+    }
+
+    .ngxsmk-sc-ex__copy-btn:hover {
+      background: var(--ngxsmk-color-surface-variant, #f4f4f5);
+      color: var(--ngxsmk-color-on-surface, #09090b);
+    }
+
+    .ngxsmk-sc-ex__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2px;
+      padding: var(--ngxsmk-space-2, 0.5rem) var(--ngxsmk-space-3, 0.75rem);
+      border-top: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      background: var(--ngxsmk-color-surface, #ffffff);
+    }
+
+    .ngxsmk-sc-ex__tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: var(--ngxsmk-space-1-5, 0.375rem) var(--ngxsmk-space-2, 0.5rem);
+      border: none;
+      border-radius: var(--ngxsmk-radius-md, 0.375rem);
+      background: none;
+      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      font-family: inherit;
+      font-size: var(--ngxsmk-text-body-sm-size);
+      font-weight: 500;
+      cursor: pointer;
+      transition:
+        background 0.15s,
+        color 0.15s;
+      white-space: nowrap;
+    }
+
+    .ngxsmk-sc-ex__tab:hover {
+      background: color-mix(in srgb, var(--ngxsmk-color-on-surface, #09090b) 4%, transparent);
+      color: var(--ngxsmk-color-on-surface, #09090b);
+    }
+
+    .ngxsmk-sc-ex__tab--active {
+      background: var(--ngxsmk-color-primary-container, #ede9fe);
+      color: var(--ngxsmk-color-on-primary-container, #4c1d95);
+    }
+
+    .ngxsmk-sc-ex__tab--active:hover {
+      background: var(--ngxsmk-color-primary-container, #ede9fe);
+      color: var(--ngxsmk-color-on-primary-container, #4c1d95);
+    }
+
+    .ngxsmk-sc-ex__tab--stackblitz {
+      margin-left: auto;
+      color: var(--ngxsmk-color-primary, #7c3aed);
+    }
+
+    .ngxsmk-sc-ex__tab--stackblitz:hover {
+      background: color-mix(in srgb, var(--ngxsmk-color-primary, #7c3aed) 8%, transparent);
+      color: var(--ngxsmk-color-primary, #7c3aed);
+    }
+
+    .ngxsmk-sc-ex__code-wrap {
+      position: relative;
+      border-top: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+    }
+
+    .ngxsmk-sc-ex__code-copy {
+      position: absolute;
+      top: var(--ngxsmk-space-2, 0.5rem);
+      right: var(--ngxsmk-space-3, 0.75rem);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.25rem 0.5rem;
+      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      border-radius: var(--ngxsmk-radius-md, 0.375rem);
+      background: var(--ngxsmk-color-surface, #ffffff);
+      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      font-family: inherit;
+      font-size: 0.7rem;
+      font-weight: 500;
+      cursor: pointer;
+      z-index: 1;
+      transition:
+        background 0.15s,
+        color 0.15s;
+    }
+
+    .ngxsmk-sc-ex__code-copy:hover {
+      background: var(--ngxsmk-color-surface-variant, #f4f4f5);
+      color: var(--ngxsmk-color-on-surface, #09090b);
     }
 
     .ngxsmk-sc-ex__code {
       margin: 0;
       padding: var(--ngxsmk-space-4, 1rem) var(--ngxsmk-space-5, 1.25rem);
-      border-top: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
       background: var(--ngxsmk-color-surface-variant, #f4f4f5);
       color: var(--ngxsmk-color-on-surface, #09090b);
       font-family: var(--ngxsmk-font-mono);
@@ -256,8 +510,6 @@ interface ApiOutput {
       line-height: 1.6;
       overflow-x: auto;
       white-space: pre;
-      border-bottom-left-radius: calc(var(--ngxsmk-radius-lg, 0.5rem) - 1px);
-      border-bottom-right-radius: calc(var(--ngxsmk-radius-lg, 0.5rem) - 1px);
     }
 
     .ngxsmk-sc-ex__api {
@@ -290,7 +542,7 @@ interface ApiOutput {
     .ngxsmk-sc-ex__table th,
     .ngxsmk-sc-ex__table td {
       text-align: left;
-      padding: 0.35rem 0.75rem;
+      padding: 0.4rem 0.75rem;
       border-bottom: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
       color: var(--ngxsmk-color-on-surface, #09090b);
       white-space: nowrap;
@@ -299,11 +551,34 @@ interface ApiOutput {
     .ngxsmk-sc-ex__table th {
       font-weight: 600;
       color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      background: var(--ngxsmk-color-surface-variant, #f4f4f5);
     }
 
     .ngxsmk-sc-ex__table code {
       font-family: var(--ngxsmk-font-mono);
-      font-size: var(--ngxsmk-text-body-sm-size);
+      font-size: 0.8em;
+    }
+
+    .ngxsmk-sc-ex__badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.1rem 0.45rem;
+      border-radius: 9999px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      line-height: 1.4;
+      background: var(--ngxsmk-color-surface-variant, #f4f4f5);
+      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+    }
+
+    .ngxsmk-sc-ex__badge--model {
+      background: color-mix(in srgb, var(--ngxsmk-color-primary, #7c3aed) 12%, transparent);
+      color: var(--ngxsmk-color-primary, #7c3aed);
+    }
+
+    .ngxsmk-sc-ex__badge--signal {
+      background: color-mix(in srgb, var(--ngxsmk-color-success, #16a34a) 12%, transparent);
+      color: var(--ngxsmk-color-success, #16a34a);
     }
 
     .ngxsmk-sc-ex__api-note {
@@ -322,9 +597,15 @@ interface ApiOutput {
       .ngxsmk-sc-ex__head {
         padding: var(--ngxsmk-space-3, 0.75rem) var(--ngxsmk-space-4, 1rem);
       }
+
       .ngxsmk-sc-ex__preview {
-        padding: var(--ngxsmk-space-4, 1rem);
+        padding: var(--ngxsmk-space-5, 1.25rem);
       }
+
+      .ngxsmk-sc-ex__actions {
+        padding: var(--ngxsmk-space-1-5, 0.375rem) var(--ngxsmk-space-2, 0.5rem);
+      }
+
       .ngxsmk-sc-ex__code,
       .ngxsmk-sc-ex__api {
         padding: var(--ngxsmk-space-3, 0.75rem) var(--ngxsmk-space-4, 1rem);
@@ -347,6 +628,8 @@ export class ShowcaseExample {
   readonly customize = input<string>('');
 
   protected readonly panel = signal<ApiPanel | null>(null);
+  protected readonly copiedCode = signal(false);
+  protected readonly copiedPreview = signal(false);
 
   protected toggle(panel: ApiPanel): void {
     this.panel.update((current) => (current === panel ? null : panel));
@@ -375,6 +658,22 @@ export class ShowcaseExample {
       .trim()
       .replace(/[^a-z0-9]+/g, '-');
   });
+
+  protected copyCode(): void {
+    if (!this.code()) return;
+    navigator.clipboard.writeText(this.code()).then(() => {
+      this.copiedCode.set(true);
+      setTimeout(() => this.copiedCode.set(false), 1500);
+    });
+  }
+
+  protected copyPreviewCode(): void {
+    if (!this.code()) return;
+    navigator.clipboard.writeText(this.code()).then(() => {
+      this.copiedPreview.set(true);
+      setTimeout(() => this.copiedPreview.set(false), 1500);
+    });
+  }
 
   protected openStackBlitz(): void {
     if (typeof document === 'undefined') return;

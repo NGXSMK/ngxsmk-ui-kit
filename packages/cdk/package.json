@@ -1,6 +1,6 @@
 {
   "name": "@ngxsmk/cdk",
-  "version": "1.3.3",
+  "version": "2.0.0",
   "description": "Low-level Angular directives and utilities (click-outside, focus-trap, media-query, scroll-lock) for @ngxsmk.",
   "keywords": [
     "angular",
