@@ -1445,6 +1445,11 @@ export class NgxsmkScheduler implements OnInit {
       });
     });
 
+    effect(() => {
+      const engineEvents = this.engine.events();
+      this.events.set(engineEvents);
+    });
+
     destroyRef.onDestroy(() => {
       if (this._nowInterval) clearInterval(this._nowInterval);
     });
@@ -1452,11 +1457,6 @@ export class NgxsmkScheduler implements OnInit {
 
   ngOnInit(): void {
     this.engine.events.set(this.events());
-
-    effect(() => {
-      const engineEvents = this.engine.events();
-      this.events.set(engineEvents);
-    });
   }
 
   protected onPrev(): void {
