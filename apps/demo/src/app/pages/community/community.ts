@@ -1,94 +1,554 @@
-import {
-  NgxsmkCardContent,
-  NgxsmkCardHeader,
-  NgxsmkCardTitle,
-  NgxsmkCard,
-} from '@ngxsmk/core/card';
-import { NgxsmkButton } from '@ngxsmk/core/button';
-import { NgxsmkHeading } from '@ngxsmk/core/heading';
-import { NgxsmkText } from '@ngxsmk/core/text';
-import { Component } from '@angular/core';
-import { TranslatePipe } from '@ngx-translate/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { Title, Meta } from '@angular/platform-browser';
 import { AppNav } from '../../nav/nav';
+import { NgxsmkButton } from '@ngxsmk/core/button';
+
 @Component({
   selector: 'community-page',
   standalone: true,
-  imports: [
-    NgxsmkCard,
-    NgxsmkCardContent,
-    NgxsmkCardHeader,
-    NgxsmkCardTitle,
-    NgxsmkButton,
-    NgxsmkHeading,
-    NgxsmkText,
-    TranslatePipe,
-    AppNav,
-  ],
+  imports: [AppNav, NgxsmkButton],
   template: `
     <app-nav />
-    <div class="ngxsmk-page">
-      <header class="ngxsmk-page__header">
-        <ngxsmk-heading level="h1">{{ 'community.title' | translate }}</ngxsmk-heading>
-        <ngxsmk-text variant="body" class="ngxsmk-page__sub">{{
-          'community.subtitle' | translate
-        }}</ngxsmk-text>
+
+    <div class="co">
+      <!-- ═══════════════ HERO ═══════════════ -->
+      <header class="co-hero">
+        <div class="co-hero__inner">
+          <span class="co-hero__pill">Community</span>
+          <h1 class="co-hero__title">Built together, ship faster</h1>
+          <p class="co-hero__sub">
+            Join a growing community of Angular developers. Ask questions, propose features, report
+            bugs, and share what you've built with NGXSMK.
+          </p>
+          <div class="co-hero__stats">
+            <div class="co-hero__stat">
+              <span class="co-hero__stat-val">Open</span>
+              <span class="co-hero__stat-label">Source</span>
+            </div>
+            <div class="co-hero__stat">
+              <span class="co-hero__stat-val">MIT</span>
+              <span class="co-hero__stat-label">License</span>
+            </div>
+            <div class="co-hero__stat">
+              <span class="co-hero__stat-val">200+</span>
+              <span class="co-hero__stat-label">Components</span>
+            </div>
+          </div>
+        </div>
       </header>
-      <div class="ngxsmk-community-grid">
-        <ngxsmk-card class="ngxsmk-community-card">
-          <div ngxsmkCardHeader>
-            <ngxsmk-heading level="h3" ngxsmkCardTitle>{{
-              'community.githubDiscussions' | translate
-            }}</ngxsmk-heading>
+
+      <!-- ═══════════════ CHANNELS ═══════════════ -->
+      <section class="co-section">
+        <h2 class="co-section__title">How to contribute</h2>
+        <p class="co-section__sub">
+          Whether it's a bug report, feature idea, docs improvement, or a pull request — every
+          contribution matters.
+        </p>
+
+        <div class="co-channels">
+          @for (ch of channels; track ch.title) {
+            <a class="co-channel" [href]="ch.href" target="_blank" rel="noopener">
+              <div class="co-channel__icon" [innerHTML]="ch.icon"></div>
+              <h3 class="co-channel__title">{{ ch.title }}</h3>
+              <p class="co-channel__desc">{{ ch.desc }}</p>
+              <span class="co-channel__link">
+                {{ ch.cta }}
+                <svg viewBox="0 0 16 16" fill="none" width="12" height="12">
+                  <path
+                    d="M4.5 11.5l7-7M5 4.5h7v7"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </span>
+            </a>
+          }
+        </div>
+      </section>
+
+      <!-- ═══════════════ GUIDELINES ═══════════════ -->
+      <section class="co-section">
+        <h2 class="co-section__title">Contribution guidelines</h2>
+        <p class="co-section__sub">
+          Follow these conventions to keep the codebase consistent and reviews fast.
+        </p>
+
+        <div class="co-rules">
+          @for (rule of rules; track rule.title) {
+            <div class="co-rule">
+              <span class="co-rule__num">{{ rule.num }}</span>
+              <div class="co-rule__body">
+                <h4 class="co-rule__title">{{ rule.title }}</h4>
+                <p class="co-rule__desc">{{ rule.desc }}</p>
+              </div>
+            </div>
+          }
+        </div>
+      </section>
+
+      <!-- ═══════════════ CODE OF CONDUCT ═══════════════ -->
+      <section class="co-section">
+        <div class="co-coc">
+          <div class="co-coc__icon">
+            <svg viewBox="0 0 24 24" fill="none" width="28" height="28">
+              <path
+                d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+              <path
+                d="M8 12l3 3 5-6"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
           </div>
-          <div ngxsmkCardContent>
-            <ngxsmk-text variant="body" class="ngxsmk-community-desc">{{
-              'community.githubDiscussionsDesc' | translate
-            }}</ngxsmk-text>
-            <a ngxsmk-button size="sm" href="mailto:ngxsmk@gmail.com?subject=NGXSMK%20feedback">{{
-              'community.joinDiscussion' | translate
-            }}</a>
+          <div class="co-coc__text">
+            <h3 class="co-coc__title">Code of Conduct</h3>
+            <p class="co-coc__desc">
+              We are committed to providing a welcoming and inclusive experience for everyone. Be
+              respectful, constructive, and assume good intent.
+            </p>
           </div>
-        </ngxsmk-card>
-      </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════ FOOTER CTA ═══════════════ -->
+      <section class="co-footer">
+        <div class="co-footer__card">
+          <div class="co-footer__icon">
+            <svg viewBox="0 0 24 24" fill="none" width="28" height="28">
+              <path
+                d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.607.069-.607 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.03-2.683-.103-.253-.447-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.748-1.025 2.748-1.025.546 1.377.203 2.394.1 2.647.64.699 1.026 1.592 1.026 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"
+                fill="currentColor"
+              />
+            </svg>
+          </div>
+          <h3 class="co-footer__title">Ready to contribute?</h3>
+          <p class="co-footer__sub">
+            Fork the repo, pick an issue labeled
+            <strong>good first issue</strong>, and open a pull request. We review within 48 hours.
+          </p>
+          <div class="co-footer__actions">
+            <a
+              ngxsmk-button
+              href="https://github.com/ngxsmk/ngxsmk-ui-kit"
+              target="_blank"
+              rel="noopener"
+            >
+              Open on GitHub
+            </a>
+          </div>
+        </div>
+      </section>
     </div>
   `,
   styles: `
-    .ngxsmk-page {
-      max-width: 1400px;
+    :host {
+      --co-max: 820px;
+      display: block;
+      font-family: 'Inter', var(--ngxsmk-font-sans);
+      color: var(--ngxsmk-color-on-background);
+    }
+
+    /* ═══════════════ HERO ═══════════════ */
+    .co-hero {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(4rem, 8vw, 6rem) var(--ngxsmk-space-6, 1.5rem) clamp(2.5rem, 5vw, 4rem);
+      text-align: center;
+      background-image: radial-gradient(var(--ngxsmk-color-outline, #e4e4e7) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .co-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: radial-gradient(
+        55% 55% at 50% 0%,
+        color-mix(in srgb, var(--ngxsmk-color-primary) 12%, transparent),
+        transparent 70%
+      );
+    }
+    .co-hero__inner {
+      position: relative;
+      z-index: 1;
+      max-width: 38rem;
       margin: 0 auto;
-      padding: var(--ngxsmk-space-12, 3rem) var(--ngxsmk-space-6, 1.5rem);
-    }
-    .ngxsmk-page__header {
-      margin-bottom: var(--ngxsmk-space-12, 3rem);
-    }
-    .ngxsmk-page__header h1,
-    .ngxsmk-page__header ngxsmk-heading {
-      font-size: var(--ngxsmk-text-headline-lg-size);
-      font-weight: 700;
-      margin: 0 0 var(--ngxsmk-space-2, 0.5rem);
-      color: var(--ngxsmk-color-on-surface, #09090b);
-    }
-    .ngxsmk-page__sub {
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
-      margin: 0;
-      font-size: var(--ngxsmk-text-body-lg-size);
-    }
-    .ngxsmk-community-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(min(22rem, 100%), 1fr));
-      gap: var(--ngxsmk-space-6, 1.5rem);
-    }
-    .ngxsmk-community-card {
       display: flex;
       flex-direction: column;
-      height: 100%;
+      align-items: center;
     }
-    .ngxsmk-community-desc {
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
-      font-size: var(--ngxsmk-text-body-md-size);
-      line-height: 1.6;
+    .co-hero__pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.25rem 0.75rem;
+      border: 1px solid var(--ngxsmk-color-outline);
+      border-radius: var(--ngxsmk-radius-full, 999px);
+      background: color-mix(in srgb, var(--ngxsmk-color-surface) 60%, transparent);
+      backdrop-filter: blur(6px);
+      font-size: var(--ngxsmk-text-body-sm-size, 0.8125rem);
+      font-weight: 600;
+      color: var(--ngxsmk-color-on-surface);
+      margin-bottom: var(--ngxsmk-space-4, 1rem);
+      letter-spacing: 0.04em;
+    }
+    .co-hero__title {
+      font-family: 'Outfit', var(--ngxsmk-font-sans), system-ui, sans-serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      line-height: 1.1;
       margin: 0 0 var(--ngxsmk-space-4, 1rem);
+      background: linear-gradient(
+        135deg,
+        var(--ngxsmk-color-on-surface),
+        var(--ngxsmk-color-on-surface-variant, #71717a)
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .co-hero__sub {
+      font-size: var(--ngxsmk-text-body-lg-size, 1.0625rem);
+      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      line-height: 1.65;
+      margin: 0 0 var(--ngxsmk-space-6, 1.5rem);
+      max-width: 34rem;
+    }
+    .co-hero__stats {
+      display: flex;
+      gap: var(--ngxsmk-space-10, 2.5rem);
+    }
+    .co-hero__stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.15rem;
+    }
+    .co-hero__stat-val {
+      font-family: 'Outfit', var(--ngxsmk-font-sans), system-ui, sans-serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--ngxsmk-color-on-surface);
+    }
+    .co-hero__stat-label {
+      font-size: var(--ngxsmk-text-body-xs-size, 0.75rem);
+      font-weight: 500;
+      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ═══════════════ SECTIONS ═══════════════ */
+    .co-section {
+      max-width: var(--co-max);
+      margin: 0 auto;
+      padding: var(--ngxsmk-space-10, 2.5rem) var(--ngxsmk-space-6, 1.5rem);
+    }
+    .co-section__title {
+      font-family: 'Outfit', var(--ngxsmk-font-sans), system-ui, sans-serif;
+      font-size: var(--ngxsmk-text-headline-sm-size, 1.25rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin: 0 0 0.35rem;
+      color: var(--ngxsmk-color-on-surface);
+    }
+    .co-section__sub {
+      font-size: var(--ngxsmk-text-body-md-size, 0.9375rem);
+      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      line-height: 1.6;
+      margin: 0 0 var(--ngxsmk-space-6, 1.5rem);
+    }
+
+    /* ═══════════════ CHANNELS ═══════════════ */
+    .co-channels {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(16rem, 100%), 1fr));
+      gap: var(--ngxsmk-space-4, 1rem);
+    }
+    .co-channel {
+      display: flex;
+      flex-direction: column;
+      padding: var(--ngxsmk-space-5, 1.25rem);
+      background: var(--ngxsmk-color-surface, #fff);
+      border: 1px solid var(--ngxsmk-color-outline);
+      border-radius: var(--ngxsmk-radius-lg);
+      text-decoration: none;
+      color: inherit;
+      transition:
+        box-shadow 0.2s,
+        transform 0.2s,
+        border-color 0.2s;
+    }
+    .co-channel:hover {
+      box-shadow: var(--ngxsmk-shadow-md);
+      transform: translateY(-2px);
+      border-color: var(--ngxsmk-color-primary);
+    }
+    .co-channel__icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: var(--ngxsmk-radius-md);
+      background: color-mix(in srgb, var(--ngxsmk-color-primary) 10%, transparent);
+      color: var(--ngxsmk-color-primary);
+      margin-bottom: var(--ngxsmk-space-3, 0.75rem);
+      font-size: 1.25rem;
+    }
+    .co-channel__title {
+      font-size: var(--ngxsmk-text-body-md-size, 0.9375rem);
+      font-weight: 700;
+      margin: 0 0 0.25rem;
+      color: var(--ngxsmk-color-on-surface);
+    }
+    .co-channel__desc {
+      font-size: var(--ngxsmk-text-body-sm-size, 0.8125rem);
+      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      line-height: 1.55;
+      margin: 0 0 auto;
+      flex: 1;
+    }
+    .co-channel__link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      margin-top: var(--ngxsmk-space-3, 0.75rem);
+      font-size: var(--ngxsmk-text-body-sm-size, 0.8125rem);
+      font-weight: 600;
+      color: var(--ngxsmk-color-primary);
+    }
+
+    /* ═══════════════ RULES ═══════════════ */
+    .co-rules {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .co-rule {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.75rem;
+      border-radius: var(--ngxsmk-radius-md);
+      transition: background 0.15s;
+    }
+    .co-rule:hover {
+      background: color-mix(in srgb, var(--ngxsmk-color-on-surface) 3%, transparent);
+    }
+    .co-rule__num {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: color-mix(in srgb, var(--ngxsmk-color-primary) 10%, transparent);
+      color: var(--ngxsmk-color-primary);
+      font-size: var(--ngxsmk-text-body-xs-size, 0.75rem);
+      font-weight: 700;
+    }
+    .co-rule__body {
+      flex: 1;
+    }
+    .co-rule__title {
+      font-size: var(--ngxsmk-text-body-sm-size, 0.8125rem);
+      font-weight: 700;
+      margin: 0 0 0.15rem;
+      color: var(--ngxsmk-color-on-surface);
+    }
+    .co-rule__desc {
+      font-size: var(--ngxsmk-text-body-sm-size, 0.8125rem);
+      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* ═══════════════ CODE OF CONDUCT ═══════════════ */
+    .co-coc {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: var(--ngxsmk-space-5, 1.25rem);
+      background: color-mix(in srgb, #22c55e 6%, var(--ngxsmk-color-surface, #fff));
+      border: 1px solid color-mix(in srgb, #22c55e 20%, var(--ngxsmk-color-outline));
+      border-radius: var(--ngxsmk-radius-lg);
+    }
+    .co-coc__icon {
+      flex-shrink: 0;
+      color: #22c55e;
+      margin-top: 0.1rem;
+    }
+    .co-coc__title {
+      font-size: var(--ngxsmk-text-body-md-size, 0.9375rem);
+      font-weight: 700;
+      margin: 0 0 0.25rem;
+      color: var(--ngxsmk-color-on-surface);
+    }
+    .co-coc__desc {
+      font-size: var(--ngxsmk-text-body-sm-size, 0.8125rem);
+      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* ═══════════════ FOOTER CTA ═══════════════ */
+    .co-footer {
+      max-width: var(--co-max);
+      margin: 0 auto;
+      padding: var(--ngxsmk-space-6, 1.5rem);
+      padding-bottom: var(--ngxsmk-space-16, 4rem);
+    }
+    .co-footer__card {
+      text-align: center;
+      padding: var(--ngxsmk-space-10, 2.5rem);
+      background: var(--ngxsmk-color-surface, #fff);
+      border: 1px solid var(--ngxsmk-color-outline);
+      border-radius: var(--ngxsmk-radius-xl, 1rem);
+    }
+    .co-footer__icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: var(--ngxsmk-radius-lg);
+      background: color-mix(in srgb, var(--ngxsmk-color-primary) 10%, transparent);
+      color: var(--ngxsmk-color-primary);
+      margin-bottom: var(--ngxsmk-space-4, 1rem);
+    }
+    .co-footer__title {
+      font-family: 'Outfit', var(--ngxsmk-font-sans), system-ui, sans-serif;
+      font-size: var(--ngxsmk-text-headline-sm-size, 1.25rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin: 0 0 0.5rem;
+      color: var(--ngxsmk-color-on-surface);
+    }
+    .co-footer__sub {
+      font-size: var(--ngxsmk-text-body-md-size, 0.9375rem);
+      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      line-height: 1.6;
+      margin: 0 0 var(--ngxsmk-space-5, 1.25rem);
+      max-width: 28rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .co-footer__sub strong {
+      color: var(--ngxsmk-color-on-surface);
+      font-weight: 700;
+    }
+
+    /* ═══════════════ RESPONSIVE ═══════════════ */
+    @media (max-width: 640px) {
+      .co-hero {
+        padding: var(--ngxsmk-space-10, 2.5rem) var(--ngxsmk-space-4, 1rem)
+          var(--ngxsmk-space-8, 2rem);
+      }
+      .co-section {
+        padding-left: var(--ngxsmk-space-4, 1rem);
+        padding-right: var(--ngxsmk-space-4, 1rem);
+      }
+      .co-footer {
+        padding-left: var(--ngxsmk-space-4, 1rem);
+        padding-right: var(--ngxsmk-space-4, 1rem);
+      }
+      .co-hero__stats {
+        gap: var(--ngxsmk-space-6, 1.5rem);
+      }
     }
   `,
 })
-export class CommunityPage {}
+export class CommunityPage implements OnInit {
+  private readonly titleService = inject(Title);
+  private readonly meta = inject(Meta);
+
+  protected readonly channels = [
+    {
+      title: 'GitHub Issues',
+      desc: 'Report bugs, request features, or suggest improvements. Every issue is triaged within 48 hours.',
+      cta: 'Open an issue',
+      href: 'https://github.com/ngxsmk/ngxsmk-ui-kit/issues',
+      icon: '<svg viewBox="0 0 24 24" fill="none" width="22" height="22"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.607.069-.607 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.03-2.683-.103-.253-.447-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.748-1.025 2.748-1.025.546 1.377.203 2.394.1 2.647.64.699 1.026 1.592 1.026 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z" fill="currentColor"/></svg>',
+    },
+    {
+      title: 'Pull Requests',
+      desc: 'Fork, branch, and open a PR. We follow conventional commits and review within 48 hours.',
+      cta: 'Start a PR',
+      href: 'https://github.com/ngxsmk/ngxsmk-ui-kit/pulls',
+      icon: '<svg viewBox="0 0 24 24" fill="none" width="22" height="22"><circle cx="18" cy="18" r="3" stroke="currentColor" stroke-width="1.5"/><circle cx="6" cy="6" r="3" stroke="currentColor" stroke-width="1.5"/><circle cx="6" cy="18" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M6 9v6M18 9c0 6-12 6-12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>',
+    },
+    {
+      title: 'Email the maintainer',
+      desc: 'For private feedback, security disclosures, or partnership inquiries — reach out directly.',
+      cta: 'Send an email',
+      href: 'mailto:ngxsmk@gmail.com?subject=NGXSMK%20feedback',
+      icon: '<svg viewBox="0 0 24 24" fill="none" width="22" height="22"><rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 7l10 6 10-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    },
+    {
+      title: 'Documentation',
+      desc: 'Found a typo or unclear guide? Docs PRs are the fastest way to contribute — no code review needed.',
+      cta: 'Improve the docs',
+      href: 'https://github.com/ngxsmk/ngxsmk-ui-kit/tree/main/docs',
+      icon: '<svg viewBox="0 0 24 24" fill="none" width="22" height="22"><path d="M4 4h16v16H4z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M8 8h8M8 12h6M8 16h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>',
+    },
+  ];
+
+  protected readonly rules = [
+    {
+      num: '01',
+      title: 'Conventional commits',
+      desc: 'Use feat:, fix:, chore:, docs:, or refactor: prefixes. The commitlint hook enforces this automatically.',
+    },
+    {
+      num: '02',
+      title: 'Signal-only APIs',
+      desc: 'All new inputs must use input() / input.required(). No @Input() decorators. Two-way bindings use model().',
+    },
+    {
+      num: '03',
+      title: 'Standalone components',
+      desc: 'Every component and directive must be standalone: true. No NgModules in new code.',
+    },
+    {
+      num: '04',
+      title: 'Token-driven styling',
+      desc: 'Use --ngxsmk-* CSS custom properties. Never hardcode colors, radii, or spacing values.',
+    },
+    {
+      num: '05',
+      title: 'One component per file',
+      desc: 'Keep components small and focused. Extract shared logic into @ngxsmk/cdk utilities.',
+    },
+    {
+      num: '06',
+      title: 'Run the full pipeline',
+      desc: 'Before pushing: npm run build, npm test, npm run lint, npm run format. All must pass.',
+    },
+  ];
+
+  ngOnInit(): void {
+    this.titleService.setTitle('Community & Contributing — NGXSMK');
+    this.meta.updateTag({
+      name: 'description',
+      content:
+        'Join the NGXSMK community. Suggest features, report issues, and share feedback with the maintainers.',
+    });
+    this.meta.updateTag({ property: 'og:title', content: 'Community & Contributing — NGXSMK' });
+    this.meta.updateTag({
+      property: 'og:description',
+      content:
+        'Join the NGXSMK community. Suggest features, report issues, and share feedback with the maintainers.',
+    });
+  }
+}
