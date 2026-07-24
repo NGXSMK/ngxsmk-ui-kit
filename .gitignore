@@ -12,6 +12,7 @@ packages/*/tsconfig.lib.compat.json
 
 # Node
 /node_modules
+packages/*/node_modules
 npm-debug.log
 yarn-error.log
 
