@@ -172,8 +172,18 @@
     "teamDesign": "设计"
   },
   "blog": {
-    "title": "博客",
-    "subtitle": "来自 NGXSMK 团队的最新资讯、文章与写作。",
+    "pill": "Blog",
+    "title": "NGXSMK 最新动态",
+    "subtitle": "技术深度解析、版本发布公告以及构建生产级信号原生 Angular 组件 UI 的指南。",
+    "statArticles": "文章",
+    "statTopics": "主题",
+    "statCadence": "更新节奏",
+    "featured": "精选",
+    "all": "全部",
+    "newsletter": "保持关注",
+    "newsletterSub": "获取最新的 NGXSMK 更新、指南和社区精选，直接送到您的收件箱。",
+    "subscribe": "订阅",
+    "topicsTitle": "主题",
     "readArticle": "阅读全文",
     "tag": {
       "announcement": "公告",
@@ -198,9 +208,27 @@
       }
     }
   },
+  "blogPost": {
+    "backToBlog": "返回博客",
+    "quickStart": "快速开始",
+    "copyLink": "复制链接",
+    "copied": "✓ 已复制",
+    "moreArticles": "更多文章",
+    "postNotFound": "文章未找到",
+    "postNotFoundDesc": "您查找的文章不存在。",
+    "ngxsmkTeam": "NGXSMK 团队"
+  },
   "changelog": {
+    "pill": "更新日志",
     "title": "更新日志",
     "subtitle": "追踪 NGXSMK 的变更、缺陷修复、更新与发布。",
+    "statReleases": "版本",
+    "statChanges": "变更",
+    "statSince": "自",
+    "all": "全部",
+    "latest": "最新",
+    "footerTitle": "在 GitHub 上关注",
+    "footerSub": "在公共仓库中提交问题、贡献代码或跟踪即将发布的版本。",
     "type": {
       "added": "新增",
       "fixed": "修复",
@@ -208,6 +236,24 @@
       "removed": "已删除"
     },
     "release": {
+      "v200": {
+        "summary": "重大发布：motion.dev 动画系统、完整 UI/UX 重新设计、Tailwind CSS 支持以及 AI 优先工具。",
+        "changes": {
+          "0": "motion.dev 动画系统，包含 NgxsmkMotionDirective 和 NgxsmkAnimateDirective，用于声明式进入/退出/滚动动画。",
+          "1": "四个手势指令：NgxsmkHoverDirective、NgxsmkFocusDirective、NgxsmkDragDirective 和 NgxsmkPressDirective。",
+          "2": "Tailwind CSS v3 预设和 v4 CSS 主题，实现零配置 Tailwind 集成。",
+          "3": "组件展示页面，包含侧边栏导航、分类分组和 StackBlitz 实时沙盒。",
+          "4": "演示应用完整 UI/UX 重新设计：首页、文档、主题、博客和更新日志页面。",
+          "5": "70+ 组件的设计令牌替换，实现一致的视觉语言。",
+          "6": "弃用 @Input/@Output 装饰器——所有 API 现在仅支持信号。",
+          "7": "提取 CvaBase<T> 抽象类到 @ngxsmk/cdk/cva-base，消除 8 个表单组件中约 80 行重复的 ControlValueAccessor 样板代码。",
+          "8": "提取 ListboxKeyboard 类到 @ngxsmk/cdk/listbox-keyboard，统一方向键、Home/End、Enter 和 Escape 导航。",
+          "9": "合并 SearchService 到 ComponentRegistry，消除重复的 MiniSearch 索引。",
+          "10": "提取 NgxThemeInjectorService 用于 CSS 注入，将其与深色模式切换解耦。",
+          "11": "提取组件 token 默认值从 css.ts staticVars() 到 COMPONENT_TOKEN_DEFAULTS 注册表。",
+          "12": "删除 6 个孤立的渲染器 token 和实现、CDK overlay 策略以及未使用的 base-typeahead 骨架。"
+        }
+      },
       "v133": {
         "summary": "架构深化：CVA 基类、listbox 键盘导航和死代码清理。",
         "changes": {
@@ -297,8 +343,15 @@
     }
   },
   "roadmap": {
+    "pill": "路线图",
     "title": "路线图",
     "subtitle": "预览我们正在开发以及 NGXSMK 接下来会上线的内容。",
+    "statShipped": "已发布",
+    "statInProgress": "进行中",
+    "statPlanned": "计划中",
+    "footerTitle": "有功能请求？",
+    "footerSub": "我们根据社区反馈来安排开发。在 GitHub 上提交问题或发起讨论。",
+    "footerCta": "请求新功能",
     "quarter": {
       "q3_2026": "2026 年第三季度",
       "q4_2026": "2026 年第四季度",
@@ -1297,11 +1350,49 @@
     "ionicActive": "Ionic 主题已激活"
   },
   "community": {
-    "title": "社区与贡献",
-    "subtitle": "加入我们不断成长的社区，提出问题、提议功能，并分享你构建的成果。",
-    "githubDiscussions": "联系与反馈",
-    "githubDiscussionsDesc": "有问题、想法或错误报告？直接联系维护者 — 每条消息都有助于改进组件库。",
-    "joinDiscussion": "发送反馈"
+    "pill": "Community",
+    "title": "Built together, ship faster",
+    "subtitle": "Join a growing community of Angular developers. Ask questions, propose features, report bugs, and share what you've built with NGXSMK.",
+    "statOpen": "Open",
+    "statSource": "Source",
+    "statMit": "MIT",
+    "statLicense": "License",
+    "statComponents": "Components",
+    "channelTitle": "How to contribute",
+    "channelSub": "Whether it's a bug report, feature idea, docs improvement, or a pull request — every contribution matters.",
+    "channelGithubTitle": "GitHub Issues",
+    "channelGithubDesc": "Report bugs, request features, or suggest improvements. Every issue is triaged within 48 hours.",
+    "channelGithubCta": "Open an issue",
+    "channelPrTitle": "Pull Requests",
+    "channelPrDesc": "Fork, branch, and open a PR. We follow conventional commits and review within 48 hours.",
+    "channelPrCta": "Start a PR",
+    "channelEmailTitle": "Email the maintainer",
+    "channelEmailDesc": "For private feedback, security disclosures, or partnership inquiries — reach out directly.",
+    "channelEmailCta": "Send an email",
+    "channelDocsTitle": "Documentation",
+    "channelDocsDesc": "Found a typo or unclear guide? Docs PRs are the fastest way to contribute — no code review needed.",
+    "channelDocsCta": "Improve the docs",
+    "guidelinesTitle": "Contribution guidelines",
+    "guidelinesSub": "Follow these conventions to keep the codebase consistent and reviews fast.",
+    "rule1Title": "Conventional commits",
+    "rule1Desc": "Use feat:, fix:, chore:, docs:, or refactor: prefixes. The commitlint hook enforces this automatically.",
+    "rule2Title": "Signal-only APIs",
+    "rule2Desc": "All new inputs must use input() / input.required(). No @Input() decorators. Two-way bindings use model().",
+    "rule3Title": "Standalone components",
+    "rule3Desc": "Every component and directive must be standalone: true. No NgModules in new code.",
+    "rule4Title": "Token-driven styling",
+    "rule4Desc": "Use --ngxsmk-* CSS custom properties. Never hardcode colors, radii, or spacing values.",
+    "rule5Title": "One component per file",
+    "rule5Desc": "Keep components small and focused. Extract shared logic into @ngxsmk/cdk utilities.",
+    "rule6Title": "Run the full pipeline",
+    "rule6Desc": "Before pushing: npm run build, npm test, npm run lint, npm run format. All must pass.",
+    "cocTitle": "Code of Conduct",
+    "cocDesc": "We are committed to providing a welcoming and inclusive experience for everyone. Be respectful, constructive, and assume good intent.",
+    "footerTitle": "Ready to contribute?",
+    "footerSub": "Fork the repo, pick an issue labeled",
+    "footerGoodFirst": "good first issue",
+    "footerSub2": ", and open a pull request. We review within 48 hours.",
+    "footerCta": "Open on GitHub"
   },
   "api": {
     "title": "API 参考",

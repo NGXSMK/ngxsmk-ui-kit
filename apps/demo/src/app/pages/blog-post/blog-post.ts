@@ -5,12 +5,13 @@ import { Title, Meta } from '@angular/platform-browser';
 import { AppNav } from '../../nav/nav';
 import { NgxsmkButton } from '@ngxsmk/core/button';
 import { NgxsmkHeading } from '@ngxsmk/core/heading';
+import { TranslatePipe } from '@ngx-translate/core';
 import { getBlogPost, blogPosts, type BlogPost } from '../blog/blog-data';
 
 @Component({
   selector: 'blog-post-page',
   standalone: true,
-  imports: [DatePipe, RouterLink, AppNav, NgxsmkButton, NgxsmkHeading],
+  imports: [DatePipe, RouterLink, AppNav, NgxsmkButton, NgxsmkHeading, TranslatePipe],
   template: `
     <app-nav />
 
@@ -28,7 +29,7 @@ import { getBlogPost, blogPosts, type BlogPost } from '../blog/blog-data';
                 stroke-linejoin="round"
               />
             </svg>
-            Back to blog
+            {{ 'blogPost.backToBlog' | translate }}
           </a>
         </nav>
 
@@ -51,7 +52,9 @@ import { getBlogPost, blogPosts, type BlogPost } from '../blog/blog-data';
             <div class="bp__avatar">{{ p.author.charAt(0) }}</div>
             <div class="bp__author-info">
               <span class="bp__author-name">{{ p.author }}</span>
-              <span class="bp__author-role">NGXSMK Team · {{ p.date | date: 'MMM d, yyyy' }}</span>
+              <span class="bp__author-role"
+                >{{ 'blogPost.ngxsmkTeam' | translate }} · {{ p.date | date: 'MMM d, yyyy' }}</span
+              >
             </div>
           </div>
         </header>
@@ -61,7 +64,7 @@ import { getBlogPost, blogPosts, type BlogPost } from '../blog/blog-data';
           <div class="bp__code">
             <div class="bp__code-head">
               <div class="bp__code-dots"><i></i><i></i><i></i></div>
-              <span class="bp__code-label">Quick Start</span>
+              <span class="bp__code-label">{{ 'blogPost.quickStart' | translate }}</span>
             </div>
             <pre class="bp__code-body"><code>{{ p.code }}</code></pre>
           </div>
@@ -74,12 +77,14 @@ import { getBlogPost, blogPosts, type BlogPost } from '../blog/blog-data';
         <footer class="bp__footer">
           <div class="bp__footer-actions">
             <button ngxsmk-button variant="outline" (click)="copyLink()">
-              {{ copied ? '✓ Copied' : 'Copy link' }}
+              {{ copied ? ('blogPost.copied' | translate) : ('blogPost.copyLink' | translate) }}
             </button>
           </div>
 
           <div class="bp__related">
-            <ngxsmk-heading level="h3" class="bp__related-title">More articles</ngxsmk-heading>
+            <ngxsmk-heading level="h3" class="bp__related-title">{{
+              'blogPost.moreArticles' | translate
+            }}</ngxsmk-heading>
             <div class="bp__related-grid">
               @for (r of relatedPosts; track r.id) {
                 <a class="bp__related-card" [routerLink]="['/blog', r.id]">
@@ -94,9 +99,9 @@ import { getBlogPost, blogPosts, type BlogPost } from '../blog/blog-data';
       </article>
     } @else {
       <div class="bp bp--empty">
-        <ngxsmk-heading level="h2">Post not found</ngxsmk-heading>
-        <p class="bp__empty-sub">The article you're looking for doesn't exist.</p>
-        <a ngxsmk-button routerLink="/blog">Back to blog</a>
+        <ngxsmk-heading level="h2">{{ 'blogPost.postNotFound' | translate }}</ngxsmk-heading>
+        <p class="bp__empty-sub">{{ 'blogPost.postNotFoundDesc' | translate }}</p>
+        <a ngxsmk-button routerLink="/blog">{{ 'blogPost.backToBlog' | translate }}</a>
       </div>
     }
   `,

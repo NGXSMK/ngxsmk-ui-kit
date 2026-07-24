@@ -172,8 +172,18 @@
     "teamDesign": "デザイン"
   },
   "blog": {
+    "pill": "ブログ",
     "title": "ブログ",
     "subtitle": "NGXSMK チームからの最新ニュース、記事、解説。",
+    "statArticles": "記事",
+    "statTopics": "トピック",
+    "statCadence": "更新頻度",
+    "featured": "注目",
+    "all": "すべて",
+    "newsletter": "最新情報をお届け",
+    "newsletterSub": "NGXSMK の最新アップデート、ガイド、コミュニティハイライトをメールでお届けします。",
+    "subscribe": "購読",
+    "topicsTitle": "トピック",
     "readArticle": "記事を読む",
     "tag": {
       "announcement": "お知らせ",
@@ -198,9 +208,27 @@
       }
     }
   },
+  "blogPost": {
+    "backToBlog": "ブログに戻る",
+    "quickStart": "クイックスタート",
+    "copyLink": "リンクをコピー",
+    "copied": "✓ コピーしました",
+    "moreArticles": "さらに読む",
+    "postNotFound": "記事が見つかりません",
+    "postNotFoundDesc": "お探しの記事は存在しません。",
+    "ngxsmkTeam": "NGXSMK チーム"
+  },
   "changelog": {
+    "pill": "変更履歴",
     "title": "変更履歴",
     "subtitle": "NGXSMK の変更、バグ修正、アップデート、リリースを追跡します。",
+    "statReleases": "リリース",
+    "statChanges": "変更",
+    "statSince": "開始",
+    "all": "すべて",
+    "latest": "最新",
+    "footerTitle": "GitHub でフォロー",
+    "footerSub": "パブリックリポジトリで Issues、コントリビュート、今後のリリースを追跡できます。",
     "type": {
       "added": "追加",
       "fixed": "修正",
@@ -208,6 +236,24 @@
       "removed": "削除"
     },
     "release": {
+      "v200": {
+        "summary": "メジャーリリース：motion.dev アニメーションシステム、完全な UI/UX リデザイン、Tailwind CSS サポート、AI ファーストツール。",
+        "changes": {
+          "0": "motion.dev アニメーションシステムに NgxsmkMotionDirective と NgxsmkAnimateDirective を実装し、宣言的なエンター/エスクロールアニメーションを実現。",
+          "1": "4つのジェスチャー directive：NgxsmkHoverDirective、NgxsmkFocusDirective、NgxsmkDragDirective、NgxsmkPressDirective。",
+          "2": "Tailwind CSS v3 プリセットと v4 CSS テーマでゼロコンフィグ Tailwind 統合を実現。",
+          "3": "サイドバーナビゲーション、カテゴリグルーピィング、StackBlitz ライブプレイグラウンド付きのコンポーネントショーケースページ。",
+          "4": "デモアプリの完全な UI/UX リデザイン：ホーム、ドキュメント、テーマ、ブログ、変更履歴ページ。",
+          "5": "70以上のコンポーネントでのデザイントークン置換により、一貫したビジュアル言語を実現。",
+          "6": "@Input/@Output デコレーターを非推奨化 — すべての API はシグナル専用に。",
+          "7": "CvaBase<T> 抽象クラスを @ngxsmk/cdk/cva-base に抽出し、8つのフォームコンポーネントで約80行の重複した ControlValueAccessor ボイラープレートを排除。",
+          "8": "ListboxKeyboard クラスを @ngxsmk/cdk/listbox-keyboard に抽出し、矢印キー、Home/End、Enter、Escape ナビゲーションを統一。",
+          "9": "SearchService を ComponentRegistry にマージし、重複した MiniSearch インデックスを排除。",
+          "10": "NgxThemeInjectorService を CSS インジェクション用に抽出し、ダークモード切り替えから分離。",
+          "11": "コンポーネントトークンのデフォルト値を css.ts staticVars() から COMPONENT_TOKEN_DEFAULTS レジストリに抽出。",
+          "12": "6つの孤立したレンダラートークンと実装、CDK overlay 戦略、未使用の base-typeahead スケルトンを削除。"
+        }
+      },
       "v133": {
         "summary": "アーキテクチャの深化：CVA ベースクラス、listbox キーボードナビゲーション、デッドコードの整理。",
         "changes": {
@@ -297,8 +343,15 @@
     }
   },
   "roadmap": {
+    "pill": "ロードマップ",
     "title": "ロードマップ",
     "subtitle": "私たちが取り組んでいることと、NGXSMK に次にやってくるもののプレビュー。",
+    "statShipped": "リリース済み",
+    "statInProgress": "開発中",
+    "statPlanned": "計画中",
+    "footerTitle": "機能リクエストがありますか？",
+    "footerSub": "コミュニティのフィードバックに基づいて開発を進めています。GitHub で Issue を開いたりディスカッションを開始したりしてください。",
+    "footerCta": "機能をリクエスト",
     "quarter": {
       "q3_2026": "2026年Q3",
       "q4_2026": "2026年Q4",
@@ -1297,11 +1350,49 @@
     "ionicActive": "Ionicテーマがアクティブ"
   },
   "community": {
-    "title": "コミュニティと貢献",
-    "subtitle": "成長するコミュニティに参加し、質問したり、機能を提案したり、作ったものを共有したりしましょう。",
-    "githubDiscussions": "お問い合わせ・フィードバック",
-    "githubDiscussionsDesc": "質問、アイデア、バグ報告はメンテナーへ直接ご連絡ください。すべてのメッセージがキットの改善に役立ちます。",
-    "joinDiscussion": "フィードバックを送る"
+    "pill": "コミュニティ",
+    "title": "一緒に構築し、より速く出荷する",
+    "subtitle": "成長する Angular 開発者のコミュニティに参加しましょう。質問、機能の提案、バグの報告、NGXSMK で作ったものの共有。",
+    "statOpen": "オープン",
+    "statSource": "ソース",
+    "statMit": "MIT",
+    "statLicense": "ライセンス",
+    "statComponents": "コンポーネント",
+    "channelTitle": "コントリビュート方法",
+    "channelSub": "バグ報告、機能のアイデア、ドキュメントの改善、プルリクエスト — すべてのコントリビュートが大切です。",
+    "channelGithubTitle": "GitHub Issues",
+    "channelGithubDesc": "バグの報告、機能のリクエスト、改善の提案。すべての Issue は48時間以内にトリアージされます。",
+    "channelGithubCta": "Issue を開く",
+    "channelPrTitle": "プルリクエスト",
+    "channelPrDesc": "フォークし、ブランチを作成し、PR を開きます。Conventional Commits に従い、48時間以内にレビューします。",
+    "channelPrCta": "PR を開始",
+    "channelEmailTitle": "メンテナーにメール",
+    "channelEmailDesc": "プライベートなフィードバック、セキュリティの開示、提携のお問い合わせ — 直接ご連絡ください。",
+    "channelEmailCta": "メールを送信",
+    "channelDocsTitle": "ドキュメント",
+    "channelDocsDesc": "タイプミスや不明なガイドを見つけましたか？ドキュメントの PR は最も簡単なコントリビュート方法です — コードレビューは不要。",
+    "channelDocsCta": "ドキュメントを改善",
+    "guidelinesTitle": "コントリビューションガイドライン",
+    "guidelinesSub": "これらの規則に従って、コードベースの一貫性を保ち、レビューを迅速に行いましょう。",
+    "rule1Title": "Conventional commits",
+    "rule1Desc": "feat:、fix:、chore:、docs:、refactor: プレフィックスを使用します。commitlint フックが自動的にこれを適用します。",
+    "rule2Title": "シグナル専用 API",
+    "rule2Desc": "すべての新しい入力は input() / input.required() を使用します。@Input() デコレーターは不可。双方向バインディングには model() を使用。",
+    "rule3Title": "スタンドアロンコンポーネント",
+    "rule3Desc": "すべてのコンポーネントとディレクティブは standalone: true である必要があります。新しいコードに NgModules は使用しません。",
+    "rule4Title": "トークン駆動のスタイリング",
+    "rule4Desc": "--ngxsmk-* CSS カスタムプロパティを使用します。色、角丸、間隔の値をハードコードしないでください。",
+    "rule5Title": "コンポーネントごとに1ファイル",
+    "rule5Desc": "コンポーネントは小さく焦点を絞って保ちます。共通のロジックは @ngxsmk/cdk ユーティリティに抽出します。",
+    "rule6Title": "フルパイプラインを実行",
+    "rule6Desc": "プッシュ前に：npm run build、npm test、npm run lint、npm run format。すべてが合格する必要があります。",
+    "cocTitle": "行動規範",
+    "cocDesc": "私たちは、誰もが歓迎され INCLUDED な体験をするよう努めています。敬意を払い、建設的で、善意を前提としてください。",
+    "footerTitle": "コントリビュートしませんか？",
+    "footerSub": "リポジトリをフォークし、",
+    "footerGoodFirst": "good first issue",
+    "footerSub2": " ラベルの Issue を選んで、プルリクエストを開いてください。48時間以内にレビューします。",
+    "footerCta": "GitHub で開く"
   },
   "api": {
     "title": "APIリファレンス",

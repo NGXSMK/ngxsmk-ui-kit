@@ -6,12 +6,13 @@ import { AppNav } from '../../nav/nav';
 import { NgxsmkButton } from '@ngxsmk/core/button';
 import { NgxsmkBadge } from '@ngxsmk/core/badge';
 import { NgxsmkHeading } from '@ngxsmk/core/heading';
+import { TranslatePipe } from '@ngx-translate/core';
 import { blogPosts } from './blog-data';
 
 @Component({
   selector: 'blog-page',
   standalone: true,
-  imports: [DatePipe, RouterLink, AppNav, NgxsmkButton, NgxsmkBadge, NgxsmkHeading],
+  imports: [DatePipe, RouterLink, AppNav, NgxsmkButton, NgxsmkBadge, NgxsmkHeading, TranslatePipe],
   template: `
     <app-nav />
 
@@ -19,24 +20,23 @@ import { blogPosts } from './blog-data';
       <!-- ═══════════════ HERO ═══════════════ -->
       <header class="b-hero">
         <div class="b-hero__inner">
-          <ngxsmk-badge variant="primary">Blog</ngxsmk-badge>
-          <h1 class="b-hero__title">Latest from NGXSMK</h1>
+          <ngxsmk-badge variant="primary">{{ 'blog.pill' | translate }}</ngxsmk-badge>
+          <h1 class="b-hero__title">{{ 'blog.title' | translate }}</h1>
           <p class="b-hero__sub">
-            Technical deep-dives, release announcements, and guides for building production UIs with
-            signal-native Angular components.
+            {{ 'blog.subtitle' | translate }}
           </p>
           <div class="b-hero__stats">
             <div class="b-hero__stat">
               <span class="b-hero__stat-val">{{ posts.length }}</span>
-              <span class="b-hero__stat-label">Articles</span>
+              <span class="b-hero__stat-label">{{ 'blog.statArticles' | translate }}</span>
             </div>
             <div class="b-hero__stat">
               <span class="b-hero__stat-val">4</span>
-              <span class="b-hero__stat-label">Topics</span>
+              <span class="b-hero__stat-label">{{ 'blog.statTopics' | translate }}</span>
             </div>
             <div class="b-hero__stat">
               <span class="b-hero__stat-val">Weekly</span>
-              <span class="b-hero__stat-label">Cadence</span>
+              <span class="b-hero__stat-label">{{ 'blog.statCadence' | translate }}</span>
             </div>
           </div>
         </div>
@@ -49,7 +49,7 @@ import { blogPosts } from './blog-data';
           [class.b-filter--active]="activeFilter() === 'all'"
           (click)="activeFilter.set('all')"
         >
-          All
+          {{ 'blog.all' | translate }}
         </button>
         @for (cat of categories; track cat) {
           <button
@@ -74,7 +74,7 @@ import { blogPosts } from './blog-data';
                 stroke-linejoin="round"
               />
             </svg>
-            Featured
+            {{ 'blog.featured' | translate }}
           </div>
           <a class="b-featured__card" [routerLink]="['/blog', fp.id]">
             <div class="b-featured__content">
@@ -160,10 +160,11 @@ import { blogPosts } from './blog-data';
               />
             </svg>
           </div>
-          <ngxsmk-heading level="h2" class="b-newsletter__title">Stay in the loop</ngxsmk-heading>
+          <ngxsmk-heading level="h2" class="b-newsletter__title">{{
+            'blog.newsletter' | translate
+          }}</ngxsmk-heading>
           <p class="b-newsletter__sub">
-            Get notified about new components, theme updates, and AI tooling improvements. No spam —
-            just technical updates.
+            {{ 'blog.newsletterSub' | translate }}
           </p>
           <div class="b-newsletter__form">
             <input
@@ -172,7 +173,9 @@ import { blogPosts } from './blog-data';
               placeholder="developer@example.com"
               aria-label="Email address"
             />
-            <button ngxsmk-button class="b-newsletter__btn">Subscribe</button>
+            <button ngxsmk-button class="b-newsletter__btn">
+              {{ 'blog.subscribe' | translate }}
+            </button>
           </div>
           <p class="b-newsletter__note">Join 2,400+ Angular developers. Unsubscribe anytime.</p>
         </div>
@@ -180,7 +183,9 @@ import { blogPosts } from './blog-data';
 
       <!-- ═══════════════ TOPICS ═══════════════ -->
       <section class="b-topics">
-        <ngxsmk-heading level="h2" class="b-topics__title">Topics</ngxsmk-heading>
+        <ngxsmk-heading level="h2" class="b-topics__title">{{
+          'blog.topicsTitle' | translate
+        }}</ngxsmk-heading>
         <div class="b-topics__grid">
           @for (topic of topicList; track topic.name) {
             <div class="b-topic" [style.--topic-color]="topic.color">

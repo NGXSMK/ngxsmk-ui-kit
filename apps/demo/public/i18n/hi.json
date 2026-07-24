@@ -172,8 +172,18 @@
     "teamDesign": "डिज़ाइन"
   },
   "blog": {
+    "pill": "ब्लॉग",
     "title": "ब्लॉग",
     "subtitle": "NGXSMK टीम से नवीनतम समाचार, लेख और लिखी हुई सामग्री।",
+    "statArticles": "लेख",
+    "statTopics": "विषय",
+    "statCadence": "आवृत्ति",
+    "featured": "विशेष रुप से",
+    "all": "सभी",
+    "newsletter": "अपडेट रहें",
+    "newsletterSub": "नवीनतम NGXSMK अपडेट, मार्गदर्शिका और कम्युनिटी हाइलाइट्स सीधे अपने इनबॉक्स में प्राप्त करें।",
+    "subscribe": "सदस्यता लें",
+    "topicsTitle": "विषय",
     "readArticle": "लेख पढ़ें",
     "tag": {
       "announcement": "घोषणा",
@@ -198,9 +208,27 @@
       }
     }
   },
+  "blogPost": {
+    "backToBlog": "ब्लॉग पर वापस जाएं",
+    "quickStart": "त्वरित आरंभ",
+    "copyLink": "लिंक कॉपी करें",
+    "copied": "✓ कॉपी किया गया",
+    "moreArticles": "और पढ़ें",
+    "postNotFound": "लेख नहीं मिला",
+    "postNotFoundDesc": "आप जो लेख खोज रहे हैं वह मौजूद नहीं है।",
+    "ngxsmkTeam": "NGXSMK टीम"
+  },
   "changelog": {
+    "pill": "चेंजलॉग",
     "title": "चेंजलॉग",
     "subtitle": "NGXSMK के परिवर्तन, बग फ़िक्स, अपडेट और रिलीज़ को ट्रैक करें।",
+    "statReleases": "रिलीज़",
+    "statChanges": "बदलाव",
+    "statSince": "से",
+    "all": "सभी",
+    "latest": "नवीनतम",
+    "footerTitle": "GitHub पर फॉलो करें",
+    "footerSub": "पब्लिक रिपॉज़िटरी में Issues खोलें, योगदान दें या आगामी रिलीज़ को ट्रैक करें।",
     "type": {
       "added": "जोड़ा गया",
       "fixed": "सुधारा गया",
@@ -208,6 +236,24 @@
       "removed": "हटाया गया"
     },
     "release": {
+      "v200": {
+        "summary": "प्रमुख रिलीज़: motion.dev एनिमेशन सिस्टम, पूर्ण UI/UX रीडिज़ाइन, Tailwind CSS समर्थन, और AI-फर्स्ट टूल्स।",
+        "changes": {
+          "0": "motion.dev एनिमेशन सिस्टम जिसमें घोषणात्मक एंटर/एग्ज़िट/स्क्रॉल एनिमेशन के लिए NgxsmkMotionDirective और NgxsmkAnimateDirective हैं।",
+          "1": "चार जेस्चर डायरेक्टिव: NgxsmkHoverDirective, NgxsmkFocusDirective, NgxsmkDragDirective और NgxsmkPressDirective।",
+          "2": "Tailwind CSS v3 प्रीसेट और v4 CSS थीम ज़ीरो-कॉन्फ़िग Tailwind इंटीग्रेशन के लिए।",
+          "3": "साइडबार नेविगेशन, कैटेगरी ग्रुपिंग और StackBlitz लाइव प्लेग्राउंड के साथ कंपोनेंट शोकेस पेज।",
+          "4": "डेमो ऐप का पूर्ण UI/UX रीडिज़ाइन: होम, डॉक्स, थीम, ब्लॉग और चेंजलॉग पेज।",
+          "5": "लगातार विज़ुअल भाषा के लिए 70+ कंपोनेंट्स में डिज़ाइन टोकन प्रतिस्थापन।",
+          "6": "@Input/@Output डेकोरेटर्स अप्रचलित — सभी API अब केवल सिग्नल-आधारित हैं।",
+          "7": "CvaBase<T> अमूर्त क्लास को @ngxsmk/cdk/cva-base में निकाला, 8 फॉर्म कंपोनेंट्स में ~80 पंक्तियों की डुप्लीकेट ControlValueAccessor बॉयलरप्लेट समाप्त की।",
+          "8": "ListboxKeyboard क्लास को @ngxsmk/cdk/listbox-keyboard में निकाला, तीर कुंजी, Home/End, Enter और Escape नेविगेशन को एकीकृत किया।",
+          "9": "SearchService को ComponentRegistry में मर्ज किया, डुप्लीकेट MiniSearch इंडेक्स समाप्त किया।",
+          "10": "NgxThemeInjectorService को CSS इंजेक्शन के लिए निकाला, डार्क मोड स्विचिंग से अलग किया।",
+          "11": "कंपोनेंट टोकन डिफ़ॉल्ट मान css.ts staticVars() से COMPONENT_TOKEN_DEFAULTS रजिस्ट्री में निकाले।",
+          "12": "6 अनाथ रेंडरर टोकन और कार्यान्वयन, CDK overlay रणनीति और अप्रयुक्त base-typeahead स्केलेटन हटाए।"
+        }
+      },
       "v133": {
         "summary": "वास्तुकला गहराई: CVA बेस क्लास, listbox कीबोर्ड नेविगेशन और मृत कोड की सफाई।",
         "changes": {
@@ -297,8 +343,15 @@
     }
   },
   "roadmap": {
+    "pill": "रोडमैप",
     "title": "रोडमैप",
     "subtitle": "एक झलक कि हम किस पर काम कर रहे हैं और NGXSMK में आगे क्या आने वाला है।",
+    "statShipped": "रिलीज़ किया गया",
+    "statInProgress": "प्रगति में",
+    "statPlanned": "योजनाबद्ध",
+    "footerTitle": "कोई फ़ीचर अनुरोध है?",
+    "footerSub": "हम कम्युनिटी फ़ीडबैक के आधार पर विकसित करते हैं। GitHub पर कोई Issue खोलें या चर्चा शुरू करें।",
+    "footerCta": "फ़ीचर का अनुरोध करें",
     "quarter": {
       "q3_2026": "Q3 2026",
       "q4_2026": "Q4 2026",
@@ -1297,11 +1350,49 @@
     "ionicActive": "आयोनिक थीम सक्रिय"
   },
   "community": {
-    "title": "समुदाय और योगदान",
-    "subtitle": "हमारे बढ़ते समुदाय से जुड़ें, प्रश्न पूछें, फ़ीचर्स का प्रस्ताव करें और जो आपने बनाया है उसे साझा करें।",
-    "githubDiscussions": "संपर्क और प्रतिक्रिया",
-    "githubDiscussionsDesc": "प्रश्न, विचार या बग रिपोर्ट? सीधे मेंटेनर से संपर्क करें — हर संदेश किट को बेहतर बनाने में मदद करता है।",
-    "joinDiscussion": "प्रतिक्रिया भेजें"
+    "pill": "कम्युनिटी",
+    "title": "एक साथ बनाएँ, तेज़ी से शिप करें",
+    "subtitle": "Angular डेवलपर्स के बढ़ते समुदाय से जुड़ें। प्रश्न पूछें, फ़ीचर्स प्रस्तावित करें, बग रिपोर्ट करें, और NGXSMK के साथ जो बनाया है उसे साझा करें।",
+    "statOpen": "खुला",
+    "statSource": "स्रोत",
+    "statMit": "MIT",
+    "statLicense": "लाइसेंस",
+    "statComponents": "कंपोनेंट्स",
+    "channelTitle": "योगदान कैसे करें",
+    "channelSub": "बग रिपोर्ट हो, फ़ीचर का विचार हो, दस्तावेज़ में सुधार हो या पुल रिक्वेस्ट — हर योगदान मायने रखता है।",
+    "channelGithubTitle": "GitHub Issues",
+    "channelGithubDesc": "बग रिपोर्ट करें, फ़ीचर का अनुरोध करें, या सुधार सुझाएँ। हर इश्यू 48 घंटे के भीतर ट्रायज होता है।",
+    "channelGithubCta": "इश्यू खोलें",
+    "channelPrTitle": "पुल रिक्वेस्ट",
+    "channelPrDesc": "फ़ोर्क करें, ब्रांच बनाएँ, और PR खोलें। हम Conventional Commits का पालन करते हैं और 48 घंटे के भीतर रिव्यू करते हैं।",
+    "channelPrCta": "PR शुरू करें",
+    "channelEmailTitle": "मेंटेनर को ईमेल करें",
+    "channelEmailDesc": "निजी फ़ीडबैक, सुरक्षा प्रकटीकरण, या साझेदारी पूछताछ के लिए — सीधे संपर्क करें।",
+    "channelEmailCta": "ईमेल भेजें",
+    "channelDocsTitle": "दस्तावेज़",
+    "channelDocsDesc": "टाइपो या अस्पष्ट गाइड मिला? दस्तावेज़ PR योगदान का सबसे तेज़ तरीका है — कोड रिव्यू की आवश्यकता नहीं।",
+    "channelDocsCta": "दस्तावेज़ में सुधार करें",
+    "guidelinesTitle": "योगदान दिशानिर्देश",
+    "guidelinesSub": "इन परंपराओं का पालन करें ताकि कोडबेस में एकरूपता बनी रहे और रिव्यू तेज़ हों।",
+    "rule1Title": "Conventional commits",
+    "rule1Desc": "feat:, fix:, chore:, docs:, या refactor: प्रीफ़िक्स का उपयोग करें। commitlint हुक इसे स्वचालित रूप से लागू करता है।",
+    "rule2Title": "केवल सिग्नल API",
+    "rule2Desc": "सभी नए इनपुट input() / input.required() का उपयोग करने चाहिए। @Input() डेकोरेटर्स नहीं। टू-वे बाइंडिंग के लिए model()।",
+    "rule3Title": "स्टैंडअलोन कंपोनेंट्स",
+    "rule3Desc": "हर कंपोनेंट और डायरेक्टिव standalone: true होना चाहिए। नए कोड में NgModules नहीं।",
+    "rule4Title": "टोकन-संचालित स्टाइलिंग",
+    "rule4Desc": "--ngxsmk-* CSS कस्टम प्रॉपर्टीज़ का उपयोग करें। रंग, कोना त्रिज्या, या स्पेसिंग मान कभी हार्डकोड न करें।",
+    "rule5Title": "प्रति फ़ाइल एक कंपोनेंट",
+    "rule5Desc": "कंपोनेंट्स को छोटा और केंद्रित रखें। साझा लॉजिक को @ngxsmk/cdk यूटिलिटीज़ में निकालें।",
+    "runTitle": "पूरी पाइपलाइन चलाएँ",
+    "rule6Desc": "पुश करने से पहले: npm run build, npm test, npm run lint, npm run format। सभी पास होने चाहिए।",
+    "cocTitle": "आचार संहिता",
+    "cocDesc": "हम सभी के लिए एक स्वागत योग्य और समावेशी अनुभव प्रदान करने के लिए प्रतिबद्ध हैं। सम्मानजनक, रचनात्मक रहें और अच्छे इरादे मानें।",
+    "footerTitle": "योगदान करने के लिए तैयार?",
+    "footerSub": "रिपॉज़िटरी फ़ोर्क करें,",
+    "footerGoodFirst": "good first issue",
+    "footerSub2": " लेबल वाला इश्यू चुनें, और पुल रिक्वेस्ट खोलें। हम 48 घंटे के भीतर रिव्यू करते हैं।",
+    "footerCta": "GitHub पर खोलें"
   },
   "api": {
     "title": "API संदर्भ",

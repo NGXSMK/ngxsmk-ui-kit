@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, ElementRef, HostListener, inject, signal } from '@angular/core';
 import { UpperCasePipe } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 import { LangService } from './lang.service';
@@ -147,6 +147,7 @@ import { isRtl } from './langs';
 })
 export class LanguageSwitcher {
   private readonly lang = inject(LangService);
+  private readonly host = inject(ElementRef);
   readonly langs = this.lang.langs;
   readonly open = signal(false);
 
@@ -157,6 +158,18 @@ export class LanguageSwitcher {
 
   choose(code: string): void {
     this.lang.setLang(code);
+    this.open.set(false);
+  }
+
+  @HostListener('document:pointerdown', ['$event'])
+  onPointerDown(e: PointerEvent): void {
+    if (this.open() && !this.host.nativeElement.contains(e.target as Node)) {
+      this.open.set(false);
+    }
+  }
+
+  @HostListener('document:keydown.escape')
+  onEscapeKey(): void {
     this.open.set(false);
   }
 }

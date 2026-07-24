@@ -172,8 +172,18 @@
     "teamDesign": "Diseño"
   },
   "blog": {
+    "pill": "Blog",
     "title": "Blog",
     "subtitle": "Últimas noticias, artículos y publicaciones del equipo de NGXSMK.",
+    "statArticles": "Artículos",
+    "statTopics": "Temas",
+    "statCadence": "Frecuencia",
+    "featured": "Destacado",
+    "all": "Todos",
+    "newsletter": "Mantente al día",
+    "newsletterSub": "Recibe las últimas actualizaciones de NGXSMK, guías y noticias de la comunidad directamente en tu bandeja de entrada.",
+    "subscribe": "Suscribirse",
+    "topicsTitle": "Temas",
     "readArticle": "Leer artículo",
     "tag": {
       "announcement": "Anuncio",
@@ -198,9 +208,27 @@
       }
     }
   },
+  "blogPost": {
+    "backToBlog": "Volver al blog",
+    "quickStart": "Inicio rápido",
+    "copyLink": "Copiar enlace",
+    "copied": "✓ Copiado",
+    "moreArticles": "Más artículos",
+    "postNotFound": "Artículo no encontrado",
+    "postNotFoundDesc": "El artículo que buscas no existe.",
+    "ngxsmkTeam": "Equipo NGXSMK"
+  },
   "changelog": {
+    "pill": "Registro de cambios",
     "title": "Registro de cambios",
     "subtitle": "Sigue los cambios, correcciones de errores, actualizaciones y lanzamientos de NGXSMK.",
+    "statReleases": "Versiones",
+    "statChanges": "Cambios",
+    "statSince": "Desde",
+    "all": "Todos",
+    "latest": "Último",
+    "footerTitle": "Síguenos en GitHub",
+    "footerSub": "Abre issues, contribuye o rastrea próximas versiones en el repositorio público.",
     "type": {
       "added": "añadido",
       "fixed": "corregido",
@@ -208,6 +236,24 @@
       "removed": "eliminado"
     },
     "release": {
+      "v200": {
+        "summary": "Versión mayor: sistema de animación motion.dev, rediseño completo de UI/UX, soporte para Tailwind CSS y herramientas IA.",
+        "changes": {
+          "0": "Sistema de animación motion.dev con NgxsmkMotionDirective y NgxsmkAnimateDirective para animaciones declarativas de entrada/salida/scroll.",
+          "1": "Cuatro directivas de gestos: NgxsmkHoverDirective, NgxsmkFocusDirective, NgxsmkDragDirective y NgxsmkPressDirective.",
+          "2": "Preset de Tailwind CSS v3 y tema CSS v4 para integración cero configuración con Tailwind.",
+          "3": "Página showcase de componentes con navegación lateral, agrupación por categorías y playground en vivo con StackBlitz.",
+          "4": "Rediseño completo de UI/UX de la app demo: páginas de inicio, docs, temas, blog y changelog.",
+          "5": "Reemplazo de tokens de diseño en 70+ componentes para un lenguaje visual consistente.",
+          "6": "Decoradores @Input/@Output obsoletos — todas las APIs ahora son solo señales.",
+          "7": "Clase abstracta CvaBase<T> extraída a @ngxsmk/cdk/cva-base, eliminando ~80 líneas de boilerplate duplicado de ControlValueAccessor en 8 componentes de formulario.",
+          "8": "Clase ListboxKeyboard extraída a @ngxsmk/cdk/listbox-keyboard, unificando navegación de flechas, Home/End, Enter y Escape.",
+          "9": "SearchService fusionado en ComponentRegistry, eliminando el índice MiniSearch duplicado.",
+          "10": "NgxThemeInjectorService extraído para inyección CSS, desacoplándolo del modo oscuro.",
+          "11": "Valores por defecto de tokens de componente extraídos de css.ts staticVars() a un registro COMPONENT_TOKEN_DEFAULTS.",
+          "12": "Eliminados 6 tokens de renderer huérfanos e implementaciones, la estrategia overlay CDK y el esqueleto base-typeahead no utilizado."
+        }
+      },
       "v133": {
         "summary": "Profundización arquitectónica: clase base CVA, navegación por teclado en listbox y limpieza de código muerto.",
         "changes": {
@@ -297,8 +343,15 @@
     }
   },
   "roadmap": {
+    "pill": "Hoja de ruta",
     "title": "Hoja de ruta",
     "subtitle": "Una vista previa de en qué estamos trabajando y qué viene próximo para NGXSMK.",
+    "statShipped": "Publicado",
+    "statInProgress": "En progreso",
+    "statPlanned": "Planificado",
+    "footerTitle": "¿Tienes una solicitud de función?",
+    "footerSub": "Desarrollamos según la retroalimentación de la comunidad. Abre un issue o inicia una discusión en GitHub.",
+    "footerCta": "Solicitar una función",
     "quarter": {
       "q3_2026": "Q3 2026",
       "q4_2026": "Q4 2026",
