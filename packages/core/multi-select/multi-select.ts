@@ -162,7 +162,7 @@ import { ListboxKeyboard } from '@ngxsmk/cdk/listbox-keyboard';
       color: var(--ngxsmk-color-on-primary-container);
       border-radius: var(--ngxsmk-radius-sm);
       font-size: var(--ngxsmk-text-body-sm-size);
-      font-weight: 500;
+      font-weight: var(--ngxsmk-font-weight-medium, 500);
     }
 
     .ngxsmk-multi-select__tag-remove {
@@ -170,7 +170,7 @@ import { ListboxKeyboard } from '@ngxsmk/cdk/listbox-keyboard';
       background: none;
       cursor: pointer;
       font-size: var(--ngxsmk-text-body-lg-size);
-      line-height: 1;
+      line-height: var(--ngxsmk-leading-none, 1);
       padding: 0;
       color: inherit;
       opacity: var(--ngxsmk-opacity-muted);

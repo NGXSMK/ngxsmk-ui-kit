@@ -132,7 +132,7 @@ import { NgxsmkTable, NgxsmkTableColumn } from '@ngxsmk/core/table';
     .ngxsmk-data-table__page-btn--active {
       background: var(--ngxsmk-color-primary);
       color: var(--ngxsmk-color-on-primary);
-      font-weight: 600;
+      font-weight: var(--ngxsmk-font-weight-semibold, 600);
     }
 
     .ngxsmk-data-table__page-btn:disabled {

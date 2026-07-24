@@ -58,7 +58,7 @@ import { DOCUMENT } from '@angular/common';
     .ngxsmk-outline__link--active {
       color: var(--ngxsmk-color-primary);
       border-inline-start-color: var(--ngxsmk-color-primary);
-      font-weight: 500;
+      font-weight: var(--ngxsmk-font-weight-medium, 500);
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

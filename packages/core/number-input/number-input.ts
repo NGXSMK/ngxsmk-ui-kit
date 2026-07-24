@@ -135,7 +135,7 @@ import { CvaBase } from '@ngxsmk/cdk/cva-base';
       background: var(--ngxsmk-color-surface-variant);
       color: var(--ngxsmk-color-on-surface);
       font-size: var(--ngxsmk-text-title-md-size);
-      line-height: 1;
+      line-height: var(--ngxsmk-leading-none, 1);
       cursor: pointer;
       user-select: none;
       transition: background var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);

@@ -34,7 +34,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
       border-radius: var(--ngxsmk-radius-md);
     }
     .ngxsmk-memory-viewer__key {
-      font-weight: 500;
+      font-weight: var(--ngxsmk-font-weight-medium, 500);
       color: var(--ngxsmk-color-primary);
     }
     .ngxsmk-memory-viewer__value {

@@ -31,10 +31,10 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
       padding: var(--ngxsmk-space-0-5) var(--ngxsmk-space-3);
     }
     .ngxsmk-diff-viewer__line--add {
-      background: rgba(var(--ngxsmk-color-success), 0.1);
+      background: color-mix(in srgb, var(--ngxsmk-color-success, #0d8626) 10%, transparent);
     }
     .ngxsmk-diff-viewer__line--remove {
-      background: rgba(var(--ngxsmk-color-error), 0.1);
+      background: color-mix(in srgb, var(--ngxsmk-color-error, #e3193b) 10%, transparent);
     }
     .ngxsmk-diff-viewer__line--add .ngxsmk-diff-viewer__prefix {
       color: var(--ngxsmk-color-success);

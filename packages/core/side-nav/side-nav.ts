@@ -57,7 +57,7 @@ export class NgxsmkSideNav {
       margin-top: var(--ngxsmk-space-2);
       font-family: var(--ngxsmk-font-sans);
       font-size: var(--ngxsmk-text-label-sm-size);
-      font-weight: 600;
+      font-weight: var(--ngxsmk-font-weight-semibold, 600);
       color: var(--ngxsmk-color-on-surface-variant);
       text-transform: uppercase;
       letter-spacing: 0.05em;
@@ -126,7 +126,7 @@ export class NgxsmkSideNavHeading {}
     :host([data-active]) .ngxsmk-side-nav-item__link {
       background: var(--ngxsmk-color-primary-container);
       color: var(--ngxsmk-color-on-primary-container);
-      font-weight: 500;
+      font-weight: var(--ngxsmk-font-weight-medium, 500);
     }
     :host([data-disabled]) .ngxsmk-side-nav-item__link {
       opacity: var(--ngxsmk-opacity-disabled);

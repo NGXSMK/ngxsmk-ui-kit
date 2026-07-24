@@ -149,7 +149,7 @@ export class NgxsmkAccordion {
       color: var(--ngxsmk-color-on-surface);
       font-family: inherit;
       font-size: var(--ngxsmk-text-body-md-size);
-      font-weight: 500;
+      font-weight: var(--ngxsmk-font-weight-medium, 500);
       line-height: var(--ngxsmk-text-body-md-line);
       text-align: start;
       cursor: pointer;

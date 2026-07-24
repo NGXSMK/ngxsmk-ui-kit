@@ -160,7 +160,7 @@ export interface PromptItem {
 
     .ngxsmk-prompt-card__cat {
       font-size: var(--ngxsmk-text-label-sm-size);
-      font-weight: 700;
+      font-weight: var(--ngxsmk-font-weight-bold, 700);
       text-transform: uppercase;
       letter-spacing: 0.05em;
       color: var(--ngxsmk-color-on-surface-variant);
@@ -170,7 +170,7 @@ export interface PromptItem {
       margin: 0 0 var(--ngxsmk-space-1, 0.25rem) 0;
       font-family: 'Outfit', var(--ngxsmk-font-sans, system-ui), sans-serif;
       font-size: var(--ngxsmk-text-label-lg-size);
-      font-weight: 700;
+      font-weight: var(--ngxsmk-font-weight-bold, 700);
       color: var(--ngxsmk-color-on-surface);
       line-height: 1.3;
     }
@@ -196,7 +196,7 @@ export interface PromptItem {
 
     .ngxsmk-prompt-card__action {
       font-size: var(--ngxsmk-text-label-md-size);
-      font-weight: 600;
+      font-weight: var(--ngxsmk-font-weight-semibold, 600);
       color: var(--ngxsmk-color-primary);
       transition: color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }

@@ -83,16 +83,16 @@ export type DockPosition = 'bottom' | 'top' | 'left' | 'right';
       color: var(--ngxsmk-color-on-surface, #09090b);
       cursor: pointer;
       transition:
-        transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
-        background 0.15s ease,
-        box-shadow 0.15s ease;
+        transform var(--ngxsmk-duration-normal, 0.2s) cubic-bezier(0.34, 1.56, 0.64, 1),
+        background var(--ngxsmk-duration-fast, 150ms) ease,
+        box-shadow var(--ngxsmk-duration-fast, 150ms) ease;
     }
 
     .ngxsmk-dock__item:hover:not(:disabled) {
       transform: scale(1.25) translateY(-4px);
       background: var(--ngxsmk-color-primary, #7c3aed);
       color: var(--ngxsmk-color-on-primary, #ffffff);
-      box-shadow: 0 8px 16px -4px rgba(124, 58, 237, 0.4);
+      box-shadow: var(--ngxsmk-shadow-lg, 0 8px 16px -4px rgba(124, 58, 237, 0.4));
     }
 
     .ngxsmk-dock__item:hover .ngxsmk-dock__tooltip {
@@ -111,12 +111,12 @@ export type DockPosition = 'bottom' | 'top' | 'left' | 'right';
       background: var(--ngxsmk-color-on-surface, #09090b);
       color: var(--ngxsmk-color-surface, #ffffff);
       font-size: var(--ngxsmk-text-body-xs-size, 0.75rem);
-      font-weight: 500;
+      font-weight: var(--ngxsmk-font-weight-medium, 500);
       white-space: nowrap;
       pointer-events: none;
       opacity: 0;
       visibility: hidden;
-      transition: all 0.15s ease;
+      transition: all var(--ngxsmk-duration-fast, 150ms) ease;
     }
 
     .ngxsmk-dock__icon {
@@ -132,12 +132,12 @@ export type DockPosition = 'bottom' | 'top' | 'left' | 'right';
       top: -2px;
       right: -2px;
       padding: 0.1rem 0.35rem;
-      border-radius: 9999px;
+      border-radius: var(--ngxsmk-radius-full, 9999px);
       background: var(--ngxsmk-color-error, #ef4444);
       color: var(--ngxsmk-color-on-error, #ffffff);
       font-size: 0.65rem;
-      font-weight: 700;
-      line-height: 1;
+      font-weight: var(--ngxsmk-font-weight-bold, 700);
+      line-height: var(--ngxsmk-leading-none, 1);
     }
 
     .ngxsmk-dock__item:disabled {

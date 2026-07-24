@@ -116,6 +116,14 @@
   --ngxsmk-tracking-tight: -0.02em;
   --ngxsmk-tracking-normal: 0;
   --ngxsmk-tracking-wide: 0.08em;
+  --ngxsmk-font-weight-regular: 400;
+  --ngxsmk-font-weight-medium: 500;
+  --ngxsmk-font-weight-semibold: 600;
+  --ngxsmk-font-weight-bold: 700;
+  --ngxsmk-leading-none: 1;
+  --ngxsmk-leading-tight: 1.25;
+  --ngxsmk-leading-normal: 1.5;
+  --ngxsmk-leading-relaxed: 1.625;
   --ngxsmk-space-0: 0px;
   --ngxsmk-space-1: 0.25rem;
   --ngxsmk-space-2: 0.5rem;

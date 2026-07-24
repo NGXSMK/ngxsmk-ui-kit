@@ -250,7 +250,7 @@ export class NgxsmkToast {
     .ngxsmk-toaster__title {
       margin: 0;
       font-size: var(--ngxsmk-text-label-lg-size);
-      font-weight: 600;
+      font-weight: var(--ngxsmk-font-weight-semibold, 600);
       line-height: var(--ngxsmk-text-label-lg-line);
     }
 

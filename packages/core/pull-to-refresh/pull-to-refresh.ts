@@ -72,7 +72,7 @@ function resistedDistance(distance: number, maxPull: number): number {
       gap: 2px;
       pointer-events: none;
       font-size: 11px;
-      font-weight: 500;
+      font-weight: var(--ngxsmk-font-weight-medium, 500);
       color: var(--ngxsmk-color-on-surface-variant, #666);
     }
 
@@ -85,6 +85,12 @@ function resistedDistance(distance: number, maxPull: number): number {
       min-width: 96px;
       text-align: center;
       white-space: nowrap;
+    }
+
+    .ngxsmk-ptr__indicator path,
+    .ngxsmk-ptr__indicator circle,
+    .ngxsmk-ptr__indicator rect {
+      transition: opacity var(--ngxsmk-duration-normal, 150ms);
     }
 
     .ngxsmk-ptr__content {
@@ -111,7 +117,6 @@ function resistedDistance(distance: number, maxPull: number): number {
           stroke-width="1.5"
           stroke-linecap="round"
           [style.opacity]="status() === 'ready' || status() === 'refreshing' ? 1 : 0"
-          [style.transition]="'opacity 150ms'"
         />
         <circle
           cx="31.3"
@@ -119,7 +124,6 @@ function resistedDistance(distance: number, maxPull: number): number {
           r="2.2"
           fill="currentColor"
           [style.opacity]="status() === 'ready' || status() === 'refreshing' ? 1 : 0"
-          [style.transition]="'opacity 150ms'"
         />
         <rect x="7" y="7" width="22" height="22" rx="9" fill="currentColor" />
         <circle cx="14.2" cy="16" r="1.45" fill="var(--ngxsmk-color-surface, #fff)" />
@@ -131,7 +135,6 @@ function resistedDistance(distance: number, maxPull: number): number {
           stroke-width="1.5"
           stroke-linecap="round"
           [style.opacity]="status() === 'ready' || status() === 'refreshing' ? 0 : 1"
-          [style.transition]="'opacity 150ms'"
         />
         <path
           d="M14 20.5c1 2.4 7 2.4 8 0"
@@ -140,7 +143,6 @@ function resistedDistance(distance: number, maxPull: number): number {
           stroke-width="1.5"
           stroke-linecap="round"
           [style.opacity]="status() === 'ready' ? 1 : 0"
-          [style.transition]="'opacity 150ms'"
         />
         <circle
           cx="18"
@@ -148,7 +150,6 @@ function resistedDistance(distance: number, maxPull: number): number {
           r="1.6"
           fill="var(--ngxsmk-color-surface, #fff)"
           [style.opacity]="status() === 'refreshing' ? 1 : 0"
-          [style.transition]="'opacity 150ms'"
         />
       </svg>
       <span class="ngxsmk-ptr__label" [style.opacity]="labelOpacity()">{{ label() }}</span>

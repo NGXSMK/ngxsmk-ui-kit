@@ -357,7 +357,7 @@ import {
         position: fixed;
         inset: 0;
         z-index: calc(var(--ngxsmk-z-banner) - 1);
-        background: rgb(0 0 0 / 0.4);
+        background: var(--ngxsmk-color-backdrop, rgb(0 0 0 / 0.4));
         animation: ngxsmk-chat-backdrop-in var(--ngxsmk-duration-normal) var(--ngxsmk-ease-out);
       }
 

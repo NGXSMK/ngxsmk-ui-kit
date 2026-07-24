@@ -13,7 +13,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
       display: inline-block;
       font-family: var(--ngxsmk-font-sans);
       font-size: var(--ngxsmk-text-body-sm-size);
-      font-weight: 500;
+      font-weight: var(--ngxsmk-font-weight-medium, 500);
       color: var(--ngxsmk-color-on-surface);
     }
     .ngxsmk-field-label__req {

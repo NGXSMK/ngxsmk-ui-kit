@@ -24,7 +24,7 @@
     }
     .ngxsmk-citation-viewer__title {
       font-size: var(--ngxsmk-text-label-lg-size);
-      font-weight: 500;
+      font-weight: var(--ngxsmk-font-weight-medium, 500);
       color: var(--ngxsmk-color-on-surface);
       margin-bottom: var(--ngxsmk-space-1);
     }
@@ -36,7 +36,7 @@
     .ngxsmk-citation-viewer__preview {
       font-size: var(--ngxsmk-text-body-sm-size);
       color: var(--ngxsmk-color-on-surface-variant);
-      line-height: 1.5;
+      line-height: var(--ngxsmk-leading-normal, 1.5);
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

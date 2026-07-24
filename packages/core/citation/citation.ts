@@ -46,7 +46,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
       color: var(--ngxsmk-color-on-surface-variant);
     }
     .ngxsmk-citation__marker {
-      font-weight: 600;
+      font-weight: var(--ngxsmk-font-weight-semibold, 600);
       color: var(--ngxsmk-color-primary);
       font-size: 0.75em;
     }

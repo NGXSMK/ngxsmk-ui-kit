@@ -655,11 +655,11 @@ const HOURS = Array.from({ length: 24 }, (_, i) => i);
         box-shadow: none;
       }
       .ngxsmk-sch__nav-btn--today {
-        font-weight: 600;
+        font-weight: var(--ngxsmk-font-weight-semibold, 600);
       }
       .ngxsmk-sch__title {
         font-size: var(--ngxsmk-text-label-lg-size, 0.875rem);
-        font-weight: 600;
+        font-weight: var(--ngxsmk-font-weight-semibold, 600);
         color: var(--_text);
         margin-left: var(--ngxsmk-space-2, 0.5rem);
         user-select: none;
@@ -681,7 +681,7 @@ const HOURS = Array.from({ length: 24 }, (_, i) => i);
         color: var(--_text-sec);
         font-size: var(--ngxsmk-text-label-sm-size, 0.6875rem);
         font-family: inherit;
-        font-weight: 500;
+        font-weight: var(--ngxsmk-font-weight-medium, 500);
         cursor: pointer;
         transition:
           background var(--_fast),
@@ -723,11 +723,11 @@ const HOURS = Array.from({ length: 24 }, (_, i) => i);
       }
       .ngxsmk-sch__day-name {
         font-size: var(--ngxsmk-text-label-xs-size, var(--ngxsmk-text-label-sm-size, 0.6875rem));
-        font-weight: 600;
+        font-weight: var(--ngxsmk-font-weight-semibold, 600);
         text-transform: uppercase;
         letter-spacing: 0.06em;
         color: var(--_text-sec);
-        line-height: 1;
+        line-height: var(--ngxsmk-leading-none, 1);
       }
       .ngxsmk-sch__day-num {
         display: inline-flex;
@@ -737,9 +737,9 @@ const HOURS = Array.from({ length: 24 }, (_, i) => i);
         height: 1.625rem;
         border-radius: 50%;
         font-size: var(--ngxsmk-text-body-md-size, 0.875rem);
-        font-weight: 600;
+        font-weight: var(--ngxsmk-font-weight-semibold, 600);
         color: var(--_text);
-        line-height: 1;
+        line-height: var(--ngxsmk-leading-none, 1);
         transition:
           background var(--_fast),
           color var(--_fast);
@@ -769,13 +769,13 @@ const HOURS = Array.from({ length: 24 }, (_, i) => i);
         color: var(--_text-sec);
         border-inline-end: 1px solid var(--_border);
         user-select: none;
-        line-height: 1;
+        line-height: var(--ngxsmk-leading-none, 1);
       }
       .ngxsmk-sch__gutter-label--allday {
         font-size: 9px;
         text-transform: uppercase;
         letter-spacing: 0.06em;
-        font-weight: 600;
+        font-weight: var(--ngxsmk-font-weight-semibold, 600);
         justify-content: center;
         padding: 0;
         align-items: center;
@@ -795,7 +795,7 @@ const HOURS = Array.from({ length: 24 }, (_, i) => i);
         color: var(--_on-primary-container);
         border-radius: var(--_radius-sm);
         font-size: var(--ngxsmk-text-label-xs-size, var(--ngxsmk-text-label-sm-size, 0.6875rem));
-        font-weight: 500;
+        font-weight: var(--ngxsmk-font-weight-medium, 500);
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -916,16 +916,16 @@ const HOURS = Array.from({ length: 24 }, (_, i) => i);
         pointer-events: none;
       }
       .ngxsmk-sch__event-time {
-        font-weight: 600;
+        font-weight: var(--ngxsmk-font-weight-semibold, 600);
         font-size: 10px;
-        line-height: 1;
+        line-height: var(--ngxsmk-leading-none, 1);
         opacity: 0.85;
       }
       .ngxsmk-sch__event-title {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        font-weight: 500;
+        font-weight: var(--ngxsmk-font-weight-medium, 500);
         line-height: 1.2;
       }
 
@@ -990,7 +990,7 @@ const HOURS = Array.from({ length: 24 }, (_, i) => i);
         padding: var(--ngxsmk-space-2, 0.5rem);
         text-align: center;
         font-size: var(--ngxsmk-text-label-xs-size, var(--ngxsmk-text-label-sm-size, 0.6875rem));
-        font-weight: 600;
+        font-weight: var(--ngxsmk-font-weight-semibold, 600);
         text-transform: uppercase;
         letter-spacing: 0.06em;
         color: var(--_text-sec);
@@ -1021,7 +1021,7 @@ const HOURS = Array.from({ length: 24 }, (_, i) => i);
       }
       .ngxsmk-sch__month-day-num {
         font-size: var(--ngxsmk-text-label-sm-size, 0.75rem);
-        font-weight: 500;
+        font-weight: var(--ngxsmk-font-weight-medium, 500);
         color: var(--_text-sec);
         margin-bottom: 2px;
       }
@@ -1046,7 +1046,7 @@ const HOURS = Array.from({ length: 24 }, (_, i) => i);
         padding: 1px 4px;
         border-radius: var(--_radius-sm);
         font-size: 10px;
-        font-weight: 500;
+        font-weight: var(--ngxsmk-font-weight-medium, 500);
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -1056,7 +1056,7 @@ const HOURS = Array.from({ length: 24 }, (_, i) => i);
         line-height: 1.4;
       }
       .ngxsmk-sch__month-event-time {
-        font-weight: 600;
+        font-weight: var(--ngxsmk-font-weight-semibold, 600);
         margin-right: 2px;
       }
       .ngxsmk-sch__month-more {
@@ -1064,7 +1064,7 @@ const HOURS = Array.from({ length: 24 }, (_, i) => i);
         color: var(--_text-sec);
         padding: 1px 4px;
         cursor: pointer;
-        font-weight: 500;
+        font-weight: var(--ngxsmk-font-weight-medium, 500);
       }
 
       /* ── Agenda View ── */
@@ -1097,15 +1097,15 @@ const HOURS = Array.from({ length: 24 }, (_, i) => i);
       }
       .ngxsmk-sch__agenda-day-num {
         font-size: var(--ngxsmk-text-body-lg-size, 1.125rem);
-        font-weight: 700;
+        font-weight: var(--ngxsmk-font-weight-bold, 700);
         color: var(--_text);
-        line-height: 1;
+        line-height: var(--ngxsmk-leading-none, 1);
       }
       .ngxsmk-sch__agenda-day-name {
         font-size: var(--ngxsmk-text-label-xs-size, 0.6875rem);
         color: var(--_text-sec);
         text-transform: uppercase;
-        font-weight: 600;
+        font-weight: var(--ngxsmk-font-weight-semibold, 600);
       }
       .ngxsmk-sch__agenda-color {
         width: 4px;
@@ -1119,7 +1119,7 @@ const HOURS = Array.from({ length: 24 }, (_, i) => i);
       }
       .ngxsmk-sch__agenda-title {
         font-size: var(--ngxsmk-text-body-md-size, 0.875rem);
-        font-weight: 500;
+        font-weight: var(--ngxsmk-font-weight-medium, 500);
         color: var(--_text);
         white-space: nowrap;
         overflow: hidden;
@@ -1161,13 +1161,13 @@ const HOURS = Array.from({ length: 24 }, (_, i) => i);
       }
       .ngxsmk-sch__timeline-day-name {
         font-size: var(--ngxsmk-text-label-xs-size, 0.6875rem);
-        font-weight: 600;
+        font-weight: var(--ngxsmk-font-weight-semibold, 600);
         text-transform: uppercase;
         color: var(--_text-sec);
       }
       .ngxsmk-sch__timeline-day-num {
         font-size: var(--ngxsmk-text-body-md-size, 0.875rem);
-        font-weight: 700;
+        font-weight: var(--ngxsmk-font-weight-bold, 700);
         color: var(--_text);
       }
       .ngxsmk-sch__timeline-day-num--today {
@@ -1208,13 +1208,13 @@ const HOURS = Array.from({ length: 24 }, (_, i) => i);
       }
       .ngxsmk-sch__timeline-event-time {
         font-size: var(--ngxsmk-text-label-xs-size, 0.6875rem);
-        font-weight: 600;
+        font-weight: var(--ngxsmk-font-weight-semibold, 600);
         opacity: 0.85;
         white-space: nowrap;
       }
       .ngxsmk-sch__timeline-event-title {
         font-size: var(--ngxsmk-text-body-sm-size, 0.8125rem);
-        font-weight: 500;
+        font-weight: var(--ngxsmk-font-weight-medium, 500);
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;

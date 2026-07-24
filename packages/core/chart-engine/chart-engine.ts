@@ -175,7 +175,7 @@ export const SHARED_CHART_STYLES = `
     display: flex;
     align-items: center;
     gap: 6px;
-    font-weight: 600;
+    font-weight: var(--ngxsmk-font-weight-semibold, 600);
     margin-bottom: 2px;
   }
   .ngxsmk-chart-tip__dot {

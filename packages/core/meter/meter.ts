@@ -73,7 +73,7 @@ export type NgxsmkMeterLevel = 'optimal' | 'suboptimal' | 'poor';
     }
     .ngxsmk-meter__label {
       color: var(--ngxsmk-color-on-surface);
-      font-weight: 500;
+      font-weight: var(--ngxsmk-font-weight-medium, 500);
     }
     .ngxsmk-meter__value {
       color: var(--ngxsmk-color-on-surface-variant);

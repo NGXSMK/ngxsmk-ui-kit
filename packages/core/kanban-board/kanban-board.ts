@@ -97,7 +97,7 @@ export interface KanbanMove {
       outline-color: var(--ngxsmk-color-primary);
     }
     .ngxsmk-kanban-board__header {
-      font-weight: 600;
+      font-weight: var(--ngxsmk-font-weight-semibold, 600);
       font-size: var(--ngxsmk-text-body-md-size);
       color: var(--ngxsmk-color-on-surface);
       margin-bottom: var(--ngxsmk-space-3);
@@ -127,7 +127,7 @@ export interface KanbanMove {
       opacity: var(--ngxsmk-opacity-faint);
     }
     .ngxsmk-kanban-board__card-title {
-      font-weight: 500;
+      font-weight: var(--ngxsmk-font-weight-medium, 500);
       font-size: var(--ngxsmk-text-label-lg-size);
       color: var(--ngxsmk-color-on-surface);
     }

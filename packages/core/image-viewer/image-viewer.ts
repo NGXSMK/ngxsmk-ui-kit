@@ -46,7 +46,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
     .ngxsmk-image-viewer__overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.8);
+      background: var(--ngxsmk-color-backdrop, rgba(0, 0, 0, 0.8));
       display: flex;
       align-items: center;
       justify-content: center;

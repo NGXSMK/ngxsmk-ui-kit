@@ -159,7 +159,7 @@ export type ViewportSize = 'full' | 'mobile' | 'tablet' | 'desktop';
       display: flex;
       align-items: center;
       gap: var(--ngxsmk-space-3);
-      font-weight: 700;
+      font-weight: var(--ngxsmk-font-weight-bold, 700);
       font-size: var(--ngxsmk-text-title-sm-size, 1.125rem);
       color: var(--ngxsmk-color-primary);
     }
@@ -181,7 +181,7 @@ export type ViewportSize = 'full' | 'mobile' | 'tablet' | 'desktop';
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      font-weight: 600;
+      font-weight: var(--ngxsmk-font-weight-semibold, 600);
       font-size: var(--ngxsmk-text-label-sm-size, 0.875rem);
       transition:
         color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
@@ -280,7 +280,7 @@ export type ViewportSize = 'full' | 'mobile' | 'tablet' | 'desktop';
       margin: 0;
       padding: var(--ngxsmk-space-4) var(--ngxsmk-space-6);
       font-size: var(--ngxsmk-text-title-sm-size, 1rem);
-      font-weight: 600;
+      font-weight: var(--ngxsmk-font-weight-semibold, 600);
       border-bottom: 1px solid var(--ngxsmk-color-outline);
     }
 

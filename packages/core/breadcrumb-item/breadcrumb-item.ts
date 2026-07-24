@@ -41,7 +41,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
     }
     .ngxsmk-breadcrumb-item__link:not([href]) {
       color: var(--ngxsmk-color-on-surface);
-      font-weight: 500;
+      font-weight: var(--ngxsmk-font-weight-medium, 500);
       pointer-events: none;
       cursor: default;
     }

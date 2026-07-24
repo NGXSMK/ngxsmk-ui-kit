@@ -44,11 +44,11 @@ export interface PivotRow {
     }
     .ngxsmk-pivot-table__header {
       background: var(--ngxsmk-color-surface-variant);
-      font-weight: 600;
+      font-weight: var(--ngxsmk-font-weight-semibold, 600);
       color: var(--ngxsmk-color-on-surface);
     }
     .ngxsmk-pivot-table__row-label {
-      font-weight: 500;
+      font-weight: var(--ngxsmk-font-weight-medium, 500);
       background: var(--ngxsmk-color-surface-variant);
     }
     .ngxsmk-pivot-table__cell {

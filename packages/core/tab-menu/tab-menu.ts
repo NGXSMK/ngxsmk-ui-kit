@@ -38,7 +38,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
       color: var(--ngxsmk-color-on-surface-variant);
       font: inherit;
       font-size: var(--ngxsmk-text-label-md-size, 0.75rem);
-      font-weight: 500;
+      font-weight: var(--ngxsmk-font-weight-medium, 500);
       padding: var(--ngxsmk-space-1) var(--ngxsmk-space-3);
       border-radius: var(--ngxsmk-radius-md, 0.5rem);
       cursor: pointer;

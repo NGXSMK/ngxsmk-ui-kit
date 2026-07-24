@@ -18,13 +18,13 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
       padding: 0 0.375rem;
       font-family: var(--ngxsmk-font-mono);
       font-size: var(--ngxsmk-text-body-sm-size);
-      font-weight: 500;
+      font-weight: var(--ngxsmk-font-weight-medium, 500);
       color: var(--ngxsmk-color-on-surface);
       background: var(--ngxsmk-color-surface);
       border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-sm);
       box-shadow: 0 1px 0 var(--ngxsmk-color-outline);
-      line-height: 1;
+      line-height: var(--ngxsmk-leading-none, 1);
     }
     :host([data-size='lg']) {
       height: 2rem;

@@ -64,7 +64,7 @@ export interface OrgNode {
       min-width: 8rem;
     }
     .ngxsmk-org-chart__name {
-      font-weight: 600;
+      font-weight: var(--ngxsmk-font-weight-semibold, 600);
       color: var(--ngxsmk-color-on-surface);
     }
     .ngxsmk-org-chart__role {

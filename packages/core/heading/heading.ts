@@ -50,16 +50,16 @@ export type NgxsmkHeadingLevel = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
       font-weight: 300;
     }
     :host([data-weight='regular']) {
-      font-weight: 400;
+      font-weight: var(--ngxsmk-font-weight-regular, 400);
     }
     :host([data-weight='medium']) {
-      font-weight: 500;
+      font-weight: var(--ngxsmk-font-weight-medium, 500);
     }
     :host([data-weight='semibold']) {
-      font-weight: 600;
+      font-weight: var(--ngxsmk-font-weight-semibold, 600);
     }
     :host([data-weight='bold']) {
-      font-weight: 700;
+      font-weight: var(--ngxsmk-font-weight-bold, 700);
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

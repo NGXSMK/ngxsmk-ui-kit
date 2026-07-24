@@ -62,7 +62,7 @@ import { loadMotion, prefersReducedMotion } from '@ngxsmk/core/animation';
   },
   styles: `
     :host {
-      transition: transform 180ms cubic-bezier(0.2, 0, 0, 1);
+      transition: transform var(--ngxsmk-duration-normal, 180ms) cubic-bezier(0.2, 0, 0, 1);
     }
     :host:active:not(.ngxsmk-eab--disabled) {
       transform: scale(0.97);
@@ -79,7 +79,7 @@ import { loadMotion, prefersReducedMotion } from '@ngxsmk/core/animation';
       z-index: 10;
       overflow: hidden;
       border-radius: 16px;
-      transition: width 320ms cubic-bezier(0.36, 0, 0.66, -0.56);
+      transition: width var(--ngxsmk-duration-slow, 320ms) cubic-bezier(0.36, 0, 0.66, -0.56);
     }
 
     .ngxsmk-eab__dots {
@@ -95,8 +95,8 @@ import { loadMotion, prefersReducedMotion } from '@ngxsmk/core/animation';
       display: inline-grid;
       place-items: center;
       transition:
-        opacity 180ms ease-out,
-        transform 180ms ease-out;
+        opacity var(--ngxsmk-duration-normal, 180ms) ease-out,
+        transform var(--ngxsmk-duration-normal, 180ms) ease-out;
     }
 
     .ngxsmk-eab__idle-icon {
@@ -104,7 +104,7 @@ import { loadMotion, prefersReducedMotion } from '@ngxsmk/core/animation';
       inset: 0;
       display: grid;
       place-items: center;
-      transition: opacity 100ms ease-out;
+      transition: opacity var(--ngxsmk-duration-fast, 100ms) ease-out;
     }
 
     .ngxsmk-eab__label {
@@ -112,17 +112,23 @@ import { loadMotion, prefersReducedMotion } from '@ngxsmk/core/animation';
       z-index: 0;
       white-space: nowrap;
       font-size: 18px;
-      font-weight: 500;
+      font-weight: var(--ngxsmk-font-weight-medium, 500);
       letter-spacing: -0.02em;
       transition:
         opacity 120ms ease-out,
         transform 120ms ease-out;
     }
+
+    .ngxsmk-eab__idle-icon svg,
+    .ngxsmk-eab__dot svg {
+      width: 28px;
+      height: 20px;
+    }
   `,
   template: `
     <span class="ngxsmk-eab__accent" [style.width]="accentWidth()">
       <span class="ngxsmk-eab__idle-icon" [style.opacity]="active() ? 0 : 1">
-        <svg viewBox="0 0 20 28" fill="none" aria-hidden="true" style="width:28px;height:20px">
+        <svg viewBox="0 0 20 28" fill="none" aria-hidden="true">
           <circle cx="4" cy="4" r="2" fill="currentColor" />
           <circle cx="10" cy="9" r="2" fill="currentColor" />
           <circle cx="16" cy="14" r="2" fill="currentColor" />
@@ -139,7 +145,7 @@ import { loadMotion, prefersReducedMotion } from '@ngxsmk/core/animation';
             [style.transition-delay]="active() && !reducedMotion ? 40 + idx * 25 + 'ms' : '0ms'"
             [style.color]="'rgb(10 10 10 / ' + opacity + ')'"
           >
-            <svg viewBox="0 0 20 28" fill="none" aria-hidden="true" style="width:28px;height:20px">
+            <svg viewBox="0 0 20 28" fill="none" aria-hidden="true">
               <circle cx="4" cy="4" r="2" fill="currentColor" />
               <circle cx="10" cy="9" r="2" fill="currentColor" />
               <circle cx="16" cy="14" r="2" fill="currentColor" />

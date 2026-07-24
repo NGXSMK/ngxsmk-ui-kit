@@ -82,7 +82,7 @@ export interface HeatmapValue {
       border-radius: 2px;
       background: var(--ngxsmk-color-surface-variant, #ebedf0);
       cursor: pointer;
-      transition: transform 0.1s ease;
+      transition: transform var(--ngxsmk-duration-fast, 0.1s) ease;
     }
 
     .ngxsmk-heatmap__cell:hover {

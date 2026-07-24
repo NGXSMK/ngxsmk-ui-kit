@@ -9,7 +9,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     :host {
       display: block;
       font-family: var(--ngxsmk-font-sans);
-      line-height: 1.6;
+      line-height: var(--ngxsmk-leading-relaxed, 1.6);
       color: var(--ngxsmk-color-on-surface);
     }
     ::ng-deep h1,
@@ -17,7 +17,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     ::ng-deep h3,
     ::ng-deep h4 {
       margin: 1em 0 0.5em;
-      font-weight: 600;
+      font-weight: var(--ngxsmk-font-weight-semibold, 600);
     }
     ::ng-deep h1 {
       font-size: 1.5em;
@@ -30,7 +30,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     }
     ::ng-deep p {
       margin: 0 0 0.75em;
-      line-height: 1.6;
+      line-height: var(--ngxsmk-leading-relaxed, 1.6);
     }
     ::ng-deep code {
       background: var(--ngxsmk-color-surface-variant);
@@ -91,7 +91,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     }
     ::ng-deep th {
       background: var(--ngxsmk-color-surface-variant);
-      font-weight: 600;
+      font-weight: var(--ngxsmk-font-weight-semibold, 600);
     }
     @media (max-width: 768px) {
       ::ng-deep table {

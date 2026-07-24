@@ -141,7 +141,7 @@ export interface DateRange {
 
     .ngxsmk-date-range-picker__label {
       font-size: var(--ngxsmk-text-body-xs-size, 0.75rem);
-      font-weight: 500;
+      font-weight: var(--ngxsmk-font-weight-medium, 500);
       color: var(--ngxsmk-color-on-surface-variant, #71717a);
     }
 
@@ -158,8 +158,7 @@ export interface DateRange {
 
     .ngxsmk-date-range-picker__input:focus {
       border-color: var(--ngxsmk-color-primary, #7c3aed);
-      box-shadow: 0 0 0 2px
-        color-mix(in srgb, var(--ngxsmk-color-primary, #7c3aed) 20%, transparent);
+      box-shadow: var(--ngxsmk-shadow-focus);
     }
 
     .ngxsmk-date-range-picker__separator {
@@ -179,7 +178,7 @@ export interface DateRange {
     .ngxsmk-date-range-picker__preset-btn {
       font-family: inherit;
       font-size: var(--ngxsmk-text-body-xs-size, 0.75rem);
-      font-weight: 500;
+      font-weight: var(--ngxsmk-font-weight-medium, 500);
       padding: 0.25rem 0.625rem;
       border-radius: var(--ngxsmk-radius-full, 9999px);
       border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
@@ -187,8 +186,8 @@ export interface DateRange {
       color: var(--ngxsmk-color-on-surface, #09090b);
       cursor: pointer;
       transition:
-        background-color 0.15s ease,
-        border-color 0.15s ease;
+        background-color var(--ngxsmk-duration-fast, 150ms) ease,
+        border-color var(--ngxsmk-duration-fast, 150ms) ease;
     }
 
     .ngxsmk-date-range-picker__preset-btn:hover:not(:disabled) {
