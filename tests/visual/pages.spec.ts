@@ -24,6 +24,7 @@ for (const [route, name] of Object.entries(PAGES)) {
     await page.goto(route, { waitUntil: 'networkidle' });
     // Let lazy-loaded content and fonts settle.
     await page.evaluate(() => document.fonts.ready);
+    await page.waitForSelector('h1', { state: 'visible', timeout: 10000 }).catch(() => {});
     await expect(page).toHaveScreenshot(`${name}.png`, { fullPage: true });
   });
 }
