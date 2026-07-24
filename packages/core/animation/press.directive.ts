@@ -147,46 +147,43 @@ export class NgxsmkPress {
       const pressState = this._pressState();
       const releaseState = this._releaseState();
 
-      const cancelPress = motion.press(
-        nativeEl,
-        () => {
-          this.pressed.emit(true);
-          const opts: Record<string, unknown> = {};
-          if (pressState.transition) {
-            if (!pressState.transition.type || pressState.transition.type === 'tween') {
-              const t = pressState.transition as NgxsmkTweenTransition;
-              if (t.duration != null) opts['duration'] = t.duration;
-              if (t.ease != null) opts['ease'] = t.ease;
-            } else if (pressState.transition.type === 'spring') {
-              const s = pressState.transition as NgxsmkSpringTransition;
-              opts['type'] = 'spring';
-              if (s.stiffness != null) opts['stiffness'] = s.stiffness;
-              if (s.damping != null) opts['damping'] = s.damping;
-              if (s.mass != null) opts['mass'] = s.mass;
+      const cancelPress = motion.press(nativeEl, () => {
+        this.pressed.emit(true);
+        const opts: Record<string, unknown> = {};
+        if (pressState.transition) {
+          if (!pressState.transition.type || pressState.transition.type === 'tween') {
+            const t = pressState.transition as NgxsmkTweenTransition;
+            if (t.duration != null) opts['duration'] = t.duration;
+            if (t.ease != null) opts['ease'] = t.ease;
+          } else if (pressState.transition.type === 'spring') {
+            const s = pressState.transition as NgxsmkSpringTransition;
+            opts['type'] = 'spring';
+            if (s.stiffness != null) opts['stiffness'] = s.stiffness;
+            if (s.damping != null) opts['damping'] = s.damping;
+            if (s.mass != null) opts['mass'] = s.mass;
+          }
+        }
+        motion.animate(nativeEl, pressState.animate ?? {}, opts);
+
+        return () => {
+          this.pressed.emit(false);
+          const releaseOpts: Record<string, unknown> = {};
+          if (releaseState.transition) {
+            if (!releaseState.transition.type || releaseState.transition.type === 'tween') {
+              const t = releaseState.transition as NgxsmkTweenTransition;
+              if (t.duration != null) releaseOpts['duration'] = t.duration;
+              if (t.ease != null) releaseOpts['ease'] = t.ease;
+            } else if (releaseState.transition.type === 'spring') {
+              const s = releaseState.transition as NgxsmkSpringTransition;
+              releaseOpts['type'] = 'spring';
+              if (s.stiffness != null) releaseOpts['stiffness'] = s.stiffness;
+              if (s.damping != null) releaseOpts['damping'] = s.damping;
+              if (s.mass != null) releaseOpts['mass'] = s.mass;
             }
           }
-          motion.animate(nativeEl, pressState.animate ?? {}, opts);
-
-          return () => {
-            this.pressed.emit(false);
-            const releaseOpts: Record<string, unknown> = {};
-            if (releaseState.transition) {
-              if (!releaseState.transition.type || releaseState.transition.type === 'tween') {
-                const t = releaseState.transition as NgxsmkTweenTransition;
-                if (t.duration != null) releaseOpts['duration'] = t.duration;
-                if (t.ease != null) releaseOpts['ease'] = t.ease;
-              } else if (releaseState.transition.type === 'spring') {
-                const s = releaseState.transition as NgxsmkSpringTransition;
-                releaseOpts['type'] = 'spring';
-                if (s.stiffness != null) releaseOpts['stiffness'] = s.stiffness;
-                if (s.damping != null) releaseOpts['damping'] = s.damping;
-                if (s.mass != null) releaseOpts['mass'] = s.mass;
-              }
-            }
-            motion.animate(nativeEl, releaseState.animate ?? {}, releaseOpts);
-          };
-        },
-      );
+          motion.animate(nativeEl, releaseState.animate ?? {}, releaseOpts);
+        };
+      });
 
       this.destroyRef.onDestroy(() => cancelPress());
     });

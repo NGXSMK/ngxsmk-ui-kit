@@ -234,8 +234,9 @@ import {
       color: var(--ngxsmk-color-on-surface-variant);
       cursor: pointer;
       flex-shrink: 0;
-      transition: background var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
-                  color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
+      transition:
+        background var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
+        color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
     .ngxsmk-chat-layout__toggle:hover {
       background: var(--ngxsmk-color-surface-hover);
@@ -290,8 +291,9 @@ import {
       cursor: pointer;
       box-shadow: var(--ngxsmk-shadow-md);
       z-index: 1;
-      transition: transform var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
-                  opacity var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
+      transition:
+        transform var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
+        opacity var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
       animation: ngxsmk-chat-fab-enter var(--ngxsmk-duration-normal) var(--ngxsmk-ease-out);
     }
     .ngxsmk-chat-layout__fab:hover {
@@ -305,8 +307,14 @@ import {
     }
 
     @keyframes ngxsmk-chat-fab-enter {
-      from { opacity: 0; transform: translateY(8px) scale(0.9); }
-      to   { opacity: 1; transform: translateY(0) scale(1); }
+      from {
+        opacity: 0;
+        transform: translateY(8px) scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
     }
 
     /* ── Input area ── */
@@ -359,8 +367,12 @@ import {
     }
 
     @keyframes ngxsmk-chat-backdrop-in {
-      from { opacity: 0; }
-      to   { opacity: 1; }
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
     }
   `,
 })

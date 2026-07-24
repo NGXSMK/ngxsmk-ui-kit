@@ -51,9 +51,10 @@ import { ChangeDetectionStrategy, Component, output } from '@angular/core';
       justify-content: center;
       cursor: pointer;
       box-shadow: var(--ngxsmk-shadow-md);
-      transition: background var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
-                  color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
-                  transform var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
+      transition:
+        background var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
+        color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
+        transform var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
     :host(:hover) {
       background: var(--ngxsmk-color-primary);

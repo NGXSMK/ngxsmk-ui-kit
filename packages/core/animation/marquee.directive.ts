@@ -132,8 +132,12 @@ export class NgxsmkMarquee {
       duration: config.speed,
       ease: config.easing,
       repeat: Infinity,
-      repeatType: config.repeatType === 'reverse' ? 'reverse' :
-        config.repeatType === 'mirror' ? 'mirror' : 'loop',
+      repeatType:
+        config.repeatType === 'reverse'
+          ? 'reverse'
+          : config.repeatType === 'mirror'
+            ? 'mirror'
+            : 'loop',
     };
 
     const anim1 = motion.animate(original, keyframes, options);

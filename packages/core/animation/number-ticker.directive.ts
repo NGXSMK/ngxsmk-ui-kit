@@ -7,11 +7,7 @@ import {
   input,
   untracked,
 } from '@angular/core';
-import {
-  animateValue,
-  loadMotion,
-  prefersReducedMotion,
-} from './animate';
+import { animateValue, loadMotion, prefersReducedMotion } from './animate';
 
 /**
  * Animates the host element's text content from a start number to a target

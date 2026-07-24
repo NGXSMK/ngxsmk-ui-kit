@@ -193,9 +193,7 @@ export class NgxsmkMorphModalContent {
   constructor() {
     afterNextRender(() => {
       if (prefersReducedMotion()) {
-        this._cssTransition.set(
-          `clip-path ${this.morphModalDuration()}s ${this.morphModalEase()}`,
-        );
+        this._cssTransition.set(`clip-path ${this.morphModalDuration()}s ${this.morphModalEase()}`);
       }
     });
 
@@ -230,11 +228,8 @@ export class NgxsmkMorphModalContent {
     const motion = await loadMotion();
     if (motion) {
       const opts = this._buildOptions();
-      await motion.animate(
-        this.el.nativeElement,
-        { clipPath: `circle(150% at 50% 50%)` },
-        opts,
-      ).finished;
+      await motion.animate(this.el.nativeElement, { clipPath: `circle(150% at 50% 50%)` }, opts)
+        .finished;
     } else {
       this._clipPath.set('circle(150% at 50% 50%)');
     }
@@ -253,11 +248,8 @@ export class NgxsmkMorphModalContent {
     const motion = await loadMotion();
     if (motion) {
       const opts = this._buildOptions();
-      await motion.animate(
-        this.el.nativeElement,
-        { clipPath: 'circle(0% at 50% 50%)' },
-        opts,
-      ).finished;
+      await motion.animate(this.el.nativeElement, { clipPath: 'circle(0% at 50% 50%)' }, opts)
+        .finished;
     } else {
       this._clipPath.set('circle(0% at 50% 50%)');
     }

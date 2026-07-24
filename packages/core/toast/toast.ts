@@ -22,7 +22,9 @@ export interface NgxsmkToastOptions {
   motion?: NgxsmkMotionState;
 }
 
-export interface NgxsmkActiveToast extends Required<Omit<NgxsmkToastOptions, 'description' | 'motion'>> {
+export interface NgxsmkActiveToast extends Required<
+  Omit<NgxsmkToastOptions, 'description' | 'motion'>
+> {
   id: number;
   description: string;
   motion?: NgxsmkMotionState;
