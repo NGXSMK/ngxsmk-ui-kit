@@ -1,11 +1,5 @@
 import { UpperCasePipe } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  model,
-  output,
-  signal,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, model, output, signal } from '@angular/core';
 
 export interface NgxsmkKanbanColumn {
   id: string;

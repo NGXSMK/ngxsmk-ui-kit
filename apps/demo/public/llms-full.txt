@@ -1454,7 +1454,11 @@ Inputs:
 
 Outputs:
 - `(cardClick)`: emits `NgxsmkKanbanItem`
-- `(itemDropped)`: emits `{ item: NgxsmkKanbanItem; fromColumnId: string; toColumnId: string }`
+- `(itemDropped)`: emits `{
+    item: NgxsmkKanbanItem;
+    fromColumnId: string;
+    toColumnId: string;
+  }`
 
 ## NgxsmkKbd
 

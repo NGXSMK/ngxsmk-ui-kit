@@ -3949,7 +3949,7 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
       },
       {
         "name": "itemDropped",
-        "type": "{ item: NgxsmkKanbanItem; fromColumnId: string; toColumnId: string }"
+        "type": "{\n    item: NgxsmkKanbanItem;\n    fromColumnId: string;\n    toColumnId: string;\n  }"
       }
     ]
   },
@@ -5333,7 +5333,7 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     ],
     "outputs": [
       {
-        "name": "submit",
+        "name": "submitPrompt",
         "type": "string"
       },
       {

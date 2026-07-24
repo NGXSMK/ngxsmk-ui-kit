@@ -20,9 +20,7 @@ if (!major) {
 const libs = ['theme', 'cdk', 'core'];
 const majorNum = parseInt(major, 10);
 const builder =
-  majorNum === 17 || majorNum === 18
-    ? '@angular-devkit/build-angular:ng-packagr'
-    : '@angular/build:ng-packagr';
+  majorNum <= 19 ? '@angular-devkit/build-angular:ng-packagr' : '@angular/build:ng-packagr';
 const ANGULAR_JSON = 'angular.json';
 const BACKUP = 'angular.json.bak';
 
