@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -1216,7 +1215,7 @@ export function provideSpreadsheet(
     }
   `,
 })
-export class NgxsmkSpreadsheet implements OnInit, AfterViewInit {
+export class NgxsmkSpreadsheet implements OnInit {
   // ── Inputs ──
   readonly columns = input<ColumnDef[]>([]);
   readonly rows = input<RowDef[]>([]);
@@ -1265,6 +1264,54 @@ export class NgxsmkSpreadsheet implements OnInit, AfterViewInit {
   constructor() {
     const provided = inject(SPREADSHEET_ENGINE, { optional: true });
     this.engine = provided ?? new SpreadsheetEngine();
+
+    // Watch for input changes
+    effect(() => {
+      const cols = this.columns();
+      if (cols.length > 0) {
+        this.engine.columnDefs.set(cols);
+      }
+    });
+
+    effect(() => {
+      const r = this.rows();
+      if (r.length > 0) {
+        this.engine.rowData.set(r);
+      }
+    });
+
+    effect(() => {
+      this.engine.density.set(this.density());
+    });
+
+    effect(() => {
+      this.engine.editable.set(this.editable());
+    });
+
+    // Sync selection to model
+    effect(() => {
+      const sel = this.engine.selection();
+      this.selectionChange.emit(sel.range);
+    });
+
+    // Set up viewport dimensions
+    afterNextRender(() => {
+      const container = this._container()?.nativeElement;
+      if (container) {
+        const rect = container.getBoundingClientRect();
+        this.engine.viewportHeight.set(rect.height);
+        this.engine.viewportWidth.set(rect.width);
+
+        const ro = new ResizeObserver((entries) => {
+          for (const entry of entries) {
+            this.engine.viewportHeight.set(entry.contentRect.height);
+            this.engine.viewportWidth.set(entry.contentRect.width);
+          }
+        });
+        ro.observe(container);
+        this._destroyRef.onDestroy(() => ro.disconnect());
+      }
+    });
   }
 
   // ── Internal State ──
@@ -1329,56 +1376,6 @@ export class NgxsmkSpreadsheet implements OnInit, AfterViewInit {
     if (this.rows().length > 0) {
       this.engine.rowData.set(this.rows());
     }
-
-    // Watch for input changes
-    effect(() => {
-      const cols = this.columns();
-      if (cols.length > 0) {
-        this.engine.columnDefs.set(cols);
-      }
-    });
-
-    effect(() => {
-      const r = this.rows();
-      if (r.length > 0) {
-        this.engine.rowData.set(r);
-      }
-    });
-
-    effect(() => {
-      this.engine.density.set(this.density());
-    });
-
-    effect(() => {
-      this.engine.editable.set(this.editable());
-    });
-
-    // Sync selection to model
-    effect(() => {
-      const sel = this.engine.selection();
-      this.selectionChange.emit(sel.range);
-    });
-  }
-
-  ngAfterViewInit(): void {
-    // Set up viewport dimensions
-    afterNextRender(() => {
-      const container = this._container()?.nativeElement;
-      if (container) {
-        const rect = container.getBoundingClientRect();
-        this.engine.viewportHeight.set(rect.height);
-        this.engine.viewportWidth.set(rect.width);
-
-        const ro = new ResizeObserver((entries) => {
-          for (const entry of entries) {
-            this.engine.viewportHeight.set(entry.contentRect.height);
-            this.engine.viewportWidth.set(entry.contentRect.width);
-          }
-        });
-        ro.observe(container);
-        this._destroyRef.onDestroy(() => ro.disconnect());
-      }
-    });
   }
 
   // ── Scroll ──
