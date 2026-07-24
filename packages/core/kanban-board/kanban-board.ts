@@ -2,8 +2,6 @@ import { UpperCasePipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  computed,
-  input,
   model,
   output,
   signal,
@@ -13,7 +11,7 @@ export interface NgxsmkKanbanColumn {
   id: string;
   title: string;
   color?: string;
-  items?: any[];
+  items?: NgxsmkKanbanItem[];
 }
 
 export type KanbanColumn = NgxsmkKanbanColumn;
@@ -70,9 +68,13 @@ export type KanbanItem = NgxsmkKanbanItem;
                 class="ngxsmk-kanban__card"
                 [class.ngxsmk-kanban__card--dragging]="draggedItem()?.id === item.id"
                 [draggable]="true"
+                role="button"
+                tabindex="0"
                 (dragstart)="_onDragStart($event, item, col.id)"
                 (dragend)="_onDragEnd()"
                 (click)="cardClick.emit(item)"
+                (keydown.enter)="cardClick.emit(item)"
+                (keydown.space)="cardClick.emit(item)"
               >
                 <h5 class="ngxsmk-kanban__card-title">{{ item.title }}</h5>
                 @if (item.description) {
@@ -351,7 +353,7 @@ export class NgxsmkKanbanBoard {
     if (currentCols && currentCols.length > 0) {
       const nextCols = currentCols.map((col) => {
         if (col.id === fromColId && col.items) {
-          return { ...col, items: col.items.filter((i: any) => i.id !== item.id) };
+          return { ...col, items: col.items.filter((i: NgxsmkKanbanItem) => i.id !== item.id) };
         }
         if (col.id === toColId && col.items) {
           return { ...col, items: [...col.items, updatedItem] };

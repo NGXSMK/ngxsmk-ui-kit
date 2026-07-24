@@ -105,7 +105,11 @@ export interface NgxsmkNotificationItem {
               <div
                 class="ngxsmk-notif__item"
                 [class.ngxsmk-notif__item--unread]="!item.read"
+                role="button"
+                tabindex="0"
                 (click)="onItemClick(item)"
+                (keydown.enter)="onItemClick(item)"
+                (keydown.space)="onItemClick(item)"
               >
                 <div class="ngxsmk-notif__indicator" [attr.data-type]="item.type || 'info'"></div>
 

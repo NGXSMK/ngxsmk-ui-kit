@@ -185,7 +185,7 @@ export class NgxsmkCreditCardInput {
 
   protected onCardNumberInput(event: Event): void {
     const target = event.target as HTMLInputElement;
-    let digits = target.value.replace(/\D/g, '').slice(0, 16);
+    const digits = target.value.replace(/\D/g, '').slice(0, 16);
     // Format into 4-digit blocks
     const formatted = digits.match(/.{1,4}/g)?.join(' ') ?? digits;
     this.value.set(formatted);

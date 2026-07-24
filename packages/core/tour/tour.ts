@@ -29,7 +29,7 @@ export interface NgxsmkTourStep {
   template: `
     @if (active() && currentStepData(); as step) {
       <!-- SPOTLIGHT BACKDROP OVERLAY -->
-      <div class="ngxsmk-tour__backdrop" (click)="onBackdropClick()"></div>
+      <div class="ngxsmk-tour__backdrop" role="button" tabindex="0" (click)="onBackdropClick()" (keydown.enter)="onBackdropClick()" (keydown.space)="onBackdropClick()"></div>
 
       <!-- HIGHLIGHT BOX AROUND TARGET -->
       @if (targetRect(); as rect) {

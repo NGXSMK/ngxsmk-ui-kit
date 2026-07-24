@@ -240,7 +240,7 @@ export class NgxsmkFilterBuilder {
   protected updateOperator(index: number, event: Event): void {
     const target = event.target as HTMLSelectElement;
     this.conditions.update((list) =>
-      list.map((c, i) => (i === index ? { ...c, operator: target.value as any } : c)),
+      list.map((c, i) => (i === index ? { ...c, operator: target.value } : c)),
     );
   }
 

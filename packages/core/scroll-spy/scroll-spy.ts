@@ -1,13 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
   OnDestroy,
   OnInit,
-  computed,
   input,
   model,
-  signal,
 } from '@angular/core';
 
 export interface NgxsmkScrollSpyItem {

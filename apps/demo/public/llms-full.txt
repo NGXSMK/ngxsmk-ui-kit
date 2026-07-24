@@ -1982,7 +1982,7 @@ Inputs:
 - `[(selectedModel)]`: string (default: `''`)
 
 Outputs:
-- `(submit)`: emits `string`
+- `(submitPrompt)`: emits `string`
 - `(fileAttach)`: emits `FileList`
 
 ## NgxsmkPromptLibrary

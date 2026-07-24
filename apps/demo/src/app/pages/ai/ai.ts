@@ -556,7 +556,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
         <ngxsmk-prompt-input
           [(value)]="demoPromptValue"
           [models]="demoModelOptions"
-          (submit)="sentLog.set($event)"
+          (submitPrompt)="sentLog.set($event)"
         />
       </div>
     </showcase-example>
@@ -1219,7 +1219,7 @@ Would you like me to generate a concrete layout snippet or template structure fo
   protected readonly NgxsmkTokenCounter = NgxsmkTokenCounter;
   protected readonly codeAudioVisualizer = `<ngxsmk-audio-visualizer [active]="true" [bars]="12" variant="bars" />\n<ngxsmk-audio-visualizer [active]="true" [bars]="16" variant="wave" color="var(--ngxsmk-color-secondary)" />\n<ngxsmk-audio-visualizer [active]="true" [bars]="6" variant="dots" color="var(--ngxsmk-color-success)" />`;
   protected readonly codeTokenCounter = `<ngxsmk-token-counter [used]="16450" [limit]="128000" modelName="Claude 3.5 Sonnet" />`;
-  protected readonly codePromptInput = `<ngxsmk-prompt-input [(value)]="text" [models]="modelsList" (submit)="onSend($event)" />`;
+  protected readonly codePromptInput = `<ngxsmk-prompt-input [(value)]="text" [models]="modelsList" (submitPrompt)="onSend($event)" />`;
   protected readonly codeThinking = `<ngxsmk-ai-thinking-indicator label="Synthesizing response..." variant="orb" />`;
   protected readonly codePromptLib = `<ngxsmk-prompt-library [prompts]="promptsList" (selected)="onUse($event)" />`;
 

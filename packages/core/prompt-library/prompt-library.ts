@@ -39,7 +39,7 @@ export interface NgxsmkPromptLibraryItem {
           </div>
         } @else {
           @for (item of filteredPrompts(); track item.id) {
-            <div class="ngxsmk-prompt-lib__card" (click)="onSelect(item)">
+            <div class="ngxsmk-prompt-lib__card" role="button" tabindex="0" (click)="onSelect(item)" (keydown.enter)="onSelect(item)" (keydown.space)="onSelect(item)">
               <div class="ngxsmk-prompt-lib__top">
                 <span class="ngxsmk-prompt-lib__title">{{ item.title }}</span>
                 @if (item.category) {
