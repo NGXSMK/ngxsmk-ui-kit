@@ -1,29 +1,14 @@
-import { Injectable, Renderer2, inject } from '@angular/core';
+import { InjectionToken, Injectable, Renderer2, Type, inject } from '@angular/core';
 import { ButtonRenderer } from './button-renderer';
-import { NgxsmkButtonSize, NgxsmkButtonVariant } from './button';
 
 /**
- * Default web renderer for the button. Applies CSS classes and creates
- * a `<span>` spinner element. This is the current behavior, extracted
- * behind the `ButtonRenderer` seam.
+ * Default web renderer: a CSS-animated `<span>` styled by
+ * `.ngxsmk-button__spinner` in the theme stylesheet.
  */
 @Injectable()
 export class DefaultButtonRenderer implements ButtonRenderer {
   private readonly renderer = inject(Renderer2);
   private spinner: HTMLElement | null = null;
-
-  applyVariant(_variant: NgxsmkButtonVariant, _size: NgxsmkButtonSize): void {
-    // Variants are applied via data-attributes in the host binding —
-    // the CSS file maps data-variant="primary" to visual styles.
-  }
-
-  applyIconOnly(_iconOnly: boolean): void {
-    // Handled via host binding [attr.data-icon-only]
-  }
-
-  applyDisabled(_disabled: boolean): void {
-    // Handled via host binding [attr.disabled] and [attr.aria-disabled]
-  }
 
   createSpinner(host: HTMLElement): void {
     if (this.spinner) return;
@@ -41,51 +26,59 @@ export class DefaultButtonRenderer implements ButtonRenderer {
   }
 }
 
-/** Ionic adapter — wraps `ion-button` instead of native `<button>`. */
+/**
+ * Application-level choice of button renderer.
+ *
+ * `NGXSMK_BUTTON_RENDERER` is provided by the button directive itself, and a
+ * directive's own providers always shadow environment providers — so it cannot
+ * be overridden from `bootstrapApplication`. This token carries the *class*
+ * instead: it lives in the root injector, where an app can replace it, and the
+ * directive instantiates whatever it finds.
+ *
+ * ```ts
+ * providers: [{ provide: NGXSMK_BUTTON_RENDERER_CLASS, useValue: IonicButtonRenderer }]
+ * ```
+ *
+ * A node-level `NGXSMK_BUTTON_RENDERER` provider still wins for a single
+ * subtree, which is the right precedence: more specific beats more general.
+ */
+export const NGXSMK_BUTTON_RENDERER_CLASS = new InjectionToken<Type<ButtonRenderer>>(
+  'NGXSMK_BUTTON_RENDERER_CLASS',
+  { providedIn: 'root', factory: () => DefaultButtonRenderer },
+);
+
+/**
+ * Ionic renderer: inserts an `<ion-spinner>` so the loading indicator picks up
+ * the platform look Ionic resolves at runtime (lines on iOS, circular on
+ * Material) instead of our own CSS animation.
+ *
+ * Requires `@ionic/angular` to be loaded so the `ion-spinner` custom element is
+ * defined; it is a plain element until then, and the `.ngxsmk-button__spinner`
+ * class keeps our own sizing/margin rules applying either way.
+ *
+ * ```ts
+ * providers: [{ provide: NGXSMK_BUTTON_RENDERER, useClass: IonicButtonRenderer }]
+ * ```
+ */
+@Injectable()
 export class IonicButtonRenderer implements ButtonRenderer {
   private readonly renderer = inject(Renderer2);
   private spinner: HTMLElement | null = null;
 
-  private readonly variantMap: Record<NgxsmkButtonVariant, { fill: string; color?: string }> = {
-    primary: { fill: 'solid', color: 'primary' },
-    secondary: { fill: 'solid', color: 'secondary' },
-    outline: { fill: 'outline' },
-    ghost: { fill: 'clear' },
-    destructive: { fill: 'solid', color: 'danger' },
-    link: { fill: 'clear' },
-  };
-
-  private readonly sizeMap: Record<NgxsmkButtonSize, string | null> = {
-    sm: 'small',
-    md: null,
-    lg: 'large',
-  };
-
-  applyVariant(_variant: NgxsmkButtonVariant, _size: NgxsmkButtonSize): void {
-    // Ionic attributes would be set on the host element.
-    // In practice, when using ion-button, these would be:
-    // host.setAttribute('fill', mapping.fill);
-    // if (mapping.color) host.setAttribute('color', mapping.color);
-    // const sizeAttr = this.sizeMap[size];
-    // if (sizeAttr) host.setAttribute('size', sizeAttr);
+  createSpinner(host: HTMLElement): void {
+    if (this.spinner) return;
+    this.spinner = this.renderer.createElement('ion-spinner');
+    this.renderer.addClass(this.spinner, 'ngxsmk-button__spinner');
+    this.renderer.setAttribute(this.spinner, 'aria-hidden', 'true');
+    // Inherit the button's text color rather than Ionic's default.
+    this.renderer.setStyle(this.spinner, 'color', 'currentColor');
+    this.renderer.insertBefore(host, this.spinner, host.firstChild);
   }
 
-  applyIconOnly(_iconOnly: boolean): void {
-    // Ionic: button with only an icon uses slot="icon-only"
-    // host.setAttribute('slot', iconOnly ? 'icon-only' : '');
-  }
-
-  applyDisabled(_disabled: boolean): void {
-    // Ionic: ion-button has [disabled] property
-    // host.disabled = disabled;
-  }
-
-  createSpinner(_host: HTMLElement): void {
-    // Ionic: ion-button has built-in loading state via [showAsyncIndicator]
-    // No manual spinner creation needed
-  }
-
-  removeSpinner(_host: HTMLElement): void {
-    // Ionic: clear loading state by setting showAsyncIndicator to false
+  removeSpinner(host: HTMLElement): void {
+    if (this.spinner) {
+      this.renderer.removeChild(host, this.spinner);
+      this.spinner = null;
+    }
   }
 }

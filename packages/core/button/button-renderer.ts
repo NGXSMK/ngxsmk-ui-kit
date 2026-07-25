@@ -1,20 +1,17 @@
 import { InjectionToken } from '@angular/core';
-import { NgxsmkButtonSize, NgxsmkButtonVariant } from './button';
 
 /**
- * Rendering strategy for the button component. The behavioral class accepts
- * inputs and computes state; this interface handles DOM manipulation.
+ * Loading-indicator strategy for the button directive.
  *
- * Two adapters justify the seam: `DefaultButtonRenderer` (current web behavior
- * with CSS classes) and `IonicButtonRenderer` (wraps `ion-button`).
+ * Variant, size, icon-only, and disabled state are all reflected declaratively
+ * through host bindings on `NgxsmkButton` and styled from `data-*` attributes,
+ * so they need no renderer seam. The spinner is the one piece that requires
+ * imperative DOM work, and the one piece a host platform may want to own:
+ * `DefaultButtonRenderer` inserts a CSS-animated `<span>`, while
+ * `IonicButtonRenderer` inserts an `<ion-spinner>` so the indicator matches the
+ * iOS/Material look Ionic selects at runtime.
  */
 export interface ButtonRenderer {
-  /** Apply variant, size, and state attributes/classes to the host element. */
-  applyVariant(variant: NgxsmkButtonVariant, size: NgxsmkButtonSize): void;
-  /** Apply icon-only styling. */
-  applyIconOnly(iconOnly: boolean): void;
-  /** Apply disabled state. */
-  applyDisabled(disabled: boolean): void;
   /** Create and insert a loading spinner element. */
   createSpinner(host: HTMLElement): void;
   /** Remove the loading spinner element. */

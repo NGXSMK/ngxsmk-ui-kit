@@ -9,6 +9,7 @@ import {
   effect,
   inject,
 } from '@angular/core';
+import { NGXSMK_PLATFORM_ADAPTER } from '@ngxsmk/cdk/platform';
 import { NgxsmkDialog } from '@ngxsmk/core/dialog';
 import { NgxsmkAlertDialog, NgxsmkAlertDialogVariant } from '@ngxsmk/core/alert-dialog';
 
@@ -26,8 +27,9 @@ function rootNode(ref: ComponentRef<unknown>): HTMLElement {
 
 /**
  * Opens {@link NgxsmkDialog} instances programmatically — no template binding
- * required. The dialog is mounted on `<body>`, shown, and fully torn down
- * (view detached, component destroyed, DOM removed) once it closes.
+ * required. The dialog is mounted on the platform's overlay container (the
+ * `<body>` by default), shown, and fully torn down (view detached, component
+ * destroyed, DOM removed) once it closes.
  *
  * ```ts
  * dialog = inject(NgxsmkImperativeDialog);
@@ -39,6 +41,7 @@ export class NgxsmkImperativeDialog {
   private readonly appRef = inject(ApplicationRef);
   private readonly injector = inject(EnvironmentInjector);
   private readonly doc = inject(DOCUMENT);
+  private readonly platform = inject(NGXSMK_PLATFORM_ADAPTER);
 
   /** Opens a dialog with the given title and body text. */
   open(title: string, content = ''): NgxsmkDialog {
@@ -48,7 +51,7 @@ export class NgxsmkImperativeDialog {
       projectableNodes: [body],
     });
 
-    this.doc.body.appendChild(rootNode(compRef));
+    this.platform.overlayContainer().appendChild(rootNode(compRef));
     this.appRef.attachView(compRef.hostView);
     compRef.setInput('title', title);
     compRef.setInput('open', true);
@@ -90,7 +93,7 @@ export class NgxsmkImperativeDialog {
 export class NgxsmkImperativeAlertDialog {
   private readonly appRef = inject(ApplicationRef);
   private readonly injector = inject(EnvironmentInjector);
-  private readonly doc = inject(DOCUMENT);
+  private readonly platform = inject(NGXSMK_PLATFORM_ADAPTER);
 
   /** Shows a confirm dialog; resolves `true` on confirm, `false` otherwise. */
   confirm(message: string, options: NgxsmkConfirmOptions = {}): Promise<boolean> {
@@ -105,7 +108,7 @@ export class NgxsmkImperativeAlertDialog {
       if (options.cancelLabel) compRef.setInput('cancelLabel', options.cancelLabel);
       if (options.variant) compRef.setInput('variant', options.variant);
 
-      this.doc.body.appendChild(rootNode(compRef));
+      this.platform.overlayContainer().appendChild(rootNode(compRef));
       this.appRef.attachView(compRef.hostView);
       compRef.setInput('open', true);
       this.appRef.tick();

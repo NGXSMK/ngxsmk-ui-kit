@@ -46,6 +46,8 @@ import { ChangeDetectionStrategy, Component, input, output } from '@angular/core
       background: var(--ngxsmk-color-backdrop, rgba(0, 0, 0, 0.5));
       z-index: var(--ngxsmk-z-overlay, 1300);
     }
+    /* Pads the three viewport edges the drawer touches so its header clears a
+       notch and its footer clears the home indicator. 0px off-device. */
     .ngxsmk-mobile-nav__panel {
       position: fixed;
       top: 0;
@@ -58,6 +60,9 @@ import { ChangeDetectionStrategy, Component, input, output } from '@angular/core
       flex-direction: column;
       box-shadow: var(--ngxsmk-shadow-xl);
       animation: ngxsmk-slide-in 200ms var(--ngxsmk-ease-out);
+      padding-top: var(--ngxsmk-safe-area-top);
+      padding-bottom: var(--ngxsmk-safe-area-bottom);
+      padding-left: var(--ngxsmk-safe-area-left);
     }
     .ngxsmk-mobile-nav__header {
       display: flex;

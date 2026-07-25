@@ -191,21 +191,23 @@ export class NgxsmkToast {
       font-family: var(--ngxsmk-font-sans);
     }
 
+    /* Offsets add the safe-area inset so toasts clear notches and the home
+       indicator on mobile. The tokens resolve to 0px everywhere else. */
     :host([data-position='bottom-right']) {
-      right: 1rem;
-      bottom: 1rem;
+      right: calc(1rem + var(--ngxsmk-safe-area-right));
+      bottom: calc(1rem + var(--ngxsmk-safe-area-bottom));
     }
     :host([data-position='bottom-left']) {
-      left: 1rem;
-      bottom: 1rem;
+      left: calc(1rem + var(--ngxsmk-safe-area-left));
+      bottom: calc(1rem + var(--ngxsmk-safe-area-bottom));
     }
     :host([data-position='top-right']) {
-      right: 1rem;
-      top: 1rem;
+      right: calc(1rem + var(--ngxsmk-safe-area-right));
+      top: calc(1rem + var(--ngxsmk-safe-area-top));
     }
     :host([data-position='top-left']) {
-      left: 1rem;
-      top: 1rem;
+      left: calc(1rem + var(--ngxsmk-safe-area-left));
+      top: calc(1rem + var(--ngxsmk-safe-area-top));
     }
 
     .ngxsmk-toaster__toast {

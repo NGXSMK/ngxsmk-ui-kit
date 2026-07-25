@@ -96,16 +96,32 @@ export type NgxsmkSheetSide = 'left' | 'right' | 'bottom';
       z-index: 1;
     }
 
+    /* Panels are flush to a viewport edge, so each pads by the inset on the
+       edge it touches — keeping content clear of notches and the home
+       indicator. The tokens are 0px wherever the browser reports no inset. */
     .ngxsmk-sheet__panel[data-side='left'],
     .ngxsmk-sheet__panel[data-side='right'] {
       width: min(var(--ngxsmk-sheet-width, 24rem), 100vw);
       height: 100%;
+      padding-top: var(--ngxsmk-safe-area-top);
+      padding-bottom: var(--ngxsmk-safe-area-bottom);
+    }
+
+    .ngxsmk-sheet__panel[data-side='left'] {
+      padding-left: var(--ngxsmk-safe-area-left);
+    }
+
+    .ngxsmk-sheet__panel[data-side='right'] {
+      padding-right: var(--ngxsmk-safe-area-right);
     }
 
     .ngxsmk-sheet__panel[data-side='bottom'] {
       width: 100%;
       max-height: var(--ngxsmk-sheet-height, 50vh);
       border-radius: var(--ngxsmk-radius-xl) var(--ngxsmk-radius-xl) 0 0;
+      padding-bottom: var(--ngxsmk-safe-area-bottom);
+      padding-left: var(--ngxsmk-safe-area-left);
+      padding-right: var(--ngxsmk-safe-area-right);
     }
 
     .ngxsmk-sheet__header {

@@ -89,7 +89,13 @@ try {
     run(`node node_modules/@angular/cli/bin/ng.js build @ngxsmk/${lib} --configuration production`);
   }
 
-  // 4. Publish (public via publishConfig in each package.json).
+  // 4. Verify the artifact actually links on the advertised floor. Building
+  //    with Angular 17.3 makes this near-certain, but the stamp is what
+  //    consumers' linkers enforce — so assert it rather than assume it.
+  console.log('\nVerifying Angular minVersion floor...');
+  run('node tools/scripts/check-min-version.mjs');
+
+  // 5. Publish (public via publishConfig in each package.json).
   console.log('\nPublishing packages...');
   for (const lib of ['cdk', 'theme', 'core']) {
     run(`npm publish ./dist/ngxsmk/${lib} --access public`);
@@ -98,7 +104,7 @@ try {
   const version = JSON.parse(readFileSync('./packages/core/package.json', 'utf8')).version;
   console.log(`\n✓ Published @ngxsmk/{cdk,theme,core}@${version} (built with Angular ${ANGULAR}).`);
 } finally {
-  // 5. Always restore angular.json and clean up generated compat tsconfigs.
+  // 6. Always restore angular.json and clean up generated compat tsconfigs.
   for (const lib of LIBS) {
     const p = `packages/${lib}/tsconfig.lib.compat.json`;
     if (existsSync(p)) rmSync(p);
@@ -109,7 +115,7 @@ try {
     console.log('\nRestored angular.json.');
   }
 
-  // 6. Auto-restore the Angular 22 development toolchain so the workspace is
+  // 7. Auto-restore the Angular 22 development toolchain so the workspace is
   //    immediately usable after publish without any manual step.
   console.log('\nRestoring Angular 22 development toolchain...');
   run('npm install');

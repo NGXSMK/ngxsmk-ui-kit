@@ -8,7 +8,7 @@ import {
   input,
 } from '@angular/core';
 import { NGXSMK_BUTTON_RENDERER } from './button-renderer';
-import { DefaultButtonRenderer } from './default-renderer';
+import { NGXSMK_BUTTON_RENDERER_CLASS } from './default-renderer';
 
 export type NgxsmkButtonVariant =
   'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'link';
@@ -30,7 +30,15 @@ export type NgxsmkButtonSize = 'sm' | 'md' | 'lg';
   standalone: true,
   /* eslint-disable-next-line @angular-eslint/directive-selector */
   selector: 'button[ngxsmk-button], a[ngxsmk-button]',
-  providers: [{ provide: NGXSMK_BUTTON_RENDERER, useClass: DefaultButtonRenderer }],
+  // Instantiated from the root-level class token so an app can swap the
+  // renderer globally; the factory runs in this node's injection context, so
+  // the renderer can still inject Renderer2.
+  providers: [
+    {
+      provide: NGXSMK_BUTTON_RENDERER,
+      useFactory: () => new (inject(NGXSMK_BUTTON_RENDERER_CLASS))(),
+    },
+  ],
   host: {
     class: 'ngxsmk-button',
     '[attr.data-variant]': 'variant()',

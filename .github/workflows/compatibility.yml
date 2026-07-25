@@ -92,3 +92,48 @@ jobs:
           node node_modules/@angular/cli/bin/ng.js build @ngxsmk/theme --configuration development
           node node_modules/@angular/cli/bin/ng.js build @ngxsmk/cdk --configuration development
           node node_modules/@angular/cli/bin/ng.js build @ngxsmk/core --configuration development
+
+  # The job above proves our *source* compiles on each major. Consumers never
+  # compile our source — they install one prebuilt tarball. This job builds the
+  # libraries the way `publish.mjs` does (Angular 17.3, partial mode), packs
+  # them, and AOT-builds a throwaway app on each major against the packed
+  # output. That is the only path that exercises the Angular linker's
+  # `minVersion` gate, the shipped `.d.ts` under an older TypeScript, and the
+  # `exports` map.
+  consume:
+    name: Consume packed libs on Angular ${{ matrix.ng }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - ng: '17'
+            node: '20'
+          - ng: '18'
+            node: '20'
+          - ng: '19'
+            node: '22'
+          - ng: '20'
+            node: '22'
+          - ng: '21'
+            node: '22'
+          - ng: '22'
+            node: '22'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build libraries
+        run: npm run build:libs
+
+      - name: Verify the Angular minVersion floor
+        run: npm run check:min-version
+
+      - name: Build a consumer app on Angular ${{ matrix.ng }}
+        run: node tools/scripts/consume-smoke.mjs ${{ matrix.ng }}

@@ -41,6 +41,10 @@
   --ngxsmk-motion-ease: var(--ngxsmk-ease-in-out);
   --ngxsmk-hover-lift: translateY(-1px);
   --ngxsmk-press-scale: scale(0.98);
+  --ngxsmk-safe-area-top: env(safe-area-inset-top, 0px);
+  --ngxsmk-safe-area-right: env(safe-area-inset-right, 0px);
+  --ngxsmk-safe-area-bottom: env(safe-area-inset-bottom, 0px);
+  --ngxsmk-safe-area-left: env(safe-area-inset-left, 0px);
   --ngxsmk-focus-ring: var(--ngxsmk-shadow-focus);
   --ngxsmk-focus-ring-error: 0 0 0 2px color-mix(in srgb, var(--ngxsmk-color-error) 15%, transparent), 0 0 0 4px color-mix(in srgb, var(--ngxsmk-color-error) 45%, transparent);
   --ngxsmk-button-bg: var(--ngxsmk-color-primary);

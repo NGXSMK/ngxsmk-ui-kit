@@ -210,6 +210,9 @@ export class NgxsmkTopNavMenu {}
         overflow-y: auto;
         flex-direction: column;
         border-radius: 0;
+        /* Full-height dropdown runs to the bottom edge; keep the last item
+           clear of the home indicator. 0px where there is no inset. */
+        padding-bottom: var(--ngxsmk-safe-area-bottom);
       }
       .ngxsmk-top-nav-mega-menu__grid {
         grid-template-columns: 1fr;

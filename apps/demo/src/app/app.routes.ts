@@ -50,6 +50,15 @@ export const routes: Routes = [
     },
   },
   {
+    path: 'ionic',
+    loadComponent: () => import('./pages/ionic/ionic').then((m) => m.IonicPage),
+    title: 'Ionic Integration - NGXSMK in Ionic apps | NGXSMK',
+    data: {
+      description:
+        'Run NGXSMK inside Ionic. Map NGXSMK design tokens onto Ionic --ion-* variables, lock ion-content scrolling from overlays, and honor mobile safe-area insets.',
+    },
+  },
+  {
     path: 'playground',
     loadComponent: () => import('./pages/playground/playground').then((m) => m.PlaygroundPage),
     title: 'Playground - Interactive Theme Editor | NGXSMK',

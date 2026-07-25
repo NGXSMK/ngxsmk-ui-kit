@@ -1,9 +1,9 @@
 import { DOCUMENT } from '@angular/common';
 import { Injectable, inject } from '@angular/core';
-import { buildThemeCss } from './css';
+import { buildThemeCss, emitDarkBlock } from './css';
 import { resolveTheme } from './define-config';
 import { TokenOutputAdapter, ionicVarsAdapter } from './token-adapter';
-import { ThemeConfig } from './types';
+import { ResolvedTheme, ThemeConfig } from './types';
 
 const STYLE_ID = 'ngxsmk-theme';
 const IONIC_STYLE_ID = 'ngxsmk-ionic-theme';
@@ -41,9 +41,7 @@ export class NgxThemeInjectorService {
     let css = buildThemeCss(config);
 
     if (adapter) {
-      const resolved = resolveTheme(config);
-      const platformVars = adapter.vars(resolved);
-      css += '\n' + this.buildAdapterCss(adapter.name, platformVars);
+      css += '\n' + this.buildAdapterCss(adapter, resolveTheme(config));
     }
 
     style.textContent = css;
@@ -62,9 +60,7 @@ export class NgxThemeInjectorService {
       head.appendChild(style);
     }
 
-    const resolved = resolveTheme(config);
-    const vars = ionicVarsAdapter.vars(resolved);
-    style.textContent = this.buildAdapterCss('ionic', vars);
+    style.textContent = this.buildAdapterCss(ionicVarsAdapter, resolveTheme(config));
   }
 
   /** Remove a runtime-applied theme, falling back to the build-time CSS. */
@@ -77,8 +73,17 @@ export class NgxThemeInjectorService {
     this.document.getElementById(IONIC_STYLE_ID)?.remove();
   }
 
-  private buildAdapterCss(adapterName: string, vars: Record<string, string>): string {
-    const lines = Object.entries(vars).map(([k, v]) => `  ${k}: ${v};`);
-    return `/* @ngxsmk/theme — ${adapterName} adapter */\n:root {\n${lines.join('\n')}\n}`;
+  private buildAdapterCss(adapter: TokenOutputAdapter, theme: ResolvedTheme): string {
+    const lines = Object.entries(adapter.vars(theme)).map(([k, v]) => `  ${k}: ${v};`);
+    let css = `/* @ngxsmk/theme — ${adapter.name} adapter */\n:root {\n${lines.join('\n')}\n}`;
+
+    // Adapters that vary by mode get their dark set under the same selector
+    // the NGXSMK tokens use, so both flip together.
+    const dark = adapter.varsDark?.(theme);
+    if (dark && Object.keys(dark).length) {
+      css += '\n\n' + emitDarkBlock(theme, dark);
+    }
+
+    return css;
   }
 }

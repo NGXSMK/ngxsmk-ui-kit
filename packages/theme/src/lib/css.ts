@@ -125,6 +125,17 @@ function staticVars(theme: ResolvedTheme): Vars {
     '--ngxsmk-hover-lift': 'translateY(-1px)',
     '--ngxsmk-press-scale': 'scale(0.98)',
 
+    // Safe-area insets: the display cutouts, notches, and home indicators a
+    // browser reports via env(). Zero on desktop and on any browser that does
+    // not report them, so edge-anchored components can add them
+    // unconditionally. Ionic publishes the same numbers as --ion-safe-area-*;
+    // the Ionic adapter re-points these tokens at those so a single set of
+    // values drives both token systems.
+    '--ngxsmk-safe-area-top': 'env(safe-area-inset-top, 0px)',
+    '--ngxsmk-safe-area-right': 'env(safe-area-inset-right, 0px)',
+    '--ngxsmk-safe-area-bottom': 'env(safe-area-inset-bottom, 0px)',
+    '--ngxsmk-safe-area-left': 'env(safe-area-inset-left, 0px)',
+
     // Focus ring: THE focus indicator for every component. Aliases the
     // mode-aware --ngxsmk-shadow-focus; the error variant derives from the
     // semantic error role so invalid controls ring red in both modes.
@@ -354,6 +365,39 @@ function block(selector: string, vars: Vars, indent = ''): string {
 }
 
 /**
+ * Emit `vars` under whichever selector or at-rule the theme's dark-mode
+ * strategy calls for.
+ *
+ * Shared with the runtime token adapters (e.g. the Ionic `--ion-*` output) so
+ * every token system a consumer enables flips to dark under exactly the same
+ * condition — a duplicated strategy switch would drift.
+ */
+export function emitDarkBlock(theme: ResolvedTheme, vars: Vars): string {
+  switch (theme.darkMode.strategy) {
+    case 'media':
+      return `@media (prefers-color-scheme: dark) {\n${block(':root', vars, '  ')}\n}`;
+    case 'system': {
+      // `light-dark()` support is per-property; the class block still serves
+      // as the override hook, so `system` behaves as media + class.
+      const cn = theme.darkMode.className;
+      return [
+        `@media (prefers-color-scheme: dark) {\n${block(':root', vars, '  ')}\n}`,
+        block(`:root.${cn}, :root.${cn} body, .${cn}`, vars),
+      ].join('\n\n');
+    }
+    default: {
+      // `:root.<class>` (specificity 0,2,0) plus a `body` variant defend the
+      // dark tokens against third-party stylesheets that redefine the same
+      // custom properties on a plain `:root` (0,1,0) — those would otherwise
+      // win by source order when injected into <head> after this sheet. The
+      // bare `.<class>` keeps scoped (non-root) dark regions working.
+      const cn = theme.darkMode.className;
+      return block(`:root.${cn}, :root.${cn} body, .${cn}`, vars);
+    }
+  }
+}
+
+/**
  * Transform a theme config into a CSS stylesheet of `--ngxsmk-*` custom
  * properties. Emits static tokens plus light-mode roles on `:root`, and
  * dark-mode roles according to the configured dark-mode strategy.
@@ -365,33 +409,7 @@ export function buildThemeCss(config: ThemeConfig | ResolvedTheme): string {
       : resolveTheme(config as ThemeConfig);
 
   const root = block(':root', { ...staticVars(theme), ...lightVars(theme) });
-  const dark = darkVars(theme);
-
-  let darkBlock: string;
-  switch (theme.darkMode.strategy) {
-    case 'media':
-      darkBlock = `@media (prefers-color-scheme: dark) {\n${block(':root', dark, '  ')}\n}`;
-      break;
-    case 'system': {
-      // `light-dark()` support is per-property; the class block still serves
-      // as the override hook, so `system` behaves as media + class.
-      const cn = theme.darkMode.className;
-      darkBlock = [
-        `@media (prefers-color-scheme: dark) {\n${block(':root', dark, '  ')}\n}`,
-        block(`:root.${cn}, :root.${cn} body, .${cn}`, dark),
-      ].join('\n\n');
-      break;
-    }
-    default: {
-      // `:root.<class>` (specificity 0,2,0) plus a `body` variant defend the
-      // dark tokens against third-party stylesheets that redefine `--ngxsmk-*`
-      // on a plain `:root` (0,1,0) — those would otherwise win by source order
-      // when injected into <head> after this sheet. The bare `.<class>` keeps
-      // scoped (non-root) dark regions working.
-      const cn = theme.darkMode.className;
-      darkBlock = block(`:root.${cn}, :root.${cn} body, .${cn}`, dark);
-    }
-  }
+  const darkBlock = emitDarkBlock(theme, darkVars(theme));
 
   // Zero every duration token (components animate with --ngxsmk-duration-*
   // directly) and neutralize the shared transforms so ALL token-driven motion

@@ -90,6 +90,7 @@ export * from '@ngxsmk/core/input-group';
 export * from '@ngxsmk/core/input-group-text';
 export * from '@ngxsmk/core/input';
 export * from '@ngxsmk/core/intersection-observer';
+export * from '@ngxsmk/core/ionic';
 export * from '@ngxsmk/core/json-viewer';
 export * from '@ngxsmk/core/kanban-board';
 export * from '@ngxsmk/core/keyboard-shortcut';
