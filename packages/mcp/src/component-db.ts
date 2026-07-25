@@ -82,6 +82,62 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "outputs": []
   },
   {
+    "entryPoint": "@ngxsmk/core/action-sheet",
+    "name": "NgxsmkActionSheet",
+    "kind": "Component",
+    "selector": "ngxsmk-action-sheet",
+    "description": "Bottom-anchored list of choices, in the shape mobile users expect from a native action sheet. Distinct from `ngxsmk-sheet`, which is a general side/bottom panel for arbitrary content. This is specifically a short menu of mutually exclusive actions, with a separated cancel affordance and a destructive style.",
+    "inputs": [
+      {
+        "name": "open",
+        "type": "boolean",
+        "required": false,
+        "twoWay": true,
+        "default": "false"
+      },
+      {
+        "name": "actions",
+        "type": "readonly NgxsmkActionSheetAction[]",
+        "required": false,
+        "default": "[]"
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "required": false,
+        "default": "''"
+      },
+      {
+        "name": "ariaLabel",
+        "type": "string",
+        "required": false,
+        "default": "'Actions'"
+      },
+      {
+        "name": "cancelLabel",
+        "type": "string",
+        "required": false,
+        "default": "'Cancel'"
+      },
+      {
+        "name": "showCancel",
+        "type": "boolean",
+        "required": false,
+        "default": "true"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "selected",
+        "type": "string"
+      },
+      {
+        "name": "dismissed",
+        "type": "'backdrop' | 'cancel' | 'escape'"
+      }
+    ]
+  },
+  {
     "entryPoint": "@ngxsmk/core/agent-card",
     "name": "NgxsmkAgentCard",
     "kind": "Component",
@@ -1296,6 +1352,39 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "outputs": []
   },
   {
+    "entryPoint": "@ngxsmk/core/back-to-top",
+    "name": "NgxsmkBackToTop",
+    "kind": "Component",
+    "selector": "ngxsmk-back-to-top",
+    "description": "Button that appears once the user has scrolled past a threshold and returns them to the top. Listens to whichever element the platform adapter says actually scrolls, so it works inside an Ionic `ion-content` as well as on a plain document — the same seam the scroll lock uses.",
+    "inputs": [
+      {
+        "name": "threshold",
+        "type": "number",
+        "required": false,
+        "default": "400"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": "'Back to top'"
+      },
+      {
+        "name": "instant",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "activated",
+        "type": "void"
+      }
+    ]
+  },
+  {
     "entryPoint": "@ngxsmk/core/badge",
     "name": "NgxsmkBadge",
     "kind": "Component",
@@ -1355,11 +1444,100 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "outputs": []
   },
   {
+    "entryPoint": "@ngxsmk/core/bottom-tab-bar",
+    "name": "NgxsmkBottomTabBar",
+    "kind": "Component",
+    "selector": "ngxsmk-bottom-tab-bar",
+    "description": "Fixed bottom navigation bar for mobile layouts. Pads itself by `--ngxsmk-safe-area-bottom`, so it clears the home indicator on devices that report an inset and sits flush everywhere else. In an Ionic app `provideNgxsmkIonic()` points that token at Ionic's own inset values.",
+    "inputs": [
+      {
+        "name": "ariaLabel",
+        "type": "string",
+        "required": false,
+        "default": "'Bottom navigation'"
+      },
+      {
+        "name": "fixed",
+        "type": "boolean",
+        "required": false,
+        "default": "true"
+      }
+    ],
+    "outputs": []
+  },
+  {
+    "entryPoint": "@ngxsmk/core/bottom-tab-bar",
+    "name": "NgxsmkBottomTab",
+    "kind": "Component",
+    "selector": "ngxsmk-bottom-tab",
+    "description": "A single destination in an . Renders an `<a>` when `href` is set and a `<button>` otherwise, so keyboard and screen-reader semantics match what the tab actually does.",
+    "inputs": [
+      {
+        "name": "href",
+        "type": "string",
+        "required": false,
+        "default": "''"
+      },
+      {
+        "name": "active",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "badge",
+        "type": "string",
+        "required": false,
+        "default": "''"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "selected",
+        "type": "void"
+      }
+    ]
+  },
+  {
+    "entryPoint": "@ngxsmk/core/breadcrumb",
+    "name": "NgxsmkBreadcrumb",
+    "kind": "Component",
+    "selector": "ngxsmk-breadcrumb",
+    "description": "Navigation landmark wrapping a trail of `ngxsmk-breadcrumb-item`s. Supplies the three things an item cannot provide for itself: the `navigation` landmark that lets screen-reader users jump to the trail, the list semantics that announce its length, and a single `separator` shared by every item instead of repeated on each one.",
+    "inputs": [
+      {
+        "name": "ariaLabel",
+        "type": "string",
+        "required": false,
+        "default": "'Breadcrumb'"
+      },
+      {
+        "name": "separator",
+        "type": "string",
+        "required": false,
+        "default": "'/'"
+      },
+      {
+        "name": "overflow",
+        "type": "NgxsmkBreadcrumbOverflow",
+        "required": false,
+        "default": "'wrap'"
+      }
+    ],
+    "outputs": []
+  },
+  {
     "entryPoint": "@ngxsmk/core/breadcrumb-item",
     "name": "NgxsmkBreadcrumbItem",
     "kind": "Component",
     "selector": "ngxsmk-breadcrumb-item",
-    "description": "",
+    "description": "A single step in a breadcrumb trail. An item with no `href` is the current page and is marked `aria-current=\"page\"`.",
     "inputs": [
       {
         "name": "href",
@@ -1371,7 +1549,7 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
         "name": "separator",
         "type": "string",
         "required": false,
-        "default": "'/'"
+        "default": "''"
       }
     ],
     "outputs": []
@@ -4216,6 +4394,33 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "outputs": []
   },
   {
+    "entryPoint": "@ngxsmk/core/masked-input",
+    "name": "NgxsmkMaskedInput",
+    "kind": "Directive",
+    "selector": "input[ngxsmkMask]",
+    "description": "Formats a native `<input>` as the user types, against a character mask. This is the primitive under the kit's format-specific inputs — a credit-card, phone, date, or postcode field is this directive plus a mask string.",
+    "inputs": [
+      {
+        "name": "ngxsmkMask",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "unmask",
+        "type": "boolean",
+        "required": false,
+        "default": "true"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      }
+    ],
+    "outputs": []
+  },
+  {
     "entryPoint": "@ngxsmk/core/masonry-grid",
     "name": "NgxsmkMasonryGrid",
     "kind": "Component",
@@ -5158,6 +5363,28 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     ]
   },
   {
+    "entryPoint": "@ngxsmk/core/portal",
+    "name": "NgxsmkPortal",
+    "kind": "Directive",
+    "selector": "[ngxsmkPortal]",
+    "description": "Renders content somewhere else in the DOM while keeping it in this component's logical tree — so bindings, injected services, and change detection all continue to work from where the template is written. Defaults to the platform's overlay container, which is `document.body` on the web and `ion-app` under Ionic. That is the seam the kit's own dialogs use; this directive exposes it for anything an app needs to escape a clipping or stacking ancestor — a dropdown inside `overflow: hidden`, a toast that must outrank a modal.",
+    "inputs": [
+      {
+        "name": "ngxsmkPortal",
+        "type": "NgxsmkPortalTarget",
+        "required": false,
+        "default": "null"
+      },
+      {
+        "name": "ngxsmkPortalDisabled",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      }
+    ],
+    "outputs": []
+  },
+  {
     "entryPoint": "@ngxsmk/core/power-search",
     "name": "NgxsmkPowerSearch",
     "kind": "Component",
@@ -5776,6 +6003,90 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     ]
   },
   {
+    "entryPoint": "@ngxsmk/core/response-feedback",
+    "name": "NgxsmkResponseFeedback",
+    "kind": "Component",
+    "selector": "ngxsmk-response-feedback",
+    "description": "Thumbs up/down rating for a generated response, with optional follow-up. Distinct from `ngxsmk-rating`, which captures a score on a scale. This is the binary signal an LLM product collects to build an evaluation set: a direction, and — when the answer was bad — why. Reason chips appear only after a downvote, so the common case stays a single click and the detail is asked for only when there is something to learn.",
+    "inputs": [
+      {
+        "name": "rating",
+        "type": "NgxsmkFeedbackRating",
+        "required": false,
+        "twoWay": true,
+        "default": "null"
+      },
+      {
+        "name": "reasons",
+        "type": "readonly string[]",
+        "required": false,
+        "default": "[]"
+      },
+      {
+        "name": "allowComment",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "ariaLabel",
+        "type": "string",
+        "required": false,
+        "default": "'Rate this response'"
+      },
+      {
+        "name": "upLabel",
+        "type": "string",
+        "required": false,
+        "default": "'Good response'"
+      },
+      {
+        "name": "downLabel",
+        "type": "string",
+        "required": false,
+        "default": "'Bad response'"
+      },
+      {
+        "name": "reasonLabel",
+        "type": "string",
+        "required": false,
+        "default": "'What went wrong?'"
+      },
+      {
+        "name": "commentLabel",
+        "type": "string",
+        "required": false,
+        "default": "'Anything else?'"
+      },
+      {
+        "name": "reason",
+        "type": "string | null",
+        "required": false,
+        "twoWay": true,
+        "default": "null"
+      },
+      {
+        "name": "comment",
+        "type": "string",
+        "required": false,
+        "twoWay": true,
+        "default": "''"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "submitted",
+        "type": "NgxsmkFeedbackEvent"
+      }
+    ]
+  },
+  {
     "entryPoint": "@ngxsmk/core/rich-text-editor",
     "name": "NgxsmkRichTextEditor",
     "kind": "Component",
@@ -5821,6 +6132,28 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
         "name": "group",
         "type": "RuleGroup",
         "required": true
+      }
+    ],
+    "outputs": []
+  },
+  {
+    "entryPoint": "@ngxsmk/core/safe-area",
+    "name": "NgxsmkSafeArea",
+    "kind": "Directive",
+    "selector": "[ngxsmkSafeArea]",
+    "description": "Pads an element by the device's safe-area insets. The kit's own edge-anchored components (toast, sheet, mobile-nav, bottom-tab-bar) already do this internally. This directive exposes the same behavior for app layout — a fixed header, a custom footer, a full-bleed panel — without hand-writing `env(safe-area-inset-*)` in four places. Resolves to `0px` wherever the browser reports no inset, so it is safe to apply unconditionally. Under Ionic, `provideNgxsmkIonic()` repoints the underlying tokens at Ionic's values, which are populated in a Capacitor WebView where `env()` often is not.",
+    "inputs": [
+      {
+        "name": "ngxsmkSafeArea",
+        "type": "string | readonly NgxsmkSafeAreaSide[] | ''",
+        "required": false,
+        "default": "''"
+      },
+      {
+        "name": "mode",
+        "type": "'padding' | 'margin'",
+        "required": false,
+        "default": "'padding'"
       }
     ],
     "outputs": []
@@ -7259,6 +7592,137 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
         "type": "'square' | 'circle'",
         "required": false,
         "default": "'square'"
+      }
+    ],
+    "outputs": []
+  },
+  {
+    "entryPoint": "@ngxsmk/core/time-picker",
+    "name": "NgxsmkTimePicker",
+    "kind": "Component",
+    "selector": "ngxsmk-time-picker",
+    "description": "Time-of-day picker built from native `<select>`s. The kit had `date-picker`, `date-range-picker`, and `scheduler` but no way to pick a time on its own. Selects are deliberate: they give keyboard support, screen-reader semantics, and native mobile pickers for free, which a custom popup would have to reimplement and usually gets wrong. The value is always canonical 24-hour `HH:mm` (or `HH:mm:ss`) regardless of whether it is displayed as 12-hour, so it round-trips to a server unchanged.",
+    "inputs": [
+      {
+        "name": "value",
+        "type": "string",
+        "required": false,
+        "default": "''"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "use12Hour",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "showSeconds",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "minuteStep",
+        "type": "number",
+        "required": false,
+        "default": "1"
+      },
+      {
+        "name": "secondStep",
+        "type": "number",
+        "required": false,
+        "default": "1"
+      },
+      {
+        "name": "ariaLabel",
+        "type": "string",
+        "required": false,
+        "default": "'Time'"
+      },
+      {
+        "name": "hourLabel",
+        "type": "string",
+        "required": false,
+        "default": "'Hours'"
+      },
+      {
+        "name": "minuteLabel",
+        "type": "string",
+        "required": false,
+        "default": "'Minutes'"
+      },
+      {
+        "name": "secondLabel",
+        "type": "string",
+        "required": false,
+        "default": "'Seconds'"
+      },
+      {
+        "name": "meridiemLabel",
+        "type": "string",
+        "required": false,
+        "default": "'AM or PM'"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "valueChange",
+        "type": "string"
+      }
+    ]
+  },
+  {
+    "entryPoint": "@ngxsmk/core/timeline",
+    "name": "NgxsmkTimeline",
+    "kind": "Component",
+    "selector": "ngxsmk-timeline",
+    "description": "Chronological list of events — an activity feed, an audit trail, a release history. The kit had `timeline-gantt` (scheduling), `timeline-stepper` (progress through a known sequence), and `reasoning-timeline` (agent traces), but no plain \"what happened, in order\" list.",
+    "inputs": [
+      {
+        "name": "orientation",
+        "type": "'vertical' | 'horizontal'",
+        "required": false,
+        "default": "'vertical'"
+      }
+    ],
+    "outputs": []
+  },
+  {
+    "entryPoint": "@ngxsmk/core/timeline",
+    "name": "NgxsmkTimelineItem",
+    "kind": "Component",
+    "selector": "ngxsmk-timeline-item",
+    "description": "One event in an . Content is the event body. Use `slot=\"title\"` for a heading line and `slot=\"marker\"` to replace the default dot with an icon.",
+    "inputs": [
+      {
+        "name": "time",
+        "type": "string",
+        "required": false,
+        "default": "''"
+      },
+      {
+        "name": "dateTime",
+        "type": "string",
+        "required": false,
+        "default": "''"
+      },
+      {
+        "name": "variant",
+        "type": "NgxsmkTimelineVariant",
+        "required": false,
+        "default": "'default'"
+      },
+      {
+        "name": "last",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
       }
     ],
     "outputs": []

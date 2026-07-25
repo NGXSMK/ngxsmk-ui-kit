@@ -4,6 +4,7 @@ import { RouterOutlet, RouterLink, RouterLinkActive, Router, NavigationEnd } fro
 import { filter } from 'rxjs/operators';
 import { TranslatePipe } from '@ngx-translate/core';
 import { AppNav } from '../nav/nav';
+import { APP_VERSION } from '../core/version';
 
 interface CategoryGroup {
   label: string;
@@ -21,7 +22,7 @@ interface CategoryGroup {
       <aside class="sc-sidebar" [class.sc-sidebar--open]="mobileOpen()">
         <div class="sc-sidebar__brand">
           <span class="sc-sidebar__brand-name">NGXSMK</span>
-          <span class="sc-sidebar__version">v2.0.0</span>
+          <span class="sc-sidebar__version">v{{ appVersion }}</span>
         </div>
 
         <div class="sc-sidebar__search">
@@ -511,6 +512,8 @@ interface CategoryGroup {
   `,
 })
 export class ShowcaseLayout {
+  /** Stamped from the root package.json — see core/version.ts. */
+  protected readonly appVersion = APP_VERSION;
   protected readonly searchQuery = signal('');
   protected readonly mobileOpen = signal(false);
   protected readonly expandedGroups = signal<Set<string>>(

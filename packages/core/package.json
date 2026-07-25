@@ -1,6 +1,6 @@
 {
   "name": "@ngxsmk/core",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Signal-first, zoneless Angular UI component library with AI-ready controls and a universal token engine.",
   "keywords": [
     "angular",
@@ -30,7 +30,7 @@
     "@angular/core": ">=17.3.0",
     "@angular/forms": ">=17.3.0",
     "@angular/cdk": ">=17.3.0",
-    "@ngxsmk/cdk": "^2.0.0",
+    "@ngxsmk/cdk": "^2.1.0",
     "ngxsmk-datepicker": ">=2.3.1 <2.4.0",
     "luxon": "^3.0.0",
     "qrcode-generator": "^2.0.0",

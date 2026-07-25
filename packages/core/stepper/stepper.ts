@@ -90,6 +90,10 @@ type StepView = NgxsmkStep & {
   host: {
     class: 'ngxsmk-stepper',
     '[attr.data-orientation]': 'orientation()',
+    // Without a role the host is `generic`, which ARIA forbids naming, so the
+    // aria-label below never reaches assistive tech. `group` names the ordered
+    // list of steps without implying navigation.
+    role: 'group',
     '[attr.aria-label]': 'label()',
   },
   styles: `

@@ -73,7 +73,12 @@ export type TransferDirection = 'left' | 'right';
         </div>
       }
 
-      <div class="ngxsmk-transfer__body" role="listbox" aria-multiselectable="true">
+      <div
+        class="ngxsmk-transfer__body"
+        role="listbox"
+        aria-multiselectable="true"
+        [attr.aria-label]="titles()[0]"
+      >
         @for (item of filteredLeftItems(); track item.key) {
           <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
           <div
@@ -167,7 +172,12 @@ export type TransferDirection = 'left' | 'right';
         </div>
       }
 
-      <div class="ngxsmk-transfer__body" role="listbox" aria-multiselectable="true">
+      <div
+        class="ngxsmk-transfer__body"
+        role="listbox"
+        aria-multiselectable="true"
+        [attr.aria-label]="titles()[1]"
+      >
         @for (item of filteredRightItems(); track item.key) {
           <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
           <div

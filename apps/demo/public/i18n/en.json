@@ -346,6 +346,23 @@
         "changes": {
           "0": "Foundational primitives: button, card, input, dialog."
         }
+      },
+      "v210": {
+        "summary": "Ionic integration, ten new components, and packaging fixes that unblocked Angular 17 consumers.",
+        "changes": {
+          "0": "Ionic support: provideNgxsmkIonic() wires the platform adapter, an ion-spinner button renderer, and a safe-area bridge in one call.",
+          "1": "Complete Ionic token adapter — all nine color roles with their six-variable sets, the --ion-color-step ladder, surfaces, and a real dark-mode block.",
+          "2": "NGXSMK_PLATFORM_ADAPTER abstracts which element scrolls and where overlays attach, so overlays behave correctly inside ion-content and ion-app.",
+          "3": "Safe-area tokens applied to toast, sheet, mobile-nav, and the top-nav mega menu.",
+          "4": "Ten new components: breadcrumb, bottom-tab-bar, masked-input, response-feedback, time-picker, portal, timeline, safe-area, back-to-top, and action-sheet.",
+          "5": "Baseline conformance suite covering 156 previously untested components, plus an axe harness in @ngxsmk/cdk/testing.",
+          "6": "Declared @angular/cdk and qrcode-generator as peer dependencies — both were imported but never declared, breaking installs that used select or qr-code.",
+          "7": "Narrowed the ngxsmk-datepicker peer range: 2.4.0 dropped its root export, which made @ngxsmk/core/datepicker unresolvable for new installs.",
+          "8": "masonry-grid ignored custom item templates — the component used *ngTemplateOutlet without importing NgTemplateOutlet, so every item silently fell back to the default card.",
+          "9": "Accessibility fixes in status-dot, stepper, and transfer, where aria-label sat on elements ARIA forbids naming or a listbox had no accessible name.",
+          "10": "Button renderer selection moved to NGXSMK_BUTTON_RENDERER_CLASS, which an application can actually override — the previous token was shadowed by the directive.",
+          "11": "ButtonRenderer trimmed to the two methods the directive calls; the other three were never invoked."
+        }
       }
     }
   },

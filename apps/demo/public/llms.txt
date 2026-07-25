@@ -1,9 +1,9 @@
 # NGXSMK UI Kit
 
-> Angular-first, MIT-licensed UI ecosystem: 258+ signals-native, zoneless
+> Angular-first, MIT-licensed UI ecosystem: 270+ signals-native, zoneless
 > standalone components with a universal design-token engine (CSS variables,
 > SCSS, Tailwind, StyleX, Tokens Studio export). MIT licensed, no paid tiers.
-> Current version: 2.0.0. Supports Angular 17.3 through 22.
+> Current version: 2.1.0. Supports Angular 17.3 through 22.
 
 Packages: `@ngxsmk/core` (components, one secondary entry point per component,
 e.g. `@ngxsmk/core/button`), `@ngxsmk/theme` (design tokens + theme engine),
@@ -25,6 +25,7 @@ Usage rules for generated code:
 ## Components
 - NgxsmkAccordion (`ngxsmk-accordion`) — @ngxsmk/core/accordion — Expandable section container
 - NgxsmkAccordionItem (`ngxsmk-accordion-item`) — @ngxsmk/core/accordion
+- NgxsmkActionSheet (`ngxsmk-action-sheet`) — @ngxsmk/core/action-sheet — Bottom-anchored list of choices, in the shape mobile users expect from a native action sheet
 - NgxsmkAgentCard (`ngxsmk-agent-card`) — @ngxsmk/core/agent-card
 - NgxsmkAiChat (`ngxsmk-ai-chat`) — @ngxsmk/core/ai-chat
 - NgxsmkAiThinkingIndicator (`ngxsmk-ai-thinking-indicator`) — @ngxsmk/core/ai-thinking-indicator — Animated glowing orb, pulse wave, and skeleton indicator for active AI reasoning
@@ -49,10 +50,14 @@ Usage rules for generated code:
 - NgxsmkAvatar (`ngxsmk-avatar`) — @ngxsmk/core/avatar — User avatar with automatic initials fallback when no image is available or the image fails to load
 - NgxsmkAvatarGroupOverflow (`ngxsmk-avatar-group-overflow`) — @ngxsmk/core/avatar-group-overflow
 - NgxsmkAvatarStatusDot (`ngxsmk-avatar-status-dot`) — @ngxsmk/core/avatar-status-dot
+- NgxsmkBackToTop (`ngxsmk-back-to-top`) — @ngxsmk/core/back-to-top — Button that appears once the user has scrolled past a threshold and returns them to the top
 - NgxsmkBadge (`ngxsmk-badge`) — @ngxsmk/core/badge — Small status descriptor for counts and labels
 - NgxsmkBanner (`ngxsmk-banner`) — @ngxsmk/core/banner
 - NgxsmkBlockquote (`ngxsmk-blockquote`) — @ngxsmk/core/blockquote
-- NgxsmkBreadcrumbItem (`ngxsmk-breadcrumb-item`) — @ngxsmk/core/breadcrumb-item
+- NgxsmkBottomTabBar (`ngxsmk-bottom-tab-bar`) — @ngxsmk/core/bottom-tab-bar — Fixed bottom navigation bar for mobile layouts
+- NgxsmkBottomTab (`ngxsmk-bottom-tab`) — @ngxsmk/core/bottom-tab-bar — A single destination in an 
+- NgxsmkBreadcrumb (`ngxsmk-breadcrumb`) — @ngxsmk/core/breadcrumb — Navigation landmark wrapping a trail of `ngxsmk-breadcrumb-item`s
+- NgxsmkBreadcrumbItem (`ngxsmk-breadcrumb-item`) — @ngxsmk/core/breadcrumb-item — A single step in a breadcrumb trail
 - NgxsmkButton (`button[ngxsmk-button], a[ngxsmk-button]`) — @ngxsmk/core/button — Button applied to native `<button>`/`<a>` elements so browser semantics, forms integration, and keyboard behavior come for free
 - NgxsmkButtonGroup (`ngxsmk-button-group, [ngxsmkButtonGroup]`) — @ngxsmk/core/button-group
 - NgxsmkCalendarHeatmap (`ngxsmk-calendar-heatmap`) — @ngxsmk/core/calendar-heatmap — GitHub-style contribution calendar heatmap component for visualizing daily metrics
@@ -162,6 +167,7 @@ Usage rules for generated code:
 - NgxsmkListItem (`ngxsmk-list-item, [ngxsmkListItem]`) — @ngxsmk/core/list-item
 - NgxsmkMarkdown (`ngxsmk-markdown`) — @ngxsmk/core/markdown
 - NgxsmkMarkdownViewer (`ngxsmk-markdown-viewer`) — @ngxsmk/core/markdown-viewer
+- NgxsmkMaskedInput (`input[ngxsmkMask]`) — @ngxsmk/core/masked-input — Formats a native `<input>` as the user types, against a character mask
 - NgxsmkMasonryGrid (`ngxsmk-masonry-grid`) — @ngxsmk/core/masonry-grid — Staggered multi-column media layout (masonry/waterfall grid) container
 - NgxsmkMediaQuery (`[ngxsmkMediaQuery]`) — @ngxsmk/core/media-query
 - NgxsmkMediaTheme (`[ngxsmkMediaTheme]`) — @ngxsmk/core/media-theme
@@ -191,6 +197,7 @@ Usage rules for generated code:
 - NgxsmkPivotTable (`ngxsmk-pivot-table`) — @ngxsmk/core/pivot-table
 - NgxsmkPlayground (`ngxsmk-playground`) — @ngxsmk/core/playground
 - NgxsmkPopover (`ngxsmk-popover`) — @ngxsmk/core/popover — Click-triggered popover anchored to its trigger
+- NgxsmkPortal (`[ngxsmkPortal]`) — @ngxsmk/core/portal — Renders content somewhere else in the DOM while keeping it in this component's logical tree — so bindings, injected services, and change detection all continue to work from where the template is written
 - NgxsmkPowerSearch (`ngxsmk-power-search`) — @ngxsmk/core/power-search
 - NgxsmkProgress (`ngxsmk-progress`) — @ngxsmk/core/progress — Progress bar
 - NgxsmkProgressCircle (`ngxsmk-progress-circle`) — @ngxsmk/core/progress-circle
@@ -208,8 +215,10 @@ Usage rules for generated code:
 - NgxsmkResizable (`ngxsmk-resizable`) — @ngxsmk/core/resizable
 - NgxsmkResizeHandle (`ngxsmk-resize-handle`) — @ngxsmk/core/resize-handle
 - NgxsmkResizeObserver (`[ngxsmkResizeObserver]`) — @ngxsmk/core/resize-observer
+- NgxsmkResponseFeedback (`ngxsmk-response-feedback`) — @ngxsmk/core/response-feedback — Thumbs up/down rating for a generated response, with optional follow-up
 - NgxsmkRichTextEditor (`ngxsmk-rich-text-editor`) — @ngxsmk/core/rich-text-editor — Lightweight WYSIWYG rich text editor control with formatting toolbar
 - NgxsmkRuleBuilder (`ngxsmk-rule-builder`) — @ngxsmk/core/rule-builder
+- NgxsmkSafeArea (`[ngxsmkSafeArea]`) — @ngxsmk/core/safe-area — Pads an element by the device's safe-area insets
 - NgxsmkScheduler (`ngxsmk-scheduler`) — @ngxsmk/core/scheduler
 - NgxsmkScrollLock (`[ngxsmkScrollLock]`) — @ngxsmk/core/scroll-lock
 - NgxsmkScrollSpy (`ngxsmk-scroll-spy`) — @ngxsmk/core/scroll-spy — ScrollSpy component & table-of-contents tracker
@@ -252,6 +261,9 @@ Usage rules for generated code:
 - NgxsmkText (`ngxsmk-text`) — @ngxsmk/core/text
 - NgxsmkThemeBuilder (`ngxsmk-theme-builder`) — @ngxsmk/core/theme-builder
 - NgxsmkThumbnail (`ngxsmk-thumbnail`) — @ngxsmk/core/thumbnail
+- NgxsmkTimePicker (`ngxsmk-time-picker`) — @ngxsmk/core/time-picker — Time-of-day picker built from native `<select>`s
+- NgxsmkTimeline (`ngxsmk-timeline`) — @ngxsmk/core/timeline — Chronological list of events — an activity feed, an audit trail, a release history
+- NgxsmkTimelineItem (`ngxsmk-timeline-item`) — @ngxsmk/core/timeline — One event in an 
 - NgxsmkTimelineGantt (`ngxsmk-timeline-gantt`) — @ngxsmk/core/timeline-gantt
 - NgxsmkTimelineStepper (`ngxsmk-timeline-stepper`) — @ngxsmk/core/timeline-stepper — Vertical milestone timeline node step tracker component
 - NgxsmkTimestamp (`ngxsmk-timestamp`) — @ngxsmk/core/timestamp

@@ -1,6 +1,6 @@
 {
   "name": "ngxsmk-ui-kit",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -33,6 +33,7 @@
     "check:zoneless": "node tools/scripts/check-zoneless.mjs",
     "check:min-version": "node tools/scripts/check-min-version.mjs",
     "check:consume": "node tools/scripts/consume-smoke.mjs",
+    "generate:conformance": "node tools/scripts/generate-conformance-specs.mjs",
     "visual": "playwright test",
     "visual:update": "playwright test --update-snapshots",
     "start:mcp": "node packages/mcp/dist/index.js",

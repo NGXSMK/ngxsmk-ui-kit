@@ -1,9 +1,9 @@
 # NGXSMK UI Kit
 
-> Angular-first, MIT-licensed UI ecosystem: 258+ signals-native, zoneless
+> Angular-first, MIT-licensed UI ecosystem: 270+ signals-native, zoneless
 > standalone components with a universal design-token engine (CSS variables,
 > SCSS, Tailwind, StyleX, Tokens Studio export). MIT licensed, no paid tiers.
-> Current version: 2.0.0. Supports Angular 17.3 through 22.
+> Current version: 2.1.0. Supports Angular 17.3 through 22.
 
 Packages: `@ngxsmk/core` (components, one secondary entry point per component,
 e.g. `@ngxsmk/core/button`), `@ngxsmk/theme` (design tokens + theme engine),
@@ -43,6 +43,24 @@ Inputs:
 - `[label]`: string (required)
 - `[value]`: string (default: `''`)
 - `[disabled]`: boolean (default: `false`)
+
+## NgxsmkActionSheet
+
+- Selector: `ngxsmk-action-sheet`
+- Import from: `@ngxsmk/core/action-sheet`
+- Bottom-anchored list of choices, in the shape mobile users expect from a native action sheet. Distinct from `ngxsmk-sheet`, which is a general side/bottom panel for arbitrary content. This is specifically a short menu of mutually exclusive actions, with a separated cancel affordance and a destructive style.
+
+Inputs:
+- `[(open)]`: boolean (default: `false`)
+- `[actions]`: readonly NgxsmkActionSheetAction[] (default: `[]`)
+- `[title]`: string (default: `''`)
+- `[ariaLabel]`: string (default: `'Actions'`)
+- `[cancelLabel]`: string (default: `'Cancel'`)
+- `[showCancel]`: boolean (default: `true`)
+
+Outputs:
+- `(selected)`: emits `string`
+- `(dismissed)`: emits `'backdrop' | 'cancel' | 'escape'`
 
 ## NgxsmkAgentCard
 
@@ -434,6 +452,20 @@ Inputs:
 Inputs:
 - `[variant]`: NgxsmkAvatarStatusDotVariant (default: `'online'`)
 
+## NgxsmkBackToTop
+
+- Selector: `ngxsmk-back-to-top`
+- Import from: `@ngxsmk/core/back-to-top`
+- Button that appears once the user has scrolled past a threshold and returns them to the top. Listens to whichever element the platform adapter says actually scrolls, so it works inside an Ionic `ion-content` as well as on a plain document — the same seam the scroll lock uses.
+
+Inputs:
+- `[threshold]`: number (default: `400`)
+- `[label]`: string (default: `'Back to top'`)
+- `[instant]`: boolean (default: `false`)
+
+Outputs:
+- `(activated)`: emits `void`
+
 ## NgxsmkBadge
 
 - Selector: `ngxsmk-badge`
@@ -463,14 +495,51 @@ Outputs:
 Inputs:
 - `[cite]`: string (default: `''`)
 
+## NgxsmkBottomTabBar
+
+- Selector: `ngxsmk-bottom-tab-bar`
+- Import from: `@ngxsmk/core/bottom-tab-bar`
+- Fixed bottom navigation bar for mobile layouts. Pads itself by `--ngxsmk-safe-area-bottom`, so it clears the home indicator on devices that report an inset and sits flush everywhere else. In an Ionic app `provideNgxsmkIonic()` points that token at Ionic's own inset values.
+
+Inputs:
+- `[ariaLabel]`: string (default: `'Bottom navigation'`)
+- `[fixed]`: boolean (default: `true`)
+
+## NgxsmkBottomTab
+
+- Selector: `ngxsmk-bottom-tab`
+- Import from: `@ngxsmk/core/bottom-tab-bar`
+- A single destination in an . Renders an `<a>` when `href` is set and a `<button>` otherwise, so keyboard and screen-reader semantics match what the tab actually does.
+
+Inputs:
+- `[href]`: string (default: `''`)
+- `[active]`: boolean (default: `false`)
+- `[disabled]`: boolean (default: `false`)
+- `[badge]`: string (default: `''`)
+
+Outputs:
+- `(selected)`: emits `void`
+
+## NgxsmkBreadcrumb
+
+- Selector: `ngxsmk-breadcrumb`
+- Import from: `@ngxsmk/core/breadcrumb`
+- Navigation landmark wrapping a trail of `ngxsmk-breadcrumb-item`s. Supplies the three things an item cannot provide for itself: the `navigation` landmark that lets screen-reader users jump to the trail, the list semantics that announce its length, and a single `separator` shared by every item instead of repeated on each one.
+
+Inputs:
+- `[ariaLabel]`: string (default: `'Breadcrumb'`)
+- `[separator]`: string (default: `'/'`)
+- `[overflow]`: NgxsmkBreadcrumbOverflow (default: `'wrap'`)
+
 ## NgxsmkBreadcrumbItem
 
 - Selector: `ngxsmk-breadcrumb-item`
 - Import from: `@ngxsmk/core/breadcrumb-item`
+- A single step in a breadcrumb trail. An item with no `href` is the current page and is marked `aria-current="page"`.
 
 Inputs:
 - `[href]`: string (default: `''`)
-- `[separator]`: string (default: `'/'`)
+- `[separator]`: string (default: `''`)
 
 ## NgxsmkButton
 
@@ -1586,6 +1655,17 @@ Inputs:
 - Selector: `ngxsmk-markdown-viewer`
 - Import from: `@ngxsmk/core/markdown-viewer`
 
+## NgxsmkMaskedInput
+
+- Selector: `input[ngxsmkMask]`
+- Import from: `@ngxsmk/core/masked-input`
+- Formats a native `<input>` as the user types, against a character mask. This is the primitive under the kit's format-specific inputs — a credit-card, phone, date, or postcode field is this directive plus a mask string.
+
+Inputs:
+- `[ngxsmkMask]`: string (required)
+- `[unmask]`: boolean (default: `true`)
+- `[disabled]`: boolean (default: `false`)
+
 ## NgxsmkMasonryGrid
 
 - Selector: `ngxsmk-masonry-grid`
@@ -1923,6 +2003,16 @@ Outputs:
 - `(opened)`: emits `void`
 - `(closed)`: emits `void`
 
+## NgxsmkPortal
+
+- Selector: `[ngxsmkPortal]`
+- Import from: `@ngxsmk/core/portal`
+- Renders content somewhere else in the DOM while keeping it in this component's logical tree — so bindings, injected services, and change detection all continue to work from where the template is written. Defaults to the platform's overlay container, which is `document.body` on the web and `ion-app` under Ionic. That is the seam the kit's own dialogs use; this directive exposes it for anything an app needs to escape a clipping or stacking ancestor — a dropdown inside `overflow: hidden`, a toast that must outrank a modal.
+
+Inputs:
+- `[ngxsmkPortal]`: NgxsmkPortalTarget (default: `null`)
+- `[ngxsmkPortalDisabled]`: boolean (default: `false`)
+
 ## NgxsmkPowerSearch
 
 - Selector: `ngxsmk-power-search`
@@ -2140,6 +2230,28 @@ Outputs:
 Outputs:
 - `(sizeChanged)`: emits `NgxsmkResizeObserverSize`
 
+## NgxsmkResponseFeedback
+
+- Selector: `ngxsmk-response-feedback`
+- Import from: `@ngxsmk/core/response-feedback`
+- Thumbs up/down rating for a generated response, with optional follow-up. Distinct from `ngxsmk-rating`, which captures a score on a scale. This is the binary signal an LLM product collects to build an evaluation set: a direction, and — when the answer was bad — why. Reason chips appear only after a downvote, so the common case stays a single click and the detail is asked for only when there is something to learn.
+
+Inputs:
+- `[(rating)]`: NgxsmkFeedbackRating (default: `null`)
+- `[reasons]`: readonly string[] (default: `[]`)
+- `[allowComment]`: boolean (default: `false`)
+- `[disabled]`: boolean (default: `false`)
+- `[ariaLabel]`: string (default: `'Rate this response'`)
+- `[upLabel]`: string (default: `'Good response'`)
+- `[downLabel]`: string (default: `'Bad response'`)
+- `[reasonLabel]`: string (default: `'What went wrong?'`)
+- `[commentLabel]`: string (default: `'Anything else?'`)
+- `[(reason)]`: string | null (default: `null`)
+- `[(comment)]`: string (default: `''`)
+
+Outputs:
+- `(submitted)`: emits `NgxsmkFeedbackEvent`
+
 ## NgxsmkRichTextEditor
 
 - Selector: `ngxsmk-rich-text-editor`
@@ -2159,6 +2271,16 @@ Inputs:
 
 Inputs:
 - `[group]`: RuleGroup (required)
+
+## NgxsmkSafeArea
+
+- Selector: `[ngxsmkSafeArea]`
+- Import from: `@ngxsmk/core/safe-area`
+- Pads an element by the device's safe-area insets. The kit's own edge-anchored components (toast, sheet, mobile-nav, bottom-tab-bar) already do this internally. This directive exposes the same behavior for app layout — a fixed header, a custom footer, a full-bleed panel — without hand-writing `env(safe-area-inset-*)` in four places. Resolves to `0px` wherever the browser reports no inset, so it is safe to apply unconditionally. Under Ionic, `provideNgxsmkIonic()` repoints the underlying tokens at Ionic's values, which are populated in a Capacitor WebView where `env()` often is not.
+
+Inputs:
+- `[ngxsmkSafeArea]`: string | readonly NgxsmkSafeAreaSide[] | '' (default: `''`)
+- `[mode]`: 'padding' | 'margin' (default: `'padding'`)
 
 ## NgxsmkScheduler
 
@@ -2668,6 +2790,49 @@ Inputs:
 - `[alt]`: string (default: `''`)
 - `[size]`: 'sm' | 'md' | 'lg' | 'xl' (default: `'md'`)
 - `[shape]`: 'square' | 'circle' (default: `'square'`)
+
+## NgxsmkTimePicker
+
+- Selector: `ngxsmk-time-picker`
+- Import from: `@ngxsmk/core/time-picker`
+- Time-of-day picker built from native `<select>`s. The kit had `date-picker`, `date-range-picker`, and `scheduler` but no way to pick a time on its own. Selects are deliberate: they give keyboard support, screen-reader semantics, and native mobile pickers for free, which a custom popup would have to reimplement and usually gets wrong. The value is always canonical 24-hour `HH:mm` (or `HH:mm:ss`) regardless of whether it is displayed as 12-hour, so it round-trips to a server unchanged.
+
+Inputs:
+- `[value]`: string (default: `''`)
+- `[disabled]`: boolean (default: `false`)
+- `[use12Hour]`: boolean (default: `false`)
+- `[showSeconds]`: boolean (default: `false`)
+- `[minuteStep]`: number (default: `1`)
+- `[secondStep]`: number (default: `1`)
+- `[ariaLabel]`: string (default: `'Time'`)
+- `[hourLabel]`: string (default: `'Hours'`)
+- `[minuteLabel]`: string (default: `'Minutes'`)
+- `[secondLabel]`: string (default: `'Seconds'`)
+- `[meridiemLabel]`: string (default: `'AM or PM'`)
+
+Outputs:
+- `(valueChange)`: emits `string`
+
+## NgxsmkTimeline
+
+- Selector: `ngxsmk-timeline`
+- Import from: `@ngxsmk/core/timeline`
+- Chronological list of events — an activity feed, an audit trail, a release history. The kit had `timeline-gantt` (scheduling), `timeline-stepper` (progress through a known sequence), and `reasoning-timeline` (agent traces), but no plain "what happened, in order" list.
+
+Inputs:
+- `[orientation]`: 'vertical' | 'horizontal' (default: `'vertical'`)
+
+## NgxsmkTimelineItem
+
+- Selector: `ngxsmk-timeline-item`
+- Import from: `@ngxsmk/core/timeline`
+- One event in an . Content is the event body. Use `slot="title"` for a heading line and `slot="marker"` to replace the default dot with an icon.
+
+Inputs:
+- `[time]`: string (default: `''`)
+- `[dateTime]`: string (default: `''`)
+- `[variant]`: NgxsmkTimelineVariant (default: `'default'`)
+- `[last]`: boolean (default: `false`)
 
 ## NgxsmkTimelineGantt
 

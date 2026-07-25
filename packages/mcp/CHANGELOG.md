@@ -1,5 +1,7 @@
 # @ngxsmk/mcp
 
+## 2.1.0
+
 ## 1.3.2
 
 - The component database is now auto-generated from `packages/core` sources

@@ -1,11 +1,23 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import { NGXSMK_BREADCRUMB_SEPARATOR } from '@ngxsmk/core/breadcrumb';
 
+/**
+ * A single step in a breadcrumb trail. An item with no `href` is the current
+ * page and is marked `aria-current="page"`.
+ *
+ * ```html
+ * <ngxsmk-breadcrumb-item href="/docs">Docs</ngxsmk-breadcrumb-item>
+ * ```
+ *
+ * Wrap items in `ngxsmk-breadcrumb` for the navigation landmark and list
+ * semantics; used bare they still render, just without those.
+ */
 @Component({
   standalone: true,
   selector: 'ngxsmk-breadcrumb-item',
   template: `
-    @if (separator()) {
-      <span class="ngxsmk-breadcrumb-item__sep" aria-hidden="true">{{ separator() }}</span>
+    @if (effectiveSeparator()) {
+      <span class="ngxsmk-breadcrumb-item__sep" aria-hidden="true">{{ effectiveSeparator() }}</span>
     }
     <a
       class="ngxsmk-breadcrumb-item__link"
@@ -15,7 +27,9 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
       <ng-content />
     </a>
   `,
-  host: { class: 'ngxsmk-breadcrumb-item' },
+  // Explicit listitem role: the parent's <ol> cannot confer it on a custom
+  // element, so without this the trail is not announced as a list.
+  host: { class: 'ngxsmk-breadcrumb-item', role: 'listitem' },
   styles: `
     :host {
       display: inline-flex;
@@ -55,5 +69,17 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 })
 export class NgxsmkBreadcrumbItem {
   readonly href = input('');
-  readonly separator = input('/');
+
+  /**
+   * Per-item override. Left empty, the item uses the enclosing breadcrumb's
+   * `separator`, falling back to `/` when used outside one — which is what a
+   * bare item rendered before this input could defer to a parent.
+   */
+  readonly separator = input('');
+
+  private readonly inherited = inject(NGXSMK_BREADCRUMB_SEPARATOR, { optional: true });
+
+  protected readonly effectiveSeparator = computed(
+    () => this.separator() || this.inherited?.() || '/',
+  );
 }

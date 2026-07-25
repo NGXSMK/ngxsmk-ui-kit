@@ -17,6 +17,11 @@ const VARIANT_COLORS: Record<NgxsmkStatusDotVariant, string> = {
     class: 'ngxsmk-status-dot',
     '[attr.data-variant]': 'variant()',
     '[style.background]': 'variantColor()',
+    // A roleless element is `generic`, and ARIA prohibits naming it — the
+    // aria-label below is dropped by assistive tech without a role to carry it.
+    // `img` fits a static indicator; the sibling avatar-status-dot uses
+    // `status` because it announces changes.
+    role: 'img',
     '[attr.aria-label]': 'variant()',
   },
   styles: `

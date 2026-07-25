@@ -178,7 +178,7 @@ export class HomePage implements OnInit {
 </button>
 
 <ngxsmk-badge variant="primary">
-  v2.0.0
+  v2.1.0
 </ngxsmk-badge>
 
 <ngxsmk-progress [value]="75" />`;

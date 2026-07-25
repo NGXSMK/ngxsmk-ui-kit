@@ -1,6 +1,6 @@
 {
   "name": "@ngxsmk/cli",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "CLI & schematics for the @ngxsmk signal-native Angular UI kit",
   "bin": {
     "ngxsmk": "./dist/index.js"

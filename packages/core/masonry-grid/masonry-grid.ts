@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -21,6 +22,7 @@ import {
 @Component({
   standalone: true,
   selector: 'ngxsmk-masonry-grid',
+  imports: [NgTemplateOutlet],
   template: `
     <div class="ngxsmk-masonry" [style.gap]="gap() + 'px'">
       @for (col of columnList(); track $index) {
