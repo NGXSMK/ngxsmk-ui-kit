@@ -82,7 +82,7 @@
     "@commitlint/cli": "^19.7.1",
     "@commitlint/config-conventional": "^19.7.1",
     "@eslint/js": "^10.0.1",
-    "@playwright/test": "^1.61.1",
+    "@playwright/test": "^1.62.1",
     "angular-eslint": "22.1.0",
     "axe-core": "^4.12.1",
     "eslint": "^10.6.0",
