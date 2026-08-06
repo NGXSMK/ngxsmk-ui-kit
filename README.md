@@ -13,9 +13,10 @@ tree-shakable standalone components.
 [![npm version](https://img.shields.io/npm/v/@ngxsmk/core?label=npm&color=blue)](https://www.npmjs.com/package/@ngxsmk/core)
 [![npm downloads](https://img.shields.io/npm/dm/@ngxsmk/core?color=blue)](https://www.npmjs.com/package/@ngxsmk/core)
 [![Angular](https://img.shields.io/badge/Angular-17.3%20→%2022-dd0031?logo=angular&logoColor=white)](https://angular.dev)
+[![WhatsApp Channel](https://img.shields.io/badge/WhatsApp-Channel-25D366?logo=whatsapp&logoColor=white)](https://whatsapp.com/channel/0029Vb8PWpz1XquUOnGPUM2p)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 
-[**Live Demo**](https://ngxsmk.github.io/ngxsmk-ui-kit)
+[**Live Demo**](https://ngxsmk.github.io/ngxsmk-ui-kit) · [**WhatsApp Channel**](https://whatsapp.com/channel/0029Vb8PWpz1XquUOnGPUM2p)
 
 </div>
 
@@ -561,7 +562,8 @@ tools/
 ## Feedback & support
 
 Found a bug or have an idea? Reach out through the
-[community page](https://github.com/orgs/NGXSMK/discussions/19) — every report makes the kit
+[community page](https://github.com/orgs/NGXSMK/discussions/19) or join our
+[WhatsApp Channel](https://whatsapp.com/channel/0029Vb8PWpz1XquUOnGPUM2p) — every report makes the kit
 better. Sharing the [live demo](https://ngxsmk.github.io/ngxsmk-ui-kit) with your team helps too.
 
 ## License

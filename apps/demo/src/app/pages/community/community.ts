@@ -495,6 +495,13 @@ export class CommunityPage implements OnInit {
       icon: '<svg viewBox="0 0 24 24" fill="none" width="22" height="22"><rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 7l10 6 10-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     },
     {
+      titleKey: 'community.channelWhatsappTitle',
+      descKey: 'community.channelWhatsappDesc',
+      ctaKey: 'community.channelWhatsappCta',
+      href: 'https://whatsapp.com/channel/0029Vb8PWpz1XquUOnGPUM2p',
+      icon: '<svg viewBox="0 0 24 24" fill="none" width="22" height="22"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347z" fill="currentColor"/><path d="M12 2C6.477 2 2 6.477 2 12c0 2.159.685 4.158 1.854 5.8L2.5 21.5l3.826-1.312A9.954 9.954 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18c-1.782 0-3.435-.468-4.869-1.284l-.349-.2-.228.078-2.259.775.789-2.203.084-.236-.217-.358A7.954 7.954 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z" fill="currentColor"/></svg>',
+    },
+    {
       titleKey: 'community.channelDocsTitle',
       descKey: 'community.channelDocsDesc',
       ctaKey: 'community.channelDocsCta',

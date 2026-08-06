@@ -1,6 +1,6 @@
 # @ngxsmk/theme
 
-The design-token engine of the [NGXSMK UI kit](https://ngxsmk.github.io/ngxsmk-ui-kit). A `ThemeConfig` maps to a flat set of `--ngxsmk-*` CSS custom properties that every `@ngxsmk/core` component reads. Ships 4 presets, light/dark/system strategies, and runtime theme switching via `NgxsmkThemeService`.
+The design-token engine of the [NGXSMK UI kit](https://ngxsmk.github.io/ngxsmk-ui-kit) ([WhatsApp Channel](https://whatsapp.com/channel/0029Vb8PWpz1XquUOnGPUM2p)). A `ThemeConfig` maps to a flat set of `--ngxsmk-*` CSS custom properties that every `@ngxsmk/core` component reads. Ships 4 presets, light/dark/system strategies, and runtime theme switching via `NgxsmkThemeService`.
 
 ## Compatibility
 

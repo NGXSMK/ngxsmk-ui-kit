@@ -53,7 +53,7 @@ Load the base theme once (see [`@ngxsmk/theme`](../theme)):
 - **Enterprise** — `kanban-board`, `scheduler`, `workflow-builder`, `spreadsheet`, `pivot-table`, `org-chart`
 - **Utilities** — `copy-to-clipboard`, `seo`, `animation`, `i18n`
 
-See the [live demo](https://ngxsmk.github.io/ngxsmk-ui-kit) for examples of every component.
+See the [live demo](https://ngxsmk.github.io/ngxsmk-ui-kit) for examples of every component or join our [WhatsApp Channel](https://whatsapp.com/channel/0029Vb8PWpz1XquUOnGPUM2p) for updates.
 
 ## Tree-shaking
 
