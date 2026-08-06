@@ -54,6 +54,9 @@ jobs:
 
       - name: Pin Angular ${{ matrix.ng }} toolchain & TypeScript
         run: |
+          npm config set fetch-retries 5
+          npm config set fetch-retry-maxtimeout 120000
+
           if [ "${{ matrix.ng }}" = "17" ] || [ "${{ matrix.ng }}" = "18" ] || [ "${{ matrix.ng }}" = "19" ]; then
             BUILDER="@angular-devkit/build-angular"
           else
