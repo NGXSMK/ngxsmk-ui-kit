@@ -63,7 +63,10 @@ import { ChangeDetectionStrategy, Component, input, model, output } from '@angul
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: calc(var(--ngxsmk-space-4) + var(--ngxsmk-safe-area-top, env(safe-area-inset-top, 0px))) var(--ngxsmk-space-4) var(--ngxsmk-space-4);
+      padding: calc(
+          var(--ngxsmk-space-4) + var(--ngxsmk-safe-area-top, env(safe-area-inset-top, 0px))
+        )
+        var(--ngxsmk-space-4) var(--ngxsmk-space-4);
       border-bottom: 1px solid var(--ngxsmk-color-outline);
     }
     .ngxsmk-mobile-nav__title {
@@ -86,7 +89,10 @@ import { ChangeDetectionStrategy, Component, input, model, output } from '@angul
     .ngxsmk-mobile-nav__content {
       flex: 1;
       overflow-y: auto;
-      padding: var(--ngxsmk-space-4) var(--ngxsmk-space-4) calc(var(--ngxsmk-space-4) + var(--ngxsmk-safe-area-bottom, env(safe-area-inset-bottom, 0px)));
+      padding: var(--ngxsmk-space-4) var(--ngxsmk-space-4)
+        calc(
+          var(--ngxsmk-space-4) + var(--ngxsmk-safe-area-bottom, env(safe-area-inset-bottom, 0px))
+        );
     }
     @keyframes ngxsmk-slide-in {
       from {

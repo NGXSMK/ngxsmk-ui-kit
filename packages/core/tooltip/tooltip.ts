@@ -1,5 +1,13 @@
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
-import { DestroyRef, Directive, ElementRef, inject, input, signal, PLATFORM_ID } from '@angular/core';
+import {
+  DestroyRef,
+  Directive,
+  ElementRef,
+  inject,
+  input,
+  signal,
+  PLATFORM_ID,
+} from '@angular/core';
 import { ngxsmkUniqueId } from '@ngxsmk/core/util';
 import { NgxsmkMotionState, playEnter, playExit } from '@ngxsmk/core/animation';
 
@@ -53,7 +61,12 @@ export class NgxsmkTooltip {
   }
 
   protected scheduleShow(): void {
-    if (!isPlatformBrowser(this.platformId) || this.showTimer || this.visible() || !this.ngxsmkTooltip()) {
+    if (
+      !isPlatformBrowser(this.platformId) ||
+      this.showTimer ||
+      this.visible() ||
+      !this.ngxsmkTooltip()
+    ) {
       return;
     }
     this.showTimer = setTimeout(() => {

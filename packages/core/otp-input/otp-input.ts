@@ -110,8 +110,7 @@ import { NGXSMK_FORM_FIELD_CONTROL, NgxsmkFormFieldControl } from '@ngxsmk/core/
     .ngxsmk-otp-input__slot:focus,
     .ngxsmk-otp-input__slot--active {
       border-color: var(--ngxsmk-color-primary);
-      box-shadow: 0 0 0 3px
-        color-mix(in srgb, var(--ngxsmk-color-primary) 15%, transparent);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--ngxsmk-color-primary) 15%, transparent);
     }
 
     :host([data-invalid]) .ngxsmk-otp-input__slot {

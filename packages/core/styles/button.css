@@ -251,16 +251,24 @@
   z-index: var(--ngxsmk-z-popover, 1500);
 }
 .ngxsmk-fab[data-position='bottom-right'] {
-  bottom: calc(var(--ngxsmk-space-6) + var(--ngxsmk-safe-area-bottom, env(safe-area-inset-bottom, 0px)));
-  right: calc(var(--ngxsmk-space-6) + var(--ngxsmk-safe-area-right, env(safe-area-inset-right, 0px)));
+  bottom: calc(
+    var(--ngxsmk-space-6) + var(--ngxsmk-safe-area-bottom, env(safe-area-inset-bottom, 0px))
+  );
+  right: calc(
+    var(--ngxsmk-space-6) + var(--ngxsmk-safe-area-right, env(safe-area-inset-right, 0px))
+  );
 }
 .ngxsmk-fab[data-position='bottom-left'] {
-  bottom: calc(var(--ngxsmk-space-6) + var(--ngxsmk-safe-area-bottom, env(safe-area-inset-bottom, 0px)));
+  bottom: calc(
+    var(--ngxsmk-space-6) + var(--ngxsmk-safe-area-bottom, env(safe-area-inset-bottom, 0px))
+  );
   left: calc(var(--ngxsmk-space-6) + var(--ngxsmk-safe-area-left, env(safe-area-inset-left, 0px)));
 }
 .ngxsmk-fab[data-position='top-right'] {
   top: calc(var(--ngxsmk-space-6) + var(--ngxsmk-safe-area-top, env(safe-area-inset-top, 0px)));
-  right: calc(var(--ngxsmk-space-6) + var(--ngxsmk-safe-area-right, env(safe-area-inset-right, 0px)));
+  right: calc(
+    var(--ngxsmk-space-6) + var(--ngxsmk-safe-area-right, env(safe-area-inset-right, 0px))
+  );
 }
 .ngxsmk-fab[data-position='top-left'] {
   top: calc(var(--ngxsmk-space-6) + var(--ngxsmk-safe-area-top, env(safe-area-inset-top, 0px)));

@@ -50,7 +50,11 @@ interface SearchItem {
           <a class="nav__link" routerLink="/docs" routerLinkActive="nav__link--active">
             {{ 'nav.docs' | translate }}
           </a>
-          <a class="nav__link" routerLink="/playground/component" routerLinkActive="nav__link--active">
+          <a
+            class="nav__link"
+            routerLink="/playground/component"
+            routerLinkActive="nav__link--active"
+          >
             Playground
           </a>
           <a class="nav__link" routerLink="/themes" routerLinkActive="nav__link--active">
@@ -179,7 +183,11 @@ interface SearchItem {
         <a class="nav__mobile-link" routerLink="/docs" (click)="mobileOpen.set(false)">
           {{ 'nav.docs' | translate }}
         </a>
-        <a class="nav__mobile-link" routerLink="/playground/component" (click)="mobileOpen.set(false)">
+        <a
+          class="nav__mobile-link"
+          routerLink="/playground/component"
+          (click)="mobileOpen.set(false)"
+        >
           Playground
         </a>
         <a class="nav__mobile-link" routerLink="/themes" (click)="mobileOpen.set(false)">

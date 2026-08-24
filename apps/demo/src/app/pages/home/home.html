@@ -11,7 +11,15 @@
     "runtimePlatform": "Angular",
     "license": "https://opensource.org/licenses/MIT",
     "codeRepository": "https://github.com/NGXSMK/ngxsmk-ui-kit",
-    "keywords": ["angular", "components", "signals", "zoneless", "design-system", "ui-kit", "ngxsmk"]
+    "keywords": [
+      "angular",
+      "components",
+      "signals",
+      "zoneless",
+      "design-system",
+      "ui-kit",
+      "ngxsmk"
+    ]
   }
 </script>
 
@@ -31,14 +39,12 @@
       </h1>
 
       <p class="hero__lede" [ngxsmkAnimate]="motionTitle">
-        A modern, customizable and developer friendly UI component library for building
-        production ready Angular applications.
+        A modern, customizable and developer friendly UI component library for building production
+        ready Angular applications.
       </p>
 
       <div class="hero__cta" [ngxsmkAnimate]="motionCta">
-        <a ngxsmk-button size="lg" routerLink="/showcase/explorer">
-          Get Started →
-        </a>
+        <a ngxsmk-button size="lg" routerLink="/showcase/explorer"> Get Started → </a>
         <a ngxsmk-button size="lg" variant="outline" routerLink="/showcase/explorer">
           Explore Components
         </a>
@@ -50,7 +56,13 @@
           target="_blank"
           rel="noopener"
         >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 0.5rem;">
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            style="margin-right: 0.5rem"
+          >
             <path
               d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"
             />
@@ -119,7 +131,9 @@
             <ngxsmk-avatar name="Sachin Dilshan" size="md" />
             <div>
               <div class="hero-showcase__user-name">NGXSMK Operations Dashboard</div>
-              <div class="hero-showcase__user-sub">Live signal reactivity · Zero runtime dependencies</div>
+              <div class="hero-showcase__user-sub">
+                Live signal reactivity · Zero runtime dependencies
+              </div>
             </div>
           </div>
           <div class="hero-showcase__header-right">
@@ -131,12 +145,8 @@
                 (ngModelChange)="demoFilterQuery.set($event)"
               />
             </div>
-            <button ngxsmk-button size="sm" variant="outline">
-              Export
-            </button>
-            <button ngxsmk-button size="sm">
-              + New Metric
-            </button>
+            <button ngxsmk-button size="sm" variant="outline">Export</button>
+            <button ngxsmk-button size="sm">+ New Metric</button>
           </div>
         </div>
 
@@ -167,7 +177,9 @@
             <div class="hero-showcase__panel-head">
               <div>
                 <h4 class="hero-showcase__panel-title">Weekly Signal Invocations</h4>
-                <p class="hero-showcase__panel-desc">Real-time throughput metrics across services</p>
+                <p class="hero-showcase__panel-desc">
+                  Real-time throughput metrics across services
+                </p>
               </div>
               <ngxsmk-badge variant="primary">SVG Vector</ngxsmk-badge>
             </div>
@@ -186,7 +198,7 @@
               </div>
               <div class="hero-showcase__control-row">
                 <span class="control-label">Buffer capacity ({{ demoProgress() }}%):</span>
-                <div style="flex: 1; max-width: 140px;">
+                <div style="flex: 1; max-width: 140px">
                   <ngxsmk-progress [value]="demoProgress()" />
                 </div>
               </div>
@@ -198,16 +210,14 @@
             <div class="hero-showcase__panel-head">
               <div>
                 <h4 class="hero-showcase__panel-title">Active Service Nodes</h4>
-                <p class="hero-showcase__panel-desc">Component instances running in current session</p>
+                <p class="hero-showcase__panel-desc">
+                  Component instances running in current session
+                </p>
               </div>
               <ngxsmk-badge variant="success">All Healthy</ngxsmk-badge>
             </div>
             <div class="hero-showcase__table-wrap">
-              <ngxsmk-table
-                [columns]="showcaseColumns"
-                [rows]="showcaseRows"
-                [striped]="true"
-              />
+              <ngxsmk-table [columns]="showcaseColumns" [rows]="showcaseRows" [striped]="true" />
             </div>
           </div>
         </div>
@@ -320,8 +330,8 @@
         <span class="arch-layer__tag">Core</span>
         <h3 class="arch-layer__name">Angular Components</h3>
         <p class="arch-layer__desc">
-          150+ standalone components. Signal inputs, two-way models, template outlets via InjectionTokens,
-          and token-driven styling.
+          150+ standalone components. Signal inputs, two-way models, template outlets via
+          InjectionTokens, and token-driven styling.
         </p>
         <code class="arch-layer__pkg">@ngxsmk/core/*</code>
       </div>
@@ -355,7 +365,9 @@
     <header class="section__head">
       <p class="section__eyebrow">Component Directory</p>
       <h2 class="section__title">Explore all 150+ components</h2>
-      <p class="section__sub">Search across every native component, form control, AI interface, and layout primitive.</p>
+      <p class="section__sub">
+        Search across every native component, form control, AI interface, and layout primitive.
+      </p>
       <div class="explorer__search">
         <svg
           class="explorer__search-icon"
@@ -393,7 +405,7 @@
           [style.--cat-color]="cat.color"
         >
           <div class="cat-card__head">
-            <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <div style="display: flex; align-items: center; gap: 0.5rem">
               <span class="cat-card__icon">{{ cat.icon }}</span>
               <h3 class="cat-card__title">{{ cat.title }}</h3>
             </div>
@@ -429,16 +441,12 @@
     <div class="cta__inner">
       <h2 class="cta__title">Start building today.</h2>
       <p class="cta__sub">
-        Browse 150+ signal-native components, clone a production template, and tune a theme to match your brand.
-        All free, MIT-licensed, zero runtime dependencies.
+        Browse 150+ signal-native components, clone a production template, and tune a theme to match
+        your brand. All free, MIT-licensed, zero runtime dependencies.
       </p>
       <div class="hero__cta hero__cta--center">
-        <a ngxsmk-button size="lg" routerLink="/showcase/explorer">
-          Get Started →
-        </a>
-        <a ngxsmk-button size="lg" variant="outline" routerLink="/docs">
-          Read Documentation
-        </a>
+        <a ngxsmk-button size="lg" routerLink="/showcase/explorer"> Get Started → </a>
+        <a ngxsmk-button size="lg" variant="outline" routerLink="/docs"> Read Documentation </a>
         <a
           ngxsmk-button
           size="lg"
@@ -462,7 +470,8 @@
         <span class="footer__wordmark">NGXSMK UI Kit</span>
       </a>
       <p class="footer__tagline">
-        A modern, customizable and developer friendly UI component library for building production ready Angular applications.
+        A modern, customizable and developer friendly UI component library for building production
+        ready Angular applications.
       </p>
       <div class="footer__version-badge">
         <span class="footer__version-dot"></span>
@@ -486,9 +495,13 @@
     </div>
     <div class="footer__col">
       <h4 class="footer__heading">Ecosystem & Community</h4>
-      <a href="https://github.com/NGXSMK/ngxsmk-ui-kit" target="_blank" rel="noopener">GitHub Repository</a>
+      <a href="https://github.com/NGXSMK/ngxsmk-ui-kit" target="_blank" rel="noopener"
+        >GitHub Repository</a
+      >
       <a href="https://www.npmjs.com/org/ngxsmk" target="_blank" rel="noopener">npm Registry</a>
-      <a href="https://whatsapp.com/channel/0029Vb8PWpz1XquUOnGPUM2p" target="_blank" rel="noopener">WhatsApp Community</a>
+      <a href="https://whatsapp.com/channel/0029Vb8PWpz1XquUOnGPUM2p" target="_blank" rel="noopener"
+        >WhatsApp Community</a
+      >
       <a href="/llms.txt" target="_blank" rel="noopener">LLM Index (llms.txt)</a>
     </div>
   </div>

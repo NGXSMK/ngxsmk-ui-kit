@@ -15,7 +15,9 @@ import { NgxsmkBadge } from '@ngxsmk/core/badge';
 })
 class PerfTestHost {
   readonly count = signal(0);
-  readonly btnVariant = computed<'primary' | 'secondary'>(() => (this.count() % 2 === 0 ? 'primary' : 'secondary'));
+  readonly btnVariant = computed<'primary' | 'secondary'>(() =>
+    this.count() % 2 === 0 ? 'primary' : 'secondary',
+  );
   readonly formattedStatus = computed(() => `Active Count: ${this.count()}`);
 }
 
@@ -37,7 +39,7 @@ describe('Performance Laboratory Runtime Benchmark Spec', () => {
       c();
     }
     const elapsed = performance.now() - start;
-    const opsPerSec = (ITERATIONS / (elapsed / 1000));
+    const opsPerSec = ITERATIONS / (elapsed / 1000);
 
     expect(c()).toBe((ITERATIONS - 1) * 2 + 1);
     expect(opsPerSec).toBeGreaterThan(100000);

@@ -124,8 +124,7 @@ import { ChangeDetectionStrategy, Component, computed, input, model } from '@ang
 
     .ngxsmk-range-slider__input::-webkit-slider-thumb:hover {
       transform: scale(1.1);
-      box-shadow: 0 0 0 4px
-        color-mix(in srgb, var(--ngxsmk-color-primary) 20%, transparent);
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--ngxsmk-color-primary) 20%, transparent);
     }
 
     .ngxsmk-range-slider__input--min {

@@ -19,6 +19,7 @@
 ## 1. Top 100 SEO & GEO Improvements (Ranked by Priority)
 
 ### 1.1 Priority P0: Critical Technical Foundations (1–25)
+
 1. **Automated XML Sitemap Generation**: `apps/demo/public/sitemap.xml` continuously updated with route priorities.
 2. **Crawl & AI Bot Governance (`robots.txt`)**: Explicit indexing rules and allowances for `GPTBot`, `ClaudeBot`, `PerplexityBot`.
 3. **Canonical Link Enforcement**: Single canonical URL per component/guide to prevent query parameter duplication.
@@ -48,6 +49,7 @@
 ---
 
 ### 1.2 Priority P1: High-Value Architecture & Topical Authority Hubs (26–50)
+
 26. **Angular Signals UI Authority Hub**: Deep guide on signal inputs (`input()`), models (`model()`), and derived state.
 27. **Zoneless Change Detection Hub**: Definitive blueprint for building high-performance zoneless Angular apps.
 28. **Universal Design Tokens Hub**: Guide on CSS custom properties, dynamic theming, and dark mode tokens.
@@ -77,35 +79,37 @@
 ---
 
 ### 1.3 Priority P2: Developer Problem-Solving Guides & Troubleshooting (51–75)
-51. *How to build an accessible Angular dialog modal with focus trap.*
-52. *How to implement dark mode using pure CSS custom properties in Angular.*
-53. *How to create a virtualized data table handling 100k rows in Angular.*
-54. *How to connect Angular Signals directly to AI streaming endpoints.*
-55. *How to migrate legacy Angular `@Input()` and `@Output()` to signal primitives.*
-56. *How to build a multi-step form wizard with signal models.*
-57. *How to implement roving focus in custom Angular navigation menus.*
-58. *How to configure Angular zoneless change detection in `app.config.ts`.*
-59. *How to avoid SSR hydration mismatches in dynamic Angular components.*
-60. *How to generate customized theme stylesheets using `@ngxsmk/cli`.*
-61. *How to build an accessible command palette (`Cmd+K`) in Angular.*
-62. *How to build a drag-and-drop Kanban board in Angular.*
-63. *How to handle form field error validation with screen reader announcements.*
-64. *How to build an audio player with wave visualization in Angular.*
-65. *How to implement biometric / PIN authentication inputs in Angular.*
-66. *How to build interactive SVG data charts with tooltips in Angular.*
-67. *How to create responsive drawer sheets on mobile devices.*
-68. *How to use Angular CDK skip links for accessibility compliance.*
-69. *How to build a code diff viewer for developer tools.*
-70. *How to implement markdown rendering with syntax highlighting in Angular.*
-71. *How to optimize Angular component library bundle sizes for enterprise apps.*
-72. *Troubleshooting: Resolving Angular peer dependency warnings.*
-73. *Troubleshooting: Fixing SSR CSS flash in dark mode applications.*
-74. *Troubleshooting: Debugging focus trapping issues in modal overlays.*
-75. *Troubleshooting: Ensuring signal reactivity across deeply nested components.*
+
+51. _How to build an accessible Angular dialog modal with focus trap._
+52. _How to implement dark mode using pure CSS custom properties in Angular._
+53. _How to create a virtualized data table handling 100k rows in Angular._
+54. _How to connect Angular Signals directly to AI streaming endpoints._
+55. _How to migrate legacy Angular `@Input()` and `@Output()` to signal primitives._
+56. _How to build a multi-step form wizard with signal models._
+57. _How to implement roving focus in custom Angular navigation menus._
+58. _How to configure Angular zoneless change detection in `app.config.ts`._
+59. _How to avoid SSR hydration mismatches in dynamic Angular components._
+60. _How to generate customized theme stylesheets using `@ngxsmk/cli`._
+61. _How to build an accessible command palette (`Cmd+K`) in Angular._
+62. _How to build a drag-and-drop Kanban board in Angular._
+63. _How to handle form field error validation with screen reader announcements._
+64. _How to build an audio player with wave visualization in Angular._
+65. _How to implement biometric / PIN authentication inputs in Angular._
+66. _How to build interactive SVG data charts with tooltips in Angular._
+67. _How to create responsive drawer sheets on mobile devices._
+68. _How to use Angular CDK skip links for accessibility compliance._
+69. _How to build a code diff viewer for developer tools._
+70. _How to implement markdown rendering with syntax highlighting in Angular._
+71. _How to optimize Angular component library bundle sizes for enterprise apps._
+72. _Troubleshooting: Resolving Angular peer dependency warnings._
+73. _Troubleshooting: Fixing SSR CSS flash in dark mode applications._
+74. _Troubleshooting: Debugging focus trapping issues in modal overlays._
+75. _Troubleshooting: Ensuring signal reactivity across deeply nested components._
 
 ---
 
 ### 1.4 Priority P3: Generative Engine Optimization (GEO) & AI Discovery (76–100)
+
 76. **LLM Citation Optimization**: Concise, technically precise code examples designed for AI models.
 77. **MCP Direct API Discovery**: Equipping AI coding agents with `ngxsmk_search_components` tool.
 78. **Semantic Entity Graph**: Linking NGXSMK with Angular 17/18/19/20 ecosystem entities.
@@ -130,21 +134,21 @@
 97. **Project Management Kanban Patterns**: Agile sprint and task tracking layouts.
 98. **Analytics Platform Showcases**: Time-series charts and date range filtering patterns.
 99. **Mobile First Responsive Blueprints**: Touch dock and mobile drawer design patterns.
-100. **Transparent Performance Benchmark Lab**: Verifiable Brotli sizes and signal mutation throughput.
+100.  **Transparent Performance Benchmark Lab**: Verifiable Brotli sizes and signal mutation throughput.
 
 ---
 
 ## 2. Honest Technical Comparison Matrix
 
-| Dimension | **NGXSMK** | **Angular Material** | **PrimeNG** | **Taiga UI** |
-|---|---|---|---|---|
-| **Reactivity Model** | 100% Angular Signals Native (`input()`, `model()`) | Hybrid (Decorators + Signals adoption) | RxJS & Decorators primarily | RxJS (`tui-let`, Observables) |
-| **Zoneless Support** | Native First-Class (0 `zone.js` dependencies) | Experimental / Partial | Supported in v18+ | Supported in v4+ |
-| **Styling Architecture** | Universal `--ngxsmk-*` CSS Tokens | MDC / SCSS Theme mixins | Theme Designer / SCSS / Tailwind | CSS Custom Properties |
-| **Accessibility Standard** | WCAG 2.2 AA (Roving focus, focus traps, ARIA) | WCAG 2.1 AA (Angular CDK a11y) | WCAG 2.0 | WCAG 2.1 AA |
-| **AI Interface Primitives**| Native (`ai-chat`, `prompt-input`, `diff-viewer`) | None (Third-party integration) | None (Custom integration) | None |
-| **Average Brotli / Entry** | **~1.6 kB** (Ultra-compact) | ~6.5 kB | ~8.2 kB | ~4.5 kB |
-| **AI Agent Support** | MCP Server, `llms.txt`, Anti-patterns | None | None | None |
+| Dimension                   | **NGXSMK**                                         | **Angular Material**                   | **PrimeNG**                      | **Taiga UI**                  |
+| --------------------------- | -------------------------------------------------- | -------------------------------------- | -------------------------------- | ----------------------------- |
+| **Reactivity Model**        | 100% Angular Signals Native (`input()`, `model()`) | Hybrid (Decorators + Signals adoption) | RxJS & Decorators primarily      | RxJS (`tui-let`, Observables) |
+| **Zoneless Support**        | Native First-Class (0 `zone.js` dependencies)      | Experimental / Partial                 | Supported in v18+                | Supported in v4+              |
+| **Styling Architecture**    | Universal `--ngxsmk-*` CSS Tokens                  | MDC / SCSS Theme mixins                | Theme Designer / SCSS / Tailwind | CSS Custom Properties         |
+| **Accessibility Standard**  | WCAG 2.2 AA (Roving focus, focus traps, ARIA)      | WCAG 2.1 AA (Angular CDK a11y)         | WCAG 2.0                         | WCAG 2.1 AA                   |
+| **AI Interface Primitives** | Native (`ai-chat`, `prompt-input`, `diff-viewer`)  | None (Third-party integration)         | None (Custom integration)        | None                          |
+| **Average Brotli / Entry**  | **~1.6 kB** (Ultra-compact)                        | ~6.5 kB                                | ~8.2 kB                          | ~4.5 kB                       |
+| **AI Agent Support**        | MCP Server, `llms.txt`, Anti-patterns              | None                                   | None                             | None                          |
 
 ---
 

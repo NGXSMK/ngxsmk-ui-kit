@@ -15,6 +15,7 @@ npx @ngxsmk/cli migrate
 ```
 
 Or via Angular CLI:
+
 ```bash
 ng update @ngxsmk/cli
 ```

@@ -15,13 +15,17 @@ function scanMarkdownFiles(dir) {
   const entries = readdirSync(dir);
 
   for (const entry of entries) {
-    if (entry === 'node_modules' || entry === 'dist' || entry === '.git' || entry === '.angular') continue;
+    if (entry === 'node_modules' || entry === 'dist' || entry === '.git' || entry === '.angular')
+      continue;
     const fullPath = join(dir, entry);
     const stat = statSync(fullPath);
 
     if (stat.isDirectory()) {
       scanMarkdownFiles(fullPath);
-    } else if (stat.isFile() && (extname(fullPath) === '.md' || extname(fullPath) === '.markdown')) {
+    } else if (
+      stat.isFile() &&
+      (extname(fullPath) === '.md' || extname(fullPath) === '.markdown')
+    ) {
       totalMdFiles++;
       auditFile(fullPath);
     }
@@ -68,7 +72,9 @@ function auditFile(filePath) {
     if (existsSync(resolvedTarget)) {
       passedLinks++;
     } else {
-      linkErrors.push(`[${filePath}] Broken relative link: "${rawLink}" (target not found: ${resolvedTarget})`);
+      linkErrors.push(
+        `[${filePath}] Broken relative link: "${rawLink}" (target not found: ${resolvedTarget})`,
+      );
     }
   }
 }

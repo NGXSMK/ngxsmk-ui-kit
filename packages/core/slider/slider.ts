@@ -122,7 +122,7 @@ export class NgxsmkSlider extends CvaBase<number> implements NgxsmkFormFieldCont
   }
 
   writeValue(val: unknown): void {
-    const num = typeof val === 'number' ? val : (parseFloat(val as string) || 0);
+    const num = typeof val === 'number' ? val : parseFloat(val as string) || 0;
     this.value.set(num);
   }
 

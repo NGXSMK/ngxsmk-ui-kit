@@ -16,7 +16,7 @@ const STATIC_ROUTES = [
   { path: 'blog', priority: 0.75, changefreq: 'weekly' },
   { path: 'changelog', priority: 0.8, changefreq: 'weekly' },
   { path: 'roadmap', priority: 0.7, changefreq: 'monthly' },
-  
+
   // Showcase Category Pages
   { path: 'showcase/explorer', priority: 0.9, changefreq: 'weekly' },
   { path: 'showcase/content-typography', priority: 0.8, changefreq: 'weekly' },
@@ -56,4 +56,6 @@ ${STATIC_ROUTES.map(
 const outputPath = join(process.cwd(), 'apps/demo/public/sitemap.xml');
 writeFileSync(outputPath, xmlContent, 'utf-8');
 
-console.log(`✅ Successfully generated sitemap with ${STATIC_ROUTES.length} URLs at: ${outputPath}`);
+console.log(
+  `✅ Successfully generated sitemap with ${STATIC_ROUTES.length} URLs at: ${outputPath}`,
+);

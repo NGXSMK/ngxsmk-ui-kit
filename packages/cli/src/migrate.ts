@@ -44,7 +44,10 @@ const IMPORT_MAPPINGS: Record<string, string> = {
 /**
  * Applies automated AST-like codemods to a single file content.
  */
-export function migrateSourceContent(content: string, filePath = ''): { updated: string; changes: string[]; warnings: string[] } {
+export function migrateSourceContent(
+  content: string,
+  filePath = '',
+): { updated: string; changes: string[]; warnings: string[] } {
   let updated = content;
   const changes: string[] = [];
   const warnings: string[] = [];
@@ -77,7 +80,9 @@ export function migrateSourceContent(content: string, filePath = ''): { updated:
 
     if (unmapped.length > 0) {
       statements.push(`import { ${unmapped.join(', ')} } from '@ngxsmk/core';`);
-      warnings.push(`[${filePath}] Could not automatically resolve secondary entry point for: ${unmapped.join(', ')}`);
+      warnings.push(
+        `[${filePath}] Could not automatically resolve secondary entry point for: ${unmapped.join(', ')}`,
+      );
     }
 
     changes.push(`Split barrel import into ${statements.length} secondary entry point(s)`);
@@ -103,8 +108,10 @@ export function migrateSourceContent(content: string, filePath = ''): { updated:
   }
 
   // 5. Diagnostics / Warnings for legacy Angular decorators in UI code
-  if (/@Input\(\)/.test(updated) && (filePath.endsWith('.ts') && !filePath.endsWith('.spec.ts'))) {
-    warnings.push(`[${filePath}] Detected legacy @Input() decorator. Consider migrating to signal input().`);
+  if (/@Input\(\)/.test(updated) && filePath.endsWith('.ts') && !filePath.endsWith('.spec.ts')) {
+    warnings.push(
+      `[${filePath}] Detected legacy @Input() decorator. Consider migrating to signal input().`,
+    );
   }
 
   return { updated, changes, warnings };
@@ -129,7 +136,8 @@ export function runMigration(options: MigrationOptions = {}): MigrationResult {
     const entries = readdirSync(dir);
 
     for (const entry of entries) {
-      if (entry === 'node_modules' || entry === 'dist' || entry === '.git' || entry === '.angular') continue;
+      if (entry === 'node_modules' || entry === 'dist' || entry === '.git' || entry === '.angular')
+        continue;
       const fullPath = join(dir, entry);
       const stat = statSync(fullPath);
 

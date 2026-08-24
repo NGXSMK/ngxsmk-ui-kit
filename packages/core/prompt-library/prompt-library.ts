@@ -101,8 +101,7 @@ export interface NgxsmkPromptLibraryItem {
 
     .ngxsmk-prompt-lib__search:focus {
       border-color: var(--ngxsmk-color-primary);
-      box-shadow: 0 0 0 3px
-        color-mix(in srgb, var(--ngxsmk-color-primary) 12%, transparent);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--ngxsmk-color-primary) 12%, transparent);
     }
 
     .ngxsmk-prompt-lib__grid {

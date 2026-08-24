@@ -559,8 +559,7 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
       align-items: stretch;
       position: relative;
       background: var(--ngxsmk-input-group-bg, var(--ngxsmk-color-surface));
-      border: 1.5px solid
-        var(--ngxsmk-input-group-border, var(--ngxsmk-color-outline-strong));
+      border: 1.5px solid var(--ngxsmk-input-group-border, var(--ngxsmk-color-outline-strong));
       border-radius: var(--ngxsmk-input-group-radius, var(--ngxsmk-radius-md, 0.5rem));
       box-shadow: var(--ngxsmk-input-group-shadow, none);
       transition:
@@ -784,8 +783,7 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
       font-weight: var(--ngxsmk-font-weight-medium, 500);
       white-space: nowrap;
       background: var(--ngxsmk-color-surface-variant);
-      border-left: 1px solid
-        var(--ngxsmk-input-group-border, var(--ngxsmk-color-outline-strong));
+      border-left: 1px solid var(--ngxsmk-input-group-border, var(--ngxsmk-color-outline-strong));
       user-select: none;
       min-height: 100%;
       transition:
@@ -796,8 +794,7 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
     .ngxsmk-input-group__addon--leading,
     ::ng-deep .ngxsmk-input-group-text:not([trailing]) {
       border-left: none;
-      border-right: 1px solid
-        var(--ngxsmk-input-group-border, var(--ngxsmk-color-outline-strong));
+      border-right: 1px solid var(--ngxsmk-input-group-border, var(--ngxsmk-color-outline-strong));
     }
 
     :host(.ngxsmk-input-group--focused) .ngxsmk-input-group__addon,

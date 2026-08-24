@@ -569,10 +569,7 @@ const HOURS = Array.from({ length: 24 }, (_, i) => i);
         );
         --_surface: var(--scheduler-bg, var(--ngxsmk-color-surface));
         --_text: var(--scheduler-text, var(--ngxsmk-color-on-surface));
-        --_text-sec: var(
-          --scheduler-text-secondary,
-          var(--ngxsmk-color-on-surface-variant)
-        );
+        --_text-sec: var(--scheduler-text-secondary, var(--ngxsmk-color-on-surface-variant));
         --_today-bg: var(
           --scheduler-today-bg,
           color-mix(in srgb, var(--_primary) 3%, var(--_surface))
@@ -1239,10 +1236,7 @@ const HOURS = Array.from({ length: 24 }, (_, i) => i);
         --_border: var(--scheduler-border, var(--ngxsmk-color-outline-variant));
         --_surface: var(--scheduler-bg, var(--ngxsmk-color-surface));
         --_text: var(--scheduler-text, var(--ngxsmk-color-on-surface));
-        --_text-sec: var(
-          --scheduler-text-secondary,
-          var(--ngxsmk-color-on-surface-variant)
-        );
+        --_text-sec: var(--scheduler-text-secondary, var(--ngxsmk-color-on-surface-variant));
         --_today-bg: var(
           --scheduler-today-bg,
           color-mix(in srgb, var(--_primary) 8%, var(--_surface))

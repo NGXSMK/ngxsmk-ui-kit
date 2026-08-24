@@ -5,7 +5,12 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { NgxsmkButton } from '@ngxsmk/core/button';
 import { NgxsmkBadge } from '@ngxsmk/core/badge';
 import { NgxsmkAlert } from '@ngxsmk/core/alert';
-import { NgxsmkCard, NgxsmkCardContent, NgxsmkCardHeader, NgxsmkCardTitle } from '@ngxsmk/core/card';
+import {
+  NgxsmkCard,
+  NgxsmkCardContent,
+  NgxsmkCardHeader,
+  NgxsmkCardTitle,
+} from '@ngxsmk/core/card';
 import { NgxsmkTab, NgxsmkTabs } from '@ngxsmk/core/tabs';
 import { NgxsmkFormField } from '@ngxsmk/core/form-field';
 import { NgxsmkInputDirective } from '@ngxsmk/core/input';
@@ -24,14 +29,28 @@ import { NgxsmkRovingFocusGroup, NgxsmkRovingFocusItem } from '@ngxsmk/cdk/rovin
 
 // 1. SaaS Dashboard Host
 @Component({
-  imports: [NgxsmkCard, NgxsmkCardHeader, NgxsmkCardTitle, NgxsmkCardContent, NgxsmkTabs, NgxsmkTab, NgxsmkBadge, NgxsmkAlert],
+  imports: [
+    NgxsmkCard,
+    NgxsmkCardHeader,
+    NgxsmkCardTitle,
+    NgxsmkCardContent,
+    NgxsmkTabs,
+    NgxsmkTab,
+    NgxsmkBadge,
+    NgxsmkAlert,
+  ],
   template: `
     <div class="saas-dashboard">
-      <ngxsmk-alert variant="info" title="Cluster Healthy">All systems operating within normal parameters.</ngxsmk-alert>
+      <ngxsmk-alert variant="info" title="Cluster Healthy"
+        >All systems operating within normal parameters.</ngxsmk-alert
+      >
       <div class="stats-row">
         <ngxsmk-card>
           <div ngxsmkCardHeader><h4 ngxsmkCardTitle>Revenue</h4></div>
-          <div ngxsmkCardContent><span class="val">{{ revenueFormatted() }}</span> <ngxsmk-badge variant="success">+14.2%</ngxsmk-badge></div>
+          <div ngxsmkCardContent>
+            <span class="val">{{ revenueFormatted() }}</span>
+            <ngxsmk-badge variant="success">+14.2%</ngxsmk-badge>
+          </div>
         </ngxsmk-card>
       </div>
       <ngxsmk-tabs [(value)]="activeWorkspace">
@@ -55,7 +74,9 @@ class SaasDashboardTestApp {
       <ngxsmk-form-field label="Filter Audit Logs">
         <input ngxsmkInput [(ngModel)]="searchFilter" />
       </ngxsmk-form-field>
-      <button ngxsmk-button variant="destructive" (click)="isDeleteOpen.set(true)">Revoke Access</button>
+      <button ngxsmk-button variant="destructive" (click)="isDeleteOpen.set(true)">
+        Revoke Access
+      </button>
       <ngxsmk-dialog [(open)]="isDeleteOpen" title="Confirm Revocation">
         <p>Revoking access will immediately disconnect active sessions.</p>
         <button ngxsmk-button variant="outline" (click)="isDeleteOpen.set(false)">Cancel</button>
@@ -70,7 +91,14 @@ class EnterpriseAdminTestApp {
 
 // 3. Analytics Platform Host
 @Component({
-  imports: [NgxsmkProgressCircle, NgxsmkMeter, NgxsmkCard, NgxsmkCardHeader, NgxsmkCardTitle, NgxsmkCardContent],
+  imports: [
+    NgxsmkProgressCircle,
+    NgxsmkMeter,
+    NgxsmkCard,
+    NgxsmkCardHeader,
+    NgxsmkCardTitle,
+    NgxsmkCardContent,
+  ],
   template: `
     <div class="analytics-platform">
       <ngxsmk-card>
@@ -111,7 +139,15 @@ class AiAppTestApp {
 
 // 5. E-Commerce Host
 @Component({
-  imports: [NgxsmkCard, NgxsmkCardHeader, NgxsmkCardTitle, NgxsmkCardContent, NgxsmkRating, NgxsmkButton, NgxsmkBadge],
+  imports: [
+    NgxsmkCard,
+    NgxsmkCardHeader,
+    NgxsmkCardTitle,
+    NgxsmkCardContent,
+    NgxsmkRating,
+    NgxsmkButton,
+    NgxsmkBadge,
+  ],
   template: `
     <div class="ecommerce-app">
       <ngxsmk-card>

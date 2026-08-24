@@ -19,13 +19,23 @@ export interface NgxsmkPieChartDataPoint {
       <canvas #canvas aria-hidden="true"></canvas>
       <div #tooltip class="ngxsmk-chart-tip" aria-hidden="true"></div>
       <table class="ngxsmk-chart-sr-table">
-        <caption>{{ ariaLabel() }}</caption>
+        <caption>
+          {{
+            ariaLabel()
+          }}
+        </caption>
         <thead>
-          <tr><th scope="col">Segment</th><th scope="col">Value</th></tr>
+          <tr>
+            <th scope="col">Segment</th>
+            <th scope="col">Value</th>
+          </tr>
         </thead>
         <tbody>
           @for (d of data(); track d.label) {
-            <tr><td>{{ d.label }}</td><td>{{ d.value }}</td></tr>
+            <tr>
+              <td>{{ d.label }}</td>
+              <td>{{ d.value }}</td>
+            </tr>
           }
         </tbody>
       </table>

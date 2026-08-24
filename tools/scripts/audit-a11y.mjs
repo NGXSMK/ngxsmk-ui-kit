@@ -27,16 +27,26 @@ function auditDir(baseDir, entry) {
     // 1. Role verification for interactive components
     if (entry.includes('dialog') || entry.includes('modal')) {
       totalChecks++;
-      if (content.includes('role="dialog"') || content.includes('role="alertdialog"') || content.includes('<dialog')) {
+      if (
+        content.includes('role="dialog"') ||
+        content.includes('role="alertdialog"') ||
+        content.includes('<dialog')
+      ) {
         passedChecks++;
       } else {
-        violations.push(`${entry}: Dialog component missing semantic role="dialog" or native <dialog> element`);
+        violations.push(
+          `${entry}: Dialog component missing semantic role="dialog" or native <dialog> element`,
+        );
       }
     }
 
     if (entry.includes('tab') && !entry.includes('table')) {
       totalChecks++;
-      if (content.includes('role="tab"') || content.includes('role="tablist"') || content.includes('role="tabpanel"')) {
+      if (
+        content.includes('role="tab"') ||
+        content.includes('role="tablist"') ||
+        content.includes('role="tabpanel"')
+      ) {
         passedChecks++;
       } else {
         violations.push(`${entry}: Tabs component missing role="tablist" / role="tab"`);
@@ -45,7 +55,11 @@ function auditDir(baseDir, entry) {
 
     if (entry.includes('switch') || entry.includes('checkbox')) {
       totalChecks++;
-      if (content.includes('role="switch"') || content.includes('role="checkbox"') || content.includes('type="checkbox"')) {
+      if (
+        content.includes('role="switch"') ||
+        content.includes('role="checkbox"') ||
+        content.includes('type="checkbox"')
+      ) {
         passedChecks++;
       } else {
         violations.push(`${entry}: Switch/Checkbox missing role="switch" / role="checkbox"`);
@@ -53,9 +67,19 @@ function auditDir(baseDir, entry) {
     }
 
     // 2. Keyboard event handling for non-native interactive elements
-    if (entry.includes('accordion') || entry.includes('tree-view') || entry.includes('menu') || entry.includes('combobox')) {
+    if (
+      entry.includes('accordion') ||
+      entry.includes('tree-view') ||
+      entry.includes('menu') ||
+      entry.includes('combobox')
+    ) {
       totalChecks++;
-      if (content.includes('(keydown') || content.includes('@HostListener(\'keydown') || content.includes('handleKeydown') || content.includes('onKeydown')) {
+      if (
+        content.includes('(keydown') ||
+        content.includes("@HostListener('keydown") ||
+        content.includes('handleKeydown') ||
+        content.includes('onKeydown')
+      ) {
         passedChecks++;
       } else {
         violations.push(`${entry}: Interactive widget missing keyboard event listener (keydown)`);
@@ -67,7 +91,13 @@ function auditDir(baseDir, entry) {
       const stylesMatch = content.match(/styles:\s*`([\s\S]*?)`/);
       if (stylesMatch) {
         const styles = stylesMatch[1];
-        if (styles.includes(':focus') || styles.includes('focus-ring') || styles.includes('outline') || content.includes('focus') || content.includes('tabindex')) {
+        if (
+          styles.includes(':focus') ||
+          styles.includes('focus-ring') ||
+          styles.includes('outline') ||
+          content.includes('focus') ||
+          content.includes('tabindex')
+        ) {
           totalChecks++;
           passedChecks++;
         }

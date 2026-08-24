@@ -32,11 +32,15 @@ export type ReasoningStep = NgxsmkReasoningStep;
           >
             @if (step.status === 'completed') {
               <svg viewBox="0 0 16 16" width="10" height="10" fill="currentColor">
-                <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"/>
+                <path
+                  d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+                />
               </svg>
             } @else if (step.status === 'error') {
               <svg viewBox="0 0 16 16" width="10" height="10" fill="currentColor">
-                <path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l3.22 3.22a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-3.22 3.22a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06Z"/>
+                <path
+                  d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l3.22 3.22a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-3.22 3.22a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06Z"
+                />
               </svg>
             }
           </div>
@@ -61,7 +65,14 @@ export type ReasoningStep = NgxsmkReasoningStep;
                   height="12"
                   aria-hidden="true"
                 >
-                  <path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path
+                    d="M4 6l4 4 4-4"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
                 </svg>
               }
             </button>
@@ -135,8 +146,16 @@ export type ReasoningStep = NgxsmkReasoningStep;
     }
 
     @keyframes ngxsmk-pulse-scale {
-      0%, 100% { transform: scale(0.9); opacity: 0.7; }
-      50% { transform: scale(1.15); opacity: 1; box-shadow: 0 0 0 4px var(--ngxsmk-color-primary-container); }
+      0%,
+      100% {
+        transform: scale(0.9);
+        opacity: 0.7;
+      }
+      50% {
+        transform: scale(1.15);
+        opacity: 1;
+        box-shadow: 0 0 0 4px var(--ngxsmk-color-primary-container);
+      }
     }
 
     .ngxsmk-reasoning-timeline__body {
@@ -195,7 +214,7 @@ export class NgxsmkReasoningTimeline {
 
   protected isExpanded(index: number, step: NgxsmkReasoningStep): boolean {
     const override = this.expandedOverrides()[index];
-    return override !== undefined ? override : (step.expanded ?? (step.status === 'running'));
+    return override !== undefined ? override : (step.expanded ?? step.status === 'running');
   }
 
   protected toggleStep(index: number): void {

@@ -20,6 +20,7 @@ To ensure zero unexpected breakage in enterprise mission-critical codebases:
 You can automatically upgrade your project using the NGXSMK CLI or Angular CLI:
 
 ### Option A: Via NGXSMK CLI Codemods
+
 ```bash
 # Preview changes without modifying files:
 npx @ngxsmk/cli migrate --dry-run
@@ -29,6 +30,7 @@ npx @ngxsmk/cli migrate
 ```
 
 ### Option B: Via Angular CLI `ng update`
+
 ```bash
 ng update @ngxsmk/cli
 ```
@@ -38,15 +40,18 @@ ng update @ngxsmk/cli
 ## 3. Migration Guide: v1.x ➔ v2.0
 
 ### 3.1 Secondary Entry Point Imports
-* **Breaking Change**: Root barrel imports from `@ngxsmk/core` are deprecated in favor of granular secondary entry points (`@ngxsmk/core/<component>`) to enable 100% tree-shaking.
-* **Automated Codemod**: `npx @ngxsmk/cli migrate` automatically rewrites imports.
+
+- **Breaking Change**: Root barrel imports from `@ngxsmk/core` are deprecated in favor of granular secondary entry points (`@ngxsmk/core/<component>`) to enable 100% tree-shaking.
+- **Automated Codemod**: `npx @ngxsmk/cli migrate` automatically rewrites imports.
 
 #### Before (v1.x):
+
 ```ts
 import { NgxsmkButton, NgxsmkCard, NgxsmkDialog } from '@ngxsmk/core';
 ```
 
 #### After (v2.0):
+
 ```ts
 import { NgxsmkButton } from '@ngxsmk/core/button';
 import { NgxsmkCard } from '@ngxsmk/core/card';
@@ -56,12 +61,13 @@ import { NgxsmkDialog } from '@ngxsmk/core/dialog';
 ---
 
 ### 3.2 Signal-Based Inputs & Two-Way Models
-* **Change**: All component inputs use Angular Signals (`input()`, `model()`).
-* **Before (v1.x)**:
+
+- **Change**: All component inputs use Angular Signals (`input()`, `model()`).
+- **Before (v1.x)**:
   ```html
   <ngxsmk-switch [checked]="isDark" (checkedChange)="isDark = $event"></ngxsmk-switch>
   ```
-* **After (v2.0)**:
+- **After (v2.0)**:
   ```html
   <ngxsmk-switch [(checked)]="isDark"></ngxsmk-switch>
   ```
@@ -69,20 +75,21 @@ import { NgxsmkDialog } from '@ngxsmk/core/dialog';
 ---
 
 ### 3.3 Design Token Renames
-* **Change**: Legacy `--ngxsmk-color-accent` has been consolidated into `--ngxsmk-color-primary`.
-* **Automated Codemod**: Automatically converted by `ngxsmk migrate`.
+
+- **Change**: Legacy `--ngxsmk-color-accent` has been consolidated into `--ngxsmk-color-primary`.
+- **Automated Codemod**: Automatically converted by `ngxsmk migrate`.
 
 ---
 
 ## 4. Deprecation & Sunset Matrix
 
-| Deprecated Feature | Deprecated Since | Sunset Target | Migration Action / Automated Codemod |
-|---|---|---|---|
-| `@ngxsmk/core` barrel imports | v2.0 | v3.0 | `ngxsmk migrate` (rewrites to `@ngxsmk/core/<name>`) |
-| `[theme]="..."` card attribute | v2.0 | v3.0 | Use `[variant]="..."` |
-| `--ngxsmk-color-accent` token | v2.0 | v3.0 | Use `--ngxsmk-color-primary` |
-| `DefaultButtonRenderer` class | v2.0 | v3.0 | Renamed to `NgxsmkDefaultButtonRenderer` |
-| Non-signals `@Input()` usage | v2.0 | v3.0 | Migrate to `input()` / `model()` |
+| Deprecated Feature             | Deprecated Since | Sunset Target | Migration Action / Automated Codemod                 |
+| ------------------------------ | ---------------- | ------------- | ---------------------------------------------------- |
+| `@ngxsmk/core` barrel imports  | v2.0             | v3.0          | `ngxsmk migrate` (rewrites to `@ngxsmk/core/<name>`) |
+| `[theme]="..."` card attribute | v2.0             | v3.0          | Use `[variant]="..."`                                |
+| `--ngxsmk-color-accent` token  | v2.0             | v3.0          | Use `--ngxsmk-color-primary`                         |
+| `DefaultButtonRenderer` class  | v2.0             | v3.0          | Renamed to `NgxsmkDefaultButtonRenderer`             |
+| Non-signals `@Input()` usage   | v2.0             | v3.0          | Migrate to `input()` / `model()`                     |
 
 ---
 

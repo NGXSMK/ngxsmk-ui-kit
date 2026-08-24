@@ -9,6 +9,7 @@ This document defines the architectural, visual, naming, API, accessibility, tes
 ---
 
 ## Table of Contents
+
 1. [Component Architecture & Directory Structure](#1-component-architecture--directory-structure)
 2. [Component & Class Naming Conventions](#2-component--class-naming-conventions)
 3. [API & Signal Conventions](#3-api--signal-conventions)
@@ -29,6 +30,7 @@ This document defines the architectural, visual, naming, API, accessibility, tes
 ## 1. Component Architecture & Directory Structure
 
 Every component or directive in `@ngxsmk/core` is a standalone, isolated **secondary entry point**:
+
 - **Single Directory**: `packages/core/<name>/`
 - **Core Implementation**: `packages/core/<name>/<name>.ts` (Single-file component enclosing class, template, and scoped styles)
 - **Public API Re-export**: `packages/core/<name>/index.ts`
@@ -44,6 +46,7 @@ packages/core/button/
 ```
 
 ### Mandatory Class & Decorator Settings
+
 - `standalone: true` is strictly required on all components and directives.
 - `changeDetection: ChangeDetectionStrategy.OnPush` is strictly required on all components.
 - Directives and components must never depend on `zone.js`.
@@ -52,14 +55,14 @@ packages/core/button/
 
 ## 2. Component & Class Naming Conventions
 
-| Category | Pattern | Example |
-|---|---|---|
-| **Directory Name** | kebab-case | `prompt-input`, `segmented-control` |
-| **Component Class** | PascalCase with `Ngxsmk` prefix | `NgxsmkPromptInput`, `NgxsmkSegmentedControl` |
-| **Element Selector** | kebab-case with `ngxsmk-` prefix | `<ngxsmk-prompt-input>` |
-| **Attribute Selector** | `[ngxsmk<PascalCase>]` or `button[ngxsmk-button]` | `<button ngxsmk-button>`, `<input ngxsmkInput>` |
-| **Type / Interface** | PascalCase with `Ngxsmk` prefix | `NgxsmkButtonVariant`, `NgxsmkPromptModelOption` |
-| **Injection Token** | SCREAMING_SNAKE_CASE with `NGXSMK_` prefix | `NGXSMK_FORM_FIELD_CONTROL` |
+| Category               | Pattern                                           | Example                                          |
+| ---------------------- | ------------------------------------------------- | ------------------------------------------------ |
+| **Directory Name**     | kebab-case                                        | `prompt-input`, `segmented-control`              |
+| **Component Class**    | PascalCase with `Ngxsmk` prefix                   | `NgxsmkPromptInput`, `NgxsmkSegmentedControl`    |
+| **Element Selector**   | kebab-case with `ngxsmk-` prefix                  | `<ngxsmk-prompt-input>`                          |
+| **Attribute Selector** | `[ngxsmk<PascalCase>]` or `button[ngxsmk-button]` | `<button ngxsmk-button>`, `<input ngxsmkInput>`  |
+| **Type / Interface**   | PascalCase with `Ngxsmk` prefix                   | `NgxsmkButtonVariant`, `NgxsmkPromptModelOption` |
+| **Injection Token**    | SCREAMING_SNAKE_CASE with `NGXSMK_` prefix        | `NGXSMK_FORM_FIELD_CONTROL`                      |
 
 ---
 
@@ -68,17 +71,20 @@ packages/core/button/
 NGXSMK components use modern Angular Signal APIs exclusively. Decorators (`@Input()`, `@Output()`, `@HostBinding()`) are strictly forbidden.
 
 ### 3.1 Input Signals
+
 - Standard inputs: `readonly size = input<NgxsmkButtonSize>('md');`
 - Required inputs: `readonly options = input.required<NgxsmkOption[]>();`
 - Boolean inputs **must** include boolean transform: `readonly disabled = input(false, { transform: booleanAttribute });`
 - Two-way bound values use `model()`: `readonly value = model<string>('');`
 
 ### 3.2 Output Signals
+
 - Outputs use `output<T>()`: `readonly changed = output<string>();`
 - Event names must use past/action tense: `selected`, `dismissed`, `submitted`, `opened`, `closed`.
 - Avoid prefixing outputs with `on` (e.g. use `changed` instead of `onChanged`).
 
 ### 3.3 Computed Signals & Reactivity
+
 - All template derivations, formatted labels, and active states must be declared as `computed()` signals to avoid redundant template method calls.
 - Side effects belong in `effect()` within the constructor or injection context.
 
@@ -89,6 +95,7 @@ NGXSMK components use modern Angular Signal APIs exclusively. Decorators (`@Inpu
 All styling in NGXSMK must be token-driven. Hardcoded colors, arbitrary pixel dimensions, and untokenized shadows are strictly prohibited.
 
 ### 4.1 Token Namespaces
+
 - **Colors**: `--ngxsmk-color-primary`, `--ngxsmk-color-surface`, `--ngxsmk-color-surface-muted`, `--ngxsmk-color-surface-elevated`, `--ngxsmk-color-outline`, `--ngxsmk-color-on-surface`
 - **Spacing**: `--ngxsmk-space-1` (4px), `--ngxsmk-space-2` (8px), `--ngxsmk-space-3` (12px), `--ngxsmk-space-4` (16px), `--ngxsmk-space-6` (24px), `--ngxsmk-space-8` (32px)
 - **Radius**: `--ngxsmk-radius-sm` (4px), `--ngxsmk-radius-md` (8px), `--ngxsmk-radius-lg` (12px), `--ngxsmk-radius-xl` (16px), `--ngxsmk-radius-2xl` (20px), `--ngxsmk-radius-full` (9999px)
@@ -98,6 +105,7 @@ All styling in NGXSMK must be token-driven. Hardcoded colors, arbitrary pixel di
 - **Motion**: `--ngxsmk-duration-fast` (100ms), `--ngxsmk-duration-normal` (200ms), `--ngxsmk-ease-out`, `--ngxsmk-ease-in-out`
 
 ### 4.2 Hardcoded Value Rules
+
 - `#[0-9a-fA-F]{3,8}` hex values inside component CSS/templates are forbidden.
 - Theme CSS is generated: edit `packages/theme/src/lib/css.ts`, then run `npm run theme:css`.
 
@@ -106,6 +114,7 @@ All styling in NGXSMK must be token-driven. Hardcoded colors, arbitrary pixel di
 ## 5. CSS, BEM & Logical Properties
 
 ### 5.1 Class & Host Naming
+
 - Use standard BEM naming prefixed with `.ngxsmk-`:
   - Block: `.ngxsmk-prompt-box`
   - Element: `.ngxsmk-prompt-box__textarea`
@@ -113,7 +122,9 @@ All styling in NGXSMK must be token-driven. Hardcoded colors, arbitrary pixel di
 - Host elements must bind `host: { class: 'ngxsmk-<component-name>' }`.
 
 ### 5.2 100% Logical CSS Properties (RTL Mandate)
+
 Physical directional properties are forbidden in favor of CSS logical properties:
+
 - `margin-left` / `margin-right` ➔ `margin-inline-start` / `margin-inline-end` / `margin-inline`
 - `padding-left` / `padding-right` ➔ `padding-inline-start` / `padding-inline-end` / `padding-inline`
 - `left` / `right` ➔ `inset-inline-start` / `inset-inline-end`
@@ -126,6 +137,7 @@ Physical directional properties are forbidden in favor of CSS logical properties
 Components with multiple visual treatments must adhere to standardized variant taxonomies:
 
 ### 6.1 Action / Button Variants
+
 - `primary`: Solid brand fill for the single primary action.
 - `secondary`: Tonal/surface-variant fill for secondary actions.
 - `outline`: Bordered transparent background for complementary actions.
@@ -134,6 +146,7 @@ Components with multiple visual treatments must adhere to standardized variant t
 - `link`: Borderless text action without vertical translation.
 
 ### 6.2 Feedback / Status Variants
+
 - `info`: Blue information container and icon.
 - `success`: Green confirmation container and icon.
 - `warning`: Amber alert container and icon.
@@ -196,6 +209,7 @@ Every interactive component must explicitly define and style all states:
 ## 11. Deprecation Policy
 
 When deprecating an API or component:
+
 1. Mark the class/method with JSDoc `@deprecated Use <Replacement> (<path>) instead. Will be removed in v<Major+1>.0.0.`
 2. Maintain backward-compatible re-exports or shims for at least **1 major version release**.
 3. Deprecated components must be logged in release notes and migration guides.
@@ -215,8 +229,9 @@ When deprecating an API or component:
 ## 13. Documentation & AI Surface Requirements
 
 Every component must maintain documentation across 3 surfaces:
+
 1. **JSDoc Summary & Usage Snippet**: Placed immediately above the `@Component` / `@Directive` class for automated LLM extraction into `llms.txt` and MCP database:
-   ```ts
+   ````ts
    /**
     * Multi-line prompt composer with model selection and send triggers.
     *
@@ -224,7 +239,7 @@ Every component must maintain documentation across 3 surfaces:
     * <ngxsmk-prompt-input [(value)]="prompt" (submitPrompt)="onSend($event)" />
     * ```
     */
-   ```
+   ````
 2. **Demo Showcase Page**: An interactive, realistic documentation page in `apps/demo` showcasing defaults, variants, states, and accessibility instructions.
 3. **MCP Tooling**: Run `node tools/scripts/generate-ai-docs.mjs` on any API addition to synchronize `packages/mcp/src/component-db.ts` and `llms.txt`.
 

@@ -103,8 +103,7 @@ function buildLightVars(theme: ResolvedTheme): Record<string, string> {
   vars['--ion-safe-area-bottom'] =
     'var(--ngxsmk-safe-area-bottom, env(safe-area-inset-bottom, 0px))';
   vars['--ion-safe-area-left'] = 'var(--ngxsmk-safe-area-left, env(safe-area-inset-left, 0px))';
-  vars['--ion-safe-area-right'] =
-    'var(--ngxsmk-safe-area-right, env(safe-area-inset-right, 0px))';
+  vars['--ion-safe-area-right'] = 'var(--ngxsmk-safe-area-right, env(safe-area-inset-right, 0px))';
 
   return vars;
 }
@@ -163,8 +162,7 @@ function buildDarkVars(theme: ResolvedTheme): Record<string, string> {
   vars['--ion-safe-area-bottom'] =
     'var(--ngxsmk-safe-area-bottom, env(safe-area-inset-bottom, 0px))';
   vars['--ion-safe-area-left'] = 'var(--ngxsmk-safe-area-left, env(safe-area-inset-left, 0px))';
-  vars['--ion-safe-area-right'] =
-    'var(--ngxsmk-safe-area-right, env(safe-area-inset-right, 0px))';
+  vars['--ion-safe-area-right'] = 'var(--ngxsmk-safe-area-right, env(safe-area-inset-right, 0px))';
 
   return vars;
 }
@@ -240,7 +238,8 @@ function interpolateSteppedColors(
     const r = Math.round(bgR * (1 - weight) + textR * weight);
     const g = Math.round(bgG * (1 - weight) + textG * weight);
     const b = Math.round(bgB * (1 - weight) + textB * weight);
-    const hex = `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`.toUpperCase();
+    const hex =
+      `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`.toUpperCase();
     vars[`--ion-color-step-${step}`] = hex;
   }
 }

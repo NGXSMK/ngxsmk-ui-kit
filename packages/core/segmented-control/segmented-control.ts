@@ -177,7 +177,9 @@ export class NgxsmkSegmentedControl extends CvaBase<string> implements NgxsmkFor
       const nextVal = opts[nextIdx].value;
       this.select(nextVal);
       const allIndex = this.options().findIndex((o) => o.value === nextVal);
-      const btn = this.el.nativeElement.querySelector<HTMLButtonElement>(`#${this.id()}-${allIndex}`);
+      const btn = this.el.nativeElement.querySelector<HTMLButtonElement>(
+        `#${this.id()}-${allIndex}`,
+      );
       btn?.focus();
     }
   }

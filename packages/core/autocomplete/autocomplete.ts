@@ -103,7 +103,9 @@ export interface NgxsmkAutocompleteOption {
       color: var(--ngxsmk-color-on-surface);
       outline: none;
       box-sizing: border-box;
-      transition: border-color var(--ngxsmk-duration-fast), box-shadow var(--ngxsmk-duration-fast);
+      transition:
+        border-color var(--ngxsmk-duration-fast),
+        box-shadow var(--ngxsmk-duration-fast);
     }
     .ngxsmk-autocomplete__input::placeholder {
       color: var(--ngxsmk-color-on-surface-variant);
@@ -180,7 +182,9 @@ export class NgxsmkAutocomplete extends CvaBase<string> implements NgxsmkFormFie
   protected readonly filtered = computed(() => {
     const q = this.query().toLowerCase();
     if (!q) return this.options();
-    return this.options().filter((o) => o.label.toLowerCase().includes(q) || o.value.toLowerCase().includes(q));
+    return this.options().filter(
+      (o) => o.label.toLowerCase().includes(q) || o.value.toLowerCase().includes(q),
+    );
   });
 
   protected readonly kb = new ListboxKeyboard({
@@ -192,9 +196,7 @@ export class NgxsmkAutocomplete extends CvaBase<string> implements NgxsmkFormFie
   protected readonly activeIndex = this.kb.activeIndex;
 
   protected readonly activeDescendant = computed(() =>
-    this.open() && this.activeIndex() >= 0
-      ? `${this.listboxId}-${this.activeIndex()}`
-      : null,
+    this.open() && this.activeIndex() >= 0 ? `${this.listboxId}-${this.activeIndex()}` : null,
   );
 
   protected inputDisabled(): boolean {
