@@ -1,7 +1,7 @@
 {
   "name": "ngxsmk",
   "description": "Build Angular UIs with the NGXSMK UI kit: bundles the using-ngxsmk skill and the @ngxsmk/mcp component-database MCP server (search components, explain APIs, recommend layouts).",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "author": {
     "name": "NGXSMK",
     "url": "https://github.com/NGXSMK"
@@ -9,5 +9,12 @@
   "homepage": "https://ngxsmk.github.io/ngxsmk-ui-kit",
   "repository": "https://github.com/NGXSMK/ngxsmk-ui-kit",
   "license": "MIT",
-  "keywords": ["angular", "ui-kit", "components", "signals", "theming", "mcp"]
+  "keywords": [
+    "angular",
+    "ui-kit",
+    "components",
+    "signals",
+    "theming",
+    "mcp"
+  ]
 }

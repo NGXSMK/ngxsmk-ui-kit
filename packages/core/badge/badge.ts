@@ -41,6 +41,7 @@ export type NgxsmkBadgeVariant =
     :host([data-variant='secondary']) {
       background: var(--ngxsmk-color-surface-variant);
       color: var(--ngxsmk-color-on-surface);
+      border-color: var(--ngxsmk-color-outline);
     }
     :host([data-variant='outline']) {
       border-color: var(--ngxsmk-color-outline-strong);
@@ -49,18 +50,22 @@ export type NgxsmkBadgeVariant =
     :host([data-variant='success']) {
       background: var(--ngxsmk-color-success-container);
       color: var(--ngxsmk-color-on-success-container);
+      border-color: color-mix(in srgb, var(--ngxsmk-color-success) 20%, transparent);
     }
     :host([data-variant='warning']) {
       background: var(--ngxsmk-color-warning-container);
       color: var(--ngxsmk-color-on-warning-container);
+      border-color: color-mix(in srgb, var(--ngxsmk-color-warning) 20%, transparent);
     }
     :host([data-variant='error']) {
       background: var(--ngxsmk-color-error-container);
       color: var(--ngxsmk-color-on-error-container);
+      border-color: color-mix(in srgb, var(--ngxsmk-color-error) 20%, transparent);
     }
     :host([data-variant='info']) {
       background: var(--ngxsmk-color-info-container);
       color: var(--ngxsmk-color-on-info-container);
+      border-color: color-mix(in srgb, var(--ngxsmk-color-info) 20%, transparent);
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

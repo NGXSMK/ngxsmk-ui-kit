@@ -63,9 +63,9 @@ import { NgxsmkSparkline } from '@ngxsmk/core/sparkline';
 
     .ngxsmk-stat-card {
       padding: 1rem 1.15rem;
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-lg, 0.5rem);
-      background: var(--ngxsmk-color-surface, #ffffff);
+      background: var(--ngxsmk-color-surface);
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
@@ -81,7 +81,7 @@ import { NgxsmkSparkline } from '@ngxsmk/core/sparkline';
     .ngxsmk-stat-card__title {
       font-size: 0.8rem;
       font-weight: 600;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--ngxsmk-color-on-surface-variant);
     }
 
     .ngxsmk-stat-card__badge {
@@ -89,18 +89,18 @@ import { NgxsmkSparkline } from '@ngxsmk/core/sparkline';
       font-weight: 700;
       padding: 0.1rem 0.4rem;
       border-radius: var(--ngxsmk-radius-full, 9999px);
-      background: var(--ngxsmk-color-surface-variant, #f4f4f5);
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      background: var(--ngxsmk-color-surface-variant);
+      color: var(--ngxsmk-color-on-surface-variant);
     }
 
     .ngxsmk-stat-card__badge--up {
-      background: color-mix(in srgb, var(--ngxsmk-color-success, #16a34a) 12%, transparent);
-      color: var(--ngxsmk-color-success, #16a34a);
+      background: color-mix(in srgb, var(--ngxsmk-color-success) 12%, transparent);
+      color: var(--ngxsmk-color-success);
     }
 
     .ngxsmk-stat-card__badge--down {
-      background: color-mix(in srgb, var(--ngxsmk-color-error, #ef4444) 12%, transparent);
-      color: var(--ngxsmk-color-error, #ef4444);
+      background: color-mix(in srgb, var(--ngxsmk-color-error) 12%, transparent);
+      color: var(--ngxsmk-color-error);
     }
 
     .ngxsmk-stat-card__body {
@@ -120,12 +120,12 @@ import { NgxsmkSparkline } from '@ngxsmk/core/sparkline';
       font-size: 1.6rem;
       font-weight: 700;
       line-height: 1.1;
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      color: var(--ngxsmk-color-on-surface);
     }
 
     .ngxsmk-stat-card__period {
       font-size: 0.725rem;
-      color: var(--ngxsmk-color-on-surface-variant, #a1a1aa);
+      color: var(--ngxsmk-color-on-surface-variant);
       margin-top: 0.15rem;
     }
 
@@ -176,11 +176,11 @@ export class NgxsmkStatTrendCard {
 
   protected readonly sparkColor = computed(() => {
     const pos = this.isPositive();
-    if (pos === true) return 'var(--ngxsmk-color-success, #16a34a)';
-    if (pos === false) return 'var(--ngxsmk-color-error, #ef4444)';
+    if (pos === true) return 'var(--ngxsmk-color-success)';
+    if (pos === false) return 'var(--ngxsmk-color-error)';
     const t = this.trendVal();
-    if (t > 0) return 'var(--ngxsmk-color-success, #16a34a)';
-    if (t < 0) return 'var(--ngxsmk-color-error, #ef4444)';
-    return 'var(--ngxsmk-color-primary, #7c3aed)';
+    if (t > 0) return 'var(--ngxsmk-color-success)';
+    if (t < 0) return 'var(--ngxsmk-color-error)';
+    return 'var(--ngxsmk-color-primary)';
   });
 }

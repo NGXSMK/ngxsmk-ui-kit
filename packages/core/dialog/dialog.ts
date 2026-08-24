@@ -1,3 +1,4 @@
+import { isPlatformBrowser } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -12,6 +13,7 @@ import {
   signal,
   untracked,
   viewChild,
+  PLATFORM_ID,
 } from '@angular/core';
 import { NgxsmkScrollLock } from '@ngxsmk/cdk';
 import { ngxsmkUniqueId } from '@ngxsmk/core/util';
@@ -111,15 +113,16 @@ const DIALOG_MOTION: NgxsmkMotionState = {
       overflow: auto;
       padding: 0;
       border: 1px solid var(--ngxsmk-color-outline);
-      border-radius: var(--ngxsmk-radius-xl);
+      border-radius: var(--ngxsmk-radius-2xl, 1rem);
       background: var(--ngxsmk-color-surface);
       color: var(--ngxsmk-color-on-surface);
-      box-shadow: var(--ngxsmk-shadow-xl);
+      box-shadow: var(--ngxsmk-shadow-2xl);
       font-family: var(--ngxsmk-font-sans);
     }
 
     .ngxsmk-dialog__native::backdrop {
       background: var(--ngxsmk-color-backdrop, rgb(0 0 0 / 0.5));
+      backdrop-filter: blur(4px);
     }
 
     .ngxsmk-dialog__container {
@@ -156,6 +159,8 @@ const DIALOG_MOTION: NgxsmkMotionState = {
       background: transparent;
       color: var(--ngxsmk-color-on-surface-variant);
       cursor: pointer;
+      transition: background var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
+                  color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
     .ngxsmk-dialog__close:hover {
       background: var(--ngxsmk-color-surface-hover);
@@ -198,6 +203,7 @@ export class NgxsmkDialog {
   protected readonly enterMotion = DIALOG_MOTION;
 
   private readonly dialogRef = viewChild.required<ElementRef<HTMLDialogElement>>('dialog');
+  private readonly platformId = inject(PLATFORM_ID);
   private locked = false;
 
   constructor() {
@@ -208,11 +214,14 @@ export class NgxsmkDialog {
       const dialog = this.dialogRef().nativeElement;
       const open = this.open();
       untracked(() => {
-        if (open && !dialog.open) {
+        if (!isPlatformBrowser(this.platformId)) {
+          return;
+        }
+        if (open && !dialog.open && typeof dialog.showModal === 'function') {
           this.visible.set(true);
           dialog.showModal();
           this.setLocked(true);
-        } else if (!open && dialog.open) {
+        } else if (!open && dialog.open && typeof dialog.close === 'function') {
           void playExit(dialog, DIALOG_MOTION).then(() => {
             dialog.close();
             this.visible.set(false);

@@ -21,7 +21,7 @@ interface CategoryGroup {
       <aside class="sc-sidebar" [class.sc-sidebar--open]="mobileOpen()">
         <div class="sc-sidebar__brand">
           <span class="sc-sidebar__brand-name">NGXSMK</span>
-          <span class="sc-sidebar__version">v2.0.0</span>
+          <span class="sc-sidebar__version">v3.0.0</span>
         </div>
 
         <div class="sc-sidebar__search">

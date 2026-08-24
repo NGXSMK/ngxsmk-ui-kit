@@ -115,7 +115,7 @@ export interface NgxsmkTourStep {
         0 0 15px rgba(124, 58, 237, 0.5);
       pointer-events: none;
       transition: all 0.25s ease-out;
-      border: 2px solid var(--ngxsmk-color-primary, #7c3aed);
+      border: 2px solid var(--ngxsmk-color-primary);
     }
 
     .ngxsmk-tour__popover {
@@ -124,8 +124,8 @@ export interface NgxsmkTourStep {
       width: 20rem;
       padding: 1rem;
       border-radius: var(--ngxsmk-radius-lg, 0.5rem);
-      background: var(--ngxsmk-color-surface, #ffffff);
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      background: var(--ngxsmk-color-surface);
+      border: 1px solid var(--ngxsmk-color-outline);
       box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
       transition: all 0.2s ease-out;
     }
@@ -142,14 +142,14 @@ export interface NgxsmkTourStep {
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.04em;
-      color: var(--ngxsmk-color-primary, #7c3aed);
+      color: var(--ngxsmk-color-primary);
     }
 
     .ngxsmk-tour__close-btn {
       border: none;
       background: none;
       font-size: 0.85rem;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--ngxsmk-color-on-surface-variant);
       cursor: pointer;
     }
 
@@ -157,14 +157,14 @@ export interface NgxsmkTourStep {
       margin: 0 0 0.25rem;
       font-size: 0.95rem;
       font-weight: 700;
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      color: var(--ngxsmk-color-on-surface);
     }
 
     .ngxsmk-tour__desc {
       margin: 0 0 0.85rem;
       font-size: 0.825rem;
       line-height: 1.5;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--ngxsmk-color-on-surface-variant);
     }
 
     .ngxsmk-tour__footer {
@@ -178,7 +178,7 @@ export interface NgxsmkTourStep {
       background: none;
       font-size: 0.775rem;
       font-weight: 600;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--ngxsmk-color-on-surface-variant);
       cursor: pointer;
     }
 
@@ -198,14 +198,14 @@ export interface NgxsmkTourStep {
     }
 
     .ngxsmk-tour__btn--pri {
-      background: var(--ngxsmk-color-primary, #7c3aed);
+      background: var(--ngxsmk-color-primary);
       color: #ffffff;
     }
 
     .ngxsmk-tour__btn--sec {
-      background: var(--ngxsmk-color-surface-variant, #f4f4f5);
-      color: var(--ngxsmk-color-on-surface, #09090b);
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      background: var(--ngxsmk-color-surface-variant);
+      color: var(--ngxsmk-color-on-surface);
+      border: 1px solid var(--ngxsmk-color-outline);
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

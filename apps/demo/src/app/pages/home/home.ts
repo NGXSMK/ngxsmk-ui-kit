@@ -1,5 +1,3 @@
-import { NgxsmkButton } from '@ngxsmk/core/button';
-import { NgxsmkToast, NgxsmkToaster } from '@ngxsmk/core/toast';
 import { Component, inject, signal, computed, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -10,12 +8,23 @@ import { NgxsmkAnimate } from '@ngxsmk/core/animation';
 import { NgxsmkThemeService } from '@ngxsmk/theme';
 import { APP_VERSION } from '../../core/version';
 
+import { NgxsmkButton } from '@ngxsmk/core/button';
+import { NgxsmkBadge } from '@ngxsmk/core/badge';
+import { NgxsmkStat } from '@ngxsmk/core/stat';
+import { NgxsmkTable, type NgxsmkTableColumn } from '@ngxsmk/core/table';
+import { NgxsmkBarChart } from '@ngxsmk/core/chart-bar';
+import { NgxsmkProgress } from '@ngxsmk/core/progress';
+import { NgxsmkSwitch } from '@ngxsmk/core/switch';
+import { NgxsmkAvatar } from '@ngxsmk/core/avatar';
+import { NgxsmkInputDirective } from '@ngxsmk/core/input';
+import { NgxsmkToast, NgxsmkToaster } from '@ngxsmk/core/toast';
+
 interface BentoCard {
   icon: string;
   title: string;
   desc: string;
-  span?: 'wide' | 'tall' | 'full';
-  accent?: string;
+  tag: string;
+  accent: string;
 }
 
 interface Stat {
@@ -31,6 +40,7 @@ interface CategoryGroup {
   count: number;
   items: string[];
   color: string;
+  desc: string;
 }
 
 @Component({
@@ -42,6 +52,14 @@ interface CategoryGroup {
     RouterLink,
     AppNav,
     NgxsmkButton,
+    NgxsmkBadge,
+    NgxsmkStat,
+    NgxsmkTable,
+    NgxsmkBarChart,
+    NgxsmkProgress,
+    NgxsmkSwitch,
+    NgxsmkAvatar,
+    NgxsmkInputDirective,
     NgxsmkToaster,
     NgxsmkAnimate,
   ],
@@ -58,6 +76,39 @@ export class HomePage implements OnInit {
 
   protected readonly installCommand = 'npm install @ngxsmk/core @ngxsmk/theme';
   protected readonly searchQuery = signal('');
+  protected readonly copied = signal(false);
+
+  // Showcase Dashboard Interactive State
+  protected readonly showcaseTab = signal<'analytics' | 'services' | 'settings'>('analytics');
+  protected readonly demoActiveUsers = signal('48,250');
+  protected readonly demoLiveMode = signal(true);
+  protected readonly demoProgress = signal(78);
+  protected readonly demoFilterQuery = signal('');
+
+  protected readonly showcaseChartData = [
+    { label: 'Mon', value: 340 },
+    { label: 'Tue', value: 480 },
+    { label: 'Wed', value: 610 },
+    { label: 'Thu', value: 540 },
+    { label: 'Fri', value: 720 },
+    { label: 'Sat', value: 890 },
+    { label: 'Sun', value: 810 },
+  ];
+
+  protected readonly showcaseColumns: NgxsmkTableColumn[] = [
+    { key: 'name', label: 'Component / Service' },
+    { key: 'type', label: 'Type' },
+    { key: 'status', label: 'Status' },
+    { key: 'latency', label: 'Latency' },
+  ];
+
+  protected readonly showcaseRows = [
+    { name: 'Button & Controls', type: 'Form Action', status: 'Optimal', latency: '4ms' },
+    { name: 'Zoneless Signal Tree', type: 'Reactivity', status: 'Optimal', latency: '2ms' },
+    { name: 'Dynamic Token Engine', type: 'Design System', status: 'Optimal', latency: '5ms' },
+    { name: 'AI Chat Composer', type: 'AI Assistant', status: 'Optimal', latency: '12ms' },
+    { name: 'Enterprise Kanban Grid', type: 'Business Tool', status: 'Optimal', latency: '8ms' },
+  ];
 
   protected readonly motionHero = {
     initial: { opacity: 0, y: 12 },
@@ -78,25 +129,25 @@ export class HomePage implements OnInit {
   };
 
   ngOnInit(): void {
-    this.title.setTitle('NGXSMK — Signal-Native Angular UI Kit | 150+ Components');
+    this.title.setTitle('NGXSMK UI Kit — Modern Developer-First Angular UI Components');
     this.meta.updateTag({
       name: 'description',
       content:
-        'NGXSMK is a signal-native, zoneless Angular component library with 150+ standalone components, a universal design-token engine, and AI-first tooling. MIT licensed, zero runtime dependencies.',
+        'NGXSMK UI Kit is a modern, customizable and developer-friendly UI component library for building production-ready Angular applications with signals and zoneless architecture.',
     });
     this.meta.updateTag({
       property: 'og:title',
-      content: 'NGXSMK — Signal-Native Angular UI Kit | 150+ Components',
+      content: 'NGXSMK UI Kit — Build beautiful Angular applications faster',
     });
     this.meta.updateTag({
       property: 'og:description',
       content:
-        'Signal-native, zoneless Angular components with a universal token engine. Copy-paste scaffolding, AI tooling, and enterprise widgets — all MIT licensed.',
+        'A modern, customizable and developer friendly UI component library for building production ready Angular applications.',
     });
     this.meta.updateTag({
       name: 'keywords',
       content:
-        'Angular UI kit, Angular components, signal components, zoneless Angular, design system, Angular 19, Angular 20, standalone components, token engine, MIT, AI components, enterprise widgets',
+        'NGXSMK, NGXSMK UI Kit, Angular UI kit, Angular components, signal components, zoneless Angular, design system, Angular 19, Angular 20, standalone components, token engine, MIT, AI components, enterprise widgets',
     });
 
     let stored: string | null = null;
@@ -124,98 +175,124 @@ export class HomePage implements OnInit {
   protected readonly bentoCards: BentoCard[] = [
     {
       icon: '⚡',
-      title: 'home.featNativeTitle',
-      desc: 'home.featNativeDesc',
-      span: 'wide',
+      title: 'Angular First',
+      desc: 'Built specifically for modern Angular with signals, standalone components, and pure zoneless change detection.',
+      tag: 'Signals & Zoneless',
       accent: '#6366f1',
     },
     {
-      icon: '◇',
-      title: 'home.featCopyPasteTitle',
-      desc: 'home.featCopyPasteDesc',
-      accent: '#f59e0b',
+      icon: '🛡️',
+      title: 'Type Safe',
+      desc: 'Developer friendly TypeScript APIs. Every component uses signal inputs, two-way models, and typed event outputs.',
+      tag: 'TypeScript Native',
+      accent: '#3b82f6',
     },
     {
-      icon: '✦',
-      title: 'home.featAiTitle',
-      desc: 'home.featAiDesc',
-      accent: '#7c3aed',
-    },
-    {
-      icon: '❖',
-      title: 'home.featThemesTitle',
-      desc: 'home.featThemesDesc',
-      span: 'wide',
+      icon: '🎨',
+      title: 'Universal Theming',
+      desc: 'Flexible themes and variants driven by CSS custom properties. Dynamic preset switching with Tailwind v3/v4 support.',
+      tag: 'Design Tokens',
       accent: '#10b981',
     },
     {
-      icon: '▤',
-      title: 'home.featEnterpriseTitle',
-      desc: 'home.featEnterpriseDesc',
-      accent: '#ef4444',
+      icon: '📦',
+      title: 'Production Ready',
+      desc: '150+ reusable components designed for real applications. Zero bloated external runtime dependencies.',
+      tag: '0 Dependencies',
+      accent: '#f59e0b',
     },
     {
-      icon: '⌘',
-      title: 'home.featEcosystemTitle',
-      desc: 'home.featEcosystemDesc',
-      accent: '#3b82f6',
+      icon: '📱',
+      title: 'Responsive & Accessible',
+      desc: 'Follows WCAG AA accessibility standards with full keyboard navigation, visible focus rings, and seamless mobile reflow.',
+      tag: 'WCAG AA Compliant',
+      accent: '#ec4899',
+    },
+    {
+      icon: '🤖',
+      title: 'AI-First Tooling',
+      desc: 'Includes an MCP component database, LLM-readable API reference (llms.txt), and Claude Code skills for instant scaffolding.',
+      tag: 'MCP & LLM Ready',
+      accent: '#7c3aed',
     },
   ];
 
   protected readonly stats: Stat[] = [
     { value: '150+', label: 'Components', accent: '#6366f1' },
     { value: '0', label: 'Runtime deps', accent: '#10b981' },
-    { value: 'WCAG AA', label: 'Accessible', accent: '#f59e0b' },
+    { value: 'Signals', label: 'Reactivity', accent: '#f59e0b' },
     { value: 'MIT', label: 'Licensed', accent: '#3b82f6' },
   ];
 
-  protected readonly codeExample = `<button ngxsmk-button>
-  Get Started
-</button>
+  protected readonly codeExample = `import { Component, signal } from '@angular/core';
+import { NgxsmkButton } from '@ngxsmk/core/button';
+import { NgxsmkBadge } from '@ngxsmk/core/badge';
+import { NgxsmkInputDirective } from '@ngxsmk/core/input';
 
-<button ngxsmk-button variant="outline">
-  Learn More
-</button>
-
-<ngxsmk-badge variant="primary">
-  v2.0.0
-</ngxsmk-badge>
-
-<ngxsmk-progress [value]="75" />`;
+@Component({
+  selector: 'app-hero-demo',
+  standalone: true,
+  imports: [NgxsmkButton, NgxsmkBadge, NgxsmkInputDirective],
+  template: \`
+    <div class="user-card">
+      <ngxsmk-badge variant="primary">v3.0.0</ngxsmk-badge>
+      <input ngxsmkInput placeholder="Enter username..." />
+      <button ngxsmk-button (click)="submit()">
+        Save Changes
+      </button>
+    </div>
+  \`
+})
+export class HeroDemoComponent {
+  readonly username = signal('');
+  submit() { /* Signal action */ }
+}`;
 
   protected readonly techFeatures = [
-    { label: 'Signals', desc: 'input(), model(), computed(), effect()' },
-    { label: 'Standalone', desc: 'No NgModules — every component is standalone' },
-    { label: 'Zoneless', desc: 'No Zone.js dependency — pure signal reactivity' },
-    { label: 'SSR', desc: 'Server-side rendering ready out of the box' },
-    { label: 'OnPush', desc: 'All components use OnPush change detection' },
-    { label: 'Dark Mode', desc: 'CSS custom properties with .dark class toggle' },
+    { label: 'Signals-Native', desc: 'input(), input.required(), model(), computed(), effect()' },
+    { label: 'Standalone Only', desc: 'Zero NgModules — every component is a standalone entry' },
+    { label: 'Pure Zoneless', desc: 'Operates flawlessly without zone.js dependency' },
+    { label: 'SSR & Hydration', desc: 'Server-side rendering and hydration ready out of the box' },
+    { label: 'OnPush By Default', desc: 'Every component utilizes OnPush change detection' },
+    { label: 'Dark Mode Ready', desc: 'Seamless CSS custom properties toggle via .dark class' },
   ];
 
   protected readonly categoryGroups: CategoryGroup[] = [
     {
-      title: 'Forms',
+      title: 'Actions & Buttons',
+      icon: '🔘',
+      path: 'forms',
+      count: 27,
+      color: '#6366f1',
+      desc: 'Buttons, toggle groups, icon buttons, loading triggers, split actions.',
+      items: ['Button', 'Button Group', 'Toggle Button', 'Split Button', 'FAB', 'Expanding Arrow'],
+    },
+    {
+      title: 'Forms & Inputs',
       icon: '📝',
       path: 'forms',
       count: 25,
-      color: '#6366f1',
-      items: ['Button', 'Input', 'Checkbox', 'Radio', 'Switch', 'Select', 'Slider', 'DatePicker'],
+      color: '#3b82f6',
+      desc: 'Form controls, selects, typeaheads, date pickers, switches, and sliders.',
+      items: ['Input', 'Select', 'Checkbox', 'Radio', 'Switch', 'Date Picker', 'Slider', 'OTP Input'],
     },
     {
-      title: 'AI',
-      icon: '✦',
-      path: 'ai',
-      count: 21,
-      color: '#7c3aed',
-      items: ['ChatWindow', 'StreamingText', 'MarkdownViewer', 'CodeBlock', 'DiffViewer'],
+      title: 'Navigation',
+      icon: '🧭',
+      path: 'navigation',
+      count: 9,
+      color: '#0d9488',
+      desc: 'Tabs, breadcrumbs, menus, sidebars, mega menus, and mobile drawers.',
+      items: ['Top Nav', 'Side Nav', 'Tab Menu', 'Breadcrumb', 'Mega Menu', 'Outline'],
     },
     {
-      title: 'Enterprise',
-      icon: '🏢',
-      path: 'enterprise',
-      count: 13,
-      color: '#ef4444',
-      items: ['Kanban', 'Scheduler', 'Spreadsheet', 'Gantt', 'Workflow'],
+      title: 'Feedback & Status',
+      icon: '🔔',
+      path: 'feedback',
+      count: 8,
+      color: '#f59e0b',
+      desc: 'Alerts, toasts, badges, progress bars, spinners, skeletons, and empty states.',
+      items: ['Alert', 'Badge', 'Progress', 'Skeleton', 'Spinner', 'Empty State', 'Banner'],
     },
     {
       title: 'Data Display',
@@ -223,23 +300,44 @@ export class HomePage implements OnInit {
       path: 'data-display',
       count: 11,
       color: '#10b981',
-      items: ['Table', 'Accordion', 'Tabs', 'List', 'Stat'],
+      desc: 'Tables, data grids, accordions, avatars, metadata lists, and chip tags.',
+      items: ['Table', 'Data Table', 'Accordion', 'Avatar', 'Tag & Chip', 'Metadata List'],
     },
     {
-      title: 'Overlay',
+      title: 'Overlays & Modals',
       icon: '🪟',
       path: 'overlay',
       count: 8,
-      color: '#f59e0b',
-      items: ['Dialog', 'Sheet', 'Tooltip', 'ContextMenu'],
+      color: '#dc2626',
+      desc: 'Dialogs, alert dialogs, sheets, tooltips, hover cards, and dropdown menus.',
+      items: ['Dialog', 'Alert Dialog', 'Tooltip', 'Hover Card', 'Sheet', 'Dropdown Menu'],
     },
     {
-      title: 'Charts',
+      title: 'Data Visualization',
       icon: '📈',
       path: 'charts',
-      count: 8,
-      color: '#3b82f6',
-      items: ['Line', 'Bar', 'Pie', 'Area', 'Heatmap'],
+      count: 10,
+      color: '#059669',
+      desc: 'Lightweight, theme-reactive SVG charts with zero external dependencies.',
+      items: ['Line Chart', 'Bar Chart', 'Pie Chart', 'Area Chart', 'Heatmap', 'Sparkline'],
+    },
+    {
+      title: 'AI Interfaces',
+      icon: '✦',
+      path: 'ai',
+      count: 21,
+      color: '#7c3aed',
+      desc: 'Chat windows, dictation buttons, streaming text, reasoning traces, and citations.',
+      items: ['Chat Window', 'Streaming Text', 'Markdown Viewer', 'Code Block', 'Diff Viewer'],
+    },
+    {
+      title: 'Enterprise Tools',
+      icon: '🏢',
+      path: 'enterprise',
+      count: 13,
+      color: '#ef4444',
+      desc: 'Kanban boards, schedulers, spreadsheets, workflow builders, and Gantt charts.',
+      items: ['Kanban Board', 'Scheduler', 'Timeline Gantt', 'Spreadsheet', 'Workflow Builder'],
     },
   ];
 
@@ -248,18 +346,19 @@ export class HomePage implements OnInit {
     if (!q) return this.categoryGroups;
     return this.categoryGroups.filter(
       (c) =>
-        c.title.toLowerCase().includes(q) || c.items.some((item) => item.toLowerCase().includes(q)),
+        c.title.toLowerCase().includes(q) ||
+        c.desc.toLowerCase().includes(q) ||
+        c.items.some((item) => item.toLowerCase().includes(q)),
     );
   });
-
-  protected readonly copied = signal(false);
 
   protected copyInstall(): void {
     document.defaultView?.navigator?.clipboard
       ?.writeText(this.installCommand)
       .then(() => {
         this.copied.set(true);
-        setTimeout(() => this.copied.set(false), 2000);
+        this.toast.success('Copied to clipboard', this.installCommand);
+        setTimeout(() => this.copied.set(false), 2500);
       })
       .catch(() => this.toast.error('Copy failed', 'Clipboard is unavailable.'));
   }

@@ -87,7 +87,7 @@ import { CommonModule } from '@angular/common';
       align-items: center;
       padding: 0 var(--ngxsmk-space-3, 0.75rem);
       height: 40px;
-      border-bottom: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      border-bottom: 1px solid var(--ngxsmk-color-outline);
       font-size: var(--ngxsmk-text-body-sm-size, 0.875rem);
     }
   `,

@@ -49,6 +49,29 @@ const TOOLS = [
             required: ['type'],
         },
     },
+    {
+        name: 'ngxsmk_get_anti_patterns',
+        description: 'Get the official list of anti-patterns and rules to avoid when generating NGXSMK code (e.g. avoiding decorators, barrel imports, physical CSS, hardcoded colors).',
+        inputSchema: {
+            type: 'object',
+            properties: {},
+        },
+    },
+    {
+        name: 'ngxsmk_get_migration_path',
+        description: 'Get step-by-step migration translation guides from Angular Material or legacy libraries to NGXSMK standalone signals components.',
+        inputSchema: {
+            type: 'object',
+            properties: {
+                sourceLibrary: {
+                    type: 'string',
+                    enum: ['material', 'bootstrap', 'ionic'],
+                    description: 'The source library being migrated from',
+                },
+            },
+            required: ['sourceLibrary'],
+        },
+    },
 ];
 function elementTag(selector) {
     const first = selector.split(',')[0].trim();
@@ -199,6 +222,51 @@ ${usageSnippet(match)}
                 {
                     type: 'text',
                     text: `Recommended layout code:\n\n\`\`\`html\n${template}\n\`\`\``,
+                },
+            ],
+        };
+    }
+    if (name === 'ngxsmk_get_anti_patterns') {
+        return {
+            content: [
+                {
+                    type: 'text',
+                    text: `### Official NGXSMK Anti-Patterns & Traps
+
+1. ❌ **Decorator-based APIs**: Never use \`@Input()\` or \`@Output()\`. Always use signals (\`input()\`, \`model()\`, \`output()\`, \`computed()\`).
+2. ❌ **Root Barrel Imports**: Never import from \`@ngxsmk/core\`. Always use secondary entry points like \`@ngxsmk/core/button\` or \`@ngxsmk/core/dialog\`.
+3. ❌ **Hardcoded Colors & Spacing**: Never write \`#hex\` or pixel values in styles. Use \`var(--ngxsmk-color-*)\` and \`var(--ngxsmk-space-*)\`.
+4. ❌ **Physical CSS Properties**: Never use \`margin-left\`, \`right\`, \`text-align: left\`. Use logical properties (\`margin-inline-start\`, \`text-align: start\`) for 100% RTL compliance.
+5. ❌ **Unconstrained CSS Grids**: Never use \`grid-template-columns: 1fr\`. Always use \`minmax(0, 1fr)\` to prevent mobile blowout.
+`,
+                },
+            ],
+        };
+    }
+    if (name === 'ngxsmk_get_migration_path') {
+        const src = args?.sourceLibrary || 'material';
+        let guidance = '';
+        if (src === 'material') {
+            guidance = `### Angular Material ➔ NGXSMK Migration Guide
+- \`<button mat-raised-button color="primary">\` ➔ \`<button ngxsmk-button variant="primary">\`
+- \`<mat-form-field><mat-label>Email</mat-label><input matInput></mat-form-field>\` ➔ \`<ngxsmk-form-field label="Email"><input ngxsmkInput></ngxsmk-form-field>\`
+- \`<mat-slide-toggle [(ngModel)]="val">\` ➔ \`<ngxsmk-switch [(checked)]="val">\`
+- \`<mat-tab-group>\` ➔ \`<ngxsmk-tabs>\`
+- \`<mat-card><mat-card-title>Title</mat-card-title></mat-card>\` ➔ \`<ngxsmk-card><h3 ngxsmkCardTitle>Title</h3></ngxsmk-card>\`
+`;
+        }
+        else {
+            guidance = `### Generic Library ➔ NGXSMK Migration Guide
+- Use Standalone components directly in your \`imports: [...]\` array.
+- Replace RxJS subscriptions with Angular Signals (\`signal()\`, \`computed()\`).
+- Apply theme custom properties via \`--ngxsmk-*\`.
+`;
+        }
+        return {
+            content: [
+                {
+                    type: 'text',
+                    text: guidance,
                 },
             ],
         };

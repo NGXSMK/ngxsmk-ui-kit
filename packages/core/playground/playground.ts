@@ -132,16 +132,9 @@ export type ViewportSize = 'full' | 'mobile' | 'tablet' | 'desktop';
       font-family: var(--ngxsmk-font-sans, sans-serif);
       transition: background-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
-    /* Scoped dark preview: mirrors the kit's real dark-mode surface values so
-       the playground pane matches an actual .dark theme. */
     .ngxsmk-playground.dark {
-      background: #111112;
-      color: #dfe2e5;
-      --ngxsmk-color-background: #111112;
-      --ngxsmk-color-surface: #1f1f22;
-      --ngxsmk-color-surface-variant: #28292c;
-      --ngxsmk-color-outline: rgb(242 244 246 / 0.1);
-      --ngxsmk-color-on-surface: #dfe2e5;
+      background: var(--ngxsmk-color-background);
+      color: var(--ngxsmk-color-on-surface);
     }
 
     .ngxsmk-playground__header {

@@ -100,7 +100,7 @@ export interface NgxsmkSparklineBar {
             [attr.y1]="0"
             [attr.x2]="active.x"
             [attr.y2]="numericHeight()"
-            stroke="var(--ngxsmk-color-outline, #e4e4e7)"
+            stroke="var(--ngxsmk-color-outline)"
             stroke-width="1"
             stroke-dasharray="2 2"
           />
@@ -109,7 +109,7 @@ export interface NgxsmkSparklineBar {
             [attr.cy]="active.y"
             [attr.r]="strokeWidth() + 2"
             [attr.fill]="color()"
-            stroke="var(--ngxsmk-color-surface, #ffffff)"
+            stroke="var(--ngxsmk-color-surface)"
             stroke-width="2"
           />
         }
@@ -173,8 +173,8 @@ export interface NgxsmkSparklineBar {
       top: -1.75rem;
       padding: 0.15rem 0.4rem;
       border-radius: var(--ngxsmk-radius-sm, 0.25rem);
-      background: var(--ngxsmk-color-on-surface, #09090b);
-      color: var(--ngxsmk-color-surface, #ffffff);
+      background: var(--ngxsmk-color-on-surface);
+      color: var(--ngxsmk-color-surface);
       font-family: var(--ngxsmk-font-mono, monospace);
       font-size: 0.7rem;
       font-weight: 600;
@@ -200,7 +200,7 @@ export class NgxsmkSparkline {
   readonly height = input<number | string>(32);
 
   /** Stroke/bar/fill primary color string or CSS variable. */
-  readonly color = input<string>('var(--ngxsmk-color-primary, #7c3aed)');
+  readonly color = input<string>('var(--ngxsmk-color-primary)');
 
   /** Area fill opacity (0–1) for area variant. Default: 0.2. */
   readonly fillOpacity = input<number>(0.2);

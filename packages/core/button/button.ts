@@ -8,7 +8,7 @@ import {
   input,
 } from '@angular/core';
 import { NGXSMK_BUTTON_RENDERER } from './button-renderer';
-import { DefaultButtonRenderer } from './default-renderer';
+import { NgxsmkDefaultButtonRenderer } from './default-renderer';
 
 export type NgxsmkButtonVariant =
   'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'link';
@@ -30,7 +30,7 @@ export type NgxsmkButtonSize = 'sm' | 'md' | 'lg';
   standalone: true,
   /* eslint-disable-next-line @angular-eslint/directive-selector */
   selector: 'button[ngxsmk-button], a[ngxsmk-button]',
-  providers: [{ provide: NGXSMK_BUTTON_RENDERER, useClass: DefaultButtonRenderer }],
+  providers: [{ provide: NGXSMK_BUTTON_RENDERER, useClass: NgxsmkDefaultButtonRenderer }],
   host: {
     class: 'ngxsmk-button',
     '[attr.data-variant]': 'variant()',

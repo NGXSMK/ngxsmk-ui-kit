@@ -74,4 +74,11 @@ describe('buildThemeCss', () => {
     expect(reduced).toContain('--ngxsmk-press-scale: none;');
     expect(reduced).toContain('.ngxsmk-reduce-motion');
   });
+
+  it('emits mobile safe-area and touch-target tokens', () => {
+    expect(css).toContain('--ngxsmk-safe-area-top: env(safe-area-inset-top, 0px);');
+    expect(css).toContain('--ngxsmk-safe-area-bottom: env(safe-area-inset-bottom, 0px);');
+    expect(css).toContain('--ngxsmk-touch-target-min: 44px;');
+  });
 });
+

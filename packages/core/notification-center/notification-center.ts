@@ -156,10 +156,10 @@ export interface NgxsmkNotificationItem {
       justify-content: center;
       width: 2.5rem;
       height: 2.5rem;
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-md, 0.375rem);
-      background: var(--ngxsmk-color-surface, #ffffff);
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      background: var(--ngxsmk-color-surface);
+      color: var(--ngxsmk-color-on-surface);
       cursor: pointer;
       transition:
         background-color 0.15s ease,
@@ -167,7 +167,7 @@ export interface NgxsmkNotificationItem {
     }
 
     .ngxsmk-notif__bell-btn:hover {
-      background: var(--ngxsmk-color-surface-variant, #f4f4f5);
+      background: var(--ngxsmk-color-surface-variant);
     }
 
     .ngxsmk-notif__badge {
@@ -176,12 +176,12 @@ export interface NgxsmkNotificationItem {
       right: -0.25rem;
       padding: 0.1rem 0.35rem;
       border-radius: var(--ngxsmk-radius-full, 9999px);
-      background: var(--ngxsmk-color-error, #ef4444);
+      background: var(--ngxsmk-color-error);
       color: #ffffff;
       font-size: 0.65rem;
       font-weight: 700;
       line-height: 1;
-      border: 2px solid var(--ngxsmk-color-surface, #ffffff);
+      border: 2px solid var(--ngxsmk-color-surface);
     }
 
     .ngxsmk-notif__panel {
@@ -190,8 +190,8 @@ export interface NgxsmkNotificationItem {
       top: calc(100% + 0.5rem);
       width: 22rem;
       max-height: 28rem;
-      background: var(--ngxsmk-color-surface, #ffffff);
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      background: var(--ngxsmk-color-surface);
+      border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-lg, 0.5rem);
       box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.12);
       display: flex;
@@ -205,7 +205,7 @@ export interface NgxsmkNotificationItem {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      border-bottom: 1px solid var(--ngxsmk-color-outline);
     }
 
     .ngxsmk-notif__title-group {
@@ -218,14 +218,14 @@ export interface NgxsmkNotificationItem {
       margin: 0;
       font-size: 0.95rem;
       font-weight: 700;
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      color: var(--ngxsmk-color-on-surface);
     }
 
     .ngxsmk-notif__pill {
       font-size: 0.65rem;
       font-weight: 600;
-      background: var(--ngxsmk-color-primary-container, #ede9fe);
-      color: var(--ngxsmk-color-primary, #7c3aed);
+      background: var(--ngxsmk-color-primary-container);
+      color: var(--ngxsmk-color-primary);
       padding: 0.1rem 0.4rem;
       border-radius: var(--ngxsmk-radius-full, 9999px);
     }
@@ -235,14 +235,14 @@ export interface NgxsmkNotificationItem {
       background: none;
       font-size: 0.75rem;
       font-weight: 600;
-      color: var(--ngxsmk-color-primary, #7c3aed);
+      color: var(--ngxsmk-color-primary);
       cursor: pointer;
     }
 
     .ngxsmk-notif__tabs {
       display: flex;
       padding: 0.25rem 0.75rem;
-      background: var(--ngxsmk-color-surface-variant, #f4f4f5);
+      background: var(--ngxsmk-color-surface-variant);
       gap: 0.25rem;
     }
 
@@ -253,7 +253,7 @@ export interface NgxsmkNotificationItem {
       background: none;
       font-size: 0.75rem;
       font-weight: 600;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--ngxsmk-color-on-surface-variant);
       cursor: pointer;
       border-radius: var(--ngxsmk-radius-sm, 0.25rem);
       transition:
@@ -262,8 +262,8 @@ export interface NgxsmkNotificationItem {
     }
 
     .ngxsmk-notif__tab--active {
-      background: var(--ngxsmk-color-surface, #ffffff);
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      background: var(--ngxsmk-color-surface);
+      color: var(--ngxsmk-color-on-surface);
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
     }
 
@@ -277,7 +277,7 @@ export interface NgxsmkNotificationItem {
     .ngxsmk-notif__empty {
       padding: 2rem 1rem;
       text-align: center;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--ngxsmk-color-on-surface-variant);
       font-size: 0.85rem;
     }
 
@@ -286,17 +286,17 @@ export interface NgxsmkNotificationItem {
       display: flex;
       gap: 0.75rem;
       padding: 0.75rem 1rem;
-      border-bottom: 1px solid var(--ngxsmk-color-outline, #f4f4f5);
+      border-bottom: 1px solid var(--ngxsmk-color-outline);
       cursor: pointer;
       transition: background 0.15s ease;
     }
 
     .ngxsmk-notif__item:hover {
-      background: color-mix(in srgb, var(--ngxsmk-color-on-surface, #09090b) 4%, transparent);
+      background: color-mix(in srgb, var(--ngxsmk-color-on-surface) 4%, transparent);
     }
 
     .ngxsmk-notif__item--unread {
-      background: color-mix(in srgb, var(--ngxsmk-color-primary, #7c3aed) 4%, transparent);
+      background: color-mix(in srgb, var(--ngxsmk-color-primary) 4%, transparent);
     }
 
     .ngxsmk-notif__indicator {
@@ -305,17 +305,17 @@ export interface NgxsmkNotificationItem {
       border-radius: 9999px;
       margin-top: 0.35rem;
       flex-shrink: 0;
-      background: var(--ngxsmk-color-primary, #7c3aed);
+      background: var(--ngxsmk-color-primary);
     }
 
     .ngxsmk-notif__indicator[data-type='success'] {
-      background: var(--ngxsmk-color-success, #16a34a);
+      background: var(--ngxsmk-color-success);
     }
     .ngxsmk-notif__indicator[data-type='warning'] {
-      background: var(--ngxsmk-color-amber, #f59e0b);
+      background: var(--ngxsmk-color-amber);
     }
     .ngxsmk-notif__indicator[data-type='error'] {
-      background: var(--ngxsmk-color-error, #ef4444);
+      background: var(--ngxsmk-color-error);
     }
 
     .ngxsmk-notif__body {
@@ -333,30 +333,30 @@ export interface NgxsmkNotificationItem {
     .ngxsmk-notif__item-title {
       font-size: 0.825rem;
       font-weight: 600;
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      color: var(--ngxsmk-color-on-surface);
     }
 
     .ngxsmk-notif__time {
       font-size: 0.7rem;
-      color: var(--ngxsmk-color-on-surface-variant, #a1a1aa);
+      color: var(--ngxsmk-color-on-surface-variant);
     }
 
     .ngxsmk-notif__desc {
       margin: 0.2rem 0 0;
       font-size: 0.775rem;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--ngxsmk-color-on-surface-variant);
       line-height: 1.4;
     }
 
     .ngxsmk-notif__item-action {
       margin-top: 0.4rem;
       padding: 0.2rem 0.5rem;
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-sm, 0.25rem);
-      background: var(--ngxsmk-color-surface, #ffffff);
+      background: var(--ngxsmk-color-surface);
       font-size: 0.7rem;
       font-weight: 600;
-      color: var(--ngxsmk-color-primary, #7c3aed);
+      color: var(--ngxsmk-color-primary);
       cursor: pointer;
     }
   `,

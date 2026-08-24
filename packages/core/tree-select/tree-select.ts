@@ -102,8 +102,8 @@ export type TreeNode = NgxsmkTreeSelectNode;
     .ngxsmk-tree-sel__trigger {
       padding: 0.5rem 0.75rem;
       border-radius: var(--ngxsmk-radius-md, 0.375rem);
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
-      background: var(--ngxsmk-color-surface, #ffffff);
+      border: 1px solid var(--ngxsmk-color-outline);
+      background: var(--ngxsmk-color-surface);
       cursor: pointer;
       min-height: 2.5rem;
       display: flex;
@@ -111,7 +111,7 @@ export type TreeNode = NgxsmkTreeSelectNode;
     }
 
     .ngxsmk-tree-sel__ph {
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--ngxsmk-color-on-surface-variant);
       font-size: 0.875rem;
     }
 
@@ -123,16 +123,16 @@ export type TreeNode = NgxsmkTreeSelectNode;
 
     .ngxsmk-tree-sel__tag {
       font-size: 0.75rem;
-      background: var(--ngxsmk-color-surface-variant, #f4f4f5);
+      background: var(--ngxsmk-color-surface-variant);
       padding: 0.15rem 0.4rem;
       border-radius: var(--ngxsmk-radius-sm, 0.25rem);
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      color: var(--ngxsmk-color-on-surface);
     }
 
     .ngxsmk-tree-sel__more {
       font-size: 0.75rem;
       font-weight: 600;
-      color: var(--ngxsmk-color-primary, #7c3aed);
+      color: var(--ngxsmk-color-primary);
     }
 
     .ngxsmk-tree-sel__panel {
@@ -141,8 +141,8 @@ export type TreeNode = NgxsmkTreeSelectNode;
       left: 0;
       right: 0;
       z-index: 100;
-      background: var(--ngxsmk-color-surface, #ffffff);
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      background: var(--ngxsmk-color-surface);
+      border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-md, 0.375rem);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
       max-height: 14rem;
@@ -172,7 +172,7 @@ export type TreeNode = NgxsmkTreeSelectNode;
     }
 
     .ngxsmk-tree-sel__node-label:hover {
-      background: var(--ngxsmk-color-surface-variant, #f4f4f5);
+      background: var(--ngxsmk-color-surface-variant);
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

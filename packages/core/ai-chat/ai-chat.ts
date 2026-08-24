@@ -204,9 +204,9 @@ export interface NgxsmkAiMessage {
       height: 100%;
       background: var(--ngxsmk-color-surface);
       border: 1px solid var(--ngxsmk-color-outline);
-      border-radius: var(--ngxsmk-radius-lg, 8px);
+      border-radius: var(--ngxsmk-radius-xl);
       overflow: hidden;
-      font-family: var(--ngxsmk-font-sans, sans-serif);
+      font-family: var(--ngxsmk-font-sans);
       color: var(--ngxsmk-color-on-surface);
     }
 
@@ -228,14 +228,18 @@ export interface NgxsmkAiMessage {
     }
 
     .ngxsmk-ai-chat__header-actions select {
-      height: 2rem;
+      height: var(--ngxsmk-control-height-sm, 2rem);
       padding: 0 var(--ngxsmk-space-2);
       border: 1px solid var(--ngxsmk-color-outline);
-      border-radius: var(--ngxsmk-radius-md, 4px);
+      border-radius: var(--ngxsmk-radius-md);
       background: var(--ngxsmk-color-surface);
       color: var(--ngxsmk-color-on-surface);
       font-family: inherit;
       cursor: pointer;
+    }
+    .ngxsmk-ai-chat__header-actions select:focus-visible {
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring);
     }
 
     .ngxsmk-ai-chat__feed {
@@ -250,7 +254,7 @@ export interface NgxsmkAiMessage {
     .ngxsmk-ai-chat__message-row {
       display: flex;
       gap: var(--ngxsmk-space-3);
-      max-width: 80%;
+      max-width: 85%;
     }
 
     .ngxsmk-ai-chat__message-row--user {
@@ -261,7 +265,7 @@ export interface NgxsmkAiMessage {
     .ngxsmk-ai-chat__avatar {
       width: 2rem;
       height: 2rem;
-      border-radius: var(--ngxsmk-radius-full, 50%);
+      border-radius: var(--ngxsmk-radius-full);
       background: var(--ngxsmk-color-surface-variant);
       color: var(--ngxsmk-color-on-surface-variant);
       display: flex;
@@ -283,9 +287,9 @@ export interface NgxsmkAiMessage {
     .ngxsmk-ai-chat__bubble {
       padding: var(--ngxsmk-space-3) var(--ngxsmk-space-4);
       background: var(--ngxsmk-color-surface-variant);
-      border-radius: var(--ngxsmk-radius-md, 6px);
-      font-size: var(--ngxsmk-text-body-sm-size, 0.875rem);
-      line-height: var(--ngxsmk-leading-normal, 1.5);
+      border-radius: var(--ngxsmk-radius-lg);
+      font-size: var(--ngxsmk-text-body-sm-size);
+      line-height: var(--ngxsmk-text-body-sm-line);
     }
     .ngxsmk-ai-chat__bubble p {
       margin: 0;
@@ -299,7 +303,7 @@ export interface NgxsmkAiMessage {
       background: var(--ngxsmk-color-surface-variant);
       border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-md);
-      padding: var(--ngxsmk-space-2);
+      padding: var(--ngxsmk-space-2) var(--ngxsmk-space-3);
       font-size: var(--ngxsmk-text-label-sm-size);
       margin-bottom: var(--ngxsmk-space-2);
       cursor: pointer;
@@ -310,6 +314,8 @@ export interface NgxsmkAiMessage {
       color: var(--ngxsmk-color-on-surface-variant);
       border-top: 1px solid var(--ngxsmk-color-outline);
       margin-top: var(--ngxsmk-space-2);
+      font-family: var(--ngxsmk-font-mono);
+      white-space: pre-wrap;
     }
 
     .ngxsmk-ai-chat__citations {
@@ -320,7 +326,7 @@ export interface NgxsmkAiMessage {
     }
 
     .ngxsmk-ai-chat__citation {
-      font-size: var(--ngxsmk-text-label-sm-size, 0.75rem);
+      font-size: var(--ngxsmk-text-label-sm-size);
       color: var(--ngxsmk-color-primary);
       background: var(--ngxsmk-color-primary-container);
       padding: var(--ngxsmk-space-0-5) var(--ngxsmk-space-1-5);
@@ -337,7 +343,7 @@ export interface NgxsmkAiMessage {
     .ngxsmk-ai-chat__dot {
       width: 6px;
       height: 6px;
-      border-radius: 50%;
+      border-radius: var(--ngxsmk-radius-full);
       background: var(--ngxsmk-color-on-surface-variant);
       animation: ngxsmk-bounce 1.4s infinite ease-in-out both;
     }
@@ -380,6 +386,10 @@ export interface NgxsmkAiMessage {
     .ngxsmk-ai-chat__suggestion-btn:hover {
       background: var(--ngxsmk-color-surface-hover);
     }
+    .ngxsmk-ai-chat__suggestion-btn:focus-visible {
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring);
+    }
 
     .ngxsmk-ai-chat__footer {
       padding: var(--ngxsmk-space-3) var(--ngxsmk-space-4);
@@ -394,30 +404,41 @@ export interface NgxsmkAiMessage {
 
     .ngxsmk-ai-chat__form input {
       flex: 1;
-      height: 2.5rem;
+      height: var(--ngxsmk-control-height-md, 2.5rem);
       padding: 0 var(--ngxsmk-space-3);
       border: 1px solid var(--ngxsmk-color-outline);
-      border-radius: var(--ngxsmk-radius-md, 6px);
+      border-radius: var(--ngxsmk-radius-md);
       background: var(--ngxsmk-color-background);
       color: var(--ngxsmk-color-on-surface);
       font-family: inherit;
       outline: none;
+      transition: border-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
+                  box-shadow var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
     .ngxsmk-ai-chat__form input:focus {
-      border-color: var(--ngxsmk-color-primary);
+      border-color: var(--ngxsmk-color-ring);
+      box-shadow: var(--ngxsmk-focus-ring);
     }
 
     .ngxsmk-ai-chat__form button {
-      width: 2.5rem;
-      height: 2.5rem;
+      width: var(--ngxsmk-control-height-md, 2.5rem);
+      height: var(--ngxsmk-control-height-md, 2.5rem);
       display: inline-flex;
       align-items: center;
       justify-content: center;
       border: none;
       background: var(--ngxsmk-color-primary);
       color: var(--ngxsmk-color-on-primary);
-      border-radius: var(--ngxsmk-radius-md, 6px);
+      border-radius: var(--ngxsmk-radius-md);
       cursor: pointer;
+      transition: background var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
+    }
+    .ngxsmk-ai-chat__form button:hover:not(:disabled) {
+      background: var(--ngxsmk-color-primary-hover);
+    }
+    .ngxsmk-ai-chat__form button:focus-visible {
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring);
     }
     .ngxsmk-ai-chat__form button:disabled {
       opacity: var(--ngxsmk-opacity-disabled);
@@ -426,7 +447,7 @@ export interface NgxsmkAiMessage {
 
     .ngxsmk-ai-chat__token-viewer {
       margin-top: var(--ngxsmk-space-2);
-      font-size: var(--ngxsmk-text-label-sm-size, 0.75rem);
+      font-size: var(--ngxsmk-text-label-sm-size);
       color: var(--ngxsmk-color-on-surface-variant);
       text-align: right;
     }

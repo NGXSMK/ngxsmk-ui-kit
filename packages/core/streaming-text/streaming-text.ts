@@ -6,8 +6,10 @@ import {
   afterNextRender,
   inject,
   input,
+  output,
   signal,
   effect,
+  viewChild,
 } from '@angular/core';
 import { loadMotion, prefersReducedMotion } from '@ngxsmk/core/animation';
 
@@ -42,6 +44,7 @@ import { loadMotion, prefersReducedMotion } from '@ngxsmk/core/animation';
 })
 export class NgxsmkStreamingText {
   private readonly destroyRef = inject(DestroyRef);
+  private readonly cursorRef = viewChild<ElementRef<HTMLElement>>('cursor');
 
   readonly text = input('');
   readonly speed = input(30);
@@ -49,11 +52,24 @@ export class NgxsmkStreamingText {
   /** Cursor blink mode: `'css'` (default) or `'motion'` (motion.dev animate). */
   readonly streamingCursorAnimation = input<'css' | 'motion'>('css');
 
+  /** Emits when streaming finishes rendering the current text target. */
+  readonly completed = output<string>();
+
   protected readonly displayText = signal('');
+  private timerId: ReturnType<typeof setTimeout> | null = null;
 
   constructor() {
+    this.destroyRef.onDestroy(() => {
+      this.clearTimer();
+    });
+
     effect(() => {
       const target = this.text();
+      this.clearTimer();
+      // If target changed completely, reset
+      if (!target.startsWith(this.displayText())) {
+        this.displayText.set('');
+      }
       this.streamTo(target);
     });
 
@@ -65,13 +81,12 @@ export class NgxsmkStreamingText {
       const motion = await loadMotion();
       if (!motion) return;
 
-      const cursorEl = (this as unknown as { cursorRef?: ElementRef<HTMLElement> }).cursorRef;
-      if (!cursorEl?.nativeElement) return;
+      const cursorEl = this.cursorRef()?.nativeElement;
+      if (!cursorEl) return;
 
-      const cursor = cursorEl.nativeElement;
       // Override CSS animation with motion.dev infinite blink
-      cursor.style.animation = 'none';
-      motion.animate(cursor, { opacity: [1, 0] } as unknown as Record<string, string | number>, {
+      cursorEl.style.animation = 'none';
+      motion.animate(cursorEl, { opacity: [1, 0] } as unknown as Record<string, string | number>, {
         duration: 0.8,
         ease: 'steps(1)',
         repeat: Infinity,
@@ -80,13 +95,27 @@ export class NgxsmkStreamingText {
     });
   }
 
+  private clearTimer(): void {
+    if (this.timerId !== null) {
+      clearTimeout(this.timerId);
+      this.timerId = null;
+    }
+  }
+
   private streamTo(target: string): void {
     const currentLen = this.displayText().length;
-    if (target.length <= currentLen) return;
+    if (target.length <= currentLen) {
+      if (target.length === currentLen && target.length > 0) {
+        this.completed.emit(target);
+      }
+      return;
+    }
     const nextChar = target[currentLen];
     this.displayText.update((t) => t + nextChar);
     if (this.displayText().length < target.length) {
-      setTimeout(() => this.streamTo(target), this.speed());
+      this.timerId = setTimeout(() => this.streamTo(target), this.speed());
+    } else {
+      this.completed.emit(target);
     }
   }
 }

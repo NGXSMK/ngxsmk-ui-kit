@@ -7,13 +7,13 @@
     "source": "github"
   },
   "websiteUrl": "https://ngxsmk.github.io/ngxsmk-ui-kit",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "packages": [
     {
       "registryType": "npm",
       "registryBaseUrl": "https://registry.npmjs.org",
       "identifier": "@ngxsmk/mcp",
-      "version": "2.0.0",
+      "version": "3.0.0",
       "transport": {
         "type": "stdio"
       }

@@ -96,32 +96,32 @@ export type TimelineStep = NgxsmkTimelineStep;
       font-size: 0.7rem;
       font-weight: 700;
       z-index: 2;
-      border: 2px solid var(--ngxsmk-color-outline, #e4e4e7);
-      background: var(--ngxsmk-color-surface, #ffffff);
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      border: 2px solid var(--ngxsmk-color-outline);
+      background: var(--ngxsmk-color-surface);
+      color: var(--ngxsmk-color-on-surface-variant);
     }
 
     .ngxsmk-timeline__item[data-status='completed'] .ngxsmk-timeline__node {
-      background: var(--ngxsmk-color-success, #16a34a);
-      border-color: var(--ngxsmk-color-success, #16a34a);
+      background: var(--ngxsmk-color-success);
+      border-color: var(--ngxsmk-color-success);
       color: #ffffff;
     }
 
     .ngxsmk-timeline__item[data-status='active'] .ngxsmk-timeline__node {
-      background: var(--ngxsmk-color-primary, #7c3aed);
-      border-color: var(--ngxsmk-color-primary, #7c3aed);
+      background: var(--ngxsmk-color-primary);
+      border-color: var(--ngxsmk-color-primary);
       color: #ffffff;
     }
 
     .ngxsmk-timeline__line {
       width: 2px;
       flex: 1;
-      background: var(--ngxsmk-color-outline, #e4e4e7);
+      background: var(--ngxsmk-color-outline);
       margin-top: 0.2rem;
     }
 
     .ngxsmk-timeline__item[data-status='completed'] .ngxsmk-timeline__line {
-      background: var(--ngxsmk-color-success, #16a34a);
+      background: var(--ngxsmk-color-success);
     }
 
     .ngxsmk-timeline__content {
@@ -139,19 +139,19 @@ export type TimelineStep = NgxsmkTimelineStep;
     .ngxsmk-timeline__title {
       font-size: 0.875rem;
       font-weight: 600;
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      color: var(--ngxsmk-color-on-surface);
     }
 
     .ngxsmk-timeline__time {
       font-size: 0.725rem;
-      color: var(--ngxsmk-color-on-surface-variant, #a1a1aa);
+      color: var(--ngxsmk-color-on-surface-variant);
     }
 
     .ngxsmk-timeline__desc {
       margin: 0.2rem 0 0;
       font-size: 0.8rem;
       line-height: 1.45;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--ngxsmk-color-on-surface-variant);
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

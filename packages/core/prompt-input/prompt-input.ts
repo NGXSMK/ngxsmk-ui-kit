@@ -102,100 +102,128 @@ export interface NgxsmkPromptModelOption {
     :host {
       display: block;
       width: 100%;
-      font-family: var(--ngxsmk-font-sans, system-ui);
+      font-family: var(--ngxsmk-font-sans);
     }
 
     .ngxsmk-prompt-box {
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
-      border-radius: var(--ngxsmk-radius-lg, 0.5rem);
-      background: var(--ngxsmk-color-surface, #ffffff);
-      padding: 0.75rem 0.85rem 0.5rem;
+      border: 1px solid var(--ngxsmk-color-outline-strong);
+      border-radius: var(--ngxsmk-radius-xl);
+      background: var(--ngxsmk-color-surface);
+      box-shadow: var(--ngxsmk-shadow-sm);
+      padding: var(--ngxsmk-space-3) var(--ngxsmk-space-4) var(--ngxsmk-space-2);
       transition:
-        border-color 0.15s ease,
-        box-shadow 0.15s ease;
+        border-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
+        box-shadow var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
 
     .ngxsmk-prompt-box:focus-within {
-      border-color: var(--ngxsmk-color-primary, #7c3aed);
-      box-shadow: 0 0 0 3px
-        color-mix(in srgb, var(--ngxsmk-color-primary, #7c3aed) 12%, transparent);
+      border-color: var(--ngxsmk-color-ring);
+      box-shadow: var(--ngxsmk-focus-ring);
     }
 
     .ngxsmk-prompt-box__textarea {
       width: 100%;
       border: none;
-      background: none;
+      background: transparent;
       outline: none;
       resize: none;
       font-family: inherit;
-      font-size: 0.9rem;
-      line-height: 1.5;
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      font-size: var(--ngxsmk-text-body-md-size);
+      line-height: var(--ngxsmk-text-body-md-line);
+      color: var(--ngxsmk-color-on-surface);
+    }
+
+    .ngxsmk-prompt-box__textarea::placeholder {
+      color: var(--ngxsmk-color-on-surface-variant);
     }
 
     .ngxsmk-prompt-box__toolbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-top: 0.5rem;
-      padding-top: 0.35rem;
-      border-top: 1px solid var(--ngxsmk-color-outline, #f4f4f5);
+      margin-top: var(--ngxsmk-space-2);
+      padding-top: var(--ngxsmk-space-2);
+      border-top: 1px solid var(--ngxsmk-color-outline-subtle);
     }
 
     .ngxsmk-prompt-box__left {
       display: flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: var(--ngxsmk-space-2);
     }
 
     .ngxsmk-prompt-box__btn {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 1.85rem;
-      height: 1.85rem;
+      width: 2rem;
+      height: 2rem;
       border: none;
-      border-radius: var(--ngxsmk-radius-sm, 0.25rem);
-      background: none;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      border-radius: var(--ngxsmk-radius-md);
+      background: transparent;
+      color: var(--ngxsmk-color-on-surface-variant);
       cursor: pointer;
-      transition: background 0.15s ease;
+      transition: background var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
+                  color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
 
     .ngxsmk-prompt-box__btn:hover {
-      background: var(--ngxsmk-color-surface-variant, #f4f4f5);
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      background: var(--ngxsmk-color-surface-hover);
+      color: var(--ngxsmk-color-on-surface);
+    }
+    .ngxsmk-prompt-box__btn:focus-visible {
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring);
     }
 
     .ngxsmk-prompt-box__model-select {
       font-family: inherit;
-      font-size: 0.75rem;
-      font-weight: 600;
-      padding: 0.2rem 0.5rem;
-      border-radius: var(--ngxsmk-radius-sm, 0.25rem);
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
-      background: var(--ngxsmk-color-surface-variant, #f4f4f5);
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      font-size: var(--ngxsmk-text-label-sm-size);
+      font-weight: var(--ngxsmk-font-weight-semibold, 600);
+      padding: var(--ngxsmk-space-1) var(--ngxsmk-space-2);
+      border-radius: var(--ngxsmk-radius-md);
+      border: 1px solid var(--ngxsmk-color-outline);
+      background: var(--ngxsmk-color-surface-variant);
+      color: var(--ngxsmk-color-on-surface);
       outline: none;
       cursor: pointer;
+      transition: border-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
+    }
+    .ngxsmk-prompt-box__model-select:focus-visible {
+      border-color: var(--ngxsmk-color-ring);
+      box-shadow: var(--ngxsmk-focus-ring);
     }
 
     .ngxsmk-prompt-box__send-btn {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 1.85rem;
-      height: 1.85rem;
+      width: 2rem;
+      height: 2rem;
       border: none;
-      border-radius: var(--ngxsmk-radius-sm, 0.25rem);
-      background: var(--ngxsmk-color-primary, #7c3aed);
-      color: #ffffff;
+      border-radius: var(--ngxsmk-radius-full);
+      background: var(--ngxsmk-color-primary);
+      color: var(--ngxsmk-color-on-primary);
       cursor: pointer;
-      transition: opacity 0.15s ease;
+      transition: background var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
+                  transform var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
+                  opacity var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
+    }
+
+    .ngxsmk-prompt-box__send-btn:hover:not(:disabled) {
+      background: var(--ngxsmk-color-primary-hover);
+      transform: scale(1.06);
+    }
+    .ngxsmk-prompt-box__send-btn:active:not(:disabled) {
+      transform: scale(0.96);
+    }
+    .ngxsmk-prompt-box__send-btn:focus-visible {
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring);
     }
 
     .ngxsmk-prompt-box__send-btn:disabled {
-      opacity: 0.4;
+      opacity: var(--ngxsmk-opacity-disabled);
       cursor: not-allowed;
     }
   `,

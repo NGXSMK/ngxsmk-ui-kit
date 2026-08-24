@@ -1,6 +1,6 @@
 {
   "name": "@ngxsmk/core",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Signal-first, zoneless Angular UI component library with AI-ready controls and a universal token engine.",
   "keywords": [
     "angular",

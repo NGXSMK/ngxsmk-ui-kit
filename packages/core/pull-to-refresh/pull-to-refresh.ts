@@ -73,7 +73,7 @@ function resistedDistance(distance: number, maxPull: number): number {
       pointer-events: none;
       font-size: 11px;
       font-weight: var(--ngxsmk-font-weight-medium, 500);
-      color: var(--ngxsmk-color-on-surface-variant, #666);
+      color: var(--ngxsmk-color-on-surface-variant);
     }
 
     .ngxsmk-ptr__spinner {
@@ -126,12 +126,12 @@ function resistedDistance(distance: number, maxPull: number): number {
           [style.opacity]="status() === 'ready' || status() === 'refreshing' ? 1 : 0"
         />
         <rect x="7" y="7" width="22" height="22" rx="9" fill="currentColor" />
-        <circle cx="14.2" cy="16" r="1.45" fill="var(--ngxsmk-color-surface, #fff)" />
-        <circle cx="21.8" cy="16" r="1.45" fill="var(--ngxsmk-color-surface, #fff)" />
+        <circle cx="14.2" cy="16" r="1.45" fill="var(--ngxsmk-color-surface)" />
+        <circle cx="21.8" cy="16" r="1.45" fill="var(--ngxsmk-color-surface)" />
         <path
           d="M14.5 21h7"
           fill="none"
-          stroke="var(--ngxsmk-color-surface, #fff)"
+          stroke="var(--ngxsmk-color-surface)"
           stroke-width="1.5"
           stroke-linecap="round"
           [style.opacity]="status() === 'ready' || status() === 'refreshing' ? 0 : 1"
@@ -139,7 +139,7 @@ function resistedDistance(distance: number, maxPull: number): number {
         <path
           d="M14 20.5c1 2.4 7 2.4 8 0"
           fill="none"
-          stroke="var(--ngxsmk-color-surface, #fff)"
+          stroke="var(--ngxsmk-color-surface)"
           stroke-width="1.5"
           stroke-linecap="round"
           [style.opacity]="status() === 'ready' ? 1 : 0"
@@ -148,7 +148,7 @@ function resistedDistance(distance: number, maxPull: number): number {
           cx="18"
           cy="21"
           r="1.6"
-          fill="var(--ngxsmk-color-surface, #fff)"
+          fill="var(--ngxsmk-color-surface)"
           [style.opacity]="status() === 'refreshing' ? 1 : 0"
         />
       </svg>

@@ -71,14 +71,14 @@ import { ChangeDetectionStrategy, Component, computed, input, model } from '@ang
       width: 100%;
       height: 0.375rem;
       border-radius: var(--ngxsmk-radius-full, 9999px);
-      background: var(--ngxsmk-color-surface-variant, #e4e4e7);
+      background: var(--ngxsmk-color-surface-variant);
     }
 
     .ngxsmk-range-slider__fill {
       position: absolute;
       height: 0.375rem;
       border-radius: var(--ngxsmk-radius-full, 9999px);
-      background: var(--ngxsmk-color-primary, #7c3aed);
+      background: var(--ngxsmk-color-primary);
     }
 
     .ngxsmk-range-slider__input {
@@ -97,8 +97,8 @@ import { ChangeDetectionStrategy, Component, computed, input, model } from '@ang
       height: 1.25rem;
       width: 1.25rem;
       border-radius: var(--ngxsmk-radius-full, 9999px);
-      background: var(--ngxsmk-color-surface, #ffffff);
-      border: 2px solid var(--ngxsmk-color-primary, #7c3aed);
+      background: var(--ngxsmk-color-surface);
+      border: 2px solid var(--ngxsmk-color-primary);
       pointer-events: auto;
       -webkit-appearance: none;
       cursor: pointer;
@@ -112,8 +112,8 @@ import { ChangeDetectionStrategy, Component, computed, input, model } from '@ang
       height: 1.25rem;
       width: 1.25rem;
       border-radius: var(--ngxsmk-radius-full, 9999px);
-      background: var(--ngxsmk-color-surface, #ffffff);
-      border: 2px solid var(--ngxsmk-color-primary, #7c3aed);
+      background: var(--ngxsmk-color-surface);
+      border: 2px solid var(--ngxsmk-color-primary);
       pointer-events: auto;
       cursor: pointer;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
@@ -125,7 +125,7 @@ import { ChangeDetectionStrategy, Component, computed, input, model } from '@ang
     .ngxsmk-range-slider__input::-webkit-slider-thumb:hover {
       transform: scale(1.1);
       box-shadow: 0 0 0 4px
-        color-mix(in srgb, var(--ngxsmk-color-primary, #7c3aed) 20%, transparent);
+        color-mix(in srgb, var(--ngxsmk-color-primary) 20%, transparent);
     }
 
     .ngxsmk-range-slider__input--min {

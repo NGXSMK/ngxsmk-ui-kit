@@ -25,9 +25,9 @@ export interface NgxsmkChartConfig {
     .ngxsmk-chart-dashboard__grid > * {
       display: block;
       padding: var(--ngxsmk-space-4);
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-lg, 0.75rem);
-      background: var(--ngxsmk-color-surface, #ffffff);
+      background: var(--ngxsmk-color-surface);
       box-shadow: var(--ngxsmk-shadow-sm, 0 1px 2px rgba(15, 23, 42, 0.04));
     }
     @media (max-width: 768px) {

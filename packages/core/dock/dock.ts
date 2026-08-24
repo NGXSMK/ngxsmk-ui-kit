@@ -65,7 +65,7 @@ export type DockPosition = 'bottom' | 'top' | 'left' | 'right';
       padding: var(--ngxsmk-space-2, 0.5rem) var(--ngxsmk-space-3, 0.75rem);
       border: 1px solid var(--ngxsmk-color-outline, rgba(228, 228, 231, 0.6));
       border-radius: var(--ngxsmk-radius-full, 9999px);
-      background: color-mix(in srgb, var(--ngxsmk-color-surface, #ffffff) 80%, transparent);
+      background: color-mix(in srgb, var(--ngxsmk-color-surface) 80%, transparent);
       backdrop-filter: blur(16px) saturate(1.5);
       box-shadow: var(--ngxsmk-shadow-lg, 0 10px 25px -5px rgba(0, 0, 0, 0.1));
     }
@@ -79,8 +79,8 @@ export type DockPosition = 'bottom' | 'top' | 'left' | 'right';
       height: 2.75rem;
       border: none;
       border-radius: var(--ngxsmk-radius-full, 9999px);
-      background: var(--ngxsmk-color-surface-variant, #f4f4f5);
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      background: var(--ngxsmk-color-surface-variant);
+      color: var(--ngxsmk-color-on-surface);
       cursor: pointer;
       transition:
         transform var(--ngxsmk-duration-normal, 0.2s) cubic-bezier(0.34, 1.56, 0.64, 1),
@@ -90,8 +90,8 @@ export type DockPosition = 'bottom' | 'top' | 'left' | 'right';
 
     .ngxsmk-dock__item:hover:not(:disabled) {
       transform: scale(1.25) translateY(-4px);
-      background: var(--ngxsmk-color-primary, #7c3aed);
-      color: var(--ngxsmk-color-on-primary, #ffffff);
+      background: var(--ngxsmk-color-primary);
+      color: var(--ngxsmk-color-on-primary);
       box-shadow: var(--ngxsmk-shadow-lg, 0 8px 16px -4px rgba(124, 58, 237, 0.4));
     }
 
@@ -108,8 +108,8 @@ export type DockPosition = 'bottom' | 'top' | 'left' | 'right';
       transform: translateX(-50%) translateY(0);
       padding: 0.2rem 0.5rem;
       border-radius: var(--ngxsmk-radius-sm, 0.25rem);
-      background: var(--ngxsmk-color-on-surface, #09090b);
-      color: var(--ngxsmk-color-surface, #ffffff);
+      background: var(--ngxsmk-color-on-surface);
+      color: var(--ngxsmk-color-surface);
       font-size: var(--ngxsmk-text-body-xs-size, 0.75rem);
       font-weight: var(--ngxsmk-font-weight-medium, 500);
       white-space: nowrap;
@@ -133,8 +133,8 @@ export type DockPosition = 'bottom' | 'top' | 'left' | 'right';
       right: -2px;
       padding: 0.1rem 0.35rem;
       border-radius: var(--ngxsmk-radius-full, 9999px);
-      background: var(--ngxsmk-color-error, #ef4444);
-      color: var(--ngxsmk-color-on-error, #ffffff);
+      background: var(--ngxsmk-color-error);
+      color: var(--ngxsmk-color-on-error);
       font-size: 0.65rem;
       font-weight: var(--ngxsmk-font-weight-bold, 700);
       line-height: var(--ngxsmk-leading-none, 1);

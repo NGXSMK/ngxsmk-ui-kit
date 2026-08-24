@@ -1,6 +1,6 @@
 {
   "name": "ngxsmk-ui-kit",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -41,6 +41,15 @@
     "restore:toolchain": "node tools/scripts/gen-ci-angularjson.mjs --restore && npm install",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "governance": "node tools/scripts/check-governance.mjs",
+    "audit:consistency": "node tools/scripts/audit-component-consistency.mjs",
+    "audit:a11y": "node tools/scripts/audit-a11y.mjs",
+    "audit:complexity": "node tools/scripts/audit-component-complexity.mjs",
+    "perf:lab": "node tools/scripts/performance-lab.mjs",
+    "test:migration": "node tools/scripts/test-migration.mjs",
+    "sitemap": "node tools/scripts/generate-sitemap.mjs",
+    "audit:seo": "node tools/scripts/audit-seo.mjs",
+    "audit:docs": "node tools/scripts/audit-docs.mjs",
     "lint": "ng lint",
     "prepare": "husky"
   },

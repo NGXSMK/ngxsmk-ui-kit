@@ -33,6 +33,7 @@ export abstract class AbstractCanvasChart implements AfterViewInit, OnDestroy {
   readonly width = input(400);
   readonly height = input(200);
   readonly responsive = input(true);
+  readonly ariaLabel = input('Data chart');
 
   protected get drawWidth(): number {
     return this.responsive() && this.measured.w ? this.measured.w : this.width();
@@ -79,6 +80,9 @@ export abstract class AbstractCanvasChart implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
     const canvas = this.canvasRef().nativeElement;
     this.ctx = canvas.getContext('2d')!;
     canvas.addEventListener('mousemove', this.onMove);
@@ -98,6 +102,9 @@ export abstract class AbstractCanvasChart implements AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.destroyed = true;
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
     cancelAnimationFrame(this.rafId);
     this.ro?.disconnect();
     const canvas = this.canvasRef()?.nativeElement;
@@ -118,8 +125,9 @@ export abstract class AbstractCanvasChart implements AfterViewInit, OnDestroy {
   }
 
   private resize(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
     const canvas = this.canvasRef().nativeElement;
-    this.dpr = window.devicePixelRatio || 1;
+    this.dpr = typeof window !== 'undefined' ? (window.devicePixelRatio || 1) : 1;
     this.W = this.drawWidth;
     this.H = this.drawHeight;
     canvas.width = Math.max(1, Math.round(this.W * this.dpr));

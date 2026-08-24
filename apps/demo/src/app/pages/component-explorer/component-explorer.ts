@@ -449,6 +449,25 @@ const CATEGORY_ICONS: Record<string, string> = {
       background: var(--ngxsmk-color-primary-container, #ede9fe);
       box-shadow: 0 6px 20px rgba(124, 58, 237, 0.25);
     }
+
+    @media (max-width: 640px) {
+      .explorer-grid {
+        grid-template-columns: 1fr;
+      }
+      .explorer-tabs {
+        gap: 0.25rem;
+      }
+      .explorer-tab {
+        padding: 0.25rem 0.625rem;
+        font-size: var(--ngxsmk-text-body-xs-size);
+      }
+      .explorer-scroll-top {
+        bottom: 1rem;
+        right: 1rem;
+        width: 2.25rem;
+        height: 2.25rem;
+      }
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

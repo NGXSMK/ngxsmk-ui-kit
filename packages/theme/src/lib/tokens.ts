@@ -197,3 +197,14 @@ export const EASING: Record<string, string> = {
   'in-out': 'cubic-bezier(0.4, 0, 0.2, 1)',
   emphasized: 'cubic-bezier(0.2, 0, 0, 1)',
 };
+
+/** Safe-area inset defaults (fallback to CSS env() variables for iOS/Android/Ionic). */
+export const SAFE_AREA = {
+  top: 'env(safe-area-inset-top, 0px)',
+  bottom: 'env(safe-area-inset-bottom, 0px)',
+  left: 'env(safe-area-inset-left, 0px)',
+  right: 'env(safe-area-inset-right, 0px)',
+};
+
+/** Minimum touch target size for mobile accessibility (Apple HIG & Android Material). */
+export const TOUCH_TARGET_MIN = '44px';

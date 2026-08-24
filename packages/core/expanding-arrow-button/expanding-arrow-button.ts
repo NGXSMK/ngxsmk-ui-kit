@@ -176,10 +176,10 @@ export class NgxsmkExpandingArrowButton {
   readonly disabled = input<boolean>(false);
 
   /** Background color of the accent tile. */
-  readonly accentBg = input<string>('var(--ngxsmk-color-primary, #18181b)');
+  readonly accentBg = input<string>('var(--ngxsmk-color-primary)');
 
   /** Text color of the accent tile. */
-  readonly accentColor = input<string>('var(--ngxsmk-color-on-primary, #fafafa)');
+  readonly accentColor = input<string>('var(--ngxsmk-color-on-primary)');
 
   /** Animation mode: `'css'` (default) or `'motion'` (motion.dev stagger). */
   readonly eabAnimation = input<'css' | 'motion'>('css');

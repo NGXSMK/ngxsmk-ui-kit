@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 export type NgxsmkStackDirection = 'horizontal' | 'vertical';
 export type NgxsmkStackAlign = 'start' | 'end' | 'center' | 'baseline' | 'stretch';
@@ -38,6 +38,6 @@ export class NgxsmkStack {
   readonly gap = input('var(--ngxsmk-space-4)');
   readonly align = input<NgxsmkStackAlign>('stretch');
 
-  protected readonly directionMap = () => DIRECTION_MAP[this.direction()];
-  protected readonly alignMap = () => ALIGN_MAP[this.align()] || this.align();
+  protected readonly directionMap = computed(() => DIRECTION_MAP[this.direction()]);
+  protected readonly alignMap = computed(() => ALIGN_MAP[this.align()] || this.align());
 }

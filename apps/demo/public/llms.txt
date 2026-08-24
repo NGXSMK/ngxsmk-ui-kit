@@ -1,9 +1,9 @@
 # NGXSMK UI Kit
 
-> Angular-first, MIT-licensed UI ecosystem: 258+ signals-native, zoneless
+> Angular-first, MIT-licensed UI ecosystem: 257+ signals-native, zoneless
 > standalone components with a universal design-token engine (CSS variables,
 > SCSS, Tailwind, StyleX, Tokens Studio export). MIT licensed, no paid tiers.
-> Current version: 2.0.0. Supports Angular 17.3 through 22.
+> Current version: 3.0.0. Supports Angular 17.3 through 22.
 
 Packages: `@ngxsmk/core` (components, one secondary entry point per component,
 e.g. `@ngxsmk/core/button`), `@ngxsmk/theme` (design tokens + theme engine),
@@ -92,7 +92,6 @@ Usage rules for generated code:
 - NgxsmkCheckboxListItemComponent (`ngxsmk-checkbox-list-item, [ngxsmkCheckboxListItem]`) — @ngxsmk/core/checkbox-list-item
 - NgxsmkCitation (`ngxsmk-citation`) — @ngxsmk/core/citation
 - NgxsmkCitationViewer (`ngxsmk-citation-viewer`) — @ngxsmk/core/citation-viewer
-- NgxsmkClickOutside (`[ngxsmkClickOutside]`) — @ngxsmk/core/click-outside
 - NgxsmkCode (`code[ngxsmk-code]`) — @ngxsmk/core/code
 - NgxsmkCodeBlock (`ngxsmk-code-block`) — @ngxsmk/core/code-block
 - NgxsmkCodeEditor (`ngxsmk-code-editor`) — @ngxsmk/core/code-editor — Code editor container with line numbers, language tag header, copy button, and editable canvas
@@ -127,7 +126,6 @@ Usage rules for generated code:
 - NgxsmkFilterBuilder (`ngxsmk-filter-builder`) — @ngxsmk/core/filter-builder — Dynamic filter predicate builder component (Field, Operator, Value condition rows)
 - NgxsmkFlex (`ngxsmk-flex`) — @ngxsmk/core/flex
 - NgxsmkFlowEditor (`ngxsmk-flow-editor`) — @ngxsmk/core/flow-editor
-- NgxsmkFocusTrap (`[ngxsmkFocusTrap]`) — @ngxsmk/core/focus-trap
 - NgxsmkFormField (`ngxsmk-form-field`) — @ngxsmk/core/form-field — Wraps a form control with label, hint, and error messaging, wiring `for`/`aria-describedby`/`aria-invalid` automatically when the projected control implements `NgxsmkFormFieldControl`
 - NgxsmkFormLayout (`ngxsmk-form-layout`) — @ngxsmk/core/form-layout
 - NgxsmkGauge (`ngxsmk-gauge`) — @ngxsmk/core/gauge — Circular arc gauge & speedometer meter component
@@ -190,6 +188,7 @@ Usage rules for generated code:
 - NgxsmkPinInput (`ngxsmk-pin-input`) — @ngxsmk/core/pin-input — One-time-code / PIN entry: a row of single-character fields with paste distribution, arrow/backspace navigation, and masking
 - NgxsmkPivotTable (`ngxsmk-pivot-table`) — @ngxsmk/core/pivot-table
 - NgxsmkPlayground (`ngxsmk-playground`) — @ngxsmk/core/playground
+- NgxsmkPopoverTrigger (`[ngxsmkPopoverTrigger]`) — @ngxsmk/core/popover
 - NgxsmkPopover (`ngxsmk-popover`) — @ngxsmk/core/popover — Click-triggered popover anchored to its trigger
 - NgxsmkPowerSearch (`ngxsmk-power-search`) — @ngxsmk/core/power-search
 - NgxsmkProgress (`ngxsmk-progress`) — @ngxsmk/core/progress — Progress bar

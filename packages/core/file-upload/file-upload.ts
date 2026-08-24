@@ -168,9 +168,9 @@ export interface UploadedFileItem {
       justify-content: center;
       gap: var(--ngxsmk-space-3, 0.75rem);
       padding: var(--ngxsmk-space-8, 2rem) var(--ngxsmk-space-6, 1.5rem);
-      border: 2px dashed var(--ngxsmk-color-outline, #d1d5db);
+      border: 2px dashed var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-xl, 0.75rem);
-      background: var(--ngxsmk-color-surface, #ffffff);
+      background: var(--ngxsmk-color-surface);
       cursor: pointer;
       text-align: center;
       transition:
@@ -180,16 +180,16 @@ export interface UploadedFileItem {
 
     .ngxsmk-file-upload__dropzone:hover,
     :host(.ngxsmk-file-upload--dragging) .ngxsmk-file-upload__dropzone {
-      border-color: var(--ngxsmk-color-primary, #7c3aed);
+      border-color: var(--ngxsmk-color-primary);
       background: color-mix(
         in srgb,
-        var(--ngxsmk-color-primary, #7c3aed) 4%,
-        var(--ngxsmk-color-surface, #ffffff)
+        var(--ngxsmk-color-primary) 4%,
+        var(--ngxsmk-color-surface)
       );
     }
 
     .ngxsmk-file-upload__dropzone:focus-visible {
-      outline: 2px solid var(--ngxsmk-color-primary, #7c3aed);
+      outline: 2px solid var(--ngxsmk-color-primary);
       outline-offset: 2px;
     }
 
@@ -198,7 +198,7 @@ export interface UploadedFileItem {
     }
 
     .ngxsmk-file-upload__icon {
-      color: var(--ngxsmk-color-primary, #7c3aed);
+      color: var(--ngxsmk-color-primary);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -211,17 +211,17 @@ export interface UploadedFileItem {
     }
 
     .ngxsmk-file-upload__primary-text {
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      color: var(--ngxsmk-color-on-surface);
     }
 
     .ngxsmk-file-upload__link {
-      color: var(--ngxsmk-color-primary, #7c3aed);
+      color: var(--ngxsmk-color-primary);
       font-weight: var(--ngxsmk-font-weight-semibold, 600);
     }
 
     .ngxsmk-file-upload__sub-text {
       font-size: var(--ngxsmk-text-body-xs-size, 0.75rem);
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--ngxsmk-color-on-surface-variant);
     }
 
     .ngxsmk-file-upload__queue {
@@ -235,13 +235,13 @@ export interface UploadedFileItem {
       align-items: center;
       gap: var(--ngxsmk-space-3, 0.75rem);
       padding: var(--ngxsmk-space-3, 0.75rem) var(--ngxsmk-space-4, 1rem);
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-lg, 0.5rem);
-      background: var(--ngxsmk-color-surface, #ffffff);
+      background: var(--ngxsmk-color-surface);
     }
 
     .ngxsmk-file-upload__item-icon {
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--ngxsmk-color-on-surface-variant);
       flex-shrink: 0;
     }
 
@@ -254,7 +254,7 @@ export interface UploadedFileItem {
 
     .ngxsmk-file-upload__item-name {
       font-weight: var(--ngxsmk-font-weight-medium, 500);
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      color: var(--ngxsmk-color-on-surface);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -262,13 +262,13 @@ export interface UploadedFileItem {
 
     .ngxsmk-file-upload__item-size {
       font-size: var(--ngxsmk-text-body-xs-size, 0.75rem);
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--ngxsmk-color-on-surface-variant);
     }
 
     .ngxsmk-file-upload__remove-btn {
       background: none;
       border: none;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--ngxsmk-color-on-surface-variant);
       cursor: pointer;
       padding: 0.25rem;
       border-radius: var(--ngxsmk-radius-sm, 0.25rem);
@@ -281,8 +281,8 @@ export interface UploadedFileItem {
     }
 
     .ngxsmk-file-upload__remove-btn:hover {
-      color: var(--ngxsmk-color-error, #ef4444);
-      background: color-mix(in srgb, var(--ngxsmk-color-error, #ef4444) 10%, transparent);
+      color: var(--ngxsmk-color-error);
+      background: color-mix(in srgb, var(--ngxsmk-color-error) 10%, transparent);
     }
 
     :host(.ngxsmk-file-upload--disabled) {

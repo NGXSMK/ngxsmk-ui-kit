@@ -44,7 +44,6 @@ import { CvaBase } from '@ngxsmk/cdk/cva-base';
   `,
   host: {
     class: 'ngxsmk-date-picker',
-    '[attr.id]': 'id()',
     '[attr.aria-invalid]': "ariaInvalid() ? 'true' : null",
     '[attr.aria-describedby]': 'ariaDescribedby()',
   },

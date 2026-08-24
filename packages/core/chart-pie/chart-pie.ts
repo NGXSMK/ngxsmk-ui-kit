@@ -15,9 +15,20 @@ export interface NgxsmkPieChartDataPoint {
   standalone: true,
   selector: 'ngxsmk-chart-pie',
   template: `
-    <div class="ngxsmk-chart-surface">
-      <canvas #canvas></canvas>
-      <div #tooltip class="ngxsmk-chart-tip"></div>
+    <div class="ngxsmk-chart-surface" role="region" [attr.aria-label]="ariaLabel()">
+      <canvas #canvas aria-hidden="true"></canvas>
+      <div #tooltip class="ngxsmk-chart-tip" aria-hidden="true"></div>
+      <table class="ngxsmk-chart-sr-table">
+        <caption>{{ ariaLabel() }}</caption>
+        <thead>
+          <tr><th scope="col">Segment</th><th scope="col">Value</th></tr>
+        </thead>
+        <tbody>
+          @for (d of data(); track d.label) {
+            <tr><td>{{ d.label }}</td><td>{{ d.value }}</td></tr>
+          }
+        </tbody>
+      </table>
     </div>
   `,
   host: { class: 'ngxsmk-chart-pie' },

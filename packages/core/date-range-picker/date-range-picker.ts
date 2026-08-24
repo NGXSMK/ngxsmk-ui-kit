@@ -121,9 +121,9 @@ export interface DateRange {
       flex-direction: column;
       gap: var(--ngxsmk-space-3, 0.75rem);
       padding: var(--ngxsmk-space-4, 1rem);
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-xl, 0.75rem);
-      background: var(--ngxsmk-color-surface, #ffffff);
+      background: var(--ngxsmk-color-surface);
       box-shadow: var(--ngxsmk-shadow-sm, 0 1px 2px 0 rgba(0, 0, 0, 0.05));
     }
 
@@ -142,27 +142,27 @@ export interface DateRange {
     .ngxsmk-date-range-picker__label {
       font-size: var(--ngxsmk-text-body-xs-size, 0.75rem);
       font-weight: var(--ngxsmk-font-weight-medium, 500);
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--ngxsmk-color-on-surface-variant);
     }
 
     .ngxsmk-date-range-picker__input {
       padding: 0.375rem 0.625rem;
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-md, 0.375rem);
-      background: var(--ngxsmk-color-surface, #ffffff);
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      background: var(--ngxsmk-color-surface);
+      color: var(--ngxsmk-color-on-surface);
       font-family: inherit;
       font-size: var(--ngxsmk-text-body-sm-size, 0.875rem);
       outline: none;
     }
 
     .ngxsmk-date-range-picker__input:focus {
-      border-color: var(--ngxsmk-color-primary, #7c3aed);
+      border-color: var(--ngxsmk-color-primary);
       box-shadow: var(--ngxsmk-shadow-focus);
     }
 
     .ngxsmk-date-range-picker__separator {
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--ngxsmk-color-on-surface-variant);
       font-size: 1.125rem;
       padding-bottom: 0.375rem;
     }
@@ -172,7 +172,7 @@ export interface DateRange {
       gap: var(--ngxsmk-space-2, 0.5rem);
       flex-wrap: wrap;
       padding-top: 0.25rem;
-      border-top: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      border-top: 1px solid var(--ngxsmk-color-outline);
     }
 
     .ngxsmk-date-range-picker__preset-btn {
@@ -181,9 +181,9 @@ export interface DateRange {
       font-weight: var(--ngxsmk-font-weight-medium, 500);
       padding: 0.25rem 0.625rem;
       border-radius: var(--ngxsmk-radius-full, 9999px);
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
-      background: var(--ngxsmk-color-surface-variant, #f4f4f5);
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      border: 1px solid var(--ngxsmk-color-outline);
+      background: var(--ngxsmk-color-surface-variant);
+      color: var(--ngxsmk-color-on-surface);
       cursor: pointer;
       transition:
         background-color var(--ngxsmk-duration-fast, 150ms) ease,
@@ -191,9 +191,9 @@ export interface DateRange {
     }
 
     .ngxsmk-date-range-picker__preset-btn:hover:not(:disabled) {
-      background: var(--ngxsmk-color-primary, #7c3aed);
-      border-color: var(--ngxsmk-color-primary, #7c3aed);
-      color: var(--ngxsmk-color-on-primary, #ffffff);
+      background: var(--ngxsmk-color-primary);
+      border-color: var(--ngxsmk-color-primary);
+      color: var(--ngxsmk-color-on-primary);
     }
 
     :host(.ngxsmk-date-range-picker--disabled) {

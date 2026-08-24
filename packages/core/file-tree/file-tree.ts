@@ -94,7 +94,7 @@ export type NgxsmkFileNode = NgxsmkFileTreeNode;
       padding: 0.25rem 0.5rem;
       border: none;
       background: none;
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      color: var(--ngxsmk-color-on-surface);
       font-family: inherit;
       font-size: 0.825rem;
       font-weight: 500;
@@ -105,18 +105,18 @@ export type NgxsmkFileNode = NgxsmkFileTreeNode;
     }
 
     .ngxsmk-file-tree__node-btn:hover {
-      background: var(--ngxsmk-color-surface-variant, #f4f4f5);
+      background: var(--ngxsmk-color-surface-variant);
     }
 
     .ngxsmk-file-tree__node-btn--active {
-      background: var(--ngxsmk-color-primary-container, #ede9fe);
-      color: var(--ngxsmk-color-primary, #7c3aed);
+      background: var(--ngxsmk-color-primary-container);
+      color: var(--ngxsmk-color-primary);
       font-weight: 600;
     }
 
     .ngxsmk-file-tree__arrow {
       font-size: 0.75rem;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--ngxsmk-color-on-surface-variant);
       transition: transform 0.15s ease;
     }
 

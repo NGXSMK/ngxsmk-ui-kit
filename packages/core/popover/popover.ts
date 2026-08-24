@@ -1,9 +1,11 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  Directive,
   ElementRef,
   booleanAttribute,
   computed,
+  forwardRef,
   inject,
   input,
   model,
@@ -15,6 +17,19 @@ import { NgxsmkAnimate, NgxsmkMotionState, playExit } from '@ngxsmk/core/animati
 
 export type NgxsmkPopoverPlacement = 'top' | 'bottom' | 'left' | 'right';
 export type NgxsmkPopoverAlign = 'start' | 'center' | 'end';
+
+@Directive({
+  standalone: true,
+  selector: '[ngxsmkPopoverTrigger]',
+  host: {
+    '[attr.aria-expanded]': 'popover.open()',
+    '(click)': 'popover.toggle(); $event.stopPropagation()',
+    '(keydown.escape)': 'popover.close()',
+  },
+})
+export class NgxsmkPopoverTrigger {
+  protected readonly popover = inject(forwardRef(() => NgxsmkPopover));
+}
 
 /**
  * Click-triggered popover anchored to its trigger. Positioning is done entirely
@@ -35,14 +50,11 @@ export type NgxsmkPopoverAlign = 'start' | 'center' | 'end';
   selector: 'ngxsmk-popover',
   imports: [NgxsmkClickOutside, NgxsmkFocusTrap, NgxsmkAnimate],
   template: `
+    <!-- eslint-disable-next-line @angular-eslint/template/interactive-supports-focus -->
     <div
       class="ngxsmk-popover__trigger"
-      tabindex="0"
-      role="button"
       [attr.aria-expanded]="open()"
       (click)="toggle()"
-      (keydown.enter)="toggle()"
-      (keydown.space)="toggle(); $event.preventDefault()"
       (keydown.escape)="close()"
     >
       <ng-content select="[ngxsmkPopoverTrigger]" />

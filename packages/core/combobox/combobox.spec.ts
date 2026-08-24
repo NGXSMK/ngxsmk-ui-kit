@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TestBed } from '@angular/core/testing';
 import { describe, expect, it, beforeEach, vi } from 'vitest';
 import { NgxsmkCombobox } from './combobox';
@@ -81,5 +82,33 @@ describe('NgxsmkCombobox', () => {
     key(input, 'Escape');
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelector('.ngxsmk-combobox__dropdown')).toBeNull();
+  });
+
+  it('integrates with Reactive Forms FormControl and handles writeValue / disabled state', () => {
+    @Component({
+      standalone: true,
+      imports: [NgxsmkCombobox, ReactiveFormsModule],
+      template: `<ngxsmk-combobox [options]="options" [formControl]="ctrl" />`,
+    })
+    class ReactiveHost {
+      readonly ctrl = new FormControl('ca');
+      readonly options = [
+        { value: 'us', label: 'United States' },
+        { value: 'ca', label: 'Canada' },
+      ];
+    }
+
+    const fixture = TestBed.createComponent(ReactiveHost);
+    fixture.detectChanges();
+    const input: HTMLInputElement = fixture.nativeElement.querySelector('.ngxsmk-combobox__input');
+    expect(input.value).toBe('Canada');
+
+    fixture.componentInstance.ctrl.setValue('us');
+    fixture.detectChanges();
+    expect(input.value).toBe('United States');
+
+    fixture.componentInstance.ctrl.disable();
+    fixture.detectChanges();
+    expect(input.disabled).toBe(true);
   });
 });

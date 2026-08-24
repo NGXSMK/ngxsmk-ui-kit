@@ -20,7 +20,7 @@ interface SearchItem {
       <div class="nav__inner">
         <a class="nav__brand" routerLink="/">
           <img class="nav__logo" src="favicon.svg" alt="" aria-hidden="true" />
-          <span class="nav__wordmark">NGXSMK</span>
+          <span class="nav__wordmark">NGXSMK <span class="nav__wordmark-sub">UI Kit</span></span>
         </a>
 
         <button
@@ -50,11 +50,17 @@ interface SearchItem {
           <a class="nav__link" routerLink="/docs" routerLinkActive="nav__link--active">
             {{ 'nav.docs' | translate }}
           </a>
-          <a class="nav__link" routerLink="/templates" routerLinkActive="nav__link--active">
-            {{ 'nav.templates' | translate }}
+          <a class="nav__link" routerLink="/playground/component" routerLinkActive="nav__link--active">
+            Playground
           </a>
           <a class="nav__link" routerLink="/themes" routerLinkActive="nav__link--active">
             {{ 'nav.themes' | translate }}
+          </a>
+          <a class="nav__link" routerLink="/templates" routerLinkActive="nav__link--active">
+            Examples
+          </a>
+          <a class="nav__link" routerLink="/changelog" routerLinkActive="nav__link--active">
+            Changelog
           </a>
         </div>
 
@@ -135,6 +141,18 @@ interface SearchItem {
             </svg>
           </a>
 
+          <!-- RTL Toggle Button -->
+          <button
+            class="nav__icon-btn"
+            [attr.aria-label]="isRtl() ? 'Switch to LTR' : 'Switch to RTL'"
+            (click)="toggleRtl()"
+            [title]="isRtl() ? 'Switch to LTR' : 'Switch to RTL (Right-to-Left Preview)'"
+          >
+            <span style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase;">
+              {{ isRtl() ? 'LTR' : 'RTL' }}
+            </span>
+          </button>
+
           <a
             class="nav__icon-btn"
             href="https://github.com/NGXSMK/ngxsmk-ui-kit"
@@ -161,14 +179,17 @@ interface SearchItem {
         <a class="nav__mobile-link" routerLink="/docs" (click)="mobileOpen.set(false)">
           {{ 'nav.docs' | translate }}
         </a>
-        <a class="nav__mobile-link" routerLink="/templates" (click)="mobileOpen.set(false)">
-          {{ 'nav.templates' | translate }}
+        <a class="nav__mobile-link" routerLink="/playground/component" (click)="mobileOpen.set(false)">
+          Playground
         </a>
         <a class="nav__mobile-link" routerLink="/themes" (click)="mobileOpen.set(false)">
           {{ 'nav.themes' | translate }}
         </a>
-        <a class="nav__mobile-link" routerLink="/playground" (click)="mobileOpen.set(false)">
-          {{ 'nav.playground' | translate }}
+        <a class="nav__mobile-link" routerLink="/templates" (click)="mobileOpen.set(false)">
+          Examples
+        </a>
+        <a class="nav__mobile-link" routerLink="/changelog" (click)="mobileOpen.set(false)">
+          Changelog
         </a>
         <a
           class="nav__mobile-link"
@@ -292,6 +313,19 @@ interface SearchItem {
     .nav__wordmark {
       letter-spacing: -0.02em;
       font-weight: 800;
+      display: flex;
+      align-items: baseline;
+      gap: 0.35rem;
+    }
+
+    .nav__wordmark-sub {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--ngxsmk-color-primary, #7c3aed);
+      background: color-mix(in srgb, var(--ngxsmk-color-primary, #7c3aed) 10%, transparent);
+      padding: 0.1rem 0.4rem;
+      border-radius: var(--ngxsmk-radius-sm, 0.25rem);
+      letter-spacing: 0.02em;
     }
 
     .nav__links {
@@ -651,6 +685,14 @@ export class AppNav {
   protected readonly searchQuery = signal('');
   protected readonly activeIndex = signal(0);
   protected readonly mobileOpen = signal(false);
+  protected readonly isRtl = signal(false);
+
+  toggleRtl(): void {
+    this.isRtl.update((v) => !v);
+    if (typeof document !== 'undefined') {
+      document.documentElement.setAttribute('dir', this.isRtl() ? 'rtl' : 'ltr');
+    }
+  }
 
   protected readonly categories = [
     {

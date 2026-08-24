@@ -58,7 +58,7 @@ export interface NgxsmkScrollSpyItem {
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--ngxsmk-color-on-surface-variant);
       margin-bottom: var(--ngxsmk-space-2, 0.5rem);
     }
 
@@ -70,7 +70,7 @@ export interface NgxsmkScrollSpyItem {
       flex-direction: column;
       gap: 0.15rem;
       position: relative;
-      border-left: 2px solid var(--ngxsmk-color-outline, #e4e4e7);
+      border-left: 2px solid var(--ngxsmk-color-outline);
     }
 
     .ngxsmk-scroll-spy__item--level-2 {
@@ -89,7 +89,7 @@ export interface NgxsmkScrollSpyItem {
       padding: 0.25rem 0.75rem;
       border: none;
       background: none;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--ngxsmk-color-on-surface-variant);
       font-family: inherit;
       font-size: 0.825rem;
       font-weight: 500;
@@ -104,15 +104,15 @@ export interface NgxsmkScrollSpyItem {
     }
 
     .ngxsmk-scroll-spy__link:hover {
-      color: var(--ngxsmk-color-on-surface, #09090b);
-      background: color-mix(in srgb, var(--ngxsmk-color-on-surface, #09090b) 4%, transparent);
+      color: var(--ngxsmk-color-on-surface);
+      background: color-mix(in srgb, var(--ngxsmk-color-on-surface) 4%, transparent);
     }
 
     .ngxsmk-scroll-spy__link--active {
-      color: var(--ngxsmk-color-primary, #7c3aed);
-      border-left-color: var(--ngxsmk-color-primary, #7c3aed);
+      color: var(--ngxsmk-color-primary);
+      border-left-color: var(--ngxsmk-color-primary);
       font-weight: 600;
-      background: color-mix(in srgb, var(--ngxsmk-color-primary, #7c3aed) 8%, transparent);
+      background: color-mix(in srgb, var(--ngxsmk-color-primary) 8%, transparent);
     }
 
     .ngxsmk-scroll-spy__label {

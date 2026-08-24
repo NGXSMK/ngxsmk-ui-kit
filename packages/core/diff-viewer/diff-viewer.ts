@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+
+export interface NgxsmkDiffLine {
+  type: 'add' | 'remove' | 'context';
+  prefix: string;
+  text: string;
+}
 
 @Component({
   standalone: true,
@@ -31,10 +37,10 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
       padding: var(--ngxsmk-space-0-5) var(--ngxsmk-space-3);
     }
     .ngxsmk-diff-viewer__line--add {
-      background: color-mix(in srgb, var(--ngxsmk-color-success, #0d8626) 10%, transparent);
+      background: color-mix(in srgb, var(--ngxsmk-color-success) 10%, transparent);
     }
     .ngxsmk-diff-viewer__line--remove {
-      background: color-mix(in srgb, var(--ngxsmk-color-error, #e3193b) 10%, transparent);
+      background: color-mix(in srgb, var(--ngxsmk-color-error) 10%, transparent);
     }
     .ngxsmk-diff-viewer__line--add .ngxsmk-diff-viewer__prefix {
       color: var(--ngxsmk-color-success);
@@ -60,15 +66,14 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 export class NgxsmkDiffViewer {
   readonly source = input('');
 
-  protected parsed(): { type: string; prefix: string; text: string }[] {
-    return this.source()
-      .split('\n')
-      .map((line) => {
-        if (line.startsWith('+') && !line.startsWith('+++'))
-          return { type: 'add', prefix: '+', text: line.slice(1) };
-        if (line.startsWith('-') && !line.startsWith('---'))
-          return { type: 'remove', prefix: '-', text: line.slice(1) };
-        return { type: 'context', prefix: ' ', text: line };
-      });
-  }
+  protected readonly parsed = computed<NgxsmkDiffLine[]>(() => {
+    const src = this.source() || '';
+    return src.split('\n').map((line) => {
+      if (line.startsWith('+') && !line.startsWith('+++'))
+        return { type: 'add', prefix: '+', text: line.slice(1) };
+      if (line.startsWith('-') && !line.startsWith('---'))
+        return { type: 'remove', prefix: '-', text: line.slice(1) };
+      return { type: 'context', prefix: ' ', text: line };
+    });
+  });
 }

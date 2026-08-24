@@ -93,9 +93,9 @@ import {
     }
 
     .ngxsmk-cropper {
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-lg, 0.5rem);
-      background: var(--ngxsmk-color-surface-variant, #18181b);
+      background: var(--ngxsmk-color-surface-variant);
       overflow: hidden;
       display: flex;
       flex-direction: column;
@@ -145,8 +145,8 @@ import {
     }
 
     .ngxsmk-cropper__empty {
-      color: #a1a1aa;
-      font-size: 0.85rem;
+      color: var(--ngxsmk-color-on-surface-variant);
+      font-size: var(--ngxsmk-text-body-sm-size);
     }
 
     .ngxsmk-cropper__toolbar {
@@ -154,8 +154,8 @@ import {
       align-items: center;
       justify-content: space-between;
       padding: 0.5rem 0.85rem;
-      background: var(--ngxsmk-color-surface, #ffffff);
-      border-top: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      background: var(--ngxsmk-color-surface);
+      border-top: 1px solid var(--ngxsmk-color-outline);
     }
 
     .ngxsmk-cropper__group {
@@ -166,10 +166,10 @@ import {
     .ngxsmk-cropper__btn {
       width: 2rem;
       height: 2rem;
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-sm, 0.25rem);
-      background: var(--ngxsmk-color-surface, #ffffff);
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      background: var(--ngxsmk-color-surface);
+      color: var(--ngxsmk-color-on-surface);
       font-size: 1rem;
       cursor: pointer;
     }
@@ -183,7 +183,7 @@ import {
     .ngxsmk-cropper__label {
       font-size: 0.75rem;
       font-weight: 600;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--ngxsmk-color-on-surface-variant);
     }
 
     .ngxsmk-cropper__slider {
@@ -194,7 +194,7 @@ import {
       padding: 0.3rem 0.75rem;
       border: none;
       border-radius: var(--ngxsmk-radius-sm, 0.25rem);
-      background: var(--ngxsmk-color-primary, #7c3aed);
+      background: var(--ngxsmk-color-primary);
       color: #ffffff;
       font-size: 0.775rem;
       font-weight: 600;

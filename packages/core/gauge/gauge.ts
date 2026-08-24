@@ -36,7 +36,7 @@ export type NgxsmkGaugeVariant = 'arch' | 'half' | 'full';
           [attr.cy]="center()"
           [attr.r]="radius()"
           fill="none"
-          stroke="var(--ngxsmk-color-surface-variant, #f4f4f5)"
+          stroke="var(--ngxsmk-color-surface-variant)"
           [attr.stroke-width]="thickness()"
           [attr.stroke-dasharray]="dashArray()"
           [attr.stroke-dashoffset]="0"
@@ -125,19 +125,19 @@ export type NgxsmkGaugeVariant = 'arch' | 'half' | 'full';
       font-size: 1.75rem;
       font-weight: 700;
       line-height: 1.1;
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      color: var(--ngxsmk-color-on-surface);
     }
 
     .ngxsmk-gauge__units {
       font-size: 0.85rem;
       font-weight: 600;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--ngxsmk-color-on-surface-variant);
     }
 
     .ngxsmk-gauge__label {
       font-size: 0.75rem;
       font-weight: 500;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--ngxsmk-color-on-surface-variant);
       margin-top: 0.1rem;
     }
   `,
@@ -160,7 +160,7 @@ export class NgxsmkGauge {
   readonly thickness = input<number>(12);
 
   /** Primary progress stroke color. */
-  readonly color = input<string>('var(--ngxsmk-color-primary, #7c3aed)');
+  readonly color = input<string>('var(--ngxsmk-color-primary)');
 
   /** Gauge shape variant: 'arch' (270°), 'half' (180°), 'full' (360°). Default: 'arch'. */
   readonly variant = input<NgxsmkGaugeVariant>('arch');

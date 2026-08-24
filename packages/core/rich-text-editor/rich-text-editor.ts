@@ -124,9 +124,9 @@ import {
     }
 
     .ngxsmk-rte {
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-md, 0.375rem);
-      background: var(--ngxsmk-color-surface, #ffffff);
+      background: var(--ngxsmk-color-surface);
       overflow: hidden;
       transition:
         border-color 0.15s ease,
@@ -134,9 +134,9 @@ import {
     }
 
     .ngxsmk-rte:focus-within {
-      border-color: var(--ngxsmk-color-primary, #7c3aed);
+      border-color: var(--ngxsmk-color-primary);
       box-shadow: 0 0 0 3px
-        color-mix(in srgb, var(--ngxsmk-color-primary, #7c3aed) 12%, transparent);
+        color-mix(in srgb, var(--ngxsmk-color-primary) 12%, transparent);
     }
 
     .ngxsmk-rte__toolbar {
@@ -145,8 +145,8 @@ import {
       flex-wrap: wrap;
       gap: 0.2rem;
       padding: 0.35rem 0.5rem;
-      background: var(--ngxsmk-color-surface-variant, #f4f4f5);
-      border-bottom: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      background: var(--ngxsmk-color-surface-variant);
+      border-bottom: 1px solid var(--ngxsmk-color-outline);
     }
 
     .ngxsmk-rte__tool-btn {
@@ -154,7 +154,7 @@ import {
       border: 1px solid transparent;
       border-radius: var(--ngxsmk-radius-sm, 0.25rem);
       background: none;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--ngxsmk-color-on-surface-variant);
       font-family: inherit;
       font-size: 0.775rem;
       font-weight: 600;
@@ -165,15 +165,15 @@ import {
     }
 
     .ngxsmk-rte__tool-btn:hover {
-      background: var(--ngxsmk-color-surface, #ffffff);
-      color: var(--ngxsmk-color-on-surface, #09090b);
-      border-color: var(--ngxsmk-color-outline, #e4e4e7);
+      background: var(--ngxsmk-color-surface);
+      color: var(--ngxsmk-color-on-surface);
+      border-color: var(--ngxsmk-color-outline);
     }
 
     .ngxsmk-rte__divider {
       width: 1px;
       height: 1.2rem;
-      background: var(--ngxsmk-color-outline, #e4e4e7);
+      background: var(--ngxsmk-color-outline);
       margin: 0 0.2rem;
     }
 
@@ -182,13 +182,13 @@ import {
       outline: none;
       font-size: 0.9rem;
       line-height: 1.6;
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      color: var(--ngxsmk-color-on-surface);
       overflow-y: auto;
     }
 
     .ngxsmk-rte__canvas:empty::before {
       content: attr(data-placeholder);
-      color: var(--ngxsmk-color-on-surface-variant, #a1a1aa);
+      color: var(--ngxsmk-color-on-surface-variant);
       pointer-events: none;
     }
 

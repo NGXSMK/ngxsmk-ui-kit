@@ -545,33 +545,33 @@ const HOURS = Array.from({ length: 24 }, (_, i) => i);
         flex-direction: column;
         font-family: var(--scheduler-font, var(--ngxsmk-font-sans, system-ui, sans-serif));
         font-size: var(--scheduler-font-size, var(--ngxsmk-text-body-sm-size, 0.75rem));
-        background: var(--scheduler-bg, var(--ngxsmk-color-surface, #fff));
-        color: var(--scheduler-text, var(--ngxsmk-color-on-surface, #1c1b1f));
-        border: 1px solid var(--scheduler-border, var(--ngxsmk-color-outline-variant, #cac4d0));
+        background: var(--scheduler-bg, var(--ngxsmk-color-surface));
+        color: var(--scheduler-text, var(--ngxsmk-color-on-surface));
+        border: 1px solid var(--scheduler-border, var(--ngxsmk-color-outline-variant));
         border-radius: var(--scheduler-radius, var(--ngxsmk-radius-lg, 0.75rem));
         overflow: hidden;
         height: 100%;
         --_hour-h: var(--scheduler-hour-height, 60px);
         --_gutter-w: var(--scheduler-time-col-width, 56px);
-        --_primary: var(--scheduler-primary, var(--ngxsmk-color-primary, #6750a4));
+        --_primary: var(--scheduler-primary, var(--ngxsmk-color-primary));
         --_primary-container: var(
           --scheduler-primary-container,
-          var(--ngxsmk-color-primary-container, #eaddff)
+          var(--ngxsmk-color-primary-container)
         );
         --_on-primary-container: var(
           --scheduler-on-primary-container,
-          var(--ngxsmk-color-on-primary-container, #21005d)
+          var(--ngxsmk-color-on-primary-container)
         );
-        --_border: var(--scheduler-border, var(--ngxsmk-color-outline-variant, #cac4d0));
+        --_border: var(--scheduler-border, var(--ngxsmk-color-outline-variant));
         --_border-light: var(
           --scheduler-border-light,
           color-mix(in srgb, var(--_border) 50%, transparent)
         );
-        --_surface: var(--scheduler-bg, var(--ngxsmk-color-surface, #fff));
-        --_text: var(--scheduler-text, var(--ngxsmk-color-on-surface, #1c1b1f));
+        --_surface: var(--scheduler-bg, var(--ngxsmk-color-surface));
+        --_text: var(--scheduler-text, var(--ngxsmk-color-on-surface));
         --_text-sec: var(
           --scheduler-text-secondary,
-          var(--ngxsmk-color-on-surface-variant, #49454f)
+          var(--ngxsmk-color-on-surface-variant)
         );
         --_today-bg: var(
           --scheduler-today-bg,
@@ -581,7 +581,7 @@ const HOURS = Array.from({ length: 24 }, (_, i) => i);
           --scheduler-weekend-bg,
           color-mix(in srgb, var(--_text-sec) 3%, var(--_surface))
         );
-        --_error: var(--scheduler-now-color, var(--ngxsmk-color-error, #ef4444));
+        --_error: var(--scheduler-now-color, var(--ngxsmk-color-error));
         --_radius-sm: var(--scheduler-event-radius, var(--ngxsmk-radius-sm, 0.25rem));
         --_shadow-sm: var(
           --scheduler-event-shadow,
@@ -746,7 +746,7 @@ const HOURS = Array.from({ length: 24 }, (_, i) => i);
       }
       .ngxsmk-sch__day-num--today {
         background: var(--_primary);
-        color: var(--scheduler-on-primary, var(--ngxsmk-color-on-primary, #fff));
+        color: var(--scheduler-on-primary, var(--ngxsmk-color-on-primary));
       }
       .ngxsmk-sch__day-header--weekend .ngxsmk-sch__day-name {
         opacity: 0.6;
@@ -1033,7 +1033,7 @@ const HOURS = Array.from({ length: 24 }, (_, i) => i);
         height: 1.5rem;
         border-radius: 50%;
         background: var(--_primary);
-        color: var(--scheduler-on-primary, var(--ngxsmk-color-on-primary, #fff));
+        color: var(--scheduler-on-primary, var(--ngxsmk-color-on-primary));
       }
       .ngxsmk-sch__month-events {
         display: flex;
@@ -1178,7 +1178,7 @@ const HOURS = Array.from({ length: 24 }, (_, i) => i);
         height: 1.75rem;
         border-radius: 50%;
         background: var(--_primary);
-        color: var(--scheduler-on-primary, var(--ngxsmk-color-on-primary, #fff));
+        color: var(--scheduler-on-primary, var(--ngxsmk-color-on-primary));
       }
       .ngxsmk-sch__timeline-events {
         flex: 1;
@@ -1227,21 +1227,21 @@ const HOURS = Array.from({ length: 24 }, (_, i) => i);
 
       /* ── Dark Mode ── */
       :host-context(.dark) {
-        --_primary: var(--scheduler-primary, var(--ngxsmk-color-primary, #d0bcff));
+        --_primary: var(--scheduler-primary, var(--ngxsmk-color-primary));
         --_primary-container: var(
           --scheduler-primary-container,
-          var(--ngxsmk-color-primary-container, #4f378b)
+          var(--ngxsmk-color-primary-container)
         );
         --_on-primary-container: var(
           --scheduler-on-primary-container,
-          var(--ngxsmk-color-on-primary-container, #eaddff)
+          var(--ngxsmk-color-on-primary-container)
         );
-        --_border: var(--scheduler-border, var(--ngxsmk-color-outline-variant, #49454f));
-        --_surface: var(--scheduler-bg, var(--ngxsmk-color-surface, #1c1b1f));
-        --_text: var(--scheduler-text, var(--ngxsmk-color-on-surface, #e6e1e5));
+        --_border: var(--scheduler-border, var(--ngxsmk-color-outline-variant));
+        --_surface: var(--scheduler-bg, var(--ngxsmk-color-surface));
+        --_text: var(--scheduler-text, var(--ngxsmk-color-on-surface));
         --_text-sec: var(
           --scheduler-text-secondary,
-          var(--ngxsmk-color-on-surface-variant, #cac4d0)
+          var(--ngxsmk-color-on-surface-variant)
         );
         --_today-bg: var(
           --scheduler-today-bg,
@@ -1251,7 +1251,7 @@ const HOURS = Array.from({ length: 24 }, (_, i) => i);
           --scheduler-weekend-bg,
           color-mix(in srgb, var(--_text-sec) 6%, var(--_surface))
         );
-        --_error: var(--scheduler-now-color, var(--ngxsmk-color-error, #f87171));
+        --_error: var(--scheduler-now-color, var(--ngxsmk-color-error));
         --_shadow-sm: var(
           --scheduler-event-shadow,
           0 0 0 1px rgb(0 0 0 / 0.2),

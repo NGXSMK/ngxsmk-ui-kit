@@ -1,9 +1,9 @@
 # NGXSMK UI Kit
 
-> Angular-first, MIT-licensed UI ecosystem: 258+ signals-native, zoneless
+> Angular-first, MIT-licensed UI ecosystem: 257+ signals-native, zoneless
 > standalone components with a universal design-token engine (CSS variables,
 > SCSS, Tailwind, StyleX, Tokens Studio export). MIT licensed, no paid tiers.
-> Current version: 2.0.0. Supports Angular 17.3 through 22.
+> Current version: 3.0.0. Supports Angular 17.3 through 22.
 
 Packages: `@ngxsmk/core` (components, one secondary entry point per component,
 e.g. `@ngxsmk/core/button`), `@ngxsmk/theme` (design tokens + theme engine),
@@ -392,7 +392,7 @@ Inputs:
 - `[active]`: boolean (default: `true`)
 - `[bars]`: number (default: `12`)
 - `[variant]`: NgxsmkAudioVisualizerVariant (default: `'bars'`)
-- `[color]`: string (default: `'var(--ngxsmk-color-primary, #7c3aed)'`)
+- `[color]`: string (default: `'var(--ngxsmk-color-primary)'`)
 - `[height]`: number (default: `32`)
 - `[ariaLabel]`: string (default: `'Audio activity visualizer'`)
 
@@ -402,9 +402,16 @@ Inputs:
 - Import from: `@ngxsmk/core/autocomplete`
 
 Inputs:
-- `[options]`: { value: string; label: string }[] (required)
+- `[options]`: NgxsmkAutocompleteOption[] (required)
 - `[placeholder]`: string (default: `''`)
 - `[(value)]`: string (default: `''`)
+- `[disabled]`: boolean (default: `false`)
+- `[id]`: unknown (default: `ngxsmkUniqueId('ngxsmk-autocomplete')`)
+- `[(ariaInvalid)]`: boolean (default: `false`)
+- `[(ariaDescribedby)]`: string | null (default: `null`)
+
+Outputs:
+- `(changed)`: emits `string`
 
 ## NgxsmkAvatar
 
@@ -841,14 +848,6 @@ Inputs:
 - `[author]`: string (default: `''`)
 - `[snippet]`: string (default: `''`)
 
-## NgxsmkClickOutside
-
-- Selector: `[ngxsmkClickOutside]`
-- Import from: `@ngxsmk/core/click-outside`
-
-Outputs:
-- `(ngxsmkClickOutside)`: emits `void`
-
 ## NgxsmkCode
 
 - Selector: `code[ngxsmk-code]`
@@ -927,9 +926,16 @@ Outputs:
 - Import from: `@ngxsmk/core/combobox`
 
 Inputs:
-- `[options]`: { value: string; label: string }[] (required)
+- `[options]`: NgxsmkComboboxOption[] (required)
 - `[(value)]`: string (default: `''`)
 - `[placeholder]`: string (default: `''`)
+- `[disabled]`: boolean (default: `false`)
+- `[id]`: unknown (default: `ngxsmkUniqueId('ngxsmk-combobox')`)
+- `[(ariaInvalid)]`: boolean (default: `false`)
+- `[(ariaDescribedby)]`: string | null (default: `null`)
+
+Outputs:
+- `(changed)`: emits `string`
 
 ## NgxsmkCommandPalette
 
@@ -1016,8 +1022,15 @@ Inputs:
 - `[columns]`: NgxsmkTableColumn[] (default: `[]`)
 - `[rows]`: any[] (default: `[]`)
 - `[pageSize]`: number (default: `10`)
+- `[filter]`: string (default: `''`)
+- `[emptyMessage]`: string (default: `'No records found'`)
+- `[loading]`: boolean (default: `false`)
 - `[sortable]`: boolean (default: `false`)
 - `[striped]`: boolean (default: `false`)
+
+Outputs:
+- `(pageChange)`: emits `{ page: number; pageSize: number }`
+- `(sortChange)`: emits `{ field: string; dir: 'asc' | 'desc' }`
 
 ## NgxsmkDatePicker
 
@@ -1117,6 +1130,7 @@ Outputs:
 
 Inputs:
 - `[items]`: NgxsmkDropdownMenuItem[] (required)
+- `[align]`: 'start' | 'end' (default: `'end'`)
 - `[(open)]`: boolean (default: `false`)
 
 ## NgxsmkEmptyState
@@ -1128,6 +1142,7 @@ Inputs:
 - `[icon]`: string (default: `''`)
 - `[title]`: string (default: `''`)
 - `[description]`: string (default: `''`)
+- `[variant]`: NgxsmkEmptyStateVariant (default: `'default'`)
 
 ## NgxsmkExpandingArrowButton
 
@@ -1137,8 +1152,8 @@ Inputs:
 
 Inputs:
 - `[disabled]`: boolean (default: `false`)
-- `[accentBg]`: string (default: `'var(--ngxsmk-color-primary, #18181b)'`)
-- `[accentColor]`: string (default: `'var(--ngxsmk-color-on-primary, #fafafa)'`)
+- `[accentBg]`: string (default: `'var(--ngxsmk-color-primary)'`)
+- `[accentColor]`: string (default: `'var(--ngxsmk-color-on-primary)'`)
 - `[eabAnimation]`: 'css' | 'motion' (default: `'css'`)
 - `[eabDuration]`: number (default: `0.32`)
 - `[eabEase]`: string | number[] (default: `'cubic-bezier(0.36, 0, 0.66, -0.56)'`)
@@ -1248,14 +1263,6 @@ Inputs:
 - `[title]`: string (default: `'Flow Editor'`)
 - `[nodes]`: { id: string; label: string }[] (required)
 
-## NgxsmkFocusTrap
-
-- Selector: `[ngxsmkFocusTrap]`
-- Import from: `@ngxsmk/core/focus-trap`
-
-Inputs:
-- `[ngxsmkFocusTrap]`: boolean (default: `true`)
-
 ## NgxsmkFormField
 
 - Selector: `ngxsmk-form-field`
@@ -1288,7 +1295,7 @@ Inputs:
 - `[max]`: number (default: `100`)
 - `[size]`: number (default: `160`)
 - `[thickness]`: number (default: `12`)
-- `[color]`: string (default: `'var(--ngxsmk-color-primary, #7c3aed)'`)
+- `[color]`: string (default: `'var(--ngxsmk-color-primary)'`)
 - `[variant]`: NgxsmkGaugeVariant (default: `'arch'`)
 - `[label]`: string (default: `''`)
 - `[units]`: string (default: `''`)
@@ -1657,7 +1664,7 @@ Inputs:
 - Import from: `@ngxsmk/core/mobile-nav`
 
 Inputs:
-- `[open]`: boolean (default: `false`)
+- `[(open)]`: boolean (default: `false`)
 - `[label]`: string (default: `'Navigation'`)
 
 Outputs:
@@ -1721,10 +1728,13 @@ Outputs:
 - Import from: `@ngxsmk/core/multi-select`
 
 Inputs:
-- `[options]`: { value: string; label: string }[] (required)
+- `[options]`: NgxsmkMultiSelectOption[] (required)
 - `[(value)]`: string[] (default: `[]`)
 - `[placeholder]`: string (default: `''`)
 - `[disabled]`: boolean (default: `false`)
+- `[id]`: unknown (default: `ngxsmkUniqueId('ngxsmk-multi-select')`)
+- `[(ariaInvalid)]`: boolean (default: `false`)
+- `[(ariaDescribedby)]`: string | null (default: `null`)
 
 Outputs:
 - `(changed)`: emits `string[]`
@@ -1816,9 +1826,13 @@ Inputs:
 - `[placeholder]`: string (default: `'•'`)
 - `[ariaLabel]`: string (default: `'One time password input'`)
 - `[(value)]`: string (default: `''`)
+- `[id]`: unknown (default: `ngxsmkUniqueId('ngxsmk-otp-input')`)
+- `[(ariaInvalid)]`: boolean (default: `false`)
+- `[(ariaDescribedby)]`: string | null (default: `null`)
 
 Outputs:
 - `(completed)`: emits `string`
+- `(changed)`: emits `string`
 
 ## NgxsmkOutline
 
@@ -1904,6 +1918,11 @@ Inputs:
 
 Inputs:
 - `[initialDark]`: boolean (default: `false`)
+
+## NgxsmkPopoverTrigger
+
+- Selector: `[ngxsmkPopoverTrigger]`
+- Import from: `@ngxsmk/core/popover`
 
 ## NgxsmkPopover
 
@@ -2109,7 +2128,7 @@ Outputs:
 - Import from: `@ngxsmk/core/reasoning-timeline`
 
 Inputs:
-- `[steps]`: ReasoningStep[] (required)
+- `[steps]`: NgxsmkReasoningStep[] (required)
 
 ## NgxsmkResizable
 
@@ -2236,8 +2255,12 @@ Inputs:
 - Import from: `@ngxsmk/core/segmented-control`
 
 Inputs:
-- `[options]`: SegmentedOption[] (required)
+- `[options]`: NgxsmkSegmentedOption[] (required)
 - `[(value)]`: string (default: `''`)
+- `[disabled]`: boolean (default: `false`)
+- `[id]`: unknown (default: `ngxsmkUniqueId('ngxsmk-segmented-control')`)
+- `[(ariaInvalid)]`: boolean (default: `false`)
+- `[(ariaDescribedby)]`: string | null (default: `null`)
 
 Outputs:
 - `(changed)`: emits `string`
@@ -2366,8 +2389,11 @@ Inputs:
 - `[step]`: number (default: `1`)
 - `[(value)]`: number (default: `0`)
 - `[disabled]`: boolean (default: `false`)
+- `[id]`: unknown (default: `ngxsmkUniqueId('ngxsmk-slider')`)
 - `[ariaLabel]`: string (default: `''`)
 - `[ariaValueText]`: string (default: `''`)
+- `[(ariaInvalid)]`: boolean (default: `false`)
+- `[(ariaDescribedby)]`: string | null (default: `null`)
 
 Outputs:
 - `(changed)`: emits `number`
@@ -2392,7 +2418,7 @@ Inputs:
 - `[variant]`: NgxsmkSparklineVariant (default: `'line'`)
 - `[width]`: number | string (default: `120`)
 - `[height]`: number | string (default: `32`)
-- `[color]`: string (default: `'var(--ngxsmk-color-primary, #7c3aed)'`)
+- `[color]`: string (default: `'var(--ngxsmk-color-primary)'`)
 - `[fillOpacity]`: number (default: `0.2`)
 - `[strokeWidth]`: number (default: `2`)
 - `[dotRadius]`: number (default: `2`)
@@ -2524,6 +2550,9 @@ Inputs:
 - `[speed]`: number (default: `30`)
 - `[streamingCursorAnimation]`: 'css' | 'motion' (default: `'css'`)
 
+Outputs:
+- `(completed)`: emits `string`
+
 ## NgxsmkSwitch
 
 - Selector: `ngxsmk-switch`
@@ -2559,6 +2588,7 @@ Inputs:
 - `[columns]`: NgxsmkTableColumn[] (default: `[]`)
 - `[rows]`: any[] (default: `[]`)
 - `[striped]`: boolean (default: `false`)
+- `[responsive]`: boolean (default: `false`)
 - `[sortable]`: boolean (default: `false`)
 - `[sortField]`: string (default: `''`)
 - `[sortDir]`: 'asc' | 'desc' (default: `'asc'`)
@@ -2610,6 +2640,8 @@ Inputs:
 
 Inputs:
 - `[(value)]`: string (default: `''`)
+- `[orientation]`: 'horizontal' | 'vertical' (default: `'horizontal'`)
+- `[activationMode]`: 'automatic' | 'manual' (default: `'automatic'`)
 
 ## NgxsmkTag
 

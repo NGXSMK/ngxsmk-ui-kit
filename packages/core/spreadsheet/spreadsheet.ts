@@ -1185,7 +1185,7 @@ export function provideSpreadsheet(
     /* ── Dark Mode ── */
     :host-context(.dark) {
       --ngxsmk-spreadsheet-bg: var(--ngxsmk-color-surface);
-      --ngxsmk-spreadsheet-header-bg: var(--ngxsmk-color-surface-container, #28292c);
+      --ngxsmk-spreadsheet-header-bg: var(--ngxsmk-color-surface-container);
       --ngxsmk-spreadsheet-grid-color: var(
         --ngxsmk-color-outline-variant,
         rgba(242, 244, 246, 0.06)

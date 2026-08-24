@@ -1516,6 +1516,46 @@ interface TemplateItem {
         gap: var(--ngxsmk-space-5, 1.25rem);
       }
     }
+    @media (max-width: 640px) {
+      .tpl-page {
+        padding: 1.5rem 1rem 3rem;
+      }
+      .tpl-chips {
+        gap: 0.25rem;
+      }
+      .tpl-chip {
+        padding: 0.25rem 0.625rem;
+        font-size: var(--ngxsmk-text-body-xs-size);
+      }
+      .ngxsmk-template-preview-viewport {
+        min-height: auto;
+        padding: var(--ngxsmk-space-3);
+      }
+      .ngxsmk-mock-window-content {
+        height: auto;
+        min-height: 380px;
+        padding: var(--ngxsmk-space-2);
+      }
+      .ngxsmk-mock-body {
+        flex-direction: column;
+      }
+      .ngxsmk-mock-sidebar {
+        width: 100%;
+        flex-direction: row;
+        overflow-x: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--ngxsmk-color-outline);
+      }
+      .ngxsmk-mock-stats {
+        grid-template-columns: 1fr;
+      }
+      .ngxsmk-mock-dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+      .ngxsmk-mock-health-stats {
+        grid-template-columns: 1fr;
+      }
+    }
 
     .btn-icon {
       flex-shrink: 0;

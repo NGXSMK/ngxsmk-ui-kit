@@ -4,14 +4,14 @@
   {
     "@context": "https://schema.org",
     "@type": "SoftwareSourceCode",
-    "name": "NGXSMK",
-    "description": "Signal-native, zoneless Angular component library with 150+ standalone components and a universal design-token engine.",
+    "name": "NGXSMK UI Kit",
+    "description": "A modern, customizable and developer friendly UI component library for building production ready Angular applications.",
     "url": "https://ngxsmk.github.io/ngxsmk-ui-kit",
     "programmingLanguage": "TypeScript",
     "runtimePlatform": "Angular",
     "license": "https://opensource.org/licenses/MIT",
     "codeRepository": "https://github.com/NGXSMK/ngxsmk-ui-kit",
-    "keywords": ["angular", "components", "signals", "zoneless", "design-system", "ui-kit"]
+    "keywords": ["angular", "components", "signals", "zoneless", "design-system", "ui-kit", "ngxsmk"]
   }
 </script>
 
@@ -22,22 +22,41 @@
     <div class="hero__inner">
       <span class="hero__badge" [ngxsmkAnimate]="motionHero">
         <span class="hero__badge-dot" aria-hidden="true"></span>
-        v{{ appVersion }} · Signals-native · Zoneless
+        v{{ appVersion }} · Signals-native · Zoneless · 150+ Components
       </span>
 
       <h1 class="hero__title" [ngxsmkAnimate]="motionTitle">
-        The UI kit<br />
-        Angular <span class="hero__grad">deserves.</span>
+        Build beautiful Angular<br />
+        applications <span class="hero__grad">faster.</span>
       </h1>
 
       <p class="hero__lede" [ngxsmkAnimate]="motionTitle">
-        150+ signal-native components. Zero runtime dependencies. One universal token engine.
-        Copy-paste scaffolding, AI-first tooling, and enterprise widgets — all MIT licensed.
+        A modern, customizable and developer friendly UI component library for building
+        production ready Angular applications.
       </p>
 
       <div class="hero__cta" [ngxsmkAnimate]="motionCta">
-        <a ngxsmk-button size="lg" routerLink="/showcase/explorer"> Get Started → </a>
-        <a ngxsmk-button size="lg" variant="outline" routerLink="/docs"> Documentation </a>
+        <a ngxsmk-button size="lg" routerLink="/showcase/explorer">
+          Get Started →
+        </a>
+        <a ngxsmk-button size="lg" variant="outline" routerLink="/showcase/explorer">
+          Explore Components
+        </a>
+        <a
+          ngxsmk-button
+          size="lg"
+          variant="ghost"
+          href="https://github.com/NGXSMK/ngxsmk-ui-kit"
+          target="_blank"
+          rel="noopener"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 0.5rem;">
+            <path
+              d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"
+            />
+          </svg>
+          GitHub
+        </a>
       </div>
 
       <button
@@ -55,6 +74,147 @@
       </button>
     </div>
 
+    <!-- ═══════════════ HERO COMPONENT SHOWCASE (LIVE PREVIEW) ═══════════════ -->
+    <div class="hero__showcase-wrapper" [ngxsmkAnimate]="motionCta">
+      <div class="hero-showcase">
+        <!-- Top window titlebar -->
+        <div class="hero-showcase__bar">
+          <div class="hero-showcase__dots">
+            <span class="dot dot--red"></span>
+            <span class="dot dot--yellow"></span>
+            <span class="dot dot--green"></span>
+          </div>
+          <div class="hero-showcase__tab-pills">
+            <button
+              class="hero-showcase__tab-pill"
+              [class.active]="showcaseTab() === 'analytics'"
+              (click)="showcaseTab.set('analytics')"
+            >
+              Analytics
+            </button>
+            <button
+              class="hero-showcase__tab-pill"
+              [class.active]="showcaseTab() === 'services'"
+              (click)="showcaseTab.set('services')"
+            >
+              Services
+            </button>
+            <button
+              class="hero-showcase__tab-pill"
+              [class.active]="showcaseTab() === 'settings'"
+              (click)="showcaseTab.set('settings')"
+            >
+              Settings
+            </button>
+          </div>
+          <div class="hero-showcase__bar-status">
+            <span class="status-indicator"></span>
+            <span class="status-text">Production · Zoneless</span>
+          </div>
+        </div>
+
+        <!-- Dashboard Header -->
+        <div class="hero-showcase__header">
+          <div class="hero-showcase__header-left">
+            <ngxsmk-avatar name="Sachin Dilshan" size="md" />
+            <div>
+              <div class="hero-showcase__user-name">NGXSMK Operations Dashboard</div>
+              <div class="hero-showcase__user-sub">Live signal reactivity · Zero runtime dependencies</div>
+            </div>
+          </div>
+          <div class="hero-showcase__header-right">
+            <div class="hero-showcase__search-box">
+              <input
+                ngxsmkInput
+                placeholder="Search services or metrics..."
+                [ngModel]="demoFilterQuery()"
+                (ngModelChange)="demoFilterQuery.set($event)"
+              />
+            </div>
+            <button ngxsmk-button size="sm" variant="outline">
+              Export
+            </button>
+            <button ngxsmk-button size="sm">
+              + New Metric
+            </button>
+          </div>
+        </div>
+
+        <!-- Metric Stat Cards -->
+        <div class="hero-showcase__stats">
+          <div class="hero-stat-card">
+            <ngxsmk-stat label="Monthly Active Users" value="48,250" trend="up" />
+            <ngxsmk-badge variant="success">+14.2%</ngxsmk-badge>
+          </div>
+          <div class="hero-stat-card">
+            <ngxsmk-stat label="Signal Latency" value="18ms" trend="down" />
+            <ngxsmk-badge variant="info">Fast</ngxsmk-badge>
+          </div>
+          <div class="hero-stat-card">
+            <ngxsmk-stat label="System Health" value="99.98%" trend="up" />
+            <ngxsmk-badge variant="primary">Optimal</ngxsmk-badge>
+          </div>
+          <div class="hero-stat-card">
+            <ngxsmk-stat label="Signals Processed" value="1.24M" trend="up" />
+            <ngxsmk-badge variant="warning">+28.6%</ngxsmk-badge>
+          </div>
+        </div>
+
+        <!-- Main Body Grid -->
+        <div class="hero-showcase__grid">
+          <!-- Left Panel: Chart Visualization -->
+          <div class="hero-showcase__panel">
+            <div class="hero-showcase__panel-head">
+              <div>
+                <h4 class="hero-showcase__panel-title">Weekly Signal Invocations</h4>
+                <p class="hero-showcase__panel-desc">Real-time throughput metrics across services</p>
+              </div>
+              <ngxsmk-badge variant="primary">SVG Vector</ngxsmk-badge>
+            </div>
+            <div class="hero-showcase__chart-wrap">
+              <ngxsmk-chart-bar [data]="showcaseChartData" [width]="380" [height]="140" />
+            </div>
+            <div class="hero-showcase__controls">
+              <div class="hero-showcase__control-row">
+                <span class="control-label">Live streaming sync:</span>
+                <ngxsmk-switch
+                  [checked]="demoLiveMode()"
+                  (checkedChange)="demoLiveMode.set($event)"
+                >
+                  {{ demoLiveMode() ? 'Connected' : 'Paused' }}
+                </ngxsmk-switch>
+              </div>
+              <div class="hero-showcase__control-row">
+                <span class="control-label">Buffer capacity ({{ demoProgress() }}%):</span>
+                <div style="flex: 1; max-width: 140px;">
+                  <ngxsmk-progress [value]="demoProgress()" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Panel: Data Table -->
+          <div class="hero-showcase__panel">
+            <div class="hero-showcase__panel-head">
+              <div>
+                <h4 class="hero-showcase__panel-title">Active Service Nodes</h4>
+                <p class="hero-showcase__panel-desc">Component instances running in current session</p>
+              </div>
+              <ngxsmk-badge variant="success">All Healthy</ngxsmk-badge>
+            </div>
+            <div class="hero-showcase__table-wrap">
+              <ngxsmk-table
+                [columns]="showcaseColumns"
+                [rows]="showcaseRows"
+                [striped]="true"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick stats strip -->
     <div class="hero__stats">
       @for (stat of stats; track stat.label) {
         <div class="hero__stat">
@@ -65,25 +225,26 @@
     </div>
   </section>
 
-  <!-- ═══════════════ BENTO FEATURES ═══════════════ -->
+  <!-- ═══════════════ WHY NGXSMK SECTION ═══════════════ -->
   <section class="section" id="features">
     <header class="section__head">
-      <p class="section__eyebrow">Why NGXSMK</p>
-      <h2 class="section__title">Everything you need.<br />Nothing you don't.</h2>
+      <p class="section__eyebrow">Why NGXSMK UI Kit</p>
+      <h2 class="section__title">Everything you need.<br />Engineered for modern Angular.</h2>
+      <p class="section__sub">
+        A complete design system built from the ground up to take full advantage of Angular's newest
+        reactive signal primitives, OnPush change detection, and universal design tokens.
+      </p>
     </header>
 
     <div class="bento">
       @for (card of bentoCards; track card.title) {
-        <article
-          class="bento__card"
-          [class.bento__card--wide]="card.span === 'wide'"
-          [class.bento__card--tall]="card.span === 'tall'"
-          [class.bento__card--full]="card.span === 'full'"
-          [style.--bento-accent]="card.accent"
-        >
-          <span class="bento__icon" aria-hidden="true">{{ card.icon }}</span>
-          <h3 class="bento__title">{{ card.title | translate }}</h3>
-          <p class="bento__desc">{{ card.desc | translate }}</p>
+        <article class="bento__card" [style.--bento-accent]="card.accent">
+          <div class="bento__card-top">
+            <span class="bento__icon" aria-hidden="true">{{ card.icon }}</span>
+            <span class="bento__tag">{{ card.tag }}</span>
+          </div>
+          <h3 class="bento__title">{{ card.title }}</h3>
+          <p class="bento__desc">{{ card.desc }}</p>
         </article>
       }
     </div>
@@ -95,7 +256,7 @@
       <p class="section__eyebrow">Developer Experience</p>
       <h2 class="section__title">Copy. Paste. Ship.</h2>
       <p class="section__sub">
-        Every component is a standalone Angular import. Signal inputs, token-driven styling, and
+        Every component is a standalone Angular import with signal inputs, token-driven styling, and
         zero boilerplate. Copy any example directly into your template.
       </p>
     </header>
@@ -104,13 +265,13 @@
       <div class="code-showcase__terminal">
         <div class="code-showcase__head">
           <div class="code-showcase__dots"><i></i><i></i><i></i></div>
-          <span class="code-showcase__label">app.component.html</span>
+          <span class="code-showcase__label">hero-demo.component.ts</span>
         </div>
         <pre class="code-showcase__code"><code>{{ codeExample }}</code></pre>
       </div>
 
       <div class="code-showcase__features">
-        <h3 class="code-showcase__feat-title">Built for Angular Developers</h3>
+        <h3 class="code-showcase__feat-title">Engineered for Angular Developers</h3>
         @for (feat of techFeatures; track feat.label) {
           <div class="code-showcase__feat">
             <span class="code-showcase__feat-label">{{ feat.label }}</span>
@@ -121,14 +282,14 @@
     </div>
   </section>
 
-  <!-- ═══════════════ TECH SPECS ═══════════════ -->
+  <!-- ═══════════════ ARCHITECTURE ═══════════════ -->
   <section class="section" id="tech">
     <header class="section__head">
       <p class="section__eyebrow">Architecture</p>
       <h2 class="section__title">Three Layers. One Token Engine.</h2>
       <p class="section__sub">
-        The CDK is pure TypeScript. Core adds the Angular shell. Theme provides the design-token
-        engine that powers everything.
+        The CDK provides behavior primitives. Core adds the Angular component shell. Theme delivers
+        the design-token engine that powers everything seamlessly.
       </p>
     </header>
 
@@ -138,7 +299,7 @@
         <h3 class="arch-layer__name">Behavior Primitives</h3>
         <p class="arch-layer__desc">
           Pure TypeScript. CVA base, form models, focus management, keyboard navigation, and
-          animation helpers — no Angular dependency.
+          animation helpers — zero Angular framework runtime lock-in.
         </p>
         <code class="arch-layer__pkg">@ngxsmk/cdk</code>
       </div>
@@ -159,8 +320,8 @@
         <span class="arch-layer__tag">Core</span>
         <h3 class="arch-layer__name">Angular Components</h3>
         <p class="arch-layer__desc">
-          150+ standalone components. Signal inputs, template outlets via InjectionTokens,
-          token-driven styling, and optional motion.dev integration.
+          150+ standalone components. Signal inputs, two-way models, template outlets via InjectionTokens,
+          and token-driven styling.
         </p>
         <code class="arch-layer__pkg">@ngxsmk/core/*</code>
       </div>
@@ -182,19 +343,19 @@
         <h3 class="arch-layer__name">Design-Token Engine</h3>
         <p class="arch-layer__desc">
           HSL coordinates → CSS custom properties. Supports vanilla CSS, SCSS, Tailwind v3 preset,
-          v4 theme, and Ionic adapter. Dark mode via <code>.dark</code> class.
+          Tailwind v4 theme, and Ionic adapter. Dark mode via <code>.dark</code> class.
         </p>
         <code class="arch-layer__pkg">@ngxsmk/theme</code>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════════ COMPONENT EXPLORER ═══════════════ -->
+  <!-- ═══════════════ COMPONENT EXPLORER / DIRECTORY ═══════════════ -->
   <section class="section section--tint" id="showcase">
     <header class="section__head">
-      <p class="section__eyebrow">Interactive Explorer</p>
+      <p class="section__eyebrow">Component Directory</p>
       <h2 class="section__title">Explore all 150+ components</h2>
-      <p class="section__sub">Search across every native component, directive, and custom hook.</p>
+      <p class="section__sub">Search across every native component, form control, AI interface, and layout primitive.</p>
       <div class="explorer__search">
         <svg
           class="explorer__search-icon"
@@ -213,7 +374,7 @@
         <input
           class="explorer__search-input"
           type="text"
-          placeholder="Search components..."
+          placeholder="Filter component categories (e.g. Button, Table, Chat, Kanban)..."
           [ngModel]="searchQuery()"
           (ngModelChange)="searchQuery.set($event)"
         />
@@ -232,10 +393,13 @@
           [style.--cat-color]="cat.color"
         >
           <div class="cat-card__head">
-            <span class="cat-card__icon">{{ cat.icon }}</span>
-            <span class="cat-card__count">{{ cat.count }}</span>
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <span class="cat-card__icon">{{ cat.icon }}</span>
+              <h3 class="cat-card__title">{{ cat.title }}</h3>
+            </div>
+            <span class="cat-card__count">{{ cat.count }} components</span>
           </div>
-          <h3 class="cat-card__title">{{ cat.title }}</h3>
+          <p class="cat-card__desc">{{ cat.desc }}</p>
           <div class="cat-card__items">
             @for (item of cat.items; track item) {
               <a
@@ -248,7 +412,7 @@
               </a>
             }
           </div>
-          <span class="cat-card__cta">View all →</span>
+          <span class="cat-card__cta">Explore {{ cat.title }} →</span>
         </article>
       }
     </div>
@@ -263,14 +427,28 @@
   <section class="cta">
     <div class="cta__glow" aria-hidden="true"></div>
     <div class="cta__inner">
-      <h2 class="cta__title">Build the thing.</h2>
+      <h2 class="cta__title">Start building today.</h2>
       <p class="cta__sub">
-        Browse 150+ components, clone a production template, and tune a theme to match your brand.
-        All free, all MIT-licensed.
+        Browse 150+ signal-native components, clone a production template, and tune a theme to match your brand.
+        All free, MIT-licensed, zero runtime dependencies.
       </p>
       <div class="hero__cta hero__cta--center">
-        <a ngxsmk-button size="lg" routerLink="/showcase/explorer"> Get Started → </a>
-        <a ngxsmk-button size="lg" variant="outline" routerLink="/docs"> Documentation </a>
+        <a ngxsmk-button size="lg" routerLink="/showcase/explorer">
+          Get Started →
+        </a>
+        <a ngxsmk-button size="lg" variant="outline" routerLink="/docs">
+          Read Documentation
+        </a>
+        <a
+          ngxsmk-button
+          size="lg"
+          variant="ghost"
+          href="https://github.com/NGXSMK/ngxsmk-ui-kit"
+          target="_blank"
+          rel="noopener"
+        >
+          GitHub Repository
+        </a>
       </div>
     </div>
   </section>
@@ -281,38 +459,43 @@
     <div class="footer__brand">
       <a class="footer__logo-link" routerLink="/">
         <img class="footer__logo" src="favicon.svg" alt="" aria-hidden="true" />
-        <span class="footer__wordmark">NGXSMK</span>
+        <span class="footer__wordmark">NGXSMK UI Kit</span>
       </a>
-      <p class="footer__tagline">The UI kit that Angular deserves.</p>
+      <p class="footer__tagline">
+        A modern, customizable and developer friendly UI component library for building production ready Angular applications.
+      </p>
+      <div class="footer__version-badge">
+        <span class="footer__version-dot"></span>
+        v{{ appVersion }} · MIT License
+      </div>
     </div>
 
     <div class="footer__col">
-      <h4 class="footer__heading">Docs</h4>
-      <a routerLink="/docs">Getting started</a>
-      <a routerLink="/showcase/explorer">Components</a>
-      <a routerLink="/templates">Templates</a>
-      <a routerLink="/themes">Themes</a>
+      <h4 class="footer__heading">Documentation</h4>
+      <a routerLink="/docs">Getting Started</a>
+      <a routerLink="/showcase/explorer">Component Catalog</a>
+      <a routerLink="/playground/component">Interactive Playground</a>
+      <a routerLink="/themes">Themes & Tokens</a>
     </div>
     <div class="footer__col">
-      <h4 class="footer__heading">Resources</h4>
-      <a routerLink="/blog">Blog</a>
-      <a routerLink="/changelog">Changelog</a>
-      <a routerLink="/roadmap">Roadmap</a>
-      <a routerLink="/community">Community</a>
+      <h4 class="footer__heading">Showcase & Examples</h4>
+      <a routerLink="/templates">Admin Dashboard</a>
+      <a routerLink="/templates">AI Assistant Interface</a>
+      <a routerLink="/templates">SaaS Landing Page</a>
+      <a routerLink="/changelog">Changelog & Releases</a>
     </div>
     <div class="footer__col">
-      <h4 class="footer__heading">Connect</h4>
-      <a href="https://github.com/NGXSMK/ngxsmk-ui-kit" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://whatsapp.com/channel/0029Vb8PWpz1XquUOnGPUM2p" target="_blank" rel="noopener"
-        >WhatsApp Channel</a
-      >
-      <a href="https://www.npmjs.com/org/ngxsmk" target="_blank" rel="noopener">npm</a>
+      <h4 class="footer__heading">Ecosystem & Community</h4>
+      <a href="https://github.com/NGXSMK/ngxsmk-ui-kit" target="_blank" rel="noopener">GitHub Repository</a>
+      <a href="https://www.npmjs.com/org/ngxsmk" target="_blank" rel="noopener">npm Registry</a>
+      <a href="https://whatsapp.com/channel/0029Vb8PWpz1XquUOnGPUM2p" target="_blank" rel="noopener">WhatsApp Community</a>
+      <a href="/llms.txt" target="_blank" rel="noopener">LLM Index (llms.txt)</a>
     </div>
   </div>
 
   <div class="footer__bar">
-    <span>© 2026 NGXSMK · MIT License</span>
-    <span class="footer__built">Built with @ngxsmk/core, @ngxsmk/cdk &amp; @ngxsmk/theme</span>
+    <span>© 2026 NGXSMK · MIT License · Open Source</span>
+    <span class="footer__built">Engineered with @ngxsmk/core, @ngxsmk/cdk &amp; @ngxsmk/theme</span>
   </div>
 </footer>
 

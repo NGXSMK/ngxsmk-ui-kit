@@ -206,7 +206,7 @@ export type TransferDirection = 'left' | 'right';
       gap: var(--ngxsmk-space-4, 1rem);
       font-family: var(--ngxsmk-font-sans, system-ui, sans-serif);
       font-size: var(--ngxsmk-text-body-sm-size, 0.875rem);
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      color: var(--ngxsmk-color-on-surface);
     }
 
     .ngxsmk-transfer__list {
@@ -214,9 +214,9 @@ export type TransferDirection = 'left' | 'right';
       flex-direction: column;
       width: 220px;
       height: 280px;
-      border: 1px solid var(--ngxsmk-color-outline, #d1d5db);
+      border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-md, 0.5rem);
-      background: var(--ngxsmk-color-surface, #ffffff);
+      background: var(--ngxsmk-color-surface);
       overflow: hidden;
     }
 
@@ -225,30 +225,30 @@ export type TransferDirection = 'left' | 'right';
       align-items: center;
       justify-content: space-between;
       padding: var(--ngxsmk-space-2, 0.5rem) var(--ngxsmk-space-3, 0.75rem);
-      border-bottom: 1px solid var(--ngxsmk-color-outline, #d1d5db);
-      background: var(--ngxsmk-color-surface-variant, #f4f4f5);
+      border-bottom: 1px solid var(--ngxsmk-color-outline);
+      background: var(--ngxsmk-color-surface-variant);
       font-weight: 600;
     }
 
     .ngxsmk-transfer__header-count {
       font-size: var(--ngxsmk-text-body-xs-size, 0.75rem);
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--ngxsmk-color-on-surface-variant);
     }
 
     .ngxsmk-transfer__search {
       padding: var(--ngxsmk-space-2, 0.5rem);
-      border-bottom: 1px solid var(--ngxsmk-color-outline, #e5e7eb);
+      border-bottom: 1px solid var(--ngxsmk-color-outline);
     }
 
     .ngxsmk-transfer__search-input {
       width: 100%;
       padding: var(--ngxsmk-space-1, 0.25rem) var(--ngxsmk-space-2, 0.5rem);
-      border: 1px solid var(--ngxsmk-color-outline, #e5e7eb);
+      border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-sm, 0.25rem);
       font-size: var(--ngxsmk-text-body-xs-size, 0.75rem);
       outline: none;
-      background: var(--ngxsmk-color-surface, #ffffff);
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      background: var(--ngxsmk-color-surface);
+      color: var(--ngxsmk-color-on-surface);
     }
 
     .ngxsmk-transfer__body {
@@ -273,7 +273,7 @@ export type TransferDirection = 'left' | 'right';
     }
 
     .ngxsmk-transfer__item--selected {
-      background: color-mix(in srgb, var(--ngxsmk-color-primary, #7c3aed) 10%, transparent);
+      background: color-mix(in srgb, var(--ngxsmk-color-primary) 10%, transparent);
     }
 
     .ngxsmk-transfer__item--disabled {
@@ -295,13 +295,13 @@ export type TransferDirection = 'left' | 'right';
 
     .ngxsmk-transfer__item-desc {
       font-size: 0.7rem;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--ngxsmk-color-on-surface-variant);
     }
 
     .ngxsmk-transfer__empty {
       padding: 2rem 0;
       text-align: center;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--ngxsmk-color-on-surface-variant);
       font-size: var(--ngxsmk-text-body-xs-size, 0.75rem);
     }
 
@@ -317,18 +317,18 @@ export type TransferDirection = 'left' | 'right';
       justify-content: center;
       width: 2rem;
       height: 2rem;
-      border: 1px solid var(--ngxsmk-color-outline, #d1d5db);
+      border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-md, 0.375rem);
-      background: var(--ngxsmk-color-surface, #ffffff);
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      background: var(--ngxsmk-color-surface);
+      color: var(--ngxsmk-color-on-surface);
       cursor: pointer;
       transition: all 0.15s ease;
     }
 
     .ngxsmk-transfer__btn:hover:not(:disabled) {
-      background: var(--ngxsmk-color-primary, #7c3aed);
+      background: var(--ngxsmk-color-primary);
       color: #ffffff;
-      border-color: var(--ngxsmk-color-primary, #7c3aed);
+      border-color: var(--ngxsmk-color-primary);
     }
 
     .ngxsmk-transfer__btn:disabled {

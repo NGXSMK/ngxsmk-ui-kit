@@ -1,6 +1,6 @@
 {
   "name": "@ngxsmk/theme",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Runtime theming and design-token engine for @ngxsmk/core with light/dark modes and preset palettes.",
   "keywords": [
     "angular",
@@ -25,10 +25,14 @@
   },
   "peerDependencies": {
     "@angular/common": ">=17.3.0",
-    "@angular/core": ">=17.3.0"
+    "@angular/core": ">=17.3.0",
+    "@ionic/angular": ">=7.0.0 || >=8.0.0"
   },
   "peerDependenciesMeta": {
     "tailwindcss": {
+      "optional": true
+    },
+    "@ionic/angular": {
       "optional": true
     }
   },

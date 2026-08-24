@@ -1,4 +1,5 @@
 import { Component, signal } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TestBed } from '@angular/core/testing';
 import { describe, expect, it, beforeEach, vi } from 'vitest';
 import { NgxsmkAutocomplete } from './autocomplete';
@@ -106,5 +107,33 @@ describe('NgxsmkAutocomplete', () => {
     );
     expect(active).toBeTruthy();
     expect(activeOption?.id).toBe(active);
+  });
+
+  it('integrates with Reactive Forms FormControl and handles writeValue / disabled state', () => {
+    @Component({
+      standalone: true,
+      imports: [NgxsmkAutocomplete, ReactiveFormsModule],
+      template: `<ngxsmk-autocomplete [options]="options" [formControl]="ctrl" />`,
+    })
+    class ReactiveHost {
+      readonly ctrl = new FormControl('apple');
+      readonly options = [
+        { value: 'apple', label: 'Apple' },
+        { value: 'banana', label: 'Banana' },
+      ];
+    }
+
+    const fixture = TestBed.createComponent(ReactiveHost);
+    fixture.detectChanges();
+    const input: HTMLInputElement = fixture.nativeElement.querySelector('.ngxsmk-autocomplete__input');
+    expect(input.value).toBe('apple');
+
+    fixture.componentInstance.ctrl.setValue('banana');
+    fixture.detectChanges();
+    expect(input.value).toBe('banana');
+
+    fixture.componentInstance.ctrl.disable();
+    fixture.detectChanges();
+    expect(input.disabled).toBe(true);
   });
 });

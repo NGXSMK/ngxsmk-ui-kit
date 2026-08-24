@@ -1167,7 +1167,7 @@ exports.COMPONENT_DATABASE = [
                 "name": "color",
                 "type": "string",
                 "required": false,
-                "default": "'var(--ngxsmk-color-primary, #7c3aed)'"
+                "default": "'var(--ngxsmk-color-primary)'"
             },
             {
                 "name": "height",
@@ -1193,7 +1193,7 @@ exports.COMPONENT_DATABASE = [
         "inputs": [
             {
                 "name": "options",
-                "type": "{ value: string; label: string }[]",
+                "type": "NgxsmkAutocompleteOption[]",
                 "required": true
             },
             {
@@ -1208,9 +1208,40 @@ exports.COMPONENT_DATABASE = [
                 "required": false,
                 "twoWay": true,
                 "default": "''"
+            },
+            {
+                "name": "disabled",
+                "type": "boolean",
+                "required": false,
+                "default": "false"
+            },
+            {
+                "name": "id",
+                "type": "unknown",
+                "required": false,
+                "default": "ngxsmkUniqueId('ngxsmk-autocomplete')"
+            },
+            {
+                "name": "ariaInvalid",
+                "type": "boolean",
+                "required": false,
+                "twoWay": true,
+                "default": "false"
+            },
+            {
+                "name": "ariaDescribedby",
+                "type": "string | null",
+                "required": false,
+                "twoWay": true,
+                "default": "null"
             }
         ],
-        "outputs": []
+        "outputs": [
+            {
+                "name": "changed",
+                "type": "string"
+            }
+        ]
     },
     {
         "entryPoint": "@ngxsmk/core/avatar",
@@ -2229,20 +2260,6 @@ exports.COMPONENT_DATABASE = [
         "outputs": []
     },
     {
-        "entryPoint": "@ngxsmk/core/click-outside",
-        "name": "NgxsmkClickOutside",
-        "kind": "Directive",
-        "selector": "[ngxsmkClickOutside]",
-        "description": "",
-        "inputs": [],
-        "outputs": [
-            {
-                "name": "ngxsmkClickOutside",
-                "type": "void"
-            }
-        ]
-    },
-    {
         "entryPoint": "@ngxsmk/core/code",
         "name": "NgxsmkCode",
         "kind": "Component",
@@ -2425,7 +2442,7 @@ exports.COMPONENT_DATABASE = [
         "inputs": [
             {
                 "name": "options",
-                "type": "{ value: string; label: string }[]",
+                "type": "NgxsmkComboboxOption[]",
                 "required": true
             },
             {
@@ -2440,9 +2457,40 @@ exports.COMPONENT_DATABASE = [
                 "type": "string",
                 "required": false,
                 "default": "''"
+            },
+            {
+                "name": "disabled",
+                "type": "boolean",
+                "required": false,
+                "default": "false"
+            },
+            {
+                "name": "id",
+                "type": "unknown",
+                "required": false,
+                "default": "ngxsmkUniqueId('ngxsmk-combobox')"
+            },
+            {
+                "name": "ariaInvalid",
+                "type": "boolean",
+                "required": false,
+                "twoWay": true,
+                "default": "false"
+            },
+            {
+                "name": "ariaDescribedby",
+                "type": "string | null",
+                "required": false,
+                "twoWay": true,
+                "default": "null"
             }
         ],
-        "outputs": []
+        "outputs": [
+            {
+                "name": "changed",
+                "type": "string"
+            }
+        ]
     },
     {
         "entryPoint": "@ngxsmk/core/command-palette",
@@ -2667,6 +2715,24 @@ exports.COMPONENT_DATABASE = [
                 "default": "10"
             },
             {
+                "name": "filter",
+                "type": "string",
+                "required": false,
+                "default": "''"
+            },
+            {
+                "name": "emptyMessage",
+                "type": "string",
+                "required": false,
+                "default": "'No records found'"
+            },
+            {
+                "name": "loading",
+                "type": "boolean",
+                "required": false,
+                "default": "false"
+            },
+            {
                 "name": "sortable",
                 "type": "boolean",
                 "required": false,
@@ -2679,7 +2745,16 @@ exports.COMPONENT_DATABASE = [
                 "default": "false"
             }
         ],
-        "outputs": []
+        "outputs": [
+            {
+                "name": "pageChange",
+                "type": "{ page: number; pageSize: number }"
+            },
+            {
+                "name": "sortChange",
+                "type": "{ field: string; dir: 'asc' | 'desc' }"
+            }
+        ]
     },
     {
         "entryPoint": "@ngxsmk/core/date-picker",
@@ -2936,6 +3011,12 @@ exports.COMPONENT_DATABASE = [
                 "required": true
             },
             {
+                "name": "align",
+                "type": "'start' | 'end'",
+                "required": false,
+                "default": "'end'"
+            },
+            {
                 "name": "open",
                 "type": "boolean",
                 "required": false,
@@ -2969,6 +3050,12 @@ exports.COMPONENT_DATABASE = [
                 "type": "string",
                 "required": false,
                 "default": "''"
+            },
+            {
+                "name": "variant",
+                "type": "NgxsmkEmptyStateVariant",
+                "required": false,
+                "default": "'default'"
             }
         ],
         "outputs": []
@@ -2990,13 +3077,13 @@ exports.COMPONENT_DATABASE = [
                 "name": "accentBg",
                 "type": "string",
                 "required": false,
-                "default": "'var(--ngxsmk-color-primary, #18181b)'"
+                "default": "'var(--ngxsmk-color-primary)'"
             },
             {
                 "name": "accentColor",
                 "type": "string",
                 "required": false,
-                "default": "'var(--ngxsmk-color-on-primary, #fafafa)'"
+                "default": "'var(--ngxsmk-color-on-primary)'"
             },
             {
                 "name": "eabAnimation",
@@ -3317,22 +3404,6 @@ exports.COMPONENT_DATABASE = [
         "outputs": []
     },
     {
-        "entryPoint": "@ngxsmk/core/focus-trap",
-        "name": "NgxsmkFocusTrap",
-        "kind": "Directive",
-        "selector": "[ngxsmkFocusTrap]",
-        "description": "",
-        "inputs": [
-            {
-                "name": "ngxsmkFocusTrap",
-                "type": "boolean",
-                "required": false,
-                "default": "true"
-            }
-        ],
-        "outputs": []
-    },
-    {
         "entryPoint": "@ngxsmk/core/form-field",
         "name": "NgxsmkFormField",
         "kind": "Component",
@@ -3423,7 +3494,7 @@ exports.COMPONENT_DATABASE = [
                 "name": "color",
                 "type": "string",
                 "required": false,
-                "default": "'var(--ngxsmk-color-primary, #7c3aed)'"
+                "default": "'var(--ngxsmk-color-primary)'"
             },
             {
                 "name": "variant",
@@ -4382,6 +4453,7 @@ exports.COMPONENT_DATABASE = [
                 "name": "open",
                 "type": "boolean",
                 "required": false,
+                "twoWay": true,
                 "default": "false"
             },
             {
@@ -4534,7 +4606,7 @@ exports.COMPONENT_DATABASE = [
         "inputs": [
             {
                 "name": "options",
-                "type": "{ value: string; label: string }[]",
+                "type": "NgxsmkMultiSelectOption[]",
                 "required": true
             },
             {
@@ -4555,6 +4627,26 @@ exports.COMPONENT_DATABASE = [
                 "type": "boolean",
                 "required": false,
                 "default": "false"
+            },
+            {
+                "name": "id",
+                "type": "unknown",
+                "required": false,
+                "default": "ngxsmkUniqueId('ngxsmk-multi-select')"
+            },
+            {
+                "name": "ariaInvalid",
+                "type": "boolean",
+                "required": false,
+                "twoWay": true,
+                "default": "false"
+            },
+            {
+                "name": "ariaDescribedby",
+                "type": "string | null",
+                "required": false,
+                "twoWay": true,
+                "default": "null"
             }
         ],
         "outputs": [
@@ -4818,11 +4910,35 @@ exports.COMPONENT_DATABASE = [
                 "required": false,
                 "twoWay": true,
                 "default": "''"
+            },
+            {
+                "name": "id",
+                "type": "unknown",
+                "required": false,
+                "default": "ngxsmkUniqueId('ngxsmk-otp-input')"
+            },
+            {
+                "name": "ariaInvalid",
+                "type": "boolean",
+                "required": false,
+                "twoWay": true,
+                "default": "false"
+            },
+            {
+                "name": "ariaDescribedby",
+                "type": "string | null",
+                "required": false,
+                "twoWay": true,
+                "default": "null"
             }
         ],
         "outputs": [
             {
                 "name": "completed",
+                "type": "string"
+            },
+            {
+                "name": "changed",
                 "type": "string"
             }
         ]
@@ -5081,6 +5197,15 @@ exports.COMPONENT_DATABASE = [
                 "default": "false"
             }
         ],
+        "outputs": []
+    },
+    {
+        "entryPoint": "@ngxsmk/core/popover",
+        "name": "NgxsmkPopoverTrigger",
+        "kind": "Directive",
+        "selector": "[ngxsmkPopoverTrigger]",
+        "description": "",
+        "inputs": [],
         "outputs": []
     },
     {
@@ -5688,7 +5813,7 @@ exports.COMPONENT_DATABASE = [
         "inputs": [
             {
                 "name": "steps",
-                "type": "ReasoningStep[]",
+                "type": "NgxsmkReasoningStep[]",
                 "required": true
             }
         ],
@@ -6052,7 +6177,7 @@ exports.COMPONENT_DATABASE = [
         "inputs": [
             {
                 "name": "options",
-                "type": "SegmentedOption[]",
+                "type": "NgxsmkSegmentedOption[]",
                 "required": true
             },
             {
@@ -6061,6 +6186,32 @@ exports.COMPONENT_DATABASE = [
                 "required": false,
                 "twoWay": true,
                 "default": "''"
+            },
+            {
+                "name": "disabled",
+                "type": "boolean",
+                "required": false,
+                "default": "false"
+            },
+            {
+                "name": "id",
+                "type": "unknown",
+                "required": false,
+                "default": "ngxsmkUniqueId('ngxsmk-segmented-control')"
+            },
+            {
+                "name": "ariaInvalid",
+                "type": "boolean",
+                "required": false,
+                "twoWay": true,
+                "default": "false"
+            },
+            {
+                "name": "ariaDescribedby",
+                "type": "string | null",
+                "required": false,
+                "twoWay": true,
+                "default": "null"
             }
         ],
         "outputs": [
@@ -6434,6 +6585,12 @@ exports.COMPONENT_DATABASE = [
                 "default": "false"
             },
             {
+                "name": "id",
+                "type": "unknown",
+                "required": false,
+                "default": "ngxsmkUniqueId('ngxsmk-slider')"
+            },
+            {
                 "name": "ariaLabel",
                 "type": "string",
                 "required": false,
@@ -6444,6 +6601,20 @@ exports.COMPONENT_DATABASE = [
                 "type": "string",
                 "required": false,
                 "default": "''"
+            },
+            {
+                "name": "ariaInvalid",
+                "type": "boolean",
+                "required": false,
+                "twoWay": true,
+                "default": "false"
+            },
+            {
+                "name": "ariaDescribedby",
+                "type": "string | null",
+                "required": false,
+                "twoWay": true,
+                "default": "null"
             }
         ],
         "outputs": [
@@ -6510,7 +6681,7 @@ exports.COMPONENT_DATABASE = [
                 "name": "color",
                 "type": "string",
                 "required": false,
-                "default": "'var(--ngxsmk-color-primary, #7c3aed)'"
+                "default": "'var(--ngxsmk-color-primary)'"
             },
             {
                 "name": "fillOpacity",
@@ -6904,7 +7075,12 @@ exports.COMPONENT_DATABASE = [
                 "default": "'css'"
             }
         ],
-        "outputs": []
+        "outputs": [
+            {
+                "name": "completed",
+                "type": "string"
+            }
+        ]
     },
     {
         "entryPoint": "@ngxsmk/core/switch",
@@ -6979,6 +7155,12 @@ exports.COMPONENT_DATABASE = [
             },
             {
                 "name": "striped",
+                "type": "boolean",
+                "required": false,
+                "default": "false"
+            },
+            {
+                "name": "responsive",
                 "type": "boolean",
                 "required": false,
                 "default": "false"
@@ -7100,6 +7282,18 @@ exports.COMPONENT_DATABASE = [
                 "required": false,
                 "twoWay": true,
                 "default": "''"
+            },
+            {
+                "name": "orientation",
+                "type": "'horizontal' | 'vertical'",
+                "required": false,
+                "default": "'horizontal'"
+            },
+            {
+                "name": "activationMode",
+                "type": "'automatic' | 'manual'",
+                "required": false,
+                "default": "'automatic'"
             }
         ],
         "outputs": []

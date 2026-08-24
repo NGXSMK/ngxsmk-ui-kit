@@ -1,4 +1,5 @@
 import { Component, signal } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TestBed } from '@angular/core/testing';
 import { describe, expect, it, beforeEach, vi } from 'vitest';
 import { NgxsmkMultiSelect } from './multi-select';
@@ -82,5 +83,35 @@ describe('NgxsmkMultiSelect', () => {
     key(trigger, 'ArrowDown');
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelector('.ngxsmk-multi-select__listbox')).toBeNull();
+  });
+
+  it('integrates with Reactive Forms FormControl and handles writeValue / disabled state', () => {
+    @Component({
+      standalone: true,
+      imports: [NgxsmkMultiSelect, ReactiveFormsModule],
+      template: `<ngxsmk-multi-select [options]="options" [formControl]="ctrl" />`,
+    })
+    class ReactiveHost {
+      readonly ctrl = new FormControl(['red']);
+      readonly options = [
+        { value: 'red', label: 'Red' },
+        { value: 'green', label: 'Green' },
+      ];
+    }
+
+    const fixture = TestBed.createComponent(ReactiveHost);
+    fixture.detectChanges();
+    const tags = fixture.nativeElement.querySelectorAll('.ngxsmk-multi-select__tag');
+    expect(tags.length).toBe(1);
+
+    fixture.componentInstance.ctrl.setValue(['red', 'green']);
+    fixture.detectChanges();
+    const updatedTags = fixture.nativeElement.querySelectorAll('.ngxsmk-multi-select__tag');
+    expect(updatedTags.length).toBe(2);
+
+    fixture.componentInstance.ctrl.disable();
+    fixture.detectChanges();
+    const trigger: HTMLElement = fixture.nativeElement.querySelector('.ngxsmk-multi-select__trigger');
+    expect(trigger.getAttribute('aria-disabled')).toBe('true');
   });
 });

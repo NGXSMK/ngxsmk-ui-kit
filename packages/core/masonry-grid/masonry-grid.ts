@@ -70,9 +70,9 @@ import {
 
     .ngxsmk-masonry__fallback-card {
       padding: var(--ngxsmk-space-4, 1rem);
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-md, 0.375rem);
-      background: var(--ngxsmk-color-surface, #ffffff);
+      background: var(--ngxsmk-color-surface);
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

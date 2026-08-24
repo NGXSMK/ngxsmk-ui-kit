@@ -24,6 +24,7 @@ export type NgxsmkTagVariant = 'neutral' | 'primary' | 'success' | 'warning' | '
       align-items: center;
       gap: var(--ngxsmk-space-1);
       padding: var(--ngxsmk-space-0-5) var(--ngxsmk-space-2);
+      border: 1px solid transparent;
       border-radius: var(--ngxsmk-radius-sm);
       font-family: var(--ngxsmk-font-sans);
       font-size: var(--ngxsmk-text-label-md-size);
@@ -35,26 +36,32 @@ export type NgxsmkTagVariant = 'neutral' | 'primary' | 'success' | 'warning' | '
     :host([data-variant='neutral']) {
       background: var(--ngxsmk-color-surface-variant);
       color: var(--ngxsmk-color-on-surface-variant);
+      border-color: var(--ngxsmk-color-outline);
     }
     :host([data-variant='primary']) {
       background: var(--ngxsmk-color-primary-container);
       color: var(--ngxsmk-color-on-primary-container);
+      border-color: color-mix(in srgb, var(--ngxsmk-color-primary) 20%, transparent);
     }
     :host([data-variant='success']) {
       background: var(--ngxsmk-color-success-container);
       color: var(--ngxsmk-color-on-success-container);
+      border-color: color-mix(in srgb, var(--ngxsmk-color-success) 20%, transparent);
     }
     :host([data-variant='warning']) {
       background: var(--ngxsmk-color-warning-container);
       color: var(--ngxsmk-color-on-warning-container);
+      border-color: color-mix(in srgb, var(--ngxsmk-color-warning) 20%, transparent);
     }
     :host([data-variant='error']) {
       background: var(--ngxsmk-color-error-container);
       color: var(--ngxsmk-color-on-error-container);
+      border-color: color-mix(in srgb, var(--ngxsmk-color-error) 20%, transparent);
     }
     :host([data-variant='info']) {
       background: var(--ngxsmk-color-info-container);
       color: var(--ngxsmk-color-on-info-container);
+      border-color: color-mix(in srgb, var(--ngxsmk-color-info) 20%, transparent);
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -104,7 +111,8 @@ export class NgxsmkTag {
       align-items: center;
       gap: var(--ngxsmk-space-1);
       padding: var(--ngxsmk-space-0-5) var(--ngxsmk-space-1) var(--ngxsmk-space-0-5)
-        var(--ngxsmk-space-2);
+        var(--ngxsmk-space-2-5, var(--ngxsmk-space-3));
+      border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-full);
       background: var(--ngxsmk-color-surface-variant);
       color: var(--ngxsmk-color-on-surface);
@@ -124,15 +132,16 @@ export class NgxsmkTag {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 1.125rem;
-      height: 1.125rem;
+      width: 1.25rem;
+      height: 1.25rem;
       padding: 0;
       border: none;
       border-radius: var(--ngxsmk-radius-full);
       background: transparent;
       color: var(--ngxsmk-color-on-surface-variant);
       cursor: pointer;
-      transition: background-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
+      transition: background-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
+                  color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
 
     .ngxsmk-chip__remove:hover {
