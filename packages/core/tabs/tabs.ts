@@ -48,7 +48,13 @@ export class NgxsmkTab {
   imports: [NgTemplateOutlet],
   template: `
     <!-- eslint-disable-next-line @angular-eslint/template/interactive-supports-focus -->
-    <div class="ngxsmk-tabs__list" role="tablist" (keydown)="onKeydown($event)">
+    <div
+      class="ngxsmk-tabs__list"
+      [class.ngxsmk-tabs__list--vertical]="orientation() === 'vertical'"
+      [attr.aria-orientation]="orientation()"
+      role="tablist"
+      (keydown)="onKeydown($event)"
+    >
       @for (tab of tabs(); track tab.value()) {
         <button
           type="button"
@@ -78,11 +84,19 @@ export class NgxsmkTab {
       </div>
     }
   `,
-  host: { class: 'ngxsmk-tabs' },
+  host: {
+    class: 'ngxsmk-tabs',
+    '[class.ngxsmk-tabs--vertical]': 'orientation() === "vertical"',
+  },
   styles: `
     :host {
       display: block;
       font-family: var(--ngxsmk-font-sans);
+    }
+
+    :host(.ngxsmk-tabs--vertical) {
+      display: flex;
+      gap: var(--ngxsmk-space-4);
     }
 
     .ngxsmk-tabs__list {
@@ -91,8 +105,15 @@ export class NgxsmkTab {
       border-bottom: 1px solid var(--ngxsmk-color-outline);
     }
 
+    .ngxsmk-tabs__list--vertical {
+      flex-direction: column;
+      border-bottom: none;
+      border-right: 1px solid var(--ngxsmk-color-outline);
+      min-width: 140px;
+    }
+
     @media (max-width: 768px) {
-      .ngxsmk-tabs__list {
+      .ngxsmk-tabs__list:not(.ngxsmk-tabs__list--vertical) {
         overflow-x: auto;
         flex-wrap: nowrap;
       }
@@ -115,6 +136,14 @@ export class NgxsmkTab {
         border-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
 
+    .ngxsmk-tabs__list--vertical .ngxsmk-tabs__trigger {
+      margin-bottom: 0;
+      margin-right: -1px;
+      border-bottom: none;
+      border-right: 2px solid transparent;
+      text-align: left;
+    }
+
     .ngxsmk-tabs__trigger:hover {
       color: var(--ngxsmk-color-on-surface);
     }
@@ -122,6 +151,11 @@ export class NgxsmkTab {
     .ngxsmk-tabs__trigger[data-active] {
       color: var(--ngxsmk-color-primary);
       border-bottom-color: var(--ngxsmk-color-primary);
+    }
+
+    .ngxsmk-tabs__list--vertical .ngxsmk-tabs__trigger[data-active] {
+      border-bottom-color: transparent;
+      border-right-color: var(--ngxsmk-color-primary);
     }
 
     .ngxsmk-tabs__trigger:disabled {
@@ -142,6 +176,11 @@ export class NgxsmkTab {
       line-height: var(--ngxsmk-text-body-md-line);
     }
 
+    :host(.ngxsmk-tabs--vertical) .ngxsmk-tabs__panel {
+      padding-top: 0;
+      flex: 1;
+    }
+
     .ngxsmk-tabs__panel:focus-visible {
       outline: none;
       box-shadow: var(--ngxsmk-focus-ring);
@@ -156,6 +195,8 @@ export class NgxsmkTabs {
 
   /** Selected tab value; defaults to the first enabled tab. */
   readonly value = model('');
+  readonly orientation = input<'horizontal' | 'vertical'>('horizontal');
+  readonly activationMode = input<'automatic' | 'manual'>('automatic');
 
   protected readonly tabs = contentChildren(NgxsmkTab);
 
@@ -190,27 +231,32 @@ export class NgxsmkTabs {
     }
     const current = enabled.findIndex((t) => t.value() === this.activeValue());
 
+    const isNext =
+      (this.orientation() === 'horizontal' && event.key === 'ArrowRight') ||
+      (this.orientation() === 'vertical' && event.key === 'ArrowDown');
+
+    const isPrev =
+      (this.orientation() === 'horizontal' && event.key === 'ArrowLeft') ||
+      (this.orientation() === 'vertical' && event.key === 'ArrowUp');
+
     let next: number;
-    switch (event.key) {
-      case 'ArrowRight':
-        next = (current + 1) % enabled.length;
-        break;
-      case 'ArrowLeft':
-        next = (current - 1 + enabled.length) % enabled.length;
-        break;
-      case 'Home':
-        next = 0;
-        break;
-      case 'End':
-        next = enabled.length - 1;
-        break;
-      default:
-        return;
+    if (isNext) {
+      next = (current + 1) % enabled.length;
+    } else if (isPrev) {
+      next = (current - 1 + enabled.length) % enabled.length;
+    } else if (event.key === 'Home') {
+      next = 0;
+    } else if (event.key === 'End') {
+      next = enabled.length - 1;
+    } else {
+      return;
     }
     event.preventDefault();
 
     const value = enabled[next].value();
-    this.select(value);
+    if (this.activationMode() === 'automatic') {
+      this.select(value);
+    }
     const triggers = this.host.nativeElement.querySelectorAll<HTMLElement>('[role="tab"]');
     for (const trigger of Array.from(triggers)) {
       if (trigger.id === this.triggerId(value)) {

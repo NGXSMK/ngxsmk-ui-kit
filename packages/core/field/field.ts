@@ -30,6 +30,9 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
+/**
+ * @deprecated Use `NgxsmkFormField` (`@ngxsmk/core/form-field`) instead. Will be removed in v3.0.0.
+ */
 export class NgxsmkField {
   readonly hint = input('');
   readonly direction = input<'vertical' | 'horizontal'>('vertical');

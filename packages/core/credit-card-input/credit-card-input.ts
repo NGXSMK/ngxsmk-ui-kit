@@ -86,10 +86,10 @@ export type NgxsmkCardBrand = 'visa' | 'mastercard' | 'amex' | 'discover' | 'unk
       width: 100%;
       height: 2.75rem;
       padding: 0 0.75rem;
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-md, 0.375rem);
-      background: var(--ngxsmk-color-surface, #ffffff);
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      background: var(--ngxsmk-color-surface);
+      color: var(--ngxsmk-color-on-surface);
       font-family: var(--ngxsmk-font-mono, monospace);
       font-size: 0.95rem;
       font-weight: 600;
@@ -100,9 +100,9 @@ export type NgxsmkCardBrand = 'visa' | 'mastercard' | 'amex' | 'discover' | 'unk
     }
 
     .ngxsmk-card-input__input:focus {
-      border-color: var(--ngxsmk-color-primary, #7c3aed);
+      border-color: var(--ngxsmk-color-primary);
       box-shadow: 0 0 0 3px
-        color-mix(in srgb, var(--ngxsmk-color-primary, #7c3aed) 12%, transparent);
+        color-mix(in srgb, var(--ngxsmk-color-primary) 12%, transparent);
     }
 
     .ngxsmk-card-input__input--number {
@@ -120,28 +120,28 @@ export type NgxsmkCardBrand = 'visa' | 'mastercard' | 'amex' | 'discover' | 'unk
       letter-spacing: 0.05em;
       padding: 0.15rem 0.4rem;
       border-radius: var(--ngxsmk-radius-sm, 0.25rem);
-      background: var(--ngxsmk-color-surface-variant, #f4f4f5);
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      background: var(--ngxsmk-color-surface-variant);
+      color: var(--ngxsmk-color-on-surface-variant);
     }
 
     .ngxsmk-card-input__brand-tag[data-brand='visa'] {
-      background: #1a1f71;
-      color: #ffffff;
+      background: var(--ngxsmk-color-primary);
+      color: var(--ngxsmk-color-on-primary);
     }
 
     .ngxsmk-card-input__brand-tag[data-brand='mastercard'] {
-      background: #eb001b;
-      color: #ffffff;
+      background: var(--ngxsmk-color-error);
+      color: var(--ngxsmk-color-on-error);
     }
 
     .ngxsmk-card-input__brand-tag[data-brand='amex'] {
-      background: #006fcf;
-      color: #ffffff;
+      background: var(--ngxsmk-color-info);
+      color: var(--ngxsmk-color-on-info);
     }
 
     .ngxsmk-card-input__sub-row {
       display: flex;
-      gap: 0.5rem;
+      gap: var(--ngxsmk-space-2);
     }
 
     .ngxsmk-card-input__input--expiry {

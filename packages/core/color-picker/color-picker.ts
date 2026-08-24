@@ -113,9 +113,9 @@ export type ColorFormat = 'hex' | 'hsl' | 'rgb';
       flex-direction: column;
       gap: var(--ngxsmk-space-3, 0.75rem);
       padding: var(--ngxsmk-space-4, 1rem);
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-xl, 0.75rem);
-      background: var(--ngxsmk-color-surface, #ffffff);
+      background: var(--ngxsmk-color-surface);
       width: 260px;
       box-shadow: var(--ngxsmk-shadow-md, 0 4px 6px -1px rgba(0, 0, 0, 0.1));
     }
@@ -130,7 +130,7 @@ export type ColorFormat = 'hex' | 'hsl' | 'rgb';
       width: 2.25rem;
       height: 2.25rem;
       border-radius: var(--ngxsmk-radius-md, 0.375rem);
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      border: 1px solid var(--ngxsmk-color-outline);
       flex-shrink: 0;
       box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
     }
@@ -142,10 +142,10 @@ export type ColorFormat = 'hex' | 'hsl' | 'rgb';
     .ngxsmk-color-picker__input {
       width: 100%;
       padding: 0.375rem 0.625rem;
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-md, 0.375rem);
-      background: var(--ngxsmk-color-surface, #ffffff);
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      background: var(--ngxsmk-color-surface);
+      color: var(--ngxsmk-color-on-surface);
       font-family: var(--ngxsmk-font-mono, monospace);
       font-size: var(--ngxsmk-text-body-xs-size, 0.75rem);
       font-weight: var(--ngxsmk-font-weight-semibold, 600);
@@ -155,7 +155,7 @@ export type ColorFormat = 'hex' | 'hsl' | 'rgb';
     }
 
     .ngxsmk-color-picker__input:focus {
-      border-color: var(--ngxsmk-color-primary, #7c3aed);
+      border-color: var(--ngxsmk-color-primary);
       box-shadow: var(--ngxsmk-shadow-focus);
     }
 
@@ -168,7 +168,7 @@ export type ColorFormat = 'hex' | 'hsl' | 'rgb';
     .ngxsmk-color-picker__label {
       font-size: var(--ngxsmk-text-body-xs-size, 0.75rem);
       font-weight: var(--ngxsmk-font-weight-medium, 500);
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--ngxsmk-color-on-surface-variant);
     }
 
     .ngxsmk-color-picker__hue-slider {
@@ -198,7 +198,7 @@ export type ColorFormat = 'hex' | 'hsl' | 'rgb';
       height: 1rem;
       border-radius: 50%;
       background: #ffffff;
-      border: 2px solid var(--ngxsmk-color-on-surface, #09090b);
+      border: 2px solid var(--ngxsmk-color-on-surface);
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
       cursor: pointer;
     }
@@ -208,14 +208,14 @@ export type ColorFormat = 'hex' | 'hsl' | 'rgb';
       grid-template-columns: repeat(6, 1fr);
       gap: 0.375rem;
       padding-top: 0.25rem;
-      border-top: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      border-top: 1px solid var(--ngxsmk-color-outline);
     }
 
     .ngxsmk-color-picker__preset-btn {
       width: 1.625rem;
       height: 1.625rem;
       border-radius: var(--ngxsmk-radius-md, 0.375rem);
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      border: 1px solid var(--ngxsmk-color-outline);
       cursor: pointer;
       padding: 0;
       transition:
@@ -228,7 +228,7 @@ export type ColorFormat = 'hex' | 'hsl' | 'rgb';
     }
 
     .ngxsmk-color-picker__preset-btn--selected {
-      outline: 2px solid var(--ngxsmk-color-primary, #7c3aed);
+      outline: 2px solid var(--ngxsmk-color-primary);
       outline-offset: 1px;
     }
 

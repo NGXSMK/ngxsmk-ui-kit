@@ -104,9 +104,9 @@ export type FilterCondition = NgxsmkFilterCondition;
 
     .ngxsmk-filter-bldr {
       padding: 0.85rem;
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-md, 0.375rem);
-      background: var(--ngxsmk-color-surface, #ffffff);
+      background: var(--ngxsmk-color-surface);
       display: flex;
       flex-direction: column;
       gap: 0.75rem;
@@ -121,15 +121,15 @@ export type FilterCondition = NgxsmkFilterCondition;
     .ngxsmk-filter-bldr__title {
       font-size: 0.85rem;
       font-weight: 700;
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      color: var(--ngxsmk-color-on-surface);
     }
 
     .ngxsmk-filter-bldr__add-btn {
       padding: 0.25rem 0.5rem;
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-sm, 0.25rem);
-      background: var(--ngxsmk-color-surface-variant, #f4f4f5);
-      color: var(--ngxsmk-color-primary, #7c3aed);
+      background: var(--ngxsmk-color-surface-variant);
+      color: var(--ngxsmk-color-primary);
       font-size: 0.75rem;
       font-weight: 600;
       cursor: pointer;
@@ -145,7 +145,7 @@ export type FilterCondition = NgxsmkFilterCondition;
     .ngxsmk-filter-bldr__empty {
       padding: 1rem;
       text-align: center;
-      color: var(--ngxsmk-color-on-surface-variant, #a1a1aa);
+      color: var(--ngxsmk-color-on-surface-variant);
       font-size: 0.8rem;
     }
 
@@ -159,7 +159,7 @@ export type FilterCondition = NgxsmkFilterCondition;
       width: 3rem;
       font-size: 0.725rem;
       font-weight: 700;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--ngxsmk-color-on-surface-variant);
       text-transform: uppercase;
       text-align: right;
       flex-shrink: 0;
@@ -168,10 +168,10 @@ export type FilterCondition = NgxsmkFilterCondition;
     .ngxsmk-filter-bldr__select {
       height: 2.25rem;
       padding: 0 0.5rem;
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-sm, 0.25rem);
-      background: var(--ngxsmk-color-surface, #ffffff);
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      background: var(--ngxsmk-color-surface);
+      color: var(--ngxsmk-color-on-surface);
       font-size: 0.8rem;
       font-weight: 500;
       outline: none;
@@ -185,10 +185,10 @@ export type FilterCondition = NgxsmkFilterCondition;
       flex: 1;
       height: 2.25rem;
       padding: 0 0.5rem;
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-sm, 0.25rem);
-      background: var(--ngxsmk-color-surface, #ffffff);
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      background: var(--ngxsmk-color-surface);
+      color: var(--ngxsmk-color-on-surface);
       font-size: 0.8rem;
       outline: none;
     }
@@ -196,14 +196,14 @@ export type FilterCondition = NgxsmkFilterCondition;
     .ngxsmk-filter-bldr__remove-btn {
       border: none;
       background: none;
-      color: var(--ngxsmk-color-on-surface-variant, #a1a1aa);
+      color: var(--ngxsmk-color-on-surface-variant);
       font-size: 0.8rem;
       cursor: pointer;
       padding: 0.2rem 0.4rem;
     }
 
     .ngxsmk-filter-bldr__remove-btn:hover {
-      color: var(--ngxsmk-color-error, #ef4444);
+      color: var(--ngxsmk-color-error);
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

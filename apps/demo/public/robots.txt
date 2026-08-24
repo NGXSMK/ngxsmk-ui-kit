@@ -1,0 +1,30 @@
+# NGXSMK UI Kit - Robots.txt
+# https://ngxsmk.github.io/ngxsmk-ui-kit
+
+User-agent: *
+Allow: /
+Disallow: /api/private/
+Disallow: /*?*preview=*
+
+# AI & LLM Search Crawlers
+User-agent: GPTBot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+
+User-agent: ClaudeBot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Sitemap Index
+Sitemap: https://ngxsmk.github.io/ngxsmk-ui-kit/sitemap.xml

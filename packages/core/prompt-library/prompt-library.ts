@@ -87,10 +87,10 @@ export interface NgxsmkPromptLibraryItem {
       width: 100%;
       height: 2.5rem;
       padding: 0 0.85rem;
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-md, 0.375rem);
-      background: var(--ngxsmk-color-surface, #ffffff);
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      background: var(--ngxsmk-color-surface);
+      color: var(--ngxsmk-color-on-surface);
       font-family: inherit;
       font-size: 0.85rem;
       outline: none;
@@ -100,9 +100,9 @@ export interface NgxsmkPromptLibraryItem {
     }
 
     .ngxsmk-prompt-lib__search:focus {
-      border-color: var(--ngxsmk-color-primary, #7c3aed);
+      border-color: var(--ngxsmk-color-primary);
       box-shadow: 0 0 0 3px
-        color-mix(in srgb, var(--ngxsmk-color-primary, #7c3aed) 12%, transparent);
+        color-mix(in srgb, var(--ngxsmk-color-primary) 12%, transparent);
     }
 
     .ngxsmk-prompt-lib__grid {
@@ -115,15 +115,15 @@ export interface NgxsmkPromptLibraryItem {
       grid-column: 1 / -1;
       padding: 2rem;
       text-align: center;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--ngxsmk-color-on-surface-variant);
       font-size: 0.85rem;
     }
 
     .ngxsmk-prompt-lib__card {
       padding: 0.85rem;
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-md, 0.375rem);
-      background: var(--ngxsmk-color-surface, #ffffff);
+      background: var(--ngxsmk-color-surface);
       cursor: pointer;
       display: flex;
       flex-direction: column;
@@ -135,7 +135,7 @@ export interface NgxsmkPromptLibraryItem {
     }
 
     .ngxsmk-prompt-lib__card:hover {
-      border-color: var(--ngxsmk-color-primary, #7c3aed);
+      border-color: var(--ngxsmk-color-primary);
       box-shadow: 0 4px 12px rgba(124, 58, 237, 0.08);
       transform: translateY(-1px);
     }
@@ -151,7 +151,7 @@ export interface NgxsmkPromptLibraryItem {
     .ngxsmk-prompt-lib__title {
       font-size: 0.875rem;
       font-weight: 700;
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      color: var(--ngxsmk-color-on-surface);
     }
 
     .ngxsmk-prompt-lib__cat {
@@ -159,15 +159,15 @@ export interface NgxsmkPromptLibraryItem {
       font-weight: 600;
       padding: 0.15rem 0.4rem;
       border-radius: var(--ngxsmk-radius-sm, 0.25rem);
-      background: var(--ngxsmk-color-surface-variant, #f4f4f5);
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      background: var(--ngxsmk-color-surface-variant);
+      color: var(--ngxsmk-color-on-surface-variant);
     }
 
     .ngxsmk-prompt-lib__desc {
       margin: 0 0 0.5rem;
       font-size: 0.8rem;
       line-height: 1.45;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--ngxsmk-color-on-surface-variant);
       display: -webkit-box;
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
@@ -183,7 +183,7 @@ export interface NgxsmkPromptLibraryItem {
     .ngxsmk-prompt-lib__tag {
       font-family: var(--ngxsmk-font-mono, monospace);
       font-size: 0.65rem;
-      color: var(--ngxsmk-color-primary, #7c3aed);
+      color: var(--ngxsmk-color-primary);
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

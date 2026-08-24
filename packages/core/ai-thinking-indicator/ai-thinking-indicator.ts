@@ -47,23 +47,23 @@ export type NgxsmkAiThinkingVariant = 'orb' | 'wave' | 'dots';
   styles: `
     :host {
       display: inline-block;
-      font-family: var(--ngxsmk-font-sans, system-ui);
+      font-family: var(--ngxsmk-font-sans);
     }
 
     .ngxsmk-ai-thinking {
       display: flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: var(--ngxsmk-space-2);
     }
 
     /* ORB VARIANT */
     .ngxsmk-ai-thinking__orb {
       position: relative;
-      border-radius: var(--ngxsmk-radius-full, 9999px);
+      border-radius: var(--ngxsmk-radius-full);
       background: radial-gradient(
         circle,
-        var(--ngxsmk-color-primary, #7c3aed) 0%,
-        rgba(124, 58, 237, 0.2) 70%
+        var(--ngxsmk-color-primary) 0%,
+        color-mix(in srgb, var(--ngxsmk-color-primary) 20%, transparent) 70%
       );
       display: flex;
       align-items: center;
@@ -74,23 +74,23 @@ export type NgxsmkAiThinkingVariant = 'orb' | 'wave' | 'dots';
     .ngxsmk-ai-thinking__orb-inner {
       width: 45%;
       height: 45%;
-      border-radius: var(--ngxsmk-radius-full, 9999px);
-      background: #ffffff;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+      border-radius: var(--ngxsmk-radius-full);
+      background: var(--ngxsmk-color-surface);
+      box-shadow: 0 0 10px color-mix(in srgb, var(--ngxsmk-color-primary) 50%, white);
       animation: ngxsmk-orb-glow 1.2s ease-in-out infinite alternate;
     }
 
     /* DOTS VARIANT */
     .ngxsmk-ai-thinking__dots {
       display: flex;
-      gap: 0.3rem;
+      gap: var(--ngxsmk-space-1);
     }
 
     .ngxsmk-ai-thinking__dot {
       width: 0.5rem;
       height: 0.5rem;
-      border-radius: 9999px;
-      background: var(--ngxsmk-color-primary, #7c3aed);
+      border-radius: var(--ngxsmk-radius-full);
+      background: var(--ngxsmk-color-primary);
       animation: ngxsmk-dots-bounce 1.2s infinite ease-in-out both;
     }
 
@@ -105,15 +105,15 @@ export type NgxsmkAiThinkingVariant = 'orb' | 'wave' | 'dots';
     .ngxsmk-ai-thinking__wave {
       display: flex;
       align-items: center;
-      gap: 0.2rem;
+      gap: var(--ngxsmk-space-0-5);
       height: 1.25rem;
     }
 
     .ngxsmk-ai-thinking__wave-bar {
       width: 0.2rem;
       height: 100%;
-      background: var(--ngxsmk-color-primary, #7c3aed);
-      border-radius: 9999px;
+      background: var(--ngxsmk-color-primary);
+      border-radius: var(--ngxsmk-radius-full);
       animation: ngxsmk-wave-scale 1s ease-in-out infinite alternate;
     }
 
@@ -125,20 +125,20 @@ export type NgxsmkAiThinkingVariant = 'orb' | 'wave' | 'dots';
     }
 
     .ngxsmk-ai-thinking__label {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      font-size: var(--ngxsmk-text-label-sm-size);
+      font-weight: var(--ngxsmk-font-weight-semibold, 600);
+      color: var(--ngxsmk-color-on-surface-variant);
       letter-spacing: 0.02em;
     }
 
     @keyframes ngxsmk-orb-pulse {
       0% {
         transform: scale(0.85);
-        box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.4);
+        box-shadow: 0 0 0 0 color-mix(in srgb, var(--ngxsmk-color-primary) 40%, transparent);
       }
       100% {
         transform: scale(1.15);
-        box-shadow: 0 0 20px 8px rgba(124, 58, 237, 0.3);
+        box-shadow: 0 0 20px 8px color-mix(in srgb, var(--ngxsmk-color-primary) 30%, transparent);
       }
     }
 

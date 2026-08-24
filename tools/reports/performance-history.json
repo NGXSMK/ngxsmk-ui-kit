@@ -1,0 +1,92 @@
+[
+  {
+    "timestamp": "2026-08-24T19:37:58.440Z",
+    "entryPoints": 246,
+    "totalRawBytes": 2376467,
+    "totalGzipBytes": 500635,
+    "totalBrotliBytes": 414569,
+    "signalOpsPerSec": 143719460,
+    "virtualScrollLatencyMs": 0,
+    "ssrThroughputPerSec": 23809524
+  },
+  {
+    "timestamp": "2026-08-24T19:38:20.270Z",
+    "entryPoints": 246,
+    "totalRawBytes": 2376467,
+    "totalGzipBytes": 500635,
+    "totalBrotliBytes": 414569,
+    "signalOpsPerSec": 150761345,
+    "virtualScrollLatencyMs": 0,
+    "ssrThroughputPerSec": 32467532
+  },
+  {
+    "timestamp": "2026-08-24T19:42:01.538Z",
+    "entryPoints": 246,
+    "totalRawBytes": 2376467,
+    "totalGzipBytes": 500635,
+    "totalBrotliBytes": 414569,
+    "signalOpsPerSec": 139997200,
+    "virtualScrollLatencyMs": 0,
+    "ssrThroughputPerSec": 37313433
+  },
+  {
+    "timestamp": "2026-08-24T19:46:06.240Z",
+    "entryPoints": 248,
+    "totalRawBytes": 2384050,
+    "totalGzipBytes": 502065,
+    "totalBrotliBytes": 415927,
+    "signalOpsPerSec": 151837230,
+    "virtualScrollLatencyMs": 0,
+    "ssrThroughputPerSec": 12345679
+  },
+  {
+    "timestamp": "2026-08-24T19:50:48.287Z",
+    "entryPoints": 248,
+    "totalRawBytes": 2384050,
+    "totalGzipBytes": 502065,
+    "totalBrotliBytes": 415927,
+    "signalOpsPerSec": 149276011,
+    "virtualScrollLatencyMs": 0,
+    "ssrThroughputPerSec": 20576132
+  },
+  {
+    "timestamp": "2026-08-24T19:54:34.336Z",
+    "entryPoints": 248,
+    "totalRawBytes": 2384050,
+    "totalGzipBytes": 502065,
+    "totalBrotliBytes": 415927,
+    "signalOpsPerSec": 150875075,
+    "virtualScrollLatencyMs": 0,
+    "ssrThroughputPerSec": 28571429
+  },
+  {
+    "timestamp": "2026-08-24T19:56:34.295Z",
+    "entryPoints": 248,
+    "totalRawBytes": 2384050,
+    "totalGzipBytes": 502065,
+    "totalBrotliBytes": 415927,
+    "signalOpsPerSec": 140984069,
+    "virtualScrollLatencyMs": 0,
+    "ssrThroughputPerSec": 29239766
+  },
+  {
+    "timestamp": "2026-08-24T20:01:55.347Z",
+    "entryPoints": 248,
+    "totalRawBytes": 2384050,
+    "totalGzipBytes": 502065,
+    "totalBrotliBytes": 415927,
+    "signalOpsPerSec": 152021891,
+    "virtualScrollLatencyMs": 0,
+    "ssrThroughputPerSec": 27932961
+  },
+  {
+    "timestamp": "2026-08-24T20:05:28.125Z",
+    "entryPoints": 248,
+    "totalRawBytes": 2384050,
+    "totalGzipBytes": 502065,
+    "totalBrotliBytes": 415927,
+    "signalOpsPerSec": 144592250,
+    "virtualScrollLatencyMs": 0,
+    "ssrThroughputPerSec": 18248175
+  }
+]

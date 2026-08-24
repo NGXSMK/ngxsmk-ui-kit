@@ -42,12 +42,17 @@ import {
     :host([data-interactive]) {
       cursor: pointer;
       transition:
-        box-shadow var(--ngxsmk-duration-normal) var(--ngxsmk-ease-out),
-        border-color var(--ngxsmk-duration-normal) var(--ngxsmk-ease-out);
+        box-shadow var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
+        border-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
+        transform var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
     :host([data-interactive]:hover) {
       box-shadow: var(--ngxsmk-shadow-md);
       border-color: var(--ngxsmk-color-outline-strong);
+      transform: var(--ngxsmk-hover-lift);
+    }
+    :host([data-interactive]:active) {
+      transform: var(--ngxsmk-press-scale);
     }
     :host([data-interactive]:focus-visible) {
       outline: none;

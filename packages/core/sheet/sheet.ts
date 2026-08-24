@@ -149,12 +149,13 @@ export type NgxsmkSheetSide = 'left' | 'right' | 'bottom';
       box-shadow: var(--ngxsmk-focus-ring);
     }
 
-    .ngxsmk-sheet__body {
-      flex: 1;
-      overflow-y: auto;
-      padding: var(--ngxsmk-space-6);
-      font-size: var(--ngxsmk-text-body-md-size);
-      line-height: var(--ngxsmk-text-body-md-line);
+    .ngxsmk-sheet__panel[data-side='left'] .ngxsmk-sheet__header,
+    .ngxsmk-sheet__panel[data-side='right'] .ngxsmk-sheet__header {
+      padding-top: calc(var(--ngxsmk-space-4) + var(--ngxsmk-safe-area-top, env(safe-area-inset-top, 0px)));
+    }
+
+    .ngxsmk-sheet__panel[data-side='bottom'] .ngxsmk-sheet__body {
+      padding-bottom: calc(var(--ngxsmk-space-6) + var(--ngxsmk-safe-area-bottom, env(safe-area-inset-bottom, 0px)));
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

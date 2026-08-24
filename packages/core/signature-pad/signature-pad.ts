@@ -77,9 +77,9 @@ import { ngxsmkUniqueId } from '@ngxsmk/core/util';
       position: relative;
       display: inline-flex;
       flex-direction: column;
-      border: 1px solid var(--ngxsmk-color-outline, #d1d5db);
+      border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-md, 0.5rem);
-      background: var(--ngxsmk-color-surface, #ffffff);
+      background: var(--ngxsmk-color-surface);
       overflow: hidden;
     }
 
@@ -98,25 +98,25 @@ import { ngxsmkUniqueId } from '@ngxsmk/core/util';
       display: flex;
       justify-content: flex-end;
       padding: var(--ngxsmk-space-2, 0.5rem);
-      border-top: 1px dashed var(--ngxsmk-color-outline, #e5e7eb);
-      background: var(--ngxsmk-color-surface-variant, #fafafa);
+      border-top: 1px dashed var(--ngxsmk-color-outline);
+      background: var(--ngxsmk-color-surface-variant);
     }
 
     .ngxsmk-signature-pad__btn {
       padding: 0.25rem 0.625rem;
-      border: 1px solid var(--ngxsmk-color-outline, #d1d5db);
+      border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-sm, 0.25rem);
-      background: var(--ngxsmk-color-surface, #ffffff);
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      background: var(--ngxsmk-color-surface);
+      color: var(--ngxsmk-color-on-surface);
       font-size: var(--ngxsmk-text-body-xs-size, 0.75rem);
       cursor: pointer;
       transition: all 0.15s ease;
     }
 
     .ngxsmk-signature-pad__btn--clear:hover:not(:disabled) {
-      background: var(--ngxsmk-color-error, #ef4444);
-      color: var(--ngxsmk-color-on-error, #ffffff);
-      border-color: var(--ngxsmk-color-error, #ef4444);
+      background: var(--ngxsmk-color-error);
+      color: var(--ngxsmk-color-on-error);
+      border-color: var(--ngxsmk-color-error);
     }
 
     .ngxsmk-signature-pad__btn:disabled {

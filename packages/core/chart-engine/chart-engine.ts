@@ -158,9 +158,9 @@ export const SHARED_CHART_STYLES = `
     min-width: 64px;
     padding: 6px 9px;
     border-radius: var(--ngxsmk-radius-base, 0.5rem);
-    background: var(--ngxsmk-color-surface, #ffffff);
-    color: var(--ngxsmk-color-on-surface, #0a1317);
-    border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+    background: var(--ngxsmk-color-surface);
+    color: var(--ngxsmk-color-on-surface);
+    border: 1px solid var(--ngxsmk-color-outline);
     box-shadow: var(--ngxsmk-shadow-lg, 0 6px 20px rgba(15, 23, 42, 0.18));
     font-family: var(--ngxsmk-font-sans, system-ui), sans-serif;
     font-size: var(--ngxsmk-text-body-xs-size);
@@ -186,6 +186,17 @@ export const SHARED_CHART_STYLES = `
   }
   .ngxsmk-chart-tip__line {
     opacity: 0.85;
+  }
+  .ngxsmk-chart-sr-table {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
   }
   @media (prefers-reduced-motion: reduce) {
     .ngxsmk-chart-tip {

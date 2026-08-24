@@ -1,5 +1,5 @@
 import { UpperCasePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, model, output, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, model, output, signal } from '@angular/core';
 
 export interface NgxsmkKanbanColumn {
   id: string;
@@ -51,13 +51,13 @@ export type KanbanItem = NgxsmkKanbanItem;
               <h4 class="ngxsmk-kanban__col-title">{{ col.title }}</h4>
             </div>
             <span class="ngxsmk-kanban__count">
-              {{ getColumnItems(col.id).length }}
+              {{ (itemsByColumn().get(col.id) || []).length }}
             </span>
           </div>
 
           <!-- COLUMN CARDS LIST -->
           <div class="ngxsmk-kanban__col-list">
-            @for (item of getColumnItems(col.id); track item.id) {
+            @for (item of itemsByColumn().get(col.id) || []; track item.id) {
               <div
                 class="ngxsmk-kanban__card"
                 [class.ngxsmk-kanban__card--dragging]="draggedItem()?.id === item.id"
@@ -116,8 +116,8 @@ export type KanbanItem = NgxsmkKanbanItem;
       flex: 1;
       min-width: 16rem;
       max-width: 22rem;
-      background: var(--ngxsmk-color-surface-variant, #f4f4f5);
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      background: var(--ngxsmk-color-surface-variant);
+      border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-lg, 0.5rem);
       padding: 0.75rem;
       display: flex;
@@ -130,14 +130,14 @@ export type KanbanItem = NgxsmkKanbanItem;
     }
 
     .ngxsmk-kanban__col--drag-over {
-      border-color: var(--ngxsmk-color-primary, #7c3aed);
+      border-color: var(--ngxsmk-color-primary);
       background: color-mix(
         in srgb,
-        var(--ngxsmk-color-primary, #7c3aed) 8%,
-        var(--ngxsmk-color-surface-variant, #f4f4f5)
+        var(--ngxsmk-color-primary) 8%,
+        var(--ngxsmk-color-surface-variant)
       );
       box-shadow: 0 0 0 2px
-        color-mix(in srgb, var(--ngxsmk-color-primary, #7c3aed) 25%, transparent);
+        color-mix(in srgb, var(--ngxsmk-color-primary) 25%, transparent);
     }
 
     .ngxsmk-kanban__col-header {
@@ -163,7 +163,7 @@ export type KanbanItem = NgxsmkKanbanItem;
       margin: 0;
       font-size: 0.85rem;
       font-weight: 700;
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      color: var(--ngxsmk-color-on-surface);
     }
 
     .ngxsmk-kanban__count {
@@ -171,8 +171,8 @@ export type KanbanItem = NgxsmkKanbanItem;
       font-weight: 700;
       padding: 0.1rem 0.4rem;
       border-radius: var(--ngxsmk-radius-full, 9999px);
-      background: var(--ngxsmk-color-surface, #ffffff);
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      background: var(--ngxsmk-color-surface);
+      color: var(--ngxsmk-color-on-surface-variant);
     }
 
     .ngxsmk-kanban__col-list {
@@ -185,8 +185,8 @@ export type KanbanItem = NgxsmkKanbanItem;
     .ngxsmk-kanban__card {
       padding: 0.75rem;
       border-radius: var(--ngxsmk-radius-md, 0.375rem);
-      background: var(--ngxsmk-color-surface, #ffffff);
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      background: var(--ngxsmk-color-surface);
+      border: 1px solid var(--ngxsmk-color-outline);
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
       cursor: grab;
       display: flex;
@@ -205,7 +205,7 @@ export type KanbanItem = NgxsmkKanbanItem;
     }
 
     .ngxsmk-kanban__card:hover {
-      border-color: var(--ngxsmk-color-primary, #7c3aed);
+      border-color: var(--ngxsmk-color-primary);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
       transform: translateY(-1px);
     }
@@ -219,14 +219,14 @@ export type KanbanItem = NgxsmkKanbanItem;
       margin: 0;
       font-size: 0.85rem;
       font-weight: 600;
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      color: var(--ngxsmk-color-on-surface);
     }
 
     .ngxsmk-kanban__card-desc {
       margin: 0;
       font-size: 0.775rem;
       line-height: 1.4;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--ngxsmk-color-on-surface-variant);
     }
 
     .ngxsmk-kanban__card-footer {
@@ -246,8 +246,8 @@ export type KanbanItem = NgxsmkKanbanItem;
       font-weight: 600;
       padding: 0.1rem 0.35rem;
       border-radius: var(--ngxsmk-radius-sm, 0.25rem);
-      background: var(--ngxsmk-color-primary-container, #ede9fe);
-      color: var(--ngxsmk-color-primary, #7c3aed);
+      background: var(--ngxsmk-color-primary-container);
+      color: var(--ngxsmk-color-primary);
     }
 
     .ngxsmk-kanban__avatar {
@@ -256,8 +256,8 @@ export type KanbanItem = NgxsmkKanbanItem;
       width: 1.35rem;
       height: 1.35rem;
       border-radius: 9999px;
-      background: var(--ngxsmk-color-surface-variant, #f4f4f5);
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      background: var(--ngxsmk-color-surface-variant);
+      color: var(--ngxsmk-color-on-surface);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -285,13 +285,30 @@ export class NgxsmkKanbanBoard {
   protected readonly draggedItem = signal<NgxsmkKanbanItem | null>(null);
   protected readonly dragOverColId = signal<string | null>(null);
 
-  protected getColumnItems(colId: string): NgxsmkKanbanItem[] {
+  protected readonly itemsByColumn = computed(() => {
+    const map = new Map<string, NgxsmkKanbanItem[]>();
     const flatItems = this.items();
-    if (flatItems && flatItems.length > 0) {
-      return flatItems.filter((i) => i.columnId === colId);
+    const cols = this.columns();
+    for (const c of cols) {
+      map.set(c.id, c.items ? [...c.items] : []);
     }
-    const col = this.columns().find((c) => c.id === colId);
-    return col?.items || [];
+    if (flatItems && flatItems.length > 0) {
+      for (const item of flatItems) {
+        if (item.columnId) {
+          const list = map.get(item.columnId);
+          if (list) {
+            list.push(item);
+          } else {
+            map.set(item.columnId, [item]);
+          }
+        }
+      }
+    }
+    return map;
+  });
+
+  protected getColumnItems(colId: string): NgxsmkKanbanItem[] {
+    return this.itemsByColumn().get(colId) || [];
   }
 
   protected _onDragStart(event: DragEvent, item: NgxsmkKanbanItem, colId: string): void {

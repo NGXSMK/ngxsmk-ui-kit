@@ -81,7 +81,7 @@ import {
       user-select: none;
       -webkit-user-select: none;
       cursor: ew-resize;
-      background: var(--ngxsmk-color-surface-variant, #f4f4f5);
+      background: var(--ngxsmk-color-surface-variant);
     }
 
     .ngxsmk-compare-img__full {
@@ -140,9 +140,9 @@ import {
       width: 2.25rem;
       height: 2.25rem;
       border-radius: var(--ngxsmk-radius-full, 9999px);
-      background: var(--ngxsmk-color-surface, #ffffff);
-      color: var(--ngxsmk-color-on-surface, #09090b);
-      border: 2px solid var(--ngxsmk-color-outline, #e4e4e7);
+      background: var(--ngxsmk-color-surface);
+      color: var(--ngxsmk-color-on-surface);
+      border: 2px solid var(--ngxsmk-color-outline);
       display: flex;
       align-items: center;
       justify-content: center;

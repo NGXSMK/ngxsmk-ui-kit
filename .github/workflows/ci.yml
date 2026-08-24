@@ -28,6 +28,27 @@ jobs:
       - name: Lint all projects
         run: npm run lint
 
+      - name: Verify design system governance
+        run: npm run governance
+
+      - name: Verify component consistency
+        run: npm run audit:consistency
+
+      - name: Verify accessibility standards
+        run: npm run audit:a11y
+
+      - name: Verify component simplicity & complexity standards
+        run: npm run audit:complexity
+
+      - name: Verify migration codemods
+        run: npm run test:migration
+
+      - name: Verify Technical SEO & GEO
+        run: npm run audit:seo
+
+      - name: Verify Documentation Quality & Links
+        run: npm run audit:docs
+
   test:
     name: Test
     runs-on: ubuntu-latest
@@ -73,6 +94,9 @@ jobs:
 
       - name: Check bundle sizes
         run: npm run size
+
+      - name: Run performance laboratory benchmarks
+        run: npm run perf:lab
 
       - name: Check zoneless output
         run: npm run check:zoneless

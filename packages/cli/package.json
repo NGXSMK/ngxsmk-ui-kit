@@ -1,11 +1,21 @@
 {
   "name": "@ngxsmk/cli",
-  "version": "2.0.0",
+  "version": "3.0.0",
+  "type": "module",
   "description": "CLI & schematics for the @ngxsmk signal-native Angular UI kit",
   "bin": {
     "ngxsmk": "./dist/index.js"
   },
   "schematics": "./collection.json",
+  "ng-update": {
+    "migrations": "./migration.json"
+  },
+  "files": [
+    "dist",
+    "collection.json",
+    "migration.json",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsc -p tsconfig.json"
   },

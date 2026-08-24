@@ -52,9 +52,7 @@ export class NgxsmkImperativeDialog {
     this.appRef.attachView(compRef.hostView);
     compRef.setInput('title', title);
     compRef.setInput('open', true);
-    // Flush CD (renders the view and runs the dialog's showModal effect) so the
-    // dialog opens even when invoked outside Angular's zone.
-    this.appRef.tick();
+    compRef.changeDetectorRef.detectChanges();
 
     // Tear everything down once the dialog reports itself closed.
     const watcher = effect(
@@ -108,7 +106,7 @@ export class NgxsmkImperativeAlertDialog {
       this.doc.body.appendChild(rootNode(compRef));
       this.appRef.attachView(compRef.hostView);
       compRef.setInput('open', true);
-      this.appRef.tick();
+      compRef.changeDetectorRef.detectChanges();
 
       let settled = false;
       const finish = (result: boolean) => {

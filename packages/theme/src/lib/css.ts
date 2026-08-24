@@ -133,6 +133,13 @@ function staticVars(theme: ResolvedTheme): Vars {
       '0 0 0 2px color-mix(in srgb, var(--ngxsmk-color-error) 15%, transparent), ' +
       '0 0 0 4px color-mix(in srgb, var(--ngxsmk-color-error) 45%, transparent)',
 
+    // Mobile viewport & safe-area tokens (iOS / Android / Ionic)
+    '--ngxsmk-safe-area-top': 'env(safe-area-inset-top, 0px)',
+    '--ngxsmk-safe-area-bottom': 'env(safe-area-inset-bottom, 0px)',
+    '--ngxsmk-safe-area-left': 'env(safe-area-inset-left, 0px)',
+    '--ngxsmk-safe-area-right': 'env(safe-area-inset-right, 0px)',
+    '--ngxsmk-touch-target-min': '44px',
+
     // Component-specific token defaults
     ...Object.values(COMPONENT_TOKEN_DEFAULTS).reduce(
       (merged, tokens) => ({ ...merged, ...tokens }),
@@ -222,12 +229,17 @@ function lightVars(theme: ResolvedTheme): Vars {
     '--ngxsmk-color-on-surface': '#0A1317',
     '--ngxsmk-color-surface-variant': theme.neutral[100],
     '--ngxsmk-color-on-surface-variant': theme.neutral[500],
+    '--ngxsmk-color-surface-muted': theme.neutral[50],
+    '--ngxsmk-color-surface-elevated': '#FFFFFF',
+    '--ngxsmk-color-surface-overlay': '#FFFFFF',
+    '--ngxsmk-color-on-surface-muted': theme.neutral[400],
     '--ngxsmk-color-surface-hover': 'rgb(5 54 89 / 0.05)',
     '--ngxsmk-color-surface-active': 'rgb(5 54 89 / 0.1)',
     '--ngxsmk-color-surface-container': '#FFFFFF',
     '--ngxsmk-color-outline': 'rgb(5 54 89 / 0.1)',
     '--ngxsmk-color-outline-strong': theme.neutral[200],
     '--ngxsmk-color-outline-variant': 'rgb(5 54 89 / 0.06)',
+    '--ngxsmk-color-outline-subtle': 'rgb(5 54 89 / 0.05)',
 
     // Elevation ladder
     '--ngxsmk-color-surface-1': '#FFFFFF',
@@ -299,12 +311,17 @@ function darkVars(theme: ResolvedTheme): Vars {
     '--ngxsmk-color-on-surface': '#DFE2E5',
     '--ngxsmk-color-surface-variant': '#28292C',
     '--ngxsmk-color-on-surface-variant': '#AAAFB5',
+    '--ngxsmk-color-surface-muted': '#141416',
+    '--ngxsmk-color-surface-elevated': '#28292C',
+    '--ngxsmk-color-surface-overlay': '#2F3136',
+    '--ngxsmk-color-on-surface-muted': '#777C85',
     '--ngxsmk-color-surface-hover': 'rgb(255 255 255 / 0.05)',
     '--ngxsmk-color-surface-active': 'rgb(255 255 255 / 0.1)',
     '--ngxsmk-color-surface-container': '#28292C',
     '--ngxsmk-color-outline': 'rgb(242 244 246 / 0.1)',
     '--ngxsmk-color-outline-strong': '#494D53',
     '--ngxsmk-color-outline-variant': 'rgb(242 244 246 / 0.06)',
+    '--ngxsmk-color-outline-subtle': 'rgb(242 244 246 / 0.05)',
 
     // Elevation ladder
     '--ngxsmk-color-surface-1': theme.neutral[800],

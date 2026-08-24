@@ -1,4 +1,4 @@
-﻿import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 @Component({
   standalone: true,
@@ -26,7 +26,6 @@
 export class NgxsmkAvatarGroupOverflow {
   readonly count = input.required<number>();
 
-  protected ariaLabel(): string {
-    return this.count() + ' more';
-  }
+  protected readonly ariaLabel = computed(() => `${this.count()} more`);
 }
+

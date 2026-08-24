@@ -1,35 +1,61 @@
-﻿import {
+import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
   HostListener,
+  forwardRef,
   inject,
   input,
   model,
   output,
   signal,
+  computed,
   booleanAttribute,
 } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ngxsmkUniqueId } from '@ngxsmk/core/util';
 import { ListboxKeyboard } from '@ngxsmk/cdk/listbox-keyboard';
+import { CvaBase } from '@ngxsmk/cdk/cva-base';
+import { NGXSMK_FORM_FIELD_CONTROL, NgxsmkFormFieldControl } from '@ngxsmk/core/form-field';
+
+export interface NgxsmkMultiSelectOption {
+  value: string;
+  label: string;
+  disabled?: boolean;
+}
 
 @Component({
   selector: 'ngxsmk-multi-select',
   standalone: true,
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => NgxsmkMultiSelect),
+      multi: true,
+    },
+    {
+      provide: NGXSMK_FORM_FIELD_CONTROL,
+      useExisting: forwardRef(() => NgxsmkMultiSelect),
+    },
+  ],
   template: `
     <div
       #trigger
       class="ngxsmk-multi-select__trigger"
+      [id]="id()"
       [class.ngxsmk-multi-select__trigger--open]="open()"
-      [class.ngxsmk-multi-select__trigger--disabled]="disabled()"
-      [attr.tabindex]="disabled() ? -1 : 0"
+      [class.ngxsmk-multi-select__trigger--disabled]="isDisabled()"
+      [attr.tabindex]="isDisabled() ? -1 : 0"
       role="combobox"
       [attr.aria-expanded]="open()"
       [attr.aria-controls]="open() ? listboxId : null"
       [attr.aria-activedescendant]="activeDescendant()"
-      [attr.aria-disabled]="disabled() ? 'true' : null"
+      [attr.aria-disabled]="isDisabled() ? 'true' : null"
+      [attr.aria-invalid]="ariaInvalid() ? 'true' : null"
+      [attr.aria-describedby]="ariaDescribedby()"
       (click)="toggle()"
       (keydown)="onKeydown($event)"
+      (blur)="onBlur()"
     >
       <div class="ngxsmk-multi-select__tags">
         @for (s of selectedValues(); track s) {
@@ -39,7 +65,7 @@ import { ListboxKeyboard } from '@ngxsmk/cdk/listbox-keyboard';
             <button
               type="button"
               class="ngxsmk-multi-select__tag-remove"
-              [disabled]="disabled()"
+              [disabled]="isDisabled()"
               (click)="remove(s)"
               aria-label="Remove"
             >
@@ -91,7 +117,8 @@ import { ListboxKeyboard } from '@ngxsmk/cdk/listbox-keyboard';
   `,
   host: {
     class: 'ngxsmk-multi-select',
-    '[attr.data-disabled]': 'disabled() ? "" : null',
+    '[attr.data-disabled]': 'isDisabled() ? "" : null',
+    '[attr.data-invalid]': 'ariaInvalid() ? "" : null',
   },
   styles: `
     :host {
@@ -116,7 +143,7 @@ import { ListboxKeyboard } from '@ngxsmk/cdk/listbox-keyboard';
       border-radius: var(--ngxsmk-radius-base);
       background: var(--ngxsmk-color-surface);
       cursor: pointer;
-      transition: border-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
+      transition: border-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out), box-shadow var(--ngxsmk-duration-fast);
     }
 
     .ngxsmk-multi-select__trigger:hover:not(.ngxsmk-multi-select__trigger--disabled) {
@@ -134,10 +161,18 @@ import { ListboxKeyboard } from '@ngxsmk/cdk/listbox-keyboard';
       box-shadow: var(--ngxsmk-focus-ring);
     }
 
+    :host([data-invalid]) .ngxsmk-multi-select__trigger {
+      border-color: var(--ngxsmk-color-error);
+    }
+    :host([data-invalid]) .ngxsmk-multi-select__trigger:focus-visible {
+      box-shadow: var(--ngxsmk-focus-ring-error);
+    }
+
     .ngxsmk-multi-select__trigger--disabled {
       opacity: var(--ngxsmk-button-disabled-opacity, 0.5);
       cursor: not-allowed;
       pointer-events: none;
+      background: var(--ngxsmk-color-surface-variant);
     }
 
     .ngxsmk-multi-select__tags {
@@ -145,12 +180,6 @@ import { ListboxKeyboard } from '@ngxsmk/cdk/listbox-keyboard';
       flex-wrap: wrap;
       gap: var(--ngxsmk-space-1-5);
       flex: 1;
-      align-items: center;
-    }
-
-    .ngxsmk-multi-select__placeholder {
-      color: var(--ngxsmk-color-on-surface-variant);
-      user-select: none;
     }
 
     .ngxsmk-multi-select__tag {
@@ -158,35 +187,39 @@ import { ListboxKeyboard } from '@ngxsmk/cdk/listbox-keyboard';
       align-items: center;
       gap: var(--ngxsmk-space-1);
       padding: var(--ngxsmk-space-0-5) var(--ngxsmk-space-2);
-      background: var(--ngxsmk-color-primary-container);
-      color: var(--ngxsmk-color-on-primary-container);
       border-radius: var(--ngxsmk-radius-sm);
-      font-size: var(--ngxsmk-text-body-sm-size);
-      font-weight: var(--ngxsmk-font-weight-medium, 500);
+      background: var(--ngxsmk-color-primary-container, rgba(0,0,0,0.06));
+      color: var(--ngxsmk-color-on-primary-container, var(--ngxsmk-color-on-surface));
+      font-size: var(--ngxsmk-text-label-md-size);
+      line-height: var(--ngxsmk-text-label-md-line);
     }
 
     .ngxsmk-multi-select__tag-remove {
-      border: none;
-      background: none;
-      cursor: pointer;
-      font-size: var(--ngxsmk-text-body-lg-size);
-      line-height: var(--ngxsmk-leading-none, 1);
-      padding: 0;
-      color: inherit;
-      opacity: var(--ngxsmk-opacity-muted);
-      display: flex;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
+      padding: 0;
+      border: none;
+      background: none;
+      color: inherit;
+      cursor: pointer;
+      font-size: 1.1em;
+      line-height: 1;
+      opacity: 0.7;
     }
-
     .ngxsmk-multi-select__tag-remove:hover {
       opacity: 1;
     }
 
+    .ngxsmk-multi-select__placeholder {
+      color: var(--ngxsmk-color-on-surface-variant);
+      user-select: none;
+    }
+
     .ngxsmk-multi-select__chevron {
-      flex: 0 0 auto;
       width: 1rem;
       height: 1rem;
+      flex-shrink: 0;
       color: var(--ngxsmk-color-on-surface-variant);
       transition: transform var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
@@ -234,17 +267,32 @@ import { ListboxKeyboard } from '@ngxsmk/cdk/listbox-keyboard';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NgxsmkMultiSelect {
-  readonly options = input.required<{ value: string; label: string }[]>();
+export class NgxsmkMultiSelect extends CvaBase<string[]> implements NgxsmkFormFieldControl {
+  readonly options = input.required<NgxsmkMultiSelectOption[]>();
   readonly value = model<string[]>([]);
   readonly placeholder = input('');
   readonly disabled = input(false, { transform: booleanAttribute });
+  readonly id = input(ngxsmkUniqueId('ngxsmk-multi-select'));
+
+  readonly ariaInvalid = model(false);
+  readonly ariaDescribedby = model<string | null>(null);
+
   readonly changed = output<string[]>();
 
   protected readonly listboxId = ngxsmkUniqueId('ngxsmk-multi-select-listbox');
   protected readonly open = signal(false);
 
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
+
+  protected readonly remaining = computed(() => {
+    const val = this.value() || [];
+    return this.options().filter((o) => !val.includes(o.value));
+  });
+
+  protected readonly selectedValues = computed(() => {
+    const val = this.value() || [];
+    return val.filter((v) => this.options().some((o) => o.value === v));
+  });
 
   protected readonly kb = new ListboxKeyboard({
     optionSelector: '.ngxsmk-multi-select__option',
@@ -254,33 +302,37 @@ export class NgxsmkMultiSelect {
 
   protected readonly activeIndex = this.kb.activeIndex;
 
-  protected activeDescendant(): string | null {
-    return this.open() && this.activeIndex() >= 0
+  protected readonly activeDescendant = computed(() =>
+    this.open() && this.activeIndex() >= 0
       ? `${this.listboxId}-${this.activeIndex()}`
-      : null;
+      : null,
+  );
+
+  protected inputDisabled(): boolean {
+    return this.disabled();
   }
 
-  protected selectedValues(): string[] {
-    return this.value().filter((v) => this.options().some((o) => o.value === v));
+  writeValue(val: unknown): void {
+    this.value.set(Array.isArray(val) ? val : []);
+  }
+
+  protected onBlur(): void {
+    this.emitTouched();
   }
 
   protected labelFor(v: string): string {
     return this.options().find((o) => o.value === v)?.label || v;
   }
 
-  protected remaining(): { value: string; label: string }[] {
-    return this.options().filter((o) => !this.value().includes(o.value));
-  }
-
   protected toggle(): void {
-    if (this.disabled()) return;
+    if (this.isDisabled()) return;
     const next = !this.open();
     this.open.set(next);
     this.activeIndex.set(next && this.remaining().length ? 0 : -1);
   }
 
   protected onKeydown(event: KeyboardEvent): void {
-    if (this.disabled()) return;
+    if (this.isDisabled()) return;
     this.kb.handleKeydown(event, {
       onSelect: (i) => {
         const opt = this.remaining()[i];
@@ -298,17 +350,22 @@ export class NgxsmkMultiSelect {
     });
   }
 
-  protected selectOption(opt: { value: string; label: string }): void {
-    this.value.set([...this.value(), opt.value]);
-    this.changed.emit(this.value());
+  protected selectOption(opt: NgxsmkMultiSelectOption): void {
+    const next = [...(this.value() || []), opt.value];
+    this.value.set(next);
+    this.emitChange(next);
+    this.changed.emit(next);
     const count = this.remaining().length;
     this.activeIndex.set(count ? Math.min(this.activeIndex(), count - 1) : -1);
     this.scrollActiveIntoView();
   }
 
   protected remove(v: string): void {
-    this.value.set(this.value().filter((x) => x !== v));
-    this.changed.emit(this.value());
+    if (this.isDisabled()) return;
+    const next = (this.value() || []).filter((x) => x !== v);
+    this.value.set(next);
+    this.emitChange(next);
+    this.changed.emit(next);
   }
 
   @HostListener('document:click', ['$event'])

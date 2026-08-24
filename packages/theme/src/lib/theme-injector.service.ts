@@ -63,8 +63,9 @@ export class NgxThemeInjectorService {
     }
 
     const resolved = resolveTheme(config);
-    const vars = ionicVarsAdapter.vars(resolved);
-    style.textContent = this.buildAdapterCss('ionic', vars);
+    const lightVars = ionicVarsAdapter.vars(resolved);
+    const darkVars = ionicVarsAdapter.darkVars ? ionicVarsAdapter.darkVars(resolved) : undefined;
+    style.textContent = this.buildAdapterCss('ionic', lightVars, darkVars);
   }
 
   /** Remove a runtime-applied theme, falling back to the build-time CSS. */
@@ -77,8 +78,18 @@ export class NgxThemeInjectorService {
     this.document.getElementById(IONIC_STYLE_ID)?.remove();
   }
 
-  private buildAdapterCss(adapterName: string, vars: Record<string, string>): string {
+  private buildAdapterCss(
+    adapterName: string,
+    vars: Record<string, string>,
+    darkVars?: Record<string, string>,
+  ): string {
     const lines = Object.entries(vars).map(([k, v]) => `  ${k}: ${v};`);
-    return `/* @ngxsmk/theme — ${adapterName} adapter */\n:root {\n${lines.join('\n')}\n}`;
+    let result = `/* @ngxsmk/theme — ${adapterName} adapter */\n:root {\n${lines.join('\n')}\n}`;
+    if (darkVars && Object.keys(darkVars).length > 0) {
+      const darkLines = Object.entries(darkVars).map(([k, v]) => `  ${k}: ${v};`);
+      result += `\n\n:root.dark, body.dark, html.dark, [data-theme="dark"] {\n${darkLines.join('\n')}\n}`;
+      result += `\n\n@media (prefers-color-scheme: dark) {\n  :root:not(.light) {\n  ${darkLines.join('\n  ')}\n  }\n}`;
+    }
+    return result;
   }
 }

@@ -102,18 +102,22 @@ export type NgxsmkAlertVariant = 'info' | 'success' | 'warning' | 'error';
     :host([data-variant='info']) {
       background: var(--ngxsmk-color-info-container);
       color: var(--ngxsmk-color-on-info-container);
+      border-color: color-mix(in srgb, var(--ngxsmk-color-info) 22%, transparent);
     }
     :host([data-variant='success']) {
       background: var(--ngxsmk-color-success-container);
       color: var(--ngxsmk-color-on-success-container);
+      border-color: color-mix(in srgb, var(--ngxsmk-color-success) 22%, transparent);
     }
     :host([data-variant='warning']) {
       background: var(--ngxsmk-color-warning-container);
       color: var(--ngxsmk-color-on-warning-container);
+      border-color: color-mix(in srgb, var(--ngxsmk-color-warning) 22%, transparent);
     }
     :host([data-variant='error']) {
       background: var(--ngxsmk-color-error-container);
       color: var(--ngxsmk-color-on-error-container);
+      border-color: color-mix(in srgb, var(--ngxsmk-color-error) 22%, transparent);
     }
 
     .ngxsmk-alert__icon {

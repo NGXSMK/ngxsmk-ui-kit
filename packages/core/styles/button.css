@@ -19,6 +19,8 @@
   user-select: none;
   text-decoration: none;
   white-space: nowrap;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
   transition:
     background-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
     border-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
@@ -41,27 +43,37 @@
 }
 
 .ngxsmk-button[data-size='sm'] {
-  padding: var(--ngxsmk-space-1) var(--ngxsmk-space-3);
+  min-height: var(--ngxsmk-control-height-sm, 2rem);
+  padding: 0 var(--ngxsmk-space-3);
   font-size: var(--ngxsmk-text-label-md-size);
 }
 
 .ngxsmk-button[data-size='md'] {
-  padding: var(--ngxsmk-space-2) var(--ngxsmk-space-4);
+  min-height: var(--ngxsmk-control-height-md, 2.5rem);
+  padding: 0 var(--ngxsmk-space-4);
+  font-size: var(--ngxsmk-text-label-lg-size);
 }
 
 .ngxsmk-button[data-size='lg'] {
-  padding: var(--ngxsmk-space-3) var(--ngxsmk-space-6);
+  min-height: var(--ngxsmk-control-height-lg, 3rem);
+  padding: 0 var(--ngxsmk-space-6);
   font-size: var(--ngxsmk-text-body-lg-size);
 }
 
 .ngxsmk-button[data-icon-only][data-size='sm'] {
-  padding: var(--ngxsmk-space-1);
+  width: var(--ngxsmk-control-height-sm, 2rem);
+  min-width: var(--ngxsmk-control-height-sm, 2rem);
+  padding: 0;
 }
 .ngxsmk-button[data-icon-only][data-size='md'] {
-  padding: var(--ngxsmk-space-2);
+  width: var(--ngxsmk-control-height-md, 2.5rem);
+  min-width: var(--ngxsmk-control-height-md, 2.5rem);
+  padding: 0;
 }
 .ngxsmk-button[data-icon-only][data-size='lg'] {
-  padding: var(--ngxsmk-space-3);
+  width: var(--ngxsmk-control-height-lg, 3rem);
+  min-width: var(--ngxsmk-control-height-lg, 3rem);
+  padding: 0;
 }
 
 .ngxsmk-button[data-variant='primary']:hover {
@@ -78,7 +90,7 @@
   color: var(--ngxsmk-color-on-surface);
 }
 .ngxsmk-button[data-variant='secondary']:hover {
-  background: var(--ngxsmk-color-outline);
+  background: var(--ngxsmk-color-outline-strong);
   transform: var(--ngxsmk-hover-lift);
 }
 .ngxsmk-button[data-variant='secondary']:active {
@@ -123,16 +135,18 @@
 }
 
 .ngxsmk-button[data-variant='link'] {
+  min-height: auto;
   background: transparent;
   color: var(--ngxsmk-color-primary);
-  padding-inline: 0;
+  padding: 0;
+  border-color: transparent;
 }
 .ngxsmk-button[data-variant='link']:hover {
   text-decoration: underline;
-  transform: var(--ngxsmk-hover-lift);
+  transform: none;
 }
 .ngxsmk-button[data-variant='link']:active {
-  transform: var(--ngxsmk-press-scale);
+  transform: none;
 }
 
 .ngxsmk-button__spinner {
@@ -237,20 +251,20 @@
   z-index: var(--ngxsmk-z-popover, 1500);
 }
 .ngxsmk-fab[data-position='bottom-right'] {
-  bottom: var(--ngxsmk-space-6);
-  right: var(--ngxsmk-space-6);
+  bottom: calc(var(--ngxsmk-space-6) + var(--ngxsmk-safe-area-bottom, env(safe-area-inset-bottom, 0px)));
+  right: calc(var(--ngxsmk-space-6) + var(--ngxsmk-safe-area-right, env(safe-area-inset-right, 0px)));
 }
 .ngxsmk-fab[data-position='bottom-left'] {
-  bottom: var(--ngxsmk-space-6);
-  left: var(--ngxsmk-space-6);
+  bottom: calc(var(--ngxsmk-space-6) + var(--ngxsmk-safe-area-bottom, env(safe-area-inset-bottom, 0px)));
+  left: calc(var(--ngxsmk-space-6) + var(--ngxsmk-safe-area-left, env(safe-area-inset-left, 0px)));
 }
 .ngxsmk-fab[data-position='top-right'] {
-  top: var(--ngxsmk-space-6);
-  right: var(--ngxsmk-space-6);
+  top: calc(var(--ngxsmk-space-6) + var(--ngxsmk-safe-area-top, env(safe-area-inset-top, 0px)));
+  right: calc(var(--ngxsmk-space-6) + var(--ngxsmk-safe-area-right, env(safe-area-inset-right, 0px)));
 }
 .ngxsmk-fab[data-position='top-left'] {
-  top: var(--ngxsmk-space-6);
-  left: var(--ngxsmk-space-6);
+  top: calc(var(--ngxsmk-space-6) + var(--ngxsmk-safe-area-top, env(safe-area-inset-top, 0px)));
+  left: calc(var(--ngxsmk-space-6) + var(--ngxsmk-safe-area-left, env(safe-area-inset-left, 0px)));
 }
 
 .ngxsmk-fab[disabled] {

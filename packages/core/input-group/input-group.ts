@@ -511,7 +511,7 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
       font-family: var(--ngxsmk-input-group-font, var(--ngxsmk-font-sans));
       font-size: var(--ngxsmk-text-body-sm-size, 0.875rem);
       line-height: var(--ngxsmk-leading-normal, 1.5);
-      color: var(--ngxsmk-color-on-surface, #0a1317);
+      color: var(--ngxsmk-color-on-surface);
       width: auto;
     }
 
@@ -530,7 +530,7 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
       left: var(--ngxsmk-input-group-padding, 0.75rem);
       transform: translateY(-50%);
       font-size: var(--ngxsmk-text-body-md-size, 0.9rem);
-      color: var(--ngxsmk-color-on-surface-variant, #6b7280);
+      color: var(--ngxsmk-color-on-surface-variant);
       pointer-events: none;
       transition: all var(--ngxsmk-duration-fast, 100ms) var(--ngxsmk-ease-out);
       z-index: 5;
@@ -543,14 +543,14 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
       transform: translateY(-50%);
       font-size: var(--ngxsmk-text-body-xs-size, 0.725rem);
       font-weight: 600;
-      background: var(--ngxsmk-input-group-bg, var(--ngxsmk-color-surface, #ffffff));
+      background: var(--ngxsmk-input-group-bg, var(--ngxsmk-color-surface));
       padding: 0 0.25rem;
       border-radius: var(--ngxsmk-radius-sm, 0.2rem);
-      color: var(--ngxsmk-color-primary, #7c3aed);
+      color: var(--ngxsmk-color-primary);
     }
 
     .ngxsmk-input-group__floating-label--error {
-      color: var(--ngxsmk-color-error, #dc2626);
+      color: var(--ngxsmk-color-error);
     }
 
     /* ── Container ── */
@@ -558,9 +558,9 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
       display: flex;
       align-items: stretch;
       position: relative;
-      background: var(--ngxsmk-input-group-bg, var(--ngxsmk-color-surface, #ffffff));
+      background: var(--ngxsmk-input-group-bg, var(--ngxsmk-color-surface));
       border: 1.5px solid
-        var(--ngxsmk-input-group-border, var(--ngxsmk-color-outline-strong, #d1d5db));
+        var(--ngxsmk-input-group-border, var(--ngxsmk-color-outline-strong));
       border-radius: var(--ngxsmk-input-group-radius, var(--ngxsmk-radius-md, 0.5rem));
       box-shadow: var(--ngxsmk-input-group-shadow, none);
       transition:
@@ -655,7 +655,7 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
     :host([data-variant='underline']) .ngxsmk-input-group__container {
       background: transparent;
       border: none;
-      border-bottom: 2px solid var(--ngxsmk-color-outline-strong, #d1d5db);
+      border-bottom: 2px solid var(--ngxsmk-color-outline-strong);
       border-radius: 0;
     }
 
@@ -704,16 +704,16 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
       font-size: var(--ngxsmk-text-label-lg-size, 0.875rem);
       font-weight: var(--ngxsmk-text-label-lg-weight, 500);
       line-height: var(--ngxsmk-text-label-lg-line, 1.25);
-      color: var(--ngxsmk-color-on-surface, #0a1317);
+      color: var(--ngxsmk-color-on-surface);
       margin-bottom: var(--ngxsmk-space-1, 0.25rem);
     }
 
     .ngxsmk-input-group__label--error {
-      color: var(--ngxsmk-color-error, #dc2626);
+      color: var(--ngxsmk-color-error);
     }
 
     .ngxsmk-input-group__required {
-      color: var(--ngxsmk-color-error, #dc2626);
+      color: var(--ngxsmk-color-error);
       margin-left: 2px;
     }
 
@@ -755,11 +755,11 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
       font-family: var(--ngxsmk-input-group-font, var(--ngxsmk-font-sans));
       font-size: var(--ngxsmk-text-body-md-size, 1rem);
       line-height: var(--ngxsmk-leading-normal, 1.5);
-      color: var(--ngxsmk-color-on-surface, #0a1317);
+      color: var(--ngxsmk-color-on-surface);
     }
 
     .ngxsmk-input-group__input::placeholder {
-      color: var(--ngxsmk-color-on-surface-variant, #6b7280);
+      color: var(--ngxsmk-color-on-surface-variant);
       opacity: 0.7;
     }
 
@@ -779,13 +779,13 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
       align-items: center;
       justify-content: center;
       padding: 0 var(--ngxsmk-space-3, 0.75rem);
-      color: var(--ngxsmk-color-on-surface-variant, #6b7280);
+      color: var(--ngxsmk-color-on-surface-variant);
       font-size: var(--ngxsmk-text-body-sm-size, 0.875rem);
       font-weight: var(--ngxsmk-font-weight-medium, 500);
       white-space: nowrap;
       background: var(--ngxsmk-color-surface-variant);
       border-left: 1px solid
-        var(--ngxsmk-input-group-border, var(--ngxsmk-color-outline-strong, #d1d5db));
+        var(--ngxsmk-input-group-border, var(--ngxsmk-color-outline-strong));
       user-select: none;
       min-height: 100%;
       transition:
@@ -797,7 +797,7 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
     ::ng-deep .ngxsmk-input-group-text:not([trailing]) {
       border-left: none;
       border-right: 1px solid
-        var(--ngxsmk-input-group-border, var(--ngxsmk-color-outline-strong, #d1d5db));
+        var(--ngxsmk-input-group-border, var(--ngxsmk-color-outline-strong));
     }
 
     :host(.ngxsmk-input-group--focused) .ngxsmk-input-group__addon,
@@ -834,7 +834,7 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
       border: none;
       background: transparent;
       border-radius: var(--ngxsmk-radius-full, 9999px);
-      color: var(--ngxsmk-color-on-surface-variant, #6b7280);
+      color: var(--ngxsmk-color-on-surface-variant);
       cursor: pointer;
       padding: 0;
       flex-shrink: 0;
@@ -844,19 +844,19 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
     .ngxsmk-input-group__clear:hover,
     .ngxsmk-input-group__toggle-password:hover {
       background: var(--ngxsmk-color-surface-hover, rgba(0, 0, 0, 0.05));
-      color: var(--ngxsmk-color-on-surface, #0a1317);
+      color: var(--ngxsmk-color-on-surface);
     }
 
     /* ── Counter ── */
     .ngxsmk-input-group__counter {
       font-size: var(--ngxsmk-text-body-xs-size, 0.75rem);
-      color: var(--ngxsmk-color-on-surface-variant, #6b7280);
+      color: var(--ngxsmk-color-on-surface-variant);
       white-space: nowrap;
       flex-shrink: 0;
     }
 
     .ngxsmk-input-group__counter--over {
-      color: var(--ngxsmk-color-error, #dc2626);
+      color: var(--ngxsmk-color-error);
       font-weight: var(--ngxsmk-font-weight-semibold, 600);
     }
 
@@ -868,19 +868,19 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
     }
 
     .ngxsmk-input-group__status-icon--success {
-      color: var(--ngxsmk-color-success, #16a34a);
+      color: var(--ngxsmk-color-success);
     }
 
     .ngxsmk-input-group__status-icon--error {
-      color: var(--ngxsmk-color-error, #dc2626);
+      color: var(--ngxsmk-color-error);
     }
 
     .ngxsmk-input-group__status-icon--warning {
-      color: var(--ngxsmk-color-warning, #f59e0b);
+      color: var(--ngxsmk-color-warning);
     }
 
     .ngxsmk-input-group__status-icon--pending {
-      color: var(--ngxsmk-color-on-surface-variant, #6b7280);
+      color: var(--ngxsmk-color-on-surface-variant);
     }
 
     /* ── Spinner ── */
@@ -888,7 +888,7 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
       display: inline-block;
       width: 1rem;
       height: 1rem;
-      border: 2px solid var(--ngxsmk-color-outline-variant, #e5e7eb);
+      border: 2px solid var(--ngxsmk-color-outline-variant);
       border-top-color: var(--ngxsmk-color-primary);
       border-radius: 50%;
       animation: ngxsmk-spin 0.6s linear infinite;
@@ -922,30 +922,30 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
     }
 
     .ngxsmk-input-group__message--error {
-      color: var(--ngxsmk-color-error, #dc2626);
+      color: var(--ngxsmk-color-error);
     }
 
     .ngxsmk-input-group__message--hint {
-      color: var(--ngxsmk-color-on-surface-variant, #6b7280);
+      color: var(--ngxsmk-color-on-surface-variant);
     }
 
     /* ── Dark Mode ── */
     :host-context(.dark) .ngxsmk-input-group__container {
       background: var(--ngxsmk-input-group-bg, var(--ngxsmk-color-surface));
-      border-color: var(--ngxsmk-input-group-border, var(--ngxsmk-color-outline-strong, #4b5563));
+      border-color: var(--ngxsmk-input-group-border, var(--ngxsmk-color-outline-strong));
     }
 
     :host-context(.dark) .ngxsmk-input-group__addon {
-      background: var(--ngxsmk-color-surface-container, #28292c);
+      background: var(--ngxsmk-color-surface-container);
       border-color: var(--ngxsmk-color-outline-variant, rgba(255, 255, 255, 0.06));
     }
 
     :host-context(.dark) .ngxsmk-input-group__input::placeholder {
-      color: var(--ngxsmk-color-on-surface-variant, #9ca3af);
+      color: var(--ngxsmk-color-on-surface-variant);
     }
 
     :host-context(.dark) .ngxsmk-input-group__input:-webkit-autofill {
-      -webkit-box-shadow: 0 0 0 30px var(--ngxsmk-color-surface, #1f1f22) inset !important;
+      -webkit-box-shadow: 0 0 0 30px var(--ngxsmk-color-surface) inset !important;
       -webkit-text-fill-color: var(--ngxsmk-color-on-surface) !important;
     }
   `,

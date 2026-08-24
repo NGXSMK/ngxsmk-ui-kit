@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, model, output } from '@angular/core';
 
 @Component({
   standalone: true,
@@ -63,7 +63,7 @@ import { ChangeDetectionStrategy, Component, input, output } from '@angular/core
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: var(--ngxsmk-space-4);
+      padding: calc(var(--ngxsmk-space-4) + var(--ngxsmk-safe-area-top, env(safe-area-inset-top, 0px))) var(--ngxsmk-space-4) var(--ngxsmk-space-4);
       border-bottom: 1px solid var(--ngxsmk-color-outline);
     }
     .ngxsmk-mobile-nav__title {
@@ -86,7 +86,7 @@ import { ChangeDetectionStrategy, Component, input, output } from '@angular/core
     .ngxsmk-mobile-nav__content {
       flex: 1;
       overflow-y: auto;
-      padding: var(--ngxsmk-space-4);
+      padding: var(--ngxsmk-space-4) var(--ngxsmk-space-4) calc(var(--ngxsmk-space-4) + var(--ngxsmk-safe-area-bottom, env(safe-area-inset-bottom, 0px)));
     }
     @keyframes ngxsmk-slide-in {
       from {
@@ -100,11 +100,12 @@ import { ChangeDetectionStrategy, Component, input, output } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgxsmkMobileNav {
-  readonly open = input(false);
+  readonly open = model(false);
   readonly label = input('Navigation');
   readonly openedChange = output<boolean>();
 
   close(): void {
+    this.open.set(false);
     this.openedChange.emit(false);
   }
 }

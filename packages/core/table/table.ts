@@ -95,7 +95,6 @@ export class NgxsmkCellDef {
       </tbody>
     </table>
   `,
-  host: { class: 'ngxsmk-table', '[attr.data-striped]': 'striped() ? "" : null' },
   styles: `
     :host {
       display: block;
@@ -172,7 +171,41 @@ export class NgxsmkCellDef {
     .ngxsmk-table__row:last-child .ngxsmk-table__cell {
       border-bottom: none;
     }
+
+    :host([data-responsive]) {
+      @media (max-width: 640px) {
+        .ngxsmk-table__element {
+          border: none;
+        }
+        .ngxsmk-table__head {
+          display: none;
+        }
+        .ngxsmk-table__row {
+          display: flex;
+          flex-direction: column;
+          margin-bottom: var(--ngxsmk-space-3);
+          border: 1px solid var(--ngxsmk-color-outline);
+          border-radius: var(--ngxsmk-radius-lg);
+          background: var(--ngxsmk-color-surface);
+          box-shadow: var(--ngxsmk-shadow-sm);
+        }
+        .ngxsmk-table__cell {
+          display: flex;
+          justify-content: space-between;
+          padding: var(--ngxsmk-space-2) var(--ngxsmk-space-3);
+          border-bottom: 1px solid var(--ngxsmk-color-outline);
+        }
+        .ngxsmk-table__cell:last-child {
+          border-bottom: none;
+        }
+      }
+    }
   `,
+  host: {
+    class: 'ngxsmk-table',
+    '[attr.data-striped]': 'striped() ? "" : null',
+    '[attr.data-responsive]': 'responsive() ? "" : null',
+  },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgxsmkTable {
@@ -180,6 +213,7 @@ export class NgxsmkTable {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   readonly rows = input<any[]>([]);
   readonly striped = input(false, { transform: booleanAttribute });
+  readonly responsive = input(false, { transform: booleanAttribute });
 
   /** Renders headers as clickable sort controls. */
   readonly sortable = input(false, { transform: booleanAttribute });

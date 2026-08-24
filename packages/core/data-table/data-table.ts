@@ -5,6 +5,7 @@ import {
   computed,
   effect,
   input,
+  output,
   signal,
 } from '@angular/core';
 import { NgxsmkTable, NgxsmkTableColumn } from '@ngxsmk/core/table';
@@ -13,6 +14,10 @@ import { NgxsmkTable, NgxsmkTableColumn } from '@ngxsmk/core/table';
   standalone: true,
   selector: 'ngxsmk-data-table',
   template: `
+    @if (loading()) {
+      <div class="ngxsmk-data-table__loading-bar" role="progressbar" aria-label="Loading data"></div>
+    }
+
     <ngxsmk-table
       [columns]="displayColumns()"
       [rows]="displayRows()"
@@ -22,6 +27,12 @@ import { NgxsmkTable, NgxsmkTableColumn } from '@ngxsmk/core/table';
       [sortDir]="sortDir()"
       (sortChange)="sortBy($event)"
     />
+
+    @if (processedRows().length === 0 && !loading()) {
+      <div class="ngxsmk-data-table__empty">
+        {{ emptyMessage() }}
+      </div>
+    }
 
     <div class="ngxsmk-data-table__footer">
       <span class="ngxsmk-data-table__info">
@@ -83,6 +94,32 @@ import { NgxsmkTable, NgxsmkTableColumn } from '@ngxsmk/core/table';
       display: block;
       width: 100%;
       font-family: var(--ngxsmk-font-sans);
+      position: relative;
+    }
+
+    .ngxsmk-data-table__loading-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--ngxsmk-color-primary);
+      z-index: 2;
+      animation: ngxsmk-pulse 1.2s infinite ease-in-out;
+    }
+
+    @keyframes ngxsmk-pulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+
+    .ngxsmk-data-table__empty {
+      padding: var(--ngxsmk-space-6) var(--ngxsmk-space-4);
+      text-align: center;
+      border: 1px solid var(--ngxsmk-color-outline);
+      border-top: none;
+      color: var(--ngxsmk-color-on-surface-variant);
+      font-size: var(--ngxsmk-text-body-sm-size);
     }
 
     .ngxsmk-data-table__footer {
@@ -163,8 +200,14 @@ export class NgxsmkDataTable {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   readonly rows = input<any[]>([]);
   readonly pageSize = input(10);
+  readonly filter = input('');
+  readonly emptyMessage = input('No records found');
+  readonly loading = input(false, { transform: booleanAttribute });
   readonly sortable = input(false, { transform: booleanAttribute });
   readonly striped = input(false, { transform: booleanAttribute });
+
+  readonly pageChange = output<{ page: number; pageSize: number }>();
+  readonly sortChange = output<{ field: string; dir: 'asc' | 'desc' }>();
 
   protected readonly sortField = signal<string>('');
   protected readonly sortDir = signal<'asc' | 'desc'>('asc');
@@ -178,8 +221,16 @@ export class NgxsmkDataTable {
     });
   }
 
-  private readonly processedRows = computed(() => {
-    const data = [...this.rows()];
+  protected readonly processedRows = computed(() => {
+    let data = [...this.rows()];
+    const q = this.filter().trim().toLowerCase();
+    if (q) {
+      data = data.filter((row) =>
+        Object.values(row).some((val) =>
+          val != null && String(val).toLowerCase().includes(q),
+        ),
+      );
+    }
     const field = this.sortField();
     if (field && this.sortable()) {
       const dir = this.sortDir();
@@ -246,18 +297,22 @@ export class NgxsmkDataTable {
       return;
     }
     this.currentPage.set(page);
+    this.pageChange.emit({ page, pageSize: this.pageSize() });
   }
 
   sortBy(key: string): void {
     if (!this.sortable()) {
       return;
     }
+    let nextDir: 'asc' | 'desc' = 'asc';
     if (this.sortField() === key) {
-      this.sortDir.update((d) => (d === 'asc' ? 'desc' : 'asc'));
+      nextDir = this.sortDir() === 'asc' ? 'desc' : 'asc';
+      this.sortDir.set(nextDir);
     } else {
       this.sortField.set(key);
       this.sortDir.set('asc');
     }
     this.currentPage.set(1);
+    this.sortChange.emit({ field: key, dir: nextDir });
   }
 }

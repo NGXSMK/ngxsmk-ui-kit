@@ -69,12 +69,12 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
 
     .ngxsmk-token-counter__model {
       font-weight: 600;
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      color: var(--ngxsmk-color-on-surface);
     }
 
     .ngxsmk-token-counter__stats {
       font-family: var(--ngxsmk-font-mono, monospace);
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--ngxsmk-color-on-surface-variant);
       font-size: 0.75rem;
     }
 
@@ -88,14 +88,14 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
     }
 
     .ngxsmk-token-counter__cost {
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--ngxsmk-color-on-surface-variant);
       font-weight: 400;
     }
 
     .ngxsmk-token-counter__track {
       width: 100%;
       height: 0.375rem;
-      background: var(--ngxsmk-color-surface-variant, #f4f4f5);
+      background: var(--ngxsmk-color-surface-variant);
       border-radius: var(--ngxsmk-radius-full, 9999px);
       overflow: hidden;
     }
@@ -146,9 +146,9 @@ export class NgxsmkTokenCounter {
 
   protected readonly statusColor = computed(() => {
     const pct = this.percentage();
-    if (pct >= 90) return 'var(--ngxsmk-color-error, #ef4444)';
-    if (pct >= 75) return 'var(--ngxsmk-color-amber, #f59e0b)';
-    return 'var(--ngxsmk-color-primary, #7c3aed)';
+    if (pct >= 90) return 'var(--ngxsmk-color-error)';
+    if (pct >= 75) return 'var(--ngxsmk-color-amber)';
+    return 'var(--ngxsmk-color-primary)';
   });
 
   private formatNumber(num: number): string {

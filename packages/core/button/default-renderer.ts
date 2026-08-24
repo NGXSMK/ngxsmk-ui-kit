@@ -8,7 +8,7 @@ import { NgxsmkButtonSize, NgxsmkButtonVariant } from './button';
  * behind the `ButtonRenderer` seam.
  */
 @Injectable()
-export class DefaultButtonRenderer implements ButtonRenderer {
+export class NgxsmkDefaultButtonRenderer implements ButtonRenderer {
   private readonly renderer = inject(Renderer2);
   private spinner: HTMLElement | null = null;
 
@@ -41,8 +41,11 @@ export class DefaultButtonRenderer implements ButtonRenderer {
   }
 }
 
+/** @deprecated Use NgxsmkDefaultButtonRenderer instead */
+export const DefaultButtonRenderer = NgxsmkDefaultButtonRenderer;
+
 /** Ionic adapter — wraps `ion-button` instead of native `<button>`. */
-export class IonicButtonRenderer implements ButtonRenderer {
+export class NgxsmkIonicButtonRenderer implements ButtonRenderer {
   private readonly renderer = inject(Renderer2);
   private spinner: HTMLElement | null = null;
 

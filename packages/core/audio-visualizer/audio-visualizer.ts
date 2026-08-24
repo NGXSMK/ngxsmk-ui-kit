@@ -120,7 +120,7 @@ export class NgxsmkAudioVisualizer {
   readonly variant = input<NgxsmkAudioVisualizerVariant>('bars');
 
   /** Color of the visualizer elements. */
-  readonly color = input<string>('var(--ngxsmk-color-primary, #7c3aed)');
+  readonly color = input<string>('var(--ngxsmk-color-primary)');
 
   /** Container height in pixels. Default: 32. */
   readonly height = input<number>(32);

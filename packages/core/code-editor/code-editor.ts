@@ -51,10 +51,10 @@ import { ChangeDetectionStrategy, Component, computed, input, model, signal } fr
     }
 
     .ngxsmk-code-ed {
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
-      border-radius: var(--ngxsmk-radius-md, 0.375rem);
-      background: #09090b;
-      color: #f4f4f5;
+      border: 1px solid var(--ngxsmk-color-outline);
+      border-radius: var(--ngxsmk-radius-md);
+      background: var(--ngxsmk-color-background);
+      color: var(--ngxsmk-color-on-background);
       overflow: hidden;
       display: flex;
       flex-direction: column;
@@ -64,34 +64,34 @@ import { ChangeDetectionStrategy, Component, computed, input, model, signal } fr
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0.35rem 0.75rem;
-      background: #18181b;
-      border-bottom: 1px solid #27272a;
+      padding: var(--ngxsmk-space-1-5) var(--ngxsmk-space-3);
+      background: var(--ngxsmk-color-surface-variant);
+      border-bottom: 1px solid var(--ngxsmk-color-outline);
     }
 
     .ngxsmk-code-ed__lang {
-      font-size: 0.725rem;
-      font-weight: 700;
+      font-size: var(--ngxsmk-text-label-sm-size);
+      font-weight: var(--ngxsmk-font-weight-bold, 700);
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--ngxsmk-color-primary, #a78bfa);
+      letter-spacing: var(--ngxsmk-tracking-wide, 0.05em);
+      color: var(--ngxsmk-color-primary);
     }
 
     .ngxsmk-code-ed__copy-btn {
       border: none;
       background: none;
-      color: #a1a1aa;
+      color: var(--ngxsmk-color-on-surface-variant);
       font-family: inherit;
-      font-size: 0.725rem;
-      font-weight: 600;
+      font-size: var(--ngxsmk-text-label-sm-size);
+      font-weight: var(--ngxsmk-font-weight-semibold, 600);
       cursor: pointer;
-      padding: 0.15rem 0.4rem;
-      border-radius: 0.2rem;
-      transition: color 0.15s ease;
+      padding: var(--ngxsmk-space-0-5) var(--ngxsmk-space-1-5);
+      border-radius: var(--ngxsmk-radius-sm);
+      transition: color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
 
     .ngxsmk-code-ed__copy-btn:hover {
-      color: #ffffff;
+      color: var(--ngxsmk-color-on-surface);
     }
 
     .ngxsmk-code-ed__body {
@@ -100,26 +100,26 @@ import { ChangeDetectionStrategy, Component, computed, input, model, signal } fr
     }
 
     .ngxsmk-code-ed__gutter {
-      padding: 0.75rem 0.5rem;
-      background: #121215;
-      color: #52525b;
+      padding: var(--ngxsmk-space-3) var(--ngxsmk-space-2);
+      background: var(--ngxsmk-color-surface-variant);
+      color: var(--ngxsmk-color-on-surface-variant);
       user-select: none;
       display: flex;
       flex-direction: column;
-      text-align: right;
-      font-size: 0.8rem;
+      text-align: end;
+      font-size: var(--ngxsmk-text-label-sm-size);
       line-height: 1.5;
-      border-right: 1px solid #27272a;
+      border-inline-end: 1px solid var(--ngxsmk-color-outline);
     }
 
     .ngxsmk-code-ed__textarea {
       flex: 1;
-      padding: 0.75rem 0.85rem;
+      padding: var(--ngxsmk-space-3) var(--ngxsmk-space-4);
       border: none;
       background: transparent;
-      color: #f4f4f5;
+      color: var(--ngxsmk-color-on-surface);
       font-family: inherit;
-      font-size: 0.825rem;
+      font-size: var(--ngxsmk-text-body-sm-size);
       line-height: 1.5;
       outline: none;
       resize: vertical;

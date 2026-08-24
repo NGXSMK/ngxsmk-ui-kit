@@ -60,136 +60,138 @@ import { NgxsmkThemeService } from '@ngxsmk/theme';
         </div>
       </header>
 
-      <!-- ═══════════════════════ QUICK START ═══════════════════════ -->
-      <section class="d-card">
-        <div class="d-card__split">
-          <div class="d-card__left">
-            <ngxsmk-heading level="h2">Quick Start</ngxsmk-heading>
-            <p class="d-body">
-              Install core packages and the design engine. Zero external runtime dependencies — just
-              Angular and your terminal.
-            </p>
-            <div class="d-checklist">
-              <div class="d-checklist__item">
-                <svg class="d-checklist__icon" viewBox="0 0 16 16" fill="none">
-                  <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5" />
-                  <path
-                    d="M5 8l2 2 4-4"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-                <span>Zero external runtime dependencies</span>
-              </div>
-              <div class="d-checklist__item">
-                <svg class="d-checklist__icon" viewBox="0 0 16 16" fill="none">
-                  <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5" />
-                  <path
-                    d="M5 8l2 2 4-4"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-                <span>SSR &amp; zoneless-ready out of the box</span>
-              </div>
-              <div class="d-checklist__item">
-                <svg class="d-checklist__icon" viewBox="0 0 16 16" fill="none">
-                  <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5" />
-                  <path
-                    d="M5 8l2 2 4-4"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-                <span>Standard Web APIs — no vendor lock-in</span>
-              </div>
-            </div>
-          </div>
+      <!-- ═══════════════════════ GETTING STARTED (4-STEP ONBOARDING) ═══════════════════════ -->
+      <section class="d-card d-card--highlight">
+        <div class="d-card__header-box">
+          <ngxsmk-heading level="h2">Getting Started</ngxsmk-heading>
+          <p class="d-body">
+            Follow this 4-step guide to integrate NGXSMK UI Kit into any modern Angular 19+ standalone application in under 2 minutes.
+          </p>
+        </div>
 
-          <div class="d-card__right">
+        <div class="d-steps-grid">
+          <!-- Step 1 -->
+          <div class="d-step-card">
+            <div class="d-step-card__head">
+              <span class="d-step-number">1</span>
+              <h3 class="d-step-title">Install Core Packages</h3>
+            </div>
+            <p class="d-step-desc">
+              Install the component library and theme token engine with zero bloated external dependencies.
+            </p>
             <div class="d-terminal">
               <div class="d-terminal__head">
                 <div class="d-terminal__dots"><i></i><i></i><i></i></div>
-                <span class="d-terminal__label">Install</span>
+                <span class="d-terminal__label">bash</span>
               </div>
               <div class="d-terminal__body">
                 <span class="d-terminal__prompt">$</span>
                 <code class="d-terminal__code">npm install &#64;ngxsmk/core &#64;ngxsmk/theme</code>
-                <button class="d-terminal__copy" (click)="copy('npm')">
+                <button class="d-terminal__copy" (click)="copy('npm')" [attr.aria-label]="'Copy command'">
                   @if (copiedNPM()) {
                     <svg viewBox="0 0 16 16" fill="none">
-                      <path
-                        d="M4 8l3 3 5-5"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
+                      <path d="M4 8l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                   } @else {
                     <svg viewBox="0 0 16 16" fill="none">
-                      <rect
-                        x="5"
-                        y="5"
-                        width="7"
-                        height="7"
-                        rx="1.5"
-                        stroke="currentColor"
-                        stroke-width="1.3"
-                      />
-                      <path
-                        d="M3 10V3.5A.5.5 0 0 1 3.5 3H10"
-                        stroke="currentColor"
-                        stroke-width="1.3"
-                        stroke-linecap="round"
-                      />
+                      <rect x="5" y="5" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.3" />
+                      <path d="M3 10V3.5A.5.5 0 0 1 3.5 3H10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" />
                     </svg>
                   }
                 </button>
               </div>
             </div>
-            <div class="d-terminal" style="margin-top: 0.75rem">
+          </div>
+
+          <!-- Step 2 -->
+          <div class="d-step-card">
+            <div class="d-step-card__head">
+              <span class="d-step-number">2</span>
+              <h3 class="d-step-title">Include Design Tokens</h3>
+            </div>
+            <p class="d-step-desc">
+              Import the universal design tokens in your global <code>styles.scss</code> or <code>angular.json</code>.
+            </p>
+            <div class="d-terminal">
               <div class="d-terminal__head">
                 <div class="d-terminal__dots"><i></i><i></i><i></i></div>
-                <span class="d-terminal__label">CLI Scaffolding</span>
+                <span class="d-terminal__label">styles.scss</span>
               </div>
               <div class="d-terminal__body">
-                <span class="d-terminal__prompt">$</span>
-                <code class="d-terminal__code">npx ngxsmk add button</code>
-                <button class="d-terminal__copy" (click)="copy('cli')">
-                  @if (copiedCLI()) {
+                <code class="d-terminal__code">&#64;import '&#64;ngxsmk/theme/css/tokens.css';</code>
+                <button class="d-terminal__copy" (click)="copy('theme')" [attr.aria-label]="'Copy theme import'">
+                  @if (copiedTheme()) {
                     <svg viewBox="0 0 16 16" fill="none">
-                      <path
-                        d="M4 8l3 3 5-5"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
+                      <path d="M4 8l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                   } @else {
                     <svg viewBox="0 0 16 16" fill="none">
-                      <rect
-                        x="5"
-                        y="5"
-                        width="7"
-                        height="7"
-                        rx="1.5"
-                        stroke="currentColor"
-                        stroke-width="1.3"
-                      />
-                      <path
-                        d="M3 10V3.5A.5.5 0 0 1 3.5 3H10"
-                        stroke="currentColor"
-                        stroke-width="1.3"
-                        stroke-linecap="round"
-                      />
+                      <rect x="5" y="5" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.3" />
+                      <path d="M3 10V3.5A.5.5 0 0 1 3.5 3H10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" />
+                    </svg>
+                  }
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="d-step-card">
+            <div class="d-step-card__head">
+              <span class="d-step-number">3</span>
+              <h3 class="d-step-title">Import Standalone Components</h3>
+            </div>
+            <p class="d-step-desc">
+              Every component is standalone. Import only what you use with secondary entry points.
+            </p>
+            <div class="d-terminal">
+              <div class="d-terminal__head">
+                <div class="d-terminal__dots"><i></i><i></i><i></i></div>
+                <span class="d-terminal__label">app.component.ts</span>
+              </div>
+              <div class="d-terminal__body">
+                <code class="d-terminal__code">import &#123; NgxsmkButton &#125; from '&#64;ngxsmk/core/button';</code>
+                <button class="d-terminal__copy" (click)="copy('import')" [attr.aria-label]="'Copy import'">
+                  @if (copiedImport()) {
+                    <svg viewBox="0 0 16 16" fill="none">
+                      <path d="M4 8l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  } @else {
+                    <svg viewBox="0 0 16 16" fill="none">
+                      <rect x="5" y="5" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.3" />
+                      <path d="M3 10V3.5A.5.5 0 0 1 3.5 3H10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" />
+                    </svg>
+                  }
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="d-step-card">
+            <div class="d-step-card__head">
+              <span class="d-step-number">4</span>
+              <h3 class="d-step-title">Build &amp; Render UI</h3>
+            </div>
+            <p class="d-step-desc">
+              Apply component directives or elements in your template with signals and OnPush change detection.
+            </p>
+            <div class="d-terminal">
+              <div class="d-terminal__head">
+                <div class="d-terminal__dots"><i></i><i></i><i></i></div>
+                <span class="d-terminal__label">template.html</span>
+              </div>
+              <div class="d-terminal__body">
+                <code class="d-terminal__code">&lt;button ngxsmk-button&gt;Get Started&lt;/button&gt;</code>
+                <button class="d-terminal__copy" (click)="copy('template')" [attr.aria-label]="'Copy template'">
+                  @if (copiedTemplate()) {
+                    <svg viewBox="0 0 16 16" fill="none">
+                      <path d="M4 8l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  } @else {
+                    <svg viewBox="0 0 16 16" fill="none">
+                      <rect x="5" y="5" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.3" />
+                      <path d="M3 10V3.5A.5.5 0 0 1 3.5 3H10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" />
                     </svg>
                   }
                 </button>
@@ -744,12 +746,13 @@ import { NgxsmkThemeService } from '@ngxsmk/theme';
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0.25rem;
+      gap: 0.5rem;
     }
     .d-hero__stat-val {
       font-family: 'Outfit', var(--ngxsmk-font-sans), system-ui, sans-serif;
       font-size: var(--ngxsmk-text-headline-md-size);
       font-weight: 800;
+      line-height: 1.2;
       color: var(--ngxsmk-color-primary, #7c3aed);
     }
     .d-hero__stat-label {
@@ -758,6 +761,7 @@ import { NgxsmkThemeService } from '@ngxsmk/theme';
       text-transform: uppercase;
       letter-spacing: 0.06em;
       font-weight: 500;
+      line-height: 1.3;
     }
 
     /* ──── CARD ──── */
@@ -768,6 +772,57 @@ import { NgxsmkThemeService } from '@ngxsmk/theme';
       padding: var(--ngxsmk-space-8, 2rem);
       box-shadow: var(--ngxsmk-shadow-md);
       margin-bottom: 2.5rem;
+    }
+    .d-card--highlight {
+      border-color: color-mix(in srgb, var(--ngxsmk-color-primary, #7c3aed) 40%, var(--ngxsmk-color-outline));
+    }
+    .d-card__header-box {
+      max-width: 600px;
+      margin-bottom: 2rem;
+    }
+    .d-steps-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+    .d-step-card {
+      background: color-mix(in srgb, var(--ngxsmk-color-surface-variant) 35%, transparent);
+      border: 1px solid var(--ngxsmk-color-outline);
+      border-radius: var(--ngxsmk-radius-lg);
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .d-step-card__head {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .d-step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.75rem;
+      height: 1.75rem;
+      border-radius: 50%;
+      background: var(--ngxsmk-color-primary, #7c3aed);
+      color: #fff;
+      font-size: 0.8125rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .d-step-title {
+      margin: 0;
+      font-size: var(--ngxsmk-text-body-md-size);
+      font-weight: 700;
+      color: var(--ngxsmk-color-on-surface);
+    }
+    .d-step-desc {
+      margin: 0;
+      font-size: var(--ngxsmk-text-body-sm-size);
+      color: var(--ngxsmk-color-on-surface-variant);
+      line-height: 1.5;
     }
     .d-card__split {
       display: grid;
@@ -1248,6 +1303,18 @@ import { NgxsmkThemeService } from '@ngxsmk/theme';
         grid-template-columns: 1fr;
         gap: 1.75rem;
       }
+      .d-steps-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      .d-pillars__grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      .d-ai__grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
       .d-hero {
         padding: var(--ngxsmk-space-10, 2.5rem) 0 var(--ngxsmk-space-8, 2rem);
       }
@@ -1268,6 +1335,9 @@ export class DocsPage {
   protected readonly copiedNPM = signal(false);
   protected readonly copiedCLI = signal(false);
   protected readonly copiedMCP = signal(false);
+  protected readonly copiedTheme = signal(false);
+  protected readonly copiedImport = signal(false);
+  protected readonly copiedTemplate = signal(false);
 
   protected readonly activeAccent = signal<'violet' | 'emerald' | 'rose' | 'amber' | 'blue'>(
     'violet',
@@ -1314,16 +1384,28 @@ export class DocsPage {
   --ngxsmk-text-body-sm-size: 0.875rem;
 }`;
 
-  copy(type: 'npm' | 'cli' | 'mcp'): void {
-    const commands = {
+  copy(type: 'npm' | 'cli' | 'mcp' | 'theme' | 'import' | 'template'): void {
+    const commands: Record<string, string> = {
       npm: 'npm install @ngxsmk/core @ngxsmk/theme',
       cli: 'npx ngxsmk add button',
       mcp: 'claude mcp add ngxsmk -- npx @ngxsmk/mcp',
+      theme: "@import '@ngxsmk/theme/css/tokens.css';",
+      import: "import { NgxsmkButton } from '@ngxsmk/core/button';",
+      template: '<button ngxsmk-button>Get Started</button>',
     };
-    const flags = { npm: this.copiedNPM, cli: this.copiedCLI, mcp: this.copiedMCP };
-    navigator.clipboard.writeText(commands[type]).then(() => {
-      flags[type].set(true);
-      setTimeout(() => flags[type].set(false), 2000);
-    });
+    const flags: Record<string, typeof this.copiedNPM> = {
+      npm: this.copiedNPM,
+      cli: this.copiedCLI,
+      mcp: this.copiedMCP,
+      theme: this.copiedTheme,
+      import: this.copiedImport,
+      template: this.copiedTemplate,
+    };
+    if (commands[type] && flags[type]) {
+      navigator.clipboard.writeText(commands[type]).then(() => {
+        flags[type].set(true);
+        setTimeout(() => flags[type].set(false), 2000);
+      });
+    }
   }
 }

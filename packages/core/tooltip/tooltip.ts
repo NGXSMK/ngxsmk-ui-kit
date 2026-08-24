@@ -1,5 +1,5 @@
-import { DOCUMENT } from '@angular/common';
-import { DestroyRef, Directive, ElementRef, inject, input, signal } from '@angular/core';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { DestroyRef, Directive, ElementRef, inject, input, signal, PLATFORM_ID } from '@angular/core';
 import { ngxsmkUniqueId } from '@ngxsmk/core/util';
 import { NgxsmkMotionState, playEnter, playExit } from '@ngxsmk/core/animation';
 
@@ -37,6 +37,7 @@ const TOOLTIP_MOTION: NgxsmkMotionState = {
 export class NgxsmkTooltip {
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly document = inject(DOCUMENT);
+  private readonly platformId = inject(PLATFORM_ID);
 
   readonly ngxsmkTooltip = input.required<string>();
   readonly tooltipPosition = input<NgxsmkTooltipPosition>('top');
@@ -52,7 +53,7 @@ export class NgxsmkTooltip {
   }
 
   protected scheduleShow(): void {
-    if (this.showTimer || this.visible() || !this.ngxsmkTooltip()) {
+    if (!isPlatformBrowser(this.platformId) || this.showTimer || this.visible() || !this.ngxsmkTooltip()) {
       return;
     }
     this.showTimer = setTimeout(() => {
@@ -62,6 +63,7 @@ export class NgxsmkTooltip {
   }
 
   protected hide(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
     if (this.showTimer) {
       clearTimeout(this.showTimer);
       this.showTimer = null;

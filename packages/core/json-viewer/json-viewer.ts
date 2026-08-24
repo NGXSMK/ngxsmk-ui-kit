@@ -8,7 +8,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
   styles: `
     :host {
       display: block;
-      background: var(--ngxsmk-color-surface-variant, #f4f4f5);
+      background: var(--ngxsmk-color-surface-variant);
       padding: var(--ngxsmk-space-4, 1rem);
       border-radius: var(--ngxsmk-radius-md, 0.5rem);
       font-family: var(--ngxsmk-font-mono, monospace);
@@ -24,20 +24,20 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
       word-break: break-word;
     }
     ::ng-deep .ngxsmk-json-key {
-      color: var(--ngxsmk-color-primary, #7c3aed);
+      color: var(--ngxsmk-color-primary);
       font-weight: 600;
     }
     ::ng-deep .ngxsmk-json-string {
-      color: var(--ngxsmk-color-success, #16a34a);
+      color: var(--ngxsmk-color-success);
     }
     ::ng-deep .ngxsmk-json-number {
-      color: var(--ngxsmk-color-warning, #d97706);
+      color: var(--ngxsmk-color-warning);
     }
     ::ng-deep .ngxsmk-json-boolean {
-      color: var(--ngxsmk-color-error, #dc2626);
+      color: var(--ngxsmk-color-error);
     }
     ::ng-deep .ngxsmk-json-null {
-      color: var(--ngxsmk-color-outline, #a1a1aa);
+      color: var(--ngxsmk-color-outline);
       font-style: italic;
     }
   `,

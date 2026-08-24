@@ -163,6 +163,9 @@ import { ListboxKeyboard } from '@ngxsmk/cdk/listbox-keyboard';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
+/**
+ * @deprecated Use `NgxsmkMultiSelect` (`@ngxsmk/core/multi-select`) instead. Will be removed in v3.0.0.
+ */
 export class NgxsmkMultiSelector implements OnDestroy {
   @ViewChild('triggerEl') private triggerEl!: ElementRef<HTMLElement>;
   @ViewChild('dropdownTpl') private dropdownTpl!: TemplateRef<unknown>;

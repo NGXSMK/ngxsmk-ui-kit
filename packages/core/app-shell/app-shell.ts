@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, booleanAttribute, input } from '@angular/core';
 
 @Component({
   standalone: true,
@@ -21,22 +21,30 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
   styles: `
     :host {
       display: grid;
-      grid-template-columns: auto 1fr;
+      grid-template-columns: auto minmax(0, 1fr);
       min-height: 100vh;
+      min-height: 100dvh;
       font-family: var(--ngxsmk-font-sans);
     }
     .ngxsmk-app-shell__main {
       display: flex;
       flex-direction: column;
       overflow: hidden;
+      min-width: 0;
+    }
+    .ngxsmk-app-shell__header {
+      padding-top: var(--ngxsmk-safe-area-top, env(safe-area-inset-top, 0px));
     }
     .ngxsmk-app-shell__content {
       flex: 1;
       overflow-y: auto;
     }
+    .ngxsmk-app-shell__footer {
+      padding-bottom: var(--ngxsmk-safe-area-bottom, env(safe-area-inset-bottom, 0px));
+    }
     @media (max-width: 768px) {
       :host {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
       }
       .ngxsmk-app-shell__sidebar {
         width: 100%;
@@ -46,7 +54,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgxsmkAppShell {
-  readonly sidebar = input(false);
-  readonly topbar = input(true);
-  readonly footer = input(false);
+  readonly sidebar = input(false, { transform: booleanAttribute });
+  readonly topbar = input(true, { transform: booleanAttribute });
+  readonly footer = input(false, { transform: booleanAttribute });
 }

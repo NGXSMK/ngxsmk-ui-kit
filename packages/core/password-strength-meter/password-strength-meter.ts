@@ -18,7 +18,7 @@ import { ChangeDetectionStrategy, Component, computed, input, model, signal } fr
           <div
             class="ngxsmk-pass-meter__bar"
             [style.background]="
-              $index <= score() ? statusColor() : 'var(--ngxsmk-color-surface-variant, #f4f4f5)'
+              $index <= score() ? statusColor() : 'var(--ngxsmk-color-surface-variant)'
             "
           ></div>
         }
@@ -103,7 +103,7 @@ import { ChangeDetectionStrategy, Component, computed, input, model, signal } fr
       grid-template-columns: 1fr 1fr;
       gap: 0.25rem 0.5rem;
       font-size: 0.75rem;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--ngxsmk-color-on-surface-variant);
     }
 
     .ngxsmk-pass-meter__checklist li {
@@ -114,7 +114,7 @@ import { ChangeDetectionStrategy, Component, computed, input, model, signal } fr
     }
 
     .ngxsmk-pass-meter__req--valid {
-      color: var(--ngxsmk-color-success, #16a34a);
+      color: var(--ngxsmk-color-success);
       font-weight: 600;
     }
 
@@ -175,15 +175,15 @@ export class NgxsmkPasswordStrengthMeter {
     const sc = this.score();
     switch (sc) {
       case 0:
-        return 'var(--ngxsmk-color-error, #ef4444)';
+        return 'var(--ngxsmk-color-error)';
       case 1:
-        return 'var(--ngxsmk-color-amber, #f59e0b)';
+        return 'var(--ngxsmk-color-amber)';
       case 2:
-        return 'var(--ngxsmk-color-secondary, #3b82f6)';
+        return 'var(--ngxsmk-color-secondary)';
       case 3:
-        return 'var(--ngxsmk-color-success, #16a34a)';
+        return 'var(--ngxsmk-color-success)';
       default:
-        return 'var(--ngxsmk-color-surface-variant, #f4f4f5)';
+        return 'var(--ngxsmk-color-surface-variant)';
     }
   });
 }
