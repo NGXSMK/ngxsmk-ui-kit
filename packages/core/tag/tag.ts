@@ -140,8 +140,9 @@ export class NgxsmkTag {
       background: transparent;
       color: var(--ngxsmk-color-on-surface-variant);
       cursor: pointer;
-      transition: background-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
-                  color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
+      transition:
+        background-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
+        color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
 
     .ngxsmk-chip__remove:hover {

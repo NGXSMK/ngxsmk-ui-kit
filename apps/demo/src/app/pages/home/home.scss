@@ -200,9 +200,15 @@
   height: 10px;
   border-radius: 50%;
 }
-.dot--red { background: #ef4444; }
-.dot--yellow { background: #f59e0b; }
-.dot--green { background: #10b981; }
+.dot--red {
+  background: #ef4444;
+}
+.dot--yellow {
+  background: #f59e0b;
+}
+.dot--green {
+  background: #10b981;
+}
 
 .hero-showcase__tab-pills {
   display: flex;

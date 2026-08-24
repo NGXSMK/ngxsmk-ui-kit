@@ -274,7 +274,16 @@ export class HeroDemoComponent {
       count: 25,
       color: '#3b82f6',
       desc: 'Form controls, selects, typeaheads, date pickers, switches, and sliders.',
-      items: ['Input', 'Select', 'Checkbox', 'Radio', 'Switch', 'Date Picker', 'Slider', 'OTP Input'],
+      items: [
+        'Input',
+        'Select',
+        'Checkbox',
+        'Radio',
+        'Switch',
+        'Date Picker',
+        'Slider',
+        'OTP Input',
+      ],
     },
     {
       title: 'Navigation',

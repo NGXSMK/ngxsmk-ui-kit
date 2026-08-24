@@ -65,7 +65,8 @@ import { NgxsmkThemeService } from '@ngxsmk/theme';
         <div class="d-card__header-box">
           <ngxsmk-heading level="h2">Getting Started</ngxsmk-heading>
           <p class="d-body">
-            Follow this 4-step guide to integrate NGXSMK UI Kit into any modern Angular 19+ standalone application in under 2 minutes.
+            Follow this 4-step guide to integrate NGXSMK UI Kit into any modern Angular 19+
+            standalone application in under 2 minutes.
           </p>
         </div>
 
@@ -77,7 +78,8 @@ import { NgxsmkThemeService } from '@ngxsmk/theme';
               <h3 class="d-step-title">Install Core Packages</h3>
             </div>
             <p class="d-step-desc">
-              Install the component library and theme token engine with zero bloated external dependencies.
+              Install the component library and theme token engine with zero bloated external
+              dependencies.
             </p>
             <div class="d-terminal">
               <div class="d-terminal__head">
@@ -87,15 +89,38 @@ import { NgxsmkThemeService } from '@ngxsmk/theme';
               <div class="d-terminal__body">
                 <span class="d-terminal__prompt">$</span>
                 <code class="d-terminal__code">npm install &#64;ngxsmk/core &#64;ngxsmk/theme</code>
-                <button class="d-terminal__copy" (click)="copy('npm')" [attr.aria-label]="'Copy command'">
+                <button
+                  class="d-terminal__copy"
+                  (click)="copy('npm')"
+                  [attr.aria-label]="'Copy command'"
+                >
                   @if (copiedNPM()) {
                     <svg viewBox="0 0 16 16" fill="none">
-                      <path d="M4 8l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                      <path
+                        d="M4 8l3 3 5-5"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
                     </svg>
                   } @else {
                     <svg viewBox="0 0 16 16" fill="none">
-                      <rect x="5" y="5" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.3" />
-                      <path d="M3 10V3.5A.5.5 0 0 1 3.5 3H10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" />
+                      <rect
+                        x="5"
+                        y="5"
+                        width="7"
+                        height="7"
+                        rx="1.5"
+                        stroke="currentColor"
+                        stroke-width="1.3"
+                      />
+                      <path
+                        d="M3 10V3.5A.5.5 0 0 1 3.5 3H10"
+                        stroke="currentColor"
+                        stroke-width="1.3"
+                        stroke-linecap="round"
+                      />
                     </svg>
                   }
                 </button>
@@ -110,7 +135,8 @@ import { NgxsmkThemeService } from '@ngxsmk/theme';
               <h3 class="d-step-title">Include Design Tokens</h3>
             </div>
             <p class="d-step-desc">
-              Import the universal design tokens in your global <code>styles.scss</code> or <code>angular.json</code>.
+              Import the universal design tokens in your global <code>styles.scss</code> or
+              <code>angular.json</code>.
             </p>
             <div class="d-terminal">
               <div class="d-terminal__head">
@@ -118,16 +144,41 @@ import { NgxsmkThemeService } from '@ngxsmk/theme';
                 <span class="d-terminal__label">styles.scss</span>
               </div>
               <div class="d-terminal__body">
-                <code class="d-terminal__code">&#64;import '&#64;ngxsmk/theme/css/tokens.css';</code>
-                <button class="d-terminal__copy" (click)="copy('theme')" [attr.aria-label]="'Copy theme import'">
+                <code class="d-terminal__code"
+                  >&#64;import '&#64;ngxsmk/theme/css/tokens.css';</code
+                >
+                <button
+                  class="d-terminal__copy"
+                  (click)="copy('theme')"
+                  [attr.aria-label]="'Copy theme import'"
+                >
                   @if (copiedTheme()) {
                     <svg viewBox="0 0 16 16" fill="none">
-                      <path d="M4 8l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                      <path
+                        d="M4 8l3 3 5-5"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
                     </svg>
                   } @else {
                     <svg viewBox="0 0 16 16" fill="none">
-                      <rect x="5" y="5" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.3" />
-                      <path d="M3 10V3.5A.5.5 0 0 1 3.5 3H10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" />
+                      <rect
+                        x="5"
+                        y="5"
+                        width="7"
+                        height="7"
+                        rx="1.5"
+                        stroke="currentColor"
+                        stroke-width="1.3"
+                      />
+                      <path
+                        d="M3 10V3.5A.5.5 0 0 1 3.5 3H10"
+                        stroke="currentColor"
+                        stroke-width="1.3"
+                        stroke-linecap="round"
+                      />
                     </svg>
                   }
                 </button>
@@ -150,16 +201,41 @@ import { NgxsmkThemeService } from '@ngxsmk/theme';
                 <span class="d-terminal__label">app.component.ts</span>
               </div>
               <div class="d-terminal__body">
-                <code class="d-terminal__code">import &#123; NgxsmkButton &#125; from '&#64;ngxsmk/core/button';</code>
-                <button class="d-terminal__copy" (click)="copy('import')" [attr.aria-label]="'Copy import'">
+                <code class="d-terminal__code"
+                  >import &#123; NgxsmkButton &#125; from '&#64;ngxsmk/core/button';</code
+                >
+                <button
+                  class="d-terminal__copy"
+                  (click)="copy('import')"
+                  [attr.aria-label]="'Copy import'"
+                >
                   @if (copiedImport()) {
                     <svg viewBox="0 0 16 16" fill="none">
-                      <path d="M4 8l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                      <path
+                        d="M4 8l3 3 5-5"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
                     </svg>
                   } @else {
                     <svg viewBox="0 0 16 16" fill="none">
-                      <rect x="5" y="5" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.3" />
-                      <path d="M3 10V3.5A.5.5 0 0 1 3.5 3H10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" />
+                      <rect
+                        x="5"
+                        y="5"
+                        width="7"
+                        height="7"
+                        rx="1.5"
+                        stroke="currentColor"
+                        stroke-width="1.3"
+                      />
+                      <path
+                        d="M3 10V3.5A.5.5 0 0 1 3.5 3H10"
+                        stroke="currentColor"
+                        stroke-width="1.3"
+                        stroke-linecap="round"
+                      />
                     </svg>
                   }
                 </button>
@@ -174,7 +250,8 @@ import { NgxsmkThemeService } from '@ngxsmk/theme';
               <h3 class="d-step-title">Build &amp; Render UI</h3>
             </div>
             <p class="d-step-desc">
-              Apply component directives or elements in your template with signals and OnPush change detection.
+              Apply component directives or elements in your template with signals and OnPush change
+              detection.
             </p>
             <div class="d-terminal">
               <div class="d-terminal__head">
@@ -182,16 +259,41 @@ import { NgxsmkThemeService } from '@ngxsmk/theme';
                 <span class="d-terminal__label">template.html</span>
               </div>
               <div class="d-terminal__body">
-                <code class="d-terminal__code">&lt;button ngxsmk-button&gt;Get Started&lt;/button&gt;</code>
-                <button class="d-terminal__copy" (click)="copy('template')" [attr.aria-label]="'Copy template'">
+                <code class="d-terminal__code"
+                  >&lt;button ngxsmk-button&gt;Get Started&lt;/button&gt;</code
+                >
+                <button
+                  class="d-terminal__copy"
+                  (click)="copy('template')"
+                  [attr.aria-label]="'Copy template'"
+                >
                   @if (copiedTemplate()) {
                     <svg viewBox="0 0 16 16" fill="none">
-                      <path d="M4 8l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                      <path
+                        d="M4 8l3 3 5-5"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
                     </svg>
                   } @else {
                     <svg viewBox="0 0 16 16" fill="none">
-                      <rect x="5" y="5" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.3" />
-                      <path d="M3 10V3.5A.5.5 0 0 1 3.5 3H10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" />
+                      <rect
+                        x="5"
+                        y="5"
+                        width="7"
+                        height="7"
+                        rx="1.5"
+                        stroke="currentColor"
+                        stroke-width="1.3"
+                      />
+                      <path
+                        d="M3 10V3.5A.5.5 0 0 1 3.5 3H10"
+                        stroke="currentColor"
+                        stroke-width="1.3"
+                        stroke-linecap="round"
+                      />
                     </svg>
                   }
                 </button>
@@ -774,7 +876,11 @@ import { NgxsmkThemeService } from '@ngxsmk/theme';
       margin-bottom: 2.5rem;
     }
     .d-card--highlight {
-      border-color: color-mix(in srgb, var(--ngxsmk-color-primary, #7c3aed) 40%, var(--ngxsmk-color-outline));
+      border-color: color-mix(
+        in srgb,
+        var(--ngxsmk-color-primary, #7c3aed) 40%,
+        var(--ngxsmk-color-outline)
+      );
     }
     .d-card__header-box {
       max-width: 600px;

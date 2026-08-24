@@ -22,26 +22,27 @@
 
 ## 2. Canonical Import Mapping Reference
 
-| Component / Directive | Class Name | Import Path | Primary Selector |
-|---|---|---|---|
-| **Button** | `NgxsmkButton` | `@ngxsmk/core/button` | `button[ngxsmk-button], a[ngxsmk-button]` |
-| **Card** | `NgxsmkCard`, `NgxsmkCardHeader`, `NgxsmkCardTitle`, `NgxsmkCardDescription`, `NgxsmkCardContent`, `NgxsmkCardFooter` | `@ngxsmk/core/card` | `ngxsmk-card`, `[ngxsmkCardHeader]`, etc. |
-| **Form Field & Input** | `NgxsmkFormField`, `NgxsmkInputDirective` | `@ngxsmk/core/form-field`, `@ngxsmk/core/input` | `ngxsmk-form-field`, `input[ngxsmkInput]` |
-| **Switch & Checkbox** | `NgxsmkSwitch`, `NgxsmkCheckbox` | `@ngxsmk/core/switch`, `@ngxsmk/core/checkbox` | `ngxsmk-switch`, `ngxsmk-checkbox` |
-| **Tabs** | `NgxsmkTabs`, `NgxsmkTab` | `@ngxsmk/core/tabs` | `ngxsmk-tabs`, `ngxsmk-tab` |
-| **Dialog / Modal** | `NgxsmkDialog` | `@ngxsmk/core/dialog` | `ngxsmk-dialog` |
-| **Alert & Badge** | `NgxsmkAlert`, `NgxsmkBadge` | `@ngxsmk/core/alert`, `@ngxsmk/core/badge` | `ngxsmk-alert`, `ngxsmk-badge` |
-| **Virtual Scroll** | `NgxsmkVirtualScroll` | `@ngxsmk/core/virtual-scroll` | `ngxsmk-virtual-scroll` |
-| **AI Chat & Prompts** | `NgxsmkAiChat`, `NgxsmkPromptInput` | `@ngxsmk/core/ai-chat`, `@ngxsmk/core/prompt-input` | `ngxsmk-ai-chat`, `ngxsmk-prompt-input` |
-| **Pin / OTP Input** | `NgxsmkPinInput` | `@ngxsmk/core/pin-input` | `ngxsmk-pin-input` |
-| **Roving Focus (CDK)** | `NgxsmkRovingFocusGroup`, `NgxsmkRovingFocusItem` | `@ngxsmk/cdk/roving-focus` | `[ngxsmkRovingFocusGroup]`, `[ngxsmkRovingFocusItem]` |
-| **Skip Link (CDK)** | `NgxsmkSkipLink` | `@ngxsmk/cdk/skip-link` | `ngxsmk-skip-link` |
+| Component / Directive  | Class Name                                                                                                            | Import Path                                         | Primary Selector                                      |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- | ----------------------------------------------------- |
+| **Button**             | `NgxsmkButton`                                                                                                        | `@ngxsmk/core/button`                               | `button[ngxsmk-button], a[ngxsmk-button]`             |
+| **Card**               | `NgxsmkCard`, `NgxsmkCardHeader`, `NgxsmkCardTitle`, `NgxsmkCardDescription`, `NgxsmkCardContent`, `NgxsmkCardFooter` | `@ngxsmk/core/card`                                 | `ngxsmk-card`, `[ngxsmkCardHeader]`, etc.             |
+| **Form Field & Input** | `NgxsmkFormField`, `NgxsmkInputDirective`                                                                             | `@ngxsmk/core/form-field`, `@ngxsmk/core/input`     | `ngxsmk-form-field`, `input[ngxsmkInput]`             |
+| **Switch & Checkbox**  | `NgxsmkSwitch`, `NgxsmkCheckbox`                                                                                      | `@ngxsmk/core/switch`, `@ngxsmk/core/checkbox`      | `ngxsmk-switch`, `ngxsmk-checkbox`                    |
+| **Tabs**               | `NgxsmkTabs`, `NgxsmkTab`                                                                                             | `@ngxsmk/core/tabs`                                 | `ngxsmk-tabs`, `ngxsmk-tab`                           |
+| **Dialog / Modal**     | `NgxsmkDialog`                                                                                                        | `@ngxsmk/core/dialog`                               | `ngxsmk-dialog`                                       |
+| **Alert & Badge**      | `NgxsmkAlert`, `NgxsmkBadge`                                                                                          | `@ngxsmk/core/alert`, `@ngxsmk/core/badge`          | `ngxsmk-alert`, `ngxsmk-badge`                        |
+| **Virtual Scroll**     | `NgxsmkVirtualScroll`                                                                                                 | `@ngxsmk/core/virtual-scroll`                       | `ngxsmk-virtual-scroll`                               |
+| **AI Chat & Prompts**  | `NgxsmkAiChat`, `NgxsmkPromptInput`                                                                                   | `@ngxsmk/core/ai-chat`, `@ngxsmk/core/prompt-input` | `ngxsmk-ai-chat`, `ngxsmk-prompt-input`               |
+| **Pin / OTP Input**    | `NgxsmkPinInput`                                                                                                      | `@ngxsmk/core/pin-input`                            | `ngxsmk-pin-input`                                    |
+| **Roving Focus (CDK)** | `NgxsmkRovingFocusGroup`, `NgxsmkRovingFocusItem`                                                                     | `@ngxsmk/cdk/roving-focus`                          | `[ngxsmkRovingFocusGroup]`, `[ngxsmkRovingFocusItem]` |
+| **Skip Link (CDK)**    | `NgxsmkSkipLink`                                                                                                      | `@ngxsmk/cdk/skip-link`                             | `ngxsmk-skip-link`                                    |
 
 ---
 
 ## 3. Common Composition Patterns
 
 ### 3.1 Form Field with Reactive Signals & Validation
+
 ```ts
 import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -72,6 +73,7 @@ export class UserFormComponent {
 ---
 
 ### 3.2 Modal Dialog with Accessible Focus Trap & Actions
+
 ```ts
 import { Component, signal } from '@angular/core';
 import { NgxsmkDialog } from '@ngxsmk/core/dialog';
@@ -87,7 +89,9 @@ import { NgxsmkButton } from '@ngxsmk/core/button';
       <p>This action is irreversible. All connected instances will be permanently terminated.</p>
       <div slot="actions" class="flex justify-end gap-2 mt-4">
         <button ngxsmk-button variant="outline" (click)="isOpen.set(false)">Cancel</button>
-        <button ngxsmk-button variant="destructive" (click)="confirmDelete()">Permanently Delete</button>
+        <button ngxsmk-button variant="destructive" (click)="confirmDelete()">
+          Permanently Delete
+        </button>
       </div>
     </ngxsmk-dialog>
   `,
@@ -104,24 +108,24 @@ export class DeleteClusterComponent {
 
 ## 4. Anti-Patterns & Common Traps
 
-| Anti-Pattern (DO NOT DO) | Correct Pattern (ALWAYS DO) |
-|---|---|
-| ❌ `@Input() name = '';` | ✅ `readonly name = input('');` |
-| ❌ `@Output() changed = new EventEmitter();` | ✅ `readonly changed = output<string>();` |
+| Anti-Pattern (DO NOT DO)                          | Correct Pattern (ALWAYS DO)                              |
+| ------------------------------------------------- | -------------------------------------------------------- |
+| ❌ `@Input() name = '';`                          | ✅ `readonly name = input('');`                          |
+| ❌ `@Output() changed = new EventEmitter();`      | ✅ `readonly changed = output<string>();`                |
 | ❌ `import { NgxsmkButton } from '@ngxsmk/core';` | ✅ `import { NgxsmkButton } from '@ngxsmk/core/button';` |
-| ❌ `<button class="ngxsmk-btn">` | ✅ `<button ngxsmk-button variant="primary">` |
-| ❌ `color: #7c3aed;` | ✅ `color: var(--ngxsmk-color-primary);` |
-| ❌ `margin-left: 16px;` | ✅ `margin-inline-start: var(--ngxsmk-space-4);` |
-| ❌ `grid-template-columns: 1fr 1fr;` | ✅ `grid-template-columns: repeat(2, minmax(0, 1fr));` |
+| ❌ `<button class="ngxsmk-btn">`                  | ✅ `<button ngxsmk-button variant="primary">`            |
+| ❌ `color: #7c3aed;`                              | ✅ `color: var(--ngxsmk-color-primary);`                 |
+| ❌ `margin-left: 16px;`                           | ✅ `margin-inline-start: var(--ngxsmk-space-4);`         |
+| ❌ `grid-template-columns: 1fr 1fr;`              | ✅ `grid-template-columns: repeat(2, minmax(0, 1fr));`   |
 
 ---
 
 ## 5. Angular Material to NGXSMK Migration Guide
 
-| Angular Material | NGXSMK Equivalent | Migration Changes |
-|---|---|---|
-| `<button mat-raised-button color="primary">` | `<button ngxsmk-button variant="primary">` | Change `mat-raised-button` to `ngxsmk-button`, `color` to `variant`. |
-| `<mat-form-field><mat-label>Name</mat-label><input matInput></mat-form-field>` | `<ngxsmk-form-field label="Name"><input ngxsmkInput></ngxsmk-form-field>` | Move label to `[label]` input attribute on `<ngxsmk-form-field>`. |
-| `<mat-slide-toggle [(ngModel)]="active">` | `<ngxsmk-switch [(checked)]="active">` | Replace `mat-slide-toggle` with `ngxsmk-switch`, binding `[(checked)]`. |
-| `<mat-tab-group><mat-tab label="1"></mat-tab></mat-tab-group>` | `<ngxsmk-tabs><ngxsmk-tab label="1"></ngxsmk-tab></ngxsmk-tabs>` | Replace with `ngxsmk-tabs` and `ngxsmk-tab`. |
-| `<mat-card><mat-card-title>Title</mat-card-title></mat-card>` | `<ngxsmk-card><h3 ngxsmkCardTitle>Title</h3></ngxsmk-card>` | Use directive slots `[ngxsmkCardTitle]` inside `ngxsmk-card`. |
+| Angular Material                                                               | NGXSMK Equivalent                                                         | Migration Changes                                                       |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `<button mat-raised-button color="primary">`                                   | `<button ngxsmk-button variant="primary">`                                | Change `mat-raised-button` to `ngxsmk-button`, `color` to `variant`.    |
+| `<mat-form-field><mat-label>Name</mat-label><input matInput></mat-form-field>` | `<ngxsmk-form-field label="Name"><input ngxsmkInput></ngxsmk-form-field>` | Move label to `[label]` input attribute on `<ngxsmk-form-field>`.       |
+| `<mat-slide-toggle [(ngModel)]="active">`                                      | `<ngxsmk-switch [(checked)]="active">`                                    | Replace `mat-slide-toggle` with `ngxsmk-switch`, binding `[(checked)]`. |
+| `<mat-tab-group><mat-tab label="1"></mat-tab></mat-tab-group>`                 | `<ngxsmk-tabs><ngxsmk-tab label="1"></ngxsmk-tab></ngxsmk-tabs>`          | Replace with `ngxsmk-tabs` and `ngxsmk-tab`.                            |
+| `<mat-card><mat-card-title>Title</mat-card-title></mat-card>`                  | `<ngxsmk-card><h3 ngxsmkCardTitle>Title</h3></ngxsmk-card>`               | Use directive slots `[ngxsmkCardTitle]` inside `ngxsmk-card`.           |

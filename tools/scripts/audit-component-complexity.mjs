@@ -66,16 +66,22 @@ function auditFile(dirName, fileName, filePath) {
 
   const recommendations = [];
   if (inputsCount > 12) {
-    recommendations.push(`Consider consolidating ${inputsCount} inputs into a configuration object`);
+    recommendations.push(
+      `Consider consolidating ${inputsCount} inputs into a configuration object`,
+    );
   }
   if (loc > 300) {
-    recommendations.push(`File length (${loc} lines) exceeds 300 LoC threshold; consider splitting helper functions`);
+    recommendations.push(
+      `File length (${loc} lines) exceeds 300 LoC threshold; consider splitting helper functions`,
+    );
   }
   if (hasSubscribe) {
     recommendations.push('Replace manual .subscribe() with signals (toSignal or computed)');
   }
   if (signalCount > 0 && computedCount === 0) {
-    recommendations.push('Evaluate if mutable state can be converted to derived computed() signals');
+    recommendations.push(
+      'Evaluate if mutable state can be converted to derived computed() signals',
+    );
   }
 
   componentAudits.push({
@@ -110,7 +116,9 @@ for (const entry of entries) {
 const avgLoC = Math.round(totalLoC / totalComponents);
 const avgInputs = (totalInputs / totalComponents).toFixed(1);
 const derivedRatio = Math.round((totalComputeds / (totalComputeds + totalSignals || 1)) * 100);
-const signalPurityRate = Math.round(((totalComponents - rxjsSubscriptionsCount) / totalComponents) * 100);
+const signalPurityRate = Math.round(
+  ((totalComponents - rxjsSubscriptionsCount) / totalComponents) * 100,
+);
 
 console.log('===============================================================');
 console.log('            NGXSMK ARCHITECTURAL SIMPLICITY AUDIT              ');
@@ -118,7 +126,9 @@ console.log('===============================================================');
 console.log(`Total Core Components Audited:    ${totalComponents}`);
 console.log(`Average Lines of Code (LoC):      ${avgLoC} lines / component`);
 console.log(`Average API Input Surface:        ${avgInputs} inputs / component`);
-console.log(`Signals-Native Purity Rate:       ${signalPurityRate}% (0 subscriptions in ${totalComponents - rxjsSubscriptionsCount}/${totalComponents})`);
+console.log(
+  `Signals-Native Purity Rate:       ${signalPurityRate}% (0 subscriptions in ${totalComponents - rxjsSubscriptionsCount}/${totalComponents})`,
+);
 console.log(`Derived State Ratio (computed):   ${derivedRatio}% derived vs stored`);
 console.log('---------------------------------------------------------------');
 
@@ -128,7 +138,9 @@ componentAudits
   .sort((a, b) => b.simplicityScore - a.simplicityScore)
   .slice(0, 5)
   .forEach((c) => {
-    console.log(`  ⭐ ${c.name.padEnd(28)} Score: ${c.simplicityScore}/100 (${c.loc} LoC, ${c.inputs} inputs)`);
+    console.log(
+      `  ⭐ ${c.name.padEnd(28)} Score: ${c.simplicityScore}/100 (${c.loc} LoC, ${c.inputs} inputs)`,
+    );
   });
 
 console.log('===============================================================\n');
@@ -163,8 +175,12 @@ const reportLines = [
   '|---|---|---|---|---|---|',
 ];
 
-for (const c of componentAudits.sort((a, b) => b.simplicityScore - a.simplicityScore).slice(0, 15)) {
-  reportLines.push(`| **${c.name}** | ${c.loc} | ${c.inputs} | ${c.outputs} | ${c.computeds} | **${c.simplicityScore}/100** |`);
+for (const c of componentAudits
+  .sort((a, b) => b.simplicityScore - a.simplicityScore)
+  .slice(0, 15)) {
+  reportLines.push(
+    `| **${c.name}** | ${c.loc} | ${c.inputs} | ${c.outputs} | ${c.computeds} | **${c.simplicityScore}/100** |`,
+  );
 }
 
 reportLines.push('');

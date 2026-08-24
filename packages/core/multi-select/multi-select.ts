@@ -143,7 +143,9 @@ export interface NgxsmkMultiSelectOption {
       border-radius: var(--ngxsmk-radius-base);
       background: var(--ngxsmk-color-surface);
       cursor: pointer;
-      transition: border-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out), box-shadow var(--ngxsmk-duration-fast);
+      transition:
+        border-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
+        box-shadow var(--ngxsmk-duration-fast);
     }
 
     .ngxsmk-multi-select__trigger:hover:not(.ngxsmk-multi-select__trigger--disabled) {
@@ -188,7 +190,7 @@ export interface NgxsmkMultiSelectOption {
       gap: var(--ngxsmk-space-1);
       padding: var(--ngxsmk-space-0-5) var(--ngxsmk-space-2);
       border-radius: var(--ngxsmk-radius-sm);
-      background: var(--ngxsmk-color-primary-container, rgba(0,0,0,0.06));
+      background: var(--ngxsmk-color-primary-container, rgba(0, 0, 0, 0.06));
       color: var(--ngxsmk-color-on-primary-container, var(--ngxsmk-color-on-surface));
       font-size: var(--ngxsmk-text-label-md-size);
       line-height: var(--ngxsmk-text-label-md-line);
@@ -303,9 +305,7 @@ export class NgxsmkMultiSelect extends CvaBase<string[]> implements NgxsmkFormFi
   protected readonly activeIndex = this.kb.activeIndex;
 
   protected readonly activeDescendant = computed(() =>
-    this.open() && this.activeIndex() >= 0
-      ? `${this.listboxId}-${this.activeIndex()}`
-      : null,
+    this.open() && this.activeIndex() >= 0 ? `${this.listboxId}-${this.activeIndex()}` : null,
   );
 
   protected inputDisabled(): boolean {

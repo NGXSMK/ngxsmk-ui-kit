@@ -159,8 +159,9 @@ const DIALOG_MOTION: NgxsmkMotionState = {
       background: transparent;
       color: var(--ngxsmk-color-on-surface-variant);
       cursor: pointer;
-      transition: background var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
-                  color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
+      transition:
+        background var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
+        color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
     .ngxsmk-dialog__close:hover {
       background: var(--ngxsmk-color-surface-hover);

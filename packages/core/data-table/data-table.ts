@@ -15,7 +15,11 @@ import { NgxsmkTable, NgxsmkTableColumn } from '@ngxsmk/core/table';
   selector: 'ngxsmk-data-table',
   template: `
     @if (loading()) {
-      <div class="ngxsmk-data-table__loading-bar" role="progressbar" aria-label="Loading data"></div>
+      <div
+        class="ngxsmk-data-table__loading-bar"
+        role="progressbar"
+        aria-label="Loading data"
+      ></div>
     }
 
     <ngxsmk-table
@@ -109,8 +113,13 @@ import { NgxsmkTable, NgxsmkTableColumn } from '@ngxsmk/core/table';
     }
 
     @keyframes ngxsmk-pulse {
-      0%, 100% { opacity: 0.3; }
-      50% { opacity: 1; }
+      0%,
+      100% {
+        opacity: 0.3;
+      }
+      50% {
+        opacity: 1;
+      }
     }
 
     .ngxsmk-data-table__empty {
@@ -226,9 +235,7 @@ export class NgxsmkDataTable {
     const q = this.filter().trim().toLowerCase();
     if (q) {
       data = data.filter((row) =>
-        Object.values(row).some((val) =>
-          val != null && String(val).toLowerCase().includes(q),
-        ),
+        Object.values(row).some((val) => val != null && String(val).toLowerCase().includes(q)),
       );
     }
     const field = this.sortField();

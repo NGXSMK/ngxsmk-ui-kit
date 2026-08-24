@@ -412,8 +412,9 @@ export interface NgxsmkAiMessage {
       color: var(--ngxsmk-color-on-surface);
       font-family: inherit;
       outline: none;
-      transition: border-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
-                  box-shadow var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
+      transition:
+        border-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
+        box-shadow var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
     .ngxsmk-ai-chat__form input:focus {
       border-color: var(--ngxsmk-color-ring);

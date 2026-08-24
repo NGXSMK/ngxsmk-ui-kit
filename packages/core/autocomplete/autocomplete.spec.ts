@@ -125,7 +125,9 @@ describe('NgxsmkAutocomplete', () => {
 
     const fixture = TestBed.createComponent(ReactiveHost);
     fixture.detectChanges();
-    const input: HTMLInputElement = fixture.nativeElement.querySelector('.ngxsmk-autocomplete__input');
+    const input: HTMLInputElement = fixture.nativeElement.querySelector(
+      '.ngxsmk-autocomplete__input',
+    );
     expect(input.value).toBe('apple');
 
     fixture.componentInstance.ctrl.setValue('banana');

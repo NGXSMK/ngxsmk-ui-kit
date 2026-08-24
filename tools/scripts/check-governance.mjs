@@ -122,7 +122,12 @@ function checkComponent(dirName, dirPath) {
         const nonTokens = hexMatches.filter(
           (h) => !h.includes('#ffffff') && !h.includes('#000000'),
         );
-        if (nonTokens.length > 0 && !file.includes('color-picker') && !file.includes('chart-') && !file.includes('calendar-heatmap')) {
+        if (
+          nonTokens.length > 0 &&
+          !file.includes('color-picker') &&
+          !file.includes('chart-') &&
+          !file.includes('calendar-heatmap')
+        ) {
           violations.push({
             file: filePath,
             rule: 'Design Token Purity',

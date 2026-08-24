@@ -4,7 +4,12 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { NgxsmkButton } from '@ngxsmk/core/button';
 import { NgxsmkBadge } from '@ngxsmk/core/badge';
 import { NgxsmkAlert } from '@ngxsmk/core/alert';
-import { NgxsmkCard, NgxsmkCardContent, NgxsmkCardHeader, NgxsmkCardTitle } from '@ngxsmk/core/card';
+import {
+  NgxsmkCard,
+  NgxsmkCardContent,
+  NgxsmkCardHeader,
+  NgxsmkCardTitle,
+} from '@ngxsmk/core/card';
 import { NgxsmkSwitch } from '@ngxsmk/core/switch';
 import { NgxsmkCheckbox } from '@ngxsmk/core/checkbox';
 import { NgxsmkPromptInput } from '@ngxsmk/core/prompt-input';

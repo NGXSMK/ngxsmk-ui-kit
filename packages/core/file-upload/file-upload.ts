@@ -181,11 +181,7 @@ export interface UploadedFileItem {
     .ngxsmk-file-upload__dropzone:hover,
     :host(.ngxsmk-file-upload--dragging) .ngxsmk-file-upload__dropzone {
       border-color: var(--ngxsmk-color-primary);
-      background: color-mix(
-        in srgb,
-        var(--ngxsmk-color-primary) 4%,
-        var(--ngxsmk-color-surface)
-      );
+      background: color-mix(in srgb, var(--ngxsmk-color-primary) 4%, var(--ngxsmk-color-surface));
     }
 
     .ngxsmk-file-upload__dropzone:focus-visible {

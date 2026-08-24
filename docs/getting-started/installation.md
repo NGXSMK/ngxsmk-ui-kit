@@ -20,6 +20,7 @@ npm install @ngxsmk/core @ngxsmk/theme
 ```
 
 Optional interaction primitives:
+
 ```bash
 npm install @ngxsmk/cdk
 ```
@@ -52,7 +53,12 @@ Import the component directly into your standalone component's `imports` array:
 ```ts
 import { Component, signal } from '@angular/core';
 import { NgxsmkButton } from '@ngxsmk/core/button';
-import { NgxsmkCard, NgxsmkCardHeader, NgxsmkCardTitle, NgxsmkCardContent } from '@ngxsmk/core/card';
+import {
+  NgxsmkCard,
+  NgxsmkCardHeader,
+  NgxsmkCardTitle,
+  NgxsmkCardContent,
+} from '@ngxsmk/core/card';
 
 @Component({
   selector: 'app-root',
@@ -87,8 +93,6 @@ In your `app.config.ts`, enable zoneless change detection:
 import { ApplicationConfig, provideZonelessChangeDetection } from '@angular/core';
 
 export const appConfig: ApplicationConfig = {
-  providers: [
-    provideZonelessChangeDetection(),
-  ],
+  providers: [provideZonelessChangeDetection()],
 };
 ```

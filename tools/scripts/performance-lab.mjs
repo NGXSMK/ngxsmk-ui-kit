@@ -54,7 +54,7 @@ for (let i = 0; i < SIGNAL_OPS; i++) {
   signalVal = (signalVal + i) ^ 0x5a5a;
 }
 const signalDurationMs = performance.now() - startSignal;
-const signalOpsPerSec = Math.round((SIGNAL_OPS / (signalDurationMs / 1000)));
+const signalOpsPerSec = Math.round(SIGNAL_OPS / (signalDurationMs / 1000));
 
 // 3. Benchmark: Large Dataset Virtualization Simulation (100,000 items)
 const VIRTUAL_DATASET_SIZE = 100000;
@@ -88,7 +88,7 @@ for (let i = 0; i < SSR_CYCLES; i++) {
   ssrMarkup = `<div class="ngxsmk-card" data-interactive=""><div class="ngxsmk-card__header"><h4 class="ngxsmk-card__title">Order #${i}</h4></div><div class="ngxsmk-card__content"><button class="ngxsmk-button" data-variant="primary">View</button></div></div>`;
 }
 const ssrDurationMs = performance.now() - startSsr;
-const ssrThroughputPerSec = Math.round((SSR_CYCLES / (ssrDurationMs / 1000)));
+const ssrThroughputPerSec = Math.round(SSR_CYCLES / (ssrDurationMs / 1000));
 
 // 5. Competitor & Architectural Baseline Comparison
 const benchmarkComparison = [
@@ -131,7 +131,9 @@ console.log(`Total Built Entry Points:      ${bundleMetrics.length}`);
 console.log(`Total Raw Size:                ${kb(totalRaw)}`);
 console.log(`Total Gzip Size:               ${kb(totalGzip)}`);
 console.log(`Total Brotli Size:             ${kb(totalBrotli)}`);
-console.log(`Signal Throughput:             ${(signalOpsPerSec / 1000000).toFixed(2)}M mutations/sec`);
+console.log(
+  `Signal Throughput:             ${(signalOpsPerSec / 1000000).toFixed(2)}M mutations/sec`,
+);
 console.log(`Virtual Scroll (100k Rows):    ${avgScrollLatencyMs} ms / frame`);
 console.log(`SSR Rendering Throughput:      ${ssrThroughputPerSec.toLocaleString()} comps/sec`);
 console.log('---------------------------------------------------------------');
@@ -170,15 +172,23 @@ reportLines.push('| Component / Entry Point | Raw Size | Gzip Size | Brotli Size
 reportLines.push('|---|---|---|---|---|');
 
 for (const m of bundleMetrics.sort((a, b) => a.br - b.br).slice(0, 20)) {
-  reportLines.push(`| **${m.entry}** | ${kb(m.raw)} | ${kb(m.gz)} | **${kb(m.br)}** | ✅ Optimized |`);
+  reportLines.push(
+    `| **${m.entry}** | ${kb(m.raw)} | ${kb(m.gz)} | **${kb(m.br)}** | ✅ Optimized |`,
+  );
 }
 
 reportLines.push('');
 reportLines.push('## 3. Big Data & Reactivity Guarantees');
 reportLines.push('');
-reportLines.push(`- **100,000-Item Dataset Virtualization**: Rendered in **${avgScrollLatencyMs} ms** per frame with fixed ${VISIBLE_COUNT} DOM nodes.`);
-reportLines.push(`- **Signal Mutation Benchmark**: Processed **${SIGNAL_OPS.toLocaleString()}** signal updates in **${signalDurationMs.toFixed(2)} ms** (${(signalOpsPerSec / 1000000).toFixed(2)}M ops/sec).`);
-reportLines.push(`- **Server-Side Render Latency**: **${ssrThroughputPerSec.toLocaleString()}** components rendered per second with zero browser API contamination.`);
+reportLines.push(
+  `- **100,000-Item Dataset Virtualization**: Rendered in **${avgScrollLatencyMs} ms** per frame with fixed ${VISIBLE_COUNT} DOM nodes.`,
+);
+reportLines.push(
+  `- **Signal Mutation Benchmark**: Processed **${SIGNAL_OPS.toLocaleString()}** signal updates in **${signalDurationMs.toFixed(2)} ms** (${(signalOpsPerSec / 1000000).toFixed(2)}M ops/sec).`,
+);
+reportLines.push(
+  `- **Server-Side Render Latency**: **${ssrThroughputPerSec.toLocaleString()}** components rendered per second with zero browser API contamination.`,
+);
 
 const reportPath = join(REPORT_DIR, 'performance-laboratory-report.md');
 writeFileSync(reportPath, reportLines.join('\n'), 'utf-8');

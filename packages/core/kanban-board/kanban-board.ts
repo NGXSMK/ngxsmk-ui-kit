@@ -136,8 +136,7 @@ export type KanbanItem = NgxsmkKanbanItem;
         var(--ngxsmk-color-primary) 8%,
         var(--ngxsmk-color-surface-variant)
       );
-      box-shadow: 0 0 0 2px
-        color-mix(in srgb, var(--ngxsmk-color-primary) 25%, transparent);
+      box-shadow: 0 0 0 2px color-mix(in srgb, var(--ngxsmk-color-primary) 25%, transparent);
     }
 
     .ngxsmk-kanban__col-header {

@@ -111,7 +111,9 @@ describe('NgxsmkMultiSelect', () => {
 
     fixture.componentInstance.ctrl.disable();
     fixture.detectChanges();
-    const trigger: HTMLElement = fixture.nativeElement.querySelector('.ngxsmk-multi-select__trigger');
+    const trigger: HTMLElement = fixture.nativeElement.querySelector(
+      '.ngxsmk-multi-select__trigger',
+    );
     expect(trigger.getAttribute('aria-disabled')).toBe('true');
   });
 });

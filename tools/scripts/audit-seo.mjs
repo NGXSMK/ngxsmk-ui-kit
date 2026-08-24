@@ -25,7 +25,10 @@ if (existsSync(robotsPath)) {
   const robotsContent = readFileSync(robotsPath, 'utf-8');
   check('robots.txt declares Sitemap index', robotsContent.includes('Sitemap:'));
   check('robots.txt declares GPTBot permissions', robotsContent.includes('User-agent: GPTBot'));
-  check('robots.txt declares ClaudeBot permissions', robotsContent.includes('User-agent: ClaudeBot'));
+  check(
+    'robots.txt declares ClaudeBot permissions',
+    robotsContent.includes('User-agent: ClaudeBot'),
+  );
 }
 
 // 2. Check sitemap.xml
@@ -33,10 +36,19 @@ const sitemapPath = join(process.cwd(), 'apps/demo/public/sitemap.xml');
 check('sitemap.xml exists in demo public directory', existsSync(sitemapPath));
 if (existsSync(sitemapPath)) {
   const sitemapContent = readFileSync(sitemapPath, 'utf-8');
-  check('sitemap.xml is valid urlset XML', sitemapContent.includes('<urlset') && sitemapContent.includes('</urlset>'));
-  check('sitemap.xml includes root URL', sitemapContent.includes('<loc>https://ngxsmk.github.io/ngxsmk-ui-kit/</loc>'));
+  check(
+    'sitemap.xml is valid urlset XML',
+    sitemapContent.includes('<urlset') && sitemapContent.includes('</urlset>'),
+  );
+  check(
+    'sitemap.xml includes root URL',
+    sitemapContent.includes('<loc>https://ngxsmk.github.io/ngxsmk-ui-kit/</loc>'),
+  );
   check('sitemap.xml includes docs URL', sitemapContent.includes('/docs</loc>'));
-  check('sitemap.xml includes showcase explorer', sitemapContent.includes('/showcase/explorer</loc>'));
+  check(
+    'sitemap.xml includes showcase explorer',
+    sitemapContent.includes('/showcase/explorer</loc>'),
+  );
   check('sitemap.xml includes AI showcase', sitemapContent.includes('/showcase/ai</loc>'));
 }
 
@@ -53,7 +65,10 @@ if (existsSync(routesPath)) {
   const routesContent = readFileSync(routesPath, 'utf-8');
   check('app.routes.ts defines titles', routesContent.includes('title:'));
   check('app.routes.ts defines meta descriptions', routesContent.includes('description:'));
-  check('app.routes.ts defines OpenGraph/Twitter friendly descriptions', routesContent.length > 5000);
+  check(
+    'app.routes.ts defines OpenGraph/Twitter friendly descriptions',
+    routesContent.length > 5000,
+  );
 }
 
 // 5. Check SEO service implementation

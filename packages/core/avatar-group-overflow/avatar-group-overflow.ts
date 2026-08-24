@@ -28,4 +28,3 @@ export class NgxsmkAvatarGroupOverflow {
 
   protected readonly ariaLabel = computed(() => `${this.count()} more`);
 }
-

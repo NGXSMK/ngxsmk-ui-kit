@@ -81,4 +81,3 @@ describe('buildThemeCss', () => {
     expect(css).toContain('--ngxsmk-touch-target-min: 44px;');
   });
 });
-

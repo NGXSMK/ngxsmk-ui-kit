@@ -163,8 +163,9 @@ export interface NgxsmkPromptModelOption {
       background: transparent;
       color: var(--ngxsmk-color-on-surface-variant);
       cursor: pointer;
-      transition: background var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
-                  color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
+      transition:
+        background var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
+        color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
 
     .ngxsmk-prompt-box__btn:hover {
@@ -205,9 +206,10 @@ export interface NgxsmkPromptModelOption {
       background: var(--ngxsmk-color-primary);
       color: var(--ngxsmk-color-on-primary);
       cursor: pointer;
-      transition: background var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
-                  transform var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
-                  opacity var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
+      transition:
+        background var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
+        transform var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
+        opacity var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
 
     .ngxsmk-prompt-box__send-btn:hover:not(:disabled) {

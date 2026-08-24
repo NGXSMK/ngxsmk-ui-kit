@@ -101,8 +101,7 @@ export type NgxsmkCardBrand = 'visa' | 'mastercard' | 'amex' | 'discover' | 'unk
 
     .ngxsmk-card-input__input:focus {
       border-color: var(--ngxsmk-color-primary);
-      box-shadow: 0 0 0 3px
-        color-mix(in srgb, var(--ngxsmk-color-primary) 12%, transparent);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--ngxsmk-color-primary) 12%, transparent);
     }
 
     .ngxsmk-card-input__input--number {

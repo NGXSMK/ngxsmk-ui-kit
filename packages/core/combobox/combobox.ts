@@ -105,7 +105,9 @@ export interface NgxsmkComboboxOption {
       color: var(--ngxsmk-color-on-surface);
       outline: none;
       box-sizing: border-box;
-      transition: border-color var(--ngxsmk-duration-fast), box-shadow var(--ngxsmk-duration-fast);
+      transition:
+        border-color var(--ngxsmk-duration-fast),
+        box-shadow var(--ngxsmk-duration-fast);
     }
     .ngxsmk-combobox__input::placeholder {
       color: var(--ngxsmk-color-on-surface-variant);
@@ -199,9 +201,7 @@ export class NgxsmkCombobox extends CvaBase<string> implements NgxsmkFormFieldCo
   protected readonly activeIndex = this.kb.activeIndex;
 
   protected readonly activeDescendant = computed(() =>
-    this.open() && this.activeIndex() >= 0
-      ? `${this.dropdownId}-${this.activeIndex()}`
-      : null,
+    this.open() && this.activeIndex() >= 0 ? `${this.dropdownId}-${this.activeIndex()}` : null,
   );
 
   protected inputDisabled(): boolean {

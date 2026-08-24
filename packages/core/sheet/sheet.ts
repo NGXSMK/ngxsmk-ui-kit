@@ -151,11 +151,15 @@ export type NgxsmkSheetSide = 'left' | 'right' | 'bottom';
 
     .ngxsmk-sheet__panel[data-side='left'] .ngxsmk-sheet__header,
     .ngxsmk-sheet__panel[data-side='right'] .ngxsmk-sheet__header {
-      padding-top: calc(var(--ngxsmk-space-4) + var(--ngxsmk-safe-area-top, env(safe-area-inset-top, 0px)));
+      padding-top: calc(
+        var(--ngxsmk-space-4) + var(--ngxsmk-safe-area-top, env(safe-area-inset-top, 0px))
+      );
     }
 
     .ngxsmk-sheet__panel[data-side='bottom'] .ngxsmk-sheet__body {
-      padding-bottom: calc(var(--ngxsmk-space-6) + var(--ngxsmk-safe-area-bottom, env(safe-area-inset-bottom, 0px)));
+      padding-bottom: calc(
+        var(--ngxsmk-space-6) + var(--ngxsmk-safe-area-bottom, env(safe-area-inset-bottom, 0px))
+      );
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

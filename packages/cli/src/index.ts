@@ -11,7 +11,9 @@ if (command === 'migrate') {
   const targetIdx = args.indexOf('--target');
   const targetVersion = targetIdx > -1 ? args[targetIdx + 1] : 'latest';
 
-  console.log(`🚀 Running NGXSMK Migration Engine (target: ${targetVersion}, dryRun: ${dryRun})...\n`);
+  console.log(
+    `🚀 Running NGXSMK Migration Engine (target: ${targetVersion}, dryRun: ${dryRun})...\n`,
+  );
 
   const result = runMigration({
     cwd: process.cwd(),

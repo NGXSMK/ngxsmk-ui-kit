@@ -53,7 +53,11 @@ function analyzeComponent(compName, compDir) {
     if (compName.includes('button') || compName.includes('fab') || styles.includes('button')) {
       categories.buttonHeights.checks++;
       if (styles.includes('height:') || styles.includes('min-height:')) {
-        if (styles.includes('var(--ngxsmk-control-height') || styles.includes('var(--ngxsmk-space') || styles.includes('100%')) {
+        if (
+          styles.includes('var(--ngxsmk-control-height') ||
+          styles.includes('var(--ngxsmk-space') ||
+          styles.includes('100%')
+        ) {
           categories.buttonHeights.passes++;
         } else {
           const issue = `${compName}: Button height should use var(--ngxsmk-control-height-*)`;
@@ -74,7 +78,11 @@ function analyzeComponent(compName, compDir) {
     ) {
       categories.inputHeights.checks++;
       if (styles.includes('height:') || styles.includes('min-height:')) {
-        if (styles.includes('var(--ngxsmk-control-height') || styles.includes('100%') || styles.includes('auto')) {
+        if (
+          styles.includes('var(--ngxsmk-control-height') ||
+          styles.includes('100%') ||
+          styles.includes('auto')
+        ) {
           categories.inputHeights.passes++;
         } else {
           const issue = `${compName}: Form control height should bind to var(--ngxsmk-control-height-*)`;
@@ -89,7 +97,11 @@ function analyzeComponent(compName, compDir) {
     // 3. Border Radii
     categories.borderRadii.checks++;
     if (styles.includes('border-radius:')) {
-      if (styles.includes('var(--ngxsmk-radius-') || styles.includes('inherit') || styles.includes('50%')) {
+      if (
+        styles.includes('var(--ngxsmk-radius-') ||
+        styles.includes('inherit') ||
+        styles.includes('50%')
+      ) {
         categories.borderRadii.passes++;
       } else {
         const issue = `${compName}: Raw border-radius detected; use var(--ngxsmk-radius-*)`;
@@ -122,7 +134,11 @@ function analyzeComponent(compName, compDir) {
     // 5. Spacing
     categories.spacing.checks++;
     if (styles.includes('margin:') || styles.includes('gap:')) {
-      if (styles.includes('var(--ngxsmk-space-') || styles.includes('0') || styles.includes('auto')) {
+      if (
+        styles.includes('var(--ngxsmk-space-') ||
+        styles.includes('0') ||
+        styles.includes('auto')
+      ) {
         categories.spacing.passes++;
       } else {
         const issue = `${compName}: Spacing should use var(--ngxsmk-space-*) tokens`;
@@ -156,7 +172,12 @@ function analyzeComponent(compName, compDir) {
       content.includes('tabindex')
     ) {
       categories.focusRings.checks++;
-      if (styles.includes(':focus-visible') || styles.includes(':focus') || content.includes('FocusRing') || content.includes('ngxsmkFocusRing')) {
+      if (
+        styles.includes(':focus-visible') ||
+        styles.includes(':focus') ||
+        content.includes('FocusRing') ||
+        content.includes('ngxsmkFocusRing')
+      ) {
         categories.focusRings.passes++;
       } else {
         const issue = `${compName}: Missing explicit :focus-visible focus ring declaration`;
@@ -168,7 +189,12 @@ function analyzeComponent(compName, compDir) {
     // 8. Icon Sizes
     if (content.includes('svg') || compName.includes('icon') || styles.includes('svg')) {
       categories.iconSizes.checks++;
-      if (styles.includes('var(--ngxsmk-icon-size') || content.includes('viewBox') || content.includes('width=') || styles.includes('width:')) {
+      if (
+        styles.includes('var(--ngxsmk-icon-size') ||
+        content.includes('viewBox') ||
+        content.includes('width=') ||
+        styles.includes('width:')
+      ) {
         categories.iconSizes.passes++;
       } else {
         categories.iconSizes.passes++;
@@ -195,7 +221,11 @@ function analyzeComponent(compName, compDir) {
       const hexMatches = (styles.match(/#[0-9a-fA-F]{3,8}\b/g) || []).filter(
         (h) => !h.includes('#ffffff') && !h.includes('#000000'),
       );
-      if (hexMatches.length === 0 || compName.includes('color-picker') || compName.includes('chart-')) {
+      if (
+        hexMatches.length === 0 ||
+        compName.includes('color-picker') ||
+        compName.includes('chart-')
+      ) {
         categories.colors.passes++;
       } else {
         const issue = `${compName}: Hardcoded hex color ${hexMatches.join(', ')} found; use --ngxsmk-* variables`;
@@ -207,9 +237,16 @@ function analyzeComponent(compName, compDir) {
     }
 
     // 11. Disabled States
-    if (content.includes('disabled') && (content.includes('button') || content.includes('input') || content.includes('CvaBase'))) {
+    if (
+      content.includes('disabled') &&
+      (content.includes('button') || content.includes('input') || content.includes('CvaBase'))
+    ) {
       categories.disabledStates.checks++;
-      if (styles.includes(':disabled') || styles.includes('[disabled]') || styles.includes('[aria-disabled')) {
+      if (
+        styles.includes(':disabled') ||
+        styles.includes('[disabled]') ||
+        styles.includes('[aria-disabled')
+      ) {
         categories.disabledStates.passes++;
       } else {
         const issue = `${compName}: Missing explicit :disabled / [aria-disabled] style handler`;
@@ -219,9 +256,20 @@ function analyzeComponent(compName, compDir) {
     }
 
     // 12. Loading States
-    if (content.includes('loading') || compName.includes('spinner') || compName.includes('skeleton')) {
+    if (
+      content.includes('loading') ||
+      compName.includes('spinner') ||
+      compName.includes('skeleton')
+    ) {
       categories.loadingStates.checks++;
-      if (content.includes('aria-busy') || content.includes('spinner') || compName.includes('skeleton') || compName.includes('spinner') || styles.includes('spinner') || styles.includes('skeleton')) {
+      if (
+        content.includes('aria-busy') ||
+        content.includes('spinner') ||
+        compName.includes('skeleton') ||
+        compName.includes('spinner') ||
+        styles.includes('spinner') ||
+        styles.includes('skeleton')
+      ) {
         categories.loadingStates.passes++;
       } else {
         categories.loadingStates.passes++;
@@ -229,9 +277,18 @@ function analyzeComponent(compName, compDir) {
     }
 
     // 13. Error States
-    if (content.includes('CvaBase') || content.includes('NgxsmkFormFieldControl') || compName.includes('alert')) {
+    if (
+      content.includes('CvaBase') ||
+      content.includes('NgxsmkFormFieldControl') ||
+      compName.includes('alert')
+    ) {
       categories.errorStates.checks++;
-      if (styles.includes('aria-invalid') || styles.includes('ng-invalid') || compName.includes('alert') || styles.includes('error')) {
+      if (
+        styles.includes('aria-invalid') ||
+        styles.includes('ng-invalid') ||
+        compName.includes('alert') ||
+        styles.includes('error')
+      ) {
         categories.errorStates.passes++;
       } else {
         const issue = `${compName}: Form control missing explicit aria-invalid / error border styling`;
@@ -241,7 +298,13 @@ function analyzeComponent(compName, compDir) {
     }
 
     // 14. Hover States
-    if (content.includes('button') || content.includes('interactive') || compName.includes('card') || compName.includes('chip') || compName.includes('item')) {
+    if (
+      content.includes('button') ||
+      content.includes('interactive') ||
+      compName.includes('card') ||
+      compName.includes('chip') ||
+      compName.includes('item')
+    ) {
       categories.hoverStates.checks++;
       if (styles.includes(':hover') || styles.includes('surface-hover')) {
         categories.hoverStates.passes++;
@@ -253,7 +316,12 @@ function analyzeComponent(compName, compDir) {
     // 15. Density & Sizing
     if (content.includes('size = input') || content.includes('dense = input')) {
       categories.density.checks++;
-      if (styles.includes('data-size') || styles.includes('data-dense') || content.includes('sizeMap') || styles.includes('var(--ngxsmk-control-height')) {
+      if (
+        styles.includes('data-size') ||
+        styles.includes('data-dense') ||
+        content.includes('sizeMap') ||
+        styles.includes('var(--ngxsmk-control-height')
+      ) {
         categories.density.passes++;
       } else {
         categories.density.passes++;
@@ -327,7 +395,9 @@ for (const key of Object.keys(categories)) {
   const cat = categories[key];
   const rate = cat.checks > 0 ? Math.round((cat.passes / cat.checks) * 100) : 100;
   const status = rate >= 90 ? '✅ Excellent' : rate >= 70 ? '⚠️ Needs Review' : '❌ Non-Compliant';
-  reportLines.push(`| **${cat.name}** | **${rate}%** | ${cat.passes} / ${cat.checks} | ${status} |`);
+  reportLines.push(
+    `| **${cat.name}** | **${rate}%** | ${cat.passes} / ${cat.checks} | ${status} |`,
+  );
 }
 
 reportLines.push('');
@@ -335,7 +405,9 @@ reportLines.push('## Detailed Findings & Action Items');
 reportLines.push('');
 
 if (allWarnings.length === 0) {
-  reportLines.push('🎉 **No consistency violations found!** All components strictly adhere to NGXSMK design tokens and conventions.');
+  reportLines.push(
+    '🎉 **No consistency violations found!** All components strictly adhere to NGXSMK design tokens and conventions.',
+  );
 } else {
   reportLines.push(`Found **${allWarnings.length}** item(s) for refinement:`);
   reportLines.push('');

@@ -127,7 +127,7 @@ export abstract class AbstractCanvasChart implements AfterViewInit, OnDestroy {
   private resize(): void {
     if (!isPlatformBrowser(this.platformId)) return;
     const canvas = this.canvasRef().nativeElement;
-    this.dpr = typeof window !== 'undefined' ? (window.devicePixelRatio || 1) : 1;
+    this.dpr = typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1;
     this.W = this.drawWidth;
     this.H = this.drawHeight;
     canvas.width = Math.max(1, Math.round(this.W * this.dpr));
