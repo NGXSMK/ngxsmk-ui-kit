@@ -5,7 +5,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
  * Renders off-screen by default, sliding into view when focused via Tab.
  *
  * ```html
- * <ngxsmk-skip-link targetId="main-content">Skip to main content</ngxsmk-skip-link>
+ * <ngxsmk-skip-link targetId="main-content" label="Skip to main content" />
  * ```
  */
 @Component({
@@ -13,7 +13,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
   selector: 'ngxsmk-skip-link',
   template: `
     <a [href]="'#' + targetId()" class="ngxsmk-skip-link">
-      <ng-content>{{ label() }}</ng-content>
+      {{ label() }}
     </a>
   `,
   styles: `
@@ -46,6 +46,6 @@ export class NgxsmkSkipLink {
   /** Target HTML ID anchor to scroll/focus to. Default: 'main-content'. */
   readonly targetId = input<string>('main-content');
 
-  /** Default fallback label text if no projected content. */
+  /** Label text rendered inside the skip link. Default: 'Skip to content'. */
   readonly label = input<string>('Skip to content');
 }
