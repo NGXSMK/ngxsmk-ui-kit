@@ -18,7 +18,7 @@ export type ReasoningStep = NgxsmkReasoningStep;
   selector: 'ngxsmk-reasoning-timeline',
   template: `
     <div class="ngxsmk-reasoning-timeline__steps" role="list">
-      @for (step of steps(); track step.id ?? $index; let i = $index) {
+      @for (step of steps(); track step.id ?? step.label; let i = $index) {
         <div
           class="ngxsmk-reasoning-timeline__step"
           role="listitem"
