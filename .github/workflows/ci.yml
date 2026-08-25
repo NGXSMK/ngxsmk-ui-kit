@@ -112,6 +112,10 @@ jobs:
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          # Check out the actual head branch so we are not in detached HEAD state.
+          # For PRs this is the source branch; for pushes it is the pushed branch.
+          ref: ${{ github.head_ref || github.ref_name }}
+          fetch-depth: 0
 
       - name: Set up Node
         uses: actions/setup-node@v4
@@ -145,8 +149,9 @@ jobs:
           if git diff --cached --quiet; then
             echo "No new baselines to commit."
           else
+            BRANCH="${{ github.head_ref || github.ref_name }}"
             git commit -m "chore(visual): update linux-rendered visual baselines [skip ci]"
-            git push
+            git push origin "HEAD:${BRANCH}"
           fi
 
       - name: Fail if visual tests failed and no new baselines were written
