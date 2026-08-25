@@ -15,7 +15,6 @@ import { NgxsmkTab, NgxsmkTabs } from '@ngxsmk/core/tabs';
 import { NgxsmkFormField } from '@ngxsmk/core/form-field';
 import { NgxsmkInputDirective } from '@ngxsmk/core/input';
 import { NgxsmkSwitch } from '@ngxsmk/core/switch';
-import { NgxsmkCheckbox } from '@ngxsmk/core/checkbox';
 import { NgxsmkProgress } from '@ngxsmk/core/progress';
 import { NgxsmkProgressCircle } from '@ngxsmk/core/progress-circle';
 import { NgxsmkMeter } from '@ngxsmk/core/meter';

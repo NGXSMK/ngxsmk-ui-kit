@@ -2,7 +2,7 @@ import {
   Directive,
   ElementRef,
   InjectionToken,
-  Signal,
+  OnDestroy,
   WritableSignal,
   booleanAttribute,
   computed,
@@ -134,7 +134,7 @@ export class NgxsmkRovingFocusGroup implements NgxsmkRovingFocusContext {
     '(focus)': 'handleFocus()',
   },
 })
-export class NgxsmkRovingFocusItem {
+export class NgxsmkRovingFocusItem implements OnDestroy {
   private readonly group = inject(NGXSMK_ROVING_FOCUS_GROUP);
   private readonly elRef = inject(ElementRef<HTMLElement>);
 
