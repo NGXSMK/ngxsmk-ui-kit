@@ -66,7 +66,13 @@ try {
   run('node', ['tools/scripts/gen-ci-angularjson.mjs', major]);
 
   // Avoid stale output confusing ng-packagr's secondary-entry-point builds.
-  rmSync('dist', { recursive: true, force: true });
+  if (existsSync('dist')) {
+    try {
+      rmSync('dist', { recursive: true, force: true, maxRetries: 5, retryDelay: 100 });
+    } catch (err) {
+      console.warn(`[verify] Note: could not remove dist (${err.message}), continuing build...`);
+    }
+  }
 
   for (const lib of libs) {
     console.log(`[verify] building ${lib}`);

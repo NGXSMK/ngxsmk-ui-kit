@@ -148,7 +148,7 @@ export class NgxsmkPinInput extends CvaBase<string> {
   /** The value split into exactly `length` cells (padded with ''). */
   protected readonly cells = computed(() => {
     const len = this.length();
-    const chars = [...this.value()].slice(0, len);
+    const chars = Array.from(this.value()).slice(0, len);
     return Array.from({ length: len }, (_, i) => chars[i] ?? '');
   });
 
@@ -164,7 +164,10 @@ export class NgxsmkPinInput extends CvaBase<string> {
     const el = event.target as HTMLInputElement;
     const raw = el.value;
     // Keep only the last valid char typed (handles overtype in a filled cell).
-    const char = [...raw].reverse().find((c) => this.pattern().test(c)) ?? '';
+    const char =
+      Array.from(raw)
+        .reverse()
+        .find((c) => this.pattern().test(c)) ?? '';
     const next = this.cells();
     next[index] = char;
     el.value = char;
@@ -220,7 +223,7 @@ export class NgxsmkPinInput extends CvaBase<string> {
   protected onPaste(event: ClipboardEvent, index: number): void {
     event.preventDefault();
     const text = event.clipboardData?.getData('text') ?? '';
-    const valid = [...text].filter((c) => this.pattern().test(c));
+    const valid = Array.from(text).filter((c) => this.pattern().test(c));
     if (valid.length === 0) return;
     const cells = this.cells();
     let cursor = index;

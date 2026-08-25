@@ -43,8 +43,8 @@ export class App {
     }
 
     afterNextRender({
-      write: async () => {
-        await this.registry.initialize();
+      write: () => {
+        void this.registry.initialize();
       },
     });
   }

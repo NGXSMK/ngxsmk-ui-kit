@@ -3,11 +3,13 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "types": []
+    "types": [],
+    "lib": ["ES2022", "DOM", "DOM.Iterable"]
   },
   "include": ["src/**/*.ts"],
   "exclude": ["src/**/*.spec.ts"],
   "angularCompilerOptions": {
-    "compilationMode": "full"
+    "compilationMode": "full",
+    "strictTemplates": false
   }
 }

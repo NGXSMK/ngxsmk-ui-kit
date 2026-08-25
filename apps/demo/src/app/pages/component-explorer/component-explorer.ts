@@ -503,10 +503,10 @@ export class ComponentExplorer {
       let filtered = components;
       if (q) {
         filtered = components.filter(
-          (c) =>
+          (c: ComponentMetadata) =>
             c.name.toLowerCase().includes(q) ||
             c.description.toLowerCase().includes(q) ||
-            c.tags.some((t) => t.toLowerCase().includes(q)) ||
+            c.tags.some((t: string) => t.toLowerCase().includes(q)) ||
             c.selector.toLowerCase().includes(q),
         );
       }

@@ -534,7 +534,7 @@ export class ComponentRegistry {
       });
     }
 
-    const categories = [...new Set(this.components().map((d) => d.category))];
+    const categories = Array.from(new Set(this.components().map((d) => d.category)));
     for (const cat of categories) {
       if (cat.toLowerCase().includes(query.toLowerCase()) && suggestions.length < limit) {
         suggestions.push({ text: cat, type: 'category' });
@@ -551,7 +551,7 @@ export class ComponentRegistry {
       suggestions.push({ text: recent, type: 'recent' });
     }
 
-    const categories = [...new Set(this.components().map((d) => d.category))];
+    const categories = Array.from(new Set(this.components().map((d) => d.category)));
     for (const cat of categories.slice(0, limit - suggestions.length)) {
       suggestions.push({ text: cat, type: 'category' });
     }

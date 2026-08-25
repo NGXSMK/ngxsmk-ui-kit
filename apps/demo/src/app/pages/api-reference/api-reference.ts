@@ -727,7 +727,7 @@ export class ApiReferencePage {
       list.push(c);
       groups.set(c.entryPoint, list);
     }
-    return [...groups.entries()].map(([entryPoint, items]) => ({ entryPoint, items }));
+    return Array.from(groups.entries()).map(([entryPoint, items]) => ({ entryPoint, items }));
   });
 
   constructor() {

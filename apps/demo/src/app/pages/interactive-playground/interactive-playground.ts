@@ -1038,7 +1038,9 @@ export class InteractivePlayground {
       .map(([category, comps]) => ({
         category,
         label: this.catLabelKey(category),
-        comps: comps.sort((a, b) => a.name.localeCompare(b.name)),
+        comps: comps.sort((a: ComponentMetadata, b: ComponentMetadata) =>
+          a.name.localeCompare(b.name),
+        ),
       }))
       .sort((a, b) => a.label.localeCompare(b.label));
   });
