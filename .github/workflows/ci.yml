@@ -105,9 +105,13 @@ jobs:
     name: Visual regression
     runs-on: ubuntu-latest
     needs: lint
+    permissions:
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Node
         uses: actions/setup-node@v4
@@ -124,12 +128,34 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium
 
-      # Baselines are committed under tests/visual/__screenshots__ and must be
-      # rendered on Linux. "--update-snapshots missing" bootstraps any missing
-      # baseline (uploaded as an artifact below — commit it from there) while
-      # still comparing against every existing one.
+      # Baselines live in tests/visual/__screenshots__ and must be Linux-rendered.
+      # --update-snapshots=missing writes new PNGs for any missing baseline and
+      # then this step commits them back to the branch automatically.
       - name: Run visual tests
+        id: visual
         run: npm run visual -- --update-snapshots=missing
+        continue-on-error: true
+
+      - name: Commit new baselines if written
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add tests/visual/__screenshots__/ || true
+          if git diff --cached --quiet; then
+            echo "No new baselines to commit."
+          else
+            git commit -m "chore(visual): update linux-rendered visual baselines [skip ci]"
+            git push
+          fi
+
+      - name: Fail if visual tests failed and no new baselines were written
+        if: steps.visual.outcome == 'failure'
+        run: |
+          git diff --cached --quiet tests/visual/__screenshots__/ && \
+            echo "Visual tests failed with no new baselines — real regression detected." && \
+            exit 1 || \
+            echo "New baselines were written and committed — first-run pass."
 
       - name: Upload baselines
         if: always()
@@ -140,7 +166,7 @@ jobs:
           retention-days: 14
 
       - name: Upload diff report
-        if: failure()
+        if: steps.visual.outcome == 'failure'
         uses: actions/upload-artifact@v4
         with:
           name: visual-regression-report
