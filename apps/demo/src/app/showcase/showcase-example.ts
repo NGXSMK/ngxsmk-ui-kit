@@ -3,18 +3,6 @@ import { TranslatePipe } from '@ngx-translate/core';
 
 type ApiPanel = 'code' | 'api' | 'customize';
 
-interface ApiInput {
-  readonly propName: string;
-  readonly templateName: string;
-  readonly transform?: (value: unknown) => unknown;
-  readonly isSignal: boolean;
-}
-
-interface ApiOutput {
-  readonly propName: string;
-  readonly templateName: string;
-}
-
 /**
  * Reusable showcase block: a titled, described live demo of a single
  * component (or small group of related components) with an optional
@@ -644,9 +632,9 @@ export class ShowcaseExample {
     return component ? reflectComponentType(component as Type<unknown>) : null;
   });
 
-  protected readonly inputs = computed<readonly ApiInput[]>(() => this.metadata()?.inputs ?? []);
+  protected readonly inputs = computed(() => this.metadata()?.inputs ?? []);
 
-  protected readonly outputs = computed<readonly ApiOutput[]>(() => this.metadata()?.outputs ?? []);
+  protected readonly outputs = computed(() => this.metadata()?.outputs ?? []);
 
   /** Names of the component's outputs, used to detect two-way (`model`) inputs. */
   protected readonly outputNames = computed(() => new Set(this.outputs().map((o) => o.propName)));

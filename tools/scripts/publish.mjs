@@ -84,7 +84,13 @@ try {
   // 3. Clean any stale dist artifacts, then build all three libraries.
   //    Partial compilation mode is guaranteed by the compat tsconfig above.
   console.log('\nCleaning dist and rebuilding libraries in partial compilation mode...');
-  if (existsSync('dist')) rmSync('dist', { recursive: true, force: true });
+  if (existsSync('dist')) {
+    try {
+      rmSync('dist', { recursive: true, force: true, maxRetries: 5, retryDelay: 100 });
+    } catch (err) {
+      console.warn(`[publish] Note: could not remove dist (${err.message}), continuing build...`);
+    }
+  }
   for (const lib of LIBS) {
     run(`node node_modules/@angular/cli/bin/ng.js build @ngxsmk/${lib} --configuration production`);
   }

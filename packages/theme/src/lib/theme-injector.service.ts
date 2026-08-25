@@ -19,7 +19,7 @@ const IONIC_STYLE_ID = 'ngxsmk-ionic-theme';
  */
 @Injectable({ providedIn: 'root' })
 export class NgxThemeInjectorService {
-  private readonly document = inject(DOCUMENT);
+  private readonly document = inject(DOCUMENT) as Document;
 
   /**
    * Apply a theme at runtime. Generates token CSS from the config and swaps
@@ -35,7 +35,7 @@ export class NgxThemeInjectorService {
     if (!style) {
       style = this.document.createElement('style');
       style.id = STYLE_ID;
-      head.appendChild(style);
+      head?.appendChild(style);
     }
 
     let css = buildThemeCss(config);
@@ -46,7 +46,9 @@ export class NgxThemeInjectorService {
       css += '\n' + this.buildAdapterCss(adapter.name, platformVars);
     }
 
-    style.textContent = css;
+    if (style) {
+      style.textContent = css;
+    }
   }
 
   /**
@@ -59,7 +61,7 @@ export class NgxThemeInjectorService {
     if (!style) {
       style = this.document.createElement('style');
       style.id = IONIC_STYLE_ID;
-      head.appendChild(style);
+      head?.appendChild(style);
     }
 
     const resolved = resolveTheme(config);

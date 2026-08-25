@@ -26,6 +26,7 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "esnext",
     "moduleResolution": "bundler",
     "useDefineForClassFields": false

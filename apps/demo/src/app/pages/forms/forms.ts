@@ -1107,7 +1107,7 @@ ngxsmk-checkbox-list-item {
 
   protected toggleLang(value: string, checked: boolean): void {
     this.langs.update((curr) =>
-      checked ? [...new Set([...curr, value])] : curr.filter((v) => v !== value),
+      checked ? Array.from(new Set([...curr, value])) : curr.filter((v) => v !== value),
     );
   }
 
