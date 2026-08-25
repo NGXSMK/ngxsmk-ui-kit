@@ -37,6 +37,7 @@ export type SegmentedOption = NgxsmkSegmentedOption;
     },
   ],
   template: `
+    <!-- eslint-disable-next-line @angular-eslint/template/interactive-supports-focus -->
     <div
       class="ngxsmk-segmented-control__group"
       role="radiogroup"

@@ -23,7 +23,7 @@ export interface NgxsmkDropdownMenuItem {
   selector: 'ngxsmk-dropdown-menu',
   imports: [NgxsmkAnimate, NgxsmkClickOutside],
   template: `
-    <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
+    <!-- eslint-disable-next-line @angular-eslint/template/interactive-supports-focus -->
     <div
       class="ngxsmk-dropdown-menu__trigger"
       [attr.aria-haspopup]="'menu'"
@@ -34,7 +34,7 @@ export interface NgxsmkDropdownMenuItem {
       <ng-content select="[ngxsmkDropdownTrigger]" />
     </div>
     @if (open()) {
-      <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
+      <!-- eslint-disable-next-line @angular-eslint/template/interactive-supports-focus -->
       <div
         class="ngxsmk-dropdown-menu__list"
         [attr.data-align]="align()"
