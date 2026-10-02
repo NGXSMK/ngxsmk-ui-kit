@@ -1,5 +1,11 @@
 # @ngxsmk/mcp
 
+## 3.1.0
+
+- MCP server version bumped to 3.1.0 in sync with the monorepo release.
+- Component database regenerated to include 6 new components: `time-picker`,
+  `breadcrumb`, `chip-group`, `icon`, `input-mask`, and `menubar`.
+
 ## 1.3.2
 
 - The component database is now auto-generated from `packages/core` sources

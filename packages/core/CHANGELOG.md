@@ -1,5 +1,23 @@
 # @ngxsmk/core
 
+## 3.1.0
+
+### Minor Changes
+
+- **`time-picker`** — new component with form-field and CVA support (`@ngxsmk/core/time-picker`).
+- **`breadcrumb`** — new component (`@ngxsmk/core/breadcrumb`).
+- **`chip-group`** — new component (`@ngxsmk/core/chip-group`).
+- **`icon`** — new component (`@ngxsmk/core/icon`).
+- **`input-mask`** — new component (`@ngxsmk/core/input-mask`).
+- **`menubar`** — new component (`@ngxsmk/core/menubar`).
+
+### Patch Changes
+
+- `dialog`: animation abort errors fixed (`try-catch-finally` in `playEnter`/`playExit`); opacity/transform inline styles cleared before open; lifecycle cleanup guaranteed via `finally`.
+- `dialog`: empty `.catch(() => {})` replaced with documented no-op (lint fix).
+- `lightbox`: hardcoded `#fff` in focus-ring box-shadows replaced with `--ngxsmk-lightbox-fg` token.
+- `animation`: WAAPI abort (`InvalidStateError`, `TypeError: motion.style is not a function`) fixed — target styles now always applied even when document is hidden.
+
 ## 1.3.1
 
 ### Patch Changes
