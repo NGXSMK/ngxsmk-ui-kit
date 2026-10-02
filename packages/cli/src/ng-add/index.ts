@@ -36,9 +36,9 @@ function ensureDeps(tree: Tree, context: SchematicContext): void {
       context.logger.info(`Queued dependency ${name}@${version}`);
     }
   };
-  add('@ngxsmk/core', '^3.0.0');
-  add('@ngxsmk/theme', '^3.0.0');
-  add('@ngxsmk/cdk', '^3.0.0');
+  add('@ngxsmk/core', '^3.1.0');
+  add('@ngxsmk/theme', '^3.1.0');
+  add('@ngxsmk/cdk', '^3.1.0');
   tree.overwrite('package.json', JSON.stringify(pkg, null, 2) + '\n');
 }
 

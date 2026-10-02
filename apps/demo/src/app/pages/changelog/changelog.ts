@@ -506,6 +506,18 @@ export class ChangelogPage implements OnInit {
   protected readonly totalChanges: number;
   protected readonly releases: Release[] = [
     {
+      version: 'v3.1.0',
+      date: '2026-10-02',
+      i18nKey: 'changelog.release.v310',
+      changes: [
+        { type: 'added', i18nKey: 'changelog.release.v310.changes.0' },
+        { type: 'added', i18nKey: 'changelog.release.v310.changes.1' },
+        { type: 'fixed', i18nKey: 'changelog.release.v310.changes.2' },
+        { type: 'fixed', i18nKey: 'changelog.release.v310.changes.3' },
+        { type: 'fixed', i18nKey: 'changelog.release.v310.changes.4' },
+      ],
+    },
+    {
       version: 'v3.0.0',
       date: '2026-08-25',
       i18nKey: 'changelog.release.v200',

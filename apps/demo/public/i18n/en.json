@@ -244,6 +244,16 @@
       "removed": "removed"
     },
     "release": {
+      "v310": {
+        "summary": "Stable release: 6 new signal-native components (time-picker, breadcrumb, chip-group, icon, input-mask, menubar), dialog animation stability, and demo layout improvements.",
+        "changes": {
+          "0": "Added time-picker component with form-field integration and ControlValueAccessor support.",
+          "1": "Added breadcrumb, chip-group, icon, input-mask, and menubar components.",
+          "2": "Fixed dialog animation abort errors and guaranteed cleanup via finally.",
+          "3": "Fixed templates preview modal flex layout and dialog open selector scoping.",
+          "4": "Design token purity fix in lightbox focus rings."
+        }
+      },
       "v200": {
         "summary": "Major release: motion.dev animation system, full UI/UX redesign, Tailwind CSS support, and AI-first tooling.",
         "changes": {

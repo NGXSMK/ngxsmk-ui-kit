@@ -3,7 +3,7 @@
 > Angular-first, MIT-licensed UI ecosystem: 263+ signals-native, zoneless
 > standalone components with a universal design-token engine (CSS variables,
 > SCSS, Tailwind, StyleX, Tokens Studio export). MIT licensed, no paid tiers.
-> Current version: 3.0.0. Supports Angular 17.3 through 22.
+> Current version: 3.1.0. Supports Angular 17.3 through 22.
 
 Packages: `@ngxsmk/core` (components, one secondary entry point per component,
 e.g. `@ngxsmk/core/button`), `@ngxsmk/theme` (design tokens + theme engine),

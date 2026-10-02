@@ -61,7 +61,7 @@ export interface SelectorOption {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 /**
- * @deprecated Use `NgxsmkChipGroup` (`@ngxsmk/core/chip-group`) instead. Will be removed in v3.0.0.
+ * @deprecated Use `NgxsmkChipGroup` (`@ngxsmk/core/chip-group`) instead. Will be removed in v4.0.0.
  */
 export class NgxsmkSelector {
   readonly options = input.required<SelectorOption[]>();
