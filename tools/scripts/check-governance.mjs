@@ -118,10 +118,13 @@ function checkComponent(dirName, dirPath) {
       const stylesContent = stylesMatch[1];
       const hexMatches = stylesContent.match(/#[0-9a-fA-F]{3,8}\b/g);
       if (hexMatches) {
+        // Normalise 3-char shorthands so the allowlist covers #fff → #ffffff etc.
+        const normalise = (h) =>
+          h.length === 4 ? '#' + [...h.slice(1)].map((c) => c + c).join('') : h.toLowerCase();
         // Filter out benign defaults or color-picker / canvas chart palette defaults
-        const nonTokens = hexMatches.filter(
-          (h) => !h.includes('#ffffff') && !h.includes('#000000'),
-        );
+        const nonTokens = hexMatches
+          .map(normalise)
+          .filter((h) => !h.includes('#ffffff') && !h.includes('#000000'));
         if (
           nonTokens.length > 0 &&
           !file.includes('color-picker') &&
