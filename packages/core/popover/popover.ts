@@ -102,11 +102,11 @@ export class NgxsmkPopoverTrigger {
       min-width: 12rem;
       max-width: min(20rem, calc(100vw - 2rem));
       padding: var(--ngxsmk-space-4, 1rem);
-      border: 1px solid var(--ngxsmk-color-outline);
-      border-radius: var(--ngxsmk-radius-lg, 12px);
-      background: var(--ngxsmk-color-surface);
+      border: 1px solid var(--ngxsmk-menu-border, var(--ngxsmk-color-outline));
+      border-radius: var(--ngxsmk-menu-radius, var(--ngxsmk-radius-lg));
+      background: var(--ngxsmk-menu-bg, var(--ngxsmk-color-surface));
       color: var(--ngxsmk-color-on-surface);
-      box-shadow: var(--ngxsmk-shadow-lg, 0 10px 30px rgba(0, 0, 0, 0.15));
+      box-shadow: var(--ngxsmk-menu-shadow, var(--ngxsmk-shadow-lg));
       font-size: var(--ngxsmk-text-body-sm-size, 0.875rem);
       line-height: var(--ngxsmk-text-body-sm-line, 1.4);
       --ngxsmk-popover-gap: calc(var(--ngxsmk-popover-offset, 8) * 1px);

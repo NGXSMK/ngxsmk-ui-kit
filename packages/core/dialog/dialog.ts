@@ -108,21 +108,22 @@ const DIALOG_MOTION: NgxsmkMotionState = {
   host: { class: 'ngxsmk-dialog' },
   styles: `
     .ngxsmk-dialog__native {
-      width: min(var(--ngxsmk-dialog-width, 28rem), calc(100vw - 2rem));
+      width: min(var(--ngxsmk-dialog-width, var(--ngxsmk-dialog-max-width, 28rem)), calc(100vw - 2rem));
+      max-width: min(var(--ngxsmk-dialog-max-width, var(--ngxsmk-dialog-width, calc(100vw - 2rem))), calc(100vw - 2rem));
       max-height: calc(100dvh - 2rem);
       overflow: auto;
       padding: 0;
       border: 1px solid var(--ngxsmk-color-outline);
-      border-radius: var(--ngxsmk-radius-2xl, 1rem);
-      background: var(--ngxsmk-color-surface);
+      border-radius: var(--ngxsmk-dialog-radius, var(--ngxsmk-radius-2xl));
+      background: var(--ngxsmk-dialog-bg, var(--ngxsmk-color-surface));
       color: var(--ngxsmk-color-on-surface);
-      box-shadow: var(--ngxsmk-shadow-2xl);
+      box-shadow: var(--ngxsmk-dialog-shadow, var(--ngxsmk-shadow-2xl));
       font-family: var(--ngxsmk-font-sans);
     }
 
     .ngxsmk-dialog__native::backdrop {
-      background: var(--ngxsmk-color-backdrop, rgb(0 0 0 / 0.5));
-      backdrop-filter: blur(4px);
+      background: var(--ngxsmk-dialog-backdrop, var(--ngxsmk-color-backdrop));
+      backdrop-filter: blur(var(--ngxsmk-dialog-blur, 4px));
     }
 
     .ngxsmk-dialog__container {
@@ -218,15 +219,43 @@ export class NgxsmkDialog {
         if (!isPlatformBrowser(this.platformId)) {
           return;
         }
-        if (open && !dialog.open && typeof dialog.showModal === 'function') {
-          this.visible.set(true);
-          dialog.showModal();
-          this.setLocked(true);
-        } else if (!open && dialog.open && typeof dialog.close === 'function') {
-          void playExit(dialog, DIALOG_MOTION).then(() => {
-            dialog.close();
+        if (open) {
+          if (!dialog.open && typeof dialog.showModal === 'function') {
+            dialog.style.opacity = '';
+            dialog.style.transform = '';
+            this.visible.set(true);
+            try {
+              dialog.showModal();
+            } catch {
+              // Dialog might already be open
+            }
+            this.setLocked(true);
+          }
+        } else {
+          if (dialog.open) {
+            const cleanup = () => {
+              if (dialog.open && typeof dialog.close === 'function') {
+                try {
+                  dialog.close();
+                } catch {
+                  // Dialog might already be closed
+                }
+              }
+              dialog.style.opacity = '';
+              dialog.style.transform = '';
+              this.visible.set(false);
+              this.setLocked(false);
+            };
+
+            playExit(dialog, DIALOG_MOTION)
+              .catch((_e: unknown) => { /* animation abort — safe to ignore */ })
+              .finally(cleanup);
+          } else {
+            dialog.style.opacity = '';
+            dialog.style.transform = '';
             this.visible.set(false);
-          });
+            this.setLocked(false);
+          }
         }
       });
     });
@@ -247,6 +276,10 @@ export class NgxsmkDialog {
   }
 
   protected onNativeClose(): void {
+    const dialog = this.dialogRef().nativeElement;
+    dialog.style.opacity = '';
+    dialog.style.transform = '';
+    this.visible.set(false);
     this.setLocked(false);
     this.open.set(false);
   }

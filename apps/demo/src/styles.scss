@@ -1,6 +1,49 @@
 /* Demo app base styles — token stylesheet is loaded before this file.
-   Fonts (Inter / Plus Jakarta Sans / Geist Mono) are loaded via @font-face
-   below with preconnect in index.html, so no render-blocking @import here. */
+   Geist Sans / Geist Mono are loaded via @font-face below (Ink preset default). */
+
+@font-face {
+  font-family: 'Geist Sans';
+  src: url('https://cdn.jsdelivr.net/npm/geist@1/dist/fonts/geist-sans/Geist-Regular.woff2')
+    format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geist Sans';
+  src: url('https://cdn.jsdelivr.net/npm/geist@1/dist/fonts/geist-sans/Geist-Medium.woff2')
+    format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geist Sans';
+  src: url('https://cdn.jsdelivr.net/npm/geist@1/dist/fonts/geist-sans/Geist-SemiBold.woff2')
+    format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geist Sans';
+  src: url('https://cdn.jsdelivr.net/npm/geist@1/dist/fonts/geist-sans/Geist-Bold.woff2')
+    format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geist Sans Fallback';
+  src: local('Segoe UI'), local('Helvetica Neue'), local('Arial'), local('sans-serif');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
 
 @font-face {
   font-family: 'Geist Mono';
@@ -37,10 +80,6 @@
   font-display: swap;
 }
 
-:root {
-  --ngxsmk-font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-}
-
 *,
 *::before,
 *::after {
@@ -63,21 +102,190 @@ body {
   max-width: 100vw;
 }
 
+:root {
+  /* Brand Core (matching ngxsmk-datepicker) */
+  --brand-primary: #6366f1;
+  --brand-primary-light: #818cf8;
+  --brand-primary-dark: #4f46e5;
+  --brand-accent: #f59e0b;
+  --brand-accent-light: #fbbf24;
+  --brand-accent-soft: rgba(245, 158, 11, 0.12);
+  --brand-emerald: #10b981;
+  --brand-cyan: #06b6d4;
+
+  /* Typography */
+  --font-family-display: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-family-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-family-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+
+  /* Radii */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+  --radius-pill: 9999px;
+  --radius-full: 9999px;
+
+  /* Multi-Layer Soft Shadows & Glow */
+  --shadow-sm: 0 1px 3px 0 rgba(15, 23, 42, 0.05), 0 1px 2px -1px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 4px 16px -2px rgba(15, 23, 42, 0.08), 0 2px 6px -2px rgba(15, 23, 42, 0.05);
+  --shadow-lg: 0 12px 32px -4px rgba(15, 23, 42, 0.1), 0 4px 12px -2px rgba(15, 23, 42, 0.06);
+  --shadow-xl: 0 20px 48px -8px rgba(15, 23, 42, 0.12);
+  --shadow-glow: 0 0 35px rgba(99, 102, 241, 0.25);
+
+  --header-height: 64px;
+  --max-content-width: 1240px;
+
+  /* Light Canvas & Surfaces */
+  --color-bg-page: #f8fafc;
+  --color-bg-sidebar: #ffffff;
+  --color-bg-card: #ffffff;
+  --color-bg-elevated: #f1f5f9;
+  --color-bg-code: #0b0f19;
+  --color-bg-header: rgba(255, 255, 255, 0.85);
+
+  --color-text-main: #0f172a;
+  --color-text-muted: #334155;
+  --color-text-dim: #64748b;
+
+  --color-border: #e2e8f0;
+  --color-border-light: #cbd5e1;
+
+  --color-primary: var(--brand-primary);
+  --color-primary-light: var(--brand-primary-light);
+  --color-primary-dark: var(--brand-primary-dark);
+  --color-secondary: var(--brand-accent);
+
+  /* === Universal 2026 NGXSMK Component Tokens (Sync with ngxsmk-datepicker) === */
+  --ngxsmk-color-primary: #6366f1;
+  --ngxsmk-color-primary-hover: #4f46e5;
+  --ngxsmk-color-primary-active: #4338ca;
+  --ngxsmk-color-on-primary: #ffffff;
+  --ngxsmk-color-primary-container: rgba(99, 102, 241, 0.12);
+  --ngxsmk-color-on-primary-container: #4f46e5;
+
+  --ngxsmk-color-secondary: #f59e0b;
+  --ngxsmk-color-secondary-hover: #d97706;
+  --ngxsmk-color-secondary-active: #b45309;
+
+  --ngxsmk-color-surface: #ffffff;
+  --ngxsmk-color-surface-variant: #f8fafc;
+  --ngxsmk-color-surface-elevated: #ffffff;
+  --ngxsmk-color-on-surface: #0f172a;
+  --ngxsmk-color-on-surface-variant: #64748b;
+  --ngxsmk-color-outline: #e2e8f0;
+  --ngxsmk-color-outline-strong: #cbd5e1;
+
+  --ngxsmk-color-ring: rgba(99, 102, 241, 0.35);
+  --ngxsmk-focus-ring: 0 0 0 3px rgba(99, 102, 241, 0.22);
+  --ngxsmk-shadow-focus: 0 0 0 3px rgba(99, 102, 241, 0.22);
+
+  --ngxsmk-radius-base: 10px;
+  --ngxsmk-radius-md: 12px;
+  --ngxsmk-radius-lg: 16px;
+  --ngxsmk-radius-xl: 20px;
+  --ngxsmk-radius-2xl: 24px;
+  --ngxsmk-radius-full: 9999px;
+
+  --ngxsmk-button-radius: 10px;
+  --ngxsmk-button-font-family: var(--font-family-display, var(--ngxsmk-font-sans));
+  --ngxsmk-button-font-weight: 600;
+
+  --ngxsmk-input-radius: 10px;
+  --ngxsmk-input-border: #cbd5e1;
+  --ngxsmk-input-bg: #ffffff;
+  --ngxsmk-input-color: #0f172a;
+  --ngxsmk-input-height: 2.6rem;
+
+  --ngxsmk-card-radius: 18px;
+  --ngxsmk-card-bg: #ffffff;
+  --ngxsmk-card-border-color: #e2e8f0;
+  --ngxsmk-card-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
+
+  --ngxsmk-switch-checked-bg: #6366f1;
+  --ngxsmk-checkbox-checked-bg: #6366f1;
+  --ngxsmk-progress-color: #6366f1;
+}
+
+:root.dark,
+html.dark,
+html[data-theme='dark'] {
+  --brand-primary: #818cf8;
+  --brand-primary-light: #a5b4fc;
+  --brand-primary-dark: #6366f1;
+  --brand-accent: #fbbf24;
+  --brand-accent-light: #fde047;
+  --brand-accent-soft: rgba(251, 191, 36, 0.15);
+
+  /* Deep Obsidian Canvas & Surfaces */
+  --color-bg-page: #090d16;
+  --color-bg-sidebar: #0d121f;
+  --color-bg-card: #111827;
+  --color-bg-elevated: #1a2236;
+  --color-bg-code: #05080f;
+  --color-bg-header: rgba(9, 13, 22, 0.85);
+
+  --color-text-main: #f8fafc;
+  --color-text-muted: #cbd5e1;
+  --color-text-dim: #94a3b8;
+
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-light: rgba(255, 255, 255, 0.14);
+  --shadow-xl: 0 20px 48px -8px rgba(0, 0, 0, 0.6);
+
+  /* Dark Component Tokens */
+  --ngxsmk-color-primary: #818cf8;
+  --ngxsmk-color-primary-hover: #a5b4fc;
+  --ngxsmk-color-primary-active: #6366f1;
+  --ngxsmk-color-on-primary: #090d16;
+  --ngxsmk-color-primary-container: rgba(129, 140, 248, 0.16);
+  --ngxsmk-color-on-primary-container: #c7d2fe;
+
+  --ngxsmk-color-surface: #111827;
+  --ngxsmk-color-surface-variant: #1a2236;
+  --ngxsmk-color-surface-elevated: #1e293b;
+  --ngxsmk-color-on-surface: #f8fafc;
+  --ngxsmk-color-on-surface-variant: #94a3b8;
+  --ngxsmk-color-outline: rgba(255, 255, 255, 0.09);
+  --ngxsmk-color-outline-strong: rgba(255, 255, 255, 0.16);
+
+  --ngxsmk-color-ring: rgba(129, 140, 248, 0.45);
+  --ngxsmk-focus-ring: 0 0 0 3px rgba(129, 140, 248, 0.28);
+  --ngxsmk-shadow-focus: 0 0 0 3px rgba(129, 140, 248, 0.28);
+
+  --ngxsmk-input-bg: #111827;
+  --ngxsmk-input-border: rgba(255, 255, 255, 0.14);
+  --ngxsmk-input-color: #f8fafc;
+
+  --ngxsmk-card-bg: #111827;
+  --ngxsmk-card-border-color: rgba(255, 255, 255, 0.08);
+
+  --ngxsmk-checkbox-checked-bg: #818cf8;
+  --ngxsmk-switch-checked-bg: #818cf8;
+  --ngxsmk-progress-color: #818cf8;
+}
+
 body {
   margin: 0;
   min-height: 100%;
-  background: var(--ngxsmk-color-background, #fafafa);
-  color: var(--ngxsmk-color-on-background, #09090b);
-  font-family:
-    'Inter',
-    var(--ngxsmk-font-sans, system-ui),
-    -apple-system,
-    sans-serif;
+  background: var(--color-bg-page, #f8fafc);
+  color: var(--color-text-main, #0f172a);
+  font-family: var(--font-family-body, var(--ngxsmk-font-sans, system-ui, sans-serif));
   font-size: var(--ngxsmk-text-body-md-size, 0.875rem);
-  line-height: var(--ngxsmk-text-body-md-line, 1.5);
-  transition: background-color 0.2s ease;
+  line-height: 1.5;
+  transition: background-color 0.2s ease, color 0.2s ease;
   scrollbar-width: thin;
-  scrollbar-color: var(--ngxsmk-color-outline, #e4e4e7) transparent;
+  scrollbar-color: var(--color-border, #e2e8f0) transparent;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.25;
 }
 
 button,
@@ -103,9 +311,15 @@ input[type='search']::-webkit-search-results-decoration {
   -webkit-appearance: none;
 }
 
-/* Focus visible ring */
-:focus-visible:not(input):not(textarea):not(select) {
-  outline: 2px solid var(--ngxsmk-color-ring, #7c3aed);
+/*
+ * Kit components own --ngxsmk-focus-ring. Only apply a demo fallback outside
+ * ngxsmk hosts so we don't double-ring buttons/triggers.
+ */
+a:focus-visible:not([ngxsmk-button]),
+.sc-menu-btn:focus-visible,
+.ngxsmk-sc-ex__tab:focus-visible,
+.ngxsmk-sc-ex__copy-btn:focus-visible {
+  outline: 2px solid var(--ngxsmk-color-ring, var(--ngxsmk-color-primary, #6366f1));
   outline-offset: 2px;
 }
 
@@ -115,8 +329,8 @@ button:focus {
 
 /* Selection style */
 ::selection {
-  background: var(--ngxsmk-color-primary-container, #ede9fe);
-  color: var(--ngxsmk-color-on-primary-container, #4c1d95);
+  background: color-mix(in srgb, var(--ngxsmk-color-primary, #6366f1) 22%, transparent);
+  color: var(--ngxsmk-color-on-surface, #09090b);
 }
 
 /* Scrollbar styling (WebKit/Blink) */
@@ -138,55 +352,215 @@ button:focus {
   background: var(--ngxsmk-color-outline-strong, #a1a1aa);
 }
 
-/* Page title and description (used by non-showcase pages) */
+/* Page title and description (used by showcase & category pages) */
 .ngxsmk-page-title {
-  font-family: 'Outfit', var(--ngxsmk-font-sans, system-ui), sans-serif;
-  font-size: var(--ngxsmk-text-headline-lg-size, 2rem);
-  font-weight: 700;
-  letter-spacing: -0.025em;
+  font-family: var(--font-family-display, var(--ngxsmk-font-sans, system-ui)), sans-serif;
+  font-size: clamp(1.85rem, 3.5vw, 2.45rem);
+  font-weight: 750;
+  letter-spacing: -0.035em;
+  line-height: 1.15;
   margin: 0 0 0.5rem;
-  color: var(--ngxsmk-color-on-background, #09090b);
+  color: var(--color-text-main, #0f172a);
 }
 
 .ngxsmk-page-desc {
-  font-size: var(--ngxsmk-text-body-md-size, 0.875rem);
-  color: var(--ngxsmk-color-on-surface-variant, #71717a);
-  margin: 0 0 2.5rem;
-  line-height: 1.6;
+  font-size: clamp(0.95rem, 0.9rem + 0.2vw, 1.05rem);
+  color: var(--color-text-muted, #334155);
+  margin: 0 0 2rem;
+  line-height: 1.65;
+  max-width: 46rem;
 }
 
-/* Section cards used by component showcase pages */
-section {
+/* Global 2026 Badges, Traffic Lights & Terminals */
+.version-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-pill, 9999px);
+  background: var(--color-bg-card, #ffffff);
+  border: 1px solid var(--color-border, #e2e8f0);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 1.25rem;
+  font-size: 0.78rem;
+  color: var(--color-text-muted, #334155);
+  backdrop-filter: blur(12px);
+
+  .pulse-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #10b981;
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+    animation: pulse-glow 2s infinite;
+  }
+
+  .badge-tag {
+    font-weight: 700;
+    color: var(--color-primary, #6366f1);
+  }
+
+  .badge-divider {
+    opacity: 0.4;
+  }
+
+  .badge-text {
+    font-weight: 500;
+    color: var(--color-text-main, #0f172a);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(0.9);
+  }
+}
+
+.traffic-lights {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  .light {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+
+    &.red {
+      background: #ef4444;
+    }
+    &.yellow {
+      background: #f59e0b;
+    }
+    &.green {
+      background: #10b981;
+    }
+  }
+}
+
+/* 2026 Modern UI/UX Utilities */
+.ngxsmk-gradient-text {
+  background: linear-gradient(135deg, var(--ngxsmk-color-on-surface, #09090b) 25%, var(--ngxsmk-color-primary, #6366f1) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.ngxsmk-gradient-accent {
+  background: linear-gradient(135deg, var(--ngxsmk-color-primary, #6366f1) 0%, color-mix(in srgb, var(--ngxsmk-color-primary, #6366f1) 70%, #818cf8) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.ngxsmk-glass {
+  background: color-mix(in srgb, var(--ngxsmk-color-surface, #ffffff) 78%, transparent);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid color-mix(in srgb, var(--ngxsmk-color-outline, #e4e4e7) 70%, transparent);
+}
+
+.ngxsmk-dot-grid {
+  background-image: radial-gradient(color-mix(in srgb, var(--ngxsmk-color-on-surface, #09090b) 8%, transparent) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Button system (matching ngxsmk-datepicker) */
+.btn {
+  padding: 0.65rem 1.25rem;
+  min-height: 44px;
+  border-radius: var(--radius-md, 12px);
+  font-family: var(--font-family-display, sans-serif);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  border: none;
+  font-size: 0.88rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  letter-spacing: -0.01em;
+  user-select: none;
+  appearance: none;
+  text-decoration: none;
+
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--brand-primary, #6366f1) 0%, var(--brand-primary-dark, #4f46e5) 100%);
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
+
+  &:hover {
+    background: linear-gradient(135deg, var(--brand-primary-light, #818cf8) 0%, var(--brand-primary, #6366f1) 100%);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+    transform: translateY(-1px);
+    color: #ffffff !important;
+  }
+}
+
+.btn-outline {
+  background: var(--color-bg-card, #ffffff);
+  border: 1px solid var(--color-border, #e2e8f0);
+  color: var(--color-text-main, #0f172a);
+  box-shadow: var(--shadow-sm);
+
+  &:hover {
+    background: var(--color-bg-elevated, #f1f5f9);
+    border-color: var(--brand-primary, #6366f1);
+    color: var(--brand-primary, #6366f1);
+    transform: translateY(-1px);
+  }
+}
+
+.highlight {
+  background: linear-gradient(135deg, var(--brand-primary, #6366f1) 0%, var(--brand-accent, #f59e0b) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+}
+
+/* Optional card surface for docs/themes — never style bare <section> globally */
+.ngxsmk-section {
   background: var(--ngxsmk-color-surface, #ffffff);
-  border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
-  border-radius: var(--ngxsmk-radius-lg, 0.5rem);
-  padding: 1.5rem;
+  border: 1px solid color-mix(in srgb, var(--ngxsmk-color-outline, #e4e4e7) 80%, transparent);
+  border-radius: var(--ngxsmk-radius-xl, 0.75rem);
+  padding: 1.75rem;
   margin-bottom: 1.5rem;
-  transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.02), 0 1px 2px -1px rgba(0, 0, 0, 0.02);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-section:hover {
-  border-color: var(--ngxsmk-color-outline-strong, #d4d4d8);
+.ngxsmk-section:hover {
+  border-color: color-mix(in srgb, var(--ngxsmk-color-outline, #e4e4e7) 60%, var(--ngxsmk-color-primary, #6366f1));
+  box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.04);
 }
 
-section h3 {
-  font-family: 'Outfit', var(--ngxsmk-font-sans, system-ui), sans-serif;
-  font-size: var(--ngxsmk-text-body-xs-size, 0.625rem);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--ngxsmk-color-on-surface-variant, #71717a);
-  margin: 0 0 1rem;
-  padding-bottom: 0;
-  border-bottom: none;
-}
-
-/* Form element base spacing and sizing */
-input,
-textarea,
-select {
+/*
+ * Do NOT style bare input/textarea/select globally.
+ * That double-paints kit controls (ngxsmkInput, select, date-picker, chat, …)
+ * and makes demos look broken / overlapped. Demo chrome inputs use explicit
+ * classes (e.g. .sc-sidebar__search-input, .ngxsmk-demo-input).
+ */
+.ngxsmk-demo-input,
+.sc-sidebar__search-input,
+.explorer-search-input,
+.cmd-input,
+.pg-search-input,
+.b-newsletter__input,
+.editor-textarea,
+.color-input,
+.theme-select {
   font-family: inherit;
   font-size: var(--ngxsmk-text-body-md-size, 0.875rem);
   padding: 0.5rem 0.75rem;
@@ -200,10 +574,16 @@ select {
     box-shadow 0.15s ease;
 }
 
-input:focus,
-textarea:focus,
-select:focus {
-  border-color: var(--ngxsmk-color-primary, #7c3aed);
+.ngxsmk-demo-input:focus,
+.sc-sidebar__search-input:focus,
+.explorer-search-input:focus,
+.cmd-input:focus,
+.pg-search-input:focus,
+.b-newsletter__input:focus,
+.editor-textarea:focus,
+.color-input:focus,
+.theme-select:focus {
+  border-color: var(--ngxsmk-color-primary, #6366f1);
 }
 
 .ngxsmk-demo-row {
@@ -305,17 +685,13 @@ showcase-example {
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
 }
 
-/* Prevent horizontal overflow from media, code, and form controls. */
+/* Prevent horizontal overflow from media/code — not tables/inputs (kit owns those). */
 img,
 svg,
 video,
 canvas,
-table,
 pre,
-code,
-input,
-textarea,
-select {
+code {
   max-width: 100%;
 }
 
@@ -329,11 +705,17 @@ select {
   min-width: 0;
 }
 
-/* iOS Safari zooms the page when a focused field's font-size is below 16px. */
+/* iOS Safari zoom — only demo chrome fields, not kit control density. */
 @media (max-width: 640px) {
-  input,
-  textarea,
-  select {
+  .ngxsmk-demo-input,
+  .sc-sidebar__search-input,
+  .explorer-search-input,
+  .cmd-input,
+  .pg-search-input,
+  .b-newsletter__input,
+  .editor-textarea,
+  .color-input,
+  .theme-select {
     font-size: 1rem !important;
   }
 }
@@ -350,7 +732,7 @@ select {
   body .ngxsmk-page__header.ngxsmk-page__header {
     margin-bottom: var(--ngxsmk-space-8, 2rem);
   }
-  section {
+  .ngxsmk-section {
     padding: 1rem;
   }
   body .ngxsmk-page-title.ngxsmk-page-title {

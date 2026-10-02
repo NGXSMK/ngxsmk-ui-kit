@@ -1,37 +1,67 @@
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   DestroyRef,
   ElementRef,
+  PLATFORM_ID,
+  booleanAttribute,
+  computed,
   effect,
   inject,
   input,
   model,
   signal,
+  untracked,
 } from '@angular/core';
-import { NgxsmkScrollLock } from '@ngxsmk/cdk';
+import { NgxsmkFocusTrap, NgxsmkScrollLock } from '@ngxsmk/cdk';
 import { NgxsmkAnimate, NgxsmkMotionState, playExit } from '@ngxsmk/core/animation';
+import { ngxsmkUniqueId } from '@ngxsmk/core/util';
 
 export type NgxsmkSheetSide = 'left' | 'right' | 'bottom';
 
+/**
+ * Slide-over panel (drawer) from the left, right, or bottom edge.
+ * Portals to `document.body` so fixed positioning is never clipped by
+ * ancestor overflow / transforms (e.g. demo showcase scroll regions).
+ *
+ * ```html
+ * <ngxsmk-sheet [(open)]="open" side="right" title="Settings">
+ *   Panel content
+ * </ngxsmk-sheet>
+ * ```
+ */
 @Component({
   standalone: true,
   selector: 'ngxsmk-sheet',
   template: `
     @if (open()) {
-      <div class="ngxsmk-sheet__root" [attr.data-side]="side()">
+      <div
+        class="ngxsmk-sheet__root"
+        tabindex="-1"
+        [attr.data-side]="side()"
+        (keydown)="onRootKeydown($event)"
+      >
         <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
-        <div class="ngxsmk-sheet__backdrop" (click)="requestClose()"></div>
+        <div class="ngxsmk-sheet__backdrop" (click)="onBackdrop()"></div>
         <div
           class="ngxsmk-sheet__panel"
-          [ngxsmkAnimate]="SHEET_MOTION"
+          [ngxsmkAnimate]="sheetMotion()"
           [attr.data-side]="side()"
           role="dialog"
           aria-modal="true"
-          [attr.aria-label]="title()"
+          [attr.aria-labelledby]="title() ? titleId : null"
+          [attr.aria-label]="title() ? null : 'Sheet'"
+          tabindex="-1"
+          ngxsmkFocusTrap
+          [ngxsmkFocusTrapAutoCapture]="true"
         >
           <div class="ngxsmk-sheet__header">
-            <h2 class="ngxsmk-sheet__title">{{ title() }}</h2>
+            @if (title()) {
+              <h2 class="ngxsmk-sheet__title" [id]="titleId">{{ title() }}</h2>
+            } @else {
+              <span class="ngxsmk-sheet__title-spacer"></span>
+            }
             <button
               type="button"
               class="ngxsmk-sheet__close"
@@ -55,8 +85,11 @@ export type NgxsmkSheetSide = 'left' | 'right' | 'bottom';
       </div>
     }
   `,
-  host: { class: 'ngxsmk-sheet' },
-  imports: [NgxsmkAnimate],
+  host: {
+    class: 'ngxsmk-sheet',
+    '(document:keydown.escape)': 'onDocumentEscape($event)',
+  },
+  imports: [NgxsmkAnimate, NgxsmkFocusTrap],
   styles: `
     :host {
       display: contents;
@@ -67,6 +100,7 @@ export type NgxsmkSheetSide = 'left' | 'right' | 'bottom';
       inset: 0;
       z-index: var(--ngxsmk-z-modal, 1400);
       display: flex;
+      pointer-events: none;
     }
 
     .ngxsmk-sheet__root[data-side='left'] {
@@ -80,32 +114,55 @@ export type NgxsmkSheetSide = 'left' | 'right' | 'bottom';
     }
 
     .ngxsmk-sheet__backdrop {
-      position: fixed;
+      position: absolute;
       inset: 0;
-      background: var(--ngxsmk-color-backdrop, rgb(0 0 0 / 0.5));
+      background: var(--ngxsmk-sheet-backdrop, var(--ngxsmk-color-backdrop));
+      pointer-events: auto;
     }
 
     .ngxsmk-sheet__panel {
       position: relative;
       display: flex;
       flex-direction: column;
-      background: var(--ngxsmk-color-surface);
+      min-height: 0;
+      max-height: 100%;
+      background: var(--ngxsmk-sheet-bg, var(--ngxsmk-color-surface));
       color: var(--ngxsmk-color-on-surface);
       font-family: var(--ngxsmk-font-sans);
-      box-shadow: var(--ngxsmk-shadow-xl);
+      box-shadow: var(--ngxsmk-sheet-shadow, var(--ngxsmk-shadow-xl));
+      border: 1px solid var(--ngxsmk-color-outline);
       z-index: 1;
+      pointer-events: auto;
+      outline: none;
     }
 
     .ngxsmk-sheet__panel[data-side='left'],
     .ngxsmk-sheet__panel[data-side='right'] {
       width: min(var(--ngxsmk-sheet-width, 24rem), 100vw);
       height: 100%;
+      max-height: 100dvh;
+      border-block: none;
+    }
+
+    .ngxsmk-sheet__panel[data-side='left'] {
+      border-inline-start: none;
+      border-radius: 0 var(--ngxsmk-sheet-radius, var(--ngxsmk-radius-xl))
+        var(--ngxsmk-sheet-radius, var(--ngxsmk-radius-xl)) 0;
+    }
+
+    .ngxsmk-sheet__panel[data-side='right'] {
+      border-inline-end: none;
+      border-radius: var(--ngxsmk-sheet-radius, var(--ngxsmk-radius-xl)) 0 0
+        var(--ngxsmk-sheet-radius, var(--ngxsmk-radius-xl));
     }
 
     .ngxsmk-sheet__panel[data-side='bottom'] {
       width: 100%;
-      max-height: var(--ngxsmk-sheet-height, 50vh);
-      border-radius: var(--ngxsmk-radius-xl) var(--ngxsmk-radius-xl) 0 0;
+      max-height: min(var(--ngxsmk-sheet-height, 50vh), 100dvh);
+      border-inline: none;
+      border-bottom: none;
+      border-radius: var(--ngxsmk-sheet-radius, var(--ngxsmk-radius-xl))
+        var(--ngxsmk-sheet-radius, var(--ngxsmk-radius-xl)) 0 0;
     }
 
     .ngxsmk-sheet__header {
@@ -113,6 +170,7 @@ export type NgxsmkSheetSide = 'left' | 'right' | 'bottom';
       align-items: center;
       justify-content: space-between;
       gap: var(--ngxsmk-space-4);
+      flex-shrink: 0;
       padding: var(--ngxsmk-space-4) var(--ngxsmk-space-6);
       border-bottom: 1px solid var(--ngxsmk-color-outline);
     }
@@ -122,6 +180,11 @@ export type NgxsmkSheetSide = 'left' | 'right' | 'bottom';
       font-size: var(--ngxsmk-text-headline-sm-size);
       font-weight: var(--ngxsmk-text-headline-sm-weight);
       line-height: var(--ngxsmk-text-headline-sm-line);
+      color: var(--ngxsmk-color-on-surface);
+    }
+
+    .ngxsmk-sheet__title-spacer {
+      flex: 1;
     }
 
     .ngxsmk-sheet__close {
@@ -149,6 +212,14 @@ export type NgxsmkSheetSide = 'left' | 'right' | 'bottom';
       box-shadow: var(--ngxsmk-focus-ring);
     }
 
+    .ngxsmk-sheet__body {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow: auto;
+      padding: var(--ngxsmk-space-4) var(--ngxsmk-space-6);
+      -webkit-overflow-scrolling: touch;
+    }
+
     .ngxsmk-sheet__panel[data-side='left'] .ngxsmk-sheet__header,
     .ngxsmk-sheet__panel[data-side='right'] .ngxsmk-sheet__header {
       padding-top: calc(
@@ -167,45 +238,111 @@ export type NgxsmkSheetSide = 'left' | 'right' | 'bottom';
 export class NgxsmkSheet {
   private readonly scrollLock = inject(NgxsmkScrollLock);
   private readonly hostEl = inject(ElementRef<HTMLElement>);
+  private readonly document = inject(DOCUMENT);
+  private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 
   readonly open = model(false);
   readonly side = input<NgxsmkSheetSide>('right');
   readonly title = input('');
+  /** When false, Escape and backdrop clicks no longer close the sheet. */
+  readonly dismissible = input(true, { transform: booleanAttribute });
 
   protected readonly closing = signal(false);
+  protected readonly titleId = ngxsmkUniqueId('ngxsmk-sheet-title');
 
-  protected readonly SHEET_MOTION: NgxsmkMotionState = {
-    initial: { opacity: 0, y: 12 },
-    animate: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: 12 },
-    transition: { duration: 0.22, easing: 'ease-out' },
-  };
-
-  /** Plays the exit animation, then flips `open` to false (reduced-motion safe). */
-  protected requestClose(): void {
-    if (this.closing()) return;
-    this.closing.set(true);
-    const el = this.hostEl.nativeElement.querySelector(
-      '.ngxsmk-sheet__panel',
-    ) as HTMLElement | null;
-    void playExit(el ?? this.hostEl.nativeElement, this.SHEET_MOTION).then(() => {
-      this.closing.set(false);
-      this.open.set(false);
-    });
-  }
+  protected readonly sheetMotion = computed((): NgxsmkMotionState => {
+    const side = this.side();
+    if (side === 'left') {
+      return {
+        initial: { opacity: 0, x: -24 },
+        animate: { opacity: 1, x: 0 },
+        exit: { opacity: 0, x: -16 },
+        transition: { duration: 0.22, easing: 'ease-out' },
+      } satisfies NgxsmkMotionState;
+    }
+    if (side === 'right') {
+      return {
+        initial: { opacity: 0, x: 24 },
+        animate: { opacity: 1, x: 0 },
+        exit: { opacity: 0, x: 16 },
+        transition: { duration: 0.22, easing: 'ease-out' },
+      } satisfies NgxsmkMotionState;
+    }
+    return {
+      initial: { opacity: 0, y: 24 },
+      animate: { opacity: 1, y: 0 },
+      exit: { opacity: 0, y: 16 },
+      transition: { duration: 0.22, easing: 'ease-out' },
+    } satisfies NgxsmkMotionState;
+  });
 
   private locked = false;
+  private portaledRoot: HTMLElement | null = null;
 
   constructor() {
     effect(() => {
       if (this.open()) {
         this.setLocked(true);
+        untracked(() => this.schedulePortal());
       } else {
         this.setLocked(false);
+        this.portaledRoot = null;
       }
     });
 
-    inject(DestroyRef).onDestroy(() => this.setLocked(false));
+    inject(DestroyRef).onDestroy(() => {
+      this.setLocked(false);
+      this.portaledRoot = null;
+    });
+  }
+
+  protected onBackdrop(): void {
+    if (this.dismissible()) {
+      this.requestClose();
+    }
+  }
+
+  protected onDocumentEscape(event: Event): void {
+    if (!this.open() || !this.dismissible() || this.closing()) return;
+    event.preventDefault();
+    this.requestClose();
+  }
+
+  protected onRootKeydown(event: KeyboardEvent): void {
+    if (event.key === 'Escape' && this.dismissible()) {
+      event.preventDefault();
+      event.stopPropagation();
+      this.requestClose();
+    }
+  }
+
+  /** Plays the exit animation, then flips `open` to false (reduced-motion safe). */
+  protected requestClose(): void {
+    if (this.closing()) return;
+    this.closing.set(true);
+    const el =
+      (this.portaledRoot?.querySelector('.ngxsmk-sheet__panel') as HTMLElement | null) ??
+      (this.hostEl.nativeElement.querySelector('.ngxsmk-sheet__panel') as HTMLElement | null);
+    void playExit(el ?? this.hostEl.nativeElement, this.sheetMotion()).then(() => {
+      this.closing.set(false);
+      this.open.set(false);
+    });
+  }
+
+  private schedulePortal(): void {
+    if (!this.isBrowser) return;
+    // Defer until the @if root exists in the DOM, then lift to <body>
+    // so overflow/transform ancestors (demo showcase) cannot clip it.
+    queueMicrotask(() => {
+      const root =
+        (this.hostEl.nativeElement.querySelector('.ngxsmk-sheet__root') as HTMLElement | null) ??
+        this.portaledRoot;
+      if (!root || !this.open()) return;
+      if (root.parentElement !== this.document.body) {
+        this.document.body.appendChild(root);
+      }
+      this.portaledRoot = root;
+    });
   }
 
   private setLocked(locked: boolean): void {

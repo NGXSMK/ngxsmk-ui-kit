@@ -82,7 +82,9 @@
     "chatReplyPlaceholder": "回复……",
     "composerDrawerHint": "附加文件、选择一个提示词，或调出工具——然后发送。",
     "citationSnippet": "Transformer 相比循环模型可实现显著更高的并行化。",
-    "audioVoiceReply": "语音回复"
+    "audioVoiceReply": "语音回复",
+    "online": "在线",
+    "chatLayoutExampleMsg": "询问关于您账户的任何问题。"
   },
   "enterprise": {
     "pageDesc": "面向业务应用的重负载构建模块——看板、日程、编辑器和数据工具。每一个都支持主题感知，并可随时接入你自己的数据源。",
@@ -170,7 +172,12 @@
     "roleViewer": "查看者",
     "teamPlatform": "平台",
     "teamContent": "内容",
-    "teamDesign": "设计"
+    "teamDesign": "设计",
+    "fileTreeDesc": "资源管理器目录树视图，支持文件夹展开/折叠及文件选择。",
+    "timelineDesc": "垂直里程碑时间线跟踪器，带有步骤进度指示器。",
+    "codeEditorDesc": "代码片段展示区，包含行号、语法头部和复制按钮。",
+    "statTrendDesc": "KPI 仪表板卡片，嵌入迷你走势图和指标趋势。",
+    "filterBuilderDesc": "动态过滤条件构建器，包含字段、运算符和值行。"
   },
   "blog": {
     "pill": "Blog",
@@ -581,7 +588,8 @@
       "ai": "AI 界面",
       "utility": "工具与 Hooks",
       "other": "其他"
-    }
+    },
+    "scrollTop": "回到顶部"
   },
   "iplayground": {
     "explorer": "浏览器",
@@ -664,7 +672,11 @@
     "signal": "signal",
     "regular": "常规",
     "outputsEvents": "输出（事件）",
-    "thEvent": "事件"
+    "thEvent": "事件",
+    "code": "代码",
+    "copyCode": "复制代码",
+    "copy": "复制",
+    "copied": "已复制！"
   },
   "forms": {
     "intro": "按钮、输入框、下拉与富表单控件。以下每个组件都可实时交互——试用它们，然后展开代码进行复制。",
@@ -779,7 +791,11 @@
     "langAngular": "Angular",
     "langJavaScript": "JavaScript",
     "transferDesc": "双列表框容器，用于在源列表和目标列表之间移动所选项目。",
-    "signaturePadDesc": "用于绘制和导出流畅电子签名的数字画布。"
+    "signaturePadDesc": "用于绘制和导出流畅电子签名的数字画布。",
+    "creditCardDesc": "自动格式化信用卡输入字段，支持品牌检测和校验。",
+    "passwordStrengthDesc": "实时密码安全评估，带强度条和要求清单。",
+    "treeSelectDesc": "分层下拉选择器，具有可展开的树节点和多选功能。",
+    "selectCategories": "选择分类..."
   },
   "feedback": {
     "intro": "用于传达状态、进度与系统响应的组件——从行内警报和横幅，到加载器、骨架屏与在线状态点。",
@@ -1325,6 +1341,14 @@
       "checkout": {
         "title": "多步骤结账与双因素验证",
         "desc": "具有双因素 PIN 验证和订单确认的安全电子商务结账流程。"
+      },
+      "aiconsole": {
+        "title": "AI 控制台",
+        "desc": "包含面包屑导航、模型控制和 ngxsmk-ai-chat 的智能体工作区模板 — 随时可连接到您的后端。"
+      },
+      "opstable": {
+        "title": "运维数据表",
+        "desc": "在 ngxsmk-data-table 上带有筛选、选择、列宽调整和拖拽排序列头的运维清单。"
       }
     }
   },
@@ -1351,52 +1375,55 @@
     "ionicActive": "Ionic 主题已激活"
   },
   "community": {
-    "pill": "Community",
-    "title": "Built together, ship faster",
-    "subtitle": "Join a growing community of Angular developers. Ask questions, propose features, report bugs, and share what you've built with NGXSMK.",
-    "statOpen": "Open",
-    "statSource": "Source",
+    "pill": "社区",
+    "title": "社区与贡献",
+    "subtitle": "加入我们不断壮大的 Angular 开发者社区。提问、提出功能建议、反馈问题并分享您使用 NGXSMK 构建的成果。",
+    "statOpen": "开源",
+    "statSource": "代码",
     "statMit": "MIT",
-    "statLicense": "License",
-    "statComponents": "Components",
-    "channelTitle": "How to contribute",
-    "channelSub": "Whether it's a bug report, feature idea, docs improvement, or a pull request — every contribution matters.",
+    "statLicense": "开源许可",
+    "statComponents": "精选组件",
+    "channelTitle": "如何参与贡献",
+    "channelSub": "无论是缺陷报告、功能构想、文档改进还是拉取请求 — 每一份贡献都至关重要。",
     "channelGithubTitle": "GitHub Issues",
-    "channelGithubDesc": "Report bugs, request features, or suggest improvements. Every issue is triaged within 48 hours.",
-    "channelGithubCta": "Open an issue",
+    "channelGithubDesc": "报告问题、请求新功能或提出改进建议。所有 Issue 均在 48 小时内处理。",
+    "channelGithubCta": "提交 Issue",
     "channelPrTitle": "Pull Requests",
-    "channelPrDesc": "Fork, branch, and open a PR. We follow conventional commits and review within 48 hours.",
-    "channelPrCta": "Start a PR",
-    "channelEmailTitle": "Email the maintainer",
-    "channelEmailDesc": "For private feedback, security disclosures, or partnership inquiries — reach out directly.",
-    "channelEmailCta": "Send an email",
+    "channelPrDesc": "Fork 仓库、创建分支并提交 PR。我们遵循 Conventional Commits 规范，并在 48 小时内完成审查。",
+    "channelPrCta": "发起 PR",
+    "channelEmailTitle": "邮件联系维护者",
+    "channelEmailDesc": "私密反馈、安全漏洞披露或合作咨询 — 请直接发送邮件与我们联系。",
+    "channelEmailCta": "发送邮件",
     "channelWhatsappTitle": "WhatsApp 频道",
-    "channelWhatsappDesc": "加入我们的官方 WhatsApp 频道，获取最新动态、公告和版本说明。",
+    "channelWhatsappDesc": "加入我们的官方 WhatsApp 频道，第一时间获取最新动态、版本发布和公告。",
     "channelWhatsappCta": "加入频道",
-    "channelDocsTitle": "Documentation",
-    "channelDocsDesc": "Found a typo or unclear guide? Docs PRs are the fastest way to contribute — no code review needed.",
-    "channelDocsCta": "Improve the docs",
-    "guidelinesTitle": "Contribution guidelines",
-    "guidelinesSub": "Follow these conventions to keep the codebase consistent and reviews fast.",
-    "rule1Title": "Conventional commits",
-    "rule1Desc": "Use feat:, fix:, chore:, docs:, or refactor: prefixes. The commitlint hook enforces this automatically.",
-    "rule2Title": "Signal-only APIs",
-    "rule2Desc": "All new inputs must use input() / input.required(). No @Input() decorators. Two-way bindings use model().",
-    "rule3Title": "Standalone components",
-    "rule3Desc": "Every component and directive must be standalone: true. No NgModules in new code.",
-    "rule4Title": "Token-driven styling",
-    "rule4Desc": "Use --ngxsmk-* CSS custom properties. Never hardcode colors, radii, or spacing values.",
-    "rule5Title": "One component per file",
-    "rule5Desc": "Keep components small and focused. Extract shared logic into @ngxsmk/cdk utilities.",
-    "rule6Title": "Run the full pipeline",
-    "rule6Desc": "Before pushing: npm run build, npm test, npm run lint, npm run format. All must pass.",
-    "cocTitle": "Code of Conduct",
-    "cocDesc": "We are committed to providing a welcoming and inclusive experience for everyone. Be respectful, constructive, and assume good intent.",
-    "footerTitle": "Ready to contribute?",
-    "footerSub": "Fork the repo, pick an issue labeled",
+    "channelDocsTitle": "完善文档",
+    "channelDocsDesc": "发现错别字或表述不清的说明？文档 PR 是最快的贡献途径 — 无需复杂的代码审核。",
+    "channelDocsCta": "改进文档",
+    "guidelinesTitle": "贡献指南",
+    "guidelinesSub": "请遵循以下约定，以保持代码库的一致性并加快审核流程。",
+    "rule1Title": "Conventional commits 规范",
+    "rule1Desc": "使用 feat:、fix:、chore:、docs: 或 refactor: 前缀。commitlint 钩子会自动进行校验。",
+    "rule2Title": "纯 Signals API",
+    "rule2Desc": "所有新输入必须使用 input() / input.required()。禁止使用 @Input() 装饰器。双向绑定请使用 model()。",
+    "rule3Title": "独立组件 (Standalone)",
+    "rule3Desc": "每个组件和指令都必须声明为 standalone: true。新代码中严禁使用 NgModule。",
+    "rule4Title": "基于设计令牌的样式",
+    "rule4Desc": "使用 --ngxsmk-* CSS 自定义属性。严禁硬编码颜色、圆角或间距数值。",
+    "rule5Title": "单文件单组件",
+    "rule5Desc": "保持组件小巧且专注。将共享逻辑提取到 @ngxsmk/cdk 工具库中。",
+    "rule6Title": "运行完整检查流水线",
+    "rule6Desc": "在提交前运行：npm run build、npm test、npm run lint、npm run format。所有检查必须全部通过。",
+    "cocTitle": "行为准则",
+    "cocDesc": "我们致力于为所有人提供热情包容的交流环境。请相互尊重、建设性沟通并保持善意。",
+    "footerTitle": "准备好贡献了吗？",
+    "footerSub": "Fork 本仓库，挑选标有",
     "footerGoodFirst": "good first issue",
-    "footerSub2": ", and open a pull request. We review within 48 hours.",
-    "footerCta": "Open on GitHub"
+    "footerSub2": " 的议题，并提交您的拉取请求。我们将在 48 小时内予以审查。",
+    "footerCta": "在 GitHub 上查看",
+    "githubDiscussions": "联系与反馈",
+    "githubDiscussionsDesc": "有问题、想法或错误报告？直接联系维护者 — 每一条反馈都帮助完善组件库。",
+    "joinDiscussion": "发送反馈"
   },
   "api": {
     "title": "API 参考",

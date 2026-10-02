@@ -2,11 +2,12 @@ import {
   Component,
   ElementRef,
   HostListener,
-  ViewChild,
   input,
   output,
   signal,
   computed,
+  model,
+  viewChild,
   ChangeDetectionStrategy,
   effect,
 } from '@angular/core';
@@ -19,11 +20,23 @@ export interface CommandItem {
   icon?: string;
 }
 
+/**
+ * Keyboard-first command palette (Ctrl/Cmd+K by default). Search, group, and
+ * select commands; emits `selected` and closes.
+ *
+ * ```html
+ * <ngxsmk-command-palette
+ *   [commands]="commands"
+ *   [(open)]="paletteOpen"
+ *   (selected)="run($event)"
+ * />
+ * ```
+ */
 @Component({
   selector: 'ngxsmk-command-palette',
   standalone: true,
   template: `
-    @if (isOpen()) {
+    @if (open()) {
       <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
       <div class="ngxsmk-cmd-backdrop" (click)="close()">
         <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events -->
@@ -32,6 +45,7 @@ export interface CommandItem {
           (click)="$event.stopPropagation()"
           role="dialog"
           aria-modal="true"
+          aria-label="Command palette"
         >
           <div class="ngxsmk-cmd-search">
             <svg
@@ -44,6 +58,7 @@ export interface CommandItem {
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
+              aria-hidden="true"
             >
               <circle cx="11" cy="11" r="8" />
               <path d="m21 21-4.35-4.35" />
@@ -60,7 +75,7 @@ export interface CommandItem {
             <kbd class="ngxsmk-cmd-esc-kbd">ESC</kbd>
           </div>
 
-          <div class="ngxsmk-cmd-list">
+          <div class="ngxsmk-cmd-list" role="listbox">
             @if (filteredGroups().length === 0) {
               <div class="ngxsmk-cmd-empty">No results found for "{{ searchQuery() }}"</div>
             }
@@ -73,6 +88,8 @@ export interface CommandItem {
                   <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
                   <div
                     class="ngxsmk-cmd-item"
+                    role="option"
+                    [attr.aria-selected]="isActive(cmd)"
                     [class.ngxsmk-cmd-item--active]="isActive(cmd)"
                     (click)="selectItem(cmd)"
                     (mouseenter)="setActiveItem(cmd)"
@@ -288,20 +305,21 @@ export class NgxsmkCommandPalette {
   readonly commands = input<CommandItem[]>([]);
   readonly triggerKey = input<string>('k');
   readonly placeholder = input('Type a command or search...');
+  /** Two-way open state (`[(open)]`). */
+  readonly open = model(false);
 
-  readonly isOpen = signal(false);
   readonly selected = output<CommandItem>();
 
   protected readonly searchQuery = signal('');
   protected readonly activeIndex = signal(0);
 
-  @ViewChild('searchInput') searchInput?: ElementRef<HTMLInputElement>;
+  private readonly searchInput = viewChild<ElementRef<HTMLInputElement>>('searchInput');
 
   constructor() {
     effect(() => {
-      if (this.isOpen()) {
+      if (this.open()) {
         setTimeout(() => {
-          this.searchInput?.nativeElement.focus();
+          this.searchInput()?.nativeElement.focus();
         }, 50);
       } else {
         this.searchQuery.set('');
@@ -315,16 +333,14 @@ export class NgxsmkCommandPalette {
     const isMeta = event.metaKey || event.ctrlKey;
     const key = event.key.toLowerCase();
 
-    // Toggle on Ctrl+K or Cmd+K
     if (isMeta && key === this.triggerKey().toLowerCase()) {
       event.preventDefault();
-      this.isOpen.update((open) => !open);
+      this.open.update((v) => !v);
       return;
     }
 
-    if (!this.isOpen()) return;
+    if (!this.open()) return;
 
-    // Handle open keyboard navigation
     switch (event.key) {
       case 'Escape':
         event.preventDefault();
@@ -345,12 +361,13 @@ export class NgxsmkCommandPalette {
     }
   }
 
-  open(): void {
-    this.isOpen.set(true);
+  /** Imperative open (demos / host buttons). */
+  show(): void {
+    this.open.set(true);
   }
 
   close(): void {
-    this.isOpen.set(false);
+    this.open.set(false);
   }
 
   protected onSearchInput(event: Event): void {

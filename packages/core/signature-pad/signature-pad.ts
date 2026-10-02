@@ -80,6 +80,7 @@ import { ngxsmkUniqueId } from '@ngxsmk/core/util';
       border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-md, 0.5rem);
       background: var(--ngxsmk-color-surface);
+      max-width: 100%;
       overflow: hidden;
     }
 
@@ -87,6 +88,8 @@ import { ngxsmkUniqueId } from '@ngxsmk/core/util';
       touch-action: none;
       cursor: crosshair;
       background: transparent;
+      max-width: 100%;
+      height: auto;
     }
 
     .ngxsmk-signature-pad--disabled .ngxsmk-signature-pad__canvas {
@@ -128,7 +131,7 @@ import { ngxsmkUniqueId } from '@ngxsmk/core/util';
 export class NgxsmkSignaturePad extends CvaBase<string> implements NgxsmkFormFieldControl {
   readonly width = input<number>(400);
   readonly height = input<number>(180);
-  readonly penColor = input<string>('#09090b');
+  readonly penColor = input<string>('#6366f1');
   readonly penWidth = input<number>(2);
   readonly disabled = input<boolean>(false);
   readonly ariaLabel = input<string>('Digital signature pad canvas');
@@ -155,12 +158,24 @@ export class NgxsmkSignaturePad extends CvaBase<string> implements NgxsmkFormFie
     });
   }
 
+  private resolvePenColor(): string {
+    const raw = this.penColor();
+    if (raw && raw !== 'currentColor' && raw !== 'auto') {
+      return raw;
+    }
+    if (this.canvasEl) {
+      const col = getComputedStyle(this.canvasEl.nativeElement).color;
+      if (col) return col;
+    }
+    return '#6366f1';
+  }
+
   private initCanvas(): void {
     if (!this.canvasEl) return;
     const canvas = this.canvasEl.nativeElement;
     this.ctx = canvas.getContext('2d');
     if (this.ctx) {
-      this.ctx.strokeStyle = this.penColor();
+      this.ctx.strokeStyle = this.resolvePenColor();
       this.ctx.lineWidth = this.penWidth();
       this.ctx.lineCap = 'round';
       this.ctx.lineJoin = 'round';
@@ -168,7 +183,11 @@ export class NgxsmkSignaturePad extends CvaBase<string> implements NgxsmkFormFie
   }
 
   protected startDrawing(event: MouseEvent): void {
-    if (this.disabled() || !this.ctx || !this.canvasEl) return;
+    if (this.disabled() || !this.canvasEl) return;
+    if (!this.ctx) {
+      this.initCanvas();
+    }
+    if (!this.ctx) return;
     this.isDrawing = true;
     const rect = this.canvasEl.nativeElement.getBoundingClientRect();
     this.lastX = event.clientX - rect.left;
@@ -193,7 +212,11 @@ export class NgxsmkSignaturePad extends CvaBase<string> implements NgxsmkFormFie
   }
 
   protected handleTouchStart(event: TouchEvent): void {
-    if (this.disabled() || !this.ctx || !this.canvasEl || event.touches.length === 0) return;
+    if (this.disabled() || !this.canvasEl || event.touches.length === 0) return;
+    if (!this.ctx) {
+      this.initCanvas();
+    }
+    if (!this.ctx) return;
     this.isDrawing = true;
     const touch = event.touches[0];
     const rect = this.canvasEl.nativeElement.getBoundingClientRect();

@@ -6,6 +6,7 @@ import {
   NgxsmkSpringTransition,
   loadMotion,
   prefersReducedMotion,
+  applyStyles,
 } from './animate';
 
 /**
@@ -195,7 +196,10 @@ export class NgxsmkTextReveal {
     await Promise.all(
       spans.map((span: HTMLSpanElement, i: number) => {
         if (state.initial) {
-          motion.style(span, state.initial);
+          applyStyles(span, state.initial);
+          if (typeof (motion as unknown as { style?: (e: Element, s: unknown) => void }).style === 'function') {
+            (motion as unknown as { style: (e: Element, s: unknown) => void }).style(span, state.initial);
+          }
         }
         const delay = typeof staggerFn === 'number' ? staggerFn * i : i * staggerDelay;
         return motion.animate(span, state.animate ?? {}, {

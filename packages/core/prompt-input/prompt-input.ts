@@ -106,10 +106,10 @@ export interface NgxsmkPromptModelOption {
     }
 
     .ngxsmk-prompt-box {
-      border: 1px solid var(--ngxsmk-color-outline-strong);
-      border-radius: var(--ngxsmk-radius-xl);
-      background: var(--ngxsmk-color-surface);
-      box-shadow: var(--ngxsmk-shadow-sm);
+      border: 1px solid var(--ngxsmk-prompt-border, var(--ngxsmk-color-outline-strong));
+      border-radius: var(--ngxsmk-prompt-radius, var(--ngxsmk-radius-xl));
+      background: var(--ngxsmk-prompt-bg, var(--ngxsmk-color-surface));
+      box-shadow: var(--ngxsmk-prompt-shadow, var(--ngxsmk-shadow-sm));
       padding: var(--ngxsmk-space-3) var(--ngxsmk-space-4) var(--ngxsmk-space-2);
       transition:
         border-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
@@ -202,7 +202,7 @@ export interface NgxsmkPromptModelOption {
       width: 2rem;
       height: 2rem;
       border: none;
-      border-radius: var(--ngxsmk-radius-full);
+      border-radius: var(--ngxsmk-prompt-send-radius, var(--ngxsmk-radius-full));
       background: var(--ngxsmk-color-primary);
       color: var(--ngxsmk-color-on-primary);
       cursor: pointer;
@@ -214,10 +214,10 @@ export interface NgxsmkPromptModelOption {
 
     .ngxsmk-prompt-box__send-btn:hover:not(:disabled) {
       background: var(--ngxsmk-color-primary-hover);
-      transform: scale(1.06);
+      transform: var(--ngxsmk-hover-lift, none);
     }
     .ngxsmk-prompt-box__send-btn:active:not(:disabled) {
-      transform: scale(0.96);
+      transform: var(--ngxsmk-press-scale, scale(0.96));
     }
     .ngxsmk-prompt-box__send-btn:focus-visible {
       outline: none;

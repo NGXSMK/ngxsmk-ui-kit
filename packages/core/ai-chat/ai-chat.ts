@@ -202,9 +202,9 @@ export interface NgxsmkAiMessage {
       display: flex;
       flex-direction: column;
       height: 100%;
-      background: var(--ngxsmk-color-surface);
-      border: 1px solid var(--ngxsmk-color-outline);
-      border-radius: var(--ngxsmk-radius-xl);
+      background: var(--ngxsmk-ai-chat-bg, var(--ngxsmk-color-surface));
+      border: 1px solid var(--ngxsmk-ai-chat-border, var(--ngxsmk-color-outline));
+      border-radius: var(--ngxsmk-ai-chat-radius, var(--ngxsmk-radius-xl));
       overflow: hidden;
       font-family: var(--ngxsmk-font-sans);
       color: var(--ngxsmk-color-on-surface);
@@ -215,8 +215,8 @@ export interface NgxsmkAiMessage {
       justify-content: space-between;
       align-items: center;
       padding: var(--ngxsmk-space-3) var(--ngxsmk-space-4);
-      background: var(--ngxsmk-color-surface-variant);
-      border-bottom: 1px solid var(--ngxsmk-color-outline);
+      background: var(--ngxsmk-ai-chat-header-bg, var(--ngxsmk-color-surface-variant));
+      border-bottom: 1px solid var(--ngxsmk-ai-chat-border, var(--ngxsmk-color-outline));
     }
 
     .ngxsmk-ai-chat__header-title {
@@ -286,8 +286,8 @@ export interface NgxsmkAiMessage {
 
     .ngxsmk-ai-chat__bubble {
       padding: var(--ngxsmk-space-3) var(--ngxsmk-space-4);
-      background: var(--ngxsmk-color-surface-variant);
-      border-radius: var(--ngxsmk-radius-lg);
+      background: var(--ngxsmk-ai-chat-bubble-bg, var(--ngxsmk-color-surface-variant));
+      border-radius: var(--ngxsmk-ai-chat-bubble-radius, var(--ngxsmk-radius-lg));
       font-size: var(--ngxsmk-text-body-sm-size);
       line-height: var(--ngxsmk-text-body-sm-line);
     }
@@ -295,7 +295,7 @@ export interface NgxsmkAiMessage {
       margin: 0;
     }
     .ngxsmk-ai-chat__message-row--user .ngxsmk-ai-chat__bubble {
-      background: var(--ngxsmk-color-primary);
+      background: var(--ngxsmk-ai-chat-bubble-user-bg, var(--ngxsmk-color-primary));
       color: var(--ngxsmk-color-on-primary);
     }
 
@@ -375,8 +375,8 @@ export interface NgxsmkAiMessage {
 
     .ngxsmk-ai-chat__suggestion-btn {
       background: var(--ngxsmk-color-surface);
-      border: 1px solid var(--ngxsmk-color-outline);
-      border-radius: var(--ngxsmk-radius-full);
+      border: 1px solid var(--ngxsmk-ai-chat-border, var(--ngxsmk-color-outline));
+      border-radius: var(--ngxsmk-ai-chat-composer-radius, var(--ngxsmk-radius-full));
       padding: var(--ngxsmk-space-1-5) var(--ngxsmk-space-3);
       font-size: var(--ngxsmk-text-label-sm-size);
       cursor: pointer;
@@ -405,10 +405,10 @@ export interface NgxsmkAiMessage {
     .ngxsmk-ai-chat__form input {
       flex: 1;
       height: var(--ngxsmk-control-height-md, 2.5rem);
-      padding: 0 var(--ngxsmk-space-3);
-      border: 1px solid var(--ngxsmk-color-outline);
-      border-radius: var(--ngxsmk-radius-md);
-      background: var(--ngxsmk-color-background);
+      padding: 0 var(--ngxsmk-input-padding-inline, var(--ngxsmk-space-3));
+      border: 1px solid var(--ngxsmk-input-border, var(--ngxsmk-color-outline));
+      border-radius: var(--ngxsmk-ai-chat-composer-radius, var(--ngxsmk-radius-md));
+      background: var(--ngxsmk-input-bg, var(--ngxsmk-color-background));
       color: var(--ngxsmk-color-on-surface);
       font-family: inherit;
       outline: none;
@@ -430,7 +430,7 @@ export interface NgxsmkAiMessage {
       border: none;
       background: var(--ngxsmk-color-primary);
       color: var(--ngxsmk-color-on-primary);
-      border-radius: var(--ngxsmk-radius-md);
+      border-radius: var(--ngxsmk-prompt-send-radius, var(--ngxsmk-radius-md));
       cursor: pointer;
       transition: background var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }

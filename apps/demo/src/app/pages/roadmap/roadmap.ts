@@ -34,8 +34,13 @@ const STATUS_META: Record<string, { color: string; bg: string; icon: string }> =
       <!-- ═══════════════ HERO ═══════════════ -->
       <header class="rm-hero">
         <div class="rm-hero__inner">
-          <span class="rm-hero__pill">{{ 'roadmap.pill' | translate }}</span>
-          <h1 class="rm-hero__title">{{ 'roadmap.title' | translate }}</h1>
+          <div class="version-badge">
+            <span class="pulse-dot"></span>
+            <span class="badge-tag">Roadmap</span>
+            <span class="badge-divider"></span>
+            <span class="badge-text">{{ 'roadmap.pill' | translate }}</span>
+          </div>
+          <h1 class="rm-hero__title">Product <span class="highlight">Roadmap</span></h1>
           <p class="rm-hero__sub">
             {{ 'roadmap.subtitle' | translate }}
           </p>
@@ -49,7 +54,7 @@ const STATUS_META: Record<string, { color: string; bg: string; icon: string }> =
               <span class="rm-hero__stat-label">{{ 'roadmap.statInProgress' | translate }}</span>
             </div>
             <div class="rm-hero__stat">
-              <span class="rm-hero__stat-val" style="color: #7c3aed">{{ plannedCount }}</span>
+              <span class="rm-hero__stat-val" style="color: #6366f1">{{ plannedCount }}</span>
               <span class="rm-hero__stat-label">{{ 'roadmap.statPlanned' | translate }}</span>
             </div>
           </div>
@@ -83,6 +88,11 @@ const STATUS_META: Record<string, { color: string; bg: string; icon: string }> =
             ></div>
 
             <div class="rm-card__head">
+              <div class="traffic-lights">
+                <span class="light red"></span>
+                <span class="light yellow"></span>
+                <span class="light green"></span>
+              </div>
               <div class="rm-card__head-top">
                 <span class="rm-card__quarter">{{ m.quarter }}</span>
                 <span
@@ -169,19 +179,20 @@ const STATUS_META: Record<string, { color: string; bg: string; icon: string }> =
   `,
   styles: `
     :host {
-      --rm-max: 760px;
+      --rm-max: 880px;
       display: block;
-      font-family: 'Inter', var(--ngxsmk-font-sans);
-      color: var(--ngxsmk-color-on-background);
+      font-family: var(--font-body, 'Inter', system-ui, sans-serif);
+      color: var(--color-text-main, #0f172a);
     }
 
     /* ═══════════════ HERO ═══════════════ */
     .rm-hero {
       position: relative;
       overflow: hidden;
-      padding: clamp(4rem, 8vw, 6rem) var(--ngxsmk-space-6, 1.5rem) clamp(2.5rem, 5vw, 4rem);
+      padding: clamp(3.5rem, 7vw, 5.5rem) 1.5rem clamp(2.5rem, 5vw, 3.5rem);
       text-align: center;
-      background-image: radial-gradient(var(--ngxsmk-color-outline, #e4e4e7) 1px, transparent 1px);
+      background-color: var(--color-bg-canvas, #f8fafc);
+      background-image: radial-gradient(var(--color-border-card, rgba(148, 163, 184, 0.25)) 1px, transparent 1px);
       background-size: 24px 24px;
     }
     .rm-hero::before {
@@ -192,77 +203,60 @@ const STATUS_META: Record<string, { color: string; bg: string; icon: string }> =
       pointer-events: none;
       background: radial-gradient(
         55% 55% at 50% 0%,
-        color-mix(in srgb, var(--ngxsmk-color-primary) 12%, transparent),
+        rgba(99, 102, 241, 0.12),
         transparent 70%
       );
     }
     .rm-hero__inner {
       position: relative;
       z-index: 1;
-      max-width: 38rem;
+      max-width: 44rem;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
-    .rm-hero__pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.25rem 0.75rem;
-      border: 1px solid var(--ngxsmk-color-outline);
-      border-radius: var(--ngxsmk-radius-full, 999px);
-      background: color-mix(in srgb, var(--ngxsmk-color-surface) 60%, transparent);
-      backdrop-filter: blur(6px);
-      font-size: var(--ngxsmk-text-body-sm-size, 0.8125rem);
-      font-weight: 600;
-      color: var(--ngxsmk-color-on-surface);
-      margin-bottom: var(--ngxsmk-space-4, 1rem);
-      letter-spacing: 0.04em;
-    }
     .rm-hero__title {
-      font-family: 'Outfit', var(--ngxsmk-font-sans), system-ui, sans-serif;
-      font-size: clamp(2rem, 5vw, 3rem);
+      font-family: var(--font-display, 'Plus Jakarta Sans', system-ui, sans-serif);
+      font-size: clamp(2.25rem, 5vw, 3.25rem);
       font-weight: 800;
       letter-spacing: -0.035em;
-      line-height: 1.1;
-      margin: 0 0 var(--ngxsmk-space-4, 1rem);
-      background: linear-gradient(
-        135deg,
-        var(--ngxsmk-color-on-surface),
-        var(--ngxsmk-color-on-surface-variant, #71717a)
-      );
+      line-height: 1.15;
+      margin: 0.75rem 0 1rem;
+      color: var(--color-text-main, #0f172a);
+    }
+    .highlight {
+      background: linear-gradient(135deg, #6366f1 0%, #f59e0b 100%);
       -webkit-background-clip: text;
-      background-clip: text;
       -webkit-text-fill-color: transparent;
     }
     .rm-hero__sub {
-      font-size: var(--ngxsmk-text-body-lg-size, 1.0625rem);
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      font-size: 1.0625rem;
+      color: var(--color-text-secondary, #64748b);
       line-height: 1.65;
-      margin: 0 0 var(--ngxsmk-space-6, 1.5rem);
-      max-width: 34rem;
+      margin: 0 0 2rem;
+      max-width: 36rem;
     }
     .rm-hero__stats {
       display: flex;
-      gap: var(--ngxsmk-space-10, 2.5rem);
+      gap: 3rem;
     }
     .rm-hero__stat {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0.15rem;
+      gap: 0.2rem;
     }
     .rm-hero__stat-val {
-      font-family: 'Outfit', var(--ngxsmk-font-sans), system-ui, sans-serif;
-      font-size: 1.5rem;
+      font-family: var(--font-display, 'Plus Jakarta Sans', system-ui, sans-serif);
+      font-size: 1.75rem;
       font-weight: 800;
       letter-spacing: -0.02em;
     }
     .rm-hero__stat-label {
-      font-size: var(--ngxsmk-text-body-xs-size, 0.75rem);
-      font-weight: 500;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--color-text-muted, #94a3b8);
       text-transform: uppercase;
       letter-spacing: 0.06em;
     }
@@ -271,64 +265,65 @@ const STATUS_META: Record<string, { color: string; bg: string; icon: string }> =
     .rm-legend {
       max-width: var(--rm-max);
       margin: 0 auto;
-      padding: var(--ngxsmk-space-6, 1.5rem) var(--ngxsmk-space-6, 1.5rem) 0;
+      padding: 1.5rem 1.5rem 0;
       display: flex;
-      gap: 1.25rem;
+      gap: 1.5rem;
       flex-wrap: wrap;
     }
     .rm-legend__item {
       display: flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.5rem;
     }
     .rm-legend__dot {
-      width: 8px;
-      height: 8px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
     }
     .rm-legend__label {
-      font-size: var(--ngxsmk-text-body-sm-size, 0.8125rem);
-      font-weight: 500;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--color-text-secondary, #64748b);
+      text-transform: capitalize;
     }
 
     /* ═══════════════ TIMELINE ═══════════════ */
     .rm-timeline {
       max-width: var(--rm-max);
       margin: 0 auto;
-      padding: var(--ngxsmk-space-8, 2rem) var(--ngxsmk-space-6, 1.5rem);
+      padding: 2.5rem 1.5rem;
       position: relative;
     }
     .rm-timeline__line {
       position: absolute;
-      left: calc(var(--ngxsmk-space-6, 1.5rem) + 5px);
-      top: var(--ngxsmk-space-8, 2rem);
-      bottom: 0;
+      left: calc(1.5rem + 5px);
+      top: 2.5rem;
+      bottom: 2.5rem;
       width: 2px;
       background: linear-gradient(
         180deg,
-        var(--ngxsmk-color-outline, #e4e4e7),
-        color-mix(in srgb, var(--ngxsmk-color-outline, #e4e4e7) 30%, transparent)
+        rgba(99, 102, 241, 0.4),
+        rgba(148, 163, 184, 0.2)
       );
     }
 
     /* ═══════════════ CARD ═══════════════ */
     .rm-card {
       position: relative;
-      padding-left: 2rem;
-      padding-bottom: var(--ngxsmk-space-10, 2.5rem);
+      padding-left: 2.25rem;
+      padding-bottom: 2.5rem;
     }
     .rm-card:last-child {
       padding-bottom: 0;
     }
     .rm-card--current .rm-card__head {
-      background: color-mix(in srgb, #f59e0b 6%, var(--ngxsmk-color-surface, #fff));
-      border-color: color-mix(in srgb, #f59e0b 25%, var(--ngxsmk-color-outline));
+      border-color: rgba(245, 158, 11, 0.45);
+      box-shadow: 0 8px 24px -6px rgba(245, 158, 11, 0.15);
     }
     .rm-card__dot {
       position: absolute;
       left: 0;
-      top: 0.55rem;
+      top: 1rem;
       width: 12px;
       height: 12px;
       border-radius: 50%;
@@ -336,14 +331,24 @@ const STATUS_META: Record<string, { color: string; bg: string; icon: string }> =
     }
 
     .rm-card__head {
-      border: 1px solid var(--ngxsmk-color-outline);
-      border-radius: var(--ngxsmk-radius-lg);
-      padding: var(--ngxsmk-space-5, 1.25rem);
-      background: var(--ngxsmk-color-surface, #fff);
-      margin-bottom: 0.75rem;
+      border: 1px solid var(--color-border-card, rgba(148, 163, 184, 0.2));
+      border-radius: var(--radius-xl, 22px);
+      padding: 1.5rem;
+      background: var(--color-bg-card, #ffffff);
+      margin-bottom: 0.85rem;
+      box-shadow: 0 4px 14px -4px rgba(0, 0, 0, 0.04);
       transition:
-        border-color 0.2s,
-        background 0.2s;
+        border-color 0.22s,
+        box-shadow 0.22s,
+        transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .rm-card__head:hover {
+      border-color: rgba(99, 102, 241, 0.45);
+      box-shadow: 0 16px 32px -12px rgba(99, 102, 241, 0.18);
+      transform: translateY(-2px);
+    }
+    .rm-card__head .traffic-lights {
+      margin-bottom: 0.75rem;
     }
     .rm-card__head-top {
       display: flex;
@@ -351,37 +356,37 @@ const STATUS_META: Record<string, { color: string; bg: string; icon: string }> =
       justify-content: space-between;
       gap: 0.5rem;
       flex-wrap: wrap;
-      margin-bottom: 0.35rem;
+      margin-bottom: 0.5rem;
     }
     .rm-card__quarter {
-      font-family: 'Outfit', var(--ngxsmk-font-sans), system-ui, sans-serif;
-      font-size: var(--ngxsmk-text-body-sm-size, 0.8125rem);
+      font-family: var(--font-display, 'Plus Jakarta Sans', system-ui, sans-serif);
+      font-size: 0.825rem;
       font-weight: 700;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
-      letter-spacing: 0.04em;
+      color: var(--color-text-secondary, #64748b);
+      letter-spacing: 0.05em;
       text-transform: uppercase;
     }
     .rm-card__status {
       display: inline-flex;
       align-items: center;
-      gap: 0.3rem;
-      padding: 0.2rem 0.6rem;
-      border-radius: var(--ngxsmk-radius-full, 999px);
-      font-size: var(--ngxsmk-text-body-xs-size, 0.75rem);
+      gap: 0.35rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
       font-weight: 700;
       letter-spacing: 0.03em;
     }
     .rm-card__title {
-      font-family: 'Outfit', var(--ngxsmk-font-sans), system-ui, sans-serif;
-      font-size: var(--ngxsmk-text-headline-sm-size, 1.25rem);
+      font-family: var(--font-display, 'Plus Jakarta Sans', system-ui, sans-serif);
+      font-size: 1.25rem;
       font-weight: 700;
       letter-spacing: -0.02em;
-      margin: 0 0 0.25rem;
-      color: var(--ngxsmk-color-on-surface);
+      margin: 0 0 0.35rem;
+      color: var(--color-text-main, #0f172a);
     }
     .rm-card__desc {
-      font-size: var(--ngxsmk-text-body-sm-size, 0.8125rem);
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      font-size: 0.9rem;
+      color: var(--color-text-secondary, #64748b);
       line-height: 1.6;
       margin: 0;
     }
@@ -393,26 +398,26 @@ const STATUS_META: Record<string, { color: string; bg: string; icon: string }> =
       padding: 0 0 0 0.5rem;
       display: flex;
       flex-direction: column;
-      gap: 0.35rem;
+      gap: 0.4rem;
     }
     .rm-item {
       display: flex;
       align-items: flex-start;
-      gap: 0.6rem;
-      padding: 0.45rem 0.65rem;
-      border-radius: var(--ngxsmk-radius-md);
+      gap: 0.75rem;
+      padding: 0.5rem 0.75rem;
+      border-radius: var(--radius-md, 8px);
       transition: background 0.15s;
     }
     .rm-item:hover {
-      background: color-mix(in srgb, var(--ngxsmk-color-on-surface) 4%, transparent);
+      background: rgba(99, 102, 241, 0.04);
     }
     .rm-item--done .rm-item__name {
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--color-text-secondary, #64748b);
     }
     .rm-item__check {
       flex-shrink: 0;
-      width: 18px;
-      height: 18px;
+      width: 20px;
+      height: 20px;
       border-radius: 50%;
       border: 1.5px solid;
       display: flex;
@@ -423,17 +428,17 @@ const STATUS_META: Record<string, { color: string; bg: string; icon: string }> =
     .rm-item__text {
       display: flex;
       flex-direction: column;
-      gap: 0.1rem;
+      gap: 0.15rem;
     }
     .rm-item__name {
-      font-size: var(--ngxsmk-text-body-sm-size, 0.8125rem);
-      font-weight: 500;
-      color: var(--ngxsmk-color-on-surface);
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--color-text-main, #0f172a);
       line-height: 1.4;
     }
     .rm-item__detail {
-      font-size: var(--ngxsmk-text-body-xs-size, 0.75rem);
-      color: var(--ngxsmk-color-on-surface-variant, #a1a1aa);
+      font-size: 0.775rem;
+      color: var(--color-text-muted, #94a3b8);
       line-height: 1.5;
     }
 

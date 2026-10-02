@@ -1,8 +1,7 @@
-# NGXSMK Design System Governance Standard
+# NGXSMK Design System Governance
 
-> **Status**: Official / Enforced  
-> **Target**: `@ngxsmk/*` Packages, Apps, Documentation, and Tools  
-> **Enforcement**: Automated CI Checks (`npm run governance`), Linters, and Review Gates
+> **Audience**: Contributors to this repository (not app consumers)  
+> **Enforcement**: `npm run governance`, linters, and review gates
 
 This document defines the architectural, visual, naming, API, accessibility, testing, and lifecycle standards that every component, directive, service, and token in NGXSMK must strictly follow.
 

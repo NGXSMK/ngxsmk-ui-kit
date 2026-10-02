@@ -16,7 +16,8 @@
     "darkMode": "Passer en mode sombre",
     "github": "npm",
     "getStarted": "Commencer",
-    "starOnGithub": "Star sur GitHub"
+    "starOnGithub": "Star sur GitHub",
+    "whatsapp": "Canal WhatsApp"
   },
   "search": {
     "placeholder": "Rechercher des composants (ex. Button, Kanban, Chat)…",
@@ -81,7 +82,9 @@
     "chatReplyPlaceholder": "Répondre…",
     "composerDrawerHint": "Joignez des fichiers, choisissez une invite ou invoquez un outil - puis envoyez.",
     "citationSnippet": "Le Transformer permet une parallélisation nettement plus importante que les modèles récurrents.",
-    "audioVoiceReply": "Réponse vocale"
+    "audioVoiceReply": "Réponse vocale",
+    "online": "En ligne",
+    "chatLayoutExampleMsg": "Posez-moi n'importe quelle question sur votre compte."
   },
   "enterprise": {
     "pageDesc": "Éléments de base robustes pour applications métier - tableaux, planificateurs, éditeurs et outils de données. Chacun est conscient du thème et prêt à se connecter à vos propres sources de données.",
@@ -169,7 +172,12 @@
     "roleViewer": "Lecteur",
     "teamPlatform": "Plateforme",
     "teamContent": "Contenu",
-    "teamDesign": "Conception"
+    "teamDesign": "Conception",
+    "fileTreeDesc": "Arborescence de répertoires style explorateur avec déploiement/réduction de dossiers et sélection de fichiers.",
+    "timelineDesc": "Suivi de chronologie verticale des jalons avec indicateurs de progression par étape.",
+    "codeEditorDesc": "Zone d'extrait de code avec numéros de ligne, en-tête de syntaxe et bouton de copie.",
+    "statTrendDesc": "Carte de tableau de bord KPI avec mini-graphique sparkline intégré et tendance métrique.",
+    "filterBuilderDesc": "Constructeur dynamique de conditions de filtre avec lignes Champ, Opérateur et Valeur."
   },
   "blog": {
     "pill": "Blog",
@@ -580,7 +588,8 @@
       "ai": "Interface IA",
       "utility": "Utilitaires et hooks",
       "other": "Autre"
-    }
+    },
+    "scrollTop": "Faire défiler vers le haut"
   },
   "iplayground": {
     "explorer": "Explorateur",
@@ -663,7 +672,11 @@
     "signal": "signal",
     "regular": "standard",
     "outputsEvents": "Sorties (événements)",
-    "thEvent": "Événement"
+    "thEvent": "Événement",
+    "code": "Code",
+    "copyCode": "Copier le code",
+    "copy": "Copier",
+    "copied": "Copié !"
   },
   "forms": {
     "intro": "Boutons, entrées, sélections et contrôles de formulaire riches. Chaque composant ci-dessous est en direct et interactif - essayez-les, puis révélez le code pour le copier.",
@@ -778,7 +791,11 @@
     "langAngular": "Angular",
     "langJavaScript": "JavaScript",
     "transferDesc": "Conteneur à double liste pour déplacer les éléments sélectionnés entre les listes source et cible.",
-    "signaturePadDesc": "Canevas numérique pour dessiner et exporter des signatures électroniques fluides."
+    "signaturePadDesc": "Canevas numérique pour dessiner et exporter des signatures électroniques fluides.",
+    "creditCardDesc": "Champ de saisie de carte de crédit à formatage automatique avec détection de marque et validation.",
+    "passwordStrengthDesc": "Évaluation de la sécurité du mot de passe en temps réel avec barre de force et liste d'exigences.",
+    "treeSelectDesc": "Sélecteur déroulant hiérarchique avec nœuds arborescents extensibles et sélection multiple.",
+    "selectCategories": "Sélectionner des catégories..."
   },
   "feedback": {
     "intro": "Composants qui communiquent statut, progression et réponses système - des alertes en ligne et bannières aux chargeurs, squelettes et points de présence.",
@@ -1324,6 +1341,14 @@
       "checkout": {
         "title": "Paiement multi-étapes & 2FA",
         "desc": "Flux de paiement e-commerce sécurisé avec vérification PIN à 2 facteurs."
+      },
+      "aiconsole": {
+        "title": "Console IA",
+        "desc": "Recette d'espace de travail d'agent avec fil d'Ariane, contrôles de modèle et ngxsmk-ai-chat — prêt à être relié à votre backend."
+      },
+      "opstable": {
+        "title": "Tableau de données d'opérations",
+        "desc": "Inventaire des opérations avec filtrage, sélection, redimensionnement des colonnes et réorganisation des en-têtes par glisser-déposer sur ngxsmk-data-table."
       }
     }
   },
@@ -1350,11 +1375,55 @@
     "ionicActive": "Thème Ionic actif"
   },
   "community": {
-    "title": "Communauté et contribution",
-    "subtitle": "Rejoignez notre communauté grandissante, posez des questions, proposez des fonctionnalités et partagez ce que vous avez construit.",
+    "title": "Communauté & contribution",
+    "subtitle": "Rejoignez notre communauté grandissante de développeurs Angular. Posez des questions, proposez des fonctionnalités et partagez vos réalisations.",
     "githubDiscussions": "Contact et retours",
     "githubDiscussionsDesc": "Des questions, des idées ou des bugs ? Contactez directement le mainteneur — chaque message aide à améliorer le kit.",
-    "joinDiscussion": "Envoyer un retour"
+    "joinDiscussion": "Envoyer un retour",
+    "pill": "Communauté",
+    "statOpen": "Open",
+    "statSource": "Source",
+    "statMit": "MIT",
+    "statLicense": "Licence",
+    "statComponents": "Composants",
+    "channelTitle": "Comment contribuer",
+    "channelSub": "Qu'il s'agisse d'un rapport de bogue, d'une idée de fonctionnalité, d'une amélioration de documentation ou d'une pull request — chaque contribution compte.",
+    "channelGithubTitle": "GitHub Issues",
+    "channelGithubDesc": "Signalez des bogues, demandez des fonctionnalités ou suggérez des améliorations. Chaque issue est traitée sous 48 heures.",
+    "channelGithubCta": "Ouvrir une issue",
+    "channelPrTitle": "Pull Requests",
+    "channelPrDesc": "Forkez, créez une branche et ouvrez une PR. Nous suivons Conventional Commits et révisons sous 48 heures.",
+    "channelPrCta": "Démarrer une PR",
+    "channelEmailTitle": "Envoyer un courriel au mainteneur",
+    "channelEmailDesc": "Pour des retours privés, divulgations de sécurité ou demandes de partenariat — contactez-nous directement.",
+    "channelEmailCta": "Envoyer un courriel",
+    "channelWhatsappTitle": "Canal WhatsApp",
+    "channelWhatsappDesc": "Rejoignez notre chaîne WhatsApp officielle pour suivre les dernières nouveautés, versions et annonces.",
+    "channelWhatsappCta": "Rejoindre le canal",
+    "channelDocsTitle": "Documentation",
+    "channelDocsDesc": "Vous avez repéré une coquille ou un guide imprécis ? Les PRs de documentation sont le moyen le plus rapide de contribuer — aucune révision de code complexe requise.",
+    "channelDocsCta": "Améliorer la documentation",
+    "guidelinesTitle": "Directives de contribution",
+    "guidelinesSub": "Suivez ces conventions pour préserver la cohérence du code et accélérer les révisions.",
+    "rule1Title": "Conventional commits",
+    "rule1Desc": "Utilisez les préfixes feat:, fix:, chore:, docs: ou refactor:. Le hook commitlint l'applique automatiquement.",
+    "rule2Title": "APIs basées exclusivement sur les Signals",
+    "rule2Desc": "Toutes les nouvelles entrées doivent utiliser input() / input.required(). Aucun décorateur @Input(). Les liaisons bidirectionnelles utilisent model().",
+    "rule3Title": "Composants autonomes (Standalone)",
+    "rule3Desc": "Chaque composant et directive doit être standalone: true. Aucun NgModule dans le nouveau code.",
+    "rule4Title": "Stylisation pilotée par tokens",
+    "rule4Desc": "Utilisez les propriétés personnalisées CSS --ngxsmk-*. Ne codez jamais en dur de couleurs, rayons ou espacements.",
+    "rule5Title": "Un composant par fichier",
+    "rule5Desc": "Gardez les composants concis et ciblés. Extrayez la logique partagée dans les utilitaires @ngxsmk/cdk.",
+    "rule6Title": "Exécuter toute la chaîne de vérification",
+    "rule6Desc": "Avant de pousser : npm run build, npm test, npm run lint, npm run format. Tous doivent réussir.",
+    "cocTitle": "Code de conduite",
+    "cocDesc": "Nous nous engageons à offrir une expérience accueillante et inclusive à tous. Soyez respectueux, constructif et bienveillant.",
+    "footerTitle": "Prêt à contribuer ?",
+    "footerSub": "Forkez le dépôt, choisissez un ticket étiqueté",
+    "footerGoodFirst": "good first issue",
+    "footerSub2": " et ouvrez une pull request. Nous révisons sous 48 heures.",
+    "footerCta": "Ouvrir sur GitHub"
   },
   "api": {
     "title": "Référence API",

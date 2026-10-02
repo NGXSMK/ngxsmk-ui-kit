@@ -1,6 +1,6 @@
 # NGXSMK UI Kit
 
-> Angular-first, MIT-licensed UI ecosystem: 257+ signals-native, zoneless
+> Angular-first, MIT-licensed UI ecosystem: 263+ signals-native, zoneless
 > standalone components with a universal design-token engine (CSS variables,
 > SCSS, Tailwind, StyleX, Tokens Studio export). MIT licensed, no paid tiers.
 > Current version: 3.0.0. Supports Angular 17.3 through 22.
@@ -99,6 +99,7 @@ Outputs:
 
 - Selector: `ngxsmk-alert-dialog`
 - Import from: `@ngxsmk/core/alert-dialog`
+- Confirm / cancel modal built on the native `<dialog>` element.
 
 Inputs:
 - `[(open)]`: boolean (default: `false`)
@@ -470,6 +471,17 @@ Outputs:
 Inputs:
 - `[cite]`: string (default: `''`)
 
+## NgxsmkBreadcrumb
+
+- Selector: `ngxsmk-breadcrumb`
+- Import from: `@ngxsmk/core/breadcrumb`
+- Composed breadcrumb trail. Prefer this over wiring sibling `ngxsmk-breadcrumb-item` nodes by hand.
+
+Inputs:
+- `[items]`: NgxsmkBreadcrumbCrumb[] (default: `[]`)
+- `[separator]`: string (default: `'/'`)
+- `[ariaLabel]`: string (default: `'Breadcrumb'`)
+
 ## NgxsmkBreadcrumbItem
 
 - Selector: `ngxsmk-breadcrumb-item`
@@ -829,6 +841,22 @@ Inputs:
 Outputs:
 - `(changed)`: emits `boolean`
 
+## NgxsmkChipGroup
+
+- Selector: `ngxsmk-chip-group`
+- Import from: `@ngxsmk/core/chip-group`
+- Toggleable chip group for single- or multi-select from a fixed option set. Prefer this over the deprecated `ngxsmk-selector`.
+
+Inputs:
+- `[options]`: NgxsmkChipGroupOption[] (required)
+- `[(value)]`: string[] (default: `[]`)
+- `[multiple]`: boolean (default: `true`)
+- `[disabled]`: boolean (default: `false`)
+- `[ariaLabel]`: string (default: `''`)
+
+Outputs:
+- `(changed)`: emits `string[]`
+
 ## NgxsmkCitation
 
 - Selector: `ngxsmk-citation`
@@ -842,11 +870,15 @@ Inputs:
 
 - Selector: `ngxsmk-citation-viewer`
 - Import from: `@ngxsmk/core/citation-viewer`
+- Single citation card or a stacked list of sources for AI answers. Pass one source via title/author/snippet, or multiple via `[sources]`.
 
 Inputs:
+- `[sources]`: NgxsmkCitationSource[] (default: `[]`)
 - `[title]`: string (default: `''`)
 - `[author]`: string (default: `''`)
 - `[snippet]`: string (default: `''`)
+- `[url]`: string (default: `''`)
+- `[showIndex]`: boolean (default: `true`)
 
 ## NgxsmkCode
 
@@ -860,9 +892,14 @@ Inputs:
 
 - Selector: `ngxsmk-code-block`
 - Import from: `@ngxsmk/core/code-block`
+- Code panel with copy control, language label, and optional streaming reveal for AI assistant UIs. Pass source via `[code]` (preferred) or project text.
 
 Inputs:
 - `[language]`: string (default: `''`)
+- `[code]`: string (default: `''`)
+- `[streaming]`: boolean (default: `false`)
+- `[streamChunk]`: number (default: `3`)
+- `[streamIntervalMs]`: number (default: `24`)
 
 ## NgxsmkCodeEditor
 
@@ -941,11 +978,13 @@ Outputs:
 
 - Selector: `ngxsmk-command-palette`
 - Import from: `@ngxsmk/core/command-palette`
+- Keyboard-first command palette (Ctrl/Cmd+K by default). Search, group, and select commands; emits `selected` and closes.
 
 Inputs:
 - `[commands]`: CommandItem[] (default: `[]`)
 - `[triggerKey]`: string (default: `'k'`)
 - `[placeholder]`: string (default: `'Type a command or search...'`)
+- `[(open)]`: boolean (default: `false`)
 
 Outputs:
 - `(selected)`: emits `CommandItem`
@@ -1017,6 +1056,7 @@ Inputs:
 
 - Selector: `ngxsmk-data-table`
 - Import from: `@ngxsmk/core/data-table`
+- Paginated, filterable data table built on `ngxsmk-table`.
 
 Inputs:
 - `[columns]`: NgxsmkTableColumn[] (default: `[]`)
@@ -1027,10 +1067,25 @@ Inputs:
 - `[loading]`: boolean (default: `false`)
 - `[sortable]`: boolean (default: `false`)
 - `[striped]`: boolean (default: `false`)
+- `[serverMode]`: boolean (default: `false`)
+- `[totalItems]`: number (default: `0`)
+- `[selectable]`: boolean (default: `false`)
+- `[resizable]`: boolean (default: `false`)
+- `[reorderable]`: boolean (default: `false`)
+- `[columnFilterable]`: boolean (default: `false`)
+- `[virtual]`: boolean (default: `false`)
+- `[virtualHeight]`: string (default: `'24rem'`)
+- `[rowHeight]`: number (default: `40`)
+- `[rowKey]`: string (default: `'id'`)
+- `[(selectedKeys)]`: (string | number)[] (default: `[]`)
+- `[(columnWidths)]`: Record<string, string> (default: `{}`)
+- `[(columnFilters)]`: Record<string, string> (default: `{}`)
 
 Outputs:
 - `(pageChange)`: emits `{ page: number; pageSize: number }`
 - `(sortChange)`: emits `{ field: string; dir: 'asc' | 'desc' }`
+- `(selectionChange)`: emits `(string | number)[]`
+- `(columnsChange)`: emits `NgxsmkTableColumn[]`
 
 ## NgxsmkDatePicker
 
@@ -1044,6 +1099,7 @@ Inputs:
 - `[placeholder]`: string (default: `''`)
 - `[disabled]`: boolean (default: `false`)
 - `[id]`: unknown (default: `ngxsmkUniqueId('ngxsmk-date-picker')`)
+- `[ariaLabel]`: string | null (default: `null`)
 - `[(ariaInvalid)]`: boolean (default: `false`)
 - `[(ariaDescribedby)]`: string | null (default: `null`)
 
@@ -1137,12 +1193,14 @@ Inputs:
 
 - Selector: `ngxsmk-empty-state`
 - Import from: `@ngxsmk/core/empty-state`
+- Centered empty / error / success placeholder with optional projected icon and actions. Prefer projecting SVG via `[ngxsmkEmptyIcon]` over the deprecated `icon` HTML string.
 
 Inputs:
 - `[icon]`: string (default: `''`)
 - `[title]`: string (default: `''`)
 - `[description]`: string (default: `''`)
 - `[variant]`: NgxsmkEmptyStateVariant (default: `'default'`)
+- `[hideLegacyIcon]`: boolean (default: `false`)
 
 ## NgxsmkExpandingArrowButton
 
@@ -1350,10 +1408,22 @@ Inputs:
 
 - Selector: `ngxsmk-hover-card`
 - Import from: `@ngxsmk/core/hover-card`
+- Hover / focus card that reveals rich content next to a trigger.
 
 Inputs:
 - `[openDelay]`: number (default: `300`)
 - `[closeDelay]`: number (default: `150`)
+
+## NgxsmkIcon
+
+- Selector: `ngxsmk-icon`
+- Import from: `@ngxsmk/core/icon`
+- Inline icon sized by `--ngxsmk-icon-*` tokens. Use a built-in `name` or project custom SVG.
+
+Inputs:
+- `[name]`: NgxsmkIconName | '' (default: `''`)
+- `[size]`: NgxsmkIconSize (default: `'md'`)
+- `[ariaLabel]`: string (default: `''`)
 
 ## NgxsmkImageCropper
 
@@ -1411,11 +1481,12 @@ Inputs:
 - `[showClear]`: boolean (default: `false`)
 - `[showCounter]`: boolean (default: `false`)
 - `[showStatusIcon]`: boolean (default: `false`)
+- `[showCopy]`: boolean (default: `false`)
 - `[fullWidth]`: boolean (default: `true`)
 - `[loading]`: boolean (default: `false`)
 - `[floatingLabel]`: boolean (default: `false`)
 - `[addons]`: InputGroupAddon[] (default: `[]`)
-- `[inputType]`: InputGroupInputType | 'password' (default: `'text'`)
+- `[inputType]`: InputGroupInputType | 'password' | undefined (default: `undefined`)
 - `[(value)]`: string (default: `''`)
 - `[id]`: unknown (default: `ngxsmkUniqueId('ngxsmk-input-group')`)
 - `[(ariaInvalid)]`: boolean (default: `false`)
@@ -1426,12 +1497,27 @@ Outputs:
 - `(blurred)`: emits `void`
 - `(cleared)`: emits `void`
 - `(valueChanged)`: emits `string`
+- `(copiedChange)`: emits `string`
 - `(validationChanged)`: emits `{ status: ValidationStatus; message: string }`
 
 ## NgxsmkInputGroupText
 
 - Selector: `[ngxsmkInputGroupText], ngxsmk-input-group-text`
 - Import from: `@ngxsmk/core/input-group-text`
+
+## NgxsmkInputMask
+
+- Selector: `input[ngxsmkInputMask]`
+- Import from: `@ngxsmk/core/input-mask`
+- Mask pattern tokens: - `0` — digit - `A` — letter - `*` — alphanumeric - any other char — literal
+
+Inputs:
+- `[mask]`: string (required)
+- `[(value)]`: string (default: `''`)
+- `[(rawValue)]`: string (default: `''`)
+- `[disabled]`: boolean (default: `false`)
+- `[inputMode]`: string (default: `'text'`)
+- `[autocomplete]`: string (default: `'off'`)
 
 ## NgxsmkIntersectionObserver
 
@@ -1539,6 +1625,7 @@ Inputs:
 
 - Selector: `ngxsmk-lightbox`
 - Import from: `@ngxsmk/core/lightbox`
+- Full-viewport image gallery overlay. Call `show(index)` to open at a specific image (projected previews should wire their own clicks). The overlay portals to `document.body` so showcase overflow cannot clip it.
 
 Inputs:
 - `[images]`: NgxsmkLightboxImage[] (required)
@@ -1628,6 +1715,16 @@ Inputs:
 
 Inputs:
 - `[entries]`: { key: string; value: string }[] (required)
+
+## NgxsmkMenubar
+
+- Selector: `ngxsmk-menubar`
+- Import from: `@ngxsmk/core/menubar`
+- Horizontal application menubar with nested dropdowns.
+
+Inputs:
+- `[items]`: NgxsmkMenubarItem[] (default: `[]`)
+- `[(hoverOpen)]`: boolean (default: `true`)
 
 ## NgxsmkMetadataListItem
 
@@ -1726,6 +1823,7 @@ Outputs:
 
 - Selector: `ngxsmk-multi-select`
 - Import from: `@ngxsmk/core/multi-select`
+- Combobox multi-select with removable tags, listbox keyboard nav, and form CVA.
 
 Inputs:
 - `[options]`: NgxsmkMultiSelectOption[] (required)
@@ -2302,16 +2400,19 @@ Outputs:
 
 - Selector: `ngxsmk-sheet`
 - Import from: `@ngxsmk/core/sheet`
+- Slide-over panel (drawer) from the left, right, or bottom edge. Portals to `document.body` so fixed positioning is never clipped by ancestor overflow / transforms (e.g. demo showcase scroll regions).
 
 Inputs:
 - `[(open)]`: boolean (default: `false`)
 - `[side]`: NgxsmkSheetSide (default: `'right'`)
 - `[title]`: string (default: `''`)
+- `[dismissible]`: boolean (default: `true`)
 
 ## NgxsmkSideNav
 
 - Selector: `ngxsmk-side-nav`
 - Import from: `@ngxsmk/core/side-nav`
+- Collapsible app sidebar shell. Project sections, headings, and items; toggle via `NgxsmkSideNavCollapseButton` or `toggle()`.
 
 Outputs:
 - `(collapsedChange)`: emits `boolean`
@@ -2355,7 +2456,7 @@ Outputs:
 Inputs:
 - `[width]`: number (default: `400`)
 - `[height]`: number (default: `180`)
-- `[penColor]`: string (default: `'#09090b'`)
+- `[penColor]`: string (default: `'#6366f1'`)
 - `[penWidth]`: number (default: `2`)
 - `[disabled]`: boolean (default: `false`)
 - `[ariaLabel]`: string (default: `'Digital signature pad canvas'`)
@@ -2382,6 +2483,7 @@ Inputs:
 
 - Selector: `ngxsmk-slider`
 - Import from: `@ngxsmk/core/slider`
+- Native range slider styled with design tokens. Supports CVA and form-field.
 
 Inputs:
 - `[min]`: number (default: `0`)
@@ -2494,11 +2596,13 @@ Inputs:
 
 - Selector: `ngxsmk-stat`
 - Import from: `@ngxsmk/core/stat`
+- Compact metric / KPI tile with optional trend arrow and delta text.
 
 Inputs:
 - `[value]`: string (default: `''`)
 - `[label]`: string (default: `''`)
 - `[trend]`: NgxsmkStatTrend (default: `'flat'`)
+- `[delta]`: string (default: `''`)
 - `[icon]`: string (default: `''`)
 
 ## NgxsmkStatTrendCard
@@ -2583,6 +2687,7 @@ Inputs:
 
 - Selector: `ngxsmk-table`
 - Import from: `@ngxsmk/core/table`
+- Lightweight data table with optional sort, column resize, and drag-reorder.
 
 Inputs:
 - `[columns]`: NgxsmkTableColumn[] (default: `[]`)
@@ -2590,11 +2695,16 @@ Inputs:
 - `[striped]`: boolean (default: `false`)
 - `[responsive]`: boolean (default: `false`)
 - `[sortable]`: boolean (default: `false`)
+- `[resizable]`: boolean (default: `false`)
+- `[reorderable]`: boolean (default: `false`)
 - `[sortField]`: string (default: `''`)
 - `[sortDir]`: 'asc' | 'desc' (default: `'asc'`)
+- `[columnWidths]`: Record<string, string> (default: `{}`)
 
 Outputs:
 - `(sortChange)`: emits `string`
+- `(columnResize)`: emits `{ key: string; width: string }`
+- `(columnReorder)`: emits `NgxsmkTableColumn[]`
 
 ## NgxsmkTableCell
 
@@ -2701,6 +2811,26 @@ Inputs:
 - `[size]`: 'sm' | 'md' | 'lg' | 'xl' (default: `'md'`)
 - `[shape]`: 'square' | 'circle' (default: `'square'`)
 
+## NgxsmkTimePicker
+
+- Selector: `ngxsmk-time-picker`
+- Import from: `@ngxsmk/core/time-picker`
+- Time-only form control (`HH:MM` / `HH:MM:SS`) with form-field + CVA support.
+
+Inputs:
+- `[(value)]`: string (default: `''`)
+- `[min]`: string (default: `''`)
+- `[max]`: string (default: `''`)
+- `[step]`: string (default: `'60'`)
+- `[placeholder]`: string (default: `''`)
+- `[disabled]`: boolean (default: `false`)
+- `[id]`: unknown (default: `ngxsmkUniqueId('ngxsmk-time-picker')`)
+- `[(ariaInvalid)]`: boolean (default: `false`)
+- `[(ariaDescribedby)]`: string | null (default: `null`)
+
+Outputs:
+- `(changed)`: emits `string`
+
 ## NgxsmkTimelineGantt
 
 - Selector: `ngxsmk-timeline-gantt`
@@ -2785,11 +2915,16 @@ Inputs:
 
 - Selector: `ngxsmk-tokenizer`
 - Import from: `@ngxsmk/core/tokenizer`
+- Free-form tags / chips input. Press Enter (or a delimiter) to commit a token; Backspace on an empty input removes the last token.
 
 Inputs:
 - `[(tokens)]`: string[] (default: `[]`)
 - `[placeholder]`: string (default: `'Type and press Enter...'`)
 - `[disabled]`: boolean (default: `false`)
+- `[maxTokens]`: number (default: `0`)
+- `[delimiters]`: string (default: `',;'`)
+- `[ariaLabel]`: string (default: `''`)
+- `[allowDuplicates]`: boolean (default: `false`)
 
 Outputs:
 - `(changed)`: emits `string[]`
@@ -2798,6 +2933,7 @@ Outputs:
 
 - Selector: `ngxsmk-tool-call-viewer`
 - Import from: `@ngxsmk/core/tool-call-viewer`
+- Expandable list of AI tool / function calls with status and JSON args/results.
 
 Inputs:
 - `[calls]`: ToolCall[] (required)

@@ -101,7 +101,7 @@ export class NgxsmkTab {
 
     .ngxsmk-tabs__list {
       display: flex;
-      gap: var(--ngxsmk-space-1);
+      gap: var(--ngxsmk-tabs-gap, var(--ngxsmk-space-1));
       border-bottom: 1px solid var(--ngxsmk-color-outline);
     }
 
@@ -123,7 +123,7 @@ export class NgxsmkTab {
       padding: var(--ngxsmk-space-2) var(--ngxsmk-space-4);
       margin-bottom: -1px;
       border: none;
-      border-bottom: 2px solid transparent;
+      border-bottom: var(--ngxsmk-tabs-indicator, 2px) solid transparent;
       background: transparent;
       color: var(--ngxsmk-color-on-surface-variant);
       font-family: inherit;
@@ -140,7 +140,7 @@ export class NgxsmkTab {
       margin-bottom: 0;
       margin-right: -1px;
       border-bottom: none;
-      border-right: 2px solid transparent;
+      border-right: var(--ngxsmk-tabs-indicator, 2px) solid transparent;
       text-align: left;
     }
 

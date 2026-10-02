@@ -14,6 +14,8 @@
     "dist",
     "collection.json",
     "migration.json",
+    "src/ng-add/schema.json",
+    "src/scaffold/schema.json",
     "README.md"
   ],
   "scripts": {

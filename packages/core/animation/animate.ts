@@ -133,7 +133,7 @@ interface MotionModule {
     keyframes: Record<string, string | number>,
     options?: Record<string, unknown>,
   ) => { finished: Promise<void>; stop: () => void; cancel: () => void };
-  style: (el: Element, props: Record<string, string | number>) => void;
+  style?: (el: Element, props: Record<string, string | number>) => void;
   stagger: (num: number, options?: Record<string, unknown>) => number;
   hover: (
     el: Element | string,
@@ -186,12 +186,26 @@ export const prefersReducedMotion = (): boolean =>
   typeof window !== 'undefined' &&
   window.matchMedia?.('(prefers-reduced-motion: reduce)').matches === true;
 
-function applyStyles(el: HTMLElement, styles: Record<string, string | number>): void {
+export function applyStyles(el: HTMLElement, styles: Record<string, string | number>): void {
+  const transforms: string[] = [];
   for (const [key, value] of Object.entries(styles)) {
-    el.style.setProperty(
-      key.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`),
-      String(value),
-    );
+    if (key === 'x') {
+      transforms.push(`translateX(${typeof value === 'number' ? `${value}px` : value})`);
+    } else if (key === 'y') {
+      transforms.push(`translateY(${typeof value === 'number' ? `${value}px` : value})`);
+    } else if (key === 'scale') {
+      transforms.push(`scale(${value})`);
+    } else if (key === 'rotate') {
+      transforms.push(`rotate(${typeof value === 'number' ? `${value}deg` : value})`);
+    } else {
+      el.style.setProperty(
+        key.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`),
+        String(value),
+      );
+    }
+  }
+  if (transforms.length > 0) {
+    el.style.transform = transforms.join(' ');
   }
 }
 
@@ -289,7 +303,10 @@ export async function playEnter(el: HTMLElement, state?: NgxsmkMotionState): Pro
   }
 
   if (state.initial) {
-    motion.style(el, state.initial);
+    applyStyles(el, state.initial);
+    if (typeof motion.style === 'function') {
+      motion.style(el, state.initial);
+    }
   }
 
   let options = toMotionOptions(state.transition) ?? {};
@@ -300,7 +317,22 @@ export async function playEnter(el: HTMLElement, state?: NgxsmkMotionState): Pro
 
   options = mergePerProperty(options, state.perProperty);
 
-  await motion.animate(el, state.animate, options).finished;
+  const keyframes: Record<string, string | number | (string | number)[]> = {};
+  for (const [key, value] of Object.entries(state.animate)) {
+    if (state.initial && key in state.initial) {
+      keyframes[key] = [state.initial[key], value];
+    } else {
+      keyframes[key] = value;
+    }
+  }
+
+  try {
+    await motion.animate(el, keyframes as Record<string, string | number>, options).finished;
+  } catch {
+    // Graceful fallback if WAAPI animation was aborted (e.g. document hidden)
+  } finally {
+    applyStyles(el, state.animate);
+  }
 }
 
 /** Animate an element out (exit). Resolves when the animation finishes. */
@@ -311,7 +343,13 @@ export async function playExit(el: HTMLElement, state?: NgxsmkMotionState): Prom
   if (!motion) return;
 
   const options = toMotionOptions(state.transition) ?? {};
-  await motion.animate(el, state.exit, options).finished;
+  try {
+    await motion.animate(el, state.exit, options).finished;
+  } catch {
+    // Graceful fallback if WAAPI animation was aborted
+  } finally {
+    applyStyles(el, state.exit);
+  }
 }
 
 /**

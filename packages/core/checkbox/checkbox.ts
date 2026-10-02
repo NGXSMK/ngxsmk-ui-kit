@@ -96,11 +96,11 @@ import { CvaBase } from '@ngxsmk/cdk/cva-base';
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 1.125rem;
-      height: 1.125rem;
+      width: var(--ngxsmk-checkbox-size, 1.125rem);
+      height: var(--ngxsmk-checkbox-size, 1.125rem);
       flex-shrink: 0;
-      border: 1.5px solid var(--ngxsmk-color-outline-strong);
-      border-radius: var(--ngxsmk-radius-sm);
+      border: 1.5px solid var(--ngxsmk-checkbox-border, var(--ngxsmk-color-outline-strong));
+      border-radius: var(--ngxsmk-checkbox-radius, var(--ngxsmk-radius-sm));
       background: var(--ngxsmk-color-surface);
       color: var(--ngxsmk-color-on-primary);
       transition:
@@ -118,8 +118,8 @@ import { CvaBase } from '@ngxsmk/cdk/cva-base';
 
     :host([data-checked]) .ngxsmk-checkbox__box,
     .ngxsmk-checkbox__native:indeterminate + .ngxsmk-checkbox__box {
-      background: var(--ngxsmk-color-primary);
-      border-color: var(--ngxsmk-color-primary);
+      background: var(--ngxsmk-checkbox-checked-bg, var(--ngxsmk-color-primary));
+      border-color: var(--ngxsmk-checkbox-checked-bg, var(--ngxsmk-color-primary));
     }
 
     :host([data-checked]) .ngxsmk-checkbox__box svg,

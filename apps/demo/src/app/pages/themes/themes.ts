@@ -1,7 +1,6 @@
 import { NgxsmkButton } from '@ngxsmk/core/button';
 import { NgxsmkHeading } from '@ngxsmk/core/heading';
 import { NgxsmkText } from '@ngxsmk/core/text';
-import { NgxsmkBadge } from '@ngxsmk/core/badge';
 import { Component, signal, inject, computed } from '@angular/core';
 import { NgxsmkThemeService, presets } from '@ngxsmk/theme';
 import { NgxsmkThemeBuilder } from '@ngxsmk/core/theme-builder';
@@ -16,7 +15,6 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     NgxsmkButton,
     NgxsmkHeading,
     NgxsmkText,
-    NgxsmkBadge,
     NgxsmkThemeBuilder,
     ShowcaseExample,
     TranslatePipe,
@@ -28,11 +26,16 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
       <!-- HERO -->
       <header class="ngxsmk-page__hero">
         <div class="ngxsmk-page__hero-content">
-          <ngxsmk-badge variant="primary">Theme Engine</ngxsmk-badge>
-          <ngxsmk-heading level="h1">{{ 'themes.title' | translate }}</ngxsmk-heading>
-          <ngxsmk-text variant="body" class="ngxsmk-page__sub">{{
+          <div class="version-badge">
+            <span class="pulse-dot"></span>
+            <span class="badge-tag">Universal Tokens</span>
+            <span class="badge-divider">·</span>
+            <span class="badge-text">Real-Time Theme Engine</span>
+          </div>
+          <h1 class="themes-hero-title">Customizable <span class="highlight">Design System</span></h1>
+          <p class="ngxsmk-page__sub">{{
             'themes.subtitle' | translate
-          }}</ngxsmk-text>
+          }}</p>
           <div class="ngxsmk-page__hero-stats">
             <div class="ngxsmk-stat">
               <span class="ngxsmk-stat__value">150+</span>
@@ -317,48 +320,68 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
   styles: `
     :host {
       display: block;
-      background-color: var(--ngxsmk-color-background, #fafafa);
-      background-image: radial-gradient(var(--ngxsmk-color-outline, #e4e4e7) 1px, transparent 1px);
-      background-size: 24px 24px;
+      background: var(--ngxsmk-color-background, #fafafa);
       min-height: 100%;
     }
 
     .ngxsmk-page {
-      max-width: 1200px;
+      max-width: 1160px;
       margin: 0 auto;
-      padding: var(--ngxsmk-space-8, 2rem) var(--ngxsmk-space-6, 1.5rem);
+      padding: clamp(2rem, 5vw, 3rem) clamp(1.25rem, 4vw, 2rem) clamp(3rem, 7vw, 4.5rem);
     }
 
     /* HERO */
     .ngxsmk-page__hero {
+      position: relative;
       text-align: center;
-      padding: var(--ngxsmk-space-12, 3rem) 0 var(--ngxsmk-space-10, 2.5rem);
+      padding: clamp(2.5rem, 6vw, 4rem) 0 clamp(2rem, 4vw, 3rem);
+    }
+
+    .ngxsmk-page__hero::before {
+      content: '';
+      position: absolute;
+      inset: -10% -25% auto;
+      height: 14rem;
+      pointer-events: none;
+      background: radial-gradient(
+        50% 60% at 50% 0%,
+        color-mix(in srgb, var(--ngxsmk-color-primary) 12%, transparent),
+        transparent 72%
+      );
     }
 
     .ngxsmk-page__hero-content {
-      max-width: 640px;
+      position: relative;
+      max-width: 44rem;
       margin: 0 auto;
     }
 
-    .ngxsmk-page__hero h1,
-    .ngxsmk-page__hero ngxsmk-heading {
-      font-size: var(--ngxsmk-text-headline-lg-size);
-      font-weight: 700;
-      margin: var(--ngxsmk-space-3, 0.75rem) 0 var(--ngxsmk-space-3, 0.75rem);
-      color: var(--ngxsmk-color-on-surface, #09090b);
+    .themes-hero-title {
+      font-family: var(--font-family-display, sans-serif);
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 750;
+      letter-spacing: -0.035em;
+      line-height: 1.12;
+      margin: 0.5rem 0 1rem;
+      color: var(--color-text-main, #0f172a);
     }
 
     .ngxsmk-page__sub {
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
-      margin: 0 0 var(--ngxsmk-space-6, 1.5rem);
-      font-size: var(--ngxsmk-text-body-lg-size);
-      line-height: 1.6;
+      color: var(--color-text-muted, #334155);
+      margin: 0 0 1.75rem;
+      font-size: 1.0625rem;
+      line-height: 1.65;
     }
 
     .ngxsmk-page__hero-stats {
       display: flex;
       justify-content: center;
-      gap: var(--ngxsmk-space-8, 2rem);
+      gap: clamp(1.25rem, 4vw, 2.5rem);
+      flex-wrap: wrap;
+      max-width: 28rem;
+      margin: 0 auto;
+      padding-top: 1rem;
+      border-top: 1px solid var(--color-border, #e2e8f0);
     }
 
     .ngxsmk-stat {
@@ -369,36 +392,53 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     }
 
     .ngxsmk-stat__value {
-      font-family: 'Outfit', var(--ngxsmk-font-sans, system-ui), sans-serif;
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--ngxsmk-color-primary, #7c3aed);
+      font-family: var(--font-family-display, sans-serif);
+      font-size: 1.35rem;
+      font-weight: 750;
+      letter-spacing: -0.03em;
+      color: var(--color-text-main, #0f172a);
     }
 
     .ngxsmk-stat__label {
-      font-size: var(--ngxsmk-text-body-sm-size);
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-text-muted, #334155);
     }
 
     /* SECTIONS */
     .ngxsmk-section {
-      margin-bottom: var(--ngxsmk-space-10, 2.5rem);
+      margin-bottom: 2rem;
+      background: var(--color-bg-card, #ffffff);
+      border: 1px solid var(--color-border, #e2e8f0);
+      border-radius: var(--radius-xl, 22px);
+      padding: clamp(1.5rem, 3.5vw, 2.25rem);
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .ngxsmk-section:hover {
+      border-color: rgba(99, 102, 241, 0.35);
+      box-shadow: var(--shadow-md);
     }
 
     .ngxsmk-section__header {
-      margin-bottom: var(--ngxsmk-space-5, 1.25rem);
+      margin-bottom: 1.5rem;
     }
 
     .ngxsmk-section__header ngxsmk-heading {
-      font-size: var(--ngxsmk-text-headline-sm-size);
+      font-family: var(--font-family-display, sans-serif);
+      font-size: 1.35rem;
       font-weight: 700;
-      margin: 0 0 var(--ngxsmk-space-2, 0.5rem);
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      letter-spacing: -0.02em;
+      margin: 0 0 0.4rem;
+      color: var(--color-text-main, #0f172a);
     }
 
     .ngxsmk-section__desc {
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
-      font-size: var(--ngxsmk-text-body-md-size);
+      color: var(--color-text-muted, #334155);
+      font-size: 0.95rem;
       line-height: 1.6;
       margin: 0;
     }
@@ -407,87 +447,93 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     .ngxsmk-preset-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(min(14rem, 100%), 1fr));
-      gap: var(--ngxsmk-space-4, 1rem);
+      gap: 1rem;
     }
 
     .ngxsmk-preset-card {
       display: flex;
       flex-direction: column;
-      gap: var(--ngxsmk-space-3, 0.75rem);
-      padding: var(--ngxsmk-space-4, 1rem);
-      border: 2px solid var(--ngxsmk-color-outline, #e4e4e7);
-      border-radius: var(--ngxsmk-radius-lg, 0.5rem);
-      background: var(--ngxsmk-color-surface, #ffffff);
+      gap: 0.75rem;
+      padding: 1.15rem;
+      border: 1px solid var(--color-border, #e2e8f0);
+      border-radius: var(--radius-lg, 16px);
+      background: var(--color-bg-elevated, #f1f5f9);
       cursor: pointer;
       transition:
-        border-color 0.15s,
-        box-shadow 0.15s;
+        border-color 0.18s ease,
+        transform 0.18s ease,
+        box-shadow 0.18s ease;
     }
 
     .ngxsmk-preset-card:hover {
-      border-color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      border-color: rgba(99, 102, 241, 0.4);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
     }
 
     .ngxsmk-preset-card--active {
-      border-color: var(--ngxsmk-color-primary, #7c3aed);
-      box-shadow: 0 0 0 3px
-        color-mix(in srgb, var(--ngxsmk-color-primary, #7c3aed) 15%, transparent);
+      border-color: var(--brand-primary, #6366f1);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+      background: var(--color-bg-card, #ffffff);
     }
 
     .ngxsmk-preset-card__swatches {
       display: flex;
-      gap: var(--ngxsmk-space-2, 0.5rem);
+      gap: 0.5rem;
     }
 
     .ngxsmk-preset-card__swatch {
       flex: 1;
       height: 2.5rem;
-      border-radius: var(--ngxsmk-radius-md, 0.375rem);
+      border-radius: var(--radius-sm, 8px);
     }
 
     .ngxsmk-preset-card__name {
-      font-size: var(--ngxsmk-text-body-sm-size);
-      font-weight: 600;
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      font-family: var(--font-family-display, sans-serif);
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--color-text-main, #0f172a);
       text-transform: capitalize;
     }
 
     /* MODE TOGGLE */
     .ngxsmk-mode-toggle {
       display: flex;
-      gap: var(--ngxsmk-space-2, 0.5rem);
-      background: var(--ngxsmk-color-surface-variant, #f4f4f5);
-      padding: var(--ngxsmk-space-1, 0.25rem);
-      border-radius: var(--ngxsmk-radius-lg, 0.5rem);
+      gap: 4px;
+      background: var(--color-bg-elevated, #f1f5f9);
+      border: 1px solid var(--color-border, #e2e8f0);
+      padding: 3px;
+      border-radius: var(--radius-pill, 9999px);
       width: fit-content;
     }
 
     .ngxsmk-mode-btn {
       display: inline-flex;
       align-items: center;
-      gap: var(--ngxsmk-space-2, 0.5rem);
-      padding: var(--ngxsmk-space-2, 0.5rem) var(--ngxsmk-space-4, 1rem);
+      gap: 0.5rem;
+      padding: 0.45rem 1.15rem;
       border: none;
-      border-radius: var(--ngxsmk-radius-md, 0.375rem);
+      border-radius: var(--radius-pill, 9999px);
       background: transparent;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
-      font-family: inherit;
-      font-size: var(--ngxsmk-text-body-sm-size);
+      color: var(--color-text-muted, #334155);
+      font-family: var(--font-family-body, sans-serif);
+      font-size: 0.82rem;
       font-weight: 600;
       cursor: pointer;
       transition:
         background 0.15s,
-        color 0.15s;
+        color 0.15s,
+        box-shadow 0.15s;
     }
 
     .ngxsmk-mode-btn:hover {
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      color: var(--color-text-main, #0f172a);
     }
 
     .ngxsmk-mode-btn--active {
-      background: var(--ngxsmk-color-surface, #ffffff);
-      color: var(--ngxsmk-color-on-surface, #09090b);
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+      background: var(--brand-primary, #6366f1);
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(99, 102, 241, 0.35);
     }
 
     /* COLOR PALETTE */
@@ -530,7 +576,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     .ngxsmk-swatch__token {
       font-family: var(--ngxsmk-font-mono);
       font-size: 0.65rem;
-      color: var(--ngxsmk-color-primary, #7c3aed);
+      color: var(--ngxsmk-color-primary);
     }
 
     /* TYPOGRAPHY */
@@ -567,7 +613,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     }
 
     .ngxsmk-type-item__label {
-      font-family: 'Outfit', var(--ngxsmk-font-sans, system-ui), sans-serif;
+      font-family: var(--ngxsmk-font-sans), system-ui, sans-serif;
       font-weight: 600;
       color: var(--ngxsmk-color-on-surface, #09090b);
     }
@@ -575,7 +621,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     .ngxsmk-type-item__token {
       font-family: var(--ngxsmk-font-mono);
       font-size: 0.7rem;
-      color: var(--ngxsmk-color-primary, #7c3aed);
+      color: var(--ngxsmk-color-primary);
       flex-shrink: 0;
     }
 
@@ -594,7 +640,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
 
     .ngxsmk-spacing-item__bar {
       height: 1.25rem;
-      background: var(--ngxsmk-color-primary, #7c3aed);
+      background: var(--ngxsmk-color-primary);
       border-radius: var(--ngxsmk-radius-sm, 0.25rem);
       opacity: 0.7;
       min-width: 2px;
@@ -636,8 +682,8 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     .ngxsmk-radius-item__box {
       width: 4rem;
       height: 4rem;
-      border: 2px solid var(--ngxsmk-color-primary, #7c3aed);
-      background: color-mix(in srgb, var(--ngxsmk-color-primary, #7c3aed) 8%, transparent);
+      border: 2px solid var(--ngxsmk-color-primary);
+      background: color-mix(in srgb, var(--ngxsmk-color-primary) 8%, transparent);
     }
 
     .ngxsmk-radius-item__name {
@@ -696,8 +742,8 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     .ngxsmk-token-preview--radius {
       width: 2rem;
       height: 2rem;
-      border: 2px solid var(--ngxsmk-color-primary, #7c3aed);
-      background: color-mix(in srgb, var(--ngxsmk-color-primary, #7c3aed) 8%, transparent);
+      border: 2px solid var(--ngxsmk-color-primary);
+      background: color-mix(in srgb, var(--ngxsmk-color-primary) 8%, transparent);
     }
 
     /* MISC */
@@ -752,15 +798,14 @@ export class ThemesPage {
   protected readonly theme = inject(NgxsmkThemeService);
   protected readonly presets = presets;
   protected readonly ionicApplied = signal(false);
-  protected readonly activePreset = signal('violet');
+  protected readonly activePreset = signal('ink');
   protected readonly currentMode = signal<'light' | 'dark' | 'system'>('light');
 
   protected readonly presetList = [
-    { name: 'violet', colors: ['#7c3aed', '#ede9fe', '#4c1d95', '#f5f3ff'] },
+    { name: 'ink', colors: ['#0d9488', '#f6f7f8', '#12141a', '#ebedf0'] },
     { name: 'emerald', colors: ['#10b981', '#d1fae5', '#065f40', '#ecfdf5'] },
+    { name: 'violet', colors: ['#7c3aed', '#ede9fe', '#4c1d95', '#f5f3ff'] },
     { name: 'rose', colors: ['#f43f5e', '#ffe4e6', '#9f1239', '#fff1f2'] },
-    { name: 'amber', colors: ['#f59e0b', '#fef3c7', '#92400e', '#fffbeb'] },
-    { name: 'blue', colors: ['#3b82f6', '#dbeafe', '#1e40af', '#eff6ff'] },
     { name: 'neutral', colors: ['#71717a', '#f4f4f5', '#27272a', '#fafafa'] },
   ];
 

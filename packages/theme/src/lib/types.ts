@@ -80,6 +80,17 @@ export interface ThemeConfig {
   };
   /** Global corner rounding character of the theme. Default `md`. */
   borderRadius?: RadiusPreset;
+  /**
+   * Partial override of the radius ladder (`sm`/`md`/`lg`/…). Merged over
+   * package defaults so presets like Ink can sharpen corners without
+   * changing Classic (`emerald`) consumers.
+   */
+  radiusScale?: Partial<Record<string, string>>;
+  /**
+   * Partial override of the shadow ladder. Same consumer-safety pattern as
+   * `radiusScale`.
+   */
+  shadowScale?: Partial<Record<string, string>>;
   /** How dark mode is activated. Default: `class` (a `.dark` class on `<html>`). */
   darkMode?: {
     strategy?: DarkModeStrategy;
@@ -89,6 +100,8 @@ export interface ThemeConfig {
   /**
    * Raw semantic-role token overrides merged into the generated output,
    * e.g. `{ dark: { '--ngxsmk-color-primary': '#FAFAFA' } }`.
+   * Light overrides also win over static `:root` tokens (fonts already set,
+   * hover-lift, etc.).
    */
   overrides?: {
     light?: Record<string, string>;

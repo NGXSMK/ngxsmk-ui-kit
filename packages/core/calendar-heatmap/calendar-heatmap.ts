@@ -67,6 +67,9 @@ export interface HeatmapValue {
       border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--ngxsmk-radius-md, 0.5rem);
       background: var(--ngxsmk-color-surface);
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
     .ngxsmk-heatmap__grid {
@@ -74,6 +77,7 @@ export interface HeatmapValue {
       grid-template-rows: repeat(7, 12px);
       grid-auto-flow: column;
       gap: 3px;
+      min-width: max-content;
     }
 
     .ngxsmk-heatmap__cell {
@@ -90,19 +94,19 @@ export interface HeatmapValue {
     }
 
     .ngxsmk-heatmap__cell[data-level='0'] {
-      background: var(--ngxsmk-color-surface-variant);
+      background: var(--ngxsmk-color-surface-variant, #e2e8f0);
     }
     .ngxsmk-heatmap__cell[data-level='1'] {
-      background: var(--ngxsmk-heatmap-level-1);
+      background: var(--ngxsmk-heatmap-level-1, #86efac);
     }
     .ngxsmk-heatmap__cell[data-level='2'] {
-      background: var(--ngxsmk-heatmap-level-2);
+      background: var(--ngxsmk-heatmap-level-2, #4ade80);
     }
     .ngxsmk-heatmap__cell[data-level='3'] {
-      background: var(--ngxsmk-heatmap-level-3);
+      background: var(--ngxsmk-heatmap-level-3, #22c55e);
     }
     .ngxsmk-heatmap__cell[data-level='4'] {
-      background: var(--ngxsmk-heatmap-level-4);
+      background: var(--ngxsmk-heatmap-level-4, #15803d);
     }
 
     .ngxsmk-heatmap__legend {

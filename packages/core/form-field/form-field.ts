@@ -47,14 +47,14 @@ import { NGXSMK_FORM_FIELD_CONTROL } from './form-field-control';
     :host {
       display: flex;
       flex-direction: column;
-      gap: var(--ngxsmk-space-1-5);
+      gap: var(--ngxsmk-form-field-gap, var(--ngxsmk-space-1-5));
       font-family: var(--ngxsmk-font-sans);
     }
 
     .ngxsmk-form-field__label {
       color: var(--ngxsmk-color-on-surface);
       font-size: var(--ngxsmk-text-label-lg-size);
-      font-weight: var(--ngxsmk-text-label-lg-weight);
+      font-weight: var(--ngxsmk-form-field-label-weight, var(--ngxsmk-text-label-lg-weight));
       line-height: var(--ngxsmk-text-label-lg-line);
     }
 

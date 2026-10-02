@@ -14,6 +14,7 @@ import {
   output,
   signal,
   TemplateRef,
+  untracked,
   viewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -330,6 +331,46 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
             </button>
           }
 
+          <!-- Copy to clipboard (API keys / secrets) -->
+          @if (showCopy() && engine.hasContent() && !engine.disabled()) {
+            <button
+              type="button"
+              class="ngxsmk-input-group__copy"
+              (click)="_copy()"
+              tabindex="-1"
+              [attr.aria-label]="copied() ? 'Copied' : 'Copy to clipboard'"
+            >
+              @if (copied()) {
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              } @else {
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="9" y="9" width="13" height="13" rx="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+              }
+            </button>
+          }
+
           <!-- Character Counter -->
           @if (engine.showCounter()) {
             @if (tplCounter) {
@@ -572,7 +613,7 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
 
     /* ── Loading input padding ── */
     .ngxsmk-input-group__input--has-loading {
-      padding-left: 2rem !important;
+      padding-inline-start: 2rem !important;
     }
 
     :host(.ngxsmk-input-group--focused) .ngxsmk-input-group__container {
@@ -673,7 +714,7 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
     }
 
     :host([data-size='sm']) .ngxsmk-input-group__input {
-      padding: var(--ngxsmk-space-1, 0.25rem) var(--ngxsmk-space-2, 0.5rem);
+      padding-block: var(--ngxsmk-space-1, 0.25rem);
       font-size: var(--ngxsmk-text-body-sm-size, 0.875rem);
     }
 
@@ -683,7 +724,7 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
     }
 
     :host([data-size='lg']) .ngxsmk-input-group__input {
-      padding: var(--ngxsmk-space-3, 0.75rem) var(--ngxsmk-space-4, 1rem);
+      padding-block: var(--ngxsmk-space-3, 0.75rem);
       font-size: var(--ngxsmk-text-body-lg-size, 1.125rem);
     }
 
@@ -693,7 +734,7 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
     }
 
     :host([data-size='xl']) .ngxsmk-input-group__input {
-      padding: var(--ngxsmk-space-3-5, 0.875rem) var(--ngxsmk-space-4, 1rem);
+      padding-block: var(--ngxsmk-space-3-5, 0.875rem);
       font-size: var(--ngxsmk-text-body-lg-size, 1.125rem);
     }
 
@@ -822,7 +863,8 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
 
     /* ── Clear Button ── */
     .ngxsmk-input-group__clear,
-    .ngxsmk-input-group__toggle-password {
+    .ngxsmk-input-group__toggle-password,
+    .ngxsmk-input-group__copy {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -839,9 +881,17 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
     }
 
     .ngxsmk-input-group__clear:hover,
-    .ngxsmk-input-group__toggle-password:hover {
+    .ngxsmk-input-group__toggle-password:hover,
+    .ngxsmk-input-group__copy:hover {
       background: var(--ngxsmk-color-surface-hover, rgba(0, 0, 0, 0.05));
       color: var(--ngxsmk-color-on-surface);
+    }
+
+    .ngxsmk-input-group__copy:focus-visible,
+    .ngxsmk-input-group__clear:focus-visible,
+    .ngxsmk-input-group__toggle-password:focus-visible {
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring);
     }
 
     /* ── Counter ── */
@@ -905,7 +955,7 @@ export const INPUT_GROUP_ENGINE = new InjectionToken<InputGroupEngine>('INPUT_GR
 
     .ngxsmk-input-group__loading {
       position: absolute;
-      left: var(--ngxsmk-space-2, 0.5rem);
+      inset-inline-start: var(--ngxsmk-space-2, 0.5rem);
       top: 50%;
       transform: translateY(-50%);
       z-index: 1;
@@ -968,11 +1018,17 @@ export class NgxsmkInputGroup
   readonly showClear = input(false);
   readonly showCounter = input(false);
   readonly showStatusIcon = input(false);
+  /** Shows a trailing copy-to-clipboard control when the field has a value. */
+  readonly showCopy = input(false);
   readonly fullWidth = input(true);
   readonly loading = input(false);
   readonly floatingLabel = input(false);
   readonly addons = input<InputGroupAddon[]>([]);
-  readonly inputType = input<InputGroupInputType | 'password'>('text');
+  /**
+   * Alias of `type`. Prefer `type="password"` for secrets / API keys.
+   * @deprecated Use `type` instead.
+   */
+  readonly inputType = input<InputGroupInputType | 'password' | undefined>(undefined);
 
   // ── Two-way Binding ──
   readonly value = model('');
@@ -987,6 +1043,7 @@ export class NgxsmkInputGroup
   readonly blurred = output<void>();
   readonly cleared = output<void>();
   readonly valueChanged = output<string>();
+  readonly copiedChange = output<string>();
   readonly validationChanged = output<{ status: ValidationStatus; message: string }>();
 
   // ── Template Refs ──
@@ -1008,6 +1065,8 @@ export class NgxsmkInputGroup
   // ── Internal ──
   protected readonly _messageId = signal<string | null>(null);
   protected readonly _describedBy = signal<string | null>(null);
+  protected readonly copied = signal(false);
+  private copyResetTimer: ReturnType<typeof setTimeout> | null = null;
 
   constructor() {
     const provided = inject(INPUT_GROUP_ENGINE, { optional: true });
@@ -1015,9 +1074,17 @@ export class NgxsmkInputGroup
     super();
     this.engine = engine;
 
+    this._destroyRef.onDestroy(() => {
+      if (this.copyResetTimer) {
+        clearTimeout(this.copyResetTimer);
+      }
+    });
+
     // ── Sync inputs → engine ──
     effect(() => {
-      this.engine.type.set(this.type());
+      // `inputType` is a deprecated alias; `type` wins when both are set.
+      const alias = this.inputType();
+      this.engine.type.set(alias && this.type() === 'text' ? alias : this.type());
     });
     effect(() => {
       this.engine.variant.set(this.variant());
@@ -1074,10 +1141,20 @@ export class NgxsmkInputGroup
       this.engine.addons.set(this.addons());
     });
 
+    // External [(value)] / initial value → engine (avoid feedback loop).
+    effect(() => {
+      const external = this.value();
+      if (external !== untracked(() => this.engine.value())) {
+        this.engine.value.set(external);
+      }
+    });
+
     // ── Sync engine → model + CVA ──
     effect(() => {
       const val = this.engine.value();
-      this.value.set(val);
+      if (val !== untracked(() => this.value())) {
+        this.value.set(val);
+      }
       this.emitChange(val);
       this._cdr.markForCheck();
     });
@@ -1158,7 +1235,8 @@ export class NgxsmkInputGroup
     if (event.key === 'Enter') {
       this.engine.blur();
     }
-    if (event.key === 'Escape') {
+    if (event.key === 'Escape' && this.showClear()) {
+      event.preventDefault();
       this.engine.clear();
     }
   }
@@ -1170,6 +1248,24 @@ export class NgxsmkInputGroup
   protected _clear(): void {
     this.engine.clear();
     this._inputEl()?.nativeElement.focus();
+  }
+
+  protected async _copy(): Promise<void> {
+    const value = this.engine.value();
+    if (!value || typeof navigator === 'undefined' || !navigator.clipboard?.writeText) {
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(value);
+      this.copied.set(true);
+      this.copiedChange.emit(value);
+      if (this.copyResetTimer) {
+        clearTimeout(this.copyResetTimer);
+      }
+      this.copyResetTimer = setTimeout(() => this.copied.set(false), 1500);
+    } catch {
+      /* clipboard denied — leave UI unchanged */
+    }
   }
 
   // ── Public API ──

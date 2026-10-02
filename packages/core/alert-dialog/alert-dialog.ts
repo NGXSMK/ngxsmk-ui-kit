@@ -1,4 +1,4 @@
-﻿import {
+import {
   ChangeDetectionStrategy,
   Component,
   effect,
@@ -14,6 +14,19 @@ import { DOCUMENT } from '@angular/common';
 
 export type NgxsmkAlertDialogVariant = 'info' | 'destructive';
 
+/**
+ * Confirm / cancel modal built on the native `<dialog>` element.
+ *
+ * ```html
+ * <ngxsmk-alert-dialog
+ *   [(open)]="open"
+ *   title="Delete item?"
+ *   message="This cannot be undone."
+ *   variant="destructive"
+ *   (confirmed)="onDelete()"
+ * />
+ * ```
+ */
 @Component({
   standalone: true,
   selector: 'ngxsmk-alert-dialog',

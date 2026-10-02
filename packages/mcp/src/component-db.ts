@@ -223,7 +223,7 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "name": "NgxsmkAlertDialog",
     "kind": "Component",
     "selector": "ngxsmk-alert-dialog",
-    "description": "",
+    "description": "Confirm / cancel modal built on the native `<dialog>` element.",
     "inputs": [
       {
         "name": "open",
@@ -1386,6 +1386,34 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "outputs": []
   },
   {
+    "entryPoint": "@ngxsmk/core/breadcrumb",
+    "name": "NgxsmkBreadcrumb",
+    "kind": "Component",
+    "selector": "ngxsmk-breadcrumb",
+    "description": "Composed breadcrumb trail. Prefer this over wiring sibling `ngxsmk-breadcrumb-item` nodes by hand.",
+    "inputs": [
+      {
+        "name": "items",
+        "type": "NgxsmkBreadcrumbCrumb[]",
+        "required": false,
+        "default": "[]"
+      },
+      {
+        "name": "separator",
+        "type": "string",
+        "required": false,
+        "default": "'/'"
+      },
+      {
+        "name": "ariaLabel",
+        "type": "string",
+        "required": false,
+        "default": "'Breadcrumb'"
+      }
+    ],
+    "outputs": []
+  },
+  {
     "entryPoint": "@ngxsmk/core/breadcrumb-item",
     "name": "NgxsmkBreadcrumbItem",
     "kind": "Component",
@@ -2229,6 +2257,51 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     ]
   },
   {
+    "entryPoint": "@ngxsmk/core/chip-group",
+    "name": "NgxsmkChipGroup",
+    "kind": "Component",
+    "selector": "ngxsmk-chip-group",
+    "description": "Toggleable chip group for single- or multi-select from a fixed option set. Prefer this over the deprecated `ngxsmk-selector`.",
+    "inputs": [
+      {
+        "name": "options",
+        "type": "NgxsmkChipGroupOption[]",
+        "required": true
+      },
+      {
+        "name": "value",
+        "type": "string[]",
+        "required": false,
+        "twoWay": true,
+        "default": "[]"
+      },
+      {
+        "name": "multiple",
+        "type": "boolean",
+        "required": false,
+        "default": "true"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "ariaLabel",
+        "type": "string",
+        "required": false,
+        "default": "''"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "changed",
+        "type": "string[]"
+      }
+    ]
+  },
+  {
     "entryPoint": "@ngxsmk/core/citation",
     "name": "NgxsmkCitation",
     "kind": "Component",
@@ -2254,8 +2327,14 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "name": "NgxsmkCitationViewer",
     "kind": "Component",
     "selector": "ngxsmk-citation-viewer",
-    "description": "",
+    "description": "Single citation card or a stacked list of sources for AI answers. Pass one source via title/author/snippet, or multiple via `[sources]`.",
     "inputs": [
+      {
+        "name": "sources",
+        "type": "NgxsmkCitationSource[]",
+        "required": false,
+        "default": "[]"
+      },
       {
         "name": "title",
         "type": "string",
@@ -2273,6 +2352,18 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
         "type": "string",
         "required": false,
         "default": "''"
+      },
+      {
+        "name": "url",
+        "type": "string",
+        "required": false,
+        "default": "''"
+      },
+      {
+        "name": "showIndex",
+        "type": "boolean",
+        "required": false,
+        "default": "true"
       }
     ],
     "outputs": []
@@ -2298,13 +2389,37 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "name": "NgxsmkCodeBlock",
     "kind": "Component",
     "selector": "ngxsmk-code-block",
-    "description": "",
+    "description": "Code panel with copy control, language label, and optional streaming reveal for AI assistant UIs. Pass source via `[code]` (preferred) or project text.",
     "inputs": [
       {
         "name": "language",
         "type": "string",
         "required": false,
         "default": "''"
+      },
+      {
+        "name": "code",
+        "type": "string",
+        "required": false,
+        "default": "''"
+      },
+      {
+        "name": "streaming",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "streamChunk",
+        "type": "number",
+        "required": false,
+        "default": "3"
+      },
+      {
+        "name": "streamIntervalMs",
+        "type": "number",
+        "required": false,
+        "default": "24"
       }
     ],
     "outputs": []
@@ -2515,7 +2630,7 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "name": "NgxsmkCommandPalette",
     "kind": "Component",
     "selector": "ngxsmk-command-palette",
-    "description": "",
+    "description": "Keyboard-first command palette (Ctrl/Cmd+K by default). Search, group, and select commands; emits `selected` and closes.",
     "inputs": [
       {
         "name": "commands",
@@ -2534,6 +2649,13 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
         "type": "string",
         "required": false,
         "default": "'Type a command or search...'"
+      },
+      {
+        "name": "open",
+        "type": "boolean",
+        "required": false,
+        "twoWay": true,
+        "default": "false"
       }
     ],
     "outputs": [
@@ -2712,7 +2834,7 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "name": "NgxsmkDataTable",
     "kind": "Component",
     "selector": "ngxsmk-data-table",
-    "description": "",
+    "description": "Paginated, filterable data table built on `ngxsmk-table`.",
     "inputs": [
       {
         "name": "columns",
@@ -2761,6 +2883,87 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
         "type": "boolean",
         "required": false,
         "default": "false"
+      },
+      {
+        "name": "serverMode",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "totalItems",
+        "type": "number",
+        "required": false,
+        "default": "0"
+      },
+      {
+        "name": "selectable",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "resizable",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "reorderable",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "columnFilterable",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "virtual",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "virtualHeight",
+        "type": "string",
+        "required": false,
+        "default": "'24rem'"
+      },
+      {
+        "name": "rowHeight",
+        "type": "number",
+        "required": false,
+        "default": "40"
+      },
+      {
+        "name": "rowKey",
+        "type": "string",
+        "required": false,
+        "default": "'id'"
+      },
+      {
+        "name": "selectedKeys",
+        "type": "(string | number)[]",
+        "required": false,
+        "twoWay": true,
+        "default": "[]"
+      },
+      {
+        "name": "columnWidths",
+        "type": "Record<string, string>",
+        "required": false,
+        "twoWay": true,
+        "default": "{}"
+      },
+      {
+        "name": "columnFilters",
+        "type": "Record<string, string>",
+        "required": false,
+        "twoWay": true,
+        "default": "{}"
       }
     ],
     "outputs": [
@@ -2771,6 +2974,14 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
       {
         "name": "sortChange",
         "type": "{ field: string; dir: 'asc' | 'desc' }"
+      },
+      {
+        "name": "selectionChange",
+        "type": "(string | number)[]"
+      },
+      {
+        "name": "columnsChange",
+        "type": "NgxsmkTableColumn[]"
       }
     ]
   },
@@ -2817,6 +3028,12 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
         "type": "unknown",
         "required": false,
         "default": "ngxsmkUniqueId('ngxsmk-date-picker')"
+      },
+      {
+        "name": "ariaLabel",
+        "type": "string | null",
+        "required": false,
+        "default": "null"
       },
       {
         "name": "ariaInvalid",
@@ -3049,7 +3266,7 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "name": "NgxsmkEmptyState",
     "kind": "Component",
     "selector": "ngxsmk-empty-state",
-    "description": "",
+    "description": "Centered empty / error / success placeholder with optional projected icon and actions. Prefer projecting SVG via `[ngxsmkEmptyIcon]` over the deprecated `icon` HTML string.",
     "inputs": [
       {
         "name": "icon",
@@ -3074,6 +3291,12 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
         "type": "NgxsmkEmptyStateVariant",
         "required": false,
         "default": "'default'"
+      },
+      {
+        "name": "hideLegacyIcon",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
       }
     ],
     "outputs": []
@@ -3667,7 +3890,7 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "name": "NgxsmkHoverCard",
     "kind": "Component",
     "selector": "ngxsmk-hover-card",
-    "description": "",
+    "description": "Hover / focus card that reveals rich content next to a trigger.",
     "inputs": [
       {
         "name": "openDelay",
@@ -3680,6 +3903,34 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
         "type": "number",
         "required": false,
         "default": "150"
+      }
+    ],
+    "outputs": []
+  },
+  {
+    "entryPoint": "@ngxsmk/core/icon",
+    "name": "NgxsmkIcon",
+    "kind": "Component",
+    "selector": "ngxsmk-icon",
+    "description": "Inline icon sized by `--ngxsmk-icon-*` tokens. Use a built-in `name` or project custom SVG.",
+    "inputs": [
+      {
+        "name": "name",
+        "type": "NgxsmkIconName | ''",
+        "required": false,
+        "default": "''"
+      },
+      {
+        "name": "size",
+        "type": "NgxsmkIconSize",
+        "required": false,
+        "default": "'md'"
+      },
+      {
+        "name": "ariaLabel",
+        "type": "string",
+        "required": false,
+        "default": "''"
       }
     ],
     "outputs": []
@@ -3873,6 +4124,12 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
         "default": "false"
       },
       {
+        "name": "showCopy",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
         "name": "fullWidth",
         "type": "boolean",
         "required": false,
@@ -3898,9 +4155,9 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
       },
       {
         "name": "inputType",
-        "type": "InputGroupInputType | 'password'",
+        "type": "InputGroupInputType | 'password' | undefined",
         "required": false,
-        "default": "'text'"
+        "default": "undefined"
       },
       {
         "name": "value",
@@ -3948,6 +4205,10 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
         "type": "string"
       },
       {
+        "name": "copiedChange",
+        "type": "string"
+      },
+      {
         "name": "validationChanged",
         "type": "{ status: ValidationStatus; message: string }"
       }
@@ -3960,6 +4221,53 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "selector": "[ngxsmkInputGroupText], ngxsmk-input-group-text",
     "description": "",
     "inputs": [],
+    "outputs": []
+  },
+  {
+    "entryPoint": "@ngxsmk/core/input-mask",
+    "name": "NgxsmkInputMask",
+    "kind": "Directive",
+    "selector": "input[ngxsmkInputMask]",
+    "description": "Mask pattern tokens: - `0` — digit - `A` — letter - `*` — alphanumeric - any other char — literal",
+    "inputs": [
+      {
+        "name": "mask",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "value",
+        "type": "string",
+        "required": false,
+        "twoWay": true,
+        "default": "''"
+      },
+      {
+        "name": "rawValue",
+        "type": "string",
+        "required": false,
+        "twoWay": true,
+        "default": "''"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "inputMode",
+        "type": "string",
+        "required": false,
+        "default": "'text'"
+      },
+      {
+        "name": "autocomplete",
+        "type": "string",
+        "required": false,
+        "default": "'off'"
+      }
+    ],
     "outputs": []
   },
   {
@@ -4157,7 +4465,7 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "name": "NgxsmkLightbox",
     "kind": "Component",
     "selector": "ngxsmk-lightbox",
-    "description": "",
+    "description": "Full-viewport image gallery overlay. Call `show(index)` to open at a specific image (projected previews should wire their own clicks). The overlay portals to `document.body` so showcase overflow cannot clip it.",
     "inputs": [
       {
         "name": "images",
@@ -4363,6 +4671,29 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
         "name": "entries",
         "type": "{ key: string; value: string }[]",
         "required": true
+      }
+    ],
+    "outputs": []
+  },
+  {
+    "entryPoint": "@ngxsmk/core/menubar",
+    "name": "NgxsmkMenubar",
+    "kind": "Component",
+    "selector": "ngxsmk-menubar",
+    "description": "Horizontal application menubar with nested dropdowns.",
+    "inputs": [
+      {
+        "name": "items",
+        "type": "NgxsmkMenubarItem[]",
+        "required": false,
+        "default": "[]"
+      },
+      {
+        "name": "hoverOpen",
+        "type": "boolean",
+        "required": false,
+        "twoWay": true,
+        "default": "true"
       }
     ],
     "outputs": []
@@ -4620,7 +4951,7 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "name": "NgxsmkMultiSelect",
     "kind": "Component",
     "selector": "ngxsmk-multi-select",
-    "description": "",
+    "description": "Combobox multi-select with removable tags, listbox keyboard nav, and form CVA.",
     "inputs": [
       {
         "name": "options",
@@ -6348,7 +6679,7 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "name": "NgxsmkSheet",
     "kind": "Component",
     "selector": "ngxsmk-sheet",
-    "description": "",
+    "description": "Slide-over panel (drawer) from the left, right, or bottom edge. Portals to `document.body` so fixed positioning is never clipped by ancestor overflow / transforms (e.g. demo showcase scroll regions).",
     "inputs": [
       {
         "name": "open",
@@ -6368,6 +6699,12 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
         "type": "string",
         "required": false,
         "default": "''"
+      },
+      {
+        "name": "dismissible",
+        "type": "boolean",
+        "required": false,
+        "default": "true"
       }
     ],
     "outputs": []
@@ -6377,7 +6714,7 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "name": "NgxsmkSideNav",
     "kind": "Component",
     "selector": "ngxsmk-side-nav",
-    "description": "",
+    "description": "Collapsible app sidebar shell. Project sections, headings, and items; toggle via `NgxsmkSideNavCollapseButton` or `toggle()`.",
     "inputs": [],
     "outputs": [
       {
@@ -6481,7 +6818,7 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
         "name": "penColor",
         "type": "string",
         "required": false,
-        "default": "'#09090b'"
+        "default": "'#6366f1'"
       },
       {
         "name": "penWidth",
@@ -6569,7 +6906,7 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "name": "NgxsmkSlider",
     "kind": "Component",
     "selector": "ngxsmk-slider",
-    "description": "",
+    "description": "Native range slider styled with design tokens. Supports CVA and form-field.",
     "inputs": [
       {
         "name": "min",
@@ -6924,7 +7261,7 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "name": "NgxsmkStat",
     "kind": "Component",
     "selector": "ngxsmk-stat",
-    "description": "",
+    "description": "Compact metric / KPI tile with optional trend arrow and delta text.",
     "inputs": [
       {
         "name": "value",
@@ -6943,6 +7280,12 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
         "type": "NgxsmkStatTrend",
         "required": false,
         "default": "'flat'"
+      },
+      {
+        "name": "delta",
+        "type": "string",
+        "required": false,
+        "default": "''"
       },
       {
         "name": "icon",
@@ -7157,7 +7500,7 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "name": "NgxsmkTable",
     "kind": "Component",
     "selector": "ngxsmk-table",
-    "description": "",
+    "description": "Lightweight data table with optional sort, column resize, and drag-reorder.",
     "inputs": [
       {
         "name": "columns",
@@ -7190,6 +7533,18 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
         "default": "false"
       },
       {
+        "name": "resizable",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "reorderable",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
         "name": "sortField",
         "type": "string",
         "required": false,
@@ -7200,12 +7555,26 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
         "type": "'asc' | 'desc'",
         "required": false,
         "default": "'asc'"
+      },
+      {
+        "name": "columnWidths",
+        "type": "Record<string, string>",
+        "required": false,
+        "default": "{}"
       }
     ],
     "outputs": [
       {
         "name": "sortChange",
         "type": "string"
+      },
+      {
+        "name": "columnResize",
+        "type": "{ key: string; width: string }"
+      },
+      {
+        "name": "columnReorder",
+        "type": "NgxsmkTableColumn[]"
       }
     ]
   },
@@ -7458,6 +7827,78 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "outputs": []
   },
   {
+    "entryPoint": "@ngxsmk/core/time-picker",
+    "name": "NgxsmkTimePicker",
+    "kind": "Component",
+    "selector": "ngxsmk-time-picker",
+    "description": "Time-only form control (`HH:MM` / `HH:MM:SS`) with form-field + CVA support.",
+    "inputs": [
+      {
+        "name": "value",
+        "type": "string",
+        "required": false,
+        "twoWay": true,
+        "default": "''"
+      },
+      {
+        "name": "min",
+        "type": "string",
+        "required": false,
+        "default": "''"
+      },
+      {
+        "name": "max",
+        "type": "string",
+        "required": false,
+        "default": "''"
+      },
+      {
+        "name": "step",
+        "type": "string",
+        "required": false,
+        "default": "'60'"
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "required": false,
+        "default": "''"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "id",
+        "type": "unknown",
+        "required": false,
+        "default": "ngxsmkUniqueId('ngxsmk-time-picker')"
+      },
+      {
+        "name": "ariaInvalid",
+        "type": "boolean",
+        "required": false,
+        "twoWay": true,
+        "default": "false"
+      },
+      {
+        "name": "ariaDescribedby",
+        "type": "string | null",
+        "required": false,
+        "twoWay": true,
+        "default": "null"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "changed",
+        "type": "string"
+      }
+    ]
+  },
+  {
     "entryPoint": "@ngxsmk/core/timeline-gantt",
     "name": "NgxsmkTimelineGantt",
     "kind": "Component",
@@ -7642,7 +8083,7 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "name": "NgxsmkTokenizer",
     "kind": "Component",
     "selector": "ngxsmk-tokenizer",
-    "description": "",
+    "description": "Free-form tags / chips input. Press Enter (or a delimiter) to commit a token; Backspace on an empty input removes the last token.",
     "inputs": [
       {
         "name": "tokens",
@@ -7662,6 +8103,30 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
         "type": "boolean",
         "required": false,
         "default": "false"
+      },
+      {
+        "name": "maxTokens",
+        "type": "number",
+        "required": false,
+        "default": "0"
+      },
+      {
+        "name": "delimiters",
+        "type": "string",
+        "required": false,
+        "default": "',;'"
+      },
+      {
+        "name": "ariaLabel",
+        "type": "string",
+        "required": false,
+        "default": "''"
+      },
+      {
+        "name": "allowDuplicates",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
       }
     ],
     "outputs": [
@@ -7676,7 +8141,7 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "name": "NgxsmkToolCallViewer",
     "kind": "Component",
     "selector": "ngxsmk-tool-call-viewer",
-    "description": "",
+    "description": "Expandable list of AI tool / function calls with status and JSON args/results.",
     "inputs": [
       {
         "name": "calls",

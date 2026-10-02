@@ -36,14 +36,33 @@ const TOOLS = [
     },
     {
         name: 'ngxsmk_recommend_layout',
-        description: 'Generate production-ready Angular template layouts using ngxsmk grid, stack, and card systems.',
+        description: 'Generate a complete standalone Angular page (TS + template) using correct @ngxsmk/core/<entry> imports — never barrel imports.',
         inputSchema: {
             type: 'object',
             properties: {
                 type: {
                     type: 'string',
-                    enum: ['login', 'dashboard', 'settings', 'ai-assistant'],
+                    enum: ['login', 'dashboard', 'settings', 'ai-assistant', 'ops-table'],
                     description: 'The type of application layout to generate',
+                },
+            },
+            required: ['type'],
+        },
+    },
+    {
+        name: 'ngxsmk_scaffold_page',
+        description: 'Scaffold a ready-to-paste standalone Angular component for a page recipe with secondary-entry imports, signal APIs, and token-only styles.',
+        inputSchema: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['login', 'dashboard', 'settings', 'ai-assistant', 'ops-table'],
+                    description: 'Page recipe to scaffold',
+                },
+                className: {
+                    type: 'string',
+                    description: 'Optional Angular class name (default depends on type)',
                 },
             },
             required: ['type'],
@@ -59,7 +78,7 @@ const TOOLS = [
     },
     {
         name: 'ngxsmk_get_migration_path',
-        description: 'Get step-by-step migration translation guides from Angular Material or legacy libraries to NGXSMK standalone signals components.',
+        description: 'Get step-by-step migration guides from Angular Material, Bootstrap, or Ionic toward NGXSMK standalone signal components (and Ionic theme sync).',
         inputSchema: {
             type: 'object',
             properties: {
@@ -70,6 +89,20 @@ const TOOLS = [
                 },
             },
             required: ['sourceLibrary'],
+        },
+    },
+    {
+        name: 'ngxsmk_ionic_setup',
+        description: 'Return the recommended Ionic Angular + NGXSMK setup: providers, CSS imports, token sync via provideNgxsmkIonicTheme, and what to keep as Ionic vs NGXSMK.',
+        inputSchema: {
+            type: 'object',
+            properties: {
+                architecture: {
+                    type: 'string',
+                    enum: ['standalone', 'ngmodule'],
+                    description: 'Ionic Angular project architecture (default: standalone)',
+                },
+            },
         },
     },
 ];
@@ -93,6 +126,201 @@ function usageSnippet(c) {
     if (attr)
         return `<${attr[1]} ${attr[2]}${attrs}>...</${attr[1]}>`;
     return `<${first}${attrs} />`;
+}
+function scaffoldPage(type, className) {
+    const recipes = {
+        login: {
+            className: 'LoginPage',
+            body: `import { Component, signal } from '@angular/core';
+import { NgxsmkButton } from '@ngxsmk/core/button';
+import { NgxsmkCard, NgxsmkCardContent } from '@ngxsmk/core/card';
+import { NgxsmkFormField } from '@ngxsmk/core/form-field';
+import { NgxsmkInputDirective } from '@ngxsmk/core/input';
+import { NgxsmkCheckbox } from '@ngxsmk/core/checkbox';
+
+@Component({
+  selector: 'app-login-page',
+  standalone: true,
+  imports: [NgxsmkButton, NgxsmkCard, NgxsmkCardContent, NgxsmkFormField, NgxsmkInputDirective, NgxsmkCheckbox],
+  template: \`
+    <main class="page">
+      <ngxsmk-card>
+        <div ngxsmkCardContent class="stack">
+          <h1>Sign in</h1>
+          <ngxsmk-form-field label="Email">
+            <input ngxsmkInput type="email" autocomplete="username" />
+          </ngxsmk-form-field>
+          <ngxsmk-form-field label="Password">
+            <input ngxsmkInput type="password" autocomplete="current-password" />
+          </ngxsmk-form-field>
+          <ngxsmk-checkbox [(checked)]="remember">Remember me</ngxsmk-checkbox>
+          <button ngxsmk-button type="button">Continue</button>
+        </div>
+      </ngxsmk-card>
+    </main>
+  \`,
+  styles: \`
+    .page { max-width: 24rem; margin: 4rem auto; padding: 0 1rem; font-family: var(--ngxsmk-font-sans); }
+    .stack { display: flex; flex-direction: column; gap: var(--ngxsmk-space-4); padding: var(--ngxsmk-space-5); }
+    h1 { margin: 0; letter-spacing: -0.03em; }
+  \`,
+})
+export class CLASSNAME {
+  readonly remember = signal(true);
+}
+`,
+        },
+        dashboard: {
+            className: 'DashboardPage',
+            body: `import { Component } from '@angular/core';
+import { NgxsmkStat } from '@ngxsmk/core/stat';
+import { NgxsmkDataTable } from '@ngxsmk/core/data-table';
+
+@Component({
+  selector: 'app-dashboard-page',
+  standalone: true,
+  imports: [NgxsmkStat, NgxsmkDataTable],
+  template: \`
+    <main class="page">
+      <h1>Dashboard</h1>
+      <div class="stats">
+        <ngxsmk-stat label="Active users" value="1,245" trend="up" />
+        <ngxsmk-stat label="Revenue" value="$45k" trend="up" />
+      </div>
+      <ngxsmk-data-table [columns]="columns" [rows]="rows" [sortable]="true" [pageSize]="5" />
+    </main>
+  \`,
+  styles: \`
+    .page { max-width: 56rem; margin: 0 auto; padding: var(--ngxsmk-space-8) var(--ngxsmk-space-5); font-family: var(--ngxsmk-font-sans); }
+    .stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ngxsmk-space-3); margin-block: var(--ngxsmk-space-5); }
+  \`,
+})
+export class CLASSNAME {
+  readonly columns = [{ key: 'name', label: 'Service' }, { key: 'status', label: 'Status' }];
+  readonly rows = [{ id: 1, name: 'API', status: 'Healthy' }];
+}
+`,
+        },
+        settings: {
+            className: 'SettingsPage',
+            body: `import { Component, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { NgxsmkButton } from '@ngxsmk/core/button';
+import { NgxsmkFormField } from '@ngxsmk/core/form-field';
+import { NgxsmkInputDirective } from '@ngxsmk/core/input';
+import { NgxsmkSwitch } from '@ngxsmk/core/switch';
+
+@Component({
+  selector: 'app-settings-page',
+  standalone: true,
+  imports: [FormsModule, NgxsmkButton, NgxsmkFormField, NgxsmkInputDirective, NgxsmkSwitch],
+  template: \`
+    <main class="page">
+      <h1>Settings</h1>
+      <ngxsmk-form-field label="Display name">
+        <input ngxsmkInput [(ngModel)]="name" />
+      </ngxsmk-form-field>
+      <ngxsmk-switch [(checked)]="emailDigests">Email digests</ngxsmk-switch>
+      <button ngxsmk-button type="button">Save</button>
+    </main>
+  \`,
+  styles: \`
+    .page { max-width: 28rem; margin: 0 auto; padding: var(--ngxsmk-space-8) var(--ngxsmk-space-5); display: flex; flex-direction: column; gap: var(--ngxsmk-space-4); font-family: var(--ngxsmk-font-sans); }
+  \`,
+})
+export class CLASSNAME {
+  name = 'Ada Lovelace';
+  readonly emailDigests = signal(true);
+}
+`,
+        },
+        'ai-assistant': {
+            className: 'AiAssistantPage',
+            body: `import { Component } from '@angular/core';
+import { NgxsmkAiChat, type NgxsmkAiMessage } from '@ngxsmk/core/ai-chat';
+
+@Component({
+  selector: 'app-ai-assistant-page',
+  standalone: true,
+  imports: [NgxsmkAiChat],
+  template: \`
+    <main class="page">
+      <h1>Assistant</h1>
+      <ngxsmk-ai-chat [messages]="messages" [models]="models" [selectedModel]="models[0]" (sendMessage)="onSend($event)" />
+    </main>
+  \`,
+  styles: \`
+    .page { max-width: 40rem; margin: 0 auto; padding: var(--ngxsmk-space-8) var(--ngxsmk-space-5); font-family: var(--ngxsmk-font-sans); }
+    ngxsmk-ai-chat { display: block; min-height: 24rem; }
+  \`,
+})
+export class CLASSNAME {
+  readonly models = ['gemini-2.5-flash', 'claude-sonnet'];
+  messages: NgxsmkAiMessage[] = [{ id: 1, role: 'assistant', content: 'How can I help you today?' }];
+  onSend(text: string): void {
+    this.messages = [...this.messages, { id: Date.now(), role: 'user', content: text }];
+  }
+}
+`,
+        },
+        'ops-table': {
+            className: 'OpsTablePage',
+            body: `import { Component, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { NgxsmkInputDirective } from '@ngxsmk/core/input';
+import { NgxsmkDataTable } from '@ngxsmk/core/data-table';
+
+@Component({
+  selector: 'app-ops-table-page',
+  standalone: true,
+  imports: [FormsModule, NgxsmkInputDirective, NgxsmkDataTable],
+  template: \`
+    <main class="page">
+      <header>
+        <h1>Service inventory</h1>
+        <input ngxsmkInput placeholder="Filter…" [(ngModel)]="filter" />
+      </header>
+      <ngxsmk-data-table
+        [columns]="columns"
+        [rows]="rows"
+        [filter]="filter"
+        [sortable]="true"
+        [selectable]="true"
+        [columnFilterable]="true"
+        [resizable]="true"
+        [reorderable]="true"
+        rowKey="id"
+        [(selectedKeys)]="selected"
+      />
+    </main>
+  \`,
+  styles: \`
+    .page { max-width: 64rem; margin: 0 auto; padding: var(--ngxsmk-space-8) var(--ngxsmk-space-5); font-family: var(--ngxsmk-font-sans); }
+    header { display: flex; flex-wrap: wrap; gap: var(--ngxsmk-space-3); justify-content: space-between; margin-bottom: var(--ngxsmk-space-4); }
+  \`,
+})
+export class CLASSNAME {
+  filter = '';
+  readonly selected = signal<Array<string | number>>([]);
+  readonly columns = [
+    { key: 'name', label: 'Service', filterable: true },
+    { key: 'region', label: 'Region', filterable: true },
+    { key: 'status', label: 'Status', filterable: true },
+  ];
+  readonly rows = [
+    { id: 1, name: 'api-gateway', region: 'us-east-1', status: 'Healthy' },
+    { id: 2, name: 'billing-worker', region: 'eu-west-1', status: 'Degraded' },
+  ];
+}
+`,
+        },
+    };
+    const recipe = recipes[type];
+    if (!recipe) {
+        return `Unknown type "${type}". Use: ${Object.keys(recipes).join(', ')}`;
+    }
+    const name = className || recipe.className;
+    return recipe.body.replace(/CLASSNAME/g, name);
 }
 function findComponent(query) {
     const q = query.toLowerCase();
@@ -183,45 +411,22 @@ ${usageSnippet(match)}
             ],
         };
     }
-    if (name === 'ngxsmk_recommend_layout') {
-        const type = args?.type;
-        let template = '';
-        if (type === 'login') {
-            template = `<div class="login-container" style="display: flex; align-items: center; justify-content: center; height: 100vh;">
-  <ngxsmk-card style="width: 100%; max-width: 400px; padding: var(--ngxsmk-space-6);">
-    <h2 style="margin-bottom: var(--ngxsmk-space-4);">Sign In</h2>
-    <div style="margin-bottom: var(--ngxsmk-space-4);">
-      <label style="display: block; margin-bottom: var(--ngxsmk-space-2);">Email</label>
-      <input ngxsmkInput type="email" style="width: 100%;" />
-    </div>
-    <div style="margin-bottom: var(--ngxsmk-space-6);">
-      <label style="display: block; margin-bottom: var(--ngxsmk-space-2);">Password</label>
-      <input ngxsmkInput type="password" style="width: 100%;" />
-    </div>
-    <button ngxsmk-button style="width: 100%;">Sign In</button>
-  </ngxsmk-card>
-</div>`;
-        }
-        else if (type === 'ai-assistant') {
-            template = `<div class="assistant-layout" style="display: flex; height: 100vh;">
-  <aside style="width: 250px; border-right: 1px solid var(--ngxsmk-color-outline); background: var(--ngxsmk-color-surface);">
-    <div style="padding: var(--ngxsmk-space-4); font-weight: bold;">History</div>
-  </aside>
-  <main style="flex: 1; display: flex; flex-direction: column;">
-    <div style="flex: 1; padding: var(--ngxsmk-space-6);">
-      <ngxsmk-ai-chat [messages]="messages()" [isTyping]="isTyping()" />
-    </div>
-  </main>
-</div>`;
-        }
-        else {
-            template = `<!-- General layout for type: ${type} -->\n<div class="ngxsmk-layout">\n  <ngxsmk-card>General Card</ngxsmk-card>\n</div>`;
-        }
+    if (name === 'ngxsmk_recommend_layout' || name === 'ngxsmk_scaffold_page') {
+        const type = String(args?.type || '');
+        const className = args?.className;
+        const code = scaffoldPage(type, className);
         return {
             content: [
                 {
                     type: 'text',
-                    text: `Recommended layout code:\n\n\`\`\`html\n${template}\n\`\`\``,
+                    text: `### NGXSMK scaffold — \`${type}\`
+
+Rules baked in: secondary-entry imports only, signal APIs, token CSS, standalone component.
+
+\`\`\`ts
+${code}
+\`\`\`
+`,
                 },
             ],
         };
@@ -244,22 +449,61 @@ ${usageSnippet(match)}
         };
     }
     if (name === 'ngxsmk_get_migration_path') {
-        const src = args?.sourceLibrary || 'material';
+        const src = args?.sourceLibrary;
+        if (!src || !['material', 'bootstrap', 'ionic'].includes(src)) {
+            return {
+                content: [
+                    {
+                        type: 'text',
+                        text: `Missing or invalid sourceLibrary. Pass one of: "material", "bootstrap", "ionic". Example: { "sourceLibrary": "ionic" }.`,
+                    },
+                ],
+                isError: true,
+            };
+        }
         let guidance = '';
         if (src === 'material') {
-            guidance = `### Angular Material ➔ NGXSMK Migration Guide
-- \`<button mat-raised-button color="primary">\` ➔ \`<button ngxsmk-button variant="primary">\`
-- \`<mat-form-field><mat-label>Email</mat-label><input matInput></mat-form-field>\` ➔ \`<ngxsmk-form-field label="Email"><input ngxsmkInput></ngxsmk-form-field>\`
-- \`<mat-slide-toggle [(ngModel)]="val">\` ➔ \`<ngxsmk-switch [(checked)]="val">\`
-- \`<mat-tab-group>\` ➔ \`<ngxsmk-tabs>\`
-- \`<mat-card><mat-card-title>Title</mat-card-title></mat-card>\` ➔ \`<ngxsmk-card><h3 ngxsmkCardTitle>Title</h3></ngxsmk-card>\`
+            guidance = `### Angular Material → NGXSMK
+- \`<button mat-raised-button color="primary">\` → \`<button ngxsmk-button>\`
+- \`<mat-form-field><mat-label>Email</mat-label><input matInput></mat-form-field>\` → \`<ngxsmk-form-field label="Email"><input ngxsmkInput></ngxsmk-form-field>\`
+- \`<mat-slide-toggle [(ngModel)]="val">\` → \`<ngxsmk-switch [(checked)]="val">\`
+- \`<mat-tab-group>\` → \`<ngxsmk-tabs>\`
+- \`<mat-card>\` → \`<ngxsmk-card>\`
+- Import from \`@ngxsmk/core/<entry>\` only (never the root barrel).
+`;
+        }
+        else if (src === 'bootstrap') {
+            guidance = `### Bootstrap / ng-bootstrap → NGXSMK
+- \`.btn.btn-primary\` → \`<button ngxsmk-button>\`
+- \`.form-control\` → \`<input ngxsmkInput>\` inside \`<ngxsmk-form-field>\`
+- \`.modal\` → \`<ngxsmk-dialog>\` or \`<ngxsmk-sheet>\`
+- \`.nav-tabs\` → \`<ngxsmk-tabs>\`
+- Drop Bootstrap utility classes for layout; prefer \`@ngxsmk/core/stack\`, \`grid\`, \`container\`.
+- Theme via \`--ngxsmk-*\` tokens, not Bootstrap SCSS variables.
 `;
         }
         else {
-            guidance = `### Generic Library ➔ NGXSMK Migration Guide
-- Use Standalone components directly in your \`imports: [...]\` array.
-- Replace RxJS subscriptions with Angular Signals (\`signal()\`, \`computed()\`).
-- Apply theme custom properties via \`--ngxsmk-*\`.
+            guidance = `### Ionic Angular → NGXSMK (hybrid)
+Keep Ionic for **shell navigation** (\`ion-tabs\`, \`ion-menu\`, \`ion-router-outlet\`, page lifecycle).
+Use NGXSMK for **product UI** (forms, tables, AI chat, dense overlays).
+
+1. Install \`@ngxsmk/core\` + \`@ngxsmk/theme\`.
+2. Import theme CSS once: \`@import '@ngxsmk/theme/styles/ngxsmk.css';\`
+3. In \`app.config.ts\`:
+\`\`\`ts
+import { provideIonicAngular } from '@ionic/angular/standalone';
+import { provideNgxsmkIonicTheme } from '@ngxsmk/theme';
+
+export const appConfig = {
+  providers: [
+    provideIonicAngular(),
+    provideNgxsmkIonicTheme(), // maps --ngxsmk-* → --ion-*
+  ],
+};
+\`\`\`
+4. Replace dense Ionic forms gradually: \`ion-input\` → \`ngxsmkInput\` + \`ngxsmk-form-field\`, \`ion-toggle\` → \`ngxsmk-switch\`.
+5. Do **not** nest Ionic modals inside NGXSMK dialogs (or vice versa) without a clear stacking plan.
+Call \`ngxsmk_ionic_setup\` for a full paste-ready snippet.
 `;
         }
         return {
@@ -271,7 +515,55 @@ ${usageSnippet(match)}
             ],
         };
     }
-    throw new Error(`Tool not found: ${name}`);
+    if (name === 'ngxsmk_ionic_setup') {
+        const arch = args?.architecture ?? 'standalone';
+        const text = arch === 'ngmodule'
+            ? `### Ionic Angular (NgModule) + NGXSMK
+
+1. \`npm i @ngxsmk/core @ngxsmk/theme\`
+2. Global styles: \`@import '@ngxsmk/theme/styles/ngxsmk.css';\`
+3. In \`AppModule\`:
+\`\`\`ts
+import { IonicModule } from '@ionic/angular';
+import { provideNgxsmkIonicTheme } from '@ngxsmk/theme';
+
+@NgModule({
+  imports: [IonicModule.forRoot()],
+  providers: [provideNgxsmkIonicTheme()],
+})
+export class AppModule {}
+\`\`\`
+4. Keep \`ion-router-outlet\` / tabs / menu. Import NGXSMK components per feature module from \`@ngxsmk/core/<name>\`.
+5. Prefer signals + standalone feature components even inside an NgModule shell.
+`
+            : `### Ionic Angular (standalone) + NGXSMK
+
+1. \`npm i @ngxsmk/core @ngxsmk/theme\`
+2. Global styles (\`src/global.scss\`):
+\`\`\`scss
+@import '@ngxsmk/theme/styles/ngxsmk.css';
+// optional Ink: @import '@ngxsmk/theme/styles/ngxsmk.ink.css';
+\`\`\`
+3. \`app.config.ts\`:
+\`\`\`ts
+import { ApplicationConfig } from '@angular/core';
+import { provideIonicAngular } from '@ionic/angular/standalone';
+import { provideNgxsmkIonicTheme, inkPreset } from '@ngxsmk/theme';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideIonicAngular(),
+    provideNgxsmkIonicTheme(), // or provideNgxsmkIonicTheme(inkPreset)
+  ],
+};
+\`\`\`
+4. **Keep Ionic for:** tabs, side menu, page transitions, Capacitor plugins.
+5. **Use NGXSMK for:** data tables, AI chat, complex forms, sheets/dialogs that match your web kit.
+6. Tokens: NGXSMK writes \`--ngxsmk-*\`; \`provideNgxsmkIonicTheme\` also syncs \`--ion-*\` so Ionic chrome matches.
+`;
+        return { content: [{ type: 'text', text }] };
+    }
+    throw new Error(`Unknown tool "${name}". Available: ${TOOLS.map((t) => t.name).join(', ')}.`);
 });
 async function run() {
     const transport = new stdio_js_1.StdioServerTransport();

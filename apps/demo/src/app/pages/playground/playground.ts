@@ -746,7 +746,6 @@ type RadiusKey = keyof typeof RADII;
     AppNav,
     NgxsmkButton,
     NgxsmkSwitch,
-    NgxsmkHeading,
     NgxsmkHStack,
     NgxsmkDropdownMenu,
     AstRenderer,
@@ -816,11 +815,14 @@ type RadiusKey = keyof typeof RADII;
       <section class="pg-panel">
         <header class="panel-head">
           <ngxsmk-h-stack justify="space-between" align="center" style="width: 100%;">
-            <ngxsmk-heading
-              level="h3"
-              style="margin: 0; font-size: var(--ngxsmk-text-title-md-size); font-weight: 700;"
-              >{{ 'playground.title' | translate }}</ngxsmk-heading
-            >
+            <div class="panel-brand">
+              <div class="traffic-lights">
+                <span class="light red"></span>
+                <span class="light yellow"></span>
+                <span class="light green"></span>
+              </div>
+              <h3 class="panel-title">{{ 'playground.title' | translate }}</h3>
+            </div>
 
             <ngxsmk-h-stack gap="var(--ngxsmk-space-2)">
               <ngxsmk-dropdown-menu [items]="themeMenuItems">
@@ -1417,9 +1419,14 @@ type RadiusKey = keyof typeof RADII;
         <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
         <div class="modal-card" (click)="$event.stopPropagation()">
           <header class="modal-head">
-            <ngxsmk-heading level="h3" style="margin: 0; font-size: 1.15rem; font-weight: 700;">{{
+            <div class="traffic-lights">
+              <span class="light red"></span>
+              <span class="light yellow"></span>
+              <span class="light green"></span>
+            </div>
+            <h3 class="modal-title">{{
               'playground.export.title' | translate
-            }}</ngxsmk-heading>
+            }}</h3>
             <button type="button" class="close-btn" (click)="showDownloadModal.set(false)">
               &times;
             </button>
@@ -1614,6 +1621,21 @@ type RadiusKey = keyof typeof RADII;
 
     .dark .panel-head {
       border-bottom: 1px solid var(--ngxsmk-color-neutral-800);
+    }
+
+    .panel-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .panel-title {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 700;
+      font-family: var(--font-display, 'Plus Jakarta Sans', system-ui, sans-serif);
+      color: var(--ngxsmk-color-on-surface);
+      letter-spacing: -0.015em;
     }
 
     .panel-content {
@@ -1973,48 +1995,38 @@ type RadiusKey = keyof typeof RADII;
       color: var(--ngxsmk-color-on-surface);
     }
 
-    .toolbar-btn.active {
-      background: var(--ngxsmk-color-primary, #7c3aed);
-      color: var(--ngxsmk-color-on-primary, #ffffff);
-      border-color: var(--ngxsmk-color-primary, #7c3aed);
-      box-shadow: 0 2px 8px
-        color-mix(in srgb, var(--ngxsmk-color-primary, #7c3aed) 35%, transparent);
-    }
-
-    .toolbar-btn.active:hover {
-      background: var(--ngxsmk-color-primary-hover, #6d28d9);
-      color: var(--ngxsmk-color-on-primary, #ffffff);
-    }
-
+    .toolbar-btn.active,
+    .toolbar-btn.text-btn.active,
     .toolbar-btn.icon-btn.active {
-      background: var(--ngxsmk-color-primary, #7c3aed);
-      color: var(--ngxsmk-color-on-primary, #ffffff);
-      border-color: var(--ngxsmk-color-primary, #7c3aed);
-      box-shadow: 0 0 0 3px
-        color-mix(in srgb, var(--ngxsmk-color-primary, #7c3aed) 30%, transparent);
+      background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+      color: #ffffff;
+      border-color: #6366f1;
+      box-shadow: 0 2px 10px rgba(99, 102, 241, 0.35);
+    }
+
+    .toolbar-btn.active:hover,
+    .toolbar-btn.text-btn.active:hover {
+      background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+      color: #ffffff;
     }
 
     .toolbar-btn.text-btn {
       border: 1px solid var(--ngxsmk-color-outline);
       background: var(--ngxsmk-color-surface);
-    }
-
-    .toolbar-btn.text-btn.active {
-      background: var(--ngxsmk-color-primary, #7c3aed);
-      color: var(--ngxsmk-color-on-primary, #ffffff);
-      border-color: var(--ngxsmk-color-primary, #7c3aed);
-      box-shadow: 0 0 0 3px
-        color-mix(in srgb, var(--ngxsmk-color-primary, #7c3aed) 30%, transparent);
+      border-radius: var(--radius-md, 8px);
     }
 
     .toolbar-btn.text-btn.primary {
-      background: var(--ngxsmk-color-primary);
-      color: var(--ngxsmk-color-on-primary);
-      border-color: var(--ngxsmk-color-primary);
+      background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+      color: #ffffff;
+      border-color: #6366f1;
+      border-radius: var(--radius-full, 9999px);
+      box-shadow: 0 2px 10px rgba(99, 102, 241, 0.25);
     }
 
     .toolbar-btn.text-btn.primary:hover {
-      background: var(--ngxsmk-color-primary-hover);
+      background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
     }
 
     .toolbar-btn.icon-btn {
@@ -2066,8 +2078,8 @@ type RadiusKey = keyof typeof RADII;
     .canvas-viewport {
       background: var(--ngxsmk-color-background);
       border: 1px solid var(--ngxsmk-color-outline);
-      border-radius: var(--ngxsmk-radius-xl);
-      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.06);
+      border-radius: var(--radius-xl, 22px);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(99, 102, 241, 0.1);
       width: 100%;
       max-width: 900px;
       min-height: 500px;
@@ -2075,10 +2087,20 @@ type RadiusKey = keyof typeof RADII;
       transition:
         width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
         max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
         transform 0.15s ease;
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+    :root.dark .canvas-viewport {
+      border-color: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(99, 102, 241, 0.2);
+    }
+    .canvas-viewport:hover {
+      border-color: rgba(99, 102, 241, 0.4);
+      box-shadow: 0 24px 48px -15px rgba(99, 102, 241, 0.15), 0 0 0 1px rgba(99, 102, 241, 0.3);
     }
 
     .canvas-viewport.phone {
@@ -2102,8 +2124,8 @@ type RadiusKey = keyof typeof RADII;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(9, 9, 11, 0.7);
-      backdrop-filter: blur(8px);
+      background: rgba(9, 13, 22, 0.75);
+      backdrop-filter: blur(12px);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -2114,21 +2136,40 @@ type RadiusKey = keyof typeof RADII;
     .modal-card {
       background: var(--ngxsmk-color-surface);
       border: 1px solid var(--ngxsmk-color-outline);
-      border-radius: var(--ngxsmk-radius-lg);
-      width: 500px;
+      border-radius: var(--radius-xl, 22px);
+      width: 520px;
       max-width: 90vw;
-      box-shadow: var(--ngxsmk-shadow-2xl);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(99, 102, 241, 0.15);
       display: flex;
       flex-direction: column;
       animation: slideIn 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+    }
+    :root.dark .modal-card {
+      background: #0f172a;
+      border-color: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(99, 102, 241, 0.25);
     }
 
     .modal-head {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: var(--ngxsmk-space-4) var(--ngxsmk-space-5);
+      gap: 0.75rem;
+      padding: 1rem 1.25rem;
       border-bottom: 1px solid var(--ngxsmk-color-outline);
+    }
+    :root.dark .modal-head {
+      border-bottom-color: rgba(255, 255, 255, 0.08);
+      background: #0b0f19;
+    }
+
+    .modal-title {
+      margin: 0;
+      font-size: 1.1rem;
+      font-weight: 700;
+      font-family: var(--font-display, 'Plus Jakarta Sans', system-ui, sans-serif);
+      color: var(--ngxsmk-color-on-surface);
+      flex: 1;
     }
 
     .close-btn {
@@ -2137,6 +2178,13 @@ type RadiusKey = keyof typeof RADII;
       background: transparent;
       cursor: pointer;
       color: var(--ngxsmk-color-on-surface-variant);
+      line-height: 1;
+      padding: 0.25rem;
+      border-radius: var(--radius-sm, 6px);
+      transition: color 0.15s ease;
+    }
+    .close-btn:hover {
+      color: var(--ngxsmk-color-on-surface);
     }
 
     .modal-tabs {
@@ -2146,12 +2194,16 @@ type RadiusKey = keyof typeof RADII;
       border-bottom: 1px solid var(--ngxsmk-color-outline);
       gap: var(--ngxsmk-space-1);
     }
+    :root.dark .modal-tabs {
+      background: rgba(255, 255, 255, 0.02);
+      border-bottom-color: rgba(255, 255, 255, 0.06);
+    }
 
     .modal-tab-btn {
       padding: var(--ngxsmk-space-2) var(--ngxsmk-space-4);
-      border: none;
+      border: 1px solid transparent;
       background: transparent;
-      border-radius: var(--ngxsmk-radius-md);
+      border-radius: var(--radius-full, 9999px);
       font-family: inherit;
       font-size: var(--ngxsmk-text-body-sm-size);
       font-weight: 600;
@@ -2165,26 +2217,32 @@ type RadiusKey = keyof typeof RADII;
 
     .modal-tab-btn:focus-visible {
       outline: none;
-      box-shadow: var(--ngxsmk-focus-ring, var(--ngxsmk-shadow-focus));
+      box-shadow: 0 0 0 2px #6366f1;
     }
 
     .modal-tab-btn.active {
       background: var(--ngxsmk-color-surface);
-      color: var(--ngxsmk-color-on-surface);
-      box-shadow: var(--ngxsmk-shadow-sm);
+      color: #6366f1;
+      border-color: rgba(99, 102, 241, 0.2);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    }
+    :root.dark .modal-tab-btn.active {
+      background: rgba(99, 102, 241, 0.15);
+      color: #a5b4fc;
+      border-color: rgba(99, 102, 241, 0.35);
     }
 
     .modal-body {
       padding: var(--ngxsmk-space-5);
-      background: var(--ngxsmk-color-neutral-950);
+      background: #0b0f19;
       overflow-y: auto;
       max-height: 350px;
     }
 
     .export-pre {
       margin: 0;
-      font-family: var(--ngxsmk-font-mono);
-      font-size: var(--ngxsmk-text-body-sm-size);
+      font-family: var(--font-code, 'JetBrains Mono', monospace);
+      font-size: 0.8125rem;
       line-height: 1.6;
       color: #34d399;
       white-space: pre-wrap;

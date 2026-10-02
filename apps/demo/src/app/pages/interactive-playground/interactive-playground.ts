@@ -1,5 +1,4 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import {
   ComponentRegistry,
@@ -9,7 +8,6 @@ import {
 import { NgxsmkPropPanel, type PropDescriptor } from '../../playground/prop-panel';
 import { PlaygroundDemoHost } from './playground-demo-host';
 import { AppNav } from '../../nav/nav';
-import { NgxsmkHeading } from '@ngxsmk/core/heading';
 
 function sel(name: string, opts: string[], def: string, description?: string): PropDescriptor {
   return {
@@ -299,20 +297,20 @@ function buildCode(name: string, values: Record<string, unknown>): string {
 @Component({
   selector: 'app-interactive-playground',
   standalone: true,
-  imports: [RouterLink, NgxsmkPropPanel, PlaygroundDemoHost, TranslatePipe, AppNav, NgxsmkHeading],
+  imports: [NgxsmkPropPanel, PlaygroundDemoHost, TranslatePipe, AppNav],
   template: `
     <app-nav />
     <div class="pg">
       <header class="pg-header">
-        <div class="pg-breadcrumb">
-          <span class="pg-breadcrumb-mark">//</span>
-          <a routerLink="/showcase/explorer">{{ 'iplayground.explorer' | translate }}</a>
-          <span class="pg-breadcrumb-sep">/</span>
-          <span>{{ 'nav.componentPlayground' | translate }}</span>
+        <div class="version-badge">
+          <span class="pulse-dot"></span>
+          <span class="badge-tag">PLAYGROUND</span>
+          <span class="badge-divider">/</span>
+          <span class="badge-text">Interactive Workbench</span>
         </div>
-        <ngxsmk-heading level="h1" class="pg-title">{{
-          'nav.componentPlayground' | translate
-        }}</ngxsmk-heading>
+        <h1 class="pg-title">
+          Component <span class="highlight">Playground</span>
+        </h1>
         <p class="pg-subtitle">
           {{ 'iplayground.subtitle' | translate }}
         </p>
@@ -368,13 +366,22 @@ function buildCode(name: string, values: Record<string, unknown>): string {
           @if (selectedMeta(); as comp) {
             <section class="pg-stage">
               <div class="pg-stage-bar">
-                <span class="pg-stage-dot"></span>
+                <div class="traffic-lights">
+                  <span class="light red"></span>
+                  <span class="light yellow"></span>
+                  <span class="light green"></span>
+                </div>
                 <span class="pg-stage-name">{{ comp.name }}</span>
-                <span class="pg-stage-badge">{{ 'iplayground.live' | translate }}</span>
+                <span class="pg-stage-badge">
+                  <span class="pulse-dot"></span>
+                  {{ 'iplayground.live' | translate }}
+                </span>
                 <button class="pg-stage-copy" (click)="copyCode()">
                   @if (copied()) {
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
                     {{ 'iplayground.copied' | translate }}
                   } @else {
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
                     {{ 'iplayground.copyCode' | translate }}
                   }
                 </button>
@@ -386,10 +393,17 @@ function buildCode(name: string, values: Record<string, unknown>): string {
 
             <div class="pg-panels">
               <section class="pg-card">
-                <ngxsmk-heading level="h3" class="pg-card-title">
-                  {{ 'iplayground.properties' | translate }}
-                  <span class="pg-card-hint">{{ propDescriptors().length }}</span>
-                </ngxsmk-heading>
+                <div class="pg-card-header">
+                  <div class="traffic-lights">
+                    <span class="light red"></span>
+                    <span class="light yellow"></span>
+                    <span class="light green"></span>
+                  </div>
+                  <h3 class="pg-card-title">
+                    {{ 'iplayground.properties' | translate }}
+                    <span class="pg-card-hint">{{ propDescriptors().length }}</span>
+                  </h3>
+                </div>
                 <div class="pg-card-body">
                   @if (propDescriptors().length > 0) {
                     <ngxsmk-prop-panel
@@ -404,9 +418,16 @@ function buildCode(name: string, values: Record<string, unknown>): string {
               </section>
 
               <section class="pg-card">
-                <ngxsmk-heading level="h3" class="pg-card-title">{{
-                  'iplayground.generatedCode' | translate
-                }}</ngxsmk-heading>
+                <div class="pg-card-header">
+                  <div class="traffic-lights">
+                    <span class="light red"></span>
+                    <span class="light yellow"></span>
+                    <span class="light green"></span>
+                  </div>
+                  <h3 class="pg-card-title">{{
+                    'iplayground.generatedCode' | translate
+                  }}</h3>
+                </div>
                 <div class="pg-card-body">
                   <pre class="pg-code"><code>{{ generatedCode() }}</code></pre>
                 </div>
@@ -416,9 +437,16 @@ function buildCode(name: string, values: Record<string, unknown>): string {
             <section class="pg-api">
               @if (comp.inputs.length > 0) {
                 <div class="pg-detail-section">
-                  <ngxsmk-heading level="h3" class="pg-detail-section-title">{{
-                    'iplayground.inputs' | translate
-                  }}</ngxsmk-heading>
+                  <div class="pg-card-header">
+                    <div class="traffic-lights">
+                      <span class="light red"></span>
+                      <span class="light yellow"></span>
+                      <span class="light green"></span>
+                    </div>
+                    <h3 class="pg-detail-section-title">{{
+                      'iplayground.inputs' | translate
+                    }}</h3>
+                  </div>
                   <div class="pg-table-wrap">
                     <table class="pg-table">
                       <thead>
@@ -460,9 +488,16 @@ function buildCode(name: string, values: Record<string, unknown>): string {
 
               @if (comp.outputs.length > 0) {
                 <div class="pg-detail-section">
-                  <ngxsmk-heading level="h3" class="pg-detail-section-title">{{
-                    'iplayground.outputs' | translate
-                  }}</ngxsmk-heading>
+                  <div class="pg-card-header">
+                    <div class="traffic-lights">
+                      <span class="light red"></span>
+                      <span class="light yellow"></span>
+                      <span class="light green"></span>
+                    </div>
+                    <h3 class="pg-detail-section-title">{{
+                      'iplayground.outputs' | translate
+                    }}</h3>
+                  </div>
                   <div class="pg-table-wrap">
                     <table class="pg-table">
                       <thead>
@@ -492,9 +527,16 @@ function buildCode(name: string, values: Record<string, unknown>): string {
 
               @if (comp.signals.length > 0) {
                 <div class="pg-detail-section">
-                  <ngxsmk-heading level="h3" class="pg-detail-section-title">{{
-                    'iplayground.signals' | translate
-                  }}</ngxsmk-heading>
+                  <div class="pg-card-header">
+                    <div class="traffic-lights">
+                      <span class="light red"></span>
+                      <span class="light yellow"></span>
+                      <span class="light green"></span>
+                    </div>
+                    <h3 class="pg-detail-section-title">{{
+                      'iplayground.signals' | translate
+                    }}</h3>
+                  </div>
                   <div class="pg-table-wrap">
                     <table class="pg-table">
                       <thead>
@@ -532,9 +574,16 @@ function buildCode(name: string, values: Record<string, unknown>): string {
 
               @if (comp.methods.length > 0) {
                 <div class="pg-detail-section">
-                  <ngxsmk-heading level="h3" class="pg-detail-section-title">{{
-                    'iplayground.methods' | translate
-                  }}</ngxsmk-heading>
+                  <div class="pg-card-header">
+                    <div class="traffic-lights">
+                      <span class="light red"></span>
+                      <span class="light yellow"></span>
+                      <span class="light green"></span>
+                    </div>
+                    <h3 class="pg-detail-section-title">{{
+                      'iplayground.methods' | translate
+                    }}</h3>
+                  </div>
                   <div class="pg-table-wrap">
                     <table class="pg-table">
                       <thead>
@@ -569,9 +618,9 @@ function buildCode(name: string, values: Record<string, unknown>): string {
           } @else {
             <div class="pg-empty">
               <div class="pg-empty-icon">◈</div>
-              <ngxsmk-heading level="h2">{{
+              <h2 class="pg-empty-title">{{
                 'iplayground.selectComponent' | translate
-              }}</ngxsmk-heading>
+              }}</h2>
               <p>{{ 'iplayground.pickComponent' | translate }}</p>
             </div>
           }
@@ -593,57 +642,40 @@ function buildCode(name: string, values: Record<string, unknown>): string {
     .pg {
       max-width: 1400px;
       margin: 0 auto;
-      padding: 2rem 1.5rem 4rem;
+      padding: 2.5rem 1.5rem 5rem;
       color: var(--ngxsmk-color-on-surface);
     }
 
-    .pg-breadcrumb {
-      display: flex;
-      align-items: center;
-      gap: 0.375rem;
-      font-family: var(--ngxsmk-font-mono);
-      font-size: var(--ngxsmk-text-body-sm-size);
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      color: var(--ngxsmk-color-on-surface-variant);
-      margin-bottom: 0.625rem;
-    }
-    .pg-breadcrumb-mark {
-      color: var(--ngxsmk-color-primary);
-    }
-    .pg-breadcrumb a {
-      color: var(--ngxsmk-color-on-surface-variant);
-      text-decoration: none;
-    }
-    .pg-breadcrumb a:hover {
-      color: var(--ngxsmk-color-primary);
-    }
-    .pg-breadcrumb a:focus-visible {
-      outline: none;
-      box-shadow: var(--ngxsmk-focus-ring, var(--ngxsmk-shadow-focus));
-      border-radius: var(--ngxsmk-radius-sm);
+    .pg-header {
+      margin-bottom: 2rem;
     }
 
-    ngxsmk-heading.pg-title {
-      font-size: clamp(1.75rem, 3.5vw, 2.25rem);
+    .pg-title {
+      font-size: clamp(2rem, 4vw, 2.75rem);
       font-weight: 800;
-      margin: 0 0 0.375rem;
-      font-family: 'Plus Jakarta Sans', var(--ngxsmk-font-sans, system-ui), sans-serif;
-      letter-spacing: -0.03em;
-      line-height: 1.1;
+      margin: 0.75rem 0 0.5rem;
+      font-family: var(--font-display, 'Plus Jakarta Sans', system-ui, sans-serif);
+      letter-spacing: -0.035em;
+      line-height: 1.15;
+      color: var(--ngxsmk-color-on-surface);
+    }
+    .pg-title .highlight {
+      background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #f59e0b 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     .pg-subtitle {
-      font-size: var(--ngxsmk-text-body-md-size);
+      font-size: 1.0625rem;
       color: var(--ngxsmk-color-on-surface-variant);
-      margin: 0 0 1.75rem;
-      max-width: 34rem;
+      margin: 0;
+      max-width: 38rem;
       line-height: 1.6;
     }
 
     .pg-shell {
       display: grid;
-      grid-template-columns: 240px minmax(0, 1fr);
-      gap: 1.5rem;
+      grid-template-columns: 260px minmax(0, 1fr);
+      gap: 1.75rem;
       align-items: start;
     }
 
@@ -653,14 +685,24 @@ function buildCode(name: string, values: Record<string, unknown>): string {
       top: 5rem;
       display: flex;
       flex-direction: column;
-      gap: 0.75rem;
+      gap: 1rem;
+      background: var(--ngxsmk-color-surface);
+      border: 1px solid var(--ngxsmk-color-outline);
+      border-radius: var(--radius-xl, 22px);
+      padding: 1.25rem;
+      box-shadow: 0 4px 20px -5px rgba(0, 0, 0, 0.04);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    :root.dark .pg-sidebar {
+      border-color: rgba(255, 255, 255, 0.08);
+      background: #0f172a;
     }
     .pg-search {
       position: relative;
     }
     .pg-search-icon {
       position: absolute;
-      left: 0.75rem;
+      left: 1rem;
       top: 50%;
       transform: translateY(-50%);
       color: var(--ngxsmk-color-on-surface-variant);
@@ -668,30 +710,32 @@ function buildCode(name: string, values: Record<string, unknown>): string {
     }
     .pg-search-input {
       width: 100%;
-      padding: 0.5rem 0.75rem 0.5rem 2.25rem;
+      padding: 0.6rem 0.875rem 0.6rem 2.5rem;
       border: 1px solid var(--ngxsmk-color-outline);
-      border-radius: var(--ngxsmk-radius-md);
-      background: var(--ngxsmk-color-surface);
+      border-radius: var(--radius-full, 9999px);
+      background: var(--ngxsmk-color-surface-variant);
       font-size: var(--ngxsmk-text-body-sm-size);
       font-family: inherit;
       color: var(--ngxsmk-color-on-surface);
       outline: none;
       box-sizing: border-box;
-      transition:
-        border-color var(--ngxsmk-duration-fast, 150ms) var(--ngxsmk-ease-out),
-        box-shadow var(--ngxsmk-duration-fast, 150ms) var(--ngxsmk-ease-out);
+      transition: all 0.2s ease;
+    }
+    :root.dark .pg-search-input {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255, 255, 255, 0.08);
     }
     .pg-search-input:focus {
-      border-color: var(--ngxsmk-color-ring);
-      box-shadow: var(--ngxsmk-focus-ring, var(--ngxsmk-shadow-focus));
+      border-color: #6366f1;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
     }
 
     .pg-groups {
-      max-height: calc(100vh - 7rem);
+      max-height: calc(100vh - 12rem);
       overflow-y: auto;
       display: flex;
       flex-direction: column;
-      gap: 0.875rem;
+      gap: 1rem;
       padding-right: 0.25rem;
     }
     .pg-groups::-webkit-scrollbar {
@@ -703,45 +747,50 @@ function buildCode(name: string, values: Record<string, unknown>): string {
     }
     .pg-group-label {
       font-family: var(--ngxsmk-font-mono);
-      font-size: var(--ngxsmk-text-body-xs-size);
-      font-weight: 500;
-      letter-spacing: var(--ngxsmk-tracking-wide, 0.08em);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--ngxsmk-color-on-surface-variant);
       margin-bottom: 0.375rem;
+      padding-left: 0.5rem;
     }
     .pg-item {
       display: block;
       width: 100%;
       text-align: start;
-      padding: 0.4rem 0.625rem;
-      border: none;
-      border-radius: var(--ngxsmk-radius-md);
+      padding: 0.5rem 0.75rem;
+      border: 1px solid transparent;
+      border-radius: var(--radius-md, 10px);
       background: transparent;
       cursor: pointer;
       font-family: inherit;
       font-size: var(--ngxsmk-text-body-sm-size);
       color: var(--ngxsmk-color-on-surface);
-      transition:
-        background var(--ngxsmk-duration-fast, 120ms) var(--ngxsmk-ease-out),
-        color var(--ngxsmk-duration-fast, 120ms) var(--ngxsmk-ease-out);
+      transition: all 0.15s ease-out;
     }
     .pg-item:hover {
       background: var(--ngxsmk-color-surface-hover);
     }
     .pg-item:focus-visible {
       outline: none;
-      box-shadow: var(--ngxsmk-focus-ring, var(--ngxsmk-shadow-focus));
+      box-shadow: 0 0 0 2px #6366f1;
     }
-    /* Inked stamp — same active treatment as the register's filter tabs. */
     .pg-item.active {
-      background: var(--ngxsmk-color-on-surface);
-      color: var(--ngxsmk-color-surface);
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(99, 102, 241, 0.04));
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      color: #6366f1;
       font-weight: 600;
+    }
+    :root.dark .pg-item.active {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.25), rgba(99, 102, 241, 0.08));
+      border-color: rgba(99, 102, 241, 0.4);
+      color: #a5b4fc;
     }
     .pg-empty-hint {
       font-size: var(--ngxsmk-text-body-sm-size);
       color: var(--ngxsmk-color-on-surface-variant);
+      padding: 0.5rem;
     }
 
     /* Main */
@@ -749,118 +798,170 @@ function buildCode(name: string, values: Record<string, unknown>): string {
       min-width: 0;
       display: flex;
       flex-direction: column;
-      gap: 1.25rem;
+      gap: 1.5rem;
     }
 
-    /* The stage: bench top with a title-block bar. */
+    /* Stage */
     .pg-stage {
       border: 1px solid var(--ngxsmk-color-outline);
-      border-radius: var(--ngxsmk-radius-lg);
+      border-radius: var(--radius-xl, 22px);
       overflow: hidden;
       background: var(--ngxsmk-color-surface);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    :root.dark .pg-stage {
+      border-color: rgba(255, 255, 255, 0.08);
+      background: #0f172a;
+    }
+    .pg-stage:hover {
+      border-color: rgba(99, 102, 241, 0.35);
+      box-shadow: 0 16px 36px -10px rgba(99, 102, 241, 0.12);
     }
     .pg-stage-bar {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem 0.75rem;
+      gap: 0.75rem;
+      padding: 0.75rem 1.25rem;
       border-bottom: 1px solid var(--ngxsmk-color-outline);
       background: var(--ngxsmk-color-surface);
     }
-    .pg-stage-dot {
-      width: 0.5rem;
-      height: 0.5rem;
-      border-radius: 50%;
-      background: var(--ngxsmk-color-success);
+    :root.dark .pg-stage-bar {
+      border-bottom-color: rgba(255, 255, 255, 0.08);
+      background: #0b0f19;
     }
     .pg-stage-name {
-      font-family: var(--ngxsmk-font-mono);
+      font-family: var(--font-code, 'JetBrains Mono', monospace);
       font-size: var(--ngxsmk-text-body-sm-size);
-      font-weight: 500;
+      font-weight: 600;
       color: var(--ngxsmk-color-on-surface);
     }
     .pg-stage-badge {
-      font-family: var(--ngxsmk-font-mono);
-      font-size: var(--ngxsmk-text-body-xs-size);
-      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      font-family: var(--font-code, 'JetBrains Mono', monospace);
+      font-size: 0.6875rem;
+      font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: var(--ngxsmk-tracking-wide, 0.08em);
-      color: var(--ngxsmk-color-on-success-container);
-      background: var(--ngxsmk-color-success-container);
-      padding: 0.1rem 0.4rem;
-      border-radius: var(--ngxsmk-radius-sm);
+      letter-spacing: 0.06em;
+      color: #10b981;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      padding: 0.15rem 0.5rem;
+      border-radius: var(--radius-full, 9999px);
+    }
+    .pg-stage-badge .pulse-dot {
+      width: 6px;
+      height: 6px;
     }
     .pg-stage-copy {
       margin-inline-start: auto;
-      padding: 0.25rem 0.625rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      padding: 0.35rem 0.75rem;
       border: 1px solid var(--ngxsmk-color-outline);
-      border-radius: var(--ngxsmk-radius-sm);
+      border-radius: var(--radius-full, 9999px);
       background: var(--ngxsmk-color-surface);
       color: var(--ngxsmk-color-on-surface-variant);
-      font-size: var(--ngxsmk-text-body-xs-size);
+      font-size: 0.75rem;
       font-weight: 600;
       cursor: pointer;
       font-family: inherit;
-      transition:
-        border-color var(--ngxsmk-duration-fast, 120ms) var(--ngxsmk-ease-out),
-        color var(--ngxsmk-duration-fast, 120ms) var(--ngxsmk-ease-out);
+      transition: all 0.15s ease-out;
+    }
+    :root.dark .pg-stage-copy {
+      border-color: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.04);
+      color: #94a3b8;
     }
     .pg-stage-copy:hover {
-      border-color: var(--ngxsmk-color-primary);
-      color: var(--ngxsmk-color-primary);
+      border-color: #6366f1;
+      color: #6366f1;
+      background: rgba(99, 102, 241, 0.08);
+    }
+    :root.dark .pg-stage-copy:hover {
+      color: #a5b4fc;
+      border-color: #818cf8;
+      background: rgba(99, 102, 241, 0.15);
     }
     .pg-stage-copy:focus-visible {
       outline: none;
-      box-shadow: var(--ngxsmk-focus-ring, var(--ngxsmk-shadow-focus));
+      box-shadow: 0 0 0 2px #6366f1;
     }
     .pg-stage-canvas {
-      min-height: 220px;
-      padding: 2.5rem 1.5rem;
+      min-height: 240px;
+      padding: 3rem 1.5rem;
       display: flex;
       align-items: center;
       justify-content: center;
       background-color: var(--ngxsmk-color-surface);
-      background-image: radial-gradient(var(--ngxsmk-color-outline) 1px, transparent 1px);
-      background-size: 16px 16px;
+      background-image: radial-gradient(color-mix(in srgb, var(--ngxsmk-color-outline-strong) 40%, transparent) 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+    :root.dark .pg-stage-canvas {
+      background-color: #0d1322;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
     }
 
     .pg-panels {
       display: grid;
-      grid-template-columns: minmax(260px, 340px) 1fr;
-      gap: 1.25rem;
+      grid-template-columns: minmax(280px, 360px) 1fr;
+      gap: 1.5rem;
     }
     .pg-card {
       border: 1px solid var(--ngxsmk-color-outline);
-      border-radius: var(--ngxsmk-radius-lg);
+      border-radius: var(--radius-xl, 22px);
       background: var(--ngxsmk-color-surface);
       overflow: hidden;
+      box-shadow: 0 4px 20px -5px rgba(0, 0, 0, 0.04);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    /* Panel titles are mono annotations — the title-block voice. */
-    ngxsmk-heading.pg-card-title {
+    :root.dark .pg-card {
+      border-color: rgba(255, 255, 255, 0.08);
+      background: #0f172a;
+    }
+    .pg-card:hover {
+      border-color: rgba(99, 102, 241, 0.35);
+      box-shadow: 0 12px 30px -10px rgba(99, 102, 241, 0.12);
+    }
+    .pg-card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1.25rem;
+      border-bottom: 1px solid var(--ngxsmk-color-outline);
+      background: var(--ngxsmk-color-surface);
+    }
+    :root.dark .pg-card-header {
+      border-bottom-color: rgba(255, 255, 255, 0.08);
+      background: #0b0f19;
+    }
+    .pg-card-title {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      flex: 1;
       margin: 0;
-      padding: 0.75rem 1rem;
-      font-family: var(--ngxsmk-font-mono);
-      font-size: var(--ngxsmk-text-body-xs-size);
-      font-weight: 500;
+      font-family: var(--font-code, 'JetBrains Mono', monospace);
+      font-size: 0.75rem;
+      font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: var(--ngxsmk-tracking-wide, 0.08em);
+      letter-spacing: 0.08em;
       color: var(--ngxsmk-color-on-surface-variant);
-      border-bottom: 1px solid var(--ngxsmk-color-outline);
     }
     .pg-card-hint {
-      font-family: var(--ngxsmk-font-mono);
-      font-size: var(--ngxsmk-text-body-xs-size);
-      font-weight: 500;
+      font-family: var(--font-code, 'JetBrains Mono', monospace);
+      font-size: 0.6875rem;
+      font-weight: 600;
       color: var(--ngxsmk-color-on-surface);
       background: var(--ngxsmk-color-surface-variant);
-      border-radius: var(--ngxsmk-radius-sm);
+      border-radius: var(--radius-sm, 6px);
       padding: 0.1rem 0.45rem;
     }
     .pg-card-body {
-      padding: 1rem;
+      padding: 1.25rem;
     }
     .pg-muted {
       font-size: var(--ngxsmk-text-body-sm-size);
@@ -869,41 +970,49 @@ function buildCode(name: string, values: Record<string, unknown>): string {
     }
     .pg-code {
       margin: 0;
-      padding: 0.875rem;
-      background: var(--ngxsmk-color-surface-variant);
-      border-radius: var(--ngxsmk-radius-md);
-      font-family: var(--ngxsmk-font-mono);
-      font-size: var(--ngxsmk-text-body-sm-size);
+      padding: 1rem;
+      background: #0b0f19;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-md, 12px);
+      font-family: var(--font-code, 'JetBrains Mono', monospace);
+      font-size: 0.8125rem;
       line-height: 1.6;
       overflow-x: auto;
       white-space: pre-wrap;
       word-break: break-word;
-      color: var(--ngxsmk-color-on-surface);
+      color: #e2e8f0;
     }
 
     /* API tables */
     .pg-api {
       display: flex;
       flex-direction: column;
-      gap: 1.25rem;
+      gap: 1.5rem;
     }
     .pg-detail-section {
       border: 1px solid var(--ngxsmk-color-outline);
-      border-radius: var(--ngxsmk-radius-lg);
+      border-radius: var(--radius-xl, 22px);
       background: var(--ngxsmk-color-surface);
       overflow: hidden;
+      box-shadow: 0 4px 20px -5px rgba(0, 0, 0, 0.04);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    ngxsmk-heading.pg-detail-section-title {
+    :root.dark .pg-detail-section {
+      border-color: rgba(255, 255, 255, 0.08);
+      background: #0f172a;
+    }
+    .pg-detail-section:hover {
+      border-color: rgba(99, 102, 241, 0.35);
+      box-shadow: 0 12px 30px -10px rgba(99, 102, 241, 0.12);
+    }
+    .pg-detail-section-title {
       margin: 0;
-      padding: 0.75rem 1rem;
-      font-family: var(--ngxsmk-font-mono);
-      font-size: var(--ngxsmk-text-body-xs-size);
-      font-weight: 500;
+      font-family: var(--font-code, 'JetBrains Mono', monospace);
+      font-size: 0.75rem;
+      font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: var(--ngxsmk-tracking-wide, 0.08em);
+      letter-spacing: 0.08em;
       color: var(--ngxsmk-color-on-surface-variant);
-      border-bottom: 1px solid var(--ngxsmk-color-outline);
-      background: var(--ngxsmk-color-surface);
     }
     .pg-table-wrap {
       overflow-x: auto;
@@ -916,29 +1025,42 @@ function buildCode(name: string, values: Record<string, unknown>): string {
     .pg-table th,
     .pg-table td {
       text-align: start;
-      padding: 0.5rem 1rem;
+      padding: 0.75rem 1.25rem;
       border-bottom: 1px solid var(--ngxsmk-color-outline);
       color: var(--ngxsmk-color-on-surface);
       vertical-align: top;
     }
+    :root.dark .pg-table th,
+    :root.dark .pg-table td {
+      border-bottom-color: rgba(255, 255, 255, 0.06);
+    }
     .pg-table th {
-      font-family: var(--ngxsmk-font-mono);
-      font-weight: 500;
+      font-family: var(--font-code, 'JetBrains Mono', monospace);
+      font-weight: 600;
       color: var(--ngxsmk-color-on-surface-variant);
-      font-size: var(--ngxsmk-text-body-xs-size);
+      font-size: 0.6875rem;
       text-transform: uppercase;
-      letter-spacing: var(--ngxsmk-tracking-wide, 0.08em);
+      letter-spacing: 0.08em;
       background: var(--ngxsmk-color-surface-variant);
+    }
+    :root.dark .pg-table th {
+      background: rgba(255, 255, 255, 0.02);
     }
     .pg-table tr:last-child td {
       border-bottom: none;
     }
     .pg-table code {
-      font-family: var(--ngxsmk-font-mono);
-      font-size: var(--ngxsmk-text-body-sm-size);
+      font-family: var(--font-code, 'JetBrains Mono', monospace);
+      font-size: 0.8125rem;
       background: var(--ngxsmk-color-surface-variant);
-      padding: 0.125rem 0.25rem;
-      border-radius: var(--ngxsmk-radius-sm);
+      padding: 0.15rem 0.375rem;
+      border-radius: var(--radius-sm, 6px);
+      border: 1px solid var(--ngxsmk-color-outline);
+    }
+    :root.dark .pg-table code {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.08);
+      color: #38bdf8;
     }
 
     /* Blank sheet — matches the register's empty state. */
@@ -950,19 +1072,21 @@ function buildCode(name: string, values: Record<string, unknown>): string {
       padding: 4rem 2rem;
       text-align: center;
       color: var(--ngxsmk-color-on-surface-variant);
-      border: 1px dashed var(--ngxsmk-color-outline-strong);
-      border-radius: var(--ngxsmk-radius-xl);
+      border: 1px dashed rgba(99, 102, 241, 0.3);
+      border-radius: var(--radius-xl, 22px);
       background: var(--ngxsmk-color-surface);
     }
     .pg-empty-icon {
-      font-size: var(--ngxsmk-text-display-md-size);
-      opacity: var(--ngxsmk-opacity-faint, 0.3);
+      font-size: 2.5rem;
+      opacity: 0.4;
       margin-bottom: 0.75rem;
+      color: #6366f1;
     }
-    .pg-empty ngxsmk-heading {
-      margin: 0 0 0.25rem;
-      font-family: 'Plus Jakarta Sans', var(--ngxsmk-font-sans, system-ui), sans-serif;
-      font-size: var(--ngxsmk-text-title-md-size);
+    .pg-empty-title {
+      margin: 0 0 0.5rem;
+      font-family: var(--font-display, 'Plus Jakarta Sans', system-ui, sans-serif);
+      font-size: 1.35rem;
+      font-weight: 700;
       letter-spacing: -0.015em;
       color: var(--ngxsmk-color-on-surface);
     }
@@ -989,7 +1113,7 @@ function buildCode(name: string, values: Record<string, unknown>): string {
 
     @media (max-width: 640px) {
       .pg {
-        padding: 1.25rem 1rem 3rem;
+        padding: 1.5rem 1rem 3.5rem;
       }
     }
   `,

@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "NgxsmkNgAdd",
+  "title": "NGXSMK ng-add",
+  "type": "object",
+  "properties": {
+    "project": {
+      "type": "string",
+      "description": "Angular project name (defaults to the first workspace project)."
+    },
+    "theme": {
+      "type": "string",
+      "enum": ["classic", "emerald", "ink", "violet", "neutral", "rose"],
+      "default": "classic",
+      "description": "Theme CSS to wire into angular.json. classic/emerald → ngxsmk.css (stable default)."
+    },
+    "scaffold": {
+      "type": "boolean",
+      "default": true,
+      "description": "Create a sample starter page under src/app/ngxsmk-starter."
+    }
+  }
+}

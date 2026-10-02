@@ -1,7 +1,18 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, booleanAttribute, input } from '@angular/core';
 
 export type NgxsmkEmptyStateVariant = 'default' | 'error' | 'success';
 
+/**
+ * Centered empty / error / success placeholder with optional projected icon and actions.
+ * Prefer projecting SVG via `[ngxsmkEmptyIcon]` over the deprecated `icon` HTML string.
+ *
+ * ```html
+ * <ngxsmk-empty-state title="No results" description="Try a different filter.">
+ *   <svg ngxsmkEmptyIcon …></svg>
+ *   <button ngxsmk-button>Clear filters</button>
+ * </ngxsmk-empty-state>
+ * ```
+ */
 @Component({
   standalone: true,
   selector: 'ngxsmk-empty-state',
@@ -9,8 +20,8 @@ export type NgxsmkEmptyStateVariant = 'default' | 'error' | 'success';
     <div class="ngxsmk-empty-state__wrapper">
       <div class="ngxsmk-empty-state__icon-container" [attr.data-variant]="variant()">
         <ng-content select="[ngxsmkEmptyIcon], svg" />
-        @if (icon()) {
-          <div [innerHTML]="icon()"></div>
+        @if (icon() && !hideLegacyIcon()) {
+          <span class="ngxsmk-empty-state__legacy-icon" aria-hidden="true">{{ icon() }}</span>
         }
       </div>
       @if (title()) {
@@ -53,6 +64,10 @@ export type NgxsmkEmptyStateVariant = 'default' | 'error' | 'success';
       color: var(--ngxsmk-color-on-surface-variant);
     }
 
+    .ngxsmk-empty-state__icon-container:empty {
+      display: none;
+    }
+
     .ngxsmk-empty-state__icon-container[data-variant='error'] {
       background: var(--ngxsmk-color-error-container);
       color: var(--ngxsmk-color-error);
@@ -63,6 +78,11 @@ export type NgxsmkEmptyStateVariant = 'default' | 'error' | 'success';
       background: var(--ngxsmk-color-success-container);
       color: var(--ngxsmk-color-success);
       border-color: color-mix(in srgb, var(--ngxsmk-color-success) 25%, transparent);
+    }
+
+    .ngxsmk-empty-state__legacy-icon {
+      font-size: 1.5rem;
+      line-height: 1;
     }
 
     .ngxsmk-empty-state__title {
@@ -92,8 +112,14 @@ export type NgxsmkEmptyStateVariant = 'default' | 'error' | 'success';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgxsmkEmptyState {
+  /**
+   * @deprecated Prefer projected SVG/`[ngxsmkEmptyIcon]`. Plain text emoji is OK;
+   * raw HTML strings are no longer injected.
+   */
   readonly icon = input('');
   readonly title = input('');
   readonly description = input('');
   readonly variant = input<NgxsmkEmptyStateVariant>('default');
+  /** Hide the legacy `icon` text slot when projecting custom media. */
+  readonly hideLegacyIcon = input(false, { transform: booleanAttribute });
 }

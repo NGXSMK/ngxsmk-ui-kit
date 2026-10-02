@@ -1,6 +1,6 @@
 # NGXSMK UI Kit
 
-> Angular-first, MIT-licensed UI ecosystem: 257+ signals-native, zoneless
+> Angular-first, MIT-licensed UI ecosystem: 263+ signals-native, zoneless
 > standalone components with a universal design-token engine (CSS variables,
 > SCSS, Tailwind, StyleX, Tokens Studio export). MIT licensed, no paid tiers.
 > Current version: 3.0.0. Supports Angular 17.3 through 22.
@@ -29,7 +29,7 @@ Usage rules for generated code:
 - NgxsmkAiChat (`ngxsmk-ai-chat`) — @ngxsmk/core/ai-chat
 - NgxsmkAiThinkingIndicator (`ngxsmk-ai-thinking-indicator`) — @ngxsmk/core/ai-thinking-indicator — Animated glowing orb, pulse wave, and skeleton indicator for active AI reasoning
 - NgxsmkAlert (`ngxsmk-alert`) — @ngxsmk/core/alert — Inline notification
-- NgxsmkAlertDialog (`ngxsmk-alert-dialog`) — @ngxsmk/core/alert-dialog
+- NgxsmkAlertDialog (`ngxsmk-alert-dialog`) — @ngxsmk/core/alert-dialog — Confirm / cancel modal built on the native `<dialog>` element
 - NgxsmkAnimate (`[ngxsmkAnimate]`) — @ngxsmk/core/animation — Plays an enter animation on the host element once it is rendered
 - NgxsmkDrag (`[ngxsmkDrag]`) — @ngxsmk/core/animation — Enables drag gestures on the host element using `motion`'s drag system
 - NgxsmkHover (`[ngxsmkHover]`) — @ngxsmk/core/animation — Animates the host element on hover using `motion.hover()`
@@ -52,6 +52,7 @@ Usage rules for generated code:
 - NgxsmkBadge (`ngxsmk-badge`) — @ngxsmk/core/badge — Small status descriptor for counts and labels
 - NgxsmkBanner (`ngxsmk-banner`) — @ngxsmk/core/banner
 - NgxsmkBlockquote (`ngxsmk-blockquote`) — @ngxsmk/core/blockquote
+- NgxsmkBreadcrumb (`ngxsmk-breadcrumb`) — @ngxsmk/core/breadcrumb — Composed breadcrumb trail
 - NgxsmkBreadcrumbItem (`ngxsmk-breadcrumb-item`) — @ngxsmk/core/breadcrumb-item
 - NgxsmkButton (`button[ngxsmk-button], a[ngxsmk-button]`) — @ngxsmk/core/button — Button applied to native `<button>`/`<a>` elements so browser semantics, forms integration, and keyboard behavior come for free
 - NgxsmkButtonGroup (`ngxsmk-button-group, [ngxsmkButtonGroup]`) — @ngxsmk/core/button-group
@@ -90,22 +91,23 @@ Usage rules for generated code:
 - NgxsmkCheckboxList (`ngxsmk-checkbox-list`) — @ngxsmk/core/checkbox-list
 - NgxsmkCheckboxListItem (`[ngxsmkCheckboxListItem]`) — @ngxsmk/core/checkbox-list-item
 - NgxsmkCheckboxListItemComponent (`ngxsmk-checkbox-list-item, [ngxsmkCheckboxListItem]`) — @ngxsmk/core/checkbox-list-item
+- NgxsmkChipGroup (`ngxsmk-chip-group`) — @ngxsmk/core/chip-group — Toggleable chip group for single- or multi-select from a fixed option set
 - NgxsmkCitation (`ngxsmk-citation`) — @ngxsmk/core/citation
-- NgxsmkCitationViewer (`ngxsmk-citation-viewer`) — @ngxsmk/core/citation-viewer
+- NgxsmkCitationViewer (`ngxsmk-citation-viewer`) — @ngxsmk/core/citation-viewer — Single citation card or a stacked list of sources for AI answers
 - NgxsmkCode (`code[ngxsmk-code]`) — @ngxsmk/core/code
-- NgxsmkCodeBlock (`ngxsmk-code-block`) — @ngxsmk/core/code-block
+- NgxsmkCodeBlock (`ngxsmk-code-block`) — @ngxsmk/core/code-block — Code panel with copy control, language label, and optional streaming reveal for AI assistant UIs
 - NgxsmkCodeEditor (`ngxsmk-code-editor`) — @ngxsmk/core/code-editor — Code editor container with line numbers, language tag header, copy button, and editable canvas
 - NgxsmkCollapsible (`ngxsmk-collapsible`) — @ngxsmk/core/collapsible
 - NgxsmkColorPicker (`ngxsmk-color-picker`) — @ngxsmk/core/color-picker — Signal-native interactive color picker component with hue slider, presets, and HEX input
 - NgxsmkCombobox (`ngxsmk-combobox`) — @ngxsmk/core/combobox
-- NgxsmkCommandPalette (`ngxsmk-command-palette`) — @ngxsmk/core/command-palette
+- NgxsmkCommandPalette (`ngxsmk-command-palette`) — @ngxsmk/core/command-palette — Keyboard-first command palette (Ctrl/Cmd+K by default)
 - NgxsmkCompareImage (`ngxsmk-compare-image`) — @ngxsmk/core/compare-image — Interactive before/after split drag-slider image comparison component
 - NgxsmkContainer (`ngxsmk-container`) — @ngxsmk/core/container
 - NgxsmkContextMenu (`ngxsmk-context-menu`) — @ngxsmk/core/context-menu
 - NgxsmkConversationList (`ngxsmk-conversation-list`) — @ngxsmk/core/conversation-list
 - NgxsmkCopyToClipboard (`[ngxsmkCopyToClipboard]`) — @ngxsmk/core/copy-to-clipboard
 - NgxsmkCreditCardInput (`ngxsmk-credit-card-input`) — @ngxsmk/core/credit-card-input — Auto-formatting credit/debit card number, expiry, and CVV payment input component with brand detection
-- NgxsmkDataTable (`ngxsmk-data-table`) — @ngxsmk/core/data-table
+- NgxsmkDataTable (`ngxsmk-data-table`) — @ngxsmk/core/data-table — Paginated, filterable data table built on `ngxsmk-table`
 - NgxsmkDatePicker (`ngxsmk-date-picker`) — @ngxsmk/core/date-picker
 - NgxsmkDateRangePicker (`ngxsmk-date-range-picker`) — @ngxsmk/core/date-range-picker — Signal-native date range picker with dual inputs, quick preset range buttons, and calendar grid
 - NgxsmkDiagramBuilder (`ngxsmk-diagram-builder`) — @ngxsmk/core/diagram-builder
@@ -115,7 +117,7 @@ Usage rules for generated code:
 - NgxsmkDivider (`ngxsmk-divider`) — @ngxsmk/core/divider — Visual separator
 - NgxsmkDock (`ngxsmk-dock`) — @ngxsmk/core/dock — Floating macOS-style application dock with icon tooltips and magnification hover effects
 - NgxsmkDropdownMenu (`ngxsmk-dropdown-menu`) — @ngxsmk/core/dropdown-menu
-- NgxsmkEmptyState (`ngxsmk-empty-state`) — @ngxsmk/core/empty-state
+- NgxsmkEmptyState (`ngxsmk-empty-state`) — @ngxsmk/core/empty-state — Centered empty / error / success placeholder with optional projected icon and actions
 - NgxsmkExpandingArrowButton (`ngxsmk-expanding-arrow-button`) — @ngxsmk/core/expanding-arrow-button — An accent-tile button that expands into a dotted-arrow trail on hover or focus
 - NgxsmkFab (`button[ngxsmkFab], a[ngxsmkFab]`) — @ngxsmk/core/fab
 - NgxsmkField (`ngxsmk-field`) — @ngxsmk/core/field
@@ -134,12 +136,14 @@ Usage rules for generated code:
 - NgxsmkHStack (`ngxsmk-h-stack`) — @ngxsmk/core/h-stack
 - NgxsmkVStack (`ngxsmk-v-stack`) — @ngxsmk/core/h-stack
 - NgxsmkHeading (`ngxsmk-heading`) — @ngxsmk/core/heading
-- NgxsmkHoverCard (`ngxsmk-hover-card`) — @ngxsmk/core/hover-card
+- NgxsmkHoverCard (`ngxsmk-hover-card`) — @ngxsmk/core/hover-card — Hover / focus card that reveals rich content next to a trigger
+- NgxsmkIcon (`ngxsmk-icon`) — @ngxsmk/core/icon — Inline icon sized by `--ngxsmk-icon-*` tokens
 - NgxsmkImageCropper (`ngxsmk-image-cropper`) — @ngxsmk/core/image-cropper — Image aspect ratio crop, rotation, and zoom control box
 - NgxsmkImageViewer (`ngxsmk-image-viewer`) — @ngxsmk/core/image-viewer
 - NgxsmkInputDirective (`input[ngxsmkInput], textarea[ngxsmkInput]`) — @ngxsmk/core/input — Directive applied to native text inputs and textareas to style them and integrate them with `ngxsmk-form-field`
 - NgxsmkInputGroup (`ngxsmk-input-group`) — @ngxsmk/core/input-group
 - NgxsmkInputGroupText (`[ngxsmkInputGroupText], ngxsmk-input-group-text`) — @ngxsmk/core/input-group-text
+- NgxsmkInputMask (`input[ngxsmkInputMask]`) — @ngxsmk/core/input-mask — Mask pattern tokens: - `0` — digit - `A` — letter - `*` — alphanumeric - any other char — literal
 - NgxsmkIntersectionObserver (`[ngxsmkIntersectionObserver]`) — @ngxsmk/core/intersection-observer
 - NgxsmkJsonViewer (`ngxsmk-json-viewer`) — @ngxsmk/core/json-viewer
 - NgxsmkKanbanBoard (`ngxsmk-kanban-board`) — @ngxsmk/core/kanban-board — Multi-column Kanban task board component with native HTML5 drag-and-drop
@@ -153,7 +157,7 @@ Usage rules for generated code:
 - NgxsmkLazyLoad (`ngxsmk-lazy-load`) — @ngxsmk/core/lazy-load
 - NgxsmkLet (`[ngxsmkLet]`) — @ngxsmk/core/let
 - NgxsmkRxLet (`[ngxsmkRxLet]`) — @ngxsmk/core/let
-- NgxsmkLightbox (`ngxsmk-lightbox`) — @ngxsmk/core/lightbox
+- NgxsmkLightbox (`ngxsmk-lightbox`) — @ngxsmk/core/lightbox — Full-viewport image gallery overlay
 - NgxsmkLink (`a[ngxsmk-link]`) — @ngxsmk/core/link
 - NgxsmkLinkProvider (`[ngxsmkLinkProvider]`) — @ngxsmk/core/link-provider
 - NgxsmkList (`ngxsmk-list`) — @ngxsmk/core/list
@@ -164,6 +168,7 @@ Usage rules for generated code:
 - NgxsmkMediaQuery (`[ngxsmkMediaQuery]`) — @ngxsmk/core/media-query
 - NgxsmkMediaTheme (`[ngxsmkMediaTheme]`) — @ngxsmk/core/media-theme
 - NgxsmkMemoryViewer (`ngxsmk-memory-viewer`) — @ngxsmk/core/memory-viewer
+- NgxsmkMenubar (`ngxsmk-menubar`) — @ngxsmk/core/menubar — Horizontal application menubar with nested dropdowns
 - NgxsmkMetadataListItem (`ngxsmk-metadata-list-item, [ngxsmkMetadataListItem]`) — @ngxsmk/core/metadata-list
 - NgxsmkMetadataList (`ngxsmk-metadata-list`) — @ngxsmk/core/metadata-list
 - NgxsmkMeter (`ngxsmk-meter`) — @ngxsmk/core/meter — Semantic meter for a scalar measurement within a known range (disk usage, score, capacity) — distinct from `progress`, which reports task completion
@@ -173,7 +178,7 @@ Usage rules for generated code:
 - NgxsmkMorphModalTrigger (`[ngxsmkMorphModalTrigger]`) — @ngxsmk/core/morph-modal — Trigger directive that toggles a parent `NgxsmkMorphModal`
 - NgxsmkMorphModalClose (`[ngxsmkMorphModalClose]`) — @ngxsmk/core/morph-modal — Close directive that closes the parent `NgxsmkMorphModal` on click
 - NgxsmkMorphModalContent (`[ngxsmkMorphModalContent]`) — @ngxsmk/core/morph-modal — Content panel for the morph modal
-- NgxsmkMultiSelect (`ngxsmk-multi-select`) — @ngxsmk/core/multi-select
+- NgxsmkMultiSelect (`ngxsmk-multi-select`) — @ngxsmk/core/multi-select — Combobox multi-select with removable tags, listbox keyboard nav, and form CVA
 - NgxsmkMultiSelector (`ngxsmk-multi-selector`) — @ngxsmk/core/multi-selector
 - NgxsmkNavHeadingMenu (`ngxsmk-nav-heading-menu`) — @ngxsmk/core/nav-heading-menu
 - NgxsmkNavIcon (`ngxsmk-nav-icon`) — @ngxsmk/core/nav-icon
@@ -216,22 +221,22 @@ Usage rules for generated code:
 - NgxsmkSegmentedControl (`ngxsmk-segmented-control`) — @ngxsmk/core/segmented-control
 - NgxsmkSelect (`ngxsmk-select`) — @ngxsmk/core/select — Themed single-select dropdown
 - NgxsmkSelector (`ngxsmk-selector`) — @ngxsmk/core/selector
-- NgxsmkSheet (`ngxsmk-sheet`) — @ngxsmk/core/sheet
-- NgxsmkSideNav (`ngxsmk-side-nav`) — @ngxsmk/core/side-nav
+- NgxsmkSheet (`ngxsmk-sheet`) — @ngxsmk/core/sheet — Slide-over panel (drawer) from the left, right, or bottom edge
+- NgxsmkSideNav (`ngxsmk-side-nav`) — @ngxsmk/core/side-nav — Collapsible app sidebar shell
 - NgxsmkSideNavHeading (`ngxsmk-side-nav-heading`) — @ngxsmk/core/side-nav
 - NgxsmkSideNavItem (`ngxsmk-side-nav-item`) — @ngxsmk/core/side-nav
 - NgxsmkSideNavSection (`ngxsmk-side-nav-section`) — @ngxsmk/core/side-nav
 - NgxsmkSideNavCollapseButton (`ngxsmk-side-nav-collapse-button`) — @ngxsmk/core/side-nav
 - NgxsmkSignaturePad (`ngxsmk-signature-pad`) — @ngxsmk/core/signature-pad — Digital signature canvas component with smooth stroke rendering and export capabilities
 - NgxsmkSkeleton (`ngxsmk-skeleton`) — @ngxsmk/core/skeleton — Loading placeholder that mirrors the shape of upcoming content
-- NgxsmkSlider (`ngxsmk-slider`) — @ngxsmk/core/slider
+- NgxsmkSlider (`ngxsmk-slider`) — @ngxsmk/core/slider — Native range slider styled with design tokens
 - NgxsmkSpacer (`ngxsmk-spacer`) — @ngxsmk/core/spacer
 - NgxsmkSparkline (`ngxsmk-sparkline`) — @ngxsmk/core/sparkline — Compact SVG micro-chart (sparkline) for inline dashboard metrics, trend indicators, and stat cards
 - NgxsmkSpinner (`ngxsmk-spinner`) — @ngxsmk/core/spinner — Indeterminate loading indicator
 - NgxsmkSplitButton (`ngxsmk-split-button`) — @ngxsmk/core/split-button
 - NgxsmkSpreadsheet (`ngxsmk-spreadsheet`) — @ngxsmk/core/spreadsheet
 - NgxsmkStack (`ngxsmk-stack`) — @ngxsmk/core/stack
-- NgxsmkStat (`ngxsmk-stat`) — @ngxsmk/core/stat
+- NgxsmkStat (`ngxsmk-stat`) — @ngxsmk/core/stat — Compact metric / KPI tile with optional trend arrow and delta text
 - NgxsmkStatTrendCard (`ngxsmk-stat-trend-card`) — @ngxsmk/core/stat-trend-card — KPI dashboard metric card with embedded sparkline trend visualization and directional change badge
 - NgxsmkStatusDot (`ngxsmk-status-dot`) — @ngxsmk/core/status-dot
 - NgxsmkStepper (`ngxsmk-stepper`) — @ngxsmk/core/stepper — Stepper header that renders progress through a sequence of steps
@@ -239,7 +244,7 @@ Usage rules for generated code:
 - NgxsmkSwitch (`ngxsmk-switch`) — @ngxsmk/core/switch — Toggle switch for immediate on/off settings
 - NgxsmkTabMenu (`ngxsmk-tab-menu`) — @ngxsmk/core/tab-menu
 - NgxsmkCellDef (`[ngxsmkCell]`) — @ngxsmk/core/table
-- NgxsmkTable (`ngxsmk-table`) — @ngxsmk/core/table
+- NgxsmkTable (`ngxsmk-table`) — @ngxsmk/core/table — Lightweight data table with optional sort, column resize, and drag-reorder
 - NgxsmkTableCell (`td[ngxsmkTableCell], ngxsmk-table-cell`) — @ngxsmk/core/table-cell
 - NgxsmkTableHeaderCell (`th[ngxsmkTableHeaderCell], ngxsmk-table-header-cell`) — @ngxsmk/core/table-cell
 - NgxsmkTableRow (`tr[ngxsmkTableRow], ngxsmk-table-row`) — @ngxsmk/core/table-cell
@@ -251,6 +256,7 @@ Usage rules for generated code:
 - NgxsmkText (`ngxsmk-text`) — @ngxsmk/core/text
 - NgxsmkThemeBuilder (`ngxsmk-theme-builder`) — @ngxsmk/core/theme-builder
 - NgxsmkThumbnail (`ngxsmk-thumbnail`) — @ngxsmk/core/thumbnail
+- NgxsmkTimePicker (`ngxsmk-time-picker`) — @ngxsmk/core/time-picker — Time-only form control (`HH:MM` / `HH:MM:SS`) with form-field + CVA support
 - NgxsmkTimelineGantt (`ngxsmk-timeline-gantt`) — @ngxsmk/core/timeline-gantt
 - NgxsmkTimelineStepper (`ngxsmk-timeline-stepper`) — @ngxsmk/core/timeline-stepper — Vertical milestone timeline node step tracker component
 - NgxsmkTimestamp (`ngxsmk-timestamp`) — @ngxsmk/core/timestamp
@@ -259,8 +265,8 @@ Usage rules for generated code:
 - NgxsmkToggleButtonGroup (`ngxsmk-toggle-button-group`) — @ngxsmk/core/toggle-button-group
 - NgxsmkToken (`ngxsmk-token`) — @ngxsmk/core/token
 - NgxsmkTokenCounter (`ngxsmk-token-counter`) — @ngxsmk/core/token-counter — Visual LLM context window token usage meter with cost estimation
-- NgxsmkTokenizer (`ngxsmk-tokenizer`) — @ngxsmk/core/tokenizer
-- NgxsmkToolCallViewer (`ngxsmk-tool-call-viewer`) — @ngxsmk/core/tool-call-viewer
+- NgxsmkTokenizer (`ngxsmk-tokenizer`) — @ngxsmk/core/tokenizer — Free-form tags / chips input
+- NgxsmkToolCallViewer (`ngxsmk-tool-call-viewer`) — @ngxsmk/core/tool-call-viewer — Expandable list of AI tool / function calls with status and JSON args/results
 - NgxsmkTooltip (`[ngxsmkTooltip]`) — @ngxsmk/core/tooltip — Text tooltip on hover/focus
 - NgxsmkTopNav (`ngxsmk-top-nav`) — @ngxsmk/core/top-nav
 - NgxsmkTopNavHeading (`ngxsmk-top-nav-heading`) — @ngxsmk/core/top-nav

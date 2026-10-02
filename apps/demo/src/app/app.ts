@@ -12,10 +12,34 @@ import { ScrollToTop } from './core/scroll-to-top';
   selector: 'app-root',
   imports: [RouterOutlet, NgxsmkToaster, CommandPalette, ScrollToTop],
   template: `
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <router-outlet />
     <ngxsmk-toaster />
     <app-command-palette />
     <app-scroll-to-top />
+  `,
+  styles: `
+    .skip-link {
+      position: absolute;
+      inset-inline-start: var(--ngxsmk-space-3, 0.75rem);
+      top: var(--ngxsmk-space-3, 0.75rem);
+      z-index: 10000;
+      padding: 0.5rem 0.875rem;
+      border-radius: var(--ngxsmk-radius-md, 0.5rem);
+      background: var(--ngxsmk-color-primary, #0d9488);
+      color: var(--ngxsmk-color-on-primary, #fff);
+      font-family: var(--ngxsmk-font-sans, system-ui);
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-decoration: none;
+      transform: translateY(-200%);
+      transition: transform 0.15s ease;
+    }
+    .skip-link:focus {
+      transform: translateY(0);
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring, 0 0 0 3px rgb(13 148 136 / 0.45));
+    }
   `,
 })
 export class App {

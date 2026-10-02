@@ -81,3 +81,12 @@ export class AssistantPage {
   }
 }
 ```
+
+## Ionic Angular
+
+NGXSMK is Angular-first and Ionic-friendly. In Ionic apps:
+
+1. Import theme CSS once (`@ngxsmk/theme/styles/ngxsmk.css`).
+2. Add `provideNgxsmkIonicTheme()` next to `provideIonicAngular()` so `--ngxsmk-*` syncs to `--ion-*`.
+3. Keep Ionic for tabs/menus/page lifecycle; use `@ngxsmk/core/<entry>` for forms, tables, AI chat, and overlays.
+4. Never invent React/StyleX patterns — this kit is signals + standalone only.

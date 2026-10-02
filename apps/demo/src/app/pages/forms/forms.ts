@@ -15,6 +15,7 @@ import { NgxsmkTypeahead } from '@ngxsmk/core/typeahead';
 import { NgxsmkPowerSearch } from '@ngxsmk/core/power-search';
 import { NgxsmkSlider } from '@ngxsmk/core/slider';
 import { NgxsmkSegmentedControl } from '@ngxsmk/core/segmented-control';
+import { NgxsmkChipGroup } from '@ngxsmk/core/chip-group';
 import { NgxsmkSelector } from '@ngxsmk/core/selector';
 import { NgxsmkMultiSelector } from '@ngxsmk/core/multi-selector';
 import { NgxsmkTokenizer } from '@ngxsmk/core/tokenizer';
@@ -36,6 +37,9 @@ import { NgxsmkRangeSlider } from '@ngxsmk/core/range-slider';
 import { NgxsmkCreditCardInput } from '@ngxsmk/core/credit-card-input';
 import { NgxsmkPasswordStrengthMeter } from '@ngxsmk/core/password-strength-meter';
 import { NgxsmkTreeSelect, type TreeNode } from '@ngxsmk/core/tree-select';
+import { NgxsmkTimePicker } from '@ngxsmk/core/time-picker';
+import { NgxsmkInputMask } from '@ngxsmk/core/input-mask';
+import { NgxsmkIcon } from '@ngxsmk/core/icon';
 import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -71,7 +75,11 @@ interface Option {
     NgxsmkTypeahead,
     NgxsmkPowerSearch,
     NgxsmkSlider,
+    NgxsmkTimePicker,
+    NgxsmkInputMask,
+    NgxsmkIcon,
     NgxsmkSegmentedControl,
+    NgxsmkChipGroup,
     NgxsmkSelector,
     NgxsmkMultiSelector,
     NgxsmkTokenizer,
@@ -364,7 +372,54 @@ interface Option {
       </showcase-example>
 
       <showcase-example
-        title="Datepicker (calendar)"
+        title="Time Picker"
+        description="Native time control with form-field / CVA support."
+        [code]="codeTimePicker"
+        [component]="NgxsmkTimePicker"
+      >
+        <div class="ngxsmk-sc-col" style="width: 100%; max-width: 240px">
+          <ngxsmk-time-picker [(value)]="meetingTime" step="60" />
+          <small>{{ meetingTime() || '—' }}</small>
+        </div>
+      </showcase-example>
+
+      <showcase-example
+        title="Input Mask"
+        description="Pattern mask with 0 / A / * tokens on a native input."
+        [code]="codeInputMask"
+        [component]="NgxsmkInputMask"
+      >
+        <div class="ngxsmk-sc-col" style="width: 100%; max-width: 280px">
+          <input
+            ngxsmkInput
+            ngxsmkInputMask
+            mask="(000) 000-0000"
+            [(value)]="maskedPhone"
+            placeholder="(555) 000-0000"
+          />
+          <small>{{ maskedPhone() || '—' }}</small>
+        </div>
+      </showcase-example>
+
+      <showcase-example
+        title="Icon"
+        description="Built-in stroke icons sized by --ngxsmk-icon-* tokens."
+        [code]="codeIcon"
+        [component]="NgxsmkIcon"
+      >
+        <div class="ngxsmk-sc-wrap" style="gap: 1rem; align-items: center">
+          <ngxsmk-icon name="check" size="sm" aria-label="Check" />
+          <ngxsmk-icon name="settings" size="md" aria-label="Settings" />
+          <ngxsmk-icon name="bell" size="lg" aria-label="Notifications" />
+          <button ngxsmk-button size="sm">
+            <ngxsmk-icon name="plus" size="sm" />
+            Add
+          </button>
+        </div>
+      </showcase-example>
+
+      <showcase-example
+        title="Date Picker"
         [description]="'forms.datepickerDesc' | translate"
       >
         <p style="margin: 0; width: 100%">
@@ -401,6 +456,20 @@ interface Option {
       </showcase-example>
 
       <showcase-example
+        title="Chip Group"
+        description="Toggleable chips for single- or multi-select from a fixed option set."
+        [code]="codeChipGroup"
+        [component]="NgxsmkChipGroup"
+        [customize]="customizeNgxsmkChipGroup"
+      >
+        <ngxsmk-chip-group
+          [options]="interests"
+          [(value)]="selectedInterests"
+          ariaLabel="Interests"
+        />
+      </showcase-example>
+
+      <showcase-example
         title="Selector"
         [description]="'forms.selectorDesc' | translate"
         [code]="codeSelector"
@@ -431,7 +500,12 @@ interface Option {
         [component]="NgxsmkTokenizer"
         [customize]="customizeNgxsmkTokenizer"
       >
-        <ngxsmk-tokenizer [placeholder]="'forms.addTag' | translate" [(tokens)]="tags" />
+        <ngxsmk-tokenizer
+          [placeholder]="'forms.addTag' | translate"
+          [(tokens)]="tags"
+          delimiters=",;"
+          [maxTokens]="12"
+        />
       </showcase-example>
 
       <showcase-example
@@ -886,6 +960,9 @@ ngxsmk-switch {
   --ngxsmk-text-body-md-size: ;
 }`;
   protected readonly NgxsmkSlider = NgxsmkSlider;
+  protected readonly NgxsmkTimePicker = NgxsmkTimePicker;
+  protected readonly NgxsmkInputMask = NgxsmkInputMask;
+  protected readonly NgxsmkIcon = NgxsmkIcon;
   protected readonly customizeNgxsmkSlider = `/* Theme <ngxsmk-slider> via design tokens */
 ngxsmk-slider {
   --ngxsmk-color-primary: ;
@@ -913,6 +990,21 @@ ngxsmk-segmented-control {
   --ngxsmk-shadow-sm: ;
   --ngxsmk-space-1: ;
   --ngxsmk-space-1-5: ;
+  --ngxsmk-space-3: ;
+  --ngxsmk-text-body-sm-size: ;
+}`;
+  protected readonly NgxsmkChipGroup = NgxsmkChipGroup;
+  protected readonly customizeNgxsmkChipGroup = `/* Theme <ngxsmk-chip-group> via design tokens */
+ngxsmk-chip-group {
+  --ngxsmk-color-outline: ;
+  --ngxsmk-color-primary: ;
+  --ngxsmk-color-primary-container: ;
+  --ngxsmk-color-on-primary-container: ;
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-radius-full: ;
+  --ngxsmk-space-1: ;
+  --ngxsmk-space-2: ;
   --ngxsmk-space-3: ;
   --ngxsmk-text-body-sm-size: ;
 }`;
@@ -1090,6 +1182,8 @@ ngxsmk-checkbox-list-item {
   protected readonly plan = signal<unknown>('pro');
   protected readonly notifications = signal(true);
   protected readonly volume = signal(40);
+  protected readonly meetingTime = signal('09:30');
+  protected readonly maskedPhone = signal('');
   protected readonly view = signal('list');
   protected readonly selectedInterests = signal<string[]>(['design', 'ai']);
   protected readonly selectorColors = signal<string[]>([]);
@@ -1129,10 +1223,14 @@ ngxsmk-checkbox-list-item {
   protected readonly codeRadio = `<ngxsmk-radio-group [(value)]="plan">\n  <ngxsmk-radio value="free">Free</ngxsmk-radio>\n  <ngxsmk-radio value="pro">Pro</ngxsmk-radio>\n</ngxsmk-radio-group>`;
   protected readonly codeSwitch = `<ngxsmk-switch [(checked)]="notifications">Email notifications</ngxsmk-switch>`;
   protected readonly codeSlider = `<ngxsmk-slider [min]="0" [max]="100" [step]="5" [(value)]="volume" />`;
+  protected readonly codeTimePicker = `<ngxsmk-time-picker [(value)]="meetingTime" step="60" />`;
+  protected readonly codeInputMask = `<input ngxsmkInput ngxsmkInputMask mask="(000) 000-0000" [(value)]="phone" />`;
+  protected readonly codeIcon = `<ngxsmk-icon name="check" size="md" aria-label="Done" />`;
   protected readonly codeSegmented = `<ngxsmk-segmented-control [options]="viewOptions" [(value)]="view" />`;
+  protected readonly codeChipGroup = `<ngxsmk-chip-group [options]="interests" [(value)]="selected" [multiple]="true" />`;
   protected readonly codeSelector = `<ngxsmk-selector [options]="interests" [(selected)]="selectedInterests" />`;
   protected readonly codeMultiSelector = `<ngxsmk-multi-selector [options]="colors" [(value)]="selectorColors" placeholder="Select colors" />`;
-  protected readonly codeTokenizer = `<ngxsmk-tokenizer [(tokens)]="tags" placeholder="Add a tag…" />`;
+  protected readonly codeTokenizer = `<ngxsmk-tokenizer [(tokens)]="tags" placeholder="Add a tag…" delimiters=",;" [maxTokens]="12" />`;
   protected readonly codeInputGroup = `<ngxsmk-input-group placeholder="0.00">\n  <ngxsmk-input-group-text>$</ngxsmk-input-group-text>\n  <ngxsmk-input-group-text trailing>USD</ngxsmk-input-group-text>\n</ngxsmk-input-group>`;
   protected readonly codeField = `<ngxsmk-field hint="Choose a unique handle.">\n  <ngxsmk-field-label [required]="true">Username</ngxsmk-field-label>\n  <ngxsmk-input placeholder="e.g. ada_lovelace" />\n  <ngxsmk-field-status variant="error" message="This username is already taken." />\n</ngxsmk-field>`;
   protected readonly codeFormField = `<ngxsmk-form-field label="Email" required error="Please enter a valid email address.">\n  <ngxsmk-input type="email" placeholder="you@example.com" />\n</ngxsmk-form-field>`;

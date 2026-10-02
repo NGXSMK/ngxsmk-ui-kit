@@ -3,9 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { AppNav } from '../../nav/nav';
-import { NgxsmkTag } from '@ngxsmk/core/tag';
 import { NgxsmkSelect, NgxsmkSelectOption } from '@ngxsmk/core/select';
-import { NgxsmkHeading } from '@ngxsmk/core/heading';
 import {
   CATEGORY_LABELS,
   ComponentRegistry,
@@ -67,21 +65,25 @@ interface ApiDb {
 @Component({
   selector: 'api-reference-page',
   standalone: true,
-  imports: [AppNav, NgxsmkTag, RouterLink, NgxsmkSelect, TranslatePipe, NgxsmkHeading],
+  imports: [AppNav, RouterLink, NgxsmkSelect, TranslatePipe],
   template: `
     <app-nav />
 
     <div class="api-container">
       <header class="api-header">
-        <div class="api-badges">
-          @if (db(); as d) {
-            <ngxsmk-tag class="api-badge">v{{ d.version }}</ngxsmk-tag>
-            <ngxsmk-tag class="api-badge">{{
-              'api.apiCount' | translate: { count: d.components.length }
-            }}</ngxsmk-tag>
-          }
+        <div class="version-badge">
+          <span class="pulse-dot"></span>
+          <span class="badge-tag">API Reference</span>
+          <span class="badge-divider"></span>
+          <span class="badge-text">
+            @if (db(); as d) {
+              v{{ d.version }} • {{ d.components.length }} Components
+            } @else {
+              Loading registry…
+            }
+          </span>
         </div>
-        <ngxsmk-heading level="h1" class="api-title">{{ 'api.title' | translate }}</ngxsmk-heading>
+        <h1 class="api-title">Comprehensive <span class="highlight">API Reference</span></h1>
         <p class="api-subtitle">{{ 'api.subtitle' | translate }}</p>
         <div class="api-search-row">
           <input
@@ -137,14 +139,19 @@ interface ApiDb {
               @for (c of group.items; track c.name) {
                 <section class="api-entry" [id]="c.name" tabindex="-1">
                   <div class="api-entry-head">
-                    <ngxsmk-heading level="h2" class="api-entry-name">
+                    <div class="traffic-lights">
+                      <span class="light red"></span>
+                      <span class="light yellow"></span>
+                      <span class="light green"></span>
+                    </div>
+                    <h2 class="api-entry-name">
                       <a
                         class="api-entry-link"
                         [routerLink]="['/showcase', routeForEntry(c)]"
                         [fragment]="slug(c.name)"
                         >{{ c.name }}</a
                       >
-                    </ngxsmk-heading>
+                    </h2>
                     <span class="api-kind" [attr.data-kind]="c.kind">{{ c.kind }}</span>
                     <button
                       class="api-anchor"
@@ -194,9 +201,9 @@ interface ApiDb {
                   }
 
                   @if (c.inputs.length) {
-                    <ngxsmk-heading level="h3" class="api-table-title">{{
+                    <h3 class="api-table-title">{{
                       'api.inputs' | translate
-                    }}</ngxsmk-heading>
+                    }}</h3>
                     <div class="api-table-wrap">
                       <table class="api-table">
                         <thead>
@@ -242,9 +249,9 @@ interface ApiDb {
                   }
 
                   @if (c.outputs.length) {
-                    <ngxsmk-heading level="h3" class="api-table-title">{{
+                    <h3 class="api-table-title">{{
                       'api.outputs' | translate
-                    }}</ngxsmk-heading>
+                    }}</h3>
                     <div class="api-table-wrap">
                       <table class="api-table">
                         <thead>
@@ -279,72 +286,71 @@ interface ApiDb {
   styles: `
     :host {
       display: block;
-      background-color: var(--ngxsmk-color-background, #fafafa);
-      background-image: radial-gradient(var(--ngxsmk-color-outline, #e4e4e7) 1px, transparent 1px);
+      background-color: var(--color-bg-canvas, #f8fafc);
+      background-image: radial-gradient(var(--color-border-card, rgba(148, 163, 184, 0.25)) 1px, transparent 1px);
       background-size: 24px 24px;
       min-height: calc(100vh - 3.5rem);
     }
     .api-container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: var(--ngxsmk-space-12, 3rem) var(--ngxsmk-space-6, 1.5rem);
-      font-family: 'DM Sans', var(--ngxsmk-font-sans, system-ui), sans-serif;
+      padding: 2.5rem 1.5rem 4rem;
+      font-family: var(--font-body, 'Inter', system-ui, sans-serif);
+      color: var(--color-text-main, #0f172a);
     }
     .api-header {
-      margin-bottom: 2.5rem;
+      margin-bottom: 3rem;
     }
-    .api-badges {
-      display: flex;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
-    }
-    .api-badge {
-      font-size: var(--ngxsmk-text-body-sm-size);
-      font-weight: 600;
-    }
-    ngxsmk-heading.api-title {
-      font-family: 'Outfit', var(--ngxsmk-font-sans, system-ui), sans-serif;
-      font-size: var(--ngxsmk-text-display-md-size);
+    .api-title {
+      font-family: var(--font-display, 'Plus Jakarta Sans', system-ui, sans-serif);
+      font-size: clamp(2rem, 3.5vw, 2.75rem);
       font-weight: 800;
-      letter-spacing: -0.03em;
-      margin: 0 0 0.5rem;
-      color: var(--ngxsmk-color-on-surface);
+      letter-spacing: -0.035em;
+      margin: 0.75rem 0 0.5rem;
+      color: var(--color-text-main, #0f172a);
+      line-height: 1.15;
+    }
+    .highlight {
+      background: linear-gradient(135deg, #6366f1 0%, #f59e0b 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     .api-subtitle {
-      font-size: var(--ngxsmk-text-body-lg-size);
-      color: var(--ngxsmk-color-on-surface-variant);
-      margin: 0 0 1.5rem;
-      max-width: 640px;
-      line-height: 1.5;
+      font-size: 1.0625rem;
+      color: var(--color-text-secondary, #64748b);
+      margin: 0 0 1.75rem;
+      max-width: 680px;
+      line-height: 1.6;
     }
     .api-search-row {
       display: flex;
-      gap: 0.75rem;
+      gap: 1rem;
       flex-wrap: wrap;
       align-items: center;
     }
     .api-search {
       flex: 1 1 320px;
-      max-width: 480px;
-      padding: 0.625rem 1rem;
-      font-size: var(--ngxsmk-text-body-md-size);
+      max-width: 520px;
+      padding: 0.8rem 1.25rem;
+      font-size: 0.95rem;
       font-family: inherit;
-      color: var(--ngxsmk-color-on-surface);
-      background: var(--ngxsmk-color-surface);
-      border: 1px solid var(--ngxsmk-color-outline);
-      border-radius: var(--ngxsmk-radius-lg);
+      color: var(--color-text-main, #0f172a);
+      background: var(--color-bg-card, #ffffff);
+      border: 1px solid var(--color-border-card, rgba(148, 163, 184, 0.25));
+      border-radius: 9999px;
       outline: none;
+      box-shadow: 0 4px 14px -4px rgba(0, 0, 0, 0.05);
       transition:
-        border-color 0.15s,
-        box-shadow 0.15s;
+        border-color 0.2s,
+        box-shadow 0.2s;
     }
     .api-search:focus {
-      border-color: var(--ngxsmk-color-primary);
-      box-shadow: 0 0 0 3px color-mix(in srgb, var(--ngxsmk-color-primary) 20%, transparent);
+      border-color: #6366f1;
+      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15), 0 8px 24px -4px rgba(99, 102, 241, 0.12);
     }
     .api-category {
       flex: 0 0 auto;
-      width: 220px;
+      width: 240px;
       max-width: 100%;
     }
     @media (max-width: 640px) {
@@ -353,13 +359,14 @@ interface ApiDb {
       }
     }
     .api-loading {
-      color: var(--ngxsmk-color-on-surface-variant);
-      font-size: var(--ngxsmk-text-body-md-size);
+      color: var(--color-text-secondary, #64748b);
+      font-size: 1rem;
+      padding: 2rem 0;
     }
 
     .api-layout {
       display: grid;
-      grid-template-columns: 220px minmax(0, 1fr);
+      grid-template-columns: 240px minmax(0, 1fr);
       gap: 2.5rem;
       align-items: start;
     }
@@ -375,15 +382,17 @@ interface ApiDb {
       scrollbar-width: thin;
     }
     .api-sidebar-group {
-      margin-bottom: 1rem;
+      margin-bottom: 1.25rem;
     }
     .api-sidebar-entry {
       display: block;
-      font-family: var(--ngxsmk-font-mono);
-      font-size: var(--ngxsmk-text-body-xs-size);
-      color: var(--ngxsmk-color-on-surface-variant);
-      margin-bottom: 0.25rem;
+      font-family: var(--font-mono, 'JetBrains Mono', monospace);
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--color-text-muted, #94a3b8);
+      margin-bottom: 0.35rem;
       word-break: break-all;
+      letter-spacing: 0.02em;
     }
     .api-sidebar-link {
       display: block;
@@ -393,11 +402,11 @@ interface ApiDb {
       border: 0;
       background: none;
       cursor: pointer;
-      font-size: var(--ngxsmk-text-body-sm-size);
-      color: var(--ngxsmk-color-on-surface-variant);
+      font-size: 0.85rem;
+      color: var(--color-text-secondary, #64748b);
       text-decoration: none;
-      padding: 0.2rem 0.5rem;
-      border-radius: var(--ngxsmk-radius-sm);
+      padding: 0.35rem 0.65rem;
+      border-radius: 9999px;
       border-left: 2px solid transparent;
       transition:
         background 0.15s,
@@ -405,13 +414,14 @@ interface ApiDb {
         border-color 0.15s;
     }
     .api-sidebar-link:hover {
-      background: var(--ngxsmk-color-surface-hover, var(--ngxsmk-color-surface-variant));
-      color: var(--ngxsmk-color-primary);
+      background: rgba(99, 102, 241, 0.08);
+      color: #6366f1;
     }
     .api-sidebar-link.active {
-      color: var(--ngxsmk-color-primary);
-      background: color-mix(in srgb, var(--ngxsmk-color-primary) 10%, transparent);
-      border-left-color: var(--ngxsmk-color-primary);
+      color: #6366f1;
+      background: rgba(99, 102, 241, 0.12);
+      border-left-color: #6366f1;
+      font-weight: 600;
     }
     @media (max-width: 900px) {
       .api-layout {
@@ -423,32 +433,46 @@ interface ApiDb {
     }
 
     .api-entry {
-      margin-bottom: 3rem;
-      scroll-margin-top: 5rem;
+      margin-bottom: 2rem;
+      scroll-margin-top: 5.5rem;
+      background: var(--color-bg-card, #ffffff);
+      border: 1px solid var(--color-border-card, rgba(148, 163, 184, 0.2));
+      border-radius: var(--radius-xl, 22px);
+      padding: 1.5rem;
+      box-shadow: 0 4px 14px -4px rgba(0, 0, 0, 0.04);
+      transition:
+        transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.22s,
+        box-shadow 0.22s;
+    }
+    .api-entry:hover {
+      transform: translateY(-2px);
+      border-color: rgba(99, 102, 241, 0.45);
+      box-shadow: 0 16px 32px -12px rgba(99, 102, 241, 0.18);
     }
     .api-entry:focus {
-      outline: 2px solid var(--ngxsmk-color-primary);
+      outline: 2px solid #6366f1;
       outline-offset: 4px;
-      border-radius: var(--ngxsmk-radius-lg);
     }
     .api-entry:focus-visible {
-      outline: 2px solid var(--ngxsmk-color-primary);
+      outline: 2px solid #6366f1;
       outline-offset: 4px;
-      border-radius: var(--ngxsmk-radius-lg);
     }
     .api-entry-head {
       display: flex;
       align-items: center;
-      gap: 0.625rem;
-      margin-bottom: 0.5rem;
+      gap: 0.75rem;
+      margin-bottom: 0.85rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--color-border-card, rgba(148, 163, 184, 0.15));
     }
-    ngxsmk-heading.api-entry-name {
-      font-family: 'Outfit', var(--ngxsmk-font-sans, system-ui), sans-serif;
-      font-size: var(--ngxsmk-text-title-md-size);
+    .api-entry-name {
+      font-family: var(--font-display, 'Plus Jakarta Sans', system-ui, sans-serif);
+      font-size: 1.35rem;
       font-weight: 700;
       letter-spacing: -0.02em;
       margin: 0;
-      color: var(--ngxsmk-color-on-surface);
+      color: var(--color-text-main, #0f172a);
     }
     .api-entry-link {
       color: inherit;
@@ -456,7 +480,7 @@ interface ApiDb {
       transition: color 0.15s;
     }
     .api-entry-link:hover {
-      color: var(--ngxsmk-color-primary);
+      color: #6366f1;
     }
     .api-kind {
       font-size: var(--ngxsmk-text-body-xs-size);
@@ -512,118 +536,125 @@ interface ApiDb {
     .api-meta-list {
       display: flex;
       flex-direction: column;
-      gap: 0.375rem;
-      margin-bottom: 0.5rem;
+      gap: 0.5rem;
+      margin-bottom: 0.85rem;
     }
     .api-meta-row {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.625rem;
     }
     .api-entry-meta {
-      font-family: var(--ngxsmk-font-mono);
-      font-size: var(--ngxsmk-text-body-sm-size);
-      color: var(--ngxsmk-color-on-surface-variant);
-      background: var(--ngxsmk-color-surface-variant);
-      border-radius: var(--ngxsmk-radius-sm);
-      padding: 0.25rem 0.5rem;
+      font-family: var(--font-mono, 'JetBrains Mono', monospace);
+      font-size: 0.825rem;
+      color: var(--color-text-main, #0f172a);
+      background: var(--color-bg-subtle, #f1f5f9);
+      border: 1px solid var(--color-border-card, rgba(148, 163, 184, 0.2));
+      border-radius: 8px;
+      padding: 0.35rem 0.75rem;
       word-break: break-all;
     }
     .api-copy {
       flex: 0 0 auto;
-      font-size: var(--ngxsmk-text-body-xs-size);
+      font-size: 0.75rem;
       font-weight: 600;
-      color: var(--ngxsmk-color-on-surface-variant);
-      background: var(--ngxsmk-color-surface);
-      border: 1px solid var(--ngxsmk-color-outline);
-      border-radius: var(--ngxsmk-radius-sm);
-      padding: 0.2rem 0.5rem;
+      color: #6366f1;
+      background: rgba(99, 102, 241, 0.08);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      border-radius: 9999px;
+      padding: 0.25rem 0.75rem;
       cursor: pointer;
-      transition:
-        color 0.15s,
-        border-color 0.15s,
-        background 0.15s;
+      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .api-copy:hover {
-      color: var(--ngxsmk-color-primary);
-      border-color: var(--ngxsmk-color-primary);
+      background: #6366f1;
+      color: #ffffff;
+      border-color: #6366f1;
+      transform: translateY(-1px);
     }
     .api-entry-desc {
-      font-size: var(--ngxsmk-text-body-md-size);
-      color: var(--ngxsmk-color-on-surface-variant);
+      font-size: 0.9375rem;
+      color: var(--color-text-secondary, #64748b);
       line-height: 1.6;
-      margin: 0.5rem 0 0;
-      max-width: 720px;
+      margin: 0.75rem 0 1.25rem;
+      max-width: 800px;
     }
-    ngxsmk-heading.api-table-title {
-      font-size: var(--ngxsmk-text-body-sm-size);
+    .api-table-title {
+      font-family: var(--font-display, 'Plus Jakarta Sans', system-ui);
+      font-size: 0.8rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--ngxsmk-color-on-surface);
-      margin: 1.25rem 0 0.5rem;
+      letter-spacing: 0.06em;
+      color: var(--color-text-main, #0f172a);
+      margin: 1.25rem 0 0.6rem;
     }
     .api-table-wrap {
       overflow-x: auto;
-      border: 1px solid var(--ngxsmk-color-outline);
-      border-radius: var(--ngxsmk-radius-lg);
+      border: 1px solid var(--color-border-card, rgba(148, 163, 184, 0.2));
+      border-radius: var(--radius-lg, 16px);
+      background: var(--color-bg-card, #ffffff);
     }
     .api-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: var(--ngxsmk-text-body-sm-size);
+      font-size: 0.875rem;
     }
     .api-table thead th {
       position: sticky;
       top: 0;
       z-index: 1;
       text-align: left;
-      font-weight: 600;
-      color: var(--ngxsmk-color-on-surface-variant);
-      background: var(--ngxsmk-color-surface-variant);
-      padding: 0.5rem 0.75rem;
+      font-family: var(--font-display, 'Plus Jakarta Sans', system-ui);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-text-secondary, #64748b);
+      background: var(--color-bg-subtle, #f8fafc);
+      padding: 0.75rem 1rem;
       white-space: nowrap;
+      border-bottom: 1px solid var(--color-border-card, rgba(148, 163, 184, 0.2));
     }
     .api-table tbody tr {
-      transition: background 0.12s;
+      transition: background 0.15s;
     }
     .api-table tbody tr:hover {
-      background: var(--ngxsmk-color-surface-hover, var(--ngxsmk-color-surface-variant));
+      background: rgba(99, 102, 241, 0.04);
     }
     .api-table td {
-      padding: 0.5rem 0.75rem;
-      border-top: 1px solid var(--ngxsmk-color-outline);
-      color: var(--ngxsmk-color-on-surface);
+      padding: 0.75rem 1rem;
+      border-top: 1px solid var(--color-border-card, rgba(148, 163, 184, 0.12));
+      color: var(--color-text-main, #0f172a);
       vertical-align: top;
     }
     .api-table code {
-      font-family: var(--ngxsmk-font-mono);
-      font-size: var(--ngxsmk-text-body-sm-size);
+      font-family: var(--font-mono, 'JetBrains Mono', monospace);
+      font-size: 0.8125rem;
     }
     .api-type {
-      color: var(--ngxsmk-color-primary);
+      color: #6366f1;
       word-break: break-word;
     }
     .api-tag {
       display: inline-block;
-      margin-left: 0.375rem;
-      font-size: var(--ngxsmk-text-body-xs-size);
+      margin-left: 0.4rem;
+      font-size: 0.6875rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.03em;
-      padding: 0.05rem 0.35rem;
-      border-radius: 999px;
+      letter-spacing: 0.04em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 9999px;
     }
     .api-tag--required {
       color: #e11d48;
-      background: color-mix(in srgb, #e11d48 12%, transparent);
+      background: rgba(225, 29, 72, 0.12);
     }
     .api-tag--twoway {
       color: #0ea5e9;
-      background: color-mix(in srgb, #0ea5e9 12%, transparent);
+      background: rgba(14, 165, 233, 0.12);
     }
     .api-muted {
-      color: var(--ngxsmk-color-on-surface-variant);
+      color: var(--color-text-muted, #94a3b8);
     }
   `,
 })

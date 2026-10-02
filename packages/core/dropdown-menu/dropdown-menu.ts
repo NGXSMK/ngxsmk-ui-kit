@@ -85,11 +85,11 @@ export interface NgxsmkDropdownMenuItem {
       z-index: var(--ngxsmk-z-dropdown, 1000);
       min-width: 10rem;
       padding: var(--ngxsmk-space-1);
-      border: 1px solid var(--ngxsmk-color-outline);
-      border-radius: var(--ngxsmk-radius-md);
-      background: var(--ngxsmk-color-surface);
+      border: 1px solid var(--ngxsmk-menu-border, var(--ngxsmk-color-outline));
+      border-radius: var(--ngxsmk-menu-radius, var(--ngxsmk-radius-md));
+      background: var(--ngxsmk-menu-bg, var(--ngxsmk-color-surface));
       color: var(--ngxsmk-color-on-surface);
-      box-shadow: var(--ngxsmk-shadow-lg);
+      box-shadow: var(--ngxsmk-menu-shadow, var(--ngxsmk-shadow-lg));
     }
 
     .ngxsmk-dropdown-menu__list[data-align='end'] {
@@ -107,7 +107,7 @@ export interface NgxsmkDropdownMenuItem {
       width: 100%;
       padding: var(--ngxsmk-space-1-5) var(--ngxsmk-space-3);
       border: none;
-      border-radius: var(--ngxsmk-radius-sm);
+      border-radius: var(--ngxsmk-menu-item-radius, var(--ngxsmk-radius-sm));
       background: transparent;
       color: var(--ngxsmk-color-on-surface);
       font-family: inherit;

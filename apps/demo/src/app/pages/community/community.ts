@@ -15,8 +15,13 @@ import { TranslatePipe } from '@ngx-translate/core';
       <!-- ═══════════════ HERO ═══════════════ -->
       <header class="co-hero">
         <div class="co-hero__inner">
-          <span class="co-hero__pill">{{ 'community.pill' | translate }}</span>
-          <h1 class="co-hero__title">{{ 'community.title' | translate }}</h1>
+          <div class="version-badge">
+            <span class="pulse-dot"></span>
+            <span class="badge-tag">Community</span>
+            <span class="badge-divider"></span>
+            <span class="badge-text">{{ 'community.pill' | translate }}</span>
+          </div>
+          <h1 class="co-hero__title">Join the <span class="highlight">Ecosystem</span></h1>
           <p class="co-hero__sub">
             {{ 'community.subtitle' | translate }}
           </p>
@@ -30,7 +35,7 @@ import { TranslatePipe } from '@ngx-translate/core';
               <span class="co-hero__stat-label">{{ 'community.statLicense' | translate }}</span>
             </div>
             <div class="co-hero__stat">
-              <span class="co-hero__stat-val">200+</span>
+              <span class="co-hero__stat-val">150+</span>
               <span class="co-hero__stat-label">{{ 'community.statComponents' | translate }}</span>
             </div>
           </div>
@@ -47,6 +52,11 @@ import { TranslatePipe } from '@ngx-translate/core';
         <div class="co-channels">
           @for (ch of channels; track ch.titleKey) {
             <a class="co-channel" [href]="ch.href" target="_blank" rel="noopener">
+              <div class="traffic-lights">
+                <span class="light red"></span>
+                <span class="light yellow"></span>
+                <span class="light green"></span>
+              </div>
               <div class="co-channel__icon" [innerHTML]="ch.icon"></div>
               <h3 class="co-channel__title">{{ ch.titleKey | translate }}</h3>
               <p class="co-channel__desc">{{ ch.descKey | translate }}</p>
@@ -148,19 +158,20 @@ import { TranslatePipe } from '@ngx-translate/core';
   `,
   styles: `
     :host {
-      --co-max: 820px;
+      --co-max: 980px;
       display: block;
-      font-family: 'Inter', var(--ngxsmk-font-sans);
-      color: var(--ngxsmk-color-on-background);
+      font-family: var(--font-body, 'Inter', system-ui, sans-serif);
+      color: var(--color-text-main, #0f172a);
     }
 
     /* ═══════════════ HERO ═══════════════ */
     .co-hero {
       position: relative;
       overflow: hidden;
-      padding: clamp(4rem, 8vw, 6rem) var(--ngxsmk-space-6, 1.5rem) clamp(2.5rem, 5vw, 4rem);
+      padding: clamp(3.5rem, 7vw, 5.5rem) 1.5rem clamp(2.5rem, 5vw, 3.5rem);
       text-align: center;
-      background-image: radial-gradient(var(--ngxsmk-color-outline, #e4e4e7) 1px, transparent 1px);
+      background-color: var(--color-bg-canvas, #f8fafc);
+      background-image: radial-gradient(var(--color-border-card, rgba(148, 163, 184, 0.25)) 1px, transparent 1px);
       background-size: 24px 24px;
     }
     .co-hero::before {
@@ -171,77 +182,61 @@ import { TranslatePipe } from '@ngx-translate/core';
       pointer-events: none;
       background: radial-gradient(
         55% 55% at 50% 0%,
-        color-mix(in srgb, var(--ngxsmk-color-primary) 12%, transparent),
+        rgba(99, 102, 241, 0.12),
         transparent 70%
       );
     }
     .co-hero__inner {
       position: relative;
       z-index: 1;
-      max-width: 38rem;
+      max-width: 44rem;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
-    .co-hero__pill {
-      display: inline-flex;
-      align-items: center;
-      padding: 0.25rem 0.75rem;
-      border: 1px solid var(--ngxsmk-color-outline);
-      border-radius: var(--ngxsmk-radius-full, 999px);
-      background: color-mix(in srgb, var(--ngxsmk-color-surface) 60%, transparent);
-      backdrop-filter: blur(6px);
-      font-size: var(--ngxsmk-text-body-sm-size, 0.8125rem);
-      font-weight: 600;
-      color: var(--ngxsmk-color-on-surface);
-      margin-bottom: var(--ngxsmk-space-4, 1rem);
-      letter-spacing: 0.04em;
-    }
     .co-hero__title {
-      font-family: 'Outfit', var(--ngxsmk-font-sans), system-ui, sans-serif;
-      font-size: clamp(2rem, 5vw, 3rem);
+      font-family: var(--font-display, 'Plus Jakarta Sans', system-ui, sans-serif);
+      font-size: clamp(2.25rem, 5vw, 3.25rem);
       font-weight: 800;
       letter-spacing: -0.035em;
-      line-height: 1.1;
-      margin: 0 0 var(--ngxsmk-space-4, 1rem);
-      background: linear-gradient(
-        135deg,
-        var(--ngxsmk-color-on-surface),
-        var(--ngxsmk-color-on-surface-variant, #71717a)
-      );
+      line-height: 1.15;
+      margin: 0.75rem 0 1rem;
+      color: var(--color-text-main, #0f172a);
+    }
+    .highlight {
+      background: linear-gradient(135deg, #6366f1 0%, #f59e0b 100%);
       -webkit-background-clip: text;
-      background-clip: text;
       -webkit-text-fill-color: transparent;
     }
     .co-hero__sub {
-      font-size: var(--ngxsmk-text-body-lg-size, 1.0625rem);
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      font-size: 1.0625rem;
+      color: var(--color-text-secondary, #64748b);
       line-height: 1.65;
-      margin: 0 0 var(--ngxsmk-space-6, 1.5rem);
-      max-width: 34rem;
+      margin: 0 0 2rem;
+      max-width: 36rem;
     }
     .co-hero__stats {
       display: flex;
-      gap: var(--ngxsmk-space-10, 2.5rem);
+      gap: 3rem;
     }
     .co-hero__stat {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0.15rem;
+      gap: 0.2rem;
     }
     .co-hero__stat-val {
-      font-family: 'Outfit', var(--ngxsmk-font-sans), system-ui, sans-serif;
-      font-size: 1.5rem;
+      font-family: var(--font-display, 'Plus Jakarta Sans', system-ui, sans-serif);
+      font-size: 1.75rem;
       font-weight: 800;
       letter-spacing: -0.02em;
-      color: var(--ngxsmk-color-on-surface);
+      color: #6366f1;
     }
     .co-hero__stat-label {
-      font-size: var(--ngxsmk-text-body-xs-size, 0.75rem);
-      font-weight: 500;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--color-text-muted, #94a3b8);
       text-transform: uppercase;
       letter-spacing: 0.06em;
     }
@@ -250,69 +245,74 @@ import { TranslatePipe } from '@ngx-translate/core';
     .co-section {
       max-width: var(--co-max);
       margin: 0 auto;
-      padding: var(--ngxsmk-space-10, 2.5rem) var(--ngxsmk-space-6, 1.5rem);
+      padding: 2.5rem 1.5rem;
     }
     .co-section__title {
-      font-family: 'Outfit', var(--ngxsmk-font-sans), system-ui, sans-serif;
-      font-size: var(--ngxsmk-text-headline-sm-size, 1.25rem);
+      font-family: var(--font-display, 'Plus Jakarta Sans', system-ui, sans-serif);
+      font-size: 1.5rem;
       font-weight: 700;
       letter-spacing: -0.02em;
-      margin: 0 0 0.35rem;
-      color: var(--ngxsmk-color-on-surface);
+      margin: 0 0 0.4rem;
+      color: var(--color-text-main, #0f172a);
     }
     .co-section__sub {
-      font-size: var(--ngxsmk-text-body-md-size, 0.9375rem);
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      font-size: 0.95rem;
+      color: var(--color-text-secondary, #64748b);
       line-height: 1.6;
-      margin: 0 0 var(--ngxsmk-space-6, 1.5rem);
+      margin: 0 0 1.75rem;
     }
 
     /* ═══════════════ CHANNELS ═══════════════ */
     .co-channels {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(min(16rem, 100%), 1fr));
-      gap: var(--ngxsmk-space-4, 1rem);
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.25rem;
     }
     .co-channel {
       display: flex;
       flex-direction: column;
-      padding: var(--ngxsmk-space-5, 1.25rem);
-      background: var(--ngxsmk-color-surface, #fff);
-      border: 1px solid var(--ngxsmk-color-outline);
-      border-radius: var(--ngxsmk-radius-lg);
+      padding: 1.5rem;
+      background: var(--color-bg-card, #ffffff);
+      border: 1px solid var(--color-border-card, rgba(148, 163, 184, 0.2));
+      border-radius: var(--radius-xl, 22px);
       text-decoration: none;
       color: inherit;
+      box-shadow: 0 4px 14px -4px rgba(0, 0, 0, 0.04);
       transition:
-        box-shadow 0.2s,
-        transform 0.2s,
-        border-color 0.2s;
+        box-shadow 0.22s,
+        transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.22s;
     }
     .co-channel:hover {
-      box-shadow: var(--ngxsmk-shadow-md);
-      transform: translateY(-2px);
-      border-color: var(--ngxsmk-color-primary);
+      box-shadow: 0 16px 32px -12px rgba(99, 102, 241, 0.2);
+      transform: translateY(-3px);
+      border-color: rgba(99, 102, 241, 0.45);
+    }
+    .co-channel .traffic-lights {
+      margin-bottom: 1rem;
     }
     .co-channel__icon {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 44px;
-      height: 44px;
-      border-radius: var(--ngxsmk-radius-md);
-      background: color-mix(in srgb, var(--ngxsmk-color-primary) 10%, transparent);
-      color: var(--ngxsmk-color-primary);
-      margin-bottom: var(--ngxsmk-space-3, 0.75rem);
-      font-size: 1.25rem;
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: rgba(99, 102, 241, 0.1);
+      color: #6366f1;
+      margin-bottom: 1rem;
+      font-size: 1.35rem;
     }
     .co-channel__title {
-      font-size: var(--ngxsmk-text-body-md-size, 0.9375rem);
+      font-family: var(--font-display, 'Plus Jakarta Sans', system-ui, sans-serif);
+      font-size: 1.1rem;
       font-weight: 700;
-      margin: 0 0 0.25rem;
-      color: var(--ngxsmk-color-on-surface);
+      margin: 0 0 0.35rem;
+      color: var(--color-text-main, #0f172a);
     }
     .co-channel__desc {
-      font-size: var(--ngxsmk-text-body-sm-size, 0.8125rem);
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      font-size: 0.875rem;
+      color: var(--color-text-secondary, #64748b);
       line-height: 1.55;
       margin: 0 0 auto;
       flex: 1;
@@ -320,11 +320,11 @@ import { TranslatePipe } from '@ngx-translate/core';
     .co-channel__link {
       display: inline-flex;
       align-items: center;
-      gap: 0.3rem;
-      margin-top: var(--ngxsmk-space-3, 0.75rem);
-      font-size: var(--ngxsmk-text-body-sm-size, 0.8125rem);
+      gap: 0.4rem;
+      margin-top: 1rem;
+      font-size: 0.85rem;
       font-weight: 600;
-      color: var(--ngxsmk-color-primary);
+      color: #6366f1;
     }
 
     /* ═══════════════ RULES ═══════════════ */

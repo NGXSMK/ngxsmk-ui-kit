@@ -36,8 +36,13 @@ const TYPE_COLORS: Record<string, string> = {
       <!-- ═══════════════ HERO ═══════════════ -->
       <header class="cl-hero">
         <div class="cl-hero__inner">
-          <span class="cl-hero__pill">{{ 'changelog.pill' | translate }}</span>
-          <h1 class="cl-hero__title">{{ 'changelog.title' | translate }}</h1>
+          <div class="version-badge">
+            <span class="pulse-dot"></span>
+            <span class="badge-tag">Changelog</span>
+            <span class="badge-divider"></span>
+            <span class="badge-text">{{ 'changelog.pill' | translate }} • v{{ currentVersion }}</span>
+          </div>
+          <h1 class="cl-hero__title">Release <span class="highlight">Notes</span></h1>
           <p class="cl-hero__sub">
             {{ 'changelog.subtitle' | translate }}
             <strong>{{ currentVersion }}</strong
@@ -89,32 +94,39 @@ const TYPE_COLORS: Record<string, string> = {
           <article class="cl-release" [class.cl-release--first]="i === 0">
             <div class="cl-release__dot" [class.cl-release__dot--first]="i === 0"></div>
 
-            <div class="cl-release__head">
-              <div class="cl-release__version-row">
-                <span class="cl-release__version">{{ release.version }}</span>
-                @if (i === 0) {
-                  <span class="cl-release__latest">{{ 'changelog.latest' | translate }}</span>
-                }
+            <div class="cl-release__card">
+              <div class="traffic-lights">
+                <span class="light red"></span>
+                <span class="light yellow"></span>
+                <span class="light green"></span>
               </div>
-              <time class="cl-release__date">{{ formatDate(release.date) }}</time>
+              <div class="cl-release__head">
+                <div class="cl-release__version-row">
+                  <span class="cl-release__version">{{ release.version }}</span>
+                  @if (i === 0) {
+                    <span class="cl-release__latest">{{ 'changelog.latest' | translate }}</span>
+                  }
+                </div>
+                <time class="cl-release__date">{{ formatDate(release.date) }}</time>
+              </div>
+
+              <p class="cl-release__summary">{{ release.i18nKey + '.summary' | translate }}</p>
+
+              <ul class="cl-release__changes">
+                @for (change of release.changes; track change.i18nKey) {
+                  <li class="cl-change">
+                    <span
+                      class="cl-change__type"
+                      [style.background]="TYPE_COLORS[change.type] + '18'"
+                      [style.color]="TYPE_COLORS[change.type]"
+                    >
+                      {{ change.type | titlecase }}
+                    </span>
+                    <span class="cl-change__text">{{ change.i18nKey | translate }}</span>
+                  </li>
+                }
+              </ul>
             </div>
-
-            <p class="cl-release__summary">{{ release.i18nKey + '.summary' | translate }}</p>
-
-            <ul class="cl-release__changes">
-              @for (change of release.changes; track change.i18nKey) {
-                <li class="cl-change">
-                  <span
-                    class="cl-change__type"
-                    [style.background]="TYPE_COLORS[change.type] + '18'"
-                    [style.color]="TYPE_COLORS[change.type]"
-                  >
-                    {{ change.type | titlecase }}
-                  </span>
-                  <span class="cl-change__text">{{ change.i18nKey | translate }}</span>
-                </li>
-              }
-            </ul>
           </article>
         }
       </section>
@@ -149,19 +161,20 @@ const TYPE_COLORS: Record<string, string> = {
   `,
   styles: `
     :host {
-      --cl-max: 760px;
+      --cl-max: 880px;
       display: block;
-      font-family: 'Inter', var(--ngxsmk-font-sans);
-      color: var(--ngxsmk-color-on-background);
+      font-family: var(--font-body, 'Inter', system-ui, sans-serif);
+      color: var(--color-text-main, #0f172a);
     }
 
     /* ═══════════════ HERO ═══════════════ */
     .cl-hero {
       position: relative;
       overflow: hidden;
-      padding: clamp(4rem, 8vw, 6rem) var(--ngxsmk-space-6, 1.5rem) clamp(2.5rem, 5vw, 4rem);
+      padding: clamp(3.5rem, 7vw, 5.5rem) 1.5rem clamp(2.5rem, 5vw, 3.5rem);
       text-align: center;
-      background-image: radial-gradient(var(--ngxsmk-color-outline, #e4e4e7) 1px, transparent 1px);
+      background-color: var(--color-bg-canvas, #f8fafc);
+      background-image: radial-gradient(var(--color-border-card, rgba(148, 163, 184, 0.25)) 1px, transparent 1px);
       background-size: 24px 24px;
     }
     .cl-hero::before {
@@ -172,82 +185,65 @@ const TYPE_COLORS: Record<string, string> = {
       pointer-events: none;
       background: radial-gradient(
         55% 55% at 50% 0%,
-        color-mix(in srgb, var(--ngxsmk-color-primary) 12%, transparent),
+        rgba(99, 102, 241, 0.12),
         transparent 70%
       );
     }
     .cl-hero__inner {
       position: relative;
       z-index: 1;
-      max-width: 38rem;
+      max-width: 44rem;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
-    .cl-hero__pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.25rem 0.75rem;
-      border: 1px solid var(--ngxsmk-color-outline);
-      border-radius: var(--ngxsmk-radius-full, 999px);
-      background: color-mix(in srgb, var(--ngxsmk-color-surface) 60%, transparent);
-      backdrop-filter: blur(6px);
-      font-size: var(--ngxsmk-text-body-sm-size, 0.8125rem);
-      font-weight: 600;
-      color: var(--ngxsmk-color-on-surface);
-      margin-bottom: var(--ngxsmk-space-4, 1rem);
-      letter-spacing: 0.04em;
-    }
     .cl-hero__title {
-      font-family: 'Outfit', var(--ngxsmk-font-sans), system-ui, sans-serif;
-      font-size: clamp(2rem, 5vw, 3rem);
+      font-family: var(--font-display, 'Plus Jakarta Sans', system-ui, sans-serif);
+      font-size: clamp(2.25rem, 5vw, 3.25rem);
       font-weight: 800;
       letter-spacing: -0.035em;
-      line-height: 1.1;
-      margin: 0 0 var(--ngxsmk-space-4, 1rem);
-      background: linear-gradient(
-        135deg,
-        var(--ngxsmk-color-on-surface),
-        var(--ngxsmk-color-on-surface-variant, #71717a)
-      );
+      line-height: 1.15;
+      margin: 0.75rem 0 1rem;
+      color: var(--color-text-main, #0f172a);
+    }
+    .highlight {
+      background: linear-gradient(135deg, #6366f1 0%, #f59e0b 100%);
       -webkit-background-clip: text;
-      background-clip: text;
       -webkit-text-fill-color: transparent;
     }
     .cl-hero__sub {
-      font-size: var(--ngxsmk-text-body-lg-size, 1.0625rem);
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      font-size: 1.0625rem;
+      color: var(--color-text-secondary, #64748b);
       line-height: 1.65;
-      margin: 0 0 var(--ngxsmk-space-6, 1.5rem);
-      max-width: 34rem;
+      margin: 0 0 2rem;
+      max-width: 36rem;
     }
     .cl-hero__sub strong {
-      color: var(--ngxsmk-color-primary);
+      color: #6366f1;
       font-weight: 700;
     }
     .cl-hero__stats {
       display: flex;
-      gap: var(--ngxsmk-space-10, 2.5rem);
+      gap: 3rem;
     }
     .cl-hero__stat {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0.15rem;
+      gap: 0.2rem;
     }
     .cl-hero__stat-val {
-      font-family: 'Outfit', var(--ngxsmk-font-sans), system-ui, sans-serif;
-      font-size: 1.5rem;
+      font-family: var(--font-display, 'Plus Jakarta Sans', system-ui, sans-serif);
+      font-size: 1.75rem;
       font-weight: 800;
       letter-spacing: -0.02em;
-      color: var(--ngxsmk-color-on-surface);
+      color: var(--color-text-main, #0f172a);
     }
     .cl-hero__stat-label {
-      font-size: var(--ngxsmk-text-body-xs-size, 0.75rem);
-      font-weight: 500;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--color-text-muted, #94a3b8);
       text-transform: uppercase;
       letter-spacing: 0.06em;
     }
@@ -256,8 +252,7 @@ const TYPE_COLORS: Record<string, string> = {
     .cl-filters {
       max-width: var(--cl-max);
       margin: 0 auto;
-      padding: var(--ngxsmk-space-6, 1.5rem) var(--ngxsmk-space-6, 1.5rem)
-        var(--ngxsmk-space-6, 1.5rem);
+      padding: 1.5rem 1.5rem;
       display: flex;
       gap: 0.5rem;
       flex-wrap: wrap;
@@ -265,32 +260,33 @@ const TYPE_COLORS: Record<string, string> = {
     .cl-filter {
       display: inline-flex;
       align-items: center;
-      gap: 0.35rem;
-      padding: 0.3rem 0.7rem;
-      border: 1px solid var(--ngxsmk-color-outline);
-      border-radius: var(--ngxsmk-radius-full, 999px);
-      background: var(--ngxsmk-color-surface, #fff);
-      font-size: var(--ngxsmk-text-body-sm-size, 0.8125rem);
+      gap: 0.4rem;
+      padding: 0.45rem 1rem;
+      border: 1px solid var(--color-border-card, rgba(148, 163, 184, 0.25));
+      border-radius: 9999px;
+      background: var(--color-bg-card, #ffffff);
+      font-size: 0.85rem;
       font-weight: 500;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--color-text-secondary, #64748b);
       cursor: pointer;
-      transition: all 0.15s ease;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      font-family: inherit;
     }
     .cl-filter:hover {
-      border-color: var(--ngxsmk-color-primary);
-      color: var(--ngxsmk-color-primary);
+      border-color: rgba(99, 102, 241, 0.4);
+      color: #6366f1;
+      transform: translateY(-1px);
     }
     .cl-filter--active {
-      background: var(--ngxsmk-color-primary);
-      color: #fff;
-      border-color: var(--ngxsmk-color-primary);
-    }
-    .cl-filter--active .cl-filter__dot {
-      background: #fff !important;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(245, 158, 11, 0.08));
+      color: #6366f1;
+      border-color: rgba(99, 102, 241, 0.45);
+      font-weight: 600;
+      box-shadow: 0 4px 12px -2px rgba(99, 102, 241, 0.15);
     }
     .cl-filter__dot {
-      width: 7px;
-      height: 7px;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
     }
 
@@ -298,23 +294,27 @@ const TYPE_COLORS: Record<string, string> = {
     .cl-timeline {
       max-width: var(--cl-max);
       margin: 0 auto;
-      padding: var(--ngxsmk-space-8, 2rem) var(--ngxsmk-space-6, 1.5rem);
+      padding: 2rem 1.5rem 4rem;
       position: relative;
     }
     .cl-timeline__line {
       position: absolute;
-      left: calc(var(--ngxsmk-space-6, 1.5rem) + 5px);
-      top: var(--ngxsmk-space-8, 2rem);
-      bottom: 0;
+      left: calc(1.5rem + 5px);
+      top: 2rem;
+      bottom: 4rem;
       width: 2px;
-      background: var(--ngxsmk-color-outline, #e4e4e7);
+      background: linear-gradient(
+        180deg,
+        rgba(99, 102, 241, 0.4),
+        rgba(148, 163, 184, 0.2)
+      );
     }
 
     /* ═══════════════ RELEASE CARD ═══════════════ */
     .cl-release {
       position: relative;
-      padding-left: 2rem;
-      padding-bottom: var(--ngxsmk-space-8, 2rem);
+      padding-left: 2.25rem;
+      padding-bottom: 2.5rem;
     }
     .cl-release:last-child {
       padding-bottom: 0;
@@ -322,18 +322,38 @@ const TYPE_COLORS: Record<string, string> = {
     .cl-release__dot {
       position: absolute;
       left: 0;
-      top: 0.45rem;
+      top: 1rem;
       width: 12px;
       height: 12px;
       border-radius: 50%;
-      background: var(--ngxsmk-color-surface, #fff);
-      border: 2px solid var(--ngxsmk-color-outline, #a1a1aa);
+      background: var(--color-bg-card, #ffffff);
+      border: 2px solid var(--color-border-card, #94a3b8);
       z-index: 1;
     }
     .cl-release__dot--first {
-      border-color: var(--ngxsmk-color-primary);
-      background: var(--ngxsmk-color-primary);
-      box-shadow: 0 0 0 4px color-mix(in srgb, var(--ngxsmk-color-primary) 20%, transparent);
+      border-color: #6366f1;
+      background: #6366f1;
+      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
+    }
+
+    .cl-release__card {
+      background: var(--color-bg-card, #ffffff);
+      border: 1px solid var(--color-border-card, rgba(148, 163, 184, 0.2));
+      border-radius: var(--radius-xl, 22px);
+      padding: 1.5rem;
+      box-shadow: 0 4px 14px -4px rgba(0, 0, 0, 0.04);
+      transition:
+        border-color 0.22s,
+        box-shadow 0.22s,
+        transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .cl-release__card:hover {
+      border-color: rgba(99, 102, 241, 0.45);
+      box-shadow: 0 16px 32px -12px rgba(99, 102, 241, 0.18);
+      transform: translateY(-2px);
+    }
+    .cl-release__card .traffic-lights {
+      margin-bottom: 0.75rem;
     }
 
     .cl-release__head {
@@ -341,40 +361,40 @@ const TYPE_COLORS: Record<string, string> = {
       align-items: baseline;
       gap: 0.75rem;
       flex-wrap: wrap;
-      margin-bottom: 0.35rem;
+      margin-bottom: 0.5rem;
     }
     .cl-release__version-row {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.6rem;
     }
     .cl-release__version {
-      font-family: 'Outfit', var(--ngxsmk-font-sans), system-ui, sans-serif;
-      font-size: var(--ngxsmk-text-title-lg-size, 1.25rem);
+      font-family: var(--font-display, 'Plus Jakarta Sans', system-ui, sans-serif);
+      font-size: 1.35rem;
       font-weight: 700;
       letter-spacing: -0.02em;
-      color: var(--ngxsmk-color-on-surface);
+      color: var(--color-text-main, #0f172a);
     }
     .cl-release__latest {
-      padding: 0.15rem 0.55rem;
-      border-radius: var(--ngxsmk-radius-full, 999px);
-      background: color-mix(in srgb, var(--ngxsmk-color-primary) 14%, transparent);
-      color: var(--ngxsmk-color-primary);
-      font-size: var(--ngxsmk-text-body-xs-size, 0.75rem);
+      padding: 0.2rem 0.6rem;
+      border-radius: 9999px;
+      background: rgba(99, 102, 241, 0.12);
+      color: #6366f1;
+      font-size: 0.75rem;
       font-weight: 700;
       letter-spacing: 0.04em;
       text-transform: uppercase;
     }
     .cl-release__date {
-      font-size: var(--ngxsmk-text-body-sm-size, 0.8125rem);
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      font-size: 0.85rem;
+      color: var(--color-text-secondary, #64748b);
     }
 
     .cl-release__summary {
-      font-size: var(--ngxsmk-text-body-md-size, 0.9375rem);
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      font-size: 0.95rem;
+      color: var(--color-text-secondary, #64748b);
       line-height: 1.6;
-      margin: 0 0 var(--ngxsmk-space-3, 0.75rem);
+      margin: 0 0 1rem;
     }
 
     .cl-release__changes {
@@ -383,45 +403,45 @@ const TYPE_COLORS: Record<string, string> = {
       padding: 0;
       display: flex;
       flex-direction: column;
-      gap: 0.45rem;
+      gap: 0.5rem;
     }
 
     /* ═══════════════ CHANGE ROW ═══════════════ */
     .cl-change {
       display: flex;
       align-items: flex-start;
-      gap: 0.5rem;
-      font-size: var(--ngxsmk-text-body-sm-size, 0.8125rem);
-      color: var(--ngxsmk-color-on-surface);
+      gap: 0.625rem;
+      font-size: 0.875rem;
+      color: var(--color-text-main, #0f172a);
       line-height: 1.55;
     }
     .cl-change__type {
       flex-shrink: 0;
-      padding: 0.1rem 0.45rem;
-      border-radius: var(--ngxsmk-radius-sm, 0.25rem);
-      font-size: var(--ngxsmk-text-body-xs-size, 0.75rem);
+      padding: 0.15rem 0.5rem;
+      border-radius: 9999px;
+      font-size: 0.72rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.04em;
       margin-top: 0.05rem;
     }
     .cl-change__text {
-      color: var(--ngxsmk-color-on-surface-variant, #52525b);
+      color: var(--color-text-secondary, #475569);
     }
 
     /* ═══════════════ FOOTER CTA ═══════════════ */
     .cl-footer {
       max-width: var(--cl-max);
       margin: 0 auto;
-      padding: var(--ngxsmk-space-6, 1.5rem);
-      padding-bottom: var(--ngxsmk-space-16, 4rem);
+      padding: 1.5rem;
+      padding-bottom: 4rem;
     }
     .cl-footer__card {
       text-align: center;
-      padding: var(--ngxsmk-space-10, 2.5rem);
-      background: var(--ngxsmk-color-surface, #fff);
-      border: 1px solid var(--ngxsmk-color-outline);
-      border-radius: var(--ngxsmk-radius-xl, 1rem);
+      padding: 2.5rem;
+      background: var(--color-bg-card, #ffffff);
+      border: 1px solid var(--color-border-card, rgba(148, 163, 184, 0.2));
+      border-radius: var(--radius-xl, 22px);
     }
     .cl-footer__icon {
       display: inline-flex;
@@ -429,13 +449,13 @@ const TYPE_COLORS: Record<string, string> = {
       justify-content: center;
       width: 56px;
       height: 56px;
-      border-radius: var(--ngxsmk-radius-lg);
-      background: color-mix(in srgb, var(--ngxsmk-color-primary) 10%, transparent);
-      color: var(--ngxsmk-color-primary);
-      margin-bottom: var(--ngxsmk-space-4, 1rem);
+      border-radius: 16px;
+      background: rgba(99, 102, 241, 0.1);
+      color: #6366f1;
+      margin-bottom: 1rem;
     }
     .cl-footer__title {
-      font-family: 'Outfit', var(--ngxsmk-font-sans), system-ui, sans-serif;
+      font-family: var(--font-display, 'Plus Jakarta Sans', system-ui, sans-serif);
       font-size: var(--ngxsmk-text-headline-sm-size, 1.25rem);
       font-weight: 700;
       letter-spacing: -0.02em;

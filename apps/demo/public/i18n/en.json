@@ -351,9 +351,12 @@
     }
   },
   "community": {
+    "title": "Community & Contribution",
+    "subtitle": "Join our growing community, ask questions, propose features, and share what you've built.",
+    "githubDiscussions": "Contact & Feedback",
+    "githubDiscussionsDesc": "Questions, ideas, or bug reports? Reach the maintainer directly — every message helps improve the kit.",
+    "joinDiscussion": "Send Feedback",
     "pill": "Community",
-    "title": "Built together, ship faster",
-    "subtitle": "Join a growing community of Angular developers. Ask questions, propose features, report bugs, and share what you've built with NGXSMK.",
     "statOpen": "Open",
     "statSource": "Source",
     "statMit": "MIT",
@@ -371,7 +374,7 @@
     "channelEmailDesc": "For private feedback, security disclosures, or partnership inquiries — reach out directly.",
     "channelEmailCta": "Send an email",
     "channelWhatsappTitle": "WhatsApp Channel",
-    "channelWhatsappDesc": "Join our official WhatsApp Channel for updates, release notes, and community announcements.",
+    "channelWhatsappDesc": "Join our official WhatsApp channel for the latest updates, releases, and announcements.",
     "channelWhatsappCta": "Join Channel",
     "channelDocsTitle": "Documentation",
     "channelDocsDesc": "Found a typo or unclear guide? Docs PRs are the fastest way to contribute — no code review needed.",
@@ -1370,6 +1373,14 @@
         "title": "AI Chat Interface",
         "desc": "A modern, responsive conversational UI featuring message streaming, markdown response formatting, code syntax highlighting, and inline tool calls."
       },
+      "aiconsole": {
+        "title": "AI Console",
+        "desc": "Agent workspace recipe with breadcrumb chrome, model controls, and ngxsmk-ai-chat — ready to wire to your backend."
+      },
+      "opstable": {
+        "title": "Ops Data Table",
+        "desc": "Operations inventory with filter, selection, column resize, and drag-to-reorder headers on ngxsmk-data-table."
+      },
       "landing": {
         "title": "SaaS Landing Page",
         "desc": "A high-conversion landing page mockup with a beautiful hero section, interactive pricing tables, features grids, and animated FAQ accordions."
@@ -1379,8 +1390,8 @@
         "desc": "An interactive column-based task board to manage sprint tasks, user stories, and bugs. Features drag-and-drop actions."
       },
       "settings": {
-        "title": "User Settings Page",
-        "desc": "A comprehensive, multi-section configuration panel for profile options, billing systems, and security switches."
+        "title": "Settings Form",
+        "desc": "Profile and notification settings with form-field, time-picker, input-mask, switch, and tabs — a copy-paste settings recipe."
       },
       "ecommerce": {
         "title": "E-Commerce Product Detail",
@@ -1433,12 +1444,5 @@
     "applyIonic": "Apply Ionic Preset",
     "clearIonic": "Reset Ionic Preset",
     "ionicActive": "Ionic Theme Active"
-  },
-  "community": {
-    "title": "Community & Contribution",
-    "subtitle": "Join our growing community, ask questions, propose features, and share what you've built.",
-    "githubDiscussions": "Contact & Feedback",
-    "githubDiscussionsDesc": "Questions, ideas, or bug reports? Reach the maintainer directly — every message helps improve the kit.",
-    "joinDiscussion": "Send Feedback"
   }
 }

@@ -1,5 +1,19 @@
 import { ChangeDetectionStrategy, Component, input, output, signal, inject } from '@angular/core';
 
+/**
+ * Collapsible app sidebar shell. Project sections, headings, and items;
+ * toggle via `NgxsmkSideNavCollapseButton` or `toggle()`.
+ *
+ * ```html
+ * <ngxsmk-side-nav>
+ *   <ngxsmk-side-nav-section>
+ *     <ngxsmk-side-nav-heading>Workspace</ngxsmk-side-nav-heading>
+ *     <ngxsmk-side-nav-item [active]="true">Dashboard</ngxsmk-side-nav-item>
+ *   </ngxsmk-side-nav-section>
+ *   <ngxsmk-side-nav-collapse-button />
+ * </ngxsmk-side-nav>
+ * ```
+ */
 @Component({
   standalone: true,
   selector: 'ngxsmk-side-nav',

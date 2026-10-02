@@ -136,7 +136,7 @@ type PageItem = { kind: 'page'; page: number } | { kind: 'ellipsis'; key: string
       color: var(--ngxsmk-color-on-surface);
       background: transparent;
       border: 1px solid transparent;
-      border-radius: var(--ngxsmk-radius-md, 8px);
+      border-radius: var(--ngxsmk-pagination-radius, var(--ngxsmk-radius-md));
       cursor: pointer;
       transition:
         background-color var(--ngxsmk-duration-fast, 120ms) var(--ngxsmk-ease-out, ease),

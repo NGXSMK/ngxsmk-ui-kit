@@ -1,22 +1,55 @@
-import { Rule, Tree, SchematicContext, SchematicsException } from '@angular-devkit/schematics';
+import {
+  Rule,
+  SchematicContext,
+  SchematicsException,
+  Tree,
+  chain,
+} from '@angular-devkit/schematics';
+import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 
 export interface NgAddSchema {
   project?: string;
-  theme?: 'violet' | 'neutral' | 'emerald' | 'rose';
+  theme?: 'classic' | 'violet' | 'neutral' | 'emerald' | 'rose' | 'ink';
+  /** When true, scaffold a sample page under src/app/ngxsmk-starter. */
+  scaffold?: boolean;
 }
 
-export function ngAdd(_options: NgAddSchema): Rule {
-  return (tree: Tree, context: SchematicContext) => {
-    context.logger.info('Initializing @ngxsmk/core UI kit...');
+function themeStylesheet(theme: NonNullable<NgAddSchema['theme']>): string {
+  if (theme === 'classic' || theme === 'emerald') {
+    return 'node_modules/@ngxsmk/theme/styles/ngxsmk.css';
+  }
+  return `node_modules/@ngxsmk/theme/styles/ngxsmk.${theme}.css`;
+}
 
+function ensureDeps(tree: Tree, context: SchematicContext): void {
+  if (!tree.exists('package.json')) {
+    throw new SchematicsException('Could not find package.json.');
+  }
+  const pkg = JSON.parse(tree.read('package.json')!.toString('utf-8')) as {
+    dependencies?: Record<string, string>;
+    devDependencies?: Record<string, string>;
+  };
+  pkg.dependencies ??= {};
+  const add = (name: string, version: string) => {
+    if (!pkg.dependencies![name] && !pkg.devDependencies?.[name]) {
+      pkg.dependencies![name] = version;
+      context.logger.info(`Queued dependency ${name}@${version}`);
+    }
+  };
+  add('@ngxsmk/core', '^3.0.0');
+  add('@ngxsmk/theme', '^3.0.0');
+  add('@ngxsmk/cdk', '^3.0.0');
+  tree.overwrite('package.json', JSON.stringify(pkg, null, 2) + '\n');
+}
+
+function updateAngularJson(options: NgAddSchema): Rule {
+  return (tree: Tree, context: SchematicContext) => {
     if (!tree.exists('angular.json')) {
       throw new SchematicsException('Could not find angular.json workspace file.');
     }
 
-    const content = tree.read('angular.json')!.toString('utf-8');
-    const json = JSON.parse(content);
-
-    const projectName = _options.project || Object.keys(json.projects)[0];
+    const json = JSON.parse(tree.read('angular.json')!.toString('utf-8'));
+    const projectName = options.project || Object.keys(json.projects)[0];
     if (!projectName) {
       throw new SchematicsException('No project found in workspace.');
     }
@@ -27,60 +60,154 @@ export function ngAdd(_options: NgAddSchema): Rule {
     }
 
     const targets = project.architect || project.targets;
-    if (!targets) {
+    if (!targets?.build?.options) {
       throw new SchematicsException(
-        `Could not find architect targets for project "${projectName}".`,
+        `Could not find build options for project "${projectName}".`,
       );
     }
 
-    // Add styles to build architect options
-    if (targets.build && targets.build.options) {
-      const styles = targets.build.options.styles || [];
-      const themeName = _options.theme || 'violet';
-      const themeStyle = `node_modules/@ngxsmk/theme/styles/ngxsmk.${themeName}.css`;
-      const buttonStyle = 'node_modules/@ngxsmk/core/styles/button.css';
-      const inputStyle = 'node_modules/@ngxsmk/core/styles/input.css';
+    const theme = options.theme || 'classic';
+    const themeStyle = themeStylesheet(theme);
+    const styles: string[] = targets.build.options.styles || [];
 
-      if (!styles.includes(themeStyle)) {
-        styles.unshift(themeStyle);
-        context.logger.info(`Added theme stylesheet: ${themeStyle}`);
-      }
-      if (!styles.includes(buttonStyle)) {
-        styles.push(buttonStyle);
-        context.logger.info(`Added button stylesheet: ${buttonStyle}`);
-      }
-      if (!styles.includes(inputStyle)) {
-        styles.push(inputStyle);
-        context.logger.info(`Added input/textarea stylesheet: ${inputStyle}`);
-      }
+    // Drop prior ngxsmk theme sheets so theme switches stay clean.
+    const filtered = styles.filter(
+      (s) => !(typeof s === 'string' && s.includes('@ngxsmk/theme/styles/ngxsmk')),
+    );
+    filtered.unshift(themeStyle);
+    targets.build.options.styles = filtered;
+    context.logger.info(`Theme stylesheet → ${themeStyle}`);
 
-      targets.build.options.styles = styles;
+    if (targets.test?.options) {
+      const testStyles: string[] = targets.test.options.styles || [];
+      targets.test.options.styles = [
+        themeStyle,
+        ...testStyles.filter(
+          (s) => !(typeof s === 'string' && s.includes('@ngxsmk/theme/styles/ngxsmk')),
+        ),
+      ];
     }
 
-    // Add styles to test architect options
-    if (targets.test && targets.test.options) {
-      const styles = targets.test.options.styles || [];
-      const themeName = _options.theme || 'violet';
-      const themeStyle = `node_modules/@ngxsmk/theme/styles/ngxsmk.${themeName}.css`;
-      const buttonStyle = 'node_modules/@ngxsmk/core/styles/button.css';
-      const inputStyle = 'node_modules/@ngxsmk/core/styles/input.css';
-
-      if (!styles.includes(themeStyle)) {
-        styles.unshift(themeStyle);
-      }
-      if (!styles.includes(buttonStyle)) {
-        styles.push(buttonStyle);
-      }
-      if (!styles.includes(inputStyle)) {
-        styles.push(inputStyle);
-      }
-
-      targets.test.options.styles = styles;
-    }
-
-    tree.overwrite('angular.json', JSON.stringify(json, null, 2));
-    context.logger.info('Successfully updated angular.json with @ngxsmk/core styles!');
-
+    tree.overwrite('angular.json', JSON.stringify(json, null, 2) + '\n');
     return tree;
+  };
+}
+
+function scaffoldStarter(options: NgAddSchema): Rule {
+  return (tree: Tree, context: SchematicContext) => {
+    if (options.scaffold === false) {
+      return tree;
+    }
+
+    if (!tree.exists('angular.json')) {
+      return tree;
+    }
+    const json = JSON.parse(tree.read('angular.json')!.toString('utf-8'));
+    const projectName = options.project || Object.keys(json.projects)[0];
+    const project = json.projects[projectName];
+    const root: string = project?.sourceRoot || 'src';
+    const dir = `${root}/app/ngxsmk-starter`;
+    const path = `${dir}/ngxsmk-starter.ts`;
+
+    if (tree.exists(path)) {
+      context.logger.info('Starter page already exists — skipped.');
+      return tree;
+    }
+
+    const contents = `import { Component, signal } from '@angular/core';
+import { NgxsmkButton } from '@ngxsmk/core/button';
+import { NgxsmkCard, NgxsmkCardContent } from '@ngxsmk/core/card';
+import { NgxsmkFormField } from '@ngxsmk/core/form-field';
+import { NgxsmkInputDirective } from '@ngxsmk/core/input';
+import { NgxsmkSwitch } from '@ngxsmk/core/switch';
+
+/**
+ * Minimal NGXSMK starter — generated by \`ng add @ngxsmk/cli\`.
+ * Import this component into a route to verify the kit is wired.
+ */
+@Component({
+  selector: 'app-ngxsmk-starter',
+  standalone: true,
+  imports: [
+    NgxsmkButton,
+    NgxsmkCard,
+    NgxsmkCardContent,
+    NgxsmkFormField,
+    NgxsmkInputDirective,
+    NgxsmkSwitch,
+  ],
+  template: \`
+    <main class="ngxsmk-starter">
+      <h1>NGXSMK is ready</h1>
+      <p>Signals-native, zoneless-friendly components with token-driven theming.</p>
+
+      <ngxsmk-card>
+        <div ngxsmkCardContent>
+          <ngxsmk-form-field label="Email">
+            <input ngxsmkInput type="email" placeholder="you@company.com" />
+          </ngxsmk-form-field>
+
+          <ngxsmk-switch [(checked)]="darkPreview">Preview dark class toggle</ngxsmk-switch>
+
+          <div class="ngxsmk-starter__actions">
+            <button ngxsmk-button type="button">Primary</button>
+            <button ngxsmk-button type="button" variant="outline">Outline</button>
+          </div>
+        </div>
+      </ngxsmk-card>
+    </main>
+  \`,
+  styles: \`
+    .ngxsmk-starter {
+      max-width: 28rem;
+      margin: 3rem auto;
+      padding: 0 1.25rem;
+      font-family: var(--ngxsmk-font-sans, system-ui, sans-serif);
+      color: var(--ngxsmk-color-on-background);
+    }
+    .ngxsmk-starter h1 {
+      margin: 0 0 0.5rem;
+      letter-spacing: -0.03em;
+    }
+    .ngxsmk-starter p {
+      margin: 0 0 1.25rem;
+      color: var(--ngxsmk-color-on-surface-variant);
+    }
+    .ngxsmk-starter__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    :host ::ng-deep ngxsmk-card [ngxsmkCardContent],
+    :host ngxsmk-card {
+      display: block;
+    }
+    :host ::ng-deep [ngxsmkCardContent] {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1.25rem;
+    }
+  \`,
+})
+export class NgxsmkStarterPage {
+  readonly darkPreview = signal(false);
+}
+`;
+
+    tree.create(path, contents);
+    context.logger.info(`Created starter page at ${path}`);
+    context.logger.info('Route it with: loadComponent → NgxsmkStarterPage');
+    return tree;
+  };
+}
+
+export function ngAdd(options: NgAddSchema): Rule {
+  return (tree: Tree, context: SchematicContext) => {
+    context.logger.info('Adding @ngxsmk UI kit…');
+    ensureDeps(tree, context);
+    context.addTask(new NodePackageInstallTask());
+    return chain([updateAngularJson(options), scaffoldStarter(options)])(tree, context);
   };
 }

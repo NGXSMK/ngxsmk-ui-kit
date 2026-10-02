@@ -15,7 +15,7 @@ import { NgxsmkStreamingText } from '@ngxsmk/core/streaming-text';
 import { NgxsmkMarkdownViewer } from '@ngxsmk/core/markdown-viewer';
 import { NgxsmkCodeBlock } from '@ngxsmk/core/code-block';
 import { NgxsmkDiffViewer } from '@ngxsmk/core/diff-viewer';
-import { NgxsmkCitationViewer } from '@ngxsmk/core/citation-viewer';
+import { NgxsmkCitationViewer, type NgxsmkCitationSource } from '@ngxsmk/core/citation-viewer';
 import { NgxsmkToolCallViewer } from '@ngxsmk/core/tool-call-viewer';
 import { NgxsmkReasoningTimeline } from '@ngxsmk/core/reasoning-timeline';
 import { NgxsmkMemoryViewer } from '@ngxsmk/core/memory-viewer';
@@ -321,8 +321,14 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
       [component]="NgxsmkCodeBlock"
       [customize]="customizeNgxsmkCodeBlock"
     >
-      <div style="width:100%;max-width:520px">
-        <ngxsmk-code-block language="typescript">{{ codeBlockSample }}</ngxsmk-code-block>
+      <div style="width:100%;max-width:520px;display:flex;flex-direction:column;gap:0.75rem">
+        <ngxsmk-code-block language="typescript" [code]="codeBlockSample" />
+        <ngxsmk-code-block
+          language="typescript"
+          [code]="codeBlockSample"
+          [streaming]="true"
+          [streamChunk]="4"
+        />
       </div>
     </showcase-example>
 
@@ -346,11 +352,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
       [customize]="customizeNgxsmkCitationViewer"
     >
       <div style="width:100%;max-width:420px">
-        <ngxsmk-citation-viewer
-          title="Attention Is All You Need"
-          author="Vaswani et al."
-          snippet="The Transformer allows for significantly more parallelization than recurrent models."
-        />
+        <ngxsmk-citation-viewer [sources]="citationSources" />
       </div>
     </showcase-example>
 
@@ -1119,6 +1121,23 @@ ngxsmk-prompt-carousel {
     },
   ];
 
+  protected readonly citationSources: NgxsmkCitationSource[] = [
+    {
+      id: '1',
+      title: 'Attention Is All You Need',
+      author: 'Vaswani et al.',
+      snippet: 'The Transformer allows for significantly more parallelization than recurrent models.',
+      url: 'https://arxiv.org/abs/1706.03762',
+    },
+    {
+      id: '2',
+      title: 'Angular Signals guide',
+      author: 'angular.dev',
+      snippet: 'Signals are reactive primitives for fine-grained updates.',
+      url: 'https://angular.dev/guide/signals',
+    },
+  ];
+
   protected readonly reasoningSteps = [
     { label: 'Parse request', content: 'Identified intent: reset API key.', durationMs: 120 },
     { label: 'Check permissions', content: 'User has admin scope.', durationMs: 240 },
@@ -1143,9 +1162,10 @@ ngxsmk-prompt-carousel {
   protected readonly codeDrawer = `<ngxsmk-chat-composer-drawer [open]="open" (closed)="open = false">\n  <!-- attachments, prompts, tools -->\n</ngxsmk-chat-composer-drawer>`;
   protected readonly codeStreaming = `<ngxsmk-streaming-text [text]="text" [speed]="18" />`;
   protected readonly codeMarkdown = `<ngxsmk-markdown-viewer>{{ markdown }}</ngxsmk-markdown-viewer>`;
-  protected readonly codeCodeBlock = `<ngxsmk-code-block language="typescript">\n  const x = 1;\n</ngxsmk-code-block>`;
+  protected readonly codeCodeBlock = `<ngxsmk-code-block language="typescript" [code]="snippet" />
+<ngxsmk-code-block language="typescript" [code]="snippet" [streaming]="true" />`;
   protected readonly codeDiff = `<ngxsmk-diff-viewer [source]="diffString" />`;
-  protected readonly codeCitation = `<ngxsmk-citation-viewer title="Paper" author="Author" snippet="Key finding." />`;
+  protected readonly codeCitation = `<ngxsmk-citation-viewer [sources]="citations" />`;
   protected readonly codeToolCall = `<ngxsmk-tool-call-viewer [calls]="calls" />`;
   protected readonly codeReasoning = `<ngxsmk-reasoning-timeline [steps]="steps" />`;
   protected readonly codeMemory = `<ngxsmk-memory-viewer [entries]="entries" />`;

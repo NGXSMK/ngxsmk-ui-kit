@@ -260,16 +260,19 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
           label="API Key"
           placeholder="sk-..."
           hint="Found in your dashboard settings."
+          type="password"
           variant="outlined"
-          [loading]="true"
-          radius="pill"
           size="lg"
+          [showClear]="true"
+          [showCopy]="true"
+          [(value)]="apiKey"
         />
       </div>
     </showcase-example>
   `,
 })
 export class EnterprisePage {
+  protected readonly apiKey = signal('sk-live-demo-key-1234567890');
   protected readonly NgxsmkKanbanBoard = NgxsmkKanbanBoard;
   protected readonly customizeNgxsmkKanbanBoard = `/* Theme <ngxsmk-kanban-board> via design tokens */
 ngxsmk-kanban-board {
@@ -804,12 +807,11 @@ ngxsmk-input-group {
 />
 
 <ngxsmk-input-group
-  label="Username"
-  hint="3-20 characters"
-  [minLength]="3"
-  [maxLength]="20"
-  [showCounter]="true"
-  variant="soft"
-  [floatingLabel]="true"
+  label="API Key"
+  type="password"
+  placeholder="sk-..."
+  size="lg"
+  [showClear]="true"
+  [showCopy]="true"
 />`;
 }

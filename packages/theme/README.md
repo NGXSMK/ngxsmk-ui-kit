@@ -1,6 +1,6 @@
 # @ngxsmk/theme
 
-The design-token engine of the [NGXSMK UI kit](https://ngxsmk.github.io/ngxsmk-ui-kit) ([WhatsApp Channel](https://whatsapp.com/channel/0029Vb8PWpz1XquUOnGPUM2p)). A `ThemeConfig` maps to a flat set of `--ngxsmk-*` CSS custom properties that every `@ngxsmk/core` component reads. Ships 4 presets, light/dark/system strategies, and runtime theme switching via `NgxsmkThemeService`.
+The design-token engine of the [NGXSMK UI kit](https://ngxsmk.github.io/ngxsmk-ui-kit) ([WhatsApp Channel](https://whatsapp.com/channel/0029Vb8PWpz1XquUOnGPUM2p)). A `ThemeConfig` maps to a flat set of `--ngxsmk-*` CSS custom properties that every `@ngxsmk/core` component reads. Ships Classic emerald (default), opt-in **Ink** premium, plus violet/neutral/rose; light/dark/system strategies; and runtime theme switching via `NgxsmkThemeService`.
 
 ## Compatibility
 
@@ -35,21 +35,43 @@ import { NgxsmkThemeService, emeraldPreset } from '@ngxsmk/theme';
 constructor(private theme: NgxsmkThemeService) {}
 
 ngOnInit() {
-  this.theme.applyTheme(emeraldPreset); // emerald | violet | neutral | rose
+  this.theme.applyTheme(emeraldPreset); // emerald | ink | violet | neutral | rose
   this.theme.setMode('dark');           // 'light' | 'dark' | 'system'
 }
 ```
 
 ## Presets
 
-| Preset    | Primary color       |
-| --------- | ------------------- |
-| `emerald` | `#059669` (default) |
-| `violet`  | `#7C3AED`           |
-| `neutral` | `#18181B`           |
-| `rose`    | `#E11D48`           |
+| Preset    | Primary color       | Notes |
+| --------- | ------------------- | ----- |
+| `emerald` | `#059669` (default) | Classic look — **stable** for existing apps (`ngxsmk.css`) |
+| `ink`     | `#0D9488`           | Opt-in premium (graphite, Geist Sans, sharper radii) |
+| `violet`  | `#7C3AED`           | |
+| `neutral` | `#18181B`           | |
+| `rose`    | `#E11D48`           | |
 
-Presets are plain `ThemeConfig` objects exported from the package, so you can spread and override any of them.
+### Classic vs Ink (existing consumers)
+
+Default stylesheet stays Classic emerald so upgrades do not silently restyle your app:
+
+```scss
+/* Keep today's look (default) */
+@import '@ngxsmk/theme/styles/ngxsmk.css';
+
+/* Opt into the premium Ink look */
+@import '@ngxsmk/theme/styles/ngxsmk.ink.css';
+```
+
+Or at runtime:
+
+```ts
+import { inkPreset } from '@ngxsmk/theme';
+this.theme.applyTheme(inkPreset);
+```
+
+A future **major** may flip the default to Ink and ship `ngxsmk.classic.css` for holdouts. Until then, Classic is the safe default.
+
+Presets are plain `ThemeConfig` objects exported from the package, so you can spread and override any of them. Use `radiusScale` / `shadowScale` for ladder overrides without forking the whole engine.
 
 ## Token model
 
@@ -85,6 +107,25 @@ this.theme.applyTheme({
 ```
 
 Per-mode token overrides are supported via the `overrides: { light, dark }` field for fine control in light and dark modes.
+
+## Ionic Angular
+
+Sync NGXSMK tokens into Ionic’s `--ion-*` variables so web kit and mobile shell share one palette:
+
+```ts
+import { ApplicationConfig } from '@angular/core';
+import { provideIonicAngular } from '@ionic/angular/standalone';
+import { provideNgxsmkIonicTheme, inkPreset } from '@ngxsmk/theme';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideIonicAngular(),
+    provideNgxsmkIonicTheme(), // or provideNgxsmkIonicTheme(inkPreset)
+  ],
+};
+```
+
+Keep Ionic for navigation (`ion-tabs`, `ion-menu`, page lifecycle). Use `@ngxsmk/core` components for dense product UI. Agents can call MCP tool `ngxsmk_ionic_setup` for a full recipe.
 
 ## Tree-shaking & deep imports
 

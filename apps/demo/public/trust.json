@@ -1,0 +1,42 @@
+{
+  "version": "3.0.0",
+  "updated": "2026-09-07",
+  "badges": [
+    {
+      "id": "components",
+      "label": "Components",
+      "value": "260+",
+      "detail": "Signals-native secondary entries"
+    },
+    {
+      "id": "zoneless",
+      "label": "Zoneless",
+      "value": "CI gated",
+      "detail": "npm run check:zoneless"
+    },
+    {
+      "id": "a11y",
+      "label": "A11y",
+      "value": "Top-20 axe",
+      "detail": "A11Y.md top-20 + a11y-audit.spec.ts"
+    },
+    {
+      "id": "bundles",
+      "label": "Bundle size",
+      "value": "CI gated",
+      "detail": "npm run size vs baseline"
+    },
+    {
+      "id": "visual",
+      "label": "Visual",
+      "value": "Playwright",
+      "detail": "Light + dark baselines"
+    },
+    {
+      "id": "agents",
+      "label": "Agents",
+      "value": "MCP + llms.txt",
+      "detail": "Secondary-entry scaffolds"
+    }
+  ]
+}

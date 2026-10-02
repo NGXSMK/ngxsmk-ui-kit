@@ -1,7 +1,7 @@
-# NGXSMK Enterprise Migration & Upgrade Strategy
+# NGXSMK Migration Guide
 
-> **Target Standard**: Seamless, predictable upgrades across major Angular and NGXSMK versions.  
-> **Tooling**: Automated AST codemods via `ngxsmk migrate` and Angular CLI `ng update @ngxsmk/cli`.
+Upgrades across major Angular and NGXSMK versions. Automated AST codemods are
+available via `ngxsmk migrate` and Angular CLI `ng update @ngxsmk/cli`.
 
 ---
 

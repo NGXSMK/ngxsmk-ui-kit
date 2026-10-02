@@ -70,6 +70,8 @@ the source packages.
 
 ## Coding standards
 
+- Follow **[GOVERNANCE.md](./GOVERNANCE.md)** for architecture, tokens, a11y, and API rules (enforced by `npm run governance`).
+- Accessibility expectations: **[A11Y.md](./A11Y.md)**.
 - **Linting** is enforced by ESLint (`eslint.config.js`) with Angular,
   TypeScript, and accessibility rules. Run `npm run lint` to check.
 - **Formatting** is enforced by Prettier (`.prettierrc`) and EditorConfig

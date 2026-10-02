@@ -19,16 +19,93 @@ type ApiPanel = 'code' | 'api' | 'customize';
   template: `
     <div class="ngxsmk-sc-ex">
       <div class="ngxsmk-sc-ex__head">
+        <div class="traffic-lights" aria-hidden="true">
+          <span class="light red"></span>
+          <span class="light yellow"></span>
+          <span class="light green"></span>
+        </div>
         <div class="ngxsmk-sc-ex__heading">
-          <h3 class="ngxsmk-sc-ex__title">{{ title() }}</h3>
+          <div class="ngxsmk-sc-ex__title-row">
+            <h3 class="ngxsmk-sc-ex__title">{{ title() }}</h3>
+            @if (displaySelector()) {
+              <button
+                type="button"
+                class="ngxsmk-sc-ex__selector-pill"
+                (click)="copySelector()"
+                [title]="copiedSelector() ? ('showcaseExample.copied' | translate) : 'Click to copy selector'"
+                [attr.aria-label]="'Copy selector ' + displaySelector()"
+              >
+                <code>{{ displaySelector() }}</code>
+                @if (copiedSelector()) {
+                  <span class="ngxsmk-sc-ex__selector-copied">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    {{ 'showcaseExample.copied' | translate }}
+                  </span>
+                } @else {
+                  <svg class="ngxsmk-sc-ex__selector-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" />
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                  </svg>
+                }
+              </button>
+            }
+          </div>
           @if (description()) {
             <p class="ngxsmk-sc-ex__desc">{{ description() }}</p>
           }
         </div>
+        <div class="ngxsmk-sc-ex__viewports" role="group" aria-label="Preview viewport size">
+          <button
+            type="button"
+            class="ngxsmk-sc-ex__vp-btn"
+            [class.ngxsmk-sc-ex__vp-btn--active]="viewport() === 'full'"
+            (click)="viewport.set('full')"
+            title="Desktop (100%)"
+            aria-label="Desktop viewport"
+          >
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="3" width="20" height="14" rx="2" />
+              <line x1="8" y1="21" x2="16" y2="21" />
+              <line x1="12" y1="17" x2="12" y2="21" />
+            </svg>
+          </button>
+          <button
+            type="button"
+            class="ngxsmk-sc-ex__vp-btn"
+            [class.ngxsmk-sc-ex__vp-btn--active]="viewport() === 'tablet'"
+            (click)="viewport.set('tablet')"
+            title="Tablet (768px)"
+            aria-label="Tablet viewport"
+          >
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="4" y="2" width="16" height="20" rx="2" />
+              <line x1="12" y1="18" x2="12.01" y2="18" />
+            </svg>
+          </button>
+          <button
+            type="button"
+            class="ngxsmk-sc-ex__vp-btn"
+            [class.ngxsmk-sc-ex__vp-btn--active]="viewport() === 'mobile'"
+            (click)="viewport.set('mobile')"
+            title="Mobile (380px)"
+            aria-label="Mobile viewport"
+          >
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="6" y="2" width="12" height="20" rx="2" />
+              <line x1="12" y1="18" x2="12.01" y2="18" />
+            </svg>
+          </button>
+        </div>
       </div>
 
-      <div class="ngxsmk-sc-ex__preview">
-        <div class="ngxsmk-sc-ex__preview-content">
+      <div class="ngxsmk-sc-ex__preview" [attr.data-viewport]="viewport()">
+        <div
+          class="ngxsmk-sc-ex__preview-content"
+          [class.ngxsmk-sc-ex__preview-content--tablet]="viewport() === 'tablet'"
+          [class.ngxsmk-sc-ex__preview-content--mobile]="viewport() === 'mobile'"
+        >
           <ng-content />
         </div>
         @if (code()) {
@@ -40,12 +117,12 @@ type ApiPanel = 'code' | 'api' | 'customize';
           >
             @if (copiedPreview()) {
               <svg
-                width="14"
-                height="14"
+                width="13"
+                height="13"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2"
+                stroke-width="2.5"
                 stroke-linecap="round"
                 stroke-linejoin="round"
               >
@@ -54,8 +131,8 @@ type ApiPanel = 'code' | 'api' | 'customize';
               {{ 'showcaseExample.copied' | translate }}
             } @else {
               <svg
-                width="14"
-                height="14"
+                width="13"
+                height="13"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -174,43 +251,49 @@ type ApiPanel = 'code' | 'api' | 'customize';
 
       @if (panel() === 'code' && code()) {
         <div class="ngxsmk-sc-ex__code-wrap">
-          <button
-            class="ngxsmk-sc-ex__code-copy"
-            type="button"
-            (click)="copyCode()"
-            [attr.aria-label]="'showcaseExample.copyCode' | translate"
-          >
-            @if (copiedCode()) {
-              <svg
-                width="13"
-                height="13"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-              {{ 'showcaseExample.copied' | translate }}
-            } @else {
-              <svg
-                width="13"
-                height="13"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <rect x="9" y="9" width="13" height="13" rx="2" />
-                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-              </svg>
-              {{ 'showcaseExample.copyCode' | translate }}
-            }
-          </button>
+          <div class="ngxsmk-sc-ex__code-header">
+            <div class="ngxsmk-sc-ex__code-tag">
+              <span class="ngxsmk-sc-ex__code-dot"></span>
+              <span>ANGULAR COMPONENT TEMPLATE</span>
+            </div>
+            <button
+              class="ngxsmk-sc-ex__code-copy"
+              type="button"
+              (click)="copyCode()"
+              [attr.aria-label]="'showcaseExample.copyCode' | translate"
+            >
+              @if (copiedCode()) {
+                <svg
+                  width="13"
+                  height="13"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                {{ 'showcaseExample.copied' | translate }}
+              } @else {
+                <svg
+                  width="13"
+                  height="13"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="9" y="9" width="13" height="13" rx="2" />
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                </svg>
+                {{ 'showcaseExample.copyCode' | translate }}
+              }
+            </button>
+          </div>
           <pre class="ngxsmk-sc-ex__code"><code>{{ code() }}</code></pre>
         </div>
       }
@@ -219,6 +302,7 @@ type ApiPanel = 'code' | 'api' | 'customize';
         <div class="ngxsmk-sc-ex__api">
           @if (inputs().length) {
             <h4 class="ngxsmk-sc-ex__api-title">
+              <span class="ngxsmk-sc-ex__api-dot"></span>
               {{ 'showcaseExample.inputsProperties' | translate }}
             </h4>
             <div class="ngxsmk-sc-ex__table-wrap">
@@ -262,6 +346,7 @@ type ApiPanel = 'code' | 'api' | 'customize';
           }
           @if (outputs().length) {
             <h4 class="ngxsmk-sc-ex__api-title">
+              <span class="ngxsmk-sc-ex__api-dot ngxsmk-sc-ex__api-dot--amber"></span>
               {{ 'showcaseExample.outputsEvents' | translate }}
             </h4>
             <div class="ngxsmk-sc-ex__table-wrap">
@@ -270,6 +355,7 @@ type ApiPanel = 'code' | 'api' | 'customize';
                   <tr>
                     <th>{{ 'showcaseExample.thProperty' | translate }}</th>
                     <th>{{ 'showcaseExample.thEvent' | translate }}</th>
+                    <th>{{ 'showcaseExample.thKind' | translate }}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -280,6 +366,11 @@ type ApiPanel = 'code' | 'api' | 'customize';
                       </td>
                       <td>
                         <code>{{ o.templateName }}</code>
+                      </td>
+                      <td>
+                        <span class="ngxsmk-sc-ex__badge ngxsmk-sc-ex__badge--event">
+                          event
+                        </span>
                       </td>
                     </tr>
                   }
@@ -296,7 +387,15 @@ type ApiPanel = 'code' | 'api' | 'customize';
       }
 
       @if (panel() === 'customize' && customize()) {
-        <pre class="ngxsmk-sc-ex__code"><code>{{ customize() }}</code></pre>
+        <div class="ngxsmk-sc-ex__code-wrap">
+          <div class="ngxsmk-sc-ex__code-header">
+            <div class="ngxsmk-sc-ex__code-tag">
+              <span class="ngxsmk-sc-ex__code-dot ngxsmk-sc-ex__code-dot--amber"></span>
+              <span>DESIGN TOKEN CSS OVERRIDE</span>
+            </div>
+          </div>
+          <pre class="ngxsmk-sc-ex__code"><code>{{ customize() }}</code></pre>
+        </div>
       }
     </div>
   `,
@@ -307,95 +406,241 @@ type ApiPanel = 'code' | 'api' | 'customize';
     }
 
     .ngxsmk-sc-ex {
+      position: relative;
       width: 100%;
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
-      border-radius: var(--ngxsmk-radius-lg, 0.5rem);
-      background: var(--ngxsmk-color-surface, #ffffff);
-      margin-block-end: var(--ngxsmk-space-6, 1.5rem);
-      overflow: visible;
-      transition: box-shadow 0.2s ease;
+      border: 1px solid var(--color-border, #e2e8f0);
+      border-radius: var(--radius-xl, 20px);
+      background: var(--color-bg-card, #ffffff);
+      margin-block-end: 2rem;
+      overflow: hidden;
+      box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
+      transition:
+        border-color 0.22s ease,
+        box-shadow 0.22s ease;
+      z-index: auto;
     }
 
     .ngxsmk-sc-ex:hover {
-      box-shadow:
-        0 2px 8px -2px rgba(0, 0, 0, 0.06),
-        0 1px 2px -1px rgba(0, 0, 0, 0.04);
+      border-color: rgba(99, 102, 241, 0.45);
+      box-shadow: 0 16px 36px -8px rgba(99, 102, 241, 0.12);
+    }
+
+    /* Lift the active example so select/menu/popover clear the next card. */
+    .ngxsmk-sc-ex:focus-within {
+      z-index: 20;
     }
 
     .ngxsmk-sc-ex__head {
       display: flex;
       flex-wrap: wrap;
-      align-items: flex-start;
+      align-items: center;
       justify-content: space-between;
-      gap: var(--ngxsmk-space-3, 0.75rem) var(--ngxsmk-space-4, 1rem);
-      padding: var(--ngxsmk-space-4, 1rem) var(--ngxsmk-space-5, 1.25rem);
-      border-bottom: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
-      border-top-left-radius: var(--ngxsmk-radius-lg, 0.5rem);
-      border-top-right-radius: var(--ngxsmk-radius-lg, 0.5rem);
+      gap: 0.75rem 1rem;
+      padding: 0.85rem 1.25rem;
+      background: var(--color-bg-elevated, #f1f5f9);
+      border-bottom: 1px solid var(--color-border, #e2e8f0);
+    }
+
+    .traffic-lights {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-right: 0.25rem;
+    }
+
+    .traffic-lights .light {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+    }
+
+    .traffic-lights .light.red {
+      background: #ef4444;
+    }
+    .traffic-lights .light.yellow {
+      background: #f59e0b;
+    }
+    .traffic-lights .light.green {
+      background: #10b981;
     }
 
     .ngxsmk-sc-ex__heading {
       min-width: 0;
+      flex: 1;
+    }
+
+    .ngxsmk-sc-ex__title-row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.65rem;
     }
 
     .ngxsmk-sc-ex__title {
       margin: 0;
-      font-family: 'Outfit', var(--ngxsmk-font-sans, system-ui), sans-serif;
-      font-size: var(--ngxsmk-text-body-md-size);
+      font-family: var(--font-family-display, sans-serif);
+      font-size: 1.08rem;
+      font-weight: 750;
+      letter-spacing: -0.02em;
+      color: var(--color-text-main, #0f172a);
+    }
+
+    .ngxsmk-sc-ex__selector-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 9999px;
+      background: rgba(99, 102, 241, 0.08);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      color: #6366f1;
+      font-size: 0.75rem;
       font-weight: 600;
-      letter-spacing: -0.01em;
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      user-select: none;
+    }
+
+    .ngxsmk-sc-ex__selector-pill:hover {
+      background: rgba(99, 102, 241, 0.16);
+      border-color: #6366f1;
+      transform: translateY(-1px);
+    }
+
+    .ngxsmk-sc-ex__selector-pill code {
+      font-family: var(--font-family-mono, monospace);
+      font-size: 0.75rem;
+      color: inherit;
+    }
+
+    .ngxsmk-sc-ex__selector-copied {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.2rem;
+      color: #10b981;
+      font-weight: 700;
     }
 
     .ngxsmk-sc-ex__desc {
       margin: 0.25rem 0 0;
-      font-size: var(--ngxsmk-text-body-sm-size);
-      line-height: 1.5;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      font-size: 0.86rem;
+      line-height: 1.55;
+      color: var(--color-text-muted, #334155);
+    }
+
+    .ngxsmk-sc-ex__viewports {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      padding: 3px;
+      border-radius: 9999px;
+      background: var(--color-bg-card, #ffffff);
+      border: 1px solid var(--color-border, #e2e8f0);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+
+    .ngxsmk-sc-ex__vp-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.85rem;
+      height: 1.85rem;
+      border: none;
+      border-radius: 9999px;
+      background: transparent;
+      color: var(--color-text-dim, #64748b);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .ngxsmk-sc-ex__vp-btn:hover {
+      color: var(--color-text-main, #0f172a);
+    }
+
+    .ngxsmk-sc-ex__vp-btn--active {
+      background: linear-gradient(135deg, var(--brand-primary, #6366f1), var(--brand-primary-dark, #4f46e5));
+      color: #ffffff;
+      box-shadow: 0 2px 6px rgba(99, 102, 241, 0.35);
     }
 
     .ngxsmk-sc-ex__preview {
       position: relative;
-      z-index: 10;
-      padding: var(--ngxsmk-space-8, 2rem);
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--ngxsmk-space-4, 1rem);
-      align-items: center;
-      background-image: radial-gradient(
-        circle,
-        var(--ngxsmk-color-outline, #e4e4e7) 1px,
-        transparent 1px
-      );
-      background-size: 16px 16px;
+      z-index: 0;
+      padding: 2.25rem 1.75rem;
+      overflow: visible;
+      background-color: var(--color-bg-card, #ffffff);
+      background-image: radial-gradient(color-mix(in srgb, var(--brand-primary, #6366f1) 12%, transparent) 1px, transparent 1px);
+      background-size: 18px 18px;
+      transition: padding 0.2s ease;
     }
 
     .ngxsmk-sc-ex__preview-content {
-      display: contents;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      width: 100%;
+      min-width: 0;
+      transition: max-width 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+    }
+
+    .ngxsmk-sc-ex__preview-content--tablet {
+      max-width: 768px !important;
+      margin: 0 auto;
+      border: 1px dashed color-mix(in srgb, var(--brand-primary, #6366f1) 40%, transparent);
+      border-radius: var(--radius-md, 12px);
+      padding: 1.5rem;
+      background: var(--color-bg-card, #ffffff);
+      box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.08);
+    }
+
+    .ngxsmk-sc-ex__preview-content--mobile {
+      max-width: 380px !important;
+      margin: 0 auto;
+      border: 1px dashed color-mix(in srgb, var(--brand-primary, #6366f1) 40%, transparent);
+      border-radius: var(--radius-lg, 16px);
+      padding: 1.5rem;
+      background: var(--color-bg-card, #ffffff);
+      box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Full-bleed demos: tables, AI, grids — don't shrink beside siblings. */
+    .ngxsmk-sc-ex__preview-content > .ngxsmk-sc-surface,
+    .ngxsmk-sc-ex__preview-content > .ngxsmk-sc-grid,
+    .ngxsmk-sc-ex__preview-content > .ngxsmk-sc-col,
+    .ngxsmk-sc-ex__preview-content > .ngxsmk-scroll-x,
+    .ngxsmk-sc-ex__preview-content > ngxsmk-data-table,
+    .ngxsmk-sc-ex__preview-content > ngxsmk-table,
+    .ngxsmk-sc-ex__preview-content > ngxsmk-ai-chat,
+    .ngxsmk-sc-ex__preview-content > ngxsmk-spreadsheet,
+    .ngxsmk-sc-ex__preview-content > ngxsmk-chat-layout,
+    .ngxsmk-sc-ex__preview-content > ngxsmk-kanban-board {
+      flex: 1 1 100%;
+      max-width: 100%;
+      min-width: 0;
     }
 
     .ngxsmk-sc-ex__copy-btn {
       position: absolute;
-      top: var(--ngxsmk-space-3, 0.75rem);
-      right: var(--ngxsmk-space-3, 0.75rem);
+      top: 0.85rem;
+      right: 0.85rem;
       display: inline-flex;
       align-items: center;
       gap: 0.35rem;
-      padding: 0.3rem 0.6rem;
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
-      border-radius: var(--ngxsmk-radius-md, 0.375rem);
-      background: var(--ngxsmk-color-surface, #ffffff);
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      padding: 0.35rem 0.75rem;
+      border: 1px solid var(--color-border, #e2e8f0);
+      border-radius: 9999px;
+      background: color-mix(in srgb, var(--color-bg-card, #ffffff) 85%, transparent);
+      backdrop-filter: blur(8px);
+      color: var(--color-text-muted, #334155);
       font-family: inherit;
-      font-size: 0.7rem;
-      font-weight: 500;
+      font-size: 0.72rem;
+      font-weight: 600;
       cursor: pointer;
       opacity: 0;
-      transition:
-        opacity 0.15s,
-        background 0.15s,
-        color 0.15s;
-      z-index: 1;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      transition: all 0.18s ease;
+      z-index: 5;
     }
 
     .ngxsmk-sc-ex:hover .ngxsmk-sc-ex__copy-btn {
@@ -403,204 +648,277 @@ type ApiPanel = 'code' | 'api' | 'customize';
     }
 
     .ngxsmk-sc-ex__copy-btn:hover {
-      background: var(--ngxsmk-color-surface-variant, #f4f4f5);
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      background: var(--color-bg-card, #ffffff);
+      color: var(--brand-primary, #6366f1);
+      border-color: var(--brand-primary, #6366f1);
+      transform: translateY(-1px);
     }
 
     .ngxsmk-sc-ex__actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 2px;
-      padding: var(--ngxsmk-space-2, 0.5rem) var(--ngxsmk-space-3, 0.75rem);
-      border-top: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
-      background: var(--ngxsmk-color-surface, #ffffff);
+      align-items: center;
+      gap: 6px;
+      padding: 0.55rem 1.15rem;
+      border-top: 1px solid var(--color-border, #e2e8f0);
+      background: var(--color-bg-elevated, #f1f5f9);
     }
 
     .ngxsmk-sc-ex__tab {
       display: inline-flex;
       align-items: center;
-      gap: 0.35rem;
-      padding: var(--ngxsmk-space-1-5, 0.375rem) var(--ngxsmk-space-2, 0.5rem);
+      gap: 0.45rem;
+      padding: 0.35rem 0.85rem;
       border: none;
-      border-radius: var(--ngxsmk-radius-md, 0.375rem);
-      background: none;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
-      font-family: inherit;
-      font-size: var(--ngxsmk-text-body-sm-size);
-      font-weight: 500;
+      border-radius: 9999px;
+      background: transparent;
+      color: var(--color-text-muted, #334155);
+      font-family: var(--font-family-body, sans-serif);
+      font-size: 0.8rem;
+      font-weight: 600;
       cursor: pointer;
-      transition:
-        background 0.15s,
-        color 0.15s;
+      transition: all 0.15s ease;
       white-space: nowrap;
     }
 
     .ngxsmk-sc-ex__tab:hover {
-      background: color-mix(in srgb, var(--ngxsmk-color-on-surface, #09090b) 4%, transparent);
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      background: color-mix(in srgb, var(--brand-primary, #6366f1) 8%, transparent);
+      color: var(--color-text-main, #0f172a);
     }
 
     .ngxsmk-sc-ex__tab--active {
-      background: var(--ngxsmk-color-primary-container, #ede9fe);
-      color: var(--ngxsmk-color-on-primary-container, #4c1d95);
+      background: linear-gradient(135deg, var(--brand-primary, #6366f1), var(--brand-primary-dark, #4f46e5)) !important;
+      color: #ffffff !important;
+      font-weight: 700;
+      box-shadow: 0 2px 8px rgba(99, 102, 241, 0.35);
     }
 
     .ngxsmk-sc-ex__tab--active:hover {
-      background: var(--ngxsmk-color-primary-container, #ede9fe);
-      color: var(--ngxsmk-color-on-primary-container, #4c1d95);
+      background: linear-gradient(135deg, var(--brand-primary-light, #818cf8), var(--brand-primary, #6366f1)) !important;
     }
 
     .ngxsmk-sc-ex__tab--stackblitz {
       margin-left: auto;
-      color: var(--ngxsmk-color-primary, #7c3aed);
+      color: var(--brand-primary, #6366f1);
+      font-weight: 600;
     }
 
     .ngxsmk-sc-ex__tab--stackblitz:hover {
-      background: color-mix(in srgb, var(--ngxsmk-color-primary, #7c3aed) 8%, transparent);
-      color: var(--ngxsmk-color-primary, #7c3aed);
+      background: rgba(99, 102, 241, 0.12);
+      color: var(--brand-primary, #6366f1);
     }
 
     .ngxsmk-sc-ex__code-wrap {
       position: relative;
-      border-top: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      background: #0b0f19;
+      border-top: 1px solid #1e293b;
+    }
+
+    .ngxsmk-sc-ex__code-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.55rem 1.25rem;
+      background: #070a10;
+      border-bottom: 1px solid #1e293b;
+      font-size: 0.72rem;
+      color: #94a3b8;
+    }
+
+    .ngxsmk-sc-ex__code-tag {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-family: var(--font-family-mono, monospace);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    .ngxsmk-sc-ex__code-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #6366f1;
+    }
+
+    .ngxsmk-sc-ex__code-dot--amber {
+      background: #f59e0b;
     }
 
     .ngxsmk-sc-ex__code-copy {
-      position: absolute;
-      top: var(--ngxsmk-space-2, 0.5rem);
-      right: var(--ngxsmk-space-3, 0.75rem);
       display: inline-flex;
       align-items: center;
-      gap: 0.3rem;
-      padding: 0.25rem 0.5rem;
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
-      border-radius: var(--ngxsmk-radius-md, 0.375rem);
-      background: var(--ngxsmk-color-surface, #ffffff);
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
-      font-family: inherit;
-      font-size: 0.7rem;
-      font-weight: 500;
+      gap: 0.35rem;
+      padding: 0.25rem 0.65rem;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      background: #1e293b;
+      color: #cbd5e1;
+      font-family: var(--font-family-body, sans-serif);
+      font-size: 0.72rem;
+      font-weight: 600;
       cursor: pointer;
-      z-index: 1;
+      z-index: 2;
       transition:
         background 0.15s,
-        color 0.15s;
+        color 0.15s,
+        border-color 0.15s;
     }
 
     .ngxsmk-sc-ex__code-copy:hover {
-      background: var(--ngxsmk-color-surface-variant, #f4f4f5);
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      background: #334155;
+      color: #ffffff;
+      border-color: #6366f1;
     }
 
     .ngxsmk-sc-ex__code {
       margin: 0;
-      padding: var(--ngxsmk-space-4, 1rem) var(--ngxsmk-space-5, 1.25rem);
-      background: var(--ngxsmk-color-surface-variant, #f4f4f5);
-      color: var(--ngxsmk-color-on-surface, #09090b);
-      font-family: var(--ngxsmk-font-mono);
-      font-size: var(--ngxsmk-text-body-sm-size);
-      line-height: 1.6;
+      padding: 1.25rem 1.5rem;
+      background: #0b0f19;
+      color: #f8fafc;
+      font-family: var(--font-family-mono, monospace);
+      font-size: 0.82rem;
+      line-height: 1.65;
       overflow-x: auto;
       white-space: pre;
     }
 
     .ngxsmk-sc-ex__api {
-      padding: var(--ngxsmk-space-4, 1rem) var(--ngxsmk-space-5, 1.25rem);
-      border-top: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
+      padding: 1.25rem 1.5rem;
+      border-top: 1px solid var(--color-border, #e2e8f0);
+      background: var(--color-bg-card, #ffffff);
     }
 
     .ngxsmk-sc-ex__api-title {
-      margin: 0 0 var(--ngxsmk-space-2, 0.5rem);
-      font-family: 'Outfit', var(--ngxsmk-font-sans, system-ui), sans-serif;
-      font-size: var(--ngxsmk-text-body-sm-size);
-      font-weight: 600;
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 0 0 0.75rem;
+      font-family: var(--font-family-display, sans-serif);
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--color-text-main, #0f172a);
+    }
+
+    .ngxsmk-sc-ex__api-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #6366f1;
+    }
+
+    .ngxsmk-sc-ex__api-dot--amber {
+      background: #f59e0b;
     }
 
     .ngxsmk-sc-ex__api-title + .ngxsmk-sc-ex__api-title {
-      margin-top: var(--ngxsmk-space-4, 1rem);
+      margin-top: 1.5rem;
     }
 
     .ngxsmk-sc-ex__table-wrap {
       overflow-x: auto;
+      border: 1px solid var(--color-border, #e2e8f0);
+      border-radius: var(--radius-md, 12px);
+      margin-bottom: 1.25rem;
     }
 
     .ngxsmk-sc-ex__table {
       width: 100%;
       border-collapse: collapse;
-      font-size: var(--ngxsmk-text-body-sm-size);
+      font-size: 0.84rem;
     }
 
     .ngxsmk-sc-ex__table th,
     .ngxsmk-sc-ex__table td {
       text-align: left;
-      padding: 0.4rem 0.75rem;
-      border-bottom: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      padding: 0.65rem 0.95rem;
+      border-bottom: 1px solid var(--color-border, #e2e8f0);
+      color: var(--color-text-main, #0f172a);
       white-space: nowrap;
+    }
+
+    .ngxsmk-sc-ex__table tr:last-child td {
+      border-bottom: none;
     }
 
     .ngxsmk-sc-ex__table th {
       font-weight: 600;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
-      background: var(--ngxsmk-color-surface-variant, #f4f4f5);
+      color: var(--color-text-muted, #64748b);
+      background: var(--color-bg-elevated, #f1f5f9);
+      font-size: 0.78rem;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
     }
 
-    .ngxsmk-sc-ex__table code {
-      font-family: var(--ngxsmk-font-mono);
-      font-size: 0.8em;
+    .ngxsmk-sc-ex__table td code {
+      font-family: var(--font-family-mono, monospace);
+      font-size: 0.8rem;
+      background: rgba(99, 102, 241, 0.08);
+      color: #6366f1;
+      padding: 0.15rem 0.45rem;
+      border-radius: 6px;
     }
 
     .ngxsmk-sc-ex__badge {
       display: inline-flex;
       align-items: center;
-      padding: 0.1rem 0.45rem;
+      padding: 0.15rem 0.55rem;
       border-radius: 9999px;
       font-size: 0.7rem;
-      font-weight: 500;
+      font-weight: 600;
       line-height: 1.4;
-      background: var(--ngxsmk-color-surface-variant, #f4f4f5);
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      background: rgba(148, 163, 184, 0.15);
+      color: #64748b;
     }
 
     .ngxsmk-sc-ex__badge--model {
-      background: color-mix(in srgb, var(--ngxsmk-color-primary, #7c3aed) 12%, transparent);
-      color: var(--ngxsmk-color-primary, #7c3aed);
+      background: rgba(99, 102, 241, 0.12);
+      color: #6366f1;
+      border: 1px solid rgba(99, 102, 241, 0.25);
     }
 
     .ngxsmk-sc-ex__badge--signal {
-      background: color-mix(in srgb, var(--ngxsmk-color-success, #16a34a) 12%, transparent);
-      color: var(--ngxsmk-color-success, #16a34a);
+      background: rgba(16, 185, 129, 0.12);
+      color: #10b981;
+      border: 1px solid rgba(16, 185, 129, 0.25);
+    }
+
+    .ngxsmk-sc-ex__badge--event {
+      background: rgba(245, 158, 11, 0.12);
+      color: #f59e0b;
+      border: 1px solid rgba(245, 158, 11, 0.25);
     }
 
     .ngxsmk-sc-ex__api-note {
-      margin: var(--ngxsmk-space-4, 1rem) 0 0;
-      font-size: var(--ngxsmk-text-body-sm-size);
+      margin: 0.75rem 0 0;
+      font-size: 0.82rem;
       line-height: 1.55;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--color-text-dim, #64748b);
     }
 
     .ngxsmk-sc-ex__api-note code {
-      font-family: var(--ngxsmk-font-mono);
-      font-size: var(--ngxsmk-text-body-sm-size);
+      font-family: var(--font-family-mono, monospace);
+      font-size: 0.8rem;
+      color: var(--brand-primary, #6366f1);
     }
 
     @media (max-width: 480px) {
       .ngxsmk-sc-ex__head {
-        padding: var(--ngxsmk-space-3, 0.75rem) var(--ngxsmk-space-4, 1rem);
+        padding: 0.75rem 1rem;
       }
 
       .ngxsmk-sc-ex__preview {
-        padding: var(--ngxsmk-space-5, 1.25rem);
+        padding: 1.25rem;
       }
 
       .ngxsmk-sc-ex__actions {
-        padding: var(--ngxsmk-space-1-5, 0.375rem) var(--ngxsmk-space-2, 0.5rem);
+        padding: 0.375rem 0.5rem;
       }
 
       .ngxsmk-sc-ex__code,
       .ngxsmk-sc-ex__api {
-        padding: var(--ngxsmk-space-3, 0.75rem) var(--ngxsmk-space-4, 1rem);
+        padding: 0.75rem 1rem;
       }
     }
   `,
@@ -620,8 +938,10 @@ export class ShowcaseExample {
   readonly customize = input<string>('');
 
   protected readonly panel = signal<ApiPanel | null>(null);
+  protected readonly viewport = signal<'full' | 'tablet' | 'mobile'>('full');
   protected readonly copiedCode = signal(false);
   protected readonly copiedPreview = signal(false);
+  protected readonly copiedSelector = signal(false);
 
   protected toggle(panel: ApiPanel): void {
     this.panel.update((current) => (current === panel ? null : panel));
@@ -642,6 +962,32 @@ export class ShowcaseExample {
   /** A `model()` input exposes a `propNameChange` output - mark it as two-way. */
   protected isModel(propName: string): boolean {
     return this.outputNames().has(`${propName}Change`);
+  }
+
+  protected readonly selector = computed(() => {
+    const meta = this.metadata();
+    if (!meta?.selector) return '';
+    return meta.selector.split(',')[0].trim();
+  });
+
+  protected readonly displaySelector = computed(() => {
+    const sel = this.selector();
+    if (!sel) return '';
+    if (sel.includes('[')) {
+      const match = sel.match(/\[([^\]]+)\]/);
+      if (match) return `[${match[1]}]`;
+      return sel;
+    }
+    return `<${sel}>`;
+  });
+
+  protected copySelector(): void {
+    const sel = this.displaySelector();
+    if (!sel) return;
+    navigator.clipboard.writeText(sel).then(() => {
+      this.copiedSelector.set(true);
+      setTimeout(() => this.copiedSelector.set(false), 1500);
+    });
   }
 
   protected readonly elementId = computed(() => {

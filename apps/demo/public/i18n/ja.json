@@ -82,7 +82,9 @@
     "chatReplyPlaceholder": "返信…",
     "composerDrawerHint": "ファイルを添付し、プロンプトを選び、ツールを呼び出してから送信します。",
     "citationSnippet": "Transformer は、再帰型モデルよりも大幅に高い並列化を可能にします。",
-    "audioVoiceReply": "音声返信"
+    "audioVoiceReply": "音声返信",
+    "online": "オンライン",
+    "chatLayoutExampleMsg": "アカウントについて何でもお尋ねください。"
   },
   "enterprise": {
     "pageDesc": "ボード、スケジューラ、エディタ、データツールなど、ビジネスアプリケーション向けの本格的な構成要素。いずれもテーマ対応で、独自のデータソースに接続する準備ができています。",
@@ -170,7 +172,12 @@
     "roleViewer": "閲覧者",
     "teamPlatform": "プラットフォーム",
     "teamContent": "コンテンツ",
-    "teamDesign": "デザイン"
+    "teamDesign": "デザイン",
+    "fileTreeDesc": "フォルダーの展開/折りたたみとファイル選択を備えたエクスプローラー風ディレクトリツリービュー。",
+    "timelineDesc": "ステップ進捗インジケーターを備えた垂直マイルストーンタイムライントラッカー。",
+    "codeEditorDesc": "行番号、シンタックスヘッダー、コピーボタンを備えたコードスニペットステージ。",
+    "statTrendDesc": "スパークラインミニチャートとメトリックトレンドを埋め込んだ KPI ダッシュボードカード。",
+    "filterBuilderDesc": "フィールド、演算子、値の行を備えた動的フィルター条件コンストラクター。"
   },
   "blog": {
     "pill": "ブログ",
@@ -581,7 +588,8 @@
       "ai": "AI インターフェース",
       "utility": "ユーティリティとフック",
       "other": "その他"
-    }
+    },
+    "scrollTop": "トップへスクロール"
   },
   "iplayground": {
     "explorer": "エクスプローラ",
@@ -664,7 +672,11 @@
     "signal": "signal",
     "regular": "regular",
     "outputsEvents": "出力（イベント）",
-    "thEvent": "イベント"
+    "thEvent": "イベント",
+    "code": "コード",
+    "copyCode": "コードをコピー",
+    "copy": "コピー",
+    "copied": "コピーしました！"
   },
   "forms": {
     "intro": "ボタン、入力、セレクト、リッチフォームコントロール。以下のコンポーネントはすべてライブでインタラクティブです — 試してみて、コードを表示してコピーしてください。",
@@ -779,7 +791,11 @@
     "langAngular": "Angular",
     "langJavaScript": "JavaScript",
     "transferDesc": "ソースリストとターゲットリスト間で選択した項目を移動するためのデュアルリストボックスコンテナ。",
-    "signaturePadDesc": "スムーズな電子署名を描画およびエクスポートするためのデジタルキャンバス。"
+    "signaturePadDesc": "スムーズな電子署名を描画およびエクスポートするためのデジタルキャンバス。",
+    "creditCardDesc": "ブランド検出と検証を備えた自動フォーマットクレジットカード入力フィールド。",
+    "passwordStrengthDesc": "強度バーと要件チェックリストを備えたリアルタイムパスワードセキュリティ評価。",
+    "treeSelectDesc": "展開可能なツリーノードと複数選択を備えた階層型ドロップダウンセレクター。",
+    "selectCategories": "カテゴリを選択..."
   },
   "feedback": {
     "intro": "状態、進捗、システム応答を伝えるコンポーネント — インラインアラートやバナーから、ローダー、スケルトン、在席ドットまで。",
@@ -1325,6 +1341,14 @@
       "checkout": {
         "title": "マルチステップチェックアウト＆2FA",
         "desc": "2要素PIN認証と注文確認を備えた安全なECチェックアウトフロー。"
+      },
+      "aiconsole": {
+        "title": "AI コンソール",
+        "desc": "パンくずリスト、モデルコントロール、ngxsmk-ai-chat を備えたエージェントワークスペースレシピ — バックエンドとの接続準備完了。"
+      },
+      "opstable": {
+        "title": "Ops データテーブル",
+        "desc": "ngxsmk-data-table でのフィルター、選択、列幅の変更、ドラッグによる並べ替えヘッダーを備えた運用インベントリ。"
       }
     }
   },
@@ -1396,7 +1420,10 @@
     "footerSub": "リポジトリをフォークし、",
     "footerGoodFirst": "good first issue",
     "footerSub2": " ラベルの Issue を選んで、プルリクエストを開いてください。48時間以内にレビューします。",
-    "footerCta": "GitHub で開く"
+    "footerCta": "GitHub で開く",
+    "githubDiscussions": "お問い合わせ・フィードバック",
+    "githubDiscussionsDesc": "ご質問、アイデア、またはバグ報告ですか？メンテナーに直接ご連絡ください — すべてのメッセージがキットの改善に役立ちます。",
+    "joinDiscussion": "フィードバックを送信"
   },
   "api": {
     "title": "APIリファレンス",

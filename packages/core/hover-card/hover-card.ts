@@ -9,6 +9,16 @@ import {
 } from '@angular/core';
 import { NgxsmkAnimate, NgxsmkMotionState, playExit } from '@ngxsmk/core/animation';
 
+/**
+ * Hover / focus card that reveals rich content next to a trigger.
+ *
+ * ```html
+ * <ngxsmk-hover-card>
+ *   <a ngxsmkHoverCardTrigger href="#">@ngxsmk</a>
+ *   <div ngxsmkHoverCardContent>Profile summary…</div>
+ * </ngxsmk-hover-card>
+ * ```
+ */
 @Component({
   standalone: true,
   selector: 'ngxsmk-hover-card',

@@ -56,6 +56,9 @@ storybook-static/
 # TypeScript build info
 *.tsbuildinfo
 
+# Generated audit / lab reports (regenerate via tools/scripts/*)
+/tools/reports/*.md
+
 # System files
 .DS_Store
 Thumbs.db

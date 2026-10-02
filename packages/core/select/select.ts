@@ -69,6 +69,7 @@ export interface NgxsmkSelectOption {
       [attr.aria-expanded]="open()"
       [attr.aria-haspopup]="'listbox'"
       [attr.aria-labelledby]="ariaLabelledby() ?? null"
+      [attr.aria-label]="accessibleName()"
       [attr.aria-controls]="open() ? listboxId() : null"
       [attr.aria-activedescendant]="open() ? activeDescendant() : null"
       [attr.aria-invalid]="ariaInvalid() ? 'true' : null"
@@ -171,9 +172,9 @@ export interface NgxsmkSelectOption {
       box-sizing: border-box;
       height: var(--ngxsmk-control-height);
       padding: 0 var(--ngxsmk-space-3);
-      border: 1px solid var(--ngxsmk-color-outline-strong);
-      border-radius: var(--ngxsmk-radius-base);
-      background: var(--ngxsmk-color-surface);
+      border: 1px solid var(--ngxsmk-select-border, var(--ngxsmk-color-outline-strong));
+      border-radius: var(--ngxsmk-select-radius, var(--ngxsmk-radius-base));
+      background: var(--ngxsmk-select-bg, var(--ngxsmk-color-surface));
       color: var(--ngxsmk-color-on-surface);
       font-family: var(--ngxsmk-font-sans);
       font-size: var(--ngxsmk-text-body-md-size);
@@ -231,8 +232,8 @@ export interface NgxsmkSelectOption {
       box-sizing: border-box;
       background: var(--ngxsmk-color-surface);
       border: 1px solid var(--ngxsmk-color-outline);
-      border-radius: var(--ngxsmk-radius-md);
-      box-shadow: var(--ngxsmk-shadow-md);
+      border-radius: var(--ngxsmk-select-list-radius, var(--ngxsmk-radius-md));
+      box-shadow: var(--ngxsmk-select-list-shadow, var(--ngxsmk-shadow-md));
       z-index: var(--ngxsmk-z-dropdown, 1000);
       max-height: 14rem;
       overflow-y: auto;
@@ -325,6 +326,12 @@ export class NgxsmkSelect extends CvaBase<string> implements NgxsmkFormFieldCont
   protected readonly selected = computed(
     () => this.options().find((o) => o.value === this.value()) ?? null,
   );
+
+  /** Accessible name when no external labelledby is wired (axe button-name). */
+  protected readonly accessibleName = computed(() => {
+    if (this.ariaLabelledby()) return null;
+    return this.selected()?.label || this.placeholder() || 'Select';
+  });
 
   protected readonly activeDescendant = computed(() =>
     this.activeIndex() === -1 ? `${this.id()}-placeholder` : `${this.id()}-${this.activeIndex()}`,

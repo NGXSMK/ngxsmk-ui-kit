@@ -50,7 +50,7 @@ that feels like modern Angular instead of fighting it.
 
 - ⚡ **Signals-native & zoneless** — no `zone.js` dependency; works in zone-based _and_ zoneless apps.
 - 🎨 **Design-token theming** — every component reads `var(--ngxsmk-*)`; switch themes and dark mode at runtime with zero flash.
-- 🌗 **Light / dark / system** — class, media, and system strategies with 4 built-in presets (`emerald`, `violet`, `neutral`, `rose`).
+- 🌗 **Light / dark / system** — class, media, and system strategies with built-in presets (`emerald` Classic default, opt-in `ink`, plus `violet`, `neutral`, `rose`).
 - 📊 **Charts built in** — 8 token-themed chart components (bar, line, area, pie/donut, scatter, heatmap, candlestick, dashboard) — no external charting library.
 - 🤖 **AI & chat UI** — chat windows, streaming text, reasoning timelines, agent cards, voice input: the building blocks for LLM apps in Angular.
 - 🏢 **Enterprise widgets** — kanban board, scheduler, Gantt timeline, spreadsheet, pivot table, org chart, workflow & rule builders.
@@ -261,7 +261,7 @@ You can also pass a fully custom `ThemeConfig` (any brand color, radius,
 typography, or token overrides) — see the [`@ngxsmk/theme`](packages/theme)
 docs for the full model.
 
-- **Presets:** 4 built-in presets — `emerald` (default), `violet`, `neutral`, `rose`. Apply any at runtime with no flash.
+- **Presets:** `emerald` (Classic default in `ngxsmk.css`), opt-in **`ink`** (`ngxsmk.ink.css` — graphite / Geist / sharper radii), plus `violet`, `neutral`, `rose`. Existing apps on Classic stay visually stable until they opt in.
 - **Modes:** `light`, `dark`, or `system` (follows `prefers-color-scheme`).
 - **Control height** is centralized in `--ngxsmk-control-height` (default
   `2.5rem` / 40px). Changing it resizes every single-line text control at once.
@@ -426,8 +426,8 @@ NGXSMK ships first-class support for AI coding agents:
   ```
 
 - **MCP server (`@ngxsmk/mcp`)** — a stdio Model Context Protocol server with
-  `ngxsmk_search_components`, `ngxsmk_explain_api`, and
-  `ngxsmk_recommend_layout` tools, backed by an auto-generated database of
+  search, explain, layout/scaffold, anti-patterns, Material/Bootstrap/Ionic
+  migration, and `ngxsmk_ionic_setup`, backed by an auto-generated database of
   every component. Add it to any MCP client:
 
   ```json
@@ -451,6 +451,15 @@ Regenerate all AI docs after API changes:
 `node tools/scripts/generate-ai-docs.mjs`.
 
 ## FAQ
+
+<details>
+<summary><b>Does it work with Ionic?</b></summary>
+
+Yes. `@ngxsmk/theme` exports `provideNgxsmkIonicTheme()` which maps design tokens to
+Ionic CSS variables (`--ion-*`). Keep Ionic for navigation shells; use NGXSMK for
+product UI. See the theme package README and MCP tool `ngxsmk_ionic_setup`.
+
+</details>
 
 <details>
 <summary><b>Is NGXSMK free for commercial projects?</b></summary>

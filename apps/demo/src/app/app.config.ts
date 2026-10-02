@@ -23,7 +23,16 @@ export const appConfig: ApplicationConfig = {
     }),
     provideRouter(
       routes,
-      withViewTransitions(),
+      withViewTransitions({
+        onViewTransitionCreated: ({ transition }) => {
+          transition.ready.catch(() => {
+            // Ignore transitions aborted due to document hidden or navigation cancel
+          });
+          transition.finished.catch(() => {
+            // Ignore transitions aborted due to document hidden or navigation cancel
+          });
+        },
+      }),
       withInMemoryScrolling({
         anchorScrolling: 'enabled',
         scrollPositionRestoration: 'enabled',

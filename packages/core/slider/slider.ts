@@ -12,6 +12,13 @@ import { ngxsmkUniqueId } from '@ngxsmk/core/util';
 import { CvaBase } from '@ngxsmk/cdk/cva-base';
 import { NGXSMK_FORM_FIELD_CONTROL, NgxsmkFormFieldControl } from '@ngxsmk/core/form-field';
 
+/**
+ * Native range slider styled with design tokens. Supports CVA and form-field.
+ *
+ * ```html
+ * <ngxsmk-slider [(value)]="volume" [min]="0" [max]="100" [step]="1" />
+ * ```
+ */
 @Component({
   standalone: true,
   selector: 'ngxsmk-slider',

@@ -24,6 +24,17 @@ export interface NgxsmkMultiSelectOption {
   disabled?: boolean;
 }
 
+/**
+ * Combobox multi-select with removable tags, listbox keyboard nav, and form CVA.
+ *
+ * ```html
+ * <ngxsmk-multi-select
+ *   [options]="[{ value: 'a', label: 'Alpha' }]"
+ *   [(value)]="selected"
+ *   placeholder="Add items"
+ * />
+ * ```
+ */
 @Component({
   selector: 'ngxsmk-multi-select',
   standalone: true,

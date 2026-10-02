@@ -6,12 +6,12 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--ngxsmk-space-2);
-  border: 1px solid transparent;
+  gap: var(--ngxsmk-button-gap, var(--ngxsmk-space-2));
+  border: var(--ngxsmk-button-border-width, 1px) solid transparent;
   border-radius: var(--_radius);
   background: var(--_bg);
   color: var(--_fg);
-  font-family: var(--ngxsmk-font-sans);
+  font-family: var(--ngxsmk-button-font-family, var(--ngxsmk-font-sans));
   font-size: var(--ngxsmk-text-label-lg-size);
   font-weight: var(--ngxsmk-button-font-weight, 500);
   line-height: var(--ngxsmk-text-label-lg-line);

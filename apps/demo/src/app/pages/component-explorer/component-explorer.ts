@@ -13,7 +13,6 @@ import {
   ComponentMetadata,
   CATEGORY_LABELS,
 } from '../../core/component-registry';
-import { NgxsmkHeading } from '@ngxsmk/core/heading';
 
 const CATEGORY_ICONS: Record<string, string> = {
   form: '▦',
@@ -32,13 +31,17 @@ const CATEGORY_ICONS: Record<string, string> = {
 @Component({
   selector: 'app-component-explorer',
   standalone: true,
-  imports: [RouterLink, TranslatePipe, NgxsmkHeading],
+  imports: [RouterLink, TranslatePipe],
   template: `
     <div class="explorer">
       <header class="explorer-header">
-        <ngxsmk-heading level="h1" class="explorer-title">{{
-          'explorer.title' | translate
-        }}</ngxsmk-heading>
+        <div class="version-badge">
+          <span class="pulse-dot"></span>
+          <span class="badge-tag">Registry</span>
+          <span class="badge-divider"></span>
+          <span class="badge-text">{{ registry.totalCount() }} Components • {{ registry.categories().length }} Categories</span>
+        </div>
+        <h1 class="explorer-title">Component <span class="highlight">Catalog</span></h1>
         <p class="explorer-subtitle">
           {{
             'explorer.subtitle'
@@ -49,8 +52,8 @@ const CATEGORY_ICONS: Record<string, string> = {
         <div class="explorer-search">
           <svg
             class="explorer-search-icon"
-            width="16"
-            height="16"
+            width="18"
+            height="18"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -92,7 +95,8 @@ const CATEGORY_ICONS: Record<string, string> = {
               [class.active]="selectedCategory() === cat"
               (click)="selectedCategory.set(cat)"
             >
-              {{ iconFor(cat) }} {{ catLabelKey(cat) | translate }}
+              <span class="cat-icon">{{ iconFor(cat) }}</span>
+              <span>{{ catLabelKey(cat) | translate }}</span>
             </button>
           }
         </div>
@@ -111,13 +115,14 @@ const CATEGORY_ICONS: Record<string, string> = {
       @for (group of filteredGroups(); track group.category) {
         <section class="explorer-group">
           <div class="explorer-group-header">
-            <ngxsmk-heading level="h2" class="explorer-group-title">{{
+            <h2 class="explorer-group-title">{{
               catLabelKey(group.category) | translate
-            }}</ngxsmk-heading>
+            }}</h2>
             <span class="explorer-group-count">{{
               'explorer.componentCount' | translate: { count: group.components.length }
             }}</span>
           </div>
+
           <div class="explorer-grid">
             @for (comp of group.components; track comp.name) {
               <a
@@ -126,12 +131,36 @@ const CATEGORY_ICONS: Record<string, string> = {
                 [fragment]="slug(comp)"
               >
                 <div class="explorer-card-header">
+                  <div class="traffic-lights" aria-hidden="true">
+                    <span class="light red"></span>
+                    <span class="light yellow"></span>
+                    <span class="light green"></span>
+                  </div>
                   <span
                     class="explorer-card-dot"
                     [style.background]="colorFor(comp.category)"
+                    [style.box-shadow]="'0 0 10px ' + colorFor(comp.category)"
                   ></span>
                   <span class="explorer-card-name">{{ comp.name }}</span>
+                  <svg
+                    class="explorer-card-arrow"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="9 18 15 12 9 6" />
+                  </svg>
                 </div>
+                @if (comp.selector) {
+                  <div class="explorer-card-selector">
+                    <code>&lt;{{ comp.selector.replace('[', '').replace(']', '') }}&gt;</code>
+                  </div>
+                }
                 <p class="explorer-card-desc">{{ comp.description }}</p>
                 <div class="explorer-card-meta">
                   <span class="explorer-card-tag">{{ comp.packageName }}</span>
@@ -141,7 +170,7 @@ const CATEGORY_ICONS: Record<string, string> = {
                     }}</span>
                   }
                   @if (comp.signals.length > 0) {
-                    <span class="explorer-card-prop">{{
+                    <span class="explorer-card-prop explorer-card-prop--signal">{{
                       'explorer.signalsCount' | translate: { count: comp.signals.length }
                     }}</span>
                   }
@@ -180,220 +209,275 @@ const CATEGORY_ICONS: Record<string, string> = {
   styles: `
     :host {
       display: block;
-      padding: var(--ngxsmk-space-8, 2rem);
-      min-height: calc(100vh - 3.5rem);
-      background-color: var(--ngxsmk-color-background, #fafafa);
-      background-image: radial-gradient(var(--ngxsmk-color-outline, #e4e4e7) 1px, transparent 1px);
-      background-size: 24px 24px;
+      min-height: 0;
+      background: transparent;
     }
     .explorer {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 2rem 1.5rem 4rem;
-      font-family: 'DM Sans', var(--ngxsmk-font-sans, system-ui), sans-serif;
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      padding: 1.5rem 0 3rem;
+      font-family: var(--font-body, 'Inter', system-ui, sans-serif);
+      color: var(--color-text-main, #0f172a);
     }
     @media (max-width: 640px) {
       .explorer {
-        padding: 1.25rem 1rem 3rem;
+        padding: 1rem 0 2rem;
       }
     }
 
     .explorer-header {
       margin-bottom: 2.5rem;
     }
-    ngxsmk-heading.explorer-title {
-      font-size: var(--ngxsmk-text-headline-md-size);
+    .explorer-title {
+      font-size: clamp(2rem, 3.5vw, 2.75rem);
       font-weight: 800;
-      letter-spacing: -0.03em;
-      margin: 0 0 0.25rem;
-      font-family: 'Outfit', sans-serif;
+      letter-spacing: -0.035em;
+      margin: 0.75rem 0 0.5rem;
+      font-family: var(--font-display, 'Plus Jakarta Sans', system-ui, sans-serif);
+      line-height: 1.15;
+    }
+    .highlight {
+      background: linear-gradient(135deg, #6366f1 0%, #f59e0b 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     .explorer-subtitle {
-      font-size: var(--ngxsmk-text-body-md-size);
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      font-size: 1.0625rem;
+      color: var(--color-text-secondary, #64748b);
       margin: 0 0 1.5rem;
+      line-height: 1.6;
+      max-width: 680px;
     }
 
     .explorer-search {
       position: relative;
-      margin-bottom: 1rem;
+      margin-bottom: 1.25rem;
+      max-width: 640px;
     }
     .explorer-search-icon {
       position: absolute;
-      left: 0.875rem;
+      left: 1.125rem;
       top: 50%;
       transform: translateY(-50%);
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--color-text-muted, #94a3b8);
       pointer-events: none;
     }
     .explorer-search-input {
       width: 100%;
-      padding: 0.75rem 2.5rem 0.75rem 2.75rem;
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
-      border-radius: var(--ngxsmk-radius-lg, 0.5rem);
-      background: var(--ngxsmk-color-surface, #fff);
-      font-size: var(--ngxsmk-text-body-md-size);
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      padding: 0.875rem 3rem 0.875rem 3.125rem;
+      border: 1px solid var(--color-border-card, rgba(148, 163, 184, 0.25));
+      border-radius: 9999px;
+      background: var(--color-bg-card, #ffffff);
+      font-size: 0.95rem;
+      color: var(--color-text-main, #0f172a);
       outline: none;
+      box-shadow: 0 4px 16px -4px rgba(0, 0, 0, 0.05);
       transition:
-        border-color 0.15s,
-        box-shadow 0.15s;
+        border-color 0.2s,
+        box-shadow 0.2s;
       box-sizing: border-box;
+      font-family: inherit;
     }
     .explorer-search-input:focus {
-      border-color: var(--ngxsmk-color-primary, #7c3aed);
-      box-shadow: 0 0 0 3px
-        color-mix(in srgb, var(--ngxsmk-color-primary, #7c3aed) 15%, transparent);
+      border-color: #6366f1;
+      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15), 0 8px 24px -4px rgba(99, 102, 241, 0.12);
     }
     .explorer-search-input::placeholder {
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--color-text-muted, #94a3b8);
     }
     .explorer-search-clear {
       position: absolute;
-      right: 0.625rem;
+      right: 0.875rem;
       top: 50%;
       transform: translateY(-50%);
       border: none;
-      background: var(--ngxsmk-color-surface-variant, #f4f4f5);
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
-      width: 1.5rem;
-      height: 1.5rem;
+      background: var(--color-bg-subtle, #f1f5f9);
+      color: var(--color-text-secondary, #64748b);
+      width: 1.625rem;
+      height: 1.625rem;
       border-radius: 50%;
       cursor: pointer;
-      font-size: var(--ngxsmk-text-body-sm-size);
+      font-size: 0.8rem;
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: background 0.15s, color 0.15s;
     }
     .explorer-search-clear:hover {
-      background: var(--ngxsmk-color-outline, #e4e4e7);
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      background: rgba(99, 102, 241, 0.15);
+      color: #6366f1;
     }
 
     .explorer-tabs {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.375rem;
+      gap: 0.5rem;
     }
     .explorer-tab {
-      padding: 0.375rem 0.75rem;
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
-      border-radius: var(--ngxsmk-radius-full, 9999px);
-      background: var(--ngxsmk-color-surface, #fff);
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
-      font-size: var(--ngxsmk-text-body-sm-size);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.45rem 0.95rem;
+      border: 1px solid var(--color-border-card, rgba(148, 163, 184, 0.25));
+      border-radius: 9999px;
+      background: var(--color-bg-card, #ffffff);
+      color: var(--color-text-secondary, #64748b);
+      font-size: 0.825rem;
       font-weight: 500;
       cursor: pointer;
-      transition: all 0.15s;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       font-family: inherit;
       white-space: nowrap;
     }
+    .explorer-tab .cat-icon {
+      font-size: 0.85rem;
+      opacity: 0.7;
+    }
     .explorer-tab:hover {
-      border-color: var(--ngxsmk-color-primary, #7c3aed);
-      color: var(--ngxsmk-color-on-surface, #09090b);
+      border-color: rgba(99, 102, 241, 0.4);
+      color: var(--color-text-main, #0f172a);
+      transform: translateY(-1px);
     }
     .explorer-tab.active {
-      background: var(--ngxsmk-color-primary, #7c3aed);
-      border-color: var(--ngxsmk-color-primary, #7c3aed);
-      color: #fff;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(245, 158, 11, 0.08));
+      border-color: rgba(99, 102, 241, 0.45);
+      color: #6366f1;
+      font-weight: 600;
+      box-shadow: 0 4px 12px -2px rgba(99, 102, 241, 0.15);
+    }
+    .explorer-tab.active .cat-icon {
+      opacity: 1;
     }
 
     .explorer-empty {
       text-align: center;
       padding: 4rem 1rem;
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      color: var(--color-text-secondary, #64748b);
     }
     .explorer-empty-icon {
-      font-size: var(--ngxsmk-text-display-md-size);
+      font-size: 2.5rem;
       margin-bottom: 0.75rem;
       opacity: 0.4;
+      color: #6366f1;
     }
     .explorer-empty p {
-      font-size: var(--ngxsmk-text-body-md-size);
+      font-size: 1.05rem;
       margin: 0 0 1rem;
     }
     .explorer-empty-btn {
-      padding: 0.5rem 1.25rem;
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
-      border-radius: var(--ngxsmk-radius-md, 0.375rem);
-      background: var(--ngxsmk-color-surface, #fff);
-      color: var(--ngxsmk-color-on-surface, #09090b);
-      font-size: var(--ngxsmk-text-body-sm-size);
+      padding: 0.55rem 1.4rem;
+      border: 1px solid rgba(99, 102, 241, 0.35);
+      border-radius: 9999px;
+      background: var(--color-bg-card, #ffffff);
+      color: #6366f1;
+      font-size: 0.875rem;
+      font-weight: 600;
       cursor: pointer;
       font-family: inherit;
+      transition: all 0.2s;
     }
     .explorer-empty-btn:hover {
-      background: var(--ngxsmk-color-surface-variant, #f4f4f5);
+      background: rgba(99, 102, 241, 0.1);
+      transform: translateY(-1px);
     }
 
     .explorer-group {
-      margin-bottom: 2.5rem;
+      margin-bottom: 3rem;
     }
     .explorer-group-header {
       display: flex;
       align-items: baseline;
       gap: 0.75rem;
-      margin-bottom: 1rem;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--color-border-card, rgba(148, 163, 184, 0.15));
     }
-    ngxsmk-heading.explorer-group-title {
-      font-size: var(--ngxsmk-text-title-md-size);
+    .explorer-group-title {
+      font-size: 1.35rem;
       font-weight: 700;
+      letter-spacing: -0.02em;
       margin: 0;
-      font-family: 'Outfit', sans-serif;
+      font-family: var(--font-display, 'Plus Jakarta Sans', system-ui, sans-serif);
+      color: var(--color-text-main, #0f172a);
     }
     .explorer-group-count {
-      font-size: var(--ngxsmk-text-body-sm-size);
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      font-size: 0.85rem;
+      color: var(--color-text-muted, #94a3b8);
+      font-weight: 500;
     }
 
     .explorer-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 0.75rem;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
     }
 
     .explorer-card {
       display: flex;
       flex-direction: column;
-      gap: 0.375rem;
-      padding: 1rem;
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
-      border-radius: var(--ngxsmk-radius-lg, 0.5rem);
-      background: var(--ngxsmk-color-surface, #fff);
+      gap: 0.625rem;
+      padding: 1.25rem;
+      border: 1px solid var(--color-border, rgba(148, 163, 184, 0.2));
+      border-radius: var(--radius-xl, 20px);
+      background: var(--color-bg-card, #ffffff);
       text-decoration: none;
       color: inherit;
+      box-shadow: 0 4px 16px -4px rgba(15, 23, 42, 0.05);
       transition:
-        border-color 0.15s,
-        box-shadow 0.15s,
-        transform 0.15s;
+        transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.22s ease,
+        box-shadow 0.22s ease;
+      position: relative;
     }
     .explorer-card:hover {
-      border-color: var(--ngxsmk-color-primary, #7c3aed);
-      box-shadow: 0 4px 12px
-        color-mix(in srgb, var(--ngxsmk-color-primary, #7c3aed) 12%, transparent);
-      transform: translateY(-2px);
+      transform: translateY(-4px);
+      border-color: rgba(99, 102, 241, 0.45);
+      box-shadow: 0 18px 36px -10px rgba(99, 102, 241, 0.2);
+    }
+    .explorer-card:hover .explorer-card-arrow {
+      transform: translateX(3px);
+      color: var(--brand-primary, #6366f1);
     }
     .explorer-card-header {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.625rem;
+    }
+    .explorer-card-arrow {
+      margin-left: auto;
+      color: var(--color-text-dim, #94a3b8);
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+    .explorer-card-selector {
+      margin-top: -0.15rem;
+    }
+    .explorer-card-selector code {
+      font-family: var(--font-family-mono, monospace);
+      font-size: 0.74rem;
+      color: var(--brand-primary, #6366f1);
+      background: rgba(99, 102, 241, 0.08);
+      padding: 0.12rem 0.45rem;
+      border-radius: 6px;
+      border: 1px solid rgba(99, 102, 241, 0.16);
     }
     .explorer-card-dot {
-      width: 0.5rem;
-      height: 0.5rem;
+      width: 0.55rem;
+      height: 0.55rem;
       border-radius: 50%;
       flex-shrink: 0;
     }
     .explorer-card-name {
-      font-weight: 600;
-      font-size: var(--ngxsmk-text-body-md-size);
+      font-family: var(--font-display, 'Plus Jakarta Sans', system-ui, sans-serif);
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: -0.015em;
+      color: var(--color-text-main, #0f172a);
     }
     .explorer-card-desc {
-      font-size: var(--ngxsmk-text-body-sm-size);
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
+      font-size: 0.85rem;
+      color: var(--color-text-secondary, #64748b);
       margin: 0;
-      line-height: 1.5;
+      line-height: 1.55;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
@@ -402,52 +486,60 @@ const CATEGORY_ICONS: Record<string, string> = {
     .explorer-card-meta {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.375rem;
+      gap: 0.45rem;
       margin-top: auto;
-      padding-top: 0.5rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--color-border-card, rgba(148, 163, 184, 0.12));
     }
     .explorer-card-tag {
-      font-size: var(--ngxsmk-text-body-xs-size);
+      font-size: 0.72rem;
       font-weight: 600;
-      padding: 0.125rem 0.375rem;
-      border-radius: var(--ngxsmk-radius-sm);
-      background: var(--ngxsmk-color-primary-container, #ede9fe);
-      color: var(--ngxsmk-color-on-primary-container, #4c1d95);
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
+      padding: 0.2rem 0.55rem;
+      border-radius: 9999px;
+      background: rgba(99, 102, 241, 0.1);
+      color: #6366f1;
+      letter-spacing: 0.02em;
     }
     .explorer-card-prop {
-      font-size: var(--ngxsmk-text-body-xs-size);
-      color: var(--ngxsmk-color-on-surface-variant, #71717a);
-      padding: 0.125rem 0.375rem;
-      border-radius: var(--ngxsmk-radius-sm);
-      background: var(--ngxsmk-color-surface-variant, #f4f4f5);
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--color-text-secondary, #64748b);
+      padding: 0.2rem 0.55rem;
+      border-radius: 9999px;
+      background: var(--color-bg-subtle, #f1f5f9);
     }
+    .explorer-card-prop--signal {
+      background: rgba(16, 185, 129, 0.1) !important;
+      color: #10b981 !important;
+      font-weight: 600 !important;
+    }
+
     .explorer-scroll-top {
       position: fixed;
       bottom: 2rem;
       right: 2rem;
       z-index: 100;
-      width: 2.75rem;
-      height: 2.75rem;
+      width: 2.85rem;
+      height: 2.85rem;
       border-radius: 9999px;
-      border: 1px solid var(--ngxsmk-color-outline, #e4e4e7);
-      background: var(--ngxsmk-color-surface, #ffffff);
-      color: var(--ngxsmk-color-primary, #7c3aed);
+      border: 1px solid rgba(99, 102, 241, 0.35);
+      background: var(--color-bg-card, #ffffff);
+      color: #6366f1;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+      box-shadow: 0 8px 24px -4px rgba(99, 102, 241, 0.25);
       transition:
-        transform 0.2s ease,
-        background 0.2s ease,
-        box-shadow 0.2s ease;
+        transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+        background 0.2s,
+        box-shadow 0.2s;
     }
     .explorer-scroll-top:hover {
       transform: translateY(-3px);
-      background: var(--ngxsmk-color-primary-container, #ede9fe);
-      box-shadow: 0 6px 20px rgba(124, 58, 237, 0.25);
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      color: #ffffff;
+      box-shadow: 0 12px 28px -4px rgba(99, 102, 241, 0.4);
     }
 
     @media (max-width: 640px) {
@@ -549,19 +641,19 @@ export class ComponentExplorer {
 
   colorFor(category: string): string {
     const colors: Record<string, string> = {
-      form: '#7c3aed',
-      layout: '#0891b2',
-      navigation: '#0d9488',
-      'data-display': '#2563eb',
-      feedback: '#d97706',
-      overlay: '#dc2626',
-      chart: '#059669',
-      ai: '#7c3aed',
-      enterprise: '#0891b2',
-      utility: '#6b7280',
-      'content-typography': '#4f46e5',
+      form: '#6366f1',
+      layout: '#3b82f6',
+      navigation: '#8b5cf6',
+      'data-display': '#06b6d4',
+      feedback: '#f59e0b',
+      overlay: '#ec4899',
+      chart: '#10b981',
+      ai: '#8b5cf6',
+      enterprise: '#64748b',
+      utility: '#6366f1',
+      'content-typography': '#8b5cf6',
     };
-    return colors[category] ?? '#6b7280';
+    return colors[category] ?? '#6366f1';
   }
 
   routeFor(category: string): string {

@@ -2,8 +2,14 @@
   "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
   "schematics": {
     "ng-add": {
-      "description": "Add @ngxsmk UI kit to an Angular project (theme + providers).",
-      "factory": "./dist/ng-add/index#ngAdd"
+      "description": "Add @ngxsmk UI kit to an Angular project (deps + theme + optional starter page).",
+      "factory": "./dist/ng-add/index#ngAdd",
+      "schema": "./src/ng-add/schema.json"
+    },
+    "scaffold": {
+      "description": "Generate a production-ready NGXSMK page recipe with correct secondary-entry imports.",
+      "factory": "./dist/scaffold/index#scaffold",
+      "schema": "./src/scaffold/schema.json"
     }
   }
 }

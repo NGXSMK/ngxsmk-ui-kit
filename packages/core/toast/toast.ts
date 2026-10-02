@@ -214,17 +214,17 @@ export class NgxsmkToast {
       gap: var(--ngxsmk-space-3);
       padding: var(--ngxsmk-space-3) var(--ngxsmk-space-3) var(--ngxsmk-space-3) 0;
       border: 1px solid var(--ngxsmk-color-outline);
-      border-radius: var(--ngxsmk-radius-lg);
-      background: var(--ngxsmk-color-surface);
+      border-radius: var(--ngxsmk-toast-radius, var(--ngxsmk-radius-lg));
+      background: var(--ngxsmk-toast-bg, var(--ngxsmk-color-surface));
       color: var(--ngxsmk-color-on-surface);
-      box-shadow: var(--ngxsmk-shadow-lg);
+      box-shadow: var(--ngxsmk-toast-shadow, var(--ngxsmk-shadow-lg));
       pointer-events: auto;
       overflow: hidden;
       animation: ngxsmk-toast-in var(--ngxsmk-duration-normal) var(--ngxsmk-ease-out);
     }
 
     .ngxsmk-toaster__accent {
-      width: 4px;
+      width: var(--ngxsmk-toast-accent-width, 3px);
       flex-shrink: 0;
       border-radius: 0;
       background: var(--ngxsmk-color-outline-strong);

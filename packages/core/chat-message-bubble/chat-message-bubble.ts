@@ -11,16 +11,16 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
       max-width: 75%;
     }
     .ngxsmk-chat-message-bubble__bubble {
-      padding: var(--ngxsmk-space-2) var(--ngxsmk-space-3);
-      border-radius: var(--ngxsmk-radius-lg);
-      background: var(--ngxsmk-color-surface-container);
+      padding: var(--ngxsmk-chat-bubble-padding, var(--ngxsmk-space-2) var(--ngxsmk-space-3));
+      border-radius: var(--ngxsmk-chat-bubble-radius, var(--ngxsmk-radius-lg));
+      background: var(--ngxsmk-chat-bubble-bg, var(--ngxsmk-color-surface-container));
       color: var(--ngxsmk-color-on-surface);
       font-size: var(--ngxsmk-text-body-md-size);
       line-height: var(--ngxsmk-leading-normal, 1.5);
       word-wrap: break-word;
     }
     ::ng-deep [data-role='user'] ngxsmk-chat-message-bubble .ngxsmk-chat-message-bubble__bubble {
-      background: var(--ngxsmk-color-primary-container);
+      background: var(--ngxsmk-chat-bubble-user-bg, var(--ngxsmk-color-primary-container));
       color: var(--ngxsmk-color-on-primary-container);
     }
   `,

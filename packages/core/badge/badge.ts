@@ -24,12 +24,13 @@ export type NgxsmkBadgeVariant =
       display: inline-flex;
       align-items: center;
       gap: var(--ngxsmk-space-1);
-      padding: var(--ngxsmk-space-0-5) var(--ngxsmk-space-2);
+      padding: var(--ngxsmk-badge-padding-block, 0.125rem)
+        var(--ngxsmk-badge-padding-inline, 0.5rem);
       border: 1px solid transparent;
-      border-radius: var(--ngxsmk-radius-full);
+      border-radius: var(--ngxsmk-badge-radius, var(--ngxsmk-radius-full));
       font-family: var(--ngxsmk-font-sans);
       font-size: var(--ngxsmk-text-label-sm-size);
-      font-weight: var(--ngxsmk-text-label-sm-weight);
+      font-weight: var(--ngxsmk-badge-font-weight, var(--ngxsmk-text-label-sm-weight));
       line-height: var(--ngxsmk-text-label-sm-line);
       white-space: nowrap;
     }
@@ -50,22 +51,38 @@ export type NgxsmkBadgeVariant =
     :host([data-variant='success']) {
       background: var(--ngxsmk-color-success-container);
       color: var(--ngxsmk-color-on-success-container);
-      border-color: color-mix(in srgb, var(--ngxsmk-color-success) 20%, transparent);
+      border-color: color-mix(
+        in srgb,
+        var(--ngxsmk-color-success) var(--ngxsmk-badge-border-mix, 20%),
+        transparent
+      );
     }
     :host([data-variant='warning']) {
       background: var(--ngxsmk-color-warning-container);
       color: var(--ngxsmk-color-on-warning-container);
-      border-color: color-mix(in srgb, var(--ngxsmk-color-warning) 20%, transparent);
+      border-color: color-mix(
+        in srgb,
+        var(--ngxsmk-color-warning) var(--ngxsmk-badge-border-mix, 20%),
+        transparent
+      );
     }
     :host([data-variant='error']) {
       background: var(--ngxsmk-color-error-container);
       color: var(--ngxsmk-color-on-error-container);
-      border-color: color-mix(in srgb, var(--ngxsmk-color-error) 20%, transparent);
+      border-color: color-mix(
+        in srgb,
+        var(--ngxsmk-color-error) var(--ngxsmk-badge-border-mix, 20%),
+        transparent
+      );
     }
     :host([data-variant='info']) {
       background: var(--ngxsmk-color-info-container);
       color: var(--ngxsmk-color-on-info-container);
-      border-color: color-mix(in srgb, var(--ngxsmk-color-info) 20%, transparent);
+      border-color: color-mix(
+        in srgb,
+        var(--ngxsmk-color-info) var(--ngxsmk-badge-border-mix, 20%),
+        transparent
+      );
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

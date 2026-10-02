@@ -21,6 +21,10 @@ import { NgxsmkNavHeadingMenu } from '@ngxsmk/core/nav-heading-menu';
 import { NgxsmkLinkProvider } from '@ngxsmk/core/link-provider';
 import { NgxsmkMobileNav, NgxsmkMobileNavToggle } from '@ngxsmk/core/mobile-nav';
 import { NgxsmkBreadcrumbItem } from '@ngxsmk/core/breadcrumb-item';
+import { NgxsmkBreadcrumb } from '@ngxsmk/core/breadcrumb';
+import { NgxsmkMenubar, type NgxsmkMenubarItem } from '@ngxsmk/core/menubar';
+import { NgxsmkStepper, type NgxsmkStep } from '@ngxsmk/core/stepper';
+import { NgxsmkButton } from '@ngxsmk/core/button';
 import { Component, signal } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ShowcaseExample } from '../../showcase/showcase-example';
@@ -36,7 +40,11 @@ interface AppOutlineItem {
   standalone: true,
   imports: [
     ShowcaseExample,
+    NgxsmkBreadcrumb,
     NgxsmkBreadcrumbItem,
+    NgxsmkMenubar,
+    NgxsmkStepper,
+    NgxsmkButton,
     NgxsmkOutline,
     NgxsmkTabMenu,
     NgxsmkNavIcon,
@@ -78,6 +86,62 @@ interface AppOutlineItem {
         <ngxsmk-breadcrumb-item href="/docs">{{ 'nav.docs' | translate }}</ngxsmk-breadcrumb-item>
         <ngxsmk-breadcrumb-item>{{ 'nav.components' | translate }}</ngxsmk-breadcrumb-item>
       </nav>
+    </showcase-example>
+
+    <showcase-example
+      title="Breadcrumb"
+      description="Composed trail from an items array."
+      [code]="codeBreadcrumbComposed"
+      [component]="NgxsmkBreadcrumb"
+    >
+      <ngxsmk-breadcrumb
+        [items]="[
+          { label: 'Home', href: '/' },
+          { label: 'Docs', href: '/docs' },
+          { label: 'Components' },
+        ]"
+      />
+    </showcase-example>
+
+    <showcase-example
+      title="Menubar"
+      description="Horizontal application menu with nested dropdowns."
+      [code]="codeMenubar"
+      [component]="NgxsmkMenubar"
+    >
+      <ngxsmk-menubar [items]="menubarItems" />
+    </showcase-example>
+
+    <showcase-example
+      title="Stepper"
+      description="Linear or free navigation through a labeled step sequence. Pair with your own panels via activeIndex."
+      [code]="codeStepper"
+      [component]="NgxsmkStepper"
+      [customize]="customizeNgxsmkStepper"
+    >
+      <div class="ngxsmk-sc-col" style="gap: var(--ngxsmk-space-4); width: 100%;">
+        <ngxsmk-stepper [steps]="demoSteps" [(activeIndex)]="stepIndex" linear />
+        <p class="ngxsmk-demo-hint" style="margin: 0; color: var(--ngxsmk-color-on-surface-variant);">
+          Step {{ stepIndex() + 1 }}: {{ demoSteps[stepIndex()].label }}
+        </p>
+        <div class="ngxsmk-demo-row">
+          <button
+            ngxsmk-button
+            variant="outline"
+            [disabled]="stepIndex() === 0"
+            (click)="prevStep()"
+          >
+            Back
+          </button>
+          <button
+            ngxsmk-button
+            [disabled]="stepIndex() >= demoSteps.length - 1"
+            (click)="nextStep()"
+          >
+            Next
+          </button>
+        </div>
+      </div>
     </showcase-example>
 
     <showcase-example
@@ -545,6 +609,35 @@ interface AppOutlineItem {
 })
 export class NavigationPage {
   protected readonly NgxsmkBreadcrumbItem = NgxsmkBreadcrumbItem;
+  protected readonly NgxsmkBreadcrumb = NgxsmkBreadcrumb;
+  protected readonly NgxsmkMenubar = NgxsmkMenubar;
+  protected readonly NgxsmkStepper = NgxsmkStepper;
+  protected readonly customizeNgxsmkStepper = `/* Theme <ngxsmk-stepper> via design tokens */
+ngxsmk-stepper {
+  --ngxsmk-color-outline: ;
+  --ngxsmk-color-primary: ;
+  --ngxsmk-color-on-primary: ;
+  --ngxsmk-color-on-surface: ;
+  --ngxsmk-color-on-surface-variant: ;
+  --ngxsmk-font-sans: ;
+  --ngxsmk-space-2: ;
+  --ngxsmk-space-3: ;
+}`;
+  protected readonly stepIndex = signal(0);
+  protected readonly demoSteps: NgxsmkStep[] = [
+    { label: 'Account', description: 'Basic profile' },
+    { label: 'Workspace', description: 'Team settings', optional: true },
+    { label: 'Confirm', description: 'Review & finish' },
+  ];
+
+  protected prevStep(): void {
+    this.stepIndex.update((i) => Math.max(0, i - 1));
+  }
+
+  protected nextStep(): void {
+    this.stepIndex.update((i) => Math.min(this.demoSteps.length - 1, i + 1));
+  }
+
   protected readonly customizeNgxsmkBreadcrumbItem = `/* Theme <ngxsmk-breadcrumb-item> via design tokens */
 ngxsmk-breadcrumb-item {
   --ngxsmk-color-on-surface: ;
@@ -712,6 +805,39 @@ ngxsmk-top-nav-heading {
   <ngxsmk-breadcrumb-item href="/docs">Docs</ngxsmk-breadcrumb-item>
   <ngxsmk-breadcrumb-item>Components</ngxsmk-breadcrumb-item>
 </nav>`;
+
+  protected readonly codeBreadcrumbComposed = `<ngxsmk-breadcrumb
+  [items]="[
+    { label: 'Home', href: '/' },
+    { label: 'Docs', href: '/docs' },
+    { label: 'Components' },
+  ]"
+/>`;
+
+  protected readonly codeMenubar = `<ngxsmk-menubar [items]="menubarItems" />`;
+
+  protected readonly codeStepper = `<ngxsmk-stepper [steps]="steps" [(activeIndex)]="step" linear />
+<button (click)="step = step + 1">Next</button>`;
+
+  protected readonly menubarItems: NgxsmkMenubarItem[] = [
+    {
+      label: 'File',
+      children: [
+        { label: 'New', action: () => undefined },
+        { label: 'Open', action: () => undefined },
+        { divider: true, label: '' },
+        { label: 'Save', action: () => undefined },
+      ],
+    },
+    {
+      label: 'Edit',
+      children: [
+        { label: 'Undo', action: () => undefined },
+        { label: 'Redo', action: () => undefined },
+      ],
+    },
+    { label: 'Help', action: () => undefined },
+  ];
 
   protected readonly codeOutline = `<ngxsmk-outline [items]="outlineItems" [(activeId)]="activeId" />`;
 

@@ -247,16 +247,23 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
       [component]="NgxsmkLightbox"
       [customize]="customizeNgxsmkLightbox"
     >
-      <ngxsmk-lightbox [images]="galleryImages" [(open)]="lightboxOpen">
+      <ngxsmk-lightbox #lb [images]="galleryImages" [(open)]="lightboxOpen">
         <div class="ngxsmk-demo-row">
-          @for (image of galleryImages; track image.src) {
-            <ngxsmk-thumbnail [src]="image.src" [alt]="image.alt ?? ''" size="lg" shape="square" />
+          @for (image of galleryImages; track image.src; let i = $index) {
+            <button
+              type="button"
+              class="ngxsmk-lightbox-thumb"
+              [attr.aria-label]="image.alt ?? 'Open image ' + (i + 1)"
+              (click)="lb.show(i)"
+            >
+              <ngxsmk-thumbnail [src]="image.src" [alt]="image.alt ?? ''" size="lg" shape="square" />
+            </button>
           }
         </div>
       </ngxsmk-lightbox>
 
       <div class="ngxsmk-demo-row">
-        <button ngxsmk-button variant="outline" (click)="lightboxOpen.set(true)">
+        <button ngxsmk-button variant="outline" (click)="lb.show(0)">
           {{ 'overlay.openGallery' | translate }}
         </button>
       </div>
@@ -300,10 +307,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
       [title]="'overlay.commandPalette' | translate"
       [description]="'overlay.commandPaletteDesc' | translate"
       [code]="codeCommandPalette"
-      [component]="NgxsmkButton"
+      [component]="NgxsmkCommandPalette"
     >
       <div class="ngxsmk-demo-row">
-        <button ngxsmk-button (click)="palette.open()">
+        <button ngxsmk-button (click)="palette.show()">
           {{ 'overlay.openPalette' | translate }}
         </button>
       </div>
@@ -327,10 +334,25 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
       font-size: var(--ngxsmk-text-body-sm-size);
       color: var(--ngxsmk-color-on-surface-variant, #71717a);
     }
+
+    .ngxsmk-lightbox-thumb {
+      display: inline-flex;
+      padding: 0;
+      border: none;
+      background: transparent;
+      cursor: zoom-in;
+      border-radius: var(--ngxsmk-radius-md);
+    }
+
+    .ngxsmk-lightbox-thumb:focus-visible {
+      outline: none;
+      box-shadow: var(--ngxsmk-focus-ring);
+    }
   `,
 })
 export class OverlayPage {
   protected readonly NgxsmkButton = NgxsmkButton;
+  protected readonly NgxsmkCommandPalette = NgxsmkCommandPalette;
   protected readonly NgxsmkHoverCard = NgxsmkHoverCard;
   protected readonly customizeNgxsmkHoverCard = `/* Theme <ngxsmk-hover-card> via design tokens */
 ngxsmk-hover-card {
@@ -387,8 +409,10 @@ ngxsmk-context-menu {
   protected readonly NgxsmkLightbox = NgxsmkLightbox;
   protected readonly customizeNgxsmkLightbox = `/* Theme <ngxsmk-lightbox> via design tokens */
 ngxsmk-lightbox {
-  --ngxsmk-color-lightbox-backdrop: ;
-  --ngxsmk-color-ring: ;
+  --ngxsmk-lightbox-backdrop: ;
+  --ngxsmk-lightbox-fg: ;
+  --ngxsmk-lightbox-control-bg: ;
+  --ngxsmk-lightbox-control-bg-hover: ;
   --ngxsmk-font-sans: ;
   --ngxsmk-radius-md: ;
   --ngxsmk-space-2: ;
@@ -547,9 +571,14 @@ onContextMenu(e: MouseEvent, cm: NgxsmkContextMenu) {
   cm.show(e.clientX, e.clientY);
 }`;
 
-  protected readonly codeLightbox = `<ngxsmk-lightbox [images]="images" [(open)]="open">
-  <ngxsmk-thumbnail [src]="images[0].src" alt="Preview" size="lg" />
-</ngxsmk-lightbox>`;
+  protected readonly codeLightbox = `<ngxsmk-lightbox #lb [images]="images" [(open)]="open">
+  @for (img of images; track img.src; let i = $index) {
+    <button type="button" (click)="lb.show(i)">
+      <ngxsmk-thumbnail [src]="img.src" [alt]="img.alt ?? ''" size="lg" />
+    </button>
+  }
+</ngxsmk-lightbox>
+<button (click)="lb.show(0)">Open gallery</button>`;
 
   protected readonly codeImperativeDialog = `import { inject } from '@angular/core';
 
@@ -568,7 +597,7 @@ async confirm() {
   // ok is a boolean
 }`;
 
-  protected readonly codeCommandPalette = `<button ngxsmk-button (click)="palette.open()">Open Palette</button>
+  protected readonly codeCommandPalette = `<button ngxsmk-button (click)="palette.show()">Open Palette</button>
 
 <ngxsmk-command-palette
   #palette

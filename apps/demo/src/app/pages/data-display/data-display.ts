@@ -221,6 +221,11 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
           [pageSize]="4"
           [sortable]="true"
           [striped]="true"
+          [selectable]="true"
+          [resizable]="true"
+          [reorderable]="true"
+          rowKey="id"
+          [(selectedKeys)]="selectedOrderIds"
         />
       </div>
     </showcase-example>
@@ -298,8 +303,18 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
       [customize]="customizeNgxsmkStat"
     >
       <div class="ngxsmk-sc-grid ngxsmk-sc-grid--3">
-        <ngxsmk-stat [label]="'dataDisplay.statActiveUsers' | translate" value="1,284" trend="up" />
-        <ngxsmk-stat [label]="'dataDisplay.statChurn' | translate" value="2.3%" trend="down" />
+        <ngxsmk-stat
+          [label]="'dataDisplay.statActiveUsers' | translate"
+          value="1,284"
+          trend="up"
+          delta="+8.2%"
+        />
+        <ngxsmk-stat
+          [label]="'dataDisplay.statChurn' | translate"
+          value="2.3%"
+          trend="down"
+          delta="-0.4%"
+        />
         <ngxsmk-stat [label]="'dataDisplay.statOpenTickets' | translate" value="37" trend="flat" />
       </div>
     </showcase-example>
@@ -691,6 +706,7 @@ ngxsmk-card {
     { id: '#1047', customer: 'Faye Wong', total: '$18.20', status: 'Pending' },
     { id: '#1048', customer: 'Gus Lee', total: '$560.00', status: 'Paid' },
   ];
+  protected readonly selectedOrderIds = signal<(string | number)[]>([]);
 
   protected readonly codeTabs = `<ngxsmk-tabs [(value)]="activeTab">
   <ngxsmk-tab value="overview" label="Overview">…</ngxsmk-tab>
@@ -731,6 +747,11 @@ ngxsmk-card {
   [rows]="orderRows"
   [pageSize]="4"
   [sortable]="true"
+  [selectable]="true"
+  [resizable]="true"
+  [reorderable]="true"
+  rowKey="id"
+  [(selectedKeys)]="selected"
 />`;
 
   protected readonly codeList = `<ngxsmk-list [divided]="true">
@@ -751,8 +772,8 @@ ngxsmk-card {
   <span item>Research</span>
 </ngxsmk-overflow-list>`;
 
-  protected readonly codeStat = `<ngxsmk-stat label="Active users" value="1,284" trend="up" />
-<ngxsmk-stat label="Churn" value="2.3%" trend="down" />
+  protected readonly codeStat = `<ngxsmk-stat label="Active users" value="1,284" trend="up" delta="+8.2%" />
+<ngxsmk-stat label="Churn" value="2.3%" trend="down" delta="-0.4%" />
 <ngxsmk-stat label="Open tickets" value="37" trend="flat" />`;
 
   protected readonly codeStatusDot = `<ngxsmk-status-dot variant="online" /> Online

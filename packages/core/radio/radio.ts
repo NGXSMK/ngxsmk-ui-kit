@@ -138,11 +138,11 @@ export class NgxsmkRadioGroup extends CvaBase<unknown> {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 1.125rem;
-      height: 1.125rem;
+      width: var(--ngxsmk-radio-size, 1.125rem);
+      height: var(--ngxsmk-radio-size, 1.125rem);
       flex-shrink: 0;
       box-sizing: border-box;
-      border: 1.5px solid var(--ngxsmk-color-outline-strong);
+      border: 1.5px solid var(--ngxsmk-radio-border, var(--ngxsmk-color-outline-strong));
       border-radius: var(--ngxsmk-radius-full);
       background: var(--ngxsmk-color-surface);
       transition: border-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
@@ -150,8 +150,8 @@ export class NgxsmkRadioGroup extends CvaBase<unknown> {
 
     .ngxsmk-radio__circle::after {
       content: '';
-      width: 0.5rem;
-      height: 0.5rem;
+      width: var(--ngxsmk-radio-dot-size, 0.5rem);
+      height: var(--ngxsmk-radio-dot-size, 0.5rem);
       border-radius: var(--ngxsmk-radius-full);
       background: var(--ngxsmk-color-primary);
       transform: scale(0);

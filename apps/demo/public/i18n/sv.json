@@ -16,7 +16,8 @@
     "darkMode": "Byt till mörkt läge",
     "github": "npm",
     "getStarted": "Kom igång",
-    "starOnGithub": "Stjärna på GitHub"
+    "starOnGithub": "Stjärna på GitHub",
+    "whatsapp": "WhatsApp-kanal"
   },
   "search": {
     "placeholder": "Sök komponenter (t.ex. Button, Kanban, Chat)…",
@@ -81,7 +82,9 @@
     "chatReplyPlaceholder": "Svara…",
     "composerDrawerHint": "Bifoga filer, välj en uppmaning eller kalla på ett verktyg – skicka sedan.",
     "citationSnippet": "Transformern möjliggör betydligt mer parallellisering än rekurrenta modeller.",
-    "audioVoiceReply": "Röstssvar"
+    "audioVoiceReply": "Röstssvar",
+    "online": "Online",
+    "chatLayoutExampleMsg": "Fråga mig vad som helst om ditt konto."
   },
   "enterprise": {
     "pageDesc": "Kraftiga byggstenar för affärsapplikationer – tavlor, schemaläggare, redigerare och dataverktyg. Varje del är tema medveten och redo att kopplas till dina egna datakällor.",
@@ -169,7 +172,12 @@
     "roleViewer": "Visare",
     "teamPlatform": "Plattform",
     "teamContent": "Innehåll",
-    "teamDesign": "Design"
+    "teamDesign": "Design",
+    "fileTreeDesc": "Katalogträdsvy i utforskaren med expandera/komprimera mappar och filmarkering.",
+    "timelineDesc": "Vertikal tidslinje för milstolpar med stegvisa förloppsindikatorer.",
+    "codeEditorDesc": "Kodavsnittspanel med radnummer, syntaxrubrik och kopieringsknapp.",
+    "statTrendDesc": "KPI-panelkort med inbäddat sparkline-minidiagram och mått trend.",
+    "filterBuilderDesc": "Dynamisk konstruktör för filtervillkor med fält-, operator- och värderader."
   },
   "blog": {
     "pill": "Blogg",
@@ -580,7 +588,8 @@
       "ai": "AI-gränssnitt",
       "utility": "Verktyg & hooks",
       "other": "Övrigt"
-    }
+    },
+    "scrollTop": "Scrolla till toppen"
   },
   "iplayground": {
     "explorer": "Utforskare",
@@ -663,7 +672,11 @@
     "signal": "signal",
     "regular": "vanlig",
     "outputsEvents": "Utdata (händelser)",
-    "thEvent": "Händelse"
+    "thEvent": "Händelse",
+    "code": "Kod",
+    "copyCode": "Kopiera kod",
+    "copy": "Kopiera",
+    "copied": "Kopierad!"
   },
   "forms": {
     "intro": "Knappar, inmatningar, select och rika formulärkontroller. Varje komponent nedan är live och interaktiv – prova dem, och visa sedan koden för att kopiera den.",
@@ -778,7 +791,11 @@
     "langAngular": "Angular",
     "langJavaScript": "JavaScript",
     "transferDesc": "Dubbel listbox-container för att flytta valda objekt mellan käll- och mållistor.",
-    "signaturePadDesc": "Digital canvas för att rita och exportera smidiga elektroniska signaturer."
+    "signaturePadDesc": "Digital canvas för att rita och exportera smidiga elektroniska signaturer.",
+    "creditCardDesc": "Automatiskt formaterat kreditkortsinmatningsfält med varumärkesidentifiering och validering.",
+    "passwordStrengthDesc": "Säkerhetsutvärdering av lösenord i realtid med styrkestapel och kravlista.",
+    "treeSelectDesc": "Hierarkisk rullgardinsväljare med expanderbara trädnoder och flerval.",
+    "selectCategories": "Välj kategorier..."
   },
   "feedback": {
     "intro": "Komponenter som kommunicerar status, förlopp och systemrespons – från inline-varningar och banderoller till laddare, skelett och närvaroprickar.",
@@ -1324,6 +1341,14 @@
       "checkout": {
         "title": "Flersetegsutcheckning & 2FA",
         "desc": "Säkert e-handelsutcheckningsflöde med 2-faktors PIN-verifiering."
+      },
+      "aiconsole": {
+        "title": "AI-konsol",
+        "desc": "Arbetsytemall för agent med brödsmulor, modellkontroller och ngxsmk-ai-chat — redo att kopplas till din backend."
+      },
+      "opstable": {
+        "title": "Ops-datatabell",
+        "desc": "Driftsinventarie med filter, urval, kolumnstorlek och dra-för-att-ordna-om rubriker på ngxsmk-data-table."
       }
     }
   },
@@ -1351,10 +1376,54 @@
   },
   "community": {
     "title": "Gemenskap & bidrag",
-    "subtitle": "Gå med i vår växande gemenskap, ställ frågor, föreslå funktioner och dela vad du byggt.",
+    "subtitle": "Gå med i vår växande gemenskap, ställ frågor, föreslå funktioner och dela vad du har byggt med NGXSMK.",
     "githubDiscussions": "Kontakt & feedback",
     "githubDiscussionsDesc": "Frågor, idéer eller buggrapporter? Kontakta underhållaren direkt — varje meddelande hjälper till att förbättra kitet.",
-    "joinDiscussion": "Skicka feedback"
+    "joinDiscussion": "Skicka feedback",
+    "pill": "Gemenskap",
+    "statOpen": "Öppen",
+    "statSource": "Källkod",
+    "statMit": "MIT",
+    "statLicense": "Licens",
+    "statComponents": "Komponenter",
+    "channelTitle": "Hur du bidrar",
+    "channelSub": "Oavsett om det är en felrapport, funktionsidé, dokumentationsförbättring eller en pull request — varje bidrag gör skillnad.",
+    "channelGithubTitle": "GitHub Issues",
+    "channelGithubDesc": "Rapportera fel, begär funktioner eller föreslå förbättringar. Varje ärende hanteras inom 48 timmar.",
+    "channelGithubCta": "Skapa ett ärende",
+    "channelPrTitle": "Pull Requests",
+    "channelPrDesc": "Forka, skapa en gren och öppna en PR. Vi följer Conventional Commits och granskar inom 48 timmar.",
+    "channelPrCta": "Starta en PR",
+    "channelEmailTitle": "Mejla underhållaren",
+    "channelEmailDesc": "För privat feedback, säkerhetsfrågor eller partnerskap — hör av dig direkt.",
+    "channelEmailCta": "Skicka ett mejl",
+    "channelWhatsappTitle": "WhatsApp-kanal",
+    "channelWhatsappDesc": "Gå med i vår officiella WhatsApp-kanal för de senaste uppdateringarna, lanseringarna och tillkännagivandena.",
+    "channelWhatsappCta": "Gå med i kanalen",
+    "channelDocsTitle": "Dokumentation",
+    "channelDocsDesc": "Hittat ett stavfel eller en otydlig guide? Dokumentations-PRs är det snabbaste sättet att bidra — ingen kodgranskning krävs.",
+    "channelDocsCta": "Förbättra dokumentationen",
+    "guidelinesTitle": "Riktlinjer för bidrag",
+    "guidelinesSub": "Följ dessa konventioner för att hålla kodbasen enhetlig och granskningarna snabba.",
+    "rule1Title": "Conventional commits",
+    "rule1Desc": "Använd prefixen feat:, fix:, chore:, docs: eller refactor:. Commitlint-hooken tillämpar detta automatiskt.",
+    "rule2Title": "Endast Signal-APIs",
+    "rule2Desc": "Alla nya indata måste använda input() / input.required(). Inga @Input()-dekoratörer. Tvåvägsbindningar använder model().",
+    "rule3Title": "Fristående komponenter",
+    "rule3Desc": "Varje komponent och direktiv måste ha standalone: true. Inga NgModules i ny kod.",
+    "rule4Title": "Token-driven stil",
+    "rule4Desc": "Använd --ngxsmk-* CSS-anpassade egenskaper. Hårdkoda aldrig färger, radier eller avståndsvärden.",
+    "rule5Title": "En komponent per fil",
+    "rule5Desc": "Håll komponenter små och fokuserade. Bryt ut delad logik i @ngxsmk/cdk-verktyg.",
+    "rule6Title": "Kör hela pipelinen",
+    "rule6Desc": "Före push: npm run build, npm test, npm run lint, npm run format. Allt måste passera.",
+    "cocTitle": "Uppförandekod",
+    "cocDesc": "Vi är engagerade i att erbjuda en välkomnande och inkluderande upplevelse för alla. Var respektfull, konstruktiv och förutsätt goda avsikter.",
+    "footerTitle": "Redo att bidra?",
+    "footerSub": "Forka repot, välj ett ärende märkt med",
+    "footerGoodFirst": "good first issue",
+    "footerSub2": " och öppna en pull request. Vi granskar inom 48 timmar.",
+    "footerCta": "Öppna på GitHub"
   },
   "api": {
     "title": "API-referens",

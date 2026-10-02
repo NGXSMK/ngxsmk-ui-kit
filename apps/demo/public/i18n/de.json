@@ -82,7 +82,9 @@
     "chatReplyPlaceholder": "Antworten…",
     "composerDrawerHint": "Hängen Sie Dateien an, wählen Sie eine Eingabeaufforderung oder rufen Sie ein Tool auf – und senden Sie.",
     "citationSnippet": "Der Transformer ermöglicht deutlich mehr Parallelisierung als rekurrente Modelle.",
-    "audioVoiceReply": "Sprachantwort"
+    "audioVoiceReply": "Sprachantwort",
+    "online": "Online",
+    "chatLayoutExampleMsg": "Fragen Sie mich alles zu Ihrem Konto."
   },
   "enterprise": {
     "pageDesc": "Hochleistungs-Bausteine für Geschäftsanwendungen – Boards, Planer, Editoren und Datentools. Jedes ist themenbewusst und bereit, an Ihre eigenen Datenquellen angebunden zu werden.",
@@ -170,7 +172,12 @@
     "roleViewer": "Betrachter",
     "teamPlatform": "Plattform",
     "teamContent": "Inhalt",
-    "teamDesign": "Design"
+    "teamDesign": "Design",
+    "fileTreeDesc": "Explorer-Verzeichnisbaumansicht mit Ordner-Auf-/Zuklappen und Dateiauswahl.",
+    "timelineDesc": "Vertikaler Meilenstein-Zeitstrahl-Tracker mit Schrittfortschritts-Indikatoren.",
+    "codeEditorDesc": "Codeausschnitt-Bühne mit Zeilennummern, Syntaxkopfzeile und Kopierschaltfläche.",
+    "statTrendDesc": "KPI-Dashboard-Karte mit eingebettetem Sparkline-Minidiagramm und Metriktrend.",
+    "filterBuilderDesc": "Dynamischer Filterbedingungs-Konstruktor mit Zeilen für Feld, Operator und Wert."
   },
   "blog": {
     "pill": "Blog",
@@ -581,7 +588,8 @@
       "ai": "KI-Schnittstelle",
       "utility": "Dienstprogramme & Hooks",
       "other": "Andere"
-    }
+    },
+    "scrollTop": "Nach oben scrollen"
   },
   "iplayground": {
     "explorer": "Explorer",
@@ -664,7 +672,11 @@
     "signal": "signal",
     "regular": "regulär",
     "outputsEvents": "Ausgaben (Ereignisse)",
-    "thEvent": "Ereignis"
+    "thEvent": "Ereignis",
+    "code": "Code",
+    "copyCode": "Code kopieren",
+    "copy": "Kopieren",
+    "copied": "Kopiert!"
   },
   "forms": {
     "intro": "Buttons, Eingaben, Selects und reichhaltige Formularsteuerungen. Jede Komponente unten ist live und interaktiv – probieren Sie sie aus und zeigen Sie dann den Code an, um ihn zu kopieren.",
@@ -779,7 +791,11 @@
     "langAngular": "Angular",
     "langJavaScript": "JavaScript",
     "transferDesc": "Doppel-Listbox-Container zum Verschieben ausgewählter Elemente zwischen Quell- und Ziellisten.",
-    "signaturePadDesc": "Digitale Zeichenfläche zum Zeichnen und Exportieren reibungsloser elektronischer Signaturen."
+    "signaturePadDesc": "Digitale Zeichenfläche zum Zeichnen und Exportieren reibungsloser elektronischer Signaturen.",
+    "creditCardDesc": "Automatisch formatierendes Kreditkarten-Eingabefeld mit Markenerkennung und Validierung.",
+    "passwordStrengthDesc": "Echtzeit-Passwortsicherheitsbewertung mit Stärkebalken und Anforderungs-Checkliste.",
+    "treeSelectDesc": "Hierarchische Dropdown-Auswahl mit erweiterbaren Baumknoten und Mehrfachauswahl.",
+    "selectCategories": "Kategorien auswählen..."
   },
   "feedback": {
     "intro": "Komponenten, die Status, Fortschritt und Systemantworten kommunizieren – von Inline-Warnungen und Bannern bis hin zu Loadern, Skeletons und Präsenz-Punkten.",
@@ -1325,6 +1341,14 @@
       "checkout": {
         "title": "Mehrstufiger Checkout & 2FA",
         "desc": "Sicherer E-Commerce-Checkout-Ablauf mit 2-Faktor-PIN-Verifizierung."
+      },
+      "aiconsole": {
+        "title": "KI-Konsole",
+        "desc": "Agent-Arbeitsbereich-Vorlage mit Breadcrumb-Leiste, Modellsteuerungen und ngxsmk-ai-chat — bereit zur Anbindung an Ihr Backend."
+      },
+      "opstable": {
+        "title": "Ops-Datentabelle",
+        "desc": "Betriebsinventar mit Filter, Auswahl, Spaltengrößenanpassung und Drag-and-Drop-Kopfzeilen auf ngxsmk-data-table."
       }
     }
   },
@@ -1352,51 +1376,54 @@
   },
   "community": {
     "pill": "Community",
-    "title": "Built together, ship faster",
-    "subtitle": "Join a growing community of Angular developers. Ask questions, propose features, report bugs, and share what you've built with NGXSMK.",
+    "title": "Community & Mitwirkung",
+    "subtitle": "Treten Sie unserer wachsenden Community von Angular-Entwicklern bei. Stellen Sie Fragen, schlagen Sie Funktionen vor und teilen Sie Ihre Projekte mit NGXSMK.",
     "statOpen": "Open",
     "statSource": "Source",
     "statMit": "MIT",
-    "statLicense": "License",
-    "statComponents": "Components",
-    "channelTitle": "How to contribute",
-    "channelSub": "Whether it's a bug report, feature idea, docs improvement, or a pull request — every contribution matters.",
+    "statLicense": "Lizenz",
+    "statComponents": "Komponenten",
+    "channelTitle": "So können Sie beitragen",
+    "channelSub": "Ob Fehlerbericht, Feature-Idee, Dokumentationsverbesserung oder Pull Request – jeder Beitrag zählt.",
     "channelGithubTitle": "GitHub Issues",
-    "channelGithubDesc": "Report bugs, request features, or suggest improvements. Every issue is triaged within 48 hours.",
-    "channelGithubCta": "Open an issue",
+    "channelGithubDesc": "Fehler melden, Funktionen anfragen oder Verbesserungen vorschlagen. Jedes Issue wird innerhalb von 48 Stunden gesichtet.",
+    "channelGithubCta": "Issue eröffnen",
     "channelPrTitle": "Pull Requests",
-    "channelPrDesc": "Fork, branch, and open a PR. We follow conventional commits and review within 48 hours.",
-    "channelPrCta": "Start a PR",
-    "channelEmailTitle": "Email the maintainer",
-    "channelEmailDesc": "For private feedback, security disclosures, or partnership inquiries — reach out directly.",
-    "channelEmailCta": "Send an email",
+    "channelPrDesc": "Forken, Branch erstellen und PR einreichen. Wir folgen Conventional Commits und prüfen innerhalb von 48 Stunden.",
+    "channelPrCta": "PR starten",
+    "channelEmailTitle": "E-Mail an den Maintainer",
+    "channelEmailDesc": "Für vertrauliches Feedback, Sicherheitsmeldungen oder Partnerschaftsanfragen – kontaktieren Sie uns direkt.",
+    "channelEmailCta": "E-Mail senden",
     "channelWhatsappTitle": "WhatsApp-Kanal",
-    "channelWhatsappDesc": "Treten Sie unserem offiziellen WhatsApp-Kanal bei, um die neuesten Updates und Ankündigungen zu erhalten.",
+    "channelWhatsappDesc": "Treten Sie unserem offiziellen WhatsApp-Kanal bei, um die neuesten Updates, Veröffentlichungen und Ankündigungen zu erhalten.",
     "channelWhatsappCta": "Kanal beitreten",
-    "channelDocsTitle": "Documentation",
-    "channelDocsDesc": "Found a typo or unclear guide? Docs PRs are the fastest way to contribute — no code review needed.",
-    "channelDocsCta": "Improve the docs",
-    "guidelinesTitle": "Contribution guidelines",
-    "guidelinesSub": "Follow these conventions to keep the codebase consistent and reviews fast.",
+    "channelDocsTitle": "Dokumentation",
+    "channelDocsDesc": "Tippfehler oder unklare Anleitung gefunden? Dokumentations-PRs sind der schnellste Weg mitzuwirken – kein komplexes Code-Review nötig.",
+    "channelDocsCta": "Dokumentation verbessern",
+    "guidelinesTitle": "Richtlinien für Beiträge",
+    "guidelinesSub": "Befolgen Sie diese Konventionen, um die Codebasis einheitlich und Reviews zügig zu halten.",
     "rule1Title": "Conventional commits",
-    "rule1Desc": "Use feat:, fix:, chore:, docs:, or refactor: prefixes. The commitlint hook enforces this automatically.",
-    "rule2Title": "Signal-only APIs",
-    "rule2Desc": "All new inputs must use input() / input.required(). No @Input() decorators. Two-way bindings use model().",
-    "rule3Title": "Standalone components",
-    "rule3Desc": "Every component and directive must be standalone: true. No NgModules in new code.",
-    "rule4Title": "Token-driven styling",
-    "rule4Desc": "Use --ngxsmk-* CSS custom properties. Never hardcode colors, radii, or spacing values.",
-    "rule5Title": "One component per file",
-    "rule5Desc": "Keep components small and focused. Extract shared logic into @ngxsmk/cdk utilities.",
-    "rule6Title": "Run the full pipeline",
-    "rule6Desc": "Before pushing: npm run build, npm test, npm run lint, npm run format. All must pass.",
-    "cocTitle": "Code of Conduct",
-    "cocDesc": "We are committed to providing a welcoming and inclusive experience for everyone. Be respectful, constructive, and assume good intent.",
-    "footerTitle": "Ready to contribute?",
-    "footerSub": "Fork the repo, pick an issue labeled",
+    "rule1Desc": "Verwenden Sie die Präfixe feat:, fix:, chore:, docs: oder refactor:. Der Commitlint-Hook erzwingt dies automatisch.",
+    "rule2Title": "Reine Signal-APIs",
+    "rule2Desc": "Alle neuen Eingaben müssen input() / input.required() verwenden. Keine @Input()-Dekoratoren. Zwei-Wege-Bindung nutzt model().",
+    "rule3Title": "Standalone-Komponenten",
+    "rule3Desc": "Jede Komponente und Direktive muss standalone: true sein. Keine NgModules in neuem Code.",
+    "rule4Title": "Token-gesteuertes Styling",
+    "rule4Desc": "Verwenden Sie --ngxsmk-* CSS Custom Properties. Niemals Farben, Radien oder Abstände fest im Code verankern.",
+    "rule5Title": "Eine Komponente pro Datei",
+    "rule5Desc": "Halten Sie Komponenten schlank und fokussiert. Gemeinsame Logik in @ngxsmk/cdk-Dienstprogramme auslagern.",
+    "rule6Title": "Vollständige Pipeline ausführen",
+    "rule6Desc": "Vor dem Pushen: npm run build, npm test, npm run lint, npm run format. Alles muss fehlerfrei durchlaufen.",
+    "cocTitle": "Verhaltenskodex",
+    "cocDesc": "Wir verpflichten uns zu einer einladenden und integrativen Umgebung für alle. Seien Sie respektvoll, konstruktiv und gehen Sie von guten Absichten aus.",
+    "footerTitle": "Bereit mitzuwirken?",
+    "footerSub": "Forken Sie das Repository, wählen Sie ein Issue mit dem Label",
     "footerGoodFirst": "good first issue",
-    "footerSub2": ", and open a pull request. We review within 48 hours.",
-    "footerCta": "Open on GitHub"
+    "footerSub2": " und erstellen Sie einen Pull Request. Wir überprüfen innerhalb von 48 Stunden.",
+    "footerCta": "Auf GitHub öffnen",
+    "githubDiscussions": "Kontakt & Feedback",
+    "githubDiscussionsDesc": "Fragen, Ideen oder Fehlerberichte? Wenden Sie sich direkt an den Betreuer – jede Nachricht hilft, das Kit zu verbessern.",
+    "joinDiscussion": "Feedback senden"
   },
   "api": {
     "title": "API-Referenz",

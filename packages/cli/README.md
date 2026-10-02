@@ -1,29 +1,38 @@
 # @ngxsmk/cli
 
-Command line utilities, Angular schematics, and automated migration codemods for the **NGXSMK** UI ecosystem.
+Schematics and codemods for the **NGXSMK** Angular UI kit.
 
----
-
-## Installation & Usage
+## Install into an app
 
 ```bash
-# Preview automated migrations without modifying files:
-npx @ngxsmk/cli migrate --dry-run
+ng add @ngxsmk/cli --theme=classic
+# premium Ink look:
+ng add @ngxsmk/cli --theme=ink
+```
 
-# Apply automated migration codemods to your Angular project:
+What `ng-add` does:
+
+1. Adds `@ngxsmk/core`, `@ngxsmk/theme`, `@ngxsmk/cdk` to `package.json` and runs install
+2. Wires the theme CSS into `angular.json` (`ngxsmk.css` for classic/emerald)
+3. Scaffolds `src/app/ngxsmk-starter/ngxsmk-starter.ts` (disable with `--scaffold=false`)
+
+## Generate page recipes
+
+Correct **secondary-entry** imports every time:
+
+```bash
+ng generate @ngxsmk/cli:scaffold --type=login
+ng generate @ngxsmk/cli:scaffold --type=dashboard
+ng generate @ngxsmk/cli:scaffold --type=settings
+ng generate @ngxsmk/cli:scaffold --type=ai-assistant
+ng generate @ngxsmk/cli:scaffold --type=ops-table
+```
+
+## Migrations
+
+```bash
+npx @ngxsmk/cli migrate --dry-run
 npx @ngxsmk/cli migrate
 ```
 
-Or via Angular CLI:
-
-```bash
-ng update @ngxsmk/cli
-```
-
----
-
-## Features
-
-- **Automated Codemods**: Rewrites legacy barrel imports into granular secondary entry points (`@ngxsmk/core/button`, `@ngxsmk/core/card`).
-- **Token Modernization**: Converts legacy CSS variables to standard `--ngxsmk-*` design tokens.
-- **Signals Migration Diagnostics**: Highlights legacy `@Input()` decorators to help migrate components to Angular Signals.
+Rewrites barrel imports to `@ngxsmk/core/<entry>` and modernizes tokens.

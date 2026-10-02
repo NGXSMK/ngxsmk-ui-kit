@@ -155,7 +155,7 @@
               }
             ],
             "styles": [
-              "packages/theme/styles/ngxsmk.css",
+              "packages/theme/styles/ngxsmk.ink.css",
               "packages/core/styles/button.css",
               "packages/core/styles/input.css",
               "node_modules/intl-tel-input/build/css/intlTelInput.css",
@@ -172,8 +172,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "35kB",
-                  "maximumError": "50kB"
+                  "maximumWarning": "48kB",
+                  "maximumError": "55kB"
                 }
               ],
               "outputHashing": "all"

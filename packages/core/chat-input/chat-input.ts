@@ -34,12 +34,12 @@
     .ngxsmk-chat-input__textarea {
       flex: 1;
       resize: none;
-      border: 1px solid var(--ngxsmk-color-outline);
-      border-radius: var(--ngxsmk-radius-lg);
+      border: 1px solid var(--ngxsmk-input-border, var(--ngxsmk-color-outline));
+      border-radius: var(--ngxsmk-ai-chat-composer-radius, var(--ngxsmk-radius-lg));
       padding: var(--ngxsmk-space-2) var(--ngxsmk-space-3);
       font-family: var(--ngxsmk-font-sans);
       font-size: var(--ngxsmk-text-label-lg-size);
-      background: var(--ngxsmk-color-surface-container);
+      background: var(--ngxsmk-input-bg, var(--ngxsmk-color-surface-container));
       color: var(--ngxsmk-color-on-surface);
       outline: none;
       max-height: 10rem;
@@ -48,7 +48,8 @@
       color: var(--ngxsmk-color-on-surface-variant);
     }
     .ngxsmk-chat-input__textarea:focus {
-      border-color: var(--ngxsmk-color-primary);
+      border-color: var(--ngxsmk-color-ring);
+      box-shadow: var(--ngxsmk-focus-ring);
     }
     @media (max-width: 768px) {
       .ngxsmk-chat-input__bar {

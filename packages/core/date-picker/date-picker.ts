@@ -31,6 +31,7 @@ import { CvaBase } from '@ngxsmk/cdk/cva-base';
       type="date"
       class="ngxsmk-date-picker__control"
       [attr.id]="id()"
+      [attr.aria-label]="ariaLabel() ?? (placeholder() || 'Date')"
       [attr.aria-invalid]="ariaInvalid() ? 'true' : null"
       [attr.aria-describedby]="ariaDescribedby()"
       [disabled]="isDisabled()"
@@ -56,11 +57,12 @@ import { CvaBase } from '@ngxsmk/cdk/cva-base';
       display: block;
       width: 100%;
       box-sizing: border-box;
-      padding: var(--ngxsmk-space-2) var(--ngxsmk-space-3);
-      border: 1px solid var(--ngxsmk-color-outline-strong);
-      border-radius: var(--ngxsmk-radius-base);
-      background: var(--ngxsmk-color-surface);
-      color: var(--ngxsmk-color-on-surface);
+      height: var(--ngxsmk-input-height, var(--ngxsmk-control-height));
+      padding: 0 var(--ngxsmk-input-padding-inline, var(--ngxsmk-space-3));
+      border: 1px solid var(--ngxsmk-input-border, var(--ngxsmk-color-outline-strong));
+      border-radius: var(--ngxsmk-input-radius, var(--ngxsmk-radius-base));
+      background: var(--ngxsmk-input-bg, var(--ngxsmk-color-surface));
+      color: var(--ngxsmk-input-color, var(--ngxsmk-color-on-surface));
       font-family: var(--ngxsmk-font-sans);
       font-size: var(--ngxsmk-text-body-md-size);
       line-height: var(--ngxsmk-text-body-md-line);
@@ -95,6 +97,7 @@ export class NgxsmkDatePicker extends CvaBase<string> implements NgxsmkFormField
   readonly disabled = input(false, { transform: booleanAttribute });
 
   readonly id = input(ngxsmkUniqueId('ngxsmk-date-picker'));
+  readonly ariaLabel = input<string | null>(null);
   readonly ariaInvalid = model(false);
   readonly ariaDescribedby = model<string | null>(null);
 

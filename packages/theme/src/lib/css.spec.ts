@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { buildThemeCss } from './css';
-import { violetPreset } from './presets';
+import { emeraldPreset, inkPreset, violetPreset } from './presets';
 
 describe('buildThemeCss', () => {
   const css = buildThemeCss(violetPreset);
@@ -73,6 +73,31 @@ describe('buildThemeCss', () => {
     expect(reduced).toContain('--ngxsmk-hover-lift: none;');
     expect(reduced).toContain('--ngxsmk-press-scale: none;');
     expect(reduced).toContain('.ngxsmk-reduce-motion');
+  });
+
+  it('keeps Classic emerald visually stable and Ink opt-in distinct', () => {
+    const classic = buildThemeCss(emeraldPreset);
+    expect(classic).toContain("--ngxsmk-font-sans: 'Inter'");
+    expect(classic).toContain('--ngxsmk-radius-md: 0.5rem;');
+    expect(classic).toContain('--ngxsmk-color-primary: #059669;');
+    expect(classic).toContain('--ngxsmk-hover-lift: translateY(-1px);');
+
+    const ink = buildThemeCss(inkPreset);
+    expect(ink).toContain('Geist Sans');
+    expect(ink).toContain('--ngxsmk-radius-md: 0.375rem;');
+    expect(ink).toContain('--ngxsmk-color-primary: #0F766E;');
+    expect(ink).toContain('--ngxsmk-hover-lift: none;');
+    expect(ink).not.toContain("--ngxsmk-font-sans: 'Inter'");
+  });
+
+  it('merges radiusScale / shadowScale from ThemeConfig', () => {
+    const custom = buildThemeCss({
+      brand: { primary: '#059669' },
+      radiusScale: { md: '0.25rem' },
+      shadowScale: { sm: 'none' },
+    });
+    expect(custom).toContain('--ngxsmk-radius-md: 0.25rem;');
+    expect(custom).toContain('--ngxsmk-shadow-sm: none;');
   });
 
   it('emits mobile safe-area and touch-target tokens', () => {
