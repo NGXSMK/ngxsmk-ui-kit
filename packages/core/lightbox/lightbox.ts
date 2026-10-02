@@ -219,8 +219,8 @@ export interface NgxsmkLightboxImage {
     .ngxsmk-lightbox__close:focus-visible {
       outline: none;
       box-shadow:
-        0 0 0 2px #fff,
-        0 0 0 4px color-mix(in srgb, #fff 40%, transparent);
+        0 0 0 2px var(--ngxsmk-lightbox-fg, #ffffff),
+        0 0 0 4px color-mix(in srgb, var(--ngxsmk-lightbox-fg, #ffffff) 40%, transparent);
     }
 
     .ngxsmk-lightbox__nav {
@@ -249,8 +249,8 @@ export interface NgxsmkLightboxImage {
     .ngxsmk-lightbox__nav:focus-visible {
       outline: none;
       box-shadow:
-        0 0 0 2px #fff,
-        0 0 0 4px color-mix(in srgb, #fff 40%, transparent);
+        0 0 0 2px var(--ngxsmk-lightbox-fg, #ffffff),
+        0 0 0 4px color-mix(in srgb, var(--ngxsmk-lightbox-fg, #ffffff) 40%, transparent);
     }
 
     .ngxsmk-lightbox__nav--prev {
