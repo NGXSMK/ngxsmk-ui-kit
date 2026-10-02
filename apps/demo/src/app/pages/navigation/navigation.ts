@@ -121,7 +121,10 @@ interface AppOutlineItem {
     >
       <div class="ngxsmk-sc-col" style="gap: var(--ngxsmk-space-4); width: 100%;">
         <ngxsmk-stepper [steps]="demoSteps" [(activeIndex)]="stepIndex" linear />
-        <p class="ngxsmk-demo-hint" style="margin: 0; color: var(--ngxsmk-color-on-surface-variant);">
+        <p
+          class="ngxsmk-demo-hint"
+          style="margin: 0; color: var(--ngxsmk-color-on-surface-variant);"
+        >
           Step {{ stepIndex() + 1 }}: {{ demoSteps[stepIndex()].label }}
         </p>
         <div class="ngxsmk-demo-row">

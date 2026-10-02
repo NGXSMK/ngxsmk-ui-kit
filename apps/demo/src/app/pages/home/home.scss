@@ -298,7 +298,11 @@
   }
 
   &.active {
-    background: linear-gradient(135deg, var(--color-primary, #6366f1) 0%, var(--brand-primary-dark, #4f46e5) 100%);
+    background: linear-gradient(
+      135deg,
+      var(--color-primary, #6366f1) 0%,
+      var(--brand-primary-dark, #4f46e5) 100%
+    );
     color: #ffffff;
     box-shadow: 0 2px 8px rgba(99, 102, 241, 0.35);
   }
@@ -330,7 +334,8 @@
 }
 
 @keyframes live-pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
     transform: scale(1);
   }

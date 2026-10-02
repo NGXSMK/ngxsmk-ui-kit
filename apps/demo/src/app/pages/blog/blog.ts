@@ -217,7 +217,10 @@ import { blogPosts } from './blog-data';
     :host {
       display: block;
       background: var(--color-bg-canvas, #f8fafc);
-      background-image: radial-gradient(var(--color-border-card, rgba(148, 163, 184, 0.25)) 1px, transparent 1px);
+      background-image: radial-gradient(
+        var(--color-border-card, rgba(148, 163, 184, 0.25)) 1px,
+        transparent 1px
+      );
       background-size: 24px 24px;
       min-height: calc(100vh - 3.5rem);
     }
@@ -603,7 +606,9 @@ import { blogPosts } from './blog-data';
       margin-bottom: 3.5rem;
     }
     .b-newsletter__inner {
-      background: linear-gradient(135deg, rgba(99, 102, 241, 0.06), rgba(245, 158, 11, 0.04)), var(--color-bg-card, #ffffff);
+      background:
+        linear-gradient(135deg, rgba(99, 102, 241, 0.06), rgba(245, 158, 11, 0.04)),
+        var(--color-bg-card, #ffffff);
       border: 1px solid rgba(99, 102, 241, 0.3);
       border-radius: var(--radius-xl, 22px);
       padding: 3.5rem 2rem;

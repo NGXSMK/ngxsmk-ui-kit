@@ -107,7 +107,8 @@ export const inkPreset: ThemeConfig = {
     md: '0 0 0 1px rgb(0 0 0 / 0.04), 0 1px 2px rgb(0 0 0 / 0.05), 0 4px 10px rgb(0 0 0 / 0.05)',
     lg: '0 0 0 1px rgb(0 0 0 / 0.05), 0 2px 4px rgb(0 0 0 / 0.05), 0 10px 28px rgb(0 0 0 / 0.08)',
     xl: '0 0 0 1px rgb(0 0 0 / 0.05), 0 4px 8px rgb(0 0 0 / 0.06), 0 18px 40px rgb(0 0 0 / 0.1)',
-    '2xl': '0 0 0 1px rgb(0 0 0 / 0.06), 0 8px 16px rgb(0 0 0 / 0.08), 0 28px 56px rgb(0 0 0 / 0.12)',
+    '2xl':
+      '0 0 0 1px rgb(0 0 0 / 0.06), 0 8px 16px rgb(0 0 0 / 0.08), 0 28px 56px rgb(0 0 0 / 0.12)',
   },
   overrides: {
     light: {
@@ -156,7 +157,8 @@ export const inkPreset: ThemeConfig = {
       '--ngxsmk-menu-radius': 'var(--ngxsmk-radius-md)',
       '--ngxsmk-pagination-size': '2rem',
       '--ngxsmk-pagination-radius': 'var(--ngxsmk-radius-md)',
-      '--ngxsmk-table-header-bg': 'color-mix(in srgb, var(--ngxsmk-color-surface-variant) 70%, transparent)',
+      '--ngxsmk-table-header-bg':
+        'color-mix(in srgb, var(--ngxsmk-color-surface-variant) 70%, transparent)',
       '--ngxsmk-badge-font-weight': '650',
       '--ngxsmk-progress-height': '0.375rem',
       // Forms — denser labels, quieter group chrome.

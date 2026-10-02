@@ -20,14 +20,7 @@
       "repository": "https://github.com/NGXSMK/ngxsmk-ui-kit",
       "license": "MIT",
       "category": "development",
-      "keywords": [
-        "angular",
-        "ui-kit",
-        "components",
-        "signals",
-        "theming",
-        "mcp"
-      ]
+      "keywords": ["angular", "ui-kit", "components", "signals", "theming", "mcp"]
     }
   ]
 }

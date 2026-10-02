@@ -70,11 +70,7 @@ const AXE_OPTIONS = { rules: { 'color-contrast': { enabled: false } } };
       <ngxsmk-form-field label="Email">
         <input ngxsmkInput type="email" />
       </ngxsmk-form-field>
-      <ngxsmk-select
-        placeholder="Pick a color"
-        [options]="selectOptions"
-        [(value)]="color"
-      />
+      <ngxsmk-select placeholder="Pick a color" [options]="selectOptions" [(value)]="color" />
       <ngxsmk-dialog [(open)]="dialogOpen" title="Confirm delete">
         This action cannot be undone.
       </ngxsmk-dialog>
@@ -86,12 +82,7 @@ const AXE_OPTIONS = { rules: { 'color-contrast': { enabled: false } } };
       <ngxsmk-card>
         <div ngxsmkCardContent>Card body</div>
       </ngxsmk-card>
-      <ngxsmk-breadcrumb
-        [items]="[
-          { label: 'Home', href: '/' },
-          { label: 'Docs' },
-        ]"
-      />
+      <ngxsmk-breadcrumb [items]="[{ label: 'Home', href: '/' }, { label: 'Docs' }]" />
       <ngxsmk-radio-group [(value)]="plan">
         <ngxsmk-radio value="free">Free</ngxsmk-radio>
         <ngxsmk-radio value="pro">Pro</ngxsmk-radio>

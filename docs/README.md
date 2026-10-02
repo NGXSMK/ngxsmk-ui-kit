@@ -17,13 +17,13 @@ Guides for **app developers** using `@ngxsmk/*`. For contributing to this repo, 
 
 ## Packages
 
-| Package | Purpose |
-| --- | --- |
-| `@ngxsmk/core` | UI components |
-| `@ngxsmk/theme` | Design tokens and theme CSS |
-| `@ngxsmk/cdk` | Headless behavior primitives |
-| `@ngxsmk/cli` | `ng-add`, scaffolds, theme CSS |
-| `@ngxsmk/mcp` | MCP server for coding agents |
+| Package         | Purpose                        |
+| --------------- | ------------------------------ |
+| `@ngxsmk/core`  | UI components                  |
+| `@ngxsmk/theme` | Design tokens and theme CSS    |
+| `@ngxsmk/cdk`   | Headless behavior primitives   |
+| `@ngxsmk/cli`   | `ng-add`, scaffolds, theme CSS |
+| `@ngxsmk/mcp`   | MCP server for coding agents   |
 
 ## For contributors & agents (not app users)
 

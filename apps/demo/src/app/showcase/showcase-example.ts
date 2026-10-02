@@ -32,19 +32,38 @@ type ApiPanel = 'code' | 'api' | 'customize';
                 type="button"
                 class="ngxsmk-sc-ex__selector-pill"
                 (click)="copySelector()"
-                [title]="copiedSelector() ? ('showcaseExample.copied' | translate) : 'Click to copy selector'"
+                [title]="
+                  copiedSelector()
+                    ? ('showcaseExample.copied' | translate)
+                    : 'Click to copy selector'
+                "
                 [attr.aria-label]="'Copy selector ' + displaySelector()"
               >
                 <code>{{ displaySelector() }}</code>
                 @if (copiedSelector()) {
                   <span class="ngxsmk-sc-ex__selector-copied">
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                    <svg
+                      width="10"
+                      height="10"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="3"
+                    >
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
                     {{ 'showcaseExample.copied' | translate }}
                   </span>
                 } @else {
-                  <svg class="ngxsmk-sc-ex__selector-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <svg
+                    class="ngxsmk-sc-ex__selector-icon"
+                    width="11"
+                    height="11"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
                     <rect x="9" y="9" width="13" height="13" rx="2" />
                     <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
                   </svg>
@@ -65,7 +84,14 @@ type ApiPanel = 'code' | 'api' | 'customize';
             title="Desktop (100%)"
             aria-label="Desktop viewport"
           >
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg
+              width="13"
+              height="13"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
               <rect x="2" y="3" width="20" height="14" rx="2" />
               <line x1="8" y1="21" x2="16" y2="21" />
               <line x1="12" y1="17" x2="12" y2="21" />
@@ -79,7 +105,14 @@ type ApiPanel = 'code' | 'api' | 'customize';
             title="Tablet (768px)"
             aria-label="Tablet viewport"
           >
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg
+              width="13"
+              height="13"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
               <rect x="4" y="2" width="16" height="20" rx="2" />
               <line x1="12" y1="18" x2="12.01" y2="18" />
             </svg>
@@ -92,7 +125,14 @@ type ApiPanel = 'code' | 'api' | 'customize';
             title="Mobile (380px)"
             aria-label="Mobile viewport"
           >
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg
+              width="13"
+              height="13"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
               <rect x="6" y="2" width="12" height="20" rx="2" />
               <line x1="12" y1="18" x2="12.01" y2="18" />
             </svg>
@@ -368,9 +408,7 @@ type ApiPanel = 'code' | 'api' | 'customize';
                         <code>{{ o.templateName }}</code>
                       </td>
                       <td>
-                        <span class="ngxsmk-sc-ex__badge ngxsmk-sc-ex__badge--event">
-                          event
-                        </span>
+                        <span class="ngxsmk-sc-ex__badge ngxsmk-sc-ex__badge--event"> event </span>
                       </td>
                     </tr>
                   }
@@ -558,7 +596,11 @@ type ApiPanel = 'code' | 'api' | 'customize';
     }
 
     .ngxsmk-sc-ex__vp-btn--active {
-      background: linear-gradient(135deg, var(--brand-primary, #6366f1), var(--brand-primary-dark, #4f46e5));
+      background: linear-gradient(
+        135deg,
+        var(--brand-primary, #6366f1),
+        var(--brand-primary-dark, #4f46e5)
+      );
       color: #ffffff;
       box-shadow: 0 2px 6px rgba(99, 102, 241, 0.35);
     }
@@ -569,7 +611,10 @@ type ApiPanel = 'code' | 'api' | 'customize';
       padding: 2.25rem 1.75rem;
       overflow: visible;
       background-color: var(--color-bg-card, #ffffff);
-      background-image: radial-gradient(color-mix(in srgb, var(--brand-primary, #6366f1) 12%, transparent) 1px, transparent 1px);
+      background-image: radial-gradient(
+        color-mix(in srgb, var(--brand-primary, #6366f1) 12%, transparent) 1px,
+        transparent 1px
+      );
       background-size: 18px 18px;
       transition: padding 0.2s ease;
     }
@@ -581,7 +626,9 @@ type ApiPanel = 'code' | 'api' | 'customize';
       align-items: center;
       width: 100%;
       min-width: 0;
-      transition: max-width 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+      transition:
+        max-width 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.25s ease;
     }
 
     .ngxsmk-sc-ex__preview-content--tablet {
@@ -687,14 +734,22 @@ type ApiPanel = 'code' | 'api' | 'customize';
     }
 
     .ngxsmk-sc-ex__tab--active {
-      background: linear-gradient(135deg, var(--brand-primary, #6366f1), var(--brand-primary-dark, #4f46e5)) !important;
+      background: linear-gradient(
+        135deg,
+        var(--brand-primary, #6366f1),
+        var(--brand-primary-dark, #4f46e5)
+      ) !important;
       color: #ffffff !important;
       font-weight: 700;
       box-shadow: 0 2px 8px rgba(99, 102, 241, 0.35);
     }
 
     .ngxsmk-sc-ex__tab--active:hover {
-      background: linear-gradient(135deg, var(--brand-primary-light, #818cf8), var(--brand-primary, #6366f1)) !important;
+      background: linear-gradient(
+        135deg,
+        var(--brand-primary-light, #818cf8),
+        var(--brand-primary, #6366f1)
+      ) !important;
     }
 
     .ngxsmk-sc-ex__tab--stackblitz {

@@ -1126,7 +1126,8 @@ ngxsmk-prompt-carousel {
       id: '1',
       title: 'Attention Is All You Need',
       author: 'Vaswani et al.',
-      snippet: 'The Transformer allows for significantly more parallelization than recurrent models.',
+      snippet:
+        'The Transformer allows for significantly more parallelization than recurrent models.',
       url: 'https://arxiv.org/abs/1706.03762',
     },
     {

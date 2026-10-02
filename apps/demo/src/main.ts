@@ -6,4 +6,3 @@ import { initSafeViewTransitions } from './app/core/view-transition';
 initSafeViewTransitions();
 
 bootstrapApplication(App, appConfig).catch((err) => console.error(err));
-

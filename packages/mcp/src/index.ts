@@ -604,9 +604,7 @@ export const appConfig: ApplicationConfig = {
     return { content: [{ type: 'text', text }] };
   }
 
-  throw new Error(
-    `Unknown tool "${name}". Available: ${TOOLS.map((t) => t.name).join(', ')}.`,
-  );
+  throw new Error(`Unknown tool "${name}". Available: ${TOOLS.map((t) => t.name).join(', ')}.`);
 });
 
 async function run() {

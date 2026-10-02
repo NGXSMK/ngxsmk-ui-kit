@@ -36,7 +36,15 @@ interface CategoryGroup {
           (click)="mobileOpen.set(false)"
           aria-label="Close sidebar"
         >
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <svg
+            width="15"
+            height="15"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+          >
             <line x1="18" y1="6" x2="6" y2="18" />
             <line x1="6" y1="6" x2="18" y2="18" />
           </svg>
@@ -58,14 +66,23 @@ interface CategoryGroup {
           <div class="sc-brand-row">
             <div class="sc-brand-info">
               <span class="sc-logo-icon">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <svg
+                  width="15"
+                  height="15"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
                   <polygon points="12 2 2 7 12 12 22 7 12 2" />
                   <polyline points="2 17 12 22 22 17" />
                   <polyline points="2 12 12 17 22 12" />
                 </svg>
               </span>
               <div class="sc-brand-text">
-                <span class="sc-sidebar__brand-name">NGXSMK <span class="highlight">Design</span></span>
+                <span class="sc-sidebar__brand-name"
+                  >NGXSMK <span class="highlight">Design</span></span
+                >
                 <span class="sc-sidebar__brand-sub">Signals & Zoneless Kit</span>
               </div>
             </div>
@@ -75,7 +92,10 @@ interface CategoryGroup {
 
         <!-- Search Bar with Pill Style, Clear Button & ⌘K Shortcut -->
         <div class="sc-sidebar__search-section">
-          <div class="sc-sidebar__search-box" [class.sc-sidebar__search-box--focused]="isSearchFocused()">
+          <div
+            class="sc-sidebar__search-box"
+            [class.sc-sidebar__search-box--focused]="isSearchFocused()"
+          >
             <svg
               class="sc-sidebar__search-icon"
               width="14"
@@ -109,7 +129,15 @@ interface CategoryGroup {
                 title="Clear search"
                 aria-label="Clear search query"
               >
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                <svg
+                  width="11"
+                  height="11"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                >
                   <line x1="18" y1="6" x2="6" y2="18" />
                   <line x1="6" y1="6" x2="18" y2="18" />
                 </svg>
@@ -140,7 +168,14 @@ interface CategoryGroup {
             (click)="mobileOpen.set(false)"
           >
             <span class="sc-quick-icon">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
                 <rect x="3" y="3" width="7" height="7" rx="1.5" />
                 <rect x="14" y="3" width="7" height="7" rx="1.5" />
                 <rect x="14" y="14" width="7" height="7" rx="1.5" />
@@ -158,7 +193,14 @@ interface CategoryGroup {
             (click)="mobileOpen.set(false)"
           >
             <span class="sc-quick-icon sc-quick-icon--workbench">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
                 <line x1="4" y1="21" x2="4" y2="14" />
                 <line x1="4" y1="10" x2="4" y2="3" />
                 <line x1="12" y1="21" x2="12" y2="12" />
@@ -185,7 +227,9 @@ interface CategoryGroup {
             class="sc-collapse-all-btn"
             type="button"
             (click)="toggleAllGroups()"
-            [title]="expandedGroups().size > 0 ? 'Collapse all categories' : 'Expand all categories'"
+            [title]="
+              expandedGroups().size > 0 ? 'Collapse all categories' : 'Expand all categories'
+            "
           >
             {{ expandedGroups().size > 0 ? 'Collapse' : 'Expand' }}
           </button>
@@ -196,7 +240,14 @@ interface CategoryGroup {
           @if (filteredGroups().length === 0) {
             <div class="sc-empty-state">
               <div class="sc-empty-icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
                   <circle cx="11" cy="11" r="8" />
                   <path d="m21 21-4.35-4.35" />
                   <line x1="8" y1="11" x2="14" y2="11" />
@@ -211,7 +262,10 @@ interface CategoryGroup {
           }
 
           @for (group of filteredGroups(); track group.label) {
-            <div class="sc-sidebar__group" [class.sc-sidebar__group--expanded]="isGroupExpanded(group.label)">
+            <div
+              class="sc-sidebar__group"
+              [class.sc-sidebar__group--expanded]="isGroupExpanded(group.label)"
+            >
               <div
                 class="sc-sidebar__group-header-wrap"
                 [class.sc-sidebar__group-header-wrap--active]="isGroupRouteActive(group)"
@@ -287,7 +341,14 @@ interface CategoryGroup {
               (click)="mobileOpen.set(false)"
               title="Documentation"
             >
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
                 <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
                 <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
               </svg>
@@ -299,7 +360,14 @@ interface CategoryGroup {
               (click)="mobileOpen.set(false)"
               title="Theme Generator"
             >
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
                 <circle cx="12" cy="12" r="10" />
                 <circle cx="12" cy="12" r="4" />
                 <line x1="4.93" y1="4.93" x2="9.17" y2="9.17" />
@@ -315,7 +383,14 @@ interface CategoryGroup {
               (click)="mobileOpen.set(false)"
               title="Full Page Templates"
             >
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
                 <rect x="3" y="3" width="18" height="18" rx="2" />
                 <path d="M3 9h18" />
                 <path d="M9 21V9" />
@@ -329,8 +404,17 @@ interface CategoryGroup {
               rel="noopener"
               title="GitHub Repository"
             >
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+                />
               </svg>
               <span>GitHub</span>
             </a>
@@ -487,7 +571,8 @@ interface CategoryGroup {
     }
 
     @keyframes pulse-glow {
-      0%, 100% {
+      0%,
+      100% {
         opacity: 1;
         transform: scale(1);
       }
@@ -589,7 +674,9 @@ interface CategoryGroup {
     .sc-sidebar__search-box--focused {
       border-color: var(--brand-primary, #6366f1);
       background: var(--color-bg-card, #ffffff);
-      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2), 0 4px 12px rgba(99, 102, 241, 0.1);
+      box-shadow:
+        0 0 0 3px rgba(99, 102, 241, 0.2),
+        0 4px 12px rgba(99, 102, 241, 0.1);
     }
 
     .sc-sidebar__search-icon {
@@ -1007,7 +1094,9 @@ interface CategoryGroup {
         height: 4px;
         border-radius: 50%;
         background: var(--color-text-dim, #94a3b8);
-        transition: transform 0.15s ease, background 0.15s ease;
+        transition:
+          transform 0.15s ease,
+          background 0.15s ease;
       }
 
       &:hover {
@@ -1073,7 +1162,11 @@ interface CategoryGroup {
       }
 
       &--active {
-        background: linear-gradient(90deg, rgba(99, 102, 241, 0.14) 0%, rgba(168, 85, 247, 0.04) 100%);
+        background: linear-gradient(
+          90deg,
+          rgba(99, 102, 241, 0.14) 0%,
+          rgba(168, 85, 247, 0.04) 100%
+        );
         color: var(--brand-primary, #6366f1);
         font-weight: 650;
         box-shadow: inset 2.5px 0 0 var(--brand-primary, #6366f1);
@@ -1712,8 +1805,7 @@ export class ShowcaseLayout {
         const matchingCats = g.categories
           .map((c) => {
             const catMatches =
-              c.label.toLowerCase().includes(q) ||
-              c.path.toLowerCase().includes(q);
+              c.label.toLowerCase().includes(q) || c.path.toLowerCase().includes(q);
 
             const matchingItems = c.items.filter(
               (item) => groupMatches || catMatches || item.toLowerCase().includes(q),

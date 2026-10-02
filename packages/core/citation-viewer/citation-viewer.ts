@@ -26,7 +26,12 @@ export interface NgxsmkCitationSource {
         <article class="ngxsmk-citation-viewer__card" role="listitem">
           <div class="ngxsmk-citation-viewer__head">
             @if (src.url) {
-              <a class="ngxsmk-citation-viewer__title" [href]="src.url" target="_blank" rel="noopener noreferrer">
+              <a
+                class="ngxsmk-citation-viewer__title"
+                [href]="src.url"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 {{ src.title }}
               </a>
             } @else {

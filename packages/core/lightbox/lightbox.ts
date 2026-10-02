@@ -56,12 +56,7 @@ export interface NgxsmkLightboxImage {
           ngxsmkFocusTrap
           [ngxsmkFocusTrapAutoCapture]="true"
         >
-          <button
-            type="button"
-            class="ngxsmk-lightbox__close"
-            aria-label="Close"
-            (click)="close()"
-          >
+          <button type="button" class="ngxsmk-lightbox__close" aria-label="Close" (click)="close()">
             <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
               <path
                 d="M4 4l8 8M12 4l-8 8"
@@ -223,7 +218,9 @@ export interface NgxsmkLightboxImage {
 
     .ngxsmk-lightbox__close:focus-visible {
       outline: none;
-      box-shadow: 0 0 0 2px #fff, 0 0 0 4px color-mix(in srgb, #fff 40%, transparent);
+      box-shadow:
+        0 0 0 2px #fff,
+        0 0 0 4px color-mix(in srgb, #fff 40%, transparent);
     }
 
     .ngxsmk-lightbox__nav {
@@ -251,7 +248,9 @@ export interface NgxsmkLightboxImage {
 
     .ngxsmk-lightbox__nav:focus-visible {
       outline: none;
-      box-shadow: 0 0 0 2px #fff, 0 0 0 4px color-mix(in srgb, #fff 40%, transparent);
+      box-shadow:
+        0 0 0 2px #fff,
+        0 0 0 4px color-mix(in srgb, #fff 40%, transparent);
     }
 
     .ngxsmk-lightbox__nav--prev {
@@ -319,9 +318,7 @@ export class NgxsmkLightbox {
   readonly index = model(0);
   readonly open = model(false);
 
-  protected readonly currentImage = computed(
-    () => this.images()[this.index()] ?? null,
-  );
+  protected readonly currentImage = computed(() => this.images()[this.index()] ?? null);
 
   protected readonly dialogLabel = computed(() => {
     const alt = this.currentImage()?.alt?.trim();

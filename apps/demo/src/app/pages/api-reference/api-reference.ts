@@ -201,9 +201,7 @@ interface ApiDb {
                   }
 
                   @if (c.inputs.length) {
-                    <h3 class="api-table-title">{{
-                      'api.inputs' | translate
-                    }}</h3>
+                    <h3 class="api-table-title">{{ 'api.inputs' | translate }}</h3>
                     <div class="api-table-wrap">
                       <table class="api-table">
                         <thead>
@@ -249,9 +247,7 @@ interface ApiDb {
                   }
 
                   @if (c.outputs.length) {
-                    <h3 class="api-table-title">{{
-                      'api.outputs' | translate
-                    }}</h3>
+                    <h3 class="api-table-title">{{ 'api.outputs' | translate }}</h3>
                     <div class="api-table-wrap">
                       <table class="api-table">
                         <thead>
@@ -287,7 +283,10 @@ interface ApiDb {
     :host {
       display: block;
       background-color: var(--color-bg-canvas, #f8fafc);
-      background-image: radial-gradient(var(--color-border-card, rgba(148, 163, 184, 0.25)) 1px, transparent 1px);
+      background-image: radial-gradient(
+        var(--color-border-card, rgba(148, 163, 184, 0.25)) 1px,
+        transparent 1px
+      );
       background-size: 24px 24px;
       min-height: calc(100vh - 3.5rem);
     }
@@ -346,7 +345,9 @@ interface ApiDb {
     }
     .api-search:focus {
       border-color: #6366f1;
-      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15), 0 8px 24px -4px rgba(99, 102, 241, 0.12);
+      box-shadow:
+        0 0 0 4px rgba(99, 102, 241, 0.15),
+        0 8px 24px -4px rgba(99, 102, 241, 0.12);
     }
     .api-category {
       flex: 0 0 auto;

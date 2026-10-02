@@ -40,7 +40,9 @@ const TYPE_COLORS: Record<string, string> = {
             <span class="pulse-dot"></span>
             <span class="badge-tag">Changelog</span>
             <span class="badge-divider"></span>
-            <span class="badge-text">{{ 'changelog.pill' | translate }} • v{{ currentVersion }}</span>
+            <span class="badge-text"
+              >{{ 'changelog.pill' | translate }} • v{{ currentVersion }}</span
+            >
           </div>
           <h1 class="cl-hero__title">Release <span class="highlight">Notes</span></h1>
           <p class="cl-hero__sub">
@@ -174,7 +176,10 @@ const TYPE_COLORS: Record<string, string> = {
       padding: clamp(3.5rem, 7vw, 5.5rem) 1.5rem clamp(2.5rem, 5vw, 3.5rem);
       text-align: center;
       background-color: var(--color-bg-canvas, #f8fafc);
-      background-image: radial-gradient(var(--color-border-card, rgba(148, 163, 184, 0.25)) 1px, transparent 1px);
+      background-image: radial-gradient(
+        var(--color-border-card, rgba(148, 163, 184, 0.25)) 1px,
+        transparent 1px
+      );
       background-size: 24px 24px;
     }
     .cl-hero::before {
@@ -183,11 +188,7 @@ const TYPE_COLORS: Record<string, string> = {
       inset: 0;
       z-index: 0;
       pointer-events: none;
-      background: radial-gradient(
-        55% 55% at 50% 0%,
-        rgba(99, 102, 241, 0.12),
-        transparent 70%
-      );
+      background: radial-gradient(55% 55% at 50% 0%, rgba(99, 102, 241, 0.12), transparent 70%);
     }
     .cl-hero__inner {
       position: relative;
@@ -303,11 +304,7 @@ const TYPE_COLORS: Record<string, string> = {
       top: 2rem;
       bottom: 4rem;
       width: 2px;
-      background: linear-gradient(
-        180deg,
-        rgba(99, 102, 241, 0.4),
-        rgba(148, 163, 184, 0.2)
-      );
+      background: linear-gradient(180deg, rgba(99, 102, 241, 0.4), rgba(148, 163, 184, 0.2));
     }
 
     /* ═══════════════ RELEASE CARD ═══════════════ */

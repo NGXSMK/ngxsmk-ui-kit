@@ -42,13 +42,13 @@ ngOnInit() {
 
 ## Presets
 
-| Preset    | Primary color       | Notes |
-| --------- | ------------------- | ----- |
+| Preset    | Primary color       | Notes                                                      |
+| --------- | ------------------- | ---------------------------------------------------------- |
 | `emerald` | `#059669` (default) | Classic look — **stable** for existing apps (`ngxsmk.css`) |
-| `ink`     | `#0D9488`           | Opt-in premium (graphite, Geist Sans, sharper radii) |
-| `violet`  | `#7C3AED`           | |
-| `neutral` | `#18181B`           | |
-| `rose`    | `#E11D48`           | |
+| `ink`     | `#0D9488`           | Opt-in premium (graphite, Geist Sans, sharper radii)       |
+| `violet`  | `#7C3AED`           |                                                            |
+| `neutral` | `#18181B`           |                                                            |
+| `rose`    | `#E11D48`           |                                                            |
 
 ### Classic vs Ink (existing consumers)
 

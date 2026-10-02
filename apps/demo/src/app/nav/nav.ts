@@ -23,7 +23,14 @@ interface SearchItem {
         <div class="nav__left">
           <a class="nav__brand logo" routerLink="/" (click)="mobileOpen.set(false)">
             <div class="logo-icon-wrapper">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.3">
+              <svg
+                viewBox="0 0 24 24"
+                width="20"
+                height="20"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.3"
+              >
                 <polygon points="12 2 2 7 12 12 22 7 12 2" />
                 <polyline points="2 17 12 22 22 17" />
                 <polyline points="2 12 12 17 22 12" />
@@ -39,7 +46,11 @@ interface SearchItem {
             <a class="nav__link" routerLink="/docs" routerLinkActive="nav__link--active">
               {{ 'nav.docs' | translate }}
             </a>
-            <a class="nav__link" routerLink="/showcase/explorer" routerLinkActive="nav__link--active">
+            <a
+              class="nav__link"
+              routerLink="/showcase/explorer"
+              routerLinkActive="nav__link--active"
+            >
               {{ 'nav.components' | translate }}
             </a>
             <a class="nav__link" routerLink="/templates" routerLinkActive="nav__link--active">
@@ -168,7 +179,16 @@ interface SearchItem {
           <!-- Get Started CTA Button -->
           <a routerLink="/docs" class="nav__cta">
             <span>Get started</span>
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <svg
+              width="13"
+              height="13"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
               <line x1="5" y1="12" x2="19" y2="12" />
               <polyline points="12 5 19 12 12 19" />
             </svg>
@@ -183,12 +203,28 @@ interface SearchItem {
             (click)="mobileOpen.set(!mobileOpen())"
           >
             @if (mobileOpen()) {
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+              >
                 <line x1="18" y1="6" x2="6" y2="18" />
                 <line x1="6" y1="6" x2="18" y2="18" />
               </svg>
             } @else {
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+              >
                 <line x1="3" y1="6" x2="21" y2="6" />
                 <line x1="3" y1="12" x2="21" y2="12" />
                 <line x1="3" y1="18" x2="21" y2="18" />
@@ -206,8 +242,20 @@ interface SearchItem {
       <div class="nav__mobile">
         <div class="nav__mobile-header">
           <span class="nav__mobile-title">Navigation</span>
-          <button class="nav__mobile-close" type="button" (click)="mobileOpen.set(false)" aria-label="Close menu">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <button
+            class="nav__mobile-close"
+            type="button"
+            (click)="mobileOpen.set(false)"
+            aria-label="Close menu"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+            >
               <line x1="18" y1="6" x2="6" y2="18" />
               <line x1="6" y1="6" x2="18" y2="18" />
             </svg>
@@ -215,8 +263,19 @@ interface SearchItem {
         </div>
 
         <!-- Mobile Search Trigger -->
-        <button class="nav__mobile-search-btn" type="button" (click)="mobileOpen.set(false); openSearch()">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+        <button
+          class="nav__mobile-search-btn"
+          type="button"
+          (click)="mobileOpen.set(false); openSearch()"
+        >
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+          >
             <circle cx="11" cy="11" r="8" />
             <path d="m21 21-4.35-4.35" />
           </svg>
@@ -229,7 +288,11 @@ interface SearchItem {
             <span class="nav__mobile-link-text">{{ 'nav.docs' | translate }}</span>
             <span class="nav__mobile-link-arrow">→</span>
           </a>
-          <a class="nav__mobile-link" routerLink="/showcase/explorer" (click)="mobileOpen.set(false)">
+          <a
+            class="nav__mobile-link"
+            routerLink="/showcase/explorer"
+            (click)="mobileOpen.set(false)"
+          >
             <span class="nav__mobile-link-text">{{ 'nav.components' | translate }}</span>
             <span class="nav__mobile-badge">170+</span>
           </a>
@@ -258,21 +321,13 @@ interface SearchItem {
         <div class="nav__mobile-divider"></div>
 
         <div class="nav__mobile-actions">
-          <button
-            type="button"
-            class="nav__mobile-install"
-            (click)="copyInstallCommand()"
-          >
+          <button type="button" class="nav__mobile-install" (click)="copyInstallCommand()">
             <code>npm i &#64;ngxsmk/core</code>
             <span class="copy-tag">{{ hasCopiedInstall() ? 'Copied! ✓' : 'Copy' }}</span>
           </button>
 
           <div class="nav__mobile-controls">
-            <button
-              class="nav__mobile-icon-btn"
-              type="button"
-              (click)="theme.toggle()"
-            >
+            <button class="nav__mobile-icon-btn" type="button" (click)="theme.toggle()">
               @if (theme.isDark()) {
                 <span>☀️ Light</span>
               } @else {
@@ -280,11 +335,7 @@ interface SearchItem {
               }
             </button>
 
-            <button
-              class="nav__mobile-icon-btn"
-              type="button"
-              (click)="toggleRtl()"
-            >
+            <button class="nav__mobile-icon-btn" type="button" (click)="toggleRtl()">
               <span>Direction: {{ isRtl() ? 'LTR' : 'RTL' }}</span>
             </button>
 
@@ -386,7 +437,9 @@ interface SearchItem {
 
     .nav--scrolled {
       background: color-mix(in srgb, var(--color-bg-sidebar, #ffffff) 94%, transparent);
-      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.03);
+      box-shadow:
+        0 4px 20px -2px rgba(0, 0, 0, 0.05),
+        0 2px 6px -1px rgba(0, 0, 0, 0.03);
     }
 
     .nav::after {
@@ -431,7 +484,9 @@ interface SearchItem {
       gap: 0.65rem;
       cursor: pointer;
       text-decoration: none;
-      transition: transform 0.16s ease, opacity 0.16s ease;
+      transition:
+        transform 0.16s ease,
+        opacity 0.16s ease;
       flex-shrink: 0;
 
       &:hover {
@@ -599,7 +654,9 @@ interface SearchItem {
     }
 
     .nav__theme-btn {
-      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.15s ease;
+      transition:
+        transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+        background-color 0.15s ease;
 
       &:hover {
         transform: rotate(15deg) scale(1.05);
@@ -904,7 +961,9 @@ interface SearchItem {
       background: var(--color-bg-card, #ffffff);
       border: 1px solid var(--color-border, #e2e8f0);
       border-radius: var(--radius-lg, 16px);
-      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(99, 102, 241, 0.2);
+      box-shadow:
+        0 25px 60px -15px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(99, 102, 241, 0.2);
       overflow: hidden;
       display: flex;
       flex-direction: column;
@@ -980,7 +1039,9 @@ interface SearchItem {
       padding: 0.55rem 0.85rem;
       border-radius: var(--radius-sm, 8px);
       cursor: pointer;
-      transition: background-color 0.12s ease, color 0.12s ease;
+      transition:
+        background-color 0.12s ease,
+        color 0.12s ease;
       font-size: 0.85rem;
       color: var(--color-text-main, #0f172a);
 

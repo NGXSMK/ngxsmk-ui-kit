@@ -117,9 +117,11 @@ const COMPONENT_TOKEN_DEFAULTS: Record<string, Vars> = {
   },
   table: {
     '--ngxsmk-table-border': 'var(--ngxsmk-color-outline)',
-    '--ngxsmk-table-header-bg': 'color-mix(in srgb, var(--ngxsmk-color-surface-variant) 55%, transparent)',
+    '--ngxsmk-table-header-bg':
+      'color-mix(in srgb, var(--ngxsmk-color-surface-variant) 55%, transparent)',
     '--ngxsmk-table-row-hover': 'var(--ngxsmk-color-surface-hover)',
-    '--ngxsmk-table-stripe': 'color-mix(in srgb, var(--ngxsmk-color-surface-variant) 35%, transparent)',
+    '--ngxsmk-table-stripe':
+      'color-mix(in srgb, var(--ngxsmk-color-surface-variant) 35%, transparent)',
     '--ngxsmk-table-drop-indicator': 'inset 2px 0 0 var(--ngxsmk-color-primary)',
     '--ngxsmk-table-cell-padding': '0.625rem 0.75rem',
   },

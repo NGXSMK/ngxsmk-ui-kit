@@ -372,7 +372,10 @@ export class NgxsmkTable {
   protected onMouseMove(event: MouseEvent): void {
     const key = this.resizeKey();
     if (!key) return;
-    const next = Math.max(this.resizeMin, this.resizeStartWidth + (event.clientX - this.resizeStartX));
+    const next = Math.max(
+      this.resizeMin,
+      this.resizeStartWidth + (event.clientX - this.resizeStartX),
+    );
     this.columnResize.emit({ key, width: `${Math.round(next)}px` });
   }
 

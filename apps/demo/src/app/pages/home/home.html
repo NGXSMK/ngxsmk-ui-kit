@@ -269,11 +269,7 @@
                 </div>
               </div>
               <div class="stage-component">
-                <button
-                  ngxsmk-button
-                  [variant]="sandboxVariant()"
-                  [size]="sandboxSize()"
-                >
+                <button ngxsmk-button [variant]="sandboxVariant()" [size]="sandboxSize()">
                   Explore Signals
                 </button>
               </div>
@@ -311,22 +307,26 @@
           }
           @case ('switch') {
             <div class="stage-interactive">
-              <div class="stage-component" style="display: flex; flex-direction: column; gap: 0.75rem; align-items: flex-start;">
+              <div
+                class="stage-component"
+                style="display: flex; flex-direction: column; gap: 0.75rem; align-items: flex-start"
+              >
                 <ngxsmk-switch
                   [checked]="sandboxSwitchVal()"
                   (checkedChange)="sandboxSwitchVal.set($event)"
                 >
                   {{ sandboxSwitchVal() ? 'Zoneless Mode Active' : 'Zoneless Mode Inactive' }}
                 </ngxsmk-switch>
-                <ngxsmk-switch [checked]="true">
-                  Fine-Grained Signal Reactivity
-                </ngxsmk-switch>
+                <ngxsmk-switch [checked]="true"> Fine-Grained Signal Reactivity </ngxsmk-switch>
               </div>
             </div>
           }
           @case ('checkbox') {
             <div class="stage-interactive">
-              <div class="stage-component" style="display: flex; flex-direction: column; gap: 0.75rem; align-items: flex-start;">
+              <div
+                class="stage-component"
+                style="display: flex; flex-direction: column; gap: 0.75rem; align-items: flex-start"
+              >
                 <ngxsmk-checkbox
                   [checked]="sandboxCheckboxVal()"
                   (checkedChange)="sandboxCheckboxVal.set($event)"
@@ -341,24 +341,15 @@
           }
           @case ('input') {
             <div class="stage-interactive">
-              <div class="stage-component" style="width: 100%; max-width: 280px;">
-                <input
-                  ngxsmkInput
-                  placeholder="Search 150+ components..."
-                  style="width: 100%;"
-                />
+              <div class="stage-component" style="width: 100%; max-width: 280px">
+                <input ngxsmkInput placeholder="Search 150+ components..." style="width: 100%" />
               </div>
             </div>
           }
           @case ('stat') {
             <div class="stage-interactive">
               <div class="stage-component">
-                <ngxsmk-stat
-                  label="Render Latency"
-                  value="0.4ms"
-                  trend="up"
-                  change="+48% faster"
-                />
+                <ngxsmk-stat label="Render Latency" value="0.4ms" trend="up" change="+48% faster" />
               </div>
             </div>
           }
@@ -519,7 +510,9 @@
                     stroke-linecap="round"
                     stroke-linejoin="round"
                   >
-                    <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+                    <path
+                      d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"
+                    ></path>
                   </svg>
                 }
               }
@@ -560,9 +553,15 @@
             @for (row of comparisonRows; track row.capability) {
               <tr>
                 <td class="feature-col">{{ row.capability }}</td>
-                <td class="highlight-col"><span class="badge-yes">{{ row.ngxsmk }}</span></td>
-                <td><span class="badge-mid">{{ row.material }}</span></td>
-                <td><span class="badge-no">{{ row.primeng }}</span></td>
+                <td class="highlight-col">
+                  <span class="badge-yes">{{ row.ngxsmk }}</span>
+                </td>
+                <td>
+                  <span class="badge-mid">{{ row.material }}</span>
+                </td>
+                <td>
+                  <span class="badge-no">{{ row.primeng }}</span>
+                </td>
               </tr>
             }
           </tbody>
@@ -630,7 +629,14 @@
           @if (hasCopiedInstall()) {
             <span class="term-copied">✓ Copied</span>
           } @else {
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
               <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
               <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
             </svg>

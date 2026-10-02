@@ -308,9 +308,7 @@ function buildCode(name: string, values: Record<string, unknown>): string {
           <span class="badge-divider">/</span>
           <span class="badge-text">Interactive Workbench</span>
         </div>
-        <h1 class="pg-title">
-          Component <span class="highlight">Playground</span>
-        </h1>
+        <h1 class="pg-title">Component <span class="highlight">Playground</span></h1>
         <p class="pg-subtitle">
           {{ 'iplayground.subtitle' | translate }}
         </p>
@@ -378,10 +376,33 @@ function buildCode(name: string, values: Record<string, unknown>): string {
                 </span>
                 <button class="pg-stage-copy" (click)="copyCode()">
                   @if (copied()) {
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M20 6L9 17l-5-5" />
+                    </svg>
                     {{ 'iplayground.copied' | translate }}
                   } @else {
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+                      <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+                    </svg>
                     {{ 'iplayground.copyCode' | translate }}
                   }
                 </button>
@@ -424,9 +445,7 @@ function buildCode(name: string, values: Record<string, unknown>): string {
                     <span class="light yellow"></span>
                     <span class="light green"></span>
                   </div>
-                  <h3 class="pg-card-title">{{
-                    'iplayground.generatedCode' | translate
-                  }}</h3>
+                  <h3 class="pg-card-title">{{ 'iplayground.generatedCode' | translate }}</h3>
                 </div>
                 <div class="pg-card-body">
                   <pre class="pg-code"><code>{{ generatedCode() }}</code></pre>
@@ -443,9 +462,7 @@ function buildCode(name: string, values: Record<string, unknown>): string {
                       <span class="light yellow"></span>
                       <span class="light green"></span>
                     </div>
-                    <h3 class="pg-detail-section-title">{{
-                      'iplayground.inputs' | translate
-                    }}</h3>
+                    <h3 class="pg-detail-section-title">{{ 'iplayground.inputs' | translate }}</h3>
                   </div>
                   <div class="pg-table-wrap">
                     <table class="pg-table">
@@ -494,9 +511,7 @@ function buildCode(name: string, values: Record<string, unknown>): string {
                       <span class="light yellow"></span>
                       <span class="light green"></span>
                     </div>
-                    <h3 class="pg-detail-section-title">{{
-                      'iplayground.outputs' | translate
-                    }}</h3>
+                    <h3 class="pg-detail-section-title">{{ 'iplayground.outputs' | translate }}</h3>
                   </div>
                   <div class="pg-table-wrap">
                     <table class="pg-table">
@@ -533,9 +548,7 @@ function buildCode(name: string, values: Record<string, unknown>): string {
                       <span class="light yellow"></span>
                       <span class="light green"></span>
                     </div>
-                    <h3 class="pg-detail-section-title">{{
-                      'iplayground.signals' | translate
-                    }}</h3>
+                    <h3 class="pg-detail-section-title">{{ 'iplayground.signals' | translate }}</h3>
                   </div>
                   <div class="pg-table-wrap">
                     <table class="pg-table">
@@ -580,9 +593,7 @@ function buildCode(name: string, values: Record<string, unknown>): string {
                       <span class="light yellow"></span>
                       <span class="light green"></span>
                     </div>
-                    <h3 class="pg-detail-section-title">{{
-                      'iplayground.methods' | translate
-                    }}</h3>
+                    <h3 class="pg-detail-section-title">{{ 'iplayground.methods' | translate }}</h3>
                   </div>
                   <div class="pg-table-wrap">
                     <table class="pg-table">
@@ -618,9 +629,7 @@ function buildCode(name: string, values: Record<string, unknown>): string {
           } @else {
             <div class="pg-empty">
               <div class="pg-empty-icon">◈</div>
-              <h2 class="pg-empty-title">{{
-                'iplayground.selectComponent' | translate
-              }}</h2>
+              <h2 class="pg-empty-title">{{ 'iplayground.selectComponent' | translate }}</h2>
               <p>{{ 'iplayground.pickComponent' | translate }}</p>
             </div>
           }
@@ -897,7 +906,10 @@ function buildCode(name: string, values: Record<string, unknown>): string {
       align-items: center;
       justify-content: center;
       background-color: var(--ngxsmk-color-surface);
-      background-image: radial-gradient(color-mix(in srgb, var(--ngxsmk-color-outline-strong) 40%, transparent) 1px, transparent 1px);
+      background-image: radial-gradient(
+        color-mix(in srgb, var(--ngxsmk-color-outline-strong) 40%, transparent) 1px,
+        transparent 1px
+      );
       background-size: 20px 20px;
     }
     :root.dark .pg-stage-canvas {

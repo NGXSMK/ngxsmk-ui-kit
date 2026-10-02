@@ -61,9 +61,7 @@ function updateAngularJson(options: NgAddSchema): Rule {
 
     const targets = project.architect || project.targets;
     if (!targets?.build?.options) {
-      throw new SchematicsException(
-        `Could not find build options for project "${projectName}".`,
-      );
+      throw new SchematicsException(`Could not find build options for project "${projectName}".`);
     }
 
     const theme = options.theme || 'classic';

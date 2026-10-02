@@ -109,7 +109,10 @@ import { getBlogPost, blogPosts, type BlogPost } from '../blog/blog-data';
     :host {
       display: block;
       background: var(--color-bg-canvas, #f8fafc);
-      background-image: radial-gradient(var(--color-border-card, rgba(148, 163, 184, 0.25)) 1px, transparent 1px);
+      background-image: radial-gradient(
+        var(--color-border-card, rgba(148, 163, 184, 0.25)) 1px,
+        transparent 1px
+      );
       background-size: 24px 24px;
       min-height: calc(100vh - 3.5rem);
     }
@@ -146,7 +149,9 @@ import { getBlogPost, blogPosts, type BlogPost } from '../blog/blog-data';
       font-weight: 600;
       color: var(--color-text-secondary, #64748b);
       text-decoration: none;
-      transition: color 0.15s, transform 0.15s;
+      transition:
+        color 0.15s,
+        transform 0.15s;
     }
     .bp__back:hover {
       color: #6366f1;

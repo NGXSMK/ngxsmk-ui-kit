@@ -108,8 +108,14 @@ const DIALOG_MOTION: NgxsmkMotionState = {
   host: { class: 'ngxsmk-dialog' },
   styles: `
     .ngxsmk-dialog__native {
-      width: min(var(--ngxsmk-dialog-width, var(--ngxsmk-dialog-max-width, 28rem)), calc(100vw - 2rem));
-      max-width: min(var(--ngxsmk-dialog-max-width, var(--ngxsmk-dialog-width, calc(100vw - 2rem))), calc(100vw - 2rem));
+      width: min(
+        var(--ngxsmk-dialog-width, var(--ngxsmk-dialog-max-width, 28rem)),
+        calc(100vw - 2rem)
+      );
+      max-width: min(
+        var(--ngxsmk-dialog-max-width, var(--ngxsmk-dialog-width, calc(100vw - 2rem))),
+        calc(100vw - 2rem)
+      );
       max-height: calc(100dvh - 2rem);
       overflow: auto;
       padding: 0;
@@ -248,7 +254,9 @@ export class NgxsmkDialog {
             };
 
             playExit(dialog, DIALOG_MOTION)
-              .catch((_e: unknown) => { /* animation abort — safe to ignore */ })
+              .catch((_e: unknown) => {
+                /* animation abort — safe to ignore */
+              })
               .finally(cleanup);
           } else {
             dialog.style.opacity = '';

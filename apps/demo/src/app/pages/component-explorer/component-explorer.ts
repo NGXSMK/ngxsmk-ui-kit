@@ -39,7 +39,10 @@ const CATEGORY_ICONS: Record<string, string> = {
           <span class="pulse-dot"></span>
           <span class="badge-tag">Registry</span>
           <span class="badge-divider"></span>
-          <span class="badge-text">{{ registry.totalCount() }} Components • {{ registry.categories().length }} Categories</span>
+          <span class="badge-text"
+            >{{ registry.totalCount() }} Components •
+            {{ registry.categories().length }} Categories</span
+          >
         </div>
         <h1 class="explorer-title">Component <span class="highlight">Catalog</span></h1>
         <p class="explorer-subtitle">
@@ -115,9 +118,7 @@ const CATEGORY_ICONS: Record<string, string> = {
       @for (group of filteredGroups(); track group.category) {
         <section class="explorer-group">
           <div class="explorer-group-header">
-            <h2 class="explorer-group-title">{{
-              catLabelKey(group.category) | translate
-            }}</h2>
+            <h2 class="explorer-group-title">{{ catLabelKey(group.category) | translate }}</h2>
             <span class="explorer-group-count">{{
               'explorer.componentCount' | translate: { count: group.components.length }
             }}</span>
@@ -280,7 +281,9 @@ const CATEGORY_ICONS: Record<string, string> = {
     }
     .explorer-search-input:focus {
       border-color: #6366f1;
-      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15), 0 8px 24px -4px rgba(99, 102, 241, 0.12);
+      box-shadow:
+        0 0 0 4px rgba(99, 102, 241, 0.15),
+        0 8px 24px -4px rgba(99, 102, 241, 0.12);
     }
     .explorer-search-input::placeholder {
       color: var(--color-text-muted, #94a3b8);
@@ -301,7 +304,9 @@ const CATEGORY_ICONS: Record<string, string> = {
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: background 0.15s, color 0.15s;
+      transition:
+        background 0.15s,
+        color 0.15s;
     }
     .explorer-search-clear:hover {
       background: rgba(99, 102, 241, 0.15);
@@ -446,7 +451,9 @@ const CATEGORY_ICONS: Record<string, string> = {
     .explorer-card-arrow {
       margin-left: auto;
       color: var(--color-text-dim, #94a3b8);
-      transition: transform 0.2s ease, color 0.2s ease;
+      transition:
+        transform 0.2s ease,
+        color 0.2s ease;
     }
     .explorer-card-selector {
       margin-top: -0.15rem;

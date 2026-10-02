@@ -902,7 +902,9 @@ import { NgxsmkThemeService } from '@ngxsmk/theme';
       padding: clamp(1.5rem, 3.5vw, 2.25rem);
       box-shadow: var(--shadow-sm);
       margin-bottom: 2rem;
-      transition: border-color 0.2s, box-shadow 0.2s;
+      transition:
+        border-color 0.2s,
+        box-shadow 0.2s;
     }
     .d-card:hover {
       box-shadow: var(--shadow-md);
@@ -931,7 +933,9 @@ import { NgxsmkThemeService } from '@ngxsmk/theme';
       display: flex;
       flex-direction: column;
       gap: 0.75rem;
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition:
+        transform 0.2s,
+        box-shadow 0.2s;
     }
     .d-step-card:hover {
       transform: translateY(-2px);
@@ -950,7 +954,11 @@ import { NgxsmkThemeService } from '@ngxsmk/theme';
       width: 1.85rem;
       height: 1.85rem;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--brand-primary, #6366f1) 0%, var(--brand-primary-dark, #4f46e5) 100%);
+      background: linear-gradient(
+        135deg,
+        var(--brand-primary, #6366f1) 0%,
+        var(--brand-primary-dark, #4f46e5) 100%
+      );
       color: #fff;
       font-size: 0.8125rem;
       font-weight: 800;

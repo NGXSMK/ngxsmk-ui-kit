@@ -171,7 +171,10 @@ import { TranslatePipe } from '@ngx-translate/core';
       padding: clamp(3.5rem, 7vw, 5.5rem) 1.5rem clamp(2.5rem, 5vw, 3.5rem);
       text-align: center;
       background-color: var(--color-bg-canvas, #f8fafc);
-      background-image: radial-gradient(var(--color-border-card, rgba(148, 163, 184, 0.25)) 1px, transparent 1px);
+      background-image: radial-gradient(
+        var(--color-border-card, rgba(148, 163, 184, 0.25)) 1px,
+        transparent 1px
+      );
       background-size: 24px 24px;
     }
     .co-hero::before {
@@ -180,11 +183,7 @@ import { TranslatePipe } from '@ngx-translate/core';
       inset: 0;
       z-index: 0;
       pointer-events: none;
-      background: radial-gradient(
-        55% 55% at 50% 0%,
-        rgba(99, 102, 241, 0.12),
-        transparent 70%
-      );
+      background: radial-gradient(55% 55% at 50% 0%, rgba(99, 102, 241, 0.12), transparent 70%);
     }
     .co-hero__inner {
       position: relative;

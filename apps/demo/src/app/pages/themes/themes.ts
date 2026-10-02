@@ -32,10 +32,10 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
             <span class="badge-divider">·</span>
             <span class="badge-text">Real-Time Theme Engine</span>
           </div>
-          <h1 class="themes-hero-title">Customizable <span class="highlight">Design System</span></h1>
-          <p class="ngxsmk-page__sub">{{
-            'themes.subtitle' | translate
-          }}</p>
+          <h1 class="themes-hero-title">
+            Customizable <span class="highlight">Design System</span>
+          </h1>
+          <p class="ngxsmk-page__sub">{{ 'themes.subtitle' | translate }}</p>
           <div class="ngxsmk-page__hero-stats">
             <div class="ngxsmk-stat">
               <span class="ngxsmk-stat__value">150+</span>
@@ -415,7 +415,9 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
       border-radius: var(--radius-xl, 22px);
       padding: clamp(1.5rem, 3.5vw, 2.25rem);
       box-shadow: var(--shadow-sm);
-      transition: border-color 0.2s, box-shadow 0.2s;
+      transition:
+        border-color 0.2s,
+        box-shadow 0.2s;
     }
 
     .ngxsmk-section:hover {

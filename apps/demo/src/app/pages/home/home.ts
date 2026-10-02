@@ -88,11 +88,13 @@ export class HomePage implements OnInit {
     }
   }
 
-
-
   // Interactive Component Sandbox
-  protected readonly sandboxTab = signal<'button' | 'badge' | 'switch' | 'stat' | 'checkbox' | 'input'>('button');
-  protected readonly sandboxVariant = signal<'primary' | 'secondary' | 'outline' | 'ghost'>('primary');
+  protected readonly sandboxTab = signal<
+    'button' | 'badge' | 'switch' | 'stat' | 'checkbox' | 'input'
+  >('button');
+  protected readonly sandboxVariant = signal<'primary' | 'secondary' | 'outline' | 'ghost'>(
+    'primary',
+  );
   protected readonly sandboxSize = signal<'sm' | 'md' | 'lg'>('md');
   protected readonly sandboxSwitchVal = signal(true);
   protected readonly sandboxCheckboxVal = signal(true);
@@ -219,8 +221,6 @@ export class HomePage implements OnInit {
       setTimeout(() => this.sandboxCopied.set(false), 2000);
     });
   }
-
-
 
   protected readonly inventoryColumns = [
     { key: 'item', label: 'Item' },

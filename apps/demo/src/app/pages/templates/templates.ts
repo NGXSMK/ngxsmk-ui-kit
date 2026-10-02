@@ -86,7 +86,6 @@ export class TemplatesPage {
   protected readonly appVersion = APP_VERSION;
   protected readonly previewDevice = signal<'desktop' | 'tablet' | 'mobile'>('desktop');
 
-
   /** Sheet numbers in the register read as NGX-01 … NGX-99. */
   protected pad(n: number): string {
     return String(n).padStart(2, '0');
@@ -185,11 +184,46 @@ export class TemplatesPage {
 
   // --- Ops Table Data ---
   protected readonly opsServices = [
-    { name: 'auth-gateway', cluster: 'us-east-1a', version: 'v2.4.1', uptime: '99.99%', latency: '12ms', status: 'Healthy' },
-    { name: 'payment-svc', cluster: 'eu-central-1', version: 'v2.3.9', uptime: '99.95%', latency: '28ms', status: 'Healthy' },
-    { name: 'search-indexer', cluster: 'us-west-2b', version: 'v2.4.0', uptime: '98.40%', latency: '145ms', status: 'Degraded' },
-    { name: 'analytics-worker', cluster: 'us-east-1b', version: 'v2.4.1', uptime: '99.98%', latency: '18ms', status: 'Healthy' },
-    { name: 'billing-cron', cluster: 'eu-west-1a', version: 'v2.2.0', uptime: '100%', latency: '5ms', status: 'Standby' },
+    {
+      name: 'auth-gateway',
+      cluster: 'us-east-1a',
+      version: 'v2.4.1',
+      uptime: '99.99%',
+      latency: '12ms',
+      status: 'Healthy',
+    },
+    {
+      name: 'payment-svc',
+      cluster: 'eu-central-1',
+      version: 'v2.3.9',
+      uptime: '99.95%',
+      latency: '28ms',
+      status: 'Healthy',
+    },
+    {
+      name: 'search-indexer',
+      cluster: 'us-west-2b',
+      version: 'v2.4.0',
+      uptime: '98.40%',
+      latency: '145ms',
+      status: 'Degraded',
+    },
+    {
+      name: 'analytics-worker',
+      cluster: 'us-east-1b',
+      version: 'v2.4.1',
+      uptime: '99.98%',
+      latency: '18ms',
+      status: 'Healthy',
+    },
+    {
+      name: 'billing-cron',
+      cluster: 'eu-west-1a',
+      version: 'v2.2.0',
+      uptime: '100%',
+      latency: '5ms',
+      status: 'Standby',
+    },
   ];
 
   protected categoryCount(cat: TemplateCategory): number {
@@ -330,7 +364,9 @@ export class TemplatesPage {
 
   // --- Ops Table State ---
   protected readonly opsSearch = signal('');
-  protected readonly opsSelected = signal<Set<string>>(new Set(['auth-gateway', 'analytics-worker']));
+  protected readonly opsSelected = signal<Set<string>>(
+    new Set(['auth-gateway', 'analytics-worker']),
+  );
   protected readonly opsPage = signal(1);
 
   protected readonly filteredOpsServices = computed(() => {

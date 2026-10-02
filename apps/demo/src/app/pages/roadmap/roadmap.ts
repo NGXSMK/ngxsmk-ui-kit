@@ -192,7 +192,10 @@ const STATUS_META: Record<string, { color: string; bg: string; icon: string }> =
       padding: clamp(3.5rem, 7vw, 5.5rem) 1.5rem clamp(2.5rem, 5vw, 3.5rem);
       text-align: center;
       background-color: var(--color-bg-canvas, #f8fafc);
-      background-image: radial-gradient(var(--color-border-card, rgba(148, 163, 184, 0.25)) 1px, transparent 1px);
+      background-image: radial-gradient(
+        var(--color-border-card, rgba(148, 163, 184, 0.25)) 1px,
+        transparent 1px
+      );
       background-size: 24px 24px;
     }
     .rm-hero::before {
@@ -201,11 +204,7 @@ const STATUS_META: Record<string, { color: string; bg: string; icon: string }> =
       inset: 0;
       z-index: 0;
       pointer-events: none;
-      background: radial-gradient(
-        55% 55% at 50% 0%,
-        rgba(99, 102, 241, 0.12),
-        transparent 70%
-      );
+      background: radial-gradient(55% 55% at 50% 0%, rgba(99, 102, 241, 0.12), transparent 70%);
     }
     .rm-hero__inner {
       position: relative;
@@ -300,11 +299,7 @@ const STATUS_META: Record<string, { color: string; bg: string; icon: string }> =
       top: 2.5rem;
       bottom: 2.5rem;
       width: 2px;
-      background: linear-gradient(
-        180deg,
-        rgba(99, 102, 241, 0.4),
-        rgba(148, 163, 184, 0.2)
-      );
+      background: linear-gradient(180deg, rgba(99, 102, 241, 0.4), rgba(148, 163, 184, 0.2));
     }
 
     /* ═══════════════ CARD ═══════════════ */

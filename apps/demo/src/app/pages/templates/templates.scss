@@ -12,7 +12,6 @@
   min-height: calc(100vh - 3.5rem);
 }
 
-
 .ngxsmk-page {
   max-width: var(--max-content-width, 1240px);
   margin: 0 auto;
@@ -94,7 +93,8 @@
 }
 
 @keyframes pulse-glow {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
     transform: scale(1);
   }
@@ -242,7 +242,9 @@
   gap: 0.5rem;
   min-width: 260px;
   box-shadow: var(--shadow-sm);
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
 
   &:focus-within {
     border-color: var(--brand-primary, #6366f1);
@@ -426,9 +428,10 @@
   overflow: hidden;
   scroll-margin-top: 5rem;
   box-shadow: var(--shadow-sm);
-  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 
   &:hover {
     transform: translateY(-4px);
@@ -454,7 +457,9 @@
   height: 3px;
   z-index: 2;
   opacity: 0.85;
-  transition: opacity 0.15s ease, height 0.15s ease;
+  transition:
+    opacity 0.15s ease,
+    height 0.15s ease;
 }
 
 .tpl-card__preview {
@@ -731,7 +736,9 @@
       border-radius: var(--ngxsmk-radius-2xl, 24px);
       border: 1px solid var(--color-border, #e2e8f0);
       background: var(--color-bg-card, #ffffff);
-      box-shadow: 0 32px 80px -16px rgba(0, 0, 0, 0.32), 0 0 0 1px rgba(0, 0, 0, 0.05);
+      box-shadow:
+        0 32px 80px -16px rgba(0, 0, 0, 0.32),
+        0 0 0 1px rgba(0, 0, 0, 0.05);
       overflow: hidden;
       &[open] {
         display: flex;
@@ -820,7 +827,9 @@
     min-height: 480px;
     margin: 0 auto;
     border-radius: var(--radius-xl, 18px);
-    box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.16), 0 0 0 1px var(--color-border, #e2e8f0);
+    box-shadow:
+      0 20px 50px -10px rgba(0, 0, 0, 0.16),
+      0 0 0 1px var(--color-border, #e2e8f0);
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -918,11 +927,15 @@
 }
 .viewport--tablet .ngxsmk-mock-window {
   max-width: 768px;
-  box-shadow: 0 28px 64px -12px rgba(0, 0, 0, 0.28), 0 0 0 2px var(--brand-primary, #6366f1);
+  box-shadow:
+    0 28px 64px -12px rgba(0, 0, 0, 0.28),
+    0 0 0 2px var(--brand-primary, #6366f1);
 }
 .viewport--mobile .ngxsmk-mock-window {
   max-width: 390px;
-  box-shadow: 0 28px 64px -12px rgba(0, 0, 0, 0.28), 0 0 0 2px var(--brand-primary, #6366f1);
+  box-shadow:
+    0 28px 64px -12px rgba(0, 0, 0, 0.28),
+    0 0 0 2px var(--brand-primary, #6366f1);
   border-radius: 36px;
 
   .ngxsmk-mock-window-titlebar {
@@ -1799,7 +1812,11 @@
   }
 
   &.ops-grid-row--selected {
-    background: color-mix(in srgb, var(--ngxsmk-color-primary, #6366f1) 8%, var(--color-bg-card, #ffffff));
+    background: color-mix(
+      in srgb,
+      var(--ngxsmk-color-primary, #6366f1) 8%,
+      var(--color-bg-card, #ffffff)
+    );
   }
 }
 
@@ -1818,7 +1835,8 @@
   opacity: 0.7;
 }
 
-.cluster-tag, .version-tag {
+.cluster-tag,
+.version-tag {
   font-family: var(--font-family-mono, monospace);
   font-size: 0.75rem;
   color: var(--color-text-muted);
@@ -2173,7 +2191,8 @@
   font-size: 0.72rem;
   color: var(--color-text-dim);
 
-  &::before, &::after {
+  &::before,
+  &::after {
     content: '';
     flex: 1;
     border-bottom: 1px solid var(--color-border, #e2e8f0);

@@ -458,7 +458,11 @@ export class NgxsmkDataTable {
     for (const [key, raw] of Object.entries(filters)) {
       const fq = raw?.trim().toLowerCase();
       if (!fq) continue;
-      data = data.filter((row) => String(row?.[key] ?? '').toLowerCase().includes(fq));
+      data = data.filter((row) =>
+        String(row?.[key] ?? '')
+          .toLowerCase()
+          .includes(fq),
+      );
     }
     const field = this.sortField();
     if (field && this.sortable()) {

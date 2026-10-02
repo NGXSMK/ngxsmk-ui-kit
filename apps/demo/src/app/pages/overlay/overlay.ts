@@ -256,7 +256,12 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
               [attr.aria-label]="image.alt ?? 'Open image ' + (i + 1)"
               (click)="lb.show(i)"
             >
-              <ngxsmk-thumbnail [src]="image.src" [alt]="image.alt ?? ''" size="lg" shape="square" />
+              <ngxsmk-thumbnail
+                [src]="image.src"
+                [alt]="image.alt ?? ''"
+                size="lg"
+                shape="square"
+              />
             </button>
           }
         </div>

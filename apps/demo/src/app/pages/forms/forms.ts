@@ -418,10 +418,7 @@ interface Option {
         </div>
       </showcase-example>
 
-      <showcase-example
-        title="Date Picker"
-        [description]="'forms.datepickerDesc' | translate"
-      >
+      <showcase-example title="Date Picker" [description]="'forms.datepickerDesc' | translate">
         <p style="margin: 0; width: 100%">
           {{ 'forms.referRepo' | translate }}
           <a

@@ -197,8 +197,14 @@ export class NgxsmkTextReveal {
       spans.map((span: HTMLSpanElement, i: number) => {
         if (state.initial) {
           applyStyles(span, state.initial);
-          if (typeof (motion as unknown as { style?: (e: Element, s: unknown) => void }).style === 'function') {
-            (motion as unknown as { style: (e: Element, s: unknown) => void }).style(span, state.initial);
+          if (
+            typeof (motion as unknown as { style?: (e: Element, s: unknown) => void }).style ===
+            'function'
+          ) {
+            (motion as unknown as { style: (e: Element, s: unknown) => void }).style(
+              span,
+              state.initial,
+            );
           }
         }
         const delay = typeof staggerFn === 'number' ? staggerFn * i : i * staggerDelay;

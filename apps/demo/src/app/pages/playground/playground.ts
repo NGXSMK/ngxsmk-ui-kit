@@ -1424,9 +1424,7 @@ type RadiusKey = keyof typeof RADII;
               <span class="light yellow"></span>
               <span class="light green"></span>
             </div>
-            <h3 class="modal-title">{{
-              'playground.export.title' | translate
-            }}</h3>
+            <h3 class="modal-title">{{ 'playground.export.title' | translate }}</h3>
             <button type="button" class="close-btn" (click)="showDownloadModal.set(false)">
               &times;
             </button>
@@ -2079,7 +2077,9 @@ type RadiusKey = keyof typeof RADII;
       background: var(--ngxsmk-color-background);
       border: 1px solid var(--ngxsmk-color-outline);
       border-radius: var(--radius-xl, 22px);
-      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(99, 102, 241, 0.1);
+      box-shadow:
+        0 20px 40px -15px rgba(0, 0, 0, 0.08),
+        0 0 0 1px rgba(99, 102, 241, 0.1);
       width: 100%;
       max-width: 900px;
       min-height: 500px;
@@ -2096,11 +2096,15 @@ type RadiusKey = keyof typeof RADII;
     }
     :root.dark .canvas-viewport {
       border-color: rgba(255, 255, 255, 0.08);
-      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(99, 102, 241, 0.2);
+      box-shadow:
+        0 20px 40px -15px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(99, 102, 241, 0.2);
     }
     .canvas-viewport:hover {
       border-color: rgba(99, 102, 241, 0.4);
-      box-shadow: 0 24px 48px -15px rgba(99, 102, 241, 0.15), 0 0 0 1px rgba(99, 102, 241, 0.3);
+      box-shadow:
+        0 24px 48px -15px rgba(99, 102, 241, 0.15),
+        0 0 0 1px rgba(99, 102, 241, 0.3);
     }
 
     .canvas-viewport.phone {
@@ -2139,7 +2143,9 @@ type RadiusKey = keyof typeof RADII;
       border-radius: var(--radius-xl, 22px);
       width: 520px;
       max-width: 90vw;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(99, 102, 241, 0.15);
+      box-shadow:
+        0 25px 50px -12px rgba(0, 0, 0, 0.25),
+        0 0 0 1px rgba(99, 102, 241, 0.15);
       display: flex;
       flex-direction: column;
       animation: slideIn 0.25s cubic-bezier(0.4, 0, 0.2, 1);
@@ -2148,7 +2154,9 @@ type RadiusKey = keyof typeof RADII;
     :root.dark .modal-card {
       background: #0f172a;
       border-color: rgba(255, 255, 255, 0.08);
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(99, 102, 241, 0.25);
+      box-shadow:
+        0 25px 50px -12px rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(99, 102, 241, 0.25);
     }
 
     .modal-head {
