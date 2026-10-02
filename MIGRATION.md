@@ -5,6 +5,28 @@ available via `ngxsmk migrate` and Angular CLI `ng update @ngxsmk/cli`.
 
 ---
 
+## Migrating to v3.1.0
+
+v3.1.0 is a **minor release** — fully backward compatible with all v3.0.x
+consumers. No breaking changes, no API removals.
+
+### What's new
+
+Six new components are available as opt-in secondary entry points:
+
+| Component     | Entry point                |
+| ------------- | -------------------------- |
+| `time-picker` | `@ngxsmk/core/time-picker` |
+| `breadcrumb`  | `@ngxsmk/core/breadcrumb`  |
+| `chip-group`  | `@ngxsmk/core/chip-group`  |
+| `icon`        | `@ngxsmk/core/icon`        |
+| `input-mask`  | `@ngxsmk/core/input-mask`  |
+| `menubar`     | `@ngxsmk/core/menubar`     |
+
+Import only the components you use — no migration steps required.
+
+---
+
 ## 1. Enterprise Deprecation & Breaking Change Policy
 
 To ensure zero unexpected breakage in enterprise mission-critical codebases:

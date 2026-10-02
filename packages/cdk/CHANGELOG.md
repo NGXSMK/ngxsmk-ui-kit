@@ -1,5 +1,13 @@
 # @ngxsmk/cdk
 
+## 3.1.0
+
+### Patch Changes
+
+- No breaking changes in this release. `@ngxsmk/cdk` remains fully stable and
+  backward compatible with all `3.x` consumers.
+- Version bumped to 3.1.0 in sync with the monorepo release.
+
 ## 1.3.1
 
 ### Patch Changes

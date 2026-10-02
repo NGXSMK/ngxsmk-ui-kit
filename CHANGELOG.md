@@ -5,6 +5,36 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.1.0] - 2026-10-02
+
+### Added
+
+- **`time-picker`** — new component with form-field and CVA support (`@ngxsmk/core/time-picker`).
+- **`breadcrumb`** — new component (`@ngxsmk/core/breadcrumb`).
+- **`chip-group`** — new component (`@ngxsmk/core/chip-group`).
+- **`icon`** — new component (`@ngxsmk/core/icon`).
+- **`input-mask`** — new component (`@ngxsmk/core/input-mask`).
+- **`menubar`** — new component (`@ngxsmk/core/menubar`).
+
+### Fixed
+
+- **`dialog`**: animation abort errors fixed (`try-catch-finally` in `playEnter`/`playExit`); opacity/transform inline styles cleared before open; lifecycle cleanup guaranteed via `finally`.
+- **`dialog`**: empty `.catch(() => {})` replaced with documented no-op (lint fix).
+- **`lightbox`**: hardcoded `#fff` in focus-ring box-shadows replaced with `--ngxsmk-lightbox-fg` token.
+- **`animation`**: WAAPI abort (`InvalidStateError`, `TypeError: motion.style is not a function`) fixed — target styles now always applied even when document is hidden.
+- **`templates` demo page**: closed `<dialog>` no longer renders as visible empty box (scoped `display:flex` to `[open]` selector).
+- **`templates` demo page**: blank white space below template cards removed (redundant `min-height` on page container).
+- **`templates` demo preview modal**: full flex height chain added so preview content is always visible.
+- **`home` demo page**: mode-tabs overflow fix, CTA h2 line-height fix, sandbox showcase improvements.
+- **Governance script**: 3-char hex shorthands (`#fff`/`#000`) now correctly normalised before allowlist filter.
+
+### Changed
+
+- Bundle size baseline updated for 254 entries (519.0 kB gzipped).
+- Visual baselines reset for fresh Linux CI regeneration.
+- Prettier formatting applied across 44 files.
+- Version bumped to 3.1.0 across all packages.
+
 ## [1.3.2] - 2026-07-17
 
 ### Added

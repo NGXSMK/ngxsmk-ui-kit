@@ -1,5 +1,18 @@
 # @ngxsmk/theme
 
+## 3.1.0
+
+### Minor Changes
+
+- Token updates to support new `time-picker`, `breadcrumb`, `chip-group`, `icon`, `input-mask`, and `menubar` components.
+- `--ngxsmk-lightbox-fg` token added; replaces hardcoded `#fff` in `lightbox` focus-ring box-shadows.
+- Governance script: 3-char hex shorthands (`#fff`/`#000`) now correctly normalised before allowlist filter.
+
+### Changed
+
+- Bundle size baseline updated for 254 entries (519.0 kB gzipped).
+- Version bumped to 3.1.0.
+
 ## 1.3.1
 
 ### Patch Changes

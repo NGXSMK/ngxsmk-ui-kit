@@ -4,7 +4,7 @@
 
 # NGXSMK — The Open-Source Angular UI Kit
 
-**170+ free Angular components. Signals-native. Zoneless. Token-themed. Dark mode built in.**
+**176+ free Angular components. Signals-native. Zoneless. Token-themed. Dark mode built in.**
 
 The modern Angular component library & design system for Angular 17.3 → 22 —
 forms, data tables, charts, AI chat UI, and enterprise widgets that ship as
@@ -43,7 +43,7 @@ That's it — no `zone.js`, no global module, no CSS framework required.
 
 Most Angular UI libraries were designed before signals, standalone components,
 and zoneless change detection existed. NGXSMK was built **after** — every one of
-its 170+ components is a standalone, `OnPush`, signal-based component
+its 176+ components is a standalone, `OnPush`, signal-based component
 (`input()`, `output()`, `model()`) that reads design tokens from CSS custom
 properties. The result: instant runtime theming, minimal bundles, and an API
 that feels like modern Angular instead of fighting it.
@@ -214,7 +214,7 @@ npm install motion
 | --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`@ngxsmk/theme`](packages/theme) | Universal design-token engine: `ThemeConfig` → `--ngxsmk-*` CSS custom properties, 4 presets, light/dark strategies, runtime switching via `NgxsmkThemeService`.                                                                                                                                                                                           |
 | [`@ngxsmk/cdk`](packages/cdk)     | Low-level behaviors: click-outside, focus trap, scroll lock, live announcer, reactive media queries, visually-hidden.                                                                                                                                                                                                                                      |
-| [`@ngxsmk/core`](packages/core)   | 170+ standalone, `OnPush`, signals-based components — buttons, badges, tags, chips, cards, dividers, spinners, skeletons, alerts, progress, avatars, form-field, inputs, checks/radios/switches, tabs, accordions, tooltips, dialogs, toasts, and re-exported `ngxsmk-datepicker` / `ngxsmk-tel-input`. Also exposes the `@ngxsmk/core/animation` helpers. |
+| [`@ngxsmk/core`](packages/core)   | 176+ standalone, `OnPush`, signals-based components — buttons, badges, tags, chips, cards, dividers, spinners, skeletons, alerts, progress, avatars, form-field, inputs, checks/radios/switches, tabs, accordions, tooltips, dialogs, toasts, and re-exported `ngxsmk-datepicker` / `ngxsmk-tel-input`. Also exposes the `@ngxsmk/core/animation` helpers. |
 
 ## Components
 
