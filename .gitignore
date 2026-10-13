@@ -57,7 +57,10 @@ storybook-static/
 *.tsbuildinfo
 
 # Generated audit / lab reports (regenerate via tools/scripts/*)
-/tools/reports/*.md
+/tools/reports/
+
+# Local Cursor / agent skill locks (not part of the published kit)
+skills-lock.json
 
 # System files
 .DS_Store

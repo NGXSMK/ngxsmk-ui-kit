@@ -546,6 +546,18 @@ button:focus {
   }
 }
 
+.btn-ghost {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--color-text-muted, #475569);
+  box-shadow: none;
+
+  &:hover {
+    color: var(--brand-primary, #6366f1);
+    background: var(--color-bg-elevated, #f1f5f9);
+  }
+}
+
 .highlight {
   background: linear-gradient(
     135deg,

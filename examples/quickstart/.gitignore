@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.angular/
+*.tsbuildinfo
+.idea/
+.vscode/
+# Regenerate after publishing a new @ngxsmk/* version; omit from git so
+# StackBlitz always resolves the latest matching range from npm.
+package-lock.json

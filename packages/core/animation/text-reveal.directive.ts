@@ -5,6 +5,7 @@ import {
   NgxsmkTweenTransition,
   NgxsmkSpringTransition,
   loadMotion,
+  normalizeEase,
   prefersReducedMotion,
   applyStyles,
 } from './animate';
@@ -178,7 +179,7 @@ export class NgxsmkTextReveal {
       if (!state.transition.type || state.transition.type === 'tween') {
         const t = state.transition as NgxsmkTweenTransition;
         if (t.duration != null) options['duration'] = t.duration;
-        if (t.ease != null) options['ease'] = t.ease;
+        if (t.ease != null) options['ease'] = normalizeEase(t.ease);
       } else if (state.transition.type === 'spring') {
         const s = state.transition as NgxsmkSpringTransition;
         options['type'] = 'spring';

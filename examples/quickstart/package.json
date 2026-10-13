@@ -1,0 +1,32 @@
+{
+  "name": "ngxsmk-quickstart",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Minimal zoneless Angular app using @ngxsmk/core + @ngxsmk/theme. Open in StackBlitz: https://stackblitz.com/github/NGXSMK/ngxsmk-ui-kit/tree/main/examples/quickstart",
+  "scripts": {
+    "start": "ng serve --open",
+    "build": "ng build"
+  },
+  "dependencies": {
+    "@angular/common": "^20.0.0",
+    "@angular/compiler": "^20.0.0",
+    "@angular/core": "^20.0.0",
+    "@angular/forms": "^20.0.0",
+    "@angular/platform-browser": "^20.0.0",
+    "@ngxsmk/cdk": "^3.2.0",
+    "@ngxsmk/core": "^3.2.0",
+    "@ngxsmk/theme": "^3.2.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@angular/build": "^20.0.0",
+    "@angular/cli": "^20.0.0",
+    "@angular/compiler-cli": "^20.0.0",
+    "typescript": "~5.8.0"
+  },
+  "stackblitz": {
+    "installDependencies": true,
+    "startCommand": "npm start"
+  }
+}

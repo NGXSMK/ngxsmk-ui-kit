@@ -1,5 +1,18 @@
 # @ngxsmk/theme
 
+## 3.2.0
+
+### Minor Changes
+
+- Generated theme stylesheets (`ngxsmk.css` and presets) now append
+  `@ngxsmk/core/styles` directive CSS (`button`, `input`) so a single import
+  covers tokens + base control styles.
+- Package `exports` include `./css` and `./styles/*.css`.
+
+### Changed
+
+- Version bumped to 3.2.0.
+
 ## 3.1.0
 
 ### Minor Changes

@@ -1213,7 +1213,7 @@ export class ShowcaseExample {
           'export class DemoComponent {}',
         ].join('\n'),
         'src/styles.css':
-          "@import '@ngxsmk/theme/css';\n\nbody { font-family: system-ui, sans-serif; padding: 2rem; }\n",
+          "@import '@ngxsmk/theme/styles/ngxsmk.css';\n\nbody { font-family: system-ui, sans-serif; padding: 2rem; }\n",
       },
     };
 

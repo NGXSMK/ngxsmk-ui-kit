@@ -1,0 +1,8 @@
+/* Tokens are loaded via angular.json (theme + button/input styles). */
+
+body {
+  margin: 0;
+  font-family: var(--ngxsmk-font-sans);
+  background: var(--ngxsmk-color-background);
+  color: var(--ngxsmk-color-on-background);
+}

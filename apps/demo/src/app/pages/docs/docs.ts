@@ -70,7 +70,7 @@ import { NgxsmkThemeService } from '@ngxsmk/theme';
         <div class="d-card__header-box">
           <ngxsmk-heading level="h2">Getting Started</ngxsmk-heading>
           <p class="d-body">
-            Follow this 4-step guide to integrate NGXSMK UI Kit into any modern Angular 19+
+            Follow this 4-step guide to integrate NGXSMK UI Kit into any modern Angular 17.3+
             standalone application in under 2 minutes.
           </p>
         </div>
@@ -83,8 +83,8 @@ import { NgxsmkThemeService } from '@ngxsmk/theme';
               <h3 class="d-step-title">Install Core Packages</h3>
             </div>
             <p class="d-step-desc">
-              Install the component library and theme token engine with zero bloated external
-              dependencies.
+              Install the component library and theme engine. Heavy peers (datepicker, tel-input,
+              motion, CDK) are optional — only install them for the entry points you use.
             </p>
             <div class="d-terminal">
               <div class="d-terminal__head">
@@ -140,8 +140,8 @@ import { NgxsmkThemeService } from '@ngxsmk/theme';
               <h3 class="d-step-title">Include Design Tokens</h3>
             </div>
             <p class="d-step-desc">
-              Import the universal design tokens in your global <code>styles.scss</code> or
-              <code>angular.json</code>.
+              Import the design tokens (and base button/input styles) in your global
+              <code>styles.scss</code> or <code>angular.json</code>.
             </p>
             <div class="d-terminal">
               <div class="d-terminal__head">
@@ -150,7 +150,7 @@ import { NgxsmkThemeService } from '@ngxsmk/theme';
               </div>
               <div class="d-terminal__body">
                 <code class="d-terminal__code"
-                  >&#64;import '&#64;ngxsmk/theme/css/tokens.css';</code
+                  >&#64;import '&#64;ngxsmk/theme/styles/ngxsmk.css';</code
                 >
                 <button
                   class="d-terminal__copy"
@@ -305,6 +305,55 @@ import { NgxsmkThemeService } from '@ngxsmk/theme';
               </div>
             </div>
           </div>
+        </div>
+
+        <div class="d-peers">
+          <h3 class="d-peers__title">Optional peers (install only if you use them)</h3>
+          <p class="d-peers__lead">
+            <code>npm install &#64;ngxsmk/core</code> alone installs cleanly — no peer warnings for
+            datepicker, tel-input, or motion.
+          </p>
+          <div class="d-peers__grid">
+            <div class="d-peers__row">
+              <code>&#64;ngxsmk/core/select</code>
+              <span><code>npm i &#64;angular/cdk</code></span>
+            </div>
+            <div class="d-peers__row">
+              <code>&#64;ngxsmk/core/datepicker</code>
+              <span><code>npm i ngxsmk-datepicker luxon</code></span>
+            </div>
+            <div class="d-peers__row">
+              <code>&#64;ngxsmk/core/tel-input</code>
+              <span
+                ><code
+                  >npm i ngxsmk-tel-input intl-tel-input libphonenumber-js &#64;angular/cdk
+                  &#64;angular/material</code
+                ></span
+              >
+            </div>
+            <div class="d-peers__row">
+              <code>&#64;ngxsmk/core/animation</code>
+              <span><code>npm i motion</code> (v12–v14, lazy-loaded)</span>
+            </div>
+          </div>
+          <p class="d-peers__foot">
+            Prefer hardened primitives first — see the
+            <a
+              class="d-link"
+              href="https://github.com/NGXSMK/ngxsmk-ui-kit/blob/main/docs/COMPONENT_TIERS.md"
+              target="_blank"
+              rel="noopener"
+              >component tiers</a
+            >
+            (Core / Extended / Experimental) and try the
+            <a
+              class="d-link"
+              href="https://stackblitz.com/github/NGXSMK/ngxsmk-ui-kit/tree/main/examples/quickstart?file=src%2Fapp%2Fapp.ts"
+              target="_blank"
+              rel="noopener"
+              >StackBlitz quickstart</a
+            >.
+          </p>
         </div>
       </section>
 
@@ -730,9 +779,17 @@ import { NgxsmkThemeService } from '@ngxsmk/theme';
             automatic.
           </ngxsmk-accordion-item>
           <ngxsmk-accordion-item label="What about motion and animations?">
-            NGXSMK supports <code>motion.dev</code> as an optional peer dependency. Every animation
-            parameter is exposed as a signal input with smart defaults. When <code>motion</code> is
-            not installed, directives no-op or fall back to CSS/manual JS.
+            NGXSMK supports <code>motion.dev</code> as an optional peer dependency (v12–v14). Every
+            animation parameter is exposed as a signal input with smart defaults. When
+            <code>motion</code> is not installed, directives no-op or fall back to CSS/manual JS.
+            CSS easing keywords like <code>ease-out</code> are normalised for Motion automatically.
+          </ngxsmk-accordion-item>
+          <ngxsmk-accordion-item label="Do I need all the peer dependencies?">
+            No. Only <code>&#64;angular/common</code>, <code>&#64;angular/core</code>,
+            <code>&#64;angular/forms</code>, and <code>&#64;ngxsmk/cdk</code> are required.
+            Datepicker, tel-input, <code>&#64;angular/cdk</code> (for select), and
+            <code>motion</code> are marked optional in <code>package.json</code> — install them only
+            for the entry points you import.
           </ngxsmk-accordion-item>
           <ngxsmk-accordion-item label="Can I use it with Ionic?">
             Yes. Use <code>provideNgxsmkIonicTheme()</code> from <code>@ngxsmk/theme</code> next to
@@ -923,6 +980,53 @@ import { NgxsmkThemeService } from '@ngxsmk/theme';
 
       @media (max-width: 768px) {
         grid-template-columns: 1fr;
+      }
+    }
+    .d-peers {
+      margin-top: 1.75rem;
+      padding: 1.25rem 1.35rem;
+      border-radius: var(--radius-lg, 16px);
+      border: 1px solid var(--color-border, #e2e8f0);
+      background: var(--color-bg-elevated, #f8fafc);
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .d-peers__title {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 650;
+      color: var(--color-text-main, #0f172a);
+    }
+    .d-peers__lead,
+    .d-peers__foot {
+      margin: 0;
+      font-size: 0.9rem;
+      line-height: 1.55;
+      color: var(--color-text-muted, #475569);
+    }
+    .d-peers__grid {
+      display: grid;
+      gap: 0.55rem;
+    }
+    .d-peers__row {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr);
+      gap: 0.75rem;
+      align-items: start;
+      padding: 0.55rem 0.7rem;
+      border-radius: 10px;
+      background: var(--color-bg-card, #fff);
+      border: 1px solid var(--color-border, #e2e8f0);
+      font-size: 0.82rem;
+
+      @media (max-width: 720px) {
+        grid-template-columns: 1fr;
+      }
+
+      code {
+        font-size: 0.78rem;
+        word-break: break-word;
       }
     }
     .d-step-card {
@@ -1626,7 +1730,7 @@ export class DocsPage {
       npm: 'npm install @ngxsmk/core @ngxsmk/theme',
       cli: 'npx ngxsmk add button',
       mcp: 'claude mcp add ngxsmk -- npx @ngxsmk/mcp',
-      theme: "@import '@ngxsmk/theme/css/tokens.css';",
+      theme: "@import '@ngxsmk/theme/styles/ngxsmk.css';",
       import: "import { NgxsmkButton } from '@ngxsmk/core/button';",
       template: '<button ngxsmk-button>Get Started</button>',
     };

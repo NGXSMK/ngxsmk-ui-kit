@@ -498,3 +498,369 @@
   --ngxsmk-duration-slow: 0ms;
   --ngxsmk-duration-slower: 0ms;
 }
+
+/* ==========================================================================
+   Component styles for directive-based primitives (button, input).
+   Source: packages/core/styles/*.css — regenerate with `npm run theme:css`.
+   ========================================================================== */
+
+/* ---- @ngxsmk/core/styles/button.css ---- */
+.ngxsmk-button {
+  --_bg: var(--ngxsmk-button-bg, var(--ngxsmk-color-primary));
+  --_fg: var(--ngxsmk-button-color, var(--ngxsmk-color-on-primary));
+  --_radius: var(--ngxsmk-button-radius, var(--ngxsmk-radius-base));
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ngxsmk-button-gap, var(--ngxsmk-space-2));
+  border: var(--ngxsmk-button-border-width, 1px) solid transparent;
+  border-radius: var(--_radius);
+  background: var(--_bg);
+  color: var(--_fg);
+  font-family: var(--ngxsmk-button-font-family, var(--ngxsmk-font-sans));
+  font-size: var(--ngxsmk-text-label-lg-size);
+  font-weight: var(--ngxsmk-button-font-weight, 500);
+  line-height: var(--ngxsmk-text-label-lg-line);
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none;
+  white-space: nowrap;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
+    border-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
+    color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
+    transform var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
+}
+
+.ngxsmk-button:focus-visible {
+  outline: none;
+  box-shadow: var(--ngxsmk-focus-ring);
+}
+
+.ngxsmk-button:focus {
+  outline: none;
+}
+
+.ngxsmk-button[disabled] {
+  opacity: var(--ngxsmk-button-disabled-opacity, 0.5);
+  pointer-events: none;
+}
+
+.ngxsmk-button[data-size='sm'] {
+  min-height: var(--ngxsmk-control-height-sm, 2rem);
+  padding: 0 var(--ngxsmk-space-3);
+  font-size: var(--ngxsmk-text-label-md-size);
+}
+
+.ngxsmk-button[data-size='md'] {
+  min-height: var(--ngxsmk-control-height-md, 2.5rem);
+  padding: 0 var(--ngxsmk-space-4);
+  font-size: var(--ngxsmk-text-label-lg-size);
+}
+
+.ngxsmk-button[data-size='lg'] {
+  min-height: var(--ngxsmk-control-height-lg, 3rem);
+  padding: 0 var(--ngxsmk-space-6);
+  font-size: var(--ngxsmk-text-body-lg-size);
+}
+
+.ngxsmk-button[data-icon-only][data-size='sm'] {
+  width: var(--ngxsmk-control-height-sm, 2rem);
+  min-width: var(--ngxsmk-control-height-sm, 2rem);
+  padding: 0;
+}
+.ngxsmk-button[data-icon-only][data-size='md'] {
+  width: var(--ngxsmk-control-height-md, 2.5rem);
+  min-width: var(--ngxsmk-control-height-md, 2.5rem);
+  padding: 0;
+}
+.ngxsmk-button[data-icon-only][data-size='lg'] {
+  width: var(--ngxsmk-control-height-lg, 3rem);
+  min-width: var(--ngxsmk-control-height-lg, 3rem);
+  padding: 0;
+}
+
+.ngxsmk-button[data-variant='primary']:hover {
+  background: var(--ngxsmk-color-primary-hover);
+  transform: var(--ngxsmk-hover-lift);
+}
+.ngxsmk-button[data-variant='primary']:active {
+  background: var(--ngxsmk-color-primary-active);
+  transform: var(--ngxsmk-press-scale);
+}
+
+.ngxsmk-button[data-variant='secondary'] {
+  background: var(--ngxsmk-color-surface-variant);
+  color: var(--ngxsmk-color-on-surface);
+}
+.ngxsmk-button[data-variant='secondary']:hover {
+  background: var(--ngxsmk-color-outline-strong);
+  transform: var(--ngxsmk-hover-lift);
+}
+.ngxsmk-button[data-variant='secondary']:active {
+  transform: var(--ngxsmk-press-scale);
+}
+
+.ngxsmk-button[data-variant='outline'] {
+  background: transparent;
+  border-color: var(--ngxsmk-color-outline-strong);
+  color: var(--ngxsmk-color-on-surface);
+}
+.ngxsmk-button[data-variant='outline']:hover {
+  background: var(--ngxsmk-color-surface-hover);
+  transform: var(--ngxsmk-hover-lift);
+}
+.ngxsmk-button[data-variant='outline']:active {
+  transform: var(--ngxsmk-press-scale);
+}
+
+.ngxsmk-button[data-variant='ghost'] {
+  background: transparent;
+  color: var(--ngxsmk-color-on-surface);
+}
+.ngxsmk-button[data-variant='ghost']:hover {
+  background: var(--ngxsmk-color-surface-hover);
+  transform: var(--ngxsmk-hover-lift);
+}
+.ngxsmk-button[data-variant='ghost']:active {
+  transform: var(--ngxsmk-press-scale);
+}
+
+.ngxsmk-button[data-variant='destructive'] {
+  background: var(--ngxsmk-color-error);
+  color: var(--ngxsmk-color-on-error);
+}
+.ngxsmk-button[data-variant='destructive']:hover {
+  background: color-mix(in srgb, var(--ngxsmk-color-error) 88%, black);
+  transform: var(--ngxsmk-hover-lift);
+}
+.ngxsmk-button[data-variant='destructive']:active {
+  transform: var(--ngxsmk-press-scale);
+}
+
+.ngxsmk-button[data-variant='link'] {
+  min-height: auto;
+  background: transparent;
+  color: var(--ngxsmk-color-primary);
+  padding: 0;
+  border-color: transparent;
+}
+.ngxsmk-button[data-variant='link']:hover {
+  text-decoration: underline;
+  transform: none;
+}
+.ngxsmk-button[data-variant='link']:active {
+  transform: none;
+}
+
+.ngxsmk-button__spinner {
+  width: 1em;
+  height: 1em;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: var(--ngxsmk-radius-full);
+  animation: ngxsmk-button-spin 0.6s linear infinite;
+}
+
+@keyframes ngxsmk-button-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* FAB Styles */
+.ngxsmk-fab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--ngxsmk-radius-full);
+  border: none;
+  cursor: pointer;
+  font-family: var(--ngxsmk-font-sans);
+  font-weight: 500;
+  box-shadow: var(--ngxsmk-shadow-lg);
+  transition:
+    transform var(--ngxsmk-motion-duration) var(--ngxsmk-motion-ease),
+    box-shadow var(--ngxsmk-motion-duration) var(--ngxsmk-motion-ease),
+    background-color var(--ngxsmk-motion-duration) var(--ngxsmk-motion-ease),
+    color var(--ngxsmk-motion-duration) var(--ngxsmk-motion-ease);
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+.ngxsmk-fab:focus {
+  outline: none;
+}
+.ngxsmk-fab:focus-visible {
+  outline: none;
+  box-shadow: var(--ngxsmk-shadow-lg), var(--ngxsmk-focus-ring);
+}
+
+.ngxsmk-fab[data-size='sm'] {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+.ngxsmk-fab[data-size='md'] {
+  width: 3.5rem;
+  height: 3.5rem;
+}
+.ngxsmk-fab[data-size='lg'] {
+  width: 4.5rem;
+  height: 4.5rem;
+}
+
+.ngxsmk-fab[data-extended] {
+  width: auto;
+  padding: 0 var(--ngxsmk-space-4);
+  gap: var(--ngxsmk-space-2);
+}
+.ngxsmk-fab[data-extended][data-size='sm'] {
+  height: 2.5rem;
+}
+.ngxsmk-fab[data-extended][data-size='md'] {
+  height: 3.5rem;
+}
+.ngxsmk-fab[data-extended][data-size='lg'] {
+  height: 4.5rem;
+}
+
+.ngxsmk-fab[data-variant='primary'] {
+  background: var(--ngxsmk-color-primary);
+  color: var(--ngxsmk-color-on-primary);
+}
+.ngxsmk-fab[data-variant='primary']:hover {
+  background: var(--ngxsmk-color-primary-hover);
+  transform: var(--ngxsmk-hover-lift);
+}
+.ngxsmk-fab[data-variant='primary']:active {
+  background: var(--ngxsmk-color-primary-active);
+  transform: var(--ngxsmk-press-scale);
+}
+
+.ngxsmk-fab[data-variant='secondary'] {
+  background: var(--ngxsmk-color-secondary);
+  color: var(--ngxsmk-color-on-secondary);
+}
+.ngxsmk-fab[data-variant='secondary']:hover {
+  background: var(--ngxsmk-color-secondary-hover);
+  transform: var(--ngxsmk-hover-lift);
+}
+.ngxsmk-fab[data-variant='secondary']:active {
+  background: var(--ngxsmk-color-secondary-active);
+  transform: var(--ngxsmk-press-scale);
+}
+
+.ngxsmk-fab[data-position] {
+  position: fixed;
+  z-index: var(--ngxsmk-z-popover, 1500);
+}
+.ngxsmk-fab[data-position='bottom-right'] {
+  bottom: calc(
+    var(--ngxsmk-space-6) + var(--ngxsmk-safe-area-bottom, env(safe-area-inset-bottom, 0px))
+  );
+  right: calc(
+    var(--ngxsmk-space-6) + var(--ngxsmk-safe-area-right, env(safe-area-inset-right, 0px))
+  );
+}
+.ngxsmk-fab[data-position='bottom-left'] {
+  bottom: calc(
+    var(--ngxsmk-space-6) + var(--ngxsmk-safe-area-bottom, env(safe-area-inset-bottom, 0px))
+  );
+  left: calc(var(--ngxsmk-space-6) + var(--ngxsmk-safe-area-left, env(safe-area-inset-left, 0px)));
+}
+.ngxsmk-fab[data-position='top-right'] {
+  top: calc(var(--ngxsmk-space-6) + var(--ngxsmk-safe-area-top, env(safe-area-inset-top, 0px)));
+  right: calc(
+    var(--ngxsmk-space-6) + var(--ngxsmk-safe-area-right, env(safe-area-inset-right, 0px))
+  );
+}
+.ngxsmk-fab[data-position='top-left'] {
+  top: calc(var(--ngxsmk-space-6) + var(--ngxsmk-safe-area-top, env(safe-area-inset-top, 0px)));
+  left: calc(var(--ngxsmk-space-6) + var(--ngxsmk-safe-area-left, env(safe-area-inset-left, 0px)));
+}
+
+.ngxsmk-fab[disabled] {
+  opacity: 0.6;
+  pointer-events: none;
+  box-shadow: none;
+}
+
+/* ---- @ngxsmk/core/styles/input.css ---- */
+input[ngxsmkInput],
+textarea[ngxsmkInput] {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--ngxsmk-input-border, var(--ngxsmk-color-outline-strong));
+  border-radius: var(--ngxsmk-input-radius, var(--ngxsmk-radius-base));
+  background: var(--ngxsmk-input-bg, var(--ngxsmk-color-surface));
+  color: var(--ngxsmk-input-color, var(--ngxsmk-color-on-surface));
+  font-family: var(--ngxsmk-font-sans);
+  font-size: var(--ngxsmk-text-body-md-size);
+  line-height: var(--ngxsmk-text-body-md-line);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    border-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
+    box-shadow var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
+    background-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
+  outline: none;
+}
+
+@media (max-width: 640px) {
+  input[ngxsmkInput],
+  textarea[ngxsmkInput] {
+    font-size: 16px;
+  }
+}
+
+input[ngxsmkInput] {
+  height: var(--ngxsmk-input-height, var(--ngxsmk-control-height));
+  padding: 0 var(--ngxsmk-input-padding-inline, var(--ngxsmk-space-3));
+}
+
+textarea[ngxsmkInput] {
+  min-height: 5rem;
+  padding: var(--ngxsmk-space-2) var(--ngxsmk-input-padding-inline, var(--ngxsmk-space-3));
+  resize: vertical;
+}
+
+input[ngxsmkInput]:hover:not(:disabled):not([aria-invalid='true']),
+textarea[ngxsmkInput]:hover:not(:disabled):not([aria-invalid='true']) {
+  border-color: var(--ngxsmk-color-ring);
+}
+
+input[ngxsmkInput]:focus,
+textarea[ngxsmkInput]:focus {
+  border-color: var(--ngxsmk-color-ring);
+  box-shadow: var(--ngxsmk-focus-ring);
+}
+
+input[ngxsmkInput][aria-invalid='true'],
+textarea[ngxsmkInput][aria-invalid='true'],
+input[ngxsmkInput].ng-invalid.ng-touched,
+textarea[ngxsmkInput].ng-invalid.ng-touched {
+  border-color: var(--ngxsmk-color-error);
+}
+
+input[ngxsmkInput][aria-invalid='true']:focus,
+textarea[ngxsmkInput][aria-invalid='true']:focus,
+input[ngxsmkInput].ng-invalid.ng-touched:focus,
+textarea[ngxsmkInput].ng-invalid.ng-touched:focus {
+  box-shadow: var(--ngxsmk-focus-ring-error);
+}
+
+input[ngxsmkInput]:disabled,
+textarea[ngxsmkInput]:disabled {
+  opacity: var(--ngxsmk-opacity-disabled);
+  cursor: not-allowed;
+  background: var(--ngxsmk-color-surface-variant);
+}
+
+input[ngxsmkInput]::placeholder,
+textarea[ngxsmkInput]::placeholder {
+  color: var(--ngxsmk-input-placeholder, var(--ngxsmk-color-on-surface-variant));
+}

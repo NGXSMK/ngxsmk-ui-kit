@@ -1,5 +1,10 @@
 # @ngxsmk/mcp
 
+## 3.2.0
+
+- MCP server version bumped to 3.2.0 in sync with the monorepo release.
+- Component database regenerated with the current `@ngxsmk/core` surface.
+
 ## 3.1.0
 
 - MCP server version bumped to 3.1.0 in sync with the monorepo release.

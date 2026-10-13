@@ -16,30 +16,31 @@ Get up and running with **NGXSMK** in your Angular application in less than 2 mi
 Run the following command in your terminal:
 
 ```bash
-npm install @ngxsmk/core @ngxsmk/theme
+npm install @ngxsmk/core @ngxsmk/theme @ngxsmk/cdk
 ```
 
-Optional interaction primitives:
-
-```bash
-npm install @ngxsmk/cdk
-```
+Heavy peers (datepicker, tel-input, motion, `@angular/cdk` for select) are
+**optional** — install them only for the entry points you use. See the
+[component tiers](../COMPONENT_TIERS.md) and the
+[@ngxsmk/core README](../../packages/core/README.md).
 
 ---
 
 ## 3. Step 2: Import Theme Styles
 
-Add the generated NGXSMK theme tokens to your global styles (e.g. `src/styles.scss` or `src/styles.css`):
+Add the generated NGXSMK theme stylesheet to your global styles (e.g.
+`src/styles.scss` or `src/styles.css`). One file covers design tokens (light +
+dark) and the base styles for attribute directives like `button` / `input`:
 
 ```scss
-@import '@ngxsmk/theme/css/tokens.css';
+@import '@ngxsmk/theme/styles/ngxsmk.css';
 ```
 
 Or add it to the `styles` array in your `angular.json`:
 
 ```json
 "styles": [
-  "node_modules/@ngxsmk/theme/css/tokens.css",
+  "node_modules/@ngxsmk/theme/styles/ngxsmk.css",
   "src/styles.scss"
 ]
 ```

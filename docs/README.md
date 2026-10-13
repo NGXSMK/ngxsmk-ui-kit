@@ -5,6 +5,8 @@ Guides for **app developers** using `@ngxsmk/*`. For contributing to this repo, 
 ## Getting started
 
 - [Installation](./getting-started/installation.md) — install, peers, bootstrap
+- [Component tiers](./COMPONENT_TIERS.md) — Core / Extended / Experimental maturity
+- [Quickstart example](../examples/quickstart) — StackBlitz-ready zoneless starter
 - [Migration](../MIGRATION.md) — upgrades, deprecations, CLI codemods
 - [Troubleshooting](./guides/troubleshooting.md) — common setup and SSR issues
 

@@ -14,6 +14,7 @@ import {
   NgxsmkTweenTransition,
   NgxsmkSpringTransition,
   loadMotion,
+  normalizeEase,
   prefersReducedMotion,
 } from './animate';
 
@@ -154,7 +155,7 @@ export class NgxsmkPress {
           if (!pressState.transition.type || pressState.transition.type === 'tween') {
             const t = pressState.transition as NgxsmkTweenTransition;
             if (t.duration != null) opts['duration'] = t.duration;
-            if (t.ease != null) opts['ease'] = t.ease;
+            if (t.ease != null) opts['ease'] = normalizeEase(t.ease);
           } else if (pressState.transition.type === 'spring') {
             const s = pressState.transition as NgxsmkSpringTransition;
             opts['type'] = 'spring';
@@ -172,7 +173,7 @@ export class NgxsmkPress {
             if (!releaseState.transition.type || releaseState.transition.type === 'tween') {
               const t = releaseState.transition as NgxsmkTweenTransition;
               if (t.duration != null) releaseOpts['duration'] = t.duration;
-              if (t.ease != null) releaseOpts['ease'] = t.ease;
+              if (t.ease != null) releaseOpts['ease'] = normalizeEase(t.ease);
             } else if (releaseState.transition.type === 'spring') {
               const s = releaseState.transition as NgxsmkSpringTransition;
               releaseOpts['type'] = 'spring';

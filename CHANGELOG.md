@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.2.0] - 2026-10-13
+
+### Added
+
+- **Smoke test harness** — generated `*.smoke.spec.ts` for every `@ngxsmk/core` entry point; `npm run test:smoke:gen` / `test:smoke:check`.
+- **Quickstart example** — zoneless StackBlitz starter at `examples/quickstart`.
+- **Component tiers** — Core / Extended / Experimental maturity guide (`docs/COMPONENT_TIERS.md`).
+- Theme CSS now bundles directive styles for `button` and `input` (single `@import '@ngxsmk/theme/styles/ngxsmk.css'`).
+
+### Changed
+
+- Heavy peers (`ngxsmk-datepicker`, `luxon`, `ngxsmk-tel-input`, `intl-tel-input`, `libphonenumber-js`, `@angular/cdk`, `motion`) are **optional** — install only for the entry points you use.
+- `motion` peer range widened to `^12 || ^13 || ^14`; CSS easing keywords (`ease-out`, …) normalised for Motion’s JS engine.
+- Demo docs/home updated: correct theme import path, optional-peers table, StackBlitz CTA, Angular 17.3–22 badge.
+- Version bumped to 3.2.0 across all packages.
+
 ## [3.1.0] - 2026-10-02
 
 ### Added

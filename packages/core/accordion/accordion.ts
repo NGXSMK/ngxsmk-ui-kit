@@ -13,7 +13,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { ngxsmkUniqueId } from '@ngxsmk/core/util';
-import { loadMotion, prefersReducedMotion } from '@ngxsmk/core/animation';
+import { loadMotion, normalizeEase, prefersReducedMotion } from '@ngxsmk/core/animation';
 
 /**
  * Expandable section container.
@@ -252,7 +252,7 @@ export class NgxsmkAccordionItem {
     if (!motion) return;
 
     const duration = this.accordion.accordionDuration();
-    const ease = this.accordion.accordionEase();
+    const ease = normalizeEase(this.accordion.accordionEase());
 
     if (expand) {
       region.style.gridTemplateRows = '0fr';

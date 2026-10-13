@@ -8,7 +8,7 @@ import {
   input,
   signal,
 } from '@angular/core';
-import { loadMotion, prefersReducedMotion } from '@ngxsmk/core/animation';
+import { loadMotion, normalizeEase, prefersReducedMotion } from '@ngxsmk/core/animation';
 
 /**
  * An accent-tile button that expands into a dotted-arrow trail on hover
@@ -275,7 +275,7 @@ export class NgxsmkExpandingArrowButton {
       if (damping != null) options['damping'] = damping;
     } else {
       options['duration'] = duration;
-      options['ease'] = ease;
+      options['ease'] = normalizeEase(ease);
     }
 
     if (show) {

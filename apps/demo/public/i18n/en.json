@@ -244,6 +244,16 @@
       "removed": "removed"
     },
     "release": {
+      "v320": {
+        "summary": "Optional peers, Motion 14 support, smoke-test coverage, StackBlitz quickstart, and component maturity tiers.",
+        "changes": {
+          "0": "Added smoke specs for every @ngxsmk/core entry point plus a StackBlitz quickstart example.",
+          "1": "Added Core / Extended / Experimental component tiers documentation.",
+          "2": "Made datepicker, tel-input, motion, and CDK peers optional; motion supports v12–v14.",
+          "3": "Theme CSS now includes button/input directive styles in a single stylesheet import.",
+          "4": "Normalised CSS easing keywords for Motion and fixed demo docs theme import path."
+        }
+      },
       "v310": {
         "summary": "Stable release: 6 new signal-native components (time-picker, breadcrumb, chip-group, icon, input-mask, menubar), dialog animation stability, and demo layout improvements.",
         "changes": {

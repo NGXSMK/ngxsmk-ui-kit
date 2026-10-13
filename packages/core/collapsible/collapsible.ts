@@ -10,7 +10,7 @@ import {
   untracked,
   viewChild,
 } from '@angular/core';
-import { loadMotion, prefersReducedMotion } from '@ngxsmk/core/animation';
+import { loadMotion, normalizeEase, prefersReducedMotion } from '@ngxsmk/core/animation';
 
 @Component({
   standalone: true,
@@ -165,7 +165,7 @@ export class NgxsmkCollapsible {
     if (!motion) return;
 
     const duration = this.collapsibleDuration();
-    const ease = this.collapsibleEase();
+    const ease = normalizeEase(this.collapsibleEase());
 
     if (open) {
       region.style.maxHeight = '0px';
