@@ -47,7 +47,10 @@ import { NgxsmkThemeService } from '@ngxsmk/theme';
       <ngxsmk-v-stack gap="var(--ngxsmk-space-6)" style="padding-block: var(--ngxsmk-space-8)">
         <ngxsmk-h-stack justify="space-between">
           <h1 style="margin: 0">NGXSMK quickstart</h1>
-          <ngxsmk-switch [checked]="theme.isDark()" (checkedChange)="theme.setMode($event ? 'dark' : 'light')">
+          <ngxsmk-switch
+            [checked]="theme.isDark()"
+            (checkedChange)="theme.setMode($event ? 'dark' : 'light')"
+          >
             Dark mode
           </ngxsmk-switch>
         </ngxsmk-h-stack>
@@ -73,9 +76,8 @@ import { NgxsmkThemeService } from '@ngxsmk/theme';
         </ngxsmk-card>
 
         <p style="color: var(--ngxsmk-color-on-surface-muted)">
-          Edit <code>src/app/app.ts</code>. Every component is a standalone, signal-based
-          Angular component imported from its own entry point
-          (<code>&#64;ngxsmk/core/&lt;name&gt;</code>).
+          Edit <code>src/app/app.ts</code>. Every component is a standalone, signal-based Angular
+          component imported from its own entry point (<code>&#64;ngxsmk/core/&lt;name&gt;</code>).
         </p>
       </ngxsmk-v-stack>
     </ngxsmk-container>

@@ -4,10 +4,10 @@ Not every entry point in `@ngxsmk/core` is at the same maturity. Use this
 list when deciding what to depend on in production, where to spend review
 budget, and what to treat as still evolving.
 
-| Tier             | Meaning                                                                                         |
-| ---------------- | ----------------------------------------------------------------------------------------------- |
-| **Core**         | Hardened primitives. Prefer these for new apps. Smoke-tested; API changes are rare and versioned. |
-| **Extended**     | Production-ready for their domain, but narrower audience (charts, AI/chat, media).                |
+| Tier             | Meaning                                                                                                |
+| ---------------- | ------------------------------------------------------------------------------------------------------ |
+| **Core**         | Hardened primitives. Prefer these for new apps. Smoke-tested; API changes are rare and versioned.      |
+| **Extended**     | Production-ready for their domain, but narrower audience (charts, AI/chat, media).                     |
 | **Experimental** | Useful today; APIs and behaviour may still move. Pin versions; prefer Core alternatives when possible. |
 
 Every name below is a secondary entry point: `@ngxsmk/core/<name>`.
