@@ -5,6 +5,25 @@ available via `ngxsmk migrate` and Angular CLI `ng update @ngxsmk/cli`.
 
 ---
 
+## Migrating to v3.2.0
+
+v3.2.0 is a **minor release** — fully backward compatible with all v3.1.x /
+v3.0.x consumers. No breaking changes, no API removals.
+
+### What's new
+
+- Optional peer dependencies: datepicker, tel-input, motion, and `@angular/cdk`
+  (select) no longer warn on a bare `@ngxsmk/core` install.
+- Theme stylesheet path remains `@ngxsmk/theme/styles/ngxsmk.css` (and now also
+  includes base button/input styles). If you previously imported a non-existent
+  `@ngxsmk/theme/css/tokens.css` path, switch to `styles/ngxsmk.css`.
+- `motion` v13/v14 are supported; CSS easing names like `ease-out` continue to
+  work.
+
+No code changes required for existing apps.
+
+---
+
 ## Migrating to v3.1.0
 
 v3.1.0 is a **minor release** — fully backward compatible with all v3.0.x

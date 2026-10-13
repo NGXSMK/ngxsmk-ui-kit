@@ -13,12 +13,18 @@ The component library of the [NGXSMK UI kit](https://ngxsmk.github.io/ngxsmk-ui-
 npm install @ngxsmk/core @ngxsmk/theme
 ```
 
-Peer dependencies (already present in any Angular app):
+Required peer dependencies (already present in any Angular app):
 
 - `@angular/common`, `@angular/core`, `@angular/forms`, `@ngxsmk/cdk`
-- `ngxsmk-datepicker`, `luxon` (datepicker component)
-- `ngxsmk-tel-input`, `@angular/material`, `@angular/cdk`, `intl-tel-input`, `libphonenumber-js` (tel input)
-- `motion` (optional — lazy-loaded animations)
+
+Optional peer dependencies — install only for the entry points you use. Everything else (button, dialog, table, …) works with the required peers alone and emits no install warnings:
+
+| Entry point               | Install                                                                                  |
+| ------------------------- | ---------------------------------------------------------------------------------------- |
+| `@ngxsmk/core/select`     | `npm i @angular/cdk`                                                                     |
+| `@ngxsmk/core/datepicker` | `npm i ngxsmk-datepicker luxon`                                                          |
+| `@ngxsmk/core/tel-input`  | `npm i ngxsmk-tel-input intl-tel-input libphonenumber-js @angular/cdk @angular/material` |
+| `@ngxsmk/core/animation`  | `npm i motion` (v12–v14; lazy-loaded, gracefully no-ops when absent)                     |
 
 ## Quick start
 
@@ -54,6 +60,12 @@ Load the base theme once (see [`@ngxsmk/theme`](../theme)):
 - **Utilities** — `copy-to-clipboard`, `seo`, `animation`, `i18n`
 
 See the [live demo](https://ngxsmk.github.io/ngxsmk-ui-kit) for examples of every component or join our [WhatsApp Channel](https://whatsapp.com/channel/0029Vb8PWpz1XquUOnGPUM2p) for updates.
+
+## Maturity tiers
+
+Not every entry is equally hardened. See
+[Component tiers](../../docs/COMPONENT_TIERS.md) for the **Core** /
+**Extended** / **Experimental** split — prefer Core for new production apps.
 
 ## Tree-shaking
 

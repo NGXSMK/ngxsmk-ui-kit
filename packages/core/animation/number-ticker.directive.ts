@@ -7,7 +7,7 @@ import {
   input,
   untracked,
 } from '@angular/core';
-import { animateValue, loadMotion, prefersReducedMotion } from './animate';
+import { animateValue, loadMotion, normalizeEase, prefersReducedMotion } from './animate';
 
 /**
  * Animates the host element's text content from a start number to a target
@@ -124,7 +124,7 @@ export class NgxsmkNumberTicker {
     const opts: Record<string, unknown> = {};
     opts['duration'] = this.numberTickerDuration();
     opts['delay'] = this.numberTickerDelay();
-    opts['ease'] = this.numberTickerEase();
+    opts['ease'] = normalizeEase(this.numberTickerEase());
     return opts;
   }
 

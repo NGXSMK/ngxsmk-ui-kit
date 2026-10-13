@@ -209,6 +209,28 @@ export function applyStyles(el: HTMLElement, styles: Record<string, string | num
   }
 }
 
+/** CSS easing keywords → the camelCase names motion's JS engine understands. */
+const CSS_EASE_TO_MOTION: Record<string, string> = {
+  ease: 'easeInOut',
+  'ease-in': 'easeIn',
+  'ease-out': 'easeOut',
+  'ease-in-out': 'easeInOut',
+};
+
+/**
+ * Normalise an easing value before handing it to `motion`.
+ *
+ * `motion.animate()` accepts camelCase names (`'easeOut'`), cubic-bezier
+ * arrays, and functions. CSS keywords such as `'ease-out'` work only when the
+ * browser lets motion delegate to WAAPI with native `linear()` support; on any
+ * other path motion throws `Invalid easing type`. Mapping the CSS spellings
+ * here lets every `ease` input accept either form.
+ */
+export function normalizeEase<T>(ease: T): T | string {
+  if (typeof ease !== 'string') return ease;
+  return CSS_EASE_TO_MOTION[ease] ?? ease;
+}
+
 /**
  * Convert a `NgxsmkTransition` (our type) into the plain options object
  * that `motion.animate()` accepts.
@@ -224,8 +246,8 @@ export function toMotionOptions(
     const t = transition as NgxsmkTweenTransition;
     if (t.duration != null) opts['duration'] = t.duration;
     if (t.delay != null) opts['delay'] = t.delay;
-    if (t.ease != null) opts['ease'] = t.ease;
-    else if (t.easing != null) opts['ease'] = t.easing;
+    if (t.ease != null) opts['ease'] = normalizeEase(t.ease);
+    else if (t.easing != null) opts['ease'] = normalizeEase(t.easing);
     if (t.times != null) opts['times'] = t.times;
   } else if (transition.type === 'spring') {
     const s = transition as NgxsmkSpringTransition;
@@ -260,7 +282,7 @@ function toStaggerDelay(motion: MotionModule, stagger: NgxsmkStagger): number {
   const opts: Record<string, unknown> = {};
   if (stagger.startDelay != null) opts['startDelay'] = stagger.startDelay;
   if (stagger.from != null) opts['from'] = stagger.from;
-  if (stagger.ease != null) opts['ease'] = stagger.ease;
+  if (stagger.ease != null) opts['ease'] = normalizeEase(stagger.ease);
   return motion.stagger(stagger.interval, opts);
 }
 

@@ -14,6 +14,7 @@ import {
   NgxsmkTweenTransition,
   NgxsmkSpringTransition,
   loadMotion,
+  normalizeEase,
   prefersReducedMotion,
 } from './animate';
 
@@ -170,7 +171,7 @@ export class NgxsmkHover {
           if (!enterState.transition.type || enterState.transition.type === 'tween') {
             const t = enterState.transition as NgxsmkTweenTransition;
             if (t.duration != null) opts['duration'] = t.duration;
-            if (t.ease != null) opts['ease'] = t.ease;
+            if (t.ease != null) opts['ease'] = normalizeEase(t.ease);
           } else if (enterState.transition.type === 'spring') {
             const s = enterState.transition as NgxsmkSpringTransition;
             opts['type'] = 'spring';
@@ -188,7 +189,7 @@ export class NgxsmkHover {
             if (!leaveState.transition.type || leaveState.transition.type === 'tween') {
               const t = leaveState.transition as NgxsmkTweenTransition;
               if (t.duration != null) leaveOpts['duration'] = t.duration;
-              if (t.ease != null) leaveOpts['ease'] = t.ease;
+              if (t.ease != null) leaveOpts['ease'] = normalizeEase(t.ease);
             } else if (leaveState.transition.type === 'spring') {
               const s = leaveState.transition as NgxsmkSpringTransition;
               leaveOpts['type'] = 'spring';

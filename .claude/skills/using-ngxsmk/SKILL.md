@@ -33,7 +33,7 @@ or copy this skill folder into any consumer project's `.claude/skills/`.
    ```
 
 4. **Theming.** Import theme CSS once (e.g. in `styles.css`):
-   `@import '@ngxsmk/theme/css';`. Customize ONLY via `--ngxsmk-*` custom
+   `@import '@ngxsmk/theme/styles/ngxsmk.css';`. Customize ONLY via `--ngxsmk-*` custom
    properties (`--ngxsmk-color-primary`, `--ngxsmk-radius-md`,
    `--ngxsmk-space-4`, ...). Never override internal `.ngxsmk-*` classes.
    Dark mode: add the `dark` class to `<html>`.

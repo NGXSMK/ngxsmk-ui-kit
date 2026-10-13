@@ -1,6 +1,6 @@
 {
   "name": "ngxsmk-ui-kit",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -24,6 +24,8 @@
     "build": "npm run theme:css && npm run build:libs && npm run build:mcp && npm run build:demo",
     "watch": "ng build --watch --configuration development",
     "test": "ng test @ngxsmk/theme --watch=false && ng test @ngxsmk/cdk --watch=false && ng test @ngxsmk/core --watch=false",
+    "test:smoke:gen": "node tools/scripts/generate-smoke-specs.mjs",
+    "test:smoke:check": "node tools/scripts/generate-smoke-specs.mjs --check",
     "theme:css": "tsx tools/scripts/generate-theme-css.ts",
     "build:libs": "ng build @ngxsmk/theme && ng build @ngxsmk/cdk && ng build @ngxsmk/core",
     "build:mcp": "npx tsc -p packages/mcp/tsconfig.json",
@@ -76,7 +78,7 @@
     "libphonenumber-js": "^1.13.8",
     "luxon": "^3.7.2",
     "minisearch": "^7.2.0",
-    "motion": "^12.42.2",
+    "motion": "^14.0.0",
     "ngxsmk-datepicker": "^2.3.1",
     "ngxsmk-tel-input": "^1.8.4",
     "qrcode-generator": "^2.0.4",

@@ -1,6 +1,6 @@
 {
   "name": "@ngxsmk/theme",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "description": "Runtime theming and design-token engine for @ngxsmk/core with light/dark modes and preset palettes.",
   "keywords": [
     "angular",
@@ -55,7 +55,9 @@
       "types": "./tailwind/preset-v3.d.ts",
       "default": "./tailwind/preset-v3.js"
     },
-    "./tailwind/v4.css": "./tailwind-v4.css"
+    "./tailwind/v4.css": "./tailwind-v4.css",
+    "./css": "./styles/ngxsmk.css",
+    "./styles/*.css": "./styles/*.css"
   },
   "publishConfig": {
     "access": "public"

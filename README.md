@@ -15,8 +15,11 @@ tree-shakable standalone components.
 [![Angular](https://img.shields.io/badge/Angular-17.3%20→%2022-dd0031?logo=angular&logoColor=white)](https://angular.dev)
 [![WhatsApp Channel](https://img.shields.io/badge/WhatsApp-Channel-25D366?logo=whatsapp&logoColor=white)](https://whatsapp.com/channel/0029Vb8PWpz1XquUOnGPUM2p)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
+[![Open in StackBlitz](https://img.shields.io/badge/StackBlitz-quickstart-1389FD?logo=stackblitz&logoColor=white)](https://stackblitz.com/github/NGXSMK/ngxsmk-ui-kit/tree/main/examples/quickstart?file=src%2Fapp%2Fapp.ts)
 
-[**Live Demo**](https://ngxsmk.github.io/ngxsmk-ui-kit) · [**WhatsApp Channel**](https://whatsapp.com/channel/0029Vb8PWpz1XquUOnGPUM2p)
+[**Live Demo**](https://ngxsmk.github.io/ngxsmk-ui-kit) ·
+[**Open in StackBlitz**](https://stackblitz.com/github/NGXSMK/ngxsmk-ui-kit/tree/main/examples/quickstart?file=src%2Fapp%2Fapp.ts) ·
+[**WhatsApp Channel**](https://whatsapp.com/channel/0029Vb8PWpz1XquUOnGPUM2p)
 
 </div>
 
@@ -87,6 +90,7 @@ all-in-one kit for signal-native, zoneless Angular apps._
 ## Table of contents
 
 - [Quick start](#quick-start)
+- [Try it in the browser](#try-it-in-the-browser)
 - [Features](#features)
 - [Packages](#packages)
 - [Components](#components)
@@ -173,14 +177,35 @@ export class App {}
 > **Prefer deep imports** (`@ngxsmk/core/button`) over the barrel
 > (`@ngxsmk/core`) so the bundler tree-shakes unused components.
 
+## Try it in the browser
+
+A zoneless starter (button, card, form field, dialog, dark-mode toggle) lives
+in [`examples/quickstart`](./examples/quickstart) and opens in StackBlitz with
+one click:
+
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/NGXSMK/ngxsmk-ui-kit/tree/main/examples/quickstart?file=src%2Fapp%2Fapp.ts)
+
+Or clone and run locally:
+
+```bash
+cd examples/quickstart
+npm install
+npm start
+```
+
 ### Peer dependencies
 
 `@ngxsmk/core` declares these **peer dependencies** (you already have the
-`@angular/*` ones in any Angular app):
+`@angular/*` ones in any Angular app). Everything below the first block is
+marked **optional** in `package.json`, so `npm install @ngxsmk/core` on its own
+installs cleanly with no peer warnings:
 
 ```bash
 # Always required
 npm install @angular/common @angular/core @angular/forms @ngxsmk/cdk
+
+# Only if you use the select component (popup positioning)
+npm install @angular/cdk
 
 # Only if you use the datepicker component
 npm install ngxsmk-datepicker luxon
@@ -188,12 +213,12 @@ npm install ngxsmk-datepicker luxon
 # Only if you use the telephone input component
 npm install ngxsmk-tel-input @angular/material @angular/cdk intl-tel-input libphonenumber-js
 
-# Only if you enable animations (optional)
+# Only if you enable animations (optional, v12–v14)
 npm install motion
 ```
 
-> `motion` is an **optional** peer — components work without it; animations are
-> lazy-loaded and only pulled in when an animation actually runs.
+> `motion` is lazy-loaded and only pulled in when an animation actually runs;
+> components work without it.
 
 ## Features
 
@@ -221,6 +246,10 @@ npm install motion
 A curated slice of the catalog — every name below is a deep entry point
 (`@ngxsmk/core/<name>`). Import only what you use, and browse them all in the
 [live component explorer](https://ngxsmk.github.io/ngxsmk-ui-kit/showcase/explorer).
+
+Maturity is tagged in
+[**Component tiers**](./docs/COMPONENT_TIERS.md) (**Core** / **Extended** /
+**Experimental**) so you know what is hardened vs still evolving.
 
 - **Forms & inputs** — `input`, `textarea`, `select`, `multi-select`, `combobox`, `autocomplete`, `typeahead`, `number-input`, `pin-input`, `slider`, `checkbox`, `radio`, `switch`, `form-field`, `datepicker`, `tel-input`, `tag`, `segmented-control`, `rating`, `toggle-button`
 - **Buttons & actions** — `button`, `button-group`, `fab`, `split-button`, `link`

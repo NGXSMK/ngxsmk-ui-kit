@@ -12,10 +12,10 @@ Components appear unstyled or colors render as plain black/white.
 
 ### Solution:
 
-Ensure `@ngxsmk/theme/css/tokens.css` is imported in your global stylesheet (`src/styles.scss`):
+Ensure `@ngxsmk/theme/styles/ngxsmk.css` is imported in your global stylesheet (`src/styles.scss`):
 
 ```scss
-@import '@ngxsmk/theme/css/tokens.css';
+@import '@ngxsmk/theme/styles/ngxsmk.css';
 ```
 
 ---

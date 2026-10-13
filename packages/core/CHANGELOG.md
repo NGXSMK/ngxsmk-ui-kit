@@ -1,5 +1,20 @@
 # @ngxsmk/core
 
+## 3.2.0
+
+### Minor Changes
+
+- Heavy peers (`ngxsmk-datepicker`, `luxon`, `ngxsmk-tel-input`, `intl-tel-input`,
+  `libphonenumber-js`, `@angular/cdk`, `motion`) marked **optional** in
+  `peerDependenciesMeta` — install only for the entry points you use.
+- `motion` peer range: `^12.0.0 || ^13.0.0 || ^14.0.0`.
+- Smoke specs generated for every secondary entry point.
+- `normalizeEase()` maps CSS keywords (`ease-out`, …) to Motion-compatible names.
+
+### Changed
+
+- Version bumped to 3.2.0.
+
 ## 3.1.0
 
 ### Minor Changes
