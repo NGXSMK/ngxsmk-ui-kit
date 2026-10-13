@@ -69,24 +69,25 @@ function installBrowserShims(): void {
   g['IntersectionObserver'] ??= ObserverShim;
   g['MutationObserver'] ??= ObserverShim;
 
+  // jsdom (and some Vitest environments) expose matchMedia but return a
+  // MediaQueryList missing EventTarget methods. Always install a complete shim
+  // so destroy-time removeEventListener in components does not throw.
   const win = globalThis as unknown as Window;
-  if (typeof win.matchMedia !== 'function') {
-    Object.defineProperty(win, 'matchMedia', {
-      configurable: true,
-      writable: true,
-      value: (query: string): MediaQueryList =>
-        ({
-          matches: false,
-          media: query,
-          onchange: null,
-          addEventListener: () => {},
-          removeEventListener: () => {},
-          addListener: () => {},
-          removeListener: () => {},
-          dispatchEvent: () => false,
-        }) as unknown as MediaQueryList,
-    });
-  }
+  Object.defineProperty(win, 'matchMedia', {
+    configurable: true,
+    writable: true,
+    value: (query: string): MediaQueryList =>
+      ({
+        matches: false,
+        media: query,
+        onchange: null,
+        addEventListener: () => {},
+        removeEventListener: () => {},
+        addListener: () => {},
+        removeListener: () => {},
+        dispatchEvent: () => false,
+      }) as unknown as MediaQueryList,
+  });
 
   // jsdom logs "Not implemented" through console.error for these; make them
   // inert instead so a component using them is not flagged as erroring.
