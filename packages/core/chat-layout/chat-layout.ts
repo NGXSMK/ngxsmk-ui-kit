@@ -480,8 +480,15 @@ export class NgxsmkChatLayout {
       }
     };
 
-    mq.addEventListener('change', handler);
-    this.destroyRef.onDestroy(() => mq.removeEventListener('change', handler));
+    // Prefer EventTarget APIs; fall back to legacy addListener/removeListener
+    // for incomplete matchMedia shims (e.g. older jsdom).
+    if (typeof mq.addEventListener === 'function') {
+      mq.addEventListener('change', handler);
+      this.destroyRef.onDestroy(() => mq.removeEventListener('change', handler));
+    } else {
+      mq.addListener(handler);
+      this.destroyRef.onDestroy(() => mq.removeListener(handler));
+    }
   }
 
   private _setupScrollTracking(): void {
