@@ -103,6 +103,8 @@ export class NgxsmkPresence {
 
   readonly afterLeave = output<void>();
 
+  private exitGeneration = 0;
+
   // Derived state — compose individual inputs into NgxsmkMotionState
   private readonly _composedState = computed<NgxsmkMotionState>(() => {
     const stateInput = this.motion();
@@ -160,19 +162,29 @@ export class NgxsmkPresence {
       const state = this._composedState();
       untracked(() => {
         if (show) {
+          this.exitGeneration += 1;
           if (this.viewContainer.length === 0) {
             const view = this.viewContainer.createEmbeddedView(this.template);
             const el = view.rootNodes.find((n): n is HTMLElement => n instanceof HTMLElement);
             if (el) {
               void playEnter(el, state);
             }
+          } else {
+            const view = this.viewContainer.get(0) as EmbeddedViewRef<unknown> | null;
+            const el =
+              view?.rootNodes.find((n): n is HTMLElement => n instanceof HTMLElement) ?? null;
+            if (el) {
+              void playEnter(el, state);
+            }
           }
         } else if (this.viewContainer.length > 0) {
+          const gen = (this.exitGeneration += 1);
           const view = this.viewContainer.get(0) as EmbeddedViewRef<unknown> | null;
           const el =
             view?.rootNodes.find((n): n is HTMLElement => n instanceof HTMLElement) ?? null;
           const target = el ?? this.host.nativeElement;
           void playExit(target, state).then(() => {
+            if (gen !== this.exitGeneration) return;
             this.viewContainer.clear();
             this.afterLeave.emit();
           });

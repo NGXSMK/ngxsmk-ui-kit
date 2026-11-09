@@ -36,12 +36,18 @@ const DEFAULT_DURATION_MS = 5000;
  * Toast state and API. Render `<ngxsmk-toaster />` once near the app root,
  * then call `show`/`success`/`error` from anywhere.
  */
+const LEAVE_FALLBACK_MS = 400;
+
 @Injectable({ providedIn: 'root' })
 export class NgxsmkToast {
   private readonly announcer = inject(NgxsmkLiveAnnouncer);
   private readonly items = signal<NgxsmkActiveToast[]>([]);
   private readonly leaving = signal<ReadonlySet<number>>(new Set());
   private readonly timers = new Map<number, ReturnType<typeof setTimeout>>();
+  private readonly leaveFallbacks = new Map<number, ReturnType<typeof setTimeout>>();
+  private readonly remainingMs = new Map<number, number>();
+  private readonly deadlineMs = new Map<number, number>();
+  private readonly paused = new Set<number>();
   private nextId = 0;
 
   isLeaving(id: number): boolean {
@@ -68,12 +74,50 @@ export class NgxsmkToast {
     );
 
     if (toast.duration > 0) {
-      this.timers.set(
-        toast.id,
-        setTimeout(() => this.dismiss(toast.id), toast.duration),
-      );
+      this.armTimer(toast.id, toast.duration);
     }
     return toast.id;
+  }
+
+  /** Pause auto-dismiss while the toast is hovered or focused. */
+  pause(id: number): void {
+    if (this.paused.has(id) || this.isLeaving(id)) return;
+    const deadline = this.deadlineMs.get(id);
+    if (deadline == null) return;
+    this.paused.add(id);
+    this.clearTimer(id);
+    this.remainingMs.set(id, Math.max(0, deadline - Date.now()));
+    this.deadlineMs.delete(id);
+  }
+
+  /** Resume auto-dismiss after hover/focus ends. */
+  resume(id: number): void {
+    if (!this.paused.has(id) || this.isLeaving(id)) return;
+    this.paused.delete(id);
+    const remaining = this.remainingMs.get(id) ?? 0;
+    this.remainingMs.delete(id);
+    if (remaining <= 0) {
+      this.dismiss(id);
+      return;
+    }
+    this.armTimer(id, remaining);
+  }
+
+  private armTimer(id: number, ms: number): void {
+    this.clearTimer(id);
+    this.deadlineMs.set(id, Date.now() + ms);
+    this.timers.set(
+      id,
+      setTimeout(() => this.dismiss(id), ms),
+    );
+  }
+
+  private clearTimer(id: number): void {
+    const timer = this.timers.get(id);
+    if (timer) {
+      clearTimeout(timer);
+      this.timers.delete(id);
+    }
   }
 
   success(title: string, description?: string): number {
@@ -90,11 +134,10 @@ export class NgxsmkToast {
   }
 
   dismiss(id: number): void {
-    const timer = this.timers.get(id);
-    if (timer) {
-      clearTimeout(timer);
-      this.timers.delete(id);
-    }
+    this.clearTimer(id);
+    this.paused.delete(id);
+    this.remainingMs.delete(id);
+    this.deadlineMs.delete(id);
     if (this.isLeaving(id)) {
       return;
     }
@@ -107,10 +150,19 @@ export class NgxsmkToast {
       next.add(id);
       return next;
     });
+    this.leaveFallbacks.set(
+      id,
+      setTimeout(() => this.commitDismiss(id), LEAVE_FALLBACK_MS),
+    );
   }
 
   /** Called once a toast's leave animation ends. */
   commitDismiss(id: number): void {
+    const fallback = this.leaveFallbacks.get(id);
+    if (fallback) {
+      clearTimeout(fallback);
+      this.leaveFallbacks.delete(id);
+    }
     this.leaving.update((set) => {
       if (!set.has(id)) {
         return set;
@@ -127,6 +179,13 @@ export class NgxsmkToast {
       clearTimeout(timer);
     }
     this.timers.clear();
+    this.paused.clear();
+    this.remainingMs.clear();
+    this.deadlineMs.clear();
+    for (const timer of this.leaveFallbacks.values()) {
+      clearTimeout(timer);
+    }
+    this.leaveFallbacks.clear();
     this.leaving.set(new Set());
     this.items.set([]);
   }
@@ -149,6 +208,10 @@ export class NgxsmkToast {
         [attr.data-variant]="toast.variant"
         [class.leaving]="service.isLeaving(toast.id)"
         (animationend)="onAnimEnd($event, toast.id)"
+        (mouseenter)="service.pause(toast.id)"
+        (mouseleave)="service.resume(toast.id)"
+        (focusin)="service.pause(toast.id)"
+        (focusout)="onFocusOut($event, toast.id)"
       >
         <div class="ngxsmk-toaster__accent" aria-hidden="true"></div>
         <div class="ngxsmk-toaster__body">
@@ -330,8 +393,21 @@ export class NgxsmkToaster {
   protected readonly toasts = computed(() => this.service.toasts());
 
   protected onAnimEnd(event: AnimationEvent, id: number): void {
-    if (event.animationName === 'ngxsmk-toast-out') {
+    if (
+      event.target === event.currentTarget &&
+      this.service.isLeaving(id) &&
+      (event.animationName === 'ngxsmk-toast-out' ||
+        event.animationName.endsWith('_ngxsmk-toast-out'))
+    ) {
       this.service.commitDismiss(id);
     }
+  }
+
+  protected onFocusOut(event: FocusEvent, id: number): void {
+    const next = event.relatedTarget as Node | null;
+    if (next && (event.currentTarget as Node).contains(next)) {
+      return;
+    }
+    this.service.resume(id);
   }
 }

@@ -1,13 +1,13 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  ContentChild,
   TemplateRef,
   computed,
+  contentChild,
   input,
   signal,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 
 /**
  * Signals-native virtual scroll container for rendering massive datasets with 60 FPS performance.
@@ -23,7 +23,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   standalone: true,
   selector: 'ngxsmk-virtual-scroll',
-  imports: [CommonModule],
+  imports: [NgTemplateOutlet],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     class: 'ngxsmk-virtual-scroll',
@@ -38,7 +38,7 @@ import { CommonModule } from '@angular/common';
           @for (item of visibleItems(); track $index) {
             <ng-container
               *ngTemplateOutlet="
-                template || defaultItemTpl;
+                rowTemplate(defaultItemTpl);
                 context: { $implicit: item.data, index: item.index }
               "
             ></ng-container>
@@ -97,7 +97,15 @@ export class NgxsmkVirtualScroll<T = unknown> {
   readonly itemHeight = input<number>(40);
   readonly buffer = input<number>(5);
 
-  @ContentChild(TemplateRef) protected template?: TemplateRef<{ $implicit: T; index: number }>;
+  private readonly projectedTemplate = contentChild<
+    TemplateRef<{ $implicit: T; index: number }>
+  >(TemplateRef);
+
+  protected rowTemplate(
+    fallback: TemplateRef<{ $implicit: T; index: number }>,
+  ): TemplateRef<{ $implicit: T; index: number }> {
+    return this.projectedTemplate() ?? fallback;
+  }
 
   protected readonly scrollTop = signal(0);
 

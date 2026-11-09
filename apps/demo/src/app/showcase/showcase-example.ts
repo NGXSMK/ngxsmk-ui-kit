@@ -19,11 +19,6 @@ type ApiPanel = 'code' | 'api' | 'customize';
   template: `
     <div class="ngxsmk-sc-ex">
       <div class="ngxsmk-sc-ex__head">
-        <div class="traffic-lights" aria-hidden="true">
-          <span class="light red"></span>
-          <span class="light yellow"></span>
-          <span class="light green"></span>
-        </div>
         <div class="ngxsmk-sc-ex__heading">
           <div class="ngxsmk-sc-ex__title-row">
             <h3 class="ngxsmk-sc-ex__title">{{ title() }}</h3>
@@ -80,6 +75,7 @@ type ApiPanel = 'code' | 'api' | 'customize';
             type="button"
             class="ngxsmk-sc-ex__vp-btn"
             [class.ngxsmk-sc-ex__vp-btn--active]="viewport() === 'full'"
+            [attr.aria-pressed]="viewport() === 'full'"
             (click)="viewport.set('full')"
             title="Desktop (100%)"
             aria-label="Desktop viewport"
@@ -101,6 +97,7 @@ type ApiPanel = 'code' | 'api' | 'customize';
             type="button"
             class="ngxsmk-sc-ex__vp-btn"
             [class.ngxsmk-sc-ex__vp-btn--active]="viewport() === 'tablet'"
+            [attr.aria-pressed]="viewport() === 'tablet'"
             (click)="viewport.set('tablet')"
             title="Tablet (768px)"
             aria-label="Tablet viewport"
@@ -121,6 +118,7 @@ type ApiPanel = 'code' | 'api' | 'customize';
             type="button"
             class="ngxsmk-sc-ex__vp-btn"
             [class.ngxsmk-sc-ex__vp-btn--active]="viewport() === 'mobile'"
+            [attr.aria-pressed]="viewport() === 'mobile'"
             (click)="viewport.set('mobile')"
             title="Mobile (380px)"
             aria-label="Mobile viewport"
@@ -148,45 +146,6 @@ type ApiPanel = 'code' | 'api' | 'customize';
         >
           <ng-content />
         </div>
-        @if (code()) {
-          <button
-            class="ngxsmk-sc-ex__copy-btn"
-            type="button"
-            (click)="copyPreviewCode()"
-            [attr.aria-label]="'showcaseExample.copy' | translate"
-          >
-            @if (copiedPreview()) {
-              <svg
-                width="13"
-                height="13"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-              {{ 'showcaseExample.copied' | translate }}
-            } @else {
-              <svg
-                width="13"
-                height="13"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <rect x="9" y="9" width="13" height="13" rx="2" />
-                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-              </svg>
-              {{ 'showcaseExample.copyCode' | translate }}
-            }
-          </button>
-        }
       </div>
 
       <div class="ngxsmk-sc-ex__actions">
@@ -195,6 +154,7 @@ type ApiPanel = 'code' | 'api' | 'customize';
             class="ngxsmk-sc-ex__tab"
             type="button"
             [class.ngxsmk-sc-ex__tab--active]="panel() === 'code'"
+            [attr.aria-expanded]="panel() === 'code'"
             (click)="toggle('code')"
           >
             <svg
@@ -218,6 +178,7 @@ type ApiPanel = 'code' | 'api' | 'customize';
             class="ngxsmk-sc-ex__tab"
             type="button"
             [class.ngxsmk-sc-ex__tab--active]="panel() === 'api'"
+            [attr.aria-expanded]="panel() === 'api'"
             (click)="toggle('api')"
           >
             <svg
@@ -244,6 +205,7 @@ type ApiPanel = 'code' | 'api' | 'customize';
             class="ngxsmk-sc-ex__tab"
             type="button"
             [class.ngxsmk-sc-ex__tab--active]="panel() === 'customize'"
+            [attr.aria-expanded]="panel() === 'customize'"
             (click)="toggle('customize')"
           >
             <svg
@@ -285,6 +247,45 @@ type ApiPanel = 'code' | 'api' | 'customize';
               <line x1="10" y1="14" x2="21" y2="3" />
             </svg>
             StackBlitz
+          </button>
+        }
+        @if (code()) {
+          <button
+            class="ngxsmk-sc-ex__copy-btn"
+            type="button"
+            (click)="copyPreviewCode()"
+            [attr.aria-label]="'showcaseExample.copy' | translate"
+          >
+            @if (copiedPreview()) {
+              <svg
+                width="13"
+                height="13"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              {{ 'showcaseExample.copied' | translate }}
+            } @else {
+              <svg
+                width="13"
+                height="13"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="9" y="9" width="13" height="13" rx="2" />
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+              </svg>
+              {{ 'showcaseExample.copyCode' | translate }}
+            }
           </button>
         }
       </div>
@@ -443,27 +444,19 @@ type ApiPanel = 'code' | 'api' | 'customize';
       scroll-margin-top: 5rem;
     }
 
+    :host {
+      display: block;
+      container-type: inline-size;
+    }
+
     .ngxsmk-sc-ex {
       position: relative;
-      width: 100%;
-      border: 1px solid var(--color-border, #e2e8f0);
-      border-radius: var(--radius-xl, 20px);
-      background: var(--color-bg-card, #ffffff);
-      margin-block-end: 2rem;
-      overflow: hidden;
-      box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
-      transition:
-        border-color 0.22s ease,
-        box-shadow 0.22s ease;
-      z-index: auto;
+      margin-block-end: var(--ngxsmk-space-8);
+      background: var(--ngxsmk-color-surface);
+      border: 1px solid var(--ngxsmk-color-outline-variant);
+      border-radius: var(--ngxsmk-radius-lg);
     }
 
-    .ngxsmk-sc-ex:hover {
-      border-color: rgba(99, 102, 241, 0.45);
-      box-shadow: 0 16px 36px -8px rgba(99, 102, 241, 0.12);
-    }
-
-    /* Lift the active example so select/menu/popover clear the next card. */
     .ngxsmk-sc-ex:focus-within {
       z-index: 20;
     }
@@ -471,35 +464,26 @@ type ApiPanel = 'code' | 'api' | 'customize';
     .ngxsmk-sc-ex__head {
       display: flex;
       flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.75rem 1rem;
-      padding: 0.85rem 1.25rem;
-      background: var(--color-bg-elevated, #f1f5f9);
-      border-bottom: 1px solid var(--color-border, #e2e8f0);
+      align-items: flex-start;
+      gap: var(--ngxsmk-space-4);
+      padding: var(--ngxsmk-space-5);
     }
 
-    .traffic-lights {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-right: 0.25rem;
-    }
+    @container (min-width: 48rem) {
+      .ngxsmk-sc-ex {
+        display: grid;
+        grid-template-columns: minmax(12rem, 28%) minmax(0, 1fr);
+      }
 
-    .traffic-lights .light {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-    }
+      .ngxsmk-sc-ex__head {
+        flex-direction: column;
+        border-inline-end: 1px solid var(--ngxsmk-color-outline-variant);
+      }
 
-    .traffic-lights .light.red {
-      background: #ef4444;
-    }
-    .traffic-lights .light.yellow {
-      background: #f59e0b;
-    }
-    .traffic-lights .light.green {
-      background: #10b981;
+      .ngxsmk-sc-ex > :nth-child(n + 3) {
+        grid-column: 1 / -1;
+        min-width: 0;
+      }
     }
 
     .ngxsmk-sc-ex__heading {
@@ -581,8 +565,8 @@ type ApiPanel = 'code' | 'api' | 'customize';
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 1.85rem;
-      height: 1.85rem;
+      width: 2.25rem;
+      height: 2.25rem;
       border: none;
       border-radius: 9999px;
       background: transparent;
@@ -611,11 +595,15 @@ type ApiPanel = 'code' | 'api' | 'customize';
       padding: 2.25rem 1.75rem;
       overflow: visible;
       background-color: var(--color-bg-card, #ffffff);
-      background-image: radial-gradient(
-        color-mix(in srgb, var(--brand-primary, #6366f1) 12%, transparent) 1px,
-        transparent 1px
+      background-color: color-mix(
+        in srgb,
+        var(--ngxsmk-color-primary) 4%,
+        var(--ngxsmk-color-surface)
       );
-      background-size: 18px 18px;
+      display: grid;
+      align-items: center;
+      min-height: 9rem;
+      min-width: 0;
       transition: padding 0.2s ease;
     }
 
@@ -668,9 +656,7 @@ type ApiPanel = 'code' | 'api' | 'customize';
     }
 
     .ngxsmk-sc-ex__copy-btn {
-      position: absolute;
-      top: 0.85rem;
-      right: 0.85rem;
+      margin-inline-start: auto;
       display: inline-flex;
       align-items: center;
       gap: 0.35rem;
@@ -684,14 +670,14 @@ type ApiPanel = 'code' | 'api' | 'customize';
       font-size: 0.72rem;
       font-weight: 600;
       cursor: pointer;
-      opacity: 0;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
       transition: all 0.18s ease;
       z-index: 5;
     }
 
-    .ngxsmk-sc-ex:hover .ngxsmk-sc-ex__copy-btn {
-      opacity: 1;
+    .ngxsmk-sc-ex button:focus-visible {
+      outline: 2px solid var(--ngxsmk-color-primary);
+      outline-offset: 2px;
     }
 
     .ngxsmk-sc-ex__copy-btn:hover {
@@ -979,6 +965,7 @@ type ApiPanel = 'code' | 'api' | 'customize';
   `,
 })
 export class ShowcaseExample {
+  readonly anchor = input<string>();
   readonly title = input.required<string>();
   readonly description = input<string>('');
   /** Optional source snippet shown in a collapsible panel. */
@@ -1046,10 +1033,13 @@ export class ShowcaseExample {
   }
 
   protected readonly elementId = computed(() => {
-    return this.title()
-      .toLowerCase()
-      .trim()
-      .replace(/[^a-z0-9]+/g, '-');
+    return (
+      this.anchor() ??
+      this.title()
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9]+/g, '-')
+    );
   });
 
   protected copyCode(): void {

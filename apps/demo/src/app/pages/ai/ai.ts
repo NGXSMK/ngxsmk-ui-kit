@@ -75,10 +75,12 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
   ],
 
   template: `
-    <h2 class="ngxsmk-page-title">{{ 'category.ai' | translate }}</h2>
-    <p class="ngxsmk-page-desc">
+    <header class="category-intro">
+      <h1 class="ngxsmk-page-title">{{ 'category.ai' | translate }}</h1>
+      <p class="ngxsmk-page-desc">
       {{ 'ai.pageDesc' | translate }}
     </p>
+    </header>
 
     <showcase-example
       title="Agent Card"

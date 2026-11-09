@@ -2,12 +2,12 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  ViewChild,
   computed,
   input,
   model,
   output,
   signal,
+  viewChild,
 } from '@angular/core';
 
 /**
@@ -115,7 +115,7 @@ import {
       max-width: 100%;
       max-height: 100%;
       object-fit: contain;
-      transition: transform 0.15s ease;
+      transition: transform var(--ngxsmk-duration-fast, 0.15s) ease;
     }
 
     .ngxsmk-cropper__overlay {
@@ -204,7 +204,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgxsmkImageCropper {
-  @ViewChild('imgEl') imgEl!: ElementRef<HTMLImageElement>;
+  private readonly imgEl = viewChild<ElementRef<HTMLImageElement>>('imgEl');
 
   /** Source image URL. */
   readonly src = input<string>('');

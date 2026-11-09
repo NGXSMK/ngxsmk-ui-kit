@@ -375,6 +375,26 @@ button:focus {
   max-width: 46rem;
 }
 
+.category-intro {
+  display: grid;
+  gap: var(--ngxsmk-space-3);
+  padding-block: var(--ngxsmk-space-5);
+  margin-block-end: var(--ngxsmk-space-6);
+  border-block-end: 1px solid var(--ngxsmk-color-outline-variant);
+
+  .ngxsmk-page-title,
+  .ngxsmk-page-desc {
+    margin: 0;
+    text-wrap: pretty;
+  }
+
+  @media (min-width: 72rem) {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    align-items: baseline;
+    gap: var(--ngxsmk-space-8);
+  }
+}
+
 /* Global 2026 Badges, Traffic Lights & Terminals */
 .version-badge {
   display: inline-flex;

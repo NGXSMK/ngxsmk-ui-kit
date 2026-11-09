@@ -762,6 +762,7 @@ type RadiusKey = keyof typeof RADII;
           [attr.aria-label]="'playground.codeEditor' | translate"
           class="sidenav-btn"
           [class.active]="tab() === 'code'"
+          [attr.aria-pressed]="tab() === 'code'"
           (click)="tab.set('code')"
         >
           <svg
@@ -786,6 +787,7 @@ type RadiusKey = keyof typeof RADII;
           [attr.aria-label]="'playground.themeEditor' | translate"
           class="sidenav-btn"
           [class.active]="tab() === 'theme'"
+          [attr.aria-pressed]="tab() === 'theme'"
           (click)="tab.set('theme')"
         >
           <svg
@@ -821,7 +823,7 @@ type RadiusKey = keyof typeof RADII;
                 <span class="light yellow"></span>
                 <span class="light green"></span>
               </div>
-              <h3 class="panel-title">{{ 'playground.title' | translate }}</h3>
+              <h1 class="panel-title">{{ 'playground.title' | translate }}</h1>
             </div>
 
             <ngxsmk-h-stack gap="var(--ngxsmk-space-2)">

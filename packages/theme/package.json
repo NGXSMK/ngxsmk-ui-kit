@@ -24,8 +24,8 @@
     "url": "https://github.com/NGXSMK/ngxsmk-ui-kit/issues"
   },
   "peerDependencies": {
-    "@angular/common": ">=17.3.0",
-    "@angular/core": ">=17.3.0",
+    "@angular/common": ">=17.3.0 <23.0.0",
+    "@angular/core": ">=17.3.0 <23.0.0",
     "@ionic/angular": ">=7.0.0 || >=8.0.0"
   },
   "peerDependenciesMeta": {

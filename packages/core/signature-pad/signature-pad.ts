@@ -2,15 +2,14 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  ViewChild,
   afterNextRender,
   forwardRef,
   input,
   model,
   output,
   signal,
+  viewChild,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { CvaBase } from '@ngxsmk/cdk/cva-base';
 import { NGXSMK_FORM_FIELD_CONTROL, NgxsmkFormFieldControl } from '@ngxsmk/core/form-field';
 import { ngxsmkUniqueId } from '@ngxsmk/core/util';
@@ -25,7 +24,6 @@ import { ngxsmkUniqueId } from '@ngxsmk/core/util';
 @Component({
   standalone: true,
   selector: 'ngxsmk-signature-pad',
-  imports: [CommonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
@@ -113,7 +111,7 @@ import { ngxsmkUniqueId } from '@ngxsmk/core/util';
       color: var(--ngxsmk-color-on-surface);
       font-size: var(--ngxsmk-text-body-xs-size, 0.75rem);
       cursor: pointer;
-      transition: all 0.15s ease;
+      transition: all var(--ngxsmk-duration-fast, 0.15s) ease;
     }
 
     .ngxsmk-signature-pad__btn--clear:hover:not(:disabled) {
@@ -143,7 +141,7 @@ export class NgxsmkSignaturePad extends CvaBase<string> implements NgxsmkFormFie
   readonly ariaInvalid = model(false);
   readonly ariaDescribedby = model<string | null>(null);
 
-  @ViewChild('canvas') protected canvasEl?: ElementRef<HTMLCanvasElement>;
+  private readonly canvasEl = viewChild<ElementRef<HTMLCanvasElement>>('canvas');
 
   protected readonly isEmpty = signal(true);
   private isDrawing = false;
@@ -163,16 +161,16 @@ export class NgxsmkSignaturePad extends CvaBase<string> implements NgxsmkFormFie
     if (raw && raw !== 'currentColor' && raw !== 'auto') {
       return raw;
     }
-    if (this.canvasEl) {
-      const col = getComputedStyle(this.canvasEl.nativeElement).color;
+    if (this.canvasEl()) {
+      const col = getComputedStyle(this.canvasEl()!.nativeElement).color;
       if (col) return col;
     }
     return '#6366f1';
   }
 
   private initCanvas(): void {
-    if (!this.canvasEl) return;
-    const canvas = this.canvasEl.nativeElement;
+    if (!this.canvasEl()) return;
+    const canvas = this.canvasEl()!.nativeElement;
     this.ctx = canvas.getContext('2d');
     if (this.ctx) {
       this.ctx.strokeStyle = this.resolvePenColor();
@@ -183,20 +181,20 @@ export class NgxsmkSignaturePad extends CvaBase<string> implements NgxsmkFormFie
   }
 
   protected startDrawing(event: MouseEvent): void {
-    if (this.disabled() || !this.canvasEl) return;
+    if (this.disabled() || !this.canvasEl()) return;
     if (!this.ctx) {
       this.initCanvas();
     }
     if (!this.ctx) return;
     this.isDrawing = true;
-    const rect = this.canvasEl.nativeElement.getBoundingClientRect();
+    const rect = this.canvasEl()!.nativeElement.getBoundingClientRect();
     this.lastX = event.clientX - rect.left;
     this.lastY = event.clientY - rect.top;
   }
 
   protected draw(event: MouseEvent): void {
-    if (!this.isDrawing || !this.ctx || !this.canvasEl) return;
-    const rect = this.canvasEl.nativeElement.getBoundingClientRect();
+    if (!this.isDrawing || !this.ctx || !this.canvasEl()) return;
+    const rect = this.canvasEl()!.nativeElement.getBoundingClientRect();
     const currentX = event.clientX - rect.left;
     const currentY = event.clientY - rect.top;
 
@@ -212,23 +210,23 @@ export class NgxsmkSignaturePad extends CvaBase<string> implements NgxsmkFormFie
   }
 
   protected handleTouchStart(event: TouchEvent): void {
-    if (this.disabled() || !this.canvasEl || event.touches.length === 0) return;
+    if (this.disabled() || !this.canvasEl() || event.touches.length === 0) return;
     if (!this.ctx) {
       this.initCanvas();
     }
     if (!this.ctx) return;
     this.isDrawing = true;
     const touch = event.touches[0];
-    const rect = this.canvasEl.nativeElement.getBoundingClientRect();
+    const rect = this.canvasEl()!.nativeElement.getBoundingClientRect();
     this.lastX = touch.clientX - rect.left;
     this.lastY = touch.clientY - rect.top;
   }
 
   protected handleTouchMove(event: TouchEvent): void {
-    if (!this.isDrawing || !this.ctx || !this.canvasEl || event.touches.length === 0) return;
+    if (!this.isDrawing || !this.ctx || !this.canvasEl() || event.touches.length === 0) return;
     event.preventDefault();
     const touch = event.touches[0];
-    const rect = this.canvasEl.nativeElement.getBoundingClientRect();
+    const rect = this.canvasEl()!.nativeElement.getBoundingClientRect();
     const currentX = touch.clientX - rect.left;
     const currentY = touch.clientY - rect.top;
 
@@ -248,7 +246,7 @@ export class NgxsmkSignaturePad extends CvaBase<string> implements NgxsmkFormFie
   }
 
   clear(): void {
-    if (!this.canvasEl || !this.ctx) return;
+    if (!this.canvasEl() || !this.ctx) return;
     this.ctx.clearRect(0, 0, this.width(), this.height());
     this.isEmpty.set(true);
     this.value.set('');
@@ -257,8 +255,8 @@ export class NgxsmkSignaturePad extends CvaBase<string> implements NgxsmkFormFie
   }
 
   private saveDataUrl(): void {
-    if (!this.canvasEl) return;
-    const dataUrl = this.canvasEl.nativeElement.toDataURL('image/png');
+    if (!this.canvasEl()) return;
+    const dataUrl = this.canvasEl()!.nativeElement.toDataURL('image/png');
     this.value.set(dataUrl);
     this.emitChange(dataUrl);
   }

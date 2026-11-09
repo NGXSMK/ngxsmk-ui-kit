@@ -236,7 +236,12 @@ export class NgxsmkCarousel {
 
   constructor() {
     effect((onCleanup) => {
-      if (isPlatformBrowser(this.platformId) && this.autoplay() && this.slides().length > 1) {
+      if (
+        isPlatformBrowser(this.platformId) &&
+        this.autoplay() &&
+        this.slides().length > 1 &&
+        !prefersReducedMotion()
+      ) {
         const id = setInterval(() => {
           this.next();
         }, this.interval());

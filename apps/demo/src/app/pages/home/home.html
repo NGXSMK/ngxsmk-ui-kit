@@ -5,7 +5,7 @@
     "@context": "https://schema.org",
     "@type": "SoftwareSourceCode",
     "name": "NGXSMK UI Kit",
-    "description": "The #1 Modern Signal-Based Angular UI Kit. 150+ zoneless standalone primitives, unified token theming, and built-in AI agent tooling.",
+    "description": "An Angular UI kit built on signals. 150+ zoneless standalone primitives, unified token theming, and built-in AI agent tooling.",
     "url": "https://ngxsmk.github.io/ngxsmk-ui-kit",
     "programmingLanguage": "TypeScript",
     "runtimePlatform": "Angular",
@@ -29,13 +29,11 @@
       </div>
 
       <!-- Main Title -->
-      <h1 class="hero-title">
-        The #1 Modern Signal-Based <span class="highlight">Angular UI Kit</span>
-      </h1>
+      <h1 class="hero-title">Angular components built on signals</h1>
 
       <p class="hero-lead">
-        Stop wrestling with bloated UI libraries. Build production apps with 150+ standalone,
-        zoneless-native primitives, unified token theming, and built-in AI agent tooling.
+        Choose from 150+ standalone Angular components. Import the ones your app needs, then theme
+        them together with shared design tokens.
       </p>
 
       <!-- CTAs and Install Command -->
@@ -83,20 +81,19 @@
         </a>
 
         <!-- Quick Copy Box -->
-        <div
+        <button
+          type="button"
           class="quick-install-box"
           (click)="copyInstallCommand()"
-          role="button"
-          tabindex="0"
-          (keydown.enter)="copyInstallCommand()"
+          [attr.aria-label]="
+            hasCopiedInstall()
+              ? 'Copied install command'
+              : 'Copy install command: ' + installCommand
+          "
         >
           <span class="install-prompt">$</span>
           <code class="install-cmd">{{ installCommand }}</code>
-          <button
-            type="button"
-            class="copy-trigger"
-            [attr.aria-label]="hasCopiedInstall() ? 'Copied' : 'Copy command'"
-          >
+          <span class="copy-trigger" aria-hidden="true">
             @if (hasCopiedInstall()) {
               <svg
                 width="15"
@@ -125,45 +122,18 @@
                 <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
               </svg>
             }
-          </button>
-        </div>
-      </div>
-
-      <!-- Trust / Capability Pills -->
-      <div class="trust-pills">
-        <div class="trust-pill">
-          <span class="check-icon">✓</span>
-          <span>Signals Native</span>
-        </div>
-        <div class="trust-pill">
-          <span class="check-icon">✓</span>
-          <span>100% Zoneless</span>
-        </div>
-        <div class="trust-pill">
-          <span class="check-icon">✓</span>
-          <span>WCAG 2.1 AAA</span>
-        </div>
-        <div class="trust-pill">
-          <span class="check-icon">✓</span>
-          <span>Pure CSS Variables</span>
-        </div>
-        <div class="trust-pill">
-          <span class="check-icon">✓</span>
-          <span>150+ Primitives</span>
-        </div>
+          </span>
+        </button>
       </div>
     </div>
 
     <!-- Interactive Live Showcase Card (matching ngxsmk-datepicker) -->
     <div class="showcase-card">
-      <!-- Window Header Bar -->
+      <header class="workbench-intro">
+        <h2>Component workbench</h2>
+        <p>Choose a component, try its controls, and copy the markup.</p>
+      </header>
       <div class="showcase-bar">
-        <div class="traffic-lights">
-          <span class="light red"></span>
-          <span class="light yellow"></span>
-          <span class="light green"></span>
-        </div>
-
         <!-- Segmented Mode Control -->
         <div class="mode-tabs" role="tablist" aria-label="Showcase mode switcher">
           <button
@@ -412,10 +382,10 @@
        ══════════════════════════════════════════════════════════ -->
   <section class="bento-section" aria-labelledby="features-heading">
     <div class="section-header">
-      <span class="section-tag">High-Performance Architecture</span>
-      <h2 id="features-heading">Engineered for Speed, Signals, and AI</h2>
+      <h2 id="features-heading">Inside the kit</h2>
       <p class="section-sub">
-        Everything you need to ship enterprise Angular software with zero runtime friction.
+        Explore the components, design tokens, and developer tools that fit together in an Angular
+        app.
       </p>
     </div>
 
@@ -539,10 +509,9 @@
        ══════════════════════════════════════════════════════════ -->
   <section class="comparison-section">
     <div class="section-header">
-      <span class="section-tag">Framework Benchmark</span>
-      <h2>Why developers choose NGXSMK</h2>
+      <h2>Compare library features</h2>
       <p class="section-sub">
-        Built from the ground up for modern Angular paradigms with zero legacy baggage.
+        Compare component architecture, styling, and tooling across Angular libraries.
       </p>
     </div>
 
@@ -583,10 +552,8 @@
        ══════════════════════════════════════════════════════════ -->
   <section class="cta-banner" aria-labelledby="cta-heading">
     <div class="cta-content">
-      <h2 id="cta-heading">Ready to Build Modern Angular Apps?</h2>
-      <p class="cta-lead">
-        Install NGXSMK UI Kit today and experience signals-native velocity across 150+ primitives.
-      </p>
+      <h2 id="cta-heading">Add your first component</h2>
+      <p class="cta-lead">Follow the installation guide to bring the kit into your Angular app.</p>
       <div class="cta-actions">
         <a class="btn btn-primary" routerLink="/docs">Get Started Now</a>
         <a

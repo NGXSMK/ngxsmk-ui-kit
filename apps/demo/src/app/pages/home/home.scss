@@ -1,9 +1,3 @@
-/* ==========================================================================
-   NGXSMK Modern 2026 Home Page Styles
-   Matching https://ngxsmk.github.io/ngxsmk-datepicker/
-   Luminous Indigo · Amber Accents · Glassmorphic Acrylic · Plus Jakarta Sans
-   ========================================================================== */
-
 .home {
   max-width: var(--max-content-width, 1240px);
   margin: 0 auto;
@@ -16,12 +10,14 @@
 /* ================= HERO SECTION ================= */
 .hero-section {
   display: grid;
-  grid-template-columns: 1.15fr 1fr;
-  gap: 2.5rem;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  padding-block: clamp(1rem, 4vw, 4rem);
+  border-bottom: 1px solid var(--color-border);
   align-items: center;
 
   @media (max-width: 1024px) {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 2rem;
   }
 }
@@ -52,7 +48,9 @@
     border-radius: 50%;
     background: #10b981;
     box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
-    animation: pulse-glow 2s infinite;
+    @media (prefers-reduced-motion: no-preference) {
+      animation: pulse-glow 2s infinite;
+    }
   }
 
   .badge-tag {
@@ -84,13 +82,13 @@
 
 .hero-title {
   font-family: var(--font-family-display, sans-serif);
-  font-size: clamp(2rem, 1.6rem + 2vw, 3.25rem);
+  font-size: clamp(2.75rem, 5.3vw, 5rem);
   font-weight: 700;
-  line-height: 1.15;
+  line-height: 1.03;
   letter-spacing: -0.035em;
   margin: 0 0 1.1rem;
   color: var(--color-text-main, #0f172a);
-  max-width: 22ch;
+  max-width: 14ch;
 }
 
 .hero-lead {
@@ -183,43 +181,58 @@
   }
 }
 
-.trust-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.65rem 1.25rem;
-
-  .trust-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    font-size: 0.78rem;
-    font-weight: 600;
-    color: var(--color-text-muted, #334155);
-
-    .check-icon {
-      color: #10b981;
-      font-weight: 800;
-    }
-  }
-}
-
 /* ================= SHOWCASE CARD ================= */
 .showcase-card {
-  background: var(--color-bg-card, #ffffff);
-  border: 1px solid var(--color-border, #e2e8f0);
-  border-radius: var(--radius-xl, 22px);
-  box-shadow: var(--shadow-xl);
+  min-width: 0;
   overflow: hidden;
-  backdrop-filter: blur(16px);
-  transition:
-    transform 0.2s,
-    box-shadow 0.2s;
-
-  &:hover {
-    box-shadow: 0 24px 48px -12px rgba(99, 102, 241, 0.18);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  background: var(--color-bg-card);
+  box-shadow: var(--shadow-xl);
+}
+.workbench-intro {
+  padding: 1.5rem;
+  border-block-start: 3px solid var(--ngxsmk-color-primary);
+  h2 {
+    margin: 0;
+    font: 650 1.35rem/1.2 var(--font-family-display, sans-serif);
+  }
+  p {
+    margin: 0.4rem 0 0;
+    color: var(--color-text-muted);
+    font-size: 0.92rem;
   }
 }
-
+@media (prefers-reduced-motion: no-preference) {
+  .hero-title,
+  .hero-lead,
+  .hero-actions,
+  .showcase-card {
+    animation: workbench-enter 550ms cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+  }
+  .hero-lead {
+    animation-delay: 70ms;
+  }
+  .hero-actions {
+    animation-delay: 120ms;
+  }
+  .showcase-card {
+    animation-delay: 160ms;
+  }
+  .stage-interactive {
+    animation: workbench-enter 200ms ease-out;
+  }
+}
+@keyframes workbench-enter {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 .showcase-bar {
   display: flex;
   align-items: center;
@@ -323,7 +336,9 @@
     border-radius: 50%;
     background: #10b981;
     box-shadow: 0 0 6px #10b981;
-    animation: live-pulse 2s infinite;
+    @media (prefers-reduced-motion: no-preference) {
+      animation: live-pulse 2s infinite;
+    }
   }
 
   @media (max-width: 480px) {
@@ -548,7 +563,7 @@
   }
 
   @media (max-width: 580px) {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -716,7 +731,7 @@
 .cta-banner {
   position: relative;
   display: grid;
-  grid-template-columns: 1.25fr 1fr;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
   gap: 2rem;
   align-items: center;
   padding: 2.5rem;
@@ -729,7 +744,7 @@
   overflow: hidden;
 
   @media (max-width: 900px) {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     padding: 1.75rem;
   }
 }

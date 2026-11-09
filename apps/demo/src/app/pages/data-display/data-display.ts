@@ -72,10 +72,12 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     TranslatePipe,
   ],
   template: `
-    <h2 class="ngxsmk-page-title">{{ 'category.data-display' | translate }}</h2>
-    <p class="ngxsmk-page-desc">
+    <header class="category-intro">
+      <h1 class="ngxsmk-page-title">{{ 'category.data-display' | translate }}</h1>
+      <p class="ngxsmk-page-desc">
       {{ 'dataDisplay.pageDesc' | translate }}
     </p>
+    </header>
 
     <showcase-example
       title="Tabs"

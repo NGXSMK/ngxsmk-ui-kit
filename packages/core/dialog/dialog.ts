@@ -66,7 +66,7 @@ const DIALOG_MOTION: NgxsmkMotionState = {
     <dialog
       #dialog
       class="ngxsmk-dialog__native"
-      [attr.aria-labelledby]="title() ? titleId : null"
+      [attr.aria-labelledby]="title() ? titleId : ariaLabelledby()"
       (cancel)="onCancel($event)"
       (close)="onNativeClose()"
       (click)="onBackdropClick($event)"
@@ -200,6 +200,8 @@ export class NgxsmkDialog {
   private readonly scrollLock = inject(NgxsmkScrollLock);
 
   readonly open = model(false);
+  /** ID of a projected heading when the built-in title is omitted. */
+  readonly ariaLabelledby = input<string | null>(null);
   readonly title = input('');
   /** When false, Escape and backdrop clicks no longer close the dialog. */
   readonly dismissible = input(true, { transform: booleanAttribute });
@@ -213,6 +215,7 @@ export class NgxsmkDialog {
   private readonly dialogRef = viewChild.required<ElementRef<HTMLDialogElement>>('dialog');
   private readonly platformId = inject(PLATFORM_ID);
   private locked = false;
+  private leaveGeneration = 0;
 
   constructor() {
     // Only `open()` and `dialogRef()` drive reactivity; the show/leave work
@@ -226,6 +229,7 @@ export class NgxsmkDialog {
           return;
         }
         if (open) {
+          this.leaveGeneration += 1;
           if (!dialog.open && typeof dialog.showModal === 'function') {
             dialog.style.opacity = '';
             dialog.style.transform = '';
@@ -236,10 +240,17 @@ export class NgxsmkDialog {
               // Dialog might already be open
             }
             this.setLocked(true);
+          } else if (dialog.open) {
+            dialog.style.opacity = '';
+            dialog.style.transform = '';
+            this.visible.set(true);
+            this.setLocked(true);
           }
         } else {
           if (dialog.open) {
+            const gen = (this.leaveGeneration += 1);
             const cleanup = () => {
+              if (gen !== this.leaveGeneration) return;
               if (dialog.open && typeof dialog.close === 'function') {
                 try {
                   dialog.close();
@@ -268,7 +279,10 @@ export class NgxsmkDialog {
       });
     });
 
-    inject(DestroyRef).onDestroy(() => this.setLocked(false));
+    inject(DestroyRef).onDestroy(() => {
+      this.leaveGeneration += 1;
+      this.setLocked(false);
+    });
   }
 
   close(): void {

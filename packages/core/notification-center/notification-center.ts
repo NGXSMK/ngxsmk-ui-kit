@@ -2,11 +2,18 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  DestroyRef,
+  effect,
+  ElementRef,
+  inject,
   input,
   model,
   output,
   signal,
+  untracked,
 } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { ngxsmkUniqueId } from '@ngxsmk/core/util';
 
 export interface NgxsmkNotificationItem {
   id: string;
@@ -35,6 +42,8 @@ export interface NgxsmkNotificationItem {
       type="button"
       class="ngxsmk-notif__bell-btn"
       [attr.aria-label]="ariaLabel()"
+      [attr.aria-expanded]="isOpen()"
+      [attr.aria-controls]="panelId"
       (click)="toggleOpen()"
     >
       <svg
@@ -58,7 +67,12 @@ export interface NgxsmkNotificationItem {
 
     <!-- NOTIFICATION SLIDE PANEL / POPOVER -->
     @if (isOpen()) {
-      <div class="ngxsmk-notif__panel">
+      <div
+        class="ngxsmk-notif__panel"
+        role="dialog"
+        [id]="panelId"
+        [attr.aria-label]="title()"
+      >
         <div class="ngxsmk-notif__header">
           <div class="ngxsmk-notif__title-group">
             <h3 class="ngxsmk-notif__title">{{ title() }}</h3>
@@ -162,8 +176,8 @@ export interface NgxsmkNotificationItem {
       color: var(--ngxsmk-color-on-surface);
       cursor: pointer;
       transition:
-        background-color 0.15s ease,
-        border-color 0.15s ease;
+        background-color var(--ngxsmk-duration-fast, 0.15s) ease,
+        border-color var(--ngxsmk-duration-fast, 0.15s) ease;
     }
 
     .ngxsmk-notif__bell-btn:hover {
@@ -257,8 +271,8 @@ export interface NgxsmkNotificationItem {
       cursor: pointer;
       border-radius: var(--ngxsmk-radius-sm, 0.25rem);
       transition:
-        background 0.15s ease,
-        color 0.15s ease;
+        background var(--ngxsmk-duration-fast, 0.15s) ease,
+        color var(--ngxsmk-duration-fast, 0.15s) ease;
     }
 
     .ngxsmk-notif__tab--active {
@@ -288,7 +302,7 @@ export interface NgxsmkNotificationItem {
       padding: 0.75rem 1rem;
       border-bottom: 1px solid var(--ngxsmk-color-outline);
       cursor: pointer;
-      transition: background 0.15s ease;
+      transition: background var(--ngxsmk-duration-fast, 0.15s) ease;
     }
 
     .ngxsmk-notif__item:hover {
@@ -383,6 +397,37 @@ export class NgxsmkNotificationCenter {
 
   protected readonly isOpen = signal(false);
   protected readonly filterMode = signal<'all' | 'unread'>('all');
+  protected readonly panelId = ngxsmkUniqueId('ngxsmk-notif-panel');
+
+  private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly document = inject(DOCUMENT);
+
+  constructor() {
+    effect((onCleanup) => {
+      if (!this.isOpen()) return;
+      const onKey = (event: KeyboardEvent) => {
+        if (event.key === 'Escape') {
+          event.preventDefault();
+          this.isOpen.set(false);
+        }
+      };
+      const onPointer = (event: PointerEvent) => {
+        const target = event.target as Node | null;
+        if (target && !this.host.nativeElement.contains(target)) {
+          this.isOpen.set(false);
+        }
+      };
+      untracked(() => {
+        this.document.defaultView?.addEventListener('keydown', onKey);
+        this.document.addEventListener('pointerdown', onPointer);
+      });
+      onCleanup(() => {
+        this.document.defaultView?.removeEventListener('keydown', onKey);
+        this.document.removeEventListener('pointerdown', onPointer);
+      });
+    });
+    inject(DestroyRef).onDestroy(() => this.isOpen.set(false));
+  }
 
   protected readonly unreadCount = computed(() => {
     return this.notifications().filter((n) => !n.read).length;

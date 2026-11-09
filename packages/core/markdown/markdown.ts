@@ -1,14 +1,43 @@
-import { ChangeDetectionStrategy, Component, input, computed } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
-function escapeHtml(text: string): string {
-  return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+/** Escape text for safe HTML text/attribute contexts. */
+export function escapeHtml(text: string): string {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 }
 
-function renderMarkdown(md: string): string {
+/** Allow only safe URL schemes for markdown links and images. */
+export function isSafeUrl(url: string): boolean {
+  const trimmed = url.trim();
+  if (!trimmed || /[\s"'<>`]/.test(trimmed)) return false;
+  if (trimmed.startsWith('#')) return true;
+  if (trimmed.startsWith('/') || trimmed.startsWith('./') || trimmed.startsWith('../')) {
+    return true;
+  }
+  try {
+    const parsed = new URL(trimmed, 'https://example.invalid');
+    return ['http:', 'https:', 'mailto:'].includes(parsed.protocol);
+  } catch {
+    return false;
+  }
+}
+
+export interface RenderMarkdownOptions {
+  /** When false (default), image markdown is rendered as a link label only. */
+  allowImages?: boolean;
+}
+
+export function renderMarkdown(md: string, options: RenderMarkdownOptions = {}): string {
+  const allowImages = options.allowImages === true;
   let html = escapeHtml(md);
   // code blocks
   html = html.replace(/```(\w*)\n([\s\S]*?)```/g, (_, lang, code) => {
-    const langAttr = lang ? ` data-language="${lang}"` : '';
+    const safeLang = String(lang).replace(/[^a-zA-Z0-9_-]/g, '');
+    const langAttr = safeLang ? ` data-language="${safeLang}"` : '';
     return `<pre class="ngxsmk-markdown-pre"${langAttr}><code class="ngxsmk-markdown-code">${code.trim()}</code></pre>`;
   });
   // inline code
@@ -19,16 +48,20 @@ function renderMarkdown(md: string): string {
   html = html.replace(/\*([^*]+)\*/g, '<em>$1</em>');
   // strikethrough
   html = html.replace(/~~([^~]+)~~/g, '<del>$1</del>');
+  // images before links so ![alt](url) is not eaten by the link regex
+  html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (_, alt, url) => {
+    if (!allowImages || !isSafeUrl(url)) {
+      return escapeHtml(alt || 'image');
+    }
+    return `<img src="${escapeHtml(url)}" alt="${escapeHtml(alt)}" class="ngxsmk-markdown-img" />`;
+  });
   // links
-  html = html.replace(
-    /\[([^\]]+)\]\(([^)]+)\)/g,
-    '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>',
-  );
-  // images
-  html = html.replace(
-    /!\[([^\]]*)\]\(([^)]+)\)/g,
-    '<img src="$2" alt="$1" class="ngxsmk-markdown-img" />',
-  );
+  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, label, url) => {
+    if (!isSafeUrl(url)) {
+      return label;
+    }
+    return `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${label}</a>`;
+  });
   // unordered lists
   html = html.replace(/^\s*[-*]\s+(.+)$/gm, '<li>$1</li>');
   html = html.replace(/(<li>.*<\/li>\n?)+/g, '<ul>$&</ul>');
@@ -55,6 +88,15 @@ function renderMarkdown(md: string): string {
   return html;
 }
 
+/**
+ * Lightweight markdown renderer for trusted or semi-trusted content.
+ * URLs are scheme-allowlisted; images are off by default (`allowImages`).
+ * Final HTML still passes through Angular's `[innerHTML]` sanitizer.
+ *
+ * ```html
+ * <ngxsmk-markdown [content]="md" [allowImages]="true" />
+ * ```
+ */
 @Component({
   standalone: true,
   selector: 'ngxsmk-markdown',
@@ -166,5 +208,9 @@ function renderMarkdown(md: string): string {
 })
 export class NgxsmkMarkdown {
   readonly content = input.required<string>();
-  protected readonly html = computed(() => renderMarkdown(this.content()));
+  /** When true, safe http(s) image URLs are rendered. Default false. */
+  readonly allowImages = input(false);
+  protected readonly html = computed(() =>
+    renderMarkdown(this.content(), { allowImages: this.allowImages() }),
+  );
 }

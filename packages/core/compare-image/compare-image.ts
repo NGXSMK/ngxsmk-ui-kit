@@ -2,11 +2,11 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  ViewChild,
   computed,
   input,
   model,
   signal,
+  viewChild,
 } from '@angular/core';
 
 /**
@@ -152,7 +152,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgxsmkCompareImage {
-  @ViewChild('container') containerRef!: ElementRef<HTMLDivElement>;
+  private readonly containerRef = viewChild.required<ElementRef<HTMLDivElement>>('container');
 
   /** Source URL for before/original image. */
   readonly before = input<string>('');
@@ -218,8 +218,7 @@ export class NgxsmkCompareImage {
   }
 
   private updatePosition(clientX: number): void {
-    if (!this.containerRef) return;
-    const rect = this.containerRef.nativeElement.getBoundingClientRect();
+    const rect = this.containerRef().nativeElement.getBoundingClientRect();
     const offsetX = clientX - rect.left;
     const pct = (offsetX / rect.width) * 100;
     this.position.set(Math.min(100, Math.max(0, Math.round(pct))));

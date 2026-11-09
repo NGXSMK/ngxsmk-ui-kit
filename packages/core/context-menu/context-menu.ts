@@ -8,6 +8,7 @@ import {
   input,
   signal,
 } from '@angular/core';
+import { createPresence } from '@ngxsmk/cdk';
 import { NgxsmkAnimate, NgxsmkMotionState, playExit } from '@ngxsmk/core/animation';
 
 export interface NgxsmkContextMenuItem {
@@ -123,8 +124,11 @@ export class NgxsmkContextMenu {
     transition: { duration: 0.14, ease: 'ease-out' },
   };
 
+  private readonly presence = createPresence();
+  protected readonly closing = this.presence.isClosing;
+
   constructor() {
-    this.destroyRef.onDestroy(() => this.hide());
+    this.destroyRef.onDestroy(() => this.presence.forceClose());
   }
 
   @HostListener('contextmenu', ['$event'])
@@ -134,23 +138,22 @@ export class NgxsmkContextMenu {
   }
 
   show(x: number, y: number): void {
+    this.presence.open();
     this.x.set(x);
     this.y.set(y);
     this.visible.set(true);
   }
 
-  protected readonly closing = signal(false);
-
   hide(): void {
-    if (this.closing()) return;
-    this.closing.set(true);
+    if (!this.visible() || this.presence.isClosing()) return;
     const el = this.host.nativeElement.querySelector(
       '.ngxsmk-context-menu__list',
     ) as HTMLElement | null;
-    void playExit(el ?? this.host.nativeElement, this.CONTEXT_MENU_MOTION).then(() => {
-      this.closing.set(false);
-      this.visible.set(false);
-    });
+    void this.presence
+      .close(() => playExit(el ?? this.host.nativeElement, this.CONTEXT_MENU_MOTION))
+      .then((settled) => {
+        if (settled) this.visible.set(false);
+      });
   }
 
   protected onClick(event: Event): void {

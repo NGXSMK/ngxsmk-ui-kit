@@ -579,7 +579,7 @@ export class RoadmapPage implements OnInit {
         {
           text: 'MCP server for coding assistants',
           detail:
-            'Already shipped in v1.3.2. Will expand with component generation tools and theme-aware prompts.',
+            'Already shipped in v3.2.0. Will expand with component generation tools and theme-aware prompts.',
         },
         {
           text: 'Agent guardrails & evaluations',

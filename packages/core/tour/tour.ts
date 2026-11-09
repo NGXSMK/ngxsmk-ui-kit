@@ -1,3 +1,4 @@
+import { prefersReducedMotion } from '@ngxsmk/core/animation';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -114,7 +115,7 @@ export interface NgxsmkTourStep {
         0 0 0 9999px rgba(9, 9, 11, 0.5),
         0 0 15px rgba(124, 58, 237, 0.5);
       pointer-events: none;
-      transition: all 0.25s ease-out;
+      transition: all var(--ngxsmk-duration-normal, 0.25s) ease-out;
       border: 2px solid var(--ngxsmk-color-primary);
     }
 
@@ -127,7 +128,7 @@ export interface NgxsmkTourStep {
       background: var(--ngxsmk-color-surface);
       border: 1px solid var(--ngxsmk-color-outline);
       box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
-      transition: all 0.2s ease-out;
+      transition: all var(--ngxsmk-duration-normal, 0.2s) ease-out;
     }
 
     .ngxsmk-tour__popover-header {
@@ -194,7 +195,7 @@ export interface NgxsmkTourStep {
       font-weight: 600;
       cursor: pointer;
       border: none;
-      transition: background-color 0.15s ease;
+      transition: background-color var(--ngxsmk-duration-fast, 0.15s) ease;
     }
 
     .ngxsmk-tour__btn--pri {
@@ -286,7 +287,7 @@ export class NgxsmkTour {
 
     const el = document.getElementById(step.targetId);
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      el.scrollIntoView({ behavior: prefersReducedMotion() ? 'instant' : 'smooth', block: 'center' });
       setTimeout(() => {
         const r = el.getBoundingClientRect();
         this.targetRect.set({ top: r.top, left: r.left, width: r.width, height: r.height });

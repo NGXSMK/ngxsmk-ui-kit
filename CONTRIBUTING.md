@@ -68,6 +68,25 @@ alongside a release. Do **not** run `changeset publish`: releases go through
 lowest supported Angular and publishes the `dist/ngxsmk/*` output rather than
 the source packages.
 
+### CI publish design (approval required)
+
+Local `npm run publish` remains the supported path until an OIDC workflow is
+explicitly approved. The intended CI design:
+
+1. Trigger only on a signed release tag (`v*`) or a manual `workflow_dispatch`
+   with a confirmed version input — never on every push to `main`.
+2. Use GitHub Actions OIDC → npm Trusted Publishing (`id-token: write`) so no
+   long-lived `NPM_TOKEN` is stored in secrets.
+3. Build with the same Angular 17.3 partial-Ivy path as `tools/scripts/publish.mjs`,
+   then `npm publish ./dist/ngxsmk/<pkg> --access public --provenance`.
+4. Publish `@ngxsmk/theme`, `@ngxsmk/cdk`, `@ngxsmk/core`, `@ngxsmk/cli`, and
+   `@ngxsmk/mcp` together (version-locked). Build `packages/mcp` before packing
+   — `packages/mcp/dist` is gitignored and must not be committed.
+5. Gate on green `CI` + `Compatibility` checks for that tag SHA before publish.
+
+Do not land an enabled publish workflow without maintainer approval of the
+trusted-publisher npm org setup and the tag/protection rules above.
+
 ## Coding standards
 
 - Follow **[GOVERNANCE.md](./GOVERNANCE.md)** for architecture, tokens, a11y, and API rules (enforced by `npm run governance`).

@@ -105,6 +105,12 @@ import { DOCUMENT } from '@angular/common';
       background: var(--ngxsmk-color-primary);
       animation: ngxsmk-code-caret 1s steps(1) infinite;
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ngxsmk-code-block__pre[data-streaming] .ngxsmk-code-block__code::after {
+        animation: none;
+      }
+    }
     .ngxsmk-code-block__code {
       color: var(--ngxsmk-color-on-surface);
       white-space: pre;

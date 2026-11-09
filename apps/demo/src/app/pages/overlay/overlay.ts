@@ -38,16 +38,19 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     TranslatePipe,
   ],
   template: `
-    <h2 class="ngxsmk-page-title">{{ 'category.overlay' | translate }}</h2>
-    <p class="ngxsmk-page-desc">
+    <header class="category-intro">
+      <h1 class="ngxsmk-page-title">{{ 'category.overlay' | translate }}</h1>
+      <p class="ngxsmk-page-desc">
       {{ 'overlay.desc' | translate }}
     </p>
+    </header>
 
     <showcase-example
+      anchor="dialog"
       [title]="'overlay.dialog' | translate"
       [description]="'overlay.dialogDesc' | translate"
       [code]="codeDialog"
-      [component]="NgxsmkButton"
+      [component]="NgxsmkDialog"
     >
       <div class="ngxsmk-demo-row">
         <button ngxsmk-button (click)="dialogOpen.set(true)">
@@ -356,6 +359,7 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
   `,
 })
 export class OverlayPage {
+  protected readonly NgxsmkDialog = NgxsmkDialog;
   protected readonly NgxsmkButton = NgxsmkButton;
   protected readonly NgxsmkCommandPalette = NgxsmkCommandPalette;
   protected readonly NgxsmkHoverCard = NgxsmkHoverCard;

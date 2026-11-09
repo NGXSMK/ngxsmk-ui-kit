@@ -65,8 +65,7 @@ describe('NgxsmkPopover', () => {
     fixture.detectChanges();
     expect(host.querySelector('.ngxsmk-popover__panel')).not.toBeNull();
 
-    fixture.componentInstance.popover().close();
-    await Promise.resolve();
+    await fixture.componentInstance.popover().close();
     fixture.detectChanges();
     expect(host.querySelector('.ngxsmk-popover__panel')).toBeNull();
   });

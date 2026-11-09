@@ -1,17 +1,19 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
   Directive,
-  HostListener,
   TemplateRef,
   booleanAttribute,
   contentChildren,
+  effect,
   inject,
   input,
   output,
   signal,
+  untracked,
 } from '@angular/core';
-import { NgTemplateOutlet } from '@angular/common';
+import { DOCUMENT, NgTemplateOutlet } from '@angular/common';
 
 export interface NgxsmkTableColumn {
   key: string;
@@ -332,6 +334,26 @@ export class NgxsmkTable {
   private resizeStartX = 0;
   private resizeStartWidth = 0;
   private resizeMin = 64;
+  private readonly document = inject(DOCUMENT);
+
+  constructor() {
+    // Attach document listeners only while a column resize is active.
+    effect((onCleanup) => {
+      const key = this.resizeKey();
+      if (!key) return;
+      const onMove = (event: MouseEvent) => this.onMouseMove(event);
+      const onUp = () => this.onMouseUp();
+      untracked(() => {
+        this.document.addEventListener('mousemove', onMove);
+        this.document.addEventListener('mouseup', onUp);
+      });
+      onCleanup(() => {
+        this.document.removeEventListener('mousemove', onMove);
+        this.document.removeEventListener('mouseup', onUp);
+      });
+    });
+    inject(DestroyRef).onDestroy(() => this.resizeKey.set(null));
+  }
 
   protected getCellTemplate(key: string) {
     const def = this.cellDefs().find((d) => d.columnKey() === key);
@@ -368,8 +390,7 @@ export class NgxsmkTable {
     this.resizeMin = col.minWidth ?? 64;
   }
 
-  @HostListener('document:mousemove', ['$event'])
-  protected onMouseMove(event: MouseEvent): void {
+  private onMouseMove(event: MouseEvent): void {
     const key = this.resizeKey();
     if (!key) return;
     const next = Math.max(
@@ -379,8 +400,7 @@ export class NgxsmkTable {
     this.columnResize.emit({ key, width: `${Math.round(next)}px` });
   }
 
-  @HostListener('document:mouseup')
-  protected onMouseUp(): void {
+  private onMouseUp(): void {
     this.resizeKey.set(null);
   }
 

@@ -7,7 +7,6 @@ import {
   output,
   signal,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CvaBase } from '@ngxsmk/cdk/cva-base';
 import { NGXSMK_FORM_FIELD_CONTROL, NgxsmkFormFieldControl } from '@ngxsmk/core/form-field';
@@ -30,7 +29,6 @@ export interface UploadedFileItem {
 @Component({
   standalone: true,
   selector: 'ngxsmk-file-upload',
-  imports: [CommonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
@@ -272,8 +270,8 @@ export interface UploadedFileItem {
       align-items: center;
       justify-content: center;
       transition:
-        color 0.15s ease,
-        background-color 0.15s ease;
+        color var(--ngxsmk-duration-fast, 0.15s) ease,
+        background-color var(--ngxsmk-duration-fast, 0.15s) ease;
     }
 
     .ngxsmk-file-upload__remove-btn:hover {

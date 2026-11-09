@@ -13,7 +13,13 @@ vi.mock('motion', () => ({
   standalone: true,
   imports: [NgxsmkDialog, NgxsmkDialogFooter],
   template: `
-    <ngxsmk-dialog [(open)]="open" [title]="title()" [dismissible]="dismissible()">
+    <ngxsmk-dialog
+      [(open)]="open"
+      [title]="title()"
+      ariaLabelledby="projected-title"
+      [dismissible]="dismissible()"
+    >
+      <h2 id="projected-title">Projected title</h2>
       Modal Content
       <div ngxsmkDialogFooter>
         <button id="close-btn" (click)="open.set(false)">Cancel</button>
@@ -62,6 +68,17 @@ describe('NgxsmkDialog', () => {
   it('renders correctly with given title and hides by default', () => {
     const { dialogEl } = setup();
     expect(dialogEl.hasAttribute('open')).toBe(false);
+  });
+
+  it('uses the projected heading when the built-in title is omitted', async () => {
+    const { fixture, dialogEl } = setup();
+    fixture.componentInstance.open.set(true);
+    fixture.componentInstance.title.set('');
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    expect(dialogEl.getAttribute('aria-labelledby')).toBe('projected-title');
+    expect(dialogEl.querySelector('#projected-title')?.textContent).toBe('Projected title');
   });
 
   it('opens native dialog modal and locks scroll when open signal changes to true', async () => {

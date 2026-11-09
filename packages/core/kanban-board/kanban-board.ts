@@ -124,9 +124,9 @@ export type KanbanItem = NgxsmkKanbanItem;
       flex-direction: column;
       gap: 0.65rem;
       transition:
-        background-color 0.15s ease,
-        border-color 0.15s ease,
-        box-shadow 0.15s ease;
+        background-color var(--ngxsmk-duration-fast, 0.15s) ease,
+        border-color var(--ngxsmk-duration-fast, 0.15s) ease,
+        box-shadow var(--ngxsmk-duration-fast, 0.15s) ease;
     }
 
     .ngxsmk-kanban__col--drag-over {
@@ -192,10 +192,10 @@ export type KanbanItem = NgxsmkKanbanItem;
       flex-direction: column;
       gap: 0.35rem;
       transition:
-        border-color 0.15s ease,
-        box-shadow 0.15s ease,
-        transform 0.15s ease,
-        opacity 0.15s ease;
+        border-color var(--ngxsmk-duration-fast, 0.15s) ease,
+        box-shadow var(--ngxsmk-duration-fast, 0.15s) ease,
+        transform var(--ngxsmk-duration-fast, 0.15s) ease,
+        opacity var(--ngxsmk-duration-fast, 0.15s) ease;
       user-select: none;
     }
 

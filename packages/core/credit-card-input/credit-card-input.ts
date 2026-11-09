@@ -95,8 +95,8 @@ export type NgxsmkCardBrand = 'visa' | 'mastercard' | 'amex' | 'discover' | 'unk
       font-weight: 600;
       outline: none;
       transition:
-        border-color 0.15s ease,
-        box-shadow 0.15s ease;
+        border-color var(--ngxsmk-duration-fast, 0.15s) ease,
+        box-shadow var(--ngxsmk-duration-fast, 0.15s) ease;
     }
 
     .ngxsmk-card-input__input:focus {

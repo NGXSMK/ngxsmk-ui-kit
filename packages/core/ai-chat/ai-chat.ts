@@ -2,10 +2,10 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  ViewChild,
   booleanAttribute,
   input,
   output,
+  viewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -347,6 +347,12 @@ export interface NgxsmkAiMessage {
       background: var(--ngxsmk-color-on-surface-variant);
       animation: ngxsmk-bounce 1.4s infinite ease-in-out both;
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ngxsmk-ai-chat__dot {
+        animation: none;
+      }
+    }
     .ngxsmk-ai-chat__dot:nth-child(1) {
       animation-delay: -0.32s;
     }
@@ -467,7 +473,7 @@ export class NgxsmkAiChat {
   readonly sendMessage = output<string>();
   readonly modelChanged = output<string>();
 
-  @ViewChild('feedContainer') private feedContainer!: ElementRef<HTMLDivElement>;
+  private readonly feedContainer = viewChild<ElementRef<HTMLDivElement>>('feedContainer');
 
   protected promptText = '';
 
@@ -493,11 +499,8 @@ export class NgxsmkAiChat {
   }
 
   private scrollToBottom(): void {
-    try {
-      const el = this.feedContainer.nativeElement;
-      el.scrollTop = el.scrollHeight;
-    } catch {
-      // Ignored if view not ready.
-    }
+    const el = this.feedContainer()?.nativeElement;
+    if (!el) return;
+    el.scrollTop = el.scrollHeight;
   }
 }

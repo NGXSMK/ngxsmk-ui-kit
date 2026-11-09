@@ -1,3 +1,4 @@
+import { prefersReducedMotion } from '@ngxsmk/core/animation';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -459,7 +460,7 @@ export class NgxsmkChatLayout {
     if (!container) return;
     container.scrollTo({
       top: container.scrollHeight,
-      behavior: 'smooth',
+      behavior: prefersReducedMotion() ? 'instant' : 'smooth',
     });
     this._userScrolledUp = false;
     this.showScrollFab.set(false);
@@ -535,7 +536,10 @@ export class NgxsmkChatLayout {
         if (newHeight > this._lastContentHeight && this.autoScroll() && !this._userScrolledUp) {
           // Content grew and we're near bottom — scroll down
           requestAnimationFrame(() => {
-            container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
+            container.scrollTo({
+              top: container.scrollHeight,
+              behavior: prefersReducedMotion() ? 'instant' : 'smooth',
+            });
           });
         }
         this._lastContentHeight = newHeight;

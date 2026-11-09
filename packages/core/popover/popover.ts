@@ -10,9 +10,8 @@ import {
   input,
   model,
   output,
-  signal,
 } from '@angular/core';
-import { NgxsmkClickOutside, NgxsmkFocusTrap } from '@ngxsmk/cdk';
+import { createPresence, NgxsmkClickOutside, NgxsmkFocusTrap } from '@ngxsmk/cdk';
 import { NgxsmkAnimate, NgxsmkMotionState, playExit } from '@ngxsmk/core/animation';
 
 export type NgxsmkPopoverPlacement = 'top' | 'bottom' | 'left' | 'right';
@@ -168,7 +167,8 @@ export class NgxsmkPopover {
   readonly closed = output<void>();
 
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
-  private readonly closing = signal(false);
+  private readonly presence = createPresence();
+  private readonly closing = this.presence.isClosing;
 
   /** Slide direction follows the placement; opacity-only keeps centering intact. */
   protected readonly motion = computed<NgxsmkMotionState>(() => {
@@ -198,24 +198,24 @@ export class NgxsmkPopover {
   }
 
   show(): void {
-    if (this.disabled() || this.open()) return;
+    if (this.disabled()) return;
+    if (this.open() && !this.presence.isClosing()) return;
+    this.presence.open();
     this.open.set(true);
     this.opened.emit();
   }
 
-  close(): void {
-    if (!this.open() || this.closing()) return;
+  async close(): Promise<void> {
+    if (!this.open() || this.presence.isClosing()) return;
     const panel = this.host.nativeElement.querySelector<HTMLElement>('.ngxsmk-popover__panel');
     if (!panel) {
-      this.finishClose();
+      this.presence.forceClose();
+      this.open.set(false);
+      this.closed.emit();
       return;
     }
-    this.closing.set(true);
-    void playExit(panel, this.motion()).then(() => this.finishClose());
-  }
-
-  private finishClose(): void {
-    this.closing.set(false);
+    const settled = await this.presence.close(() => playExit(panel, this.motion()));
+    if (!settled) return;
     this.open.set(false);
     this.closed.emit();
   }

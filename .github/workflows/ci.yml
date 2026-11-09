@@ -5,16 +5,19 @@ on:
     branches: [main]
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   lint:
     name: Lint
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
       - name: Set up Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 22
           cache: npm
@@ -49,16 +52,19 @@ jobs:
       - name: Verify Documentation Quality & Links
         run: npm run audit:docs
 
+      - name: Verify smoke specs stay in sync
+        run: npm run test:smoke:check
+
   test:
     name: Test
     runs-on: ubuntu-latest
     needs: lint
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
       - name: Set up Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 22
           cache: npm
@@ -67,10 +73,14 @@ jobs:
         run: npm ci
 
       - name: Install Chrome
-        uses: browser-actions/setup-chrome@v1
+        # Pin to the v1 tag commit for supply-chain integrity.
+        uses: browser-actions/setup-chrome@c785b87e244131f27c9f19c1a33e2ead956ab7ce # v1
 
       - name: Run unit tests
         run: npm test
+
+      - name: CDK coverage gate
+        run: npx ng test @ngxsmk/cdk --watch=false --configuration=coverage
 
   build:
     name: Build
@@ -78,10 +88,10 @@ jobs:
     needs: lint
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
       - name: Set up Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 22
           cache: npm
@@ -107,9 +117,11 @@ jobs:
     needs: lint
     permissions:
       contents: write
+    # Auto-committing baselines requires write access to the head branch.
+    # Fork PRs get a read-only token — skip the push path for those.
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           # Check out the actual head branch so we are not in detached HEAD state.
@@ -118,7 +130,7 @@ jobs:
           fetch-depth: 0
 
       - name: Set up Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 22
           cache: npm
@@ -134,14 +146,19 @@ jobs:
 
       # Baselines live in tests/visual/__screenshots__ and must be Linux-rendered.
       # --update-snapshots=missing writes new PNGs for any missing baseline and
-      # then this step commits them back to the branch automatically.
+      # then this step commits them back to the branch automatically (same-repo only).
       - name: Run visual tests
         id: visual
         run: npm run visual -- --update-snapshots=missing
         continue-on-error: true
 
       - name: Commit new baselines if written
-        if: always()
+        if: >
+          always() &&
+          (github.event_name != 'pull_request' ||
+           github.event.pull_request.head.repo.full_name == github.repository)
+        env:
+          BRANCH: ${{ github.head_ref || github.ref_name }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -149,7 +166,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No new baselines to commit."
           else
-            BRANCH="${{ github.head_ref || github.ref_name }}"
             git commit -m "chore(visual): update linux-rendered visual baselines [skip ci]"
             git push origin "HEAD:${BRANCH}"
           fi
@@ -164,7 +180,7 @@ jobs:
 
       - name: Upload baselines
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: visual-baselines
           path: tests/visual/__screenshots__/
@@ -172,7 +188,7 @@ jobs:
 
       - name: Upload diff report
         if: steps.visual.outcome == 'failure'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: visual-regression-report
           path: |

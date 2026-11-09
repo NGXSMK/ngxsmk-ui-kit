@@ -5,11 +5,15 @@ import {
   DestroyRef,
   ElementRef,
   afterNextRender,
+  booleanAttribute,
+  effect,
   inject,
   input,
   output,
   signal,
+  untracked,
 } from '@angular/core';
+import { createPresence, NgxsmkFocusTrap } from '@ngxsmk/cdk';
 import { loadMotion, prefersReducedMotion } from '@ngxsmk/core/animation';
 
 /**
@@ -121,6 +125,12 @@ export class NgxsmkMorphModalClose {
 @Directive({
   standalone: true,
   selector: '[ngxsmkMorphModalContent]',
+  hostDirectives: [
+    {
+      directive: NgxsmkFocusTrap,
+      inputs: ['ngxsmkFocusTrap: morphModalFocusTrap', 'ngxsmkFocusTrapAutoCapture: morphModalFocusCapture'],
+    },
+  ],
   host: {
     '[style.position]': '"fixed"',
     '[style.inset]': '"0"',
@@ -136,6 +146,8 @@ export class NgxsmkMorphModalClose {
     '[attr.aria-modal]': '"true"',
     '[attr.aria-label]': 'morphModalAriaLabel()',
     '[attr.aria-describedby]': 'morphModalAriaDescribedBy() || null',
+    '[attr.aria-hidden]': '_isOpen() ? null : "true"',
+    '[attr.inert]': '_isOpen() ? null : ""',
     '(click)': '_onBackdropClick($event)',
     '(keydown.escape)': '_onEscape()',
   },
@@ -144,12 +156,19 @@ export class NgxsmkMorphModalContent {
   private readonly modal = inject(NgxsmkMorphModal, { optional: true });
   private readonly el = inject(ElementRef<HTMLElement>);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly presence = createPresence();
 
   /** Accessible name announced by screen readers. */
   readonly morphModalAriaLabel = input.required<string>();
 
   /** Optional id of descriptive content. */
   readonly morphModalAriaDescribedBy = input<string>();
+
+  /** Forwards to `NgxsmkFocusTrap` (enabled while the panel is mounted). */
+  readonly morphModalFocusTrap = input(true, { transform: booleanAttribute });
+
+  /** Auto-focus the first focusable child when the panel mounts. */
+  readonly morphModalFocusCapture = input(true, { transform: booleanAttribute });
 
   /** Close on Escape or backdrop press. */
   readonly morphModalDismissible = input<boolean>(true);
@@ -197,25 +216,24 @@ export class NgxsmkMorphModalContent {
       }
     });
 
-    // Watch the parent modal's open state
     if (this.modal) {
-      const checkOpen = () => {
+      effect(() => {
         const open = this.modal!.morphModalOpen();
-        if (open && !this._isOpen()) {
-          this.open();
-        } else if (!open && this._isOpen()) {
-          this.close();
-        }
-      };
-
-      // Poll the signal since we can't directly effect on it in a directive
-      // (the modal is injected, not an input)
-      const interval = setInterval(checkOpen, 50);
-      this.destroyRef.onDestroy(() => clearInterval(interval));
+        untracked(() => {
+          if (open && !this._isOpen()) {
+            void this.open();
+          } else if (!open && this._isOpen()) {
+            void this.close();
+          }
+        });
+      });
     }
+
+    this.destroyRef.onDestroy(() => this.presence.forceClose());
   }
 
   private async open(): Promise<void> {
+    this.presence.open();
     this._isOpen.set(true);
     this.el.nativeElement.style.display = 'flex';
 
@@ -234,26 +252,27 @@ export class NgxsmkMorphModalContent {
       this._clipPath.set('circle(150% at 50% 50%)');
     }
 
-    this.afterOpen.emit();
+    if (this.presence.isOpen()) {
+      this.afterOpen.emit();
+    }
   }
 
   private async close(): Promise<void> {
-    if (prefersReducedMotion()) {
-      this._clipPath.set('circle(0% at 50% 50%)');
-      this._isOpen.set(false);
-      this.afterClose.emit();
-      return;
-    }
-
-    const motion = await loadMotion();
-    if (motion) {
-      const opts = this._buildOptions();
-      await motion.animate(this.el.nativeElement, { clipPath: 'circle(0% at 50% 50%)' }, opts)
-        .finished;
-    } else {
-      this._clipPath.set('circle(0% at 50% 50%)');
-    }
-
+    const settled = await this.presence.close(async () => {
+      if (prefersReducedMotion()) {
+        this._clipPath.set('circle(0% at 50% 50%)');
+        return;
+      }
+      const motion = await loadMotion();
+      if (motion) {
+        const opts = this._buildOptions();
+        await motion.animate(this.el.nativeElement, { clipPath: 'circle(0% at 50% 50%)' }, opts)
+          .finished;
+      } else {
+        this._clipPath.set('circle(0% at 50% 50%)');
+      }
+    });
+    if (!settled) return;
     this._isOpen.set(false);
     this.afterClose.emit();
   }

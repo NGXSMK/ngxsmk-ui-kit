@@ -1,4 +1,5 @@
-﻿import {
+import { prefersReducedMotion } from '@ngxsmk/core/animation';
+import {
   ChangeDetectionStrategy,
   Component,
   ContentChildren,
@@ -946,6 +947,12 @@ const HOURS = Array.from({ length: 24 }, (_, i) => i);
         background: var(--_error);
         animation: ngxsmk-sch-pulse 2s ease-in-out infinite;
       }
+
+      @media (prefers-reduced-motion: reduce) {
+        .ngxsmk-sch__now-dot {
+          animation: none;
+        }
+      }
       @keyframes ngxsmk-sch-pulse {
         0%,
         100% {
@@ -1722,6 +1729,11 @@ export class NgxsmkScheduler implements OnInit {
     if (!container) return;
     const hour = new Date().getHours();
     const scrollTo = Math.max(0, (hour - 2) * this.engine.hourHeight());
-    requestAnimationFrame(() => container.scrollTo({ top: scrollTo, behavior: 'smooth' }));
+    requestAnimationFrame(() =>
+      container.scrollTo({
+        top: scrollTo,
+        behavior: prefersReducedMotion() ? 'instant' : 'smooth',
+      }),
+    );
   }
 }

@@ -109,6 +109,7 @@ export class NgxsmkRadioGroup extends CvaBase<unknown> {
     .ngxsmk-radio__wrapper {
       display: inline-flex;
       align-items: center;
+      min-block-size: var(--ngxsmk-control-height);
       gap: var(--ngxsmk-space-2);
       cursor: pointer;
       font-family: var(--ngxsmk-font-sans);
@@ -163,6 +164,20 @@ export class NgxsmkRadioGroup extends CvaBase<unknown> {
     }
     :host([data-checked]) .ngxsmk-radio__circle::after {
       transform: scale(1);
+    }
+
+    @media (hover: hover) {
+      :host(:not([data-disabled])) .ngxsmk-radio__wrapper:hover .ngxsmk-radio__circle {
+        outline: var(--ngxsmk-space-px, 1px) solid var(--ngxsmk-color-primary);
+        outline-offset: var(--ngxsmk-space-1);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ngxsmk-radio__circle,
+      .ngxsmk-radio__circle::after {
+        transition: none;
+      }
     }
 
     .ngxsmk-radio__native:focus-visible + .ngxsmk-radio__circle {

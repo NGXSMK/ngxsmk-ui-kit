@@ -158,8 +158,8 @@ export interface NgxsmkSparklineBar {
 
     .ngxsmk-sparkline__bar {
       transition:
-        opacity 0.15s ease,
-        transform 0.15s ease;
+        opacity var(--ngxsmk-duration-fast, 0.15s) ease,
+        transform var(--ngxsmk-duration-fast, 0.15s) ease;
       opacity: 0.85;
     }
 

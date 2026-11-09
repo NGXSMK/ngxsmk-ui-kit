@@ -1,7 +1,6 @@
 import {
   Component,
   ElementRef,
-  HostListener,
   input,
   output,
   signal,
@@ -10,7 +9,11 @@ import {
   viewChild,
   ChangeDetectionStrategy,
   effect,
+  inject,
+  untracked,
 } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { NgxsmkFocusTrap } from '@ngxsmk/cdk/focus-trap';
 
 export interface CommandItem {
   id: string;
@@ -35,6 +38,7 @@ export interface CommandItem {
 @Component({
   selector: 'ngxsmk-command-palette',
   standalone: true,
+  imports: [NgxsmkFocusTrap],
   template: `
     @if (open()) {
       <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
@@ -46,6 +50,8 @@ export interface CommandItem {
           role="dialog"
           aria-modal="true"
           aria-label="Command palette"
+          ngxsmkFocusTrap
+          [ngxsmkFocusTrapAutoCapture]="true"
         >
           <div class="ngxsmk-cmd-search">
             <svg
@@ -226,8 +232,8 @@ export interface CommandItem {
       color: var(--ngxsmk-color-on-surface);
       cursor: pointer;
       transition:
-        background 0.1s,
-        color 0.1s;
+        background var(--ngxsmk-duration-fast, 0.1s),
+        color var(--ngxsmk-duration-fast, 0.1s);
     }
 
     .ngxsmk-cmd-item--active {
@@ -314,8 +320,16 @@ export class NgxsmkCommandPalette {
   protected readonly activeIndex = signal(0);
 
   private readonly searchInput = viewChild<ElementRef<HTMLInputElement>>('searchInput');
+  private readonly document = inject(DOCUMENT);
 
   constructor() {
+    // Global chord (Ctrl/Cmd+K) stays registered; palette navigation only while open.
+    effect((onCleanup) => {
+      const onKey = (event: KeyboardEvent) => this.handleKeyboardEvent(event);
+      untracked(() => this.document.defaultView?.addEventListener('keydown', onKey));
+      onCleanup(() => this.document.defaultView?.removeEventListener('keydown', onKey));
+    });
+
     effect(() => {
       if (this.open()) {
         setTimeout(() => {
@@ -328,8 +342,7 @@ export class NgxsmkCommandPalette {
     });
   }
 
-  @HostListener('window:keydown', ['$event'])
-  handleKeyboardEvent(event: KeyboardEvent): void {
+  private handleKeyboardEvent(event: KeyboardEvent): void {
     const isMeta = event.metaKey || event.ctrlKey;
     const key = event.key.toLowerCase();
 

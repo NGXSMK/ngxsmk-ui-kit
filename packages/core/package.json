@@ -26,20 +26,30 @@
     "url": "https://github.com/NGXSMK/ngxsmk-ui-kit/issues"
   },
   "peerDependencies": {
-    "@angular/common": ">=17.3.0",
-    "@angular/core": ">=17.3.0",
-    "@angular/forms": ">=17.3.0",
-    "@ngxsmk/cdk": ">=2.0.0",
-    "@angular/cdk": ">=17.3.0",
+    "@angular/common": ">=17.3.0 <23.0.0",
+    "@angular/core": ">=17.3.0 <23.0.0",
+    "@angular/forms": ">=17.3.0 <23.0.0",
+    "@angular/platform-browser": ">=17.3.0 <23.0.0",
+    "@ngxsmk/cdk": ">=3.2.0",
+    "@ngxsmk/theme": ">=3.2.0",
+    "@angular/cdk": ">=17.3.0 <23.0.0",
     "ngxsmk-datepicker": "^2.3.1",
     "luxon": "^3.0.0",
     "ngxsmk-tel-input": "^1.8.4",
     "intl-tel-input": "^25.3.2",
     "libphonenumber-js": "^1.12.10",
-    "motion": "^12.0.0 || ^13.0.0 || ^14.0.0"
+    "motion": "^12.0.0 || ^13.0.0 || ^14.0.0",
+    "qrcode-generator": "^2.0.0",
+    "rxjs": "^7.0.0"
   },
   "peerDependenciesMeta": {
     "@angular/cdk": {
+      "optional": true
+    },
+    "@angular/platform-browser": {
+      "optional": true
+    },
+    "@ngxsmk/theme": {
       "optional": true
     },
     "ngxsmk-datepicker": {
@@ -58,6 +68,12 @@
       "optional": true
     },
     "motion": {
+      "optional": true
+    },
+    "qrcode-generator": {
+      "optional": true
+    },
+    "rxjs": {
       "optional": true
     }
   },

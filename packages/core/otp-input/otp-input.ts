@@ -2,8 +2,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  QueryList,
-  ViewChildren,
   computed,
   effect,
   forwardRef,
@@ -12,6 +10,7 @@ import {
   output,
   signal,
   booleanAttribute,
+  viewChildren,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ngxsmkUniqueId } from '@ngxsmk/core/util';
@@ -102,9 +101,9 @@ import { NGXSMK_FORM_FIELD_CONTROL, NgxsmkFormFieldControl } from '@ngxsmk/core/
       border-radius: var(--ngxsmk-radius-md, 0.375rem);
       outline: none;
       transition:
-        border-color 0.15s ease,
-        box-shadow 0.15s ease,
-        background-color 0.15s ease;
+        border-color var(--ngxsmk-duration-fast, 0.15s) ease,
+        box-shadow var(--ngxsmk-duration-fast, 0.15s) ease,
+        background-color var(--ngxsmk-duration-fast, 0.15s) ease;
     }
 
     .ngxsmk-otp-input__slot:focus,
@@ -133,7 +132,7 @@ import { NGXSMK_FORM_FIELD_CONTROL, NgxsmkFormFieldControl } from '@ngxsmk/core/
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgxsmkOtpInput extends CvaBase<string> implements NgxsmkFormFieldControl {
-  @ViewChildren('inputEl') private inputEls!: QueryList<ElementRef<HTMLInputElement>>;
+  private readonly inputEls = viewChildren<ElementRef<HTMLInputElement>>('inputEl');
 
   /** Number of OTP input slots. Default: 6. */
   readonly length = input<number>(6);
@@ -279,10 +278,11 @@ export class NgxsmkOtpInput extends CvaBase<string> implements NgxsmkFormFieldCo
   }
 
   private focusSlot(index: number): void {
-    const inputs = this.inputEls?.toArray();
-    if (inputs && inputs[index]) {
-      inputs[index].nativeElement.focus();
-      inputs[index].nativeElement.select();
+    const inputs = this.inputEls();
+    const el = inputs[index];
+    if (el) {
+      el.nativeElement.focus();
+      el.nativeElement.select();
       this.activeSlot.set(index);
     }
   }

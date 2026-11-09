@@ -31,7 +31,6 @@ import { NgxsmkTransfer } from '@ngxsmk/core/transfer';
 import { NgxsmkSignaturePad } from '@ngxsmk/core/signature-pad';
 import { NgxsmkColorPicker } from '@ngxsmk/core/color-picker';
 import { NgxsmkFileUpload } from '@ngxsmk/core/file-upload';
-import { NgxsmkDateRangePicker } from '@ngxsmk/core/date-range-picker';
 import { NgxsmkOtpInput } from '@ngxsmk/core/otp-input';
 import { NgxsmkRangeSlider } from '@ngxsmk/core/range-slider';
 import { NgxsmkCreditCardInput } from '@ngxsmk/core/credit-card-input';
@@ -40,7 +39,10 @@ import { NgxsmkTreeSelect, type TreeNode } from '@ngxsmk/core/tree-select';
 import { NgxsmkTimePicker } from '@ngxsmk/core/time-picker';
 import { NgxsmkInputMask } from '@ngxsmk/core/input-mask';
 import { NgxsmkIcon } from '@ngxsmk/core/icon';
-import { Component, signal } from '@angular/core';
+import { NgxsmkTelInputComponent } from 'ngxsmk-tel-input';
+import { NgxsmkDatepickerComponent } from 'ngxsmk-datepicker';
+import { NgxsmkThemeService } from '@ngxsmk/theme';
+import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ShowcaseExample } from '../../showcase/showcase-example';
@@ -68,6 +70,8 @@ interface Option {
     NgxsmkRadioGroup,
     NgxsmkSwitch,
     NgxsmkNumberInput,
+    NgxsmkDatepickerComponent,
+    NgxsmkTelInputComponent,
     NgxsmkSelect,
     NgxsmkMultiSelect,
     NgxsmkAutocomplete,
@@ -94,7 +98,6 @@ interface Option {
     NgxsmkSignaturePad,
     NgxsmkColorPicker,
     NgxsmkFileUpload,
-    NgxsmkDateRangePicker,
     NgxsmkOtpInput,
     NgxsmkRangeSlider,
     NgxsmkCreditCardInput,
@@ -102,10 +105,12 @@ interface Option {
     NgxsmkTreeSelect,
   ],
   template: `
-    <h2 class="ngxsmk-page-title">{{ 'category.forms' | translate }}</h2>
-    <p class="ngxsmk-page-desc">
-      {{ 'forms.intro' | translate }}
-    </p>
+    <header class="category-intro">
+      <h1 class="ngxsmk-page-title">{{ 'category.forms' | translate }}</h1>
+      <p class="ngxsmk-page-desc">
+        {{ 'forms.intro' | translate }}
+      </p>
+    </header>
 
     <div class="ngxsmk-sc-col">
       <showcase-example
@@ -176,7 +181,9 @@ interface Option {
         [customize]="customizeNgxsmkInput"
       >
         <div class="ngxsmk-sc-col" style="width: 100%; max-width: 320px">
+          <label for="example-email">{{ 'forms.emailLabel' | translate }}</label>
           <input
+            id="example-email"
             ngxsmkInput
             type="email"
             [placeholder]="'forms.emailPlaceholder' | translate"
@@ -222,7 +229,9 @@ interface Option {
         [customize]="customizeNgxsmkSelect"
       >
         <div class="ngxsmk-sc-col" style="width: 100%; max-width: 260px">
+          <span id="example-color-label">{{ 'forms.pickColor' | translate }}</span>
           <ngxsmk-select
+            ariaLabelledby="example-color-label"
             [options]="colors"
             [placeholder]="'forms.pickColor' | translate"
             [(value)]="color"
@@ -418,28 +427,45 @@ interface Option {
         </div>
       </showcase-example>
 
-      <showcase-example title="Date Picker" [description]="'forms.datepickerDesc' | translate">
-        <p style="margin: 0; width: 100%">
-          {{ 'forms.referRepo' | translate }}
-          <a
-            href="https://github.com/NGXSMK/ngxsmk-datepicker"
-            target="_blank"
-            rel="noopener noreferrer"
-            >github.com/NGXSMK/ngxsmk-datepicker</a
-          >
-        </p>
+      <showcase-example
+        title="Date Picker"
+        description="Choose an appointment date using the ngxsmk-datepicker calendar."
+        [component]="NgxsmkDatepickerComponent"
+        [code]="pluginCode"
+      >
+        <div class="ngxsmk-sc-col">
+          <label for="appointment-calendar">Appointment date</label>
+          <ngxsmk-datepicker
+            inputId="appointment-calendar"
+            mode="single"
+            placeholder="Choose a date"
+            [theme]="theme.isDark() ? 'dark' : 'light'"
+            [appendToBody]="true"
+            [(ngModel)]="appointment"
+          />
+          <a href="https://github.com/NGXSMK/ngxsmk-datepicker">Datepicker plugin documentation</a>
+        </div>
       </showcase-example>
 
-      <showcase-example title="Telephone input" [description]="'forms.telInputDesc' | translate">
-        <p style="margin: 0; width: 100%">
-          {{ 'forms.referRepo' | translate }}
-          <a
-            href="https://github.com/NGXSMK/ngxsmk-tel-input"
-            target="_blank"
-            rel="noopener noreferrer"
-            >github.com/NGXSMK/ngxsmk-tel-input</a
+      <showcase-example
+        title="Telephone input"
+        description="Select a country and enter a phone number to see its international format."
+        [component]="NgxsmkTelInputComponent"
+        [code]="telephoneCode"
+      >
+        <div class="ngxsmk-sc-col">
+          <ngxsmk-tel-input
+            label="Phone number"
+            [theme]="theme.isDark() ? 'dark' : 'light'"
+            [(ngModel)]="telephone"
+          />
+          @if (telephone()) {
+            <small>International number: {{ telephone() }}</small>
+          }
+          <a href="https://github.com/NGXSMK/ngxsmk-tel-input"
+            >Telephone input plugin documentation</a
           >
-        </p>
+        </div>
       </showcase-example>
 
       <showcase-example
@@ -600,10 +626,21 @@ interface Option {
 
       <showcase-example
         title="Date Range Picker"
-        description="Dual date range selector with quick preset pills (Today, Last 7 days, etc.)."
+        description="Choose the start and end dates for a booking."
+        [component]="NgxsmkDatepickerComponent"
         [code]="codeDateRangePicker"
       >
-        <ngxsmk-date-range-picker [(range)]="dateRange" />
+        <div class="ngxsmk-sc-col">
+          <label for="booking-calendar">Booking dates</label>
+          <ngxsmk-datepicker
+            inputId="booking-calendar"
+            mode="range"
+            placeholder="Choose a date range"
+            [theme]="theme.isDark() ? 'dark' : 'light'"
+            [appendToBody]="true"
+            [(ngModel)]="dateRange"
+          />
+        </div>
       </showcase-example>
 
       <showcase-example
@@ -1165,6 +1202,16 @@ ngxsmk-checkbox-list-item {
   protected readonly bold = signal(true);
   protected readonly italic = signal(false);
   protected readonly underline = signal(false);
+  protected readonly NgxsmkTelInputComponent = NgxsmkTelInputComponent;
+  protected readonly telephone = signal<string | null>(null);
+  protected readonly telephoneCode = `<!-- Import NgxsmkTelInputComponent from 'ngxsmk-tel-input' and FormsModule from '@angular/forms'. -->
+<ngxsmk-tel-input label="Phone number" [(ngModel)]="telephone" />`;
+  protected readonly NgxsmkDatepickerComponent = NgxsmkDatepickerComponent;
+  protected readonly theme = inject(NgxsmkThemeService);
+  protected readonly appointment = signal<Date | null>(null);
+  protected readonly pluginCode = `<!-- Import NgxsmkDatepickerComponent from 'ngxsmk-datepicker' and FormsModule from '@angular/forms'. -->
+<label for="appointment-calendar">Appointment date</label>
+<ngxsmk-datepicker inputId="appointment-calendar" mode="single" placeholder="Choose a date" [(ngModel)]="appointment" />`;
   protected readonly email = signal('');
   protected readonly feedback = signal('');
   protected readonly quantity = signal(2);
@@ -1187,7 +1234,7 @@ ngxsmk-checkbox-list-item {
   protected readonly tags = signal<string[]>(['angular', 'signals']);
   protected readonly langs = signal<string[]>(['ts', 'ng']);
   protected readonly pickedColor = signal('#7c3aed');
-  protected readonly dateRange = signal({ start: '2026-07-01', end: '2026-07-22' });
+  protected readonly dateRange = signal<{ start: Date; end: Date | null } | null>(null);
   protected readonly transferData = [
     { key: '1', title: 'Authentication Service' },
     { key: '2', title: 'Payment Gateway' },
@@ -1206,7 +1253,8 @@ ngxsmk-checkbox-list-item {
   protected readonly codeButtonGroup = `<ngxsmk-button-group>\n  <button ngxsmk-button variant="outline">Left</button>\n  <button ngxsmk-button variant="outline">Right</button>\n</ngxsmk-button-group>`;
   protected readonly codeToggleButton = `<button ngxsmkToggleButton [(pressed)]="starred">Star</button>`;
   protected readonly codeToggleButtonGroup = `<ngxsmk-toggle-button-group>\n  <button ngxsmkToggleButton [(pressed)]="bold">Bold</button>\n  <button ngxsmkToggleButton [(pressed)]="italic">Italic</button>\n</ngxsmk-toggle-button-group>`;
-  protected readonly codeInput = `<ngxsmk-input type="email" placeholder="you@example.com" [(value)]="email" />`;
+  protected readonly codeInput = `<label for="email">Email</label>
+<input ngxsmkInput id="email" type="email" [(ngModel)]="email" />`;
   protected readonly codeTextarea = `<ngxsmk-textarea [rows]="4" [(value)]="feedback" placeholder="Share your feedback…" />`;
   protected readonly codeNumber = `<ngxsmk-number-input [min]="0" [max]="10" [step]="1" [(value)]="quantity" />`;
   protected readonly codeSelect = `<ngxsmk-select [options]="colors" [(value)]="color" placeholder="Pick a color" />`;
@@ -1234,7 +1282,9 @@ ngxsmk-checkbox-list-item {
   protected readonly codeCheckboxListItem = `<ngxsmk-checkbox-list-item\n  description="Statically typed, great tooling."\n  [checked]="langs().includes('ts')"\n  (changed)="toggleLang('ts', $event)"\n>TypeScript</ngxsmk-checkbox-list-item>\n<ngxsmk-checkbox-list-item\n  [checked]="langs().includes('ng')"\n  (changed)="toggleLang('ng', $event)"\n>Angular</ngxsmk-checkbox-list-item>`;
   protected readonly codeColorPicker = `<ngxsmk-color-picker [(value)]="pickedColor" />`;
   protected readonly codeFileUpload = `<ngxsmk-file-upload accept="image/*,application/pdf" [maxSizeMb]="10" />`;
-  protected readonly codeDateRangePicker = `<ngxsmk-date-range-picker [(range)]="dateRange" />`;
+  protected readonly codeDateRangePicker = `<!-- Import NgxsmkDatepickerComponent from 'ngxsmk-datepicker' and FormsModule from '@angular/forms'. -->
+<label for="booking-calendar">Booking dates</label>
+<ngxsmk-datepicker inputId="booking-calendar" mode="range" placeholder="Choose a date range" [(ngModel)]="dateRange" />`;
   protected readonly codeTransfer = `<ngxsmk-transfer [dataSource]="transferData" [(targetKeys)]="selectedTransferKeys" />`;
   protected readonly codeSignaturePad = `<ngxsmk-signature-pad [width]="400" [height]="160" />`;
   protected readonly NgxsmkOtpInput = NgxsmkOtpInput;

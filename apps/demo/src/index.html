@@ -5,6 +5,13 @@
     <title>NGXSMK — The UI Kit That Angular Deserves</title>
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Baseline CSP for the public demo. `unsafe-inline` covers the theme
+         bootstrap script and Angular's style encapsulation; tighten further
+         (nonces / hashed SRI for third-party CSS) when shipping a hardened host. -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net data:; img-src 'self' data: https:; connect-src 'self' https:; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'"
+    />
     <meta name="theme-color" content="#0D9488" />
     <meta name="robots" content="index, follow" />
     <meta name="google-site-verification" content="A5yVrT2S54aESSjpQexg5uJ8TcuMROMzqX_vnaJzbsE" />

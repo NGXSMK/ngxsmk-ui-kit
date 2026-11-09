@@ -2990,7 +2990,7 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "name": "NgxsmkDatePicker",
     "kind": "Component",
     "selector": "ngxsmk-date-picker",
-    "description": "",
+    "description": "Native date input with keyboard editing and a platform calendar.",
     "inputs": [
       {
         "name": "value",
@@ -3159,6 +3159,12 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
         "required": false,
         "twoWay": true,
         "default": "false"
+      },
+      {
+        "name": "ariaLabelledby",
+        "type": "string | null",
+        "required": false,
+        "default": "null"
       },
       {
         "name": "title",
@@ -4328,7 +4334,7 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
       },
       {
         "name": "itemDropped",
-        "type": "{\n    item: NgxsmkKanbanItem;\n    fromColumnId: string;\n    toColumnId: string;\n  }"
+        "type": "{\r\n    item: NgxsmkKanbanItem;\r\n    fromColumnId: string;\r\n    toColumnId: string;\r\n  }"
       }
     ]
   },
@@ -4575,12 +4581,18 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "name": "NgxsmkMarkdown",
     "kind": "Component",
     "selector": "ngxsmk-markdown",
-    "description": "",
+    "description": "Lightweight markdown renderer for trusted or semi-trusted content. URLs are scheme-allowlisted; images are off by default (`allowImages`). Final HTML still passes through Angular's `[innerHTML]` sanitizer.",
     "inputs": [
       {
         "name": "content",
         "type": "string",
         "required": true
+      },
+      {
+        "name": "allowImages",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
       }
     ],
     "outputs": []
@@ -8407,7 +8419,7 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
     "outputs": [
       {
         "name": "transferChange",
-        "type": "{\n    targetKeys: string[];\n    direction: TransferDirection;\n    moveKeys: string[];\n  }"
+        "type": "{\r\n    targetKeys: string[];\r\n    direction: TransferDirection;\r\n    moveKeys: string[];\r\n  }"
       }
     ]
   },

@@ -1,3 +1,4 @@
+import { prefersReducedMotion } from '@ngxsmk/core/animation';
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, input, model } from '@angular/core';
 
 export interface NgxsmkScrollSpyItem {
@@ -97,8 +98,8 @@ export interface NgxsmkScrollSpyItem {
       cursor: pointer;
       border-radius: var(--ngxsmk-radius-sm, 0.25rem);
       transition:
-        color 0.15s ease,
-        background-color 0.15s ease;
+        color var(--ngxsmk-duration-fast, 0.15s) ease,
+        background-color var(--ngxsmk-duration-fast, 0.15s) ease;
       margin-left: -2px;
       border-left: 2px solid transparent;
     }
@@ -159,7 +160,7 @@ export class NgxsmkScrollSpy implements OnInit, OnDestroy {
     const targetEl = document.getElementById(id);
     if (targetEl) {
       const top = targetEl.getBoundingClientRect().top + window.scrollY - this.offset();
-      window.scrollTo({ top, behavior: 'smooth' });
+      window.scrollTo({ top, behavior: prefersReducedMotion() ? 'instant' : 'smooth' });
     }
   }
 

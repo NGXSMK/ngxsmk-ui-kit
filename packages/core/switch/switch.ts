@@ -50,6 +50,7 @@ import { CvaBase } from '@ngxsmk/cdk/cva-base';
     .ngxsmk-switch__wrapper {
       display: inline-flex;
       align-items: center;
+      min-block-size: var(--ngxsmk-control-height);
       gap: var(--ngxsmk-space-2);
       cursor: pointer;
       font-family: var(--ngxsmk-font-sans);
@@ -104,6 +105,20 @@ import { CvaBase } from '@ngxsmk/cdk/cva-base';
       transform: translateX(
         calc(var(--ngxsmk-switch-width, 2.25rem) - var(--ngxsmk-switch-thumb-size, 0.875rem) - 4px)
       );
+    }
+
+    @media (hover: hover) {
+      :host(:not([data-disabled])) .ngxsmk-switch__wrapper:hover .ngxsmk-switch__track {
+        outline: var(--ngxsmk-space-px, 1px) solid var(--ngxsmk-color-primary);
+        outline-offset: var(--ngxsmk-space-1);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ngxsmk-switch__track,
+      .ngxsmk-switch__thumb {
+        transition: none;
+      }
     }
 
     .ngxsmk-switch__native:focus-visible ~ .ngxsmk-switch__track {

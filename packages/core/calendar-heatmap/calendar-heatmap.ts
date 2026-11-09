@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 export interface HeatmapValue {
   date: string; // YYYY-MM-DD
@@ -16,7 +15,6 @@ export interface HeatmapValue {
 @Component({
   standalone: true,
   selector: 'ngxsmk-calendar-heatmap',
-  imports: [CommonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     class: 'ngxsmk-calendar-heatmap',

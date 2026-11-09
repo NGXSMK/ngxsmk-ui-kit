@@ -7,8 +7,7 @@ import {
   output,
   signal,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CvaBase } from '@ngxsmk/cdk/cva-base';
 import { NGXSMK_FORM_FIELD_CONTROL, NgxsmkFormFieldControl } from '@ngxsmk/core/form-field';
 import { ngxsmkUniqueId } from '@ngxsmk/core/util';
@@ -25,7 +24,6 @@ export type ColorFormat = 'hex' | 'hsl' | 'rgb';
 @Component({
   standalone: true,
   selector: 'ngxsmk-color-picker',
-  imports: [CommonModule, FormsModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {

@@ -140,6 +140,12 @@ export type ReasoningStep = NgxsmkReasoningStep;
       background: var(--ngxsmk-color-primary) !important;
       animation: ngxsmk-pulse-scale 1.4s infinite ease-in-out;
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ngxsmk-reasoning-timeline__dot--running {
+        animation: none;
+      }
+    }
     .ngxsmk-reasoning-timeline__dot--error {
       background: var(--ngxsmk-color-error) !important;
       color: var(--ngxsmk-color-on-error) !important;

@@ -3,15 +3,29 @@ import {
   ChangeDetectionStrategy,
   Component,
   forwardRef,
+  inject,
   input,
   model,
   output,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ngxsmkUniqueId } from '@ngxsmk/core/util';
-import { NGXSMK_FORM_FIELD_CONTROL, NgxsmkFormFieldControl } from '@ngxsmk/core/form-field';
+import {
+  NGXSMK_FORM_FIELD_CONTROL,
+  NgxsmkFormField,
+  NgxsmkFormFieldControl,
+} from '@ngxsmk/core/form-field';
 import { CvaBase } from '@ngxsmk/cdk/cva-base';
 
+/**
+ * Native date input with keyboard editing and a platform calendar.
+ *
+ * ```html
+ * <ngxsmk-form-field label="Appointment date">
+ *   <ngxsmk-date-picker [(value)]="appointmentDate" />
+ * </ngxsmk-form-field>
+ * ```
+ */
 @Component({
   standalone: true,
   selector: 'ngxsmk-date-picker',
@@ -31,7 +45,7 @@ import { CvaBase } from '@ngxsmk/cdk/cva-base';
       type="date"
       class="ngxsmk-date-picker__control"
       [attr.id]="id()"
-      [attr.aria-label]="ariaLabel() ?? (placeholder() || 'Date')"
+      [attr.aria-label]="ariaLabel() ?? (field?.label() ? null : placeholder() || 'Date')"
       [attr.aria-invalid]="ariaInvalid() ? 'true' : null"
       [attr.aria-describedby]="ariaDescribedby()"
       [disabled]="isDisabled()"
@@ -45,6 +59,7 @@ import { CvaBase } from '@ngxsmk/cdk/cva-base';
   `,
   host: {
     class: 'ngxsmk-date-picker',
+    '[attr.id]': 'null',
     '[attr.aria-invalid]': "ariaInvalid() ? 'true' : null",
     '[attr.aria-describedby]': 'ariaDescribedby()',
   },
@@ -55,6 +70,7 @@ import { CvaBase } from '@ngxsmk/cdk/cva-base';
     }
     .ngxsmk-date-picker__control {
       display: block;
+      min-inline-size: 0;
       width: 100%;
       box-sizing: border-box;
       height: var(--ngxsmk-input-height, var(--ngxsmk-control-height));
@@ -70,8 +86,14 @@ import { CvaBase } from '@ngxsmk/cdk/cva-base';
         border-color var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out),
         box-shadow var(--ngxsmk-duration-fast) var(--ngxsmk-ease-out);
     }
-    .ngxsmk-date-picker__control::placeholder {
-      color: var(--ngxsmk-color-on-surface-variant);
+    .ngxsmk-date-picker__control::-webkit-calendar-picker-indicator {
+      padding: var(--ngxsmk-space-2);
+      margin-inline-end: calc(-1 * var(--ngxsmk-space-2));
+      border-radius: var(--ngxsmk-radius-sm);
+      cursor: pointer;
+    }
+    .ngxsmk-date-picker__control:not(:disabled)::-webkit-calendar-picker-indicator:hover {
+      background-color: var(--ngxsmk-color-surface-variant);
     }
     .ngxsmk-date-picker__control:hover:not(:disabled):not([aria-invalid='true']) {
       border-color: var(--ngxsmk-color-ring);
@@ -80,6 +102,10 @@ import { CvaBase } from '@ngxsmk/cdk/cva-base';
       outline: none;
       border-color: var(--ngxsmk-color-ring);
       box-shadow: var(--ngxsmk-focus-ring);
+    }
+    .ngxsmk-date-picker__control[aria-invalid='true'],
+    .ngxsmk-date-picker__control:user-invalid {
+      border-color: var(--ngxsmk-color-error);
     }
     .ngxsmk-date-picker__control:disabled {
       opacity: var(--ngxsmk-opacity-disabled);
@@ -90,6 +116,7 @@ import { CvaBase } from '@ngxsmk/cdk/cva-base';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgxsmkDatePicker extends CvaBase<string> implements NgxsmkFormFieldControl {
+  protected readonly field = inject(NgxsmkFormField, { optional: true });
   readonly value = model('');
   readonly min = input('');
   readonly max = input('');
