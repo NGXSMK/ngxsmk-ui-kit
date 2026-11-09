@@ -7,12 +7,12 @@ security vulnerabilities seriously and appreciate responsible disclosure.
 
 We actively support and provide security updates for the current major line:
 
-| Version | Supported |
-| :------ | :-------- |
-| 3.2.x   | Yes       |
+| Version | Supported            |
+| :------ | :------------------- |
+| 3.2.x   | Yes                  |
 | 3.1.x   | Yes (security fixes) |
 | 3.0.x   | Yes (security fixes) |
-| < 3.0   | No        |
+| < 3.0   | No                   |
 
 Older 1.x / 2.x releases are end-of-life. Please upgrade to the latest 3.x
 release when possible.

@@ -70,8 +70,8 @@ interface AppOutlineItem {
     <header class="category-intro">
       <h1 class="ngxsmk-page-title">{{ 'category.navigation' | translate }}</h1>
       <p class="ngxsmk-page-desc">
-      {{ 'navigation.desc' | translate }}
-    </p>
+        {{ 'navigation.desc' | translate }}
+      </p>
     </header>
 
     <showcase-example

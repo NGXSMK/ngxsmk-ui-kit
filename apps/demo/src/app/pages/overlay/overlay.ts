@@ -41,8 +41,8 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <header class="category-intro">
       <h1 class="ngxsmk-page-title">{{ 'category.overlay' | translate }}</h1>
       <p class="ngxsmk-page-desc">
-      {{ 'overlay.desc' | translate }}
-    </p>
+        {{ 'overlay.desc' | translate }}
+      </p>
     </header>
 
     <showcase-example

@@ -35,8 +35,8 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <header class="category-intro">
       <h1 class="ngxsmk-page-title">{{ 'category.content-typography' | translate }}</h1>
       <p class="ngxsmk-page-desc">
-      {{ 'contentTypography.intro' | translate }}
-    </p>
+        {{ 'contentTypography.intro' | translate }}
+      </p>
     </header>
 
     <showcase-example

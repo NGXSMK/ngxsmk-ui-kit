@@ -128,7 +128,10 @@ export class NgxsmkMorphModalClose {
   hostDirectives: [
     {
       directive: NgxsmkFocusTrap,
-      inputs: ['ngxsmkFocusTrap: morphModalFocusTrap', 'ngxsmkFocusTrapAutoCapture: morphModalFocusCapture'],
+      inputs: [
+        'ngxsmkFocusTrap: morphModalFocusTrap',
+        'ngxsmkFocusTrapAutoCapture: morphModalFocusCapture',
+      ],
     },
   ],
   host: {
