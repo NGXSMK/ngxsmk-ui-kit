@@ -32,7 +32,7 @@ export type NgxsmkAlertDialogVariant = 'info' | 'destructive';
   standalone: true,
   selector: 'ngxsmk-alert-dialog',
   template: `
-    <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
+    <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events -->
     <dialog
       #dialog
       class="ngxsmk-alert-dialog__native"
