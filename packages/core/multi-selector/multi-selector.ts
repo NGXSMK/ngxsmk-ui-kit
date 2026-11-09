@@ -13,9 +13,9 @@ import {
   Renderer2,
   signal,
   TemplateRef,
-  ViewChild,
   ViewContainerRef,
   OnDestroy,
+  viewChild,
 } from '@angular/core';
 import { ngxsmkUniqueId } from '@ngxsmk/core/util';
 import { ListboxKeyboard } from '@ngxsmk/cdk/listbox-keyboard';
@@ -167,8 +167,8 @@ import { ListboxKeyboard } from '@ngxsmk/cdk/listbox-keyboard';
  * @deprecated Use `NgxsmkMultiSelect` (`@ngxsmk/core/multi-select`) instead. Will be removed in v4.0.0.
  */
 export class NgxsmkMultiSelector implements OnDestroy {
-  @ViewChild('triggerEl') private triggerEl!: ElementRef<HTMLElement>;
-  @ViewChild('dropdownTpl') private dropdownTpl!: TemplateRef<unknown>;
+  private readonly triggerEl = viewChild.required<ElementRef<HTMLElement>>('triggerEl');
+  private readonly dropdownTpl = viewChild.required<TemplateRef<unknown>>('dropdownTpl');
 
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly vcr = inject(ViewContainerRef);
@@ -239,7 +239,7 @@ export class NgxsmkMultiSelector implements OnDestroy {
     if (this.dropdownView) return;
     this.isOpen.set(true);
     this.activeIndex.set(this.options().length ? 0 : -1);
-    this.dropdownView = this.vcr.createEmbeddedView(this.dropdownTpl);
+    this.dropdownView = this.vcr.createEmbeddedView(this.dropdownTpl());
     this.dropdownView?.detectChanges();
     const node =
       (this.dropdownView?.rootNodes.find((n) => n.nodeType === 1) as HTMLElement | undefined) ??
@@ -271,8 +271,8 @@ export class NgxsmkMultiSelector implements OnDestroy {
   }
 
   private readonly position = (): void => {
-    if (!this.dropdownNode || !this.triggerEl) return;
-    const r = this.triggerEl.nativeElement.getBoundingClientRect();
+    if (!this.dropdownNode) return;
+    const r = this.triggerEl().nativeElement.getBoundingClientRect();
     this.renderer.setStyle(this.dropdownNode, 'top', `${r.bottom + 4}px`);
     this.renderer.setStyle(this.dropdownNode, 'left', `${r.left}px`);
     this.renderer.setStyle(this.dropdownNode, 'width', `${r.width}px`);

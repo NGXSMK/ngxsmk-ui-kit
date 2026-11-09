@@ -95,8 +95,8 @@ export interface NgxsmkPromptLibraryItem {
       font-size: 0.85rem;
       outline: none;
       transition:
-        border-color 0.15s ease,
-        box-shadow 0.15s ease;
+        border-color var(--ngxsmk-duration-fast, 0.15s) ease,
+        box-shadow var(--ngxsmk-duration-fast, 0.15s) ease;
     }
 
     .ngxsmk-prompt-lib__search:focus {
@@ -128,9 +128,9 @@ export interface NgxsmkPromptLibraryItem {
       flex-direction: column;
       justify-content: space-between;
       transition:
-        border-color 0.15s ease,
-        box-shadow 0.15s ease,
-        transform 0.15s ease;
+        border-color var(--ngxsmk-duration-fast, 0.15s) ease,
+        box-shadow var(--ngxsmk-duration-fast, 0.15s) ease,
+        transform var(--ngxsmk-duration-fast, 0.15s) ease;
     }
 
     .ngxsmk-prompt-lib__card:hover {

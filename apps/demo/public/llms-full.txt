@@ -1091,6 +1091,7 @@ Outputs:
 
 - Selector: `ngxsmk-date-picker`
 - Import from: `@ngxsmk/core/date-picker`
+- Native date input with keyboard editing and a platform calendar.
 
 Inputs:
 - `[(value)]`: string (default: `''`)
@@ -1146,6 +1147,7 @@ Outputs:
 
 Inputs:
 - `[(open)]`: boolean (default: `false`)
+- `[ariaLabelledby]`: string | null (default: `null`)
 - `[title]`: string (default: `''`)
 - `[dismissible]`: boolean (default: `true`)
 
@@ -1671,9 +1673,11 @@ Inputs:
 
 - Selector: `ngxsmk-markdown`
 - Import from: `@ngxsmk/core/markdown`
+- Lightweight markdown renderer for trusted or semi-trusted content. URLs are scheme-allowlisted; images are off by default (`allowImages`). Final HTML still passes through Angular's `[innerHTML]` sanitizer.
 
 Inputs:
 - `[content]`: string (required)
+- `[allowImages]`: boolean (default: `false`)
 
 ## NgxsmkMarkdownViewer
 

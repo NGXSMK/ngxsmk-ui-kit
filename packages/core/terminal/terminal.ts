@@ -59,6 +59,12 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
     .ngxsmk-terminal__cursor {
       animation: blink 1s step-end infinite;
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ngxsmk-terminal__cursor {
+        animation: none;
+      }
+    }
     @keyframes blink {
       50% {
         opacity: 0;

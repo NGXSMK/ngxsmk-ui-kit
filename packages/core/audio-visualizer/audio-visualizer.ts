@@ -49,7 +49,7 @@ export type NgxsmkAudioVisualizerVariant = 'bars' | 'wave' | 'dots';
       width: 0.25rem;
       height: 20%;
       border-radius: var(--ngxsmk-radius-full, 9999px);
-      transition: height 0.2s ease;
+      transition: height var(--ngxsmk-duration-normal, 0.2s) ease;
     }
 
     /* BARS ANIMATION */
@@ -102,8 +102,8 @@ export type NgxsmkAudioVisualizerVariant = 'bars' | 'wave' | 'dots';
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .ngxsmk-audio-vis[data-active] .ngxsmk-audio-vis__bar {
-        animation-duration: 2.5s !important;
+      .ngxsmk-audio-vis[data-active][data-variant] .ngxsmk-audio-vis__bar {
+        animation: none;
       }
     }
   `,

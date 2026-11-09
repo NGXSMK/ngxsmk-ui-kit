@@ -2,9 +2,9 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  ViewChild,
   input,
   model,
+  viewChild,
 } from '@angular/core';
 
 /**
@@ -129,8 +129,8 @@ import {
       background: var(--ngxsmk-color-surface);
       overflow: hidden;
       transition:
-        border-color 0.15s ease,
-        box-shadow 0.15s ease;
+        border-color var(--ngxsmk-duration-fast, 0.15s) ease,
+        box-shadow var(--ngxsmk-duration-fast, 0.15s) ease;
     }
 
     .ngxsmk-rte:focus-within {
@@ -159,8 +159,8 @@ import {
       font-weight: 600;
       cursor: pointer;
       transition:
-        background 0.15s ease,
-        color 0.15s ease;
+        background var(--ngxsmk-duration-fast, 0.15s) ease,
+        color var(--ngxsmk-duration-fast, 0.15s) ease;
     }
 
     .ngxsmk-rte__tool-btn:hover {
@@ -199,7 +199,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgxsmkRichTextEditor {
-  @ViewChild('editorCanvas') editorCanvas!: ElementRef<HTMLDivElement>;
+  private readonly editorCanvas = viewChild.required<ElementRef<HTMLDivElement>>('editorCanvas');
 
   /** Placeholder prompt text for empty editor. */
   readonly placeholder = input<string>('Write content...');
@@ -220,8 +220,7 @@ export class NgxsmkRichTextEditor {
   }
 
   protected onContentInput(): void {
-    if (!this.editorCanvas) return;
-    const html = this.editorCanvas.nativeElement.innerHTML;
+    const html = this.editorCanvas().nativeElement.innerHTML;
     this.value.set(html);
   }
 }

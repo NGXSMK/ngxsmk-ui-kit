@@ -57,7 +57,9 @@ export interface PromptItem {
       display: flex;
       gap: var(--ngxsmk-space-4, 1rem);
       overflow-x: auto;
-      scroll-behavior: smooth;
+      @media (prefers-reduced-motion: no-preference) {
+        scroll-behavior: smooth;
+      }
       padding: var(--ngxsmk-space-2, 0.5rem) var(--ngxsmk-space-6, 1.5rem);
       /* Hide scrollbars */
       -ms-overflow-style: none; /* IE and Edge */

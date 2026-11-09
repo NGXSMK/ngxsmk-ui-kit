@@ -101,7 +101,7 @@ export type NgxsmkFileNode = NgxsmkFileTreeNode;
       text-align: left;
       cursor: pointer;
       border-radius: var(--ngxsmk-radius-sm, 0.25rem);
-      transition: background-color 0.15s ease;
+      transition: background-color var(--ngxsmk-duration-fast, 0.15s) ease;
     }
 
     .ngxsmk-file-tree__node-btn:hover {
@@ -117,7 +117,7 @@ export type NgxsmkFileNode = NgxsmkFileTreeNode;
     .ngxsmk-file-tree__arrow {
       font-size: 0.75rem;
       color: var(--ngxsmk-color-on-surface-variant);
-      transition: transform 0.15s ease;
+      transition: transform var(--ngxsmk-duration-fast, 0.15s) ease;
     }
 
     .ngxsmk-file-tree__arrow--open {

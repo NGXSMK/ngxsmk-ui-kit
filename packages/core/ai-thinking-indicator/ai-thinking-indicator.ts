@@ -173,9 +173,10 @@ export type NgxsmkAiThinkingVariant = 'orb' | 'wave' | 'dots';
 
     @media (prefers-reduced-motion: reduce) {
       .ngxsmk-ai-thinking__orb,
+      .ngxsmk-ai-thinking__orb-inner,
       .ngxsmk-ai-thinking__dot,
       .ngxsmk-ai-thinking__wave-bar {
-        animation-duration: 3s !important;
+        animation: none;
       }
     }
   `,

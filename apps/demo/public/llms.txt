@@ -108,7 +108,7 @@ Usage rules for generated code:
 - NgxsmkCopyToClipboard (`[ngxsmkCopyToClipboard]`) — @ngxsmk/core/copy-to-clipboard
 - NgxsmkCreditCardInput (`ngxsmk-credit-card-input`) — @ngxsmk/core/credit-card-input — Auto-formatting credit/debit card number, expiry, and CVV payment input component with brand detection
 - NgxsmkDataTable (`ngxsmk-data-table`) — @ngxsmk/core/data-table — Paginated, filterable data table built on `ngxsmk-table`
-- NgxsmkDatePicker (`ngxsmk-date-picker`) — @ngxsmk/core/date-picker
+- NgxsmkDatePicker (`ngxsmk-date-picker`) — @ngxsmk/core/date-picker — Native date input with keyboard editing and a platform calendar
 - NgxsmkDateRangePicker (`ngxsmk-date-range-picker`) — @ngxsmk/core/date-range-picker — Signal-native date range picker with dual inputs, quick preset range buttons, and calendar grid
 - NgxsmkDiagramBuilder (`ngxsmk-diagram-builder`) — @ngxsmk/core/diagram-builder
 - NgxsmkDialogFooter (`[ngxsmkDialogFooter]`) — @ngxsmk/core/dialog — Marks content projected into the dialog's footer action row
@@ -162,7 +162,7 @@ Usage rules for generated code:
 - NgxsmkLinkProvider (`[ngxsmkLinkProvider]`) — @ngxsmk/core/link-provider
 - NgxsmkList (`ngxsmk-list`) — @ngxsmk/core/list
 - NgxsmkListItem (`ngxsmk-list-item, [ngxsmkListItem]`) — @ngxsmk/core/list-item
-- NgxsmkMarkdown (`ngxsmk-markdown`) — @ngxsmk/core/markdown
+- NgxsmkMarkdown (`ngxsmk-markdown`) — @ngxsmk/core/markdown — Lightweight markdown renderer for trusted or semi-trusted content
 - NgxsmkMarkdownViewer (`ngxsmk-markdown-viewer`) — @ngxsmk/core/markdown-viewer
 - NgxsmkMasonryGrid (`ngxsmk-masonry-grid`) — @ngxsmk/core/masonry-grid — Staggered multi-column media layout (masonry/waterfall grid) container
 - NgxsmkMediaQuery (`[ngxsmkMediaQuery]`) — @ngxsmk/core/media-query

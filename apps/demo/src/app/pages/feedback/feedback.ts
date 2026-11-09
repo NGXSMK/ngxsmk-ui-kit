@@ -28,10 +28,12 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     NgxsmkButton,
   ],
   template: `
-    <h2 class="ngxsmk-page-title">{{ 'category.feedback' | translate }}</h2>
-    <p class="ngxsmk-page-desc">
+    <header class="category-intro">
+      <h1 class="ngxsmk-page-title">{{ 'category.feedback' | translate }}</h1>
+      <p class="ngxsmk-page-desc">
       {{ 'feedback.intro' | translate }}
     </p>
+    </header>
 
     <showcase-example
       title="Alert"

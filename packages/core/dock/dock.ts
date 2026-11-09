@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 export interface DockItem {
   id: string;
@@ -21,7 +20,6 @@ export type DockPosition = 'bottom' | 'top' | 'left' | 'right';
 @Component({
   standalone: true,
   selector: 'ngxsmk-dock',
-  imports: [CommonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     class: 'ngxsmk-dock',

@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, forwardRef, input, model } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CvaBase } from '@ngxsmk/cdk/cva-base';
 import { NGXSMK_FORM_FIELD_CONTROL, NgxsmkFormFieldControl } from '@ngxsmk/core/form-field';
@@ -20,7 +19,6 @@ export interface DateRange {
 @Component({
   standalone: true,
   selector: 'ngxsmk-date-range-picker',
-  imports: [CommonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {

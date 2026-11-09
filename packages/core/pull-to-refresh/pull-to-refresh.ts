@@ -12,8 +12,18 @@ import {
   signal,
   untracked,
 } from '@angular/core';
+import { createMachine } from '@ngxsmk/cdk';
 
 export type PullToRefreshStatus = 'idle' | 'pulling' | 'ready' | 'refreshing';
+
+type PtrEvent =
+  | 'PULL'
+  | 'THRESHOLD'
+  | 'RELEASE_REFRESH'
+  | 'RELEASE_CANCEL'
+  | 'REFRESH_DONE'
+  | 'EXTERNAL_START'
+  | 'EXTERNAL_END';
 
 function resistedDistance(distance: number, maxPull: number): number {
   return maxPull * (1 - Math.exp(-Math.max(0, distance) / maxPull));
@@ -98,7 +108,7 @@ function resistedDistance(distance: number, maxPull: number): number {
       z-index: 10;
       min-height: 100%;
       will-change: transform;
-      transition: transform 200ms cubic-bezier(0.2, 0, 0, 1);
+      transition: transform var(--ngxsmk-duration-normal, 200ms) cubic-bezier(0.2, 0, 0, 1);
     }
   `,
   template: `
@@ -203,10 +213,40 @@ export class NgxsmkPullToRefresh {
   /** Emits the current status. */
   readonly statusChange = output<PullToRefreshStatus>();
 
-  readonly status = signal<PullToRefreshStatus>('idle');
+  private readonly machine = createMachine<PullToRefreshStatus, PtrEvent>({
+    initial: 'idle',
+    states: {
+      idle: {
+        PULL: 'pulling',
+        THRESHOLD: 'ready',
+        EXTERNAL_START: 'refreshing',
+      },
+      pulling: {
+        PULL: 'pulling',
+        THRESHOLD: 'ready',
+        RELEASE_CANCEL: 'idle',
+        EXTERNAL_START: 'refreshing',
+      },
+      ready: {
+        PULL: 'pulling',
+        THRESHOLD: 'ready',
+        RELEASE_REFRESH: 'refreshing',
+        RELEASE_CANCEL: 'idle',
+        EXTERNAL_START: 'refreshing',
+      },
+      refreshing: {
+        REFRESH_DONE: 'idle',
+        EXTERNAL_END: 'idle',
+        EXTERNAL_START: 'refreshing',
+      },
+    },
+  });
+
+  readonly status = this.machine.state;
   private readonly _contentOffset = signal(0);
   readonly contentOffset = this._contentOffset.asReadonly();
-  private readonly _isRefreshing = signal(false);
+  private externalRefreshing = false;
+  private refreshGeneration = 0;
 
   readonly indicatorOpacity = computed(() => {
     const offset = this.contentOffset();
@@ -236,17 +276,23 @@ export class NgxsmkPullToRefresh {
   private gesture = { active: false, startX: 0, startY: 0, pointerId: -1 };
   private currentY = 0;
 
+  private isRefreshing(): boolean {
+    return this.machine.matches('refreshing');
+  }
+
   constructor() {
     effect(() => {
       const ext = this.refreshing();
       untracked(() => {
-        this._isRefreshing.set(ext);
         if (ext) {
-          this.status.set('refreshing');
+          this.externalRefreshing = true;
+          this.machine.send('EXTERNAL_START');
           this._contentOffset.set(Math.min(this.holdDistance(), this.pullThreshold()));
-        } else if (this.status() === 'refreshing') {
-          this.status.set('idle');
-          this._contentOffset.set(0);
+        } else if (this.externalRefreshing) {
+          this.externalRefreshing = false;
+          if (this.machine.send('EXTERNAL_END')) {
+            this._contentOffset.set(0);
+          }
         }
       });
     });
@@ -267,7 +313,7 @@ export class NgxsmkPullToRefresh {
         e.touches.length !== 1 ||
         nativeEl.scrollTop > 0 ||
         this.disabled() ||
-        this._isRefreshing()
+        this.isRefreshing()
       )
         return;
       const t = e.touches[0];
@@ -304,7 +350,7 @@ export class NgxsmkPullToRefresh {
         e.button !== 0 ||
         nativeEl.scrollTop > 0 ||
         this.disabled() ||
-        this._isRefreshing()
+        this.isRefreshing()
       )
         return;
       nativeEl.setPointerCapture(e.pointerId);
@@ -342,37 +388,39 @@ export class NgxsmkPullToRefresh {
   }
 
   private updatePull(distance: number): void {
-    if (this.disabled() || this._isRefreshing()) return;
+    if (this.disabled() || this.isRefreshing()) return;
     const pullLimit = Math.max(this.maxPull(), this.pullThreshold() + 24);
     const next = resistedDistance(distance, pullLimit);
     this.currentY = next;
     this._contentOffset.set(next);
-    this.status.set(next >= this.pullThreshold() ? 'ready' : 'pulling');
+    this.machine.send(next >= this.pullThreshold() ? 'THRESHOLD' : 'PULL');
   }
 
   private finishPull(): void {
     const shouldRefresh =
-      this.currentY >= this.pullThreshold() && !this.disabled() && !this._isRefreshing();
+      this.currentY >= this.pullThreshold() && !this.disabled() && !this.isRefreshing();
     this.gesture = { active: false, startX: 0, startY: 0, pointerId: -1 };
     if (shouldRefresh) {
       void this.runRefresh();
     } else {
-      this.status.set('idle');
+      this.machine.send('RELEASE_CANCEL');
       this._contentOffset.set(0);
     }
   }
 
   private async runRefresh(): Promise<void> {
-    if (this.disabled() || this._isRefreshing()) return;
-    this._isRefreshing.set(true);
-    this.status.set('refreshing');
+    if (this.disabled() || this.isRefreshing()) return;
+    if (!this.machine.send('RELEASE_REFRESH')) return;
+    const gen = (this.refreshGeneration += 1);
     this._contentOffset.set(Math.min(this.holdDistance(), this.pullThreshold()));
     try {
       await this.pullToRefresh()();
     } finally {
-      this._isRefreshing.set(false);
-      this.status.set('idle');
-      this._contentOffset.set(0);
+      if (gen !== this.refreshGeneration) return;
+      if (this.externalRefreshing || this.refreshing()) return;
+      if (this.machine.send('REFRESH_DONE')) {
+        this._contentOffset.set(0);
+      }
     }
   }
 }

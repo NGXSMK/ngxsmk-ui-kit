@@ -52,7 +52,7 @@ export type NgxsmkSpinnerSize = 'sm' | 'md' | 'lg';
 
     @media (prefers-reduced-motion: reduce) {
       :host {
-        animation-duration: 1.6s;
+        animation: none;
       }
     }
   `,

@@ -43,9 +43,9 @@ jobs:
           - ng: '22'
             node: '22'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: ${{ matrix.node }}
 
@@ -95,3 +95,10 @@ jobs:
           node node_modules/@angular/cli/bin/ng.js build @ngxsmk/theme --configuration development
           node node_modules/@angular/cli/bin/ng.js build @ngxsmk/cdk --configuration development
           node node_modules/@angular/cli/bin/ng.js build @ngxsmk/core --configuration development
+
+      # Oldest-major gate: prove the Angular 17.3 partial-Ivy artifacts exist and
+      # expose package entry points. Full Vitest suites stay on the modern CI job
+      # (unit-test builder differs across majors).
+      - name: Smoke-import built packages (oldest major)
+        if: matrix.ng == '17'
+        run: node tools/scripts/smoke-import-built.mjs

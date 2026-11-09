@@ -10,6 +10,7 @@ import {
   signal,
   effect,
   viewChild,
+  untracked,
 } from '@angular/core';
 import { loadMotion, prefersReducedMotion } from '@ngxsmk/core/animation';
 
@@ -33,6 +34,12 @@ import { loadMotion, prefersReducedMotion } from '@ngxsmk/core/animation';
       margin-inline-start: var(--ngxsmk-space-1);
       animation: blink 0.8s step-end infinite;
       vertical-align: text-bottom;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ngxsmk-streaming-text__cursor {
+        animation: none;
+      }
     }
     @keyframes blink {
       50% {
@@ -66,11 +73,15 @@ export class NgxsmkStreamingText {
     effect(() => {
       const target = this.text();
       this.clearTimer();
-      // If target changed completely, reset
-      if (!target.startsWith(this.displayText())) {
-        this.displayText.set('');
-      }
-      this.streamTo(target);
+      untracked(() => {
+        if (prefersReducedMotion()) {
+          this.displayText.set(target);
+          if (target) this.completed.emit(target);
+          return;
+        }
+        if (!target.startsWith(this.displayText())) this.displayText.set('');
+        this.streamTo(target);
+      });
     });
 
     // Animate cursor with motion.dev when enabled
@@ -79,18 +90,32 @@ export class NgxsmkStreamingText {
       if (prefersReducedMotion()) return;
 
       const motion = await loadMotion();
-      if (!motion) return;
+      if (!motion || this.destroyRef.destroyed || prefersReducedMotion()) return;
 
       const cursorEl = this.cursorRef()?.nativeElement;
       if (!cursorEl) return;
 
       // Override CSS animation with motion.dev infinite blink
       cursorEl.style.animation = 'none';
-      motion.animate(cursorEl, { opacity: [1, 0] } as unknown as Record<string, string | number>, {
-        duration: 0.8,
-        ease: 'steps(1)',
-        repeat: Infinity,
-        repeatType: 'reverse',
+      const blink = motion.animate(
+        cursorEl,
+        { opacity: [1, 0] } as unknown as Record<string, string | number>,
+        {
+          duration: 0.8,
+          ease: 'steps(1)',
+          repeat: Infinity,
+          repeatType: 'reverse',
+        },
+      );
+      const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const stopBlink = () => {
+        blink.cancel();
+        cursorEl.style.removeProperty('animation');
+      };
+      preference.addEventListener('change', stopBlink, { once: true });
+      this.destroyRef.onDestroy(() => {
+        preference.removeEventListener('change', stopBlink);
+        stopBlink();
       });
     });
   }

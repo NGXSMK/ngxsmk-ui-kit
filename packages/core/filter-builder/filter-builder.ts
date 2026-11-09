@@ -133,7 +133,7 @@ export type FilterCondition = NgxsmkFilterCondition;
       font-size: 0.75rem;
       font-weight: 600;
       cursor: pointer;
-      transition: background 0.15s ease;
+      transition: background var(--ngxsmk-duration-fast, 0.15s) ease;
     }
 
     .ngxsmk-filter-bldr__rows {

@@ -54,7 +54,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
 
     @media (prefers-reduced-motion: reduce) {
       :host([data-indeterminate]) .ngxsmk-progress__bar {
-        animation-duration: 2.4s;
+        animation: none;
       }
     }
   `,

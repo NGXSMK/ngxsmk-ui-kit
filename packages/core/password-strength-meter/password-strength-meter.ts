@@ -80,7 +80,7 @@ import { ChangeDetectionStrategy, Component, computed, input, model, signal } fr
       flex: 1;
       height: 0.35rem;
       border-radius: var(--ngxsmk-radius-full, 9999px);
-      transition: background-color 0.25s ease;
+      transition: background-color var(--ngxsmk-duration-normal, 0.25s) ease;
     }
 
     .ngxsmk-pass-meter__header {
@@ -110,7 +110,7 @@ import { ChangeDetectionStrategy, Component, computed, input, model, signal } fr
       display: flex;
       align-items: center;
       gap: 0.35rem;
-      transition: color 0.15s ease;
+      transition: color var(--ngxsmk-duration-fast, 0.15s) ease;
     }
 
     .ngxsmk-pass-meter__req--valid {

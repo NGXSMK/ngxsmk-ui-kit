@@ -10,7 +10,8 @@ import {
   viewChild,
   DestroyRef,
 } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { NgxsmkScrollLock } from '@ngxsmk/cdk';
+import { ngxsmkUniqueId } from '@ngxsmk/core/util';
 
 export type NgxsmkAlertDialogVariant = 'info' | 'destructive';
 
@@ -35,14 +36,17 @@ export type NgxsmkAlertDialogVariant = 'info' | 'destructive';
     <dialog
       #dialog
       class="ngxsmk-alert-dialog__native"
+      role="alertdialog"
+      [attr.aria-labelledby]="titleId"
+      [attr.aria-describedby]="messageId"
       (cancel)="onCancel($event)"
       (close)="open.set(false)"
       (click)="onBackdropClick($event)"
     >
       @if (open()) {
         <div class="ngxsmk-alert-dialog__card" [attr.data-variant]="variant()">
-          <h2 class="ngxsmk-alert-dialog__title">{{ title() }}</h2>
-          <p class="ngxsmk-alert-dialog__message">{{ message() }}</p>
+          <h2 class="ngxsmk-alert-dialog__title" [id]="titleId">{{ title() }}</h2>
+          <p class="ngxsmk-alert-dialog__message" [id]="messageId">{{ message() }}</p>
           <div class="ngxsmk-alert-dialog__footer">
             <button
               type="button"
@@ -135,23 +139,33 @@ export class NgxsmkAlertDialog {
   readonly variant = input<NgxsmkAlertDialogVariant>('info');
   readonly confirmed = output<void>();
   readonly cancelled = output<void>();
-  private readonly doc = inject(DOCUMENT);
+  private readonly scrollLock = inject(NgxsmkScrollLock);
   private readonly dialogRef = viewChild.required<ElementRef<HTMLDialogElement>>('dialog');
+  protected readonly titleId = ngxsmkUniqueId('ngxsmk-alert-title');
+  protected readonly messageId = ngxsmkUniqueId('ngxsmk-alert-message');
+  private locked = false;
 
   constructor() {
     effect(() => {
       const dialog = this.dialogRef().nativeElement;
       if (this.open() && !dialog.open) {
         dialog.showModal();
-        this.doc.body.style.overflow = 'hidden';
+        this.setLocked(true);
       } else if (!this.open() && dialog.open) {
         dialog.close();
-        this.doc.body.style.overflow = '';
+        this.setLocked(false);
+      } else if (!this.open()) {
+        this.setLocked(false);
       }
     });
-    inject(DestroyRef).onDestroy(() => {
-      this.doc.body.style.overflow = '';
-    });
+    inject(DestroyRef).onDestroy(() => this.setLocked(false));
+  }
+
+  private setLocked(locked: boolean): void {
+    if (locked === this.locked) return;
+    this.locked = locked;
+    if (locked) this.scrollLock.lock();
+    else this.scrollLock.unlock();
   }
 
   confirm(): void {

@@ -195,7 +195,7 @@ const COMPONENT_CATEGORIES: Record<string, ComponentCategory> = {
   NgxsmkIcon: 'data-display',
   NgxsmkImageViewer: 'data-display',
   NgxsmkImperativeDialog: 'overlay',
-  NgxsmkInput: 'form',
+  NgxsmkInputDirective: 'form',
   NgxsmkInputGroup: 'form',
   NgxsmkInputGroupText: 'form',
   NgxsmkInputMask: 'form',

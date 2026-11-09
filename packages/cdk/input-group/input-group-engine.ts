@@ -84,6 +84,7 @@ export class InputGroupEngine {
 
   private _config: InputGroupEngineConfig;
   private _asyncTimer: ReturnType<typeof setTimeout> | null = null;
+  private _validationGeneration = 0;
 
   constructor(config: InputGroupEngineConfig = {}) {
     this._config = config;
@@ -243,61 +244,80 @@ export class InputGroupEngine {
     this.onValidationChange()(status, message);
   }
 
+  private _clearAsyncTimer(): void {
+    if (this._asyncTimer) {
+      clearTimeout(this._asyncTimer);
+      this._asyncTimer = null;
+    }
+  }
+
   private _runValidation(value: string): void {
+    this._clearAsyncTimer();
+    const gen = (this._validationGeneration += 1);
+
     const validator = this._config.validator;
     if (validator) {
       const result = validator(value);
       this.status.set(result.status);
       this.message.set(result.message);
       this.onValidationChange()(result.status, result.message);
-      return;
+      if (result.status === 'error') {
+        return;
+      }
+    } else {
+      if (this.required() && !value) {
+        this.setStatus('error', 'This field is required');
+        return;
+      }
+
+      if (this.isOverLength()) {
+        this.setStatus('error', `Maximum ${this.maxLength()} characters`);
+        return;
+      }
+
+      if (this.isUnderLength()) {
+        this.setStatus('error', `Minimum ${this.minLength()} characters`);
+        return;
+      }
     }
 
-    // Built-in validations
-    if (this.required() && !value) {
-      this.status.set('error');
-      this.message.set('This field is required');
-      this.onValidationChange()('error', 'This field is required');
-      return;
-    }
-
-    if (this.isOverLength()) {
-      this.status.set('error');
-      this.message.set(`Maximum ${this.maxLength()} characters`);
-      this.onValidationChange()('error', `Maximum ${this.maxLength()} characters`);
-      return;
-    }
-
-    if (this.isUnderLength()) {
-      this.status.set('error');
-      this.message.set(`Minimum ${this.minLength()} characters`);
-      this.onValidationChange()('error', `Minimum ${this.minLength()} characters`);
-      return;
-    }
-
-    this.status.set('none');
-    this.message.set('');
-    this.onValidationChange()('none', '');
-
-    // Async validation
     const asyncValidator = this._config.asyncValidator;
     if (asyncValidator && value) {
-      if (this._asyncTimer) clearTimeout(this._asyncTimer);
       this.status.set('pending');
       this.message.set('');
+      this.onValidationChange()('pending', '');
       this._asyncTimer = setTimeout(async () => {
-        const result = await asyncValidator(value);
-        if (this.value() === value) {
+        try {
+          const result = await asyncValidator(value);
+          if (gen !== this._validationGeneration || this.value() !== value) {
+            return;
+          }
           this.status.set(result);
           this.onValidationChange()(result, '');
+        } catch {
+          if (gen !== this._validationGeneration || this.value() !== value) {
+            return;
+          }
+          this.setStatus('error', 'Validation failed');
+        } finally {
+          if (this._asyncTimer) {
+            this._asyncTimer = null;
+          }
         }
       }, this._config.asyncDebounce ?? 300);
+      return;
+    }
+
+    if (!validator) {
+      this.setStatus('none', '');
     }
   }
 
   // ── Reset ──
 
   reset(): void {
+    this._validationGeneration += 1;
+    this._clearAsyncTimer();
     this.value.set(this._config.initialValue ?? '');
     this.focused.set(false);
     this.touched.set(false);
@@ -305,6 +325,11 @@ export class InputGroupEngine {
     this.status.set('none');
     this.message.set('');
     this.passwordVisible.set(false);
+  }
+
+  destroy(): void {
+    this._validationGeneration += 1;
+    this._clearAsyncTimer();
   }
 
   // ── Enable/Disable ──

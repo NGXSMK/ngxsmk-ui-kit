@@ -67,10 +67,12 @@ interface AppOutlineItem {
     TranslatePipe,
   ],
   template: `
-    <h2 class="ngxsmk-page-title">{{ 'category.navigation' | translate }}</h2>
-    <p class="ngxsmk-page-desc">
+    <header class="category-intro">
+      <h1 class="ngxsmk-page-title">{{ 'category.navigation' | translate }}</h1>
+      <p class="ngxsmk-page-desc">
       {{ 'navigation.desc' | translate }}
     </p>
+    </header>
 
     <showcase-example
       [title]="'navigation.breadcrumbItem' | translate"

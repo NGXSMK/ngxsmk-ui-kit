@@ -48,10 +48,12 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     TranslatePipe,
   ],
   template: `
-    <h2 class="ngxsmk-page-title">{{ 'category.enterprise' | translate }}</h2>
-    <p class="ngxsmk-page-desc">
+    <header class="category-intro">
+      <h1 class="ngxsmk-page-title">{{ 'category.enterprise' | translate }}</h1>
+      <p class="ngxsmk-page-desc">
       {{ 'enterprise.pageDesc' | translate }}
     </p>
+    </header>
 
     <showcase-example
       title="Kanban Board"
@@ -651,7 +653,7 @@ ngxsmk-query-builder {
     { text: 'Compiling @ngxsmk/core...' },
     { text: 'Successfully ran target build (4.2s)' },
     { text: 'npm publish --access public', isInput: true },
-    { text: '+ @ngxsmk/core@1.3.0' },
+    { text: '+ @ngxsmk/core@3.2.0' },
   ];
 
   protected readonly orgNodes: OrgNode[] = [

@@ -14,6 +14,7 @@ export * from '@ngxsmk/cdk/resize-observer';
 export * from '@ngxsmk/cdk/autofocus';
 export * from '@ngxsmk/cdk/cva-base';
 export * from '@ngxsmk/cdk/listbox-keyboard';
+export * from '@ngxsmk/cdk/state-machine';
 export * from '@ngxsmk/cdk/scheduler';
 
 // Spreadsheet — selective re-exports to avoid name collisions with scheduler

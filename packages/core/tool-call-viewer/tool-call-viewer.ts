@@ -139,6 +139,12 @@ export type NgxsmkToolCall = ToolCall;
       border-radius: 50%;
       animation: ngxsmk-tool-spin 0.7s linear infinite;
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ngxsmk-tool-call-viewer__spinner {
+        animation: none;
+      }
+    }
     .ngxsmk-tool-call-viewer__body {
       padding: 0 var(--ngxsmk-space-3) var(--ngxsmk-space-3);
       border-top: 1px solid var(--ngxsmk-color-outline);

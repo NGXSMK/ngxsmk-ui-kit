@@ -104,8 +104,8 @@ import { ChangeDetectionStrategy, Component, computed, input, model } from '@ang
       cursor: pointer;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
       transition:
-        transform 0.1s ease,
-        box-shadow 0.1s ease;
+        transform var(--ngxsmk-duration-fast, 0.1s) ease,
+        box-shadow var(--ngxsmk-duration-fast, 0.1s) ease;
     }
 
     .ngxsmk-range-slider__input::-moz-range-thumb {
@@ -118,8 +118,8 @@ import { ChangeDetectionStrategy, Component, computed, input, model } from '@ang
       cursor: pointer;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
       transition:
-        transform 0.1s ease,
-        box-shadow 0.1s ease;
+        transform var(--ngxsmk-duration-fast, 0.1s) ease,
+        box-shadow var(--ngxsmk-duration-fast, 0.1s) ease;
     }
 
     .ngxsmk-range-slider__input::-webkit-slider-thumb:hover {

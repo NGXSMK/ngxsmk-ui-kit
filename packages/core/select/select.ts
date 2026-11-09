@@ -3,15 +3,18 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  DestroyRef,
   ElementRef,
-  HostListener,
+  effect,
   inject,
   input,
   model,
   output,
   signal,
   forwardRef,
+  untracked,
 } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { ngxsmkUniqueId } from '@ngxsmk/core/util';
@@ -306,8 +309,23 @@ export class NgxsmkSelect extends CvaBase<string> implements NgxsmkFormFieldCont
   protected readonly activeIndex = signal(-1);
 
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly document = inject(DOCUMENT);
   private typeaheadBuffer = '';
   private typeaheadClear: ReturnType<typeof setTimeout> | null = null;
+
+  constructor() {
+    super();
+    // Escape listener only while the listbox is open (avoids always-on window handlers).
+    effect((onCleanup) => {
+      if (!this.open()) return;
+      const onKey = (event: KeyboardEvent) => this.interceptEsc(event);
+      untracked(() => this.document.defaultView?.addEventListener('keydown', onKey));
+      onCleanup(() => this.document.defaultView?.removeEventListener('keydown', onKey));
+    });
+    inject(DestroyRef).onDestroy(() => {
+      if (this.typeaheadClear) clearTimeout(this.typeaheadClear);
+    });
+  }
 
   protected inputDisabled(): boolean {
     return this.disabled();
@@ -455,8 +473,7 @@ export class NgxsmkSelect extends CvaBase<string> implements NgxsmkFormFieldCont
     }
   }
 
-  @HostListener('window:keydown', ['$event'])
-  protected interceptEsc(event: KeyboardEvent): void {
+  private interceptEsc(event: KeyboardEvent): void {
     if (event.key === 'Escape' && this.open()) {
       event.preventDefault();
       this.close();

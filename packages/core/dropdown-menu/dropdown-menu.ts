@@ -8,7 +8,7 @@ import {
   model,
   signal,
 } from '@angular/core';
-import { NgxsmkClickOutside } from '@ngxsmk/cdk';
+import { createPresence, NgxsmkClickOutside } from '@ngxsmk/cdk';
 import { NgxsmkAnimate, NgxsmkMotionState, playExit } from '@ngxsmk/core/animation';
 
 export interface NgxsmkDropdownMenuItem {
@@ -145,7 +145,8 @@ export class NgxsmkDropdownMenu {
   readonly align = input<'start' | 'end'>('end');
   readonly open = model(false);
 
-  protected readonly closing = signal(false);
+  private readonly presence = createPresence();
+  protected readonly closing = this.presence.isClosing;
   protected readonly activeIndex = signal(-1);
 
   protected readonly DROPDOWN_MENU_MOTION: NgxsmkMotionState = {
@@ -164,6 +165,7 @@ export class NgxsmkDropdownMenu {
   }
 
   openMenu(focusIndex = 0): void {
+    this.presence.open();
     this.open.set(true);
     this.activeIndex.set(focusIndex);
     setTimeout(() => {
@@ -173,16 +175,17 @@ export class NgxsmkDropdownMenu {
 
   /** Plays the exit animation, then flips `open` to false (reduced-motion safe). */
   close(): void {
-    if (this.closing()) return;
-    this.closing.set(true);
+    if (!this.open() || this.presence.isClosing()) return;
     const el = this.host.nativeElement.querySelector(
       '.ngxsmk-dropdown-menu__list',
     ) as HTMLElement | null;
-    void playExit(el ?? this.host.nativeElement, this.DROPDOWN_MENU_MOTION).then(() => {
-      this.closing.set(false);
-      this.open.set(false);
-      this.activeIndex.set(-1);
-    });
+    void this.presence
+      .close(() => playExit(el ?? this.host.nativeElement, this.DROPDOWN_MENU_MOTION))
+      .then((settled) => {
+        if (!settled) return;
+        this.open.set(false);
+        this.activeIndex.set(-1);
+      });
   }
 
   protected onTriggerKeydown(event: KeyboardEvent): void {

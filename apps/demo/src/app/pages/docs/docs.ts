@@ -1,3 +1,4 @@
+import { RouterLink } from '@angular/router';
 import { Component, signal, inject, computed } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { AppNav } from '../../nav/nav';
@@ -15,6 +16,7 @@ import { NgxsmkThemeService } from '@ngxsmk/theme';
   selector: 'docs-page',
   standalone: true,
   imports: [
+    RouterLink,
     TranslatePipe,
     AppNav,
     NgxsmkButton,
@@ -39,34 +41,22 @@ import { NgxsmkThemeService } from '@ngxsmk/theme';
             <span class="badge-divider">·</span>
             <span class="badge-text">Interactive Documentation</span>
           </div>
-          <h1 class="d-hero__title">Build with <span class="highlight">NGXSMK</span></h1>
+          <h1 class="d-hero__title">Build your first Angular interface</h1>
           <p class="d-hero__sub">
-            A signal-native, zoneless Angular component library with a universal design-token
-            engine. Ship production-grade UIs faster with copy-paste components and AI tooling.
+            Install the kit, connect the theme, and add a standalone component to your app.
           </p>
-          <div class="d-hero__stats">
-            <div class="d-hero__stat">
-              <span class="d-hero__stat-val">150+</span>
-              <span class="d-hero__stat-label">Components</span>
-            </div>
-            <div class="d-hero__stat">
-              <span class="d-hero__stat-val">v{{ version }}</span>
-              <span class="d-hero__stat-label">Latest</span>
-            </div>
-            <div class="d-hero__stat">
-              <span class="d-hero__stat-val">0</span>
-              <span class="d-hero__stat-label">Runtime deps</span>
-            </div>
-            <div class="d-hero__stat">
-              <span class="d-hero__stat-val">AI</span>
-              <span class="d-hero__stat-label">Native</span>
-            </div>
-          </div>
+          <nav class="d-guide-links" aria-label="Documentation shortcuts">
+            <a class="btn btn-primary" routerLink="/docs" fragment="installation"
+              >Install the kit</a
+            >
+            <a class="btn btn-outline" routerLink="/showcase/explorer">Browse components</a>
+            <a class="btn btn-ghost" routerLink="/api">API reference</a>
+          </nav>
         </div>
       </header>
 
       <!-- ═══════════════════════ GETTING STARTED (4-STEP ONBOARDING) ═══════════════════════ -->
-      <section class="d-card d-card--highlight">
+      <section id="installation" class="d-card d-card--highlight">
         <div class="d-card__header-box">
           <ngxsmk-heading level="h2">Getting Started</ngxsmk-heading>
           <p class="d-body">
@@ -917,38 +907,14 @@ import { NgxsmkThemeService } from '@ngxsmk/theme';
       margin: 0 auto 2rem;
       max-width: 36rem;
     }
-    .d-hero__stats {
+    .d-guide-links {
       display: flex;
-      justify-content: center;
-      gap: clamp(1.25rem, 4vw, 2.5rem);
       flex-wrap: wrap;
-      padding-top: 0.5rem;
-      border-top: 1px solid var(--color-border, #e2e8f0);
-      max-width: 28rem;
-      margin: 0 auto;
+      gap: var(--ngxsmk-space-3);
+      justify-content: center;
     }
-    .d-hero__stat {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.35rem;
-      padding-top: 1rem;
-    }
-    .d-hero__stat-val {
-      font-family: var(--font-family-display, sans-serif);
-      font-size: 1.35rem;
-      font-weight: 750;
-      letter-spacing: -0.03em;
-      line-height: 1.2;
-      color: var(--color-text-main, #0f172a);
-    }
-    .d-hero__stat-label {
-      font-size: 0.7rem;
-      color: var(--color-text-muted, #334155);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      font-weight: 600;
-      line-height: 1.3;
+    #installation {
+      scroll-margin-block-start: 6rem;
     }
 
     /* ──── CARD ──── */
@@ -1659,9 +1625,7 @@ import { NgxsmkThemeService } from '@ngxsmk/theme';
       .d-hero {
         padding: var(--ngxsmk-space-10, 2.5rem) 0 var(--ngxsmk-space-8, 2rem);
       }
-      .d-hero__stats {
-        gap: var(--ngxsmk-space-4);
-      }
+
       .d-sandbox {
         max-width: 100%;
         margin-left: 0;

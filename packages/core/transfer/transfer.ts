@@ -8,7 +8,6 @@ import {
   output,
   signal,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CvaBase } from '@ngxsmk/cdk/cva-base';
 import { NGXSMK_FORM_FIELD_CONTROL, NgxsmkFormFieldControl } from '@ngxsmk/core/form-field';
@@ -37,7 +36,7 @@ export type TransferDirection = 'left' | 'right';
 @Component({
   standalone: true,
   selector: 'ngxsmk-transfer',
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
@@ -265,7 +264,7 @@ export type TransferDirection = 'left' | 'right';
       border-radius: var(--ngxsmk-radius-sm, 0.25rem);
       cursor: pointer;
       user-select: none;
-      transition: background 0.15s ease;
+      transition: background var(--ngxsmk-duration-fast, 0.15s) ease;
     }
 
     .ngxsmk-transfer__item:hover:not(.ngxsmk-transfer__item--disabled) {
@@ -322,7 +321,7 @@ export type TransferDirection = 'left' | 'right';
       background: var(--ngxsmk-color-surface);
       color: var(--ngxsmk-color-on-surface);
       cursor: pointer;
-      transition: all 0.15s ease;
+      transition: all var(--ngxsmk-duration-fast, 0.15s) ease;
     }
 
     .ngxsmk-transfer__btn:hover:not(:disabled) {

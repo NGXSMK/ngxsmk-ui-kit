@@ -67,6 +67,7 @@ import { CvaBase } from '@ngxsmk/cdk/cva-base';
     .ngxsmk-checkbox__wrapper {
       display: inline-flex;
       align-items: center;
+      min-block-size: var(--ngxsmk-control-height);
       gap: var(--ngxsmk-space-2);
       cursor: pointer;
       font-family: var(--ngxsmk-font-sans);
@@ -126,6 +127,20 @@ import { CvaBase } from '@ngxsmk/cdk/cva-base';
     .ngxsmk-checkbox__native:indeterminate + .ngxsmk-checkbox__box svg {
       opacity: 1;
       transform: scale(1);
+    }
+
+    @media (hover: hover) {
+      :host(:not([data-disabled])) .ngxsmk-checkbox__wrapper:hover .ngxsmk-checkbox__box {
+        outline: var(--ngxsmk-space-px, 1px) solid var(--ngxsmk-color-primary);
+        outline-offset: var(--ngxsmk-space-1);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ngxsmk-checkbox__box,
+      .ngxsmk-checkbox__box svg {
+        transition: none;
+      }
     }
 
     .ngxsmk-checkbox__native:focus-visible + .ngxsmk-checkbox__box {

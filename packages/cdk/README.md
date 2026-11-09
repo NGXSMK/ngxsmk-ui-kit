@@ -81,6 +81,6 @@ Hides content visually while keeping it available to screen readers.
 
 ## Entry points
 
-`click-outside`, `focusable`, `focus-trap`, `live-announcer`, `media-query`, `scroll-lock`, `visually-hidden`, `intersection-observer`, `resize-observer`, `autofocus`, `testing`.
+`click-outside`, `focusable`, `focus-trap`, `live-announcer`, `media-query`, `scroll-lock`, `visually-hidden`, `intersection-observer`, `resize-observer`, `autofocus`, `state-machine`, `testing`.
 
 Prefer deep imports (e.g. `@ngxsmk/cdk/click-outside`) so the bundler tree-shakes unused behaviors.

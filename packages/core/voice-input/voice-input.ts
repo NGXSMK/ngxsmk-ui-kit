@@ -72,6 +72,12 @@ import { ChangeDetectionStrategy, Component, output, signal } from '@angular/cor
       color: var(--ngxsmk-color-on-error-container);
       animation: pulse 1s infinite;
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ngxsmk-voice-input__button[data-recording] {
+        animation: none;
+      }
+    }
     .ngxsmk-voice-input__transcript {
       font-size: var(--ngxsmk-text-label-lg-size);
       color: var(--ngxsmk-color-on-surface-variant);

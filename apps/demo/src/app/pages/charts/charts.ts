@@ -30,10 +30,12 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     NgxsmkGauge,
   ],
   template: `
-    <h2 class="ngxsmk-page-title">{{ 'category.charts' | translate }}</h2>
-    <p class="ngxsmk-page-desc">
+    <header class="category-intro">
+      <h1 class="ngxsmk-page-title">{{ 'category.charts' | translate }}</h1>
+      <p class="ngxsmk-page-desc">
       {{ 'charts.intro' | translate }}
     </p>
+    </header>
 
     <showcase-example
       title="Line Chart"

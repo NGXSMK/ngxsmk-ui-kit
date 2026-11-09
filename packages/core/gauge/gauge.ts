@@ -100,7 +100,7 @@ export type NgxsmkGaugeVariant = 'arch' | 'half' | 'full';
     }
 
     .ngxsmk-gauge__progress {
-      transition: stroke-dashoffset 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: stroke-dashoffset var(--ngxsmk-duration-slow, 0.6s) cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .ngxsmk-gauge__content {

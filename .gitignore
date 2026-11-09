@@ -46,6 +46,7 @@ __screenshots__/
 
 # Built package / example / cli output
 packages/cli/dist
+packages/mcp/dist
 examples/**/dist
 examples/**/node_modules
 examples/**/.angular

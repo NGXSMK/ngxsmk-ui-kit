@@ -35,16 +35,7 @@ const CATEGORY_ICONS: Record<string, string> = {
   template: `
     <div class="explorer">
       <header class="explorer-header">
-        <div class="version-badge">
-          <span class="pulse-dot"></span>
-          <span class="badge-tag">Registry</span>
-          <span class="badge-divider"></span>
-          <span class="badge-text"
-            >{{ registry.totalCount() }} Components •
-            {{ registry.categories().length }} Categories</span
-          >
-        </div>
-        <h1 class="explorer-title">Component <span class="highlight">Catalog</span></h1>
+        <h1 class="explorer-title">Component catalog</h1>
         <p class="explorer-subtitle">
           {{
             'explorer.subtitle'
@@ -71,6 +62,7 @@ const CATEGORY_ICONS: Record<string, string> = {
             #searchInput
             type="text"
             class="explorer-search-input"
+            [attr.aria-label]="'explorer.searchPlaceholder' | translate"
             [attr.placeholder]="'explorer.searchPlaceholder' | translate"
             [value]="query()"
             (input)="query.set(searchInput.value)"
@@ -78,6 +70,7 @@ const CATEGORY_ICONS: Record<string, string> = {
           @if (query()) {
             <button
               class="explorer-search-clear"
+              [attr.aria-label]="'explorer.clearSearch' | translate"
               (click)="query.set(''); searchInput.value = ''; searchInput.focus()"
             >
               ✕
@@ -88,6 +81,7 @@ const CATEGORY_ICONS: Record<string, string> = {
           <button
             class="explorer-tab"
             [class.active]="!selectedCategory()"
+            [attr.aria-pressed]="!selectedCategory()"
             (click)="selectedCategory.set(null)"
           >
             {{ 'explorer.all' | translate }}
@@ -96,6 +90,7 @@ const CATEGORY_ICONS: Record<string, string> = {
             <button
               class="explorer-tab"
               [class.active]="selectedCategory() === cat"
+              [attr.aria-pressed]="selectedCategory() === cat"
               (click)="selectedCategory.set(cat)"
             >
               <span class="cat-icon">{{ iconFor(cat) }}</span>
@@ -132,17 +127,7 @@ const CATEGORY_ICONS: Record<string, string> = {
                 [fragment]="slug(comp)"
               >
                 <div class="explorer-card-header">
-                  <div class="traffic-lights" aria-hidden="true">
-                    <span class="light red"></span>
-                    <span class="light yellow"></span>
-                    <span class="light green"></span>
-                  </div>
-                  <span
-                    class="explorer-card-dot"
-                    [style.background]="colorFor(comp.category)"
-                    [style.box-shadow]="'0 0 10px ' + colorFor(comp.category)"
-                  ></span>
-                  <span class="explorer-card-name">{{ comp.name }}</span>
+                  <span class="explorer-card-name">{{ displayName(comp) }}</span>
                   <svg
                     class="explorer-card-arrow"
                     width="14"
@@ -236,11 +221,6 @@ const CATEGORY_ICONS: Record<string, string> = {
       margin: 0.75rem 0 0.5rem;
       font-family: var(--font-display, 'Plus Jakarta Sans', system-ui, sans-serif);
       line-height: 1.15;
-    }
-    .highlight {
-      background: linear-gradient(135deg, #6366f1 0%, #f59e0b 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
     }
     .explorer-subtitle {
       font-size: 1.0625rem;
@@ -427,21 +407,17 @@ const CATEGORY_ICONS: Record<string, string> = {
       background: var(--color-bg-card, #ffffff);
       text-decoration: none;
       color: inherit;
-      box-shadow: 0 4px 16px -4px rgba(15, 23, 42, 0.05);
-      transition:
-        transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
-        border-color 0.22s ease,
-        box-shadow 0.22s ease;
       position: relative;
+      min-width: 0;
     }
-    .explorer-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(99, 102, 241, 0.45);
-      box-shadow: 0 18px 36px -10px rgba(99, 102, 241, 0.2);
+    .explorer-card:hover,
+    .explorer-card:focus-visible {
+      border-color: var(--ngxsmk-color-primary);
+      background: color-mix(in srgb, var(--ngxsmk-color-primary) 4%, var(--ngxsmk-color-surface));
     }
-    .explorer-card:hover .explorer-card-arrow {
-      transform: translateX(3px);
-      color: var(--brand-primary, #6366f1);
+    .explorer-card:focus-visible {
+      outline: 2px solid var(--ngxsmk-color-primary);
+      outline-offset: 2px;
     }
     .explorer-card-header {
       display: flex;
@@ -466,12 +442,6 @@ const CATEGORY_ICONS: Record<string, string> = {
       padding: 0.12rem 0.45rem;
       border-radius: 6px;
       border: 1px solid rgba(99, 102, 241, 0.16);
-    }
-    .explorer-card-dot {
-      width: 0.55rem;
-      height: 0.55rem;
-      border-radius: 50%;
-      flex-shrink: 0;
     }
     .explorer-card-name {
       font-family: var(--font-display, 'Plus Jakarta Sans', system-ui, sans-serif);
@@ -604,6 +574,7 @@ export class ComponentExplorer {
         filtered = components.filter(
           (c: ComponentMetadata) =>
             c.name.toLowerCase().includes(q) ||
+            this.displayName(c).toLowerCase().includes(q) ||
             c.description.toLowerCase().includes(q) ||
             c.tags.some((t: string) => t.toLowerCase().includes(q)) ||
             c.selector.toLowerCase().includes(q),
@@ -617,6 +588,14 @@ export class ComponentExplorer {
 
     return groups;
   });
+
+  displayName(component: ComponentMetadata): string {
+    return component.name
+      .replace(/^Ngxsmk/, '')
+      .replace(/Directive$/, '')
+      .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
+      .replace(/([A-Z])([A-Z][a-z])/g, '$1 $2');
+  }
 
   labelFor(category: string): string {
     return (
@@ -646,23 +625,6 @@ export class ComponentExplorer {
     return (CATEGORY_ICONS as Record<string, string>)[category] || '◈';
   }
 
-  colorFor(category: string): string {
-    const colors: Record<string, string> = {
-      form: '#6366f1',
-      layout: '#3b82f6',
-      navigation: '#8b5cf6',
-      'data-display': '#06b6d4',
-      feedback: '#f59e0b',
-      overlay: '#ec4899',
-      chart: '#10b981',
-      ai: '#8b5cf6',
-      enterprise: '#64748b',
-      utility: '#6366f1',
-      'content-typography': '#8b5cf6',
-    };
-    return colors[category] ?? '#6366f1';
-  }
-
   routeFor(category: string): string {
     const CATEGORY_ROUTE: Record<string, string> = {
       form: 'forms',
@@ -689,6 +651,7 @@ export class ComponentExplorer {
         .toLowerCase()
         .replace(/[^a-z0-9]+/g, '-');
     }
+    if (comp.exportName === 'NgxsmkInputDirective') return 'input';
     if (comp.selector) {
       return comp.selector
         .replace(/^\[?ngxsmk-?/, '')

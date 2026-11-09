@@ -34,10 +34,12 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
     TranslatePipe,
   ],
   template: `
-    <h2 class="ngxsmk-page-title">{{ 'category.utilities' | translate }}</h2>
-    <p class="ngxsmk-page-desc">
+    <header class="category-intro">
+      <h1 class="ngxsmk-page-title">{{ 'category.utilities' | translate }}</h1>
+      <p class="ngxsmk-page-desc">
       {{ 'utilities.desc' | translate }}
     </p>
+    </header>
 
     <showcase-example
       [title]="'utilities.visuallyHidden' | translate"

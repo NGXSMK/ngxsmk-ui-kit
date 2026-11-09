@@ -61,6 +61,17 @@
           "builder": "@angular/build:unit-test",
           "options": {
             "tsConfig": "packages/cdk/tsconfig.spec.json"
+          },
+          "configurations": {
+            "coverage": {
+              "coverage": true,
+              "coverageThresholds": {
+                "statements": 35,
+                "lines": 35,
+                "functions": 30,
+                "branches": 25
+              }
+            }
           }
         },
         "lint": {

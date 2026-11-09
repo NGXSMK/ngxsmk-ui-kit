@@ -104,8 +104,8 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
       height: 100%;
       border-radius: inherit;
       transition:
-        width 0.3s ease,
-        background-color 0.3s ease;
+        width var(--ngxsmk-duration-slow, 0.3s) ease,
+        background-color var(--ngxsmk-duration-slow, 0.3s) ease;
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

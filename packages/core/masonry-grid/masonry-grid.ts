@@ -6,6 +6,7 @@ import {
   computed,
   input,
 } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 
 /**
  * Staggered multi-column media layout (masonry/waterfall grid) container.
@@ -21,6 +22,7 @@ import {
 @Component({
   standalone: true,
   selector: 'ngxsmk-masonry-grid',
+  imports: [NgTemplateOutlet],
   template: `
     <div class="ngxsmk-masonry" [style.gap]="gap() + 'px'">
       @for (col of columnList(); track $index) {

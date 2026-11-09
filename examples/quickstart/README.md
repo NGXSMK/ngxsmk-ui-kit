@@ -13,6 +13,20 @@ npm install
 npm start
 ```
 
+## Give the switch your brand color
+
+Open the starter and turn on **Dark mode**. To change the checked track to your
+brand color, add this rule to `src/styles.css`:
+
+```css
+ngxsmk-switch {
+  --ngxsmk-switch-checked-bg: #7042ad;
+}
+```
+
+Toggle the switch with Space to compare the two states. The override applies
+to the checked track. The unchecked track still uses the active theme.
+
 ## What to look at
 
 - `angular.json` `styles` — loads `@ngxsmk/theme/styles/ngxsmk.css` plus the

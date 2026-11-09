@@ -42,6 +42,33 @@ or copy this skill folder into any consumer project's `.claude/skills/`.
    `center`, `container`, `app-shell`) over ad-hoc flex CSS. In CSS grid, use
    `minmax(0, 1fr)` instead of `1fr` to avoid mobile overflow.
 
+6. **State machines.** For mutually exclusive UI lifecycles, use
+   `@ngxsmk/cdk/state-machine` instead of parallel booleans:
+
+   ```ts
+   import { createMachine, createPresence } from '@ngxsmk/cdk/state-machine';
+
+   // Animated overlay presence (cancels exit on re-open)
+   const presence = createPresence();
+   presence.open();
+   await presence.close(() => playExit(el, motion));
+
+   // Async / status flows
+   const status = createMachine({
+     initial: 'idle',
+     states: {
+       idle: { START: 'loading' },
+       loading: { SUCCESS: 'success', FAIL: 'error' },
+       success: { RESET: 'idle' },
+       error: { RESET: 'idle' },
+     },
+   });
+   ```
+
+   Prefer a single `status` / `state` signal (`AsyncStatus`, `AiRunStatus`, or
+   a domain union) over `isLoading` + `isError` + `isSuccess`. Overlay open
+   state should go through `createPresence` so mid-exit re-open cannot phantom-close.
+
 ## Discovering component APIs
 
 - If the project has the `@ngxsmk/mcp` MCP server configured, use its tools:

@@ -218,6 +218,12 @@ import { NgxsmkCheckbox } from '@ngxsmk/core/checkbox';
       animation: ngxsmk-pulse 1.2s infinite ease-in-out;
     }
 
+    @media (prefers-reduced-motion: reduce) {
+      .ngxsmk-data-table__loading-bar {
+        animation: none;
+      }
+    }
+
     @keyframes ngxsmk-pulse {
       0%,
       100% {

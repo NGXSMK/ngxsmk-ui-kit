@@ -115,8 +115,8 @@ import { loadMotion, normalizeEase, prefersReducedMotion } from '@ngxsmk/core/an
       font-weight: var(--ngxsmk-font-weight-medium, 500);
       letter-spacing: -0.02em;
       transition:
-        opacity 120ms ease-out,
-        transform 120ms ease-out;
+        opacity var(--ngxsmk-duration-fast, 120ms) ease-out,
+        transform var(--ngxsmk-duration-fast, 120ms) ease-out;
     }
 
     .ngxsmk-eab__idle-icon svg,

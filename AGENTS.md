@@ -14,7 +14,8 @@ library.
 - `packages/theme` — design tokens and theme engine. Theme CSS is **generated**:
   edit `packages/theme/src/lib/css.ts` (and friends), then run `npm run theme:css`.
   Never hand-edit generated CSS.
-- `packages/cdk` — behavior primitives.
+- `packages/cdk` — behavior primitives (including `@ngxsmk/cdk/state-machine`
+  for explicit UI FSMs: `createMachine`, `createPresence`).
 - `packages/mcp` — MCP server for coding agents. Its component database
   (`src/component-db.ts`) is auto-generated — do not edit by hand.
 - `packages/cli` — `ngxsmk` binary (theme CSS generation for consumers).
@@ -59,6 +60,13 @@ Node 20/22 LTS.
 - In grid layouts use `minmax(0, 1fr)` rather than `1fr` to avoid min-content
   phone overflow.
 - Conventional commits enforced by commitlint; changesets for versioning.
+- Prefer explicit state machines over parallel booleans for mutually exclusive
+  UI lifecycles. Use `createMachine` / `createPresence` from
+  `@ngxsmk/cdk/state-machine` (e.g. overlay `closed → open → closing → closed`,
+  async `idle | loading | success | error`). Do not invent `isOpen` +
+  `isClosing` + `isLoading` flag combinations; derive flags from one `state`
+  signal. Re-open during an animated exit must cancel the pending settle
+  (generation token) — `createPresence` does this.
 
 ## Adding a new component
 

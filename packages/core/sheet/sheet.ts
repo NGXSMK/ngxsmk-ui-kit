@@ -11,10 +11,9 @@ import {
   inject,
   input,
   model,
-  signal,
   untracked,
 } from '@angular/core';
-import { NgxsmkFocusTrap, NgxsmkScrollLock } from '@ngxsmk/cdk';
+import { createPresence, NgxsmkFocusTrap, NgxsmkScrollLock } from '@ngxsmk/cdk';
 import { NgxsmkAnimate, NgxsmkMotionState, playExit } from '@ngxsmk/core/animation';
 import { ngxsmkUniqueId } from '@ngxsmk/core/util';
 
@@ -247,7 +246,8 @@ export class NgxsmkSheet {
   /** When false, Escape and backdrop clicks no longer close the sheet. */
   readonly dismissible = input(true, { transform: booleanAttribute });
 
-  protected readonly closing = signal(false);
+  private readonly presence = createPresence();
+  protected readonly closing = this.presence.isClosing;
   protected readonly titleId = ngxsmkUniqueId('ngxsmk-sheet-title');
 
   protected readonly sheetMotion = computed((): NgxsmkMotionState => {
@@ -282,6 +282,7 @@ export class NgxsmkSheet {
   constructor() {
     effect(() => {
       if (this.open()) {
+        untracked(() => this.presence.open());
         this.setLocked(true);
         untracked(() => this.schedulePortal());
       } else {
@@ -291,6 +292,7 @@ export class NgxsmkSheet {
     });
 
     inject(DestroyRef).onDestroy(() => {
+      this.presence.forceClose();
       this.setLocked(false);
       this.portaledRoot = null;
     });
@@ -303,7 +305,7 @@ export class NgxsmkSheet {
   }
 
   protected onDocumentEscape(event: Event): void {
-    if (!this.open() || !this.dismissible() || this.closing()) return;
+    if (!this.open() || !this.dismissible() || this.presence.isClosing()) return;
     event.preventDefault();
     this.requestClose();
   }
@@ -318,15 +320,15 @@ export class NgxsmkSheet {
 
   /** Plays the exit animation, then flips `open` to false (reduced-motion safe). */
   protected requestClose(): void {
-    if (this.closing()) return;
-    this.closing.set(true);
+    if (!this.open() || this.presence.isClosing()) return;
     const el =
       (this.portaledRoot?.querySelector('.ngxsmk-sheet__panel') as HTMLElement | null) ??
       (this.hostEl.nativeElement.querySelector('.ngxsmk-sheet__panel') as HTMLElement | null);
-    void playExit(el ?? this.hostEl.nativeElement, this.sheetMotion()).then(() => {
-      this.closing.set(false);
-      this.open.set(false);
-    });
+    void this.presence
+      .close(() => playExit(el ?? this.hostEl.nativeElement, this.sheetMotion()))
+      .then((settled) => {
+        if (settled) this.open.set(false);
+      });
   }
 
   private schedulePortal(): void {
