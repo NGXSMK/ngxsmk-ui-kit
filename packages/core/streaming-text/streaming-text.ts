@@ -64,9 +64,12 @@ export class NgxsmkStreamingText {
 
   protected readonly displayText = signal('');
   private timerId: ReturnType<typeof setTimeout> | null = null;
+  /** `DestroyRef.destroyed` is Angular 20+; keep a flag for 17–19 compat. */
+  private isDestroyed = false;
 
   constructor() {
     this.destroyRef.onDestroy(() => {
+      this.isDestroyed = true;
       this.clearTimer();
     });
 
@@ -90,7 +93,7 @@ export class NgxsmkStreamingText {
       if (prefersReducedMotion()) return;
 
       const motion = await loadMotion();
-      if (!motion || this.destroyRef.destroyed || prefersReducedMotion()) return;
+      if (!motion || this.isDestroyed || prefersReducedMotion()) return;
 
       const cursorEl = this.cursorRef()?.nativeElement;
       if (!cursorEl) return;
