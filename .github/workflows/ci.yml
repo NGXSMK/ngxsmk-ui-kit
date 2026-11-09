@@ -145,11 +145,11 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       # Baselines live in tests/visual/__screenshots__ and must be Linux-rendered.
-      # One-shot full refresh for intentional demo UI changes on this branch;
-      # revert to --update-snapshots=missing after baselines are committed.
+      # --update-snapshots=missing writes new PNGs for any missing baseline and
+      # then this step commits them back to the branch automatically (same-repo only).
       - name: Run visual tests
         id: visual
-        run: npm run visual -- --update-snapshots
+        run: npm run visual -- --update-snapshots=missing
         continue-on-error: true
 
       - name: Commit new baselines if written
