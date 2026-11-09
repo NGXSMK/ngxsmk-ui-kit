@@ -160,9 +160,9 @@ export class SeoService {
     ];
   }
 
-  private breadcrumbs(path: string): Array<{ name: string; item: string }> {
+  private breadcrumbs(path: string): { name: string; item: string }[] {
     const segments = path.split('/').filter(Boolean);
-    const crumbs: Array<{ name: string; item: string }> = [
+    const crumbs: { name: string; item: string }[] = [
       { name: 'Home', item: `${SITE_ORIGIN}/` },
     ];
     let acc = '';

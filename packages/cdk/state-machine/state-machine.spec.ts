@@ -113,7 +113,7 @@ describe('createPresence', () => {
 
   it('survives rapid open/close/open races without phantom closed', async () => {
     const presence = createPresence();
-    const exits: Array<() => void> = [];
+    const exits: (() => void)[] = [];
 
     presence.open();
     const close1 = presence.close(

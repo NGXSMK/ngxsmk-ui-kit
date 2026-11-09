@@ -416,9 +416,12 @@ export class NgxsmkPullToRefresh {
     try {
       await this.pullToRefresh()();
     } finally {
-      if (gen !== this.refreshGeneration) return;
-      if (this.externalRefreshing || this.refreshing()) return;
-      if (this.machine.send('REFRESH_DONE')) {
+      if (
+        gen === this.refreshGeneration &&
+        !this.externalRefreshing &&
+        !this.refreshing() &&
+        this.machine.send('REFRESH_DONE')
+      ) {
         this._contentOffset.set(0);
       }
     }

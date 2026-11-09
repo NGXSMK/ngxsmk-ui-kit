@@ -1,11 +1,9 @@
 import { signal, type Signal } from '@angular/core';
 
 /** Transition table: from each state, which events lead where. */
-export type MachineTransitions<S extends string, E extends string> = {
-  readonly [State in S]?: {
-    readonly [Event in E]?: S;
-  };
-};
+export type MachineTransitions<S extends string, E extends string> = Partial<
+  Record<S, Partial<Record<E, S>>>
+>;
 
 export interface CreateMachineConfig<S extends string, E extends string> {
   readonly initial: S;
