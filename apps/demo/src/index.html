@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>NGXSMK — The UI Kit That Angular Deserves</title>
+    <title>NGXSMK - High-Performance Zoneless Angular Design System</title>
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Baseline CSP for the public demo. `unsafe-inline` covers the theme
@@ -13,47 +13,95 @@
       content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net data:; img-src 'self' data: https:; connect-src 'self' https:; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'"
     />
     <meta name="theme-color" content="#0D9488" />
-    <meta name="robots" content="index, follow" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large" />
+    <meta name="author" content="NGXSMK" />
+    <meta
+      name="keywords"
+      content="Angular UI kit, Angular design system, signals, zoneless, NGXSMK, Angular components, design tokens, MCP, dark mode"
+    />
     <meta name="google-site-verification" content="A5yVrT2S54aESSjpQexg5uJ8TcuMROMzqX_vnaJzbsE" />
     <meta
       name="description"
-      content="NGXSMK is an Angular-first, MIT-licensed UI ecosystem — signals-native, zoneless, and themed with a universal token engine."
+      content="NGXSMK is a premium, MIT-licensed Angular design system engineered with signals, zoneless change detection, and modular token customizers. Build AI-first chat interfaces and enterprise tools in minutes."
     />
     <link rel="canonical" href="https://ngxsmk.github.io/ngxsmk-ui-kit/" />
+    <link rel="manifest" href="site.webmanifest" />
+    <link rel="alternate" type="text/plain" title="LLMs" href="llms.txt" />
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:site_name" content="NGXSMK" />
-    <meta property="og:title" content="NGXSMK — The UI Kit That Angular Deserves" />
+    <meta property="og:title" content="NGXSMK - High-Performance Zoneless Angular Design System" />
     <meta
       property="og:description"
-      content="NGXSMK is an Angular-first, MIT-licensed UI ecosystem — signals-native, zoneless, and themed with a universal token engine."
+      content="NGXSMK is a premium, MIT-licensed Angular design system engineered with signals, zoneless change detection, and modular token customizers."
     />
     <meta property="og:url" content="https://ngxsmk.github.io/ngxsmk-ui-kit/" />
     <meta
       property="og:image"
       content="https://ngxsmk.github.io/ngxsmk-ui-kit/assets/og-image.png"
     />
+    <meta property="og:image:alt" content="NGXSMK — Angular UI kit" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/png" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="NGXSMK — The UI Kit That Angular Deserves" />
+    <meta name="twitter:title" content="NGXSMK - High-Performance Zoneless Angular Design System" />
     <meta
       name="twitter:description"
-      content="NGXSMK is an Angular-first, MIT-licensed UI ecosystem — signals-native, zoneless, and themed with a universal token engine."
+      content="NGXSMK is a premium, MIT-licensed Angular design system engineered with signals, zoneless change detection, and modular token customizers."
     />
     <meta
       name="twitter:image"
       content="https://ngxsmk.github.io/ngxsmk-ui-kit/assets/og-image.png"
     />
+    <meta name="twitter:image:alt" content="NGXSMK — Angular UI kit" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "NGXSMK",
-        "url": "https://ngxsmk.github.io/ngxsmk-ui-kit",
-        "description": "An Angular-first, MIT-licensed UI ecosystem — signals-native, zoneless, and themed with a universal token engine.",
-        "sameAs": ["https://www.npmjs.com/org/ngxsmk"]
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://ngxsmk.github.io/ngxsmk-ui-kit/#organization",
+            "name": "NGXSMK",
+            "url": "https://ngxsmk.github.io/ngxsmk-ui-kit",
+            "logo": "https://ngxsmk.github.io/ngxsmk-ui-kit/favicon.svg",
+            "description": "An Angular-first, MIT-licensed UI ecosystem — signals-native, zoneless, and themed with a universal token engine.",
+            "sameAs": [
+              "https://github.com/NGXSMK/ngxsmk-ui-kit",
+              "https://www.npmjs.com/org/ngxsmk"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://ngxsmk.github.io/ngxsmk-ui-kit/#website",
+            "name": "NGXSMK",
+            "url": "https://ngxsmk.github.io/ngxsmk-ui-kit",
+            "publisher": {
+              "@id": "https://ngxsmk.github.io/ngxsmk-ui-kit/#organization"
+            },
+            "inLanguage": "en"
+          },
+          {
+            "@type": "SoftwareApplication",
+            "name": "NGXSMK UI Kit",
+            "applicationCategory": "DeveloperApplication",
+            "operatingSystem": "Web",
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD"
+            },
+            "url": "https://ngxsmk.github.io/ngxsmk-ui-kit",
+            "downloadUrl": "https://www.npmjs.com/package/@ngxsmk/core"
+          }
+        ]
       }
     </script>
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="assets/og-image.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

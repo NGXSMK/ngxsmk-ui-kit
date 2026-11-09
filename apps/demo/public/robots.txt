@@ -3,19 +3,25 @@
 
 User-agent: *
 Allow: /
-Disallow: /api/private/
 Disallow: /*?*preview=*
+Disallow: /*?*utm_*
 
-# AI & LLM Search Crawlers
+# AI & LLM Search Crawlers (explicit allow for GEO)
 User-agent: GPTBot
 Allow: /
 Allow: /llms.txt
 Allow: /llms-full.txt
 
+User-agent: ChatGPT-User
+Allow: /
+
 User-agent: ClaudeBot
 Allow: /
 Allow: /llms.txt
 Allow: /llms-full.txt
+
+User-agent: anthropic-ai
+Allow: /
 
 User-agent: PerplexityBot
 Allow: /
@@ -24,6 +30,12 @@ User-agent: Google-Extended
 Allow: /
 
 User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: Amazonbot
 Allow: /
 
 # Sitemap Index

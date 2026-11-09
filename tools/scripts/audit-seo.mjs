@@ -52,11 +52,30 @@ if (existsSync(sitemapPath)) {
   check('sitemap.xml includes AI showcase', sitemapContent.includes('/showcase/ai</loc>'));
 }
 
-// 3. Check machine-readable AI files
+// 3. Check machine-readable AI files + social/PWA assets
 const llmsPath = join(process.cwd(), 'apps/demo/public/llms.txt');
 const llmsFullPath = join(process.cwd(), 'apps/demo/public/llms-full.txt');
 check('llms.txt exists in demo public', existsSync(llmsPath));
 check('llms-full.txt exists in demo public', existsSync(llmsFullPath));
+
+const ogImagePath = join(process.cwd(), 'apps/demo/public/assets/og-image.png');
+check('og-image.png exists for Open Graph / Twitter cards', existsSync(ogImagePath));
+
+const manifestPath = join(process.cwd(), 'apps/demo/public/site.webmanifest');
+check('site.webmanifest exists in demo public', existsSync(manifestPath));
+
+const indexPath = join(process.cwd(), 'apps/demo/src/index.html');
+if (existsSync(indexPath)) {
+  const indexHtml = readFileSync(indexPath, 'utf-8');
+  check('index.html declares canonical URL', indexHtml.includes('rel="canonical"'));
+  check('index.html declares og:image', indexHtml.includes('property="og:image"'));
+  check('index.html declares JSON-LD', indexHtml.includes('application/ld+json'));
+  check('index.html links site.webmanifest', indexHtml.includes('site.webmanifest'));
+  check(
+    'index.html uses production site origin in social tags',
+    indexHtml.includes('https://ngxsmk.github.io/ngxsmk-ui-kit'),
+  );
+}
 
 // 4. Check route metadata in app.routes.ts
 const routesPath = join(process.cwd(), 'apps/demo/src/app/app.routes.ts');
