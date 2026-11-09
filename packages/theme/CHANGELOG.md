@@ -1,5 +1,11 @@
 # @ngxsmk/theme
 
+## 3.3.0
+
+### Changed
+
+- Version bumped to 3.3.0 in sync with the monorepo release.
+
 ## 3.2.0
 
 ### Minor Changes

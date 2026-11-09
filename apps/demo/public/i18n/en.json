@@ -244,6 +244,14 @@
       "removed": "removed"
     },
     "release": {
+      "v330": {
+        "summary": "Dialog projected-heading a11y, Angular 22.2 toolchain refresh, and ngxsmk-datepicker v3 peer.",
+        "changes": {
+          "0": "Dialogs with a projected heading can reference it via the ariaLabelledby input.",
+          "1": "Refreshed Angular/CDK/CLI/build tooling to 22.2.x and other latest stable compatible deps.",
+          "2": "Raised optional ngxsmk-datepicker peer to ^3.0.6; version stamped 3.3.0 across packages."
+        }
+      },
       "v320": {
         "summary": "Optional peers, Motion 14 support, smoke-test coverage, StackBlitz quickstart, and component maturity tiers.",
         "changes": {

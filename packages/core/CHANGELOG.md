@@ -1,5 +1,17 @@
 # @ngxsmk/core
 
+## 3.3.0
+
+### Minor Changes
+
+- Allow dialogs with a projected heading to reference it through the
+  `ariaLabelledby` input.
+- `ngxsmk-datepicker` peer raised to `^3.0.6`.
+
+### Changed
+
+- Version bumped to 3.3.0.
+
 ## 3.2.0
 
 ### Minor Changes

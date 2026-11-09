@@ -1,5 +1,10 @@
 # @ngxsmk/cli
 
+## 3.3.0
+
+- CLI version bumped to 3.3.0 in sync with the monorepo release.
+- `ng add` installs `@ngxsmk/core`, `@ngxsmk/theme`, and `@ngxsmk/cdk` at `^3.3.0`.
+
 ## 3.2.0
 
 - CLI version bumped to 3.2.0 in sync with the monorepo release.

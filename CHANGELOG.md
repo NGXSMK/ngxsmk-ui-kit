@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.3.0] - 2026-11-10
+
+### Added
+
+- **Dialog projected heading** — dialogs with a projected heading can reference it
+  through the `ariaLabelledby` input for correct accessible naming.
+
+### Changed
+
+- Dependency refresh: Angular / CDK / Material / CLI / build tooling to **22.2.x**,
+  TypeScript **~6.0.3**, Vitest **5**, Playwright **1.65**, and other latest
+  stable toolchain packages within Angular-compatible ranges.
+- `ngxsmk-datepicker` peer/runtime dependency raised to **^3.0.6**.
+- Version bumped to 3.3.0 across all packages.
+
 ## [3.2.0] - 2026-10-13
 
 ### Added
