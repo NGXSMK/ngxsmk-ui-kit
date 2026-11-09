@@ -1,7 +1,6 @@
 import { Component, inject, signal, computed, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { Title, Meta } from '@angular/platform-browser';
 import { AppNav } from '../../nav/nav';
 import { NgxsmkThemeService, presets, type ThemeConfig } from '@ngxsmk/theme';
 import { APP_VERSION } from '../../core/version';
@@ -35,8 +34,6 @@ export class HomePage implements OnInit {
   protected readonly appVersion = APP_VERSION;
   protected readonly theme = inject(NgxsmkThemeService);
   private readonly toast = inject(NgxsmkToast);
-  private readonly title = inject(Title);
-  private readonly meta = inject(Meta);
 
   protected readonly installCommand = 'npm install @ngxsmk/core @ngxsmk/theme';
   protected readonly copied = signal(false);
@@ -335,17 +332,7 @@ export class HomePage implements OnInit {
   };
 
   ngOnInit(): void {
-    this.title.setTitle('NGXSMK — Open source Angular design system, agent ready');
-    this.meta.updateTag({
-      name: 'description',
-      content:
-        'NGXSMK is an open source Angular design system — signals-native, zoneless, fully customizable themes, and agent-ready with MCP.',
-    });
-    this.meta.updateTag({
-      property: 'og:title',
-      content: 'NGXSMK — fully customizable and agent ready',
-    });
-
+    // Title / description / OG tags come from route data via SeoService.
     try {
       const stored = document.defaultView?.localStorage?.getItem('ngxsmk-theme-mode') ?? null;
       if (!stored) this.theme.setMode('light');

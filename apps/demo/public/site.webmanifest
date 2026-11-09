@@ -1,0 +1,26 @@
+{
+  "name": "NGXSMK UI Kit",
+  "short_name": "NGXSMK",
+  "description": "Angular-first, signals-native, zoneless UI kit with a universal design-token engine.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0D9488",
+  "lang": "en",
+  "categories": ["developer", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/og-image.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
