@@ -5,6 +5,21 @@ available via `ngxsmk migrate` and Angular CLI `ng update @ngxsmk/cli`.
 
 ---
 
+## Migrating to v3.3.0
+
+v3.3.0 is a **minor release** — fully backward compatible with all v3.2.x /
+v3.1.x / v3.0.x consumers. No breaking changes, no API removals.
+
+### What's new
+
+- Dialogs that project a heading can wire accessible naming via `ariaLabelledby`.
+- Toolchain deps refreshed to latest Angular **22.2.x**-compatible stables.
+- If you use the optional `ngxsmk-datepicker` peer, install **^3.0.6** (was ^2.x).
+
+No code changes required for existing apps that do not use the datepicker peer.
+
+---
+
 ## Migrating to v3.2.0
 
 v3.2.0 is a **minor release** — fully backward compatible with all v3.1.x /

@@ -4895,6 +4895,18 @@ export const COMPONENT_DATABASE: ComponentEntry[] = [
         "required": false
       },
       {
+        "name": "morphModalFocusTrap",
+        "type": "boolean",
+        "required": false,
+        "default": "true"
+      },
+      {
+        "name": "morphModalFocusCapture",
+        "type": "boolean",
+        "required": false,
+        "default": "true"
+      },
+      {
         "name": "morphModalDismissible",
         "type": "boolean",
         "required": false,
