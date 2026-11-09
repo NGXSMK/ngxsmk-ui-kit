@@ -37,8 +37,8 @@ import { NgxsmkLazyLoad } from '@ngxsmk/core/lazy-load';
     <header class="category-intro">
       <h1 class="ngxsmk-page-title">{{ 'category.utilities' | translate }}</h1>
       <p class="ngxsmk-page-desc">
-      {{ 'utilities.desc' | translate }}
-    </p>
+        {{ 'utilities.desc' | translate }}
+      </p>
     </header>
 
     <showcase-example

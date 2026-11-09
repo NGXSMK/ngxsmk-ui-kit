@@ -111,7 +111,10 @@ export class NgxsmkOutline implements OnInit, OnDestroy {
     }
     const el = this.document.getElementById(id);
     if (el) {
-      el.scrollIntoView({ behavior: prefersReducedMotion() ? 'instant' : 'smooth', block: 'start' });
+      el.scrollIntoView({
+        behavior: prefersReducedMotion() ? 'instant' : 'smooth',
+        block: 'start',
+      });
     }
   }
 }

@@ -287,7 +287,10 @@ export class NgxsmkTour {
 
     const el = document.getElementById(step.targetId);
     if (el) {
-      el.scrollIntoView({ behavior: prefersReducedMotion() ? 'instant' : 'smooth', block: 'center' });
+      el.scrollIntoView({
+        behavior: prefersReducedMotion() ? 'instant' : 'smooth',
+        block: 'center',
+      });
       setTimeout(() => {
         const r = el.getBoundingClientRect();
         this.targetRect.set({ top: r.top, left: r.left, width: r.width, height: r.height });

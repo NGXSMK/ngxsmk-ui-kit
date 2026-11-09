@@ -47,8 +47,7 @@ export class SeoService {
         }),
       )
       .subscribe((snapshot) => {
-        const title =
-          snapshot.title || (snapshot.data['title'] as string | undefined) || SITE_NAME;
+        const title = snapshot.title || (snapshot.data['title'] as string | undefined) || SITE_NAME;
         const description =
           (snapshot.data['description'] as string | undefined) ?? DEFAULT_DESCRIPTION;
         const path = this.cleanPath(this.router.url);
@@ -103,10 +102,7 @@ export class SeoService {
         url: SITE_ORIGIN,
         logo: `${SITE_ORIGIN}/favicon.svg`,
         description: DEFAULT_DESCRIPTION,
-        sameAs: [
-          'https://github.com/NGXSMK/ngxsmk-ui-kit',
-          'https://www.npmjs.com/org/ngxsmk',
-        ],
+        sameAs: ['https://github.com/NGXSMK/ngxsmk-ui-kit', 'https://www.npmjs.com/org/ngxsmk'],
       },
       {
         '@context': 'https://schema.org',

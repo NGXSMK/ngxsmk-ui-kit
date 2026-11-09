@@ -97,9 +97,8 @@ export class NgxsmkVirtualScroll<T = unknown> {
   readonly itemHeight = input<number>(40);
   readonly buffer = input<number>(5);
 
-  private readonly projectedTemplate = contentChild<
-    TemplateRef<{ $implicit: T; index: number }>
-  >(TemplateRef);
+  private readonly projectedTemplate =
+    contentChild<TemplateRef<{ $implicit: T; index: number }>>(TemplateRef);
 
   protected rowTemplate(
     fallback: TemplateRef<{ $implicit: T; index: number }>,

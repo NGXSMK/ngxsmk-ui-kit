@@ -75,8 +75,8 @@ import { ShowcaseExample } from '../../showcase/showcase-example';
     <header class="category-intro">
       <h1 class="ngxsmk-page-title">{{ 'category.data-display' | translate }}</h1>
       <p class="ngxsmk-page-desc">
-      {{ 'dataDisplay.pageDesc' | translate }}
-    </p>
+        {{ 'dataDisplay.pageDesc' | translate }}
+      </p>
     </header>
 
     <showcase-example

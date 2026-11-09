@@ -69,7 +69,9 @@ describe('Toast and Toaster', () => {
     // Simulate animationend for ngxsmk-toast-out to clear it completely if leaving
     if (toastService.isLeaving(id)) {
       const animEvent = new Event('animationend');
-      Object.defineProperty(animEvent, 'animationName', { value: '_ngcontent-test_ngxsmk-toast-out' });
+      Object.defineProperty(animEvent, 'animationName', {
+        value: '_ngcontent-test_ngxsmk-toast-out',
+      });
       toastEl.dispatchEvent(animEvent);
       fixture.detectChanges();
     }

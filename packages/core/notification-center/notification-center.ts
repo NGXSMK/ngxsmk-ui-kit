@@ -67,12 +67,7 @@ export interface NgxsmkNotificationItem {
 
     <!-- NOTIFICATION SLIDE PANEL / POPOVER -->
     @if (isOpen()) {
-      <div
-        class="ngxsmk-notif__panel"
-        role="dialog"
-        [id]="panelId"
-        [attr.aria-label]="title()"
-      >
+      <div class="ngxsmk-notif__panel" role="dialog" [id]="panelId" [attr.aria-label]="title()">
         <div class="ngxsmk-notif__header">
           <div class="ngxsmk-notif__title-group">
             <h3 class="ngxsmk-notif__title">{{ title() }}</h3>
