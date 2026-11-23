@@ -97,7 +97,7 @@
     "@playwright/test": "^1.65.0",
     "@vitest/coverage-v8": "^5.1.0",
     "angular-eslint": "22.6.0",
-    "axe-core": "^4.14.0",
+    "axe-core": "^4.14.1",
     "eslint": "^10.14.0",
     "husky": "^9.1.7",
     "jsdom": "^31.0.0",
