@@ -98,7 +98,7 @@
     "@vitest/coverage-v8": "^5.1.0",
     "angular-eslint": "22.6.0",
     "axe-core": "^4.14.0",
-    "eslint": "^10.14.0",
+    "eslint": "^10.15.0",
     "husky": "^9.1.7",
     "jsdom": "^31.0.0",
     "ng-packagr": "^22.2.6",
@@ -106,7 +106,7 @@
     "tsx": "^4.23.15",
     "turbo": "^2.11.10",
     "typescript": "~6.0.3",
-    "typescript-eslint": "8.72.2",
+    "typescript-eslint": "8.73.0",
     "vitest": "^5.1.0"
   }
 }
